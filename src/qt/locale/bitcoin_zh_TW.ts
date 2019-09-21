@@ -1561,7 +1561,7 @@
         <translation>被禁節點</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
+        <source>Select a peer to view detailed information</source>
         <translation>選一個節點來看詳細資訊</translation>
     </message>
     <message>

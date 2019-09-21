@@ -1133,8 +1133,8 @@
         <translation>Banned peers</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
-        <translation>Select a peer to view detailed information.</translation>
+        <source>Select a peer to view detailed information</source>
+        <translation>Select a peer to view detailed information</translation>
     </message>
     <message>
         <source>Whitelisted</source>

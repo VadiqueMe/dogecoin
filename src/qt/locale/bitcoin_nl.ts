@@ -1561,8 +1561,8 @@
         <translation>Gebande peers</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
-        <translation>Selecteer een peer om gedetailleerde informatie te bekijken.</translation>
+        <source>Select a peer to view detailed information</source>
+        <translation>Selecteer een peer om gedetailleerde informatie te bekijken</translation>
     </message>
     <message>
         <source>Whitelisted</source>

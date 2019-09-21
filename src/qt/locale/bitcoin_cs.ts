@@ -1561,8 +1561,8 @@
         <translation>Protějšky pod klatbou (blokované)</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
-        <translation>Vyber protějšek a uvidíš jeho detailní informace.</translation>
+        <source>Select a peer to view detailed information</source>
+        <translation>Vyber protějšek a uvidíš jeho detailní informace</translation>
     </message>
     <message>
         <source>Whitelisted</source>

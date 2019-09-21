@@ -1113,8 +1113,8 @@
         <translation>Utestengte noder</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
-        <translation>Velg en node for å vise detaljert informasjon.</translation>
+        <source>Select a peer to view detailed information</source>
+        <translation>Velg en node for å vise detaljert informasjon</translation>
     </message>
     <message>
         <source>Whitelisted</source>

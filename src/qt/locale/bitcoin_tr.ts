@@ -1561,8 +1561,8 @@
         <translation>Yasaklı eşler</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
-        <translation>Ayrıntılı bilgi görmek için bir eş seçin.</translation>
+        <source>Select a peer to view detailed information</source>
+        <translation>Ayrıntılı bilgi görmek için bir eş seçin</translation>
     </message>
     <message>
         <source>Whitelisted</source>

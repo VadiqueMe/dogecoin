@@ -1541,8 +1541,8 @@
         <translation>Zablokované spojenia</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
-        <translation>Vyberte počítač pre zobrazenie podrobností.</translation>
+        <source>Select a peer to view detailed information</source>
+        <translation>Vyberte počítač pre zobrazenie podrobností</translation>
     </message>
     <message>
         <source>Whitelisted</source>

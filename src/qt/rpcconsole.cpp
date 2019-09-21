@@ -457,7 +457,7 @@ RPCConsole::RPCConsole(const PlatformStyle *_platformStyle, QWidget *parent) :
     setTrafficGraphRange(INITIAL_TRAFFIC_GRAPH_MINS);
 
     ui->detailWidget->hide();
-    ui->peerHeading->setText(tr("Select a peer to view detailed information."));
+    ui->peerHeading->setText(tr("Select a peer to view detailed information"));
 
     QSettings settings;
     consoleFontSize = settings.value(fontSizeSettingsKey, QFontInfo(QFont()).pointSize()).toInt();
@@ -1176,7 +1176,7 @@ void RPCConsole::clearSelectedNode()
     ui->peerWidget->selectionModel()->clearSelection();
     cachedNodeids.clear();
     ui->detailWidget->hide();
-    ui->peerHeading->setText(tr("Select a peer to view detailed information."));
+    ui->peerHeading->setText(tr("Select a peer to view detailed information"));
 }
 
 void RPCConsole::showOrHideBanTableIfRequired()

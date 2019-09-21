@@ -1253,8 +1253,8 @@
         <translation>&amp;Пиъри</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
-        <translation>Избери пиър за детайлна информация.</translation>
+        <source>Select a peer to view detailed information</source>
+        <translation>Избери пиър за детайлна информация</translation>
     </message>
     <message>
         <source>Direction</source>

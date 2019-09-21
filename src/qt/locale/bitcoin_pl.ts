@@ -1445,8 +1445,8 @@
         <translation>Blokowane węzły</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
-        <translation>Wybierz węzeł żeby zobaczyć szczegóły.</translation>
+        <source>Select a peer to view detailed information</source>
+        <translation>Wybierz węzeł żeby zobaczyć szczegóły</translation>
     </message>
     <message>
         <source>Whitelisted</source>

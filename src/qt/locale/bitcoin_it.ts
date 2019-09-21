@@ -1478,8 +1478,8 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
         <translation>Peers bannati</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
-        <translation>Seleziona un peer per visualizzare informazioni più dettagliate.</translation>
+        <source>Select a peer to view detailed information</source>
+        <translation>Seleziona un peer per visualizzare informazioni più dettagliate</translation>
     </message>
     <message>
         <source>Whitelisted</source>

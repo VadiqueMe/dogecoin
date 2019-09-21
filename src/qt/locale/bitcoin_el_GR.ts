@@ -998,8 +998,8 @@
         <translation>&amp;Χρήστες</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
-        <translation>Επιλέξτε ένα χρήστη για να δείτε αναλυτικές πληροφορίες.</translation>
+        <source>Select a peer to view detailed information</source>
+        <translation>Επιλέξτε ένα χρήστη για να δείτε αναλυτικές πληροφορίες</translation>
     </message>
     <message>
         <source>Version</source>

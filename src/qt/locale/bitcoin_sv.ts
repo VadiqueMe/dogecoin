@@ -1346,8 +1346,8 @@ Var vänlig och försök igen.</translation>
         <translation>Bannade noder</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
-        <translation>Välj en klient för att se detaljerad information.</translation>
+        <source>Select a peer to view detailed information</source>
+        <translation>Välj en klient för att se detaljerad information</translation>
     </message>
     <message>
         <source>Whitelisted</source>

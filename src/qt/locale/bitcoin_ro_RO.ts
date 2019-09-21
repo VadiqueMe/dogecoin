@@ -981,8 +981,8 @@
         <translation>&amp;Parteneri</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
-        <translation>Selectaţi un partener pentru a vedea informaţiile detaliate.</translation>
+        <source>Select a peer to view detailed information</source>
+        <translation>Selectaţi un partener pentru a vedea informaţiile detaliate</translation>
     </message>
     <message>
         <source>Whitelisted</source>

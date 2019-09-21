@@ -1561,8 +1561,8 @@
         <translation>Заблокированные участники</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
-        <translation>Выберите участника для просмотра подробностей.</translation>
+        <source>Select a peer to view detailed information</source>
+        <translation>Выберите участника для просмотра подробностей</translation>
     </message>
     <message>
         <source>Whitelisted</source>

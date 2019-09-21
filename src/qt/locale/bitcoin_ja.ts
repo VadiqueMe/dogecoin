@@ -1561,8 +1561,8 @@
         <translation>Banされたピア</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
-        <translation>詳しい情報を見たいピアを選択してください。</translation>
+        <source>Select a peer to view detailed information</source>
+        <translation>詳しい情報を見たいピアを選択してください</translation>
     </message>
     <message>
         <source>Whitelisted</source>

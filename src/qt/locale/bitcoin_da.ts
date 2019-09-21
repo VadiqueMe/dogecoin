@@ -1561,8 +1561,8 @@
         <translation>Bandlyste knuder</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
-        <translation>Vælg en anden knude for at se detaljeret information.</translation>
+        <source>Select a peer to view detailed information</source>
+        <translation>Vælg en anden knude for at se detaljeret information</translation>
     </message>
     <message>
         <source>Whitelisted</source>

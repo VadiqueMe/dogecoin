@@ -759,8 +759,8 @@
         <translation>&amp;Уламлар</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
-        <translation>Батафсил маълумотларни кўриш учун уламни танланг.</translation>
+        <source>Select a peer to view detailed information</source>
+        <translation>Батафсил маълумотларни кўриш учун уламни танланг</translation>
     </message>
     <message>
         <source>Direction</source>

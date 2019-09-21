@@ -877,7 +877,7 @@
         <translation>Kitiltott felek</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
+        <source>Select a peer to view detailed information</source>
         <translation>Peer kijelölése a részletes információkért</translation>
     </message>
     <message>

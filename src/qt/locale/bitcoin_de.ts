@@ -1557,8 +1557,8 @@
         <translation>Gesperrte Peers</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
-        <translation>Gegenstelle auswählen, um detaillierte Informationen zu erhalten.</translation>
+        <source>Select a peer to view detailed information</source>
+        <translation>Gegenstelle auswählen, um detaillierte Informationen zu erhalten</translation>
     </message>
     <message>
         <source>Whitelisted</source>

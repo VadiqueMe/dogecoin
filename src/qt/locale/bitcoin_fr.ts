@@ -1561,8 +1561,8 @@
         <translation>Pairs bannis</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
-        <translation>Choisir un pair pour voir l'information détaillée.</translation>
+        <source>Select a peer to view detailed information</source>
+        <translation>Choisir un pair pour voir l'information détaillée</translation>
     </message>
     <message>
         <source>Whitelisted</source>

@@ -1561,8 +1561,8 @@
         <translation>차단된 피어</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
-        <translation>자세한 정보를 보려면 피어를 선택하세요.</translation>
+        <source>Select a peer to view detailed information</source>
+        <translation>자세한 정보를 보려면 피어를 선택하세요</translation>
     </message>
     <message>
         <source>Whitelisted</source>

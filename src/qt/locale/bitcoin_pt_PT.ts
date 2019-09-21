@@ -1334,8 +1334,8 @@
         <translation>Nós banidos</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
-        <translation>Selecione uma conexação para ver informação em detalhe.</translation>
+        <source>Select a peer to view detailed information</source>
+        <translation>Selecione uma conexação para ver informação em detalhe</translation>
     </message>
     <message>
         <source>Whitelisted</source>

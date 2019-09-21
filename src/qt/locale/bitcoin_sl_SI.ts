@@ -965,8 +965,8 @@
         <translation>&amp;Soležniki</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
-        <translation>Izberite soležnika, o katerem si želite ogledati podrobnejše informacije.</translation>
+        <source>Select a peer to view detailed information</source>
+        <translation>Izberite soležnika, o katerem si želite ogledati podrobnejše informacije</translation>
     </message>
     <message>
         <source>Direction</source>

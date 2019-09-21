@@ -1561,8 +1561,8 @@
         <translation>Peers Bloqueados</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
-        <translation>Seleccionar un par para ver su información detallada.</translation>
+        <source>Select a peer to view detailed information</source>
+        <translation>Seleccionar un par para ver su información detallada</translation>
     </message>
     <message>
         <source>Whitelisted</source>

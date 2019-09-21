@@ -1557,8 +1557,8 @@
         <translation>Nós banidos</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
-        <translation>Selecione um cliente para ver informações detalhadas.</translation>
+        <source>Select a peer to view detailed information</source>
+        <translation>Selecione um cliente para ver informações detalhadas</translation>
     </message>
     <message>
         <source>Whitelisted</source>

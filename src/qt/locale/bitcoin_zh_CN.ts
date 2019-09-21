@@ -1547,8 +1547,8 @@
         <translation>节点黑名单</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
-        <translation>选择节点查看详细信息。</translation>
+        <source>Select a peer to view detailed information</source>
+        <translation>选择节点查看详细信息</translation>
     </message>
     <message>
         <source>Whitelisted</source>

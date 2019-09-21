@@ -1485,8 +1485,8 @@
         <translation>Iguals bandejats</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
-        <translation>Seleccioneu un igual per mostrar informació detallada.</translation>
+        <source>Select a peer to view detailed information</source>
+        <translation>Seleccioneu un igual per mostrar informació detallada</translation>
     </message>
     <message>
         <source>Whitelisted</source>

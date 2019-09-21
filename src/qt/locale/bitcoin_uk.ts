@@ -1057,7 +1057,7 @@
         <translation>Заблоковані вузли</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
+        <source>Select a peer to view detailed information</source>
         <translation>Виберіть учасника для перегляду детальнішої інформації</translation>
     </message>
     <message>

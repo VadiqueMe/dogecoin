@@ -1061,8 +1061,8 @@
         <translation>Estetyt vertaiset</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
-        <translation>Valitse vertainen eriteltyjä tietoja varten.</translation>
+        <source>Select a peer to view detailed information</source>
+        <translation>Valitse vertainen eriteltyjä tietoja varten</translation>
     </message>
     <message>
         <source>Whitelisted</source>

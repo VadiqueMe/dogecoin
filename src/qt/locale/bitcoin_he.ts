@@ -987,8 +987,8 @@
         <translation>משתמשים חסומים</translation>
     </message>
     <message>
-        <source>Select a peer to view detailed information.</source>
-        <translation>נא לבחור בעמית כדי להציג מידע מפורט.</translation>
+        <source>Select a peer to view detailed information</source>
+        <translation>נא לבחור בעמית כדי להציג מידע מפורט</translation>
     </message>
     <message>
         <source>Whitelisted</source>
