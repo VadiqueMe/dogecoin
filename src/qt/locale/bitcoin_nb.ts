@@ -1493,14 +1493,6 @@
         <translation>minstebeløp</translation>
     </message>
     <message>
-        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for dogecoin transactions than the network can process.</source>
-        <translation>Betaling av bare minimumsavgiften går helt fint så lenge det er mindre transaksjonsvolum enn plass i blokkene. Men vær klar over at dette kan ende opp i en transaksjon som aldri blir bekreftet når det er mer etterspørsel etter Dogecoin-transaksjoner enn nettverket kan behandle.</translation>
-    </message>
-    <message>
-        <source>(read the tooltip)</source>
-        <translation>(les verktøytipset)</translation>
-    </message>
-    <message>
         <source>Recommended:</source>
         <translation>Anbefalt:</translation>
     </message>

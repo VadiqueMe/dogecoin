@@ -2037,14 +2037,6 @@
         <translation>total au moins</translation>
     </message>
     <message>
-        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for dogecoin transactions than the network can process.</source>
-        <translation>Il est correct de payer les frais minimum tant que le volume transactionnel est inférieur à l'espace dans les blocs. Mais soyez conscient que cela pourrait résulter en une transaction n'étant jamais confirmée une fois qu'il y aura plus de transactions que le réseau ne pourra en traiter.</translation>
-    </message>
-    <message>
-        <source>(read the tooltip)</source>
-        <translation>(lire l'infobulle)</translation>
-    </message>
-    <message>
         <source>Recommended:</source>
         <translation>Recommandés :</translation>
     </message>
@@ -2191,10 +2183,6 @@
     <message numerus="yes">
         <source>%n block(s)</source>
         <translation><numerusform>%n bloc</numerusform><numerusform>%n blocs</numerusform></translation>
-    </message>
-    <message>
-        <source>Pay only the required fee of %1</source>
-        <translation>Payer seulement les frais exigés de %1</translation>
     </message>
     <message numerus="yes">
         <source>Estimated to begin confirmation within %n block(s).</source>

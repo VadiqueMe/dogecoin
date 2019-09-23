@@ -2037,14 +2037,6 @@
         <translation>přinejmenším</translation>
     </message>
     <message>
-        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for dogecoin transactions than the network can process.</source>
-        <translation>Platit jen minimální poplatek je v pořádku, pokud je zrovna méně transakcí než místa v blocích. Ale počítej s tím, že to také může skončit transakcí, která nikdy nebude potvrzena, pokud je větší poptávka po dogecoinových transakcích, než síť zvládne zpracovat.</translation>
-    </message>
-    <message>
-        <source>(read the tooltip)</source>
-        <translation>(viz bublina)</translation>
-    </message>
-    <message>
         <source>Recommended:</source>
         <translation>Doporučený:</translation>
     </message>
@@ -2191,10 +2183,6 @@
     <message numerus="yes">
         <source>%n block(s)</source>
         <translation><numerusform>%n blok</numerusform><numerusform>%n bloky</numerusform><numerusform>%n bloků</numerusform></translation>
-    </message>
-    <message>
-        <source>Pay only the required fee of %1</source>
-        <translation>Zaplatit pouze vyžadovaný poplatek %1</translation>
     </message>
     <message numerus="yes">
         <source>Estimated to begin confirmation within %n block(s).</source>

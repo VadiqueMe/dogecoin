@@ -103,10 +103,6 @@
         <translation>收款人地址无效，请再次确认。</translation>
     </message>
     <message>
-        <source>Pay only the required fee of %1</source>
-        <translation>仅支付全额的%1</translation>
-    </message>
-    <message>
         <source>Warning: Invalid Dogecoin address</source>
         <translation>警告：比特币地址无效</translation>
     </message>

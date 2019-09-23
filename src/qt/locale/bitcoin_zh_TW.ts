@@ -2037,14 +2037,6 @@
         <translation>總共最少</translation>
     </message>
     <message>
-        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for dogecoin transactions than the network can process.</source>
-        <translation>當交易量少於區塊可容納的空間時，只付最低手續費不會有什麽問題。但是當交易量的需求成長到超過整體網路可以處理的量時，可能會造成一筆一直不會被確認的交易。</translation>
-    </message>
-    <message>
-        <source>(read the tooltip)</source>
-        <translation>(請看提示)</translation>
-    </message>
-    <message>
         <source>Recommended:</source>
         <translation>建議值:</translation>
     </message>
@@ -2191,10 +2183,6 @@
     <message numerus="yes">
         <source>%n block(s)</source>
         <translation><numerusform>%n 個區塊</numerusform></translation>
-    </message>
-    <message>
-        <source>Pay only the required fee of %1</source>
-        <translation>只付必要的手續費 %1</translation>
     </message>
     <message>
         <source>Warning: Invalid Dogecoin address</source>

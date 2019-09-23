@@ -1425,14 +1425,6 @@
         <translation>всього щонайменше</translation>
     </message>
     <message>
-        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for dogecoin transactions than the network can process.</source>
-        <translation>Оплата тільки мінімальної комісії є прийнятною, допоки обсяг транзакцій є меншим простору в блоках. Але майте на увазі, що це може анулювати транзакцію, якщо попит на Dogecoin транзакції стане більшим, ніж мережа зможе обробити.</translation>
-    </message>
-    <message>
-        <source>(read the tooltip)</source>
-        <translation>(читати підказки)</translation>
-    </message>
-    <message>
         <source>Recommended:</source>
         <translation>Рекомендовано:</translation>
     </message>

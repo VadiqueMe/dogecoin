@@ -2885,11 +2885,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+46"/>
-        <source>(read the tooltip)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location line="+29"/>
         <source>Recommended:</source>
         <translation type="unfinished"></translation>
@@ -2932,12 +2927,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <location line="-876"/>
         <source>Dust:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+535"/>
-        <location line="+13"/>
-        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for dogecoin transactions than the network can process.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3085,11 +3074,6 @@ p, li { white-space: pre-wrap; }
             <numerusform>%n block</numerusform>
             <numerusform>%n blocks</numerusform>
         </translation>
-    </message>
-    <message>
-        <location line="+28"/>
-        <source>Pay only the required fee of %1</source>
-        <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
         <location line="+25"/>

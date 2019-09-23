@@ -90,7 +90,6 @@ private Q_SLOTS:
     void coinControlClipboardChange();
     void setMinimumFee();
     void updateFeeSectionControls();
-    void updateMinFeeLabel();
     void updateSmartFeeLabel();
     void updateGlobalFeeVariables();
 

@@ -1429,10 +1429,6 @@
         <translation>yhteensä ainakin</translation>
     </message>
     <message>
-        <source>(read the tooltip)</source>
-        <translation>(lue työkaluvinkki)</translation>
-    </message>
-    <message>
         <source>Recommended:</source>
         <translation>Suositeltu:</translation>
     </message>

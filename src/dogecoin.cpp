@@ -159,7 +159,6 @@ CAmount GetDogecoinMinRelayFee(const CTransaction& tx, unsigned int nBytes, bool
     }
 
     CAmount nMinFee = ::minRelayTxFee.GetFee(nBytes);
-    nMinFee += GetDogecoinDustFee(tx.vout, ::minRelayTxFee);
 
     if (fAllowFree)
     {
@@ -176,14 +175,3 @@ CAmount GetDogecoinMinRelayFee(const CTransaction& tx, unsigned int nBytes, bool
     return nMinFee;
 }
 
-CAmount GetDogecoinDustFee(const std::vector<CTxOut> &vout, CFeeRate &baseFeeRate) {
-    CAmount nFee = 0;
-
-    // To limit dust spam, add base fee for each output less than a COIN
-    BOOST_FOREACH(const CTxOut& txout, vout)
-        // if (txout.IsDust(::minRelayTxFee))
-        if (txout.nValue < COIN)
-            nFee += baseFeeRate.GetFeePerK();
-
-    return nFee;
-}

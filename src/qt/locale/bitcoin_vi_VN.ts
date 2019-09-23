@@ -889,10 +889,6 @@
         <translation>Tổng cộng ít nhất</translation>
     </message>
     <message>
-        <source>(read the tooltip)</source>
-        <translation>(Đọc hướng dẫn)</translation>
-    </message>
-    <message>
         <source>normal</source>
         <translation>Bình thường</translation>
     </message>

@@ -2019,14 +2019,6 @@
         <translation>最小额 </translation>
     </message>
     <message>
-        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for dogecoin transactions than the network can process.</source>
-        <translation>交易量小时只支付最小交易费是可以的。但是请注意，当交易量大到超出网络可处理时您的交易可能永远无法确认。</translation>
-    </message>
-    <message>
-        <source>(read the tooltip)</source>
-        <translation>(请注意提示信息)</translation>
-    </message>
-    <message>
         <source>Recommended:</source>
         <translation>推荐：</translation>
     </message>
@@ -2169,10 +2161,6 @@
     <message numerus="yes">
         <source>%n block(s)</source>
         <translation><numerusform>%n 个区块</numerusform></translation>
-    </message>
-    <message>
-        <source>Pay only the required fee of %1</source>
-        <translation>只支付必要费用 %1</translation>
     </message>
     <message numerus="yes">
         <source>Estimated to begin confirmation within %n block(s).</source>
