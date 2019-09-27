@@ -422,10 +422,6 @@
         <translation>Billetera</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation>Experto</translation>
-    </message>
-    <message>
         <source>none</source>
         <translation>ninguno</translation>
     </message>

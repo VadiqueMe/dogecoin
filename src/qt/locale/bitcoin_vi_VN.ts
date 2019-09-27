@@ -520,8 +520,8 @@
         <translation>Chấp nhận các kết nối từ bên ngoài</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
-        <translation>Cho phép nhận kết nối</translation>
+        <source>Accept incoming connections</source>
+        <translation>Chấp nhận kết nối đến</translation>
     </message>
     <message>
         <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>

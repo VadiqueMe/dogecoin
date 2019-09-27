@@ -988,8 +988,8 @@
         <translation>Eingehende Verbindungen annehmen</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
-        <translation>Erlaubt eingehende Verbindungen</translation>
+        <source>Accept incoming connections</source>
+        <translation>Annehmen eingehende Verbindungen</translation>
     </message>
     <message>
         <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>
@@ -1032,16 +1032,12 @@
         <translation>W&amp;allet</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation>Erweiterte Wallet-Optionen</translation>
+        <source>Hide coin &amp;control features</source>
+        <translation>"&amp;Coin Control"-Funktionen ausblenden</translation>
     </message>
     <message>
-        <source>Enable coin &amp;control features</source>
-        <translation>"&amp;Coin Control"-Funktionen aktivieren</translation>
-    </message>
-    <message>
-        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed.</source>
-        <translation>Wenn Sie das Ausgeben von unbestätigtem Wechselgeld deaktivieren, kann das Wechselgeld einer Transaktion nicht verwendet werden, bis es mindestens eine Bestätigung erhalten hat. Dies wirkt sich auf die Berechnung des Kontostands aus.</translation>
+        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
+        <translation>Wenn Sie das Ausgeben von unbestätigtem Wechselgeld deaktivieren, kann das Wechselgeld einer Transaktion nicht verwendet werden, bis es mindestens eine Bestätigung erhalten hat. Dies wirkt sich auf die Berechnung des Kontostands aus</translation>
     </message>
     <message>
         <source>&amp;Spend unconfirmed change</source>
@@ -1146,10 +1142,6 @@
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
         <translation>Wählen Sie die standardmäßige Untereinheit, die in der Benutzeroberfläche und beim Überweisen von Dogecoins angezeigt werden soll.</translation>
-    </message>
-    <message>
-        <source>Whether to show coin control features or not.</source>
-        <translation>Legt fest, ob die "Coin Control"-Funktionen angezeigt werden.</translation>
     </message>
     <message>
         <source>&amp;OK</source>

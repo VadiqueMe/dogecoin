@@ -591,19 +591,15 @@
     </message>
     <message>
         <source>Accept connections from outside</source>
-        <translation>Verbindings van buite toelaat</translation>
+        <translation>Verbindings van buite aanvaar</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
-        <translation>Inkomende verbindings toelaat</translation>
+        <source>Accept incoming connections</source>
+        <translation>Aanvaar inkomende verbindings</translation>
     </message>
     <message>
         <source>Reset all client options to default.</source>
         <translation>Alle kliëntopsies na verstek terugstel.</translation>
-    </message>
-    <message>
-        <source>Expert</source>
-        <translation>Kenner</translation>
     </message>
     <message>
         <source>IPv6</source>

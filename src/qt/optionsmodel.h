@@ -41,7 +41,7 @@ public:
         DisplayUnit,            // BitcoinUnits::Unit
         ThirdPartyTxUrls,       // QString
         Language,               // QString
-        CoinControlFeatures,    // bool
+        HideCoinControlFeatures,// bool
         ThreadsScriptVerif,     // int
         DatabaseCache,          // int
         SpendZeroConfChange,    // bool
@@ -65,7 +65,7 @@ public:
     int getDisplayUnit() { return nDisplayUnit; }
     QString getThirdPartyTxUrls() { return strThirdPartyTxUrls; }
     bool getProxySettings(QNetworkProxy& proxy) const;
-    bool getCoinControlFeatures() { return fCoinControlFeatures; }
+    bool getHideCoinControlFeatures() { return fHideCoinControlFeatures ; }
     const QString& getOverriddenByCommandLine() { return strOverriddenByCommandLine; }
 
     /* Restart flag helper */
@@ -80,7 +80,7 @@ private:
     QString language;
     int nDisplayUnit;
     QString strThirdPartyTxUrls;
-    bool fCoinControlFeatures;
+    bool fHideCoinControlFeatures ;
     /* settings that were overridden by command-line */
     QString strOverriddenByCommandLine;
 
@@ -91,7 +91,7 @@ private:
     void checkAndMigrate();
 Q_SIGNALS:
     void displayUnitChanged(int unit);
-    void coinControlFeaturesChanged(bool);
+    void hideCoinControlFeaturesChanged(bool);
     void hideTrayIconChanged(bool);
 };
 

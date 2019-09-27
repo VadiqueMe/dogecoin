@@ -649,11 +649,11 @@
     </message>
     <message>
         <source>Accept connections from outside</source>
-        <translation>ยอมรับ การเชื่อมต่อจากภายนอก</translation>
+        <translation>ยอมรับการเชื่อมต่อจากภายนอก</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
-        <translation>ยอมให้เชื่อมต่อจากภายนอกได้</translation>
+        <source>Accept incoming connections</source>
+        <translation>ยอมรับการเชื่อมต่อจากภายนอก</translation>
     </message>
     <message>
         <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>
@@ -696,15 +696,11 @@
         <translation>กระเ&amp;ป๋าเงิน</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation>ผู้เชี่ยวชาญ</translation>
+        <source>Hide coin &amp;control features</source>
+        <translation>ซ่อน dogecoin รูปแบบการ ควบคุม</translation>
     </message>
     <message>
-        <source>Enable coin &amp;control features</source>
-        <translation>เปิดใช้ coin &amp; รูปแบบการควบคุม</translation>
-    </message>
-    <message>
-        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed.</source>
+        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
         <translation>หากท่านไม่เปิดใช้ การใช้เงินทอนที่ยังไม่ยืนยัน เงินทอนจากการทำรายการจะไม่สามารถใช้ได้ จนกว่ารายการที่ทำการ จะได้รับการยืนยันหนึ่งครั้ง และจะกระทบการคำนวณยอดคงเหลือของท่านด้วย</translation>
     </message>
     <message>

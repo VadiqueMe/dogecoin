@@ -17,7 +17,7 @@
 #include "net.h"
 #include "netbase.h"
 #include "txdb.h" // for -dbcache defaults
-#include "intro.h" 
+#include "intro.h"
 
 #ifdef ENABLE_WALLET
 #include "wallet/wallet.h"
@@ -59,7 +59,7 @@ void OptionsModel::Init(bool resetSettings)
         settings.setValue("fHideTrayIcon", false);
     fHideTrayIcon = settings.value("fHideTrayIcon").toBool();
     Q_EMIT hideTrayIconChanged(fHideTrayIcon);
-    
+
     if (!settings.contains("fMinimizeToTray"))
         settings.setValue("fMinimizeToTray", false);
     fMinimizeToTray = settings.value("fMinimizeToTray").toBool() && !fHideTrayIcon;
@@ -78,8 +78,8 @@ void OptionsModel::Init(bool resetSettings)
     strThirdPartyTxUrls = settings.value("strThirdPartyTxUrls", "").toString();
 
     if (!settings.contains("fCoinControlFeatures"))
-        settings.setValue("fCoinControlFeatures", false);
-    fCoinControlFeatures = settings.value("fCoinControlFeatures", false).toBool();
+        settings.setValue( "fCoinControlFeatures", true );
+    fHideCoinControlFeatures = ! settings.value( "fCoinControlFeatures", true ).toBool();
 
     // These are shared with the core or have a command-line parameter
     // and we want command-line parameters to overwrite the GUI settings.
@@ -239,8 +239,8 @@ QVariant OptionsModel::data(const QModelIndex & index, int role) const
             return strThirdPartyTxUrls;
         case Language:
             return settings.value("language");
-        case CoinControlFeatures:
-            return fCoinControlFeatures;
+        case HideCoinControlFeatures:
+            return fHideCoinControlFeatures;
         case DatabaseCache:
             return settings.value("nDatabaseCache");
         case ThreadsScriptVerif:
@@ -372,10 +372,10 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
                 setRestartRequired(true);
             }
             break;
-        case CoinControlFeatures:
-            fCoinControlFeatures = value.toBool();
-            settings.setValue("fCoinControlFeatures", fCoinControlFeatures);
-            Q_EMIT coinControlFeaturesChanged(fCoinControlFeatures);
+        case HideCoinControlFeatures:
+            fHideCoinControlFeatures = value.toBool();
+            settings.setValue( "fCoinControlFeatures", ! fHideCoinControlFeatures );
+            Q_EMIT hideCoinControlFeaturesChanged( fHideCoinControlFeatures );
             break;
         case DatabaseCache:
             if (settings.value("nDatabaseCache") != value) {

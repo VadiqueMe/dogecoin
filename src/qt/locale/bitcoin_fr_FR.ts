@@ -660,8 +660,8 @@
         <translation>Accepter les connexions venant de l'extérieur</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
-        <translation>Autoriser les connexions entrantes</translation>
+        <source>Accept incoming connections</source>
+        <translation>Accepter les connexions entrantes</translation>
     </message>
     <message>
         <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>
@@ -678,10 +678,6 @@
     <message>
         <source>&amp;Network</source>
         <translation>&amp;Réseau</translation>
-    </message>
-    <message>
-        <source>Expert</source>
-        <translation>Expert</translation>
     </message>
     <message>
         <source>Automatically open the Dogecoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>

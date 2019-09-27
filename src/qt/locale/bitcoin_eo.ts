@@ -604,8 +604,8 @@
         <translation>Akcepti konektojn el ekstere</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
-        <translation>Permesi envenantajn konektojn</translation>
+        <source>Accept incoming connections</source>
+        <translation>Akcepti envenantajn konektojn</translation>
     </message>
     <message>
         <source>Reset all client options to default.</source>
@@ -622,10 +622,6 @@
     <message>
         <source>W&amp;allet</source>
         <translation>Monujo</translation>
-    </message>
-    <message>
-        <source>Expert</source>
-        <translation>Fakulo</translation>
     </message>
     <message>
         <source>Automatically open the Dogecoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
@@ -686,10 +682,6 @@
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
         <translation>Elekti la defaŭltan manieron por montri bitmonajn sumojn en la interfaco, kaj kiam vi sendos bitmonon.</translation>
-    </message>
-    <message>
-        <source>Whether to show coin control features or not.</source>
-        <translation>Ĉu montri detalan adres-regilon, aŭ ne.</translation>
     </message>
     <message>
         <source>&amp;OK</source>

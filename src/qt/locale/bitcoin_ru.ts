@@ -985,11 +985,11 @@
     </message>
     <message>
         <source>Accept connections from outside</source>
-        <translation>Принимать входящие соединения</translation>
+        <translation>Принимать соединения извне</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
-        <translation>Разрешить входящие подключения</translation>
+        <source>Accept incoming connections</source>
+        <translation>Принимать входящие соединения</translation>
     </message>
     <message>
         <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>
@@ -1032,16 +1032,12 @@
         <translation>Б&amp;умажник</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation>Эксперт</translation>
+        <source>Hide coin &amp;control features</source>
+        <translation>Спрятать выбор источников монет</translation>
     </message>
     <message>
-        <source>Enable coin &amp;control features</source>
-        <translation>Включить управление входами</translation>
-    </message>
-    <message>
-        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed.</source>
-        <translation>При отключении траты неподтверждённой сдачи, сдача от транзакции не может быть использована до тех пор пока у этой транзакции не будет хотя бы одно подтверждение. Это также влияет как ваш баланс рассчитывается.</translation>
+        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
+        <translation>При отключении траты неподтверждённой сдачи, сдача от транзакции не может быть использована до тех пор пока у этой транзакции не будет хотя бы одно подтверждение. Это также влияет на расчёт баланса</translation>
     </message>
     <message>
         <source>&amp;Spend unconfirmed change</source>
@@ -1146,10 +1142,6 @@
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
         <translation>Выберите единицу измерения монет при отображении и отправке.</translation>
-    </message>
-    <message>
-        <source>Whether to show coin control features or not.</source>
-        <translation>Показывать ли функции контроля монет или нет.</translation>
     </message>
     <message>
         <source>&amp;OK</source>

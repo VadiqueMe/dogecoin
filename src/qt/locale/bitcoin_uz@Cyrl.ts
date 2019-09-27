@@ -502,8 +502,8 @@
         <translation>Ташқаридан уланишларга рози бўлиш</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
-        <translation>Кирувчи уланишларга рухсат бериш</translation>
+        <source>Accept incoming connections</source>
+        <translation>Кирувчи уланишларни кабул килинг</translation>
     </message>
     <message>
         <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>

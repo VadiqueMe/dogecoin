@@ -988,7 +988,7 @@
         <translation>Přijímat spojení zvenčí</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
+        <source>Accept incoming connections</source>
         <translation>Přijímat příchozí spojení</translation>
     </message>
     <message>
@@ -1032,16 +1032,12 @@
         <translation>P&amp;eněženka</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation>Pokročilá nastavení</translation>
+        <source>Hide coin &amp;control features</source>
+        <translation>Skrýt ruční správu &amp;mincí</translation>
     </message>
     <message>
-        <source>Enable coin &amp;control features</source>
-        <translation>Povolit ruční správu &amp;mincí</translation>
-    </message>
-    <message>
-        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed.</source>
-        <translation>Pokud zakážeš utrácení ještě nepotvrzených drobných, nepůjde použít drobné z transakce, dokud nebude mít alespoň jedno potvrzení. Ovlivní to také výpočet stavu účtu.</translation>
+        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
+        <translation>Pokud zakážeš utrácení ještě nepotvrzených drobných, nepůjde použít drobné z transakce, dokud nebude mít alespoň jedno potvrzení. Ovlivní to také výpočet stavu účtu</translation>
     </message>
     <message>
         <source>&amp;Spend unconfirmed change</source>
@@ -1146,10 +1142,6 @@
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
         <translation>Zvol výchozí podjednotku, která se bude zobrazovat v programu a při posílání mincí.</translation>
-    </message>
-    <message>
-        <source>Whether to show coin control features or not.</source>
-        <translation>Zda ukazovat možnosti pro ruční správu mincí nebo ne.</translation>
     </message>
     <message>
         <source>&amp;OK</source>

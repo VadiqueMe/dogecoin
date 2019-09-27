@@ -985,11 +985,11 @@
     </message>
     <message>
         <source>Accept connections from outside</source>
-        <translation>외부로부터의 연결을 승인합니다.</translation>
+        <translation>외부로부터의 연결을 수락</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
-        <translation>연결 요청을 허용합니다.</translation>
+        <source>Accept incoming connections</source>
+        <translation>들어오는 연결 수락</translation>
     </message>
     <message>
         <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>
@@ -1032,16 +1032,12 @@
         <translation>지갑(&amp;A)</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation>전문가</translation>
+        <source>Hide coin &amp;control features</source>
+        <translation>코인 상세 제어 기능을 감추다 (&amp;C)</translation>
     </message>
     <message>
-        <source>Enable coin &amp;control features</source>
-        <translation>코인 상세 제어기능을 활성화합니다 (&amp;C)</translation>
-    </message>
-    <message>
-        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed.</source>
-        <translation>검증되지 않은 잔돈 쓰기를 비활성화하면 거래가 적어도 1회 이상 검증되기 전까지 그 거래의 거스름돈은 사용할 수 없습니다. 이는 잔액 계산 방법에도 영향을 미칩니다.</translation>
+        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
+        <translation>검증되지 않은 잔돈 쓰기를 비활성화하면 거래가 적어도 1회 이상 검증되기 전까지 그 거래의 거스름돈은 사용할 수 없습니다. 이는 잔액 계산 방법에도 영향을 미칩니다</translation>
     </message>
     <message>
         <source>&amp;Spend unconfirmed change</source>
@@ -1146,10 +1142,6 @@
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
         <translation>인터페이스에 표시하고 코인을 보낼때 사용할 기본 최소화 단위를 선택하십시오.</translation>
-    </message>
-    <message>
-        <source>Whether to show coin control features or not.</source>
-        <translation>코인 상세 제어기능에 대한 표시 여부를 선택할 수 있습니다.</translation>
     </message>
     <message>
         <source>&amp;OK</source>

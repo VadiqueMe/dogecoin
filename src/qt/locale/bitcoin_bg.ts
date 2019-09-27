@@ -864,8 +864,8 @@
         <translation>Приемай връзки отвън</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
-        <translation>Позволи входящите връзки</translation>
+        <source>Accept incoming connections</source>
+        <translation>Приемете входящи връзки</translation>
     </message>
     <message>
         <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>
@@ -892,12 +892,8 @@
         <translation>По&amp;ртфейл</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation>Експерт</translation>
-    </message>
-    <message>
-        <source>Enable coin &amp;control features</source>
-        <translation>Позволяване на монетите и &amp;техните възможности</translation>
+        <source>Hide coin &amp;control features</source>
+        <translation>Скриване на функциите за контрол на монетите</translation>
     </message>
     <message>
         <source>&amp;Spend unconfirmed change</source>
@@ -962,10 +958,6 @@
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
         <translation>Изберете единиците, показвани по подразбиране в интерфейса.</translation>
-    </message>
-    <message>
-        <source>Whether to show coin control features or not.</source>
-        <translation>Дали да покаже възможностите за контрол на монетите или не.</translation>
     </message>
     <message>
         <source>&amp;OK</source>

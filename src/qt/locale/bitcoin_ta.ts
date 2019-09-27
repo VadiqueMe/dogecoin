@@ -274,10 +274,6 @@
         <translation>&amp;பணப்பை</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation>வல்லுநர்</translation>
-    </message>
-    <message>
         <source>IPv4</source>
         <translation>IPv4</translation>
     </message>

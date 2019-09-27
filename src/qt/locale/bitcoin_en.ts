@@ -1285,7 +1285,7 @@
     </message>
     <message>
         <location line="+3"/>
-        <source>Allow incoming connections</source>
+        <source>Accept incoming connections</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1341,18 +1341,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
-        <source>Expert</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location line="+9"/>
-        <source>Enable coin &amp;control features</source>
+        <source>Hide coin &amp;control features</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
-        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed.</source>
+        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1489,11 +1484,6 @@
         <location line="+13"/>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
         <translation>Choose the default subdivision unit to show in the interface and when sending coins.</translation>
-    </message>
-    <message>
-        <location line="-450"/>
-        <source>Whether to show coin control features or not.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+612"/>

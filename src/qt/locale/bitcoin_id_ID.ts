@@ -804,8 +804,8 @@
         <translation>Terima koneksi dari luar</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
-        <translation>Perbolehkan koneksi masuk</translation>
+        <source>Accept incoming connections</source>
+        <translation>Menerima koneksi masuk</translation>
     </message>
     <message>
         <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>
@@ -848,16 +848,12 @@
         <translation>D&amp;ompet</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation>Ahli</translation>
+        <source>Hide coin &amp;control features</source>
+        <translation>Sembunyikan fitur &amp;pengaturan koin</translation>
     </message>
     <message>
-        <source>Enable coin &amp;control features</source>
-        <translation>Perbolehkan fitur &amp;pengaturan koin</translation>
-    </message>
-    <message>
-        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed.</source>
-        <translation>Jika Anda menonaktifkan perubahan saldo untuk transaksi yang belum dikonfirmasi, perubahan dari transaksi tidak dapat dilakukan sampai transaksi memiliki setidaknya satu konfirmasi. Hal ini juga mempengaruhi bagaimana saldo Anda dihitung.</translation>
+        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
+        <translation>Jika Anda menonaktifkan perubahan saldo untuk transaksi yang belum dikonfirmasi, perubahan dari transaksi tidak dapat dilakukan sampai transaksi memiliki setidaknya satu konfirmasi. Hal ini juga mempengaruhi bagaimana saldo Anda dihitung</translation>
     </message>
     <message>
         <source>&amp;Spend unconfirmed change</source>
@@ -930,10 +926,6 @@
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
         <translation>Pilihan standar unit yang ingin ditampilkan pada layar aplikasi dan saat mengirim koin.</translation>
-    </message>
-    <message>
-        <source>Whether to show coin control features or not.</source>
-        <translation>Ingin menunjukkan cara pengaturan koin atau tidak.</translation>
     </message>
     <message>
         <source>&amp;OK</source>

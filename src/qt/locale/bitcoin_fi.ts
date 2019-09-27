@@ -648,7 +648,7 @@
         <translation>Hyväksy yhteysiä ulkopuolelta</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
+        <source>Accept incoming connections</source>
         <translation>Hyväksy sisääntulevia yhteyksiä</translation>
     </message>
     <message>
@@ -692,16 +692,12 @@
         <translation>&amp;Lompakko</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation>Expertti</translation>
+        <source>Hide coin &amp;control features</source>
+        <translation>Piilota &amp;Kolikkokontrolli-ominaisuudet</translation>
     </message>
     <message>
-        <source>Enable coin &amp;control features</source>
-        <translation>Ota käytöön &amp;Kolikkokontrolli-ominaisuudet</translation>
-    </message>
-    <message>
-        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed.</source>
-        <translation>Jos poistat varmistamattomien vaihtorahojen käytön, rahansiirron vaihtorahaa ei voida käyttää ennen vähintään yhtä varmistusta. Tämä vaikuttaa myös kuinka taseesi lasketaan.</translation>
+        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
+        <translation>Jos poistat varmistamattomien vaihtorahojen käytön, rahansiirron vaihtorahaa ei voida käyttää ennen vähintään yhtä varmistusta. Tämä vaikuttaa myös kuinka taseesi lasketaan</translation>
     </message>
     <message>
         <source>&amp;Spend unconfirmed change</source>
@@ -798,10 +794,6 @@
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
         <translation>Valitse mitä yksikköä käytetään ensisijaisesti dogecoin-määrien näyttämiseen.</translation>
-    </message>
-    <message>
-        <source>Whether to show coin control features or not.</source>
-        <translation>Näytetäänkö kolikkokontrollin ominaisuuksia vai ei</translation>
     </message>
     <message>
         <source>&amp;OK</source>

@@ -648,7 +648,7 @@
         <translation>Αποδοχή συνδέσεων απο έξω</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
+        <source>Accept incoming connections</source>
         <translation>Αποδοχή εισερχόμενων συναλλαγών</translation>
     </message>
     <message>
@@ -692,16 +692,12 @@
         <translation>Π&amp;ορτοφόλι</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation>Έμπειρος</translation>
+        <source>Hide coin &amp;control features</source>
+        <translation>Απόκρυψη επιλογών ελέγχου κερμάτων</translation>
     </message>
     <message>
-        <source>Enable coin &amp;control features</source>
-        <translation>Επιλογή κατα πόσο να αναδείχνονται οι δυνατότητες ελέγχου κερμάτων.</translation>
-    </message>
-    <message>
-        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed.</source>
-        <translation>Εάν απενεργοποιήσετε το ξόδεμα μη επικυρωμένων ρέστων, τα ρέστα από μια συναλλαγή δεν μπορούν να χρησιμοποιηθούν έως ότου αυτή η συναλλαγή έχει έστω μια επικύρωση. Αυτό επίσης επηρεάζει το πως υπολογίζεται το υπόλοιπό σας.</translation>
+        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
+        <translation>Εάν απενεργοποιήσετε το ξόδεμα μη επικυρωμένων ρέστων, τα ρέστα από μια συναλλαγή δεν μπορούν να χρησιμοποιηθούν έως ότου αυτή η συναλλαγή έχει έστω μια επικύρωση. Αυτό επίσης επηρεάζει το πως υπολογίζεται το υπόλοιπό σας</translation>
     </message>
     <message>
         <source>&amp;Spend unconfirmed change</source>
@@ -766,11 +762,6 @@
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
         <translation>Διαλέξτε την προεπιλεγμένη υποδιαίρεση που θα εμφανίζεται όταν στέλνετε νομίσματα.</translation>
-    </message>
-    <message>
-        <source>Whether to show coin control features or not.</source>
-        <translation>Επιλογή κατα πόσο να αναδείχνονται οι δυνατότητες ελέγχου κερμάτων.
-</translation>
     </message>
     <message>
         <source>&amp;OK</source>

@@ -854,10 +854,6 @@
         <translation>&amp;محفظة</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation>تصدير</translation>
-    </message>
-    <message>
         <source>Proxy &amp;IP:</source>
         <translation>بروكسي &amp;اي بي:</translation>
     </message>

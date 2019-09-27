@@ -560,8 +560,8 @@
         <translation>Külső kapcsolatok elfogadása</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
-        <translation>Bejövő kapcsolatok engedélyezése</translation>
+        <source>Accept incoming connections</source>
+        <translation>Fogadja el a külső csatlakozásokat</translation>
     </message>
     <message>
         <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>
@@ -586,10 +586,6 @@
     <message>
         <source>W&amp;allet</source>
         <translation>T&amp;árca</translation>
-    </message>
-    <message>
-        <source>Expert</source>
-        <translation>Szakértő</translation>
     </message>
     <message>
         <source>Automatically open the Dogecoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>

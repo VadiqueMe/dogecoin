@@ -973,8 +973,8 @@
         <translation>接收外部连接</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
-        <translation>允许流入连接</translation>
+        <source>Accept incoming connections</source>
+        <translation>接受传入的连接</translation>
     </message>
     <message>
         <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>
@@ -1017,16 +1017,12 @@
         <translation>钱包(&amp;A)</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation>专家</translation>
+        <source>Hide coin &amp;control features</source>
+        <translation>隐藏硬币控制功能(&amp;C)</translation>
     </message>
     <message>
-        <source>Enable coin &amp;control features</source>
-        <translation>启动货币控制功能(&amp;C)</translation>
-    </message>
-    <message>
-        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed.</source>
-        <translation>如果禁用未确认的零钱，则零钱至少需要1个确认才能使用。同时账户余额计算会受到影响。</translation>
+        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
+        <translation>如果禁用未确认的零钱，则零钱至少需要1个确认才能使用。同时账户余额计算会受到影响</translation>
     </message>
     <message>
         <source>&amp;Spend unconfirmed change</source>
@@ -1131,10 +1127,6 @@
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
         <translation>选择比特币单位。</translation>
-    </message>
-    <message>
-        <source>Whether to show coin control features or not.</source>
-        <translation>是否需要交易源地址控制功能。</translation>
     </message>
     <message>
         <source>&amp;OK</source>

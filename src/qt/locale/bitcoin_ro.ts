@@ -430,8 +430,8 @@
         <translation>Acceptă conexiuni externe</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
-        <translation>Acceptă conexiunea care sosește</translation>
+        <source>Accept incoming connections</source>
+        <translation>Acceptați conexiunile care sosește</translation>
     </message>
     <message>
         <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>
@@ -444,10 +444,6 @@
     <message>
         <source>&amp;Network</source>
         <translation>&amp;Rețea</translation>
-    </message>
-    <message>
-        <source>Expert</source>
-        <translation>Expert</translation>
     </message>
     <message>
         <source>Proxy &amp;IP:</source>

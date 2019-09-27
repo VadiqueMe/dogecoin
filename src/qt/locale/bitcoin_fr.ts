@@ -988,8 +988,8 @@
         <translation>Accepter les connexions provenant de l'extérieur</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
-        <translation>Permettre les transactions entrantes</translation>
+        <source>Accept incoming connections</source>
+        <translation>Accepter les transactions entrantes</translation>
     </message>
     <message>
         <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>
@@ -1032,16 +1032,12 @@
         <translation>&amp;Porte-monnaie</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation>Expert</translation>
+        <source>Hide coin &amp;control features</source>
+        <translation>Masquer les fonctions de &amp;contrôle des pièces</translation>
     </message>
     <message>
-        <source>Enable coin &amp;control features</source>
-        <translation>Activer les fonctions de &amp;contrôle des pièces</translation>
-    </message>
-    <message>
-        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed.</source>
-        <translation>Si vous désactivé la dépense de la monnaie non confirmée, la monnaie d'une transaction ne peut pas être utilisée tant que cette transaction n'a pas reçu au moins une confirmation. Celai affecte aussi le calcul de votre solde.</translation>
+        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
+        <translation>Si vous désactivé la dépense de la monnaie non confirmée, la monnaie d'une transaction ne peut pas être utilisée tant que cette transaction n'a pas reçu au moins une confirmation. Celai affecte aussi le calcul de votre solde</translation>
     </message>
     <message>
         <source>&amp;Spend unconfirmed change</source>
@@ -1146,10 +1142,6 @@
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
         <translation>Choisir la sous-unité par défaut d'affichage dans l'interface et lors d'envoi de pièces.</translation>
-    </message>
-    <message>
-        <source>Whether to show coin control features or not.</source>
-        <translation>Afficher ou non les fonctions de contrôle des pièces.</translation>
     </message>
     <message>
         <source>&amp;OK</source>

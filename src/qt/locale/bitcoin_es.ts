@@ -988,7 +988,7 @@
         <translation>Aceptar conexiones desde el exterior</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
+        <source>Accept incoming connections</source>
         <translation>Aceptar conexiones entrantes</translation>
     </message>
     <message>
@@ -1032,16 +1032,12 @@
         <translation>&amp;Monedero</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation>Experto</translation>
+        <source>Hide coin &amp;control features</source>
+        <translation>Ocultar funcionalidad de &amp;coin control</translation>
     </message>
     <message>
-        <source>Enable coin &amp;control features</source>
-        <translation>Habilitar funcionalidad de &amp;Coin Control</translation>
-    </message>
-    <message>
-        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed.</source>
-        <translation>Si desactiva el gasto del cambio no confirmado, no se podrá usar el cambio de una transacción hasta que se alcance al menos una confirmación. Esto afecta también a cómo se calcula su saldo.</translation>
+        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
+        <translation>Si desactiva el gasto del cambio no confirmado, no se podrá usar el cambio de una transacción hasta que se alcance al menos una confirmación. Esto afecta también a cómo se calcula su saldo</translation>
     </message>
     <message>
         <source>&amp;Spend unconfirmed change</source>
@@ -1146,10 +1142,6 @@
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
         <translation>Elegir la subdivisión predeterminada para mostrar cantidades en la interfaz y cuando se envían dogecoins.</translation>
-    </message>
-    <message>
-        <source>Whether to show coin control features or not.</source>
-        <translation>Mostrar o no funcionalidad de Coin Control</translation>
     </message>
     <message>
         <source>&amp;OK</source>

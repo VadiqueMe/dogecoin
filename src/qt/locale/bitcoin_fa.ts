@@ -828,8 +828,8 @@
         <translation>پذیرش اتصالات از بیرون</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
-        <translation>اجازه دادن به اتصالات دریافتی</translation>
+        <source>Accept incoming connections</source>
+        <translation>پذیرش دادن به اتصالات دریافتی</translation>
     </message>
     <message>
         <source>Reset all client options to default.</source>
@@ -846,10 +846,6 @@
     <message>
         <source>W&amp;allet</source>
         <translation>کیف پول</translation>
-    </message>
-    <message>
-        <source>Expert</source>
-        <translation>استخراج</translation>
     </message>
     <message>
         <source>Automatically open the Dogecoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>

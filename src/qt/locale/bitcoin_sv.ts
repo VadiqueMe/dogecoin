@@ -881,7 +881,7 @@ Var vänlig och försök igen.</translation>
         <translation>Acceptera anslutningar utifrån</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
+        <source>Accept incoming connections</source>
         <translation>Acceptera inkommande anslutningar</translation>
     </message>
     <message>
@@ -925,16 +925,12 @@ Var vänlig och försök igen.</translation>
         <translation>&amp;Plånbok</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation>Expert</translation>
+        <source>Hide coin &amp;control features</source>
+        <translation>Dölj mynt&amp;kontrollfunktioner</translation>
     </message>
     <message>
-        <source>Enable coin &amp;control features</source>
-        <translation>Aktivera mynt&amp;kontrollfunktioner</translation>
-    </message>
-    <message>
-        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed.</source>
-        <translation>Om du avaktiverar betalning med obekräftad växel, kan inte växeln från en transaktion användas förrän den transaktionen har minst en bekräftelse.</translation>
+        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
+        <translation>Om du avaktiverar betalning med obekräftad växel, kan inte växeln från en transaktion användas förrän den transaktionen har minst en bekräftelse</translation>
     </message>
     <message>
         <source>&amp;Spend unconfirmed change</source>
@@ -1039,10 +1035,6 @@ Var vänlig och försök igen.</translation>
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
         <translation>Välj en måttenhet att visa i gränssnittet och när du skickar mynt.</translation>
-    </message>
-    <message>
-        <source>Whether to show coin control features or not.</source>
-        <translation>Om myntkontrollfunktioner skall visas eller inte</translation>
     </message>
     <message>
         <source>&amp;OK</source>

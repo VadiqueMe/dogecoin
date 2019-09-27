@@ -600,8 +600,8 @@
         <translation>Sprejemaj zunanje povezave</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
-        <translation>Dovoli dohodne povezave</translation>
+        <source>Accept incoming connections</source>
+        <translation>Sprejemaj dohodne povezave</translation>
     </message>
     <message>
         <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>
@@ -644,16 +644,12 @@
         <translation>&amp;Denarnica</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation>Napredne možnosti</translation>
+        <source>Hide coin &amp;control features</source>
+        <translation>Skrivanje upravljanje kovancev</translation>
     </message>
     <message>
-        <source>Enable coin &amp;control features</source>
-        <translation>Omogoči upravljanje s kovanci</translation>
-    </message>
-    <message>
-        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed.</source>
-        <translation>Če onemogočite trošenje drobiža iz še nepotrjenih transakcij, potem vrnjenega drobiža ne morete uporabiti, dokler plačilo ni vsaj enkrat potrjeno. Ta opcija vpliva tudi na izračun stanja sredstev.</translation>
+        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
+        <translation>Če onemogočite trošenje drobiža iz še nepotrjenih transakcij, potem vrnjenega drobiža ne morete uporabiti, dokler plačilo ni vsaj enkrat potrjeno. Ta opcija vpliva tudi na izračun stanja sredstev</translation>
     </message>
     <message>
         <source>&amp;Spend unconfirmed change</source>
@@ -722,10 +718,6 @@
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
         <translation>Izberite privzeto mersko enoto za prikaz v uporabniškem vmesniku in pri pošiljanju kovancev.</translation>
-    </message>
-    <message>
-        <source>Whether to show coin control features or not.</source>
-        <translation>Omogoči dodatno možnost podrobnega nadzora nad posameznimi kovanci v transakcijah.</translation>
     </message>
     <message>
         <source>&amp;OK</source>

@@ -752,10 +752,6 @@
         <translation>R&amp;ahakott</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation>Ekspert</translation>
-    </message>
-    <message>
         <source>Automatically open the Dogecoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
         <translation>Dogecoini kliendi pordi automaatne avamine ruuteris. Toimib, kui sinu ruuter aktsepteerib UPnP ühendust.</translation>
     </message>

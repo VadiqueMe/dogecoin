@@ -359,10 +359,6 @@
         <translation>Cartera</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation>experto</translation>
-    </message>
-    <message>
         <source>Automatically open the Dogecoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
         <translation>Abre automáticamente el puerto del cliente Dogecoin en el router. Esto funciona solo cuando tu router es compatible con UPnP y está habilitado.</translation>
     </message>

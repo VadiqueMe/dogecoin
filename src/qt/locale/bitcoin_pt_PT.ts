@@ -889,11 +889,11 @@
     </message>
     <message>
         <source>Accept connections from outside</source>
-        <translation>Aceitar ligações externas</translation>
+        <translation>Aceitar conexões externas</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
-        <translation>Permitir ligação a receber</translation>
+        <source>Accept incoming connections</source>
+        <translation>Aceitar conexões de entrada</translation>
     </message>
     <message>
         <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>
@@ -937,16 +937,12 @@
         <translation>C&amp;arteira</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation> Técnicos</translation>
+        <source>Hide coin &amp;control features</source>
+        <translation>Ocultar às funcionalidades de &amp;controlo de moedas</translation>
     </message>
     <message>
-        <source>Enable coin &amp;control features</source>
-        <translation>Ativar as funcionalidades de &amp;controlo de moedas</translation>
-    </message>
-    <message>
-        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed.</source>
-        <translation>Se desativar o gasto de troco não confirmado, o troco de uma transação não pode ser utilizado até que essa transação tenha pelo menos uma confirmação. Isto também afeta o cálculo do seu saldo.</translation>
+        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
+        <translation>Se desativar o gasto de troco não confirmado, o troco de uma transação não pode ser utilizado até que essa transação tenha pelo menos uma confirmação. Isto também afeta o cálculo do seu saldo</translation>
     </message>
     <message>
         <source>&amp;Spend unconfirmed change</source>
@@ -1047,10 +1043,6 @@
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
         <translation>Escolha a unidade da subdivisão predefinida para ser mostrada na interface e quando enviar as moedas.</translation>
-    </message>
-    <message>
-        <source>Whether to show coin control features or not.</source>
-        <translation>Escolha se deve mostrar as funcionalidades de controlo de moedas ou não.</translation>
     </message>
     <message>
         <source>&amp;OK</source>

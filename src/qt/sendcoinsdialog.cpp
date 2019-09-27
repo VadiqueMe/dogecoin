@@ -146,8 +146,8 @@ void SendCoinsDialog::setModel(WalletModel *_model)
 
         // Coin Control
         connect(_model->getOptionsModel(), SIGNAL(displayUnitChanged(int)), this, SLOT(coinControlUpdateLabels()));
-        connect(_model->getOptionsModel(), SIGNAL(coinControlFeaturesChanged(bool)), this, SLOT(coinControlFeatureChanged(bool)));
-        ui->frameCoinControl->setVisible(_model->getOptionsModel()->getCoinControlFeatures());
+        connect( _model->getOptionsModel(), SIGNAL(hideCoinControlFeaturesChanged(bool)), this, SLOT(coinControlFeatureChanged(bool)) );
+        ui->frameCoinControl->setVisible( ! _model->getOptionsModel()->getHideCoinControlFeatures() );
         coinControlUpdateLabels();
 
         // fee section
@@ -231,7 +231,7 @@ void SendCoinsDialog::on_sendButton_clicked()
 
     // Always use a CCoinControl instance, use the CoinControlDialog instance if CoinControl has been enabled
     CCoinControl ctrl;
-    if (model->getOptionsModel()->getCoinControlFeatures())
+    if ( ! model->getOptionsModel()->getHideCoinControlFeatures() )
         ctrl = *CoinControlDialog::coinControl;
     if (ui->radioSmartFee->isChecked())
         ctrl.nConfirmTarget = ui->sliderSmartFee->maximum() - ui->sliderSmartFee->value() + 2;
@@ -698,12 +698,12 @@ void SendCoinsDialog::coinControlClipboardChange()
     GUIUtil::setClipboard(ui->labelCoinControlChange->text().left(ui->labelCoinControlChange->text().indexOf(" ")).replace(ASYMP_UTF8, ""));
 }
 
-// Coin Control: settings menu - coin control enabled/disabled by user
+// Coin Control: settings menu - coin control on/off
 void SendCoinsDialog::coinControlFeatureChanged(bool checked)
 {
-    ui->frameCoinControl->setVisible(checked);
+    ui->frameCoinControl->setVisible( ! checked );
 
-    if (!checked && model) // coin control features disabled
+    if ( checked && model ) // coin control features off
         CoinControlDialog::coinControl->SetNull();
 
     // make sure we set back the confirmation target
@@ -798,7 +798,7 @@ void SendCoinsDialog::coinControlUpdateLabels()
     if (!model || !model->getOptionsModel())
         return;
 
-    if (model->getOptionsModel()->getCoinControlFeatures())
+    if ( ! model->getOptionsModel()->getHideCoinControlFeatures() )
     {
         // enable minimum absolute fee UI controls
         ui->radioCustomAtLeast->setVisible(true);

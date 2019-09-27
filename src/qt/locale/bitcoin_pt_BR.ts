@@ -984,8 +984,8 @@
         <translation>Aceitar conexões externas</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
-        <translation>Permitir conexões de entrada</translation>
+        <source>Accept incoming connections</source>
+        <translation>Aceitar conexões de entrada</translation>
     </message>
     <message>
         <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>
@@ -1028,16 +1028,12 @@
         <translation>C&amp;arteira</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation>Avançado</translation>
+        <source>Hide coin &amp;control features</source>
+        <translation>Ocultar opções de &amp;controle de moedas</translation>
     </message>
     <message>
-        <source>Enable coin &amp;control features</source>
-        <translation>Habilitar opções de &amp;controle de moedas</translation>
-    </message>
-    <message>
-        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed.</source>
-        <translation>Se você desabilitar o gasto de um troco não confirmado, o troco da transação não poderá ser utilizado até a transação ter pelo menos uma confirmação. Isso também afeta seu saldo computado.</translation>
+        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
+        <translation>Se você desabilitar o gasto de um troco não confirmado, o troco da transação não poderá ser utilizado até a transação ter pelo menos uma confirmação. Isso também afeta seu saldo computado</translation>
     </message>
     <message>
         <source>&amp;Spend unconfirmed change</source>
@@ -1142,10 +1138,6 @@
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
         <translation>Escolha a unidade padrão de subdivisão para interface mostrar quando enviar dogecoins.</translation>
-    </message>
-    <message>
-        <source>Whether to show coin control features or not.</source>
-        <translation>Mostrar ou não opções de controle da moeda.</translation>
     </message>
     <message>
         <source>&amp;OK</source>

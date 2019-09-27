@@ -536,8 +536,8 @@
         <translation>Broj CPU niti za verifikaciju transakcija</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
-        <translation>Dozvoli povezivanje izvana</translation>
+        <source>Accept incoming connections</source>
+        <translation>Prihvatite veze izvana</translation>
     </message>
     <message>
         <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>

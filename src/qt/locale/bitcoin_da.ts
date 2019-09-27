@@ -988,8 +988,8 @@
         <translation>Acceptér forbindelser udefra</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
-        <translation>Tillad indkommende forbindelser</translation>
+        <source>Accept incoming connections</source>
+        <translation>Acceptér indkommende forbindelser</translation>
     </message>
     <message>
         <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>
@@ -1032,16 +1032,12 @@
         <translation>&amp;Tegnebog</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation>Ekspert</translation>
+        <source>Hide coin &amp;control features</source>
+        <translation>Skjul egenskaber for &amp;coin-styring</translation>
     </message>
     <message>
-        <source>Enable coin &amp;control features</source>
-        <translation>Aktivér egenskaber for &amp;coin-styring</translation>
-    </message>
-    <message>
-        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed.</source>
-        <translation>Hvis du deaktiverer brug af ubekræftede byttepenge, kan byttepengene fra en transaktion ikke bruges, før pågældende transaktion har mindst én bekræftelse. Dette påvirker også måden hvorpå din saldo beregnes.</translation>
+        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
+        <translation>Hvis du deaktiverer brug af ubekræftede byttepenge, kan byttepengene fra en transaktion ikke bruges, før pågældende transaktion har mindst én bekræftelse. Dette påvirker også måden hvorpå din saldo beregnes</translation>
     </message>
     <message>
         <source>&amp;Spend unconfirmed change</source>
@@ -1146,10 +1142,6 @@
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
         <translation>Vælg standard for underopdeling af enhed, som skal vises i brugergrænsefladen og ved afsendelse af dogecoins.</translation>
-    </message>
-    <message>
-        <source>Whether to show coin control features or not.</source>
-        <translation>Hvorvidt egenskaber for coin-styring skal vises eller ej.</translation>
     </message>
     <message>
         <source>&amp;OK</source>

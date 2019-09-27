@@ -928,8 +928,8 @@
         <translation>Accetta connessioni provenienti dall'esterno</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
-        <translation>Permetti connessioni in ingresso</translation>
+        <source>Accept incoming connections</source>
+        <translation>Accetta connessioni in ingresso</translation>
     </message>
     <message>
         <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>
@@ -973,16 +973,12 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
         <translation>Port&amp;amonete</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation>Esperti</translation>
+        <source>Hide coin &amp;control features</source>
+        <translation>Nascondi le funzionalità di coin &amp;control</translation>
     </message>
     <message>
-        <source>Enable coin &amp;control features</source>
-        <translation>Abilita le funzionalità di coin &amp;control</translation>
-    </message>
-    <message>
-        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed.</source>
-        <translation>Disabilitando l'uso di resti non confermati, il resto di una transazione non potrà essere speso fino a quando non avrà ottenuto almeno una conferma. Questa impostazione influisce inoltre sul calcolo del saldo.</translation>
+        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
+        <translation>Disabilitando l'uso di resti non confermati, il resto di una transazione non potrà essere speso fino a quando non avrà ottenuto almeno una conferma. Questa impostazione influisce inoltre sul calcolo del saldo</translation>
     </message>
     <message>
         <source>&amp;Spend unconfirmed change</source>
@@ -1087,10 +1083,6 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
         <translation>Scegli l'unità di suddivisione predefinita da utilizzare per l'interfaccia e per l'invio di dogecoin.</translation>
-    </message>
-    <message>
-        <source>Whether to show coin control features or not.</source>
-        <translation>Specifica se le funzionalita di coin control saranno visualizzate.</translation>
     </message>
     <message>
         <source>&amp;OK</source>

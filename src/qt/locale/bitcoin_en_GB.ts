@@ -712,8 +712,8 @@
         <translation>Accept connections from outside</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
-        <translation>Allow incoming connections</translation>
+        <source>Accept incoming connections</source>
+        <translation>Accept incoming connections</translation>
     </message>
     <message>
         <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>
@@ -756,16 +756,12 @@
         <translation>W&amp;allet</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation>Expert</translation>
+        <source>Hide coin &amp;control features</source>
+        <translation>Hide coin &amp;control features</translation>
     </message>
     <message>
-        <source>Enable coin &amp;control features</source>
-        <translation>Enable coin &amp;control features</translation>
-    </message>
-    <message>
-        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed.</source>
-        <translation>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed.</translation>
+        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
+        <translation>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</translation>
     </message>
     <message>
         <source>&amp;Spend unconfirmed change</source>
@@ -870,10 +866,6 @@
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
         <translation>Choose the default subdivision unit to show in the interface and when sending coins.</translation>
-    </message>
-    <message>
-        <source>Whether to show coin control features or not.</source>
-        <translation>Whether to show coin control features or not.</translation>
     </message>
     <message>
         <source>&amp;OK</source>

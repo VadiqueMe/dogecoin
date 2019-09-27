@@ -824,8 +824,8 @@
         <translation>Accepta connexions de fora</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
-        <translation>Permet connexions entrants</translation>
+        <source>Accept incoming connections</source>
+        <translation>Accepta connexions entrants</translation>
     </message>
     <message>
         <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>
@@ -868,16 +868,12 @@
         <translation>&amp;Moneder</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation>Expert</translation>
+        <source>Hide coin &amp;control features</source>
+        <translation>Amagueu les funcions de &amp;control de les monedes</translation>
     </message>
     <message>
-        <source>Enable coin &amp;control features</source>
-        <translation>Activa les funcions de &amp;control de les monedes</translation>
-    </message>
-    <message>
-        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed.</source>
-        <translation>Si inhabiliteu la despesa d'un canvi sense confirmar, el canvi d'una transacció no pot ser utilitzat fins que la transacció no tinga com a mínim una confirmació. Això també afecta com es calcula el vostre balanç.</translation>
+        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
+        <translation>Si inhabiliteu la despesa d'un canvi sense confirmar, el canvi d'una transacció no pot ser utilitzat fins que la transacció no tinga com a mínim una confirmació. Això també afecta com es calcula el vostre balanç</translation>
     </message>
     <message>
         <source>&amp;Spend unconfirmed change</source>
@@ -946,10 +942,6 @@
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
         <translation>Selecciona la unitat de subdivisió per defecte per mostrar en la interfície quan s'envien monedes.</translation>
-    </message>
-    <message>
-        <source>Whether to show coin control features or not.</source>
-        <translation>Si voleu mostrar les funcions de control de monedes o no.</translation>
     </message>
     <message>
         <source>&amp;OK</source>

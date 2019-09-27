@@ -652,8 +652,8 @@
         <translation>Приймати підключення ззовні</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
-        <translation>Дозволити вхідні з’єднання</translation>
+        <source>Accept incoming connections</source>
+        <translation>Приймати вхідні з’єднання</translation>
     </message>
     <message>
         <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>
@@ -696,16 +696,12 @@
         <translation>Г&amp;аманець</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation>Експерт</translation>
+        <source>Hide coin &amp;control features</source>
+        <translation>Сховати вибір джерел монет</translation>
     </message>
     <message>
-        <source>Enable coin &amp;control features</source>
-        <translation>Ввімкнути &amp;керування входами</translation>
-    </message>
-    <message>
-        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed.</source>
-        <translation>Якщо вимкнути витрату непідтвердженої решти, то решту від транзакції не можна буде використати, допоки ця транзакція не матиме хоча б одне підтвердження. Це також впливає на розрахунок балансу.</translation>
+        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
+        <translation>Якщо вимкнути витрату непідтвердженої решти, то решту від транзакції не можна буде використати, допоки ця транзакція не матиме хоча б одне підтвердження. Це також впливає на розрахунок балансу</translation>
     </message>
     <message>
         <source>&amp;Spend unconfirmed change</source>
@@ -798,10 +794,6 @@
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
         <translation>Виберіть одиницю вимірювання монет, яка буде відображатись в гаманці та при відправленні.</translation>
-    </message>
-    <message>
-        <source>Whether to show coin control features or not.</source>
-        <translation>Показати або сховати керування входами.</translation>
     </message>
     <message>
         <source>&amp;OK</source>

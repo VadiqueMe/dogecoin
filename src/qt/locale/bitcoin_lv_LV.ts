@@ -458,8 +458,8 @@
         <translation>Skriptu &amp;pārbaudes pavedienu skaits</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
-        <translation>Atļaut ienākošos savienojumus</translation>
+        <source>Accept incoming connections</source>
+        <translation>Pieņemt ienākošos savienojumus</translation>
     </message>
     <message>
         <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>
@@ -494,12 +494,8 @@
         <translation>&amp;Maciņš</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation>Eksperts</translation>
-    </message>
-    <message>
-        <source>Enable coin &amp;control features</source>
-        <translation>Ieslēgt dogecoin &amp;kontroles funkcijas</translation>
+        <source>Hide coin &amp;control features</source>
+        <translation>Slēpt dogecoin &amp;kontroles funkcijas</translation>
     </message>
     <message>
         <source>&amp;Spend unconfirmed change</source>
@@ -556,10 +552,6 @@
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
         <translation>Izvēlēties dalījuma vienību pēc noklusēšanas, ko izmantot interfeisā un nosūtot bitkoinu.</translation>
-    </message>
-    <message>
-        <source>Whether to show coin control features or not.</source>
-        <translation>Vai rādīt Dogecoin kontroles funkcijas vai nē.</translation>
     </message>
     <message>
         <source>&amp;OK</source>

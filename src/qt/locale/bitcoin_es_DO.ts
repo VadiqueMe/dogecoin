@@ -490,10 +490,6 @@
         <translation>Monedero</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation>Experto</translation>
-    </message>
-    <message>
         <source>Automatically open the Dogecoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
         <translation>Abrir automáticamente el puerto del cliente Dogecoin en el router. Esta opción solo funciona si el router admite UPnP y está activado.</translation>
     </message>
@@ -544,10 +540,6 @@
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
         <translation>Elegir la subdivisión predeterminada para mostrar cantidades en la interfaz y cuando se envían monedas.</translation>
-    </message>
-    <message>
-        <source>Whether to show coin control features or not.</source>
-        <translation>Mostrar o no características de control de moneda</translation>
     </message>
     <message>
         <source>&amp;OK</source>
