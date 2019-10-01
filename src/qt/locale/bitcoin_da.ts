@@ -1653,12 +1653,8 @@
         <translation>&amp;Netværkstrafik</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>&amp;Ryd</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>Totaler</translation>
+        <source>Clear</source>
+        <translation>Ryd</translation>
     </message>
     <message>
         <source>In:</source>

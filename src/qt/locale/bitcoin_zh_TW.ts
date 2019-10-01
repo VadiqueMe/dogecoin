@@ -1653,12 +1653,8 @@
         <translation>網路流量</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
+        <source>Clear</source>
         <translation>清掉</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>總計</translation>
     </message>
     <message>
         <source>In:</source>

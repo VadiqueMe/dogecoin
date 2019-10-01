@@ -1037,12 +1037,8 @@
         <translation>&amp;Κίνηση δικτύου</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>&amp;Εκκαθάριση</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>Σύνολα</translation>
+        <source>Clear</source>
+        <translation>Εκκαθάριση</translation>
     </message>
     <message>
         <source>In:</source>

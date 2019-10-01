@@ -1653,12 +1653,8 @@
         <translation>Trafic &amp;réseau</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>&amp;Effacer</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>Totaux</translation>
+        <source>Clear</source>
+        <translation>Effacer</translation>
     </message>
     <message>
         <source>In:</source>

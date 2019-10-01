@@ -1561,12 +1561,8 @@
         <translation>Trà&amp;nsit de la xarxa</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>Nete&amp;ja</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>Totals</translation>
+        <source>Clear</source>
+        <translation>Neteja</translation>
     </message>
     <message>
         <source>In:</source>

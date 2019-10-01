@@ -1649,12 +1649,8 @@
         <translation>Tráfico de Rede</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>&amp;Limpar</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>Totais</translation>
+        <source>Clear</source>
+        <translation>Limpar</translation>
     </message>
     <message>
         <source>In:</source>

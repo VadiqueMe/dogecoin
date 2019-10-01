@@ -1634,12 +1634,8 @@
         <translation>&amp;Sieťová prevádzka</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>&amp;Vyčistiť</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>Celkovo:</translation>
+        <source>Clear</source>
+        <translation>Vyčistiť</translation>
     </message>
     <message>
         <source>In:</source>

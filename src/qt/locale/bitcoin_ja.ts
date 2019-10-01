@@ -1653,12 +1653,8 @@
         <translation>ネットワーク (&amp;N)</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>クリア(&amp;C)</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>合計</translation>
+        <source>Clear</source>
+        <translation>クリア</translation>
     </message>
     <message>
         <source>In:</source>

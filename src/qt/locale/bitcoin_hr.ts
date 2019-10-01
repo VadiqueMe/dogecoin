@@ -753,10 +753,6 @@
         <translation>&amp;Mrežni promet</translation>
     </message>
     <message>
-        <source>Totals</source>
-        <translation>Ukupno:</translation>
-    </message>
-    <message>
         <source>Clear console</source>
         <translation>Očisti konzolu</translation>
     </message>

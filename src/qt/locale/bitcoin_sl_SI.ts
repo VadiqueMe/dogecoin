@@ -1017,12 +1017,8 @@
         <translation>&amp;Omrežni promet</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>&amp;Počisti</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>Promet</translation>
+        <source>Clear</source>
+        <translation>Počisti</translation>
     </message>
     <message>
         <source>In:</source>

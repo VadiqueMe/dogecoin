@@ -815,12 +815,8 @@
         <translation>&amp;Тармоқ трафиги</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>&amp;Тозалаш</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>Жами</translation>
+        <source>Clear</source>
+        <translation>Тозалаш</translation>
     </message>
     <message>
         <source>In:</source>

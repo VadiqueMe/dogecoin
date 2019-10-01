@@ -1297,12 +1297,8 @@
         <translation>&amp;Мрежов Трафик</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>&amp;Изчисти</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>Общо:</translation>
+        <source>Clear</source>
+        <translation>Изчисти</translation>
     </message>
     <message>
         <source>In:</source>

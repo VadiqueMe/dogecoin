@@ -1649,12 +1649,8 @@
         <translation>&amp;Netzwerkauslastung</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>&amp;Zurücksetzen</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>Gesamtbetrag:</translation>
+        <source>Clear</source>
+        <translation>Zurücksetzen</translation>
     </message>
     <message>
         <source>In:</source>

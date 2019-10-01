@@ -2399,12 +2399,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+52"/>
-        <source>&amp;Clear</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>Totals</source>
+        <source>Clear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

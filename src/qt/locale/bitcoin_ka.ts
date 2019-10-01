@@ -731,12 +731,8 @@
         <translation>&amp;ქსელის ტრაფიკი</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>&amp;წაშლა</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>სულ:</translation>
+        <source>Clear</source>
+        <translation>წაშლა</translation>
     </message>
     <message>
         <source>In:</source>

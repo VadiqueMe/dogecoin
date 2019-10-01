@@ -1566,12 +1566,8 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
         <translation>&amp;Traffico di Rete</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>&amp;Cancella</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>Totali</translation>
+        <source>Clear</source>
+        <translation>Cancella</translation>
     </message>
     <message>
         <source>In:</source>

@@ -1653,12 +1653,8 @@
         <translation>&amp;Netwerkverkeer</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>&amp;Wissen</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>Totalen</translation>
+        <source>Clear</source>
+        <translation>Wissen</translation>
     </message>
     <message>
         <source>In:</source>

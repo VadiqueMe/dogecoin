@@ -1653,12 +1653,8 @@
         <translation>&amp;Tráfico de Red</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>&amp;Vaciar</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>Total:</translation>
+        <source>Clear</source>
+        <translation>Vaciar</translation>
     </message>
     <message>
         <source>In:</source>

@@ -451,8 +451,8 @@
         <translation>&amp;Hap</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>&amp;Pastro</translation>
+        <source>Clear</source>
+        <translation>Pastro</translation>
     </message>
     <message>
         <source>never</source>

@@ -1653,12 +1653,8 @@
         <translation>&amp;Ağ trafiği</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>&amp;Temizle</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>Toplamlar</translation>
+        <source>Clear</source>
+        <translation>Temizle</translation>
     </message>
     <message>
         <source>In:</source>

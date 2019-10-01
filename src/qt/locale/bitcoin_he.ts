@@ -1059,12 +1059,8 @@
         <translation>&amp;תעבורת רשת</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>&amp;ניקוי</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>סכומים</translation>
+        <source>Clear</source>
+        <translation>ניקוי</translation>
     </message>
     <message>
         <source>In:</source>

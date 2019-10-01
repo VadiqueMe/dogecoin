@@ -921,12 +921,8 @@
         <translation>&amp;Hálózati forgalom</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>&amp;Törlés</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>Összesen:</translation>
+        <source>Clear</source>
+        <translation>Törlés</translation>
     </message>
     <message>
         <source>In:</source>

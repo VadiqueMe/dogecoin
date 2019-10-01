@@ -1434,12 +1434,8 @@ Var vänlig och försök igen.</translation>
         <translation>&amp;Nätverkstrafik</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>&amp;Rensa</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>Totalt:</translation>
+        <source>Clear</source>
+        <translation>Rensa</translation>
     </message>
     <message>
         <source>In:</source>

@@ -419,6 +419,8 @@ RPCConsole::RPCConsole(const PlatformStyle *_platformStyle, QWidget *parent) :
     peersTableContextMenu(0),
     banTableContextMenu(0),
     consoleFontSize(0)
+    , resetBytesRecv( 0 )
+    , resetBytesSent( 0 )
 {
     ui->setupUi(this);
     GUIUtil::restoreWindowGeometry("nRPCConsoleWindow", this->size(), this);
@@ -439,7 +441,8 @@ RPCConsole::RPCConsole(const PlatformStyle *_platformStyle, QWidget *parent) :
     connect(ui->clearButton, SIGNAL(clicked()), this, SLOT(clear()));
     connect(ui->fontBiggerButton, SIGNAL(clicked()), this, SLOT(fontBigger()));
     connect(ui->fontSmallerButton, SIGNAL(clicked()), this, SLOT(fontSmaller()));
-    connect(ui->btnClearTrafficGraph, SIGNAL(clicked()), ui->trafficGraph, SLOT(clear()));
+    connect(ui->buttonClearTrafficGraph, SIGNAL(clicked()), ui->trafficGraph, SLOT(clear()));
+    connect( ui->buttonResetTrafficValues, SIGNAL( clicked() ), this, SLOT( resetTrafficValues() ) ) ;
 
     // set library version labels
 #ifdef ENABLE_WALLET
@@ -531,8 +534,8 @@ void RPCConsole::setClientModel(ClientModel *model)
         updateNetworkState();
         connect(model, SIGNAL(networkActiveChanged(bool)), this, SLOT(setNetworkActive(bool)));
 
-        updateTrafficStats(model->getTotalBytesRecv(), model->getTotalBytesSent());
-        connect(model, SIGNAL(bytesChanged(quint64,quint64)), this, SLOT(updateTrafficStats(quint64, quint64)));
+        updateTrafficStats() ;
+        connect(model, SIGNAL( bytesChanged(quint64,quint64) ), this, SLOT( updateTrafficStats() ));
 
         connect(model, SIGNAL(mempoolSizeChanged(long,size_t)), this, SLOT(setMempoolSize(long,size_t)));
 
@@ -932,10 +935,22 @@ void RPCConsole::setTrafficGraphRange(int mins)
     ui->lblGraphRange->setText(GUIUtil::formatDurationStr(mins * 60));
 }
 
-void RPCConsole::updateTrafficStats(quint64 totalBytesIn, quint64 totalBytesOut)
+void RPCConsole::updateTrafficStats( quint64 totalBytesIn, quint64 totalBytesOut )
 {
-    ui->lblBytesIn->setText(FormatBytes(totalBytesIn));
-    ui->lblBytesOut->setText(FormatBytes(totalBytesOut));
+    ui->bytesInLabel->setText( FormatBytes( totalBytesIn - resetBytesRecv ) ) ;
+    ui->bytesOutLabel->setText( FormatBytes( totalBytesOut - resetBytesSent ) ) ;
+}
+
+void RPCConsole::updateTrafficStats()
+{
+    updateTrafficStats( clientModel->getTotalBytesRecv(), clientModel->getTotalBytesSent() ) ;
+}
+
+void RPCConsole::resetTrafficValues()
+{
+    resetBytesRecv = clientModel->getTotalBytesRecv() ;
+    resetBytesSent = clientModel->getTotalBytesSent() ;
+    updateTrafficStats() ;
 }
 
 void RPCConsole::peerSelected(const QItemSelection &selected, const QItemSelection &deselected)

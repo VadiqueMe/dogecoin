@@ -1653,12 +1653,8 @@
         <translation>네트워크 트래픽(&amp;N)</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>지우기(&amp;C)</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>총액</translation>
+        <source>Clear</source>
+        <translation>지우기</translation>
     </message>
     <message>
         <source>In:</source>

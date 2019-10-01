@@ -1653,12 +1653,8 @@
         <translation>Сетевой &amp;трафик</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>&amp;Очистить</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>Всего</translation>
+        <source>Clear</source>
+        <translation>Очистить</translation>
     </message>
     <message>
         <source>In:</source>

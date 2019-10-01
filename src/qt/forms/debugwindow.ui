@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>740</width>
-    <height>430</height>
+    <height>520</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -643,9 +643,9 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="btnClearTrafficGraph">
+            <widget class="QPushButton" name="buttonClearTrafficGraph">
              <property name="text">
-              <string>&amp;Clear</string>
+              <string>Clear</string>
              </property>
              <property name="autoDefault">
               <bool>false</bool>
@@ -657,13 +657,39 @@
         </layout>
        </item>
        <item>
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>6</width>
+           <height>1</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
         <layout class="QVBoxLayout" name="verticalLayout">
-         <item>
-          <widget class="QGroupBox" name="groupBox">
-           <property name="title">
-            <string>Totals</string>
-           </property>
-           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <item>
+             <spacer name="verticalSpacer_5">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Fixed</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>1</width>
+                <height>12</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_4">
               <item>
@@ -730,7 +756,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QLabel" name="lblBytesIn">
+               <widget class="QLabel" name="bytesInLabel">
                 <property name="minimumSize">
                  <size>
                   <width>50</width>
@@ -810,7 +836,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QLabel" name="lblBytesOut">
+               <widget class="QLabel" name="bytesOutLabel">
                 <property name="minimumSize">
                  <size>
                   <width>50</width>
@@ -829,17 +855,27 @@
               <property name="orientation">
                <enum>Qt::Vertical</enum>
               </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Expanding</enum>
+              </property>
               <property name="sizeHint" stdset="0">
                <size>
-                <width>20</width>
-                <height>407</height>
+                <width>1</width>
+                <height>40</height>
                </size>
               </property>
              </spacer>
             </item>
-           </layout>
-          </widget>
-         </item>
+            <item>
+              <widget class="QPushButton" name="buttonResetTrafficValues">
+                <property name="text">
+                  <string>Reset</string>
+                </property>
+                <property name="autoDefault">
+                  <bool>false</bool>
+                </property>
+              </widget>
+            </item>
         </layout>
        </item>
       </layout>

@@ -1149,12 +1149,8 @@
         <translation>&amp;Verkkoliikenne</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>&amp;Tyhjennä</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>Yhteensä</translation>
+        <source>Clear</source>
+        <translation>Tyhjennä</translation>
     </message>
     <message>
         <source>In:</source>

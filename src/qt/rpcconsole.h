@@ -70,7 +70,9 @@ private Q_SLOTS:
     /** change the time range of the network traffic graph */
     void on_sldGraphRange_valueChanged(int value);
     /** update traffic statistics */
-    void updateTrafficStats(quint64 totalBytesIn, quint64 totalBytesOut);
+    void updateTrafficStats( quint64 totalBytesIn, quint64 totalBytesOut ) ;
+    void updateTrafficStats() ;
+    void resetTrafficValues() ;
     void resizeEvent(QResizeEvent *event);
     void showEvent(QShowEvent *event);
     void hideEvent(QHideEvent *event);
@@ -152,6 +154,9 @@ private:
     int consoleFontSize;
     QCompleter *autoCompleter;
     QThread thread;
+
+    quint64 resetBytesRecv ;
+    quint64 resetBytesSent ;
 
     /** Update UI with latest network info from model. */
     void updateNetworkState();

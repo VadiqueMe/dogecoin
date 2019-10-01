@@ -1135,12 +1135,8 @@
         <translation>Kemacetan &amp;Jaringan </translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>&amp;Kosongkan</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>Total</translation>
+        <source>Clear</source>
+        <translation>Kosongkan</translation>
     </message>
     <message>
         <source>In:</source>

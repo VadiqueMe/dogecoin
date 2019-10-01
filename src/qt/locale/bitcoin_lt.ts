@@ -643,12 +643,8 @@
         <translation>&amp;Konsolė</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
+        <source>Clear</source>
         <translation>Išvalyti</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>Viso:</translation>
     </message>
     <message>
         <source>Debug log file</source>

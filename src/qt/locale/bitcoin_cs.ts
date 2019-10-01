@@ -1653,12 +1653,8 @@
         <translation>&amp;Síťový provoz</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>&amp;Vyčistit</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>Součty</translation>
+        <source>Clear</source>
+        <translation>Vyčistit</translation>
     </message>
     <message>
         <source>In:</source>

@@ -1067,12 +1067,8 @@
         <translation>&amp;حركة مرور الشبكة</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>&amp;مسح</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>المجاميع</translation>
+        <source>Clear</source>
+        <translation>مسح</translation>
     </message>
     <message>
         <source>In:</source>

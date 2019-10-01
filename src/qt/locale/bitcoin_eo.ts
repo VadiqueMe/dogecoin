@@ -889,12 +889,8 @@
         <translation>&amp;Reta Trafiko</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>&amp;Forigi ĉion</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>Totaloj</translation>
+        <source>Clear</source>
+        <translation>Forigi ĉion</translation>
     </message>
     <message>
         <source>In:</source>

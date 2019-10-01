@@ -1157,10 +1157,6 @@
         <translation>&amp;کنسول</translation>
     </message>
     <message>
-        <source>Totals</source>
-        <translation>جمع کل:</translation>
-    </message>
-    <message>
         <source>In:</source>
         <translation>در:</translation>
     </message>

@@ -499,10 +499,6 @@
         <translation>&amp;Console</translation>
     </message>
     <message>
-        <source>Totals</source>
-        <translation>Kabuuan:</translation>
-    </message>
-    <message>
         <source>Debug log file</source>
         <translation>Debug log file</translation>
     </message>

@@ -518,10 +518,6 @@
         <translation>&amp;Consola</translation>
     </message>
     <message>
-        <source>Totals</source>
-        <translation>Total:</translation>
-    </message>
-    <message>
         <source>Clear console</source>
         <translation>Limpiar Consola</translation>
     </message>

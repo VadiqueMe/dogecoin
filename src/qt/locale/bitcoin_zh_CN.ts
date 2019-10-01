@@ -1635,12 +1635,8 @@
         <translation>网络流量(&amp;N)</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>清除(&amp;C)</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>总数</translation>
+        <source>Clear</source>
+        <translation>清除</translation>
     </message>
     <message>
         <source>In:</source>

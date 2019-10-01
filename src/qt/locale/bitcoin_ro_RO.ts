@@ -1041,12 +1041,8 @@
         <translation>Trafic reţea</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>&amp;Curăţă</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>Totaluri</translation>
+        <source>Clear</source>
+        <translation>Curăţă</translation>
     </message>
     <message>
         <source>In:</source>

@@ -1197,12 +1197,8 @@
         <translation>&amp;Nettverkstrafikk</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>&amp;Fjern</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>Totalt</translation>
+        <source>Clear</source>
+        <translation>Fjern</translation>
     </message>
     <message>
         <source>In:</source>

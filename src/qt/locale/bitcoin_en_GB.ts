@@ -1221,12 +1221,8 @@
         <translation>&amp;Network Traffic</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>&amp;Clear</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>Totals</translation>
+        <source>Clear</source>
+        <translation>Clear</translation>
     </message>
     <message>
         <source>In:</source>

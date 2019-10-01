@@ -443,12 +443,8 @@
         <translation>&amp;பணியகம்</translation>
     </message>
     <message>
-        <source>&amp;Clear</source>
-        <translation>&amp;வழுநீக்கு</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation>மொத்தம்</translation>
+        <source>Clear</source>
+        <translation>வழுநீக்கு</translation>
     </message>
     <message>
         <source>In:</source>
