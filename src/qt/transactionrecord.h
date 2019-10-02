@@ -18,7 +18,9 @@ class CWalletTx;
  */
 class TransactionStatus
 {
+
 public:
+
     TransactionStatus():
         countsForBalance(false), sortKey(""),
         matures_in(0), status(Offline), depth(0), open_for(0), cur_num_blocks(-1)
@@ -68,7 +70,9 @@ public:
  */
 class TransactionRecord
 {
+
 public:
+
     enum Type
     {
         Other,
@@ -84,26 +88,29 @@ public:
     static const int RecommendedNumConfirmations = 6;
 
     TransactionRecord():
-            hash(), time(0), type(Other), address(""), debit(0), credit(0), idx(0)
+            hash(), time(0), type(Other), address(""),
+            debit( 0 ), credit( 0 ),
+            subtransactionIdx( 0 )
     {
     }
 
     TransactionRecord(uint256 _hash, qint64 _time):
-            hash(_hash), time(_time), type(Other), address(""), debit(0),
-            credit(0), idx(0)
+            hash(_hash), time(_time), type(Other), address(""),
+            debit( 0 ), credit( 0 ),
+            subtransactionIdx( 0 )
     {
     }
 
     TransactionRecord(uint256 _hash, qint64 _time,
                 Type _type, const std::string &_address,
                 const CAmount& _debit, const CAmount& _credit):
-            hash(_hash), time(_time), type(_type), address(_address), debit(_debit), credit(_credit),
-            idx(0)
+            hash(_hash), time(_time), type(_type), address(_address),
+            debit( _debit ), credit( _credit ),
+            subtransactionIdx( 0 )
     {
     }
 
-    /** Decompose CWallet transaction to model transaction records.
-     */
+    /** Decompose CWallet transaction to model transaction records */
     static bool showTransaction(const CWalletTx &wtx);
     static QList<TransactionRecord> decomposeTransaction(const CWallet *wallet, const CWalletTx &wtx);
 
@@ -117,9 +124,6 @@ public:
     CAmount credit;
     /**@}*/
 
-    /** Subtransaction index, for sort key */
-    int idx;
-
     /** Status: can change with block chain update */
     TransactionStatus status;
 
@@ -130,7 +134,9 @@ public:
     QString getTxID() const;
 
     /** Return the output index of the subtransaction  */
-    int getOutputIndex() const;
+    int getSubtransactionIndex() const ;
+
+    void setSubtransactionIndex( int idx ) ;
 
     /** Update status from core wallet tx.
      */
@@ -139,6 +145,12 @@ public:
     /** Return whether a status update is needed.
      */
     bool statusUpdateNeeded();
+
+private:
+
+    /** Subtransaction index, for sort key */
+    int subtransactionIdx ;
+
 };
 
 #endif // BITCOIN_QT_TRANSACTIONRECORD_H

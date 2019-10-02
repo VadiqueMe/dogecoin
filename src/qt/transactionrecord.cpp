@@ -30,7 +30,7 @@ bool TransactionRecord::showTransaction(const CWalletTx &wtx)
 }
 
 /*
- * Decompose CWallet transaction to model transaction records.
+ * Decompose CWallet transaction to model transaction records
  */
 QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *wallet, const CWalletTx &wtx)
 {
@@ -47,15 +47,15 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
         //
         // Credit
         //
-        for(unsigned int i = 0; i < wtx.tx->vout.size(); i++)
+        for ( unsigned int i = 0 ; i < wtx.tx->vout.size() ; i++ )
         {
             const CTxOut& txout = wtx.tx->vout[i];
-            isminetype mine = wallet->IsMine(txout);
-            if(mine)
+            isminetype mine = wallet->IsMine( txout ) ;
+            if ( mine )
             {
                 TransactionRecord sub(hash, nTime);
                 CTxDestination address;
-                sub.idx = i; // vout index
+                sub.setSubtransactionIndex( i ) ; // vout index
                 sub.credit = txout.nValue;
                 sub.involvesWatchAddress = mine & ISMINE_WATCH_ONLY;
                 if (ExtractDestination(txout.scriptPubKey, address) && IsMine(*wallet, address))
@@ -115,11 +115,11 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
             //
             CAmount nTxFee = nDebit - wtx.tx->GetValueOut();
 
-            for (unsigned int nOut = 0; nOut < wtx.tx->vout.size(); nOut++)
+            for ( unsigned int nOut = 0 ; nOut < wtx.tx->vout.size() ; nOut++ )
             {
                 const CTxOut& txout = wtx.tx->vout[nOut];
                 TransactionRecord sub(hash, nTime);
-                sub.idx = nOut;
+                sub.setSubtransactionIndex( nOut ) ;
                 sub.involvesWatchAddress = involvesWatchAddress;
 
                 if(wallet->IsMine(txout))
@@ -180,11 +180,11 @@ void TransactionRecord::updateStatus(const CWalletTx &wtx)
         pindex = (*mi).second;
 
     // Sort order, unrecorded transactions sort to the top
-    status.sortKey = strprintf("%010d-%01d-%010u-%03d",
+    status.sortKey = strprintf( "%010d-%01d-%010u-%03d",
         (pindex ? pindex->nHeight : std::numeric_limits<int>::max()),
         (wtx.IsCoinBase() ? 1 : 0),
         wtx.nTimeReceived,
-        idx);
+        subtransactionIdx ) ;
     status.countsForBalance = wtx.IsTrusted() && !(wtx.GetBlocksToMaturity() > 0);
     status.depth = wtx.GetDepthInMainChain();
     status.cur_num_blocks = chainActive.Height();
@@ -266,7 +266,12 @@ QString TransactionRecord::getTxID() const
     return QString::fromStdString(hash.ToString());
 }
 
-int TransactionRecord::getOutputIndex() const
+int TransactionRecord::getSubtransactionIndex() const
 {
-    return idx;
+    return subtransactionIdx ;
+}
+
+void TransactionRecord::setSubtransactionIndex( int idx )
+{
+    subtransactionIdx = idx ;
 }
