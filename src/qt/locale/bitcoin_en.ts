@@ -2880,11 +2880,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+52"/>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location line="+89"/>
         <source>normal</source>
         <translation type="unfinished"></translation>
@@ -2912,11 +2907,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <location line="-876"/>
         <source>Dust:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+143"/>
-        <source>Confirmation time target:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

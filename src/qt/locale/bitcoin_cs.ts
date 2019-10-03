@@ -2033,10 +2033,6 @@
         <translation>Vlastní:</translation>
     </message>
     <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>(Inteligentní poplatek ještě není inicializovaný. Obvykle mu to tak pár bloků trvá...)</translation>
-    </message>
-    <message>
         <source>normal</source>
         <translation>normální</translation>
     </message>
@@ -2059,10 +2055,6 @@
     <message>
         <source>Dust:</source>
         <translation>Prach:</translation>
-    </message>
-    <message>
-        <source>Confirmation time target:</source>
-        <translation>Časové cílování potvrzení:</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

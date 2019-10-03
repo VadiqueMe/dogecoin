@@ -1726,10 +1726,6 @@
         <translation>Uso:</translation>
     </message>
     <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>(A taxa inteligente ainda não foi inicializada. Isto normalmente demora alguns blocos...)</translation>
-    </message>
-    <message>
         <source>normal</source>
         <translation>normal</translation>
     </message>

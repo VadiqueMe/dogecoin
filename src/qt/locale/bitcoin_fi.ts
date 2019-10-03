@@ -1425,10 +1425,6 @@
         <translation>Muokattu:</translation>
     </message>
     <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>(Älykästä rahansiirtokulua ei ole vielä alustettu. Tähän kuluu yleensä aikaa muutaman lohkon verran...)</translation>
-    </message>
-    <message>
         <source>normal</source>
         <translation>normaali</translation>
     </message>

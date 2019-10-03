@@ -2029,10 +2029,6 @@
         <translation>Personalizado:</translation>
     </message>
     <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>(Smart fee não iniciado. Isso requer alguns blocos...)</translation>
-    </message>
-    <message>
         <source>normal</source>
         <translation>normal</translation>
     </message>
@@ -2055,10 +2051,6 @@
     <message>
         <source>Dust:</source>
         <translation>Poeira:</translation>
-    </message>
-    <message>
-        <source>Confirmation time target:</source>
-        <translation>Confirmando tempo alvo:</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

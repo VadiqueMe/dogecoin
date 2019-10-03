@@ -2033,10 +2033,6 @@
         <translation>Выборочно:</translation>
     </message>
     <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>(Умная комиссия пока не инициализирована. Обычно для этого требуется несколько блоков...)</translation>
-    </message>
-    <message>
         <source>normal</source>
         <translation>обычный</translation>
     </message>
@@ -2059,10 +2055,6 @@
     <message>
         <source>Dust:</source>
         <translation>Пыль:</translation>
-    </message>
-    <message>
-        <source>Confirmation time target:</source>
-        <translation>Время подтверждения:</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

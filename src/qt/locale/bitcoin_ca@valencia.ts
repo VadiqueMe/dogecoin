@@ -1669,10 +1669,6 @@
         <translation>Personalitzada:</translation>
     </message>
     <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>(No s'ha inicialitzat encara la comissió intel·ligent. Normalment pren uns pocs blocs...)</translation>
-    </message>
-    <message>
         <source>normal</source>
         <translation>normal</translation>
     </message>

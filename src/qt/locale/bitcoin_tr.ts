@@ -2033,10 +2033,6 @@
         <translation>Özel:</translation>
     </message>
     <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>(Zeki ücret henüz başlatılmadı. Bu genelde birkaç blok alır...)</translation>
-    </message>
-    <message>
         <source>normal</source>
         <translation>normal</translation>
     </message>
@@ -2059,10 +2055,6 @@
     <message>
         <source>Dust:</source>
         <translation>Toz:</translation>
-    </message>
-    <message>
-        <source>Confirmation time target:</source>
-        <translation>Doğrulama süresi hedefi:</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

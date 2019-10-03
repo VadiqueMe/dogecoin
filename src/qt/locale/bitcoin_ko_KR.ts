@@ -2033,10 +2033,6 @@
         <translation>사용자 정의:</translation>
     </message>
     <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>(Smart fee가 아직 초기화 되지 않았습니다. 블록 분석이 완전하게 끝날 때 까지 기다려주십시오...)</translation>
-    </message>
-    <message>
         <source>normal</source>
         <translation>일반</translation>
     </message>
@@ -2059,10 +2055,6 @@
     <message>
         <source>Dust:</source>
         <translation>더스트:</translation>
-    </message>
-    <message>
-        <source>Confirmation time target:</source>
-        <translation>승인 시간 목표:</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

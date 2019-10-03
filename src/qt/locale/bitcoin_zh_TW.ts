@@ -2033,10 +2033,6 @@
         <translation>自訂:</translation>
     </message>
     <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>(手續費智慧演算法還沒準備好。通常都要等幾個區塊才行...)</translation>
-    </message>
-    <message>
         <source>normal</source>
         <translation>正常</translation>
     </message>
@@ -2059,10 +2055,6 @@
     <message>
         <source>Dust:</source>
         <translation>零散錢:</translation>
-    </message>
-    <message>
-        <source>Confirmation time target:</source>
-        <translation>目標確認時間:</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

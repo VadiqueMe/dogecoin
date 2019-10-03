@@ -1273,10 +1273,6 @@
         <translation>Po meri:</translation>
     </message>
     <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>(Samodejni obračun provizije še ni pripravljen. Po navadi izračun traja nekaj blokov ...)</translation>
-    </message>
-    <message>
         <source>normal</source>
         <translation>navadno</translation>
     </message>

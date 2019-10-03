@@ -102,7 +102,7 @@ UniValue getpeerinfo(const JSONRPCRequest& request)
             "       n,                        (numeric) The heights of blocks we're currently asking from this peer\n"
             "       ...\n"
             "    ],\n"
-            "    \"whitelisted\": true|false, (boolean) Whether the peer is whitelisted\n"					
+            "    \"whitelisted\": true|false, (boolean) Whether the peer is whitelisted\n"
             "    \"bytessent_per_msg\": {\n"
             "       \"addr\": n,              (numeric) The total bytes sent aggregated by message type\n"
             "       ...\n"
@@ -448,8 +448,8 @@ UniValue getnetworkinfo(const JSONRPCRequest& request)
         obj.push_back(Pair("connections",   (int)g_connman->GetNodeCount(CConnman::CONNECTIONS_ALL)));
     }
     obj.push_back(Pair("networks",      GetNetworksInfo()));
-    obj.push_back(Pair("relayfee",      ValueFromAmount(::minRelayTxFee.GetFeePerK())));
-    obj.push_back(Pair("incrementalfee", ValueFromAmount(::incrementalRelayFee.GetFeePerK())));
+    obj.push_back(Pair("relayfee", ValueFromAmount( ::minRelayTxFee.GetFeePerKiloByte() ))) ;
+    obj.push_back(Pair("incrementalfee", ValueFromAmount( ::incrementalRelayFee.GetFeePerKiloByte() ))) ;
     UniValue localAddresses(UniValue::VARR);
     {
         LOCK(cs_mapLocalHost);

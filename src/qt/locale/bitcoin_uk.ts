@@ -1421,10 +1421,6 @@
         <translation>Змінено:</translation>
     </message>
     <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>(Розумну оплату ще не ініціалізовано. Це, зазвичай, триває кілька блоків...)</translation>
-    </message>
-    <message>
         <source>normal</source>
         <translation>звичайний</translation>
     </message>

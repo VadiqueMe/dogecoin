@@ -1922,10 +1922,6 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
         <translation>Personalizzata:</translation>
     </message>
     <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>(Commissione intelligente non ancora inizializzata. Normalmente richiede un'attesa di alcuni blocchi...)</translation>
-    </message>
-    <message>
         <source>normal</source>
         <translation>normale</translation>
     </message>

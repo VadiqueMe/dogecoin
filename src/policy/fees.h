@@ -214,29 +214,6 @@ public:
     /** Remove a transaction from the mempool tracking stats*/
     bool removeTx(uint256 hash);
 
-    /** Return a feerate estimate */
-    CFeeRate estimateFee(int confTarget);
-
-    /** Estimate feerate needed to get be included in a block within
-     *  confTarget blocks. If no answer can be given at confTarget, return an
-     *  estimate at the lowest target where one can be given.
-     */
-    CFeeRate estimateSmartFee(int confTarget, int *answerFoundAtTarget, const CTxMemPool& pool);
-
-    /** Return a priority estimate.
-     *  DEPRECATED
-     *  Returns -1
-     */
-    double estimatePriority(int confTarget);
-
-    /** Estimate priority needed to get be included in a block within
-     *  confTarget blocks.
-     *  DEPRECATED
-     *  Returns -1 unless mempool is currently limited then returns INF_PRIORITY
-     *  answerFoundAtTarget is set to confTarget
-     */
-    double estimateSmartPriority(int confTarget, int *answerFoundAtTarget, const CTxMemPool& pool);
-
     /** Write estimation data to a file */
     void Write(CAutoFile& fileout);
 
@@ -267,7 +244,7 @@ class FeeFilterRounder
 {
 public:
     /** Create new FeeFilterRounder */
-    FeeFilterRounder(const CFeeRate& minIncrementalFee);
+    FeeFilterRounder( const CFeeRate& minIncrementalFee ) ;
 
     /** Quantize a minimum fee for privacy purpose before broadcast **/
     CAmount round(CAmount currentMinFee);

@@ -2015,10 +2015,6 @@
         <translation>自定义：</translation>
     </message>
     <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>(智能交易费用 尚未初始化。 需要再下载一些数据块...)</translation>
-    </message>
-    <message>
         <source>normal</source>
         <translation>一般</translation>
     </message>

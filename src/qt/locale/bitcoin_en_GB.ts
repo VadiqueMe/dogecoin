@@ -1517,10 +1517,6 @@
         <translation>Custom:</translation>
     </message>
     <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>(Smart fee not initialised yet. This usually takes a few blocks...)</translation>
-    </message>
-    <message>
         <source>normal</source>
         <translation>normal</translation>
     </message>

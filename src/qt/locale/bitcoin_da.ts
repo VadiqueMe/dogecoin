@@ -2033,10 +2033,6 @@
         <translation>Brugertilpasset:</translation>
     </message>
     <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>(Smart-gebyr er ikke initialiseret endnu. Dette tager typisk nogle få blokke…)</translation>
-    </message>
-    <message>
         <source>normal</source>
         <translation>normal</translation>
     </message>
@@ -2059,10 +2055,6 @@
     <message>
         <source>Dust:</source>
         <translation>Støv:</translation>
-    </message>
-    <message>
-        <source>Confirmation time target:</source>
-        <translation>Mål for bekræftelsestid:</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

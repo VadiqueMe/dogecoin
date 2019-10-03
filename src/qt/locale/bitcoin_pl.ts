@@ -1897,10 +1897,6 @@
         <translation>Własna:</translation>
     </message>
     <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>(Sprytne opłaty nie są jeszcze zainicjowane. Trwa to zwykle kilka bloków...)</translation>
-    </message>
-    <message>
         <source>normal</source>
         <translation>normalnie</translation>
     </message>
@@ -1923,10 +1919,6 @@
     <message>
         <source>Dust:</source>
         <translation>Pył:</translation>
-    </message>
-    <message>
-        <source>Confirmation time target:</source>
-        <translation>Docelowy czas potwierdzenia:</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

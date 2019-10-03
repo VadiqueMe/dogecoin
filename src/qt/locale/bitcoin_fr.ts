@@ -2033,10 +2033,6 @@
         <translation>Personnalisés : </translation>
     </message>
     <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>(Les frais intelligents ne sont pas encore initialisés. Cela prend habituellement quelques blocs...)</translation>
-    </message>
-    <message>
         <source>normal</source>
         <translation>normal</translation>
     </message>
@@ -2059,10 +2055,6 @@
     <message>
         <source>Dust:</source>
         <translation>Poussière :</translation>
-    </message>
-    <message>
-        <source>Confirmation time target:</source>
-        <translation>Estimation du délai de confirmation :</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

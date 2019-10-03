@@ -1489,10 +1489,6 @@
         <translation>Egendefinert:</translation>
     </message>
     <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>(Smartgebyr ikke innført ennå. Dette tar vanligvis noen blokker...)</translation>
-    </message>
-    <message>
         <source>normal</source>
         <translation>normal</translation>
     </message>

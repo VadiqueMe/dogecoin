@@ -2014,10 +2014,6 @@
         <translation>Vlastný:</translation>
     </message>
     <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>(Automatický poplatok ešte nebol vypočítaný. Toto zvyčajne trvá niekoľko blokov...)</translation>
-    </message>
-    <message>
         <source>normal</source>
         <translation>normálne</translation>
     </message>
@@ -2040,10 +2036,6 @@
     <message>
         <source>Dust:</source>
         <translation>Prach:</translation>
-    </message>
-    <message>
-        <source>Confirmation time target:</source>
-        <translation>Cieľový čas potvrdenia:</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

@@ -2536,7 +2536,7 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
                 // Relay
                 pfrom->setKnown.insert(alertHash);
                 {
-                    
+
                     connman.ForEachNode([&alert](CNode* pnode)
                     {
                         pnode->PushAlert(alert);
@@ -3100,10 +3100,10 @@ bool SendMessages(CNode* pto, CConnman& connman, const std::atomic<bool>& interr
             if (fSendTrickle && pto->fSendMempool) {
                 auto vtxinfo = mempool.infoAll();
                 pto->fSendMempool = false;
-                CAmount filterrate = 0;
+                CAmount filterrate = 0 ;
                 {
                     LOCK(pto->cs_feeFilter);
-                    filterrate = pto->minFeeFilter;
+                    filterrate = pto->minFeeFilter ;
                 }
 
                 LOCK(pto->cs_filter);
@@ -3112,10 +3112,11 @@ bool SendMessages(CNode* pto, CConnman& connman, const std::atomic<bool>& interr
                     const uint256& hash = txinfo.tx->GetHash();
                     CInv inv(MSG_TX, hash);
                     pto->setInventoryTxToSend.erase(hash);
-                    if (filterrate) {
-                        if (txinfo.feeRate.GetFeePerK() < filterrate)
-                            continue;
-                    }
+
+                    if ( filterrate )
+                        if ( txinfo.feeRate.GetFeePerKiloByte() < filterrate )
+                            continue ;
+
                     if (pto->pfilter) {
                         if (!pto->pfilter->IsRelevantAndUpdate(*txinfo.tx)) continue;
                     }
@@ -3167,8 +3168,8 @@ bool SendMessages(CNode* pto, CConnman& connman, const std::atomic<bool>& interr
                     if (!txinfo.tx) {
                         continue;
                     }
-                    if (filterrate && txinfo.feeRate.GetFeePerK() < filterrate) {
-                        continue;
+                    if ( filterrate && txinfo.feeRate.GetFeePerKiloByte() < filterrate ) {
+                        continue ;
                     }
                     if (pto->pfilter && !pto->pfilter->IsRelevantAndUpdate(*txinfo.tx)) continue;
                     // Send
@@ -3275,17 +3276,17 @@ bool SendMessages(CNode* pto, CConnman& connman, const std::atomic<bool>& interr
         // Message: feefilter
         //
         // We don't want white listed peers to filter txs to us if we have -whitelistforcerelay
-        if (pto->nVersion >= FEEFILTER_VERSION && GetBoolArg("-feefilter", DEFAULT_FEEFILTER) &&
-            !(pto->fWhitelisted && GetBoolArg("-whitelistforcerelay", DEFAULT_WHITELISTFORCERELAY))) {
-            CAmount currentFilter = mempool.GetMinFee(GetArg("-maxmempool", DEFAULT_MAX_MEMPOOL_SIZE) * 1000000).GetFeePerK();
+        if ( pto->nVersion >= FEEFILTER_VERSION && GetBoolArg( "-feefilter", DEFAULT_FEEFILTER ) &&
+            ! ( pto->fWhitelisted && GetBoolArg( "-whitelistforcerelay", DEFAULT_WHITELISTFORCERELAY ) ) ) {
+            CAmount currentFilter = mempool.GetMinFee( GetArg( "-maxmempool", DEFAULT_MAX_MEMPOOL_SIZE ) * 1000000 ).GetFeePerKiloByte() ;
             int64_t timeNow = GetTimeMicros();
             if (timeNow > pto->nextSendTimeFeeFilter) {
-                static CFeeRate default_feerate(DEFAULT_MIN_RELAY_TX_FEE);
-                static FeeFilterRounder filterRounder(default_feerate);
-                CAmount filterToSend = filterRounder.round(currentFilter);
+                static CFeeRate default_feerate( DEFAULT_MIN_RELAY_TX_FEE ) ;
+                static FeeFilterRounder filterRounder( default_feerate ) ;
+                CAmount filterToSend = filterRounder.round( currentFilter ) ;
                 // If we don't allow free transactions, then we always have a fee filter of at least minRelayTxFee
-                if (GetArg("-limitfreerelay", DEFAULT_LIMITFREERELAY) <= 0)
-                    filterToSend = std::max(filterToSend, ::minRelayTxFee.GetFeePerK());
+                if ( GetArg( "-limitfreerelay", DEFAULT_LIMITFREERELAY ) <= 0 )
+                    filterToSend = std::max( filterToSend, ::minRelayTxFee.GetFeePerKiloByte() ) ;
                 if (filterToSend != pto->lastSentFeeFilter) {
                     connman.PushMessage(pto, msgMaker.Make(NetMsgType::FEEFILTER, filterToSend));
                     pto->lastSentFeeFilter = filterToSend;

@@ -2033,10 +2033,6 @@
         <translation>Handmatig:</translation>
     </message>
     <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>(Slimme transactiekosten is nog niet geïnitialiseerd. Dit duurt meestal een paar blokken...)</translation>
-    </message>
-    <message>
         <source>normal</source>
         <translation>normaal</translation>
     </message>
@@ -2059,10 +2055,6 @@
     <message>
         <source>Dust:</source>
         <translation>Stof:</translation>
-    </message>
-    <message>
-        <source>Confirmation time target:</source>
-        <translation>Bevestigingstijddoel:</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

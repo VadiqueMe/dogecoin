@@ -1949,10 +1949,6 @@
         <translation>Personalizado:</translation>
     </message>
     <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>(Tarifa inteligente no inicializado aún. Esto generalmente lleva a pocos bloques...)</translation>
-    </message>
-    <message>
         <source>normal</source>
         <translation>normal</translation>
     </message>
@@ -1975,10 +1971,6 @@
     <message>
         <source>Dust:</source>
         <translation>Polvo:</translation>
-    </message>
-    <message>
-        <source>Confirmation time target:</source>
-        <translation>Tiempo objetivo de confirmación:</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

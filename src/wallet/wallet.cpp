@@ -50,13 +50,13 @@ const uint32_t BIP32_HARDENED_KEY_LIMIT = 0x80000000;
  * Fees smaller than this are considered zero fee (for transaction creation)
  * Override with -mintxfee
  */
-CFeeRate CWallet::minTxFee = CFeeRate(DEFAULT_TRANSACTION_MINFEE);
+CFeeRate CWallet::minTxFee = CFeeRate( DEFAULT_TRANSACTION_MINFEE ) ;
+
 /**
- * If fee estimation does not have enough data to provide estimates, use this fee instead.
- * Has no effect if not using fee estimation
+ * Dogecoin: Use this fee instead of fee estimation
  * Override with -fallbackfee
  */
-CFeeRate CWallet::fallbackFee = CFeeRate(DEFAULT_FALLBACK_FEE);
+CFeeRate CWallet::fallbackFee = CFeeRate( DEFAULT_FALLBACK_FEE ) ;
 
 /** @defgroup mapWallet
  *
@@ -2630,10 +2630,8 @@ bool CWallet::CreateTransaction(const vector<CRecipient>& vecSend, CWalletTx& wt
                 // Can we complete this as a free transaction?
                 if (fSendFreeTransactions && nBytes <= MAX_FREE_TRANSACTION_CREATE_SIZE)
                 {
-                    // Not enough fee: enough priority?
-                    double dPriorityNeeded = mempool.estimateSmartPriority(currentConfirmationTarget);
-                    // Require at least hard-coded AllowFree.
-                    if (dPriority >= dPriorityNeeded && AllowFree(dPriority))
+                    // Require at least hard-coded AllowFree
+                    if ( AllowFree(dPriority) )
                         break;
                 }
 
@@ -2806,42 +2804,23 @@ bool CWallet::AddAccountingEntry(const CAccountingEntry& acentry, CWalletDB *pwa
     return true;
 }
 
-CAmount CWallet::GetRequiredFee(const CMutableTransaction& tx, unsigned int nTxBytes)
-{
-    (void) tx ;
-    return GetRequiredFee( nTxBytes ) ;
-}
-
-CAmount CWallet::GetRequiredFee(unsigned int nTxBytes)
-{
-    return std::max(minTxFee.GetFee(nTxBytes), ::minRelayTxFee.GetFee(nTxBytes));
-}
-
-CAmount CWallet::GetMinimumFee(const CMutableTransaction& tx, unsigned int nTxBytes, unsigned int nConfirmTarget, const CTxMemPool& pool)
+CAmount CWallet::GetMinimumFee( const CMutableTransaction& tx, unsigned int nTxBytes, unsigned int nConfirmTarget, const CTxMemPool& pool )
 {
     // payTxFee is the user-set global for desired feerate
-    return GetMinimumFee(tx, nTxBytes, nConfirmTarget, pool, payTxFee.GetFee(nTxBytes));
+    return GetMinimumFee( tx, nTxBytes, nConfirmTarget, pool, payTxFee.GetFee( nTxBytes ) ) ;
 }
 
-CAmount CWallet::GetMinimumFee(const CMutableTransaction& tx, unsigned int nTxBytes, unsigned int nConfirmTarget, const CTxMemPool& pool, CAmount targetFee)
+CAmount CWallet::GetMinimumFee( const CMutableTransaction& tx, unsigned int nTxBytes, unsigned int nConfirmTarget, const CTxMemPool& pool, CAmount targetFee )
 {
-    CAmount nFeeNeeded = targetFee;
-    // User didn't set: use -txconfirmtarget to estimate...
-    if (nFeeNeeded == 0) {
-        int estimateFoundTarget = nConfirmTarget;
-        nFeeNeeded = pool.estimateSmartFee(nConfirmTarget, &estimateFoundTarget).GetFee(nTxBytes);
-        // ... unless we don't have enough mempool data for estimatefee, then use fallbackFee
-        if (nFeeNeeded == 0)
-            nFeeNeeded = fallbackFee.GetFee(nTxBytes);
-    }
-    // prevent user from paying a fee below minRelayTxFee or minTxFee
-    // Dogecoin: Drop the smart fee estimate, use GetRequiredFee
-    // nFeeNeeded = std::max(nFeeNeeded, GetRequiredFee(tx, nTxBytes));
-    nFeeNeeded = GetRequiredFee(tx, nTxBytes);
-    // But always obey the maximum
-    if (nFeeNeeded > maxTxFee)
-        nFeeNeeded = maxTxFee;
-    return nFeeNeeded;
+    CAmount nFeeNeeded = targetFee ;
+    if ( nFeeNeeded == 0 )
+        nFeeNeeded = fallbackFee.GetFee( nTxBytes ) ;
+
+    // never exceed the maximum
+    if ( nFeeNeeded > maxTxFee )
+        nFeeNeeded = maxTxFee ;
+
+    return nFeeNeeded ;
 }
 
 
@@ -3551,7 +3530,7 @@ std::string CWallet::GetWalletHelpString(bool showDebug)
     strUsage += HelpMessageOpt("-mintxfee=<amt>", strprintf(_("Fees (in %s/kB) smaller than this are considered zero fee for transaction creation (default: %s)"),
                                                             CURRENCY_UNIT, FormatMoney(DEFAULT_TRANSACTION_MINFEE)));
     strUsage += HelpMessageOpt("-paytxfee=<amt>", strprintf(_("Fee (in %s/kB) to add to transactions you send (default: %s)"),
-                                                            CURRENCY_UNIT, FormatMoney(payTxFee.GetFeePerK())));
+                                                            CURRENCY_UNIT, FormatMoney( payTxFee.GetFeePerKiloByte() )));
     strUsage += HelpMessageOpt("-rescan", _("Rescan the block chain for missing wallet transactions on startup"));
     strUsage += HelpMessageOpt("-salvagewallet", _("Attempt to recover private keys from a corrupt wallet on startup"));
     if (showDebug)
@@ -3818,7 +3797,7 @@ bool CWallet::ParameterInteraction()
     if (GetArg("-prune", 0) && GetBoolArg("-rescan", false))
         return InitError(_("Rescans are not possible in pruned mode. You will need to use -reindex which will download the whole blockchain again."));
 
-    if (::minRelayTxFee.GetFeePerK() > HIGH_TX_FEE_PER_KB)
+    if ( ::minRelayTxFee.GetFeePerKiloByte() > HIGH_TX_FEE_PER_KB )
         InitWarning(AmountHighWarn("-minrelaytxfee") + " " +
                     _("The wallet will avoid paying less than the minimum relay fee."));
 
@@ -3834,7 +3813,7 @@ bool CWallet::ParameterInteraction()
     }
     if (IsArgSet("-fallbackfee"))
     {
-        CAmount nFeePerK = 0;
+        CAmount nFeePerK = 0 ;
         if (!ParseMoney(GetArg("-fallbackfee", ""), nFeePerK))
             return InitError(strprintf(_("Invalid amount for -fallbackfee=<amount>: '%s'"), GetArg("-fallbackfee", "")));
         if (nFeePerK > HIGH_TX_FEE_PER_KB)
@@ -3844,7 +3823,7 @@ bool CWallet::ParameterInteraction()
     }
     if (IsArgSet("-paytxfee"))
     {
-        CAmount nFeePerK = 0;
+        CAmount nFeePerK = 0 ;
         if (!ParseMoney(GetArg("-paytxfee", ""), nFeePerK))
             return InitError(AmountErrMsg("paytxfee", GetArg("-paytxfee", "")));
         if (nFeePerK > HIGH_TX_FEE_PER_KB)

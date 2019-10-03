@@ -2033,10 +2033,6 @@
         <translation>カスタム：</translation>
     </message>
     <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>（スマート手数料はまだ初期化されていません。これにはおおよそ数ブロックほどかかります……）</translation>
-    </message>
-    <message>
         <source>normal</source>
         <translation>普通</translation>
     </message>
@@ -2059,10 +2055,6 @@
     <message>
         <source>Dust:</source>
         <translation>ダスト：</translation>
-    </message>
-    <message>
-        <source>Confirmation time target:</source>
-        <translation>検証時間のターゲット:</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

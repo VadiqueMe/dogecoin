@@ -1770,10 +1770,6 @@ Var vänlig och försök igen.</translation>
         <translation>Anpassad:</translation>
     </message>
     <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>(Smartavgiften är inte initierad än. Detta tar vanligen några block...)</translation>
-    </message>
-    <message>
         <source>normal</source>
         <translation>normal</translation>
     </message>

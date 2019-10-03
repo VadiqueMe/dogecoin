@@ -1793,7 +1793,7 @@ UniValue gettransaction(const JSONRPCRequest& request)
             "      \"fee\": x.xxx,                     (numeric) The amount of the fee in " + CURRENCY_UNIT + ". This is negative and only available for the \n"
             "                                           'send' category of transactions.\n"
             "      \"abandoned\": xxx                  (bool) 'true' if the transaction has been abandoned (inputs are respendable). Only available for the \n"
-            "                                           'send' category of transactions.\n"			
+            "                                           'send' category of transactions.\n"
             "    }\n"
             "    ,...\n"
             "  ],\n"
@@ -2353,7 +2353,7 @@ UniValue getwalletinfo(const JSONRPCRequest& request)
     obj.push_back(Pair("keypoolsize",   (int)pwalletMain->GetKeyPoolSize()));
     if (pwalletMain->IsCrypted())
         obj.push_back(Pair("unlocked_until", nWalletUnlockTime));
-    obj.push_back(Pair("paytxfee",      ValueFromAmount(payTxFee.GetFeePerK())));
+    obj.push_back(Pair("paytxfee", ValueFromAmount( payTxFee.GetFeePerKiloByte() ))) ;
     CKeyID masterKeyID = pwalletMain->GetHDChain().masterKeyID;
     if (!masterKeyID.IsNull())
          obj.push_back(Pair("hdmasterkeyid", masterKeyID.GetHex()));
@@ -2829,11 +2829,9 @@ UniValue bumpfee(const JSONRPCRequest& request)
             }
         } else if (options.exists("totalFee")) {
             totalFee = options["totalFee"].get_int64();
-            CAmount requiredFee = CWallet::GetRequiredFee(*wtx.tx, maxNewTxSize);
-            if (totalFee < requiredFee ) {
-                throw JSONRPCError(RPC_INVALID_PARAMETER,
-                                   strprintf("Insufficient totalFee (cannot be less than required fee %s)",
-                                             FormatMoney(requiredFee)));
+            if ( totalFee < 0 ) {
+                throw JSONRPCError( RPC_INVALID_PARAMETER,
+                                    strprintf( "Total fee cannot be less than zero" ) );
             }
         }
 
@@ -2880,8 +2878,8 @@ UniValue bumpfee(const JSONRPCRequest& request)
         // in that unit (fee per kb).
         // However, nOldFeeRate is a calculated value from the tx fee/size, so
         // add 1 satoshi to the result, because it may have been rounded down.
-        if (nNewFeeRate.GetFeePerK() < nOldFeeRate.GetFeePerK() + 1 + walletIncrementalRelayFee.GetFeePerK()) {
-            nNewFeeRate = CFeeRate(nOldFeeRate.GetFeePerK() + 1 + walletIncrementalRelayFee.GetFeePerK());
+        if ( nNewFeeRate.GetFeePerKiloByte() < nOldFeeRate.GetFeePerKiloByte() + 1 + walletIncrementalRelayFee.GetFeePerKiloByte() ) {
+            nNewFeeRate = CFeeRate( nOldFeeRate.GetFeePerKiloByte() + 1 + walletIncrementalRelayFee.GetFeePerKiloByte() ) ;
             nNewFee = nNewFeeRate.GetFee(maxNewTxSize);
         }
     }
@@ -2899,8 +2897,15 @@ UniValue bumpfee(const JSONRPCRequest& request)
     // in a rare situation where the mempool minimum fee increased significantly since the fee estimation just a
     // moment earlier. In this case, we report an error to the user, who may use totalFee to make an adjustment.
     CFeeRate minMempoolFeeRate = mempool.GetMinFee(GetArg("-maxmempool", DEFAULT_MAX_MEMPOOL_SIZE) * 1000000);
-    if (nNewFeeRate.GetFeePerK() < minMempoolFeeRate.GetFeePerK()) {
-        throw JSONRPCError(RPC_WALLET_ERROR, strprintf("New fee rate (%s) is less than the minimum fee rate (%s) to get into the mempool. totalFee value should to be at least %s or settxfee value should be at least %s to add transaction.", FormatMoney(nNewFeeRate.GetFeePerK()), FormatMoney(minMempoolFeeRate.GetFeePerK()), FormatMoney(minMempoolFeeRate.GetFee(maxNewTxSize)), FormatMoney(minMempoolFeeRate.GetFeePerK())));
+    if ( nNewFeeRate.GetFeePerKiloByte() < minMempoolFeeRate.GetFeePerKiloByte() )
+    {
+        throw JSONRPCError(RPC_WALLET_ERROR, strprintf(
+                "New fee rate (%s) is less than the minimum fee rate (%s) to get into the mempool. totalFee value should to be at least %s or settxfee value should be at least %s to add transaction.",
+                FormatMoney( nNewFeeRate.GetFeePerKiloByte() ),
+                FormatMoney( minMempoolFeeRate.GetFeePerKiloByte() ),
+                FormatMoney( minMempoolFeeRate.GetFee( maxNewTxSize ) ),
+                FormatMoney( minMempoolFeeRate.GetFeePerKiloByte() )
+        )) ;
     }
 
     // Now modify the output to increase the fee.
