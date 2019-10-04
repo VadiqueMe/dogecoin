@@ -1711,8 +1711,8 @@ Importation ...</translation>
         <translation>Options de serveur RPC:</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
-        <translation>Envoyer les informations de débogage/trace à la console au lieu du fichier debug.log</translation>
+        <source>Send trace/debug info to console instead of debug log file</source>
+        <translation>Envoyer les informations de débogage/trace à la console au lieu du fichier debug log</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

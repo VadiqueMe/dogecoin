@@ -3006,8 +3006,8 @@
         <translation>剪定モードでは再スキャンを行うことはできません。-reindexを指定し、ブロックチェイン全体を再ダウンロードする必要があります。</translation>
     </message>
     <message>
-        <source>Error: A fatal internal error occurred, see debug.log for details</source>
-        <translation>エラー：致命的な内部エラーが発生しました。詳細はdebug.logを参照してください</translation>
+        <source>Error: A fatal internal error occurred, see debug log for details</source>
+        <translation>エラー：致命的な内部エラーが発生しました。詳細は debug log を参照してください</translation>
     </message>
     <message>
         <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
@@ -3527,8 +3527,8 @@
         <translation>起動時に失ったウォレットの取引のブロック チェーンを再スキャン</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
-        <translation>トレース/デバッグ情報を debug.log ファイルの代わりにコンソールへ送る</translation>
+        <source>Send trace/debug info to console instead of debug log file</source>
+        <translation>トレース/デバッグ情報を debug log ファイルの代わりにコンソールへ送る</translation>
     </message>
     <message>
         <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
@@ -3539,8 +3539,8 @@
         <translation>すべてのデバッグオプションを表示する (使い方: --help -help-debug)</translation>
     </message>
     <message>
-        <source>Shrink debug.log file on client startup (default: 1 when no -debug)</source>
-        <translation>クライアント起動時に debug.log ファイルを縮小 (初期値: -debug オプションを指定しない場合は1)</translation>
+        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
+        <translation>クライアント起動時に debug log ファイルを縮小 (初期値: -debug オプションを指定しない場合は1)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

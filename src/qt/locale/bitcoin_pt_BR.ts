@@ -3002,8 +3002,8 @@
         <translation>Rescans não são possíveis no modo prune. Você precisa usar -reindex, que irá fazer o download de toda a blockchain novamente.</translation>
     </message>
     <message>
-        <source>Error: A fatal internal error occurred, see debug.log for details</source>
-        <translation>Erro: Um erro interno fatal ocorreu, veja debug.log para detalhes</translation>
+        <source>Error: A fatal internal error occurred, see debug log for details</source>
+        <translation>Erro: Um erro interno fatal ocorreu, veja debug log para detalhes</translation>
     </message>
     <message>
         <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
@@ -3518,8 +3518,8 @@
         <translation>Re-escanear a block-chain por transações faltantes na carteira durante a inicialização</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
-        <translation>Mandar informação de trace/debug para o console em vez de para o arquivo debug.log</translation>
+        <source>Send trace/debug info to console instead of debug log file</source>
+        <translation>Mandar informação de trace/debug para o console em vez de para o arquivo debug log</translation>
     </message>
     <message>
         <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
@@ -3530,8 +3530,8 @@
         <translation>Exibir todas opções de depuração (uso: --help -help-debug)</translation>
     </message>
     <message>
-        <source>Shrink debug.log file on client startup (default: 1 when no -debug)</source>
-        <translation>Encolher arquivo debug.log ao iniciar o cliente (padrão 1 se opção -debug não estiver presente)</translation>
+        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
+        <translation>Encolher arquivo debug log ao iniciar o cliente (padrão 1 se opção -debug não estiver presente)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

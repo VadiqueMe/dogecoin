@@ -1754,8 +1754,8 @@
         <translation>Opţiuni server RPC:</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
-        <translation>Trimite informaţiile trace/debug la consolă în locul fişierului debug.log</translation>
+        <source>Send trace/debug info to console instead of debug log file</source>
+        <translation>Trimite informaţiile trace/debug la consolă în locul fişierului debug log</translation>
     </message>
     <message>
         <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
@@ -1766,8 +1766,8 @@
         <translation>Arată toate opţiunile de depanare (uz: --help -help-debug)</translation>
     </message>
     <message>
-        <source>Shrink debug.log file on client startup (default: 1 when no -debug)</source>
-        <translation>Micşorează fişierul debug.log la pornirea clientului (implicit: 1 cînd nu se foloseşte -debug)</translation>
+        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
+        <translation>Micşorează fişierul debug log la pornirea clientului (implicit: 1 cînd nu se foloseşte -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

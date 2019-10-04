@@ -1112,12 +1112,12 @@
         <translation>Información</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
-        <translation>Enviar traza/información de depuración á consola en lugar de ao arquivo debug.log</translation>
+        <source>Send trace/debug info to console instead of debug log file</source>
+        <translation>Enviar traza/información de depuración á consola en lugar de ao arquivo debug log</translation>
     </message>
     <message>
-        <source>Shrink debug.log file on client startup (default: 1 when no -debug)</source>
-        <translation>Recortar o arquivo debug.log ao arrancar o cliente (por defecto: 1 cando no-debug)</translation>
+        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
+        <translation>Recortar o arquivo debug log ao arrancar o cliente (por defecto: 1 cando no-debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

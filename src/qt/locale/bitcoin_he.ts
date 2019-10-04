@@ -1628,8 +1628,8 @@
         <translation>קבלת פקודות משורת הפקודה ומ־JSON-RPC</translation>
     </message>
     <message>
-        <source>Error: A fatal internal error occurred, see debug.log for details</source>
-        <translation>שגיאה: סניה קלמה קריטית פנימית קרטה, פנה ל debug.log לפרטים</translation>
+        <source>Error: A fatal internal error occurred, see debug log for details</source>
+        <translation>שגיאה: סניה קלמה קריטית פנימית קרטה, פנה ל debug log לפרטים</translation>
     </message>
     <message>
         <source>Run in the background as a daemon and accept commands</source>
@@ -1812,16 +1812,16 @@
         <translation>הגדרות שרת RPC</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
-        <translation>שלח מידע דיבאג ועקבה לקונסולה במקום לקובץ debug.log</translation>
+        <source>Send trace/debug info to console instead of debug log file</source>
+        <translation>שלח מידע דיבאג ועקבה לקונסולה במקום לקובץ debug log</translation>
     </message>
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
         <translation>הצגת כל אפשרויות הניפוי (שימוש: ‎--help -help-debug)</translation>
     </message>
     <message>
-        <source>Shrink debug.log file on client startup (default: 1 when no -debug)</source>
-        <translation>כיווץ הקובץ debug.log בהפעלת הלקוח (בררת מחדל: 1 ללא ‎-debug)</translation>
+        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
+        <translation>כיווץ הקובץ debug log בהפעלת הלקוח (בררת מחדל: 1 ללא ‎-debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

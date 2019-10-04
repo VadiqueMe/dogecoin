@@ -106,6 +106,8 @@ using namespace std;
 const char * const BITCOIN_CONF_FILENAME = "dogecoin.conf";
 const char * const BITCOIN_PID_FILENAME = "dogecoind.pid";
 
+const char * const LOG_FILE_NAME = "debug.log" ;
+
 CCriticalSection cs_args;
 map<string, string> mapArgs;
 static map<string, vector<string> > _mapMultiArgs;
@@ -216,8 +218,8 @@ void OpenDebugLog()
 
     assert(fileout == NULL);
     assert(vMsgsBeforeOpenLog);
-    boost::filesystem::path pathDebug = GetDataDir() / "debug.log";
-    fileout = fopen(pathDebug.string().c_str(), "a");
+    boost::filesystem::path pathToDebugLog = GetDataDir() / LOG_FILE_NAME ;
+    fileout = fopen( pathToDebugLog.string().c_str (), "a" ) ;
     if (fileout) {
         setbuf(fileout, NULL); // unbuffered
         // dump buffered messages from before we opened the log
@@ -321,8 +323,8 @@ int LogPrintStr(const std::string &str)
             // reopen the log file, if requested
             if (fReopenDebugLog) {
                 fReopenDebugLog = false;
-                boost::filesystem::path pathDebug = GetDataDir() / "debug.log";
-                if (freopen(pathDebug.string().c_str(),"a",fileout) != NULL)
+                boost::filesystem::path pathToDebugLog = GetDataDir() / LOG_FILE_NAME ;
+                if ( freopen( pathToDebugLog.string().c_str (), "a", fileout ) != NULL )
                     setbuf(fileout, NULL); // unbuffered
             }
 
@@ -725,14 +727,14 @@ void AllocateFileRange(FILE *file, unsigned int offset, unsigned int length) {
 #endif
 }
 
-void ShrinkDebugFile()
+void ShrinkLogFile()
 {
-    // Amount of debug.log to save at end when shrinking (must fit in memory)
+    // Amount of log to save at end when shrinking
     constexpr size_t RECENT_DEBUG_HISTORY_SIZE = 10 * 1000000;
-    // Scroll debug.log if it's getting too big
-    boost::filesystem::path pathLog = GetDataDir() / "debug.log";
+    // Scroll log if it's getting too big
+    boost::filesystem::path pathLog = GetDataDir() / LOG_FILE_NAME ;
     FILE* file = fopen(pathLog.string().c_str(), "r");
-    // If debug.log file is more than 10% bigger the RECENT_DEBUG_HISTORY_SIZE
+    // If log file is more than 10% bigger the RECENT_DEBUG_HISTORY_SIZE
     // trim it down by saving only the last RECENT_DEBUG_HISTORY_SIZE bytes
     if (file && boost::filesystem::file_size(pathLog) > 11 * (RECENT_DEBUG_HISTORY_SIZE / 10))
     {

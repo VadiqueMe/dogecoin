@@ -139,7 +139,7 @@ public:
         digishieldConsensus.pLeft = &consensus;
         digishieldConsensus.pRight = &auxpowConsensus;
 
-        /** 
+        /**
          * The message start string is designed to be unlikely to occur in normal data.
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 32-bit integer with any alignment.
@@ -201,7 +201,7 @@ public:
             // Tx estimate based on average of year 2018 (~27k transactions per day)
             1544484077, // * UNIX timestamp of last checkpoint block
             42797508,   // * total number of transactions between genesis and last checkpoint
-                        //   (the tx=... number in the SetBestChain debug.log lines)
+                        //   (the tx=... number in the SetBestChain debug log lines)
             0.3125      // * estimated number of transactions per second after checkpoint
         };
     }
@@ -509,4 +509,3 @@ void UpdateRegtestBIP9Parameters(Consensus::DeploymentPos d, int64_t nStartTime,
 {
     regTestParams.UpdateBIP9Parameters(d, nStartTime, nTimeout);
 }
- 

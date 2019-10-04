@@ -406,11 +406,11 @@ bool isObscured(QWidget *w)
 
 void openDebugLogfile()
 {
-    boost::filesystem::path pathDebug = GetDataDir() / "debug.log";
+    boost::filesystem::path pathToLogFile = GetDataDir() / LOG_FILE_NAME ;
 
-    /* Open debug.log with the associated application */
-    if (boost::filesystem::exists(pathDebug))
-        QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathDebug)));
+    /* Open log file with the associated application */
+    if ( boost::filesystem::exists( pathToLogFile ) )
+        QDesktopServices::openUrl( QUrl::fromLocalFile(boostPathToQString( pathToLogFile )) ) ;
 }
 
 void SubstituteFonts(const QString& language)

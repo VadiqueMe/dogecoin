@@ -952,8 +952,8 @@
         <translation>Informacija</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
-        <translation>Siųsti atsekimo/derinimo info į konsolę vietoj debug.log failo</translation>
+        <source>Send trace/debug info to console instead of debug log file</source>
+        <translation>Siųsti atsekimo/derinimo info į konsolę vietoj debug log failo</translation>
     </message>
     <message>
         <source>Username for JSON-RPC connections</source>

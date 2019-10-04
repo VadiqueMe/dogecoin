@@ -3003,8 +3003,8 @@
         <translation>在修剪模式下沒辦法重新掃描區塊鏈。你需要配合使用 -reindex 參數來重新下載整個區塊鏈。</translation>
     </message>
     <message>
-        <source>Error: A fatal internal error occurred, see debug.log for details</source>
-        <translation>錯誤: 發生了致命的內部錯誤，詳情請看 debug.log</translation>
+        <source>Error: A fatal internal error occurred, see debug log for details</source>
+        <translation>錯誤: 發生了致命的內部錯誤，詳情請看 debug log</translation>
     </message>
     <message>
         <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
@@ -3523,8 +3523,8 @@
         <translation>啟動時重新掃描區塊鏈，來尋找錢包可能漏掉的交易。</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
-        <translation>在終端機顯示追蹤或除錯資訊，而不是寫到檔案 debug.log 中</translation>
+        <source>Send trace/debug info to console instead of debug log file</source>
+        <translation>在終端機顯示追蹤或除錯資訊，而不是寫到檔案 debug log 中</translation>
     </message>
     <message>
         <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
@@ -3535,8 +3535,8 @@
         <translation>顯示所有的除錯選項 (用法: --help --help-debug)</translation>
     </message>
     <message>
-        <source>Shrink debug.log file on client startup (default: 1 when no -debug)</source>
-        <translation>客戶端軟體啓動時把 debug.log 檔縮小(預設值: 當沒有 -debug 時為 1)</translation>
+        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
+        <translation>客戶端軟體啓動時把 debug log 檔縮小(預設值: 當沒有 -debug 時為 1)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

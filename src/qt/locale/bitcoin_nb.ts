@@ -1818,8 +1818,8 @@
         <translation>Omsøk er ikke mulig i beskjært modus. Du vil måtte bruke -reindex som vil laste nede hele blokkjeden på nytt.</translation>
     </message>
     <message>
-        <source>Error: A fatal internal error occurred, see debug.log for details</source>
-        <translation>Feil: En fatal intern feil oppstod, se debug.log for detaljer</translation>
+        <source>Error: A fatal internal error occurred, see debug log for details</source>
+        <translation>Feil: En fatal intern feil oppstod, se debug log for detaljer</translation>
     </message>
     <message>
         <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
@@ -2158,8 +2158,8 @@
         <translation>Se gjennom blokkjeden etter manglende lommeboktransaksjoner ved oppstart</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
-        <translation>Send spor-/feilsøkingsinformasjon til konsollen istedenfor filen debug.log</translation>
+        <source>Send trace/debug info to console instead of debug log file</source>
+        <translation>Send spor-/feilsøkingsinformasjon til konsollen istedenfor filen debug log</translation>
     </message>
     <message>
         <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
@@ -2170,8 +2170,8 @@
         <translation>Vis alle feilsøkingsvalg (bruk: --help -help-debug)</translation>
     </message>
     <message>
-        <source>Shrink debug.log file on client startup (default: 1 when no -debug)</source>
-        <translation>Krymp filen debug.log når klienten starter (standardverdi: 1 hvis uten -debug)</translation>
+        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
+        <translation>Krymp filen debug log når klienten starter (standardverdi: 1 hvis uten -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

@@ -3006,8 +3006,8 @@
         <translation>V prořezávacím režimu není možné přeskenovávat řetězec bloků. Musíš provést -reindex, což znovu stáhne celý řetězec bloků.</translation>
     </message>
     <message>
-        <source>Error: A fatal internal error occurred, see debug.log for details</source>
-        <translation>Chyba: Přihodila se závažná vnitřní chyba, podrobnosti viz v debug.log</translation>
+        <source>Error: A fatal internal error occurred, see debug log for details</source>
+        <translation>Chyba: Přihodila se závažná vnitřní chyba, podrobnosti viz v debug log</translation>
     </message>
     <message>
         <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
@@ -3023,7 +3023,7 @@
     </message>
     <message>
         <source>Unable to start HTTP server. See debug log for details.</source>
-        <translation>Nemohu spustit HTTP server. Detaily viz v debug.log.</translation>
+        <translation>Nemohu spustit HTTP server. Detaily viz v debug log.</translation>
     </message>
     <message>
         <source>Dogecoin Core</source>
@@ -3526,8 +3526,8 @@
         <translation>Přeskenovat při startu řetězec bloků na chybějící transakce tvé pěněženky</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
-        <translation>Posílat stopovací/ladicí informace do konzole místo do souboru debug.log</translation>
+        <source>Send trace/debug info to console instead of debug log file</source>
+        <translation>Posílat stopovací/ladicí informace do konzole místo do souboru debug log</translation>
     </message>
     <message>
         <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
@@ -3538,8 +3538,8 @@
         <translation>Zobrazit všechny možnosti ladění (užití: --help -help-debug)</translation>
     </message>
     <message>
-        <source>Shrink debug.log file on client startup (default: 1 when no -debug)</source>
-        <translation>Při spuštění klienta zmenšit soubor debug.log (výchozí: 1, pokud není zadáno -debug)</translation>
+        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
+        <translation>Při spuštění klienta zmenšit soubor debug log (výchozí: 1, pokud není zadáno -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

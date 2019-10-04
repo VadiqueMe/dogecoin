@@ -2522,8 +2522,8 @@
         <translation>Accepta la línia d'ordes i ordes JSON-RPC </translation>
     </message>
     <message>
-        <source>Error: A fatal internal error occurred, see debug.log for details</source>
-        <translation>Error: s'ha produït un error intern fatal. Vegeu debug.log per a més detalls</translation>
+        <source>Error: A fatal internal error occurred, see debug log for details</source>
+        <translation>Error: s'ha produït un error intern fatal. Vegeu debug log per a més detalls</translation>
     </message>
     <message>
         <source>Pruning blockstore...</source>
@@ -2770,8 +2770,8 @@
         <translation>Opcions del servidor RPC:</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
-        <translation>Envia informació de traça/depuració a la consola en comptes del fitxer debug.log</translation>
+        <source>Send trace/debug info to console instead of debug log file</source>
+        <translation>Envia informació de traça/depuració a la consola en comptes del fitxer debug log</translation>
     </message>
     <message>
         <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
@@ -2782,8 +2782,8 @@
         <translation>Mostra totes les opcions de depuració (ús: --help  --help-debug)</translation>
     </message>
     <message>
-        <source>Shrink debug.log file on client startup (default: 1 when no -debug)</source>
-        <translation>Redueix el fitxer debug.log durant l'inici del client (per defecte: 1 quan no -debug)</translation>
+        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
+        <translation>Redueix el fitxer debug log durant l'inici del client (per defecte: 1 quan no -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

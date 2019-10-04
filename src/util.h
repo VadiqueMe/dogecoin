@@ -55,6 +55,8 @@ extern CTranslationInterface translationInterface;
 extern const char * const BITCOIN_CONF_FILENAME;
 extern const char * const BITCOIN_PID_FILENAME;
 
+extern const char * const LOG_FILE_NAME ;
+
 /**
  * Translation function: Call Translate signal on UI interface, which returns a boost::optional result.
  * If no translation slot is registered, nothing is returned, and simply return the input.
@@ -111,7 +113,7 @@ void ReadConfigFile(const std::string& confPath);
 boost::filesystem::path GetSpecialFolderPath(int nFolder, bool fCreate = true);
 #endif
 void OpenDebugLog();
-void ShrinkDebugFile();
+void ShrinkLogFile() ;
 void runCommand(const std::string& strCommand);
 
 inline bool IsSwitchChar(char c)

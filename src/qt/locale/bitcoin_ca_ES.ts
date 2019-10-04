@@ -2794,8 +2794,8 @@
         <translation>Els rescanejos no són possible en el mode de poda. Caldrà que utilitzeu -reindex, que tornarà a baixar la cadena de blocs sencera.</translation>
     </message>
     <message>
-        <source>Error: A fatal internal error occurred, see debug.log for details</source>
-        <translation>Error: s'ha produït un error intern fatal. Vegeu debug.log per a més detalls</translation>
+        <source>Error: A fatal internal error occurred, see debug log for details</source>
+        <translation>Error: s'ha produït un error intern fatal. Vegeu debug log per a més detalls</translation>
     </message>
     <message>
         <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
@@ -2811,7 +2811,7 @@
     </message>
     <message>
         <source>Unable to start HTTP server. See debug log for details.</source>
-        <translation>No s'ha pogut iniciar el servidor HTTP. Vegeu debug.log per a més detalls.</translation>
+        <translation>No s'ha pogut iniciar el servidor HTTP. Vegeu debug log per a més detalls.</translation>
     </message>
     <message>
         <source>Dogecoin Core</source>
@@ -3062,8 +3062,8 @@
         <translation>Opcions del servidor RPC:</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
-        <translation>Envia informació de traça/depuració a la consola en comptes del fitxer debug.log</translation>
+        <source>Send trace/debug info to console instead of debug log file</source>
+        <translation>Envia informació de traça/depuració a la consola en comptes del fitxer debug log</translation>
     </message>
     <message>
         <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
@@ -3074,8 +3074,8 @@
         <translation>Mostra totes les opcions de depuració (ús: --help  --help-debug)</translation>
     </message>
     <message>
-        <source>Shrink debug.log file on client startup (default: 1 when no -debug)</source>
-        <translation>Redueix el fitxer debug.log durant l'inici del client (per defecte: 1 quan no -debug)</translation>
+        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
+        <translation>Redueix el fitxer debug log durant l'inici del client (per defecte: 1 quan no -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

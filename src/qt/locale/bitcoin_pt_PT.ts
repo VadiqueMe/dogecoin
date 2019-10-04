@@ -2135,8 +2135,8 @@
         <translation>Reanálises não são possíveis no modo de suprimir. Para isso terá de utilizar -reindex que irá transferir novamente toda a cadeia de blocos.</translation>
     </message>
     <message>
-        <source>Error: A fatal internal error occurred, see debug.log for details</source>
-        <translation>Erro: Um erro fatal interno ocorreu, verificar debug.log para mais informação</translation>
+        <source>Error: A fatal internal error occurred, see debug log for details</source>
+        <translation>Erro: Um erro fatal interno ocorreu, verificar debug log para mais informação</translation>
     </message>
     <message>
         <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
@@ -2152,7 +2152,7 @@
     </message>
     <message>
         <source>Unable to start HTTP server. See debug log for details.</source>
-        <translation>Não é possível iniciar o servidor HTTP. Verifique o debug.log para detalhes.</translation>
+        <translation>Não é possível iniciar o servidor HTTP. Verifique o debug log para detalhes.</translation>
     </message>
     <message>
         <source>Dogecoin Core</source>
@@ -2511,8 +2511,8 @@
         <translation>Procurar transacções em falta na cadeia de blocos ao iniciar</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
-        <translation>Enviar informação de rastreio/depuração para a consola e não para o ficheiro debug.log</translation>
+        <source>Send trace/debug info to console instead of debug log file</source>
+        <translation>Enviar informação de rastreio/depuração para a consola e não para o ficheiro debug log</translation>
     </message>
     <message>
         <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
@@ -2523,8 +2523,8 @@
         <translation>Mostrar todas as opções de depuração (utilização: --help -help-debug)</translation>
     </message>
     <message>
-        <source>Shrink debug.log file on client startup (default: 1 when no -debug)</source>
-        <translation>Encolher ficheiro debug.log ao iniciar o cliente (por defeito: 1 sem -debug definido)</translation>
+        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
+        <translation>Encolher ficheiro debug log ao iniciar o cliente (por defeito: 1 sem -debug definido)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

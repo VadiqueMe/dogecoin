@@ -1046,8 +1046,8 @@
         <translation>Informacija</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
-        <translation>Šalji trace/debug informacije na konzolu umjesto u debug.log datoteku</translation>
+        <source>Send trace/debug info to console instead of debug log file</source>
+        <translation>Šalji trace/debug informacije na konzolu umjesto u debug log datoteku</translation>
     </message>
     <message>
         <source>Username for JSON-RPC connections</source>

@@ -1164,8 +1164,8 @@
         <translation>RPC servera iestatījumi:</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
-        <translation>Debug/trace informāciju izvadīt konsolē, nevis debug.log failā</translation>
+        <source>Send trace/debug info to console instead of debug log file</source>
+        <translation>Debug/trace informāciju izvadīt konsolē, nevis debug log failā</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

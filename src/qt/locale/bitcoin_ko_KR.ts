@@ -3006,8 +3006,8 @@
         <translation>블록 축소 모드에서는 재검색이 불가능 합니다. -reindex 명령을 사용해서 모든 블록체인을 다시 다운로드 해야 합니다.</translation>
     </message>
     <message>
-        <source>Error: A fatal internal error occurred, see debug.log for details</source>
-        <translation>에러: 치명적인 내부 오류가 발생했습니다, 자세한 내용은 debug.log 를 확인해주세요.</translation>
+        <source>Error: A fatal internal error occurred, see debug log for details</source>
+        <translation>에러: 치명적인 내부 오류가 발생했습니다, 자세한 내용은 debug log 를 확인해주세요.</translation>
     </message>
     <message>
         <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
@@ -3518,7 +3518,7 @@
         <translation>시작시 누락된 지갑 거래에 대해 블록 체인을 다시 검색 합니다</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
+        <source>Send trace/debug info to console instead of debug log file</source>
         <translation>추적오류 정보를 degug.log 자료로 보내는 대신 콘솔로 보내기</translation>
     </message>
     <message>
@@ -3530,8 +3530,8 @@
         <translation>모든 디버그 설정 보기(설정: --help -help-debug)</translation>
     </message>
     <message>
-        <source>Shrink debug.log file on client startup (default: 1 when no -debug)</source>
-        <translation>클라이언트 시작시 debug.log 파일 비우기(기본값: 디버그 안할때 1)</translation>
+        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
+        <translation>클라이언트 시작시 debug log 파일 비우기(기본값: 디버그 안할때 1)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

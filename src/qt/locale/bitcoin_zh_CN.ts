@@ -2963,8 +2963,8 @@
         <translation>无法在开启修剪的状态下重扫描，请使用 -reindex重新下载完整的区块链。</translation>
     </message>
     <message>
-        <source>Error: A fatal internal error occurred, see debug.log for details</source>
-        <translation>错误：发生了致命的内部错误，详情见 debug.log 文件</translation>
+        <source>Error: A fatal internal error occurred, see debug log for details</source>
+        <translation>错误：发生了致命的内部错误，详情见 debug log 文件</translation>
     </message>
     <message>
         <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
@@ -3345,8 +3345,8 @@
         <translation>重新扫描区块链以查找遗漏的钱包交易</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
-        <translation>跟踪/调试信息输出到控制台，不输出到 debug.log 文件</translation>
+        <source>Send trace/debug info to console instead of debug log file</source>
+        <translation>跟踪/调试信息输出到控制台，不输出到 debug log 文件</translation>
     </message>
     <message>
         <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
@@ -3357,8 +3357,8 @@
         <translation>显示所有调试选项 (用法: --帮助 -帮助调试)</translation>
     </message>
     <message>
-        <source>Shrink debug.log file on client startup (default: 1 when no -debug)</source>
-        <translation>客户端启动时压缩debug.log文件(缺省：no-debug模式时为1)</translation>
+        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
+        <translation>客户端启动时压缩debug log文件(缺省：no-debug模式时为1)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

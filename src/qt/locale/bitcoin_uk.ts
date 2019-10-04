@@ -1746,8 +1746,8 @@
         <translation>Неможливо провести повторне сканування зі скороченим ланцюжком. Вам необхідно використати -reindex для завантаження повного ланцюжка блоків.</translation>
     </message>
     <message>
-        <source>Error: A fatal internal error occurred, see debug.log for details</source>
-        <translation>Помилка: Сталася фатальна помилка (детальніший опис наведено в debug.log)</translation>
+        <source>Error: A fatal internal error occurred, see debug log for details</source>
+        <translation>Помилка: Сталася фатальна помилка (детальніший опис наведено в debug log)</translation>
     </message>
     <message>
         <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
@@ -2074,8 +2074,8 @@
         <translation>Спочатку переглянте ланцюжок блоків на наявність втрачених транзакцій гаманця</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
-        <translation>Відсилати налагоджувальну інформацію на консоль, а не у файл debug.log</translation>
+        <source>Send trace/debug info to console instead of debug log file</source>
+        <translation>Відсилати налагоджувальну інформацію на консоль, а не у файл debug log</translation>
     </message>
     <message>
         <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
@@ -2086,8 +2086,8 @@
         <translation>Показати всі налагоджувальні параметри (використання: --help -help-debug)</translation>
     </message>
     <message>
-        <source>Shrink debug.log file on client startup (default: 1 when no -debug)</source>
-        <translation>Стискати файл debug.log під час старту клієнта (типово: 1 коли відсутній параметр -debug)</translation>
+        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
+        <translation>Стискати файл debug log під час старту клієнта (типово: 1 коли відсутній параметр -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

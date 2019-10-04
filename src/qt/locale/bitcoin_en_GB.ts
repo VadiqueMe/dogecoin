@@ -1850,8 +1850,8 @@
         <translation>Rescans are not possible in pruned mode. You will need to use -reindex which will download the whole blockchain again.</translation>
     </message>
     <message>
-        <source>Error: A fatal internal error occurred, see debug.log for details</source>
-        <translation>Error: A fatal internal error occurred, see debug.log for details</translation>
+        <source>Error: A fatal internal error occurred, see debug log for details</source>
+        <translation>Error: A fatal internal error occurred, see debug log for details</translation>
     </message>
     <message>
         <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
@@ -2326,8 +2326,8 @@
         <translation>Rescan the block chain for missing wallet transactions on startup</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
-        <translation>Send trace/debug info to console instead of debug.log file</translation>
+        <source>Send trace/debug info to console instead of debug log file</source>
+        <translation>Send trace/debug info to console instead of debug log file</translation>
     </message>
     <message>
         <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
@@ -2338,8 +2338,8 @@
         <translation>Show all debugging options (usage: --help -help-debug)</translation>
     </message>
     <message>
-        <source>Shrink debug.log file on client startup (default: 1 when no -debug)</source>
-        <translation>Shrink debug.log file on client startup (default: 1 when no -debug)</translation>
+        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
+        <translation>Shrink debug log file on client startup (default: 1 when no -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

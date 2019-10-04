@@ -2183,8 +2183,8 @@ Var vänlig och försök igen.</translation>
         <translation>Omskanningar kan inte göras i beskuret läge. Du måste använda -reindex vilket kommer ladda ner hela blockkedjan igen.</translation>
     </message>
     <message>
-        <source>Error: A fatal internal error occurred, see debug.log for details</source>
-        <translation>Fel: Ett kritiskt internt fel uppstod, se debug.log för detaljer</translation>
+        <source>Error: A fatal internal error occurred, see debug log for details</source>
+        <translation>Fel: Ett kritiskt internt fel uppstod, se debug log för detaljer</translation>
     </message>
     <message>
         <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
@@ -2659,8 +2659,8 @@ Var vänlig och försök igen.</translation>
         <translation>Sök i blockkedjan efter saknade plånbokstransaktioner vid uppstart</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
-        <translation>Skicka trace-/debuginformation till terminalen istället för till debug.log</translation>
+        <source>Send trace/debug info to console instead of debug log file</source>
+        <translation>Skicka trace-/debuginformation till terminalen istället för till debug log</translation>
     </message>
     <message>
         <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
@@ -2671,8 +2671,8 @@ Var vänlig och försök igen.</translation>
         <translation>Visa alla avlusningsalternativ (använd: --help -help-debug)</translation>
     </message>
     <message>
-        <source>Shrink debug.log file on client startup (default: 1 when no -debug)</source>
-        <translation>Krymp debug.log filen vid klient start (förvalt: 1 vid ingen -debug)</translation>
+        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
+        <translation>Krymp debug log filen vid klient start (förvalt: 1 vid ingen -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

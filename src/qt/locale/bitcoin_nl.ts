@@ -3002,8 +3002,8 @@
         <translation>Herscannen is niet mogelijk in de snoeimodus. U moet -reindex gebruiken dat de hele blokketen opnieuw zal downloaden.</translation>
     </message>
     <message>
-        <source>Error: A fatal internal error occurred, see debug.log for details</source>
-        <translation>Fout: er is een fout opgetreden,  zie debug.log voor details</translation>
+        <source>Error: A fatal internal error occurred, see debug log for details</source>
+        <translation>Fout: er is een fout opgetreden,  zie debug log voor details</translation>
     </message>
     <message>
         <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
@@ -3522,8 +3522,8 @@
         <translation>Herscan de blokketen voor missende portemonneetransacties bij opstarten</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
-        <translation>Verzend trace/debug-info naar de console in plaats van het debug.log-bestand</translation>
+        <source>Send trace/debug info to console instead of debug log file</source>
+        <translation>Verzend trace/debug-info naar de console in plaats van het debug log-bestand</translation>
     </message>
     <message>
         <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
@@ -3534,8 +3534,8 @@
         <translation>Toon alle foutopsporingsopties (gebruik: --help -help-debug)</translation>
     </message>
     <message>
-        <source>Shrink debug.log file on client startup (default: 1 when no -debug)</source>
-        <translation>Verklein debug.log-bestand bij het opstarten van de client (standaard: 1 als geen -debug)</translation>
+        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
+        <translation>Verklein debug log-bestand bij het opstarten van de client (standaard: 1 als geen -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

@@ -784,8 +784,8 @@
         <translation>&amp;Impormasion</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
-        <translation>Magpadalang trace/debug info okeng console kesa keng debug.log file</translation>
+        <source>Send trace/debug info to console instead of debug log file</source>
+        <translation>Magpadalang trace/debug info okeng console kesa keng debug log file</translation>
     </message>
     <message>
         <source>Transaction too large</source>

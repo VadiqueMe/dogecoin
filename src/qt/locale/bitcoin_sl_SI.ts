@@ -1746,12 +1746,12 @@
         <translation>Pri opciji -whitebind morate navesti vrata: %s</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
-        <translation>Pošilja sledilne/razhroščevalne informacije na konzolo namesto v datoteko debug.log</translation>
+        <source>Send trace/debug info to console instead of debug log file</source>
+        <translation>Pošilja sledilne/razhroščevalne informacije na konzolo namesto v datoteko debug log</translation>
     </message>
     <message>
-        <source>Shrink debug.log file on client startup (default: 1 when no -debug)</source>
-        <translation>Ob zagonu skrajšaj datoteko debug.log (privzeto: 1, če ni vklopljena opcija -debug)</translation>
+        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
+        <translation>Ob zagonu skrajšaj datoteko debug log (privzeto: 1, če ni vklopljena opcija -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

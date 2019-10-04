@@ -780,8 +780,8 @@
         <translation>Información</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
-        <translation>Enviar informacion de seguimiento a la consola en vez del archivo debug.log</translation>
+        <source>Send trace/debug info to console instead of debug log file</source>
+        <translation>Enviar informacion de seguimiento a la consola en vez del archivo debug log</translation>
     </message>
     <message>
         <source>Username for JSON-RPC connections</source>

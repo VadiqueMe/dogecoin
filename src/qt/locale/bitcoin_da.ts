@@ -3006,8 +3006,8 @@
         <translation>Genindlæsninger er ikke mulige i beskåret tilstand. Du er nødt til at bruge -reindex, hvilket vil downloade hele blokkæden igen.</translation>
     </message>
     <message>
-        <source>Error: A fatal internal error occurred, see debug.log for details</source>
-        <translation>Fejl: En alvorlig intern fejl er opstået. Se debug.log for detaljer</translation>
+        <source>Error: A fatal internal error occurred, see debug log for details</source>
+        <translation>Fejl: En alvorlig intern fejl er opstået. Se debug log for detaljer</translation>
     </message>
     <message>
         <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
@@ -3526,8 +3526,8 @@
         <translation>Genindlæs blokkæden efter manglende tegnebogstransaktioner under opstart</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
-        <translation>Send sporings-/fejlsøgningsinformation til konsollen i stedet for debug.log filen</translation>
+        <source>Send trace/debug info to console instead of debug log file</source>
+        <translation>Send sporings-/fejlsøgningsinformation til konsollen i stedet for debug log filen</translation>
     </message>
     <message>
         <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
@@ -3538,8 +3538,8 @@
         <translation>Vis alle tilvalg for fejlsøgning (brug: --help -help-debug)</translation>
     </message>
     <message>
-        <source>Shrink debug.log file on client startup (default: 1 when no -debug)</source>
-        <translation>Formindsk debug.log filen ved klientopstart (standard: 1 hvis ikke -debug)</translation>
+        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
+        <translation>Formindsk debug log filen ved klientopstart (standard: 1 hvis ikke -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

@@ -2386,8 +2386,8 @@
         <translation>Информация</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
-        <translation>Изпрати локализиращата или дебъг информацията към конзолата, вместо файлът debug.log</translation>
+        <source>Send trace/debug info to console instead of debug log file</source>
+        <translation>Изпрати локализиращата или дебъг информацията към конзолата, вместо файлът debug log</translation>
     </message>
     <message>
         <source>This is experimental software.</source>

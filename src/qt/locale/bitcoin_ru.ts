@@ -3006,8 +3006,8 @@
         <translation>Повторное сканирование не возможно в режиме удаления. Вам надо будет использовать -reindex, который загрузит заново всю цепь блоков.</translation>
     </message>
     <message>
-        <source>Error: A fatal internal error occurred, see debug.log for details</source>
-        <translation>Ошибка: произошла неустранимая ошибка, подробности в debug.log</translation>
+        <source>Error: A fatal internal error occurred, see debug log for details</source>
+        <translation>Ошибка: произошла неустранимая ошибка, подробности в debug log</translation>
     </message>
     <message>
         <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
@@ -3522,8 +3522,8 @@
         <translation>Перепроверить цепь блоков на предмет отсутствующих в бумажнике транзакций при запуске</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
-        <translation>Выводить информацию трассировки/отладки на консоль вместо файла debug.log</translation>
+        <source>Send trace/debug info to console instead of debug log file</source>
+        <translation>Выводить информацию трассировки/отладки на консоль вместо файла debug log</translation>
     </message>
     <message>
         <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
@@ -3534,8 +3534,8 @@
         <translation>Показать все отладочные параметры (использование: --help -help-debug)</translation>
     </message>
     <message>
-        <source>Shrink debug.log file on client startup (default: 1 when no -debug)</source>
-        <translation>Сжимать файл debug.log при запуске клиента (по умолчанию: 1, если нет -debug)</translation>
+        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
+        <translation>Сжимать файл debug log при запуске клиента (по умолчанию: 1, если нет -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

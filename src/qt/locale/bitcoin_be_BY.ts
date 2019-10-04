@@ -1318,8 +1318,8 @@
         <translation>Опцыі RPC сервера:</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
-        <translation>Слаць trace/debug звесткі ў кансоль замест файла debug.log</translation>
+        <source>Send trace/debug info to console instead of debug log file</source>
+        <translation>Слаць trace/debug звесткі ў кансоль замест файла debug log</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

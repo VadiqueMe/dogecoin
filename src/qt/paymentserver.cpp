@@ -249,9 +249,9 @@ void PaymentServer::ipcParseCommandLine(int argc, char* argv[])
         }
         else
         {
-            // Printing to debug.log is about the best we can do here, the
+            // Printing to debug log is about the best we can do here, the
             // GUI hasn't started yet so we can't pop up a message box.
-            qWarning() << "PaymentServer::ipcSendCommandLine: Payment request file does not exist: " << arg;
+            qWarning() << "PaymentServer::ipcSendCommandLine: Payment request file does not exist: " << arg ;
         }
     }
 }

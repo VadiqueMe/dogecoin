@@ -4678,7 +4678,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+1"/>
-        <source>Error: A fatal internal error occurred, see debug.log for details</source>
+        <source>Error: A fatal internal error occurred, see debug log for details</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4948,8 +4948,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+1"/>
-        <source>Send trace/debug info to console instead of debug.log file</source>
-        <translation type="unfinished">Send trace/debug info to console instead of debug.log file</translation>
+        <source>Send trace/debug info to console instead of debug log file</source>
+        <translation type="unfinished">Send trace/debug info to console instead of debug log file</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -4993,8 +4993,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+1"/>
-        <source>Shrink debug.log file on client startup (default: 1 when no -debug)</source>
-        <translation type="unfinished">Shrink debug.log file on client startup (default: 1 when no -debug)</translation>
+        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
+        <translation type="unfinished">Shrink debug log file on client startup (default: 1 when no -debug)</translation>
     </message>
     <message>
         <location line="+1"/>

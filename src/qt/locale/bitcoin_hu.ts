@@ -1462,7 +1462,7 @@
         <translation>Információ</translation>
     </message>
     <message>
-        <source>Send trace/debug info to console instead of debug.log file</source>
+        <source>Send trace/debug info to console instead of debug log file</source>
         <translation>trace/debug információ küldése a konzolra a debog.log fájl helyett</translation>
     </message>
     <message>
