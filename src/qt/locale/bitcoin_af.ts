@@ -485,10 +485,6 @@
         <translation>Fooi:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Stof:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>Na Fooi:</translation>
     </message>
@@ -837,10 +833,6 @@
     <message>
         <source>total at least</source>
         <translation>totaal ten minste</translation>
-    </message>
-    <message>
-        <source>Dust:</source>
-        <translation>Stof:</translation>
     </message>
     <message>
         <source>Balance:</source>

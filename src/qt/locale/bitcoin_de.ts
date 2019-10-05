@@ -575,10 +575,6 @@
         <translation>Gebühr:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>"Dust":</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>Abzüglich Gebühr:</translation>
     </message>
@@ -663,10 +659,6 @@
         <translation>Bytes kopieren</translation>
     </message>
     <message>
-        <source>Copy dust</source>
-        <translation>"Staub" kopieren</translation>
-    </message>
-    <message>
         <source>Copy change</source>
         <translation>Wechselgeld kopieren</translation>
     </message>
@@ -681,10 +673,6 @@
     <message>
         <source>no</source>
         <translation>nein</translation>
-    </message>
-    <message>
-        <source>This label turns red if any recipient receives an amount smaller than the current dust threshold.</source>
-        <translation>Diese Bezeichnung wird rot, wenn irgendein Empfänger einen Betrag kleiner als die derzeitige "Staubgrenze" erhält.</translation>
     </message>
     <message>
         <source>Can vary +/- %1 koinu(s) per input.</source>
@@ -1312,10 +1300,6 @@
     <message>
         <source>Invalid payment request.</source>
         <translation>Ungültige Zahlungsanforderung.</translation>
-    </message>
-    <message>
-        <source>Requested payment amount of %1 is too small (considered dust).</source>
-        <translation>Angeforderter Zahlungsbetrag in Höhe von %1 ist zu niedrig und wurde als "Staub" eingestuft.</translation>
     </message>
     <message>
         <source>Refund from %1</source>
@@ -2049,10 +2033,6 @@
         <translation>Alle Formularfelder zurücksetzen.</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>"Dust":</translation>
-    </message>
-    <message>
         <source>Clear &amp;All</source>
         <translation>&amp;Zurücksetzen</translation>
     </message>
@@ -2087,10 +2067,6 @@
     <message>
         <source>Copy bytes</source>
         <translation>Byte kopieren</translation>
-    </message>
-    <message>
-        <source>Copy dust</source>
-        <translation>"Staub" kopieren</translation>
     </message>
     <message>
         <source>Copy change</source>

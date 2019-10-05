@@ -567,10 +567,6 @@
         <translation>Poplatok:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Prach:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>Po poplatku:</translation>
     </message>
@@ -655,10 +651,6 @@
         <translation>Kopírovať bajty</translation>
     </message>
     <message>
-        <source>Copy dust</source>
-        <translation>Kopírovať prach</translation>
-    </message>
-    <message>
         <source>Copy change</source>
         <translation>Kopírovať zmenu</translation>
     </message>
@@ -673,10 +665,6 @@
     <message>
         <source>no</source>
         <translation>nie</translation>
-    </message>
-    <message>
-        <source>This label turns red if any recipient receives an amount smaller than the current dust threshold.</source>
-        <translation>Tento popis sčervenie ak ktorýkoľvek príjemca dostane sumu menšiu ako súčasný limit pre "prach".</translation>
     </message>
     <message>
         <source>Can vary +/- %1 satoshi(s) per input.</source>
@@ -1300,10 +1288,6 @@
     <message>
         <source>Invalid payment request.</source>
         <translation>Chybná požiadavka na platbu.</translation>
-    </message>
-    <message>
-        <source>Requested payment amount of %1 is too small (considered dust).</source>
-        <translation>Požadovaná suma platby %1 je príliš nízka (považovaná za prach).</translation>
     </message>
     <message>
         <source>Refund from %1</source>
@@ -2034,10 +2018,6 @@
         <translation>Vyčistiť všetky polia formulára.</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Prach:</translation>
-    </message>
-    <message>
         <source>Clear &amp;All</source>
         <translation>&amp;Zmazať všetko</translation>
     </message>
@@ -2072,10 +2052,6 @@
     <message>
         <source>Copy bytes</source>
         <translation>Kopírovať bajty</translation>
-    </message>
-    <message>
-        <source>Copy dust</source>
-        <translation>Kopírovať prach</translation>
     </message>
     <message>
         <source>Copy change</source>

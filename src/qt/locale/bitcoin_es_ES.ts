@@ -563,10 +563,6 @@
         <translation>Tasa:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Polvo:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>Después de aplicar la comisión:</translation>
     </message>
@@ -651,10 +647,6 @@
         <translation>Copiar bytes</translation>
     </message>
     <message>
-        <source>Copy dust</source>
-        <translation>Copiar polvo</translation>
-    </message>
-    <message>
         <source>Copy change</source>
         <translation>Copiar cambio</translation>
     </message>
@@ -669,10 +661,6 @@
     <message>
         <source>no</source>
         <translation>no</translation>
-    </message>
-    <message>
-        <source>This label turns red if any recipient receives an amount smaller than the current dust threshold.</source>
-        <translation>Esta etiqueta se vuelve roja si algún destinatario recibe una cantidad inferior a la actual puerta polvorienta.</translation>
     </message>
     <message>
         <source>Can vary +/- %1 koinu(s) per input.</source>
@@ -1292,10 +1280,6 @@
     <message>
         <source>Invalid payment request.</source>
         <translation>Solicitud de pago inválida.</translation>
-    </message>
-    <message>
-        <source>Requested payment amount of %1 is too small (considered dust).</source>
-        <translation>Cantidad de pago solicitada de %1 es demasiado pequeña (considerado polvo).</translation>
     </message>
     <message>
         <source>Refund from %1</source>
@@ -1969,10 +1953,6 @@
         <translation>Vaciar todos los campos del formulario</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Polvo:</translation>
-    </message>
-    <message>
         <source>Clear &amp;All</source>
         <translation>Vaciar &amp;todo</translation>
     </message>
@@ -2007,10 +1987,6 @@
     <message>
         <source>Copy bytes</source>
         <translation>Copiar bytes</translation>
-    </message>
-    <message>
-        <source>Copy dust</source>
-        <translation>Copiar polvo</translation>
     </message>
     <message>
         <source>Copy change</source>

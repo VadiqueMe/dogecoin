@@ -575,10 +575,6 @@
         <translation>手数料:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>ダスト：</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>手数料差引後:</translation>
     </message>
@@ -663,10 +659,6 @@
         <translation>バイト数をコピーする</translation>
     </message>
     <message>
-        <source>Copy dust</source>
-        <translation>ダストをコピーする</translation>
-    </message>
-    <message>
         <source>Copy change</source>
         <translation>釣り銭をコピー</translation>
     </message>
@@ -681,10 +673,6 @@
     <message>
         <source>no</source>
         <translation>いいえ</translation>
-    </message>
-    <message>
-        <source>This label turns red if any recipient receives an amount smaller than the current dust threshold.</source>
-        <translation>少なくともひとつの受取額が現在のダスト閾値を下回る場合にはこのラベルは赤くなります。</translation>
     </message>
     <message>
         <source>Can vary +/- %1 koinu(s) per input.</source>
@@ -1312,10 +1300,6 @@
     <message>
         <source>Invalid payment request.</source>
         <translation>無効な支払いリクエスト。</translation>
-    </message>
-    <message>
-        <source>Requested payment amount of %1 is too small (considered dust).</source>
-        <translation>要求された支払額 %1 は少なすぎます (ダストとみなされてしまいます)。</translation>
     </message>
     <message>
         <source>Refund from %1</source>
@@ -2053,10 +2037,6 @@
         <translation>全ての入力項目をクリア</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>ダスト：</translation>
-    </message>
-    <message>
         <source>Clear &amp;All</source>
         <translation>すべてクリア (&amp;A)</translation>
     </message>
@@ -2091,10 +2071,6 @@
     <message>
         <source>Copy bytes</source>
         <translation>バイト数をコピーする</translation>
-    </message>
-    <message>
-        <source>Copy dust</source>
-        <translation>ダストをコピーする</translation>
     </message>
     <message>
         <source>Copy change</source>

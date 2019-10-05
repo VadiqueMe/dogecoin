@@ -575,10 +575,6 @@
         <translation>Ücret:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Toz:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>Ücretten sonra:</translation>
     </message>
@@ -663,10 +659,6 @@
         <translation>Baytları kopyala</translation>
     </message>
     <message>
-        <source>Copy dust</source>
-        <translation>Tozu kopyala</translation>
-    </message>
-    <message>
         <source>Copy change</source>
         <translation>Para üstünü kopyala</translation>
     </message>
@@ -681,10 +673,6 @@
     <message>
         <source>no</source>
         <translation>hayır</translation>
-    </message>
-    <message>
-        <source>This label turns red if any recipient receives an amount smaller than the current dust threshold.</source>
-        <translation>Eğer herhangi bir alıcı mevcut toz eşiğinden daha düşük bir tutar alırsa bu etiket kırmızıya dönüşür.</translation>
     </message>
     <message>
         <source>Can vary +/- %1 koinu(s) per input.</source>
@@ -1312,10 +1300,6 @@
     <message>
         <source>Invalid payment request.</source>
         <translation>Geçersiz ödeme talebi.</translation>
-    </message>
-    <message>
-        <source>Requested payment amount of %1 is too small (considered dust).</source>
-        <translation>Talep edilen %1 ödeme tutarı çok küçüktür (toz olarak kabul edilir).</translation>
     </message>
     <message>
         <source>Refund from %1</source>
@@ -2053,10 +2037,6 @@
         <translation>Formdaki tüm alanları temizle.</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Toz:</translation>
-    </message>
-    <message>
         <source>Clear &amp;All</source>
         <translation>Tümünü &amp;temizle</translation>
     </message>
@@ -2091,10 +2071,6 @@
     <message>
         <source>Copy bytes</source>
         <translation>Baytları kopyala</translation>
-    </message>
-    <message>
-        <source>Copy dust</source>
-        <translation>Tozu kopyala</translation>
     </message>
     <message>
         <source>Copy change</source>

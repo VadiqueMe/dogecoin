@@ -419,10 +419,6 @@
         <translation>Frais:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Poussière: </translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>Après frais:</translation>
     </message>
@@ -1283,10 +1279,6 @@
     <message>
         <source>Clear all fields of the form.</source>
         <translation>Nettoyer tous les champs du formulaire.</translation>
-    </message>
-    <message>
-        <source>Dust:</source>
-        <translation>Poussière: </translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

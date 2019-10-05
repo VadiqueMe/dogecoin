@@ -535,10 +535,6 @@
         <translation>Taxa:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Lixo:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>Depois da taxa:</translation>
     </message>
@@ -1744,10 +1740,6 @@
     <message>
         <source>Clear all fields of the form.</source>
         <translation>Limpar todos os campos do formulário.</translation>
-    </message>
-    <message>
-        <source>Dust:</source>
-        <translation>Lixo:</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

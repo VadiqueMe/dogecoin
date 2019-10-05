@@ -568,10 +568,6 @@ Var vänlig och försök igen.</translation>
         <translation>Avgift:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Damm:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>Efter avgift:</translation>
     </message>
@@ -1788,10 +1784,6 @@ Var vänlig och försök igen.</translation>
     <message>
         <source>Clear all fields of the form.</source>
         <translation>Rensa alla formulärfälten</translation>
-    </message>
-    <message>
-        <source>Dust:</source>
-        <translation>Damm:</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

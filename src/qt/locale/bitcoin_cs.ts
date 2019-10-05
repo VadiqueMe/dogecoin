@@ -575,10 +575,6 @@
         <translation>Poplatek:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Prach:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>Čistá částka:</translation>
     </message>
@@ -663,10 +659,6 @@
         <translation>Kopíruj bajty</translation>
     </message>
     <message>
-        <source>Copy dust</source>
-        <translation>Kopíruj prach</translation>
-    </message>
-    <message>
         <source>Copy change</source>
         <translation>Kopíruj drobné</translation>
     </message>
@@ -681,10 +673,6 @@
     <message>
         <source>no</source>
         <translation>ne</translation>
-    </message>
-    <message>
-        <source>This label turns red if any recipient receives an amount smaller than the current dust threshold.</source>
-        <translation>Popisek zčervená, pokud má některý příjemce obdržet částku menší, než je aktuální práh pro prach.</translation>
     </message>
     <message>
         <source>Can vary +/- %1 koinu(s) per input.</source>
@@ -1312,10 +1300,6 @@
     <message>
         <source>Invalid payment request.</source>
         <translation>Neplatný platební požadavek.</translation>
-    </message>
-    <message>
-        <source>Requested payment amount of %1 is too small (considered dust).</source>
-        <translation>Požadovaná platební částka %1 je příliš malá (je považována za prach).</translation>
     </message>
     <message>
         <source>Refund from %1</source>
@@ -2053,10 +2037,6 @@
         <translation>Promaž obsah ze všech formulářových políček.</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Prach:</translation>
-    </message>
-    <message>
         <source>Clear &amp;All</source>
         <translation>Všechno s&amp;maž</translation>
     </message>
@@ -2091,10 +2071,6 @@
     <message>
         <source>Copy bytes</source>
         <translation>Kopíruj bajty</translation>
-    </message>
-    <message>
-        <source>Copy dust</source>
-        <translation>Kopíruj prach</translation>
     </message>
     <message>
         <source>Copy change</source>

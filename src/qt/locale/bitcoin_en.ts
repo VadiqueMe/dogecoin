@@ -761,11 +761,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-48"/>
-        <source>Dust:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location line="+93"/>
         <source>After Fee:</source>
         <translation type="unfinished"></translation>
@@ -873,11 +868,6 @@
     </message>
     <message>
         <location line="+1"/>
-        <source>Copy dust</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>Copy change</source>
         <translation type="unfinished"></translation>
     </message>
@@ -894,11 +884,6 @@
     <message>
         <location line="+0"/>
         <source>no</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>This label turns red if any recipient receives an amount smaller than the current dust threshold.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1925,11 +1910,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-10"/>
-        <source>Requested payment amount of %1 is too small (considered dust).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location line="+55"/>
         <source>Refund from %1</source>
         <translation type="unfinished"></translation>
@@ -2905,11 +2885,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-876"/>
-        <source>Dust:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location line="+188"/>
         <source>Clear &amp;All</source>
         <translation>Clear &amp;All</translation>
@@ -2952,11 +2927,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <location line="+1"/>
         <source>Copy bytes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Copy dust</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

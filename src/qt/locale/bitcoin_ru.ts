@@ -575,10 +575,6 @@
         <translation>Комиссия:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Пыль:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>После комиссии:</translation>
     </message>
@@ -663,10 +659,6 @@
         <translation>Копировать байты</translation>
     </message>
     <message>
-        <source>Copy dust</source>
-        <translation>Копировать пыль</translation>
-    </message>
-    <message>
         <source>Copy change</source>
         <translation>Копировать сдачу</translation>
     </message>
@@ -681,10 +673,6 @@
     <message>
         <source>no</source>
         <translation>нет</translation>
-    </message>
-    <message>
-        <source>This label turns red if any recipient receives an amount smaller than the current dust threshold.</source>
-        <translation>Эта метка станет красной, если любой получатель получит сумму меньше, чем текущий порог пыли.</translation>
     </message>
     <message>
         <source>Can vary +/- %1 koinu(s) per input.</source>
@@ -1312,10 +1300,6 @@
     <message>
         <source>Invalid payment request.</source>
         <translation>Неверный запрос платежа.</translation>
-    </message>
-    <message>
-        <source>Requested payment amount of %1 is too small (considered dust).</source>
-        <translation>Запрошенная сумма платежа %1 слишком мала (считается пылью).</translation>
     </message>
     <message>
         <source>Refund from %1</source>
@@ -2053,10 +2037,6 @@
         <translation>Очистить все поля формы</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Пыль:</translation>
-    </message>
-    <message>
         <source>Clear &amp;All</source>
         <translation>Очистить &amp;всё</translation>
     </message>
@@ -2091,10 +2071,6 @@
     <message>
         <source>Copy bytes</source>
         <translation>Копировать байты</translation>
-    </message>
-    <message>
-        <source>Copy dust</source>
-        <translation>Копировать пыль</translation>
     </message>
     <message>
         <source>Copy change</source>

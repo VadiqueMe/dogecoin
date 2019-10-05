@@ -243,10 +243,6 @@
         <translation>Провизија:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Прашина:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>После Провизија:</translation>
     </message>
@@ -511,10 +507,6 @@
     <message>
         <source>Change:</source>
         <translation>Кусур:</translation>
-    </message>
-    <message>
-        <source>Dust:</source>
-        <translation>Прашина:</translation>
     </message>
     </context>
 <context>

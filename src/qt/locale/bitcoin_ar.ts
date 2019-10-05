@@ -533,10 +533,6 @@
         <translation>رسوم :</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>غبار:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>بعد الرسوم :</translation>
     </message>
@@ -1317,10 +1313,6 @@
     <message>
         <source>Clear all fields of the form.</source>
         <translation>مسح كل حقول النموذج المطلوبة</translation>
-    </message>
-    <message>
-        <source>Dust:</source>
-        <translation>غبار:</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

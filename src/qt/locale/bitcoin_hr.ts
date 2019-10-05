@@ -375,10 +375,6 @@
         <translation>Naknada:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Prah:</translation>
-    </message>
-    <message>
         <source>Change:</source>
         <translation>Vraćeno:</translation>
     </message>
@@ -859,10 +855,6 @@
     <message>
         <source>Clear all fields of the form.</source>
         <translation>Obriši sva polja</translation>
-    </message>
-    <message>
-        <source>Dust:</source>
-        <translation>Prah:</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

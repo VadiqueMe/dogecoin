@@ -531,10 +531,6 @@
         <translation>Такса:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Прах:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>След прилагане на ДДС</translation>
     </message>
@@ -617,10 +613,6 @@
     <message>
         <source>Copy bytes</source>
         <translation>Копиране на байтовете</translation>
-    </message>
-    <message>
-        <source>Copy dust</source>
-        <translation>Копирай прахта:</translation>
     </message>
     <message>
         <source>Copy change</source>
@@ -1084,10 +1076,6 @@
     <message>
         <source>Invalid payment request.</source>
         <translation>Невалидна заявка за плащане.</translation>
-    </message>
-    <message>
-        <source>Requested payment amount of %1 is too small (considered dust).</source>
-        <translation>Заявената сума за плащане: %1 е твърде малка (счита се за отпадък)</translation>
     </message>
     <message>
         <source>Refund from %1</source>
@@ -1593,10 +1581,6 @@
         <translation>Изчисти всички полета от формуляра.</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Прах:</translation>
-    </message>
-    <message>
         <source>Clear &amp;All</source>
         <translation>&amp;Изчисти</translation>
     </message>
@@ -1631,10 +1615,6 @@
     <message>
         <source>Copy bytes</source>
         <translation>Копиране на байтовете</translation>
-    </message>
-    <message>
-        <source>Copy dust</source>
-        <translation>Копирай прахта:</translation>
     </message>
     <message>
         <source>Copy change</source>

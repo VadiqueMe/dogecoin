@@ -415,10 +415,6 @@
         <translation>Комісія:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Пил:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>Після комісії:</translation>
     </message>
@@ -1439,10 +1435,6 @@
     <message>
         <source>Clear all fields of the form.</source>
         <translation>Очистити всі поля в формі</translation>
-    </message>
-    <message>
-        <source>Dust:</source>
-        <translation>Пил:</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

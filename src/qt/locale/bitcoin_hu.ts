@@ -363,10 +363,6 @@
         <translation>Díj:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Por-határ:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>Utólagos díj:</translation>
     </message>
@@ -1159,10 +1155,6 @@
     <message>
         <source>Clear all fields of the form.</source>
         <translation>Minden mező törlése</translation>
-    </message>
-    <message>
-        <source>Dust:</source>
-        <translation>Por-határ:</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

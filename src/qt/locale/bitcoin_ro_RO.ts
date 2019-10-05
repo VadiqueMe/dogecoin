@@ -359,10 +359,6 @@
         <translation>Taxă:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Praf:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>După taxă:</translation>
     </message>
@@ -1327,10 +1323,6 @@
     <message>
         <source>Clear all fields of the form.</source>
         <translation>Şterge toate cîmpurile formularului.</translation>
-    </message>
-    <message>
-        <source>Dust:</source>
-        <translation>Praf:</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

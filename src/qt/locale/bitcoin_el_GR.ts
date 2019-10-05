@@ -407,10 +407,6 @@
         <translation>Ταρίφα</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Σκόνη</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>Ταρίφα αλλαγής</translation>
     </message>
@@ -1295,10 +1291,6 @@
     <message>
         <source>Clear all fields of the form.</source>
         <translation>Καθαρισμός όλων των πεδίων της φόρμας.</translation>
-    </message>
-    <message>
-        <source>Dust:</source>
-        <translation>Σκόνη</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

@@ -575,10 +575,6 @@
         <translation>Frais :</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Poussière :</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>Après les frais :</translation>
     </message>
@@ -663,10 +659,6 @@
         <translation>Copier les octets</translation>
     </message>
     <message>
-        <source>Copy dust</source>
-        <translation>Copier la poussière</translation>
-    </message>
-    <message>
         <source>Copy change</source>
         <translation>Copier la monnaie</translation>
     </message>
@@ -681,10 +673,6 @@
     <message>
         <source>no</source>
         <translation>non</translation>
-    </message>
-    <message>
-        <source>This label turns red if any recipient receives an amount smaller than the current dust threshold.</source>
-        <translation>Cette étiquette devient rouge si un destinataire reçoit un montant inférieur au seuil actuel de poussière.</translation>
     </message>
     <message>
         <source>Can vary +/- %1 koinu(s) per input.</source>
@@ -1312,10 +1300,6 @@
     <message>
         <source>Invalid payment request.</source>
         <translation>Demande de paiement invalide.</translation>
-    </message>
-    <message>
-        <source>Requested payment amount of %1 is too small (considered dust).</source>
-        <translation>Le paiement demandé d'un montant de %1 est trop faible (considéré comme de la poussière).</translation>
     </message>
     <message>
         <source>Refund from %1</source>
@@ -2053,10 +2037,6 @@
         <translation>Effacer tous les champs du formulaire.</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Poussière :</translation>
-    </message>
-    <message>
         <source>Clear &amp;All</source>
         <translation>&amp;Tout effacer</translation>
     </message>
@@ -2091,10 +2071,6 @@
     <message>
         <source>Copy bytes</source>
         <translation>Copier les octets</translation>
-    </message>
-    <message>
-        <source>Copy dust</source>
-        <translation>Copier la poussière</translation>
     </message>
     <message>
         <source>Copy change</source>

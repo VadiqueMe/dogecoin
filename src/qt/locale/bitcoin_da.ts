@@ -575,10 +575,6 @@
         <translation>Gebyr:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Støv:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>Efter gebyr:</translation>
     </message>
@@ -663,10 +659,6 @@
         <translation>Kopiér byte</translation>
     </message>
     <message>
-        <source>Copy dust</source>
-        <translation>Kopiér støv</translation>
-    </message>
-    <message>
         <source>Copy change</source>
         <translation>Kopiér byttepenge</translation>
     </message>
@@ -681,10 +673,6 @@
     <message>
         <source>no</source>
         <translation>nej</translation>
-    </message>
-    <message>
-        <source>This label turns red if any recipient receives an amount smaller than the current dust threshold.</source>
-        <translation>Denne mærkat bliver rød, hvis en eller flere modtagere modtager et beløb, der er mindre end den aktuelle støvgrænse.</translation>
     </message>
     <message>
         <source>Can vary +/- %1 koinu(s) per input.</source>
@@ -1312,10 +1300,6 @@
     <message>
         <source>Invalid payment request.</source>
         <translation>Ugyldig betalingsanmodning.</translation>
-    </message>
-    <message>
-        <source>Requested payment amount of %1 is too small (considered dust).</source>
-        <translation>Anmodet betalingsbeløb på %1 er for lille (regnes som støv).</translation>
     </message>
     <message>
         <source>Refund from %1</source>
@@ -2053,10 +2037,6 @@
         <translation>Ryd alle felter af formen.</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Støv:</translation>
-    </message>
-    <message>
         <source>Clear &amp;All</source>
         <translation>Ryd &amp;alle</translation>
     </message>
@@ -2091,10 +2071,6 @@
     <message>
         <source>Copy bytes</source>
         <translation>Kopiér byte</translation>
-    </message>
-    <message>
-        <source>Copy dust</source>
-        <translation>Kopiér støv</translation>
     </message>
     <message>
         <source>Copy change</source>

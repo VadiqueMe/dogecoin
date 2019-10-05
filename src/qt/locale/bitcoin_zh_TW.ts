@@ -575,10 +575,6 @@
         <translation>手續費:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>零散錢:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>計費後金額:</translation>
     </message>
@@ -663,10 +659,6 @@
         <translation>複製位元組數</translation>
     </message>
     <message>
-        <source>Copy dust</source>
-        <translation>複製零散金額</translation>
-    </message>
-    <message>
         <source>Copy change</source>
         <translation>複製找零金額</translation>
     </message>
@@ -681,10 +673,6 @@
     <message>
         <source>no</source>
         <translation>否</translation>
-    </message>
-    <message>
-        <source>This label turns red if any recipient receives an amount smaller than the current dust threshold.</source>
-        <translation>當任何一個收款金額小於目前的零散金額上限時，文字會變紅色。</translation>
     </message>
     <message>
         <source>Can vary +/- %1 koinu(s) per input.</source>
@@ -1312,10 +1300,6 @@
     <message>
         <source>Invalid payment request.</source>
         <translation>付款的要求無效。</translation>
-    </message>
-    <message>
-        <source>Requested payment amount of %1 is too small (considered dust).</source>
-        <translation>要求付款的金額 %1 太少(會被網路認為是沒必要的零散錢)。</translation>
     </message>
     <message>
         <source>Refund from %1</source>
@@ -2053,10 +2037,6 @@
         <translation>把表單中的所有欄位清空。</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>零散錢:</translation>
-    </message>
-    <message>
         <source>Clear &amp;All</source>
         <translation>全部清掉</translation>
     </message>
@@ -2091,10 +2071,6 @@
     <message>
         <source>Copy bytes</source>
         <translation>複製位元組數</translation>
-    </message>
-    <message>
-        <source>Copy dust</source>
-        <translation>複製零散金額</translation>
     </message>
     <message>
         <source>Copy change</source>

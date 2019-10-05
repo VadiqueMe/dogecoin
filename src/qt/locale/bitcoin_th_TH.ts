@@ -399,10 +399,6 @@
         <translation>ค่าธรรมเนียม:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>เศษ:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>ส่วนที่เหลือจากค่าธรรมเนียม:</translation>
     </message>
@@ -855,10 +851,6 @@
     <message>
         <source>Change:</source>
         <translation>เงินทอน:</translation>
-    </message>
-    <message>
-        <source>Dust:</source>
-        <translation>เศษ:</translation>
     </message>
     </context>
 <context>

@@ -389,10 +389,6 @@
         <translation>עמלה:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>אבק:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>לאחר עמלה:</translation>
     </message>
@@ -1357,10 +1353,6 @@
     <message>
         <source>Clear all fields of the form.</source>
         <translation>ניקוי של כל השדות בטופס.</translation>
-    </message>
-    <message>
-        <source>Dust:</source>
-        <translation>אבק:</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

@@ -543,10 +543,6 @@
         <translation>Opłata:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Pył:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>Po opłacie:</translation>
     </message>
@@ -631,10 +627,6 @@
         <translation>Skopiuj ilość bajtów</translation>
     </message>
     <message>
-        <source>Copy dust</source>
-        <translation>Kopiuj pył</translation>
-    </message>
-    <message>
         <source>Copy change</source>
         <translation>Skopiuj resztę</translation>
     </message>
@@ -649,10 +641,6 @@
     <message>
         <source>no</source>
         <translation>nie</translation>
-    </message>
-    <message>
-        <source>This label turns red if any recipient receives an amount smaller than the current dust threshold.</source>
-        <translation>Ta etykieta staje się czerwona jeżeli którykolwiek odbiorca otrzymuje kwotę mniejszą niż obecny próg pyłu.</translation>
     </message>
     <message>
         <source>Can vary +/- %1 koinu(s) per input.</source>
@@ -1917,10 +1905,6 @@
         <translation>Wyczyść wszystkie pola formularza.</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Pył:</translation>
-    </message>
-    <message>
         <source>Clear &amp;All</source>
         <translation>Wyczyść &amp;wszystko</translation>
     </message>
@@ -1955,10 +1939,6 @@
     <message>
         <source>Copy bytes</source>
         <translation>Skopiuj ilość bajtów</translation>
-    </message>
-    <message>
-        <source>Copy dust</source>
-        <translation>Kopiuj pył</translation>
     </message>
     <message>
         <source>Copy change</source>

@@ -495,10 +495,6 @@
         <translation>Tasu:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Puru:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>Peale tehingutasu:</translation>
     </message>
@@ -565,10 +561,6 @@
     <message>
         <source>Copy bytes</source>
         <translation>Kopeeri baidid</translation>
-    </message>
-    <message>
-        <source>Copy dust</source>
-        <translation>Kopeeri puru</translation>
     </message>
     <message>
         <source>Copy change</source>
@@ -1269,10 +1261,6 @@
         <translation>Puhasta kõik vormi väljad.</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Puru:</translation>
-    </message>
-    <message>
         <source>Clear &amp;All</source>
         <translation>Puhasta &amp;Kõik</translation>
     </message>
@@ -1303,10 +1291,6 @@
     <message>
         <source>Copy bytes</source>
         <translation>Kopeeri baidid</translation>
-    </message>
-    <message>
-        <source>Copy dust</source>
-        <translation>Kopeeri puru</translation>
     </message>
     <message>
         <source>Copy change</source>

@@ -459,10 +459,6 @@
         <translation>Avgift:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Støv:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>Totalt:</translation>
     </message>
@@ -1507,10 +1503,6 @@
     <message>
         <source>Clear all fields of the form.</source>
         <translation>Fjern alle felter fra skjemaet.</translation>
-    </message>
-    <message>
-        <source>Dust:</source>
-        <translation>Støv:</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

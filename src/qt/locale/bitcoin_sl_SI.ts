@@ -371,10 +371,6 @@
         <translation>Provizija:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Prah:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>Po proviziji:</translation>
     </message>
@@ -1291,10 +1287,6 @@
     <message>
         <source>Clear all fields of the form.</source>
         <translation>Počisti vsa polja.</translation>
-    </message>
-    <message>
-        <source>Dust:</source>
-        <translation>Prah:</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

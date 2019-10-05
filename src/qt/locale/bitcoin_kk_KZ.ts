@@ -125,10 +125,6 @@
         <translation>Комиссия</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Шаң</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>Комиссия алу кейін</translation>
     </message>
@@ -245,10 +241,6 @@
     <message>
         <source>After Fee:</source>
         <translation>Комиссия алу кейін:</translation>
-    </message>
-    <message>
-        <source>Dust:</source>
-        <translation>Шаң</translation>
     </message>
     </context>
 <context>

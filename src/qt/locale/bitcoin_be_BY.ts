@@ -487,10 +487,6 @@
         <translation>Камісія:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Пыл:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>Пасля камісіі:</translation>
     </message>
@@ -569,10 +565,6 @@
     <message>
         <source>Copy bytes</source>
         <translation>Капіяваць байты</translation>
-    </message>
-    <message>
-        <source>Copy dust</source>
-        <translation>Капіяваць пыл</translation>
     </message>
     <message>
         <source>yes</source>
@@ -845,10 +837,6 @@
         <translation>Даслаць адразу некалькім атрымальнікам</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Пыл:</translation>
-    </message>
-    <message>
         <source>Balance:</source>
         <translation>Баланс:</translation>
     </message>
@@ -875,10 +863,6 @@
     <message>
         <source>Copy bytes</source>
         <translation>Капіяваць байты</translation>
-    </message>
-    <message>
-        <source>Copy dust</source>
-        <translation>Капіяваць пыл</translation>
     </message>
     <message>
         <source>Confirm send coins</source>

@@ -249,10 +249,6 @@
         <translation>Comisión:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Polvo:</translation>
-    </message>
-    <message>
         <source>Change:</source>
         <translation>Cambio:</translation>
     </message>
@@ -521,10 +517,6 @@
     <message>
         <source>Change:</source>
         <translation>Cambio:</translation>
-    </message>
-    <message>
-        <source>Dust:</source>
-        <translation>Polvo:</translation>
     </message>
     </context>
 <context>

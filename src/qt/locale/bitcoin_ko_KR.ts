@@ -575,10 +575,6 @@
         <translation>수수료:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>더스트:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>수수료 이후:</translation>
     </message>
@@ -663,10 +659,6 @@
         <translation>bytes 복사</translation>
     </message>
     <message>
-        <source>Copy dust</source>
-        <translation>더스트 복사</translation>
-    </message>
-    <message>
         <source>Copy change</source>
         <translation>잔돈 복사</translation>
     </message>
@@ -681,10 +673,6 @@
     <message>
         <source>no</source>
         <translation>아니요</translation>
-    </message>
-    <message>
-        <source>This label turns red if any recipient receives an amount smaller than the current dust threshold.</source>
-        <translation>수령인이 현재 더스트 임계값보다 작은 양을 수신하면 이 라벨이 빨간색으로 변합니다.</translation>
     </message>
     <message>
         <source>Can vary +/- %1 koinu(s) per input.</source>
@@ -1312,10 +1300,6 @@
     <message>
         <source>Invalid payment request.</source>
         <translation>잘못된 지불 요청.</translation>
-    </message>
-    <message>
-        <source>Requested payment amount of %1 is too small (considered dust).</source>
-        <translation>요청한 금액 %1의 양이 너무 적습니다. (스팸성 거래로 간주)</translation>
     </message>
     <message>
         <source>Refund from %1</source>
@@ -2053,10 +2037,6 @@
         <translation>양식의 모든 필드를 지웁니다</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>더스트:</translation>
-    </message>
-    <message>
         <source>Clear &amp;All</source>
         <translation>모두 지우기(&amp;A)</translation>
     </message>
@@ -2091,10 +2071,6 @@
     <message>
         <source>Copy bytes</source>
         <translation>bytes 복사</translation>
-    </message>
-    <message>
-        <source>Copy dust</source>
-        <translation>더스트 복사</translation>
     </message>
     <message>
         <source>Copy change</source>

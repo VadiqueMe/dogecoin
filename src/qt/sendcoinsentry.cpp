@@ -147,12 +147,6 @@ bool SendCoinsEntry::validate()
         retval = false;
     }
 
-    // Reject dust outputs:
-    if (retval && GUIUtil::isDust(ui->payTo->text(), ui->payAmount->value())) {
-        ui->payAmount->setValid(false);
-        retval = false;
-    }
-
     return retval;
 }
 

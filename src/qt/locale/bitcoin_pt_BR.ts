@@ -571,10 +571,6 @@
         <translation>Taxa:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Poeira:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>Depois da taxa:</translation>
     </message>
@@ -659,10 +655,6 @@
         <translation>Copiar bytes</translation>
     </message>
     <message>
-        <source>Copy dust</source>
-        <translation>Copiar poeira</translation>
-    </message>
-    <message>
         <source>Copy change</source>
         <translation>Copiar troco</translation>
     </message>
@@ -677,10 +669,6 @@
     <message>
         <source>no</source>
         <translation>não</translation>
-    </message>
-    <message>
-        <source>This label turns red if any recipient receives an amount smaller than the current dust threshold.</source>
-        <translation>Este texto fica vermelho se qualquer destinatário receber uma quantidade menor que que o dust.</translation>
     </message>
     <message>
         <source>Can vary +/- %1 koinu(s) per input.</source>
@@ -1308,10 +1296,6 @@
     <message>
         <source>Invalid payment request.</source>
         <translation>Pedido de pagamento inválido</translation>
-    </message>
-    <message>
-        <source>Requested payment amount of %1 is too small (considered dust).</source>
-        <translation>Valor do pagamento solicitado de %1 é muito pequeno (Considerado poeira).</translation>
     </message>
     <message>
         <source>Refund from %1</source>
@@ -2049,10 +2033,6 @@
         <translation>Limpar todos os campos do formulário.</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Poeira:</translation>
-    </message>
-    <message>
         <source>Clear &amp;All</source>
         <translation>Limpar Tudo</translation>
     </message>
@@ -2087,10 +2067,6 @@
     <message>
         <source>Copy bytes</source>
         <translation>Copiar bytes</translation>
-    </message>
-    <message>
-        <source>Copy dust</source>
-        <translation>Copiar poeira</translation>
     </message>
     <message>
         <source>Copy change</source>

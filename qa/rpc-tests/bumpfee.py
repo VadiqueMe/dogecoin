@@ -59,7 +59,6 @@ class BumpFeeTest(BitcoinTestFramework):
         print("Running tests")
         dest_address = peer_node.getnewaddress()
         test_small_output_fails(rbf_node, dest_address)
-        test_dust_to_fee(rbf_node, dest_address)
         test_simple_bumpfee_succeeds(rbf_node, peer_node, dest_address)
         test_segwit_bumpfee_succeeds(rbf_node, dest_address)
         test_nonrbf_bumpfee_fails(peer_node, dest_address)
@@ -176,21 +175,6 @@ def test_small_output_fails(rbf_node, dest_address):
                             {dest_address: 0.800000000,
                              get_change_address(rbf_node): Decimal("1.00000000")})
     assert_raises_jsonrpc(-4, "Change output is too small", rbf_node.bumpfee, rbfid, {"totalFee": 200000001})
-
-
-def test_dust_to_fee(rbf_node, dest_address):
-    # check that if output is reduced to dust, it will be converted to fee
-    # the bumped tx sets fee=9900, but it converts to 10,000
-    rbfid = spend_one_input(rbf_node,
-                            Decimal("1.00000000"),
-                            {dest_address: 0.80000000,
-                             get_change_address(rbf_node): Decimal("0.10000000")})
-    fulltx = rbf_node.getrawtransaction(rbfid, 1)
-    bumped_tx = rbf_node.bumpfee(rbfid, {"totalFee": 19900000})
-    full_bumped_tx = rbf_node.getrawtransaction(bumped_tx["txid"], 1)
-    assert_equal(bumped_tx["fee"], Decimal("0.00020000"))
-    assert_equal(len(fulltx["vout"]), 2)
-    assert_equal(len(full_bumped_tx["vout"]), 1)  #change output is eliminated
 
 
 def test_settxfee(rbf_node, dest_address):

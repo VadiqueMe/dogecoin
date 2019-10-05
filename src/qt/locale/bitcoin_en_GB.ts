@@ -447,10 +447,6 @@
         <translation>Fee:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Dust:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>After Fee:</translation>
     </message>
@@ -1535,10 +1531,6 @@
     <message>
         <source>Clear all fields of the form.</source>
         <translation>Clear all fields of the form.</translation>
-    </message>
-    <message>
-        <source>Dust:</source>
-        <translation>Dust:</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

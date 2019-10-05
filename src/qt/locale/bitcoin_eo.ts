@@ -407,10 +407,6 @@
         <translation>Krompago:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Polvo:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>Post krompago:</translation>
     </message>
@@ -1071,10 +1067,6 @@
     <message>
         <source>Clear all fields of the form.</source>
         <translation>Malplenigi ĉiujn kampojn de la formularo.</translation>
-    </message>
-    <message>
-        <source>Dust:</source>
-        <translation>Polvo:</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

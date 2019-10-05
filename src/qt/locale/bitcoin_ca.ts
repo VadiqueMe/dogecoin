@@ -567,10 +567,6 @@
         <translation>Comissió:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Polsim:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>Comissió posterior:</translation>
     </message>
@@ -655,10 +651,6 @@
         <translation>Copia els bytes</translation>
     </message>
     <message>
-        <source>Copy dust</source>
-        <translation>Copia el polsim</translation>
-    </message>
-    <message>
         <source>Copy change</source>
         <translation>Copia el canvi</translation>
     </message>
@@ -673,10 +665,6 @@
     <message>
         <source>no</source>
         <translation>no</translation>
-    </message>
-    <message>
-        <source>This label turns red if any recipient receives an amount smaller than the current dust threshold.</source>
-        <translation>Aquesta etiqueta es torna vermella si cap recipient rep un import inferior al llindar de polsim actual.</translation>
     </message>
     <message>
         <source>Can vary +/- %1 koinu(s) per input.</source>
@@ -1284,10 +1272,6 @@
     <message>
         <source>Invalid payment request.</source>
         <translation>Sol·licitud de pagament no vàlida.</translation>
-    </message>
-    <message>
-        <source>Requested payment amount of %1 is too small (considered dust).</source>
-        <translation>L'import de pagament sol·licitat %1 és massa petit (es considera polsim).</translation>
     </message>
     <message>
         <source>Refund from %1</source>
@@ -1933,10 +1917,6 @@
         <translation>Esborra tots els camps del formuari.</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Polsim:</translation>
-    </message>
-    <message>
         <source>Clear &amp;All</source>
         <translation>Neteja-ho &amp;tot</translation>
     </message>
@@ -1971,10 +1951,6 @@
     <message>
         <source>Copy bytes</source>
         <translation>Copia els bytes</translation>
-    </message>
-    <message>
-        <source>Copy dust</source>
-        <translation>Copia el polsim</translation>
     </message>
     <message>
         <source>Copy change</source>

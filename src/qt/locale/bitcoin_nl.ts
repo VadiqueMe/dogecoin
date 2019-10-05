@@ -575,10 +575,6 @@
         <translation>Transactiekosten:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Stof:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>Naheffing:</translation>
     </message>
@@ -663,10 +659,6 @@
         <translation>Kopieer bytes</translation>
     </message>
     <message>
-        <source>Copy dust</source>
-        <translation>Kopieër stof</translation>
-    </message>
-    <message>
         <source>Copy change</source>
         <translation>Kopieer wijziging</translation>
     </message>
@@ -681,10 +673,6 @@
     <message>
         <source>no</source>
         <translation>nee</translation>
-    </message>
-    <message>
-        <source>This label turns red if any recipient receives an amount smaller than the current dust threshold.</source>
-        <translation>Dit label wordt rood, als een ontvanger een bedrag van minder dan de huidige dust-drempel gekregen heeft.</translation>
     </message>
     <message>
         <source>Can vary +/- %1 koinu(s) per input.</source>
@@ -1312,10 +1300,6 @@
     <message>
         <source>Invalid payment request.</source>
         <translation>Ongeldig betalingsverzoek.</translation>
-    </message>
-    <message>
-        <source>Requested payment amount of %1 is too small (considered dust).</source>
-        <translation>Het gevraagde betalingsbedrag van %1 is te weinig (beschouwd als stof).</translation>
     </message>
     <message>
         <source>Refund from %1</source>
@@ -2053,10 +2037,6 @@
         <translation>Wis alle velden van het formulier.</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Stof:</translation>
-    </message>
-    <message>
         <source>Clear &amp;All</source>
         <translation>Verwijder &amp;Alles</translation>
     </message>
@@ -2091,10 +2071,6 @@
     <message>
         <source>Copy bytes</source>
         <translation>Kopieer bytes</translation>
-    </message>
-    <message>
-        <source>Copy dust</source>
-        <translation>Kopieër stof</translation>
     </message>
     <message>
         <source>Copy change</source>

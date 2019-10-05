@@ -2720,9 +2720,6 @@ UniValue bumpfee(const JSONRPCRequest& request)
             "   {\n"
             "     \"confTarget\"        (numeric, optional) Confirmation target (in blocks)\n"
             "     \"totalFee\"          (numeric, optional) Total fee (NOT feerate) to pay, in satoshis.\n"
-            "                         In rare cases, the actual fee paid might be slightly higher than the specified\n"
-            "                         totalFee if the tx change output has to be removed because it is too close to\n"
-            "                         the dust threshold.\n"
             "     \"replaceable\"       (boolean, optional, default true) Whether the new transaction should still be\n"
             "                         marked bip-125 replaceable. If true, the sequence numbers in the transaction will\n"
             "                         be left unchanged from the original. If false, any input sequence numbers in the\n"
@@ -2908,25 +2905,19 @@ UniValue bumpfee(const JSONRPCRequest& request)
         )) ;
     }
 
-    // Now modify the output to increase the fee.
-    // If the output is not large enough to pay the fee, fail.
+    // Now modify the output to increase the fee
+    // If the output is not large enough to pay the fee, cancel
     CAmount nDelta = nNewFee - nOldFee;
-    assert(nDelta > 0);
+    assert( nDelta > 0 ) ;
     CMutableTransaction tx(*(wtx.tx));
     CTxOut* poutput = &(tx.vout[nOutput]);
     if (poutput->nValue < nDelta) {
         throw JSONRPCError(RPC_WALLET_ERROR, "Change output is too small to bump the fee");
     }
 
-    // If the output would become dust, discard it (converting the dust to fee)
-    poutput->nValue -= nDelta;
-    if (poutput->nValue <= poutput->GetDustThreshold(::dustRelayFee)) {
-        LogPrint("rpc", "Bumping fee and discarding dust output\n");
-        nNewFee += poutput->nValue;
-        tx.vout.erase(tx.vout.begin() + nOutput);
-    }
+    poutput->nValue -= nDelta ;
 
-    // Mark new tx not replaceable, if requested.
+    // Mark new tx not replaceable, if requested
     if (!replaceable) {
         for (auto& input : tx.vin) {
             if (input.nSequence < 0xfffffffe) input.nSequence = 0xfffffffe;

@@ -539,10 +539,6 @@
         <translation>Commissione:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Trascurabile:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>Dopo Commissione:</translation>
     </message>
@@ -627,10 +623,6 @@
         <translation>Copia byte</translation>
     </message>
     <message>
-        <source>Copy dust</source>
-        <translation>Copia trascurabile</translation>
-    </message>
-    <message>
         <source>Copy change</source>
         <translation>Copia resto</translation>
     </message>
@@ -645,10 +637,6 @@
     <message>
         <source>no</source>
         <translation>no</translation>
-    </message>
-    <message>
-        <source>This label turns red if any recipient receives an amount smaller than the current dust threshold.</source>
-        <translation>Questa etichetta diventerà rossa se uno qualsiasi dei destinatari riceverà un importo inferiore alla corrente soglia minima per la movimentazione della valuta.</translation>
     </message>
     <message>
         <source>Can vary +/- %1 satoshi(s) per input.</source>
@@ -1253,10 +1241,6 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
     <message>
         <source>Invalid payment request.</source>
         <translation>Richiesta di pagamento invalida</translation>
-    </message>
-    <message>
-        <source>Requested payment amount of %1 is too small (considered dust).</source>
-        <translation>L'importo di pagamento di %1 richiesto è troppo basso (considerato come trascurabile).</translation>
     </message>
     <message>
         <source>Refund from %1</source>
@@ -1942,10 +1926,6 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
         <translation>Cancellare tutti i campi del modulo.</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Trascurabile:</translation>
-    </message>
-    <message>
         <source>Clear &amp;All</source>
         <translation>Cancella &amp;tutto</translation>
     </message>
@@ -1980,10 +1960,6 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
     <message>
         <source>Copy bytes</source>
         <translation>Copia byte</translation>
-    </message>
-    <message>
-        <source>Copy dust</source>
-        <translation>Copia trascurabile</translation>
     </message>
     <message>
         <source>Copy change</source>

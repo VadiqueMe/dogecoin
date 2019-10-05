@@ -387,10 +387,6 @@
         <translation>Palkkio:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Tomu:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation>Palkkion jälkeen:</translation>
     </message>
@@ -1443,10 +1439,6 @@
     <message>
         <source>Clear all fields of the form.</source>
         <translation>Tyhjennä lomakkeen kaikki kentät</translation>
-    </message>
-    <message>
-        <source>Dust:</source>
-        <translation>Tomu:</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

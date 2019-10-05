@@ -689,30 +689,6 @@ BOOST_AUTO_TEST_CASE(test_IsStandard)
     std::string reason;
     BOOST_CHECK(IsStandardTx(t, reason));
 
-    // Dogecoin: Dust is different in Dogecoin, disable these tests
-
-    /*
-    // Check dust with default relay fee:
-    CAmount nDustThreshold = 182 * dustRelayFee.GetFee(1000)/1000 * 3;
-    BOOST_CHECK_EQUAL(nDustThreshold, 546);
-    // dust:
-    t.vout[0].nValue = nDustThreshold - 1;
-    BOOST_CHECK(!IsStandardTx(t, reason));
-    // not dust:
-    t.vout[0].nValue = nDustThreshold;
-    BOOST_CHECK(IsStandardTx(t, reason));
-
-    // Check dust with odd relay fee to verify rounding:
-    // nDustThreshold = 182 * 1234 / 1000 * 3
-    dustRelayFee = CFeeRate(1234);
-    // dust:
-    t.vout[0].nValue = 672 - 1;
-    BOOST_CHECK(!IsStandardTx(t, reason));
-    // not dust:
-    t.vout[0].nValue = 672;
-    BOOST_CHECK(IsStandardTx(t, reason)); */
-    dustRelayFee = CFeeRate(DUST_RELAY_TX_FEE);
-
     t.vout[0].scriptPubKey = CScript() << OP_1;
     BOOST_CHECK(!IsStandardTx(t, reason));
 
