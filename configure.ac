@@ -596,7 +596,7 @@ AC_SUBST(LIBMEMENV)
 
 if test x$enable_wallet != xno; then
     dnl Check for libdb_cxx only if wallet enabled
-    BITCOIN_FIND_BDB51
+    DOGECOIN_FIND_BDB5
 fi
 
 dnl Check for libminiupnpc (optional)
