@@ -1997,7 +1997,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../guiutil.cpp" line="+128"/>
-        <source>Enter a Dogecoin address (e.g. %1)</source>
+        <source>Enter a Dogecoin address (like %1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

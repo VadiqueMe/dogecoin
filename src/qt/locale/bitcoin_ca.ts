@@ -1336,7 +1336,7 @@
         <translation>Import</translation>
     </message>
     <message>
-        <source>Enter a Dogecoin address (e.g. %1)</source>
+        <source>Enter a Dogecoin address (like %1)</source>
         <translation>Introduïu una adreça de Dogecoin (p. ex. %1)</translation>
     </message>
     <message>

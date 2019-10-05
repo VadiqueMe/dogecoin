@@ -1205,7 +1205,7 @@
         <translation>Quantia</translation>
     </message>
     <message>
-        <source>Enter a Dogecoin address (e.g. %1)</source>
+        <source>Enter a Dogecoin address (like %1)</source>
         <translation>Entre um endereço Dogecoin (ex. %1)</translation>
     </message>
     <message>

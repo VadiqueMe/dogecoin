@@ -1185,7 +1185,7 @@ Var vänlig och försök igen.</translation>
         <translation>Mängd</translation>
     </message>
     <message>
-        <source>Enter a Dogecoin address (e.g. %1)</source>
+        <source>Enter a Dogecoin address (like %1)</source>
         <translation>Ange en Dogecoin-adress (t.ex. %1)</translation>
     </message>
     <message>

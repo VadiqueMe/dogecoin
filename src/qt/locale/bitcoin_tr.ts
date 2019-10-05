@@ -1372,7 +1372,7 @@
         <translation>Tutar</translation>
     </message>
     <message>
-        <source>Enter a Dogecoin address (e.g. %1)</source>
+        <source>Enter a Dogecoin address (like %1)</source>
         <translation>Bir Dogecoin adresi giriniz (mesela %1)</translation>
     </message>
     <message>

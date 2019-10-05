@@ -440,7 +440,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <source>Enter a Dogecoin address (e.g. %1)</source>
+        <source>Enter a Dogecoin address (like %1)</source>
         <translation>輸入一個 Dogecoin 位址 (例如 %1)</translation>
     </message>
     <message>

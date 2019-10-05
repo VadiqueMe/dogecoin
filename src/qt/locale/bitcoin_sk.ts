@@ -1360,7 +1360,7 @@
         <translation>Suma</translation>
     </message>
     <message>
-        <source>Enter a Dogecoin address (e.g. %1)</source>
+        <source>Enter a Dogecoin address (like %1)</source>
         <translation>Zadajte dogecoin adresu (napr. %1)</translation>
     </message>
     <message>

@@ -1284,7 +1284,7 @@
         <translation>Kwota</translation>
     </message>
     <message>
-        <source>Enter a Dogecoin address (e.g. %1)</source>
+        <source>Enter a Dogecoin address (like %1)</source>
         <translation>Wprowadź adres dogecoinowy (np. %1)</translation>
     </message>
     <message>

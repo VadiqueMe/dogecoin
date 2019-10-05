@@ -1301,7 +1301,7 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
         <translation>Importo</translation>
     </message>
     <message>
-        <source>Enter a Dogecoin address (e.g. %1)</source>
+        <source>Enter a Dogecoin address (like %1)</source>
         <translation>Inserisci un indirizzo Dogecoin (ad es. %1)</translation>
     </message>
     <message>

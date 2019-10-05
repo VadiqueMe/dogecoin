@@ -840,7 +840,7 @@
         <translation>Montant</translation>
     </message>
     <message>
-        <source>Enter a Dogecoin address (e.g. %1)</source>
+        <source>Enter a Dogecoin address (like %1)</source>
         <translation>Entrer une adresse Dogecoin (e.g. %1)</translation>
     </message>
     <message>

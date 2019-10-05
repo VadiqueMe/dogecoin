@@ -1000,8 +1000,8 @@
         <translation>Amount</translation>
     </message>
     <message>
-        <source>Enter a Dogecoin address (e.g. %1)</source>
-        <translation>Enter a Dogecoin address (e.g. %1)</translation>
+        <source>Enter a Dogecoin address (like %1)</source>
+        <translation>Enter a Dogecoin address (like %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
