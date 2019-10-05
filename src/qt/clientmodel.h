@@ -79,7 +79,6 @@ public:
 
     QString formatFullVersion() const;
     QString formatSubVersion() const;
-    bool isReleaseVersion() const;
     QString formatClientStartupTime() const;
     QString dataDir() const;
 

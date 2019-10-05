@@ -243,11 +243,6 @@ QString ClientModel::formatSubVersion() const
     return QString::fromStdString(strSubVersion);
 }
 
-bool ClientModel::isReleaseVersion() const
-{
-    return CLIENT_VERSION_IS_RELEASE;
-}
-
 QString ClientModel::formatClientStartupTime() const
 {
     return QDateTime::fromTime_t(nClientStartupTime).toString();
