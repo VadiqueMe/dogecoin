@@ -1141,10 +1141,6 @@
         <translation>Вихідних:</translation>
     </message>
     <message>
-        <source>Debug log file</source>
-        <translation>Файл звіту зневадження</translation>
-    </message>
-    <message>
         <source>Clear console</source>
         <translation>Очистити консоль</translation>
     </message>

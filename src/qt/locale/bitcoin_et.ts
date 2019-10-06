@@ -1029,10 +1029,6 @@
         <translation>&amp;Konsool</translation>
     </message>
     <message>
-        <source>Debug log file</source>
-        <translation>Silumise logifail</translation>
-    </message>
-    <message>
         <source>Clear console</source>
         <translation>Puhasta konsool</translation>
     </message>

@@ -1569,10 +1569,6 @@
         <translation>Brugeragent</translation>
     </message>
     <message>
-        <source>Open the %1 debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Åbn %1s fejlsøgningslogfil fra den aktuelle datamappe. Dette kan tage nogle få sekunder for store logfiler.</translation>
-    </message>
-    <message>
         <source>Decrease font size</source>
         <translation>Formindsk skrifttypestørrelse</translation>
     </message>
@@ -1647,10 +1643,6 @@
     <message>
         <source>Out:</source>
         <translation>Udgående:</translation>
-    </message>
-    <message>
-        <source>Debug log file</source>
-        <translation>Fejlsøgningslogfil</translation>
     </message>
     <message>
         <source>Clear console</source>

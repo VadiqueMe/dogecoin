@@ -1049,10 +1049,6 @@
         <translation>Ieşire:</translation>
     </message>
     <message>
-        <source>Debug log file</source>
-        <translation>Fişier jurnal depanare</translation>
-    </message>
-    <message>
         <source>Clear console</source>
         <translation>Curăţă consola</translation>
     </message>

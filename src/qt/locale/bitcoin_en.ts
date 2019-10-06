@@ -2293,11 +2293,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-684"/>
-        <source>Open the %1 debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location line="+68"/>
         <source>Decrease font size</source>
         <translation type="unfinished"></translation>
@@ -2391,11 +2386,6 @@ p, li { white-space: pre-wrap; }
         <location line="+1"/>
         <source>Out:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/debugwindow.ui" line="-299"/>
-        <source>Debug log file</source>
-        <translation>Debug log file</translation>
     </message>
     <message>
         <location line="+136"/>

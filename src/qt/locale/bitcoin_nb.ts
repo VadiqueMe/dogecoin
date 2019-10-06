@@ -1205,10 +1205,6 @@
         <translation>Ut:</translation>
     </message>
     <message>
-        <source>Debug log file</source>
-        <translation>Loggfil for feilsøk</translation>
-    </message>
-    <message>
         <source>Clear console</source>
         <translation>Tøm konsoll</translation>
     </message>

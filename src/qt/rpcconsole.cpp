@@ -419,17 +419,21 @@ RPCConsole::RPCConsole(const PlatformStyle *_platformStyle, QWidget *parent) :
     peersTableContextMenu(0),
     banTableContextMenu(0),
     consoleFontSize(0)
+    , pathToLogFile( GUIUtil::boostPathToQString(boost::filesystem::path( GetDataDir() / LOG_FILE_NAME )) )
+    , logFileWatcher()
     , resetBytesRecv( 0 )
     , resetBytesSent( 0 )
 {
     ui->setupUi(this);
     GUIUtil::restoreWindowGeometry("nRPCConsoleWindow", this->size(), this);
 
-    ui->openDebugLogfileButton->setToolTip(ui->openDebugLogfileButton->toolTip().arg(tr(PACKAGE_NAME)));
+    if ( platformStyle->getImagesOnButtons() )
+        ui->openDebugLogButton->setIcon( platformStyle->SingleColorIcon( ":/icons/export" ) ) ;
 
-    if (platformStyle->getImagesOnButtons()) {
-        ui->openDebugLogfileButton->setIcon(platformStyle->SingleColorIcon(":/icons/export"));
-    }
+    logFileChanged() ;
+    logFileWatcher.addPath( pathToLogFile ) ;
+    connect( &logFileWatcher, SIGNAL( fileChanged(QString) ), this, SLOT( onFileChange(const QString &) ) ) ;
+
     ui->clearButton->setIcon(platformStyle->SingleColorIcon(":/icons/remove"));
     ui->fontBiggerButton->setIcon(platformStyle->SingleColorIcon(":/icons/fontbigger"));
     ui->fontSmallerButton->setIcon(platformStyle->SingleColorIcon(":/icons/fontsmaller"));
@@ -591,7 +595,7 @@ void RPCConsole::setClientModel(ClientModel *model)
         connect(model->getPeerTableModel(), SIGNAL(layoutChanged()), this, SLOT(peerLayoutChanged()));
         // peer table signal handling - cache selected node ids
         connect(model->getPeerTableModel(), SIGNAL(layoutAboutToBeChanged()), this, SLOT(peerLayoutAboutToChange()));
-        
+
         // set up ban table
         ui->banlistWidget->setModel(model->getBanTableModel());
         ui->banlistWidget->verticalHeader()->hide();
@@ -899,9 +903,35 @@ void RPCConsole::on_tabWidget_currentChanged(int index)
         clearSelectedNode();
 }
 
-void RPCConsole::on_openDebugLogfileButton_clicked()
+void RPCConsole::onFileChange( const QString & whatsChanged )
 {
-    GUIUtil::openDebugLogfile();
+    if ( whatsChanged == pathToLogFile )
+        if ( ui->tabWidget->currentWidget() == ui->tab_log )
+            logFileChanged() ;
+}
+
+void RPCConsole::logFileChanged()
+{
+    QFile logFile( pathToLogFile ) ;
+    if ( ! logFile.open( QIODevice::ReadOnly ) )
+    {
+        ui->debugLogTextArea->setPlainText( "(can't open)" ) ;
+        return ;
+    }
+
+    QByteArray log = logFile.readAll() ;
+    if ( ! log.isEmpty() ) {
+        ui->debugLogTextArea->setPlainText(QString::fromStdString( log.toStdString() )) ;
+        ui->debugLogTextArea->verticalScrollBar()->setValue( ui->debugLogTextArea->verticalScrollBar()->maximum() ) ;
+        return ;
+    }
+
+    ui->debugLogTextArea->setPlainText( "(empty)" ) ;
+}
+
+void RPCConsole::on_openDebugLogButton_clicked()
+{
+    GUIUtil::openDebugLogfile() ;
 }
 
 void RPCConsole::scrollToEnd()
@@ -1124,7 +1154,7 @@ void RPCConsole::disconnectSelectedNode()
 {
     if(!g_connman)
         return;
-    
+
     // Get selected peer addresses
     QList<QModelIndex> nodes = GUIUtil::getEntryData(ui->peerWidget, PeerTableModel::NetNodeId);
     for(int i = 0; i < nodes.count(); i++)
@@ -1141,7 +1171,7 @@ void RPCConsole::banSelectedNode(int bantime)
 {
     if (!clientModel || !g_connman)
         return;
-    
+
     // Get selected peer addresses
     QList<QModelIndex> nodes = GUIUtil::getEntryData(ui->peerWidget, PeerTableModel::NetNodeId);
     for(int i = 0; i < nodes.count(); i++)

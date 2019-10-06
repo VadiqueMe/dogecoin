@@ -1067,10 +1067,6 @@
         <translation>יוצא:</translation>
     </message>
     <message>
-        <source>Debug log file</source>
-        <translation>קובץ יומן ניפוי</translation>
-    </message>
-    <message>
         <source>Clear console</source>
         <translation>ניקוי מסוף הבקרה</translation>
     </message>

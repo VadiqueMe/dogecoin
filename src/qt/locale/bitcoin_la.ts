@@ -511,10 +511,6 @@
         <translation>&amp;Terminale</translation>
     </message>
     <message>
-        <source>Debug log file</source>
-        <translation>Debug catalogi plica</translation>
-    </message>
-    <message>
         <source>Clear console</source>
         <translation>Vacuefac terminale</translation>
     </message>

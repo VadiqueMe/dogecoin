@@ -897,10 +897,6 @@
         <translation>El:</translation>
     </message>
     <message>
-        <source>Debug log file</source>
-        <translation>Sencimiga protokoldosiero</translation>
-    </message>
-    <message>
         <source>Clear console</source>
         <translation>Malplenigi konzolon</translation>
     </message>

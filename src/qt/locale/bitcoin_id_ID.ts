@@ -1143,10 +1143,6 @@
         <translation>Keluar:</translation>
     </message>
     <message>
-        <source>Debug log file</source>
-        <translation>Berkas catatan debug</translation>
-    </message>
-    <message>
         <source>Clear console</source>
         <translation>Bersihkan konsol</translation>
     </message>

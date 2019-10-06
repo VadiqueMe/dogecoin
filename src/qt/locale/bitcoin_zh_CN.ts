@@ -1631,10 +1631,6 @@
         <translation>输出：</translation>
     </message>
     <message>
-        <source>Debug log file</source>
-        <translation>调试日志文件</translation>
-    </message>
-    <message>
         <source>Clear console</source>
         <translation>清空控制台</translation>
     </message>

@@ -1565,10 +1565,6 @@
         <translation>User-Agent</translation>
     </message>
     <message>
-        <source>Open the %1 debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Öffnet die %1-Debugprotokolldatei aus dem aktuellen Datenverzeichnis. Dies kann bei großen Protokolldateien einige Sekunden dauern.</translation>
-    </message>
-    <message>
         <source>Decrease font size</source>
         <translation>Schrift verkleinern</translation>
     </message>
@@ -1643,10 +1639,6 @@
     <message>
         <source>Out:</source>
         <translation>ausgehend:</translation>
-    </message>
-    <message>
-        <source>Debug log file</source>
-        <translation>Debugprotokolldatei</translation>
     </message>
     <message>
         <source>Clear console</source>

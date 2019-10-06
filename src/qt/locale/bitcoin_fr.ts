@@ -1569,10 +1569,6 @@
         <translation>Agent utilisateur</translation>
     </message>
     <message>
-        <source>Open the %1 debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Ouvrir le fichier journal de débogage de %1 à partir du répertoire de données actuel. Cela peut prendre quelques secondes pour les fichiers journaux de grande taille.</translation>
-    </message>
-    <message>
         <source>Decrease font size</source>
         <translation>Diminuer la taille de police</translation>
     </message>
@@ -1647,10 +1643,6 @@
     <message>
         <source>Out:</source>
         <translation>Sortant :</translation>
-    </message>
-    <message>
-        <source>Debug log file</source>
-        <translation>Fichier journal de débogage</translation>
     </message>
     <message>
         <source>Clear console</source>

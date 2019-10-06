@@ -1165,10 +1165,6 @@
         <translation>خروجی:</translation>
     </message>
     <message>
-        <source>Debug log file</source>
-        <translation>فایلِ لاگِ اشکال زدایی</translation>
-    </message>
-    <message>
         <source>Clear console</source>
         <translation>پاکسازی کنسول</translation>
     </message>

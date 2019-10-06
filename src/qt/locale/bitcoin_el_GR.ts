@@ -1045,10 +1045,6 @@
         <translation>Εξερχόμενα:</translation>
     </message>
     <message>
-        <source>Debug log file</source>
-        <translation>Αρχείο καταγραφής εντοπισμού σφαλμάτων </translation>
-    </message>
-    <message>
         <source>Clear console</source>
         <translation>Καθαρισμός κονσόλας</translation>
     </message>

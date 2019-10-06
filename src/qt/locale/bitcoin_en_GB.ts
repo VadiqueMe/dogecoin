@@ -1153,10 +1153,6 @@
         <translation>User Agent</translation>
     </message>
     <message>
-        <source>Open the %1 debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Open the %1 debug log file from the current data directory. This can take a few seconds for large log files.</translation>
-    </message>
-    <message>
         <source>Decrease font size</source>
         <translation>Decrease font size</translation>
     </message>
@@ -1227,10 +1223,6 @@
     <message>
         <source>Out:</source>
         <translation>Out:</translation>
-    </message>
-    <message>
-        <source>Debug log file</source>
-        <translation>Debug log file</translation>
     </message>
     <message>
         <source>Clear console</source>

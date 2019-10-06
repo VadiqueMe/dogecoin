@@ -1569,10 +1569,6 @@
         <translation>ユーザエージェント</translation>
     </message>
     <message>
-        <source>Open the %1 debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>現在のデータディレクトリから %1 のデバッグ用ログファイルを開きます。ログファイルが巨大な場合、数秒かかることがあります。</translation>
-    </message>
-    <message>
         <source>Decrease font size</source>
         <translation>文字サイズを縮小</translation>
     </message>
@@ -1647,10 +1643,6 @@
     <message>
         <source>Out:</source>
         <translation>出力:</translation>
-    </message>
-    <message>
-        <source>Debug log file</source>
-        <translation>デバッグ用ログファイル</translation>
     </message>
     <message>
         <source>Clear console</source>

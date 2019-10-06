@@ -1041,10 +1041,6 @@
         <translation>Sortie:</translation>
     </message>
     <message>
-        <source>Debug log file</source>
-        <translation>Fichier du journal de débogage</translation>
-    </message>
-    <message>
         <source>Clear console</source>
         <translation>Nettoyer la console</translation>
     </message>

@@ -727,10 +727,6 @@
         <translation>Iz.:</translation>
     </message>
     <message>
-        <source>Debug log file</source>
-        <translation>Atkļūdošanas žurnāla datne</translation>
-    </message>
-    <message>
         <source>Clear console</source>
         <translation>Notīrīt konsoli</translation>
     </message>

@@ -1569,10 +1569,6 @@
         <translation>User Agent</translation>
     </message>
     <message>
-        <source>Open the %1 debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Open het %1 debug-logbestand van de huidige datamap. Dit kan een aantal seconden duren voor grote logbestanden.</translation>
-    </message>
-    <message>
         <source>Decrease font size</source>
         <translation>Verklein lettergrootte</translation>
     </message>
@@ -1647,10 +1643,6 @@
     <message>
         <source>Out:</source>
         <translation>Uit:</translation>
-    </message>
-    <message>
-        <source>Debug log file</source>
-        <translation>Debuglogbestand</translation>
     </message>
     <message>
         <source>Clear console</source>

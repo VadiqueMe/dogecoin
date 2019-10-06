@@ -1569,10 +1569,6 @@
         <translation>Юзер-агент</translation>
     </message>
     <message>
-        <source>Open the %1 debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Открыть отладочный лог-файл %1 из текущего каталога данных. Это может занять несколько секунд для больших лог-файлов.</translation>
-    </message>
-    <message>
         <source>Decrease font size</source>
         <translation>Уменьшить размер текста</translation>
     </message>
@@ -1647,10 +1643,6 @@
     <message>
         <source>Out:</source>
         <translation>Выход:</translation>
-    </message>
-    <message>
-        <source>Debug log file</source>
-        <translation>Отладочный лог-файл</translation>
     </message>
     <message>
         <source>Clear console</source>

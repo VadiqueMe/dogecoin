@@ -499,10 +499,6 @@
         <translation>&amp;Console</translation>
     </message>
     <message>
-        <source>Debug log file</source>
-        <translation>Debug log file</translation>
-    </message>
-    <message>
         <source>Clear console</source>
         <translation>I-Clear ing console</translation>
     </message>

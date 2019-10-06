@@ -823,10 +823,6 @@
         <translation>Ташқарига:</translation>
     </message>
     <message>
-        <source>Debug log file</source>
-        <translation>Тузатиш журнали файли</translation>
-    </message>
-    <message>
         <source>Clear console</source>
         <translation>Терминални тозалаш</translation>
     </message>

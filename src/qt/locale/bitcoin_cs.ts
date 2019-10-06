@@ -1569,10 +1569,6 @@
         <translation>Typ klienta</translation>
     </message>
     <message>
-        <source>Open the %1 debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Otevři soubor s ladicími záznamy %1 z aktuálního datového adresáře. U velkých žurnálů to může pár vteřin zabrat.</translation>
-    </message>
-    <message>
         <source>Decrease font size</source>
         <translation>Zmenšit písmo</translation>
     </message>
@@ -1647,10 +1643,6 @@
     <message>
         <source>Out:</source>
         <translation>Ven:</translation>
-    </message>
-    <message>
-        <source>Debug log file</source>
-        <translation>Soubor s ladicími záznamy</translation>
     </message>
     <message>
         <source>Clear console</source>

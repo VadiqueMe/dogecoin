@@ -1457,10 +1457,6 @@
         <translation>Aplikacja kliencka</translation>
     </message>
     <message>
-        <source>Open the %1 debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Otwórz plik dziennika debugowania %1 z obecnego katalogu z danymi. Może to potrwać kilka sekund przy większych plikach.</translation>
-    </message>
-    <message>
         <source>Decrease font size</source>
         <translation>Zmniejsz rozmiar czcionki</translation>
     </message>
@@ -1535,10 +1531,6 @@
     <message>
         <source>Out:</source>
         <translation>Wyjście:</translation>
-    </message>
-    <message>
-        <source>Debug log file</source>
-        <translation>Plik logowania debugowania</translation>
     </message>
     <message>
         <source>Clear console</source>

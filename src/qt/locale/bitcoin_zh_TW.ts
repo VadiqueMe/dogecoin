@@ -1569,10 +1569,6 @@
         <translation>使用者代理</translation>
     </message>
     <message>
-        <source>Open the %1 debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>從目前的資料目錄下開啓 %1 的除錯紀錄檔。當紀錄檔很大時，可能會花好幾秒的時間。</translation>
-    </message>
-    <message>
         <source>Decrease font size</source>
         <translation>縮小文字</translation>
     </message>
@@ -1647,10 +1643,6 @@
     <message>
         <source>Out:</source>
         <translation>去:</translation>
-    </message>
-    <message>
-        <source>Debug log file</source>
-        <translation>除錯紀錄檔</translation>
     </message>
     <message>
         <source>Clear console</source>

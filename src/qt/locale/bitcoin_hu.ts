@@ -929,10 +929,6 @@
         <translation>Ki:</translation>
     </message>
     <message>
-        <source>Debug log file</source>
-        <translation>Debug naplófájl</translation>
-    </message>
-    <message>
         <source>Clear console</source>
         <translation>Konzol törlése</translation>
     </message>

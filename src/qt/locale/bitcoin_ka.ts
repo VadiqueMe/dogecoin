@@ -743,10 +743,6 @@
         <translation>გამავალი:</translation>
     </message>
     <message>
-        <source>Debug log file</source>
-        <translation>დახვეწის ლოგ-ფაილი</translation>
-    </message>
-    <message>
         <source>Clear console</source>
         <translation>კონსოლის გასუფთავება</translation>
     </message>

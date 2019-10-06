@@ -1569,10 +1569,6 @@
         <translation>유저 에이전트</translation>
     </message>
     <message>
-        <source>Open the %1 debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>%1 디버그 로그파일을 현재 데이터 폴더에서 엽니다. 용량이 큰 로그 파일들은 몇 초가 걸릴 수 있습니다.</translation>
-    </message>
-    <message>
         <source>Decrease font size</source>
         <translation>글자 크기 축소</translation>
     </message>
@@ -1647,10 +1643,6 @@
     <message>
         <source>Out:</source>
         <translation>Out:</translation>
-    </message>
-    <message>
-        <source>Debug log file</source>
-        <translation>로그 파일 디버그</translation>
     </message>
     <message>
         <source>Clear console</source>

@@ -715,10 +715,6 @@
         <translation>Fuera:</translation>
     </message>
     <message>
-        <source>Debug log file</source>
-        <translation>Archivo de registro de depuración</translation>
-    </message>
-    <message>
         <source>Clear console</source>
         <translation>Borrar consola</translation>
     </message>

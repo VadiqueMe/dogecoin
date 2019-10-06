@@ -14,6 +14,8 @@
 #include <QCompleter>
 #include <QThread>
 
+#include <QFileSystemWatcher>
+
 class ClientModel;
 class PlatformStyle;
 class RPCTimerInterface;
@@ -65,8 +67,10 @@ protected:
 private Q_SLOTS:
     void on_lineEdit_returnPressed();
     void on_tabWidget_currentChanged(int index);
+    void onFileChange( const QString & whatsChanged ) ;
+    void logFileChanged() ;
     /** open the debug log from the current datadir */
-    void on_openDebugLogfileButton_clicked() ;
+    void on_openDebugLogButton_clicked() ;
     /** change the time range of the network traffic graph */
     void on_sldGraphRange_valueChanged(int value);
     /** update traffic statistics */
@@ -154,6 +158,9 @@ private:
     int consoleFontSize;
     QCompleter *autoCompleter;
     QThread thread;
+
+    QString pathToLogFile ;
+    QFileSystemWatcher logFileWatcher ;
 
     quint64 resetBytesRecv ;
     quint64 resetBytesSent ;

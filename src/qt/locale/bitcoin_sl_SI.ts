@@ -1025,10 +1025,6 @@
         <translation>Odhodnih:</translation>
     </message>
     <message>
-        <source>Debug log file</source>
-        <translation>Razhroščevalni dnevnik</translation>
-    </message>
-    <message>
         <source>Clear console</source>
         <translation>Počisti konzolo</translation>
     </message>

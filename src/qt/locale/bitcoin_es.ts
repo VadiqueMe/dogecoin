@@ -1569,10 +1569,6 @@
         <translation>User Agent</translation>
     </message>
     <message>
-        <source>Open the %1 debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Abrir el archivo de depuración %1 desde el directorio de datos actual. Puede tardar unos segundos para ficheros de gran tamaño.</translation>
-    </message>
-    <message>
         <source>Decrease font size</source>
         <translation>Disminuir tamaño de letra</translation>
     </message>
@@ -1647,10 +1643,6 @@
     <message>
         <source>Out:</source>
         <translation>Saliente:</translation>
-    </message>
-    <message>
-        <source>Debug log file</source>
-        <translation>Archivo de registro de depuración</translation>
     </message>
     <message>
         <source>Clear console</source>

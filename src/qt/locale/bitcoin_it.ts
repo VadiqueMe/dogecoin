@@ -1486,10 +1486,6 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
         <translation>User Agent</translation>
     </message>
     <message>
-        <source>Open the %1 debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Apri il file log del debug di %1 dalla cartella dati attuale. Può richiedere alcuni secondi per file di log di grandi dimensioni.</translation>
-    </message>
-    <message>
         <source>Decrease font size</source>
         <translation>Riduci dimensioni font.</translation>
     </message>
@@ -1560,10 +1556,6 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
     <message>
         <source>Out:</source>
         <translation>Uscita:</translation>
-    </message>
-    <message>
-        <source>Debug log file</source>
-        <translation>File log del Debug</translation>
     </message>
     <message>
         <source>Clear console</source>

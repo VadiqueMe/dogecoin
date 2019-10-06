@@ -671,10 +671,6 @@
         <translation>Fóra:</translation>
     </message>
     <message>
-        <source>Debug log file</source>
-        <translation>Arquivo de log de depuración</translation>
-    </message>
-    <message>
         <source>Clear console</source>
         <translation>Limpar consola</translation>
     </message>

@@ -1569,10 +1569,6 @@
         <translation>Kullanıcı Yazılımı</translation>
     </message>
     <message>
-        <source>Open the %1 debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Güncel veri klasöründen %1 hata ayıklama kütük dosyasını açar. Büyük kütük dosyaları için bu birkaç saniye alabilir.</translation>
-    </message>
-    <message>
         <source>Decrease font size</source>
         <translation>Font boyutunu küçült</translation>
     </message>
@@ -1647,10 +1643,6 @@
     <message>
         <source>Out:</source>
         <translation>Dışarı:</translation>
-    </message>
-    <message>
-        <source>Debug log file</source>
-        <translation>Hata ayıklama kütük dosyası</translation>
     </message>
     <message>
         <source>Clear console</source>

@@ -647,10 +647,6 @@
         <translation>Išvalyti</translation>
     </message>
     <message>
-        <source>Debug log file</source>
-        <translation>Derinimo žurnalo failas</translation>
-    </message>
-    <message>
         <source>Clear console</source>
         <translation>Išvalyti konsolę</translation>
     </message>

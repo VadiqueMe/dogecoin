@@ -1297,10 +1297,6 @@
         <translation>Изходящи</translation>
     </message>
     <message>
-        <source>Debug log file</source>
-        <translation>Лог файл,съдържащ грешките</translation>
-    </message>
-    <message>
         <source>Clear console</source>
         <translation>Изчисти конзолата</translation>
     </message>
