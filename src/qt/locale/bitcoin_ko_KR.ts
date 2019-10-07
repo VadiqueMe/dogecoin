@@ -2254,8 +2254,8 @@
         <translation>%1이 종료 중입니다...</translation>
     </message>
     <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation>이 창이 사라지기 전까지 컴퓨터를 끄지 마세요.</translation>
+        <source>Do not shut down the computer until this window disappears</source>
+        <translation>이 창이 사라지기 전까지 컴퓨터를 끄지 마세요</translation>
     </message>
 </context>
 <context>

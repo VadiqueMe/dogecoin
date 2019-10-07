@@ -2250,8 +2250,8 @@
         <translation>%1 está desligando...</translation>
     </message>
     <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation>Não desligue o computador até que esta janela desapareça.</translation>
+        <source>Do not shut down the computer until this window disappears</source>
+        <translation>Não desligue o computador até que esta janela desapareça</translation>
     </message>
 </context>
 <context>

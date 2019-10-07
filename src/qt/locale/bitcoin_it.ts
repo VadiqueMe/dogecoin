@@ -2095,8 +2095,8 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
         <translation>Arresto di %1 in corso...</translation>
     </message>
     <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation>Non spegnere il computer fino a quando questa finestra non si sarà chiusa.</translation>
+        <source>Do not shut down the computer until this window disappears</source>
+        <translation>Non spegnere il computer fino a quando questa finestra non si sarà chiusa</translation>
     </message>
 </context>
 <context>

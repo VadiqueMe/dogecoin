@@ -2254,8 +2254,8 @@
         <translation>%1 lukker ned…</translation>
     </message>
     <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation>Luk ikke computeren ned, før dette vindue forsvinder.</translation>
+        <source>Do not shut down the computer until this window disappears</source>
+        <translation>Luk ikke computeren ned, før dette vindue forsvinder</translation>
     </message>
 </context>
 <context>

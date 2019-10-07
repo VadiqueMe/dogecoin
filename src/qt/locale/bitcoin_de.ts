@@ -2250,8 +2250,8 @@
         <translation>%1 wird beendet...</translation>
     </message>
     <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation>Fahren Sie den Computer nicht herunter, bevor dieses Fenster verschwindet.</translation>
+        <source>Do not shut down the computer until this window disappears</source>
+        <translation>Fahren Sie den Computer nicht herunter, bevor dieses Fenster verschwindet</translation>
     </message>
 </context>
 <context>

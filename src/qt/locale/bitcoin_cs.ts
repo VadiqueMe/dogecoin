@@ -2254,8 +2254,8 @@
         <translation>%1 se ukončuje...</translation>
     </message>
     <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation>Nevypínej počítač, dokud toto okno nezmizí.</translation>
+        <source>Do not shut down the computer until this window disappears</source>
+        <translation>Nevypínej počítač, dokud toto okno nezmizí</translation>
     </message>
 </context>
 <context>

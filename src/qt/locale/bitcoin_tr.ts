@@ -2250,8 +2250,8 @@
         <translation>%1 kapanıyor...</translation>
     </message>
     <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation>Bu pencere kalkıncaya dek bilgisayarı kapatmayınız.</translation>
+        <source>Do not shut down the computer until this window disappears</source>
+        <translation>Bu pencere kalkıncaya dek bilgisayarı kapatmayınız</translation>
     </message>
 </context>
 <context>

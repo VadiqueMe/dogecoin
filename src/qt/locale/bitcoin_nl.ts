@@ -2254,8 +2254,8 @@
         <translation>%1 is aan het afsluiten...</translation>
     </message>
     <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation>Sluit de computer niet af totdat dit venster verdwenen is.</translation>
+        <source>Do not shut down the computer until this window disappears</source>
+        <translation>Sluit de computer niet af totdat dit venster verdwenen is</translation>
     </message>
 </context>
 <context>

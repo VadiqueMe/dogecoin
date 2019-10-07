@@ -1476,8 +1476,8 @@
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation>Kamu tidak dapat mematikan komputer sebelum jendela ini tertutup sendiri.</translation>
+        <source>Do not shut down the computer until this window disappears</source>
+        <translation>Kamu tidak dapat mematikan komputer sebelum jendela ini tertutup sendiri</translation>
     </message>
 </context>
 <context>

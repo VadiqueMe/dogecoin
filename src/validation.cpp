@@ -986,13 +986,13 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState& state, const C
         }
 
         // Remove conflicting transactions from the mempool
-        BOOST_FOREACH(const CTxMemPool::txiter it, allConflicting)
+        BOOST_FOREACH( const CTxMemPool::txiter it, allConflicting )
         {
-            LogPrint("mempool", "replacing tx %s with %s for %s BTC additional fees, %d delta bytes\n",
+            LogPrint( "mempool", "replacing tx %s with %s for %s DOGE additional fees, %d delta bytes\n",
                     it->GetTx().GetHash().ToString(),
                     hash.ToString(),
                     FormatMoney(nModifiedFees - nConflictingFees),
-                    (int)nSize - (int)nConflictingSize);
+                    (int)nSize - (int)nConflictingSize ) ;
             if (plTxnReplaced)
                 plTxnReplaced->push_back(it->GetSharedTx());
         }
@@ -2921,18 +2921,18 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
     return true;
 }
 
-static bool CheckIndexAgainstCheckpoint(const CBlockIndex* pindexPrev, CValidationState& state, const CChainParams& chainparams, const uint256& hash)
+static bool CheckIndexAgainstCheckpoint( const CBlockIndex* pindexPrev, CValidationState& state, const CChainParams& chainparams, const uint256& hash )
 {
-    if (*pindexPrev->phashBlock == chainparams.GetConsensus(0).hashGenesisBlock)
-        return true;
+    if ( *pindexPrev->phashBlock == chainparams.GetConsensus(0).hashGenesisBlock )
+        return true ;
 
-    int nHeight = pindexPrev->nHeight+1;
+    int nHeight = pindexPrev->nHeight + 1 ;
     // Don't accept any forks from the main chain prior to last checkpoint
-    CBlockIndex* pcheckpoint = Checkpoints::GetLastCheckpoint(chainparams.Checkpoints());
-    if (pcheckpoint && nHeight < pcheckpoint->nHeight)
-        return state.DoS(100, error("%s: forked chain older than last checkpoint (height %d)", __func__, nHeight));
+    CBlockIndex* pcheckpoint = Checkpoints::GetLastCheckpoint( chainparams.getCheckpoints() ) ;
+    if ( pcheckpoint && nHeight < pcheckpoint->nHeight )
+        return state.DoS( 100, error("%s: forked chain older than last checkpoint (height %d)", __func__, nHeight) ) ;
 
-    return true;
+    return true ;
 }
 
 bool IsWitnessEnabled(const CBlockIndex* pindexPrev, const Consensus::Params& params)

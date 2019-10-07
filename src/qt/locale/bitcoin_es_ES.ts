@@ -2150,8 +2150,8 @@
         <translation>%1 se esta cerrando...</translation>
     </message>
     <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation>No apague el equipo hasta que desaparezca esta ventana.</translation>
+        <source>Do not shut down the computer until this window disappears</source>
+        <translation>No apague el equipo hasta que desaparezca esta ventana</translation>
     </message>
 </context>
 <context>

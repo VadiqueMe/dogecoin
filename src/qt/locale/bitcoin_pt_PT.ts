@@ -1895,8 +1895,8 @@
         <translation>%1 está a encerrar...</translation>
     </message>
     <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation>Não desligue o computador enquanto esta janela não desaparecer.</translation>
+        <source>Do not shut down the computer until this window disappears</source>
+        <translation>Não desligue o computador enquanto esta janela não desaparecer</translation>
     </message>
 </context>
 <context>

@@ -2236,8 +2236,8 @@
         <translation>正在关闭 %1 ...</translation>
     </message>
     <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation>在此窗口消失前不要关闭计算机。</translation>
+        <source>Do not shut down the computer until this window disappears</source>
+        <translation>在此窗口消失前不要关闭计算机</translation>
     </message>
 </context>
 <context>

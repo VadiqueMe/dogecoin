@@ -1538,8 +1538,8 @@
         <translation>%1 sulkeutuu...</translation>
     </message>
     <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation>Älä sammuta tietokonetta ennenkuin tämä ikkuna katoaa.</translation>
+        <source>Do not shut down the computer until this window disappears</source>
+        <translation>Älä sammuta tietokonetta ennenkuin tämä ikkuna katoaa</translation>
     </message>
 </context>
 <context>

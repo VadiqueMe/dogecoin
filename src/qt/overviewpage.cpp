@@ -241,8 +241,7 @@ void OverviewPage::setWalletModel(WalletModel *model)
         connect(model, SIGNAL(notifyWatchonlyChanged(bool)), this, SLOT(updateWatchOnlyLabels(bool)));
     }
 
-    // update the display unit, to not use the default ("BTC")
-    updateDisplayUnit();
+    updateDisplayUnit() ;
 }
 
 void OverviewPage::updateDisplayUnit()

@@ -15,11 +15,11 @@
 
 namespace Checkpoints {
 
-    CBlockIndex* GetLastCheckpoint(const CCheckpointData& data)
+    CBlockIndex* GetLastCheckpoint( const CCheckpointData & data )
     {
-        const MapCheckpoints& checkpoints = data.mapCheckpoints;
+        const MapCheckpoints& checkpoints = data.mapCheckpoints ;
 
-        BOOST_REVERSE_FOREACH(const MapCheckpoints::value_type& i, checkpoints)
+        BOOST_REVERSE_FOREACH( const MapCheckpoints::value_type& i, checkpoints )
         {
             const uint256& hash = i.second;
             BlockMap::const_iterator t = mapBlockIndex.find(hash);
@@ -29,4 +29,4 @@ namespace Checkpoints {
         return NULL;
     }
 
-} // namespace Checkpoints
+}

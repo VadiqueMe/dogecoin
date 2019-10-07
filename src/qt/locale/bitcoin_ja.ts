@@ -2254,8 +2254,8 @@
         <translation>%1 をシャットダウンしています...</translation>
     </message>
     <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation>このウィンドウが消えるまでコンピュータをシャットダウンしないで下さい。</translation>
+        <source>Do not shut down the computer until this window disappears</source>
+        <translation>このウィンドウが消えるまでコンピュータをシャットダウンしないで下さい</translation>
     </message>
 </context>
 <context>

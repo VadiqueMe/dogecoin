@@ -1907,8 +1907,8 @@ Var vänlig och försök igen.</translation>
         <translation>%1 stängs av...</translation>
     </message>
     <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation>Stäng inte av datorn förrän denna ruta försvinner.</translation>
+        <source>Do not shut down the computer until this window disappears</source>
+        <translation>Stäng inte av datorn förrän denna ruta försvinner</translation>
     </message>
 </context>
 <context>

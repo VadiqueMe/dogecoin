@@ -1538,8 +1538,8 @@
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation>Не вимикайте комп’ютер до зникнення цього вікна.</translation>
+        <source>Do not shut down the computer until this window disappears</source>
+        <translation>Не вимикайте комп’ютер до зникнення цього вікна</translation>
     </message>
 </context>
 <context>

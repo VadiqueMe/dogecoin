@@ -2254,8 +2254,8 @@
         <translation>Arrêt de %1...</translation>
     </message>
     <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation>Ne pas éteindre l'ordinateur jusqu'à la disparition de cette fenêtre.</translation>
+        <source>Do not shut down the computer until this window disappears</source>
+        <translation>Ne pas éteindre l'ordinateur jusqu'à la disparition de cette fenêtre</translation>
     </message>
 </context>
 <context>

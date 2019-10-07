@@ -1146,8 +1146,8 @@
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation>Ne sistemfermu ĝis ĉi tiu fenestro malaperas.</translation>
+        <source>Do not shut down the computer until this window disappears</source>
+        <translation>Ne sistemfermu ĝis ĉi tiu fenestro malaperas</translation>
     </message>
 </context>
 <context>

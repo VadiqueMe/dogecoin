@@ -1378,8 +1378,8 @@
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation>Μην απενεργοποιήσετε τον υπολογιστή μέχρι να κλείσει αυτό το παράθυρο.</translation>
+        <source>Do not shut down the computer until this window disappears</source>
+        <translation>Μην απενεργοποιήσετε τον υπολογιστή μέχρι να κλείσει αυτό το παράθυρο</translation>
     </message>
 </context>
 <context>

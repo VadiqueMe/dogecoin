@@ -2254,8 +2254,8 @@
         <translation>%1 выключается...</translation>
     </message>
     <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation>Не выключайте компьютер, пока это окно не исчезнет.</translation>
+        <source>Do not shut down the computer until this window disappears</source>
+        <translation>Не выключайте компьютер, пока это окно не исчезнет</translation>
     </message>
 </context>
 <context>

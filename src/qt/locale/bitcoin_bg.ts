@@ -1730,8 +1730,8 @@
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation>Не изключвайте компютъра докато този прозорец не изчезне.</translation>
+        <source>Do not shut down the computer until this window disappears</source>
+        <translation>Не изключвайте компютъра докато този прозорец не изчезне</translation>
     </message>
 </context>
 <context>

@@ -3171,7 +3171,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+1"/>
-        <source>Do not shut down the computer until this window disappears.</source>
+        <source>Do not shut down the computer until this window disappears</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

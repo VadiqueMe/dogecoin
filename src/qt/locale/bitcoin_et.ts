@@ -1378,8 +1378,8 @@
         <translation>%1 lülitub välja...</translation>
     </message>
     <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation>Ära lülita arvutit välja ennem kui see aken on kadunud.</translation>
+        <source>Do not shut down the computer until this window disappears</source>
+        <translation>Ära lülita arvutit välja ennem kui see aken on kadunud</translation>
     </message>
 </context>
 <context>

@@ -1016,8 +1016,8 @@
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation>არ გამორთოთ კომპიუტერი ამ ფანჯრის გაქრობამდე.</translation>
+        <source>Do not shut down the computer until this window disappears</source>
+        <translation>არ გამორთოთ კომპიუტერი ამ ფანჯრის გაქრობამდე</translation>
     </message>
 </context>
 <context>

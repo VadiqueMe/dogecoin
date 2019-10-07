@@ -2114,8 +2114,8 @@
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation>No apagueu l'ordinador fins que no desaparegui aquesta finestra.</translation>
+        <source>Do not shut down the computer until this window disappears</source>
+        <translation>No apagueu l'ordinador fins que no desaparegui aquesta finestra</translation>
     </message>
 </context>
 <context>

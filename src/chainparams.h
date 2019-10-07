@@ -24,11 +24,11 @@ struct SeedSpec6 {
     uint16_t port;
 };
 
-typedef std::map<int, uint256> MapCheckpoints;
+typedef std::map < int, uint256 > MapCheckpoints ;
 
 struct CCheckpointData {
-    MapCheckpoints mapCheckpoints;
-};
+    MapCheckpoints mapCheckpoints ;
+} ;
 
 struct ChainTxData {
     int64_t nTime;
@@ -79,8 +79,8 @@ public:
     const std::vector<CDNSSeedData>& DNSSeeds() const { return vSeeds; }
     const std::vector<unsigned char>& Base58Prefix(Base58Type type) const { return base58Prefixes[type]; }
     const std::vector<SeedSpec6>& FixedSeeds() const { return vFixedSeeds; }
-    const CCheckpointData& Checkpoints() const { return checkpointData; }
-    const ChainTxData& TxData() const { return chainTxData; }
+    const CCheckpointData& getCheckpoints() const { return checkpointData ; }
+    const ChainTxData& TxData() const { return chainTxData ; }
 
 protected:
     CChainParams() {}
@@ -101,8 +101,8 @@ protected:
     bool fDefaultConsistencyChecks;
     bool fRequireStandard;
     bool fMineBlocksOnDemand;
-    CCheckpointData checkpointData;
-    ChainTxData chainTxData;
+    CCheckpointData checkpointData ;
+    ChainTxData chainTxData ;
 };
 
 /**

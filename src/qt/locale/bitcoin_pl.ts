@@ -2062,8 +2062,8 @@
         <translation>%1 się zamyka...</translation>
     </message>
     <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation>Nie wyłączaj komputera dopóki to okno nie zniknie.</translation>
+        <source>Do not shut down the computer until this window disappears</source>
+        <translation>Nie wyłączaj komputera dopóki to okno nie zniknie</translation>
     </message>
 </context>
 <context>
