@@ -421,10 +421,9 @@ bool GetBoolArg(const std::string& strArg, bool fDefault)
 bool SoftSetArg(const std::string& strArg, const std::string& strValue)
 {
     LOCK(cs_args);
-    if (mapArgs.count(strArg))
-        return false;
+    if ( mapArgs.count(strArg) != 0 ) return false ;
     mapArgs[strArg] = strValue;
-    return true;
+    return true ;
 }
 
 bool SoftSetBoolArg(const std::string& strArg, bool fValue)

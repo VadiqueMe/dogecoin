@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #ifndef BITCOIN_HASH_H
 #define BITCOIN_HASH_H
@@ -17,7 +17,7 @@
 
 typedef uint256 ChainCode;
 
-/** A hasher class for Bitcoin's 256-bit hash (double SHA-256). */
+/** A hasher class for Bitcoin's 256-bit hash (double SHA-256) */
 class CHash256 {
 private:
     CSHA256 sha;
@@ -41,7 +41,7 @@ public:
     }
 };
 
-/** A hasher class for Bitcoin's 160-bit hash (SHA-256 + RIPEMD-160). */
+/** A hasher class for Bitcoin's 160-bit hash (SHA-256 + RIPEMD-160) */
 class CHash160 {
 private:
     CSHA256 sha;
@@ -65,7 +65,7 @@ public:
     }
 };
 
-/** Compute the 256-bit hash of an object. */
+/** Compute the 256-bit hash of an object */
 template<typename T1>
 inline uint256 Hash(const T1 pbegin, const T1 pend)
 {
@@ -76,7 +76,7 @@ inline uint256 Hash(const T1 pbegin, const T1 pend)
     return result;
 }
 
-/** Compute the 256-bit hash of the concatenation of two objects. */
+/** Compute the 256-bit hash of the concatenation of two objects */
 template<typename T1, typename T2>
 inline uint256 Hash(const T1 p1begin, const T1 p1end,
                     const T2 p2begin, const T2 p2end) {
@@ -88,7 +88,7 @@ inline uint256 Hash(const T1 p1begin, const T1 p1end,
     return result;
 }
 
-/** Compute the 256-bit hash of the concatenation of three objects. */
+/** Compute the 256-bit hash of the concatenation of three objects */
 template<typename T1, typename T2, typename T3>
 inline uint256 Hash(const T1 p1begin, const T1 p1end,
                     const T2 p2begin, const T2 p2end,
@@ -102,7 +102,7 @@ inline uint256 Hash(const T1 p1begin, const T1 p1end,
     return result;
 }
 
-/** Compute the 160-bit hash an object. */
+/** Compute the 160-bit hash an object */
 template<typename T1>
 inline uint160 Hash160(const T1 pbegin, const T1 pend)
 {
@@ -113,20 +113,20 @@ inline uint160 Hash160(const T1 pbegin, const T1 pend)
     return result;
 }
 
-/** Compute the 160-bit hash of a vector. */
+/** Compute the 160-bit hash of a vector */
 inline uint160 Hash160(const std::vector<unsigned char>& vch)
 {
     return Hash160(vch.begin(), vch.end());
 }
 
-/** Compute the 160-bit hash of a vector. */
+/** Compute the 160-bit hash of a vector */
 template<unsigned int N>
 inline uint160 Hash160(const prevector<N, unsigned char>& vch)
 {
     return Hash160(vch.begin(), vch.end());
 }
 
-/** A writer stream (for serialization) that computes a 256-bit hash. */
+/** A writer stream (for serialization) that computes a 256-bit hash */
 class CHashWriter
 {
 private:
@@ -160,7 +160,7 @@ public:
     }
 };
 
-/** Compute the 256-bit hash of an object's serialization. */
+/** Compute the 256-bit hash of an object's serialization */
 template<typename T>
 uint256 SerializeHash(const T& obj, int nType=SER_GETHASH, int nVersion=PROTOCOL_VERSION)
 {
@@ -186,16 +186,16 @@ public:
     CSipHasher(uint64_t k0, uint64_t k1);
     /** Hash a 64-bit integer worth of data
      *  It is treated as if this was the little-endian interpretation of 8 bytes.
-     *  This function can only be used when a multiple of 8 bytes have been written so far.
+     *  This function can only be used when a multiple of 8 bytes have been written so far
      */
     CSipHasher& Write(uint64_t data);
-    /** Hash arbitrary bytes. */
+    /** Hash arbitrary bytes */
     CSipHasher& Write(const unsigned char* data, size_t size);
-    /** Compute the 64-bit SipHash-2-4 of the data written so far. The object remains untouched. */
+    /** Compute the 64-bit SipHash-2-4 of the data written so far, the object remains untouched */
     uint64_t Finalize() const;
 };
 
-/** Optimized SipHash-2-4 implementation for uint256.
+/** Optimized SipHash-2-4 implementation for uint256
  *
  *  It is identical to:
  *    SipHasher(k0, k1)

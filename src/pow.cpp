@@ -29,7 +29,7 @@ bool AllowMinDifficultyForBlock(const CBlockIndex* pindexLast, const CBlockHeade
     return (pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing*2);
 }
 
-unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
+unsigned int GetNextWorkRequired( const CBlockIndex * pindexLast, const CBlockHeader * pblock, const Consensus::Params & params )
 {
     unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
 
@@ -56,8 +56,8 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
         if (params.fPowAllowMinDifficultyBlocks)
         {
             // Special difficulty rule for testnet:
-            // If the new block's timestamp is more than 2* 10 minutes
-            // then allow mining of a min-difficulty block.
+            // If the new block's timestamp is more than 2*10 minutes
+            // then allow mining of a min-difficulty block
             if (pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing*2)
                 return nProofOfWorkLimit;
             else
@@ -74,9 +74,9 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 
     // Litecoin: This fixes an issue where a 51% attack can change difficulty at will.
     // Go back the full period unless it's the first retarget after genesis. Code courtesy of Art Forz
-    int blockstogoback = difficultyAdjustmentInterval-1;
-    if ((pindexLast->nHeight+1) != difficultyAdjustmentInterval)
-        blockstogoback = difficultyAdjustmentInterval;
+    int blockstogoback = difficultyAdjustmentInterval - 1 ;
+    if ( ( pindexLast->nHeight + 1 ) != difficultyAdjustmentInterval )
+        blockstogoback = difficultyAdjustmentInterval ;
 
     // Go back by what we want to be 14 days worth of blocks
     int nHeightFirst = pindexLast->nHeight - blockstogoback;
@@ -84,10 +84,10 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
     const CBlockIndex* pindexFirst = pindexLast->GetAncestor(nHeightFirst);
     assert(pindexFirst);
 
-    return CalculateDogecoinNextWorkRequired(pindexLast, pindexFirst->GetBlockTime(), params);
+    return CalculateDogecoinNextWorkRequired( pindexLast, pindexFirst->GetBlockTime(), params ) ;
 }
 
-unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nFirstBlockTime, const Consensus::Params& params)
+/* unsigned int CalculateNextWorkRequired( const CBlockIndex * pindexLast, int64_t nFirstBlockTime, const Consensus::Params & params )
 {
     if (params.fPowNoRetargeting)
         return pindexLast->nBits;
@@ -110,7 +110,7 @@ unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nF
         bnNew = bnPowLimit;
 
     return bnNew.GetCompact();
-}
+} */
 
 bool CheckProofOfWork(uint256 hash, unsigned int nBits, const Consensus::Params& params)
 {

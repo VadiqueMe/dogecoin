@@ -812,7 +812,8 @@ public:
         }
     }
 
-    void GetScriptForMining(boost::shared_ptr<CReserveScript> &script) override;
+    void GetScriptForMining( std::shared_ptr < CReserveScript > & script ) override ;
+
     void ResetRequestCount(const uint256 &hash) override
     {
         LOCK(cs_wallet);

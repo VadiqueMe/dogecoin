@@ -25,13 +25,15 @@ public:
 
 /**
  * Specifiy a (method, idx, name) here if the argument is a non-string RPC
- * argument and needs to be converted from JSON.
+ * argument and needs to be converted from JSON
  *
- * @note Parameter indexes start from 0.
+ * @note Parameter indexes start from 0
  */
 static const CRPCConvertParam vRPCConvertParams[] =
 {
     { "setmocktime", 0, "timestamp" },
+    { "setgenerate", 0, "generate" },
+    { "setgenerate", 1, "genproclimit" },
     { "generate", 0, "nblocks" },
     { "generate", 1, "maxtries" },
     { "generatetoaddress", 0, "nblocks" },
@@ -129,7 +131,7 @@ static const CRPCConvertParam vRPCConvertParams[] =
     { "echojson", 7, "arg7" },
     { "echojson", 8, "arg8" },
     { "echojson", 9, "arg9" },
-};
+} ;
 
 class CRPCConvertTable
 {

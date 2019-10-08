@@ -22,6 +22,9 @@ class CWallet;
 
 namespace Consensus { struct Params; };
 
+static const bool DEFAULT_GENERATE = false ;
+static const int DEFAULT_GENERATE_THREADS = 1 ;
+
 static const bool DEFAULT_PRINTPRIORITY = false;
 
 struct CBlockTemplate
@@ -130,6 +133,9 @@ struct update_for_parent_inclusion
     CTxMemPool::txiter iter;
 };
 
+/** Run the miner threads */
+void GenerateDogecoins( bool fGenerate, int nThreads, const CChainParams & chainparams ) ;
+
 /** Generate a new block, without valid proof-of-work */
 class BlockAssembler
 {
@@ -163,9 +169,9 @@ private:
     bool blockFinished;
 
 public:
-    BlockAssembler(const CChainParams& chainparams);
+    BlockAssembler( const CChainParams & chainparams ) ;
     /** Construct a new block template with coinbase to scriptPubKeyIn */
-    std::unique_ptr<CBlockTemplate> CreateNewBlock(const CScript& scriptPubKeyIn, bool fMineWitnessTx);
+    std::unique_ptr< CBlockTemplate > CreateNewBlock( const CScript & scriptPubKeyIn, bool fMineWitnessTx = false ) ;
 
 private:
     // utility functions

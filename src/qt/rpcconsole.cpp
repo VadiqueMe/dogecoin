@@ -427,6 +427,9 @@ RPCConsole::RPCConsole(const PlatformStyle *_platformStyle, QWidget *parent) :
     ui->setupUi(this);
     GUIUtil::restoreWindowGeometry("nRPCConsoleWindow", this->size(), this);
 
+    ui->debugLogTextArea->setLineWrapMode( QPlainTextEdit::WidgetWidth ) ; // QPlainTextEdit::NoWrap
+    ui->debugLogTextArea->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff ) ; // Qt::ScrollBarAlwaysOn
+
     if ( platformStyle->getImagesOnButtons() )
         ui->openDebugLogButton->setIcon( platformStyle->SingleColorIcon( ":/icons/export" ) ) ;
 

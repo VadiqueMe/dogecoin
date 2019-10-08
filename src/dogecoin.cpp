@@ -37,7 +37,7 @@ bool AllowDigishieldMinDifficultyForBlock(const CBlockIndex* pindexLast, const C
     return (pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing*2);
 }
 
-unsigned int CalculateDogecoinNextWorkRequired(const CBlockIndex* pindexLast, int64_t nFirstBlockTime, const Consensus::Params& params)
+unsigned int CalculateDogecoinNextWorkRequired( const CBlockIndex * pindexLast, int64_t nFirstBlockTime, const Consensus::Params & params )
 {
     int nHeight = pindexLast->nHeight + 1;
     const int64_t retargetTimespan = params.nPowTargetTimespan;
@@ -71,18 +71,16 @@ unsigned int CalculateDogecoinNextWorkRequired(const CBlockIndex* pindexLast, in
         nModulatedTimespan = nMaxTimespan;
 
     // Retarget
-    const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
-    arith_uint256 bnNew;
-    arith_uint256 bnOld;
-    bnNew.SetCompact(pindexLast->nBits);
-    bnOld = bnNew;
-    bnNew *= nModulatedTimespan;
-    bnNew /= retargetTimespan;
+    arith_uint256 bnOld ;
+    bnOld.SetCompact( pindexLast->nBits ) ;
+    arith_uint256 bnNew = bnOld ;
+    bnNew *= nModulatedTimespan ;
+    bnNew /= retargetTimespan ;
 
-    if (bnNew > bnPowLimit)
-        bnNew = bnPowLimit;
+    const arith_uint256 lowerPowLimit = UintToArith256( params.powLimit ) ;
+    if ( bnNew > lowerPowLimit ) bnNew = lowerPowLimit ;
 
-    return bnNew.GetCompact();
+    return bnNew.GetCompact() ;
 }
 
 bool CheckAuxPowProofOfWork(const CBlockHeader& block, const Consensus::Params& params)
@@ -97,11 +95,10 @@ bool CheckAuxPowProofOfWork(const CBlockHeader& block, const Consensus::Params& 
                      __func__, block.GetChainId(),
                      params.nAuxpowChainId, block.nVersion);
 
-    /* If there is no auxpow, just check the block hash.  */
-    if (!block.auxpow) {
+    /* If there is no auxpow, just check the block hash */
+    if ( ! block.auxpow ) {
         if (block.IsAuxpow())
-            return error("%s : no auxpow on block with auxpow version",
-                         __func__);
+            return error("%s : no auxpow on block with auxpow version", __func__);
 
         if (!CheckProofOfWork(block.GetPoWHash(), block.nBits, params))
             return error("%s : non-AUX proof of work failed", __func__);

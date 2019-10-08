@@ -162,6 +162,12 @@ public:
 
     void PushMessage(CNode* pnode, CSerializedNetMsg&& msg);
 
+    bool hasConnectedNodes()
+    {
+        LOCK(cs_vNodes) ;
+        return ! vNodes.empty() ;
+    }
+
     template<typename Callable>
     void ForEachNode(Callable&& func)
     {
@@ -287,7 +293,9 @@ public:
     unsigned int GetReceiveFloodSize() const;
 
     void WakeMessageHandler();
+
 private:
+
     struct ListenSocket {
         SOCKET socket;
         bool whitelisted;

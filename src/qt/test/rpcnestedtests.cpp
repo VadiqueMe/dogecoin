@@ -77,21 +77,22 @@ void RPCNestedTests::rpcNestedTests()
     RPCConsole::RPCExecuteCommandLine(result, "getblockchaininfo()");
     QVERIFY(result.substr(0,1) == "{");
 
-    RPCConsole::RPCExecuteCommandLine(result, "getblockchaininfo "); //whitespace at the end will be tolerated
+    RPCConsole::RPCExecuteCommandLine(result, "getblockchaininfo "); //whitespace at the end is okay
     QVERIFY(result.substr(0,1) == "{");
 
-    (RPCConsole::RPCExecuteCommandLine(result, "getblockchaininfo()[\"chain\"]")); //Quote path identifier are allowed, but look after a child contaning the quotes in the key
+    (RPCConsole::RPCExecuteCommandLine(result, "getblockchaininfo()[\"chain\"]")); //quote path identifier is okay, but look after a child contaning the quotes in the key
     QVERIFY(result == "null");
 
-    (RPCConsole::RPCExecuteCommandLine(result, "createrawtransaction [] {} 0")); //parameter not in brackets are allowed
-    (RPCConsole::RPCExecuteCommandLine(result2, "createrawtransaction([],{},0)")); //parameter in brackets are allowed
+    (RPCConsole::RPCExecuteCommandLine(result, "createrawtransaction [] {} 0")); //parameter not in brackets is okay
+    (RPCConsole::RPCExecuteCommandLine(result2, "createrawtransaction([],{},0)")); //parameter in brackets is okay
     QVERIFY(result == result2);
-    (RPCConsole::RPCExecuteCommandLine(result2, "createrawtransaction( [],  {} , 0   )")); //whitespace between parametres is allowed
+    (RPCConsole::RPCExecuteCommandLine(result2, "createrawtransaction( [],  {} , 0   )")); //whitespace between parameters is okay
     QVERIFY(result == result2);
 
-    RPCConsole::RPCExecuteCommandLine(result, "getblock(getbestblockhash())[tx][0]", &filtered);
-    QVERIFY(result == "4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b");
-    QVERIFY(filtered == "getblock(getbestblockhash())[tx][0]");
+    RPCConsole::RPCExecuteCommandLine( result, "getblock(getbestblockhash())[tx][0]", &filtered ) ;
+    qDebug() << "getblock(getbestblockhash())[tx][0] returned" << QString::fromStdString( result ) ;
+    QVERIFY( result == "5b2a3f53f605d62c53e62932dac6925e3d74afa5a4b459745c36d42d0ed26a69" ) ;
+    QVERIFY( filtered == "getblock(getbestblockhash())[tx][0]" ) ;
 
     RPCConsole::RPCParseCommandLine(result, "importprivkey", false, &filtered);
     QVERIFY(filtered == "importprivkey(…)");
