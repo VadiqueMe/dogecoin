@@ -19,6 +19,7 @@
 #include "sync.h"
 #include "ui_interface.h"
 #include "util.h" // for GetBoolArg
+#include "txmempool.h"
 #include "wallet/wallet.h"
 #include "wallet/walletdb.h" // for BackupWallet
 
@@ -677,19 +678,27 @@ bool WalletModel::saveReceiveRequest(const std::string &sAddress, const int64_t 
         return wallet->AddDestData(dest, key, sRequest);
 }
 
-bool WalletModel::transactionCanBeAbandoned(uint256 hash) const
+bool WalletModel::transactionCanBeAbandoned( uint256 hash ) const
 {
-    LOCK2(cs_main, wallet->cs_wallet);
-    const CWalletTx *wtx = wallet->GetWalletTx(hash);
-    if (!wtx || wtx->isAbandoned() || wtx->GetDepthInMainChain() > 0 || wtx->InMempool())
-        return false;
-    return true;
+    LOCK2( cs_main, wallet->cs_wallet ) ;
+    const CWalletTx * wtx = wallet->GetWalletTx( hash ) ;
+    if ( ! wtx || wtx->isAbandoned() || wtx->GetDepthInMainChain() > 0 )
+        return false ;
+
+    return true ;
 }
 
-bool WalletModel::abandonTransaction(uint256 hash) const
+bool WalletModel::abandonTransaction( uint256 hash ) const
 {
-    LOCK2(cs_main, wallet->cs_wallet);
-    return wallet->AbandonTransaction(hash);
+    LOCK2( cs_main, wallet->cs_wallet ) ;
+
+    if ( wallet->GetWalletTx( hash )->InMempool() )
+    {
+        LogPrintf( "WalletModel::abandonTransaction removing tx %s from mempool\n", hash.GetHex() ) ;
+        mempool.removeRecursive( mempool.getTxByHash( hash ) );
+    }
+
+    return wallet->AbandonTransaction( hash ) ;
 }
 
 bool WalletModel::isWalletEnabled()

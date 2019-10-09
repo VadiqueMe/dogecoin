@@ -286,8 +286,8 @@ public:
     const uint32_t nLockTime;
 
 private:
-    /** Memory only. */
-    const uint256 hash;
+    /** Memory only */
+    const uint256 hash ;
 
     uint256 ComputeHash() const;
 

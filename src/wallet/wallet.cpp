@@ -1064,7 +1064,7 @@ bool CWallet::AddToWalletIfInvolvingMe(const CTransaction& tx, const CBlockIndex
     return false;
 }
 
-bool CWallet::AbandonTransaction(const uint256& hashTx)
+bool CWallet::AbandonTransaction( const uint256& hashTx )
 {
     LOCK2(cs_main, cs_wallet);
 
@@ -1074,10 +1074,10 @@ bool CWallet::AbandonTransaction(const uint256& hashTx)
     std::set<uint256> done;
 
     // Can't mark abandoned if confirmed or in mempool
-    assert(mapWallet.count(hashTx));
-    CWalletTx& origtx = mapWallet[hashTx];
-    if (origtx.GetDepthInMainChain() > 0 || origtx.InMempool()) {
-        return false;
+    assert( mapWallet.count( hashTx ) ) ;
+    CWalletTx & origtx = mapWallet[ hashTx ] ;
+    if ( origtx.GetDepthInMainChain() > 0 || origtx.InMempool() ) {
+        return false ;
     }
 
     todo.insert(hashTx);
@@ -1823,11 +1823,8 @@ CAmount CWalletTx::GetChange() const
 
 bool CWalletTx::InMempool() const
 {
-    LOCK(mempool.cs);
-    if (mempool.exists(GetHash())) {
-        return true;
-    }
-    return false;
+    LOCK( mempool.cs ) ;
+    return mempool.exists( GetHash() ) ;
 }
 
 bool CWalletTx::IsTrusted() const
@@ -1843,9 +1840,8 @@ bool CWalletTx::IsTrusted() const
     if (!bSpendZeroConfChange || !IsFromMe(ISMINE_ALL)) // using wtx's cached debit
         return false;
 
-    // Don't trust unconfirmed transactions from us unless they are in the mempool.
-    if (!InMempool())
-        return false;
+    // Don't trust unconfirmed transactions from us unless they are in the mempool
+    if ( ! InMempool() ) return false ;
 
     // Trusted if all inputs are from us and are in the mempool:
     BOOST_FOREACH(const CTxIn& txin, tx->vin)

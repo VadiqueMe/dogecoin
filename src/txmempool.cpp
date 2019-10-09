@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "txmempool.h"
 
@@ -367,6 +367,16 @@ CTxMemPool::~CTxMemPool()
     delete minerPolicyEstimator;
 }
 
+const CTransaction & CTxMemPool::getTxByHash( uint256 hash )
+{
+    LOCK( cs ) ;
+    txiter it = mapTx.find( hash ) ;
+    if ( it == mapTx.end() )
+        throw std::runtime_error( "no transaction " + hash.GetHex() + " in mempool" ) ;
+
+    return ( *it ).GetTx() ;
+}
+
 void CTxMemPool::pruneSpent(const uint256 &hashTx, CCoins &coins)
 {
     LOCK(cs);
@@ -505,7 +515,7 @@ void CTxMemPool::CalculateDescendants(txiter entryit, setEntries &setDescendants
     }
 }
 
-void CTxMemPool::removeRecursive(const CTransaction &origTx, MemPoolRemovalReason reason)
+void CTxMemPool::removeRecursive( const CTransaction & origTx, MemPoolRemovalReason reason )
 {
     // Remove transaction from memory pool
     {

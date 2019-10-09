@@ -371,7 +371,7 @@ void TransactionView::contextualMenu(const QPoint &point)
     // check if transaction can be abandoned, disable context menu action in case it doesn't
     uint256 hash;
     hash.SetHex(selection.at(0).data(TransactionTableModel::TxHashRole).toString().toStdString());
-    abandonAction->setEnabled(model->transactionCanBeAbandoned(hash));
+    abandonAction->setEnabled( model->transactionCanBeAbandoned( hash ) ) ;
 
     if(index.isValid())
     {

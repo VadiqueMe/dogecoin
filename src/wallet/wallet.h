@@ -341,8 +341,8 @@ public:
     // True if only scriptSigs are different
     bool IsEquivalentTo(const CWalletTx& tx) const;
 
-    bool InMempool() const;
-    bool IsTrusted() const;
+    bool InMempool() const ;
+    bool IsTrusted() const ;
 
     int64_t GetTxTime() const;
     int GetRequestCount() const;
