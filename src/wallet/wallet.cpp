@@ -2431,9 +2431,9 @@ bool CWallet::CreateTransaction(const vector<CRecipient>& vecSend, CWalletTx& wt
             std::vector<COutput> vAvailableCoins;
             AvailableCoins(vAvailableCoins, true, coinControl);
 
-            nFeeRet = 0;
-            // Start with no fee and loop until there is enough fee
-            while (true)
+            nFeeRet = 0 ;
+            // begin with no fee and loop until there is enough fee
+            while ( true )
             {
                 nChangePosInOut = nChangePosRequest;
                 txNew.vin.clear();
@@ -2503,10 +2503,7 @@ bool CWallet::CreateTransaction(const vector<CRecipient>& vecSend, CWalletTx& wt
                     {
                         // Note: We use a new key here to keep it from being obvious which side is the change.
                         //  The drawback is that by not reusing a previous key, the change may be lost if a
-                        //  backup is restored, if the backup doesn't have the new private key for the change.
-                        //  If we reused the old key, it would be possible to add code to look for and
-                        //  rediscover unknown transactions that were written with keys of ours to recover
-                        //  post-backup change.
+                        //  backup is restored, if the backup doesn't have the new private key for the change
 
                         // Reserve a new key pair from key pool
                         CPubKey vchPubKey;
@@ -2580,11 +2577,11 @@ bool CWallet::CreateTransaction(const vector<CRecipient>& vecSend, CWalletTx& wt
                     currentConfirmationTarget = coinControl->nConfirmTarget;
 
                 // Can we complete this as a free transaction?
-                if (fSendFreeTransactions && nBytes <= MAX_FREE_TRANSACTION_CREATE_SIZE)
+                if ( fSendFreeTransactions && nBytes <= MAX_FREE_TRANSACTION_CREATE_SIZE )
                 {
                     // Require at least hard-coded AllowFree
                     if ( AllowFree(dPriority) )
-                        break;
+                        break ;
                 }
 
                 CAmount nFeeNeeded = GetMinimumFee(txNew, nBytes, currentConfirmationTarget, mempool);
@@ -2594,32 +2591,19 @@ bool CWallet::CreateTransaction(const vector<CRecipient>& vecSend, CWalletTx& wt
                 if (coinControl && coinControl->fOverrideFeeRate)
                     nFeeNeeded = coinControl->nFeeRate.GetFee(nBytes);
 
-                // If we made it here and we aren't even able to meet the relay fee on the next pass, give up
-                // because we must be at the maximum allowed fee.
-                if (nFeeNeeded < ::minRelayTxFee.GetFee(nBytes))
-                {
-                    strFailReason = _("Transaction too large for fee policy");
-                    return false;
-                }
-
-                if (nFeeRet >= nFeeNeeded) {
-                    // Reduce fee to only the needed amount if we have change
-                    // output to increase.  This prevents potential overpayment
-                    // in fees if the coins selected to meet nFeeNeeded result
-                    // in a transaction that requires less fee than the prior
-                    // iteration.
+                if ( nFeeRet >= nFeeNeeded ) {
                     // TODO: The case where nSubtractFeeFromAmount > 0 remains
                     // to be addressed because it requires returning the fee to
-                    // the payees and not the change output.
+                    // the payees and not the change output
                     // TODO: The case where there is no change output remains
-                    // to be addressed so we avoid creating too small an output.
+                    // to be addressed to avoid creating too small output
                     if (nFeeRet > nFeeNeeded && nChangePosInOut != -1 && nSubtractFeeFromAmount == 0) {
                         CAmount extraFeePaid = nFeeRet - nFeeNeeded;
                         vector<CTxOut>::iterator change_position = txNew.vout.begin()+nChangePosInOut;
                         change_position->nValue += extraFeePaid;
                         nFeeRet -= extraFeePaid;
                     }
-                    break; // Done, enough fee included.
+                    break ;
                 }
 
                 // Try to reduce change to include necessary fee

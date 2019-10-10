@@ -1770,10 +1770,6 @@
         <translation>Suma tranzacţionată este prea mică</translation>
     </message>
     <message>
-        <source>Transaction too large for fee policy</source>
-        <translation>Tranzacţie prea mare pentru politică gratis</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>Tranzacţie prea mare</translation>
     </message>

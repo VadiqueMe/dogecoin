@@ -3235,10 +3235,6 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
         <translation>Importo transazione troppo piccolo</translation>
     </message>
     <message>
-        <source>Transaction too large for fee policy</source>
-        <translation>Transazione troppo grande in base alla policy sulle commissioni</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>Transazione troppo grande</translation>
     </message>

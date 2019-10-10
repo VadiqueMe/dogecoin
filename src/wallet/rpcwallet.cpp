@@ -2881,28 +2881,11 @@ UniValue bumpfee(const JSONRPCRequest& request)
         }
     }
 
-    // Check that in all cases the new fee doesn't violate maxTxFee
-     if (nNewFee > maxTxFee) {
-         throw JSONRPCError(RPC_WALLET_ERROR,
-                            strprintf("Specified or calculated fee %s is too high (cannot be higher than maxTxFee %s)",
-                                      FormatMoney(nNewFee), FormatMoney(maxTxFee)));
-     }
-
-    // check that fee rate is higher than mempool's minimum fee
-    // (no point in bumping fee if we know that the new tx won't be accepted to the mempool)
-    // This may occur if the user set TotalFee or paytxfee too low, if fallbackfee is too low, or, perhaps,
-    // in a rare situation where the mempool minimum fee increased significantly since the fee estimation just a
-    // moment earlier. In this case, we report an error to the user, who may use totalFee to make an adjustment.
-    CFeeRate minMempoolFeeRate = mempool.GetMinFee(GetArg("-maxmempool", DEFAULT_MAX_MEMPOOL_SIZE) * 1000000);
-    if ( nNewFeeRate.GetFeePerKiloByte() < minMempoolFeeRate.GetFeePerKiloByte() )
-    {
-        throw JSONRPCError(RPC_WALLET_ERROR, strprintf(
-                "New fee rate (%s) is less than the minimum fee rate (%s) to get into the mempool. totalFee value should to be at least %s or settxfee value should be at least %s to add transaction.",
-                FormatMoney( nNewFeeRate.GetFeePerKiloByte() ),
-                FormatMoney( minMempoolFeeRate.GetFeePerKiloByte() ),
-                FormatMoney( minMempoolFeeRate.GetFee( maxNewTxSize ) ),
-                FormatMoney( minMempoolFeeRate.GetFeePerKiloByte() )
-        )) ;
+    // Check that in any case the new fee doesn't exceed maxTxFee
+    if ( nNewFee > maxTxFee ) {
+        throw JSONRPCError( RPC_WALLET_ERROR,
+                            strprintf("Fee %s is too high, it cannot be higher than maxTxFee %s",
+                            FormatMoney( nNewFee ), FormatMoney( maxTxFee )) ) ;
     }
 
     // Now modify the output to increase the fee

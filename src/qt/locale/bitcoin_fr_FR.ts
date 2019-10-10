@@ -1715,10 +1715,6 @@ Importation ...</translation>
         <translation>Montant de la transaction trop bas</translation>
     </message>
     <message>
-        <source>Transaction too large for fee policy</source>
-        <translation>Montant de la transaction trop élevé pour la politique de frais</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>Transaction trop grande</translation>
     </message>

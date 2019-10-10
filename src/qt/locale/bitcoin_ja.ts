@@ -3535,10 +3535,6 @@
         <translation>取引の額が小さ過ぎます</translation>
     </message>
     <message>
-        <source>Transaction too large for fee policy</source>
-        <translation>手数料ポリシーに対してトランザクションが大きすぎます</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>取引が大き過ぎます</translation>
     </message>

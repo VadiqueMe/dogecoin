@@ -3526,10 +3526,6 @@
         <translation>Quantidade da transação muito pequena.</translation>
     </message>
     <message>
-        <source>Transaction too large for fee policy</source>
-        <translation>Transação muito grande para enviar sem taxa</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>Transação muito larga</translation>
     </message>

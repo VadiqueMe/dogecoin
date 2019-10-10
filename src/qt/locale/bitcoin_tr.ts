@@ -3530,10 +3530,6 @@
         <translation>İşlem tutarı çok düşük</translation>
     </message>
     <message>
-        <source>Transaction too large for fee policy</source>
-        <translation>Ücret politikası için işlem çok büyük</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>İşlem çok büyük</translation>
     </message>

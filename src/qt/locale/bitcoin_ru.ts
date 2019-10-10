@@ -3530,10 +3530,6 @@
         <translation>Сумма транзакции слишком мала</translation>
     </message>
     <message>
-        <source>Transaction too large for fee policy</source>
-        <translation>Транзакция слишком большая для правил комиссии.</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>Транзакция слишком большая</translation>
     </message>

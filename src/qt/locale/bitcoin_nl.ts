@@ -3530,10 +3530,6 @@
         <translation>Transactiebedrag te klein</translation>
     </message>
     <message>
-        <source>Transaction too large for fee policy</source>
-        <translation>De transactie is te groot voor het transactiekostenbeleid</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>Transactie te groot</translation>
     </message>

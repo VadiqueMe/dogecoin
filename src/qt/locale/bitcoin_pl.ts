@@ -2863,10 +2863,6 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
         <translation>Zbyt niska kwota transakcji </translation>
     </message>
     <message>
-        <source>Transaction too large for fee policy</source>
-        <translation>Transakcja jest zbyt duża dla tej opłaty</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>Transakcja zbyt duża</translation>
     </message>

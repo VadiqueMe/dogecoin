@@ -2186,10 +2186,6 @@
         <translation>Transaksjonen er for liten</translation>
     </message>
     <message>
-        <source>Transaction too large for fee policy</source>
-        <translation>Transaksjon for stor for gebyrpolitikken</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>Transaksjonen er for stor</translation>
     </message>

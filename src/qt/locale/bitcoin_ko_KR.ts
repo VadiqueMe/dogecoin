@@ -3526,10 +3526,6 @@
         <translation>거래액이 너무 적습니다</translation>
     </message>
     <message>
-        <source>Transaction too large for fee policy</source>
-        <translation>수수료 정책에 비해 거래가 너무 큽니다</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>너무 큰 거래</translation>
     </message>

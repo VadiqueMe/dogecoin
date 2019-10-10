@@ -3357,10 +3357,6 @@
         <translation>交易量太小</translation>
     </message>
     <message>
-        <source>Transaction too large for fee policy</source>
-        <translation>费用策略的交易太大</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>交易太大</translation>
     </message>

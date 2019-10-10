@@ -3357,10 +3357,6 @@
         <translation>Cantidad de la transacción demasiado pequeña</translation>
     </message>
     <message>
-        <source>Transaction too large for fee policy</source>
-        <translation>Operación demasiado grande para la política de tasas</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>Transacción demasiado grande, intenta dividirla en varias.</translation>
     </message>

@@ -3275,35 +3275,6 @@ bool SendMessages(CNode* pto, CConnman& connman, const std::atomic<bool>& interr
             connman.PushMessage(pto, msgMaker.Make(NetMsgType::GETDATA, vGetData));
 
         //
-        // Message: feefilter
-        //
-        // We don't want white listed peers to filter txs to us if we have -whitelistforcerelay
-        if ( pto->nVersion >= FEEFILTER_VERSION && GetBoolArg( "-feefilter", DEFAULT_FEEFILTER ) &&
-            ! ( pto->fWhitelisted && GetBoolArg( "-whitelistforcerelay", DEFAULT_WHITELISTFORCERELAY ) ) ) {
-            CAmount currentFilter = mempool.GetMinFee( GetArg( "-maxmempool", DEFAULT_MAX_MEMPOOL_SIZE ) * 1000000 ).GetFeePerKiloByte() ;
-            int64_t timeNow = GetTimeMicros();
-            if (timeNow > pto->nextSendTimeFeeFilter) {
-                static CFeeRate default_feerate( DEFAULT_MIN_RELAY_TX_FEE ) ;
-                static FeeFilterRounder filterRounder( default_feerate ) ;
-                CAmount filterToSend = filterRounder.round( currentFilter ) ;
-                // If we don't allow free transactions, then we always have a fee filter of at least minRelayTxFee
-                if ( GetArg( "-limitfreerelay", DEFAULT_LIMITFREERELAY ) <= 0 )
-                    filterToSend = std::max( filterToSend, ::minRelayTxFee.GetFeePerKiloByte() ) ;
-                if (filterToSend != pto->lastSentFeeFilter) {
-                    connman.PushMessage(pto, msgMaker.Make(NetMsgType::FEEFILTER, filterToSend));
-                    pto->lastSentFeeFilter = filterToSend;
-                }
-                pto->nextSendTimeFeeFilter = PoissonNextSend(timeNow, AVG_FEEFILTER_BROADCAST_INTERVAL);
-            }
-            // If the fee filter has changed substantially and it's still more than MAX_FEEFILTER_CHANGE_DELAY
-            // until scheduled broadcast, then move the broadcast to within MAX_FEEFILTER_CHANGE_DELAY.
-            else if (timeNow + MAX_FEEFILTER_CHANGE_DELAY * 1000000 < pto->nextSendTimeFeeFilter &&
-                     (currentFilter < 3 * pto->lastSentFeeFilter / 4 || currentFilter > 4 * pto->lastSentFeeFilter / 3)) {
-                pto->nextSendTimeFeeFilter = timeNow + GetRandInt(MAX_FEEFILTER_CHANGE_DELAY) * 1000000;
-            }
-        }
-
-        //
         // Message: alert
         //
         BOOST_FOREACH(const CAlert &alert, pto->vAlertToSend) {

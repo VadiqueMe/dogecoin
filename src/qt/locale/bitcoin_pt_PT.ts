@@ -2539,10 +2539,6 @@
         <translation>Quantia da transação é muito baixa</translation>
     </message>
     <message>
-        <source>Transaction too large for fee policy</source>
-        <translation>Transacção demasiado grande para a política de taxas</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>Transação grande demais</translation>
     </message>

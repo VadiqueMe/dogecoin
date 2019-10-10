@@ -2778,10 +2778,6 @@
         <translation>Import de la transacció massa petit</translation>
     </message>
     <message>
-        <source>Transaction too large for fee policy</source>
-        <translation>Transacció massa gran per a la política de comissions</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>La transacció és massa gran</translation>
     </message>

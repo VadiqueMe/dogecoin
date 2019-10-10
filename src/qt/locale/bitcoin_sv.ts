@@ -2683,10 +2683,6 @@ Var vänlig och försök igen.</translation>
         <translation>Transaktions belopp för liten</translation>
     </message>
     <message>
-        <source>Transaction too large for fee policy</source>
-        <translation>Transaktionen är för stor för avgiftspolicyn</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>Transaktionen är för stor</translation>
     </message>
