@@ -707,24 +707,22 @@ unsigned int LimitOrphanTxSize(unsigned int nMaxOrphans) EXCLUSIVE_LOCKS_REQUIRE
     return nEvicted;
 }
 
-// Requires cs_main.
-void Misbehaving(NodeId pnode, int howmuch)
+// Requires cs_main
+void Misbehaving( NodeId pnode, int howmuch )
 {
-    if (howmuch == 0)
-        return;
+    if ( howmuch == 0 ) return ;
 
-    CNodeState *state = State(pnode);
-    if (state == NULL)
-        return;
+    CNodeState * state = State( pnode ) ;
+    if ( state == nullptr ) return ;
 
-    state->nMisbehavior += howmuch;
+    state->nMisbehavior += howmuch ;
     int banscore = GetArg("-banscore", DEFAULT_BANSCORE_THRESHOLD);
-    if (state->nMisbehavior >= banscore && state->nMisbehavior - howmuch < banscore)
+    if ( state->nMisbehavior >= banscore && state->nMisbehavior - howmuch < banscore )
     {
         LogPrintf("%s: %s peer=%d (%d -> %d) BAN THRESHOLD EXCEEDED\n", __func__, state->name, pnode, state->nMisbehavior-howmuch, state->nMisbehavior);
         state->fShouldBan = true;
     } else
-        LogPrintf("%s: %s peer=%d (%d -> %d)\n", __func__, state->name, pnode, state->nMisbehavior-howmuch, state->nMisbehavior);
+        LogPrintf("%s: %s peer=%d (%d -> %d)\n", __func__, state->name, pnode, state->nMisbehavior - howmuch, state->nMisbehavior);
 }
 
 
@@ -855,13 +853,13 @@ void PeerLogicValidation::BlockChecked(const CBlock& block, const CValidationSta
     std::map<uint256, std::pair<NodeId, bool>>::iterator it = mapBlockSource.find(hash);
 
     int nDoS = 0;
-    if (state.IsInvalid(nDoS)) {
+    if ( state.IsInvalid( nDoS ) ) {
         if (it != mapBlockSource.end() && State(it->second.first)) {
             assert (state.GetRejectCode() < REJECT_INTERNAL); // Blocks are never rejected with internal reject codes
             CBlockReject reject = {(unsigned char)state.GetRejectCode(), state.GetRejectReason().substr(0, MAX_REJECT_MESSAGE_LENGTH), hash};
             State(it->second.first)->rejects.push_back(reject);
-            if (nDoS > 0 && it->second.second)
-                Misbehaving(it->second.first, nDoS);
+            if ( nDoS > 0 && it->second.second )
+                Misbehaving( it->second.first, nDoS ) ;
         }
     }
     // Check that:
@@ -1155,9 +1153,9 @@ inline void static SendBlockTransactions(const CBlock& block, const BlockTransac
     for (size_t i = 0; i < req.indexes.size(); i++) {
         if (req.indexes[i] >= block.vtx.size()) {
             LOCK(cs_main);
-            Misbehaving(pfrom->GetId(), 100);
-            LogPrintf("Peer %d sent us a getblocktxn with out-of-bounds tx indices", pfrom->id);
-            return;
+            Misbehaving( pfrom->GetId(), 10 ) ;
+            LogPrintf( "Peer %d sent us a getblocktxn with out-of-bounds tx indices", pfrom->id ) ;
+            return ;
         }
         resp.txn[i] = block.vtx[req.indexes[i]];
     }
@@ -1181,14 +1179,13 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
               (strCommand == NetMsgType::FILTERLOAD ||
                strCommand == NetMsgType::FILTERADD))
     {
-        if (pfrom->nVersion >= NO_BLOOM_VERSION) {
+        if ( pfrom->nVersion >= NO_BLOOM_VERSION ) {
             LOCK(cs_main);
-            Misbehaving(pfrom->GetId(), 100);
-            return false;
+            Misbehaving( pfrom->GetId(), 10 ) ;
         } else {
-            pfrom->fDisconnect = true;
-            return false;
+            pfrom->fDisconnect = true ;
         }
+        return false ;
     }
 
     if (strCommand == NetMsgType::REJECT)
@@ -1221,9 +1218,9 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
         if (pfrom->nVersion != 0)
         {
             connman.PushMessage(pfrom, CNetMsgMaker(INIT_PROTO_VERSION).Make(NetMsgType::REJECT, strCommand, REJECT_DUPLICATE, std::string("Duplicate version message")));
-            LOCK(cs_main);
-            Misbehaving(pfrom->GetId(), 1);
-            return false;
+            LOCK( cs_main ) ;
+            Misbehaving( pfrom->GetId(), 1 ) ;
+            return false ;
         }
 
         int64_t nTime;
@@ -1385,12 +1382,10 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
     }
 
 
-    else if (pfrom->nVersion == 0)
+    else if ( pfrom->nVersion == 0 )
     {
-        // Must have a version message before anything else
-        LOCK(cs_main);
-        Misbehaving(pfrom->GetId(), 1);
-        return false;
+        // no version message before anything else
+        return false ;
     }
 
     // At this point, the outgoing message serialization version can't change.
@@ -1429,12 +1424,12 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
         pfrom->fSuccessfullyConnected = true;
     }
 
-    else if (!pfrom->fSuccessfullyConnected)
+    else if ( ! pfrom->fSuccessfullyConnected )
     {
-        // Must have a verack message before anything else
-        LOCK(cs_main);
-        Misbehaving(pfrom->GetId(), 1);
-        return false;
+        // need a verack message before anything else
+        LOCK( cs_main ) ;
+        Misbehaving( pfrom->GetId(), 1 ) ;
+        return false ;
     }
 
     else if (strCommand == NetMsgType::ADDR)
@@ -1447,9 +1442,9 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
             return true;
         if (vAddr.size() > 1000)
         {
-            LOCK(cs_main);
-            Misbehaving(pfrom->GetId(), 20);
-            return error("message addr size() = %u", vAddr.size());
+            LOCK( cs_main ) ;
+            Misbehaving( pfrom->GetId(), 2 ) ;
+            return error( "message addr size() = %u", vAddr.size() ) ;
         }
 
         // Store the new addresses
@@ -1520,9 +1515,9 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
         vRecv >> vInv;
         if (vInv.size() > MAX_INV_SZ)
         {
-            LOCK(cs_main);
-            Misbehaving(pfrom->GetId(), 20);
-            return error("message inv size() = %u", vInv.size());
+            LOCK( cs_main ) ;
+            Misbehaving( pfrom->GetId(), 5 ) ;
+            return error( "message inv size() = %u", vInv.size() ) ;
         }
 
         bool fBlocksOnly = !fRelayTxes;
@@ -1587,9 +1582,9 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
         vRecv >> vInv;
         if (vInv.size() > MAX_INV_SZ)
         {
-            LOCK(cs_main);
-            Misbehaving(pfrom->GetId(), 20);
-            return error("message getdata size() = %u", vInv.size());
+            LOCK( cs_main ) ;
+            Misbehaving( pfrom->GetId(), 5 ) ;
+            return error( "message getdata size() = %u", vInv.size() ) ;
         }
 
         if (fDebug || (vInv.size() != 1))
@@ -1815,7 +1810,7 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
                 mempool.size(), mempool.DynamicMemoryUsage() / 1000);
 
             // Recursively process any orphan transactions that depended on this one
-            std::set<NodeId> setMisbehaving;
+            std::set<NodeId> setMisbehaving ;
             while (!vWorkQueue.empty()) {
                 auto itByPrev = mapOrphanTransactionsByPrev.find(vWorkQueue.front());
                 vWorkQueue.pop_front();
@@ -1852,9 +1847,9 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
                         if (stateDummy.IsInvalid(nDos) && nDos > 0)
                         {
                             // Punish peer that gave us an invalid orphan tx
-                            Misbehaving(fromPeer, nDos);
-                            setMisbehaving.insert(fromPeer);
-                            LogPrint("mempool", "   invalid orphan tx %s\n", orphanHash.ToString());
+                            Misbehaving( fromPeer, nDos ) ;
+                            setMisbehaving.insert( fromPeer ) ;
+                            LogPrint( "mempool", "   invalid orphan tx %s\n", orphanHash.ToString() ) ;
                         }
                         // Has inputs but not accepted to mempool
                         // Probably non-standard or insufficient fee/priority
@@ -1949,8 +1944,8 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
             if (state.GetRejectCode() < REJECT_INTERNAL) // Never send AcceptToMemoryPool's internal codes over P2P
                 connman.PushMessage(pfrom, msgMaker.Make(NetMsgType::REJECT, strCommand, (unsigned char)state.GetRejectCode(),
                                    state.GetRejectReason().substr(0, MAX_REJECT_MESSAGE_LENGTH), inv.hash));
-            if (nDoS > 0) {
-                Misbehaving(pfrom->GetId(), nDoS);
+            if ( nDoS > 0 ) {
+                Misbehaving( pfrom->GetId(), nDoS ) ;
             }
         }
     }
@@ -1977,9 +1972,9 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
         if (!ProcessNewBlockHeaders({cmpctblock.header}, state, chainparams, &pindex)) {
             int nDoS;
             if (state.IsInvalid(nDoS)) {
-                if (nDoS > 0) {
-                    LOCK(cs_main);
-                    Misbehaving(pfrom->GetId(), nDoS);
+                if ( nDoS > 0 ) {
+                    LOCK( cs_main ) ;
+                    Misbehaving( pfrom->GetId(), nDoS ) ;
                 }
                 LogPrintf("Peer %d sent us invalid header via cmpctblock\n", pfrom->id);
                 return true;
@@ -2059,9 +2054,9 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
                 ReadStatus status = partialBlock.InitData(cmpctblock, vExtraTxnForCompact);
                 if (status == READ_STATUS_INVALID) {
                     MarkBlockAsReceived(pindex->GetBlockHash()); // Reset in-flight state in case of whitelist
-                    Misbehaving(pfrom->GetId(), 100);
-                    LogPrintf("Peer %d sent us invalid compact block\n", pfrom->id);
-                    return true;
+                    Misbehaving( pfrom->GetId(), 10 ) ;
+                    LogPrintf( "Peer %d sent us invalid compact block\n", pfrom->id ) ;
+                    return true ;
                 } else if (status == READ_STATUS_FAILED) {
                     // Duplicate txindexes, the block is now in-flight, so just request it
                     std::vector<CInv> vInv(1);
@@ -2173,9 +2168,9 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
             ReadStatus status = partialBlock.FillBlock(*pblock, resp.txn);
             if (status == READ_STATUS_INVALID) {
                 MarkBlockAsReceived(resp.blockhash); // Reset in-flight state in case of whitelist
-                Misbehaving(pfrom->GetId(), 100);
-                LogPrintf("Peer %d sent us invalid compact block/non-matching block transactions\n", pfrom->id);
-                return true;
+                Misbehaving( pfrom->GetId(), 10 ) ;
+                LogPrintf( "Peer %d sent us invalid compact block/non-matching block transactions\n", pfrom->id ) ;
+                return true ;
             } else if (status == READ_STATUS_FAILED) {
                 // Might have collided, fall back to getdata now :(
                 std::vector<CInv> invs;
@@ -2228,8 +2223,8 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
         unsigned int nCount = ReadCompactSize(vRecv);
         if (nCount > MAX_HEADERS_RESULTS) {
             LOCK(cs_main);
-            Misbehaving(pfrom->GetId(), 20);
-            return error("headers message size = %u", nCount);
+            Misbehaving( pfrom->GetId(), 2 ) ;
+            return error( "headers message size = %u", nCount ) ;
         }
         headers.resize(nCount);
         for (unsigned int n = 0; n < nCount; n++) {
@@ -2269,7 +2264,7 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
             UpdateBlockAvailability(pfrom->GetId(), headers.back().GetHash());
 
             if (nodestate->nUnconnectingHeaders % MAX_UNCONNECTING_HEADERS == 0) {
-                Misbehaving(pfrom->GetId(), 20);
+                Misbehaving( pfrom->GetId(), 2 ) ;
             }
             return true;
         }
@@ -2277,8 +2272,8 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
         uint256 hashLastBlock;
         for (const CBlockHeader& header : headers) {
             if (!hashLastBlock.IsNull() && header.hashPrevBlock != hashLastBlock) {
-                Misbehaving(pfrom->GetId(), 20);
-                return error("non-continuous headers sequence");
+                Misbehaving( pfrom->GetId(), 10 ) ;
+                return error( "non-continuous headers sequence" ) ;
             }
             hashLastBlock = header.GetHash();
         }
@@ -2288,9 +2283,9 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
         if (!ProcessNewBlockHeaders(headers, state, chainparams, &pindexLast)) {
             int nDoS;
             if (state.IsInvalid(nDoS)) {
-                if (nDoS > 0) {
-                    LOCK(cs_main);
-                    Misbehaving(pfrom->GetId(), nDoS);
+                if ( nDoS > 0 ) {
+                    LOCK( cs_main ) ;
+                    Misbehaving( pfrom->GetId(), nDoS ) ;
                 }
                 return error("invalid header received");
             }
@@ -2552,7 +2547,7 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
                 // This isn't a Misbehaving(100) (immediate ban) because the
                 // peer might be an older or different implementation with
                 // a different signature key, etc.
-                Misbehaving(pfrom->GetId(), 10);
+                Misbehaving( pfrom->GetId(), 5 ) ;
             }
         }
     }
@@ -2565,9 +2560,9 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
 
         if (!filter.IsWithinSizeConstraints())
         {
-            // There is no excuse for sending a too-large filter
-            LOCK(cs_main);
-            Misbehaving(pfrom->GetId(), 100);
+            // sending a too-large filter
+            LOCK( cs_main ) ;
+            Misbehaving( pfrom->GetId(), 50 ) ;
         }
         else
         {
@@ -2599,8 +2594,8 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
             }
         }
         if (bad) {
-            LOCK(cs_main);
-            Misbehaving(pfrom->GetId(), 100);
+            LOCK( cs_main ) ;
+            Misbehaving( pfrom->GetId(), 50 ) ;
         }
     }
 
@@ -2652,24 +2647,24 @@ static bool SendRejectsAndCheckIfBanned(CNode* pnode, CConnman& connman)
     }
     state.rejects.clear();
 
-    if (state.fShouldBan) {
-        state.fShouldBan = false;
-        if (pnode->fWhitelisted)
-            LogPrintf("Warning: not punishing whitelisted peer %s!\n", pnode->addr.ToString());
-        else if (pnode->fAddnode)
-            LogPrintf("Warning: not punishing addnoded peer %s!\n", pnode->addr.ToString());
+    if ( state.fShouldBan ) {
+        state.fShouldBan = false ;
+        if ( pnode->fWhitelisted )
+            LogPrintf( "Warning: not punishing whitelisted peer %s\n", pnode->addr.ToString() ) ;
+        else if ( pnode->fAddnode )
+            LogPrintf( "Warning: not punishing addnoded peer %s\n", pnode->addr.ToString() ) ;
         else {
-            pnode->fDisconnect = true;
-            if (pnode->addr.IsLocal())
-                LogPrintf("Warning: not banning local peer %s!\n", pnode->addr.ToString());
+            pnode->fDisconnect = true ;
+            if ( pnode->addr.IsLocal() )
+                LogPrintf( "Warning: not banning local peer %s\n", pnode->addr.ToString() ) ;
             else
             {
-                connman.Ban(pnode->addr, BanReasonNodeMisbehaving);
+                connman.Ban( pnode->addr, BanReasonNodeMisbehaving ) ;
             }
         }
-        return true;
+        return true ;
     }
-    return false;
+    return false ;
 }
 
 bool ProcessMessages(CNode* pfrom, CConnman& connman, const std::atomic<bool>& interruptMsgProc)
