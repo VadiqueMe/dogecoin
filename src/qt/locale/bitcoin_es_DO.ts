@@ -82,16 +82,8 @@
         <translation>Nodo</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Mostrar vista general del monedero</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transacciones</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Examinar el historial de transacciones</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -140,10 +132,6 @@
     <message>
         <source>Reindexing blocks on disk...</source>
         <translation>Reindexando bloques en disco...</translation>
-    </message>
-    <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Enviar monedas a una dirección Dogecoin</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -216,10 +204,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>Barra de pestañas</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>Solicitar pagos (genera codigo QR y URL's de Dogecoin)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>

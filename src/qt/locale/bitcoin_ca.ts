@@ -250,16 +250,8 @@
         <translation>Node</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Mostra el panorama general del moneder</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transaccions</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Cerca a l'historial de transaccions</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -334,10 +326,6 @@
         <translation>S'estan reindexant els blocs al disc...</translation>
     </message>
     <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Envia monedes a una adreça Dogecoin</translation>
-    </message>
-    <message>
         <source>Backup wallet to another location</source>
         <translation>Realitza una còpia de seguretat del moneder a una altra ubicació</translation>
     </message>
@@ -408,10 +396,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>Barra d'eines de les pestanyes</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>Sol·licita pagaments (genera codis QR i dogecoin: URI)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>

@@ -78,16 +78,8 @@
         <translation>&amp;Vista xeral</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Amosar vista xeral do moedeiro</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transacciones</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Navegar historial de transaccións</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -128,10 +120,6 @@
     <message>
         <source>Reindexing blocks on disk...</source>
         <translation>Reindexando bloques no disco...</translation>
-    </message>
-    <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Enviar moedas a unha dirección Dogecoin</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -204,10 +192,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>Barra de ferramentas</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>Solicitar pagos (xenera códigos QR e dogecoin: URIs)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>

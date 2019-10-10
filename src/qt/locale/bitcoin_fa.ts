@@ -214,16 +214,8 @@
         <translation>گره</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>نمایش بررسی اجمالی کیف پول</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;تراکنش‌ها</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>مرور تاریخچهٔ تراکنش‌ها</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -298,10 +290,6 @@
         <translation>بازنشانی بلوک‌ها روی دیسک...</translation>
     </message>
     <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>ارسال وجه به نشانی بیت‌کوین</translation>
-    </message>
-    <message>
         <source>Backup wallet to another location</source>
         <translation>تهیهٔ پشتیبان از کیف پول در یک مکان دیگر</translation>
     </message>
@@ -372,10 +360,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>نوارابزار برگه‌ها</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>درخواست پرداخت ( تولید کد کیوار و ادرس بیت کوین)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>

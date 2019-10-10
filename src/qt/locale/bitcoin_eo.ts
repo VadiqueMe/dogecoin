@@ -154,16 +154,8 @@
         <translation>Nodo</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Vidigi ĝeneralan superrigardon de la monujo</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transakcioj</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Esplori historion de transakcioj</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -212,10 +204,6 @@
     <message>
         <source>Reindexing blocks on disk...</source>
         <translation>Reindeksado de blokoj sur disko...</translation>
-    </message>
-    <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Sendi monon al Dogemon-adreso</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -288,10 +276,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>Langeto-breto</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>Peti pagon (kreas QR-kodojn kaj URI-ojn kun prefikso dogecoin:)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>

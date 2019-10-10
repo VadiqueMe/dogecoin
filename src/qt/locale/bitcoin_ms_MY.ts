@@ -251,16 +251,8 @@ Alihkan fail data ke dalam tab semasa</translation>
         <translation>Nod</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Tunjuk gambaran keseluruhan umum dompet</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transaksi</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Menyemak imbas sejarah transaksi </translation>
     </message>
     <message>
         <source>E&amp;xit</source>

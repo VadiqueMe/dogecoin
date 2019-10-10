@@ -78,10 +78,6 @@
         <translation>Гүйлгээнүүд</translation>
     </message>
     <message>
-        <source>Browse transaction history</source>
-        <translation>Гүйлгээнүүдийн түүхийг харах</translation>
-    </message>
-    <message>
         <source>E&amp;xit</source>
         <translation>Гарах</translation>
     </message>

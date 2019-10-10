@@ -74,16 +74,8 @@
         <translation>&amp;Wow</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Ipakit ing kabuuang lawe ning wallet</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transaksion</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Lawan ing kasalesayan ning transaksion</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -120,10 +112,6 @@
     <message>
         <source>&amp;Much receiving addresses...</source>
         <translation>Address king pamag-Tanggap</translation>
-    </message>
-    <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Magpadalang barya king Dogecoin address</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>

@@ -250,16 +250,8 @@
         <translation>ノード</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>ウォレットの概要を見る</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>取引(&amp;T)</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>取引履歴を閲覧</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -338,10 +330,6 @@
         <translation>ディスク上のブロックのインデックスを再作成中...</translation>
     </message>
     <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Dogecoin アドレスにコインを送る</translation>
-    </message>
-    <message>
         <source>Backup wallet to another location</source>
         <translation>ウォレットを他の場所にバックアップ</translation>
     </message>
@@ -412,10 +400,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>タブツールバー</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>支払いを要求する (QRコードとdogecoin:ではじまるURIを生成する)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -2546,7 +2530,7 @@
         <translation>取引 ID</translation>
     </message>
     <message>
-        <source>Transaction total size</source>
+        <source>Transaction full size</source>
         <translation>トランザクションの全体サイズ</translation>
     </message>
     <message>

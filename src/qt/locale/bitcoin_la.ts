@@ -66,16 +66,8 @@
         <translation>&amp;Summarium</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Monstra generale summarium cassidilis</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transactiones</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Inspicio historiam transactionum</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -112,10 +104,6 @@
     <message>
         <source>Reindexing blocks on disk...</source>
         <translation>Recreans indicem frustorum in disco...</translation>
-    </message>
-    <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Mitte nummos ad inscriptionem Dogecoin</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>

@@ -250,16 +250,8 @@
         <translation>Node</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Toon algemeen overzicht van uw portemonnee</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transacties</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Blader door transactiegescheidenis</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -338,10 +330,6 @@
         <translation>Bezig met herindexeren van blokken op harde schijf...</translation>
     </message>
     <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Verstuur munten naar een Dogecoinadres</translation>
-    </message>
-    <message>
         <source>Backup wallet to another location</source>
         <translation>Backup portemonnee naar een andere locatie</translation>
     </message>
@@ -412,10 +400,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>Tab-werkbalk</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>Vraag betaling aan (genereert QR-codes en dogecoin: URI's)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -2542,7 +2526,7 @@
         <translation>Transactie-ID</translation>
     </message>
     <message>
-        <source>Transaction total size</source>
+        <source>Transaction full size</source>
         <translation>Transactie totale grootte</translation>
     </message>
     <message>

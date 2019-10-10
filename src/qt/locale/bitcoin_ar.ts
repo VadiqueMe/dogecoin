@@ -246,16 +246,8 @@
         <translation>جهاز</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>إظهار نظرة عامة على المحفظة</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;المعاملات</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>تصفح سجل المعاملات</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -316,10 +308,6 @@
     <message>
         <source>Reindexing blocks on disk...</source>
         <translation>إعادة الفهرسة الكتل على القرص ...</translation>
-    </message>
-    <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>ارسل عملات الى عنوان بيتكوين</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -392,10 +380,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>شريط أدوات علامات التبويب</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>أطلب دفعات (يولد كودات الرمز المربع وبيت كوين: العناوين المعطاة)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>

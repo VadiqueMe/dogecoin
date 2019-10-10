@@ -146,16 +146,8 @@
         <translation>Nœud</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Affiche une vue d'ensemble du porte-monnaie</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transactions</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Permet de parcourir l'historique des transactions</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -216,10 +208,6 @@
     <message>
         <source>Reindexing blocks on disk...</source>
         <translation>Réindexer les blocs sur le disque...</translation>
-    </message>
-    <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Envoyer des pièces à une adresse Dogecoin</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -288,10 +276,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>Barre d'outils des onglets</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>Demander des paiements (générer QR codes et dogecoin: URIs)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>

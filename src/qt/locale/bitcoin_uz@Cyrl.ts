@@ -86,16 +86,8 @@
         <translation>Улам</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Ҳамённинг умумий кўринишини кўрсатиш</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Пул ўтказмалари</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Пул ўтказмалари тарихини кўриш</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -144,10 +136,6 @@
     <message>
         <source>Reindexing blocks on disk...</source>
         <translation>Дискдаги блоклар қайта индексланмоқда...</translation>
-    </message>
-    <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Тангаларни Dogecoin манзилига жўнатиш</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -220,10 +208,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>Ички ойналар асбоблар панели</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>Тўловлар (QR кодлари ва dogecoin ёрдамида яратишлар: URI’лар) сўраш</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>

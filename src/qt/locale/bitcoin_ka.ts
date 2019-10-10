@@ -82,16 +82,8 @@
         <translation>კვანძი</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>საფულის ზოგადი მიმოხილვა</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;ტრანსაქციები</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>ტრანსაქციების ისტორიის დათვალიერება</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -140,10 +132,6 @@
     <message>
         <source>Reindexing blocks on disk...</source>
         <translation>დისკზე ბლოკების რეინდექსაცია...</translation>
-    </message>
-    <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>მონეტების გაგზავნა Dogecoin-მისამართზე</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -216,10 +204,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>ბარათების პანელი</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>გადახდის მოთხოვნა (შეიქმნება QR-კოდები და dogecoin: ბმულები)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>

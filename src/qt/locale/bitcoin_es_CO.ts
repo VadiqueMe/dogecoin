@@ -74,10 +74,6 @@
         <translation>Nodo</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Mostrar vista general de la billetera</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transacciones</translation>
     </message>
@@ -124,10 +120,6 @@
     <message>
         <source>Open &amp;URI...</source>
         <translation>Abrir &amp;URL...</translation>
-    </message>
-    <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Enviando monedas a una dirección de Dogecoin</translation>
     </message>
     <message>
         <source>Change the passphrase used for wallet encryption</source>

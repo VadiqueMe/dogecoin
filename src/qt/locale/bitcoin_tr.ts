@@ -250,16 +250,8 @@
         <translation>Düğüm</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Cüzdana genel bakışı göster</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;İşlemler</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>İşlem geçmişine gözat</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -338,10 +330,6 @@
         <translation>Diskteki bloklar yeniden indeksleniyor...</translation>
     </message>
     <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Bir dogecoin adresine dogecoin gönder</translation>
-    </message>
-    <message>
         <source>Backup wallet to another location</source>
         <translation>Cüzdanı diğer bir konumda yedekle</translation>
     </message>
@@ -412,10 +400,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>Sekme araç çubuğu</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>Ödeme talep et (QR kodu ve dogecoin URI'si oluşturur)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -2542,7 +2526,7 @@
         <translation>İşlem ID'si</translation>
     </message>
     <message>
-        <source>Transaction total size</source>
+        <source>Transaction full size</source>
         <translation>İşlemin toplam boyutu</translation>
     </message>
     <message>

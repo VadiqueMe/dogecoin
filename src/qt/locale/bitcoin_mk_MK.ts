@@ -86,10 +86,6 @@
         <translation>&amp;Трансакции</translation>
     </message>
     <message>
-        <source>Browse transaction history</source>
-        <translation>Преглед на историјата на трансакции</translation>
-    </message>
-    <message>
         <source>E&amp;xit</source>
         <translation>И&amp;злез</translation>
     </message>
@@ -136,10 +132,6 @@
     <message>
         <source>Reindexing blocks on disk...</source>
         <translation>Повторно индексирање на блокови од дискот...</translation>
-    </message>
-    <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Испрати биткоини на Биткоин адреса</translation>
     </message>
     <message>
         <source>&amp;Verify message...</source>

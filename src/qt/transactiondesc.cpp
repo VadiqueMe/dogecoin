@@ -62,12 +62,12 @@ QString TransactionDesc::toHTML(CWallet *wallet, CWalletTx &wtx, TransactionReco
     CAmount nNet = nCredit - nDebit;
 
     strHTML += "<b>" + tr("Status") + ":</b> " + FormatTxStatus(wtx);
-    int nRequests = wtx.GetRequestCount();
-    if (nRequests != -1)
+    int nRequests = wtx.GetRequestCount() ;
+    if ( nRequests != -1 )
     {
-        if (nRequests == 0)
+        if ( nRequests == 0 )
             strHTML += tr(", has not been successfully broadcast yet");
-        else if (nRequests > 0)
+        else if ( nRequests > 0 )
             strHTML += tr(", broadcast through %n node(s)", "", nRequests);
     }
     strHTML += "<br>";
@@ -242,7 +242,7 @@ QString TransactionDesc::toHTML(CWallet *wallet, CWalletTx &wtx, TransactionReco
         strHTML += "<br><b>" + tr("Comment") + ":</b><br>" + GUIUtil::HtmlEscape(wtx.mapValue["comment"], true) + "<br>";
 
     strHTML += "<b>" + tr("Transaction ID") + ":</b> " + rec->getTxID() + "<br>";
-    strHTML += "<b>" + tr("Transaction total size") + ":</b> " + QString::number(wtx.tx->GetTotalSize()) + " bytes<br>";
+    strHTML += "<b>" + tr("Transaction full size") + ":</b> " + QString::number( wtx.tx->GetTotalSize() ) + " bytes<br>" ;
     strHTML += "<b>" + tr("Output index of subtransaction") + ":</b> " + QString::number( rec->getSubtransactionIndex() ) + "<br>" ;
 
     // Message from normal bitcoin:URI (bitcoin:123...?message=example)

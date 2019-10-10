@@ -86,16 +86,8 @@
         <translation>&amp;Општи преглед</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Погледајте општи преглед новчаника</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Трансакције</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Претражите историјат трансакција</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -128,10 +120,6 @@
     <message>
         <source>&amp;Change Passphrase...</source>
         <translation>Промени &amp;лозинку...</translation>
-    </message>
-    <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Пошаљите новац на dogecoin адресу</translation>
     </message>
     <message>
         <source>Change the passphrase used for wallet encryption</source>

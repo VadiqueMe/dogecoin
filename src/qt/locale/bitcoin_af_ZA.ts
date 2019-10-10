@@ -186,16 +186,8 @@
         <translation>&amp;Oorsig</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Wys algemene oorsig van die beursie</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transaksies</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Besoek transaksie geskiedenis</translation>
     </message>
     <message>
         <source>E&amp;xit</source>

@@ -246,16 +246,8 @@
         <translation>Node</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Tampilkan gambaran umum dompet Anda</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transaksi</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Lihat riwayat transaksi</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -334,10 +326,6 @@
         <translation>Mengindex ulang blok di dalam disk...</translation>
     </message>
     <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Kirim koin ke alamat Dogecoin</translation>
-    </message>
-    <message>
         <source>Backup wallet to another location</source>
         <translation>Cadangkan dompet ke lokasi lain</translation>
     </message>
@@ -408,10 +396,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>Baris tab</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>Permintaan pembayaran (membuat kode QR dan dogecoin: URIs)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>

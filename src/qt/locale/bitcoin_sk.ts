@@ -250,16 +250,8 @@
         <translation>Uzol</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Zobraziť celkový prehľad o peňaženke</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transakcie</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Prechádzať históriu transakcií</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -338,10 +330,6 @@
         <translation>Preindexúvam bloky na disku...</translation>
     </message>
     <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Poslať dogecoins na adresu</translation>
-    </message>
-    <message>
         <source>Backup wallet to another location</source>
         <translation>Zálohovať peňaženku na iné miesto</translation>
     </message>
@@ -412,10 +400,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>Lišta záložiek</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>Vyžiadať platby (vygeneruje QR kódy a dogecoin: URI)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -2503,7 +2487,7 @@
         <translation>ID transakcie</translation>
     </message>
     <message>
-        <source>Transaction total size</source>
+        <source>Transaction full size</source>
         <translation>Celková veľkosť transakcie</translation>
     </message>
     <message>

@@ -186,16 +186,8 @@
         <translation>&amp;Përmbledhje</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Trego një përmbledhje te përgjithshme të portofolit</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transaksionet</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Shfleto historinë e transaksioneve</translation>
     </message>
     <message>
         <source>Quit application</source>

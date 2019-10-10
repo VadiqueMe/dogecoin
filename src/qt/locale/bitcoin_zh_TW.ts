@@ -250,16 +250,8 @@
         <translation>節點</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>顯示錢包一般總覽</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>交易</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>瀏覽交易紀錄</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -338,10 +330,6 @@
         <translation>正在為磁碟裡的區塊重建索引...</translation>
     </message>
     <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>付錢給一個 Dogecoin 位址</translation>
-    </message>
-    <message>
         <source>Backup wallet to another location</source>
         <translation>把錢包備份到其它地方</translation>
     </message>
@@ -412,10 +400,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>分頁工具列</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>要求付款(產生 QR Code 和 dogecoin 付款協議的資源識別碼: URI)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -2542,7 +2526,7 @@
         <translation>交易識別碼</translation>
     </message>
     <message>
-        <source>Transaction total size</source>
+        <source>Transaction full size</source>
         <translation>交易總大小</translation>
     </message>
     <message>

@@ -62,16 +62,8 @@
         <translation>&amp;Trosolwg</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Dangos trosolwg cyffredinol y waled</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Trafodion</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Pori hanes trafodion</translation>
     </message>
     <message>
         <source>E&amp;xit</source>

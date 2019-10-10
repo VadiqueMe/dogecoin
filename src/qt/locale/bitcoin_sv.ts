@@ -251,16 +251,8 @@ Var vänlig och försök igen.</translation>
         <translation>Nod</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Visa generell översikt av plånboken</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transaktioner</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Bläddra i transaktionshistorik</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -339,10 +331,6 @@ Var vänlig och försök igen.</translation>
         <translation>Återindexerar block på disken...</translation>
     </message>
     <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Skicka dogecoins till en Dogecoin-adress</translation>
-    </message>
-    <message>
         <source>Backup wallet to another location</source>
         <translation>Säkerhetskopiera plånboken till en annan plats</translation>
     </message>
@@ -413,10 +401,6 @@ Var vänlig och försök igen.</translation>
     <message>
         <source>Tabs toolbar</source>
         <translation>Verktygsfält för tabbar</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>Begär betalning (genererar QR-koder och dogecoin-URI)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>

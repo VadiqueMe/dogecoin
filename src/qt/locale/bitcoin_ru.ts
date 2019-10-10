@@ -250,16 +250,8 @@
         <translation>Узел</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Показать общий обзор действий с бумажником</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Транзакции</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Показать историю транзакций</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -338,10 +330,6 @@
         <translation>Идёт переиндексация блоков на диске...</translation>
     </message>
     <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Отправить монеты на указанный адрес Dogecoin</translation>
-    </message>
-    <message>
         <source>Backup wallet to another location</source>
         <translation>Сделать резервную копию бумажника в другом месте</translation>
     </message>
@@ -412,10 +400,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>Панель вкладок</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>Запросить платежи (создаёт QR-коды и dogecoin: ссылки)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -2546,8 +2530,8 @@
         <translation>ID транзакции</translation>
     </message>
     <message>
-        <source>Transaction total size</source>
-        <translation>Общий размер транзакции</translation>
+        <source>Transaction full size</source>
+        <translation>Полный размер транзакции</translation>
     </message>
     <message>
         <source>Output index</source>

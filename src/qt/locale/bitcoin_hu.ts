@@ -94,16 +94,8 @@
         <translation>Csomópont</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Tárca általános áttekintése</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Tranzakciók</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Tranzakciós előzmények megtekintése</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -156,10 +148,6 @@
     <message>
         <source>Reindexing blocks on disk...</source>
         <translation>Lemezen lévő blokkok újraindexelése...</translation>
-    </message>
-    <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Dogecoin küldése megadott címre</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -232,10 +220,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>Fül eszköztár</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>Fizetési kérelem (QR-kódot és "dogecoin:" URI azonosítót hoz létre)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>

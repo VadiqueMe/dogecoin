@@ -90,16 +90,8 @@
         <translation>Taškas</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Rodyti piniginės bendrą apžvalgą</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Sandoriai</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Apžvelgti sandorių istoriją</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -152,10 +144,6 @@
     <message>
         <source>Reindexing blocks on disk...</source>
         <translation>Blokai iš naujo indeksuojami...</translation>
-    </message>
-    <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Siųsti monetas Dogecoin adresui</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>

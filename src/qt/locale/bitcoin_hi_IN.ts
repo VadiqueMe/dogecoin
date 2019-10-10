@@ -46,17 +46,8 @@
         <translation>&amp;विवरण</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>वॉलेट का सामानया विवरण दिखाए !</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
-        <translation>&amp; लेन-देन
-</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>देखिए पुराने लेन-देन के विवरण !</translation>
+        <translation>&amp; लेन-देन</translation>
     </message>
     <message>
         <source>E&amp;xit</source>

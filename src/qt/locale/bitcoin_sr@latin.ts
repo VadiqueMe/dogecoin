@@ -158,10 +158,6 @@
         <translation>Otvori &amp;URI...</translation>
     </message>
     <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Pošalji novčiće na Dogecoin adresu</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Proveri poruku...</translation>
     </message>

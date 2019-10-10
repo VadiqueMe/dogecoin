@@ -250,16 +250,8 @@
         <translation>Knoten</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Allgemeine Wallet-Übersicht anzeigen</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transaktionen</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Transaktionsverlauf durchsehen</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -338,10 +330,6 @@
         <translation>Reindiziere Blöcke auf Datenträger...</translation>
     </message>
     <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Dogecoins an eine Dogecoin-Adresse überweisen</translation>
-    </message>
-    <message>
         <source>Backup wallet to another location</source>
         <translation>Eine Wallet-Sicherungskopie erstellen und abspeichern</translation>
     </message>
@@ -412,10 +400,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>Registerkartenleiste</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>Zahlungen anfordern (erzeugt QR-Codes und "dogecoin:"-URIs)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -2542,7 +2526,7 @@
         <translation>Transaktionskennung</translation>
     </message>
     <message>
-        <source>Transaction total size</source>
+        <source>Transaction full size</source>
         <translation>Gesamte Transaktionsgröße</translation>
     </message>
     <message>

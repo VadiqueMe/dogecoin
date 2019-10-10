@@ -234,16 +234,8 @@
         <translation>&amp;Ülevaade</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Kuva rahakoti üld-ülevaade</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Tehingud</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Sirvi tehingute ajalugu</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -288,10 +280,6 @@
     <message>
         <source>Reindexing blocks on disk...</source>
         <translation>Kettal olevate blokkide re-indekseerimine...</translation>
-    </message>
-    <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Saada münte Dogecoini aadressile</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -364,10 +352,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>Vahelehe tööriistariba</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>Loo maksepäring (genereerib QR koodid ja dogecoini: URId)</translation>
     </message>
     <message>
         <source>Open a dogecoin: URI or payment request</source>

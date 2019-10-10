@@ -110,16 +110,8 @@
         <translation>Čvor</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Prikaži opći pregled novčanika</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transakcije</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Pretraži povijest transakcija</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -172,10 +164,6 @@
     <message>
         <source>Reindexing blocks on disk...</source>
         <translation>Re-indeksiranje blokova na disku...</translation>
-    </message>
-    <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Slanje novca na dogecoin adresu</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -248,10 +236,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>Traka kartica</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>Zatraži uplatu (stvara QR kod i dogecoin: URI adresu)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>

@@ -246,16 +246,8 @@
         <translation>Nó</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Mostrar visão geral da carteira</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transações</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Navegar pelo histórico de transações</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -334,10 +326,6 @@
         <translation>Reindexando blocos no disco...</translation>
     </message>
     <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Enviar moedas para um endereço dogecoin</translation>
-    </message>
-    <message>
         <source>Backup wallet to another location</source>
         <translation>Fazer cópia de segurança da carteira para uma outra localização</translation>
     </message>
@@ -408,10 +396,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>Barra de ferramentas</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>Solicitações de pagamentos (gera códigos QR e dogecoin: URIs)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -2542,7 +2526,7 @@
         <translation>ID da transação</translation>
     </message>
     <message>
-        <source>Transaction total size</source>
+        <source>Transaction full size</source>
         <translation>Tamanho tota da transação</translation>
     </message>
     <message>

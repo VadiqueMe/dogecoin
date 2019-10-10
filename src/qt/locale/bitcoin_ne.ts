@@ -111,16 +111,8 @@
         <translation>नोड</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>वालेटको साधारण शारांश देखाउनुहोस्</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;amp;कारोबार</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>कारोबारको इतिहास हेर्नुहोस्</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -181,10 +173,6 @@
     <message>
         <source>Reindexing blocks on disk...</source>
         <translation>डिस्कमा ब्लकलाई पुनः सूचीकरण गरिँदै...</translation>
-    </message>
-    <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>बिटकोइन ठेगानामा सिक्का पठाउनुहोस्</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>

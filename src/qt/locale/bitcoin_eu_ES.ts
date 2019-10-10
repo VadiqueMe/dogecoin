@@ -214,16 +214,8 @@
         <translation>&amp;Gainbegiratu</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Ikusi zorroaren begirada orokorra</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transakzioak</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Ikusi transakzioen historia</translation>
     </message>
     <message>
         <source>E&amp;xit</source>

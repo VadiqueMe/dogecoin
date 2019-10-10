@@ -94,16 +94,8 @@
         <translation>Solmu</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Lompakon tilanteen yleiskatsaus</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Rahansiirrot</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Selaa rahansiirtohistoriaa</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -164,10 +156,6 @@
     <message>
         <source>Reindexing blocks on disk...</source>
         <translation>Ladataan lohkoindeksiä...</translation>
-    </message>
-    <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Lähetä kolikoita Dogecoin-osoitteeseen</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -240,10 +228,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>Välilehtipalkki</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>Pyydä maksuja (Luo QR koodit ja dogecoin: URIt)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>

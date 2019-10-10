@@ -150,16 +150,8 @@
         <translation>מפרק</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>הצגת סקירה כללית של הארנק</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>ה&amp;עברות</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>עיון בהיסטוריית ההעברות</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -216,10 +208,6 @@
     <message>
         <source>Reindexing blocks on disk...</source>
         <translation>המקטעים נוספים למפתח בכונן…</translation>
-    </message>
-    <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>שליחת מטבעות לכתובת ביטקוין</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -292,10 +280,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>סרגל כלים לשוניות</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>בקשת תשלומים (יצירה של קודים מסוג QR וסכימות כתובות משאב של :dogecoin)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>

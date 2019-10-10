@@ -250,16 +250,8 @@
         <translation>Knude</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Vis generel oversigt over tegnebog</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transaktioner</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Gennemse transaktionshistorik</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -338,10 +330,6 @@
         <translation>Genindekserer blokke på disken…</translation>
     </message>
     <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Send dogecoins til en Dogecoin-adresse</translation>
-    </message>
-    <message>
         <source>Backup wallet to another location</source>
         <translation>Lav sikkerhedskopi af tegnebogen til et andet sted</translation>
     </message>
@@ -412,10 +400,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>Faneværktøjslinje</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>Anmod om betalinger (genererer QR-koder og “dogecoin:”-URI'er)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -2546,7 +2530,7 @@
         <translation>Transaktions-ID</translation>
     </message>
     <message>
-        <source>Transaction total size</source>
+        <source>Transaction full size</source>
         <translation>Totalstørrelse af transaktion</translation>
     </message>
     <message>

@@ -78,16 +78,8 @@
         <translation>و بازبینی</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>نمای کلی از wallet را نشان بده</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>و تراکنش</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>تاریخچه تراکنش را باز کن</translation>
     </message>
     <message>
         <source>E&amp;xit</source>

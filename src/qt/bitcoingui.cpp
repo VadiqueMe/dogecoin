@@ -293,15 +293,11 @@ void BitcoinGUI::createActions()
     QActionGroup *tabGroup = new QActionGroup(this);
 
     overviewAction = new QAction(platformStyle->SingleColorIcon(":/icons/overview"), tr("&Wow"), this);
-    overviewAction->setStatusTip(tr("Show general overview of wallet"));
-    overviewAction->setToolTip(overviewAction->statusTip());
     overviewAction->setCheckable(true);
     overviewAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_1));
     tabGroup->addAction(overviewAction);
 
     sendCoinsAction = new QAction(platformStyle->SingleColorIcon(":/icons/send"), tr("&Such Send"), this);
-    sendCoinsAction->setStatusTip(tr("Send coins to a Dogecoin address"));
-    sendCoinsAction->setToolTip(sendCoinsAction->statusTip());
     sendCoinsAction->setCheckable(true);
     sendCoinsAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_2));
     tabGroup->addAction(sendCoinsAction);
@@ -311,8 +307,6 @@ void BitcoinGUI::createActions()
     sendCoinsMenuAction->setToolTip(sendCoinsMenuAction->statusTip());
 
     receiveCoinsAction = new QAction(platformStyle->SingleColorIcon(":/icons/receiving_addresses"), tr("&Much Receive"), this);
-    receiveCoinsAction->setStatusTip(tr("Request payments (generates QR codes and dogecoin: URIs)"));
-    receiveCoinsAction->setToolTip(receiveCoinsAction->statusTip());
     receiveCoinsAction->setCheckable(true);
     receiveCoinsAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_3));
     tabGroup->addAction(receiveCoinsAction);
@@ -322,8 +316,6 @@ void BitcoinGUI::createActions()
     receiveCoinsMenuAction->setToolTip(receiveCoinsMenuAction->statusTip());
 
     historyAction = new QAction(platformStyle->SingleColorIcon(":/icons/history"), tr("&Transactions"), this);
-    historyAction->setStatusTip(tr("Browse transaction history"));
-    historyAction->setToolTip(historyAction->statusTip());
     historyAction->setCheckable(true);
     historyAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_4));
     tabGroup->addAction(historyAction);
@@ -516,13 +508,13 @@ void BitcoinGUI::setClientModel(ClientModel *_clientModel)
         }
 #endif // ENABLE_WALLET
         unitDisplayControl->setOptionsModel(_clientModel->getOptionsModel());
-        
+
         OptionsModel* optionsModel = _clientModel->getOptionsModel();
         if(optionsModel)
         {
             // be aware of the tray icon disable state change reported by the OptionsModel object.
             connect(optionsModel,SIGNAL(hideTrayIconChanged(bool)),this,SLOT(setTrayIconVisible(bool)));
-        
+
             // initialize the disable state of the tray icon with the current value in the model.
             setTrayIconVisible(optionsModel->getHideTrayIcon());
         }
@@ -1065,7 +1057,7 @@ void BitcoinGUI::setHDStatus(int hdEnabled)
     labelWalletHDStatusIcon->setPixmap(platformStyle->SingleColorIcon(hdEnabled ? ":/icons/hd_enabled" : ":/icons/hd_disabled").pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
     labelWalletHDStatusIcon->setToolTip(hdEnabled ? tr("HD key generation is <b>enabled</b>") : tr("HD key generation is <b>disabled</b>"));
 
-    // eventually disable the QLabel to set its opacity to 50% 
+    // eventually disable the QLabel to set its opacity to 50%
     labelWalletHDStatusIcon->setEnabled(hdEnabled);
 }
 

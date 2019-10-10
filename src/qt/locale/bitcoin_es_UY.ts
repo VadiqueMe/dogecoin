@@ -66,16 +66,8 @@
         <translation>&amp;Vista previa</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Mostrar descripción general del monedero</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;transaciones </translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Buscar en el historial de transacciones</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -108,10 +100,6 @@
     <message>
         <source>&amp;Much receiving addresses...</source>
         <translation>Recibiendo direcciones</translation>
-    </message>
-    <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Enviar monedas a una dirección Dogecoin</translation>
     </message>
     <message>
         <source>Change the passphrase used for wallet encryption</source>

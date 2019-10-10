@@ -314,19 +314,9 @@
         <translation type="unfinished">&amp;Wow</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Show general overview of wallet</source>
-        <translation type="unfinished">Show general overview of wallet</translation>
-    </message>
-    <message>
         <location line="+6"/>
         <source>&amp;Such Send</source>
         <translation type="unfinished">&amp;Such Send</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Send coins to a Dogecoin address</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+10"/>
@@ -334,19 +324,9 @@
         <translation type="unfinished">&amp;Much Receive</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location line="+10"/>
         <source>&amp;Transactions</source>
         <translation type="unfinished">&amp;Transactions</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Browse transaction history</source>
-        <translation type="unfinished">Browse transaction history</translation>
     </message>
     <message>
         <location line="+23"/>
@@ -437,11 +417,6 @@
         <location line="+1"/>
         <source>Sign messages with your Dogecoin addresses to prove you own them</source>
         <translation type="unfinished">Sign messages with your Dogecoin addresses to prove you own them</translation>
-    </message>
-    <message>
-        <location line="-510"/>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Send coins to a Dogecoin address</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -3563,7 +3538,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+1"/>
-        <source>Transaction total size</source>
+        <source>Transaction full size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

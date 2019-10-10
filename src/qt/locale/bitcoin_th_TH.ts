@@ -106,16 +106,8 @@
         <translation>Node/โหนด</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>แสดงภาพรวมทั่วไปของกระเป๋าเงิน</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;การทำรายการ</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>เรียกดูประวัติการทำธุรกรรม</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -176,10 +168,6 @@
     <message>
         <source>Reindexing blocks on disk...</source>
         <translation>กำลังทำดัชนี ที่เก็บบล็อก ใหม่ ในดิสก์...</translation>
-    </message>
-    <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>ส่ง coins ไปยัง ที่เก็บ Dogecoin</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -252,10 +240,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>แถบเครื่องมือ</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>เรียกเก็บ การชำระเงิน (สร้าง QR codes และ dogecoin: URIs)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>

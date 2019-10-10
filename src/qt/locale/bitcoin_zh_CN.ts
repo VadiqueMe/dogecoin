@@ -250,16 +250,8 @@
         <translation>节点</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>显示钱包概况</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>交易记录(&amp;T)</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>查看交易历史</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -334,10 +326,6 @@
         <translation>正在为数据块重建索引...</translation>
     </message>
     <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>向一个狗狗币地址发送狗狗币</translation>
-    </message>
-    <message>
         <source>Backup wallet to another location</source>
         <translation>备份钱包到其他文件夹</translation>
     </message>
@@ -408,10 +396,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>分页工具栏</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>请求支付 (生成二维码和 dogecoin: URI)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -2528,7 +2512,7 @@
         <translation>ID</translation>
     </message>
     <message>
-        <source>Transaction total size</source>
+        <source>Transaction full size</source>
         <translation>交易总大小</translation>
     </message>
     <message>

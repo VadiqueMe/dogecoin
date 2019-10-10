@@ -238,16 +238,8 @@
         <translation>Вузел</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Паказвае агульныя звесткі аб гаманцы</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>Транзакцыі</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Праглядзець гісторыю транзакцый</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -296,10 +288,6 @@
     <message>
         <source>Reindexing blocks on disk...</source>
         <translation>Пераіндэксацыя блокаў на дыску...</translation>
-    </message>
-    <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Даслаць манеты на Біткойн-адрас</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -368,10 +356,6 @@
     <message>
         <source>&amp;Help</source>
         <translation>Дапамога</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>Запатрабаваць плацёж (генеруецца QR-код для біткойн URI)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>

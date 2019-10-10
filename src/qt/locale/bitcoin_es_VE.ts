@@ -82,16 +82,8 @@
         <translation>Nodo</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Mostrar visión general de la billetera</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transacciones</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Buscar historial de transacciones</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -112,10 +104,6 @@
     <message>
         <source>Reindexing blocks on disk...</source>
         <translation>Reindexando bloques en el disco...</translation>
-    </message>
-    <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Enviar monedas a una dirección Dogecoin</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>

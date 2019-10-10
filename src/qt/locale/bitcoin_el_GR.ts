@@ -146,16 +146,8 @@
         <translation>Κόμβος</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Εμφάνισε τη γενική εικόνα του πορτοφολιού</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Συναλλαγές</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Περιήγηση στο ιστορικό συναλλαγών</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -208,10 +200,6 @@
     <message>
         <source>Reindexing blocks on disk...</source>
         <translation>Φόρτωση ευρετηρίου μπλοκ στον σκληρο δισκο...</translation>
-    </message>
-    <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Στείλε νομίσματα σε μια διεύθυνση dogecoin</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -284,10 +272,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>Εργαλειοθήκη καρτελών</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>Αίτηση πληρωμών (δημιουργεί QR codes και διευθύνσεις dogecoin: )</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>

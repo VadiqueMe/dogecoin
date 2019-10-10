@@ -246,16 +246,8 @@
         <translation>Сървър</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Обобщена информация за портфейла</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Транзакции</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>История на транзакциите</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -316,10 +308,6 @@
     <message>
         <source>Reindexing blocks on disk...</source>
         <translation>Повторно индексиране на блоковете на диска...</translation>
-    </message>
-    <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Изпращане към Биткоин адрес</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -392,10 +380,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>Раздели</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>Изискване на плащания(генерира QR кодове и биткойн: URIs)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>

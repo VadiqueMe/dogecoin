@@ -178,16 +178,8 @@
         <translation>Node</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Vis generell oversikt over lommeboken</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transaksjoner</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Vis transaksjonshistorikk</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -248,10 +240,6 @@
     <message>
         <source>Reindexing blocks on disk...</source>
         <translation>Reindekserer blokker på harddisk...</translation>
-    </message>
-    <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Send til en Dogecoin-adresse</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -324,10 +312,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>Verktøylinje for faner</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>Forespør betalinger (genererer QR-koder og dogecoin: URIer)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>

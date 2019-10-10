@@ -82,16 +82,8 @@
         <translation>Node</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Rādīt vispārēju maciņa pārskatu</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transakcijas</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Skatīt transakciju vēsturi</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -140,10 +132,6 @@
     <message>
         <source>Reindexing blocks on disk...</source>
         <translation>Bloku reindeksēšana no diska...</translation>
-    </message>
-    <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Nosūtīt bitkoinu uz Dogecoin adresi</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -216,10 +204,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>Ciļņu rīkjosla</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>Pieprasīt maksājumus (izveido QR kodu un dogecoin: URIs)</translation>
     </message>
     <message>
         <source>Open a dogecoin: URI or payment request</source>

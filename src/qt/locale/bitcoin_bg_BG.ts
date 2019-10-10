@@ -190,16 +190,8 @@
         <translation>Възел</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Покажи общ преглед на портфейла</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>Транзакции</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Разгледай история на транзакциите</translation>
     </message>
     <message>
         <source>E&amp;xit</source>

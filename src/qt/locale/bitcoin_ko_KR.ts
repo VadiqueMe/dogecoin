@@ -250,16 +250,8 @@
         <translation>노드</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>지갑의 일반적 개요를 보여줍니다.</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>거래(&amp;T)</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>거래내역을 검색합니다.</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -338,10 +330,6 @@
         <translation>디스크에서 블록 다시 색인중...</translation>
     </message>
     <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>도지코인 주소로 코인 보내기</translation>
-    </message>
-    <message>
         <source>Backup wallet to another location</source>
         <translation>지갑을 다른장소에 백업</translation>
     </message>
@@ -412,10 +400,6 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>툴바 색인표</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>지불 요청하기 (QR코드와 비트코인이 생성됩니다: URIs)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -2546,7 +2530,7 @@
         <translation>거래 ID</translation>
     </message>
     <message>
-        <source>Transaction total size</source>
+        <source>Transaction full size</source>
         <translation>거래 총 크기</translation>
     </message>
     <message>

@@ -90,16 +90,8 @@
         <translation>Nod</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation>Arată o prezentare generală a portofelului.</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Tranzacții</translation>
-    </message>
-    <message>
-        <source>Browse transaction history</source>
-        <translation>Navighează în istoricul tranzacțiilor</translation>
     </message>
     <message>
         <source>Quit application</source>
@@ -140,10 +132,6 @@
     <message>
         <source>Open &amp;URI...</source>
         <translation>Deschide &amp;URI...</translation>
-    </message>
-    <message>
-        <source>Send coins to a Dogecoin address</source>
-        <translation>Trimite monedele către o adresă Dogecoin</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -212,10 +200,6 @@
     <message>
         <source>&amp;Help</source>
         <translation>&amp;Ajutor</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and dogecoin: URIs)</source>
-        <translation>Cerere plată (generează coduri QR și dogecoin: URIs)</translation>
     </message>
     <message>
         <source>Open a dogecoin: URI or payment request</source>
