@@ -123,6 +123,8 @@ public Q_SLOTS:
     /** set which tab has the focus (is visible) */
     void setTabFocus(enum TabTypes tabType);
 
+    void showContextMenuForLog( const QPoint & where ) ;
+
 Q_SIGNALS:
     // For RPC command executor
     void stopExecutor();

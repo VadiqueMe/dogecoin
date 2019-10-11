@@ -430,6 +430,10 @@ RPCConsole::RPCConsole(const PlatformStyle *_platformStyle, QWidget *parent) :
     ui->debugLogTextArea->setLineWrapMode( QPlainTextEdit::WidgetWidth ) ; // QPlainTextEdit::NoWrap
     ui->debugLogTextArea->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff ) ; // Qt::ScrollBarAlwaysOn
 
+    ui->debugLogTextArea->setContextMenuPolicy( Qt::CustomContextMenu ) ;
+    connect( ui->debugLogTextArea, SIGNAL( customContextMenuRequested(const QPoint &) ),
+             this, SLOT( showContextMenuForLog(const QPoint &) ) ) ;
+
     if ( platformStyle->getImagesOnButtons() )
         ui->openDebugLogButton->setIcon( platformStyle->SingleColorIcon( ":/icons/export" ) ) ;
 
@@ -930,6 +934,18 @@ void RPCConsole::logFileChanged()
     }
 
     ui->debugLogTextArea->setPlainText( "(empty)" ) ;
+}
+
+void RPCConsole::showContextMenuForLog( const QPoint & where )
+{
+    QMenu * logAreaContextMenu = ui->debugLogTextArea->createStandardContextMenu() ;
+    logAreaContextMenu->addSeparator() ;
+
+    QAction * reloadLogAction = new QAction( "Refresh Log", this ) ;
+    connect( reloadLogAction, SIGNAL( triggered() ), this, SLOT( logFileChanged() ) ) ;
+    logAreaContextMenu->addAction( reloadLogAction ) ;
+
+    logAreaContextMenu->popup( mapToGlobal( where ) ) ;
 }
 
 void RPCConsole::on_openDebugLogButton_clicked()
