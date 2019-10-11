@@ -119,7 +119,7 @@ bool fPrintToDebugLog = true;
 bool fLogTimestamps = DEFAULT_LOGTIMESTAMPS;
 bool fLogTimeMicros = DEFAULT_LOGTIMEMICROS;
 bool fLogIPs = DEFAULT_LOGIPS;
-std::atomic<bool> fReopenDebugLog(false);
+std::atomic < bool > fReopenDebugLog( false ) ;
 CTranslationInterface translationInterface;
 
 /** Init OpenSSL library multithreading support */
@@ -294,44 +294,46 @@ static std::string LogTimestampStr(const std::string &str, std::atomic_bool *fSt
     return strStamped;
 }
 
-int LogPrintStr(const std::string &str)
+int LogPrintStr( const std::string & str )
 {
-    int ret = 0; // Returns total number of characters written
+    int ret = 0 ; // number of characters written
     static std::atomic_bool fStartedNewLine(true);
 
     string strTimestamped = LogTimestampStr(str, &fStartedNewLine);
 
-    if (fPrintToConsole)
+    if ( fPrintToConsole )
     {
         // print to console
-        ret = fwrite(strTimestamped.data(), 1, strTimestamped.size(), stdout);
-        fflush(stdout);
+        ret = fwrite( strTimestamped.data(), 1, strTimestamped.size(), stdout ) ;
+        fflush( stdout ) ;
     }
-    else if (fPrintToDebugLog)
+    else if ( fPrintToDebugLog )
     {
         boost::call_once(&DebugPrintInit, debugPrintInitFlag);
         boost::mutex::scoped_lock scoped_lock(*mutexDebugLog);
 
+        boost::filesystem::path pathToDebugLog = GetDataDir() / LOG_FILE_NAME ;
+        if ( ! boost::filesystem::exists( pathToDebugLog ) ) // log file is absent
+            fReopenDebugLog = true ;
+
         // buffer if we haven't opened the log yet
-        if (fileout == NULL) {
+        if ( fileout == NULL ) {
             assert(vMsgsBeforeOpenLog);
             ret = strTimestamped.length();
             vMsgsBeforeOpenLog->push_back(strTimestamped);
         }
         else
         {
-            // reopen the log file, if requested
-            if (fReopenDebugLog) {
-                fReopenDebugLog = false;
-                boost::filesystem::path pathToDebugLog = GetDataDir() / LOG_FILE_NAME ;
+            if ( fReopenDebugLog ) {
+                fReopenDebugLog = false ;
                 if ( freopen( pathToDebugLog.string().c_str (), "a", fileout ) != NULL )
-                    setbuf(fileout, NULL); // unbuffered
+                    setbuf( fileout, NULL ) ; // unbuffered
             }
 
-            ret = FileWriteStr(strTimestamped, fileout);
+            ret = FileWriteStr( strTimestamped, fileout ) ;
         }
     }
-    return ret;
+    return ret ;
 }
 
 /** Interpret string as boolean, for argument parsing */
