@@ -24,7 +24,7 @@
 /* Moved from wallet.cpp.  CMerkleTx is necessary for auxpow, independent
    of an enabled (or disabled) wallet.  Always include the code.  */
 
-const uint256 CMerkleTx::ABANDON_HASH(uint256S("0000000000000000000000000000000000000000000000000000000000000001"));
+const uint256 CMerkleTx::ABANDON_HASH( uint256S( "0000000000000000000000000000000000000000000000000000000000000001" ) ) ;
 
 void CMerkleTx::SetMerkleBranch(const CBlockIndex* pindex, int posInBlock)
 {
