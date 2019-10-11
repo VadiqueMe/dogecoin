@@ -35,7 +35,8 @@
 
 using namespace std;
 
-CWallet* pwalletMain = NULL;
+CWallet* pwalletMain = nullptr ;
+
 /** Transaction fee set by the user */
 CFeeRate payTxFee(DEFAULT_TRANSACTION_FEE);
 unsigned int nTxConfirmTarget = DEFAULT_TX_CONFIRMATIONS ;
@@ -43,7 +44,7 @@ bool bSpendZeroConfChange = DEFAULT_SPEND_ZEROCONF_CHANGE;
 bool fSendFreeTransactions = DEFAULT_SEND_FREE_TRANSACTIONS;
 bool fWalletRbf = DEFAULT_WALLET_RBF;
 
-const char * DEFAULT_WALLET_DAT = "wallet.dat";
+const char * const DEFAULT_WALLET_FILE = "much.wow" ;
 const uint32_t BIP32_HARDENED_KEY_LIMIT = 0x80000000;
 
 /**
@@ -444,7 +445,7 @@ bool CWallet::Verify()
         return true;
 
     LogPrintf("Using BerkeleyDB version %s\n", DbEnv::version(0, 0, 0));
-    std::string walletFile = GetArg("-wallet", DEFAULT_WALLET_DAT);
+    std::string walletFile = GetArg( "-wallet", DEFAULT_WALLET_FILE ) ;
 
     LogPrintf("Using wallet %s\n", walletFile);
     uiInterface.InitMessage(_("Verifying wallet..."));
@@ -1368,12 +1369,12 @@ CPubKey CWallet::GenerateNewHDMasterKey()
     return pubkey;
 }
 
-bool CWallet::SetHDMasterKey(const CPubKey& pubkey)
+bool CWallet::SetHDMasterKey( const CPubKey & pubkey )
 {
-    LOCK(cs_wallet);
+    LOCK( cs_wallet ) ;
 
-    // ensure this wallet.dat can only be opened by clients supporting HD
-    SetMinVersion(FEATURE_HD);
+    // ensure this wallet file can only be opened by clients supporting hardened "HD" derivation
+    SetMinVersion( FEATURE_HD ) ;
 
     // store the keyid (hash160) together with
     // the child index counter in the database
@@ -3476,7 +3477,7 @@ std::string CWallet::GetWalletHelpString(bool showDebug)
     strUsage += HelpMessageOpt("-usehd", _("Use hierarchical deterministic key generation (HD) after BIP32. Only has effect during wallet creation/first start") + " " + strprintf(_("(default: %u)"), DEFAULT_USE_HD_WALLET));
     strUsage += HelpMessageOpt("-walletrbf", strprintf(_("Send transactions with full-RBF opt-in enabled (default: %u)"), DEFAULT_WALLET_RBF));
     strUsage += HelpMessageOpt("-upgradewallet", _("Upgrade wallet to latest format on startup"));
-    strUsage += HelpMessageOpt("-wallet=<file>", _("Specify wallet file (within data directory)") + " " + strprintf(_("(default: %s)"), DEFAULT_WALLET_DAT));
+    strUsage += HelpMessageOpt("-wallet=<file>", _("Specify wallet file (within data directory)") + " " + strprintf(_("(default: %s)"), DEFAULT_WALLET_FILE)) ;
     strUsage += HelpMessageOpt("-walletbroadcast", _("Make the wallet broadcast transactions") + " " + strprintf(_("(default: %u)"), DEFAULT_WALLETBROADCAST));
     strUsage += HelpMessageOpt("-walletnotify=<cmd>", _("Execute command when a wallet transaction changes (%s in cmd is replaced by TxID)"));
     strUsage += HelpMessageOpt("-zapwallettxes=<mode>", _("Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup") +
@@ -3684,7 +3685,7 @@ bool CWallet::InitLoadWallet()
         return true;
     }
 
-    std::string walletFile = GetArg("-wallet", DEFAULT_WALLET_DAT);
+    std::string walletFile = GetArg( "-wallet", DEFAULT_WALLET_FILE ) ;
 
     CWallet * const pwallet = CreateWalletFromFile(walletFile);
     if (!pwallet) {

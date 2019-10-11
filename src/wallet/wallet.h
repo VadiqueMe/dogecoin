@@ -73,7 +73,7 @@ static const bool DEFAULT_DISABLE_WALLET = false;
 //! if set, all keys will be derived by using BIP32
 static const bool DEFAULT_USE_HD_WALLET = true;
 
-extern const char * DEFAULT_WALLET_DAT;
+extern const char * const DEFAULT_WALLET_FILE ;
 
 class CBlockIndex;
 class CCoinControl;

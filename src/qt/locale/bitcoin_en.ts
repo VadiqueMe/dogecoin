@@ -1793,11 +1793,6 @@ p, li { white-space: pre-wrap; }
         <source>Confirm send coins</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location line="+10"/>
-        <source>The transaction was rejected! This might happen if some of the coins in your wallet were already spent, such as if you used a copy of wallet.dat and coins were spent in the copy but not marked as spent here.</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>PaymentServer</name>

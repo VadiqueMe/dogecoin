@@ -3083,7 +3083,7 @@
     </message>
     <message>
         <source>Attempt to recover private keys from a corrupt wallet on startup</source>
-        <translation>시작시 망가진 wallet.dat에서 개인키 복원을 시도합니다</translation>
+        <translation>시작시 망가진 wallet 에서 개인키 복원을 시도합니다</translation>
     </message>
     <message>
         <source>Block creation options:</source>
