@@ -2632,8 +2632,8 @@
         <translation>Gönderildiği adres</translation>
     </message>
     <message>
-        <source>Payment to yourself</source>
-        <translation>Kendinize ödeme</translation>
+        <source>To self</source>
+        <translation>Kendine</translation>
     </message>
     <message>
         <source>Mined</source>
@@ -2715,8 +2715,8 @@
         <translation>Gönderildiği adres</translation>
     </message>
     <message>
-        <source>To yourself</source>
-        <translation>Kendinize</translation>
+        <source>To self</source>
+        <translation>Kendine</translation>
     </message>
     <message>
         <source>Mined</source>

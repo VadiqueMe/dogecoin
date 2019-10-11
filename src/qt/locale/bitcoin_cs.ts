@@ -2636,8 +2636,8 @@
         <translation>Posláno na</translation>
     </message>
     <message>
-        <source>Payment to yourself</source>
-        <translation>Platba sama sobě</translation>
+        <source>To self</source>
+        <translation>Sam sobě</translation>
     </message>
     <message>
         <source>Mined</source>
@@ -2719,8 +2719,8 @@
         <translation>Posláno</translation>
     </message>
     <message>
-        <source>To yourself</source>
-        <translation>Sám sobě</translation>
+        <source>To self</source>
+        <translation>Sam sobě</translation>
     </message>
     <message>
         <source>Mined</source>

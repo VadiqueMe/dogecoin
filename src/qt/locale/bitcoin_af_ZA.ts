@@ -614,8 +614,8 @@
         <translation>Gestuur na</translation>
     </message>
     <message>
-        <source>Payment to yourself</source>
-        <translation>Betalings Aan/na jouself</translation>
+        <source>To self</source>
+        <translation>Aan/na self</translation>
     </message>
     <message>
         <source>Mined</source>
@@ -677,8 +677,8 @@
         <translation>Gestuur na</translation>
     </message>
     <message>
-        <source>To yourself</source>
-        <translation>Aan/na jouself</translation>
+        <source>To self</source>
+        <translation>Aan/na self</translation>
     </message>
     <message>
         <source>Mined</source>

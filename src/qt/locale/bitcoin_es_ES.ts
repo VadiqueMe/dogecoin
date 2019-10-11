@@ -2512,7 +2512,7 @@
         <translation>Enviado a</translation>
     </message>
     <message>
-        <source>Payment to yourself</source>
+        <source>To self</source>
         <translation>Pago proprio</translation>
     </message>
     <message>
@@ -2595,7 +2595,7 @@
         <translation>Enviado a</translation>
     </message>
     <message>
-        <source>To yourself</source>
+        <source>To self</source>
         <translation>A usted mismo</translation>
     </message>
     <message>

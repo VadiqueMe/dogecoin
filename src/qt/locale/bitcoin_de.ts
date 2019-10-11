@@ -2632,7 +2632,7 @@
         <translation>Überwiesen an</translation>
     </message>
     <message>
-        <source>Payment to yourself</source>
+        <source>To self</source>
         <translation>Eigenüberweisung</translation>
     </message>
     <message>
@@ -2715,7 +2715,7 @@
         <translation>Überwiesen an</translation>
     </message>
     <message>
-        <source>To yourself</source>
+        <source>To self</source>
         <translation>Eigenüberweisung</translation>
     </message>
     <message>

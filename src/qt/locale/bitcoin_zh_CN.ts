@@ -2606,8 +2606,8 @@
         <translation>付款</translation>
     </message>
     <message>
-        <source>Payment to yourself</source>
-        <translation>付款给自己</translation>
+        <source>To self</source>
+        <translation>给自己</translation>
     </message>
     <message>
         <source>Mined</source>
@@ -2689,7 +2689,7 @@
         <translation>付款</translation>
     </message>
     <message>
-        <source>To yourself</source>
+        <source>To self</source>
         <translation>给自己</translation>
     </message>
     <message>

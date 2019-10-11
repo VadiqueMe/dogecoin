@@ -662,8 +662,8 @@
         <translation>Hona bidalia: </translation>
     </message>
     <message>
-        <source>Payment to yourself</source>
-        <translation>Ordainketa zeure buruari</translation>
+        <source>To self</source>
+        <translation>Zeure buruari</translation>
     </message>
     <message>
         <source>Mined</source>
@@ -733,7 +733,7 @@
         <translation>Hona bidalia: </translation>
     </message>
     <message>
-        <source>To yourself</source>
+        <source>To self</source>
         <translation>Zeure buruari</translation>
     </message>
     <message>

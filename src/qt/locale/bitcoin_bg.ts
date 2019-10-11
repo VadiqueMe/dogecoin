@@ -2032,8 +2032,8 @@
         <translation>Изпратени на</translation>
     </message>
     <message>
-        <source>Payment to yourself</source>
-        <translation>Плащане към себе си</translation>
+        <source>To self</source>
+        <translation>Към себе си</translation>
     </message>
     <message>
         <source>Mined</source>
@@ -2107,8 +2107,8 @@
         <translation>Изпратени на</translation>
     </message>
     <message>
-        <source>To yourself</source>
-        <translation>Собствени</translation>
+        <source>To self</source>
+        <translation>Към себе си</translation>
     </message>
     <message>
         <source>Mined</source>

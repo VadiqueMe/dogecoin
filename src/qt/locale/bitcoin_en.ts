@@ -3674,7 +3674,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+2"/>
-        <source>Payment to yourself</source>
+        <source>To self</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3778,7 +3778,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+2"/>
-        <source>To yourself</source>
+        <source>To self</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

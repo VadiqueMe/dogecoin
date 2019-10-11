@@ -2636,8 +2636,8 @@
         <translation>Sendt til</translation>
     </message>
     <message>
-        <source>Payment to yourself</source>
-        <translation>Betaling til dig selv</translation>
+        <source>To self</source>
+        <translation>Til dig selv</translation>
     </message>
     <message>
         <source>Mined</source>
@@ -2719,7 +2719,7 @@
         <translation>Sendt til</translation>
     </message>
     <message>
-        <source>To yourself</source>
+        <source>To self</source>
         <translation>Til dig selv</translation>
     </message>
     <message>

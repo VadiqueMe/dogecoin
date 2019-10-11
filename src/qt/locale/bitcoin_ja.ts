@@ -2636,8 +2636,8 @@
         <translation>送り先</translation>
     </message>
     <message>
-        <source>Payment to yourself</source>
-        <translation>自分自身への支払い</translation>
+        <source>To self</source>
+        <translation>自分へ</translation>
     </message>
     <message>
         <source>Mined</source>
@@ -2719,8 +2719,8 @@
         <translation>送り先</translation>
     </message>
     <message>
-        <source>To yourself</source>
-        <translation>自分自身</translation>
+        <source>To self</source>
+        <translation>自分へ</translation>
     </message>
     <message>
         <source>Mined</source>

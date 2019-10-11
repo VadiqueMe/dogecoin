@@ -1678,8 +1678,8 @@
         <translation>أرسل إلى</translation>
     </message>
     <message>
-        <source>Payment to yourself</source>
-        <translation>دفع لنفسك</translation>
+        <source>To self</source>
+        <translation>إليك</translation>
     </message>
     <message>
         <source>Mined</source>
@@ -1749,7 +1749,7 @@
         <translation>أرسل إلى</translation>
     </message>
     <message>
-        <source>To yourself</source>
+        <source>To self</source>
         <translation>إليك</translation>
     </message>
     <message>

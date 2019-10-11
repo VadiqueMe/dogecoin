@@ -2636,8 +2636,8 @@
         <translation>Enviado a</translation>
     </message>
     <message>
-        <source>Payment to yourself</source>
-        <translation>Pago proprio</translation>
+        <source>To self</source>
+        <translation>A ti mismo</translation>
     </message>
     <message>
         <source>Mined</source>
@@ -2719,8 +2719,8 @@
         <translation>Enviado a</translation>
     </message>
     <message>
-        <source>To yourself</source>
-        <translation>A usted mismo</translation>
+        <source>To self</source>
+        <translation>A ti mismo</translation>
     </message>
     <message>
         <source>Mined</source>

@@ -365,21 +365,21 @@ QString TransactionTableModel::lookupAddress(const std::string &address, bool to
     return description;
 }
 
-QString TransactionTableModel::formatTxType(const TransactionRecord *wtx) const
+QString TransactionTableModel::formatTxType( const TransactionRecord * wtx ) const
 {
-    switch(wtx->type)
+    switch ( wtx->type )
     {
     case TransactionRecord::RecvWithAddress:
-        return tr("Received with");
+        return tr( "Received with" ) ;
     case TransactionRecord::RecvFromOther:
-        return tr("Received from");
+        return tr( "Received from" ) ;
     case TransactionRecord::SendToAddress:
     case TransactionRecord::SendToOther:
-        return tr("Sent to");
+        return tr( "Sent to" ) ;
     case TransactionRecord::SendToSelf:
-        return tr("Payment to yourself");
+        return tr( "To self" ) ;
     case TransactionRecord::Generated:
-        return tr("Mined");
+        return tr( "Mined" ) ;
     default:
         return QString();
     }
@@ -421,8 +421,9 @@ QString TransactionTableModel::formatTxToAddress(const TransactionRecord *wtx, b
     case TransactionRecord::SendToOther:
         return QString::fromStdString(wtx->address) + watchAddress;
     case TransactionRecord::SendToSelf:
+        return QString("(") + tr("To self") + QString(")") + watchAddress ;
     default:
-        return tr("(n/a)") + watchAddress;
+        return tr("(n/a)") + watchAddress ;
     }
 }
 

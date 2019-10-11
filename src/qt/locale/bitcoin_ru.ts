@@ -2636,8 +2636,8 @@
         <translation>Отправлено на</translation>
     </message>
     <message>
-        <source>Payment to yourself</source>
-        <translation>Отправлено себе</translation>
+        <source>To self</source>
+        <translation>Себе самому</translation>
     </message>
     <message>
         <source>Mined</source>
@@ -2716,11 +2716,11 @@
     </message>
     <message>
         <source>Sent to</source>
-        <translation>Отправлено на</translation>
+        <translation>Отправлено</translation>
     </message>
     <message>
-        <source>To yourself</source>
-        <translation>Себе</translation>
+        <source>To self</source>
+        <translation>Себе самому</translation>
     </message>
     <message>
         <source>Mined</source>

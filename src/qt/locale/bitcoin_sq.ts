@@ -690,8 +690,8 @@
         <translation>Dërguar drejt</translation>
     </message>
     <message>
-        <source>Payment to yourself</source>
-        <translation>Pagesë ndaj vetvetes</translation>
+        <source>To self</source>
+        <translation>Ndaj vetvetes</translation>
     </message>
     <message>
         <source>Mined</source>

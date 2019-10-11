@@ -2632,8 +2632,8 @@
         <translation>Verzonden aan</translation>
     </message>
     <message>
-        <source>Payment to yourself</source>
-        <translation>Betaling aan uzelf</translation>
+        <source>To self</source>
+        <translation>Aan uzelf</translation>
     </message>
     <message>
         <source>Mined</source>
@@ -2715,7 +2715,7 @@
         <translation>Verzonden aan</translation>
     </message>
     <message>
-        <source>To yourself</source>
+        <source>To self</source>
         <translation>Aan uzelf</translation>
     </message>
     <message>

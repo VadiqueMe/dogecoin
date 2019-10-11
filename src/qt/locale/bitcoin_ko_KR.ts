@@ -2636,8 +2636,8 @@
         <translation>보낸 주소</translation>
     </message>
     <message>
-        <source>Payment to yourself</source>
-        <translation>자신에게 지불</translation>
+        <source>To self</source>
+        <translation>자기거래</translation>
     </message>
     <message>
         <source>Mined</source>
@@ -2719,7 +2719,7 @@
         <translation>보낸 주소</translation>
     </message>
     <message>
-        <source>To yourself</source>
+        <source>To self</source>
         <translation>자기거래</translation>
     </message>
     <message>

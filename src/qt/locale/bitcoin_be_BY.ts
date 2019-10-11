@@ -1032,8 +1032,8 @@
         <translation>Даслана да</translation>
     </message>
     <message>
-        <source>Payment to yourself</source>
-        <translation>Плацёж самому сабе</translation>
+        <source>To self</source>
+        <translation>Самому сабе</translation>
     </message>
     <message>
         <source>Mined</source>
@@ -1103,8 +1103,8 @@
         <translation>Даслана да</translation>
     </message>
     <message>
-        <source>To yourself</source>
-        <translation>Да сябе</translation>
+        <source>To self</source>
+        <translation>Самому сабе</translation>
     </message>
     <message>
         <source>Mined</source>

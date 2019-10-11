@@ -2632,8 +2632,8 @@
         <translation>Enviado para</translation>
     </message>
     <message>
-        <source>Payment to yourself</source>
-        <translation>Pagamento para você mesmo</translation>
+        <source>To self</source>
+        <translation>Para você mesmo</translation>
     </message>
     <message>
         <source>Mined</source>
@@ -2715,7 +2715,7 @@
         <translation>Enviado para</translation>
     </message>
     <message>
-        <source>To yourself</source>
+        <source>To self</source>
         <translation>Para você mesmo</translation>
     </message>
     <message>

@@ -2401,8 +2401,8 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
         <translation>Inviato a</translation>
     </message>
     <message>
-        <source>Payment to yourself</source>
-        <translation>Pagamento a te stesso</translation>
+        <source>To self</source>
+        <translation>A te stesso</translation>
     </message>
     <message>
         <source>Mined</source>
@@ -2484,7 +2484,7 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
         <translation>Inviato a</translation>
     </message>
     <message>
-        <source>To yourself</source>
+        <source>To self</source>
         <translation>A te stesso</translation>
     </message>
     <message>

@@ -2581,8 +2581,8 @@
         <translation>Odoslané na</translation>
     </message>
     <message>
-        <source>Payment to yourself</source>
-        <translation>Platba sebe samému</translation>
+        <source>To self</source>
+        <translation>Sebe samému</translation>
     </message>
     <message>
         <source>Mined</source>
@@ -2660,8 +2660,8 @@
         <translation>Odoslané na</translation>
     </message>
     <message>
-        <source>To yourself</source>
-        <translation>Ku mne</translation>
+        <source>To self</source>
+        <translation>Sebe samému</translation>
     </message>
     <message>
         <source>Mined</source>
