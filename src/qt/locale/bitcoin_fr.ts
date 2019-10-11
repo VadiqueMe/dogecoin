@@ -1681,22 +1681,6 @@
         <translation>L'activité réseau est désactivée.</translation>
     </message>
     <message>
-        <source>%1 B</source>
-        <translation>%1 o</translation>
-    </message>
-    <message>
-        <source>%1 KB</source>
-        <translation>%1 Ko</translation>
-    </message>
-    <message>
-        <source>%1 MB</source>
-        <translation>%1 Mo</translation>
-    </message>
-    <message>
-        <source>%1 GB</source>
-        <translation>%1 Go</translation>
-    </message>
-    <message>
         <source>(node id: %1)</source>
         <translation>(ID de nœud : %1)</translation>
     </message>

@@ -1341,22 +1341,6 @@
         <translation>Escriviu &lt;b&gt;help&lt;\b&gt; per a obtindre un llistat de les ordes disponibles.</translation>
     </message>
     <message>
-        <source>%1 B</source>
-        <translation>%1 B</translation>
-    </message>
-    <message>
-        <source>%1 KB</source>
-        <translation>%1 KB</translation>
-    </message>
-    <message>
-        <source>%1 MB</source>
-        <translation>%1 MB</translation>
-    </message>
-    <message>
-        <source>%1 GB</source>
-        <translation>%1 GB</translation>
-    </message>
-    <message>
         <source>via %1</source>
         <translation>a través de %1</translation>
     </message>

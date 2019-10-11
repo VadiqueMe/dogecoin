@@ -1681,22 +1681,6 @@
         <translation>네트워크 활동이 정지됨.</translation>
     </message>
     <message>
-        <source>%1 B</source>
-        <translation>%1 바이트</translation>
-    </message>
-    <message>
-        <source>%1 KB</source>
-        <translation>%1 킬로바이트</translation>
-    </message>
-    <message>
-        <source>%1 MB</source>
-        <translation>%1 메가바이트</translation>
-    </message>
-    <message>
-        <source>%1 GB</source>
-        <translation>%1 기가바이트</translation>
-    </message>
-    <message>
         <source>(node id: %1)</source>
         <translation>(노드 ID: %1)</translation>
     </message>

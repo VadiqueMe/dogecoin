@@ -1079,22 +1079,6 @@
         <translation>استخدم اسهم الاعلى و الاسفل للتنقل بين السجلات و &lt;b&gt;Ctrl-L&lt;/b&gt;  لمسح الشاشة</translation>
     </message>
     <message>
-        <source>%1 B</source>
-        <translation>%1 بايت</translation>
-    </message>
-    <message>
-        <source>%1 KB</source>
-        <translation>%1 كيلو بايت</translation>
-    </message>
-    <message>
-        <source>%1 MB</source>
-        <translation>%1 ميقا بايت</translation>
-    </message>
-    <message>
-        <source>%1 GB</source>
-        <translation>%1 قيقا بايت</translation>
-    </message>
-    <message>
         <source>never</source>
         <translation>ابدا</translation>
     </message>

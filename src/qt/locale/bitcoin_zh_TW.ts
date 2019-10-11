@@ -1681,22 +1681,6 @@
         <translation>網路活動已關閉</translation>
     </message>
     <message>
-        <source>%1 B</source>
-        <translation>%1 B (位元組)</translation>
-    </message>
-    <message>
-        <source>%1 KB</source>
-        <translation>%1 KB (千位元組)</translation>
-    </message>
-    <message>
-        <source>%1 MB</source>
-        <translation>%1 MB (百萬位元組)</translation>
-    </message>
-    <message>
-        <source>%1 GB</source>
-        <translation>%1 GB (十億位元組)</translation>
-    </message>
-    <message>
         <source>(node id: %1)</source>
         <translation>(節點識別碼: %1)</translation>
     </message>

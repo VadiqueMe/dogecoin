@@ -1681,22 +1681,6 @@
         <translation>Сетевая активность запрещена</translation>
     </message>
     <message>
-        <source>%1 B</source>
-        <translation>%1 Б</translation>
-    </message>
-    <message>
-        <source>%1 KB</source>
-        <translation>%1 КБ</translation>
-    </message>
-    <message>
-        <source>%1 MB</source>
-        <translation>%1 МБ</translation>
-    </message>
-    <message>
-        <source>%1 GB</source>
-        <translation>%1 ГБ</translation>
-    </message>
-    <message>
         <source>(node id: %1)</source>
         <translation>(номер узла: %1)</translation>
     </message>
