@@ -437,8 +437,7 @@ RPCConsole::RPCConsole(const PlatformStyle *_platformStyle, QWidget *parent) :
     if ( platformStyle->getImagesOnButtons() )
         ui->openDebugLogButton->setIcon( platformStyle->SingleColorIcon( ":/icons/export" ) ) ;
 
-    logFileChanged() ;
-    logFileWatcher.addPath( pathToLogFile ) ;
+    veryLogFile() ;
     connect( &logFileWatcher, SIGNAL( fileChanged(QString) ), this, SLOT( onFileChange(const QString &) ) ) ;
 
     ui->clearButton->setIcon(platformStyle->SingleColorIcon(":/icons/remove"));
@@ -914,11 +913,14 @@ void RPCConsole::onFileChange( const QString & whatsChanged )
 {
     if ( whatsChanged == pathToLogFile )
         if ( ui->tabWidget->currentWidget() == ui->tab_log )
-            logFileChanged() ;
+            veryLogFile() ;
 }
 
-void RPCConsole::logFileChanged()
+void RPCConsole::veryLogFile()
 {
+    if ( QFile::exists( pathToLogFile ) ) // log file can be removed and then recreated
+        logFileWatcher.addPath( pathToLogFile ) ;
+
     QFile logFile( pathToLogFile ) ;
     if ( ! logFile.open( QIODevice::ReadOnly ) )
     {
@@ -942,7 +944,7 @@ void RPCConsole::showContextMenuForLog( const QPoint & where )
     logAreaContextMenu->addSeparator() ;
 
     QAction * reloadLogAction = new QAction( "Refresh Log", this ) ;
-    connect( reloadLogAction, SIGNAL( triggered() ), this, SLOT( logFileChanged() ) ) ;
+    connect( reloadLogAction, SIGNAL( triggered() ), this, SLOT( veryLogFile() ) ) ;
     logAreaContextMenu->addAction( reloadLogAction ) ;
 
     logAreaContextMenu->popup( mapToGlobal( where ) ) ;

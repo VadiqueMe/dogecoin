@@ -684,7 +684,7 @@ bool static ScanHash( const CBlockHeader * const blockHeader, uint32_t & nNonce,
         // caller will check if it's enough for the solution
         if ( ((uint32_t*)phash)[7] == 0 /* && ((uint8_t*)phash)[27] == 0 */ )
         {
-            LogPrintf( "ScanHash found %s, solution is %s\n", phash->GetHex(), solutionHash.GetHex() ) ;
+            LogPrintf( "ScanHash with nonce %d found %s, solution is %s\n", nNonce, phash->GetHex(), solutionHash.GetHex() ) ;
             return true ;
         }
 
@@ -788,7 +788,8 @@ void static DogecoinMiner( const CChainParams & chainparams )
                         assert( hash == pblock->GetHash() ) ;
 
                         LogPrintf( "DogecoinMiner:\n" ) ;
-                        LogPrintf( "proof-of-work found\n   hash %s\n   <= solution %s\n", hash.GetHex(), solutionHash.GetHex() ) ;
+                        LogPrintf( "proof-of-work found with nonce %d\n   hash %s\n   <= solution %s\n",
+                                   nNonce, hash.GetHex(), solutionHash.GetHex() ) ;
 
                         /* bool ok = */ ProcessBlockFound( pblock, chainparams ) ;
                         coinbaseScript->KeepScript() ;

@@ -68,7 +68,7 @@ private Q_SLOTS:
     void on_lineEdit_returnPressed();
     void on_tabWidget_currentChanged(int index);
     void onFileChange( const QString & whatsChanged ) ;
-    void logFileChanged() ;
+    void veryLogFile() ;
     /** open the debug log from the current datadir */
     void on_openDebugLogButton_clicked() ;
     /** change the time range of the network traffic graph */
