@@ -1169,7 +1169,7 @@
         <translation>Версия на клиента</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
+        <source>Information</source>
         <translation>Данни</translation>
     </message>
     <message>
@@ -1213,8 +1213,8 @@
         <translation>Изпратени</translation>
     </message>
     <message>
-        <source>&amp;Peers</source>
-        <translation>&amp;Пиъри</translation>
+        <source>Peers</source>
+        <translation>Пиъри</translation>
     </message>
     <message>
         <source>Select a peer to view detailed information</source>
@@ -1261,12 +1261,12 @@
         <translation>&amp;Отвори</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Конзола</translation>
+        <source>Console</source>
+        <translation>Конзола</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>&amp;Мрежов Трафик</translation>
+        <source>Network Traffic</source>
+        <translation>Мрежов Трафик</translation>
     </message>
     <message>
         <source>Clear</source>

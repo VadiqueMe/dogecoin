@@ -2129,8 +2129,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="-22"/>
-        <source>&amp;Information</source>
-        <translation>&amp;Information</translation>
+        <source>Information</source>
+        <translation>Information</translation>
     </message>
     <message>
         <location line="-10"/>
@@ -2211,7 +2211,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="-414"/>
-        <source>&amp;Peers</source>
+        <source>Peers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2334,12 +2334,12 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+26"/>
-        <source>&amp;Console</source>
-        <translation>&amp;Console</translation>
+        <source>Console</source>
+        <translation>Console</translation>
     </message>
     <message>
         <location line="+195"/>
-        <source>&amp;Network Traffic</source>
+        <source>Network Traffic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -885,8 +885,8 @@
         <translation>Različica odjemalca</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Informacije</translation>
+        <source>Information</source>
+        <translation>Informacije</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -933,8 +933,8 @@
         <translation>Oddano</translation>
     </message>
     <message>
-        <source>&amp;Peers</source>
-        <translation>&amp;Soležniki</translation>
+        <source>Peers</source>
+        <translation>Soležniki</translation>
     </message>
     <message>
         <source>Select a peer to view detailed information</source>
@@ -989,12 +989,12 @@
         <translation>&amp;Odpri</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Konzola</translation>
+        <source>Console</source>
+        <translation>Konzola</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>&amp;Omrežni promet</translation>
+        <source>Network Traffic</source>
+        <translation>Omrežni promet</translation>
     </message>
     <message>
         <source>Clear</source>

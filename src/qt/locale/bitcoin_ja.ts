@@ -1449,8 +1449,8 @@
         <translation>クライアントのバージョン</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>情報 (&amp;I)</translation>
+        <source>Information</source>
+        <translation>情報</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -1513,8 +1513,8 @@
         <translation>送金</translation>
     </message>
     <message>
-        <source>&amp;Peers</source>
-        <translation>ピア (&amp;P)</translation>
+        <source>Peers</source>
+        <translation>ピア</translation>
     </message>
     <message>
         <source>Banned peers</source>
@@ -1609,12 +1609,12 @@
         <translation>開く (&amp;O)</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>コンソール (&amp;C)</translation>
+        <source>Console</source>
+        <translation>コンソール</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>ネットワーク (&amp;N)</translation>
+        <source>Network Traffic</source>
+        <translation>ネットワーク</translation>
     </message>
     <message>
         <source>Clear</source>

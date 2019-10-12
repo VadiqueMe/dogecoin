@@ -1045,8 +1045,8 @@
         <translation>Versi Klien</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Informasi</translation>
+        <source>Information</source>
+        <translation>Informasi</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -1107,12 +1107,12 @@
         <translation>&amp;Buka</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Konsol</translation>
+        <source>Console</source>
+        <translation>Konsol</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>Kemacetan &amp;Jaringan </translation>
+        <source>Network Traffic</source>
+        <translation>Kemacetan Jaringan</translation>
     </message>
     <message>
         <source>Clear</source>

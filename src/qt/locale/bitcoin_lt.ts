@@ -575,8 +575,8 @@
         <translation>Kliento versija</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Informacija</translation>
+        <source>Information</source>
+        <translation>Informacija</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -627,8 +627,8 @@
         <translation>&amp;Atverti</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Konsolė</translation>
+        <source>Console</source>
+        <translation>Konsolė</translation>
     </message>
     <message>
         <source>Clear</source>

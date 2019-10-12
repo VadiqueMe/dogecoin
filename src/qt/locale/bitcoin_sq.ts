@@ -435,7 +435,7 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>&amp;Information</source>
+        <source>Information</source>
         <translation>Informacion</translation>
     </message>
     <message>

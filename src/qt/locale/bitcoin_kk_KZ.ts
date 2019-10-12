@@ -211,7 +211,7 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>&amp;Information</source>
+        <source>Information</source>
         <translation>Информация</translation>
     </message>
     </context>

@@ -917,7 +917,7 @@
         <translation>Έκδοση Πελάτη</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
+        <source>Information</source>
         <translation>&amp;Πληροφορία</translation>
     </message>
     <message>
@@ -965,8 +965,8 @@
         <translation>Αποστολή</translation>
     </message>
     <message>
-        <source>&amp;Peers</source>
-        <translation>&amp;Χρήστες</translation>
+        <source>Peers</source>
+        <translation>Χρήστες</translation>
     </message>
     <message>
         <source>Select a peer to view detailed information</source>
@@ -1009,12 +1009,12 @@
         <translation>&amp;Άνοιγμα</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Κονσόλα</translation>
+        <source>Console</source>
+        <translation>Κονσόλα</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>&amp;Κίνηση δικτύου</translation>
+        <source>Network Traffic</source>
+        <translation>Κίνηση δικτύου</translation>
     </message>
     <message>
         <source>Clear</source>

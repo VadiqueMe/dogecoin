@@ -961,8 +961,8 @@
         <translation>Версія клієнту</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Інформація</translation>
+        <source>Information</source>
+        <translation>Інформація</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -1021,8 +1021,8 @@
         <translation>Відправлено</translation>
     </message>
     <message>
-        <source>&amp;Peers</source>
-        <translation>&amp;Учасники</translation>
+        <source>Peers</source>
+        <translation>Учасники</translation>
     </message>
     <message>
         <source>Banned peers</source>
@@ -1105,12 +1105,12 @@
         <translation>&amp;Відкрити</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Консоль</translation>
+        <source>Console</source>
+        <translation>Консоль</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>&amp;Мережевий трафік</translation>
+        <source>Network Traffic</source>
+        <translation>Мережевий трафік</translation>
     </message>
     <message>
         <source>Clear</source>

@@ -335,7 +335,7 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>&amp;Information</source>
+        <source>Information</source>
         <translation>Gwybodaeth</translation>
     </message>
     <message>

@@ -793,8 +793,8 @@
         <translation>Kliens verzió</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Információ</translation>
+        <source>Information</source>
+        <translation>Információ</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -845,8 +845,8 @@
         <translation>Küldött</translation>
     </message>
     <message>
-        <source>&amp;Peers</source>
-        <translation>&amp;Peerek</translation>
+        <source>Peers</source>
+        <translation>Peerek</translation>
     </message>
     <message>
         <source>Banned peers</source>
@@ -893,12 +893,12 @@
         <translation>&amp;Megnyitás</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Konzol</translation>
+        <source>Console</source>
+        <translation>Konzol</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>&amp;Hálózati forgalom</translation>
+        <source>Network Traffic</source>
+        <translation>Hálózati forgalom</translation>
     </message>
     <message>
         <source>Clear</source>

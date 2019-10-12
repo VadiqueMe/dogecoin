@@ -459,8 +459,8 @@
         <translation>Versio clientis</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Informatio</translation>
+        <source>Information</source>
+        <translation>Informatio</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -495,8 +495,8 @@
         <translation>&amp;Aperi</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Terminale</translation>
+        <source>Console</source>
+        <translation>Terminale</translation>
     </message>
     <message>
         <source>Clear console</source>

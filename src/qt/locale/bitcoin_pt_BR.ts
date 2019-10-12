@@ -1445,8 +1445,8 @@
         <translation>Versão do cliente</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Informação</translation>
+        <source>Information</source>
+        <translation>Informação</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -1509,8 +1509,8 @@
         <translation>Enviado</translation>
     </message>
     <message>
-        <source>&amp;Peers</source>
-        <translation>&amp;Pares</translation>
+        <source>Peers</source>
+        <translation>Pares</translation>
     </message>
     <message>
         <source>Banned peers</source>
@@ -1605,11 +1605,11 @@
         <translation>&amp;Abrir</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Console</translation>
+        <source>Console</source>
+        <translation>Console</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
+        <source>Network Traffic</source>
         <translation>Tráfico de Rede</translation>
     </message>
     <message>

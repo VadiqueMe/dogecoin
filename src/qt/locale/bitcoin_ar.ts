@@ -983,7 +983,7 @@
         <translation>نسخه العميل</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
+        <source>Information</source>
         <translation>المعلومات</translation>
     </message>
     <message>
@@ -1019,8 +1019,8 @@
         <translation>تم الإرسال</translation>
     </message>
     <message>
-        <source>&amp;Peers</source>
-        <translation>&amp;اصدقاء</translation>
+        <source>Peers</source>
+        <translation>اصدقاء</translation>
     </message>
     <message>
         <source>Direction</source>
@@ -1043,8 +1043,8 @@
         <translation>الفتح</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>&amp;حركة مرور الشبكة</translation>
+        <source>Network Traffic</source>
+        <translation>حركة مرور الشبكة</translation>
     </message>
     <message>
         <source>Clear</source>

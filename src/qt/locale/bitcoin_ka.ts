@@ -663,8 +663,8 @@
         <translation>კლიენტის ვერსია</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;ინფორმაცია</translation>
+        <source>Information</source>
+        <translation>ინფორმაცია</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -707,12 +707,12 @@
         <translation>&amp;შექმნა</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;კონსოლი</translation>
+        <source>Console</source>
+        <translation>კონსოლი</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>&amp;ქსელის ტრაფიკი</translation>
+        <source>Network Traffic</source>
+        <translation>ქსელის ტრაფიკი</translation>
     </message>
     <message>
         <source>Clear</source>

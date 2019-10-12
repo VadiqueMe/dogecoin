@@ -707,8 +707,8 @@
         <translation>Мижоз номи</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Маълумот</translation>
+        <source>Information</source>
+        <translation>Маълумот</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -735,8 +735,8 @@
         <translation>Ном</translation>
     </message>
     <message>
-        <source>&amp;Peers</source>
-        <translation>&amp;Уламлар</translation>
+        <source>Peers</source>
+        <translation>Уламлар</translation>
     </message>
     <message>
         <source>Select a peer to view detailed information</source>
@@ -787,12 +787,12 @@
         <translation>&amp;Очиш</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Терминал</translation>
+        <source>Console</source>
+        <translation>Терминал</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>&amp;Тармоқ трафиги</translation>
+        <source>Network Traffic</source>
+        <translation>Тармоқ трафиги</translation>
     </message>
     <message>
         <source>Clear</source>

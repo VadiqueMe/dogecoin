@@ -187,7 +187,7 @@
     </message>
     <message>
         <source>Information</source>
-        <translation>&amp;Impormasion</translation>
+        <translation>Impormasion</translation>
     </message>
     <message>
         <source>Up to date</source>
@@ -447,8 +447,8 @@
         <translation>Bersion ning Cliente</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Impormasion</translation>
+        <source>Information</source>
+        <translation>Impormasion</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -483,8 +483,8 @@
         <translation>&amp;Ibuklat</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Console</translation>
+        <source>Console</source>
+        <translation>Console</translation>
     </message>
     <message>
         <source>Clear console</source>
@@ -765,7 +765,7 @@
     </message>
     <message>
         <source>Information</source>
-        <translation>&amp;Impormasion</translation>
+        <translation>Impormasion</translation>
     </message>
     <message>
         <source>Send trace/debug info to console instead of debug log file</source>

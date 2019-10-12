@@ -253,7 +253,7 @@
 </translation>
     </message>
     <message>
-        <source>&amp;Information</source>
+        <source>Information</source>
         <translation>जानकारी</translation>
     </message>
     </context>

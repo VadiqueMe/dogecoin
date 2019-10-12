@@ -1049,8 +1049,8 @@
         <translation>نسخهٔ کلاینت</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;اطلاعات</translation>
+        <source>Information</source>
+        <translation>اطلاعات</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -1137,8 +1137,8 @@
         <translation>با&amp;ز کردن</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;کنسول</translation>
+        <source>Console</source>
+        <translation>کنسول</translation>
     </message>
     <message>
         <source>In:</source>

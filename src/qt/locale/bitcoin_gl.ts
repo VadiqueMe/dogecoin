@@ -599,8 +599,8 @@
         <translation>Versión do cliente</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Información</translation>
+        <source>Information</source>
+        <translation>Información</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -635,12 +635,12 @@
         <translation>&amp;Abrir</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Consola</translation>
+        <source>Console</source>
+        <translation>Consola</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>&amp;Tráfico de Rede</translation>
+        <source>Network Traffic</source>
+        <translation>Tráfico de Rede</translation>
     </message>
     <message>
         <source>Clear</source>

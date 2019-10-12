@@ -1449,8 +1449,8 @@
         <translation>클라이언트 버전</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>정보(&amp;I)</translation>
+        <source>Information</source>
+        <translation>정보</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -1513,8 +1513,8 @@
         <translation>보냄</translation>
     </message>
     <message>
-        <source>&amp;Peers</source>
-        <translation>피어(&amp;P)</translation>
+        <source>Peers</source>
+        <translation>피어</translation>
     </message>
     <message>
         <source>Banned peers</source>
@@ -1609,12 +1609,12 @@
         <translation>열기(&amp;O)</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>콘솔(&amp;C)</translation>
+        <source>Console</source>
+        <translation>콘솔</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>네트워크 트래픽(&amp;N)</translation>
+        <source>Network Traffic</source>
+        <translation>네트워크 트래픽</translation>
     </message>
     <message>
         <source>Clear</source>

@@ -893,8 +893,8 @@
         <translation>Versiune client</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Informaţii</translation>
+        <source>Information</source>
+        <translation>Informaţii</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -949,8 +949,8 @@
         <translation>Trimis</translation>
     </message>
     <message>
-        <source>&amp;Peers</source>
-        <translation>&amp;Parteneri</translation>
+        <source>Peers</source>
+        <translation>Parteneri</translation>
     </message>
     <message>
         <source>Select a peer to view detailed information</source>
@@ -1013,11 +1013,11 @@
         <translation>&amp;Deschide</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Consolă</translation>
+        <source>Console</source>
+        <translation>Consolă</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
+        <source>Network Traffic</source>
         <translation>Trafic reţea</translation>
     </message>
     <message>

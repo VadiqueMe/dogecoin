@@ -789,8 +789,8 @@
         <translation>Versio de kliento</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Informoj</translation>
+        <source>Information</source>
+        <translation>Informoj</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -833,8 +833,8 @@
         <translation>Sendita</translation>
     </message>
     <message>
-        <source>&amp;Peers</source>
-        <translation>&amp;Samuloj</translation>
+        <source>Peers</source>
+        <translation>Samuloj</translation>
     </message>
     <message>
         <source>Banned peers</source>
@@ -861,12 +861,12 @@
         <translation>&amp;Malfermi</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Konzolo</translation>
+        <source>Console</source>
+        <translation>Konzolo</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>&amp;Reta Trafiko</translation>
+        <source>Network Traffic</source>
+        <translation>Reta Trafiko</translation>
     </message>
     <message>
         <source>Clear</source>

@@ -1449,8 +1449,8 @@
         <translation>İstemci sürümü</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Bilgi</translation>
+        <source>Information</source>
+        <translation>Bilgi</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -1513,8 +1513,8 @@
         <translation>Yollanan</translation>
     </message>
     <message>
-        <source>&amp;Peers</source>
-        <translation>&amp;Eşler</translation>
+        <source>Peers</source>
+        <translation>Eşler</translation>
     </message>
     <message>
         <source>Banned peers</source>
@@ -1609,12 +1609,12 @@
         <translation>&amp;Aç</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Konsol</translation>
+        <source>Console</source>
+        <translation>Konsol</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>&amp;Ağ trafiği</translation>
+        <source>Network Traffic</source>
+        <translation>Ağ trafiği</translation>
     </message>
     <message>
         <source>Clear</source>

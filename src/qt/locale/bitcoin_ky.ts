@@ -171,7 +171,7 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>&amp;Information</source>
+        <source>Information</source>
         <translation>Маалымат</translation>
     </message>
     <message>
@@ -191,8 +191,8 @@
         <translation>&amp;Ачуу</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Консоль</translation>
+        <source>Console</source>
+        <translation>Консоль</translation>
     </message>
     <message>
         <source>Clear console</source>

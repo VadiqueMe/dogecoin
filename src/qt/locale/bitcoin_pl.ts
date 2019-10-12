@@ -1337,8 +1337,8 @@
         <translation>Wersja klienta</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Informacje</translation>
+        <source>Information</source>
+        <translation>Informacje</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -1401,8 +1401,8 @@
         <translation>Wysłane</translation>
     </message>
     <message>
-        <source>&amp;Peers</source>
-        <translation>&amp;Węzły</translation>
+        <source>Peers</source>
+        <translation>Węzły</translation>
     </message>
     <message>
         <source>Banned peers</source>
@@ -1497,12 +1497,12 @@
         <translation>&amp;Otwórz</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Konsola</translation>
+        <source>Console</source>
+        <translation>Konsola</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>$Ruch sieci</translation>
+        <source>Network Traffic</source>
+        <translation>Ruch sieci</translation>
     </message>
     <message>
         <source>Clear</source>

@@ -621,7 +621,7 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>&amp;Information</source>
+        <source>Information</source>
         <translation>Thông tin</translation>
     </message>
     <message>

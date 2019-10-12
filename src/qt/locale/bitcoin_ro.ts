@@ -535,8 +535,8 @@
         <translation>Versiunea clientului</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Informații</translation>
+        <source>Information</source>
+        <translation>Informații</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -583,8 +583,8 @@
         <translation>&amp;Deschide</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Consolă</translation>
+        <source>Console</source>
+        <translation>Consolă</translation>
     </message>
     <message>
         <source>1 &amp;hour</source>

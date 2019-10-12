@@ -1429,8 +1429,8 @@
         <translation>Verzia klienta</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Informácia</translation>
+        <source>Information</source>
+        <translation>Informácia</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -1493,8 +1493,8 @@
         <translation>Odoslané</translation>
     </message>
     <message>
-        <source>&amp;Peers</source>
-        <translation>&amp;Partneri</translation>
+        <source>Peers</source>
+        <translation>Partneri</translation>
     </message>
     <message>
         <source>Banned peers</source>
@@ -1590,12 +1590,12 @@
         <translation>&amp;Otvoriť</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Konzola</translation>
+        <source>Console</source>
+        <translation>Konzola</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>&amp;Sieťová prevádzka</translation>
+        <source>Network Traffic</source>
+        <translation>Sieťová prevádzka</translation>
     </message>
     <message>
         <source>Clear</source>

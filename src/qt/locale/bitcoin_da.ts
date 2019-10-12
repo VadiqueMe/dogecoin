@@ -1449,8 +1449,8 @@
         <translation>Klientversion</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Information</translation>
+        <source>Information</source>
+        <translation>Information</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -1513,8 +1513,8 @@
         <translation>Sendt</translation>
     </message>
     <message>
-        <source>&amp;Peers</source>
-        <translation>Andre &amp;knuder</translation>
+        <source>Peers</source>
+        <translation>Andre knuder</translation>
     </message>
     <message>
         <source>Banned peers</source>
@@ -1609,12 +1609,12 @@
         <translation>&amp;Åbn</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Konsol</translation>
+        <source>Console</source>
+        <translation>Konsol</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>&amp;Netværkstrafik</translation>
+        <source>Network Traffic</source>
+        <translation>Netværkstrafik</translation>
     </message>
     <message>
         <source>Clear</source>

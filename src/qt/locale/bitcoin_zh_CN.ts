@@ -1435,7 +1435,7 @@
         <translation>客户端版本</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
+        <source>Information</source>
         <translation>信息</translation>
     </message>
     <message>
@@ -1499,8 +1499,8 @@
         <translation>发送</translation>
     </message>
     <message>
-        <source>&amp;Peers</source>
-        <translation>同伴(&amp;P)</translation>
+        <source>Peers</source>
+        <translation>同伴</translation>
     </message>
     <message>
         <source>Banned peers</source>
@@ -1595,12 +1595,12 @@
         <translation>打开(&amp;O)</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>控制台(&amp;C)</translation>
+        <source>Console</source>
+        <translation>控制台</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>网络流量(&amp;N)</translation>
+        <source>Network Traffic</source>
+        <translation>网络流量</translation>
     </message>
     <message>
         <source>Clear</source>

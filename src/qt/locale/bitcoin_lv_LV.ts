@@ -647,8 +647,8 @@
         <translation>Klienta versija</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Informācija</translation>
+        <source>Information</source>
+        <translation>Informācija</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -691,12 +691,12 @@
         <translation>&amp;Atvērt</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Konsole</translation>
+        <source>Console</source>
+        <translation>Konsole</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>&amp;Tīkla Satiksme</translation>
+        <source>Network Traffic</source>
+        <translation>Tīkla Satiksme</translation>
     </message>
     <message>
         <source>Clear</source>

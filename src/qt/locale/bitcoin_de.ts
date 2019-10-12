@@ -1445,7 +1445,7 @@
         <translation>Clientversion</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
+        <source>Information</source>
         <translation>Hinweis</translation>
     </message>
     <message>
@@ -1509,8 +1509,8 @@
         <translation>Übertragen</translation>
     </message>
     <message>
-        <source>&amp;Peers</source>
-        <translation>&amp;Gegenstellen</translation>
+        <source>Peers</source>
+        <translation>Gegenstellen</translation>
     </message>
     <message>
         <source>Banned peers</source>
@@ -1605,12 +1605,12 @@
         <translation>&amp;Öffnen</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Konsole</translation>
+        <source>Console</source>
+        <translation>Konsole</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>&amp;Netzwerkauslastung</translation>
+        <source>Network Traffic</source>
+        <translation>Netzwerkauslastung</translation>
     </message>
     <message>
         <source>Clear</source>

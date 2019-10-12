@@ -505,8 +505,8 @@
         <translation>N/A</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>資訊 &amp;I</translation>
+        <source>Information</source>
+        <translation>資訊</translation>
     </message>
     <message>
         <source>Debug window</source>

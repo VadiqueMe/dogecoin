@@ -363,8 +363,8 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Informatsioon</translation>
+        <source>Information</source>
+        <translation>Informatsioon</translation>
     </message>
     <message>
         <source>General</source>
@@ -415,8 +415,8 @@
         <translation>Pingi Aeg</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>&amp;Võrgu Liiklus</translation>
+        <source>Network Traffic</source>
+        <translation>Võrgu Liiklus</translation>
     </message>
     <message>
         <source>Clear console</source>

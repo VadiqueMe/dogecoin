@@ -167,8 +167,8 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;زانیاری</translation>
+        <source>Information</source>
+        <translation>زانیاری</translation>
     </message>
     <message>
         <source>General</source>

@@ -1033,8 +1033,8 @@
         <translation>Client version</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Information</translation>
+        <source>Information</source>
+        <translation>Information</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -1097,8 +1097,8 @@
         <translation>Sent</translation>
     </message>
     <message>
-        <source>&amp;Peers</source>
-        <translation>&amp;Peers</translation>
+        <source>Peers</source>
+        <translation>Peers</translation>
     </message>
     <message>
         <source>Banned peers</source>
@@ -1189,12 +1189,12 @@
         <translation>&amp;Open</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Console</translation>
+        <source>Console</source>
+        <translation>Console</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>&amp;Network Traffic</translation>
+        <source>Network Traffic</source>
+        <translation>Network Traffic</translation>
     </message>
     <message>
         <source>Clear</source>

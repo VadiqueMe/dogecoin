@@ -1017,8 +1017,8 @@
         <translation>Klientversjon</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Informasjon</translation>
+        <source>Information</source>
+        <translation>Informasjon</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -1077,8 +1077,8 @@
         <translation>Sendt</translation>
     </message>
     <message>
-        <source>&amp;Peers</source>
-        <translation>&amp;Noder</translation>
+        <source>Peers</source>
+        <translation>Noder</translation>
     </message>
     <message>
         <source>Banned peers</source>
@@ -1169,12 +1169,12 @@
         <translation>&amp;Åpne</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Konsoll</translation>
+        <source>Console</source>
+        <translation>Konsoll</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>&amp;Nettverkstrafikk</translation>
+        <source>Network Traffic</source>
+        <translation>Nettverkstrafikk</translation>
     </message>
     <message>
         <source>Clear</source>

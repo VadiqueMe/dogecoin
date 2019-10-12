@@ -1449,8 +1449,8 @@
         <translation>Версия клиента</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Информация</translation>
+        <source>Information</source>
+        <translation>Информация</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -1513,8 +1513,8 @@
         <translation>Отправлено</translation>
     </message>
     <message>
-        <source>&amp;Peers</source>
-        <translation>&amp;Участники</translation>
+        <source>Peers</source>
+        <translation>Участники</translation>
     </message>
     <message>
         <source>Banned peers</source>
@@ -1609,12 +1609,12 @@
         <translation>&amp;Открыть</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
+        <source>Console</source>
         <translation>Консоль</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>Сетевой &amp;трафик</translation>
+        <source>Network Traffic</source>
+        <translation>Сетевой трафик</translation>
     </message>
     <message>
         <source>Clear</source>

@@ -395,8 +395,8 @@
         <translation>வாடிக்கையாளர் பதிப்பு</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;தகவல்</translation>
+        <source>Information</source>
+        <translation>தகவல்</translation>
     </message>
     <message>
         <source>Network</source>
@@ -439,8 +439,8 @@
         <translation>&amp;திற</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;பணியகம்</translation>
+        <source>Console</source>
+        <translation>பணியகம்</translation>
     </message>
     <message>
         <source>Clear</source>

@@ -1449,7 +1449,7 @@
         <translation>客戶端軟體版本</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
+        <source>Information</source>
         <translation>資訊</translation>
     </message>
     <message>
@@ -1513,7 +1513,7 @@
         <translation>送出</translation>
     </message>
     <message>
-        <source>&amp;Peers</source>
+        <source>Peers</source>
         <translation>節點</translation>
     </message>
     <message>
@@ -1609,11 +1609,11 @@
         <translation>開啓</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
+        <source>Console</source>
         <translation>主控台</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
+        <source>Network Traffic</source>
         <translation>網路流量</translation>
     </message>
     <message>

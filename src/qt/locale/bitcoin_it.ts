@@ -1366,8 +1366,8 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
         <translation>Versione client</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Informazioni</translation>
+        <source>Information</source>
+        <translation>Informazioni</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -1430,8 +1430,8 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
         <translation>Inviato</translation>
     </message>
     <message>
-        <source>&amp;Peers</source>
-        <translation>&amp;Peer</translation>
+        <source>Peers</source>
+        <translation>Peer</translation>
     </message>
     <message>
         <source>Banned peers</source>
@@ -1522,12 +1522,12 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
         <translation>&amp;Apri</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Console</translation>
+        <source>Console</source>
+        <translation>Console</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>&amp;Traffico di Rete</translation>
+        <source>Network Traffic</source>
+        <translation>Traffico di Rete</translation>
     </message>
     <message>
         <source>Clear</source>

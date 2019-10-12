@@ -961,12 +961,12 @@
         <translation>Pääteohjelman versio</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>T&amp;ietoa</translation>
+        <source>Information</source>
+        <translation>Tietoa</translation>
     </message>
     <message>
         <source>Debug window</source>
-        <translation>&amp;Debug-ikkuna</translation>
+        <translation>Debug-ikkuna</translation>
     </message>
     <message>
         <source>General</source>
@@ -1025,8 +1025,8 @@
         <translation>Lähetetyt</translation>
     </message>
     <message>
-        <source>&amp;Peers</source>
-        <translation>&amp;Vertaiset</translation>
+        <source>Peers</source>
+        <translation>Vertaiset</translation>
     </message>
     <message>
         <source>Banned peers</source>
@@ -1117,12 +1117,12 @@
         <translation>&amp;Avaa</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Konsoli</translation>
+        <source>Console</source>
+        <translation>Konsoli</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>&amp;Verkkoliikenne</translation>
+        <source>Network Traffic</source>
+        <translation>Verkkoliikenne</translation>
     </message>
     <message>
         <source>Clear</source>

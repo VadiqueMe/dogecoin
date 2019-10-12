@@ -315,8 +315,8 @@
         <translation>Клиентийн хувилбар</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Мэдээллэл</translation>
+        <source>Information</source>
+        <translation>Мэдээллэл</translation>
     </message>
     <message>
         <source>General</source>
@@ -351,8 +351,8 @@
         <translation>&amp;Нээх</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Консол</translation>
+        <source>Console</source>
+        <translation>Консол</translation>
     </message>
     <message>
         <source>Clear console</source>

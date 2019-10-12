@@ -929,8 +929,8 @@
         <translation>Kliendi versioon</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Informatsioon</translation>
+        <source>Information</source>
+        <translation>Informatsioon</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -1009,8 +1009,8 @@
         <translation>&amp;Ava</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Konsool</translation>
+        <source>Console</source>
+        <translation>Konsool</translation>
     </message>
     <message>
         <source>Clear console</source>

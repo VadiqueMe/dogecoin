@@ -669,8 +669,8 @@
         <translation>Verzija klijenta</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Informacije</translation>
+        <source>Information</source>
+        <translation>Informacije</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -725,12 +725,12 @@
         <translation>&amp;Otvori</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Konzola</translation>
+        <source>Console</source>
+        <translation>Konzola</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>&amp;Mrežni promet</translation>
+        <source>Network Traffic</source>
+        <translation>Mrežni promet</translation>
     </message>
     <message>
         <source>Clear console</source>

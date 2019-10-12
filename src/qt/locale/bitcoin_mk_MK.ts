@@ -417,8 +417,8 @@
         <translation>Верзија</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Конзола</translation>
+        <source>Console</source>
+        <translation>Конзола</translation>
     </message>
     </context>
 <context>

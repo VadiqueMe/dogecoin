@@ -887,8 +887,8 @@
         <translation>גרסת מנשק</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>מי&amp;דע</translation>
+        <source>Information</source>
+        <translation>מידע</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -951,8 +951,8 @@
         <translation>נשלחו</translation>
     </message>
     <message>
-        <source>&amp;Peers</source>
-        <translation>&amp;עמיתים</translation>
+        <source>Peers</source>
+        <translation>עמיתים</translation>
     </message>
     <message>
         <source>Banned peers</source>
@@ -1031,12 +1031,12 @@
         <translation>&amp;פתיחה</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>מ&amp;סוף בקרה</translation>
+        <source>Console</source>
+        <translation>מסוף בקרה</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>&amp;תעבורת רשת</translation>
+        <source>Network Traffic</source>
+        <translation>תעבורת רשת</translation>
     </message>
     <message>
         <source>Clear</source>

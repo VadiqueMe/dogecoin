@@ -1205,8 +1205,8 @@
         <translation>Versió del client</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Informació</translation>
+        <source>Information</source>
+        <translation>Informació</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -1253,8 +1253,8 @@
         <translation>Enviat</translation>
     </message>
     <message>
-        <source>&amp;Peers</source>
-        <translation>&amp;Iguals</translation>
+        <source>Peers</source>
+        <translation>Iguals</translation>
     </message>
     <message>
         <source>Select a peer to view detailed information</source>
@@ -1309,12 +1309,12 @@
         <translation>&amp;Obri</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Consola</translation>
+        <source>Console</source>
+        <translation>Consola</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>Trà&amp;nsit de la xarxa</translation>
+        <source>Network Traffic</source>
+        <translation>Trànsit de la xarxa</translation>
     </message>
     <message>
         <source>Clear</source>

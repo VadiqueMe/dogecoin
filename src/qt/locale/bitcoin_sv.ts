@@ -1246,8 +1246,8 @@ Var vänlig och försök igen.</translation>
         <translation>Klient-version</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Information</translation>
+        <source>Information</source>
+        <translation>Information</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -1310,8 +1310,8 @@ Var vänlig och försök igen.</translation>
         <translation>Skickad</translation>
     </message>
     <message>
-        <source>&amp;Peers</source>
-        <translation>&amp;Klienter</translation>
+        <source>Peers</source>
+        <translation>Klienter</translation>
     </message>
     <message>
         <source>Banned peers</source>
@@ -1402,12 +1402,12 @@ Var vänlig och försök igen.</translation>
         <translation>&amp;Öppna</translation>
     </message>
     <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Konsol</translation>
+        <source>Console</source>
+        <translation>Konsol</translation>
     </message>
     <message>
-        <source>&amp;Network Traffic</source>
-        <translation>&amp;Nätverkstrafik</translation>
+        <source>Network Traffic</source>
+        <translation>Nätverkstrafik</translation>
     </message>
     <message>
         <source>Clear</source>
