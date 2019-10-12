@@ -3113,8 +3113,8 @@
         <translation>指定钱包文件（数据目录内）</translation>
     </message>
     <message>
-        <source>The source code is available from %s.</source>
-        <translation>源代码可以在 %s 获得。</translation>
+        <source>The source code is on %s</source>
+        <translation>源代码在 %s 上</translation>
     </message>
     <message>
         <source>Unsupported argument -benchmark ignored, use -debug=bench.</source>

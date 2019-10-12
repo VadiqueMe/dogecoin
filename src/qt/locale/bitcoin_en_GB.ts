@@ -2098,10 +2098,6 @@
         <translation>Specify wallet file (within data directory)</translation>
     </message>
     <message>
-        <source>The source code is available from %s.</source>
-        <translation>The source code is available from %s.</translation>
-    </message>
-    <message>
         <source>Unable to bind to %s on this computer. %s is probably already running.</source>
         <translation>Unable to bind to %s on this computer. %s is probably already running.</translation>
     </message>

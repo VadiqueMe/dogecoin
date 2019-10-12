@@ -3274,8 +3274,8 @@
         <translation>Spécifiez le fichier de porte-monnaie (dans le répertoire de données)</translation>
     </message>
     <message>
-        <source>The source code is available from %s.</source>
-        <translation>Le code source est disponible sur %s.</translation>
+        <source>The source code is on %s</source>
+        <translation>Le code source est sur %s</translation>
     </message>
     <message>
         <source>Unable to bind to %s on this computer. %s is probably already running.</source>

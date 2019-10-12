@@ -3270,8 +3270,8 @@
         <translation>데이터 폴더 안에 지갑 파일을 선택하세요.</translation>
     </message>
     <message>
-        <source>The source code is available from %s.</source>
-        <translation>소스코드는 %s 에서 확인하실 수 있습니다.</translation>
+        <source>The source code is on %s</source>
+        <translation>소스 코드는 %s 에 있습니다</translation>
     </message>
     <message>
         <source>Unable to bind to %s on this computer. %s is probably already running.</source>

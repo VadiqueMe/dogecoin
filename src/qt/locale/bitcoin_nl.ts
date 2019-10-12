@@ -3274,8 +3274,8 @@
         <translation>Specificeer het portemonnee bestand (vanuit de gegevensmap)</translation>
     </message>
     <message>
-        <source>The source code is available from %s.</source>
-        <translation>De broncode is beschikbaar van %s.</translation>
+        <source>The source code is on %s</source>
+        <translation>De broncode is op %s</translation>
     </message>
     <message>
         <source>Unable to bind to %s on this computer. %s is probably already running.</source>

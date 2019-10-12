@@ -3274,8 +3274,8 @@
         <translation>Especifique o arquivo da carteira (dentro do diretório de dados)</translation>
     </message>
     <message>
-        <source>The source code is available from %s.</source>
-        <translation>O código fonte está disponível pelo %s</translation>
+        <source>The source code is on %s</source>
+        <translation>O código fonte está em %s</translation>
     </message>
     <message>
         <source>Unsupported argument -benchmark ignored, use -debug=bench.</source>

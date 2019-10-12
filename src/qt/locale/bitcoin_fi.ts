@@ -1902,8 +1902,8 @@
         <translation>Aseta lompakkotiedosto (data-hakemiston sisällä)</translation>
     </message>
     <message>
-        <source>The source code is available from %s.</source>
-        <translation>Lähdekoodi löytyy %s.</translation>
+        <source>The source code is on %s</source>
+        <translation>Lähdekoodi löytyy %s</translation>
     </message>
     <message>
         <source>Unsupported argument -benchmark ignored, use -debug=bench.</source>

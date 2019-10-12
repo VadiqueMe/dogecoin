@@ -1950,8 +1950,8 @@
         <translation>Angi lommebokfil (inne i datamappe)</translation>
     </message>
     <message>
-        <source>The source code is available from %s.</source>
-        <translation>Kildekoden er tilgjengelig fra %s.</translation>
+        <source>The source code is on %s</source>
+        <translation>Kildekoden er på %s</translation>
     </message>
     <message>
         <source>Unsupported argument -benchmark ignored, use -debug=bench.</source>

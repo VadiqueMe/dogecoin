@@ -3279,8 +3279,8 @@
         <translation>ウォレットのファイルを指定　(データ・ディレクトリの中に)</translation>
     </message>
     <message>
-        <source>The source code is available from %s.</source>
-        <translation>ソースコードは %s より入手可能です。</translation>
+        <source>The source code is on %s</source>
+        <translation>ソースコードは %s にあります</translation>
     </message>
     <message>
         <source>Unable to bind to %s on this computer. %s is probably already running.</source>

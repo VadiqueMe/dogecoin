@@ -352,7 +352,7 @@ QT_TRANSLATE_NOOP("bitcoin-core", "Specify wallet file (within data directory)")
 QT_TRANSLATE_NOOP("bitcoin-core", "Specify your own public address"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Spend unconfirmed change when sending transactions (default: %u)"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Starting network threads..."),
-QT_TRANSLATE_NOOP("bitcoin-core", "The source code is available from %s."),
+QT_TRANSLATE_NOOP("bitcoin-core", "The source code is on %s"),
 QT_TRANSLATE_NOOP("bitcoin-core", "The transaction amount is too small to pay the fee"),
 QT_TRANSLATE_NOOP("bitcoin-core", "The wallet will avoid paying less than the minimum relay fee."),
 QT_TRANSLATE_NOOP("bitcoin-core", "This is experimental software."),

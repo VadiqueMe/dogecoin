@@ -2619,8 +2619,8 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
         <translation>Określ plik portfela (w obrębie folderu danych)</translation>
     </message>
     <message>
-        <source>The source code is available from %s.</source>
-        <translation>Kod źródłowy dostępny jest z %s.</translation>
+        <source>The source code is on %s</source>
+        <translation>Kod źródłowy jest na %s</translation>
     </message>
     <message>
         <source>Unable to bind to %s on this computer. %s is probably already running.</source>

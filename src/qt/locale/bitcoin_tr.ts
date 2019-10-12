@@ -3274,8 +3274,8 @@
         <translation>Cüzdan dosyası belirtiniz (veri klasörünün içinde)</translation>
     </message>
     <message>
-        <source>The source code is available from %s.</source>
-        <translation>Kaynak kod şuradan elde edilebilir: %s.</translation>
+        <source>The source code is on %s</source>
+        <translation>Kaynak kodu %s adresindedir</translation>
     </message>
     <message>
         <source>Unable to bind to %s on this computer. %s is probably already running.</source>

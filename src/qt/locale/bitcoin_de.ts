@@ -3266,8 +3266,8 @@
         <translation>Wallet-Datei angeben (innerhalb des Datenverzeichnisses)</translation>
     </message>
     <message>
-        <source>The source code is available from %s.</source>
-        <translation>Der Quellcode ist von %s verfügbar.</translation>
+        <source>The source code is on %s</source>
+        <translation>Der Quellcode ist auf %s</translation>
     </message>
     <message>
         <source>Unable to bind to %s on this computer. %s is probably already running.</source>

@@ -3275,8 +3275,8 @@
         <translation>指定錢包檔(會在資料目錄中)</translation>
     </message>
     <message>
-        <source>The source code is available from %s.</source>
-        <translation>原始碼可以在 %s 取得。</translation>
+        <source>The source code is on %s</source>
+        <translation>源代码在 %s 上</translation>
     </message>
     <message>
         <source>Unable to bind to %s on this computer. %s is probably already running.</source>

@@ -3278,8 +3278,8 @@
         <translation>Udej název souboru s peněženkou (v rámci datového adresáře)</translation>
     </message>
     <message>
-        <source>The source code is available from %s.</source>
-        <translation>Zdrojový kód je dostupný na %s.</translation>
+        <source>The source code is on %s</source>
+        <translation>Zdrojový kód je na %s</translation>
     </message>
     <message>
         <source>Unable to bind to %s on this computer. %s is probably already running.</source>

@@ -3274,8 +3274,8 @@
         <translation>Укажите файл бумажника (внутри каталога данных)</translation>
     </message>
     <message>
-        <source>The source code is available from %s.</source>
-        <translation>Исходный код доступен в %s.</translation>
+        <source>The source code is on %s</source>
+        <translation>Исходный код есть на %s</translation>
     </message>
     <message>
         <source>Unable to bind to %s on this computer. %s is probably already running.</source>

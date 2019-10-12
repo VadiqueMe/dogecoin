@@ -4953,7 +4953,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+1"/>
-        <source>The source code is available from %s.</source>
+        <source>The source code is on %s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

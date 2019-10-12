@@ -2983,8 +2983,8 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
         <translation>Specifica il file del portamonete (all'interno della cartella dati)</translation>
     </message>
     <message>
-        <source>The source code is available from %s.</source>
-        <translation>Il codice sorgente è disponibile in %s</translation>
+        <source>The source code is on %s</source>
+        <translation>Il codice sorgente è su %s</translation>
     </message>
     <message>
         <source>Unable to bind to %s on this computer. %s is probably already running.</source>

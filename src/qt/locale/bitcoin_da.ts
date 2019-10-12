@@ -3278,8 +3278,8 @@
         <translation>Angiv tegnebogsfil (inden for datamappe)</translation>
     </message>
     <message>
-        <source>The source code is available from %s.</source>
-        <translation>Kildekoden er tilgængelig fra %s.</translation>
+        <source>The source code is on %s</source>
+        <translation>Kildekoden findes på %s</translation>
     </message>
     <message>
         <source>Unable to bind to %s on this computer. %s is probably already running.</source>

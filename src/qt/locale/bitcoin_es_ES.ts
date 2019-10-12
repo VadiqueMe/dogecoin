@@ -3105,8 +3105,8 @@
         <translation>Especificar archivo de monedero (dentro del directorio de datos)</translation>
     </message>
     <message>
-        <source>The source code is available from %s.</source>
-        <translation>El código fuente esta disponible desde %s.</translation>
+        <source>The source code is on %s</source>
+        <translation>El código fuente está en %s</translation>
     </message>
     <message>
         <source>Unable to bind to %s on this computer. %s is probably already running.</source>
