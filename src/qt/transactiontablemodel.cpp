@@ -347,22 +347,21 @@ QString TransactionTableModel::formatTxDate(const TransactionRecord *wtx) const
     return QString();
 }
 
-/* Look up address in address book, if found return label (address)
-   otherwise just return (address)
+/* Look up address in address book, if found return "label (address)"
+   otherwise just return "address"
  */
-QString TransactionTableModel::lookupAddress(const std::string &address, bool tooltip) const
+QString TransactionTableModel::lookupAddress( const std::string & address, bool tooltip ) const
 {
-    QString label = walletModel->getAddressTableModel()->labelForAddress(QString::fromStdString(address));
-    QString description;
-    if(!label.isEmpty())
+    QString qaddress = QString::fromStdString( address ) ;
+    QString label = walletModel->getAddressTableModel()->labelForAddress( qaddress ) ;
+    QString description = label ;
+    if ( label.isEmpty() || tooltip )
     {
-        description += label;
+        if ( ! label.isEmpty() ) description += QString(" (") ;
+        description += qaddress ;
+        if ( ! label.isEmpty() ) description += QString(")") ;
     }
-    if(label.isEmpty() || tooltip)
-    {
-        description += QString(" (") + QString::fromStdString(address) + QString(")");
-    }
-    return description;
+    return description ;
 }
 
 QString TransactionTableModel::formatTxType( const TransactionRecord * wtx ) const

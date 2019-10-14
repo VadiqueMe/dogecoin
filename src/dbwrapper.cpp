@@ -31,7 +31,7 @@ static leveldb::Options GetOptions(size_t nCacheSize)
     return options;
 }
 
-CDBWrapper::CDBWrapper(const boost::filesystem::path& path, size_t nCacheSize, bool fMemory, bool fWipe, bool obfuscate)
+CDBWrapper::CDBWrapper( const boost::filesystem::path & path, size_t nCacheSize, bool fMemory, bool fWipe, bool obfuscate )
 {
     penv = NULL;
     readoptions.verify_checksums = true;
@@ -56,24 +56,31 @@ CDBWrapper::CDBWrapper(const boost::filesystem::path& path, size_t nCacheSize, b
     dbwrapper_private::HandleError(status);
     LogPrintf("Opened LevelDB successfully\n");
 
-    // The base-case obfuscation key, which is a noop.
-    obfuscate_key = std::vector<unsigned char>(OBFUSCATE_KEY_NUM_BYTES, '\000');
+    // The common-case obfuscation key, which is a noop
+    obfuscate_key = std::vector< unsigned char >( OBFUSCATE_KEY_NUM_BYTES, '\000' ) ;
 
-    bool key_exists = Read(OBFUSCATE_KEY_KEY, obfuscate_key);
+    bool key_exists = Read( OBFUSCATE_KEY_KEY, obfuscate_key ) ;
 
-    if (!key_exists && obfuscate && IsEmpty()) {
+    if ( ! key_exists && obfuscate && IsEmpty() ) {
         // Initialize non-degenerate obfuscation if it won't upset
-        // existing, non-obfuscated data.
-        std::vector<unsigned char> new_key = CreateObfuscateKey();
+        // existing, non-obfuscated data
+        std::vector< unsigned char > new_key = CreateObfuscateKey() ;
 
         // Write `new_key` so we don't obfuscate the key with itself
-        Write(OBFUSCATE_KEY_KEY, new_key);
-        obfuscate_key = new_key;
+        Write( OBFUSCATE_KEY_KEY, new_key ) ;
+        obfuscate_key = new_key ;
 
-        LogPrintf("Wrote new obfuscate key for %s: %s\n", path.string(), HexStr(obfuscate_key));
+        LogPrintf( "Wrote new obfuscate key for %s: %s\n", path.string(), HexStr( obfuscate_key ) ) ;
     }
 
-    LogPrintf("Using obfuscation key for %s: %s\n", path.string(), HexStr(obfuscate_key));
+    bool noopKey = true ;
+    for ( auto const & keyByte : obfuscate_key )
+        if ( keyByte != 0 ) { noopKey = false ; break ; }
+
+    if ( noopKey )
+        LogPrintf( "Using no-op zero obfuscation key for %s\n", path.string() ) ;
+    else
+        LogPrintf( "Using obfuscation key for %s: %s\n", path.string(), HexStr( obfuscate_key ) ) ;
 }
 
 CDBWrapper::~CDBWrapper()
@@ -97,22 +104,20 @@ bool CDBWrapper::WriteBatch(CDBBatch& batch, bool fSync)
 
 // Prefixed with null character to avoid collisions with other keys
 //
-// We must use a string constructor which specifies length so that we copy
-// past the null-terminator.
-const std::string CDBWrapper::OBFUSCATE_KEY_KEY("\000obfuscate_key", 14);
+// Use a string constructor which specifies length to copy past the null-char
+const std::string CDBWrapper::OBFUSCATE_KEY_KEY( "\000obfuscate_key", 14 ) ;
 
-const unsigned int CDBWrapper::OBFUSCATE_KEY_NUM_BYTES = 8;
+const unsigned int CDBWrapper::OBFUSCATE_KEY_NUM_BYTES = 8 ;
 
 /**
  * Returns a string (consisting of 8 random bytes) suitable for use as an
- * obfuscating XOR key.
+ * obfuscating XOR key
  */
-std::vector<unsigned char> CDBWrapper::CreateObfuscateKey() const
+std::vector< unsigned char > CDBWrapper::CreateObfuscateKey() const
 {
-    unsigned char buff[OBFUSCATE_KEY_NUM_BYTES];
-    GetRandBytes(buff, OBFUSCATE_KEY_NUM_BYTES);
-    return std::vector<unsigned char>(&buff[0], &buff[OBFUSCATE_KEY_NUM_BYTES]);
-
+    unsigned char buff[ OBFUSCATE_KEY_NUM_BYTES ] ;
+    GetRandBytes( buff, OBFUSCATE_KEY_NUM_BYTES ) ;
+    return std::vector< unsigned char >( &buff[ 0 ], &buff[ OBFUSCATE_KEY_NUM_BYTES ] ) ;
 }
 
 bool CDBWrapper::IsEmpty()
