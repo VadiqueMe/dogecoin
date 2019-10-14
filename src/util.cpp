@@ -173,64 +173,40 @@ public:
 }
 instance_of_cinit;
 
-/**
- * LogPrintf() has been broken a couple of times now
- * by well-meaning people adding mutexes in the most straightforward way.
- * It breaks because it may be called by global destructors during shutdown.
- * Since the order of destruction of static/global objects is undefined,
- * defining a mutex as a global object doesn't work (the mutex gets
- * destroyed, and then some later destructor calls OutputDebugStringF,
- * maybe indirectly, and you get a core dump at shutdown trying to lock
- * the mutex).
- */
+static boost::once_flag debugPrintInitFlag = BOOST_ONCE_INIT ;
 
-static boost::once_flag debugPrintInitFlag = BOOST_ONCE_INIT;
+static std::unique_ptr< FILE > fileout( nullptr ) ;
+static std::unique_ptr< boost::mutex > mutexDebugLog( nullptr );
 
-/**
- * We use boost::call_once() to make sure mutexDebugLog and
- * vMsgsBeforeOpenLog are initialized in a thread-safe manner.
- *
- * NOTE: fileout, mutexDebugLog and sometimes vMsgsBeforeOpenLog
- * are leaked on exit. This is ugly, but will be cleaned up by
- * the OS/libc. When the shutdown sequence is fully audited and
- * tested, explicit destruction of these objects can be implemented.
- */
-static FILE* fileout = NULL;
-static boost::mutex* mutexDebugLog = NULL;
-static list<string> *vMsgsBeforeOpenLog;
+static std::list< std::string > messagesBeforeOpenLog ;
 
-static int FileWriteStr(const std::string &str, FILE *fp)
+static int FileWriteStr( const std::string & str, const std::unique_ptr< FILE > & fp )
 {
-    return fwrite(str.data(), 1, str.size(), fp);
+    return fwrite( str.data(), 1, str.size(), fp.get() ) ;
 }
 
 static void DebugPrintInit()
 {
-    assert(mutexDebugLog == NULL);
-    mutexDebugLog = new boost::mutex();
-    vMsgsBeforeOpenLog = new list<string>;
+    if ( mutexDebugLog == nullptr )
+        mutexDebugLog.reset( new boost::mutex() ) ;
 }
 
 void OpenDebugLog()
 {
-    boost::call_once(&DebugPrintInit, debugPrintInitFlag);
-    boost::mutex::scoped_lock scoped_lock(*mutexDebugLog);
+    boost::call_once( &DebugPrintInit, debugPrintInitFlag ) ;
+    boost::mutex::scoped_lock scoped_lock( *mutexDebugLog ) ;
 
-    assert(fileout == NULL);
-    assert(vMsgsBeforeOpenLog);
+    assert( fileout == nullptr ) ;
     boost::filesystem::path pathToDebugLog = GetDataDir() / LOG_FILE_NAME ;
-    fileout = fopen( pathToDebugLog.string().c_str (), "a" ) ;
-    if (fileout) {
-        setbuf(fileout, NULL); // unbuffered
+    fileout.reset( fopen( pathToDebugLog.string().c_str (), "a" ) ) ;
+    if ( fileout != nullptr ) {
+        setbuf( fileout.get(), NULL ) ; // unbuffered
         // dump buffered messages from before we opened the log
-        while (!vMsgsBeforeOpenLog->empty()) {
-            FileWriteStr(vMsgsBeforeOpenLog->front(), fileout);
-            vMsgsBeforeOpenLog->pop_front();
+        while ( ! messagesBeforeOpenLog.empty() ) {
+            FileWriteStr( messagesBeforeOpenLog.front(), fileout ) ;
+            messagesBeforeOpenLog.pop_front() ;
         }
     }
-
-    delete vMsgsBeforeOpenLog;
-    vMsgsBeforeOpenLog = NULL;
 }
 
 bool LogAcceptCategory(const char* category)
@@ -250,13 +226,13 @@ bool LogAcceptCategory(const char* category)
             if (mapMultiArgs.count("-debug")) {
                 const vector<string>& categories = mapMultiArgs.at("-debug");
                 ptrCategory.reset(new set<string>(categories.begin(), categories.end()));
-                // thread_specific_ptr automatically deletes the set when the thread ends.
+                // thread_specific_ptr automatically deletes the set when the thread ends
             } else
                 ptrCategory.reset(new set<string>());
         }
         const set<string>& setCategories = *ptrCategory.get();
 
-        // if not debugging everything and not debugging specific category, LogPrint does nothing.
+        // if not debugging everything and not debugging specific category, LogPrint does nothing
         if (setCategories.count(string("")) == 0 &&
             setCategories.count(string("1")) == 0 &&
             setCategories.count(string(category)) == 0)
@@ -297,37 +273,38 @@ static std::string LogTimestampStr(const std::string &str, std::atomic_bool *fSt
 int LogPrintStr( const std::string & str )
 {
     int ret = 0 ; // number of characters written
-    static std::atomic_bool fStartedNewLine(true);
+    static std::atomic_bool fStartedNewLine( true ) ;
 
-    string strTimestamped = LogTimestampStr(str, &fStartedNewLine);
+    string strTimestamped = LogTimestampStr( str, &fStartedNewLine ) ;
 
     if ( fPrintToConsole )
     {
-        // print to console
         ret = fwrite( strTimestamped.data(), 1, strTimestamped.size(), stdout ) ;
         fflush( stdout ) ;
     }
     else if ( fPrintToDebugLog )
     {
-        boost::call_once(&DebugPrintInit, debugPrintInitFlag);
-        boost::mutex::scoped_lock scoped_lock(*mutexDebugLog);
-
-        boost::filesystem::path pathToDebugLog = GetDataDir() / LOG_FILE_NAME ;
-        if ( ! boost::filesystem::exists( pathToDebugLog ) ) // log file is absent
-            fReopenDebugLog = true ;
+        boost::call_once( &DebugPrintInit, debugPrintInitFlag ) ;
+        boost::mutex::scoped_lock scoped_lock( *mutexDebugLog ) ;
 
         // buffer if we haven't opened the log yet
-        if ( fileout == NULL ) {
-            assert(vMsgsBeforeOpenLog);
-            ret = strTimestamped.length();
-            vMsgsBeforeOpenLog->push_back(strTimestamped);
+        if ( fileout == nullptr ) {
+            ret = strTimestamped.length() ;
+            messagesBeforeOpenLog.push_back( strTimestamped ) ;
         }
         else
         {
+            boost::filesystem::path pathToDebugLog = GetDataDir() / LOG_FILE_NAME ;
+            if ( ! boost::filesystem::exists( pathToDebugLog ) ) // log file is absent
+                fReopenDebugLog = true ;
+
             if ( fReopenDebugLog ) {
                 fReopenDebugLog = false ;
-                if ( freopen( pathToDebugLog.string().c_str (), "a", fileout ) != NULL )
-                    setbuf( fileout, NULL ) ; // unbuffered
+                FILE * outfile = freopen( pathToDebugLog.string().c_str (), "a", fileout.release() ) ;
+                if ( outfile != nullptr ) {
+                    setbuf( outfile, NULL ) ; // unbuffered
+                    fileout.reset( outfile );
+                }
             }
 
             ret = FileWriteStr( strTimestamped, fileout ) ;

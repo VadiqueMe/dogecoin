@@ -65,15 +65,15 @@ public:
 };
 static CBaseRegTestParams regTestParams;
 
-static CBaseChainParams* pCurrentBaseParams = 0;
+static CBaseChainParams * pCurrentBaseParams = nullptr ;
 
-const CBaseChainParams& BaseParams()
+const CBaseChainParams & BaseParams()
 {
-    assert(pCurrentBaseParams);
-    return *pCurrentBaseParams;
+    assert( pCurrentBaseParams != nullptr ) ;
+    return *pCurrentBaseParams ;
 }
 
-CBaseChainParams& BaseParams(const std::string& chain)
+CBaseChainParams & BaseParams( const std::string & chain )
 {
     if (chain == CBaseChainParams::MAIN)
         return mainParams;
@@ -82,29 +82,29 @@ CBaseChainParams& BaseParams(const std::string& chain)
     else if (chain == CBaseChainParams::REGTEST)
         return regTestParams;
     else
-        throw std::runtime_error(strprintf("%s: Unknown chain %s.", __func__, chain));
+        throw std::runtime_error( strprintf("%s: unknown chain %s", __func__, chain) ) ;
 }
 
-void SelectBaseParams(const std::string& chain)
+void SelectBaseParams( const std::string & chain )
 {
-    pCurrentBaseParams = &BaseParams(chain);
+    pCurrentBaseParams = &BaseParams( chain ) ;
 }
 
 std::string ChainNameFromCommandLine()
 {
-    bool fRegTest = GetBoolArg("-regtest", false);
-    bool fTestNet = GetBoolArg("-testnet", false);
+    bool fRegTest = GetBoolArg( "-regtest", false ) ;
+    bool fTestNet = GetBoolArg( "-testnet", false ) ;
 
-    if (fTestNet && fRegTest)
-        throw std::runtime_error("Invalid combination of -regtest and -testnet.");
-    if (fRegTest)
-        return CBaseChainParams::REGTEST;
-    if (fTestNet)
-        return CBaseChainParams::TESTNET;
-    return CBaseChainParams::MAIN;
+    if ( fTestNet && fRegTest )
+        throw std::runtime_error( "-regtest and -testnet together?" ) ;
+    if ( fRegTest )
+        return CBaseChainParams::REGTEST ;
+    if ( fTestNet )
+        return CBaseChainParams::TESTNET ;
+    return CBaseChainParams::MAIN ;
 }
 
 bool AreBaseParamsConfigured()
 {
-    return pCurrentBaseParams != NULL;
+    return pCurrentBaseParams != nullptr ;
 }

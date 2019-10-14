@@ -466,11 +466,11 @@ public:
 };
 static CRegTestParams regTestParams;
 
-static CChainParams *pCurrentParams = 0;
+static CChainParams * pCurrentParams = nullptr ;
 
-const CChainParams &Params() {
-    assert(pCurrentParams);
-    return *pCurrentParams;
+const CChainParams & Params() {
+    assert( pCurrentParams != nullptr ) ;
+    return *pCurrentParams ;
 }
 
 const Consensus::Params *Consensus::Params::GetConsensus(uint32_t nTargetHeight) const {
@@ -496,13 +496,13 @@ CChainParams& Params(const std::string& chain)
     else if (chain == CBaseChainParams::REGTEST)
             return regTestParams;
     else
-        throw std::runtime_error(strprintf("%s: Unknown chain %s.", __func__, chain));
+        throw std::runtime_error( strprintf("%s: unknown chain %s", __func__, chain) ) ;
 }
 
-void SelectParams(const std::string& network)
+void SelectParams( const std::string & network )
 {
-    SelectBaseParams(network);
-    pCurrentParams = &Params(network);
+    SelectBaseParams( network ) ;
+    pCurrentParams = &Params( network ) ;
 }
 
 void UpdateRegtestBIP9Parameters(Consensus::DeploymentPos d, int64_t nStartTime, int64_t nTimeout)

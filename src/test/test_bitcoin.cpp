@@ -46,6 +46,7 @@ BasicTestingSetup::BasicTestingSetup(const std::string& chainName)
         SetupNetworking();
         InitSignatureCache();
         fPrintToDebugLog = false ; // don't want to write to debug log file
+        fPrintToConsole = true ;
         fCheckBlockIndex = true;
         SelectParams(chainName);
         noui_connect();
