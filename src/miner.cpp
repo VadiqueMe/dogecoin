@@ -661,7 +661,8 @@ void IncrementExtraNonce( CBlock * pblock, const CBlockIndex * pindexPrev, uint3
 //
 // ScanHash scans nonces looking for a hash with many zero bits
 //
-bool static ScanHash( const CBlockHeader * const blockHeader, uint32_t & nNonce, uint256 * phash, const arith_uint256 & solutionHash )
+bool static ScanHash( const CBlockHeader * const blockHeader, uint32_t & nNonce, uint256 * phash,
+                      const arith_uint256 & solutionHash, uint32_t & hashesScanned )
 {
     uint256 uint256solution = ArithToUint256( solutionHash ) ;
     size_t firstLEZeroByte = 32 ;
@@ -685,6 +686,8 @@ bool static ScanHash( const CBlockHeader * const blockHeader, uint32_t & nNonce,
         // Write the last 4 bytes of the block header (the nonce) to a copy of
         // the double-SHA256 state, and compute the result
         CHash256( hasher ).Write( (unsigned char*)&nNonce, 4 ).Finalize( (unsigned char*)phash ) ;
+
+        hashesScanned ++ ;
 
         // Return the nonce if the hash has at least as many zero bytes as the solution has,
         // then caller will check for hash <= solution
@@ -729,12 +732,7 @@ static bool ProcessBlockFound( const CBlock * const block, const CChainParams & 
 void static DogecoinMiner( const CChainParams & chainparams, char threadChar )
 {
     LogPrintf( "DogecoinMiner (%c) started\n", threadChar ) ;
-    RenameThread( "dogecoin-miner" ) ;
-
-    std::random_device randomDevice ;
-    std::mt19937 randomNumber( randomDevice() ) ;
-
-    uint32_t nExtraNonce = 0 ;
+    RenameThread( strprintf( "dogedigger-%c", threadChar ) ) ;
 
     std::shared_ptr< CReserveScript > coinbaseScript ;
     GetMainSignals().ScriptForMining( coinbaseScript ) ;
@@ -745,6 +743,14 @@ void static DogecoinMiner( const CChainParams & chainparams, char threadChar )
         // In the latter case, already the pointer is NULL
         if ( ! coinbaseScript || coinbaseScript->reserveScript.empty() )
             throw std::runtime_error( "No coinbase script available (mining requires a wallet)" ) ;
+
+        std::random_device randomDevice ;
+        std::mt19937 randomNumber( randomDevice() ) ;
+
+        int64_t threadBeginsMillis = GetTimeMillis() ;
+        uint64_t allHashesByThread = 0 ;
+
+        uint32_t nExtraNonce = 0 ;
 
         while ( true )
         {
@@ -762,8 +768,8 @@ void static DogecoinMiner( const CChainParams & chainparams, char threadChar )
             // Create new block
             //
 
-            unsigned int nTransactionsUpdatedLast = mempool.GetTransactionsUpdated();
-            CBlockIndex* pindexPrev = chainActive.Tip();
+            /* unsigned int nTransactionsUpdatedLast = mempool.GetTransactionsUpdated() ; */
+            CBlockIndex * pindexPrev = chainActive.Tip() ;
 
             std::unique_ptr< BlockAssembler > assembler( new BlockAssembler( chainparams ) ) ;
             std::unique_ptr< CBlockTemplate > pblocktemplate( assembler->CreateNewBlock( coinbaseScript->reserveScript ) ) ;
@@ -780,7 +786,8 @@ void static DogecoinMiner( const CChainParams & chainparams, char threadChar )
             // Search
             //
 
-            int64_t nStart = GetTime() ;
+            uint32_t hashesScanned = 0 ;
+            int64_t scanBeginsMillis = GetTimeMillis() ;
             const CBlockHeader * const blockHeader = pblock ;
             arith_uint256 solutionHash = arith_uint256().SetCompact( blockHeader->nBits ) ;
             uint256 hash ;
@@ -797,7 +804,7 @@ void static DogecoinMiner( const CChainParams & chainparams, char threadChar )
             while ( true )
             {
                 // Check if something found
-                if ( ScanHash( blockHeader, nNonce, &hash, solutionHash ) )
+                if ( ScanHash( blockHeader, nNonce, &hash, solutionHash, hashesScanned ) )
                 {
                     if ( UintToArith256( hash ) <= solutionHash )
                     {
@@ -832,8 +839,9 @@ void static DogecoinMiner( const CChainParams & chainparams, char threadChar )
                 boost::this_thread::interruption_point() ;
                 if ( ! g_connman->hasConnectedNodes() && chainparams.MiningRequiresPeers() ) // regtest doesn't need any peer
                     break ;
-                if ( mempool.GetTransactionsUpdated() != nTransactionsUpdatedLast && GetTime() - nStart > 60 )
-                    break ;
+                /* if ( mempool.GetTransactionsUpdated() != nTransactionsUpdatedLast
+                           && GetTimeMillis() - scanBeginsMillis > 60999 )
+                    break ; */
                 if ( pindexPrev != chainActive.Tip() )
                     break ;
 
@@ -849,9 +857,15 @@ void static DogecoinMiner( const CChainParams & chainparams, char threadChar )
                     solutionHash.SetCompact( pblock->nBits ) ;
                 }
             }
+
+            allHashesByThread += hashesScanned ;
+            double blockHashesPerMillisecond = (double)hashesScanned / ( GetTimeMillis() - scanBeginsMillis ) ;
+            double allHashesPerMillisecond = (double)allHashesByThread / ( GetTimeMillis() - threadBeginsMillis ) ;
+            LogPrintf( "DogecoinMiner (%c) scanned %d hashes for current block (%.3f hashes/s), %ld hashes overall (%.3f hashes/s)\n",
+                       threadChar, hashesScanned, blockHashesPerMillisecond * 1000, allHashesByThread, allHashesPerMillisecond * 1000 ) ;
         }
     } catch ( const boost::thread_interrupted & ) {
-        LogPrintf( "DogecoinMiner (%c) terminated\n", threadChar ) ;
+        LogPrintf( "DogecoinMiner (%c) interrupted\n", threadChar ) ;
         throw ;
     } catch ( const std::runtime_error & e ) {
         LogPrintf( "DogecoinMiner (%c) runtime error: %s\n", threadChar, e.what() ) ;

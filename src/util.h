@@ -205,7 +205,7 @@ std::string HelpMessageOpt(const std::string& option, const std::string& message
  */
 int GetNumCores();
 
-void RenameThread(const char* name);
+void RenameThread( const std::string & name ) ;
 
 /**
  * .. and a wrapper that just calls func once
@@ -213,7 +213,7 @@ void RenameThread(const char* name);
 template <typename Callable> void TraceThread(const char* name,  Callable func)
 {
     std::string s = strprintf("dogecoin-%s", name);
-    RenameThread(s.c_str());
+    RenameThread( s ) ;
     try
     {
         LogPrintf("%s thread start\n", name);

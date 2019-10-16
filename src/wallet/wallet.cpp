@@ -3599,7 +3599,7 @@ CWallet* CWallet::CreateWalletFromFile(const std::string walletFile)
         }
     }
 
-    LogPrintf(" wallet      %15dms\n", GetTimeMillis() - nStart);
+    LogPrintf( " wallet  %.3f s\n", ( GetTimeMillis() - nStart ) * 0.001 ) ;
 
     RegisterValidationInterface(walletInstance);
 
@@ -3636,7 +3636,7 @@ CWallet* CWallet::CreateWalletFromFile(const std::string walletFile)
         LogPrintf("Rescanning last %i blocks (from block %i)...\n", chainActive.Height() - pindexRescan->nHeight, pindexRescan->nHeight);
         nStart = GetTimeMillis();
         walletInstance->ScanForWalletTransactions(pindexRescan, true);
-        LogPrintf( " rescan    %.3f s\n", ( GetTimeMillis() - nStart ) * 0.001 ) ;
+        LogPrintf( " rescan  %.3f s\n", ( GetTimeMillis() - nStart ) * 0.001 ) ;
         walletInstance->SetBestChain(chainActive.GetLocator());
         CWalletDB::IncrementUpdateCounter();
 

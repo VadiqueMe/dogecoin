@@ -1520,13 +1520,14 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
 
     // As LoadBlockIndex can take several minutes, it's possible the user
     // requested to kill the GUI during the last operation. If so, exit.
-    // As the program has not fully started yet, Shutdown() is possibly overkill.
+    // As the program has not fully started yet, Shutdown() is possibly overkill
     if (fRequestShutdown)
     {
         LogPrintf("Shutdown requested. Exiting.\n");
         return false;
     }
-    LogPrintf(" block index %15dms\n", GetTimeMillis() - nStart);
+
+    LogPrintf( " block index  %.3f s\n", ( GetTimeMillis() - nStart ) * 0.001 ) ;
 
     // ********************************************************* Step 8: load wallet
 #ifdef ENABLE_WALLET
