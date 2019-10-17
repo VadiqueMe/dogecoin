@@ -10,6 +10,9 @@
 #include "hash.h"
 #include "utilstrencodings.h"
 
+#include <sstream>
+#include <boost/format.hpp>
+
 void CPureBlockHeader::SetBaseVersion( int32_t nBaseVersion, int32_t nChainId )
 {
     assert( nBaseVersion >= 1 && nBaseVersion < VERSION_AUXPOW ) ;
@@ -27,4 +30,17 @@ uint256 CPureBlockHeader::GetPoWHash() const
     uint256 thash ;
     scrypt_1024_1_1_256( BEGIN(nVersion), BEGIN(thash) ) ;
     return thash ;
+}
+
+std::string CPureBlockHeader::ToString() const
+{
+    std::stringstream ss ;
+    ss << boost::format( "CPureBlockHeader(version=0x%x, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=%u, sha256_hash=%s, scrypt_hash=%s)" )
+        % nVersion
+        % hashPrevBlock.ToString()
+        % hashMerkleRoot.ToString()
+        % nTime % nBits % nNonce
+        % GetHash().ToString() % GetPoWHash().ToString()
+    << std::endl ;
+    return ss.str() ;
 }

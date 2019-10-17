@@ -20,9 +20,9 @@ std::string CBlock::ToString() const
 {
     std::stringstream s ;
     s << strprintf(
-        "CBlock(version=0x%x, scrypt_hash=%s, sha256_hash=%s, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=%u, txs=%u)\n",
-        nVersion,
+        "CBlock(scrypt_hash=%s, sha256_hash=%s, version=0x%x, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=%u, txs=%u)\n",
         GetPoWHash().ToString(), GetHash().ToString(),
+        nVersion,
         hashPrevBlock.ToString(),
         hashMerkleRoot.ToString(),
         nTime, nBits, nNonce,

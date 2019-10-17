@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2013 The Bitcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #ifndef BITCOIN_PRIMITIVES_PUREHEADER_H
 #define BITCOIN_PRIMITIVES_PUREHEADER_H
@@ -32,6 +32,8 @@ public:
     uint32_t nTime;
     uint32_t nBits;
     uint32_t nNonce;
+
+    virtual std::string ToString() const ;
 
     CPureBlockHeader()
     {
@@ -153,6 +155,6 @@ public:
             // Dogecoin: We have a random v2 block with no AuxPoW, treat as legacy
             || (nVersion == 2 && GetChainId() == 0);
     }
-};
+} ;
 
 #endif // BITCOIN_PRIMITIVES_PUREHEADER_H

@@ -1410,17 +1410,17 @@ int64_t CWalletTx::GetTxTime() const
 int CWalletTx::GetRequestCount() const
 {
     // Returns -1 if it wasn't being tracked
-    int nRequests = -1;
+    int nRequests = -1 ;
     {
-        LOCK(pwallet->cs_wallet);
-        if (IsCoinBase())
+        LOCK( pwallet->cs_wallet ) ;
+        if ( IsCoinBase() )
         {
             // Generated block
-            if (!hashUnset())
+            if ( ! hashUnset() )
             {
-                map<uint256, int>::const_iterator mi = pwallet->mapRequestCount.find(hashBlock);
-                if (mi != pwallet->mapRequestCount.end())
-                    nRequests = (*mi).second;
+                map< uint256, int >::const_iterator mi = pwallet->mapRequestCount.find( hashBlock ) ;
+                if ( mi != pwallet->mapRequestCount.end() )
+                    nRequests = ( *mi ).second ;
             }
         }
         else
@@ -3392,7 +3392,7 @@ void CWallet::GetKeyBirthTimes(std::map<CTxDestination, int64_t> &mapKeyBirth) c
     for (std::map<uint256, CWalletTx>::const_iterator it = mapWallet.begin(); it != mapWallet.end(); it++) {
         // iterate over all wallet transactions...
         const CWalletTx &wtx = (*it).second;
-        BlockMap::const_iterator blit = mapBlockIndex.find(wtx.hashBlock);
+        BlockMap::const_iterator blit = mapBlockIndex.find( wtx.hashBlock ) ;
         if (blit != mapBlockIndex.end() && chainActive.Contains(blit->second)) {
             // ... which are already in a block
             int nHeight = blit->second->nHeight;

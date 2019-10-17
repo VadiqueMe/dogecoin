@@ -42,6 +42,8 @@
 #include "wallet/wallet.h"
 #endif
 #include "warnings.h"
+#include "crypto/scrypt.h"
+
 #include <stdint.h>
 #include <stdio.h>
 #include <memory>

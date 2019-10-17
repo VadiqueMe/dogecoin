@@ -25,6 +25,8 @@
 #include "util.h"
 #include "utilmoneystr.h"
 #include "validationinterface.h"
+#include "utilstrencodings.h" // for BEGIN
+#include "crypto/scrypt.h"
 
 #include <algorithm>
 #include <boost/thread.hpp>
@@ -659,10 +661,11 @@ void IncrementExtraNonce( CBlock * pblock, const CBlockIndex * pindexPrev, uint3
 //
 
 //
-// ScanHash scans nonces looking for a hash with many zero bits
+// ScanSHA256Hash scans nonces looking for a sha256 hash with many zero bits
 //
-bool static ScanHash( const CBlockHeader * const blockHeader, uint32_t & nNonce, uint256 * phash,
-                      const arith_uint256 & solutionHash, uint32_t & hashesScanned )
+/*
+bool static ScanSHA256Hash( const CBlockHeader * const blockHeader, uint32_t & nNonce, uint256 * phash,
+                            const arith_uint256 & solutionHash, uint32_t & hashesScanned )
 {
     uint256 uint256solution = ArithToUint256( solutionHash ) ;
     size_t firstLEZeroByte = 32 ;
@@ -681,13 +684,12 @@ bool static ScanHash( const CBlockHeader * const blockHeader, uint32_t & nNonce,
 
     while ( true )
     {
-        nNonce ++ ;
-
         // Write the last 4 bytes of the block header (the nonce) to a copy of
         // the double-SHA256 state, and compute the result
         CHash256( hasher ).Write( (unsigned char*)&nNonce, 4 ).Finalize( (unsigned char*)phash ) ;
 
         hashesScanned ++ ;
+        nNonce ++ ;
 
         // Return the nonce if the hash has at least as many zero bytes as the solution has,
         // then caller will check for hash <= solution
@@ -697,12 +699,52 @@ bool static ScanHash( const CBlockHeader * const blockHeader, uint32_t & nNonce,
 
         if ( found )
         {
-            LogPrintf( "ScanHash with nonce 0x%x found %s, solution is %s\n", nNonce, phash->GetHex(), solutionHash.GetHex() ) ;
+            LogPrintf( "ScanSHA256Hash with nonce 0x%x found %s, solution is %s\n", nNonce, phash->GetHex(), solutionHash.GetHex() ) ;
             return true ;
         }
 
         // Not found after trying for a while
         if ( ( nNonce & 0xffff ) == 0 )
+            return false ;
+    }
+}
+*/
+
+//
+// ScanScryptHash scans nonces looking for a scrypt hash with many zero bits
+//
+bool static ScanScryptHash( CPureBlockHeader blockHeader, uint32_t & nNonce, uint256 * phash,
+                            const arith_uint256 & solutionHash, uint32_t & hashesScanned )
+{
+    uint256 uint256solution = ArithToUint256( solutionHash ) ;
+    size_t firstLEZeroByte = 32 ;
+    for ( ; firstLEZeroByte > 1 ; -- firstLEZeroByte )
+        if ( ((uint8_t*)&uint256solution)[ firstLEZeroByte - 1 ] != 0 )
+            break ;
+
+    if ( firstLEZeroByte == 32 ) return true ; // nothing to look for
+
+    while ( true )
+    {
+        blockHeader.nNonce = nNonce ;
+        scrypt_1024_1_1_256( /* const char* input */ BEGIN(blockHeader), /* char* output */ BEGIN(*phash) ) ;
+        hashesScanned ++ ;
+        nNonce ++ ;
+
+        // Return the nonce if the hash has at least as many zero bytes as the solution has,
+        // then caller will check for hash <= solution
+        bool found = true ;
+        for ( size_t j = firstLEZeroByte ; j < 32 ; ++ j )
+            if ( ((uint8_t*)phash)[ j ] != 0 ) { found = false ; break ; }
+
+        if ( found )
+        {
+            LogPrintf( "ScanScryptHash with nonce 0x%x found %s, solution is %s\n", nNonce, phash->GetHex(), solutionHash.GetHex() ) ;
+            return true ;
+        }
+
+        // Not found after trying for a while
+        if ( ( nNonce & 0xfff ) == 0 )
             return false ;
     }
 }
@@ -720,7 +762,7 @@ static bool ProcessBlockFound( const CBlock * const block, const CChainParams & 
     }
 
     // Say about the new block
-    GetMainSignals().BlockFound( block->GetHash() ) ;
+    GetMainSignals().BlockFound( /* sha256 hash */ block->GetHash() ) ;
 
     // Process this block the same as if it were received from another node
     if ( ! ProcessNewBlock( chainparams, std::make_shared< const CBlock >( *block ), true, NULL ) )
@@ -789,13 +831,13 @@ void static DogecoinMiner( const CChainParams & chainparams, char threadChar )
 
             uint32_t hashesScanned = 0 ;
             int64_t scanBeginsMillis = GetTimeMillis() ;
-            const CBlockHeader * const blockHeader = pblock ;
+            const CPureBlockHeader * const blockHeader = pblock ;
             arith_uint256 solutionHash = arith_uint256().SetCompact( blockHeader->nBits ) ;
             uint256 hash ;
             uint32_t nNonce = randomNumber() ;
 
             LogPrintf(
-                "Running DogecoinMiner (%c) with %u transactions in block (%u bytes), looking for hash <= %s, random initial nonce 0x%x\n",
+                "Running DogecoinMiner (%c) with %u transactions in block (%u bytes), looking for scrypt hash <= %s, random initial nonce 0x%x\n",
                 threadChar,
                 pblock->vtx.size(),
                 ::GetSerializeSize( *pblock, SER_NETWORK, PROTOCOL_VERSION ),
@@ -805,20 +847,20 @@ void static DogecoinMiner( const CChainParams & chainparams, char threadChar )
             while ( true )
             {
                 // Check if something found
-                if ( ScanHash( blockHeader, nNonce, &hash, solutionHash, hashesScanned ) )
+                if ( ScanScryptHash( *blockHeader, nNonce, &hash, solutionHash, hashesScanned ) )
                 {
                     if ( UintToArith256( hash ) <= solutionHash )
                     {
                         // Found a solution
                         pblock->nNonce = nNonce ;
-                        if ( hash != pblock->GetHash() ) {
-                            LogPrintf( "DogecoinMiner (%c): oops! ScanHash found %s but block with nonce 0x%x has hash %s\n",
-                                       threadChar, hash.GetHex(), pblock->nNonce, pblock->GetHash().GetHex() ) ;
-                            throw std::runtime_error( "hash != pblock->GetHash()" );
+                        if ( hash != pblock->GetPoWHash() ) {
+                            LogPrintf( "DogecoinMiner (%c): oops! ScanScryptHash found %s but block with nonce 0x%x has scrypt hash %s\n",
+                                       threadChar, hash.GetHex(), pblock->nNonce, pblock->GetPoWHash().GetHex() ) ;
+                            throw std::runtime_error( "hash != pblock->GetPoWHash()" );
                         }
 
                         LogPrintf( "DogecoinMiner (%c):\n", threadChar ) ;
-                        LogPrintf( "proof-of-work found with nonce 0x%x\n   hash %s\n   <= solution %s\n",
+                        LogPrintf( "proof-of-work found with nonce 0x%x\n   scrypt hash %s\n   <= solution %s\n",
                                    nNonce, hash.GetHex(), solutionHash.GetHex() ) ;
 
                         /* bool ok = */ ProcessBlockFound( pblock, chainparams ) ;
