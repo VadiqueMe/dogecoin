@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "validation.h"
 
@@ -2056,7 +2056,7 @@ void PruneAndFlush() {
 /** Update chainActive and related internal data structures */
 void static UpdateTip( CBlockIndex * pindexNew, const CChainParams & chainParams )
 {
-    chainActive.SetTip(pindexNew);
+    chainActive.SetTip( pindexNew ) ;
 
     // New best block
     mempool.AddTransactionsUpdated(1);
@@ -2107,9 +2107,11 @@ void static UpdateTip( CBlockIndex * pindexNew, const CChainParams & chainParams
         }
     }
 
-    LogPrintf( "%s: new hash=%s height=%d version=0x%08x log2_work=%.8g txs=%lu date='%s' progress=%f cache=%.1fMiB(%utxs)\n", __func__,
-        chainActive.Tip()->GetBlockHash().ToString(), chainActive.Height(), chainActive.Tip()->nVersion,
-        log(chainActive.Tip()->nChainWork.getdouble()) / log(2.0),
+    CBlockHeader newBlock = chainActive.Tip()->GetBlockHeader( chainParams.GetConsensus( chainActive.Height() ) ) ;
+    LogPrintf( "%s: new block sha256_hash=%s scrypt_hash=%s height=%d version=0x%x%s log2_work=%.8g txs=%lu date='%s' progress=%f cache=%.1fMiB(%u txs)\n", __func__,
+        /* chainActive.Tip()->GetBlockHash().ToString() */ newBlock.GetHash().ToString(), newBlock.GetPoWHash().ToString(),
+        chainActive.Height(), newBlock.nVersion, newBlock.IsAuxpow() ? "(auxpow)" : "",
+        log( chainActive.Tip()->nChainWork.getdouble() ) / log( 2.0 ),
         (unsigned long)chainActive.Tip()->nChainTx,
         DateTimeStrFormat("%Y-%m-%d %H:%M:%S", chainActive.Tip()->GetBlockTime()),
         GuessVerificationProgress(chainParams.TxData(), chainActive.Tip()),
@@ -4243,7 +4245,7 @@ bool LoadMempool(void)
     return true;
 }
 
-void DumpMempool(void)
+void DumpMempool()
 {
     int64_t start = GetTimeMicros();
 
@@ -4284,9 +4286,9 @@ void DumpMempool(void)
         file.fclose();
         RenameOver(GetDataDir() / "mempool.dat.new", GetDataDir() / "mempool.dat");
         int64_t last = GetTimeMicros();
-        LogPrintf("Dumped mempool: %gs to copy, %gs to dump\n", (mid-start)*0.000001, (last-mid)*0.000001);
-    } catch (const std::exception& e) {
-        LogPrintf("Failed to dump mempool: %s. Continuing anyway.\n", e.what());
+        LogPrintf( "Dumped mempool: %g s to copy, %g s to dump\n", ( mid - start ) * 0.000001, ( last - mid ) * 0.000001 ) ;
+    } catch ( const std::exception & e ) {
+        LogPrintf( "Can't dump mempool: %s. Continuing anyway\n", e.what() ) ;
     }
 }
 

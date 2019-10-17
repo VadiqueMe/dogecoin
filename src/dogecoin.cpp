@@ -1,6 +1,6 @@
 // Copyright (c) 2015 The Dogecoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include <boost/random/uniform_int.hpp>
 #include <boost/random/mersenne_twister.hpp>
@@ -83,7 +83,7 @@ unsigned int CalculateDogecoinNextWorkRequired( const CBlockIndex * pindexLast, 
     return bnNew.GetCompact() ;
 }
 
-bool CheckAuxPowProofOfWork(const CBlockHeader& block, const Consensus::Params& params)
+bool CheckAuxPowProofOfWork( const CBlockHeader & block, const Consensus::Params & params )
 {
     /* Except for legacy blocks with full version 1, ensure that
        the chain ID is correct.  Legacy blocks are not allowed since
@@ -97,26 +97,33 @@ bool CheckAuxPowProofOfWork(const CBlockHeader& block, const Consensus::Params& 
 
     /* If there is no auxpow, just check the block hash */
     if ( ! block.auxpow ) {
-        if (block.IsAuxpow())
-            return error("%s : no auxpow on block with auxpow version", __func__);
+        if ( block.IsAuxpow() )
+            return error("%s : no auxpow on block with auxpow in version", __func__);
 
-        if (!CheckProofOfWork(block.GetPoWHash(), block.nBits, params))
+        uint256 blockScryptHash = block.GetPoWHash() ;
+        //LogPrintf( "Checking proof-of-work for block with scrypt hash %s\n", blockScryptHash.GetHex() ) ;
+
+        if ( ! CheckProofOfWork( blockScryptHash, block.nBits, params ) )
             return error("%s : non-AUX proof of work failed", __func__);
 
-        return true;
+        return true ;
     }
 
-    /* We have auxpow.  Check it.  */
+    // Block has auxpow, check it
 
-    if (!block.IsAuxpow())
+    if ( ! block.IsAuxpow() )
         return error("%s : auxpow on block with non-auxpow version", __func__);
 
-    if (!block.auxpow->check(block.GetHash(), block.GetChainId(), params))
+    if ( ! block.auxpow->check( block.GetHash(), block.GetChainId(), params ) )
         return error("%s : AUX POW is not valid", __func__);
-    if (!CheckProofOfWork(block.auxpow->getParentBlockPoWHash(), block.nBits, params))
+
+    uint256 parentBlockScryptHash = block.auxpow->getParentBlockPoWHash() ;
+    //LogPrintf( "Checking auxiliary proof-of-work for parent block with scrypt hash %s\n", parentBlockScryptHash.GetHex() ) ;
+
+    if ( ! CheckProofOfWork( parentBlockScryptHash, block.nBits, params ) )
         return error("%s : AUX proof of work failed", __func__);
 
-    return true;
+    return true ;
 }
 
 CAmount GetDogecoinBlockSubsidy(int nHeight, const Consensus::Params& consensusParams, uint256 prevHash)

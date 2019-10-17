@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "primitives/block.h"
 
@@ -10,34 +10,29 @@
 #include "utilstrencodings.h"
 #include "crypto/common.h"
 
-void CBlockHeader::SetAuxpow (CAuxPow* apow)
+void CBlockHeader::SetAuxpow ( CAuxPow * apow )
 {
-    if (apow)
-    {
-        auxpow.reset(apow);
-        SetAuxpowFlag(true);
-    } else
-    {
-        auxpow.reset();
-        SetAuxpowFlag(false);
-    }
+    auxpow.reset( apow ) ;
+    SetAuxpowFlag( apow != nullptr ) ;
 }
 
 std::string CBlock::ToString() const
 {
-    std::stringstream s;
-    s << strprintf("CBlock(hash=%s, ver=0x%08x, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=%u, vtx=%u)\n",
-        GetHash().ToString(),
+    std::stringstream s ;
+    s << strprintf(
+        "CBlock(version=0x%x, scrypt_hash=%s, sha256_hash=%s, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=%u, txs=%u)\n",
         nVersion,
+        GetPoWHash().ToString(), GetHash().ToString(),
         hashPrevBlock.ToString(),
         hashMerkleRoot.ToString(),
         nTime, nBits, nNonce,
-        vtx.size());
-    for (unsigned int i = 0; i < vtx.size(); i++)
+        vtx.size()
+    ) ;
+    for ( unsigned int i = 0 ; i < vtx.size() ; i++ )
     {
-        s << "  " << vtx[i]->ToString() << "\n";
+        s << "  " << vtx[i]->ToString() << "\n" ;
     }
-    return s.str();
+    return s.str() ;
 }
 
 int64_t GetBlockWeight(const CBlock& block)

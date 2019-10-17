@@ -202,10 +202,10 @@ CAuxPow::CheckMerkleBranch (uint256 hash,
 }
 
 void
-CAuxPow::initAuxPow (CBlockHeader& header)
+CAuxPow::initAuxPow ( CBlockHeader & header )
 {
-  /* Set auxpow flag right now, since we take the block hash below.  */
-  header.SetAuxpowFlag(true);
+  /* Set auxpow flag right now, since we take the block hash below */
+  header.SetAuxpowFlag( true ) ;
 
   /* Build a minimal coinbase script input for merge-mining.  */
   const uint256 blockHash = header.GetHash ();
@@ -230,8 +230,8 @@ CAuxPow::initAuxPow (CBlockHeader& header)
   parent.vtx[0] = coinbaseRef;
   parent.hashMerkleRoot = BlockMerkleRoot(parent);
 
-  /* Construct the auxpow object.  */
-  header.SetAuxpow(new CAuxPow(coinbaseRef));
+  /* Construct the auxpow object */
+  header.SetAuxpow( new CAuxPow( coinbaseRef ) ) ;
   assert (header.auxpow->vChainMerkleBranch.empty());
   header.auxpow->nChainIndex = 0;
   assert (header.auxpow->vMerkleBranch.empty());

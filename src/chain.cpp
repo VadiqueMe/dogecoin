@@ -1,37 +1,35 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "chain.h"
 #include "validation.h"
 
-using namespace std;
-
-/* Moved here from the header, because we need auxpow and the logic
-   becomes more involved.  */
-CBlockHeader CBlockIndex::GetBlockHeader(const Consensus::Params& consensusParams) const
+/* Moved here from the header due to the need of auxpow and more involved logic */
+CBlockHeader CBlockIndex::GetBlockHeader( const Consensus::Params & consensusParams ) const
 {
-    CBlockHeader block;
+    CBlockHeader block ;
 
-    block.nVersion       = nVersion;
+    block.nVersion       = nVersion ;
 
     /* The CBlockIndex object's block header is missing the auxpow.
-       So if this is an auxpow block, read it from disk instead.  We only
-       have to read the actual *header*, not the full block.  */
-    if (block.IsAuxpow())
+       So if this is an auxpow block, read it from disk instead. We only
+       have to read the actual *header*, not the full block */
+    if ( block.IsAuxpow() )
     {
-        ReadBlockHeaderFromDisk(block, this, consensusParams);
-        return block;
+        ReadBlockHeaderFromDisk( block, this, consensusParams ) ;
+        return block ;
     }
 
-    if (pprev)
-        block.hashPrevBlock = pprev->GetBlockHash();
-    block.hashMerkleRoot = hashMerkleRoot;
-    block.nTime          = nTime;
-    block.nBits          = nBits;
-    block.nNonce         = nNonce;
-    return block;
+    if ( pprev )
+        block.hashPrevBlock = pprev->GetBlockHash() ;
+    block.hashMerkleRoot = hashMerkleRoot ;
+    block.nTime          = nTime ;
+    block.nBits          = nBits ;
+    block.nNonce         = nNonce ;
+
+    return block ;
 }
 
 /**

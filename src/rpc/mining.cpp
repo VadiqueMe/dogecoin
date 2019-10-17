@@ -975,8 +975,8 @@ UniValue getauxblockbip22(const JSONRPCRequest& request)
             nStart = GetTime();
 
             // Finalise it by setting the version and building the merkle root
-            IncrementExtraNonce(&newBlock->block, pindexPrev, nExtraNonce);
-            newBlock->block.SetAuxpowFlag(true);
+            IncrementExtraNonce( &newBlock->block, pindexPrev, nExtraNonce ) ;
+            newBlock->block.SetAuxpowFlag( true ) ;
 
             // Save
             pblock = &newBlock->block;
@@ -1015,13 +1015,12 @@ UniValue getauxblockbip22(const JSONRPCRequest& request)
         throw JSONRPCError(RPC_INVALID_PARAMETER, "block hash unknown");
     CBlock& block = *mit->second;
 
-    const std::vector<unsigned char> vchAuxPow
-      = ParseHex(request.params[1].get_str());
-    CDataStream ss(vchAuxPow, SER_GETHASH, PROTOCOL_VERSION);
-    CAuxPow pow;
-    ss >> pow;
-    block.SetAuxpow(new CAuxPow(pow));
-    assert(block.GetHash() == hash);
+    const std::vector< unsigned char > vchAuxPow = ParseHex( request.params[ 1 ].get_str() ) ;
+    CDataStream ss( vchAuxPow, SER_GETHASH, PROTOCOL_VERSION ) ;
+    CAuxPow auxpow ;
+    ss >> auxpow ;
+    block.SetAuxpow( new CAuxPow( auxpow ) ) ;
+    assert( block.GetHash() == hash ) ;
 
     submitblock_StateCatcher sc(block.GetHash());
     RegisterValidationInterface(&sc);

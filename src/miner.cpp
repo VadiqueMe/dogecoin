@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "miner.h"
 
@@ -200,7 +200,7 @@ std::unique_ptr< CBlockTemplate > BlockAssembler::CreateNewBlock( const CScript 
 
     uint64_t nSerializeSize = GetSerializeSize( *pblock, SER_NETWORK, PROTOCOL_VERSION ) ;
     LogPrintf(
-        "CreateNewBlock(): size %u, block weight %u, txs %u, fees %.8f, sigops %d\n",
+        "CreateNewBlock: size %u, block weight %u, txs %u, fees %.8f, sigops %d\n",
         nSerializeSize, GetBlockWeight( *pblock ), nBlockTx, nFees / 100000000.0, nBlockSigOpsCost
     ) ;
 
@@ -780,6 +780,7 @@ void static DogecoinMiner( const CChainParams & chainparams, char threadChar )
             }
 
             CBlock * pblock = &pblocktemplate->block ;
+            if ( pblock->IsAuxpow() ) pblock->SetAuxpow( nullptr ) ;
             IncrementExtraNonce( pblock, pindexPrev, nExtraNonce ) ;
 
             //
@@ -794,11 +795,11 @@ void static DogecoinMiner( const CChainParams & chainparams, char threadChar )
             uint32_t nNonce = randomNumber() ;
 
             LogPrintf(
-                "Running DogecoinMiner (%c) with %u transactions in block (%u bytes), random initial nonce 0x%x\n",
+                "Running DogecoinMiner (%c) with %u transactions in block (%u bytes), looking for hash <= %s, random initial nonce 0x%x\n",
                 threadChar,
                 pblock->vtx.size(),
                 ::GetSerializeSize( *pblock, SER_NETWORK, PROTOCOL_VERSION ),
-                nNonce
+                solutionHash.GetHex(), nNonce
             ) ;
 
             while ( true )

@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #ifndef BITCOIN_CHAIN_H
 #define BITCOIN_CHAIN_H
@@ -344,15 +344,15 @@ public:
     }
 
     /**
-     * Check if the auxpow flag is set in the version.
-     * @return True if this block version is marked as auxpow.
+     * Check if the auxpow flag is set in the version
+     * @return True if this block version is marked as auxpow
      */
     inline bool IsAuxpow() const
     {
-        return nVersion & CPureBlockHeader::VERSION_AUXPOW;
+        return nVersion & CPureBlockHeader::VERSION_AUXPOW ;
     }
 
-    /* Analyse the block version.  */
+    /* Analyse the block version */
     inline int GetBaseVersion() const
     {
         return CPureBlockHeader::GetBaseVersion(nVersion);

@@ -19,11 +19,11 @@
 class CPureBlockHeader
 {
 public:
-    /* Modifiers to the version.  */
-    static const int32_t VERSION_AUXPOW = (1 << 8);
+    /* Modifiers to the version */
+    static const int32_t VERSION_AUXPOW = 1 << 8 ;
 
-    /** Bits above are reserved for the auxpow chain ID.  */
-    static const int32_t VERSION_CHAIN_START = (1 << 16);
+    /** Bits above are reserved for the auxpow chain ID */
+    static const int32_t VERSION_CHAIN_START = 1 << 16 ;
 
     // header
     int32_t nVersion;
@@ -66,9 +66,9 @@ public:
         return (nBits == 0);
     }
 
-    uint256 GetHash() const;
+    uint256 GetHash() const ;
 
-    uint256 GetPoWHash() const;
+    uint256 GetPoWHash() const ;
 
     int64_t GetBlockTime() const
     {
@@ -82,16 +82,16 @@ public:
        allowing BIP9 to work.  */
 
     /**
-     * Extract the base version (without modifiers and chain ID).
-     * @return The base version./
+     * Extract the base version (without modifiers and chain ID)
+     * @return The base version
      */
     inline int32_t GetBaseVersion() const
     {
-        return GetBaseVersion(nVersion);
+        return GetBaseVersion( nVersion ) ;
     }
-    static inline int32_t GetBaseVersion(int32_t ver)
+    static inline int32_t GetBaseVersion( int32_t ver )
     {
-        return ver % VERSION_AUXPOW;
+        return ver % VERSION_AUXPOW ;
     }
 
     /**
@@ -123,29 +123,29 @@ public:
     }
 
     /**
-     * Check if the auxpow flag is set in the version.
-     * @return True if this block version is marked as auxpow.
+     * Check if the auxpow flag is set in the version
+     * @return True if this block version is marked as auxpow
      */
     inline bool IsAuxpow() const
     {
-        return nVersion & VERSION_AUXPOW;
+        return nVersion & VERSION_AUXPOW ;
     }
 
     /**
-     * Set the auxpow flag.  This is used for testing.
-     * @param auxpow Whether to mark auxpow as true.
+     * Set the auxpow flag
+     * @param auxpow Whether to mark auxpow as true
      */
-    inline void SetAuxpowFlag(bool auxpow)
+    inline void SetAuxpowFlag( bool auxpow )
     {
-        if (auxpow)
-            nVersion |= VERSION_AUXPOW;
+        if ( auxpow )
+            nVersion |= VERSION_AUXPOW ;
         else
-            nVersion &= ~VERSION_AUXPOW;
+            nVersion &= ~VERSION_AUXPOW ;
     }
 
     /**
-     * Check whether this is a "legacy" block without chain ID.
-     * @return True if it is.
+     * Check whether this is a "legacy" block without chain ID
+     * @return True if it is
      */
     inline bool IsLegacy() const
     {
