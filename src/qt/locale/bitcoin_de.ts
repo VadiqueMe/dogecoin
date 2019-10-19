@@ -1740,8 +1740,8 @@
         <translation>Eine optionale Bezeichnung, die der neuen Empfangsadresse zugeordnet wird.</translation>
     </message>
     <message>
-        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
-        <translation>Verwenden Sie dieses Formular, um Zahlungen anzufordern. Alle Felder sind &lt;b&gt;optional&lt;/b&gt;.</translation>
+        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
+        <translation>Verwenden Sie dieses Formular, um Zahlungen anzufordern. Alle Felder sind &lt;b&gt;optional&lt;/b&gt;</translation>
     </message>
     <message>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
@@ -1779,25 +1779,6 @@
         <source>Remove</source>
         <translation>Entfernen</translation>
     </message>
-    <message>
-        <source>Copy URI</source>
-        <translation>&amp;URI kopieren</translation>
-    </message>
-    <message>
-        <source>Copy label</source>
-        <translation>Bezeichnung kopieren</translation>
-    </message>
-    <message>
-        <source>Copy message</source>
-        <translation>Nachricht kopieren</translation>
-    </message>
-    <message>
-        <source>Copy amount</source>
-        <translation>Betrag kopieren</translation>
-    </message>
-</context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>QR-Code</translation>
@@ -1847,8 +1828,8 @@
         <translation>Resultierende URI ist zu lang, bitte den Text für Bezeichnung/Nachricht kürzen.</translation>
     </message>
     <message>
-        <source>Error encoding URI into QR Code.</source>
-        <translation>Beim Enkodieren der URI in den QR-Code ist ein Fehler aufgetreten.</translation>
+        <source>Error encoding URI into QR Code</source>
+        <translation>Beim Enkodieren der URI in den QR-Code ist ein Fehler aufgetreten</translation>
     </message>
 </context>
 <context>

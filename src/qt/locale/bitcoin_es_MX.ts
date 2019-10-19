@@ -410,16 +410,13 @@
         <translation>Mensaje opcional para agregar a la solicitud de pago, el cual será mostrado cuando la solicitud este abierta. Nota: El mensaje no se manda con el pago a travéz de la red de Dogecoin.</translation>
     </message>
     <message>
-        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
+        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
         <translation>Use este formulario para la solicitud de pagos. Todos los campos son &lt;b&gt;opcionales&lt;/b&gt;</translation>
     </message>
     <message>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
         <translation>Monto opcional a solicitar. Dejarlo vacion o en cero no solicita un monto especifico.</translation>
     </message>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>Copy &amp;Address</source>
         <translation>&amp;Copiar dirección</translation>

@@ -473,9 +473,6 @@
         <source>Show</source>
         <translation>Mostrar</translation>
     </message>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>Copy &amp;Address</source>
         <translation>&amp;Copiar Dirección</translation>

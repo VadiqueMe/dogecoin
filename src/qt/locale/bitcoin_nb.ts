@@ -1280,8 +1280,8 @@
         <translation>En valgfri merkelapp å tilknytte den nye mottakeradressen.</translation>
     </message>
     <message>
-        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
-        <translation>Bruk dette skjemaet til betalingsforespørsler. Alle felt er &lt;b&gt;valgfrie&lt;/b&gt;.</translation>
+        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
+        <translation>Bruk dette skjemaet til betalingsforespørsler. Alle felt er &lt;b&gt;valgfrie&lt;/b&gt;</translation>
     </message>
     <message>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
@@ -1319,9 +1319,6 @@
         <source>Remove</source>
         <translation>Fjern</translation>
     </message>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>QR-kode</translation>

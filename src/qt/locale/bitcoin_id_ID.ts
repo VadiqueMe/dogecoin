@@ -1190,8 +1190,8 @@
         <translation>Label opsional untuk mengasosiasikan dengan alamat penerima baru.</translation>
     </message>
     <message>
-        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
-        <translation>Gunakan form ini untuk meminta pembayaran. Semua bidang adalah &lt;b&gt;opsional&lt;/b&gt;.</translation>
+        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
+        <translation>Gunakan form ini untuk meminta pembayaran. Semua bidang adalah &lt;b&gt;opsional&lt;/b&gt;</translation>
     </message>
     <message>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
@@ -1233,9 +1233,6 @@
         <source>Copy label</source>
         <translation>Salin label</translation>
     </message>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>Kode QR</translation>

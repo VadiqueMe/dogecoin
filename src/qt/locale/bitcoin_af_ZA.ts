@@ -389,9 +389,6 @@
         <source>Copy amount</source>
         <translation>Kopieer bedrag</translation>
     </message>
-</context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>Address</source>
         <translation>Adres</translation>

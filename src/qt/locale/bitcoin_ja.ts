@@ -1744,8 +1744,8 @@
         <translation>受取用アドレスに紐づく任意のラベル。</translation>
     </message>
     <message>
-        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
-        <translation>このフォームを使用して支払のリクエストを行いましょう。すべての項目は&lt;b&gt;任意入力&lt;/b&gt;です。</translation>
+        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
+        <translation>このフォームを使用して支払のリクエストを行いましょう。すべての項目は&lt;b&gt;任意入力&lt;/b&gt;です</translation>
     </message>
     <message>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
@@ -1783,25 +1783,6 @@
         <source>Remove</source>
         <translation>削除</translation>
     </message>
-    <message>
-        <source>Copy URI</source>
-        <translation>URI をコピーする</translation>
-    </message>
-    <message>
-        <source>Copy label</source>
-        <translation>ラベルをコピーする</translation>
-    </message>
-    <message>
-        <source>Copy message</source>
-        <translation>メッセージをコピーする</translation>
-    </message>
-    <message>
-        <source>Copy amount</source>
-        <translation>総額のコピー</translation>
-    </message>
-</context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>QR コード</translation>
@@ -1851,8 +1832,8 @@
         <translation>URI が長くなり過ぎます。ラベルやメッセージのテキストを短くしてください。</translation>
     </message>
     <message>
-        <source>Error encoding URI into QR Code.</source>
-        <translation>QR コード用の URI エンコードでエラー。</translation>
+        <source>Error encoding URI into QR Code</source>
+        <translation>QR コード用の URI エンコードでエラー</translation>
     </message>
 </context>
 <context>

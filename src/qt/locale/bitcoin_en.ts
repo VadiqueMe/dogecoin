@@ -2067,7 +2067,6 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>QRImageWidget</name>
     <message>
-        <location filename="../receiverequestdialog.cpp" line="+36"/>
         <source>&amp;Save Image...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2509,7 +2508,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="-7"/>
-        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
+        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2559,30 +2558,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../receivecoinsdialog.cpp" line="+47"/>
-        <source>Copy URI</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Copy label</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Copy message</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Copy amount</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ReceiveRequestDialog</name>
-    <message>
-        <location filename="../forms/receiverequestdialog.ui" line="+29"/>
         <source>QR Code</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2602,7 +2577,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../receiverequestdialog.cpp" line="+65"/>
         <source>Request payment to %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2643,7 +2617,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+5"/>
-        <source>Error encoding URI into QR Code.</source>
+        <source>Error encoding URI into QR Code</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

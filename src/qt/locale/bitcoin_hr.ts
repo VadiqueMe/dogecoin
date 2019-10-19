@@ -771,9 +771,6 @@
         <source>Show</source>
         <translation>Pokaži</translation>
     </message>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>QR kôd</translation>

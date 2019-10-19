@@ -1725,8 +1725,8 @@
         <translation>Voliteľný popis ktorý sa pridá k tejto novej prijímajúcej adrese.</translation>
     </message>
     <message>
-        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
-        <translation>Použite tento formulár pre vyžiadanie platby. Všetky polia sú &lt;b&gt;voliteľné&lt;/b&gt;.</translation>
+        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
+        <translation>Použite tento formulár pre vyžiadanie platby. Všetky polia sú &lt;b&gt;voliteľné&lt;/b&gt;</translation>
     </message>
     <message>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
@@ -1764,25 +1764,6 @@
         <source>Remove</source>
         <translation>Odstrániť</translation>
     </message>
-    <message>
-        <source>Copy URI</source>
-        <translation>Kopírovať URI</translation>
-    </message>
-    <message>
-        <source>Copy label</source>
-        <translation>Kopírovať popis</translation>
-    </message>
-    <message>
-        <source>Copy message</source>
-        <translation>Kopírovať správu</translation>
-    </message>
-    <message>
-        <source>Copy amount</source>
-        <translation>Kopírovať sumu</translation>
-    </message>
-</context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>QR kód</translation>
@@ -1832,8 +1813,8 @@
         <translation>Výsledné URI je príliš dlhé, skúste skrátiť text pre popis alebo správu.</translation>
     </message>
     <message>
-        <source>Error encoding URI into QR Code.</source>
-        <translation>Chyba kódovania URI do QR Code.</translation>
+        <source>Error encoding URI into QR Code</source>
+        <translation>Chyba kódovania URI do QR Code</translation>
     </message>
 </context>
 <context>

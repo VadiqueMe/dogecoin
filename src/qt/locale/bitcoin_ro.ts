@@ -629,9 +629,6 @@
         <source>Remove</source>
         <translation>Elimină</translation>
     </message>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>&amp;Save Image...</source>
         <translation>&amp;Salvează imaginea...</translation>

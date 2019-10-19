@@ -870,8 +870,8 @@
         <translation>Янги қабул қилинаётган манзил билан боғланган танланадиган ёрлиқ.</translation>
     </message>
     <message>
-        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
-        <translation>Ушбу сўровдан тўловларни сўраш учун фойдаланинг. Барча майдонлар &lt;b&gt;мажбурий эмас&lt;/b&gt;.</translation>
+        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
+        <translation>Ушбу сўровдан тўловларни сўраш учун фойдаланинг. Барча майдонлар &lt;b&gt;мажбурий эмас&lt;/b&gt;</translation>
     </message>
     <message>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
@@ -909,9 +909,6 @@
         <source>Remove</source>
         <translation>Ўчириш</translation>
     </message>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>QR Коди</translation>

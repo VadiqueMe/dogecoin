@@ -1730,8 +1730,8 @@
         <translation>可为新建的收款地址添加一个标签。</translation>
     </message>
     <message>
-        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
-        <translation>使用此表单要求付款。所有字段都是&lt;b&gt;可选&lt;/b&gt;。</translation>
+        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
+        <translation>使用此表单要求付款。所有字段都是&lt;b&gt;可选&lt;/b&gt;</translation>
     </message>
     <message>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
@@ -1769,25 +1769,6 @@
         <source>Remove</source>
         <translation>移除</translation>
     </message>
-    <message>
-        <source>Copy URI</source>
-        <translation>复制URI</translation>
-    </message>
-    <message>
-        <source>Copy label</source>
-        <translation>复制标签</translation>
-    </message>
-    <message>
-        <source>Copy message</source>
-        <translation>复制消息</translation>
-    </message>
-    <message>
-        <source>Copy amount</source>
-        <translation>复制金额</translation>
-    </message>
-</context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>二维码</translation>
@@ -1837,8 +1818,8 @@
         <translation>URI 太长，请试着精简标签或消息文本。</translation>
     </message>
     <message>
-        <source>Error encoding URI into QR Code.</source>
-        <translation>把 URI 编码成二维码时发生错误。</translation>
+        <source>Error encoding URI into QR Code</source>
+        <translation>把 URI 编码成二维码时发生错误</translation>
     </message>
 </context>
 <context>

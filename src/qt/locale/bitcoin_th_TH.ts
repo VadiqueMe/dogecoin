@@ -801,9 +801,6 @@
     </message>
     </context>
 <context>
-    <name>ReceiveRequestDialog</name>
-    </context>
-<context>
     <name>RecentRequestsTableModel</name>
     </context>
 <context>

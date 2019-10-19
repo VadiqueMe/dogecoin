@@ -1228,8 +1228,8 @@
         <translation>Valinnainen nimi liitetään vastaanottavaan osoitteeseen.</translation>
     </message>
     <message>
-        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
-        <translation>Käytä lomaketta maksupyyntöihin. Kaikki kentät ovat &lt;b&gt;valinnaisia&lt;/b&gt;.</translation>
+        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
+        <translation>Käytä lomaketta maksupyyntöihin. Kaikki kentät ovat &lt;b&gt;valinnaisia&lt;/b&gt;</translation>
     </message>
     <message>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
@@ -1267,9 +1267,6 @@
         <source>Remove</source>
         <translation>Poista</translation>
     </message>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>QR-koodi</translation>

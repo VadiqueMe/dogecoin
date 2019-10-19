@@ -669,9 +669,6 @@
         <source>Clear</source>
         <translation>Išvalyti</translation>
     </message>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>QR kodas</translation>

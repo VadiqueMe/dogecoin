@@ -757,9 +757,6 @@
     </context>
 <context>
     <name>ReceiveCoinsDialog</name>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>Address</source>
         <translation>Adres</translation>

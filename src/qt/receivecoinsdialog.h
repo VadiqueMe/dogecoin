@@ -1,11 +1,13 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #ifndef BITCOIN_QT_RECEIVECOINSDIALOG_H
 #define BITCOIN_QT_RECEIVECOINSDIALOG_H
 
 #include "guiutil.h"
+#include "walletmodel.h"
 
 #include <QDialog>
 #include <QHeaderView>
@@ -45,10 +47,12 @@ public:
 
     void setModel(WalletModel *model);
 
+    void setInfoAboutRequest( const SendCoinsRecipient & info ) ;
+
 public Q_SLOTS:
-    void clear();
-    void reject();
-    void accept();
+    void clearForm() ;
+    void reject() ;
+    void accept() ;
 
 protected:
     virtual void keyPressEvent(QKeyEvent *event);
@@ -59,23 +63,27 @@ private:
     WalletModel *model;
     QMenu *contextMenu;
     const PlatformStyle *platformStyle;
+    SendCoinsRecipient info ;
 
     QModelIndex selectedRow();
     void copyColumnToClipboard(int column);
     virtual void resizeEvent(QResizeEvent *event);
 
 private Q_SLOTS:
-    void on_receiveButton_clicked();
-    void on_showRequestButton_clicked();
-    void on_removeRequestButton_clicked();
-    void on_recentRequestsView_doubleClicked(const QModelIndex &index);
-    void recentRequestsView_selectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
-    void updateDisplayUnit();
-    void showMenu(const QPoint &point);
-    void copyURI();
-    void copyLabel();
-    void copyMessage();
-    void copyAmount();
-};
+    void on_receiveButton_clicked() ;
+    void recentRequestsView_selectionChanged( const QItemSelection & selected, const QItemSelection & deselected ) ;
+    void updateDisplayUnit() ;
+    void showMenu( const QPoint & point ) ;
+    void copyURI() ;
+    void copyLabel() ;
+    void copyMessage() ;
+    void copyAmount() ;
+    void removeSelection() ;
+    void clearAllHistory() ;
 
-#endif // BITCOIN_QT_RECEIVECOINSDIALOG_H
+    void on_btnCopyURI_clicked();
+    void on_btnCopyAddress_clicked();
+    void updateRequest();
+} ;
+
+#endif

@@ -429,9 +429,6 @@
         <source>Copy label</source>
         <translation>Kopiatu etiketa</translation>
     </message>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>Copy &amp;Address</source>
         <translation>&amp;Kopiatu helbidea</translation>

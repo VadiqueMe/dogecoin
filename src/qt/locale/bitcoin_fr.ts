@@ -1744,8 +1744,8 @@
         <translation>Un étiquette facultative à associer à la nouvelle adresse de réception.</translation>
     </message>
     <message>
-        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
-        <translation>Utiliser ce formulaire pour demander des paiements. Tous les champs sont  &lt;b&gt;facultatifs&lt;/b&gt;.</translation>
+        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
+        <translation>Utiliser ce formulaire pour demander des paiements. Tous les champs sont  &lt;b&gt;facultatifs&lt;/b&gt;</translation>
     </message>
     <message>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
@@ -1783,25 +1783,6 @@
         <source>Remove</source>
         <translation>Retirer</translation>
     </message>
-    <message>
-        <source>Copy URI</source>
-        <translation>Copier l'URI</translation>
-    </message>
-    <message>
-        <source>Copy label</source>
-        <translation>Copier l’étiquette</translation>
-    </message>
-    <message>
-        <source>Copy message</source>
-        <translation>Copier le message</translation>
-    </message>
-    <message>
-        <source>Copy amount</source>
-        <translation>Copier le montant</translation>
-    </message>
-</context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>Code QR</translation>
@@ -1851,8 +1832,8 @@
         <translation>L'URI résultante est trop longue. Essayez de réduire le texte de l'étiquette ou du message.</translation>
     </message>
     <message>
-        <source>Error encoding URI into QR Code.</source>
-        <translation>Erreur d'encodage de l'URI en code QR.</translation>
+        <source>Error encoding URI into QR Code</source>
+        <translation>Erreur d'encodage de l'URI en code QR</translation>
     </message>
 </context>
 <context>

@@ -1641,8 +1641,8 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
         <translation>Un'etichetta opzionale da associare al nuovo indirizzo di ricezione.</translation>
     </message>
     <message>
-        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
-        <translation>Usa questo modulo per richiedere pagamenti. Tutti i campi sono &lt;b&gt;opzionali&lt;/b&gt;.</translation>
+        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
+        <translation>Usa questo modulo per richiedere pagamenti. Tutti i campi sono &lt;b&gt;opzionali&lt;/b&gt;</translation>
     </message>
     <message>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
@@ -1680,25 +1680,6 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
         <source>Remove</source>
         <translation>Rimuovi</translation>
     </message>
-    <message>
-        <source>Copy URI</source>
-        <translation>Copia URI</translation>
-    </message>
-    <message>
-        <source>Copy label</source>
-        <translation>Copia etichetta</translation>
-    </message>
-    <message>
-        <source>Copy message</source>
-        <translation>Copia il messaggio</translation>
-    </message>
-    <message>
-        <source>Copy amount</source>
-        <translation>Copia l'importo</translation>
-    </message>
-</context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>Codice QR</translation>

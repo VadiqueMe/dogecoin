@@ -1744,8 +1744,8 @@
         <translation>跟新收款位址關聯的標記，可以不填。</translation>
     </message>
     <message>
-        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
-        <translation>請用這份表單來要求付款。所有欄位都&lt;b&gt;可以不填&lt;/b&gt;。</translation>
+        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
+        <translation>請用這份表單來要求付款。所有欄位都&lt;b&gt;可以不填&lt;/b&gt;</translation>
     </message>
     <message>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
@@ -1783,25 +1783,6 @@
         <source>Remove</source>
         <translation>刪掉</translation>
     </message>
-    <message>
-        <source>Copy URI</source>
-        <translation>複製 URI</translation>
-    </message>
-    <message>
-        <source>Copy label</source>
-        <translation>複製標記</translation>
-    </message>
-    <message>
-        <source>Copy message</source>
-        <translation>複製訊息</translation>
-    </message>
-    <message>
-        <source>Copy amount</source>
-        <translation>複製金額</translation>
-    </message>
-</context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>QR Code</translation>
@@ -1851,8 +1832,8 @@
         <translation>產生的 URI 過長，請試著縮短標記或訊息的文字內容。</translation>
     </message>
     <message>
-        <source>Error encoding URI into QR Code.</source>
-        <translation>把 URI 編碼成 QR Code 時發生錯誤。</translation>
+        <source>Error encoding URI into QR Code</source>
+        <translation>把 URI 編碼成 QR Code 時發生錯誤</translation>
     </message>
 </context>
 <context>

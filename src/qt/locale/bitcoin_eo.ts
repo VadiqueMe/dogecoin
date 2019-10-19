@@ -935,9 +935,6 @@
         <source>Remove</source>
         <translation>Forigi</translation>
     </message>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>QR-kodo</translation>

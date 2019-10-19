@@ -696,7 +696,7 @@
         <translation>&amp;Tin nhắn:</translation>
     </message>
     <message>
-        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
+        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
         <translation>Sử dụng form này để yêu cầu thanh toán. Tất cả các trường &lt;b&gt;không bắt buộc&lt;b&gt;</translation>
     </message>
     <message>
@@ -731,9 +731,6 @@
         <source>Copy message</source>
         <translation>Copy tin nhắn</translation>
     </message>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>QR Code</translation>
@@ -771,7 +768,7 @@
         <translation>Tin nhắn</translation>
     </message>
     <message>
-        <source>Error encoding URI into QR Code.</source>
+        <source>Error encoding URI into QR Code</source>
         <translation>Lỗi khi encode từ URI thành QR Code</translation>
     </message>
 </context>

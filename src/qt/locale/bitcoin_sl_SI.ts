@@ -1080,8 +1080,8 @@
         <translation>Oznaka novega sprejemnega naslova.</translation>
     </message>
     <message>
-        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
-        <translation>S tem obrazcem ustvarite nov zahtevek za plačilo. Vsa polja so &lt;b&gt;neobvezna&lt;/b&gt;.</translation>
+        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
+        <translation>S tem obrazcem ustvarite nov zahtevek za plačilo. Vsa polja so &lt;b&gt;neobvezna&lt;/b&gt;</translation>
     </message>
     <message>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
@@ -1119,9 +1119,6 @@
         <source>Remove</source>
         <translation>Odstrani</translation>
     </message>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>QR Koda</translation>

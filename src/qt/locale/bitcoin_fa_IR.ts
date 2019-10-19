@@ -345,9 +345,6 @@
         <source>&amp;Message:</source>
         <translation>پیام:</translation>
     </message>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>Copy &amp;Address</source>
         <translation>کپی آدرس</translation>

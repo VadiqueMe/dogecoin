@@ -1744,8 +1744,8 @@
         <translation>Et valgfrit mærkat, der associeres med den nye modtagelsesadresse.</translation>
     </message>
     <message>
-        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
-        <translation>Brug denne formular for at anmode om betalinger. Alle felter er &lt;b&gt;valgfri&lt;/b&gt;.</translation>
+        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
+        <translation>Brug denne formular for at anmode om betalinger. Alle felter er &lt;b&gt;valgfri&lt;/b&gt;</translation>
     </message>
     <message>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
@@ -1783,25 +1783,6 @@
         <source>Remove</source>
         <translation>Fjern</translation>
     </message>
-    <message>
-        <source>Copy URI</source>
-        <translation>Kopiér URI</translation>
-    </message>
-    <message>
-        <source>Copy label</source>
-        <translation>Kopiér mærkat</translation>
-    </message>
-    <message>
-        <source>Copy message</source>
-        <translation>Kopiér besked</translation>
-    </message>
-    <message>
-        <source>Copy amount</source>
-        <translation>Kopiér beløb</translation>
-    </message>
-</context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>QR-kode</translation>
@@ -1851,8 +1832,8 @@
         <translation>Resulterende URI var for lang; prøv at forkorte teksten til mærkaten/beskeden.</translation>
     </message>
     <message>
-        <source>Error encoding URI into QR Code.</source>
-        <translation>Fejl ved kodning fra URI til QR-kode.</translation>
+        <source>Error encoding URI into QR Code</source>
+        <translation>Fejl ved kodning fra URI til QR-kode</translation>
     </message>
 </context>
 <context>

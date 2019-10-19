@@ -1744,8 +1744,8 @@
         <translation>임의의 라벨이 새로운 받기 주소와 결합</translation>
     </message>
     <message>
-        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
-        <translation>지급을 요청하기 위해 아래 형식을 사용하세요. 입력값은 &lt;b&gt;선택 사항&lt;/b&gt; 입니다.</translation>
+        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
+        <translation>지급을 요청하기 위해 아래 형식을 사용하세요. 입력값은 &lt;b&gt;선택 사항&lt;/b&gt; 입니다</translation>
     </message>
     <message>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
@@ -1783,25 +1783,6 @@
         <source>Remove</source>
         <translation>삭제</translation>
     </message>
-    <message>
-        <source>Copy URI</source>
-        <translation>URI 복사</translation>
-    </message>
-    <message>
-        <source>Copy label</source>
-        <translation>라벨 복사</translation>
-    </message>
-    <message>
-        <source>Copy message</source>
-        <translation>메시지 복사</translation>
-    </message>
-    <message>
-        <source>Copy amount</source>
-        <translation>거래액 복사</translation>
-    </message>
-</context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>QR 코드</translation>
@@ -1851,8 +1832,8 @@
         <translation>URI 결과가 너무 길음, 라벨/메세지의 글을 줄이도록 하세요.</translation>
     </message>
     <message>
-        <source>Error encoding URI into QR Code.</source>
-        <translation>URI를 QR 코드로 인코딩하는 중 오류가 발생했습니다.</translation>
+        <source>Error encoding URI into QR Code</source>
+        <translation>URI를 QR 코드로 인코딩하는 중 오류가 발생했습니다</translation>
     </message>
 </context>
 <context>

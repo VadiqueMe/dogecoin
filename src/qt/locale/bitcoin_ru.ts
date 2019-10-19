@@ -1744,8 +1744,8 @@
         <translation>Необязательная метка для нового адреса получения.</translation>
     </message>
     <message>
-        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
-        <translation>Заполните форму для запроса платежей. Все поля &lt;b&gt;необязательны&lt;/b&gt;.</translation>
+        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
+        <translation>Заполните форму для запроса платежей. Все поля &lt;b&gt;необязательны&lt;/b&gt;</translation>
     </message>
     <message>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
@@ -1783,25 +1783,6 @@
         <source>Remove</source>
         <translation>Удалить</translation>
     </message>
-    <message>
-        <source>Copy URI</source>
-        <translation>Копировать URI</translation>
-    </message>
-    <message>
-        <source>Copy label</source>
-        <translation>Копировать метку</translation>
-    </message>
-    <message>
-        <source>Copy message</source>
-        <translation>Копировать сообщение</translation>
-    </message>
-    <message>
-        <source>Copy amount</source>
-        <translation>Копировать сумму</translation>
-    </message>
-</context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>QR код</translation>
@@ -1851,7 +1832,7 @@
         <translation>Получившийся URI слишком длинный, попробуйте сократить текст метки / сообщения.</translation>
     </message>
     <message>
-        <source>Error encoding URI into QR Code.</source>
+        <source>Error encoding URI into QR Code</source>
         <translation>Ошибка кодирования URI в QR-код</translation>
     </message>
 </context>

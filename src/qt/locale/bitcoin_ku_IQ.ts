@@ -261,9 +261,6 @@
         <source>Remove</source>
         <translation>سڕینەوە</translation>
     </message>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>Address</source>
         <translation>ناوونیشان</translation>

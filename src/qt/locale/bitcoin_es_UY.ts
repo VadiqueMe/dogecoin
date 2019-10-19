@@ -292,9 +292,6 @@
         <source>&amp;Label:</source>
         <translation>&amp;Etiqueta:</translation>
     </message>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>Copy &amp;Address</source>
         <translation>Copiar Dirección</translation>

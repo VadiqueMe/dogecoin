@@ -1744,8 +1744,8 @@
         <translation>Een optioneel label om te associëren met het nieuwe ontvangende adres</translation>
     </message>
     <message>
-        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
-        <translation>Gebruik dit formulier om te verzoeken tot betaling. Alle velden zijn &lt;b&gt;optioneel&lt;/b&gt;.</translation>
+        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
+        <translation>Gebruik dit formulier om te verzoeken tot betaling. Alle velden zijn &lt;b&gt;optioneel&lt;/b&gt;</translation>
     </message>
     <message>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
@@ -1783,25 +1783,6 @@
         <source>Remove</source>
         <translation>Verwijder</translation>
     </message>
-    <message>
-        <source>Copy URI</source>
-        <translation>Kopieer URI</translation>
-    </message>
-    <message>
-        <source>Copy label</source>
-        <translation>Kopieer label</translation>
-    </message>
-    <message>
-        <source>Copy message</source>
-        <translation>Kopieer bericht</translation>
-    </message>
-    <message>
-        <source>Copy amount</source>
-        <translation>Kopieer bedrag</translation>
-    </message>
-</context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>QR-code</translation>
@@ -1851,7 +1832,7 @@
         <translation>Resulterende URI te lang, probeer de tekst korter te maken voor het label/bericht.</translation>
     </message>
     <message>
-        <source>Error encoding URI into QR Code.</source>
+        <source>Error encoding URI into QR Code</source>
         <translation>Fout tijdens encoderen URI in QR-code</translation>
     </message>
 </context>

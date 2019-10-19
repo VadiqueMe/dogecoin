@@ -205,9 +205,6 @@
         <source>&amp;Message:</source>
         <translation>Билдирүү:</translation>
     </message>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>Address</source>
         <translation>Дарек</translation>

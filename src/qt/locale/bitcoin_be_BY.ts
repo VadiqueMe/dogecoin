@@ -743,9 +743,6 @@
         <source>Copy amount</source>
         <translation>Капіяваць колькасць</translation>
     </message>
-</context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>Copy &amp;Address</source>
         <translation>Капіяваць адрас</translation>

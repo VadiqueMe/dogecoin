@@ -1336,8 +1336,8 @@
         <translation>&amp;Съобщение:</translation>
     </message>
     <message>
-        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
-        <translation>Използвате този формуляр за заявяване на плащания. Всички полета са &lt;b&gt;незадължителни&lt;/b&gt;.</translation>
+        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
+        <translation>Използвате този формуляр за заявяване на плащания. Всички полета са &lt;b&gt;незадължителни&lt;/b&gt;</translation>
     </message>
     <message>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
@@ -1379,9 +1379,6 @@
         <source>Copy amount</source>
         <translation>Копирай сума</translation>
     </message>
-</context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>QR код</translation>
@@ -1423,8 +1420,8 @@
         <translation>Съобщение</translation>
     </message>
     <message>
-        <source>Error encoding URI into QR Code.</source>
-        <translation>Грешка при създаването на QR Code от URI.</translation>
+        <source>Error encoding URI into QR Code</source>
+        <translation>Грешка при създаването на QR Code от URI</translation>
     </message>
 </context>
 <context>

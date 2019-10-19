@@ -382,9 +382,6 @@ Alihkan fail data ke dalam tab semasa</translation>
     </context>
 <context>
     <name>ReceiveCoinsDialog</name>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>Copy &amp;Address</source>
         <translation>&amp;Salin Alamat</translation>

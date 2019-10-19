@@ -1216,8 +1216,8 @@
         <translation>Необов'язкове поле для мітки нової адреси отримувача.</translation>
     </message>
     <message>
-        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
-        <translation>Використовуйте цю форму, щоб отримати платежі. Всі поля є &lt;b&gt;необов'язковими&lt;/b&gt;.</translation>
+        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
+        <translation>Використовуйте цю форму, щоб отримати платежі. Всі поля є &lt;b&gt;необов'язковими&lt;/b&gt;</translation>
     </message>
     <message>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
@@ -1255,9 +1255,6 @@
         <source>Remove</source>
         <translation>Вилучити</translation>
     </message>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>QR-Код</translation>

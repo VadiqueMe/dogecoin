@@ -161,9 +161,6 @@
     </context>
 <context>
     <name>ReceiveCoinsDialog</name>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>Copy &amp;Address</source>
         <translation>کاپی پتہ</translation>

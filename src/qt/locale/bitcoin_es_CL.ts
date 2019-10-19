@@ -520,9 +520,6 @@
         <source>&amp;Message:</source>
         <translation>&amp;mensaje</translation>
     </message>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>Código QR </translation>

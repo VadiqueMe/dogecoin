@@ -1517,8 +1517,8 @@ Var vänlig och försök igen.</translation>
         <translation>En frivillig etikett att associera med den nya mottagningsadressen.</translation>
     </message>
     <message>
-        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
-        <translation>Använd detta formulär för att begära betalningar. Alla fält är  &lt;b&gt;frivilliga&lt;/b&gt;.</translation>
+        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
+        <translation>Använd detta formulär för att begära betalningar. Alla fält är &lt;b&gt;frivilliga&lt;/b&gt;</translation>
     </message>
     <message>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
@@ -1556,25 +1556,6 @@ Var vänlig och försök igen.</translation>
         <source>Remove</source>
         <translation>Ta bort</translation>
     </message>
-    <message>
-        <source>Copy URI</source>
-        <translation>Kopiera URI</translation>
-    </message>
-    <message>
-        <source>Copy label</source>
-        <translation>Kopiera etikett</translation>
-    </message>
-    <message>
-        <source>Copy message</source>
-        <translation>Kopiera meddelande</translation>
-    </message>
-    <message>
-        <source>Copy amount</source>
-        <translation>Kopiera belopp</translation>
-    </message>
-</context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>QR-kod</translation>

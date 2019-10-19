@@ -1011,9 +1011,6 @@
         <source>Remove</source>
         <translation>Eltávolítás</translation>
     </message>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>QR kód</translation>

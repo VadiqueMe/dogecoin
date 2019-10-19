@@ -1111,9 +1111,6 @@
         <source>Copy amount</source>
         <translation>Copier le montant</translation>
     </message>
-</context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>QR Code</translation>

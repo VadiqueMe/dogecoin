@@ -1149,9 +1149,6 @@
         <source>Copy amount</source>
         <translation>نسخ الكمية</translation>
     </message>
-</context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>رمز كيو ار</translation>

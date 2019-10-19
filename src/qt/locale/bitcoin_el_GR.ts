@@ -1111,9 +1111,6 @@
         <source>Copy amount</source>
         <translation>Αντιγραφή ποσού</translation>
     </message>
-</context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>Κώδικας QR</translation>

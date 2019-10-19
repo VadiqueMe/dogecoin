@@ -267,9 +267,6 @@
         <source>&amp;Label:</source>
         <translation>लेबल:</translation>
     </message>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>Copy &amp;Address</source>
         <translation>&amp;पता कॉपी करे</translation>

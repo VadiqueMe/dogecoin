@@ -773,9 +773,6 @@
         <source>Remove</source>
         <translation>Noņemt</translation>
     </message>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>QR Kods</translation>

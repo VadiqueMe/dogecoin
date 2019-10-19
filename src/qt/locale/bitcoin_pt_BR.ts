@@ -1740,8 +1740,8 @@
         <translation>Um marcador opcional para associar ao novo endereço de recebimento.</translation>
     </message>
     <message>
-        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
-        <translation>Use esse formulário para fazer cobranças. Todos os campos são &lt;b&gt;opcionais&lt;/b&gt;.</translation>
+        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
+        <translation>Use esse formulário para fazer cobranças. Todos os campos são &lt;b&gt;opcionais&lt;/b&gt;</translation>
     </message>
     <message>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
@@ -1779,25 +1779,6 @@
         <source>Remove</source>
         <translation>Remover</translation>
     </message>
-    <message>
-        <source>Copy URI</source>
-        <translation>Copiar URI</translation>
-    </message>
-    <message>
-        <source>Copy label</source>
-        <translation>Copiar rótulo</translation>
-    </message>
-    <message>
-        <source>Copy message</source>
-        <translation>Copiar mensagem</translation>
-    </message>
-    <message>
-        <source>Copy amount</source>
-        <translation>Copiar quantia</translation>
-    </message>
-</context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>Código QR</translation>
@@ -1847,7 +1828,7 @@
         <translation>URI resultante muito longa. Tente reduzir o texto do rótulo ou da mensagem.</translation>
     </message>
     <message>
-        <source>Error encoding URI into QR Code.</source>
+        <source>Error encoding URI into QR Code</source>
         <translation>Erro ao codigicar o URI em código QR</translation>
     </message>
 </context>

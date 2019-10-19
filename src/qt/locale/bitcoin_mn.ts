@@ -385,9 +385,6 @@
         <source>Remove</source>
         <translation>Устгах</translation>
     </message>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>Copy &amp;Address</source>
         <translation>Хаягийг &amp;Хуулбарлах</translation>

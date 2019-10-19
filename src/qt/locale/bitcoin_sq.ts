@@ -469,9 +469,6 @@
         <source>Clear</source>
         <translation>Pastro</translation>
     </message>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>Copy &amp;Address</source>
         <translation>&amp;Kopjo adresen</translation>

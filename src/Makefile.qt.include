@@ -107,7 +107,6 @@ QT_FORMS_UI = \
   qt/forms/overviewpage.ui \
   qt/forms/paperwalletdialog.ui \
   qt/forms/receivecoinsdialog.ui \
-  qt/forms/receiverequestdialog.ui \
   qt/forms/debugwindow.ui \
   qt/forms/sendcoinsdialog.ui \
   qt/forms/sendcoinsentry.ui \
@@ -143,7 +142,7 @@ QT_MOC_CPP = \
   qt/moc_qvalidatedlineedit.cpp \
   qt/moc_qvaluecombobox.cpp \
   qt/moc_receivecoinsdialog.cpp \
-  qt/moc_receiverequestdialog.cpp \
+  qt/moc_qrimagewidget.cpp \
   qt/moc_recentrequeststablemodel.cpp \
   qt/moc_rpcconsole.cpp \
   qt/moc_sendcoinsdialog.cpp \
@@ -215,7 +214,7 @@ BITCOIN_QT_H = \
   qt/qvalidatedlineedit.h \
   qt/qvaluecombobox.h \
   qt/receivecoinsdialog.h \
-  qt/receiverequestdialog.h \
+  qt/qrimagewidget.h \
   qt/recentrequeststablemodel.h \
   qt/rpcconsole.h \
   qt/sendcoinsdialog.h \
@@ -336,7 +335,7 @@ BITCOIN_QT_WALLET_CPP = \
   qt/paymentrequestplus.cpp \
   qt/paymentserver.cpp \
   qt/receivecoinsdialog.cpp \
-  qt/receiverequestdialog.cpp \
+  qt/qrimagewidget.cpp \
   qt/recentrequeststablemodel.cpp \
   qt/sendcoinsdialog.cpp \
   qt/sendcoinsentry.cpp \
@@ -361,7 +360,7 @@ if ENABLE_WALLET
 BITCOIN_QT_CPP += $(BITCOIN_QT_WALLET_CPP)
 endif
 
-RES_IMAGES = 
+RES_IMAGES =
 
 RES_MOVIES = $(wildcard $(srcdir)/qt/res/movies/spinner-*.png)
 

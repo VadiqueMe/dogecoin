@@ -701,9 +701,6 @@
         <source>&amp;Request payment</source>
         <translation>&amp;Solicitar pago</translation>
     </message>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>Código QR</translation>

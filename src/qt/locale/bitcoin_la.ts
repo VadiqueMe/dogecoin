@@ -525,9 +525,6 @@
         <source>&amp;Message:</source>
         <translation>Nuntius:</translation>
     </message>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>Copy &amp;Address</source>
         <translation>&amp;Copia Inscriptionem</translation>

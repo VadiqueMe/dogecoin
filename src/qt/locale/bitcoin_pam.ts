@@ -505,9 +505,6 @@
         <source>&amp;Label:</source>
         <translation>&amp;Label:</translation>
     </message>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>Copy &amp;Address</source>
         <translation>&amp;Kopyan ing address</translation>

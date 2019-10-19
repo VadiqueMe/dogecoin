@@ -1744,8 +1744,8 @@
         <translation>Yeni alım adresi ile ilişkili, seçiminize dayalı etiket.</translation>
     </message>
     <message>
-        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
-        <translation>Ödeme talep etmek için bu formu kullanın. Tüm alanlar &lt;b&gt;seçime dayalıdır&lt;/b&gt;.</translation>
+        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
+        <translation>Ödeme talep etmek için bu formu kullanın. Tüm alanlar &lt;b&gt;seçime dayalıdır&lt;/b&gt;</translation>
     </message>
     <message>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
@@ -1783,25 +1783,6 @@
         <source>Remove</source>
         <translation>Kaldır</translation>
     </message>
-    <message>
-        <source>Copy URI</source>
-        <translation>URI'yi kopyala</translation>
-    </message>
-    <message>
-        <source>Copy label</source>
-        <translation>Etiket kopyala</translation>
-    </message>
-    <message>
-        <source>Copy message</source>
-        <translation>İletiyi kopyala</translation>
-    </message>
-    <message>
-        <source>Copy amount</source>
-        <translation>Tutarı kopyala</translation>
-    </message>
-</context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>QR Kodu</translation>
@@ -1851,8 +1832,8 @@
         <translation>Sonuç URI çok uzun, etiket ya da ileti metnini kısaltmayı deneyiniz.</translation>
     </message>
     <message>
-        <source>Error encoding URI into QR Code.</source>
-        <translation>URI'nin QR koduna kodlanmasında hata oluştu.</translation>
+        <source>Error encoding URI into QR Code</source>
+        <translation>URI'nin QR koduna kodlanmasında hata oluştu</translation>
     </message>
 </context>
 <context>

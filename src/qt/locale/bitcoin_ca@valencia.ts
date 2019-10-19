@@ -1400,8 +1400,8 @@
         <translation>Una etiqueta opcional que s'associarà amb la nova adreça receptora.</translation>
     </message>
     <message>
-        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
-        <translation>Utilitzeu este formulari per sol·licitar pagaments. Tots els camps són &lt;b&gt;opcionals&lt;/b&gt;.</translation>
+        <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
+        <translation>Utilitzeu este formulari per sol·licitar pagaments. Tots els camps són &lt;b&gt;opcionals&lt;/b&gt;</translation>
     </message>
     <message>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
@@ -1451,9 +1451,6 @@
         <source>Copy amount</source>
         <translation>Copia l'import</translation>
     </message>
-</context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
         <translation>Codi QR</translation>
@@ -1503,8 +1500,8 @@
         <translation>URI resultant massa llarga, intenta reduir el text per a la etiqueta / missatge</translation>
     </message>
     <message>
-        <source>Error encoding URI into QR Code.</source>
-        <translation>Error en codificar l'URI en un codi QR.</translation>
+        <source>Error encoding URI into QR Code</source>
+        <translation>Error en codificar l'URI en un codi QR</translation>
     </message>
 </context>
 <context>

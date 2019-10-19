@@ -317,9 +317,6 @@
         <source>Show</source>
         <translation>Prikaži</translation>
     </message>
-    </context>
-<context>
-    <name>ReceiveRequestDialog</name>
     <message>
         <source>Copy &amp;Address</source>
         <translation>Kopirajte adresu</translation>
