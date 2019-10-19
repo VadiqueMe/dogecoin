@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Δεξί-κλικ για επεξεργασία της διεύθυνσης ή της ετικέτας</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>Δημιουργία νέας διεύθυνσης</translation>
     </message>
@@ -1080,10 +1076,6 @@
         <translation>Ε&amp;παναχρησιμοποίηση υπάρχουσας διεύθυνσης λήψης (δεν συνιστάται)</translation>
     </message>
     <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Καθαρισμός όλων των πεδίων της φόρμας.</translation>
-    </message>
-    <message>
         <source>Clear</source>
         <translation>Καθαρισμός</translation>
     </message>
@@ -1248,10 +1240,6 @@
     <message>
         <source>Add &amp;Recipient</source>
         <translation>&amp;Προσθήκη αποδέκτη</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Καθαρισμός όλων των πεδίων της φόρμας.</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

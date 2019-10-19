@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>右クリックでアドレスまたはラベルを編集します</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>新規アドレスの作成</translation>
     </message>
@@ -1728,32 +1724,12 @@
         <translation>メッセージ (&amp;M):</translation>
     </message>
     <message>
-        <source>Reuse one of the previously used receiving addresses. Reusing addresses has security and privacy issues. Do not use this unless re-generating a payment request made before.</source>
-        <translation>以前利用した受取用アドレスのどれかを再利用します。アドレスの再利用はセキュリティおよびプライバシーにおいて問題があります。以前作成した支払リクエストを再生成するとき以外は利用しないでください。</translation>
-    </message>
-    <message>
         <source>R&amp;euse an existing receiving address (not recommended)</source>
         <translation>既存の受取用アドレスを再利用する (非推奨) (&amp;E)</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Dogecoin network.</source>
-        <translation>支払リクエストが開始された時に表示される、支払リクエストに添える任意のメッセージです。注意：メッセージはDogecoinネットワークを通じて、支払と共に送られるわけではありません。</translation>
-    </message>
-    <message>
-        <source>An optional label to associate with the new receiving address.</source>
-        <translation>受取用アドレスに紐づく任意のラベル。</translation>
-    </message>
-    <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
         <translation>このフォームを使用して支払のリクエストを行いましょう。すべての項目は&lt;b&gt;任意入力&lt;/b&gt;です</translation>
-    </message>
-    <message>
-        <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
-        <translation>リクエストする任意の金額。特定の金額をリクエストするのでない場合には、この欄は空白のままかゼロにしてください。</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>全ての入力項目をクリア</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -1972,10 +1948,6 @@
     <message>
         <source>Add &amp;Recipient</source>
         <translation>受取人を追加 (&amp;R)</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>全ての入力項目をクリア</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

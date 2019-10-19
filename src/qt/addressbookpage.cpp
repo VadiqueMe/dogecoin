@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #if defined(HAVE_CONFIG_H)
 #include "config/bitcoin-config.h"
@@ -50,12 +50,12 @@ AddressBookPage::AddressBookPage(const PlatformStyle *platformStyle, Mode _mode,
         case SendingTab: setWindowTitle(tr("Choose the address to send coins to")); break;
         case ReceivingTab: setWindowTitle(tr("Choose the address to receive coins with")); break;
         }
-        connect(ui->tableView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(accept()));
-        ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-        ui->tableView->setFocus();
-        ui->closeButton->setText(tr("C&hoose"));
-        ui->exportButton->hide();
-        break;
+        connect( ui->addressBookTableView, SIGNAL( doubleClicked(QModelIndex) ), this, SLOT( accept() ) ) ;
+        ui->addressBookTableView->setEditTriggers( QAbstractItemView::NoEditTriggers ) ;
+        ui->addressBookTableView->setFocus() ;
+        ui->closeButton->setText( tr("C&hoose") ) ;
+        ui->exportButton->hide() ;
+        break ;
     case ForEditing:
         switch(tab)
         {
@@ -97,7 +97,7 @@ AddressBookPage::AddressBookPage(const PlatformStyle *platformStyle, Mode _mode,
     connect(editAction, SIGNAL(triggered()), this, SLOT(onEditAction()));
     connect(deleteAction, SIGNAL(triggered()), this, SLOT(on_deleteAddress_clicked()));
 
-    connect(ui->tableView, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextualMenu(QPoint)));
+    connect( ui->addressBookTableView, SIGNAL( customContextMenuRequested(QPoint) ), this, SLOT( contextualMenu(QPoint) ) ) ;
 
     connect(ui->closeButton, SIGNAL(clicked()), this, SLOT(accept()));
 }
@@ -131,20 +131,20 @@ void AddressBookPage::setModel(AddressTableModel *_model)
         proxyModel->setFilterFixedString(AddressTableModel::Send);
         break;
     }
-    ui->tableView->setModel(proxyModel);
-    ui->tableView->sortByColumn(0, Qt::AscendingOrder);
+    ui->addressBookTableView->setModel( proxyModel ) ;
+    ui->addressBookTableView->sortByColumn( 0, Qt::AscendingOrder ) ;
 
     // Set column widths
 #if QT_VERSION < 0x050000
-    ui->tableView->horizontalHeader()->setResizeMode(AddressTableModel::Label, QHeaderView::Stretch);
-    ui->tableView->horizontalHeader()->setResizeMode(AddressTableModel::Address, QHeaderView::ResizeToContents);
+    ui->addressBookTableView->horizontalHeader()->setResizeMode( AddressTableModel::Label, QHeaderView::Stretch ) ;
+    ui->addressBookTableView->horizontalHeader()->setResizeMode( AddressTableModel::Address, QHeaderView::ResizeToContents ) ;
 #else
-    ui->tableView->horizontalHeader()->setSectionResizeMode(AddressTableModel::Label, QHeaderView::Stretch);
-    ui->tableView->horizontalHeader()->setSectionResizeMode(AddressTableModel::Address, QHeaderView::ResizeToContents);
+    ui->addressBookTableView->horizontalHeader()->setSectionResizeMode( AddressTableModel::Label, QHeaderView::Stretch ) ;
+    ui->addressBookTableView->horizontalHeader()->setSectionResizeMode( AddressTableModel::Address, QHeaderView::ResizeToContents ) ;
 #endif
 
-    connect(ui->tableView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
-        this, SLOT(selectionChanged()));
+    connect( ui->addressBookTableView->selectionModel(), SIGNAL( selectionChanged(QItemSelection, QItemSelection) ),
+        this, SLOT( selectionChanged() ) ) ;
 
     // Select row for newly created address
     connect(_model, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(selectNewAddress(QModelIndex,int,int)));
@@ -154,22 +154,20 @@ void AddressBookPage::setModel(AddressTableModel *_model)
 
 void AddressBookPage::on_copyAddress_clicked()
 {
-    GUIUtil::copyEntryData(ui->tableView, AddressTableModel::Address);
+    GUIUtil::copyEntryData( ui->addressBookTableView, AddressTableModel::Address ) ;
 }
 
 void AddressBookPage::onCopyLabelAction()
 {
-    GUIUtil::copyEntryData(ui->tableView, AddressTableModel::Label);
+    GUIUtil::copyEntryData( ui->addressBookTableView, AddressTableModel::Label ) ;
 }
 
 void AddressBookPage::onEditAction()
 {
-    if(!model)
-        return;
+    if ( ! model ) return ;
+    if ( ! ui->addressBookTableView->selectionModel() ) return ;
 
-    if(!ui->tableView->selectionModel())
-        return;
-    QModelIndexList indexes = ui->tableView->selectionModel()->selectedRows();
+    QModelIndexList indexes = ui->addressBookTableView->selectionModel()->selectedRows() ;
     if(indexes.isEmpty())
         return;
 
@@ -201,9 +199,8 @@ void AddressBookPage::on_newAddress_clicked()
 
 void AddressBookPage::on_deleteAddress_clicked()
 {
-    QTableView *table = ui->tableView;
-    if(!table->selectionModel())
-        return;
+    QTableView * table = ui->addressBookTableView ;
+    if ( ! table->selectionModel() ) return ;
 
     QModelIndexList indexes = table->selectionModel()->selectedRows();
     if(!indexes.isEmpty())
@@ -215,9 +212,8 @@ void AddressBookPage::on_deleteAddress_clicked()
 void AddressBookPage::selectionChanged()
 {
     // Set button states based on selected tab and selection
-    QTableView *table = ui->tableView;
-    if(!table->selectionModel())
-        return;
+    QTableView * table = ui->addressBookTableView ;
+    if ( ! table->selectionModel() ) return ;
 
     if(table->selectionModel()->hasSelection())
     {
@@ -247,9 +243,9 @@ void AddressBookPage::selectionChanged()
 
 void AddressBookPage::done(int retval)
 {
-    QTableView *table = ui->tableView;
-    if(!table->selectionModel() || !table->model())
-        return;
+    QTableView * table = ui->addressBookTableView ;
+    if ( ! table->selectionModel() || ! table->model() )
+        return ;
 
     // Figure out which address was selected, and return it
     QModelIndexList indexes = table->selectionModel()->selectedRows(AddressTableModel::Address);
@@ -291,12 +287,12 @@ void AddressBookPage::on_exportButton_clicked()
     }
 }
 
-void AddressBookPage::contextualMenu(const QPoint &point)
+void AddressBookPage::contextualMenu( const QPoint & point )
 {
-    QModelIndex index = ui->tableView->indexAt(point);
-    if(index.isValid())
+    QModelIndex index = ui->addressBookTableView->indexAt( point ) ;
+    if ( index.isValid() )
     {
-        contextMenu->exec(QCursor::pos());
+        contextMenu->exec( QCursor::pos() ) ;
     }
 }
 
@@ -306,8 +302,8 @@ void AddressBookPage::selectNewAddress(const QModelIndex &parent, int begin, int
     if(idx.isValid() && (idx.data(Qt::EditRole).toString() == newAddressToSelect))
     {
         // Select row of newly created address, once
-        ui->tableView->setFocus();
-        ui->tableView->selectRow(idx.row());
+        ui->addressBookTableView->setFocus() ;
+        ui->addressBookTableView->selectRow( idx.row() ) ;
         newAddressToSelect.clear();
     }
 }

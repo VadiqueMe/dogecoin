@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>지갑 주소나 라벨을 수정하려면 우클릭하세요.</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>새 주소 만들기</translation>
     </message>
@@ -1728,32 +1724,12 @@
         <translation>메시지(&amp;M):</translation>
     </message>
     <message>
-        <source>Reuse one of the previously used receiving addresses. Reusing addresses has security and privacy issues. Do not use this unless re-generating a payment request made before.</source>
-        <translation>이전에 사용된 수취용 주소를 사용할려고 합니다. 주소의 재사용은 보안과 개인정보 보호 측면에서 문제를 초래할 수 있습니다. 이전 지불 요청을 재생성하는 경우가 아니라면 주소 재사용을 권하지 않습니다.  </translation>
-    </message>
-    <message>
         <source>R&amp;euse an existing receiving address (not recommended)</source>
         <translation>현재의 수취용 주소를 재사용하기(&amp;E) (권장하지 않습니다)</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Dogecoin network.</source>
-        <translation>지불 요청에 첨부되는 선택가능한 메시지 입니다. 이 메세지는 요청이 열릴 때 표시될 것 입니다. 메모: 이 메시지는 비트코인 네트워크로 전송되지 않습니다.</translation>
-    </message>
-    <message>
-        <source>An optional label to associate with the new receiving address.</source>
-        <translation>임의의 라벨이 새로운 받기 주소와 결합</translation>
-    </message>
-    <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
         <translation>지급을 요청하기 위해 아래 형식을 사용하세요. 입력값은 &lt;b&gt;선택 사항&lt;/b&gt; 입니다</translation>
-    </message>
-    <message>
-        <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
-        <translation>요청할 금액 입력칸으로 선택 사항입니다. 빈 칸으로 두거나 특정 금액이 필요하지 않는 경우 0을 입력하세요. </translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>양식의 모든 필드를 지웁니다</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -1972,10 +1948,6 @@
     <message>
         <source>Add &amp;Recipient</source>
         <translation>수령인 추가하기(&amp;R)</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>양식의 모든 필드를 지웁니다</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>A cím vagy címke szerkeszteséhez kattintson a jobb gombbal</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>Új cím létrehozása</translation>
     </message>
@@ -984,10 +980,6 @@
         <translation>&amp;Üzenet:</translation>
     </message>
     <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Minden mező törlése</translation>
-    </message>
-    <message>
         <source>Clear</source>
         <translation>Törlés</translation>
     </message>
@@ -1112,10 +1104,6 @@
     <message>
         <source>Add &amp;Recipient</source>
         <translation>&amp;Címzett hozzáadása</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Minden mező törlése</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Клик правой кнопкой для редактирования адреса или метки</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>Создать новый адрес</translation>
     </message>
@@ -1728,32 +1724,12 @@
         <translation>&amp;Сообщение</translation>
     </message>
     <message>
-        <source>Reuse one of the previously used receiving addresses. Reusing addresses has security and privacy issues. Do not use this unless re-generating a payment request made before.</source>
-        <translation>Повторно использовать один из ранее использованных адресов. Повторное использование адресов несёт риски безопасности и приватности. Не используйте эту опцию, если вы не создаёте повторно ранее сделанный запрос платежа.</translation>
-    </message>
-    <message>
         <source>R&amp;euse an existing receiving address (not recommended)</source>
         <translation>&amp;Повторно использовать существующий адрес получения (не рекомендуется)</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Dogecoin network.</source>
-        <translation>Необязательное сообщение для запроса платежа, которое будет показано при открытии запроса. Заметьте: сообщение не будет отправлено вместе с платежом через сеть Dogecoin.</translation>
-    </message>
-    <message>
-        <source>An optional label to associate with the new receiving address.</source>
-        <translation>Необязательная метка для нового адреса получения.</translation>
-    </message>
-    <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
         <translation>Заполните форму для запроса платежей. Все поля &lt;b&gt;необязательны&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
-        <translation>Необязательная сумма для запроса. Оставьте пустым или укажите ноль, чтобы запросить неопределённую сумму.</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Очистить все поля формы.</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -1972,10 +1948,6 @@
     <message>
         <source>Add &amp;Recipient</source>
         <translation>&amp;Добавить получателя</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Очистить все поля формы</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

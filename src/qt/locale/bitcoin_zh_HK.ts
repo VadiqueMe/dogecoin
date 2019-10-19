@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>按右擊修改位址或標記</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>新增一個位址</translation>
     </message>

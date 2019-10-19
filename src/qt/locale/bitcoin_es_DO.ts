@@ -726,16 +726,8 @@
         <translation>Mensaje:</translation>
     </message>
     <message>
-        <source>Reuse one of the previously used receiving addresses. Reusing addresses has security and privacy issues. Do not use this unless re-generating a payment request made before.</source>
-        <translation>Reutilizar una de las direcciones previamente usadas para recibir. Reutilizar direcciones tiene problemas de seguridad y privacidad. No lo uses a menos que antes regeneres una solicitud de pago.</translation>
-    </message>
-    <message>
         <source>R&amp;euse an existing receiving address (not recommended)</source>
         <translation>R&amp;eutilizar una dirección existente para recibir (no recomendado)</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Limpiar todos los campos del formulario</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -846,10 +838,6 @@
     <message>
         <source>Add &amp;Recipient</source>
         <translation>Añadir &amp;destinatario</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Limpiar todos los campos del formulario</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

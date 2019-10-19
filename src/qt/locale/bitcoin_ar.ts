@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>انقر بالزر الايمن لتعديل العنوان</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>انشأ عنوان جديد</translation>
     </message>
@@ -1118,10 +1114,6 @@
         <translation>&amp;رسالة:</translation>
     </message>
     <message>
-        <source>Clear all fields of the form.</source>
-        <translation>مسح كل حقول النموذج المطلوبة</translation>
-    </message>
-    <message>
         <source>Clear</source>
         <translation>مسح</translation>
     </message>
@@ -1274,10 +1266,6 @@
     <message>
         <source>Add &amp;Recipient</source>
         <translation>أضافة &amp;مستلم</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>مسح كل حقول النموذج المطلوبة</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

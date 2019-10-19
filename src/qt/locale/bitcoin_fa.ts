@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>برای تغییر آدرس و یا برچسب کلیک راست کنید.</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>ایجاد نشانی جدید</translation>
     </message>
@@ -1216,10 +1212,6 @@
         <translation>برای درخواست پرداخت از این فرم استفاده کنید.تمام قسمت ها &lt;b&gt;اختیاری&lt;b&gt; هستند</translation>
     </message>
     <message>
-        <source>Clear all fields of the form.</source>
-        <translation>تمام قسمت های فرم را خالی کن.</translation>
-    </message>
-    <message>
         <source>Clear</source>
         <translation>پاک‌کردن</translation>
     </message>
@@ -1360,10 +1352,6 @@
     <message>
         <source>Add &amp;Recipient</source>
         <translation>&amp;دریافت‌کنندهٔ جدید</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>تمام قسمت های فرم را خالی کن.</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

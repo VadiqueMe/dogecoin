@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>לחץ מקש ימני כדי לערוך כתובת או תווית</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>יצירת כתובת חדשה</translation>
     </message>
@@ -1122,32 +1118,12 @@
         <translation>הו&amp;דעה:</translation>
     </message>
     <message>
-        <source>Reuse one of the previously used receiving addresses. Reusing addresses has security and privacy issues. Do not use this unless re-generating a payment request made before.</source>
-        <translation>ניתן להשתמש שוב באחת מכתובות הקבלה שכבר נעשה בהן שימוש. לשימוש חוזר בכתובות ישנן השלכות אבטחה ופרטיות. מומלץ שלא להשתמש באפשרות זו למעט יצירה מחדש של בקשת תשלום שנוצרה בעבר.</translation>
-    </message>
-    <message>
         <source>R&amp;euse an existing receiving address (not recommended)</source>
         <translation>ש&amp;ימוש &amp;חוזר בכתובת קבלה קיימת (לא מומלץ)</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Dogecoin network.</source>
-        <translation>הודעת רשות לצירוף לבקשת התשלום שתוצג בעת פתיחת הבקשה. לתשומת לבך: ההודעה לא תישלח עם התשלום ברשת ביטקוין.</translation>
-    </message>
-    <message>
-        <source>An optional label to associate with the new receiving address.</source>
-        <translation>תווית רשות לשיוך עם כתובת הקבלה החדשה.</translation>
-    </message>
-    <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
         <translation>יש להשתמש בטופס זה כדי לבקש תשלומים. כל השדות הם בגדר &lt;b&gt;רשות&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
-        <translation>סכום כרשות לבקשה. ניתן להשאיר זאת ריק כדי לא לבקש סכום מסוים.</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>ניקוי של כל השדות בטופס.</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -1310,10 +1286,6 @@
     <message>
         <source>Add &amp;Recipient</source>
         <translation>הוספת &amp;מוטב</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>ניקוי של כל השדות בטופס.</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Feu clic dret per a editar l'adreça o l'etiqueta</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>Crea una nova adreça</translation>
     </message>
@@ -1616,32 +1612,12 @@
         <translation>&amp;Missatge:</translation>
     </message>
     <message>
-        <source>Reuse one of the previously used receiving addresses. Reusing addresses has security and privacy issues. Do not use this unless re-generating a payment request made before.</source>
-        <translation>Reutilitza una de les adreces de recepció utilitzades anteriorment. La reutilització d'adreces pot comportar problemes de seguretat i privadesa. No ho utilitzeu llevat que torneu a generar una sol·licitud de pagament feta abans.</translation>
-    </message>
-    <message>
         <source>R&amp;euse an existing receiving address (not recommended)</source>
         <translation>R&amp;eutilitza una adreça de recepció anterior (no recomanat)</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Dogecoin network.</source>
-        <translation>Un missatge opcional que s'adjuntarà a la sol·licitud de pagament, que es mostrarà quan s'obri la sol·licitud. Nota: El missatge no s'enviarà amb el pagament per la xarxa Dogecoin.</translation>
-    </message>
-    <message>
-        <source>An optional label to associate with the new receiving address.</source>
-        <translation>Una etiqueta opcional que s'associarà amb la nova adreça receptora.</translation>
-    </message>
-    <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
         <translation>Utilitzeu aquest formulari per sol·licitar pagaments. Tots els camps són &lt;b&gt;opcionals&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
-        <translation>Un import opcional per sol·licitar. Deixeu-ho en blanc o zero per no sol·licitar cap import específic.</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Esborra tots els camps del formuari.</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -1872,10 +1848,6 @@
     <message>
         <source>Add &amp;Recipient</source>
         <translation>Afegeix &amp;destinatari</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Esborra tots els camps del formuari.</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Клик с десен бутон на мишката за промяна на адрес или етикет</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>Създай нов адрес</translation>
     </message>

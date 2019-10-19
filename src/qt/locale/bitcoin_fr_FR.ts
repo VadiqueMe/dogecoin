@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Double cliquez afin de modifier l'adresse ou l'étiquette</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>Créer une nouvelle adresse</translation>
     </message>
@@ -1080,10 +1076,6 @@
         <translation>Message :</translation>
     </message>
     <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Nettoyer tous les champs du formulaire.</translation>
-    </message>
-    <message>
         <source>Clear</source>
         <translation>Nettoyer</translation>
     </message>
@@ -1236,10 +1228,6 @@
     <message>
         <source>Send to multiple recipients at once</source>
         <translation>Envoyer des pièces à plusieurs destinataires à la fois</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Nettoyer tous les champs du formulaire.</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

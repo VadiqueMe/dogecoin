@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Клікніть правою кнопкою для редагування адреси або мітки</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>Створити нову адресу</translation>
     </message>
@@ -1200,32 +1196,12 @@
         <translation>&amp;Повідомлення:</translation>
     </message>
     <message>
-        <source>Reuse one of the previously used receiving addresses. Reusing addresses has security and privacy issues. Do not use this unless re-generating a payment request made before.</source>
-        <translation>Повторно використати одну з адрес. Повторне використання адрес створює ризики безпеки та конфіденційності. Не використовуйте її, окрім як для створення повторного запиту платежу.</translation>
-    </message>
-    <message>
         <source>R&amp;euse an existing receiving address (not recommended)</source>
         <translation>По&amp;вторно використати адресу для отримання (не рекомендується)</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Dogecoin network.</source>
-        <translation>Необов'язкове повідомлення на додаток до запиту платежу, котре буде показане під час відкриття запиту. Примітка: Це повідомлення не буде відправлено з платежем через мережу Dogecoin.</translation>
-    </message>
-    <message>
-        <source>An optional label to associate with the new receiving address.</source>
-        <translation>Необов'язкове поле для мітки нової адреси отримувача.</translation>
-    </message>
-    <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
         <translation>Використовуйте цю форму, щоб отримати платежі. Всі поля є &lt;b&gt;необов'язковими&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
-        <translation>Необов'язкове поле для суми запиту. Залиште це поле пустим або впишіть нуль, щоб не надсилати у запиті конкретної суми.</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Очистити всі поля в формі</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -1392,10 +1368,6 @@
     <message>
         <source>Add &amp;Recipient</source>
         <translation>Дод&amp;ати одержувача</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Очистити всі поля в формі</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Pravým tlačítkem myši můžeš upravit označení adresy</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>Vytvoř novou adresu</translation>
     </message>
@@ -1728,32 +1724,12 @@
         <translation>&amp;Zpráva:</translation>
     </message>
     <message>
-        <source>Reuse one of the previously used receiving addresses. Reusing addresses has security and privacy issues. Do not use this unless re-generating a payment request made before.</source>
-        <translation>Recyklovat již dříve použité adresy. Recyklace adres má bezpečnostní rizika a narušuje soukromí. Nezaškrtávejte to, pokud znovu nevytváříte již dříve vytvořený platební požadavek.</translation>
-    </message>
-    <message>
         <source>R&amp;euse an existing receiving address (not recommended)</source>
         <translation>&amp;Recyklovat již existující adresy (nedoporučeno)</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Dogecoin network.</source>
-        <translation>Volitelná zpráva, která se připojí k platebnímu požadavku a která se zobrazí, když se požadavek otevře. Poznámka: tahle zpráva se neposílá s platbou po dogecoinové síti.</translation>
-    </message>
-    <message>
-        <source>An optional label to associate with the new receiving address.</source>
-        <translation>Volitelné označení, které se má přiřadit k nové adrese.</translation>
-    </message>
-    <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
         <translation>Tímto formulářem můžeš požadovat platby. Všechna pole jsou &lt;b&gt;volitelná&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
-        <translation>Volitelná částka, kterou požaduješ. Nech prázdné nebo nulové, pokud nepožaduješ konkrétní částku.</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Promaž obsah ze všech formulářových políček.</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -1972,10 +1948,6 @@
     <message>
         <source>Add &amp;Recipient</source>
         <translation>Při&amp;dej příjemce</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Promaž obsah ze všech formulářových políček.</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Rechtermuisklik om het adres of label te wijzigen</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>Maak een nieuw adres aan</translation>
     </message>
@@ -1728,32 +1724,12 @@
         <translation>&amp;Bericht</translation>
     </message>
     <message>
-        <source>Reuse one of the previously used receiving addresses. Reusing addresses has security and privacy issues. Do not use this unless re-generating a payment request made before.</source>
-        <translation>Gebruik een van de eerder gebruikte ontvangstadressen opnieuw. Het opnieuw gebruiken van adressen heeft beveiliging- en privacy problemen. Gebruik dit niet, behalve als er eerder een betalingsverzoek opnieuw gegenereerd is.</translation>
-    </message>
-    <message>
         <source>R&amp;euse an existing receiving address (not recommended)</source>
         <translation>H&amp;ergebruik en bestaand ontvangstadres (niet aanbevolen)</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Dogecoin network.</source>
-        <translation>Een optioneel bericht om bij te voegen aan het betalingsverzoek, welke zal getoond worden wanneer het verzoek is geopend. Opmerking: Het bericht zal niet worden verzonden met de betaling over het Dogecoinnetwerk.</translation>
-    </message>
-    <message>
-        <source>An optional label to associate with the new receiving address.</source>
-        <translation>Een optioneel label om te associëren met het nieuwe ontvangende adres</translation>
-    </message>
-    <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
         <translation>Gebruik dit formulier om te verzoeken tot betaling. Alle velden zijn &lt;b&gt;optioneel&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
-        <translation>Een optioneel te verzoeken bedrag. Laat dit leeg, of nul, om geen specifiek bedrag aan te vragen.</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Wis alle velden op het formulier.</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -1972,10 +1948,6 @@
     <message>
         <source>Add &amp;Recipient</source>
         <translation>Voeg &amp;Ontvanger Toe</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Wis alle velden van het formulier.</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

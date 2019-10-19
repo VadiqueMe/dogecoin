@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Spustelėkite dešinįjį klaviša norint keisti adresą arba etiketę</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>Sukurti naują adresą</translation>
     </message>

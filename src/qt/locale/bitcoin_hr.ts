@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Desni klik za uređivanje adresa i oznaka</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>Dodajte novu adresu</translation>
     </message>
@@ -760,10 +756,6 @@
         <translation>&amp;Poruka:</translation>
     </message>
     <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Obriši sva polja</translation>
-    </message>
-    <message>
         <source>&amp;Request payment</source>
         <translation>&amp;Zatraži plaćanje</translation>
     </message>
@@ -832,10 +824,6 @@
     <message>
         <source>Add &amp;Recipient</source>
         <translation>&amp;Dodaj primatelja</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Obriši sva polja</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

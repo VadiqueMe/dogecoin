@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Högerklicka för att ändra adressen eller etiketten.</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>Skapa ny adress</translation>
     </message>
@@ -1501,32 +1497,12 @@ Var vänlig och försök igen.</translation>
         <translation>&amp;Meddelande:</translation>
     </message>
     <message>
-        <source>Reuse one of the previously used receiving addresses. Reusing addresses has security and privacy issues. Do not use this unless re-generating a payment request made before.</source>
-        <translation>Återanvänd en av tidigare använda mottagningsadresser. Återanvändning av adresser har både säkerhets och integritetsbrister. Använd inte samma mottagningsadress om du inte gör om samma betalningsbegäran.</translation>
-    </message>
-    <message>
         <source>R&amp;euse an existing receiving address (not recommended)</source>
         <translation>Åt&amp;eranvänd en existerande mottagningsadress (rekommenderas inte)</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Dogecoin network.</source>
-        <translation>Ett frivilligt meddelande att bifoga betalningsbegäran, vilket visas när begäran öppnas. NB: Meddelandet kommer inte att sändas med betalningen över Dogecoinnätverket.</translation>
-    </message>
-    <message>
-        <source>An optional label to associate with the new receiving address.</source>
-        <translation>En frivillig etikett att associera med den nya mottagningsadressen.</translation>
-    </message>
-    <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
         <translation>Använd detta formulär för att begära betalningar. Alla fält är &lt;b&gt;frivilliga&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
-        <translation>En valfri summa att begära. Lämna denna tom eller noll för att inte begära en specifik summa.</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Rensa alla formulärfälten</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -1721,10 +1697,6 @@ Var vänlig och försök igen.</translation>
     <message>
         <source>Add &amp;Recipient</source>
         <translation>Lägg till &amp;mottagare</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Rensa alla formulärfälten</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

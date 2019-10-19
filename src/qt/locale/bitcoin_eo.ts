@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Dekstre-klaku por redakti adreson aŭ etikedon</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>Krei novan adreson</translation>
     </message>
@@ -908,16 +904,8 @@
         <translation>&amp;Mesaĝo:</translation>
     </message>
     <message>
-        <source>Reuse one of the previously used receiving addresses. Reusing addresses has security and privacy issues. Do not use this unless re-generating a payment request made before.</source>
-        <translation>Reuzi unu el la jam uzitaj ricevaj adresoj. Reuzo de adresoj povas krei problemojn pri sekureco kaj privateco. Ne uzu tiun ĉi funkcion krom por rekrei antaŭe faritan pagopeton.</translation>
-    </message>
-    <message>
         <source>R&amp;euse an existing receiving address (not recommended)</source>
         <translation>R&amp;euzi ekzistantan ricevan adreson (malrekomendinda)</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Malplenigi ĉiujn kampojn de la formularo.</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -1024,10 +1012,6 @@
     <message>
         <source>Add &amp;Recipient</source>
         <translation>Aldoni &amp;Ricevonton</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Malplenigi ĉiujn kampojn de la formularo.</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

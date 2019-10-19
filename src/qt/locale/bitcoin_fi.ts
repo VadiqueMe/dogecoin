@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Valitse hiiren oikealla painikkeella muokataksesi osoitetta tai nimikettä</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>Luo uusi osoite</translation>
     </message>
@@ -1212,32 +1208,12 @@
         <translation>&amp;Viesti:</translation>
     </message>
     <message>
-        <source>Reuse one of the previously used receiving addresses. Reusing addresses has security and privacy issues. Do not use this unless re-generating a payment request made before.</source>
-        <translation>Uudelleenkäytä yksi vanhoista vastaanotto-osoitteista. Uudelleenkäyttössä on turvallisuus- ja yksityisyysongelmia. Älä käytä tätä ellet ole uudelleenluomassa aikaisempaa maksupyyntöä.</translation>
-    </message>
-    <message>
         <source>R&amp;euse an existing receiving address (not recommended)</source>
         <translation>&amp;Uudelleenkäytä vastaanotto-osoitetta (ei suositella)</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Dogecoin network.</source>
-        <translation>Valinnainen viesti liitetään maksupyyntöön ja näytetään avattaessa. Viestiä ei lähetetä Dogecoin-verkkoon.</translation>
-    </message>
-    <message>
-        <source>An optional label to associate with the new receiving address.</source>
-        <translation>Valinnainen nimi liitetään vastaanottavaan osoitteeseen.</translation>
-    </message>
-    <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
         <translation>Käytä lomaketta maksupyyntöihin. Kaikki kentät ovat &lt;b&gt;valinnaisia&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
-        <translation>Valinnainen pyyntömäärä. Jätä tyhjäksi tai nollaksi jos et pyydä tiettyä määrää.</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Tyhjennä lomakkeen kaikki kentät.</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -1392,10 +1368,6 @@
     <message>
         <source>Add &amp;Recipient</source>
         <translation>Lisää &amp;Vastaanottaja</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Tyhjennä lomakkeen kaikki kentät</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Nhấn chuột phải để sửa địa chỉ hoặc nhãn</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>Tạo một địa chỉ mới</translation>
     </message>
@@ -700,10 +696,6 @@
         <translation>Sử dụng form này để yêu cầu thanh toán. Tất cả các trường &lt;b&gt;không bắt buộc&lt;b&gt;</translation>
     </message>
     <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Xóa tất cả các trường trong biểu mẫu</translation>
-    </message>
-    <message>
         <source>Clear</source>
         <translation>Xóa</translation>
     </message>
@@ -868,10 +860,6 @@
     <message>
         <source>Add &amp;Recipient</source>
         <translation>Thêm &amp;Người nhận</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Xóa tất cả các trường trong biểu mẫu</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

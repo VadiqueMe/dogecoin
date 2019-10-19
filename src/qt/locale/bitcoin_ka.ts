@@ -754,32 +754,12 @@
         <translation>&amp;მესიჯი:</translation>
     </message>
     <message>
-        <source>Reuse one of the previously used receiving addresses. Reusing addresses has security and privacy issues. Do not use this unless re-generating a payment request made before.</source>
-        <translation>რომელიმე ადრე გამოყენებული მიღების მისამართის გამოყენება. ეს ამცირებს უსაფრთხოებასა და პრივატულობას. ნუ გამოიყენებთ ამ ოპციას, თუ არ ახდენთ ადრე მოთხოვნილი გადახდის ხელახლა გენერირებას.</translation>
-    </message>
-    <message>
         <source>R&amp;euse an existing receiving address (not recommended)</source>
         <translation>ად&amp;რე გამოყენებული მიღების მისამართის გამოყენება (არ არის რეკომენდებული)</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Dogecoin network.</source>
-        <translation>არააუცილებელი მესიჯი, რომელიც ერთვის გადახდის მოთხოვნას და ნაჩვენები იქნება მოთხოვნის გახსნისას. შენიშვნა: მესიჯი არ გაყვება გადახდას ბითქოინის ქსელში.</translation>
-    </message>
-    <message>
-        <source>An optional label to associate with the new receiving address.</source>
-        <translation>არააუცილებელი ნიშნული ახალ მიღების მისამართთან ასოცირებისათვის.</translation>
-    </message>
-    <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
         <translation>გამოიყენეთ ეს ფორმა გადახდის მოთხოვნისათვის. ყველა ველი &lt;b&gt;არააუცილებელია&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
-        <translation>მოთხოვნის მოცულობა. არააუცილებელია. ჩაწერეთ 0 ან დატოვეთ ცარიელი, თუ არ მოითხოვება კონკრეტული მოცულობა.</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>ფორმის ყველა ველის წაშლა</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -894,10 +874,6 @@
     <message>
         <source>Add &amp;Recipient</source>
         <translation>&amp;რეციპიენტის დამატება</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>ფორმის ყველა ველის წაშლა</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Десен клик за промяна на адреса или името</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>Създаване на нов адрес</translation>
     </message>
@@ -1340,14 +1336,6 @@
         <translation>Използвате този формуляр за заявяване на плащания. Всички полета са &lt;b&gt;незадължителни&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
-        <translation>Незадължително заявяване на сума. Оставете полето празно или нулево, за да не заявите конкретна сума.</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Изчисти всички полета от формуляра.</translation>
-    </message>
-    <message>
         <source>Clear</source>
         <translation>Изчистване</translation>
     </message>
@@ -1536,10 +1524,6 @@
     <message>
         <source>Add &amp;Recipient</source>
         <translation>Добави &amp;получател</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Изчисти всички полета от формуляра.</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

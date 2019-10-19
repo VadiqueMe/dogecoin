@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Klik-kanan untuk edit alamat ataupun label</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>Cipta alamat baru</translation>
     </message>

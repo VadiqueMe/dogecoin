@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Clique com o botão direito para editar o endereço ou rótulo</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>Criar um novo endereço</translation>
     </message>
@@ -1489,32 +1485,12 @@
         <translation>&amp;Mensagem:</translation>
     </message>
     <message>
-        <source>Reuse one of the previously used receiving addresses. Reusing addresses has security and privacy issues. Do not use this unless re-generating a payment request made before.</source>
-        <translation>Reutilize um dos endereços de entrada usados anteriormente. Reutilizar endereços pode levar a riscos de segurança e de privacidade. Não use esta função a não ser que esteja a gerar novamente uma requisição de pagamento feita anteriormente.</translation>
-    </message>
-    <message>
         <source>R&amp;euse an existing receiving address (not recommended)</source>
         <translation>Reutilizar um endereço de receção existente (não recomendado)</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Dogecoin network.</source>
-        <translation>Uma mensagem opcional para anexar ao pedido de pagamento, que será exibida quando o pedido for aberto. Nota: A mensagem não será enviada com o pagamento através da rede Dogecoin.</translation>
-    </message>
-    <message>
-        <source>An optional label to associate with the new receiving address.</source>
-        <translation>Um rótulo opcional a associar ao novo endereço de receção.</translation>
-    </message>
-    <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
         <translation>Utilize este formulário para solicitar pagamentos. Todos os campos são &lt;b&gt;opcionais&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
-        <translation>Uma quantia opcional a solicitar. Deixe em branco ou zero para não solicitar uma quantidade específica.</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Limpar todos os campos do formulário.</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -1697,10 +1673,6 @@
     <message>
         <source>Add &amp;Recipient</source>
         <translation>Adicionar &amp;Destinatário</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Limpar todos os campos do formulário.</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

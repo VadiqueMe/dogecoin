@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Манзил ёки ёрлиқни таҳрирлаш учун икки марта босинг</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>Янги манзил яратинг</translation>
     </message>
@@ -862,24 +858,8 @@
         <translation>&amp;Хабар:</translation>
     </message>
     <message>
-        <source>Reuse one of the previously used receiving addresses. Reusing addresses has security and privacy issues. Do not use this unless re-generating a payment request made before.</source>
-        <translation>Олдинги фойдаланилган қабул қилинган манзиллардан биридан қайта фойдаланилсин. Хавсизлик ва махфийлик муаммолар мавжуд манзиллардан қайта фойдаланилмоқда. Бундан тўлов сўров қайта яратилмагунича фойдаланманг.</translation>
-    </message>
-    <message>
-        <source>An optional label to associate with the new receiving address.</source>
-        <translation>Янги қабул қилинаётган манзил билан боғланган танланадиган ёрлиқ.</translation>
-    </message>
-    <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
         <translation>Ушбу сўровдан тўловларни сўраш учун фойдаланинг. Барча майдонлар &lt;b&gt;мажбурий эмас&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
-        <translation>Хоҳланган миқдор сўрови. Кўрсатилган миқдорни сўраш учун буни бўш ёки ноль қолдиринг.</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Шаклнинг барча майдончаларини тозалаш</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -1002,10 +982,6 @@
     <message>
         <source>Send to multiple recipients at once</source>
         <translation>Бирданига бир нечта қабул қилувчиларга жўнатиш</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Шаклнинг барча майдончаларини тозалаш</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

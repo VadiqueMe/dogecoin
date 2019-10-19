@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>คลิกขวาเพื่อแก้ไขที่อยู่ หรือป้ายชื่อ</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>สร้างที่อยู่ใหม่</translation>
     </message>

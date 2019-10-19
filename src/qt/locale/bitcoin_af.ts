@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Regs-kliek om die adres of etiket te verander</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>Skep 'n nuwe adres</translation>
     </message>

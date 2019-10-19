@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Klik-kanan untuk mengubah alamat atau label</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>Buat alamat baru</translation>
     </message>
@@ -1186,20 +1182,8 @@
         <translation>Gunakan lagi alamat penerima yang ada (tidak disarankan)</translation>
     </message>
     <message>
-        <source>An optional label to associate with the new receiving address.</source>
-        <translation>Label opsional untuk mengasosiasikan dengan alamat penerima baru.</translation>
-    </message>
-    <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
         <translation>Gunakan form ini untuk meminta pembayaran. Semua bidang adalah &lt;b&gt;opsional&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
-        <translation>Nilai permintaan opsional. Biarkan ini kosong atau nol bila tidak meminta nilai tertentu.</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Hapus informasi dari form.</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -1350,10 +1334,6 @@
     <message>
         <source>Add &amp;Recipient</source>
         <translation>Tambahlah &amp;Penerima</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Hapus informasi dari form.</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

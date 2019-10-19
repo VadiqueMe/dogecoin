@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>پتہ تبدیل کرے کے لیے دائیاں کلک کریں</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>نیا ایڈریس بنائیں</translation>
     </message>

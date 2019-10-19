@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Paremkliki aadressi või sildi muutmiseks</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>Loo uus aadress</translation>
     </message>
@@ -1060,10 +1056,6 @@
         <translation>&amp;Sõnum:</translation>
     </message>
     <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Puhasta kõik vormi väljad.</translation>
-    </message>
-    <message>
         <source>Show</source>
         <translation>Näita</translation>
     </message>
@@ -1216,10 +1208,6 @@
     <message>
         <source>Add &amp;Recipient</source>
         <translation>Lisa &amp;Saaja</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Puhasta kõik vormi väljad.</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

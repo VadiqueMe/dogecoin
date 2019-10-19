@@ -1016,9 +1016,6 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="toolTip">
-        <string>Clear all fields of the form.</string>
-       </property>
        <property name="text">
         <string>Clear &amp;All</string>
        </property>

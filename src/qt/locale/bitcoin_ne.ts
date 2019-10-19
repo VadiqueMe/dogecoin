@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>ठेगाना वा लेबल सम्पादन गर्न दायाँ-क्लिक गर्नुहोस्</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>नयाँ ठेगाना सिर्जना गर्नुहोस्</translation>
     </message>

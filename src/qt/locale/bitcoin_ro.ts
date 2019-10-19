@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Click dreapta pentru a modifica adresa o eticheta</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>Crează o nouă adresă</translation>
     </message>

@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Fare clic con il tasto destro del mouse per modificare l'indirizzo o l'etichetta</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>Crea un nuovo indirizzo</translation>
     </message>
@@ -1625,32 +1621,12 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
         <translation>&amp;Messaggio:</translation>
     </message>
     <message>
-        <source>Reuse one of the previously used receiving addresses. Reusing addresses has security and privacy issues. Do not use this unless re-generating a payment request made before.</source>
-        <translation>Riutilizza uno degli indirizzi di ricezione generati in precedenza. Riutilizzare un indirizzo comporta problemi di sicurezza e privacy. Non selezionare questa opzione a meno che non si stia rigenerando una richiesta di pagamento creata in precedenza.</translation>
-    </message>
-    <message>
         <source>R&amp;euse an existing receiving address (not recommended)</source>
         <translation>R&amp;iusa un indirizzo di ricezione (non raccomandato)</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Dogecoin network.</source>
-        <translation>Un messaggio opzionale da allegare alla richiesta di pagamento, il quale sarà mostrato all'apertura della richiesta. Nota: Il messaggio non sarà inviato con il pagamento sulla rete Dogecoin.</translation>
-    </message>
-    <message>
-        <source>An optional label to associate with the new receiving address.</source>
-        <translation>Un'etichetta opzionale da associare al nuovo indirizzo di ricezione.</translation>
-    </message>
-    <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
         <translation>Usa questo modulo per richiedere pagamenti. Tutti i campi sono &lt;b&gt;opzionali&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
-        <translation>Un importo opzionale da associare alla richiesta. Lasciare vuoto o a zero per non richiedere un importo specifico.</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Cancellare tutti i campi del modulo.</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -1861,10 +1837,6 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
     <message>
         <source>Add &amp;Recipient</source>
         <translation>&amp;Aggiungi beneficiario</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Cancellare tutti i campi del modulo.</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

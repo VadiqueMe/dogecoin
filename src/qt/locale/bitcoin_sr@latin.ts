@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Klikni desnim tasterom za uređivanje adrese ili oznake</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>Kreiraj novu adresu</translation>
     </message>

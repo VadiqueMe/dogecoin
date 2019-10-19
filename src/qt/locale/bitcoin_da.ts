@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Højreklik for at redigere adresse eller mærkat</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>Opret en ny adresse</translation>
     </message>
@@ -1728,32 +1724,12 @@
         <translation>&amp;Besked:</translation>
     </message>
     <message>
-        <source>Reuse one of the previously used receiving addresses. Reusing addresses has security and privacy issues. Do not use this unless re-generating a payment request made before.</source>
-        <translation>Genbrug en af de tidligere brugte modtagelsesadresser. Genbrug af adresser har indflydelse på sikkerhed og privatliv. Brug ikke dette med mindre du genskaber en betalingsanmodning fra tidligere.</translation>
-    </message>
-    <message>
         <source>R&amp;euse an existing receiving address (not recommended)</source>
         <translation>&amp;Genbrug en eksisterende modtagelsesadresse (anbefales ikke)</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Dogecoin network.</source>
-        <translation>En valgfri besked, der føjes til betalingsanmodningen, og som vil vises, når anmodningen åbnes. Bemærk: Beskeden vil ikke sendes sammen med betalingen over Dogecoin-netværket.</translation>
-    </message>
-    <message>
-        <source>An optional label to associate with the new receiving address.</source>
-        <translation>Et valgfrit mærkat, der associeres med den nye modtagelsesadresse.</translation>
-    </message>
-    <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
         <translation>Brug denne formular for at anmode om betalinger. Alle felter er &lt;b&gt;valgfri&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
-        <translation>Et valgfrit beløb til anmodning. Lad dette felt være tomt eller indeholde nul for at anmode om et ikke-specifikt beløb.</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Ryd alle felter af formen.</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -1972,10 +1948,6 @@
     <message>
         <source>Add &amp;Recipient</source>
         <translation>Tilføj &amp;modtager</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Ryd alle felter af formen.</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

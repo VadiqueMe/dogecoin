@@ -742,10 +742,6 @@
         <translation>&amp;Atkārtoti izmantot esošo saņemšanas adresi (nav ieteicams)</translation>
     </message>
     <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Notīrīt visus laukus formā.</translation>
-    </message>
-    <message>
         <source>Clear</source>
         <translation>Notīrīt</translation>
     </message>
@@ -854,10 +850,6 @@
     <message>
         <source>Add &amp;Recipient</source>
         <translation>&amp;Pievienot Saņēmēju</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Notīrīt visus laukus formā.</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

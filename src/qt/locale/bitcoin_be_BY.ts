@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Правы клік, каб рэдагаваць адрас ці метку</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>Стварыць новы адрас</translation>
     </message>

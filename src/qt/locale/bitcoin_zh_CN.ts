@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>鼠标右击编辑地址或标签</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>创建新地址</translation>
     </message>
@@ -1714,32 +1710,12 @@
         <translation>消息(&amp;M)：</translation>
     </message>
     <message>
-        <source>Reuse one of the previously used receiving addresses. Reusing addresses has security and privacy issues. Do not use this unless re-generating a payment request made before.</source>
-        <translation>重复使用以前用过的接收地址。重用地址有安全和隐私方面的隐患。除非是为重复生成同一项支付请求，否则请不要这样做。</translation>
-    </message>
-    <message>
         <source>R&amp;euse an existing receiving address (not recommended)</source>
         <translation>重用现有的接收地址（不推荐）</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Dogecoin network.</source>
-        <translation>可在付款请求上备注一条信息，在打开付款请求时可以看到。注意：该消息不是通过狗狗币网络传送。</translation>
-    </message>
-    <message>
-        <source>An optional label to associate with the new receiving address.</source>
-        <translation>可为新建的收款地址添加一个标签。</translation>
-    </message>
-    <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
         <translation>使用此表单要求付款。所有字段都是&lt;b&gt;可选&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
-        <translation>可选的请求金额。留空或填零为不要求具体金额。</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>清除此表单的所有字段。</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -1958,10 +1934,6 @@
     <message>
         <source>Add &amp;Recipient</source>
         <translation>添加收款人(&amp;R)</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>清除此表单的所有字段。</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Cliquer à droite pour modifier l'adresse ou l'étiquette</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation>Créer une nouvelle adresse</translation>
     </message>
@@ -1728,32 +1724,12 @@
         <translation>M&amp;essage :</translation>
     </message>
     <message>
-        <source>Reuse one of the previously used receiving addresses. Reusing addresses has security and privacy issues. Do not use this unless re-generating a payment request made before.</source>
-        <translation>Réutiliser une adresse de réception utilisée précédemment. Réutiliser une adresse comporte des problèmes de sécurité et de confidentialité. À ne pas utiliser, sauf pour générer une demande de paiement faite au préalable.</translation>
-    </message>
-    <message>
         <source>R&amp;euse an existing receiving address (not recommended)</source>
         <translation>Ré&amp;utiliser une adresse de réception existante (non recommandé)</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Dogecoin network.</source>
-        <translation>Un message facultatif à joindre à la demande de paiement et qui sera affiché à l'ouverture de celle-ci. Note : le message ne sera pas envoyé avec le paiement par le réseau Dogecoin.</translation>
-    </message>
-    <message>
-        <source>An optional label to associate with the new receiving address.</source>
-        <translation>Un étiquette facultative à associer à la nouvelle adresse de réception.</translation>
-    </message>
-    <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
         <translation>Utiliser ce formulaire pour demander des paiements. Tous les champs sont  &lt;b&gt;facultatifs&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
-        <translation>Un montant facultatif à demander. Ne rien saisir ou un zéro pour ne pas demander de montant spécifique.</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Effacer tous les champs du formulaire.</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -1972,10 +1948,6 @@
     <message>
         <source>Add &amp;Recipient</source>
         <translation>Ajouter un &amp;destinataire</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Effacer tous les champs du formulaire.</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>

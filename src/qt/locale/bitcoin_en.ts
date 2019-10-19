@@ -4,11 +4,6 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <location filename="../forms/addressbookpage.ui" line="+30"/>
-        <source>Right-click to edit address or label</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location line="+27"/>
         <source>Create a new address</source>
         <translation>Create a new address</translation>
@@ -2485,41 +2480,13 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-20"/>
-        <source>Reuse one of the previously used receiving addresses. Reusing addresses has security and privacy issues. Do not use this unless re-generating a payment request made before.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location line="+3"/>
         <source>R&amp;euse an existing receiving address (not recommended)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+14"/>
-        <location line="+23"/>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Dogecoin network.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-7"/>
-        <location line="+21"/>
-        <source>An optional label to associate with the new receiving address.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location line="-7"/>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <location line="+22"/>
-        <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+32"/>
-        <source>Clear all fields of the form.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2792,11 +2759,6 @@ p, li { white-space: pre-wrap; }
         <location line="+3"/>
         <source>Add &amp;Recipient</source>
         <translation>Add &amp;Recipient</translation>
-    </message>
-    <message>
-        <location line="-20"/>
-        <source>Clear all fields of the form.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+188"/>
