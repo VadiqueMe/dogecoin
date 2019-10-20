@@ -336,14 +336,6 @@
         <translation>&amp;Etiqueta</translation>
     </message>
     <message>
-        <source>The label associated with this address list entry</source>
-        <translation>La etiqueta asociada con esta entrada de la lista de direcciones</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>La dirección asociada con esta entrada de la lista de direcciones. Solo puede ser modificada para direcciones de envío.</translation>
-    </message>
-    <message>
         <source>&amp;Address</source>
         <translation>&amp;Dirección</translation>
     </message>

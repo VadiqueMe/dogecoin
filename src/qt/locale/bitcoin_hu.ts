@@ -398,14 +398,6 @@
         <translation>Cím&amp;ke</translation>
     </message>
     <message>
-        <source>The label associated with this address list entry</source>
-        <translation>Ehhez a listaelemhez rendelt címke </translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>Ehhez a címlistaelemhez rendelt cím. Csak a küldő címek módosíthatók.</translation>
-    </message>
-    <message>
         <source>&amp;Address</source>
         <translation>&amp;Cím</translation>
     </message>

@@ -58,12 +58,12 @@
         <translation>받은 주소들</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>비트코인을 보내는 계좌 주소입니다. 코인을 보내기 전에 잔고와 받는 주소를 항상 확인하세요.</translation>
+        <source>These are your addresses for sending payments</source>
+        <translation>이들은 지불을 보낼 주소입니다</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>지불액을 받기 위한 도지코인 주소들이 있습니다. 매 거래기록마다 새로운 주소 사용을 권장합니다.</translation>
+        <source>These are your addresses for receiving payments</source>
+        <translation>이들은 지불을 받을 주소입니다</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -682,14 +682,6 @@
         <translation>라벨(&amp;L)</translation>
     </message>
     <message>
-        <source>The label associated with this address list entry</source>
-        <translation>현재 선택된 주소 필드의 제목입니다. </translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>본 주소록 입력은 주소와 연계되었습니다.  이것은 보내는 주소들에서만 변경될수 있습니다.</translation>
-    </message>
-    <message>
         <source>&amp;Address</source>
         <translation>주소(&amp;A)</translation>
     </message>
@@ -710,12 +702,8 @@
         <translation>보내는 주소 편집</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Dogecoin address.</source>
-        <translation>입력한 "%1" 주소는 올바른 비트코인 주소가 아닙니다.</translation>
-    </message>
-    <message>
-        <source>The entered address "%1" is already in the address book.</source>
-        <translation>입력된 주소는"%1" 이미 주소록에 있습니다.</translation>
+        <source>The entered address "%1" is already in the address book</source>
+        <translation>입력된 주소는"%1" 이미 주소록에 있습니다</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -1246,8 +1234,8 @@
         <translation>잘못된 지불 주소입니다 %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Bitcoin address or malformed URI parameters.</source>
-        <translation>URI의 파싱에 문제가 발생했습니다. 잘못된 비트코인 주소나 URI 파라미터 구성에 오류가 존재할 수 있습니다.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid address or malformed URI parameters</source>
+        <translation>URI의 파싱에 문제가 발생했습니다. 잘못된 주소나 URI 파라미터 구성에 오류가 존재할 수 있습니다</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
@@ -2058,8 +2046,8 @@
         <translation><numerusform>%n 블록 안에 승인이 시작될 것으로 추정됩니다.</numerusform></translation>
     </message>
     <message>
-        <source>Warning: Invalid Bitcoin address</source>
-        <translation>경고: 잘못된 비트코인주소입니다</translation>
+        <source>Warning: Invalid address</source>
+        <translation>경고: 잘못된 주소</translation>
     </message>
     <message>
         <source>Warning: Unknown change address</source>
@@ -3609,10 +3597,6 @@
     <message>
         <source>Invalid -proxy address: '%s'</source>
         <translation>잘못된 -proxy 주소입니다: '%s'</translation>
-    </message>
-    <message>
-        <source>Keypool ran out, please call keypoolrefill first</source>
-        <translation>Keypool이 종료되었습니다. 먼저 keypoolrefill을 호출하십시오.</translation>
     </message>
     <message>
         <source>Listen for JSON-RPC connections on &lt;port&gt; (default: %u or testnet: %u)</source>

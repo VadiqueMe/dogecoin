@@ -434,14 +434,6 @@
         <translation>&amp;ป้ายชื่อ</translation>
     </message>
     <message>
-        <source>The label associated with this address list entry</source>
-        <translation>รายการแสดง ป้ายชื่อที่เกี่ยวข้องกับที่เก็บนี้</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>ที่เก็บที่เกี่ยวข้องกับ ที่เก็บที่แสดงรายการนี้ การปรับปรุงนี้ทำได้สำหรับ ที่เก็บเงินที่จะใช่ส่งเงิน เท่านั้น</translation>
-    </message>
-    <message>
         <source>&amp;Address</source>
         <translation>&amp;ที่เก็บ</translation>
     </message>

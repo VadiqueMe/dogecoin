@@ -287,19 +287,19 @@ ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue,
         // Taking advantage of the fact that pair serialization
         // is just the two items serialized one after the other
         ssKey >> strType;
-        if (strType == "name")
+        if ( strType == "name" )
         {
-            string strAddress;
-            ssKey >> strAddress;
-            ssValue >> pwallet->mapAddressBook[CBitcoinAddress(strAddress).Get()].name;
+            string strAddress ;
+            ssKey >> strAddress ;
+            ssValue >> pwallet->mapAddressBook[ CDogecoinAddress( strAddress ).Get() ].name ;
         }
         else if (strType == "purpose")
         {
-            string strAddress;
-            ssKey >> strAddress;
-            ssValue >> pwallet->mapAddressBook[CBitcoinAddress(strAddress).Get()].purpose;
+            string strAddress ;
+            ssKey >> strAddress ;
+            ssValue >> pwallet->mapAddressBook[ CDogecoinAddress( strAddress ).Get() ].purpose ;
         }
-        else if (strType == "tx")
+        else if ( strType == "tx" )
         {
             uint256 hash;
             ssKey >> hash;
@@ -334,7 +334,7 @@ ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue,
 
             pwallet->LoadToWallet(wtx);
         }
-        else if (strType == "acentry")
+        else if ( strType == "acentry" )
         {
             string strAccount;
             ssKey >> strAccount;
@@ -351,7 +351,7 @@ ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue,
                     wss.fAnyUnordered = true;
             }
         }
-        else if (strType == "watchs")
+        else if ( strType == "watchs" )
         {
             wss.nWatchKeys++;
             CScript script;
@@ -361,7 +361,7 @@ ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue,
             if (fYes == '1')
                 pwallet->LoadWatchOnly(script);
         }
-        else if (strType == "key" || strType == "wkey")
+        else if ( strType == "key" || strType == "wkey" )
         {
             CPubKey vchPubKey;
             ssKey >> vchPubKey;
@@ -374,7 +374,7 @@ ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue,
             CPrivKey pkey;
             uint256 hash;
 
-            if (strType == "key")
+            if ( strType == "key" )
             {
                 wss.nKeys++;
                 ssValue >> pkey;
@@ -425,7 +425,7 @@ ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue,
                 return false;
             }
         }
-        else if (strType == "mkey")
+        else if ( strType == "mkey" )
         {
             unsigned int nID;
             ssKey >> nID;
@@ -440,7 +440,7 @@ ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue,
             if (pwallet->nMasterKeyMaxID < nID)
                 pwallet->nMasterKeyMaxID = nID;
         }
-        else if (strType == "ckey")
+        else if ( strType == "ckey" )
         {
             CPubKey vchPubKey;
             ssKey >> vchPubKey;
@@ -460,16 +460,16 @@ ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue,
             }
             wss.fIsEncrypted = true;
         }
-        else if (strType == "keymeta" || strType == "watchmeta")
+        else if ( strType == "keymeta" || strType == "watchmeta" )
         {
             CTxDestination keyID;
-            if (strType == "keymeta")
+            if ( strType == "keymeta" )
             {
               CPubKey vchPubKey;
               ssKey >> vchPubKey;
               keyID = vchPubKey.GetID();
             }
-            else if (strType == "watchmeta")
+            else if ( strType == "watchmeta" )
             {
               CScript script;
               ssKey >> *(CScriptBase*)(&script);
@@ -482,11 +482,11 @@ ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue,
 
             pwallet->LoadKeyMetadata(keyID, keyMeta);
         }
-        else if (strType == "defaultkey")
+        else if ( strType == "defaultkey" )
         {
             ssValue >> pwallet->vchDefaultKey;
         }
-        else if (strType == "pool")
+        else if ( strType == "pool" )
         {
             int64_t nIndex;
             ssKey >> nIndex;
@@ -495,13 +495,13 @@ ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue,
 
             pwallet->LoadKeyPool(nIndex, keypool);
         }
-        else if (strType == "version")
+        else if ( strType == "version" )
         {
             ssValue >> wss.nFileVersion;
             if (wss.nFileVersion == 10300)
                 wss.nFileVersion = 300;
         }
-        else if (strType == "cscript")
+        else if ( strType == "cscript" )
         {
             uint160 hash;
             ssKey >> hash;
@@ -513,23 +513,23 @@ ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue,
                 return false;
             }
         }
-        else if (strType == "orderposnext")
+        else if ( strType == "orderposnext" )
         {
             ssValue >> pwallet->nOrderPosNext;
         }
-        else if (strType == "destdata")
+        else if ( strType == "destdata" )
         {
             std::string strAddress, strKey, strValue;
             ssKey >> strAddress;
             ssKey >> strKey;
             ssValue >> strValue;
-            if (!pwallet->LoadDestData(CBitcoinAddress(strAddress).Get(), strKey, strValue))
+            if ( ! pwallet->LoadDestData( CDogecoinAddress( strAddress ).Get(), strKey, strValue ) )
             {
                 strErr = "Error reading wallet database: LoadDestData failed";
                 return false;
             }
         }
-        else if (strType == "hdchain")
+        else if ( strType == "hdchain" )
         {
             CHDChain chain;
             ssValue >> chain;

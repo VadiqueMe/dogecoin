@@ -58,12 +58,12 @@
         <translation>מקבל כתובות</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>אלה הם כתובות הביטקוין שלך לשליחת תשלומים. חשוב לבדוק את הכמות של הכתובות המקבלות לפני שליחת מטבעות</translation>
+        <source>These are your addresses for sending payments</source>
+        <translation>אלה הם כתובות שלך לשליחת תשלומים</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>אלה הן כתובות הביטקוין שלך לקבלת תשלומים. מומלץ להשתמש בכתובת חדשה לכל העברה.</translation>
+        <source>These are your addresses for receiving payments</source>
+        <translation>אלה הן כתובות שלך לקבלת תשלומים</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -426,14 +426,6 @@
     <message>
         <source>&amp;Label</source>
         <translation>ת&amp;ווית</translation>
-    </message>
-    <message>
-        <source>The label associated with this address list entry</source>
-        <translation>התווית המשויכת לרשומה הזו ברשימת הכתובות</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>הכתובת המשויכת עם רשומה זו ברשימת הכתובות. ניתן לשנות זאת רק עבור כתובות לשליחה.</translation>
     </message>
     <message>
         <source>&amp;Address</source>

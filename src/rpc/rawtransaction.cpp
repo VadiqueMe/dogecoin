@@ -55,7 +55,7 @@ void ScriptPubKeyToJSON(const CScript& scriptPubKey, UniValue& out, bool fInclud
 
     UniValue a(UniValue::VARR);
     BOOST_FOREACH(const CTxDestination& addr, addresses)
-        a.push_back(CBitcoinAddress(addr).ToString());
+        a.push_back( CDogecoinAddress( addr ).ToString() ) ;
     out.push_back(Pair("addresses", a));
 }
 
@@ -214,7 +214,7 @@ UniValue getrawtransaction(const JSONRPCRequest& request)
         }
         else {
             throw JSONRPCError(RPC_TYPE_ERROR, "Invalid type provided. Verbose parameter must be a boolean.");
-        } 
+        }
     }
 
     CTransactionRef tx;
@@ -434,23 +434,23 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
         rawTx.vin.push_back(in);
     }
 
-    set<CBitcoinAddress> setAddress;
-    vector<string> addrList = sendTo.getKeys();
-    BOOST_FOREACH(const string& name_, addrList) {
-
+    std::set< CDogecoinAddress > setAddress ;
+    std::vector< std::string > addrList = sendTo.getKeys() ;
+    BOOST_FOREACH( const string& name_, addrList )
+    {
         if (name_ == "data") {
             std::vector<unsigned char> data = ParseHexV(sendTo[name_].getValStr(),"Data");
 
             CTxOut out(0, CScript() << OP_RETURN << data);
             rawTx.vout.push_back(out);
         } else {
-            CBitcoinAddress address(name_);
-            if (!address.IsValid())
-                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, string("Invalid Dogecoin address: ")+name_);
+            CDogecoinAddress address( name_ ) ;
+            if ( ! address.IsValid() )
+                throw JSONRPCError( RPC_INVALID_ADDRESS_OR_KEY, string( "Invalid Dogecoin address: " ) + name_ ) ;
 
-            if (setAddress.count(address))
-                throw JSONRPCError(RPC_INVALID_PARAMETER, string("Invalid parameter, duplicated address: ")+name_);
-            setAddress.insert(address);
+            if ( setAddress.count( address ) )
+                throw JSONRPCError( RPC_INVALID_PARAMETER, string( "Invalid parameter, duplicated address: " ) + name_ ) ;
+            setAddress.insert( address ) ;
 
             CScript scriptPubKey = GetScriptForDestination(address.Get());
             CAmount nAmount = AmountFromValue(sendTo[name_]);
@@ -572,10 +572,10 @@ UniValue decodescript(const JSONRPCRequest& request)
     UniValue type;
     type = find_value(r, "type");
 
-    if (type.isStr() && type.get_str() != "scripthash") {
+    if ( type.isStr() && type.get_str() != "scripthash" ) {
         // P2SH cannot be wrapped in a P2SH. If this script is already a P2SH,
-        // don't return the address for a P2SH of the P2SH.
-        r.push_back(Pair("p2sh", CBitcoinAddress(CScriptID(script)).ToString()));
+        // don't return the address for a P2SH of the P2SH
+        r.push_back( Pair( "p2sh", CDogecoinAddress( CScriptID( script ) ).ToString() ) ) ;
     }
 
     return r;
@@ -707,7 +707,7 @@ UniValue signrawtransaction(const JSONRPCRequest& request)
         UniValue keys = request.params[2].get_array();
         for (unsigned int idx = 0; idx < keys.size(); idx++) {
             UniValue k = keys[idx];
-            CBitcoinSecret vchSecret;
+            CDogecoinSecret vchSecret ;
             bool fGood = vchSecret.SetString(k.get_str());
             if (!fGood)
                 throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid private key");

@@ -75,12 +75,12 @@
     </message>
     <message>
         <location line="+7"/>
-        <source>These are your Dogecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your addresses for sending payments</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+4"/>
-        <source>These are your Dogecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <source>These are your addresses for receiving payments</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -891,16 +891,6 @@
         <translation>&amp;Label</translation>
     </message>
     <message>
-        <location line="+10"/>
-        <source>The label associated with this address list entry</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location line="-10"/>
         <source>&amp;Address</source>
         <translation>&amp;Address</translation>
@@ -926,13 +916,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+71"/>
-        <source>The entered address &quot;%1&quot; is not a valid Dogecoin address.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location line="+5"/>
-        <source>The entered address &quot;%1&quot; is already in the address book.</source>
+        <source>The entered address &quot;%1&quot; is already in the address book</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1825,7 +1810,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+8"/>
-        <source>URI cannot be parsed! This can be caused by an invalid Dogecoin address or malformed URI parameters.</source>
+        <source>URI cannot be parsed! This can be caused by an invalid address or malformed URI parameters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4620,11 +4605,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <location line="+1"/>
         <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Keypool ran out, please call keypoolrefill first</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

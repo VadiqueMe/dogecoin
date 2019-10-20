@@ -817,7 +817,7 @@ void static DogecoinMiner( const CChainParams & chainparams, char threadChar )
             std::unique_ptr< CBlockTemplate > pblocktemplate( assembler->CreateNewBlock( coinbaseScript->reserveScript ) ) ;
             if ( ! pblocktemplate.get() )
             {
-                LogPrintf( "Error in DogecoinMiner: Keypool ran out, please invoke keypoolrefill before restarting the mining thread\n" ) ;
+                LogPrintf( "Keypool ran out, please invoke keypoolrefill before restarting the mining thread\n" ) ;
                 return ;
             }
 

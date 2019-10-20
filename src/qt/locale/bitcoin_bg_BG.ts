@@ -58,12 +58,12 @@
         <translation>Адрес за получаване</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Тези са вашите Биткойн адреси за изпращане на монети. Винаги проверявайте количеството и получаващия адрес преди изпращане. </translation>
+        <source>These are your addresses for sending payments</source>
+        <translation>Тези са вашите адреси за изпращане на монети</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Това са вашите Биткойн адреси за получаване на монети. Препоръчително е да ползвате нов адрес на всяка транзакция.</translation>
+        <source>These are your addresses for receiving payments</source>
+        <translation>Това са вашите адреси за получаване на монети</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>

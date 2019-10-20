@@ -140,10 +140,10 @@ void ScriptPubKeyToUniv(const CScript& scriptPubKey,
     out.pushKV("reqSigs", nRequired);
     out.pushKV("type", GetTxnOutputType(type));
 
-    UniValue a(UniValue::VARR);
-    BOOST_FOREACH(const CTxDestination& addr, addresses)
-        a.push_back(CBitcoinAddress(addr).ToString());
-    out.pushKV("addresses", a);
+    UniValue a( UniValue::VARR ) ;
+    BOOST_FOREACH( const CTxDestination & addr, addresses )
+        a.push_back( CDogecoinAddress( addr ).ToString() ) ;
+    out.pushKV( "addresses", a ) ;
 }
 
 void TxToUniv(const CTransaction& tx, const uint256& hashBlock, UniValue& entry)

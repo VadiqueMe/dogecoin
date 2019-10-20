@@ -340,14 +340,6 @@
         <translation>&amp;Ёрлик</translation>
     </message>
     <message>
-        <source>The label associated with this address list entry</source>
-        <translation>Ёрлиқ ушбу манзилар рўйхати ёзуви билан боғланган</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>Манзил ушбу манзиллар рўйхати ёзуви билан боғланган. Уни фақат жўнатиладиган манзиллар учун ўзгартирса бўлади.</translation>
-    </message>
-    <message>
         <source>&amp;Address</source>
         <translation>&amp;Манзил</translation>
     </message>

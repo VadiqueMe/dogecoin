@@ -486,14 +486,6 @@
         <translation>&amp;Label</translation>
     </message>
     <message>
-        <source>The label associated with this address list entry</source>
-        <translation>The label associated with this address list entry</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>The address associated with this address list entry. This can only be modified for sending addresses.</translation>
-    </message>
-    <message>
         <source>&amp;Address</source>
         <translation>&amp;Address</translation>
     </message>
@@ -974,10 +966,6 @@
     <message>
         <source>Amount</source>
         <translation>Amount</translation>
-    </message>
-    <message>
-        <source>Enter a Dogecoin address (like %1)</source>
-        <translation>Enter a Dogecoin address (like %1)</translation>
     </message>
     <message>
         <source>%1 d</source>

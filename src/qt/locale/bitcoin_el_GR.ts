@@ -462,14 +462,6 @@
         <translation>&amp;Επιγραφή</translation>
     </message>
     <message>
-        <source>The label associated with this address list entry</source>
-        <translation>Η ετικέτα που συνδέεται με αυτήν την καταχώρηση στο βιβλίο διευθύνσεων</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>Η διεύθυνση σχετίζεται με αυτή την καταχώρηση του βιβλίου διευθύνσεων. Μπορεί να τροποποιηθεί μόνο για τις διευθύνσεις αποστολής.</translation>
-    </message>
-    <message>
         <source>&amp;Address</source>
         <translation>&amp;Διεύθυνση</translation>
     </message>

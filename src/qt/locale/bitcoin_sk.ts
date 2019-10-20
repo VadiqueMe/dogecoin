@@ -58,12 +58,12 @@
         <translation>Prijímajúce adresy</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Toto sú Vaše Dogecoin adresy pre posielanie platieb. Vždy skontrolujte sumu a prijímaciu adresu pred poslaním mincí.</translation>
+        <source>These are your addresses for sending payments</source>
+        <translation>Toto sú vaše adresy pre posielanie platieb</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Toto sú vaše Dogecoin adresy pre prijímanie platieb. Odporúča sa použiť vždy novú prijímaciu adresu pre každú transakciu.</translation>
+        <source>These are your addresses for receiving payments</source>
+        <translation>Toto sú vaše adresy pre prijímanie platieb</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -674,14 +674,6 @@
         <translation>&amp;Popis</translation>
     </message>
     <message>
-        <source>The label associated with this address list entry</source>
-        <translation>Popis tejto položký v zozname adries je prázdny</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>Adresa spojená s týmto záznamom v adresári. Možno upravovať len pre odosielajúce adresy.</translation>
-    </message>
-    <message>
         <source>&amp;Address</source>
         <translation>&amp;Adresa</translation>
     </message>
@@ -702,12 +694,8 @@
         <translation>Upraviť odosielaciu adresu</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Dogecoin address.</source>
-        <translation>Vložená adresa "%1" nieje platnou adresou Dogecoin.</translation>
-    </message>
-    <message>
-        <source>The entered address "%1" is already in the address book.</source>
-        <translation>Vložená adresa "%1" sa už nachádza v adresári.</translation>
+        <source>The entered address "%1" is already in the address book</source>
+        <translation>Vložená adresa "%1" sa už nachádza v adresári</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -1234,8 +1222,8 @@
         <translation>Neplatná adresa platby %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Dogecoin address or malformed URI parameters.</source>
-        <translation>URI sa nedá analyzovať! To môže byť spôsobené neplatnou Dogecoin adresou alebo zle nastavenými vlastnosťami URI.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid address or malformed URI parameters</source>
+        <translation>URI sa nedá analyzovať! To môže byť spôsobené neplatnou adresou alebo zle nastavenými vlastnosťami URI</translation>
     </message>
     <message>
         <source>Payment request file handling</source>

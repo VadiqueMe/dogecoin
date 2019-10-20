@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #ifndef BITCOIN_PUBKEY_H
 #define BITCOIN_PUBKEY_H
@@ -59,14 +59,14 @@ private:
     //! Set this key data to be invalid
     void Invalidate()
     {
-        vch[0] = 0xFF;
+        vch[ 0 ] = 0xFF ;
     }
 
 public:
-    //! Construct an invalid public key.
+    //! Construct an invalid public key
     CPubKey()
     {
-        Invalidate();
+        Invalidate() ;
     }
 
     //! Initialize a public key using begin/end iterators to byte data.

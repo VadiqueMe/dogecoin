@@ -58,12 +58,12 @@
         <translation>Alım adresleri</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Bunlar ödemeleri göndermek için kullanacağınız Dogecoin adreslerinizdir. Dogecoin yollamadan önce tutarı ve alıcının alım adresini her zaman kontrol ediniz.</translation>
+        <source>These are your addresses for sending payments</source>
+        <translation>Bunlar ödemeleri göndermek için kullanacağınız adreslerinizdir</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Bunlar ödemeleri almak için kullanacağınız Dogecoin adreslerinizdir. Her işlem için yeni bir alım adresi kullanmanız tavsiye edilir.</translation>
+        <source>These are your addresses for receiving payments</source>
+        <translation>Bunlar ödemeleri almak için kullanacağınız adreslerinizdir</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -682,14 +682,6 @@
         <translation>&amp;Etiket</translation>
     </message>
     <message>
-        <source>The label associated with this address list entry</source>
-        <translation>Bu adres listesi girdisi ile ilişkili etiket</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>Bu adres listesi girdisi ile ilişkili adres. Sadece gönderme adresleri için değiştirilebilir.</translation>
-    </message>
-    <message>
         <source>&amp;Address</source>
         <translation>&amp;Adres</translation>
     </message>
@@ -710,12 +702,8 @@
         <translation>Gönderi adresini düzenle</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Dogecoin address.</source>
-        <translation>Girilen "%1" adresi geçerli bir Dogecoin adresi değildir.</translation>
-    </message>
-    <message>
-        <source>The entered address "%1" is already in the address book.</source>
-        <translation>Girilen "%1" adresi zaten adres defterinde mevcuttur.</translation>
+        <source>The entered address "%1" is already in the address book</source>
+        <translation>Girilen "%1" adresi zaten adres defterinde mevcuttur</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -1246,8 +1234,8 @@
         <translation>%1 ödeme adresi geçersizdir</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Dogecoin address or malformed URI parameters.</source>
-        <translation>URI ayrıştırılamıyor! Bunun nedeni geçersiz bir Dogecoin adresi veya hatalı biçimlendirilmiş URI değişkenleri olabilir.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid address or malformed URI parameters</source>
+        <translation>URI ayrıştırılamıyor! Bunun nedeni geçersiz bir adresi veya hatalı biçimlendirilmiş URI değişkenleri olabilir</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
@@ -3617,10 +3605,6 @@
     <message>
         <source>Invalid -proxy address: '%s'</source>
         <translation>Geçersiz -proxy adresi: '%s'</translation>
-    </message>
-    <message>
-        <source>Keypool ran out, please call keypoolrefill first</source>
-        <translation>Keypool tükendi, lütfen önce keypoolrefill'i çağırın</translation>
     </message>
     <message>
         <source>Listen for JSON-RPC connections on &lt;port&gt; (default: %u or testnet: %u)</source>

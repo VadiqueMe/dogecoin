@@ -54,12 +54,12 @@
         <translation>Mottaksadresser</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Dette er dine Bitcoin-adresser for sending av betalinger. Sjekk alltid beløpet og mottakeradressen før sending av mynter.</translation>
+        <source>These are your addresses for sending payments</source>
+        <translation>Dette er dine adresser for sending av betalinger</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Dette er dine Bitcoin-adresser for å sende betalinger med. Det er anbefalt å bruke en ny mottaksadresse for hver transaksjon.</translation>
+        <source>These are your addresses for receiving payments</source>
+        <translation>Dette er dine adresser for å sende betalinger med</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -496,14 +496,6 @@
     <message>
         <source>&amp;Label</source>
         <translation>&amp;Merkelapp</translation>
-    </message>
-    <message>
-        <source>The label associated with this address list entry</source>
-        <translation>Merkelappen koblet til denne adresseliste oppføringen</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>Adressen til denne oppføringen i adresseboken. Denne kan kun endres for utsendingsadresser.</translation>
     </message>
     <message>
         <source>&amp;Address</source>

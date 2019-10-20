@@ -243,14 +243,13 @@ void PaperWalletDialog::on_getNewAddress_clicked()
     CPubKey pubkey = privKey.GetPubKey();
 
     // Derive the public key hash
-    CBitcoinAddress pubkeyhash;
-    pubkeyhash.Set(pubkey.GetID());
+    CDogecoinAddress pubkeyhash ;
+    pubkeyhash.Set( pubkey.GetID() ) ;
 
     // Create String versions of each
-    std::string myPrivKey = CBitcoinSecret(privKey).ToString();
-    std::string myPubKey = HexStr(pubkey.begin(), pubkey.end());
-    std::string myAddress = pubkeyhash.ToString();
-
+    std::string myPrivKey = CDogecoinSecret( privKey ).ToString() ;
+    std::string myPubKey = HexStr( pubkey.begin(), pubkey.end() ) ;
+    std::string myAddress = pubkeyhash.ToString() ;
 
 #ifdef USE_QRCODE
     // Generate the address QR code

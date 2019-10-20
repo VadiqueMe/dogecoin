@@ -58,12 +58,12 @@
         <translation>адрасы Прымання</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Тут знаходзяцца Біткойн-адрасы для высылання плацяжоў. Заўсёды спраўджвайце колькасць і адрас прызначэння перад здзяйсненнем транзакцыі.</translation>
+        <source>These are your addresses for sending payments</source>
+        <translation>Тут знаходзяцца адрасы для высылання плацяжоў</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Тут знаходзяцца Біткойн-адрасы для прымання плацяжоў. Пажадана выкарыстоўваць новы адрас для кожнай транзакцыі.</translation>
+        <source>These are your addresses for receiving payments</source>
+        <translation>Тут знаходзяцца адрасы для прымання плацяжоў</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -590,7 +590,7 @@
         <translation>Рэдагаваць адрас дасылання</translation>
     </message>
     <message>
-        <source>The entered address "%1" is already in the address book.</source>
+        <source>The entered address "%1" is already in the address book</source>
         <translation>Уведзены адрас "%1" ужо ў кніге адрасоў</translation>
     </message>
     <message>

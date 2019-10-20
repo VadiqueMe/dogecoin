@@ -638,14 +638,6 @@
         <translation>&amp;Etiqueta</translation>
     </message>
     <message>
-        <source>The label associated with this address list entry</source>
-        <translation>A etiqueta associada com esta entrada da lista de endereços</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>O endereço associado com o esta entrada da lista de endereços. Isto só pode ser modificado para os endereços de envio.</translation>
-    </message>
-    <message>
         <source>&amp;Address</source>
         <translation>E&amp;ndereço</translation>
     </message>

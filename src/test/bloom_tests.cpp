@@ -82,11 +82,11 @@ BOOST_AUTO_TEST_CASE(bloom_create_insert_serialize_with_tweak)
     BOOST_CHECK_EQUAL_COLLECTIONS(stream.begin(), stream.end(), expected.begin(), expected.end());
 }
 
-BOOST_AUTO_TEST_CASE(bloom_create_insert_key)
+BOOST_AUTO_TEST_CASE( bloom_create_insert_key )
 {
-    std::string strSecret = std::string("6KzLyjdh96x7mZ8rbCtQf2ef9TEe64hCBuGMchC5P4H5i4eTmD4");
-    CBitcoinSecret vchSecret;
-    BOOST_CHECK(vchSecret.SetString(strSecret));
+    std::string strSecret = std::string( "6KzLyjdh96x7mZ8rbCtQf2ef9TEe64hCBuGMchC5P4H5i4eTmD4" ) ;
+    CDogecoinSecret vchSecret ;
+    BOOST_CHECK( vchSecret.SetString( strSecret ) ) ;
 
     CKey key = vchSecret.GetKey();
     CPubKey pubkey = key.GetPubKey();

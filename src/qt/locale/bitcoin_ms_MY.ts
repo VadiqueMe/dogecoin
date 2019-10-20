@@ -59,12 +59,12 @@ Alihkan fail data ke dalam tab semasa</translation>
         <translation>alamat-alamat penerimaan</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Ini adalah alamat Bitcoin anda untuk pembayaran. Periksa jumlah dan alamat penerima sebelum membuat penghantaran koin sentiasa.</translation>
+        <source>These are your addresses for sending payments</source>
+        <translation>Ini adalah alamat anda untuk pembayaran</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Ini adalah alamat Bitcoin anda untuk menerima pembayaraan.  Anda disyorkan untuk menguna alamat menerima untuk setiap transaksi.</translation>
+        <source>These are your addresses for receiving payments</source>
+        <translation>Ini adalah alamat anda untuk menerima pembayaraan</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -309,10 +309,6 @@ Alihkan fail data ke dalam tab semasa</translation>
     <message>
         <source>Reindexing blocks on disk...</source>
         <translation>Reindexi blok pada cakera...</translation>
-    </message>
-    <message>
-        <source>Send coins to a Bitcoin address</source>
-        <translation>Menghantar koin kepada alamat Bitcoin</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>

@@ -247,7 +247,7 @@ bool CWallet::LoadCScript(const CScript& redeemScript)
      * these. Do not add them to the wallet and warn. */
     if (redeemScript.size() > MAX_SCRIPT_ELEMENT_SIZE)
     {
-        std::string strAddr = CBitcoinAddress(CScriptID(redeemScript)).ToString();
+        std::string strAddr = CDogecoinAddress( CScriptID( redeemScript ) ).ToString() ;
         LogPrintf("%s: Warning: This wallet contains a redeemScript of size %i which exceeds maximum size %i thus can never be redeemed. Do not use address %s.\n",
             __func__, redeemScript.size(), MAX_SCRIPT_ELEMENT_SIZE, strAddr);
         return true;
@@ -2503,13 +2503,12 @@ bool CWallet::CreateTransaction(const vector<CRecipient>& vecSend, CWalletTx& wt
                         //  backup is restored, if the backup doesn't have the new private key for the change
 
                         // Reserve a new key pair from key pool
-                        CPubKey vchPubKey;
-                        bool ret;
-                        ret = reservekey.GetReservedKey(vchPubKey);
-                        if (!ret)
+                        CPubKey vchPubKey ;
+                        bool ret = reservekey.GetReservedKey( vchPubKey ) ;
+                        if ( ! ret )
                         {
-                            strFailReason = _("Keypool ran out, please call keypoolrefill first");
-                            return false;
+                            strFailReason = "Keypool ran out, please invoke keypoolrefill" ;
+                            return false ;
                         }
 
                         scriptChange = GetScriptForDestination(vchPubKey.GetID());
@@ -2848,11 +2847,12 @@ bool CWallet::SetAddressBook(const CTxDestination& address, const string& strNam
     }
     NotifyAddressBookChanged(this, address, strName, ::IsMine(*this, address) != ISMINE_NO,
                              strPurpose, (fUpdated ? CT_UPDATED : CT_NEW) );
-    if (!fFileBacked)
-        return false;
-    if (!strPurpose.empty() && !CWalletDB(strWalletFile).WritePurpose(CBitcoinAddress(address).ToString(), strPurpose))
-        return false;
-    return CWalletDB(strWalletFile).WriteName(CBitcoinAddress(address).ToString(), strName);
+    if ( ! fFileBacked )
+        return false ;
+    if ( ! strPurpose.empty() && ! CWalletDB( strWalletFile ).WritePurpose( CDogecoinAddress( address ).ToString(), strPurpose ) )
+        return false ;
+
+    return CWalletDB( strWalletFile ).WriteName( CDogecoinAddress( address ).ToString(), strName ) ;
 }
 
 bool CWallet::DelAddressBook(const CTxDestination& address)
@@ -2863,7 +2863,7 @@ bool CWallet::DelAddressBook(const CTxDestination& address)
         if(fFileBacked)
         {
             // Delete destdata tuples associated with address
-            std::string strAddress = CBitcoinAddress(address).ToString();
+            std::string strAddress = CDogecoinAddress( address ).ToString() ;
             BOOST_FOREACH(const PAIRTYPE(string, string) &item, mapAddressBook[address].destdata)
             {
                 CWalletDB(strWalletFile).EraseDestData(strAddress, item.first);
@@ -2874,10 +2874,10 @@ bool CWallet::DelAddressBook(const CTxDestination& address)
 
     NotifyAddressBookChanged(this, address, "", ::IsMine(*this, address) != ISMINE_NO, "", CT_DELETED);
 
-    if (!fFileBacked)
-        return false;
-    CWalletDB(strWalletFile).ErasePurpose(CBitcoinAddress(address).ToString());
-    return CWalletDB(strWalletFile).EraseName(CBitcoinAddress(address).ToString());
+    if ( ! fFileBacked )
+        return false ;
+    CWalletDB( strWalletFile ).ErasePurpose( CDogecoinAddress( address ).ToString() ) ;
+    return CWalletDB( strWalletFile ).EraseName( CDogecoinAddress( address ).ToString() ) ;
 }
 
 bool CWallet::SetDefaultKey(const CPubKey &vchPubKey)
@@ -3421,18 +3421,18 @@ bool CWallet::AddDestData(const CTxDestination &dest, const std::string &key, co
         return false;
 
     mapAddressBook[dest].destdata.insert(std::make_pair(key, value));
-    if (!fFileBacked)
-        return true;
-    return CWalletDB(strWalletFile).WriteDestData(CBitcoinAddress(dest).ToString(), key, value);
+    if ( ! fFileBacked )
+        return true ;
+    return CWalletDB( strWalletFile ).WriteDestData( CDogecoinAddress( dest ).ToString(), key, value ) ;
 }
 
 bool CWallet::EraseDestData(const CTxDestination &dest, const std::string &key)
 {
-    if (!mapAddressBook[dest].destdata.erase(key))
-        return false;
-    if (!fFileBacked)
-        return true;
-    return CWalletDB(strWalletFile).EraseDestData(CBitcoinAddress(dest).ToString(), key);
+    if ( ! mapAddressBook[ dest ].destdata.erase( key ) )
+        return false ;
+    if ( ! fFileBacked )
+        return true ;
+    return CWalletDB( strWalletFile ).EraseDestData( CDogecoinAddress( dest ).ToString(), key ) ;
 }
 
 bool CWallet::LoadDestData(const CTxDestination &dest, const std::string &key, const std::string &value)

@@ -58,12 +58,12 @@
         <translation>受け取りアドレス</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>これらは支払いを送信するためのあなたの Dogecoin アドレスです。コインを送信する前に、常に額と受信アドレスを確認してください。</translation>
+        <source>These are your addresses for sending payments</source>
+        <translation>これらは支払いを送信するためのあなたのアドレスです</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>これらは支払いを受け取るためのドージコインアドレスです。トランザクションごとに新しい受け取り用アドレスを作成することが推奨されます。</translation>
+        <source>These are your addresses for receiving payments</source>
+        <translation>これらは支払いを受け取るためのあなたのアドレスです</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -682,14 +682,6 @@
         <translation>ラベル(&amp;L)</translation>
     </message>
     <message>
-        <source>The label associated with this address list entry</source>
-        <translation>このアドレス帳項目に結びつけられているラベル</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>このアドレス帳項目に結びつけられているアドレス。この項目は送金用アドレスの場合のみ編集することができます。</translation>
-    </message>
-    <message>
         <source>&amp;Address</source>
         <translation>アドレス帳 (&amp;A)</translation>
     </message>
@@ -710,12 +702,8 @@
         <translation>送信アドレスを編集</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Dogecoin address.</source>
-        <translation>入力されたアドレス "%1" は無効な Dogecoin アドレスです。</translation>
-    </message>
-    <message>
-        <source>The entered address "%1" is already in the address book.</source>
-        <translation>入力されたアドレス "%1" は既にアドレス帳にあります。</translation>
+        <source>The entered address "%1" is already in the address book</source>
+        <translation>入力されたアドレス "%1" は既にアドレス帳にあります</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -1246,8 +1234,8 @@
         <translation>支払いのアドレス「%1」は無効です</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Dogecoin address or malformed URI parameters.</source>
-        <translation>URI を解析できません! これは無効な Dogecoin アドレスあるいや不正な形式の URI パラメーターによって引き起こされる場合があります。</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid address or malformed URI parameters</source>
+        <translation>URI を解析できません! これは無効な アドレスあるいや不正な形式の URI パラメーターによって引き起こされる場合があります</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
@@ -3622,10 +3610,6 @@
     <message>
         <source>Invalid -proxy address: '%s'</source>
         <translation>無効な -proxy アドレス: '%s'</translation>
-    </message>
-    <message>
-        <source>Keypool ran out, please call keypoolrefill first</source>
-        <translation>鍵プールが枯渇しました。まずはじめに keypoolrefill を呼び出してください</translation>
     </message>
     <message>
         <source>Listen for JSON-RPC connections on &lt;port&gt; (default: %u or testnet: %u)</source>

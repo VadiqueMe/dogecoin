@@ -58,12 +58,12 @@
         <translation>收款地址</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>这些是你要付款过去的比特币地址。在付钱之前，务必要检查金额和收款地址是否正确。</translation>
+        <source>These are your addresses for sending payments</source>
+        <translation>这些是你要付款过去的地址</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>这些是你用来收款的比特币地址。建议在每次交易时，都使用一个新的收款地址。</translation>
+        <source>These are your addresses for receiving payments</source>
+        <translation>这些是你用来收款的地址</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -670,14 +670,6 @@
         <translation>标签(&amp;L)</translation>
     </message>
     <message>
-        <source>The label associated with this address list entry</source>
-        <translation>与此地址相关的标签项</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>该地址已与地址列表中的条目关联，只能被发送地址修改。</translation>
-    </message>
-    <message>
         <source>&amp;Address</source>
         <translation>地址(&amp;A)</translation>
     </message>
@@ -698,12 +690,8 @@
         <translation>编辑付款地址</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Dogecoin address.</source>
-        <translation>输入的地址 %1 并不是有效的比特币地址。</translation>
-    </message>
-    <message>
-        <source>The entered address "%1" is already in the address book.</source>
-        <translation>输入的地址 %1 已经存在地址簿。</translation>
+        <source>The entered address "%1" is already in the address book</source>
+        <translation>输入的地址 %1 已经存在地址簿</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -1232,8 +1220,8 @@
         <translation>无效的付款地址 %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Dogecoin address or malformed URI parameters.</source>
-        <translation>无法解析 URI 地址！可能是因为比特币地址无效，或是 URI 参数格式错误。</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid address or malformed URI parameters</source>
+        <translation>无法解析 URI 地址！可能是因为地址无效，或是 URI 参数格式错误</translation>
     </message>
     <message>
         <source>Payment request file handling</source>

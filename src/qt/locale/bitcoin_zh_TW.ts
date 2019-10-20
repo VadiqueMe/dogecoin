@@ -58,12 +58,12 @@
         <translation>收款位址</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>這些是你要付款過去的 Dogecoin 位址。在付錢之前，務必要檢查金額和收款位址是否正確。</translation>
+        <source>These are your addresses for sending payments</source>
+        <translation>這些是你要付款過去的位址</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>這些是你用來收款的 Dogecoin 位址。建議在每次交易時，都使用一個新的收款位址。</translation>
+        <source>These are your addresses for receiving payments</source>
+        <translation>這些是你用來收款的位址</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -682,14 +682,6 @@
         <translation>標記</translation>
     </message>
     <message>
-        <source>The label associated with this address list entry</source>
-        <translation>跟這個位址簿項目關聯的標記</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>跟這個位址簿項目關聯的位址。只有付款位址能被修改。</translation>
-    </message>
-    <message>
         <source>&amp;Address</source>
         <translation>位址</translation>
     </message>
@@ -710,12 +702,8 @@
         <translation>編輯付款位址</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Dogecoin address.</source>
-        <translation>輸入的位址 %1 並不是有效的 Dogecoin 位址。</translation>
-    </message>
-    <message>
-        <source>The entered address "%1" is already in the address book.</source>
-        <translation>輸入的位址 %1 在位址簿中已經有了。</translation>
+        <source>The entered address "%1" is already in the address book</source>
+        <translation>輸入的位址 %1 在位址簿中已經有了</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -1246,8 +1234,8 @@
         <translation>無效的付款位址 %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Dogecoin address or malformed URI parameters.</source>
-        <translation>沒辦法解析 URI 位址！可能是因為 Dogecoin 位址無效，或是 URI 參數格式錯誤。</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid address or malformed URI parameters</source>
+        <translation>沒辦法解析 URI 位址！可能是因為 位址無效，或是 URI 參數格式錯誤</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
@@ -3618,10 +3606,6 @@
     <message>
         <source>Invalid -proxy address: '%s'</source>
         <translation>無效的 -proxy 位址: '%s'</translation>
-    </message>
-    <message>
-        <source>Keypool ran out, please call keypoolrefill first</source>
-        <translation>密鑰池已經乾了，請先執行 keypoolrefill</translation>
     </message>
     <message>
         <source>Listen for JSON-RPC connections on &lt;port&gt; (default: %u or testnet: %u)</source>

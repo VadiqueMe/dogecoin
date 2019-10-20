@@ -92,29 +92,25 @@ bool EditAddressDialog::saveCurrentRow()
 
 void EditAddressDialog::accept()
 {
-    if(!model)
-        return;
+    if ( ! model ) return ;
 
-    if(!saveCurrentRow())
+    if ( ! saveCurrentRow() )
     {
-        switch(model->getEditStatus())
+        switch( model->getEditStatus() )
         {
         case AddressTableModel::OK:
-            // Failed with unknown reason. Just reject.
-            break;
+            // unknown reason, just reject
+            break ;
         case AddressTableModel::NO_CHANGES:
-            // No changes were made during edit operation. Just reject.
-            break;
+            // no changes were made during edit operation, just reject
+            break ;
         case AddressTableModel::INVALID_ADDRESS:
-            QMessageBox::warning(this, windowTitle(),
-                tr("The entered address \"%1\" is not a valid Dogecoin address.").arg(ui->addressEdit->text()),
-                QMessageBox::Ok, QMessageBox::Ok);
-            break;
+            break ;
         case AddressTableModel::DUPLICATE_ADDRESS:
-            QMessageBox::warning(this, windowTitle(),
-                tr("The entered address \"%1\" is already in the address book.").arg(ui->addressEdit->text()),
-                QMessageBox::Ok, QMessageBox::Ok);
-            break;
+            QMessageBox::warning( this, windowTitle(),
+                tr("The entered address \"%1\" is already in the address book").arg( ui->addressEdit->text() ),
+                QMessageBox::Ok, QMessageBox::Ok ) ;
+            break ;
         case AddressTableModel::WALLET_UNLOCK_FAILURE:
             QMessageBox::critical(this, windowTitle(),
                 tr("Could not unlock wallet."),

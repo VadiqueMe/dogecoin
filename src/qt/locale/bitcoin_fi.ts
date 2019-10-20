@@ -422,14 +422,6 @@
         <translation>&amp;Nimi</translation>
     </message>
     <message>
-        <source>The label associated with this address list entry</source>
-        <translation>Tähän osoitteeseen liitetty nimi</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>Osoite liitettynä tähän osoitekirjan alkioon. Tämä voidaan muokata vain lähetysosoitteissa.</translation>
-    </message>
-    <message>
         <source>&amp;Address</source>
         <translation>&amp;Osoite</translation>
     </message>

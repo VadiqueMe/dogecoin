@@ -58,12 +58,12 @@
         <translation>Adresy odbioru</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Tutaj znajdują się adresy Dogecoin na które wysyłasz płatności. Zawsze sprawdzaj ilość i adres odbiorcy przed wysyłką monet.</translation>
+        <source>These are your addresses for sending payments</source>
+        <translation>Tutaj znajdują się adresy na które wysyłasz płatności</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>To są twoje adresy Dogecoin do odbierania płatności. Zaleca się używanie nowych adresów odbiorczych dla każdej transakcji.</translation>
+        <source>These are your addresses for receiving payments</source>
+        <translation>To są twoje adresy do odbierania płatności</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -648,14 +648,6 @@
     <message>
         <source>&amp;Label</source>
         <translation>&amp;Etykieta</translation>
-    </message>
-    <message>
-        <source>The label associated with this address list entry</source>
-        <translation>Etykieta skojarzona z tym wpisem na liście adresów</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>Ten adres jest skojarzony z wpisem na liście adresów. Może być zmodyfikowany jedynie dla adresów wysyłających.</translation>
     </message>
     <message>
         <source>&amp;Address</source>

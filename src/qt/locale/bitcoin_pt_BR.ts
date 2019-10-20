@@ -58,12 +58,12 @@
         <translation>Endereços de recebimento</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Estes são os seus endereços para enviar pagamentos. Sempre cheque a quantia e o endereço do destinatário antes de enviar moedas.</translation>
+        <source>These are your addresses for sending payments</source>
+        <translation>Estes são os seus endereços para enviar pagamentos</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Estes são os seus endereços para receber pagamentos. É recomendado usar um novo para cada transação.</translation>
+        <source>These are your addresses for receiving payments</source>
+        <translation>Estes são os seus endereços para receber pagamentos</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -678,14 +678,6 @@
         <translation>&amp;Rótulo</translation>
     </message>
     <message>
-        <source>The label associated with this address list entry</source>
-        <translation>O rótulo associado a esta entrada na lista de endereços</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>O endereço associado a esta lista de endereços de entrada. Isso só pode ser modificado para o envio de endereços.</translation>
-    </message>
-    <message>
         <source>&amp;Address</source>
         <translation>&amp;Endereço</translation>
     </message>
@@ -706,12 +698,8 @@
         <translation>Editar endereço de envio</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Dogecoin address.</source>
-        <translation>O endereço digitado "%1" não é um endereço válido.</translation>
-    </message>
-    <message>
-        <source>The entered address "%1" is already in the address book.</source>
-        <translation>O endereço digitado "%1" já se encontra no catálogo de endereços.</translation>
+        <source>The entered address "%1" is already in the address book</source>
+        <translation>O endereço digitado "%1" já se encontra no catálogo de endereços</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -1242,8 +1230,8 @@
         <translation>Endereço de pagamento %1 inválido</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Dogecoin address or malformed URI parameters.</source>
-        <translation>URI não pode ser analisado! Isto pode ser causado por um endereço inválido ou parâmetros URI informados incorretamente.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid address or malformed URI parameters</source>
+        <translation>URI não pode ser analisado! Isto pode ser causado por um endereço inválido ou parâmetros URI informados incorretamente</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
@@ -3613,10 +3601,6 @@
     <message>
         <source>Invalid -proxy address: '%s'</source>
         <translation>Endereço -proxy inválido: '%s'</translation>
-    </message>
-    <message>
-        <source>Keypool ran out, please call keypoolrefill first</source>
-        <translation>Erro na Keypool, favor executar keypoolrefill primeiro</translation>
     </message>
     <message>
         <source>Listen for JSON-RPC connections on &lt;port&gt; (default: %u or testnet: %u)</source>

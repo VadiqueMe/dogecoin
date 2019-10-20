@@ -58,8 +58,12 @@
         <translation>آدرس های گیرنده</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>اینها آدرس های شما برای فرستادن پرداخت هاست. همیشه قبل از فرستادن سکه ها مقدار و آدرس دریافت کننده را چک کنید.</translation>
+        <source>These are your addresses for sending payments</source>
+        <translation>اینها آدرس های شما برای فرستادن پرداخت هاست</translation>
+    </message>
+    <message>
+        <source>These are your addresses for receiving payments</source>
+        <translation>اینها آدرسهای شما برای دریافت پرداخت هاست</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -622,12 +626,8 @@
         <translation>ویرایش آدرس قرستنده</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Dogecoin address.</source>
-        <translation>نشانی وارد شده "%1" یک نشانی معتبر بیت‌کوین نیست.</translation>
-    </message>
-    <message>
-        <source>The entered address "%1" is already in the address book.</source>
-        <translation>نشانی وارد شده «%1» در حال حاضر در دفترچه وجود دارد.</translation>
+        <source>The entered address "%1" is already in the address book</source>
+        <translation>نشانی وارد شده «%1» در حال حاضر در دفترچه وجود دارد</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>

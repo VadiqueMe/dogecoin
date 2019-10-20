@@ -58,12 +58,12 @@
         <translation>Mottagaradresser</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Detta är dina Dogecoin adresser för att skicka betalningar. Kolla alltid summan och den mottagande adressen innan du skickar Dogecoins.</translation>
+        <source>These are your addresses for sending payments</source>
+        <translation>Detta är dina adresser för att skicka betalningar</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Detta är dina Dogecoin adresser för att ta emot betalningar. Det rekommenderas att använda en ny mottagningsadress för varje transaktion.</translation>
+        <source>These are your addresses for receiving payments</source>
+        <translation>Detta är dina adresser för att ta emot betalningar</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -629,14 +629,6 @@ Var vänlig och försök igen.</translation>
     <message>
         <source>&amp;Label</source>
         <translation>&amp;Etikett</translation>
-    </message>
-    <message>
-        <source>The label associated with this address list entry</source>
-        <translation>Etiketten associerad med denna adresslistas post</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>Adressen associerad med denna adresslistas post. Detta kan bara ändras för sändningsadresser.</translation>
     </message>
     <message>
         <source>&amp;Address</source>

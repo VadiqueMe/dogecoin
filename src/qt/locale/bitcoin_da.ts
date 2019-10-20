@@ -58,12 +58,12 @@
         <translation>Modtagelsesadresser</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Disse er dine Dogecoin-adresser til afsendelse af betalinger. Tjek altid beløb og modtagelsesadresse, inden du sender dogecoins.</translation>
+        <source>These are your addresses for sending payments</source>
+        <translation>Disse er dine adresser til afsendelse af betalinger</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Dette er dine Dogecoin-adresser til modtagelse af betalinger. Det anbefales at bruge en ny modtagelsesadresse for hver transaktion.</translation>
+        <source>These are your addresses for receiving payments</source>
+        <translation>Dette er dine adresser til modtagelse af betalinger</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -682,14 +682,6 @@
         <translation>&amp;Mærkat</translation>
     </message>
     <message>
-        <source>The label associated with this address list entry</source>
-        <translation>Mærkatet, der er associeret med denne indgang i adresselisten</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>Adressen, der er associeret med denne indgang i adresselisten. Denne kan kune ændres for afsendelsesadresser.</translation>
-    </message>
-    <message>
         <source>&amp;Address</source>
         <translation>&amp;Adresse</translation>
     </message>
@@ -710,12 +702,8 @@
         <translation>Redigér afsendelsesadresse</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Dogecoin address.</source>
-        <translation>Den indtastede adresse “%1” er ikke en gyldig Dogecoin-adresse.</translation>
-    </message>
-    <message>
-        <source>The entered address "%1" is already in the address book.</source>
-        <translation>Den indtastede adresse “%1” er allerede i adressebogen.</translation>
+        <source>The entered address "%1" is already in the address book</source>
+        <translation>Den indtastede adresse “%1” er allerede i adressebogen</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -1246,8 +1234,8 @@
         <translation>Ugyldig betalingsadresse %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Dogecoin address or malformed URI parameters.</source>
-        <translation>URI kan ikke tolkes! Dette kan skyldes en ugyldig Dogecoin-adresse eller forkert udformede URL-parametre.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid address or malformed URI parameters</source>
+        <translation>URI kan ikke tolkes! Dette kan skyldes en ugyldig adresse eller forkert udformede URL-parametre</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
@@ -3621,10 +3609,6 @@
     <message>
         <source>Invalid -proxy address: '%s'</source>
         <translation>Ugyldig -proxy adresse: “%s”</translation>
-    </message>
-    <message>
-        <source>Keypool ran out, please call keypoolrefill first</source>
-        <translation>Nøglepulje løb tør; kald venligst keypoolrefill først</translation>
     </message>
     <message>
         <source>Listen for JSON-RPC connections on &lt;port&gt; (default: %u or testnet: %u)</source>

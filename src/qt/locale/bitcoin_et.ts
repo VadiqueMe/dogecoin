@@ -58,12 +58,12 @@
         <translation>Vastuvõtvad aadressid</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Need on sinu Dogecoin aadressid maksete saatmiseks. Ennem müntide saatmist kontrolli alati summat ja makse saaja aadressi.</translation>
+        <source>These are your addresses for sending payments</source>
+        <translation>Need on sinu aadressid maksete saatmiseks</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Need on sinu Dogecoin aadressid sisenevate maksete vastu võtmiseks. Soovitav on iga tehingu tarbeks kasutada uut aadressi.</translation>
+        <source>These are your addresses for receiving payments</source>
+        <translation>Need on sinu aadressid sisenevate maksete vastu võtmiseks</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -598,12 +598,8 @@
         <translation>Muuda saatvat aadressi</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Dogecoin address.</source>
-        <translation>Sisestatud aadress "%1" ei ole korrektne Dogecoin aadress.</translation>
-    </message>
-    <message>
-        <source>The entered address "%1" is already in the address book.</source>
-        <translation>Sisestatud aadress "%1" on juba aadressi raamatus.</translation>
+        <source>The entered address "%1" is already in the address book</source>
+        <translation>Sisestatud aadress "%1" on juba aadressi raamatus</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>

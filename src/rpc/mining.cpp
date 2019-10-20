@@ -49,7 +49,7 @@ UniValue GetNetworkHashPS(int lookup, int height) {
     // If lookup is -1, then use blocks since last difficulty change.
     if (lookup <= 0)
         lookup = pb->nHeight % Params().GetConsensus(pb->nHeight).DifficultyAdjustmentInterval() + 1;
-    // 
+    //
 
     // If lookup is larger than chain, then set it to chain length.
     if (lookup > pb->nHeight)
@@ -241,13 +241,13 @@ UniValue generate( const JSONRPCRequest& request )
     std::shared_ptr< CReserveScript > coinbaseScript ;
     GetMainSignals().ScriptForMining( coinbaseScript ) ;
 
-    // If the keypool is exhausted, no script is returned at all.  Catch this.
-    if (!coinbaseScript)
-        throw JSONRPCError(RPC_WALLET_KEYPOOL_RAN_OUT, "Error: Keypool ran out, please call keypoolrefill first");
+    // If no script is returned at all, the keypool is exhausted
+    if ( ! coinbaseScript )
+        throw JSONRPCError( RPC_WALLET_KEYPOOL_RAN_OUT, "Keypool ran out, please invoke keypoolrefill" ) ;
 
     //throw an error if no script was provided
-    if (coinbaseScript->reserveScript.empty())
-        throw JSONRPCError(RPC_INTERNAL_ERROR, "No coinbase script available (mining requires a wallet)");
+    if ( coinbaseScript->reserveScript.empty() )
+        throw JSONRPCError( RPC_INTERNAL_ERROR, "No coinbase script available (mining requires a wallet)" ) ;
 
     return generateBlocks(coinbaseScript, nGenerate, nMaxTries, true);
 }
@@ -275,10 +275,10 @@ UniValue generatetoaddress(const JSONRPCRequest& request)
         nMaxTries = request.params[2].get_int();
     }
 
-    CBitcoinAddress address(request.params[1].get_str());
+    CDogecoinAddress address( request.params[ 1 ].get_str() ) ;
     if (!address.IsValid())
         throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Error: Invalid address");
-    
+
     std::shared_ptr< CReserveScript > coinbaseScript( new CReserveScript() ) ;
     coinbaseScript->reserveScript = GetScriptForDestination( address.Get() ) ;
 
@@ -904,23 +904,22 @@ UniValue getauxblockbip22(const JSONRPCRequest& request)
     std::shared_ptr< CReserveScript > coinbaseScript ;
     GetMainSignals().ScriptForMining( coinbaseScript ) ;
 
-    // If the keypool is exhausted, no script is returned at all.  Catch this.
-    if (!coinbaseScript)
-        throw JSONRPCError(RPC_WALLET_KEYPOOL_RAN_OUT, "Error: Keypool ran out, please call keypoolrefill first");
+    // If the keypool is exhausted, no script is returned at all
+    if ( ! coinbaseScript )
+        throw JSONRPCError( RPC_WALLET_KEYPOOL_RAN_OUT, "Keypool ran out, please invoke keypoolrefill" ) ;
 
     //throw an error if no script was provided
-    if (!coinbaseScript->reserveScript.size())
-        throw JSONRPCError(RPC_INTERNAL_ERROR, "No coinbase script available (mining requires a wallet)");
+    if ( ! coinbaseScript->reserveScript.size())
+        throw JSONRPCError( RPC_INTERNAL_ERROR, "No coinbase script available (mining requires a wallet)" ) ;
 
-    if(!g_connman)
-        throw JSONRPCError(RPC_CLIENT_P2P_DISABLED, "Error: Peer-to-peer functionality missing or disabled");
+    if ( ! g_connman )
+        throw JSONRPCError( RPC_CLIENT_P2P_DISABLED, "Peer-to-peer functionality is missing or disabled" ) ;
 
-    if (g_connman->GetNodeCount(CConnman::CONNECTIONS_ALL) == 0 && !Params().MineBlocksOnDemand())
-        throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "Dogecoin is not connected!");
+    if ( ! g_connman->hasConnectedNodes() && ! Params().MineBlocksOnDemand() )
+        throw JSONRPCError( RPC_CLIENT_NOT_CONNECTED, "Dogecoin is not connected!" ) ;
 
-    if (IsInitialBlockDownload() && !Params().MineBlocksOnDemand())
-        throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD,
-                           "Dogecoin is downloading blocks...");
+    if ( IsInitialBlockDownload() && ! Params().MineBlocksOnDemand() )
+        throw JSONRPCError( RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Dogecoin is downloading blocks..." ) ;
 
     /* This should never fail, since the chain is already
        past the point of merge-mining start.  Check nevertheless.  */

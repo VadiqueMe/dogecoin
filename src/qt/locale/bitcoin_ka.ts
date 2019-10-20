@@ -336,14 +336,6 @@
         <translation>ნიშნუ&amp;ლი</translation>
     </message>
     <message>
-        <source>The label associated with this address list entry</source>
-        <translation>მისამართების სიის ამ ჩანაწერთან ასოცირებული ნიშნული</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>მისამართების სიის ამ ჩანაწერთან მისამართი ასოცირებული. მისი შეცვლა შეიძლება მხოლოდ გაგზავნის მისამართის შემთხვევაში.</translation>
-    </message>
-    <message>
         <source>&amp;Address</source>
         <translation>მის&amp;ამართი</translation>
     </message>

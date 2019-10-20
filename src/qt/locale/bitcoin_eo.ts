@@ -58,12 +58,12 @@
         <translation>Ricevaj adresoj</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Jen viaj Bitmon-adresoj por sendi pagojn. Zorge kontrolu la sumon kaj la alsendan adreson antaŭ ol sendi.</translation>
+        <source>These are your addresses for sending payments</source>
+        <translation>Jen viaj adresoj por sendi pagojn. Zorge kontrolu la sumon kaj la alsendan adreson antaŭ ol sendi.</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Jen viaj bitmonaj adresoj por ricevi pagojn. Estas konsilinde uzi apartan ricevan adreson por ĉiu transakcio.</translation>
+        <source>These are your addresses for receiving payments</source>
+        <translation>Jen viaj adresoj por ricevi pagojn. Estas konsilinde uzi apartan ricevan adreson por ĉiu transakcio.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -444,14 +444,6 @@
     <message>
         <source>&amp;Label</source>
         <translation>&amp;Etikedo</translation>
-    </message>
-    <message>
-        <source>The label associated with this address list entry</source>
-        <translation>La etikedo ligita al tiu ĉi adreslistero</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>La adreso ligita al tiu ĉi adreslistero. Eblas modifi tion nur por sendaj adresoj.</translation>
     </message>
     <message>
         <source>&amp;Address</source>

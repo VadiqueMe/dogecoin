@@ -454,14 +454,6 @@
         <translation>&amp;Мітка</translation>
     </message>
     <message>
-        <source>The label associated with this address list entry</source>
-        <translation>Мітка, пов'язана з цим записом списку адрес</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>Адреса, пов'язана з цим записом списку адрес. Це поле може бути модифіковане лише для адрес відправлення.</translation>
-    </message>
-    <message>
         <source>&amp;Address</source>
         <translation>&amp;Адреса</translation>
     </message>

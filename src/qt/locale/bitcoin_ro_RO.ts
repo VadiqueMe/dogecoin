@@ -394,14 +394,6 @@
         <translation>&amp;Etichetă</translation>
     </message>
     <message>
-        <source>The label associated with this address list entry</source>
-        <translation>Eticheta asociată cu această intrare din listă.</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>Adresa asociată cu această adresă din listă. Aceasta poate fi modificată doar pentru adresele de trimitere.</translation>
-    </message>
-    <message>
         <source>&amp;Address</source>
         <translation>&amp;Adresă</translation>
     </message>

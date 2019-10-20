@@ -58,12 +58,12 @@
         <translation>Alamat-alamat penerima</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Ini adalah alamat- alamat Bitcoin Anda untuk mengirimkan pembayaran. Selalu periksa jumlah dan alamat penerima sebelum mengirimkan koin.</translation>
+        <source>These are your addresses for sending payments</source>
+        <translation>Ini adalah alamat- alamat anda untuk mengirimkan pembayaran</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Ini adalah alamat- alamat Bitcoin Anda untuk menerima pembayaran. Dianjurkan untuk menggunakan alamat penerima yang baru setiap melakukan transaksi.</translation>
+        <source>These are your addresses for receiving payments</source>
+        <translation>Ini adalah alamat- alamat anda untuk menerima pembayaran</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -608,14 +608,6 @@
     <message>
         <source>&amp;Label</source>
         <translation>&amp;Label</translation>
-    </message>
-    <message>
-        <source>The label associated with this address list entry</source>
-        <translation>Label yang terkait dengan daftar alamat</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>Alamat yang terkait dengan daftar alamat. Hanya dapat diubah untuk alamat pengirim.</translation>
     </message>
     <message>
         <source>&amp;Address</source>

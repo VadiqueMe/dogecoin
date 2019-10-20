@@ -135,25 +135,25 @@ UniValue getnewaddress(const JSONRPCRequest& request)
         pwalletMain->TopUpKeyPool();
 
     // Generate a new key that is added to wallet
-    CPubKey newKey;
-    if (!pwalletMain->GetKeyFromPool(newKey))
-        throw JSONRPCError(RPC_WALLET_KEYPOOL_RAN_OUT, "Error: Keypool ran out, please call keypoolrefill first");
+    CPubKey newKey ;
+    if ( ! pwalletMain->GetKeyFromPool( newKey ) )
+        throw JSONRPCError( RPC_WALLET_KEYPOOL_RAN_OUT, "Keypool ran out, please invoke keypoolrefill" ) ;
     CKeyID keyID = newKey.GetID();
 
     pwalletMain->SetAddressBook(keyID, strAccount, "receive");
 
-    return CBitcoinAddress(keyID).ToString();
+    return CDogecoinAddress( keyID ).ToString() ;
 }
 
 
-CBitcoinAddress GetAccountAddress(string strAccount, bool bForceNew=false)
+CDogecoinAddress GetAccountAddress(string strAccount, bool bForceNew=false)
 {
-    CPubKey pubKey;
-    if (!pwalletMain->GetAccountPubkey(pubKey, strAccount, bForceNew)) {
-        throw JSONRPCError(RPC_WALLET_KEYPOOL_RAN_OUT, "Error: Keypool ran out, please call keypoolrefill first");
+    CPubKey pubKey ;
+    if ( ! pwalletMain->GetAccountPubkey( pubKey, strAccount, bForceNew ) ) {
+        throw JSONRPCError( RPC_WALLET_KEYPOOL_RAN_OUT, "Keypool ran out, please invoke keypoolrefill" ) ;
     }
 
-    return CBitcoinAddress(pubKey.GetID());
+    return CDogecoinAddress( pubKey.GetID() ) ;
 }
 
 UniValue getaccountaddress(const JSONRPCRequest& request)
@@ -210,16 +210,16 @@ UniValue getrawchangeaddress(const JSONRPCRequest& request)
     if (!pwalletMain->IsLocked())
         pwalletMain->TopUpKeyPool();
 
-    CReserveKey reservekey(pwalletMain);
-    CPubKey vchPubKey;
-    if (!reservekey.GetReservedKey(vchPubKey))
-        throw JSONRPCError(RPC_WALLET_KEYPOOL_RAN_OUT, "Error: Keypool ran out, please call keypoolrefill first");
+    CReserveKey reservekey( pwalletMain ) ;
+    CPubKey vchPubKey ;
+    if ( ! reservekey.GetReservedKey( vchPubKey ) )
+        throw JSONRPCError( RPC_WALLET_KEYPOOL_RAN_OUT, "Keypool ran out, please invoke keypoolrefill" ) ;
 
     reservekey.KeepKey();
 
     CKeyID keyID = vchPubKey.GetID();
 
-    return CBitcoinAddress(keyID).ToString();
+    return CDogecoinAddress( keyID ).ToString() ;
 }
 
 
@@ -242,9 +242,9 @@ UniValue setaccount(const JSONRPCRequest& request)
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
-    CBitcoinAddress address(request.params[0].get_str());
-    if (!address.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Dogecoin address");
+    CDogecoinAddress address( request.params[ 0 ].get_str() ) ;
+    if ( ! address.IsValid() )
+        throw JSONRPCError( RPC_INVALID_ADDRESS_OR_KEY, "Invalid Dogecoin address" ) ;
 
     string strAccount;
     if (request.params.size() > 1)
@@ -289,9 +289,9 @@ UniValue getaccount(const JSONRPCRequest& request)
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
-    CBitcoinAddress address(request.params[0].get_str());
-    if (!address.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Dogecoin address");
+    CDogecoinAddress address( request.params[ 0 ].get_str() ) ;
+    if ( ! address.IsValid() )
+        throw JSONRPCError( RPC_INVALID_ADDRESS_OR_KEY, "Invalid Dogecoin address" ) ;
 
     string strAccount;
     map<CTxDestination, CAddressBookData>::iterator mi = pwalletMain->mapAddressBook.find(address.Get());
@@ -328,12 +328,12 @@ UniValue getaddressesbyaccount(const JSONRPCRequest& request)
 
     // Find all addresses that have the given account
     UniValue ret(UniValue::VARR);
-    BOOST_FOREACH(const PAIRTYPE(CBitcoinAddress, CAddressBookData)& item, pwalletMain->mapAddressBook)
+    BOOST_FOREACH(const PAIRTYPE(CDogecoinAddress, CAddressBookData)& item, pwalletMain->mapAddressBook)
     {
-        const CBitcoinAddress& address = item.first;
-        const string& strName = item.second.name;
-        if (strName == strAccount)
-            ret.push_back(address.ToString());
+        const CDogecoinAddress & address = item.first ;
+        const string & strName = item.second.name ;
+        if ( strName == strAccount )
+            ret.push_back( address.ToString() ) ;
     }
     return ret;
 }
@@ -352,8 +352,8 @@ static void SendMoney(const CTxDestination &address, CAmount nValue, bool fSubtr
     if (pwalletMain->GetBroadcastTransactions() && !g_connman)
         throw JSONRPCError(RPC_CLIENT_P2P_DISABLED, "Error: Peer-to-peer functionality missing or disabled");
 
-    // Parse Bitcoin address
-    CScript scriptPubKey = GetScriptForDestination(address);
+    // Parse Dogecoin address
+    CScript scriptPubKey = GetScriptForDestination( address ) ;
 
     // Create and send the transaction
     CReserveKey reservekey(pwalletMain);
@@ -406,9 +406,9 @@ UniValue sendtoaddress(const JSONRPCRequest& request)
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
-    CBitcoinAddress address(request.params[0].get_str());
-    if (!address.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Dogecoin address");
+    CDogecoinAddress address( request.params[ 0 ].get_str() ) ;
+    if ( ! address.IsValid() )
+        throw JSONRPCError( RPC_INVALID_ADDRESS_OR_KEY, "Invalid Dogecoin address" ) ;
 
     // Amount
     CAmount nAmount = AmountFromValue(request.params[1]);
@@ -471,11 +471,11 @@ UniValue listaddressgroupings(const JSONRPCRequest& request)
         BOOST_FOREACH(CTxDestination address, grouping)
         {
             UniValue addressInfo(UniValue::VARR);
-            addressInfo.push_back(CBitcoinAddress(address).ToString());
-            addressInfo.push_back(ValueFromAmount(balances[address]));
+            addressInfo.push_back( CDogecoinAddress( address ).ToString() ) ;
+            addressInfo.push_back( ValueFromAmount( balances[ address ] ) ) ;
             {
-                if (pwalletMain->mapAddressBook.find(CBitcoinAddress(address).Get()) != pwalletMain->mapAddressBook.end())
-                    addressInfo.push_back(pwalletMain->mapAddressBook.find(CBitcoinAddress(address).Get())->second.name);
+                if ( pwalletMain->mapAddressBook.find( CDogecoinAddress( address ).Get() ) != pwalletMain->mapAddressBook.end() )
+                    addressInfo.push_back( pwalletMain->mapAddressBook.find( CDogecoinAddress( address ).Get() )->second.name ) ;
             }
             jsonGrouping.push_back(addressInfo);
         }
@@ -517,9 +517,9 @@ UniValue signmessage(const JSONRPCRequest& request)
     string strAddress = request.params[0].get_str();
     string strMessage = request.params[1].get_str();
 
-    CBitcoinAddress addr(strAddress);
-    if (!addr.IsValid())
-        throw JSONRPCError(RPC_TYPE_ERROR, "Invalid address");
+    CDogecoinAddress addr( strAddress ) ;
+    if ( ! addr.IsValid() )
+        throw JSONRPCError( RPC_TYPE_ERROR, "Invalid address" ) ;
 
     CKeyID keyID;
     if (!addr.GetKeyID(keyID))
@@ -567,10 +567,10 @@ UniValue getreceivedbyaddress(const JSONRPCRequest& request)
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
-    // Bitcoin address
-    CBitcoinAddress address = CBitcoinAddress(request.params[0].get_str());
-    if (!address.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Dogecoin address");
+    // Dogecoin address
+    CDogecoinAddress address = CDogecoinAddress( request.params[ 0 ].get_str() ) ;
+    if ( ! address.IsValid() )
+        throw JSONRPCError( RPC_INVALID_ADDRESS_OR_KEY, "Invalid Dogecoin address" ) ;
     CScript scriptPubKey = GetScriptForDestination(address.Get());
     if (!IsMine(*pwalletMain, scriptPubKey))
         return ValueFromAmount(0);
@@ -844,9 +844,9 @@ UniValue sendfrom(const JSONRPCRequest& request)
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
     string strAccount = AccountFromValue(request.params[0]);
-    CBitcoinAddress address(request.params[1].get_str());
-    if (!address.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Dogecoin address");
+    CDogecoinAddress address( request.params[ 1 ].get_str() ) ;
+    if ( ! address.IsValid() )
+        throw JSONRPCError( RPC_INVALID_ADDRESS_OR_KEY, "Invalid Dogecoin address" ) ;
     CAmount nAmount = AmountFromValue(request.params[2]);
     if (nAmount <= 0)
         throw JSONRPCError(RPC_TYPE_ERROR, "Invalid amount for send");
@@ -935,20 +935,20 @@ UniValue sendmany(const JSONRPCRequest& request)
     if (request.params.size() > 4)
         subtractFeeFromAmount = request.params[4].get_array();
 
-    set<CBitcoinAddress> setAddress;
-    vector<CRecipient> vecSend;
+    std::set< CDogecoinAddress > setAddress ;
+    std::vector< CRecipient > vecSend ;
 
     CAmount totalAmount = 0;
     vector<string> keys = sendTo.getKeys();
     BOOST_FOREACH(const string& name_, keys)
     {
-        CBitcoinAddress address(name_);
-        if (!address.IsValid())
-            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, string("Invalid Dogecoin address: ")+name_);
+        CDogecoinAddress address( name_ ) ;
+        if ( ! address.IsValid() )
+            throw JSONRPCError( RPC_INVALID_ADDRESS_OR_KEY, string( "Invalid Dogecoin address: " ) + name_ ) ;
 
-        if (setAddress.count(address))
-            throw JSONRPCError(RPC_INVALID_PARAMETER, string("Invalid parameter, duplicated address: ")+name_);
-        setAddress.insert(address);
+        if ( setAddress.count( address ) )
+            throw JSONRPCError( RPC_INVALID_PARAMETER, string( "Invalid parameter, duplicated address: " ) + name_ ) ;
+        setAddress.insert( address ) ;
 
         CScript scriptPubKey = GetScriptForDestination(address.Get());
         CAmount nAmount = AmountFromValue(sendTo[name_]);
@@ -1039,7 +1039,7 @@ UniValue addmultisigaddress(const JSONRPCRequest& request)
     pwalletMain->AddCScript(inner);
 
     pwalletMain->SetAddressBook(innerID, strAccount, "send");
-    return CBitcoinAddress(innerID).ToString();
+    return CDogecoinAddress( innerID ).ToString() ;
 }
 
 class Witnessifier : public boost::static_visitor<bool>
@@ -1115,9 +1115,9 @@ UniValue addwitnessaddress(const JSONRPCRequest& request)
         }
     }
 
-    CBitcoinAddress address(request.params[0].get_str());
-    if (!address.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Bitcoin address");
+    CDogecoinAddress address( request.params[ 0 ].get_str() ) ;
+    if ( ! address.IsValid() )
+        throw JSONRPCError( RPC_INVALID_ADDRESS_OR_KEY, "Invalid Dogecoin address" ) ;
 
     Witnessifier w;
     CTxDestination dest = address.Get();
@@ -1128,7 +1128,7 @@ UniValue addwitnessaddress(const JSONRPCRequest& request)
 
     pwalletMain->SetAddressBook(w.result, "", "receive");
 
-    return CBitcoinAddress(w.result).ToString();
+    return CDogecoinAddress( w.result ).ToString() ;
 }
 
 struct tallyitem
@@ -1163,8 +1163,9 @@ UniValue ListReceived(const UniValue& params, bool fByAccounts)
             filter = filter | ISMINE_WATCH_ONLY;
 
     // Tally
-    map<CBitcoinAddress, tallyitem> mapTally;
-    for (map<uint256, CWalletTx>::iterator it = pwalletMain->mapWallet.begin(); it != pwalletMain->mapWallet.end(); ++it)
+    std::map< CDogecoinAddress, tallyitem > mapTally ;
+    for ( std::map< uint256, CWalletTx >::iterator it = pwalletMain->mapWallet.begin() ;
+            it != pwalletMain->mapWallet.end() ; ++ it )
     {
         const CWalletTx& wtx = (*it).second;
 
@@ -1195,15 +1196,15 @@ UniValue ListReceived(const UniValue& params, bool fByAccounts)
     }
 
     // Reply
-    UniValue ret(UniValue::VARR);
-    map<string, tallyitem> mapAccountTally;
-    BOOST_FOREACH(const PAIRTYPE(CBitcoinAddress, CAddressBookData)& item, pwalletMain->mapAddressBook)
+    UniValue ret( UniValue::VARR ) ;
+    std::map< string, tallyitem > mapAccountTally ;
+    BOOST_FOREACH( const PAIRTYPE( CDogecoinAddress, CAddressBookData ) & item, pwalletMain->mapAddressBook )
     {
-        const CBitcoinAddress& address = item.first;
-        const string& strAccount = item.second.name;
-        map<CBitcoinAddress, tallyitem>::iterator it = mapTally.find(address);
-        if (it == mapTally.end() && !fIncludeEmpty)
-            continue;
+        const CDogecoinAddress & address = item.first ;
+        const string & strAccount = item.second.name ;
+        std::map< CDogecoinAddress, tallyitem >::iterator it = mapTally.find( address ) ;
+        if ( it == mapTally.end() && ! fIncludeEmpty )
+            continue ;
 
         CAmount nAmount = 0;
         int nConf = std::numeric_limits<int>::max();
@@ -1346,8 +1347,8 @@ UniValue listreceivedbyaccount(const JSONRPCRequest& request)
 
 static void MaybePushAddress(UniValue & entry, const CTxDestination &dest)
 {
-    CBitcoinAddress addr;
-    if (addr.Set(dest))
+    CDogecoinAddress addr ;
+    if ( addr.Set( dest ) )
         entry.push_back(Pair("address", addr.ToString()));
 }
 
@@ -1903,12 +1904,12 @@ UniValue backupwallet(const JSONRPCRequest& request)
 }
 
 
-UniValue keypoolrefill(const JSONRPCRequest& request)
+UniValue keypoolrefill( const JSONRPCRequest & request )
 {
-    if (!EnsureWalletIsAvailable(request.fHelp))
-        return NullUniValue;
+    if ( ! EnsureWalletIsAvailable( request.fHelp ) )
+        return NullUniValue ;
 
-    if (request.fHelp || request.params.size() > 1)
+    if ( request.fHelp || request.params.size() > 1 )
         throw runtime_error(
             "keypoolrefill ( newsize )\n"
             "\nFills the keypool."
@@ -1926,7 +1927,7 @@ UniValue keypoolrefill(const JSONRPCRequest& request)
     unsigned int kpSize = 0;
     if (request.params.size() > 0) {
         if (request.params[0].get_int() < 0)
-            throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, expected valid size.");
+            throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, expected valid size");
         kpSize = (unsigned int)request.params[0].get_int();
     }
 
@@ -1934,9 +1935,9 @@ UniValue keypoolrefill(const JSONRPCRequest& request)
     pwalletMain->TopUpKeyPool(kpSize);
 
     if (pwalletMain->GetKeyPoolSize() < kpSize)
-        throw JSONRPCError(RPC_WALLET_ERROR, "Error refreshing keypool.");
+        throw JSONRPCError(RPC_WALLET_ERROR, "Error refreshing keypool");
 
-    return NullUniValue;
+    return NullUniValue ;
 }
 
 
@@ -2446,18 +2447,18 @@ UniValue listunspent(const JSONRPCRequest& request)
         nMaxDepth = request.params[1].get_int();
     }
 
-    set<CBitcoinAddress> setAddress;
+    std::set< CDogecoinAddress > setAddress ;
     if (request.params.size() > 2 && !request.params[2].isNull()) {
         RPCTypeCheckArgument(request.params[2], UniValue::VARR);
         UniValue inputs = request.params[2].get_array();
         for (unsigned int idx = 0; idx < inputs.size(); idx++) {
             const UniValue& input = inputs[idx];
-            CBitcoinAddress address(input.get_str());
-            if (!address.IsValid())
-                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, string("Invalid Dogecoin address: ")+input.get_str());
-            if (setAddress.count(address))
-                throw JSONRPCError(RPC_INVALID_PARAMETER, string("Invalid parameter, duplicated address: ")+input.get_str());
-           setAddress.insert(address);
+            CDogecoinAddress address( input.get_str() ) ;
+            if ( ! address.IsValid() )
+                throw JSONRPCError( RPC_INVALID_ADDRESS_OR_KEY, string( "Invalid Dogecoin address: " ) + input.get_str() ) ;
+            if ( setAddress.count( address ) )
+                throw JSONRPCError( RPC_INVALID_PARAMETER, string( "Invalid parameter, duplicated address: " ) + input.get_str() ) ;
+           setAddress.insert( address ) ;
         }
     }
 
@@ -2488,7 +2489,7 @@ UniValue listunspent(const JSONRPCRequest& request)
         entry.push_back(Pair("vout", out.i));
 
         if (fValidAddress) {
-            entry.push_back(Pair("address", CBitcoinAddress(address).ToString()));
+            entry.push_back( Pair( "address", CDogecoinAddress( address ).ToString() ) ) ;
 
             if (pwalletMain->mapAddressBook.count(address))
                 entry.push_back(Pair("account", pwalletMain->mapAddressBook[address].name));
@@ -2599,13 +2600,13 @@ UniValue fundrawtransaction(const JSONRPCRequest& request)
             },
             true, true);
 
-        if (options.exists("changeAddress")) {
-            CBitcoinAddress address(options["changeAddress"].get_str());
+        if ( options.exists( "changeAddress" ) ) {
+            CDogecoinAddress address( options[ "changeAddress" ].get_str() ) ;
 
-            if (!address.IsValid())
-                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "changeAddress must be a valid dogecoin address");
+            if ( ! address.IsValid() )
+                throw JSONRPCError( RPC_INVALID_ADDRESS_OR_KEY, "changeAddress must be a valid dogecoin address" ) ;
 
-            changeAddress = address.Get();
+            changeAddress = address.Get() ;
         }
 
         if (options.exists("changePosition"))

@@ -639,19 +639,20 @@ void CoinControlDialog::updateView()
             itemOutput->setCheckState(COLUMN_CHECKBOX,Qt::Unchecked);
 
             // address
-            CTxDestination outputAddress;
-            QString sAddress = "";
-            if(ExtractDestination(out.tx->tx->vout[out.i].scriptPubKey, outputAddress))
+            CTxDestination outputAddress ;
+            QString sAddress = "" ;
+            if ( ExtractDestination( out.tx->tx->vout[ out.i ].scriptPubKey, outputAddress ) )
             {
-                sAddress = QString::fromStdString(CBitcoinAddress(outputAddress).ToString());
+                sAddress = QString::fromStdString( CDogecoinAddress( outputAddress ).ToString() ) ;
 
-                // if listMode or change => show bitcoin address. In tree mode, address is not shown again for direct wallet address outputs
-                if (!treeMode || (!(sAddress == sWalletAddress)))
-                    itemOutput->setText(COLUMN_ADDRESS, sAddress);
+                // if listMode or change => show dogecoin address
+                // in tree mode, address is not shown again for direct wallet address outputs
+                if ( ! treeMode || sAddress != sWalletAddress )
+                    itemOutput->setText( COLUMN_ADDRESS, sAddress ) ;
             }
 
             // label
-            if (!(sAddress == sWalletAddress)) // change
+            if ( sAddress != sWalletAddress ) // change
             {
                 // tooltip from where the change comes from
                 itemOutput->setToolTip(COLUMN_LABEL, tr("change from %1 (%2)").arg(sWalletLabel).arg(sWalletAddress));

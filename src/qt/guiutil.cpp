@@ -4,7 +4,7 @@
 
 #include "guiutil.h"
 
-#include "bitcoinaddressvalidator.h"
+#include "coinaddressvalidator.h"
 #include "bitcoinunits.h"
 #include "qvalidatedlineedit.h"
 #include "walletmodel.h"
@@ -114,7 +114,7 @@ static std::string DummyAddress( const CChainParams & params )
     sourcedata.insert( sourcedata.end(), dummydata, dummydata + sizeof( dummydata ) ) ;
     for ( int i = 0 ; i < 0x100 ; ++i ) { // try every trailing byte
         std::string s = EncodeBase58( sourcedata.data(), sourcedata.data() + sourcedata.size() ) ;
-        if ( ! CBitcoinAddress(s).IsValid() )
+        if ( ! CDogecoinAddress( s ).IsValid() )
             return s ;
         sourcedata[ sourcedata.size() - 1 ] += 1 ;
     }
@@ -133,8 +133,8 @@ void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent)
         QString::fromStdString( DummyAddress( Params() ) )
     ) ) ;
 #endif
-    widget->setValidator(new BitcoinAddressEntryValidator(parent));
-    widget->setCheckValidator(new BitcoinAddressCheckValidator(parent));
+    widget->setValidator( new CoinAddressEntryValidator( parent ) ) ;
+    widget->setCheckValidator( new CoinAddressCheckValidator( parent ) ) ;
 }
 
 void setupAmountWidget(QLineEdit *widget, QWidget *parent)
@@ -984,7 +984,7 @@ void ClickableLabel::mouseReleaseEvent(QMouseEvent *event)
 {
     Q_EMIT clicked(event->pos());
 }
-    
+
 void ClickableProgressBar::mouseReleaseEvent(QMouseEvent *event)
 {
     Q_EMIT clicked(event->pos());

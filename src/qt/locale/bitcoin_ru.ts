@@ -58,12 +58,12 @@
         <translation>Адреса получения</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Это ваши адреса Dogecoin для отправки платежей. Всегда проверяйте сумму и адрес получателя перед отправкой перевода.</translation>
+        <source>These are your addresses for sending payments</source>
+        <translation>Это ваши адреса для отправки платежей</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Это ваши адреса Dogecoin для приёма платежей. Рекомендуется использовать новый адрес получения для каждой транзакции.</translation>
+        <source>These are your addresses for receiving payments</source>
+        <translation>Это ваши адреса для приёма платежей</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -682,14 +682,6 @@
         <translation>&amp;Метка</translation>
     </message>
     <message>
-        <source>The label associated with this address list entry</source>
-        <translation>Метка, связанная с этой записью списка адресов</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>Адрес, связанный с этой записью списка адресов. Он может быть изменён только для адресов отправки.</translation>
-    </message>
-    <message>
         <source>&amp;Address</source>
         <translation>&amp;Адрес</translation>
     </message>
@@ -710,12 +702,8 @@
         <translation>Изменить адрес отправки</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Dogecoin address.</source>
-        <translation>Введённый адрес "%1" не является правильным Dogecoin-адресом.</translation>
-    </message>
-    <message>
-        <source>The entered address "%1" is already in the address book.</source>
-        <translation>Введённый адрес "%1" уже находится в адресной книге.</translation>
+        <source>The entered address "%1" is already in the address book</source>
+        <translation>Введённый адрес "%1" уже есть в адресной книге</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -1246,8 +1234,8 @@
         <translation>Неверный адрес платежа %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Dogecoin address or malformed URI parameters.</source>
-        <translation>Не удалось обработать URI! Это может быть связано с неверным адресом Dogecoin или неправильными параметрами URI.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid address or malformed URI parameters</source>
+        <translation>Не удалось обработать URI! Это может быть связано с неверным адресом или неправильными параметрами URI</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
@@ -3617,10 +3605,6 @@
     <message>
         <source>Invalid -proxy address: '%s'</source>
         <translation>Неверный адрес -proxy: '%s'</translation>
-    </message>
-    <message>
-        <source>Keypool ran out, please call keypoolrefill first</source>
-        <translation>Пул ключей опустел, пожалуйста, выполните keypoolrefill</translation>
     </message>
     <message>
         <source>Listen for JSON-RPC connections on &lt;port&gt; (default: %u or testnet: %u)</source>

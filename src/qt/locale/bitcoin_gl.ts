@@ -320,14 +320,6 @@
         <translation>&amp;Etiqueta</translation>
     </message>
     <message>
-        <source>The label associated with this address list entry</source>
-        <translation>A etiqueta asociada con esta entrada da listaxe de direccións</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>A dirección asociada con esta entrada na listaxe de dirección. Esta so pode ser modificada por direccións para enviar.</translation>
-    </message>
-    <message>
         <source>&amp;Address</source>
         <translation>&amp;Dirección</translation>
     </message>

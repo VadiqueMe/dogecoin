@@ -37,12 +37,11 @@ SendCoinsEntry::SendCoinsEntry(const PlatformStyle *_platformStyle, QWidget *par
     ui->addAsLabel->setPlaceholderText(tr("Enter a label for this address to add it to your address book"));
 #endif
 
-    // normal bitcoin address field
-    GUIUtil::setupAddressWidget(ui->payTo, this);
-    // just a label for displaying bitcoin address(es)
-    ui->payTo_is->setFont(GUIUtil::fixedPitchFont());
+    // dogecoin address field
+    GUIUtil::setupAddressWidget( ui->payTo, this ) ;
+    // just a label for showing address(es)
+    ui->payTo_is->setFont( GUIUtil::fixedPitchFont() ) ;
 
-    // Connect signals
     connect(ui->payAmount, SIGNAL(valueChanged()), this, SIGNAL(payAmountChanged()));
     connect(ui->checkboxSubtractFeeFromAmount, SIGNAL(toggled(bool)), this, SIGNAL(subtractFeeFromAmountChanged()));
     connect(ui->deleteButton, SIGNAL(clicked()), this, SLOT(deleteClicked()));

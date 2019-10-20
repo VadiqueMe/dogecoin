@@ -58,12 +58,12 @@
         <translation>Přijímací adresy</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Tohle jsou tvé dogecoinové adresy pro posílání plateb. Před odesláním mincí si vždy zkontroluj částku a cílovou adresu.</translation>
+        <source>These are your addresses for sending payments</source>
+        <translation>Tohle jsou tvé adresy pro posílání plateb</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Tohle jsou tvé dogecoinové adresy pro příjem plateb. Nezapomeň si pro každou transakci vždy vygenerovat novou adresu.</translation>
+        <source>These are your addresses for receiving payments</source>
+        <translation>Tohle jsou tvé adresy pro příjem plateb</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -682,14 +682,6 @@
         <translation>&amp;Označení</translation>
     </message>
     <message>
-        <source>The label associated with this address list entry</source>
-        <translation>Označení spojené s tímto záznamem v seznamu adres</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>Adresa spojená s tímto záznamem v seznamu adres. Lze upravovat jen pro odesílací adresy.</translation>
-    </message>
-    <message>
         <source>&amp;Address</source>
         <translation>&amp;Adresa</translation>
     </message>
@@ -710,12 +702,8 @@
         <translation>Uprav odesílací adresu</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Dogecoin address.</source>
-        <translation>Zadaná adresa „%1“ není platná dogecoinová adresa.</translation>
-    </message>
-    <message>
-        <source>The entered address "%1" is already in the address book.</source>
-        <translation>Zadaná adresa „%1“ už v adresáři je.</translation>
+        <source>The entered address "%1" is already in the address book</source>
+        <translation>Zadaná adresa „%1“ už v adresáři je</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -1246,8 +1234,8 @@
         <translation>Neplatná platební adresa %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Dogecoin address or malformed URI parameters.</source>
-        <translation>Nepodařilo se analyzovat URI! Důvodem může být neplatná dogecoinová adresa nebo poškozené parametry URI.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid address or malformed URI parameters</source>
+        <translation>Nepodařilo se analyzovat URI! Důvodem může být neplatná adresa nebo poškozené parametry URI</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
@@ -3621,10 +3609,6 @@
     <message>
         <source>Invalid -proxy address: '%s'</source>
         <translation>Neplatná -proxy adresa: '%s'</translation>
-    </message>
-    <message>
-        <source>Keypool ran out, please call keypoolrefill first</source>
-        <translation>Vyčerpal se zásobník klíčů, zavolej prvně, prosím, keypoolrefill</translation>
     </message>
     <message>
         <source>Listen for JSON-RPC connections on &lt;port&gt; (default: %u or testnet: %u)</source>

@@ -50,8 +50,12 @@
         <translation>&amp;Odaberi</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Ovo su vaše Dogecoin adrese za slanje novca. Uvijek provjerite iznos i adresu primatelja prije slanja novca.</translation>
+        <source>These are your addresses for sending payments</source>
+        <translation>Ovo su vaše adrese za slanje novca</translation>
+    </message>
+    <message>
+        <source>These are your addresses for receiving payments</source>
+        <translation>Ovo su vaše adrese za primanje novca</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -396,14 +400,6 @@
     <message>
         <source>&amp;Label</source>
         <translation>&amp;Oznaka</translation>
-    </message>
-    <message>
-        <source>The label associated with this address list entry</source>
-        <translation>Oznaka dogecoin adrese</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>Dogecoin adresa. Izmjene adrese su moguće samo za adrese za slanje.</translation>
     </message>
     <message>
         <source>&amp;Address</source>

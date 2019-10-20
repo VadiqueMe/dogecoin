@@ -58,12 +58,12 @@
         <translation>استقبال العناوين</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>هذه هي عناوين Dogecion التابعة لك من أجل إرسال الدفعات. تحقق دائما من المبلغ و عنوان المرسل المستقبل قبل إرسال العملات</translation>
+        <source>These are your addresses for sending payments</source>
+        <translation>هذه هي عناوين التابعة لك من أجل إرسال الدفعات</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>هذه هي عناوين Dogecion التابعة لك من أجل إستقبال الدفعات. ينصح استخدام عنوان جديد من أجل كل صفقة</translation>
+        <source>These are your addresses for receiving payments</source>
+        <translation>هذه هي عناوين التابعة لك من أجل إستقبال الدفعات</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -616,14 +616,6 @@
         <translation>&amp;وصف</translation>
     </message>
     <message>
-        <source>The label associated with this address list entry</source>
-        <translation>الملصق المرتبط بقائمة العناوين المدخلة</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>العنوان المرتبط بقائمة العناوين المدخلة. و التي يمكن تعديلها فقط بواسطة ارسال العناوين</translation>
-    </message>
-    <message>
         <source>&amp;Address</source>
         <translation>&amp;العنوان</translation>
     </message>
@@ -644,11 +636,7 @@
         <translation>تعديل عنوان الارسال</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Dogecoin address.</source>
-        <translation>العنوان المدخل "%1" ليس عنوان بيت كوين صحيح.</translation>
-    </message>
-    <message>
-        <source>The entered address "%1" is already in the address book.</source>
+        <source>The entered address "%1" is already in the address book</source>
         <translation>هدا العنوان "%1" موجود مسبقا في دفتر العناوين</translation>
     </message>
     <message>

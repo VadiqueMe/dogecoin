@@ -58,12 +58,12 @@
         <translation>Адреси за получаване</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Това са адресите на получателите на плащания. Винаги проверявайте размера на сумата и адреса на получателя, преди да изпратите монети.</translation>
+        <source>These are your addresses for sending payments</source>
+        <translation>Това са адресите на получателите на плащания</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Това са Вашите Биткойн адреси,благодарение на които ще получавате плащания.Препоръчително е да използвате нови адреси за получаване на всяка транзакция.</translation>
+        <source>These are your addresses for receiving payments</source>
+        <translation>Това са адресите на които ще получавате плащания</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -634,14 +634,6 @@
         <translation>&amp;Име</translation>
     </message>
     <message>
-        <source>The label associated with this address list entry</source>
-        <translation>Етикетът свързан с това въведение в листа с адреси</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>Адресът свързан с това въведение в листа с адреси. Това може да бъде променено само за адреси за изпращане.</translation>
-    </message>
-    <message>
         <source>&amp;Address</source>
         <translation>&amp;Адрес</translation>
     </message>
@@ -662,12 +654,8 @@
         <translation>Редактиране на адрес за изпращане</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Dogecoin address.</source>
-        <translation>"%1" не е валиден Биткоин адрес.</translation>
-    </message>
-    <message>
-        <source>The entered address "%1" is already in the address book.</source>
-        <translation>Вече има адрес "%1" в списъка с адреси.</translation>
+        <source>The entered address "%1" is already in the address book</source>
+        <translation>Вече има адрес "%1" в списъка с адреси</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>

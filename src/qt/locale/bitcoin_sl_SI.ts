@@ -406,14 +406,6 @@
         <translation>&amp;Oznaka</translation>
     </message>
     <message>
-        <source>The label associated with this address list entry</source>
-        <translation>Oznaka, pod katero je spodnji naslov naveden v vašem imeniku naslovov.</translation>
-    </message>
-    <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>Naslov tega vnosa v imeniku. Spremeniti ga je mogoče le pri vnosih iz imenika naslovov za pošiljanje.</translation>
-    </message>
-    <message>
         <source>&amp;Address</source>
         <translation>&amp;Naslov</translation>
     </message>

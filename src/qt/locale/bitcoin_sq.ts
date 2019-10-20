@@ -42,12 +42,12 @@
         <translation>Duke marr adresen</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Këto janë Dogecoin adresat e juaja për të dërguar pagesa. Gjithmon kontrolloni shumën dhe adresën pranuese para se të dërgoni monedha.</translation>
+        <source>These are your addresses for sending payments</source>
+        <translation>Këto janë adresat e juaja për të dërguar pagesa</translation>
     </message>
     <message>
-        <source>These are your Dogecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Këto janë Dogecoin adresat e juaja për të pranuar pagesa. Rekomandohet që gjithmon të përdorni një adresë të re për çdo transaksion.</translation>
+        <source>These are your addresses for receiving payments</source>
+        <translation>Këto janë adresat e juaja për të marrë pagesa</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -340,8 +340,8 @@
         <translation>ndrysho adresën dërguese</translation>
     </message>
     <message>
-        <source>The entered address "%1" is already in the address book.</source>
-        <translation>Adresa e dhënë "%1" është e zënë në librin e adresave. </translation>
+        <source>The entered address "%1" is already in the address book</source>
+        <translation>Adresa e dhënë "%1" është e zënë në librin e adresave</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>

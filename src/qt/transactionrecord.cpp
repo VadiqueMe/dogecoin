@@ -58,11 +58,11 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
                 sub.setSubtransactionIndex( i ) ; // vout index
                 sub.credit = txout.nValue;
                 sub.involvesWatchAddress = mine & ISMINE_WATCH_ONLY;
-                if (ExtractDestination(txout.scriptPubKey, address) && IsMine(*wallet, address))
+                if ( ExtractDestination( txout.scriptPubKey, address ) && IsMine( *wallet, address ) )
                 {
-                    // Received by Bitcoin Address
-                    sub.type = TransactionRecord::RecvWithAddress;
-                    sub.address = CBitcoinAddress(address).ToString();
+                    // Received by Dogecoin address
+                    sub.type = TransactionRecord::RecvWithAddress ;
+                    sub.address = CDogecoinAddress( address ).ToString() ;
                 }
                 else
                 {
@@ -129,12 +129,12 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
                     continue;
                 }
 
-                CTxDestination address;
-                if (ExtractDestination(txout.scriptPubKey, address))
+                CTxDestination address ;
+                if ( ExtractDestination( txout.scriptPubKey, address ) )
                 {
-                    // Sent to Bitcoin Address
-                    sub.type = TransactionRecord::SendToAddress;
-                    sub.address = CBitcoinAddress(address).ToString();
+                    // Sent to Dogecoin address
+                    sub.type = TransactionRecord::SendToAddress ;
+                    sub.address = CDogecoinAddress( address ).ToString() ;
                 }
                 else
                 {
