@@ -22,6 +22,10 @@ public:
     explicit GenerateCoinsPage( const PlatformStyle * style, QWidget * parent = nullptr ) ;
     ~GenerateCoinsPage() ;
 
+public Q_SLOTS:
+    void toggleGenerateBlocks( int qtCheckState ) ;
+    void changeNumberOfThreads( const QString & threads ) ;
+
 private:
     Ui::GenerateCoinsPage * ui ;
     const PlatformStyle * platformStyle ;

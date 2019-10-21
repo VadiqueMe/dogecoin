@@ -1631,7 +1631,7 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
     if (!connman.Start(scheduler, strNodeError, connOptions))
         return InitError(strNodeError);
 
-    // Generate coins in the background
+    // Generate blocks
     GenerateDogecoins( GetBoolArg( "-gen", DEFAULT_GENERATE ), GetArg( "-genproclimit", DEFAULT_GENERATE_THREADS ), chainparams ) ;
 
     // ********************************************************* Step 12: finished
