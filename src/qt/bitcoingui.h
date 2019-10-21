@@ -1,9 +1,9 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_QT_BITCOINGUI_H
-#define BITCOIN_QT_BITCOINGUI_H
+#ifndef DOGECOIN_QT_BITCOINGUI_H
+#define DOGECOIN_QT_BITCOINGUI_H
 
 #if defined(HAVE_CONFIG_H)
 #include "config/bitcoin-config.h"
@@ -51,19 +51,17 @@ public:
     static const QString DEFAULT_WALLET;
     static const std::string DEFAULT_UIPLATFORM;
 
-    explicit BitcoinGUI(const PlatformStyle *platformStyle, const NetworkStyle *networkStyle, QWidget *parent = 0);
-    ~BitcoinGUI();
+    explicit BitcoinGUI( const PlatformStyle * style, const NetworkStyle * networkStyle, QWidget * parent = nullptr ) ;
+    ~BitcoinGUI() ;
 
     /** Set the client model.
-        The client model represents the part of the core that communicates with the P2P network, and is wallet-agnostic.
-    */
+        The client model represents the part of the core that communicates with the P2P network, and is wallet-agnostic
+     */
     void setClientModel(ClientModel *clientModel);
 
 #ifdef ENABLE_WALLET
-    /** Set the wallet model.
-        The wallet model represents a bitcoin wallet, and offers access to the list of transactions, address book and sending
-        functionality.
-    */
+    /** Set the wallet model which represents a dogecoin wallet
+     */
     bool addWallet(const QString& name, WalletModel *walletModel);
     bool setCurrentWallet(const QString& name);
     void removeAllWallets();
@@ -92,10 +90,10 @@ private:
     QProgressDialog *progressDialog;
 
     QMenuBar *appMenuBar;
-    QAction *overviewAction;
-    QAction *historyAction;
+    QAction * overviewTabAction ;
+    QAction * historyTabAction ;
     QAction *quitAction;
-    QAction *sendCoinsAction;
+    QAction * sendCoinsTabAction ;
     QAction *sendCoinsMenuAction;
     QAction *usedSendingAddressesAction;
     QAction *usedReceivingAddressesAction;
@@ -103,7 +101,7 @@ private:
     QAction *verifyMessageAction;
     QAction *paperWalletAction;
     QAction *aboutAction;
-    QAction *receiveCoinsAction;
+    QAction * receiveCoinsTabAction ;
     QAction *receiveCoinsMenuAction;
     QAction *optionsAction;
     QAction *toggleHideAction;
@@ -114,6 +112,7 @@ private:
     QAction *openRPCConsoleAction;
     QAction *openAction;
     QAction *showHelpMessageAction;
+    QAction * digTabAction ;
 
     QSystemTrayIcon *trayIcon;
     QMenu *trayIconMenu;
@@ -126,11 +125,11 @@ private:
     int prevBlocks;
     int spinnerFrame;
 
-    const PlatformStyle *platformStyle;
+    const PlatformStyle * platformStyle ;
 
-    /** Create the main UI actions. */
+    /** Create the main UI actions */
     void createActions();
-    /** Create the menu bar and sub-menus. */
+    /** Create the menu bar and sub-menus */
     void createMenuBar();
     /** Create the toolbars */
     void createToolBars();
@@ -147,7 +146,7 @@ private:
     /** Disconnect core signals from GUI client */
     void unsubscribeFromCoreSignals();
 
-    /** Update UI with latest network info from model. */
+    /** Update UI with latest network info from model */
     void updateNetworkState();
 
     void updateHeadersSyncProgressLabel();
@@ -195,13 +194,15 @@ public Q_SLOTS:
 private Q_SLOTS:
 #ifdef ENABLE_WALLET
     /** Switch to overview (home) page */
-    void gotoOverviewPage();
+    void gotoOverviewPage() ;
     /** Switch to history (transactions) page */
-    void gotoHistoryPage();
+    void gotoHistoryPage() ;
     /** Switch to receive coins page */
-    void gotoReceiveCoinsPage();
+    void gotoReceiveCoinsPage() ;
     /** Switch to send coins page */
-    void gotoSendCoinsPage(QString addr = "");
+    void gotoSendCoinsPage( QString addr = "" ) ;
+    /** Switch to dig page */
+    void gotoDigPage() ;
 
     /** Show Sign/Verify Message dialog and switch to sign message tab */
     void gotoSignMessageTab(QString addr = "");
@@ -211,6 +212,7 @@ private Q_SLOTS:
     /** Show open dialog */
     void openClicked();
 #endif // ENABLE_WALLET
+
     /** Show configuration dialog */
     void optionsClicked();
     /** Show about dialog */
@@ -236,7 +238,7 @@ private Q_SLOTS:
 
     /** Show progress dialog e.g. for verifychain */
     void showProgress(const QString &title, int nProgress);
-    
+
     /** When hideTrayIcon setting is changed in OptionsModel hide or show the icon accordingly. */
     void setTrayIconVisible(bool);
 
@@ -275,4 +277,4 @@ private Q_SLOTS:
     void onMenuSelection(QAction* action);
 };
 
-#endif // BITCOIN_QT_BITCOINGUI_H
+#endif

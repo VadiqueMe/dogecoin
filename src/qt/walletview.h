@@ -1,9 +1,9 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_QT_WALLETVIEW_H
-#define BITCOIN_QT_WALLETVIEW_H
+#ifndef DOGECOIN_QT_WALLETVIEW_H
+#define DOGECOIN_QT_WALLETVIEW_H
 
 #include "amount.h"
 
@@ -19,6 +19,7 @@ class SendCoinsRecipient;
 class TransactionView;
 class WalletModel;
 class AddressBookPage;
+class GenerateCoinsPage ;
 
 QT_BEGIN_NAMESPACE
 class QModelIndex;
@@ -29,24 +30,24 @@ QT_END_NAMESPACE
   WalletView class. This class represents the view to a single wallet.
   It was added to support multiple wallet functionality. Each wallet gets its own WalletView instance.
   It communicates with both the client and the wallet models to give the user an up-to-date view of the
-  current core state.
+  current core state
 */
 class WalletView : public QStackedWidget
 {
     Q_OBJECT
 
 public:
-    explicit WalletView(const PlatformStyle *platformStyle, QWidget *parent);
-    ~WalletView();
+    explicit WalletView( const PlatformStyle * style, QWidget * parent ) ;
+    ~WalletView() ;
 
     void setBitcoinGUI(BitcoinGUI *gui);
     /** Set the client model.
-        The client model represents the part of the core that communicates with the P2P network, and is wallet-agnostic.
+        The client model represents the part of the core that communicates with the P2P network, and is wallet-agnostic
     */
     void setClientModel(ClientModel *clientModel);
     /** Set the wallet model.
         The wallet model represents a bitcoin wallet, and offers access to the list of transactions, address book and sending
-        functionality.
+        functionality
     */
     void setWalletModel(WalletModel *walletModel);
 
@@ -58,10 +59,12 @@ private:
     ClientModel *clientModel;
     WalletModel *walletModel;
 
-    OverviewPage *overviewPage;
-    QWidget *transactionsPage;
-    ReceiveCoinsDialog *receiveCoinsPage;
-    SendCoinsDialog *sendCoinsPage;
+    OverviewPage * overviewPage ;
+    QWidget * transactionsPage ;
+    ReceiveCoinsDialog * receiveCoinsPage ;
+    SendCoinsDialog * sendCoinsPage ;
+    GenerateCoinsPage * generateCoinsPage ;
+
     AddressBookPage *usedSendingAddressesPage;
     AddressBookPage *usedReceivingAddressesPage;
 
@@ -72,13 +75,15 @@ private:
 
 public Q_SLOTS:
     /** Switch to overview (home) page */
-    void gotoOverviewPage();
+    void gotoOverviewPage() ;
     /** Switch to history (transactions) page */
-    void gotoHistoryPage();
+    void gotoHistoryPage() ;
     /** Switch to receive coins page */
-    void gotoReceiveCoinsPage();
+    void gotoReceiveCoinsPage() ;
     /** Switch to send coins page */
-    void gotoSendCoinsPage(QString addr = "");
+    void gotoSendCoinsPage( QString addr = "" ) ;
+    /** Switch to dig page */
+    void gotoDigPage() ;
 
     /** Show Sign/Verify Message dialog and switch to sign message tab */
     void gotoSignMessageTab(QString addr = "");
@@ -130,4 +135,4 @@ Q_SIGNALS:
     void outOfSyncWarningClicked();
 };
 
-#endif // BITCOIN_QT_WALLETVIEW_H
+#endif

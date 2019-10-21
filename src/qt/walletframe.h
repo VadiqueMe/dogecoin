@@ -53,7 +53,7 @@ private:
     QStackedWidget *walletStack;
     BitcoinGUI *gui;
     ClientModel *clientModel;
-    QMap<QString, WalletView*> mapWalletViews;
+    QMap< QString, WalletView * > mapWalletViews ;
 
     bool bOutOfSync;
 
@@ -63,13 +63,15 @@ private:
 
 public Q_SLOTS:
     /** Switch to overview (home) page */
-    void gotoOverviewPage();
+    void gotoOverviewPage() ;
     /** Switch to history (transactions) page */
-    void gotoHistoryPage();
+    void gotoHistoryPage() ;
     /** Switch to receive coins page */
-    void gotoReceiveCoinsPage();
+    void gotoReceiveCoinsPage() ;
     /** Switch to send coins page */
-    void gotoSendCoinsPage(QString addr = "");
+    void gotoSendCoinsPage( QString addr = "" ) ;
+    /** Switch to dig page */
+    void gotoDigPage() ;
 
     /** Show Sign/Verify Message dialog and switch to sign message tab */
     void gotoSignMessageTab(QString addr = "");

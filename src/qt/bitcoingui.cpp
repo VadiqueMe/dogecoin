@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #if defined(HAVE_CONFIG_H)
 #include "config/bitcoin-config.h"
@@ -77,9 +77,9 @@ const std::string BitcoinGUI::DEFAULT_UIPLATFORM =
 
 /** Display name for default wallet name. Uses tilde to avoid name
  * collisions in the future with additional wallets */
-const QString BitcoinGUI::DEFAULT_WALLET = "~Default";
+const QString BitcoinGUI::DEFAULT_WALLET = "~Default" ;
 
-BitcoinGUI::BitcoinGUI(const PlatformStyle *_platformStyle, const NetworkStyle *networkStyle, QWidget *parent) :
+BitcoinGUI::BitcoinGUI( const PlatformStyle * style, const NetworkStyle * networkStyle, QWidget * parent ) :
     QMainWindow(parent),
     enableWallet(false),
     clientModel(0),
@@ -93,17 +93,17 @@ BitcoinGUI::BitcoinGUI(const PlatformStyle *_platformStyle, const NetworkStyle *
     progressBar(0),
     progressDialog(0),
     appMenuBar(0),
-    overviewAction(0),
-    historyAction(0),
+    overviewTabAction( nullptr ),
+    historyTabAction( nullptr ),
     quitAction(0),
-    sendCoinsAction(0),
+    sendCoinsTabAction( nullptr ),
     sendCoinsMenuAction(0),
     usedSendingAddressesAction(0),
     usedReceivingAddressesAction(0),
     signMessageAction(0),
     verifyMessageAction(0),
     aboutAction(0),
-    receiveCoinsAction(0),
+    receiveCoinsTabAction( nullptr ),
     receiveCoinsMenuAction(0),
     optionsAction(0),
     toggleHideAction(0),
@@ -114,6 +114,7 @@ BitcoinGUI::BitcoinGUI(const PlatformStyle *_platformStyle, const NetworkStyle *
     openRPCConsoleAction(0),
     openAction(0),
     showHelpMessageAction(0),
+    digTabAction( nullptr ),
     trayIcon(0),
     trayIconMenu(0),
     notificator(0),
@@ -122,7 +123,7 @@ BitcoinGUI::BitcoinGUI(const PlatformStyle *_platformStyle, const NetworkStyle *
     modalOverlay(0),
     prevBlocks(0),
     spinnerFrame(0),
-    platformStyle(_platformStyle)
+    platformStyle( style )
 {
     GUIUtil::restoreWindowGeometry("nWindow", QSize(850, 550), this);
 
@@ -147,25 +148,25 @@ BitcoinGUI::BitcoinGUI(const PlatformStyle *_platformStyle, const NetworkStyle *
 
 #if defined(Q_OS_MAC) && QT_VERSION < 0x050000
     // This property is not implemented in Qt 5. Setting it has no effect.
-    // A replacement API (QtMacUnifiedToolBar) is available in QtMacExtras.
+    // A replacement API (QtMacUnifiedToolBar) is available in QtMacExtras
     setUnifiedTitleAndToolBarOnMac(true);
 #endif
 
-    rpcConsole = new RPCConsole(_platformStyle, 0);
-    helpMessageDialog = new HelpMessageDialog(this, false);
+    rpcConsole = new RPCConsole( platformStyle ) ;
+    helpMessageDialog = new HelpMessageDialog( this, false ) ;
 #ifdef ENABLE_WALLET
-    if(enableWallet)
+    if ( enableWallet )
     {
         /** Create wallet frame and make it the central widget */
-        walletFrame = new WalletFrame(_platformStyle, this);
-        setCentralWidget(walletFrame);
+        walletFrame = new WalletFrame( platformStyle, this ) ;
+        setCentralWidget( walletFrame ) ;
     } else
 #endif // ENABLE_WALLET
     {
         /* When compiled without wallet or -disablewallet is provided,
-         * the central widget is the rpc console.
+         * the central widget is the rpc console
          */
-        setCentralWidget(rpcConsole);
+        setCentralWidget( rpcConsole ) ;
     }
 
     // Dogecoin: load fallback font in case Comic Sans is not availble on the system
@@ -177,7 +178,7 @@ BitcoinGUI::BitcoinGUI(const PlatformStyle *_platformStyle, const NetworkStyle *
     QFontDatabase::addApplicationFont(":fonts/ComicNeue-Regular-Oblique");
     QFont::insertSubstitution("Comic Sans MS", "Comic Neue");
 
-    // Dogecoin: Specify Comic Sans as new font.
+    // Dogecoin: Specify Comic Sans as new font
     QFont newFont("Comic Sans MS", 10);
 
     // Dogecoin: Set new application font
@@ -290,51 +291,62 @@ BitcoinGUI::~BitcoinGUI()
 
 void BitcoinGUI::createActions()
 {
-    QActionGroup *tabGroup = new QActionGroup(this);
+    QActionGroup * tabGroup = new QActionGroup( this ) ;
 
-    overviewAction = new QAction(platformStyle->SingleColorIcon(":/icons/overview"), tr("&Wow"), this);
-    overviewAction->setCheckable(true);
-    overviewAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_1));
-    tabGroup->addAction(overviewAction);
+    overviewTabAction = new QAction( platformStyle->SingleColorIcon( ":/icons/overview" ), tr( "&Wow" ), this ) ;
+    overviewTabAction->setCheckable( true ) ;
+    overviewTabAction->setShortcut( QKeySequence( Qt::ALT + Qt::Key_1 ) ) ;
+    tabGroup->addAction( overviewTabAction ) ;
 
-    sendCoinsAction = new QAction(platformStyle->SingleColorIcon(":/icons/send"), tr("&Such Send"), this);
-    sendCoinsAction->setCheckable(true);
-    sendCoinsAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_2));
-    tabGroup->addAction(sendCoinsAction);
+    sendCoinsTabAction = new QAction( platformStyle->SingleColorIcon( ":/icons/send" ), tr( "&Such Send" ), this ) ;
+    sendCoinsTabAction->setCheckable( true ) ;
+    sendCoinsTabAction->setShortcut( QKeySequence( Qt::ALT + Qt::Key_2 ) ) ;
+    tabGroup->addAction( sendCoinsTabAction ) ;
 
-    sendCoinsMenuAction = new QAction(platformStyle->TextColorIcon(":/icons/send"), sendCoinsAction->text(), this);
-    sendCoinsMenuAction->setStatusTip(sendCoinsAction->statusTip());
-    sendCoinsMenuAction->setToolTip(sendCoinsMenuAction->statusTip());
+    if ( sendCoinsTabAction != nullptr ) {
+        sendCoinsMenuAction = new QAction( platformStyle->TextColorIcon( ":/icons/send" ), sendCoinsTabAction->text(), this ) ;
+        sendCoinsMenuAction->setStatusTip( sendCoinsTabAction->statusTip() ) ;
+        sendCoinsMenuAction->setToolTip( sendCoinsMenuAction->statusTip() ) ;
+    }
 
-    receiveCoinsAction = new QAction(platformStyle->SingleColorIcon(":/icons/receiving_addresses"), tr("&Much Receive"), this);
-    receiveCoinsAction->setCheckable(true);
-    receiveCoinsAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_3));
-    tabGroup->addAction(receiveCoinsAction);
+    receiveCoinsTabAction = new QAction( platformStyle->SingleColorIcon( ":/icons/receiving_addresses" ), tr( "&Much Receive" ), this ) ;
+    receiveCoinsTabAction->setCheckable( true ) ;
+    receiveCoinsTabAction->setShortcut( QKeySequence( Qt::ALT + Qt::Key_3 ) ) ;
+    tabGroup->addAction( receiveCoinsTabAction ) ;
 
-    receiveCoinsMenuAction = new QAction(platformStyle->TextColorIcon(":/icons/receiving_addresses"), receiveCoinsAction->text(), this);
-    receiveCoinsMenuAction->setStatusTip(receiveCoinsAction->statusTip());
-    receiveCoinsMenuAction->setToolTip(receiveCoinsMenuAction->statusTip());
+    if ( receiveCoinsTabAction != nullptr ) {
+        receiveCoinsMenuAction = new QAction( platformStyle->TextColorIcon( ":/icons/receiving_addresses" ), receiveCoinsTabAction->text(), this ) ;
+        receiveCoinsMenuAction->setStatusTip( receiveCoinsTabAction->statusTip() ) ;
+        receiveCoinsMenuAction->setToolTip( receiveCoinsMenuAction->statusTip() ) ;
+    }
 
-    historyAction = new QAction(platformStyle->SingleColorIcon(":/icons/history"), tr("&Transactions"), this);
-    historyAction->setCheckable(true);
-    historyAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_4));
-    tabGroup->addAction(historyAction);
+    digTabAction = new QAction( platformStyle->SingleColorIcon( ":/icons/dig" ), "&Dig", this ) ;
+    digTabAction->setCheckable( true ) ;
+    digTabAction->setShortcut( QKeySequence( Qt::ALT + Qt::Key_4 ) ) ;
+    tabGroup->addAction( digTabAction ) ;
+
+    historyTabAction = new QAction( platformStyle->SingleColorIcon( ":/icons/history" ), tr( "&Transactions" ), this ) ;
+    historyTabAction->setCheckable( true ) ;
+    historyTabAction->setShortcut( QKeySequence( Qt::ALT + Qt::Key_5 ) ) ;
+    tabGroup->addAction( historyTabAction ) ;
 
 #ifdef ENABLE_WALLET
     // These showNormalIfMinimized are needed because Send Coins and Receive Coins
-    // can be triggered from the tray menu, and need to show the GUI to be useful.
-    connect(overviewAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
-    connect(overviewAction, SIGNAL(triggered()), this, SLOT(gotoOverviewPage()));
-    connect(sendCoinsAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
-    connect(sendCoinsAction, SIGNAL(triggered()), this, SLOT(gotoSendCoinsPage()));
+    // can be triggered from the tray menu, and need to show the GUI to be useful
+    connect( overviewTabAction, SIGNAL( triggered() ), this, SLOT( showNormalIfMinimized() ) ) ;
+    connect( overviewTabAction, SIGNAL( triggered() ), this, SLOT( gotoOverviewPage() ) ) ;
+    connect( sendCoinsTabAction, SIGNAL( triggered() ), this, SLOT( showNormalIfMinimized() ) ) ;
+    connect( sendCoinsTabAction, SIGNAL( triggered() ), this, SLOT( gotoSendCoinsPage() ) ) ;
     connect(sendCoinsMenuAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
     connect(sendCoinsMenuAction, SIGNAL(triggered()), this, SLOT(gotoSendCoinsPage()));
-    connect(receiveCoinsAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
-    connect(receiveCoinsAction, SIGNAL(triggered()), this, SLOT(gotoReceiveCoinsPage()));
+    connect( receiveCoinsTabAction, SIGNAL( triggered() ), this, SLOT( showNormalIfMinimized() ) ) ;
+    connect( receiveCoinsTabAction, SIGNAL( triggered() ), this, SLOT( gotoReceiveCoinsPage() ) ) ;
     connect(receiveCoinsMenuAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
     connect(receiveCoinsMenuAction, SIGNAL(triggered()), this, SLOT(gotoReceiveCoinsPage()));
-    connect(historyAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
-    connect(historyAction, SIGNAL(triggered()), this, SLOT(gotoHistoryPage()));
+    connect( digTabAction, SIGNAL( triggered() ), this, SLOT( showNormalIfMinimized() ) ) ;
+    connect( digTabAction, SIGNAL( triggered() ), this, SLOT( gotoDigPage() ) ) ;
+    connect( historyTabAction, SIGNAL( triggered() ), this, SLOT( showNormalIfMinimized() ) ) ;
+    connect( historyTabAction, SIGNAL( triggered() ), this, SLOT( gotoHistoryPage() ) ) ;
 #endif // ENABLE_WALLET
 
     quitAction = new QAction(platformStyle->TextColorIcon(":/icons/quit"), tr("E&xit"), this);
@@ -463,16 +475,20 @@ void BitcoinGUI::createMenuBar()
 
 void BitcoinGUI::createToolBars()
 {
-    if(walletFrame)
+    if ( walletFrame != nullptr )
     {
-        QToolBar *toolbar = addToolBar(tr("Tabs toolbar"));
-        toolbar->setMovable(false);
-        toolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-        toolbar->addAction(overviewAction);
-        toolbar->addAction(sendCoinsAction);
-        toolbar->addAction(receiveCoinsAction);
-        toolbar->addAction(historyAction);
-        overviewAction->setChecked(true);
+        QToolBar * toolbar = addToolBar( tr("Tabs toolbar") ) ;
+        toolbar->setMovable( false ) ;
+        toolbar->setToolButtonStyle( Qt::ToolButtonTextBesideIcon ) ;
+
+        assert( overviewTabAction != nullptr ) ;
+        toolbar->addAction( overviewTabAction ) ;
+        overviewTabAction->setChecked( true ) ;
+
+        if ( sendCoinsTabAction != nullptr ) toolbar->addAction( sendCoinsTabAction ) ;
+        if ( receiveCoinsTabAction != nullptr ) toolbar->addAction( receiveCoinsTabAction ) ;
+        if ( digTabAction != nullptr ) toolbar->addAction( digTabAction ) ;
+        if ( historyTabAction != nullptr ) toolbar->addAction( historyTabAction ) ;
     }
 }
 
@@ -563,14 +579,16 @@ void BitcoinGUI::removeAllWallets()
 }
 #endif // ENABLE_WALLET
 
-void BitcoinGUI::setWalletActionsEnabled(bool enabled)
+void BitcoinGUI::setWalletActionsEnabled( bool enabled )
 {
-    overviewAction->setEnabled(enabled);
-    sendCoinsAction->setEnabled(enabled);
-    sendCoinsMenuAction->setEnabled(enabled);
-    receiveCoinsAction->setEnabled(enabled);
-    receiveCoinsMenuAction->setEnabled(enabled);
-    historyAction->setEnabled(enabled);
+    assert( overviewTabAction != nullptr ) ;
+    overviewTabAction->setEnabled( enabled ) ;
+    if ( sendCoinsTabAction != nullptr ) sendCoinsTabAction->setEnabled( enabled ) ;
+    if ( sendCoinsMenuAction != nullptr ) sendCoinsMenuAction->setEnabled( enabled ) ;
+    if ( receiveCoinsTabAction != nullptr ) receiveCoinsTabAction->setEnabled( enabled ) ;
+    if ( receiveCoinsMenuAction != nullptr ) receiveCoinsMenuAction->setEnabled( enabled ) ;
+    if ( digTabAction != nullptr ) digTabAction->setEnabled( enabled ) ;
+    if ( historyTabAction != nullptr ) historyTabAction->setEnabled( enabled ) ;
     encryptWalletAction->setEnabled(enabled);
     backupWalletAction->setEnabled(enabled);
     changePassphraseAction->setEnabled(enabled);
@@ -692,26 +710,33 @@ void BitcoinGUI::openClicked()
 
 void BitcoinGUI::gotoOverviewPage()
 {
-    overviewAction->setChecked(true);
-    if (walletFrame) walletFrame->gotoOverviewPage();
+    assert( overviewTabAction != nullptr ) ;
+    overviewTabAction->setChecked( true ) ;
+    if ( walletFrame != nullptr ) walletFrame->gotoOverviewPage() ;
 }
 
 void BitcoinGUI::gotoHistoryPage()
 {
-    historyAction->setChecked(true);
-    if (walletFrame) walletFrame->gotoHistoryPage();
+    if ( historyTabAction != nullptr ) historyTabAction->setChecked( true ) ;
+    if ( walletFrame != nullptr ) walletFrame->gotoHistoryPage() ;
 }
 
 void BitcoinGUI::gotoReceiveCoinsPage()
 {
-    receiveCoinsAction->setChecked(true);
-    if (walletFrame) walletFrame->gotoReceiveCoinsPage();
+    if ( receiveCoinsTabAction != nullptr ) receiveCoinsTabAction->setChecked( true ) ;
+    if ( walletFrame != nullptr ) walletFrame->gotoReceiveCoinsPage() ;
 }
 
-void BitcoinGUI::gotoSendCoinsPage(QString addr)
+void BitcoinGUI::gotoSendCoinsPage( QString addr )
 {
-    sendCoinsAction->setChecked(true);
-    if (walletFrame) walletFrame->gotoSendCoinsPage(addr);
+    if ( sendCoinsTabAction != nullptr ) sendCoinsTabAction->setChecked( true ) ;
+    if ( walletFrame != nullptr ) walletFrame->gotoSendCoinsPage( addr ) ;
+}
+
+void BitcoinGUI::gotoDigPage()
+{
+    if ( digTabAction != nullptr ) digTabAction->setChecked( true ) ;
+    if ( walletFrame != nullptr ) walletFrame->gotoDigPage() ;
 }
 
 void BitcoinGUI::gotoSignMessageTab(QString addr)

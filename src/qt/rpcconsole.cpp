@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #if defined(HAVE_CONFIG_H)
 #include "config/bitcoin-config.h"
@@ -410,15 +410,15 @@ void RPCExecutor::request(const QString &command)
     }
 }
 
-RPCConsole::RPCConsole(const PlatformStyle *_platformStyle, QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::RPCConsole),
-    clientModel(0),
-    historyPtr(0),
-    platformStyle(_platformStyle),
-    peersTableContextMenu(0),
-    banTableContextMenu(0),
-    consoleFontSize(0)
+RPCConsole::RPCConsole( const PlatformStyle * style, QWidget * parent )
+    : QWidget(parent)
+    , ui(new Ui::RPCConsole)
+    , clientModel(0)
+    , historyPtr(0)
+    , platformStyle( style )
+    , peersTableContextMenu(0)
+    , banTableContextMenu(0)
+    , consoleFontSize(0)
     , pathToLogFile( GUIUtil::boostPathToQString(boost::filesystem::path( GetDataDir() / LOG_FILE_NAME )) )
     , logFileWatcher()
     , resetBytesRecv( 0 )
