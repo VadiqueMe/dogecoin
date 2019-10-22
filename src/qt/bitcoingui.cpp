@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -35,6 +36,7 @@
 #include "init.h"
 #include "ui_interface.h"
 #include "util.h"
+#include "miner.h"
 
 #include <iostream>
 
@@ -89,6 +91,7 @@ BitcoinGUI::BitcoinGUI( const PlatformStyle * style, const NetworkStyle * networ
     labelWalletHDStatusIcon(0),
     connectionsControl(0),
     labelBlocksIcon(0),
+    generatingLabel( nullptr ),
     progressBarLabel(0),
     progressBar(0),
     progressDialog(0),
@@ -123,7 +126,8 @@ BitcoinGUI::BitcoinGUI( const PlatformStyle * style, const NetworkStyle * networ
     modalOverlay(0),
     prevBlocks(0),
     spinnerFrame(0),
-    platformStyle( style )
+    platformStyle( style ),
+    everySecondTimer( new QTimer() )
 {
     GUIUtil::restoreWindowGeometry("nWindow", QSize(850, 550), this);
 
@@ -200,25 +204,26 @@ BitcoinGUI::BitcoinGUI( const PlatformStyle * style, const NetworkStyle * networ
     // Create system tray icon and notification
     createTrayIcon(networkStyle);
 
-    // Create status bar
+    // Create bottom bar
     statusBar();
 
     // Disable size grip because it looks ugly and nobody needs it
     statusBar()->setSizeGripEnabled(false);
 
-    // Status bar notification icons
-    QFrame *frameBlocks = new QFrame();
-    frameBlocks->setContentsMargins(0,0,0,0);
-    frameBlocks->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
-    QHBoxLayout *frameBlocksLayout = new QHBoxLayout(frameBlocks);
-    frameBlocksLayout->setContentsMargins(3,0,3,0);
-    frameBlocksLayout->setSpacing(3);
-    unitDisplayControl = new UnitDisplayStatusBarControl(platformStyle);
+    // Bottom bar notification icons
+    QFrame * frameBlocks = new QFrame() ;
+    frameBlocks->setContentsMargins( 0, 0, 0, 0 ) ;
+    frameBlocks->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Preferred ) ;
+    QHBoxLayout * frameBlocksLayout = new QHBoxLayout( frameBlocks ) ;
+    frameBlocksLayout->setContentsMargins( 3, 0, 3, 0 ) ;
+    frameBlocksLayout->setSpacing( 3 ) ;
+    unitDisplayControl = new UnitDisplayStatusBarControl( platformStyle ) ;
     labelWalletEncryptionIcon = new QLabel();
     labelWalletHDStatusIcon = new QLabel();
     connectionsControl = new GUIUtil::ClickableLabel();
     labelBlocksIcon = new GUIUtil::ClickableLabel();
-    if(enableWallet)
+    generatingLabel = new QLabel() ;
+    if ( enableWallet )
     {
         frameBlocksLayout->addStretch();
         frameBlocksLayout->addWidget(unitDisplayControl);
@@ -231,6 +236,16 @@ BitcoinGUI::BitcoinGUI( const PlatformStyle * style, const NetworkStyle * networ
     frameBlocksLayout->addStretch();
     frameBlocksLayout->addWidget(labelBlocksIcon);
     frameBlocksLayout->addStretch();
+
+    QIcon pawprintIcon = platformStyle->SingleColorIcon( ":/icons/pawprint" ) ;
+    generatingLabel->setPixmap( pawprintIcon.pixmap( STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE - 1 ) ) ;
+    generatingLabel->setToolTip( "Digging is <b>on</b> (0 threads)" ) ;
+    generatingLabel->setVisible( false ) ;
+    frameBlocksLayout->addWidget( generatingLabel ) ;
+    frameBlocksLayout->addSpacing( 3 ) ;
+
+    connect( everySecondTimer.get(), SIGNAL( timeout() ), this, SLOT( updateBottomBarShowsDigging() ) ) ;
+    everySecondTimer->start( 1000 /* ms */ ) ;
 
     // Progress bar and label for blocks download
     progressBarLabel = new QLabel();
@@ -936,7 +951,7 @@ void BitcoinGUI::message(const QString &title, const QString &message, unsigned 
             break;
         }
     }
-    // Append title to "Bitcoin - "
+    // Append to "Dogecoin - "
     if (!msgType.isEmpty())
         strTitle += " - " + msgType;
 
@@ -1115,6 +1130,13 @@ void BitcoinGUI::setEncryptionStatus(int status)
     }
 }
 #endif // ENABLE_WALLET
+
+void BitcoinGUI::updateBottomBarShowsDigging()
+{
+    size_t nThreads = HowManyMiningThreads() ;
+    generatingLabel->setVisible( nThreads > 0 ) ;
+    generatingLabel->setToolTip( QString( "Digging is <b>on</b> (" ) + QString::number( nThreads ) + " threads)" ) ;
+}
 
 void BitcoinGUI::showNormalIfMinimized(bool fToggleHidden)
 {

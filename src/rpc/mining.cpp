@@ -113,7 +113,7 @@ UniValue getgenerate( const JSONRPCRequest& request )
         );
 
     LOCK( cs_main ) ;
-    return GetBoolArg( "-gen", DEFAULT_GENERATE ) ;
+    return HowManyMiningThreads() > 0 ;
 }
 
 UniValue setgenerate( const JSONRPCRequest& request )
@@ -149,12 +149,8 @@ UniValue setgenerate( const JSONRPCRequest& request )
     if ( request.params.size() > 1 )
     {
         genProcLimit = request.params[1].get_int() ;
-        if ( genProcLimit == 0 )
-            fGenerate = false ;
+        if ( genProcLimit == 0 ) fGenerate = false ;
     }
-
-    SoftSetBoolArg( "-gen", fGenerate ) ;
-    SoftSetArg( "-genproclimit", std::to_string( genProcLimit ) ) ;
 
     GenerateDogecoins( fGenerate, genProcLimit, Params() ) ;
 
@@ -301,9 +297,9 @@ UniValue getmininginfo( const JSONRPCRequest& request )
             "  \"errors\": \"...\"            (string) Current errors\n"
             "  \"networkhashps\": nnn,      (numeric) The network hashes per second\n"
             "  \"generate\": true|false     (boolean) If the generation is on or off (see getgenerate or setgenerate)\n"
-            "  \"genproclimit\": n          (numeric) The processor limit for generation, -1 if no generation (see getgenerate or setgenerate)\n"
+            "  \"genthreads\": n            (numeric) Number of threads running for generation (see getgenerate or setgenerate)\n"
             "  \"pooledtx\": n              (numeric) The size of the mempool\n"
-            "  \"chain\": \"xxxx\",           (string) current network name as defined in BIP70 (main, test, regtest)\n"
+            "  \"chain\": \"xxxx\",           (string) Current network name as defined in BIP70 (main, test, regtest)\n"
             "}\n"
             "\nExamples:\n"
             + HelpExampleCli( "getmininginfo", "" )
@@ -321,7 +317,7 @@ UniValue getmininginfo( const JSONRPCRequest& request )
     obj.push_back(Pair("errors",           GetWarnings("statusbar")));
     obj.push_back(Pair("networkhashps",    getnetworkhashps( request ))) ;
     obj.push_back(Pair("generate",         getgenerate( request ))) ;
-    obj.push_back(Pair("genproclimit",     (int)GetArg( "-genproclimit", DEFAULT_GENERATE_THREADS ))) ;
+    obj.push_back(Pair("genthreads",       HowManyMiningThreads())) ;
     obj.push_back(Pair("pooledtx",         (uint64_t)mempool.size()));
     obj.push_back(Pair("chain",            Params().NetworkIDString()));
     return obj ;

@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -17,6 +18,7 @@
 #include <QMenu>
 #include <QPoint>
 #include <QSystemTrayIcon>
+#include <QTimer>
 
 class ClientModel;
 class NetworkStyle;
@@ -85,6 +87,7 @@ private:
     QLabel *labelWalletHDStatusIcon;
     QLabel *connectionsControl;
     QLabel *labelBlocksIcon;
+    QLabel * generatingLabel ;
     QLabel *progressBarLabel;
     QProgressBar *progressBar;
     QProgressDialog *progressDialog;
@@ -126,6 +129,8 @@ private:
     int spinnerFrame;
 
     const PlatformStyle * platformStyle ;
+
+    std::unique_ptr< QTimer > everySecondTimer ;
 
     /** Create the main UI actions */
     void createActions();
@@ -187,7 +192,7 @@ public Q_SLOTS:
 
     bool handlePaymentRequest(const SendCoinsRecipient& recipient);
 
-    /** Show incoming transaction notification for new transactions. */
+    /** Show incoming transaction notification for new transactions */
     void incomingTransaction(const QString& date, int unit, const CAmount& amount, const QString& type, const QString& address, const QString& label);
 #endif // ENABLE_WALLET
 
@@ -227,6 +232,8 @@ private Q_SLOTS:
     /** Handle tray icon clicked */
     void trayIconActivated(QSystemTrayIcon::ActivationReason reason);
 #endif
+
+    void updateBottomBarShowsDigging() ;
 
     /** Show window if hidden, unminimize when minimized, rise when obscured or show if hidden and fToggleHidden is true */
     void showNormalIfMinimized(bool fToggleHidden = false);

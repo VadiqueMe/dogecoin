@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -348,12 +349,12 @@ void BlockAssembler::AddToBlock(CTxMemPool::txiter iter)
     nFees += iter->GetFee();
     inBlock.insert(iter);
 
-    bool fPrintPriority = GetBoolArg("-printpriority", DEFAULT_PRINTPRIORITY);
-    if (fPrintPriority) {
+    bool fPrintPriority = GetBoolArg( "-printpriority", DEFAULT_PRINTPRIORITY ) ;
+    if ( fPrintPriority ) {
         double dPriority = iter->GetPriority(nHeight);
         CAmount dummy;
         mempool.ApplyDeltas(iter->GetTx().GetHash(), dPriority, dummy);
-        LogPrintf("priority %.1f fee %s txid %s\n",
+        LogPrintf("priority %.1f fee %s tx %s\n",
                   dPriority,
                   CFeeRate(iter->GetModifiedFee(), iter->GetTxSize()).ToString(),
                   iter->GetTx().GetHash().ToString());
@@ -660,6 +661,13 @@ void IncrementExtraNonce( CBlock * pblock, const CBlockIndex * pindexPrev, uint3
 // Internal miner
 //
 
+static std::unique_ptr< boost::thread_group > minerThreads ;
+
+size_t HowManyMiningThreads()
+{
+    return ( minerThreads != nullptr ) ? minerThreads->size() : 0 ;
+}
+
 //
 // ScanSHA256Hash scans nonces looking for a sha256 hash with many zero bits
 //
@@ -918,22 +926,19 @@ void static DogecoinMiner( const CChainParams & chainparams, char threadChar )
 
 void GenerateDogecoins( bool fGenerate, int nThreads, const CChainParams & chainparams )
 {
-    static boost::thread_group * minerThreads = nullptr ;
-
     if ( nThreads < 0 )
         nThreads = GetNumCores() ;
 
     if ( minerThreads != nullptr )
     {
         minerThreads->interrupt_all() ;
-        delete minerThreads ;
-        minerThreads = nullptr ;
+        minerThreads.reset( nullptr ) ;
     }
 
     if ( nThreads == 0 || ! fGenerate )
         return ;
 
-    minerThreads = new boost::thread_group() ;
+    minerThreads.reset( new boost::thread_group() ) ;
     for ( unsigned int i = 0 ; i < nThreads ; i++ )
         minerThreads->create_thread( boost::bind( &DogecoinMiner, boost::cref(chainparams), '1' + i ) ) ;
 }
