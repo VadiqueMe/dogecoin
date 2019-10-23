@@ -9,6 +9,9 @@
 
 class PlatformStyle ;
 
+class QCheckBox ;
+class QComboBox ;
+
 namespace Ui {
     class GenerateCoinsPage ;
 }
@@ -21,6 +24,9 @@ class GenerateCoinsPage : public QDialog
 public:
     explicit GenerateCoinsPage( const PlatformStyle * style, QWidget * parent = nullptr ) ;
     ~GenerateCoinsPage() ;
+
+    QCheckBox & getGenerateBlocksCheckbox() ;
+    QComboBox & getNumberOfThreadsList() ;
 
 public Q_SLOTS:
     void toggleGenerateBlocks( int qtCheckState ) ;

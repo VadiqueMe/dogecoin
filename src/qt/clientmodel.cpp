@@ -205,12 +205,12 @@ void ClientModel::setNetworkActive(bool active)
     }
 }
 
-bool ClientModel::getNetworkActive() const
+bool ClientModel::isNetworkActive() const
 {
-    if (g_connman) {
-        return g_connman->GetNetworkActive();
-    }
-    return false;
+    if ( g_connman != nullptr )
+        return g_connman->IsNetworkActive() ;
+
+    return false ;
 }
 
 QString ClientModel::getStatusBarWarnings() const

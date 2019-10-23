@@ -265,9 +265,9 @@
         <source>Processing blocks on disk...</source>
         <translation>กำลังดำเนินการกับบล็อกในดิสก์...</translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>%n บล็อกในประวัติรายการ ได้รับการดำเนินการเรียบร้อยแล้ว</numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>%n บล็อกในประวัติรายการ ได้รับการดำเนินการเรียบร้อยแล้ว</translation>
     </message>
     <message>
         <source>%1 behind</source>

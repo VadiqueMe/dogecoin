@@ -1563,8 +1563,8 @@
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation>Μονάδα μέτρησης προβολής ποσών. Κάντε κλικ για επιλογή άλλης μονάδας.</translation>
+        <source>Unit to show amounts in. Click to choose another unit</source>
+        <translation>Μονάδα μέτρησης προβολής ποσών. Κάντε κλικ για επιλογή άλλης μονάδας</translation>
     </message>
 </context>
 <context>

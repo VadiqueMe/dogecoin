@@ -780,8 +780,8 @@ void RPCConsole::updateNetworkState()
     connections += tr("In:") + " " + QString::number(clientModel->getNumConnections(CONNECTIONS_IN)) + " / ";
     connections += tr("Out:") + " " + QString::number(clientModel->getNumConnections(CONNECTIONS_OUT)) + ")";
 
-    if(!clientModel->getNetworkActive()) {
-        connections += " (" + tr("Network activity disabled") + ")";
+    if ( ! clientModel->isNetworkActive() ) {
+        connections += " (" + tr("Network activity is off") + ")" ;
     }
 
     ui->numberOfConnections->setText(connections);

@@ -307,16 +307,16 @@ Var vänlig och försök igen.</translation>
         <translation>Öppna &amp;URI...</translation>
     </message>
     <message>
-        <source>Click to disable network activity.</source>
-        <translation>Klicka för att inaktivera nätverksaktivitet.</translation>
+        <source>Click to switch network activity off</source>
+        <translation>Klicka för att inaktivera nätverksaktivitet</translation>
     </message>
     <message>
-        <source>Network activity disabled.</source>
-        <translation>Nätverksaktivitet inaktiverad.</translation>
+        <source>Network activity is off</source>
+        <translation>Nätverksaktivitet inaktiverad</translation>
     </message>
     <message>
-        <source>Click to enable network activity again.</source>
-        <translation>Klicka för att aktivera nätverksaktivitet igen.</translation>
+        <source>Click to turn it back on</source>
+        <translation>Klicka för att aktivera nätverksaktivitet igen</translation>
     </message>
     <message>
         <source>Syncing Headers (%1%)...</source>
@@ -426,9 +426,9 @@ Var vänlig och försök igen.</translation>
         <source>Processing blocks on disk...</source>
         <translation>Bearbetar block på disken...</translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>Bearbetade %n block av transaktionshistoriken.</numerusform><numerusform>Bearbetade %n block av transaktionshistoriken.</numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>Bearbetade %n block av transaktionshistoriken</translation>
     </message>
     <message>
         <source>%1 behind</source>
@@ -2028,8 +2028,8 @@ Var vänlig och försök igen.</translation>
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation>&amp;Enhet att visa belopp i. Klicka för att välja annan enhet.</translation>
+        <source>Unit to show amounts in. Click to choose another unit</source>
+        <translation>&amp;Enhet att visa belopp i. Klicka för att välja annan enhet</translation>
     </message>
 </context>
 <context>

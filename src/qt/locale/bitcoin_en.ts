@@ -390,7 +390,7 @@
     </message>
     <message>
         <location line="+359"/>
-        <source>Click to disable network activity.</source>
+        <source>Click to switch network activity off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -513,17 +513,17 @@
     </message>
     <message>
         <location line="+0"/>
-        <source>Click to disable network activity.</source>
+        <source>Click to switch network activity off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>Network activity disabled.</source>
+        <source>Network activity is off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+0"/>
-        <source>Click to enable network activity again.</source>
+        <source>Click to turn it back on</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -559,13 +559,10 @@
         <source>Connecting to peers...</source>
         <translation type="unfinished"></translation>
     </message>
-    <message numerus="yes">
+    <message>
         <location line="+9"/>
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation type="unfinished">
-            <numerusform>Processed %n block of transaction history.</numerusform>
-            <numerusform>Processed %n blocks of transaction history.</numerusform>
-        </translation>
+        <source>Processed %n blocks of transaction history</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+5"/>
@@ -3842,7 +3839,7 @@ p, li { white-space: pre-wrap; }
     <name>UnitDisplayStatusBarControl</name>
     <message>
         <location filename="../bitcoingui.cpp" line="+129"/>
-        <source>Unit to show amounts in. Click to select another unit.</source>
+        <source>Unit to show amounts in. Click to choose another unit</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

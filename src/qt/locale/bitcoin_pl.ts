@@ -409,9 +409,9 @@
         <source>Processing blocks on disk...</source>
         <translation>Przetwarzanie blocks on disk...</translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>Przetworzono %n bloków historii transakcji.</numerusform><numerusform>Przetworzono %n bloków historii transakcji.</numerusform><numerusform>Przetworzono %n bloków historii transakcji.</numerusform><numerusform>Przetworzono %n bloków historii transakcji.</numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>Przetworzono %n bloków historii transakcji</translation>
     </message>
     <message>
         <source>%1 behind</source>
@@ -2268,8 +2268,8 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation>Jednostka w jakiej pokazywane są kwoty. Kliknij aby wybrać inną.</translation>
+        <source>Unit to show amounts in. Click to choose another unit</source>
+        <translation>Jednostka w jakiej pokazywane są kwoty. Kliknij aby wybrać inną</translation>
     </message>
 </context>
 <context>

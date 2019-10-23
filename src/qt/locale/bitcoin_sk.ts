@@ -306,16 +306,16 @@
         <translation>Otvoriť &amp;URI...</translation>
     </message>
     <message>
-        <source>Click to disable network activity.</source>
-        <translation>Kliknite pre zakázanie sieťovej aktivity.</translation>
+        <source>Click to switch network activity off</source>
+        <translation>Kliknite pre zakázanie sieťovej aktivity</translation>
     </message>
     <message>
-        <source>Network activity disabled.</source>
-        <translation>Sieťová aktivita zakázaná.</translation>
+        <source>Network activity is off</source>
+        <translation>Sieťová aktivita zakázaná</translation>
     </message>
     <message>
-        <source>Click to enable network activity again.</source>
-        <translation>Kliknite pre povolenie sieťovej aktivity.</translation>
+        <source>Click to turn it back on</source>
+        <translation>Kliknite pre povolenie sieťovej aktivity</translation>
     </message>
     <message>
         <source>Syncing Headers (%1%)...</source>
@@ -425,9 +425,9 @@
         <source>Processing blocks on disk...</source>
         <translation>Spracovávam bloky na disku...</translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>Spracovaných %n blok transakčnej histórie.</numerusform><numerusform>Spracovaných %n bloky transakčnej histórie.</numerusform><numerusform>Spracovaných %n blokov transakčnej histórie.</numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>Spracovaných %n blokov transakčnej histórie</translation>
     </message>
     <message>
         <source>%1 behind</source>
@@ -2716,8 +2716,8 @@
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation>Jednotka pre zobrazovanie súm. Kliknite pre zvolenie inej jednotky.</translation>
+        <source>Unit to show amounts in. Click to choose another unit</source>
+        <translation>Jednotka pre zobrazovanie súm. Kliknite pre zvolenie inej jednotky</translation>
     </message>
 </context>
 <context>

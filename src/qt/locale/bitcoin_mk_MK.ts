@@ -165,9 +165,9 @@
         <source>&amp;Help</source>
         <translation>&amp;Помош</translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>Обработен %n блок од историјата на трансакции.</numerusform><numerusform>Обработени %n блокови од историјата на трансакции.</numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>Обработени %n блокови од историјата на трансакции</translation>
     </message>
     <message>
         <source>%1 behind</source>

@@ -439,13 +439,13 @@ UniValue getnetworkinfo(const JSONRPCRequest& request)
     obj.push_back(Pair("version",       CLIENT_VERSION));
     obj.push_back(Pair("subversion",    strSubVersion));
     obj.push_back(Pair("protocolversion",PROTOCOL_VERSION));
-    if(g_connman)
+    if ( g_connman != nullptr )
         obj.push_back(Pair("localservices", strprintf("%016x", g_connman->GetLocalServices())));
     obj.push_back(Pair("localrelay",     fRelayTxes));
     obj.push_back(Pair("timeoffset",    GetTimeOffset()));
-    if (g_connman) {
-        obj.push_back(Pair("networkactive", g_connman->GetNetworkActive()));
-        obj.push_back(Pair("connections",   (int)g_connman->GetNodeCount(CConnman::CONNECTIONS_ALL)));
+    if ( g_connman != nullptr ) {
+        obj.push_back( Pair( "networkactive", g_connman->IsNetworkActive() ) ) ;
+        obj.push_back( Pair( "connections", (int)g_connman->GetNodeCount( CConnman::CONNECTIONS_ALL ) ) ) ;
     }
     obj.push_back(Pair("networks",      GetNetworksInfo()));
     obj.push_back(Pair("relayfee", ValueFromAmount( ::minRelayTxFee.GetFeePerKiloByte() ))) ;
@@ -597,9 +597,9 @@ UniValue setnetworkactive(const JSONRPCRequest& request)
         throw JSONRPCError(RPC_CLIENT_P2P_DISABLED, "Error: Peer-to-peer functionality missing or disabled");
     }
 
-    g_connman->SetNetworkActive(request.params[0].get_bool());
+    g_connman->SetNetworkActive( request.params[0].get_bool() ) ;
 
-    return g_connman->GetNetworkActive();
+    return g_connman->IsNetworkActive() ;
 }
 
 static const CRPCCommand commands[] =

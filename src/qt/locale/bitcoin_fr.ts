@@ -306,16 +306,16 @@
         <translation>Ouvrir une &amp;URI...</translation>
     </message>
     <message>
-        <source>Click to disable network activity.</source>
-        <translation>Cliquer pour désactiver l'activité réseau.</translation>
+        <source>Click to switch network activity off</source>
+        <translation>Cliquer pour désactiver l'activité réseau</translation>
     </message>
     <message>
-        <source>Network activity disabled.</source>
-        <translation>L'activité réseau est désactivée.</translation>
+        <source>Network activity is off</source>
+        <translation>L'activité réseau est désactivée</translation>
     </message>
     <message>
-        <source>Click to enable network activity again.</source>
-        <translation>Cliquer pour réactiver l'activité réseau.</translation>
+        <source>Click to turn it back on</source>
+        <translation>Cliquer pour réactiver l'activité réseau</translation>
     </message>
     <message>
         <source>Syncing Headers (%1%)...</source>
@@ -425,9 +425,9 @@
         <source>Processing blocks on disk...</source>
         <translation>Traitement des blocs sur le disque...</translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>%n bloc d'historique transactionnel a été traité</numerusform><numerusform>%n blocs d'historique transactionnel ont été traités</numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>%n blocs d'historique transactionnel ont été traités</translation>
     </message>
     <message>
         <source>%1 behind</source>
@@ -2779,8 +2779,8 @@
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation>Unité d'affichage des montants. Cliquer pour choisir une autre unité.</translation>
+        <source>Unit to show amounts in. Click to choose another unit</source>
+        <translation>Unité d'affichage des montants. Cliquer pour choisir une autre unité</translation>
     </message>
 </context>
 <context>

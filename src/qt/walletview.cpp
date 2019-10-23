@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -20,6 +21,7 @@
 #include "transactionview.h"
 #include "walletmodel.h"
 #include "utilitydialog.h"
+#include "miner.h"
 
 #include "ui_interface.h"
 
@@ -30,6 +32,8 @@
 #include <QProgressDialog>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QCheckBox>
+#include <QComboBox>
 
 WalletView::WalletView( const PlatformStyle * style, QWidget * parent ) :
     QStackedWidget(parent),
@@ -200,6 +204,16 @@ void WalletView::gotoSendCoinsPage(QString addr)
 void WalletView::gotoDigPage()
 {
     setCurrentWidget( generateCoinsPage ) ;
+}
+
+void WalletView::updateDigPage()
+{
+    size_t threads = HowManyMiningThreads() ;
+    generateCoinsPage->getGenerateBlocksCheckbox().setChecked( threads > 0 ) ;
+    QString qthrea = QString::number( threads ) ;
+    if ( generateCoinsPage->getNumberOfThreadsList().findText( qthrea, Qt::MatchExactly ) < 0 )
+        generateCoinsPage->getNumberOfThreadsList().addItem( qthrea ) ;
+    generateCoinsPage->getNumberOfThreadsList().setCurrentText( qthrea ) ;
 }
 
 void WalletView::gotoSignMessageTab(QString addr)

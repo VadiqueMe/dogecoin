@@ -253,9 +253,9 @@
         <source>Processing blocks on disk...</source>
         <translation>Käsitellään lohkoja levyllä...</translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>Prosessoitu %n lohko rahansiirtohistoriasta.</numerusform><numerusform>Prosessoitu %n lohkoa rahansiirtohistoriasta.</numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>Prosessoitu %n lohkoa rahansiirtohistoriasta</translation>
     </message>
     <message>
         <source>%1 behind</source>
@@ -1595,8 +1595,8 @@
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation>Yksikkö jossa määrät näytetään. Klikkaa valitaksesi toisen yksikön.</translation>
+        <source>Unit to show amounts in. Click to choose another unit</source>
+        <translation>Yksikkö jossa määrät näytetään. Klikkaa valitaksesi toisen yksikön</translation>
     </message>
 </context>
 <context>

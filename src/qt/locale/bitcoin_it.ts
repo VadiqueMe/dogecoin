@@ -405,9 +405,9 @@
         <source>Processing blocks on disk...</source>
         <translation>Processando i blocchi su disco...</translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>Elaborato %n blocco dello storico transazioni.</numerusform><numerusform>Elaborati %n blocchi dello storico transazioni.</numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>Elaborati %n blocchi dello storico transazioni</translation>
     </message>
     <message>
         <source>%1 behind</source>
@@ -2536,8 +2536,8 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation>Unità con cui visualizzare gli importi. Clicca per selezionare un'altra unità.</translation>
+        <source>Unit to show amounts in. Click to choose another unit</source>
+        <translation>Unità con cui visualizzare gli importi. Clicca per selezionare un'altra unità</translation>
     </message>
 </context>
 <context>

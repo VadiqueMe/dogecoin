@@ -302,16 +302,16 @@
         <translation>Oop &amp; URI...</translation>
     </message>
     <message>
-        <source>Click to disable network activity.</source>
-        <translation>Kliek om netwerkaktiwiteit af te skakel.</translation>
+        <source>Click to switch network activity off</source>
+        <translation>Kliek om netwerkaktiwiteit af te skakel</translation>
     </message>
     <message>
-        <source>Network activity disabled.</source>
-        <translation>Netwerkaktiwiteit gedeaktiveer.</translation>
+        <source>Network activity is off</source>
+        <translation>Netwerkaktiwiteit gedeaktiveer</translation>
     </message>
     <message>
-        <source>Click to enable network activity again.</source>
-        <translation>Kliek om netwerkaktiwiteit weer aan te skakel.</translation>
+        <source>Click to turn it back on</source>
+        <translation>Kliek om netwerkaktiwiteit weer aan te skakel</translation>
     </message>
     <message>
         <source>Reindexing blocks on disk...</source>

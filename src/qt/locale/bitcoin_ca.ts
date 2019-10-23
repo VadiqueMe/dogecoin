@@ -306,16 +306,16 @@
         <translation>Obre un &amp;URI...</translation>
     </message>
     <message>
-        <source>Click to disable network activity.</source>
-        <translation>Feu clic per inhabilitar l'activitat de la xarxa.</translation>
+        <source>Click to switch network activity off</source>
+        <translation>Feu clic per inhabilitar l'activitat de la xarxa</translation>
     </message>
     <message>
-        <source>Network activity disabled.</source>
-        <translation>S'ha inhabilitat l'activitat de la xarxa.</translation>
+        <source>Network activity is off</source>
+        <translation>S'ha inhabilitat l'activitat de la xarxa</translation>
     </message>
     <message>
-        <source>Click to enable network activity again.</source>
-        <translation>Feu clic per tornar a habilitar l'activitat de la xarxa.</translation>
+        <source>Click to turn it back on</source>
+        <translation>Feu clic per tornar a habilitar l'activitat de la xarxa</translation>
     </message>
     <message>
         <source>Reindexing blocks on disk...</source>
@@ -421,9 +421,9 @@
         <source>Processing blocks on disk...</source>
         <translation>S'estan processant els blocs al disc...</translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>S'ha processat %n bloc de l'historial de transacció.</numerusform><numerusform>S'han processat %n blocs de l'historial de transacció.</numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>S'han processat %n blocs de l'historial de transacció</translation>
     </message>
     <message>
         <source>%1 behind</source>
@@ -2599,8 +2599,8 @@
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation>Unitat en què mostrar els imports. Feu clic per seleccionar una altra unitat.</translation>
+        <source>Unit to show amounts in. Click to choose another unit</source>
+        <translation>Unitat en què mostrar els imports. Feu clic per seleccionar una altra unitat</translation>
     </message>
 </context>
 <context>

@@ -306,16 +306,16 @@
         <translation>Načíst &amp;URI...</translation>
     </message>
     <message>
-        <source>Click to disable network activity.</source>
-        <translation>Kliknutím zařízneš spojení se sítí.</translation>
+        <source>Click to switch network activity off</source>
+        <translation>Kliknutím zařízneš spojení se sítí</translation>
     </message>
     <message>
-        <source>Network activity disabled.</source>
-        <translation>Síť je vypnutá.</translation>
+        <source>Network activity is off</source>
+        <translation>Síť je vypnutá</translation>
     </message>
     <message>
-        <source>Click to enable network activity again.</source>
-        <translation>Kliknutím opět umožníš spojení do sítě.</translation>
+        <source>Click to turn it back on</source>
+        <translation>Kliknutím opět umožníš spojení do sítě</translation>
     </message>
     <message>
         <source>Syncing Headers (%1%)...</source>
@@ -425,9 +425,9 @@
         <source>Processing blocks on disk...</source>
         <translation>Zpracovávám bloky na disku...</translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>Zpracován %n blok transakční historie.</numerusform><numerusform>Zpracovány %n bloky transakční historie.</numerusform><numerusform>Zpracováno %n bloků transakční historie.</numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>Zpracováno %n bloků transakční historie</translation>
     </message>
     <message>
         <source>%1 behind</source>
@@ -2779,8 +2779,8 @@
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation>Jednotka pro částky. Klikni pro výběr nějaké jiné.</translation>
+        <source>Unit to show amounts in. Click to choose another unit</source>
+        <translation>Jednotka pro částky. Klikni pro výběr nějaké jiné</translation>
     </message>
 </context>
 <context>

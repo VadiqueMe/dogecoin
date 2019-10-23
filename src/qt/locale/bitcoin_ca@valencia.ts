@@ -2347,8 +2347,8 @@
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation>Unitat en què mostrar els imports. Feu clic per seleccionar una altra unitat.</translation>
+        <source>Unit to show amounts in. Click to choose another unit</source>
+        <translation>Unitat en què mostrar els imports. Feu clic per seleccionar una altra unitat</translation>
     </message>
 </context>
 <context>

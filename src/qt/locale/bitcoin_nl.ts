@@ -306,16 +306,16 @@
         <translation>Open &amp;URI...</translation>
     </message>
     <message>
-        <source>Click to disable network activity.</source>
-        <translation>Klik om de netwerkactiviteit te stoppen.</translation>
+        <source>Click to switch network activity off</source>
+        <translation>Klik om de netwerkactiviteit te stoppen</translation>
     </message>
     <message>
-        <source>Network activity disabled.</source>
-        <translation>Netwerkactiviteit gestopt.</translation>
+        <source>Network activity is off</source>
+        <translation>Netwerkactiviteit gestopt</translation>
     </message>
     <message>
-        <source>Click to enable network activity again.</source>
-        <translation>Klik om de netwerkactiviteit opnieuw te starten.</translation>
+        <source>Click to turn it back on</source>
+        <translation>Klik om de netwerkactiviteit opnieuw te starten</translation>
     </message>
     <message>
         <source>Syncing Headers (%1%)...</source>
@@ -425,9 +425,9 @@
         <source>Processing blocks on disk...</source>
         <translation>Bezig met verwerken van blokken op harde schijf...</translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>%n blok aan transactiegeschiedenis verwerkt.</numerusform><numerusform>%n blokken aan transactiegeschiedenis verwerkt.</numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>%n blokken aan transactiegeschiedenis verwerkt</translation>
     </message>
     <message>
         <source>%1 behind</source>
@@ -2775,8 +2775,8 @@
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation>Eenheid om bedragen uit te drukken. Klik om een andere eenheid te selecteren.</translation>
+        <source>Unit to show amounts in. Click to choose another unit</source>
+        <translation>Eenheid om bedragen uit te drukken. Klik om een andere eenheid te selecteren</translation>
     </message>
 </context>
 <context>

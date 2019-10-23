@@ -302,16 +302,16 @@
         <translation>Abrir &amp;URI...</translation>
     </message>
     <message>
-        <source>Click to disable network activity.</source>
-        <translation>Clique para desativar a atividade de rede.</translation>
+        <source>Click to switch network activity off</source>
+        <translation>Clique para desativar a atividade de rede</translation>
     </message>
     <message>
-        <source>Network activity disabled.</source>
-        <translation>Atividade de rede desativada.</translation>
+        <source>Network activity is off</source>
+        <translation>Atividade de rede desativada</translation>
     </message>
     <message>
-        <source>Click to enable network activity again.</source>
-        <translation>Clique para ativar a atividade de rede.</translation>
+        <source>Click to turn it back on</source>
+        <translation>Clique para ativar a atividade de rede</translation>
     </message>
     <message>
         <source>Syncing Headers (%1%)...</source>
@@ -421,9 +421,9 @@
         <source>Processing blocks on disk...</source>
         <translation>Processando blocos no disco...</translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>%n bloco processado do histórico de transações.</numerusform><numerusform>%n blocos processados do histórico de transações.</numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>%n blocos processados do histórico de transações</translation>
     </message>
     <message>
         <source>%1 behind</source>
@@ -2775,8 +2775,8 @@
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation>Unidade para mostrar. Clique para selecionar outra unidade.</translation>
+        <source>Unit to show amounts in. Click to choose another unit</source>
+        <translation>Unidade para mostrar. Clique para selecionar outra unidade</translation>
     </message>
 </context>
 <context>

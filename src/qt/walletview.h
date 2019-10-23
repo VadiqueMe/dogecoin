@@ -85,6 +85,8 @@ public Q_SLOTS:
     /** Switch to dig page */
     void gotoDigPage() ;
 
+    void updateDigPage() ;
+
     /** Show Sign/Verify Message dialog and switch to sign message tab */
     void gotoSignMessageTab(QString addr = "");
     /** Show Sign/Verify Message dialog and switch to verify message tab */

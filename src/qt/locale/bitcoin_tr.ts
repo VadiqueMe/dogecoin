@@ -306,16 +306,16 @@
         <translation>&amp;URI Aç...</translation>
     </message>
     <message>
-        <source>Click to disable network activity.</source>
-        <translation>Ağ etkinliğini devre dışı bırakmak için tıklayın.</translation>
+        <source>Click to switch network activity off</source>
+        <translation>Ağ etkinliğini devre dışı bırakmak için tıklayın</translation>
     </message>
     <message>
-        <source>Network activity disabled.</source>
-        <translation>Ağ etkinliği devre dışı bırakılmış.</translation>
+        <source>Network activity is off</source>
+        <translation>Ağ etkinliği devre dışı bırakılmış</translation>
     </message>
     <message>
-        <source>Click to enable network activity again.</source>
-        <translation>Ağ etkinliğini yeniden etkinleştirmek için tıklayın.</translation>
+        <source>Click to turn it back on</source>
+        <translation>Ağ etkinliğini yeniden etkinleştirmek için tıklayın</translation>
     </message>
     <message>
         <source>Syncing Headers (%1%)...</source>
@@ -425,9 +425,9 @@
         <source>Processing blocks on disk...</source>
         <translation>Bloklar diske işleniyor...</translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>Muamele tarihçesinden %n blok işlendi.</numerusform><numerusform>İşlem tarihçesinden %n blok işlendi</numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>İşlem tarihçesinden %n blok işlendi</translation>
     </message>
     <message>
         <source>%1 behind</source>
@@ -2775,8 +2775,8 @@
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation>Tutarı göstermek için birim. Başka bir birim seçmek için tıklayınız.</translation>
+        <source>Unit to show amounts in. Click to choose another unit</source>
+        <translation>Tutarı göstermek için birim. Başka bir birim seçmek için tıklayınız</translation>
     </message>
 </context>
 <context>

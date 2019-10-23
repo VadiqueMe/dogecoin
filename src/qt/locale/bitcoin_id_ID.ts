@@ -302,16 +302,16 @@
         <translation>Buka &amp;URI</translation>
     </message>
     <message>
-        <source>Click to disable network activity.</source>
-        <translation>Klik untuk menonaktifkan aktivitas jaringan.</translation>
+        <source>Click to switch network activity off</source>
+        <translation>Klik untuk menonaktifkan aktivitas jaringan</translation>
     </message>
     <message>
-        <source>Network activity disabled.</source>
-        <translation>Aktivitas jaringan dinonaktifkan.</translation>
+        <source>Network activity is off</source>
+        <translation>Aktivitas jaringan dinonaktifkan</translation>
     </message>
     <message>
-        <source>Click to enable network activity again.</source>
-        <translation>Klik untuk mengaktifkan aktivitas jaringan lagi.</translation>
+        <source>Click to turn it back on</source>
+        <translation>Klik untuk mengaktifkan aktivitas jaringan lagi</translation>
     </message>
     <message>
         <source>Syncing Headers (%1%)...</source>
@@ -421,9 +421,9 @@
         <source>Processing blocks on disk...</source>
         <translation>Memproses blok pada disk ...</translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>%n blok dari riwayat transaksi diproses.</numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>%n blok dari riwayat transaksi diproses</translation>
     </message>
     <message>
         <source>%1 behind</source>

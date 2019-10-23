@@ -791,7 +791,7 @@ void static DogecoinMiner( const CChainParams & chainparams, char threadChar )
         // Throw an error if no script was provided.  This can happen
         // due to some internal error but also if the keypool is empty.
         // In the latter case, already the pointer is NULL
-        if ( ! coinbaseScript || coinbaseScript->reserveScript.empty() )
+        if ( coinbaseScript == nullptr || coinbaseScript->reserveScript.empty() )
             throw std::runtime_error( "No coinbase script available (mining requires a wallet)" ) ;
 
         std::random_device randomDevice ;
@@ -886,7 +886,7 @@ void static DogecoinMiner( const CChainParams & chainparams, char threadChar )
                     }
                 }
 
-                // Check for stop or if block needs to be rebuilt
+                // Check if block needs to be rebuilt
                 boost::this_thread::interruption_point() ;
                 if ( ! g_connman->hasConnectedNodes() && chainparams.MiningRequiresPeers() ) // regtest doesn't need any peer
                     break ;

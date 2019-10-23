@@ -43,6 +43,16 @@ GenerateCoinsPage::~GenerateCoinsPage()
     delete ui ;
 }
 
+QCheckBox & GenerateCoinsPage::getGenerateBlocksCheckbox()
+{
+    return *( ui->generateBlocksYesNo ) ;
+}
+
+QComboBox & GenerateCoinsPage::getNumberOfThreadsList()
+{
+    return *( ui->numberOfThreadsList ) ;
+}
+
 void GenerateCoinsPage::toggleGenerateBlocks( int qtCheckState )
 {
     if ( qtCheckState == Qt::Unchecked )

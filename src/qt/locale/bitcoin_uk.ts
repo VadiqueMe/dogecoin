@@ -289,9 +289,9 @@
         <source>%n active connection(s) to Dogecoin network</source>
         <translation><numerusform>%n активне з'єднання з мережею Dogecoin</numerusform><numerusform>%n активні з'єднання з мережею Dogecoin</numerusform><numerusform>%n активних з'єднань з мережею Dogecoin</numerusform></translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>Оброблено %n блок історії транзакцій.</numerusform><numerusform>Оброблено %n блоки історії транзакцій.</numerusform><numerusform>Оброблено %n блоків історії транзакцій.</numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>Оброблено %n блоків історії транзакцій</translation>
     </message>
     <message>
         <source>%1 behind</source>
@@ -1611,8 +1611,8 @@
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation>Одиниця виміру монет. Натисніть для вибору іншої.</translation>
+        <source>Unit to show amounts in. Click to choose another unit</source>
+        <translation>Одиниця виміру монет. Натисніть для вибору іншої</translation>
     </message>
 </context>
 <context>

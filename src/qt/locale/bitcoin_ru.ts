@@ -306,16 +306,16 @@
         <translation>Открыть &amp;URI...</translation>
     </message>
     <message>
-        <source>Click to disable network activity.</source>
-        <translation>Кликните, чтобы запретить сетевую активность.</translation>
+        <source>Click to switch network activity off</source>
+        <translation>Кликните, чтобы выключить сетевую активность</translation>
     </message>
     <message>
-        <source>Network activity disabled.</source>
-        <translation>Сетевая активность запрещена.</translation>
+        <source>Network activity is off</source>
+        <translation>Сетевая активность выключена</translation>
     </message>
     <message>
-        <source>Click to enable network activity again.</source>
-        <translation>Кликните, чтобы снова разрешить сетевую активность.</translation>
+        <source>Click to turn it back on</source>
+        <translation>Кликните, чтобы снова включить её</translation>
     </message>
     <message>
         <source>Syncing Headers (%1%)...</source>
@@ -425,9 +425,9 @@
         <source>Processing blocks on disk...</source>
         <translation>Обработка блоков на диске...</translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>Обработан %n блок истории транзакций.</numerusform><numerusform>Обработано %n блока истории транзакций.</numerusform><numerusform>Обработано %n блоков истории транзакций.</numerusform><numerusform>Обработано %n блоков истории транзакций.</numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>Обработано %n блоков истории транзакций</translation>
     </message>
     <message>
         <source>%1 behind</source>
@@ -2779,8 +2779,8 @@
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation>Единица измерения количества монет. Щёлкните для выбора другой единицы.</translation>
+        <source>Unit to show amounts in. Click to choose another unit</source>
+        <translation>Единица измерения количества монет. Щёлкните для выбора другой единицы</translation>
     </message>
 </context>
 <context>

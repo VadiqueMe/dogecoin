@@ -329,9 +329,9 @@
         <source>%n active connection(s) to Dogecoin network</source>
         <translation><numerusform>%n aktiv forbindelse til Dogecoin-nettverket</numerusform><numerusform>%n aktive forbindelser til Dogecoin-nettverket</numerusform></translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>Lastet %n blokk med transaksjonshistorikk.</numerusform><numerusform>Lastet %n blokker med transaksjonshistorikk.</numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>Lastet %n blokker med transaksjonshistorikk</translation>
     </message>
     <message>
         <source>%1 behind</source>
@@ -1683,8 +1683,8 @@
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation>Enhet å vise beløper i. Klikk for å velge en annen enhet.</translation>
+        <source>Unit to show amounts in. Click to choose another unit</source>
+        <translation>Enhet å vise beløper i. Klikk for å velge en annen enhet</translation>
     </message>
 </context>
 <context>

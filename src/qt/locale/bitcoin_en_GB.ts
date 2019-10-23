@@ -313,10 +313,6 @@
         <source>Processing blocks on disk...</source>
         <translation>Processing blocks on disk...</translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>Processed %n block of transaction history.</numerusform><numerusform>Processed %n blocks of transaction history.</numerusform></translation>
-    </message>
     <message>
         <source>%1 behind</source>
         <translation>%1 behind</translation>
@@ -1707,8 +1703,8 @@
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation>Unit to show amounts in. Click to select another unit.</translation>
+        <source>Unit to show amounts in. Click to choose another unit</source>
+        <translation>Unit to show amounts in. Click to select another unit</translation>
     </message>
 </context>
 <context>

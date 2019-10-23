@@ -306,16 +306,16 @@
         <translation>&amp;URI 열기...</translation>
     </message>
     <message>
-        <source>Click to disable network activity.</source>
-        <translation>네트워크 활동을 중지하려면 클릭.</translation>
+        <source>Click to switch network activity off</source>
+        <translation>네트워크 활동을 중지하려면 클릭</translation>
     </message>
     <message>
-        <source>Network activity disabled.</source>
-        <translation>네트워크 활동이 정지됨.</translation>
+        <source>Network activity is off</source>
+        <translation>네트워크 활동이 정지됨</translation>
     </message>
     <message>
-        <source>Click to enable network activity again.</source>
-        <translation>네트워크 활동을 다시 시작하려면 클릭.</translation>
+        <source>Click to turn it back on</source>
+        <translation>네트워크 활동을 다시 시작하려면 클릭</translation>
     </message>
     <message>
         <source>Syncing Headers (%1%)...</source>
@@ -425,9 +425,9 @@
         <source>Processing blocks on disk...</source>
         <translation>디스크에서 블록 처리중...</translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>%n 블록 만큼의 거래 기록이 처리됨.</numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>%n 블록 만큼의 거래 기록이 처리됨</translation>
     </message>
     <message>
         <source>%1 behind</source>
@@ -2779,8 +2779,8 @@
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation>거래액을 표시하는 단위. 클릭해서 다른 단위를 선택할 수 있습니다.</translation>
+        <source>Unit to show amounts in. Click to choose another unit</source>
+        <translation>거래액을 표시하는 단위. 클릭해서 다른 단위를 선택할 수 있습니다</translation>
     </message>
 </context>
 <context>

@@ -369,9 +369,9 @@
         <source>Processing blocks on disk...</source>
         <translation>Kõvakettal olevate plokkide töötlemine...</translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>Töödeldud %n plokk transaktsioonide ajaloost.</numerusform><numerusform>Töödeldud %n plokki transaktsioonide ajaloost.</numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>Töödeldud %n plokki transaktsioonide ajaloost</translation>
     </message>
     <message>
         <source>%1 behind</source>

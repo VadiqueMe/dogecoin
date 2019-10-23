@@ -237,9 +237,9 @@
         <source>%n active connection(s) to Dogecoin network</source>
         <translation><numerusform>%n aktív kapcsolat a Dogecoin hálózathoz</numerusform><numerusform>%n aktív kapcsolat a Dogecoin hálózathoz</numerusform></translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>%n blokk feldolgozva a tranzakció előzményből.</numerusform><numerusform>%n blokk feldolgozva a tranzakció előzményből.</numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>%n blokk feldolgozva a tranzakció előzményből</translation>
     </message>
     <message>
         <source>%1 behind</source>

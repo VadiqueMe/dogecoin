@@ -306,16 +306,16 @@
         <translation>URI を開く (&amp;U)...</translation>
     </message>
     <message>
-        <source>Click to disable network activity.</source>
-        <translation>クリックするとネットワーク活動を無効化します。</translation>
+        <source>Click to switch network activity off</source>
+        <translation>クリックするとネットワーク活動を無効化します</translation>
     </message>
     <message>
-        <source>Network activity disabled.</source>
-        <translation>ネットワーク活動は無効化されました。</translation>
+        <source>Network activity is off</source>
+        <translation>ネットワーク活動は無効化されました</translation>
     </message>
     <message>
-        <source>Click to enable network activity again.</source>
-        <translation>クリックするとネットワーク活動を再び有効化します。</translation>
+        <source>Click to turn it back on</source>
+        <translation>クリックするとネットワーク活動を再び有効化します</translation>
     </message>
     <message>
         <source>Syncing Headers (%1%)...</source>
@@ -425,9 +425,9 @@
         <source>Processing blocks on disk...</source>
         <translation>ディスク上のブロックを処理しています...</translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>トランザクション履歴の %n ブロックを処理しました。</numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>トランザクション履歴の %n ブロックを処理しました</translation>
     </message>
     <message>
         <source>%1 behind</source>
@@ -2779,8 +2779,8 @@
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation>金額を表示する際の単位。クリックすることで他の単位を選択します。</translation>
+        <source>Unit to show amounts in. Click to choose another unit</source>
+        <translation>金額を表示する際の単位。クリックすることで他の単位を選択します</translation>
     </message>
 </context>
 <context>

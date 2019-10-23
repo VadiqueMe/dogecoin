@@ -306,16 +306,16 @@
         <translation>&amp;Åbn URI…</translation>
     </message>
     <message>
-        <source>Click to disable network activity.</source>
-        <translation>Klik for at deaktivere netværksaktivitet.</translation>
+        <source>Click to switch network activity off</source>
+        <translation>Klik for at deaktivere netværksaktivitet</translation>
     </message>
     <message>
-        <source>Network activity disabled.</source>
-        <translation>Netværksaktivitet deaktiveret.</translation>
+        <source>Network activity is off</source>
+        <translation>Netværksaktivitet deaktiveret</translation>
     </message>
     <message>
-        <source>Click to enable network activity again.</source>
-        <translation>Klik for a aktivere netværksaktivitet igen.</translation>
+        <source>Click to turn it back on</source>
+        <translation>Klik for a aktivere netværksaktivitet igen</translation>
     </message>
     <message>
         <source>Syncing Headers (%1%)...</source>
@@ -425,9 +425,9 @@
         <source>Processing blocks on disk...</source>
         <translation>Bearbejder blokke på disken…</translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>Bearbejdede %n blok med transaktionshistorik.</numerusform><numerusform>Bearbejdede %n blokke med transaktionshistorik.</numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>Bearbejdede %n blokke med transaktionshistorik</translation>
     </message>
     <message>
         <source>%1 behind</source>
@@ -2779,8 +2779,8 @@
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation>Enhed, som beløb vises i. Klik for at vælge en anden enhed.</translation>
+        <source>Unit to show amounts in. Click to choose another unit</source>
+        <translation>Enhed, som beløb vises i. Klik for at vælge en anden enhed</translation>
     </message>
 </context>
 <context>

@@ -306,16 +306,16 @@
         <translation>開啓 URI...</translation>
     </message>
     <message>
-        <source>Click to disable network activity.</source>
-        <translation>按一下就會不使用網路。</translation>
+        <source>Click to switch network activity off</source>
+        <translation>按一下就會不使用網路</translation>
     </message>
     <message>
-        <source>Network activity disabled.</source>
-        <translation>網路活動關閉了。</translation>
+        <source>Network activity is off</source>
+        <translation>網路活動關閉了</translation>
     </message>
     <message>
-        <source>Click to enable network activity again.</source>
-        <translation>按一下就又會使用網路。</translation>
+        <source>Click to turn it back on</source>
+        <translation>按一下就又會使用網路</translation>
     </message>
     <message>
         <source>Syncing Headers (%1%)...</source>
@@ -425,9 +425,9 @@
         <source>Processing blocks on disk...</source>
         <translation>正在處理磁碟裡的區塊資料...</translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>已經處理了 %n 個區塊的交易紀錄。</numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>已經處理了 %n 個區塊的交易紀錄</translation>
     </message>
     <message>
         <source>%1 behind</source>
@@ -2775,8 +2775,8 @@
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation>金額顯示單位。可以點選其他單位。</translation>
+        <source>Unit to show amounts in. Click to choose another unit</source>
+        <translation>金額顯示單位。可以點選其他單位</translation>
     </message>
 </context>
 <context>

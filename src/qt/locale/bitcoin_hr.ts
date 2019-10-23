@@ -257,9 +257,9 @@
         <source>%n active connection(s) to Dogecoin network</source>
         <translation><numerusform>%n aktivna veza na Dogecoin mrežu</numerusform><numerusform>%n aktivnih veza na Dogecoin mrežu</numerusform><numerusform>%n aktivnih veza na Dogecoin mrežu</numerusform></translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>Obrađen %n blok povijesti transakcije.</numerusform><numerusform>Obrađeno %n bloka povijesti transakcije.</numerusform><numerusform>Obrađeno %n blokova povijesti transakcije.</numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>Obrađeno %n blokova povijesti transakcije</translation>
     </message>
     <message>
         <source>Last received block was generated %1 ago.</source>

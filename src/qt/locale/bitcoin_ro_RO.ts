@@ -233,9 +233,9 @@
         <source>%n active connection(s) to Dogecoin network</source>
         <translation><numerusform>%n conexiune activă către reţeaua Dogecoin</numerusform><numerusform>%n conexiuni active către reţeaua Dogecoin</numerusform><numerusform>%n de conexiuni active către reţeaua Dogecoin</numerusform></translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>S-a procesat %n bloc din istoricul tranzacţiilor.</numerusform><numerusform>S-au procesat %n blocuri din istoricul tranzacţiilor.</numerusform><numerusform>S-au procesat %n de blocuri din istoricul tranzacţiilor.</numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>S-au procesat %n de blocuri din istoricul tranzacţiilor</translation>
     </message>
     <message>
         <source>%1 behind</source>
@@ -1459,8 +1459,8 @@
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation>Unitatea în care sînt arătate sumele. Faceţi clic pentru a selecta o altă unitate.</translation>
+        <source>Unit to show amounts in. Click to choose another unit</source>
+        <translation>Unitatea în care sînt arătate sumele. Faceţi clic pentru a selecta o altă unitate</translation>
     </message>
 </context>
 <context>

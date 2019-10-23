@@ -59,7 +59,7 @@ public:
     long getMempoolSize() const;
     //! Return the dynamic memory usage of the mempool
     size_t getMempoolDynamicUsage() const;
-    
+
     quint64 getTotalBytesRecv() const;
     quint64 getTotalBytesSent() const;
 
@@ -70,8 +70,8 @@ public:
     bool inInitialBlockDownload() const;
     //! Returns enum BlockSource of the current importing/syncing state
     enum BlockSource getBlockSource() const;
-    //! Return true if network activity in core is enabled
-    bool getNetworkActive() const;
+    // True if network activity is on
+    bool isNetworkActive() const ;
     //! Toggle network activity state in core
     void setNetworkActive(bool active);
     //! Return warnings to be displayed in status bar

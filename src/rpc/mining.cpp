@@ -30,8 +30,6 @@
 
 #include <univalue.h>
 
-using namespace std;
-
 /**
  * Return average network hashes per second based on the last 'lookup' blocks,
  * or from the last difficulty change if 'lookup' is nonpositive.
@@ -75,10 +73,10 @@ UniValue GetNetworkHashPS(int lookup, int height) {
     return workDiff.getdouble() / timeDiff;
 }
 
-UniValue getnetworkhashps(const JSONRPCRequest& request)
+UniValue getnetworkhashps( const JSONRPCRequest& request )
 {
-    if (request.fHelp || request.params.size() > 2)
-        throw runtime_error(
+    if ( request.fHelp || request.params.size() > 2 )
+        throw std::runtime_error(
             "getnetworkhashps ( nblocks height )\n"
             "\nReturns the estimated network hashes per second based on the last n blocks.\n"
             "Pass in [blocks] to override # of blocks, -1 specifies since last difficulty change.\n"
@@ -100,7 +98,7 @@ UniValue getnetworkhashps(const JSONRPCRequest& request)
 UniValue getgenerate( const JSONRPCRequest& request )
 {
     if ( request.fHelp || request.params.size() != 0 )
-        throw runtime_error(
+        throw std::runtime_error(
             "getgenerate\n"
             "\nReturn if the server is set to generate coins or not.\n"
             "It is set with the command line argument -gen (or " + std::string( BITCOIN_CONF_FILENAME ) + " setting gen)\n"
@@ -119,7 +117,7 @@ UniValue getgenerate( const JSONRPCRequest& request )
 UniValue setgenerate( const JSONRPCRequest& request )
 {
     if ( request.fHelp || request.params.size() < 1 || request.params.size() > 2 )
-        throw runtime_error(
+        throw std::runtime_error(
             "setgenerate generate ( genproclimit )\n"
             "\nSet 'generate' true or false to turn generation on or off.\n"
             "Generation is limited to 'genproclimit' processors, -1 is unlimited.\n"
@@ -215,7 +213,7 @@ UniValue generateBlocks( std::shared_ptr < CReserveScript > coinbaseScript, int 
 UniValue generate( const JSONRPCRequest& request )
 {
     if ( request.fHelp || request.params.size() < 1 || request.params.size() > 2 )
-        throw runtime_error(
+        throw std::runtime_error(
             "generate nblocks ( maxtries )\n"
             "\nMine up to nblocks blocks immediately (before the RPC call returns)\n"
             "\nArguments:\n"
@@ -251,7 +249,7 @@ UniValue generate( const JSONRPCRequest& request )
 UniValue generatetoaddress(const JSONRPCRequest& request)
 {
     if (request.fHelp || request.params.size() < 2 || request.params.size() > 3)
-        throw runtime_error(
+        throw std::runtime_error(
             "generatetoaddress nblocks address (maxtries)\n"
             "\nMine blocks immediately to a specified address (before the RPC call returns)\n"
             "\nArguments:\n"
@@ -284,7 +282,7 @@ UniValue generatetoaddress(const JSONRPCRequest& request)
 UniValue getmininginfo( const JSONRPCRequest& request )
 {
     if ( request.fHelp || request.params.size() != 0 )
-        throw runtime_error(
+        throw std::runtime_error(
             "getmininginfo\n"
             "\nReturns a json object containing mining-related information."
             "\nResult:\n"
@@ -328,7 +326,7 @@ UniValue getmininginfo( const JSONRPCRequest& request )
 UniValue prioritisetransaction(const JSONRPCRequest& request)
 {
     if (request.fHelp || request.params.size() != 3)
-        throw runtime_error(
+        throw std::runtime_error(
             "prioritisetransaction <txid> <priority delta> <fee delta>\n"
             "Accepts the transaction into mined blocks at a higher (or lower) priority\n"
             "\nArguments:\n"
@@ -389,7 +387,7 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
     // Dogecoin: Never mine witness tx
     const bool fMineWitnessTx = false;
     if (request.fHelp || request.params.size() > 1)
-        throw runtime_error(
+        throw std::runtime_error(
             "getblocktemplate ( TemplateRequest )\n"
             "\nIf the request parameters include a 'mode' key, that is used to explicitly select between the default 'template' request or a 'proposal'.\n"
             "It returns data needed to construct a block to work on.\n"
@@ -638,7 +636,7 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
     UniValue aCaps(UniValue::VARR); aCaps.push_back("proposal");
 
     UniValue transactions(UniValue::VARR);
-    map<uint256, int64_t> setTxIndex;
+    std::map< uint256, int64_t > setTxIndex ;
     int i = 0;
     for (const auto& it : pblock->vtx) {
         const CTransaction& tx = *it;
@@ -796,7 +794,7 @@ protected:
 UniValue submitblock(const JSONRPCRequest& request)
 {
     if (request.fHelp || request.params.size() < 1 || request.params.size() > 2)
-        throw runtime_error(
+        throw std::runtime_error(
             "submitblock \"hexdata\" ( \"jsonparametersobject\" )\n"
             "\nAttempts to submit new block to network.\n"
             "The 'jsonparametersobject' parameter is currently ignored.\n"
@@ -953,7 +951,7 @@ UniValue getauxblockbip22(const JSONRPCRequest& request)
         {
             if (pindexPrev != chainActive.Tip())
             {
-                // Clear old blocks since they're obsolete now.
+                // Clear old blocks since they're obsolete now
                 mapNewBlock.clear();
                 vNewBlockTemplate.clear();
                 pblock = nullptr;

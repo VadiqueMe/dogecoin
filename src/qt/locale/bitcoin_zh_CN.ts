@@ -306,16 +306,16 @@
         <translation>打开 &amp;URI...</translation>
     </message>
     <message>
-        <source>Click to disable network activity.</source>
-        <translation>点击禁用网络活动。</translation>
+        <source>Click to switch network activity off</source>
+        <translation>点击禁用网络活动</translation>
     </message>
     <message>
-        <source>Network activity disabled.</source>
-        <translation>网络活动已禁用。</translation>
+        <source>Network activity is off</source>
+        <translation>网络活动已禁用</translation>
     </message>
     <message>
-        <source>Click to enable network activity again.</source>
-        <translation>点击重新开启网络活动。</translation>
+        <source>Click to turn it back on</source>
+        <translation>点击重新开启网络活动</translation>
     </message>
     <message>
         <source>Reindexing blocks on disk...</source>
@@ -421,9 +421,9 @@
         <source>Processing blocks on disk...</source>
         <translation>正在处理数据块...</translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>已处理 %n 个交易历史数据块。</numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>已处理 %n 个交易历史数据块</translation>
     </message>
     <message>
         <source>%1 behind</source>
@@ -2749,8 +2749,8 @@
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation>金额单位。单击选择别的单位。</translation>
+        <source>Unit to show amounts in. Click to choose another unit</source>
+        <translation>金额单位。单击选择别的单位</translation>
     </message>
 </context>
 <context>

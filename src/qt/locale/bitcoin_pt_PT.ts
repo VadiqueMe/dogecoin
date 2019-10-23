@@ -282,16 +282,16 @@
         <translation>Abrir &amp;URI...</translation>
     </message>
     <message>
-        <source>Click to disable network activity.</source>
-        <translation>Clique para desativar a atividade de rede.</translation>
+        <source>Click to switch network activity off</source>
+        <translation>Clique para desativar a atividade de rede</translation>
     </message>
     <message>
-        <source>Network activity disabled.</source>
-        <translation>Atividade de rede desativada.</translation>
+        <source>Network activity is off</source>
+        <translation>Atividade de rede desativada</translation>
     </message>
     <message>
-        <source>Click to enable network activity again.</source>
-        <translation>Clique para ativar novamente a atividade de rede.</translation>
+        <source>Click to turn it back on</source>
+        <translation>Clique para ativar novamente a atividade de rede</translation>
     </message>
     <message>
         <source>Reindexing blocks on disk...</source>
@@ -397,9 +397,9 @@
         <source>Processing blocks on disk...</source>
         <translation>A processar blocos no disco...</translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>Processado %n bloco do histórico de transações.</numerusform><numerusform>Processados %n blocos do histórico de transações.</numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>Processados %n blocos do histórico de transações</translation>
     </message>
     <message>
         <source>%1 behind</source>
@@ -1996,8 +1996,8 @@
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation>Unidade de valores recebidos. Clique para selecionar outra unidade.</translation>
+        <source>Unit to show amounts in. Click to choose another unit</source>
+        <translation>Unidade de valores recebidos. Clique para selecionar outra unidade</translation>
     </message>
 </context>
 <context>

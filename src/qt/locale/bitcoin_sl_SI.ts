@@ -241,9 +241,9 @@
         <source>Processing blocks on disk...</source>
         <translation>Obdelava blokov na disku ...</translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>%n obdelan blok zgodovine transakcij.</numerusform><numerusform>%n obdelana bloka zgodovine transakcij.</numerusform><numerusform>%n obdelani bloki zgodovine transakcij.</numerusform><numerusform>%n obdelanih blokov zgodovine transakcij.</numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>%n obdelanih blokov zgodovine transakcij</translation>
     </message>
     <message>
         <source>%1 behind</source>
@@ -1439,8 +1439,8 @@
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation>Merska enota za prikaz zneskov. Kliknite za izbiro druge enote.</translation>
+        <source>Unit to show amounts in. Click to choose another unit</source>
+        <translation>Merska enota za prikaz zneskov. Kliknite za izbiro druge enote</translation>
     </message>
 </context>
 <context>

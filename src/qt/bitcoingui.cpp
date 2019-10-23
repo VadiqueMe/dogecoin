@@ -687,8 +687,7 @@ void BitcoinGUI::optionsClicked()
 
 void BitcoinGUI::aboutClicked()
 {
-    if(!clientModel)
-        return;
+    if ( clientModel == nullptr ) return ;
 
     HelpMessageDialog dlg(this, true);
     dlg.exec();
@@ -767,31 +766,31 @@ void BitcoinGUI::gotoVerifyMessageTab(QString addr)
 
 void BitcoinGUI::updateNetworkState()
 {
-    int count = clientModel->getNumConnections();
-    QString icon;
-    switch(count)
+    int count = clientModel->getNumConnections() ;
+    QString icon ;
+    switch ( count )
     {
-    case 0: icon = ":/icons/connect_0"; break;
-    case 1: case 2: case 3: icon = ":/icons/connect_1"; break;
-    case 4: case 5: case 6: icon = ":/icons/connect_2"; break;
-    case 7: case 8: case 9: icon = ":/icons/connect_3"; break;
-    default: icon = ":/icons/connect_4"; break;
+        case 0: icon = ":/icons/connect_0" ; break ;
+        case 1: case 2: case 3: icon = ":/icons/connect_1" ; break ;
+        case 4: case 5: case 6: icon = ":/icons/connect_2" ; break ;
+        case 7: case 8: case 9: icon = ":/icons/connect_3" ; break ;
+        default: icon = ":/icons/connect_4" ; break ;
     }
 
-    QString tooltip;
+    QString tooltip ;
 
-    if (clientModel->getNetworkActive()) {
-        tooltip = tr("%n active connection(s) to Dogecoin network", "", count) + QString(".<br>") + tr("Click to disable network activity.");
+    if ( clientModel->isNetworkActive() ) {
+        tooltip = tr( "%n active connection(s) to Dogecoin network", "", count ) + QString( ".<br>" ) + tr( "Click to switch network activity off" ) ;
     } else {
-        tooltip = tr("Network activity disabled.") + QString("<br>") + tr("Click to enable network activity again.");
-        icon = ":/icons/network_disabled";
+        tooltip = tr( "Network activity is off" )  + QString( ".<br>" ) + tr( "Click to turn it back on" ) ;
+        icon = ":/icons/network_disabled" ;
     }
 
-    // Don't word-wrap this (fixed-width) tooltip
-    tooltip = QString("<nobr>") + tooltip + QString("</nobr>");
-    connectionsControl->setToolTip(tooltip);
+    // don't word-wrap this tooltip
+    tooltip = QString( "<nobr>" ) + tooltip + QString( "</nobr>" ) ;
+    connectionsControl->setToolTip( tooltip ) ;
 
-    connectionsControl->setPixmap(platformStyle->SingleColorIcon(icon).pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
+    connectionsControl->setPixmap( platformStyle->SingleColorIcon( icon ).pixmap(STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE ) ) ;
 }
 
 void BitcoinGUI::setNumConnections(int count)
@@ -862,7 +861,7 @@ void BitcoinGUI::setNumBlocks(int count, const QDateTime& blockDate, double nVer
     QDateTime currentDate = QDateTime::currentDateTime();
     qint64 secs = blockDate.secsTo(currentDate);
 
-    tooltip = tr("Processed %n block(s) of transaction history.", "", count);
+    tooltip = tr( "Processed %n blocks of transaction history", "", count ) ;
 
     // Set icon state: spinning if catching up, tick otherwise
     if(secs < 90*60)
@@ -1135,7 +1134,12 @@ void BitcoinGUI::updateBottomBarShowsDigging()
 {
     size_t nThreads = HowManyMiningThreads() ;
     generatingLabel->setVisible( nThreads > 0 ) ;
-    generatingLabel->setToolTip( QString( "Digging is <b>on</b> (" ) + QString::number( nThreads ) + " threads)" ) ;
+    generatingLabel->setToolTip(
+        QString( "<nobr>") + QString( "Digging is <b>on</b>" ) + QString( "</nobr>")
+            + " <nobr>(" + QString::number( nThreads ) + " threads)</nobr>"
+    ) ;
+
+    if ( walletFrame != nullptr ) walletFrame->refreshDigPage() ;
 }
 
 void BitcoinGUI::showNormalIfMinimized(bool fToggleHidden)
@@ -1248,9 +1252,8 @@ void BitcoinGUI::unsubscribeFromCoreSignals()
 
 void BitcoinGUI::toggleNetworkActive()
 {
-    if (clientModel) {
-        clientModel->setNetworkActive(!clientModel->getNetworkActive());
-    }
+    if ( clientModel != nullptr )
+        clientModel->setNetworkActive( ! clientModel->isNetworkActive() ) ;
 }
 
 UnitDisplayStatusBarControl::UnitDisplayStatusBarControl(const PlatformStyle *platformStyle) :
@@ -1258,7 +1261,7 @@ UnitDisplayStatusBarControl::UnitDisplayStatusBarControl(const PlatformStyle *pl
     menu(0)
 {
     createContextMenu();
-    setToolTip(tr("Unit to show amounts in. Click to select another unit."));
+    setToolTip( tr("Unit to show amounts in. Click to choose another unit") ) ;
     QList<BitcoinUnits::Unit> units = BitcoinUnits::availableUnits();
     int max_width = 0;
     const QFontMetrics fm(font());

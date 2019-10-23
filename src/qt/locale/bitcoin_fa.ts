@@ -274,16 +274,16 @@
         <translation>باز کردن &amp;آدرس</translation>
     </message>
     <message>
-        <source>Click to disable network activity.</source>
-        <translation>برای غیر فعال کردن فعالیت شبکه کلیک کنید.</translation>
+        <source>Click to switch network activity off</source>
+        <translation>برای غیر فعال کردن فعالیت شبکه کلیک کنید</translation>
     </message>
     <message>
-        <source>Network activity disabled.</source>
-        <translation>فعالیت شبکه غیر فعال شد.</translation>
+        <source>Network activity is off</source>
+        <translation>فعالیت شبکه غیر فعال شد</translation>
     </message>
     <message>
-        <source>Click to enable network activity again.</source>
-        <translation>برای فعال کردن دوباره فعالیت شبکه کلیک کنید.</translation>
+        <source>Click to turn it back on</source>
+        <translation>برای فعال کردن دوباره فعالیت شبکه کلیک کنید</translation>
     </message>
     <message>
         <source>Reindexing blocks on disk...</source>
@@ -385,9 +385,9 @@
         <source>Processing blocks on disk...</source>
         <translation>پردازش بلوک‌ها روی دیسک...</translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>پردازش %n  بلاک از تاریخچه ی تراکنش ها </numerusform></translation>
+    <message>
+        <source>Processed %n blocks of transaction history</source>
+        <translation>پردازش %n بلاک از تاریخچه ی تراکنش ها</translation>
     </message>
     <message>
         <source>%1 behind</source>
