@@ -792,7 +792,7 @@ void static DogecoinMiner( const CChainParams & chainparams, char threadChar )
         // due to some internal error but also if the keypool is empty.
         // In the latter case, already the pointer is NULL
         if ( coinbaseScript == nullptr || coinbaseScript->reserveScript.empty() )
-            throw std::runtime_error( "No coinbase script available (mining requires a wallet)" ) ;
+            throw std::runtime_error( "No coinbase script available (mining needs a wallet)" ) ;
 
         std::random_device randomDevice ;
         std::mt19937 randomNumber( randomDevice() ) ;
@@ -823,9 +823,9 @@ void static DogecoinMiner( const CChainParams & chainparams, char threadChar )
 
             std::unique_ptr< BlockAssembler > assembler( new BlockAssembler( chainparams ) ) ;
             std::unique_ptr< CBlockTemplate > pblocktemplate( assembler->CreateNewBlock( coinbaseScript->reserveScript ) ) ;
-            if ( ! pblocktemplate.get() )
+            if ( pblocktemplate.get() == nullptr )
             {
-                LogPrintf( "Keypool ran out, please invoke keypoolrefill before restarting the mining thread\n" ) ;
+                LogPrintf( "BlockAssembler::CreateNewBlock couldn't create new block\n" ) ;
                 return ;
             }
 
@@ -880,11 +880,10 @@ void static DogecoinMiner( const CChainParams & chainparams, char threadChar )
 
                         break ;
                     }
-                    else
-                    {
-                        nNonce = randomNumber() ;
-                    }
                 }
+
+                // next nonce is random
+                nNonce = randomNumber() ;
 
                 // Check if block needs to be rebuilt
                 boost::this_thread::interruption_point() ;
@@ -896,6 +895,8 @@ void static DogecoinMiner( const CChainParams & chainparams, char threadChar )
                 if ( pindexPrev != chainActive.Tip() )
                     break ;
 
+                // this "height" is needed when chain parameters depend on number of blocks in chain
+                // (in other words, when there was a "hard fork")
                 uint32_t blockHeight = chainActive.Tip()->nHeight + 1 ;
 
                 // recreate the block if the clock has run backwards, to get the actual time

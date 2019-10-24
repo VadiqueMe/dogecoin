@@ -1,7 +1,7 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "base58.h"
 #include "amount.h"
@@ -22,11 +22,11 @@
 #include "utilstrencodings.h"
 #include "validationinterface.h"
 
+#include <random>
 #include <memory>
 #include <stdint.h>
 
 #include <boost/assign/list_of.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include <univalue.h>
 
@@ -172,42 +172,59 @@ UniValue generateBlocks( std::shared_ptr < CReserveScript > coinbaseScript, int 
     }
     unsigned int nExtraNonce = 0;
     UniValue blockHashes(UniValue::VARR);
-    while (nHeight < nHeightEnd)
-    {
-        std::unique_ptr<CBlockTemplate> pblocktemplate(BlockAssembler(Params()).CreateNewBlock(coinbaseScript->reserveScript, fMineWitnessTx));
-        if (!pblocktemplate.get())
-            throw JSONRPCError(RPC_INTERNAL_ERROR, "Couldn't create new block");
-        CBlock *pblock = &pblocktemplate->block;
-        {
-            LOCK(cs_main);
-            IncrementExtraNonce(pblock, chainActive.Tip(), nExtraNonce);
-        }
-        // Dogecoin: Don't mine Aux blocks in regtest
-        //CAuxPow::initAuxPow(*pblock);
-        //CPureBlockHeader& miningHeader = pblock->auxpow->parentBlock;
-        while (nMaxTries > 0 && pblock->nNonce < nInnerLoopCount && !CheckProofOfWork(pblock->GetPoWHash(), pblock->nBits, Params().GetConsensus(nHeight))) {
-            ++pblock->nNonce;
-            --nMaxTries;
-        }
-        if (nMaxTries == 0) {
-            break;
-        }
-        if (pblock->nNonce == nInnerLoopCount) {
-            continue;
-        }
-        std::shared_ptr<const CBlock> shared_pblock = std::make_shared<const CBlock>(*pblock);
-        if (!ProcessNewBlock(Params(), shared_pblock, true, NULL))
-            throw JSONRPCError(RPC_INTERNAL_ERROR, "ProcessNewBlock, block not accepted");
-        ++nHeight;
-        blockHashes.push_back(pblock->GetHash().GetHex());
 
-        //mark script as important because it was used at least for one coinbase output if the script came from the wallet
-        if (keepScript)
+    std::random_device randomDevice ;
+    std::mt19937 randomNumber( randomDevice() ) ;
+
+    while ( nHeight < nHeightEnd && nMaxTries > 0 )
+    {
+        std::unique_ptr< CBlockTemplate > pblocktemplate(
+                BlockAssembler( Params() ).CreateNewBlock( coinbaseScript->reserveScript, fMineWitnessTx )
+        ) ;
+        if ( pblocktemplate.get() == nullptr )
+            throw JSONRPCError( RPC_INTERNAL_ERROR, "Couldn't create new block" ) ;
+
+        CBlock *pblock = &pblocktemplate->block ;
         {
-            coinbaseScript->KeepScript();
+            LOCK( cs_main ) ;
+            IncrementExtraNonce( pblock, chainActive.Tip(), nExtraNonce ) ;
+        }
+
+        pblock->nNonce = randomNumber() ;
+
+        // Dogecoin: don't mine auxpow blocks here
+        //CAuxPow::initAuxPow(*pblock);
+
+        bool found = false ;
+        int loop = 0 ;
+        while ( nMaxTries > 0 && loop < nInnerLoopCount )
+        {
+            if ( CheckProofOfWork( pblock->GetPoWHash(), pblock->nBits, Params().GetConsensus( nHeight ) ) ) {
+                // found a solution
+                found = true ;
+                break ;
+            }
+
+            ++ pblock->nNonce ;
+            ++ loop ;
+            -- nMaxTries ;
+        }
+
+        if ( found )
+        {
+            if ( ! ProcessNewBlock( Params(), std::make_shared< const CBlock >( *pblock ), true, NULL ) )
+               throw JSONRPCError( RPC_INTERNAL_ERROR, "ProcessNewBlock, block not accepted" ) ;
+
+            ++nHeight ;
+            blockHashes.push_back( pblock->GetHash().GetHex() ) ;
+
+            // keep the script because it was used at least for one coinbase output if the script came from the wallet
+            if ( keepScript )
+                coinbaseScript->KeepScript() ;
         }
     }
-    return blockHashes;
+
+    return blockHashes ;
 }
 
 UniValue generate( const JSONRPCRequest& request )
@@ -236,12 +253,11 @@ UniValue generate( const JSONRPCRequest& request )
     GetMainSignals().ScriptForMining( coinbaseScript ) ;
 
     // If no script is returned at all, the keypool is exhausted
-    if ( ! coinbaseScript )
+    if ( coinbaseScript == nullptr )
         throw JSONRPCError( RPC_WALLET_KEYPOOL_RAN_OUT, "Keypool ran out, please invoke keypoolrefill" ) ;
 
-    //throw an error if no script was provided
-    if ( coinbaseScript->reserveScript.empty() )
-        throw JSONRPCError( RPC_INTERNAL_ERROR, "No coinbase script available (mining requires a wallet)" ) ;
+    if ( coinbaseScript->reserveScript.empty() ) // no script was provided
+        throw JSONRPCError( RPC_INTERNAL_ERROR, "No coinbase script available (mining needs a wallet)" ) ;
 
     return generateBlocks(coinbaseScript, nGenerate, nMaxTries, true);
 }
