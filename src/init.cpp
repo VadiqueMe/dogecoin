@@ -195,6 +195,8 @@ void Shutdown()
     RenameThread("dogecoin-shutoff");
     mempool.AddTransactionsUpdated(1);
 
+    GenerateCoins( false, 0, Params() ) ;
+
     StopHTTPRPC();
     StopREST();
     StopRPC();
@@ -204,8 +206,6 @@ void Shutdown()
     if (pwalletMain)
         pwalletMain->Flush(false);
 #endif
-
-    GenerateDogecoins( false, 0, Params() ) ;
 
     MapPort(false);
     UnregisterValidationInterface(peerLogic.get());
@@ -1631,8 +1631,7 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
     if (!connman.Start(scheduler, strNodeError, connOptions))
         return InitError(strNodeError);
 
-    // Generate blocks
-    GenerateDogecoins( GetBoolArg( "-gen", DEFAULT_GENERATE ), GetArg( "-genproclimit", DEFAULT_GENERATE_THREADS ), chainparams ) ;
+    GenerateCoins( GetBoolArg( "-gen", DEFAULT_GENERATE ), GetArg( "-genproclimit", DEFAULT_GENERATE_THREADS ), chainparams ) ;
 
     // ********************************************************* Step 12: finished
 

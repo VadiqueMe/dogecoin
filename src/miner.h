@@ -9,11 +9,13 @@
 
 #include "primitives/block.h"
 #include "txmempool.h"
+#include "utiltime.h"
 
 #include <stdint.h>
 #include <memory>
-#include "boost/multi_index_container.hpp"
-#include "boost/multi_index/ordered_index.hpp"
+#include <vector>
+#include <thread>
+#include <random>
 
 class CBlockIndex;
 class CChainParams;
@@ -21,7 +23,7 @@ class CReserveKey;
 class CScript;
 class CWallet;
 
-namespace Consensus { struct Params; };
+namespace Consensus { struct Params ; }
 
 static const bool DEFAULT_GENERATE = false ;
 static const int DEFAULT_GENERATE_THREADS = 1 ;
@@ -75,7 +77,7 @@ struct modifiedentry_iter {
 
 // This matches the calculation in CompareTxMemPoolEntryByAncestorFee,
 // except operating on CTxMemPoolModifiedEntry.
-// TODO: refactor to avoid duplication of this logic.
+// TODO: refactor to avoid duplication of this logic
 struct CompareModifiedEntry {
     bool operator()(const CTxMemPoolModifiedEntry &a, const CTxMemPoolModifiedEntry &b) const
     {
@@ -90,7 +92,7 @@ struct CompareModifiedEntry {
 
 // A comparator that sorts transactions based on number of ancestors.
 // This is sufficient to sort an ancestor package in an order that is valid
-// to appear in a block.
+// to appear in a block
 struct CompareTxIterByAncestorCount {
     bool operator()(const CTxMemPool::txiter &a, const CTxMemPool::txiter &b) const
     {
@@ -133,11 +135,6 @@ struct update_for_parent_inclusion
 
     CTxMemPool::txiter iter;
 };
-
-size_t HowManyMiningThreads() ;
-
-/** Run the miner threads */
-void GenerateDogecoins( bool fGenerate, int nThreads, const CChainParams & chainparams ) ;
 
 /** Generate a new block, without valid proof-of-work */
 class BlockAssembler
@@ -221,6 +218,99 @@ private:
 /** Modify the extra nonce in a block */
 void IncrementExtraNonce( CBlock * pblock, const CBlockIndex * pindexPrev, uint32_t & nExtraNonce ) ;
 int64_t UpdateTime(CBlockHeader* pblock, const Consensus::Params& consensusParams, const CBlockIndex* pindexPrev);
+
+//
+// Internal miner
+//
+
+#include "arith_uint256.h"
+
+class MiningThread
+{
+
+public:
+
+    MiningThread( size_t number, const CChainParams & params )
+        : theThread( &MiningThread::MineBlocks, this )
+        , numberOfThread( number )
+        , chainparams( params )
+        , coinbaseScript( nullptr )
+        , currentCandidate( nullptr )
+        , smallestHashBlock( ~ arith_uint256() )
+        , smallestHashAll( ~ arith_uint256() )
+        , randomDevice()
+        , randomNumber( randomDevice() )
+        , threadBeginsMillis( GetTimeMillis() )
+        , allHashesByThread( 0 )
+        , hashesScanned( 0 )
+        , scanBeginsMillis( threadBeginsMillis )
+        , finished( false )
+    { }
+
+    ~MiningThread()
+    {
+        endOfThread( false ) ;
+    }
+
+    /* bool operator == ( const MiningThread & that ) const
+    {
+        return this->numberOfThread == that.numberOfThread && that.threadBeginsMillis == this->threadBeginsMillis ;
+    } */
+
+    void MineBlocks() ;
+
+    const arith_uint256 & getSmallestHashFoundForCurrentBlock() const {  return smallestHashBlock ;  }
+
+    const arith_uint256 & getSmallestHashFoundByThread() const {  return smallestHashAll ;  }
+
+    double getBlockHashesPerSecond() const
+    {
+        double blockHashesPerMillisecond = (double)hashesScanned / ( GetTimeMillis() - scanBeginsMillis ) ;
+        return 1000 * blockHashesPerMillisecond ;
+    }
+
+    double getAllHashesPerSecond() const
+    {
+        double allHashesPerMillisecond = (double)allHashesByThread / ( GetTimeMillis() - threadBeginsMillis ) ;
+        return 1000 * allHashesPerMillisecond ;
+    }
+
+    void endOfThread( bool bin = true ) ;
+    bool isFinished() const {  return finished ;  }
+
+private:
+
+    bool assembleNewBlockCandidate() ;
+
+    std::thread theThread ;
+
+    size_t numberOfThread ;
+
+    const CChainParams & chainparams ;
+
+    std::shared_ptr< CReserveScript > coinbaseScript ;
+
+    std::unique_ptr< CBlockTemplate > currentCandidate ;
+
+    arith_uint256 smallestHashBlock ;
+    arith_uint256 smallestHashAll ;
+
+    std::random_device randomDevice ;
+    std::mt19937 randomNumber ;
+
+    int64_t threadBeginsMillis ;
+    uint64_t allHashesByThread ;
+
+    uint32_t hashesScanned ;
+    int64_t scanBeginsMillis ;
+
+    bool finished ;
+
+} ;
+
+size_t HowManyMiningThreads() ;
+
+void GenerateCoins( bool generate, int nThreads, const CChainParams & chainparams ) ;
 
 #endif
 

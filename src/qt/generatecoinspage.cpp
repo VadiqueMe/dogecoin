@@ -60,7 +60,8 @@ void GenerateCoinsPage::toggleGenerateBlocks( int qtCheckState )
         if ( ui->numberOfThreadsList->currentText() != "0" )
             ui->numberOfThreadsList->setCurrentText( "0" ) ;
 
-        GenerateDogecoins( false, 0, Params() ) ;
+        if ( HowManyMiningThreads() > 0 )
+            GenerateCoins( false, 0, Params() ) ;
     }
     else /* if ( qtCheckState == Qt::Checked ) */
     {
@@ -70,7 +71,8 @@ void GenerateCoinsPage::toggleGenerateBlocks( int qtCheckState )
             ui->numberOfThreadsList->setCurrentText( threads ) ;
         }
 
-        GenerateDogecoins( true, threads.toInt(), Params() ) ;
+        if ( HowManyMiningThreads() != threads.toInt() )
+            GenerateCoins( true, threads.toInt(), Params() ) ;
     }
 }
 
@@ -80,5 +82,6 @@ void GenerateCoinsPage::changeNumberOfThreads( const QString & threads )
 
     bool generate = ( threads != "0" ) ;
     ui->generateBlocksYesNo->setChecked( generate ) ;
-    GenerateDogecoins( generate, threads.toInt(), Params() ) ;
+    if ( HowManyMiningThreads() != threads.toInt() )
+        GenerateCoins( generate, threads.toInt(), Params() ) ;
 }

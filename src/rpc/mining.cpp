@@ -150,7 +150,7 @@ UniValue setgenerate( const JSONRPCRequest& request )
         if ( genProcLimit == 0 ) fGenerate = false ;
     }
 
-    GenerateDogecoins( fGenerate, genProcLimit, Params() ) ;
+    GenerateCoins( fGenerate, genProcLimit, Params() ) ;
 
     return NullUniValue ;
 }
