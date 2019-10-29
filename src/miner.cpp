@@ -146,8 +146,8 @@ std::unique_ptr< CBlockTemplate > BlockAssembler::CreateNewBlock( const CScript 
     CBlockIndex* pindexPrev = chainActive.Tip();
     nHeight = pindexPrev->nHeight + 1;
 
-    const Consensus::Params& consensus = chainparams.GetConsensus(nHeight);
-    const int32_t nChainId = consensus.nAuxpowChainId;
+    const Consensus::Params & consensus = chainparams.GetConsensus( nHeight ) ;
+    const int32_t nChainId = consensus.nAuxpowChainId ;
     // FIXME: Active version bits after the always-auxpow fork!
     // const int32_t nVersion = ComputeBlockVersion(pindexPrev, consensus);
     const int32_t nVersion = VERSIONBITS_LAST_OLD_BLOCK_VERSION;
@@ -221,13 +221,12 @@ std::unique_ptr< CBlockTemplate > BlockAssembler::CreateNewBlock( const CScript 
 
 bool BlockAssembler::isStillDependent(CTxMemPool::txiter iter)
 {
-    BOOST_FOREACH(CTxMemPool::txiter parent, mempool.GetMemPoolParents(iter))
+    for ( CTxMemPool::txiter parent : mempool.GetMemPoolParents( iter ) )
     {
-        if (!inBlock.count(parent)) {
-            return true;
-        }
+        if ( inBlock.count( parent ) == 0 )
+            return true ;
     }
-    return false;
+    return false ;
 }
 
 void BlockAssembler::onlyUnconfirmed(CTxMemPool::setEntries& testSet)
@@ -261,7 +260,8 @@ bool BlockAssembler::TestPackage(uint64_t packageSize, int64_t packageSigOpsCost
 bool BlockAssembler::TestPackageTransactions(const CTxMemPool::setEntries& package)
 {
     uint64_t nPotentialBlockSize = nBlockSize; // only used with fNeedSizeAccounting
-    BOOST_FOREACH (const CTxMemPool::txiter it, package) {
+    for ( const CTxMemPool::txiter it : package )
+    {
         if (!IsFinalTx(it->GetTx(), nHeight, nLockTimeCutoff))
             return false;
         if (!fIncludeWitness && it->GetTx().HasWitness())
@@ -359,11 +359,11 @@ int BlockAssembler::UpdatePackagesForAdded(const CTxMemPool::setEntries& already
         indexed_modified_transaction_set &mapModifiedTx)
 {
     int nDescendantsUpdated = 0;
-    BOOST_FOREACH(const CTxMemPool::txiter it, alreadyAdded) {
+    for ( const CTxMemPool::txiter it : alreadyAdded ) {
         CTxMemPool::setEntries descendants;
         mempool.CalculateDescendants(it, descendants);
         // Insert all descendants (not yet in block) into the modified set
-        BOOST_FOREACH(CTxMemPool::txiter desc, descendants) {
+        for ( CTxMemPool::txiter desc : descendants ) {
             if (alreadyAdded.count(desc))
                 continue;
             ++nDescendantsUpdated;
@@ -618,7 +618,7 @@ void BlockAssembler::addPriorityTxs()
 
             // This tx was successfully added, so
             // add transactions that depend on this one to the priority queue to try again
-            BOOST_FOREACH(CTxMemPool::txiter child, mempool.GetMemPoolChildren(iter))
+            for ( CTxMemPool::txiter child : mempool.GetMemPoolChildren( iter ) )
             {
                 waitPriIter wpiter = waitPriMap.find(child);
                 if (wpiter != waitPriMap.end()) {
@@ -836,15 +836,13 @@ void MiningThread::MineBlocks()
                 if ( pindexPrev != chainActive.Tip() )
                     break ;
 
-                // this "height" is needed when consensus/chain parameters depend on number of blocks in chain
-                // (in other words, when there was a "hard fork")
-                uint32_t blockHeight = chainActive.Tip()->nHeight + 1 ;
+                const Consensus::Params & consensus = chainparams.GetConsensus( chainActive.Tip()->nHeight + 1 ) ;
 
                 // recreate the block if the clock has run backwards, to get the actual time
-                if ( UpdateTime( currentBlock, chainparams.GetConsensus( blockHeight ), pindexPrev ) < 0 )
+                if ( UpdateTime( currentBlock, consensus, pindexPrev ) < 0 )
                     break ;
 
-                if ( chainparams.GetConsensus( blockHeight ).fPowAllowMinDifficultyBlocks )
+                if ( consensus.fPowAllowMinDifficultyBlocks )
                 {
                     // Changing currentBlock->nTime can change work required on testnet
                     solutionHash.SetCompact( currentBlock->nBits ) ;
@@ -930,4 +928,12 @@ void GenerateCoins( bool generate, int nThreads, const CChainParams & chainparam
     std::lock_guard < std::mutex > lock( miningThreads_mutex ) ;
     for ( unsigned int i = 1 ; i <= nThreads ; i++ )
         miningThreads.push_back( std::unique_ptr< MiningThread >( new MiningThread( i, chainparams ) ) ) ;
+}
+
+CAmount GetCurrentNewBlockSubsidy()
+{
+    return GetDogecoinBlockSubsidy(
+                chainActive.Tip()->nHeight + 1,
+                Params().GetConsensus( chainActive.Tip()->nHeight + 1 ),
+                chainActive.Tip()->GetBlockHash() ) ;
 }

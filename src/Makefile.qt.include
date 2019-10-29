@@ -120,7 +120,7 @@ QT_MOC_CPP = \
   qt/moc_askpassphrasedialog.cpp \
   qt/moc_bantablemodel.cpp \
   qt/moc_coinaddressvalidator.cpp \
-  qt/moc_bitcoinamountfield.cpp \
+  qt/moc_coinamountfield.cpp \
   qt/moc_bitcoingui.cpp \
   qt/moc_bitcoinunits.cpp \
   qt/moc_clientmodel.cpp \
@@ -169,7 +169,7 @@ BITCOIN_MM = \
 
 QT_MOC = \
   qt/bitcoin.moc \
-  qt/bitcoinamountfield.moc \
+  qt/coinamountfield.moc \
   qt/intro.moc \
   qt/overviewpage.moc \
   qt/rpcconsole.moc
@@ -189,7 +189,7 @@ BITCOIN_QT_H = \
   qt/askpassphrasedialog.h \
   qt/bantablemodel.h \
   qt/coinaddressvalidator.h \
-  qt/bitcoinamountfield.h \
+  qt/coinamountfield.h \
   qt/bitcoingui.h \
   qt/bitcoinunits.h \
   qt/clientmodel.h \
@@ -304,7 +304,7 @@ RES_ICONS = \
 BITCOIN_QT_BASE_CPP = \
   qt/bantablemodel.cpp \
   qt/coinaddressvalidator.cpp \
-  qt/bitcoinamountfield.cpp \
+  qt/coinamountfield.cpp \
   qt/bitcoingui.cpp \
   qt/bitcoinunits.cpp \
   qt/clientmodel.cpp \

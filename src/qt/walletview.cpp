@@ -122,39 +122,39 @@ void WalletView::setClientModel(ClientModel *_clientModel)
     sendCoinsPage->setClientModel(_clientModel);
 }
 
-void WalletView::setWalletModel(WalletModel *_walletModel)
+void WalletView::setWalletModel( WalletModel * model )
 {
-    this->walletModel = _walletModel;
+    this->walletModel = model ;
 
-    // Put transaction list in tabs
-    transactionView->setModel(_walletModel);
-    overviewPage->setWalletModel(_walletModel);
-    receiveCoinsPage->setModel(_walletModel);
-    sendCoinsPage->setModel(_walletModel);
-    usedReceivingAddressesPage->setModel(_walletModel->getAddressTableModel());
-    usedSendingAddressesPage->setModel(_walletModel->getAddressTableModel());
+    transactionView->setModel( model );
+    overviewPage->setWalletModel( model ) ;
+    receiveCoinsPage->setModel( model ) ;
+    sendCoinsPage->setModel( model ) ;
+    generateCoinsPage->setModel( model );
+    usedReceivingAddressesPage->setModel( model->getAddressTableModel() ) ;
+    usedSendingAddressesPage->setModel( model->getAddressTableModel() ) ;
 
-    if (_walletModel)
+    if ( model != nullptr )
     {
         // Receive and pass through messages from wallet model
-        connect(_walletModel, SIGNAL(message(QString,QString,unsigned int)), this, SIGNAL(message(QString,QString,unsigned int)));
+        connect( model, SIGNAL( message(QString, QString, unsigned int) ), this, SIGNAL( message(QString, QString, unsigned int) ) ) ;
 
         // Handle changes in encryption status
-        connect(_walletModel, SIGNAL(encryptionStatusChanged(int)), this, SIGNAL(encryptionStatusChanged(int)));
-        updateEncryptionStatus();
+        connect( model, SIGNAL( encryptionStatusChanged(int) ), this, SIGNAL( encryptionStatusChanged(int) ) ) ;
+        updateEncryptionStatus() ;
 
         // update HD status
-        Q_EMIT hdEnabledStatusChanged(_walletModel->hdEnabled());
+        Q_EMIT hdEnabledStatusChanged( model->hdEnabled() ) ;
 
         // Balloon pop-up for new transaction
-        connect(_walletModel->getTransactionTableModel(), SIGNAL(rowsInserted(QModelIndex,int,int)),
-                this, SLOT(processNewTransaction(QModelIndex,int,int)));
+        connect( model->getTransactionTableModel(), SIGNAL( rowsInserted(QModelIndex, int, int) ),
+                 this, SLOT( processNewTransaction(QModelIndex, int, int) ) ) ;
 
         // Ask for passphrase if needed
-        connect(_walletModel, SIGNAL(requireUnlock()), this, SLOT(unlockWallet()));
+        connect( model, SIGNAL( requireUnlock() ), this, SLOT( unlockWallet() ) ) ;
 
         // Show progress dialog
-        connect(_walletModel, SIGNAL(showProgress(QString,int)), this, SLOT(showProgress(QString,int)));
+        connect( model, SIGNAL( showProgress(QString, int) ), this, SLOT( showProgress(QString, int) ) ) ;
     }
 }
 
@@ -214,6 +214,8 @@ void WalletView::updateDigPage()
     if ( generateCoinsPage->getNumberOfThreadsList().findText( qthrea, Qt::MatchExactly ) < 0 )
         generateCoinsPage->getNumberOfThreadsList().addItem( qthrea ) ;
     generateCoinsPage->getNumberOfThreadsList().setCurrentText( qthrea ) ;
+
+    generateCoinsPage->refreshBlockSubsudy() ;
 }
 
 void WalletView::gotoSignMessageTab(QString addr)

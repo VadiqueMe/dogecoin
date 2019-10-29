@@ -49,7 +49,7 @@ public:
         The wallet model represents a bitcoin wallet, and offers access to the list of transactions, address book and sending
         functionality
     */
-    void setWalletModel(WalletModel *walletModel);
+    void setWalletModel( WalletModel * model ) ;
 
     bool handlePaymentRequest(const SendCoinsRecipient& recipient);
 

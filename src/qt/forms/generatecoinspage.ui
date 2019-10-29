@@ -104,6 +104,43 @@
     </layout>
    </item>
    <item>
+    <layout class="QHBoxLayout" name="newBlockSubsidyHLayout">
+     <item>
+      <widget class="QLabel" name="howManyCoinsPerBlockLabel">
+       <property name="text">
+        <string>New block generates</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacerBeforeSubsidy">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>4</width>
+         <height>1</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="CoinAmountField" name="newBlockSubsidy">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+   </layout>
+   </item>
+   <item>
     <spacer name="verticalFill">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -118,6 +155,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CoinAmountField</class>
+   <extends>QWidget</extends>
+   <header>coinamountfield.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../bitcoin.qrc"/>
  </resources>

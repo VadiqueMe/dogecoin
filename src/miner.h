@@ -312,5 +312,7 @@ size_t HowManyMiningThreads() ;
 
 void GenerateCoins( bool generate, int nThreads, const CChainParams & chainparams ) ;
 
+CAmount GetCurrentNewBlockSubsidy() ;
+
 #endif
 

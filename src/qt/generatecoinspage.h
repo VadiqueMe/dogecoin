@@ -7,6 +7,8 @@
 #include <QDialog>
 #include <QWidget>
 
+#include "walletmodel.h"
+
 class PlatformStyle ;
 
 class QCheckBox ;
@@ -25,16 +27,22 @@ public:
     explicit GenerateCoinsPage( const PlatformStyle * style, QWidget * parent = nullptr ) ;
     ~GenerateCoinsPage() ;
 
+    void setModel( WalletModel * model ) ;
+
     QCheckBox & getGenerateBlocksCheckbox() ;
     QComboBox & getNumberOfThreadsList() ;
+
+    void refreshBlockSubsudy() ;
 
 public Q_SLOTS:
     void toggleGenerateBlocks( int qtCheckState ) ;
     void changeNumberOfThreads( const QString & threads ) ;
+    void updateDisplayUnit() ;
 
 private:
     Ui::GenerateCoinsPage * ui ;
     const PlatformStyle * platformStyle ;
+    WalletModel * walletModel ;
 } ;
 
 #endif

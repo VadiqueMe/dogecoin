@@ -4,6 +4,8 @@
 #include "generatecoinspage.h"
 #include "ui_generatecoinspage.h"
 
+#include "optionsmodel.h"
+
 #include "miner.h"
 #include "chainparams.h"
 #include "util.h"
@@ -36,11 +38,25 @@ GenerateCoinsPage::GenerateCoinsPage( const PlatformStyle * style, QWidget * par
                 this, SLOT( toggleGenerateBlocks(int) ) ) ;
     connect( ui->numberOfThreadsList, SIGNAL( currentIndexChanged(const QString &) ),
                 this, SLOT( changeNumberOfThreads(const QString &) ) ) ;
+
+    ui->newBlockSubsidy->setValue( GetCurrentNewBlockSubsidy() ) ;
+    ui->newBlockSubsidy->setReadOnly( true ) ;
 }
 
 GenerateCoinsPage::~GenerateCoinsPage()
 {
     delete ui ;
+}
+
+void GenerateCoinsPage::setModel( WalletModel * model )
+{
+    walletModel = model ;
+
+    if ( model && model->getOptionsModel() )
+    {
+        connect( model->getOptionsModel(), SIGNAL( displayUnitChanged(int) ), this, SLOT( updateDisplayUnit() ) ) ;
+        updateDisplayUnit() ;
+    }
 }
 
 QCheckBox & GenerateCoinsPage::getGenerateBlocksCheckbox()
@@ -51,6 +67,11 @@ QCheckBox & GenerateCoinsPage::getGenerateBlocksCheckbox()
 QComboBox & GenerateCoinsPage::getNumberOfThreadsList()
 {
     return *( ui->numberOfThreadsList ) ;
+}
+
+void GenerateCoinsPage::refreshBlockSubsudy()
+{
+    ui->newBlockSubsidy->setValue( GetCurrentNewBlockSubsidy() ) ;
 }
 
 void GenerateCoinsPage::toggleGenerateBlocks( int qtCheckState )
@@ -84,4 +105,12 @@ void GenerateCoinsPage::changeNumberOfThreads( const QString & threads )
     ui->generateBlocksYesNo->setChecked( generate ) ;
     if ( HowManyMiningThreads() != threads.toInt() )
         GenerateCoins( generate, threads.toInt(), Params() ) ;
+}
+
+void GenerateCoinsPage::updateDisplayUnit()
+{
+    if ( walletModel && walletModel->getOptionsModel() )
+    {
+        ui->newBlockSubsidy->setDisplayUnit( walletModel->getOptionsModel()->getDisplayUnit() ) ;
+    }
 }
