@@ -1439,41 +1439,41 @@ UniValue invalidateblock(const JSONRPCRequest& request)
     return NullUniValue;
 }
 
-UniValue reconsiderblock(const JSONRPCRequest& request)
+UniValue reconsiderblock( const JSONRPCRequest & request )
 {
-    if (request.fHelp || request.params.size() != 1)
+    if ( request.fHelp || request.params.size() != 1 )
         throw runtime_error(
             "reconsiderblock \"blockhash\"\n"
             "\nRemoves invalidity status of a block and its descendants, reconsider them for activation.\n"
             "This can be used to undo the effects of invalidateblock.\n"
             "\nArguments:\n"
-            "1. \"blockhash\"   (string, required) the hash of the block to reconsider\n"
+            "1. \"blockhash\"   (string, required) the sha256 hash of the block to reconsider\n"
             "\nResult:\n"
             "\nExamples:\n"
             + HelpExampleCli("reconsiderblock", "\"blockhash\"")
             + HelpExampleRpc("reconsiderblock", "\"blockhash\"")
         );
 
-    std::string strHash = request.params[0].get_str();
-    uint256 hash(uint256S(strHash));
+    std::string strHash = request.params[0].get_str() ;
+    uint256 hash( uint256S( strHash ) ) ;
 
     {
-        LOCK(cs_main);
-        if (mapBlockIndex.count(hash) == 0)
-            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Block not found");
+        LOCK( cs_main ) ;
+        if ( mapBlockIndex.count( hash ) == 0 )
+            throw JSONRPCError( RPC_INVALID_ADDRESS_OR_KEY, "Block not found" ) ;
 
-        CBlockIndex* pblockindex = mapBlockIndex[hash];
-        ResetBlockFailureFlags(pblockindex);
+        CBlockIndex* pblockindex = mapBlockIndex[ hash ] ;
+        ResetBlockFailureFlags( pblockindex ) ;
     }
 
-    CValidationState state;
-    ActivateBestChain(state, Params());
+    CValidationState state ;
+    ActivateBestChain( state, Params() ) ;
 
-    if (!state.IsValid()) {
-        throw JSONRPCError(RPC_DATABASE_ERROR, state.GetRejectReason());
+    if ( ! state.IsValid() ) {
+        throw JSONRPCError( RPC_DATABASE_ERROR, state.GetRejectReason() ) ;
     }
 
-    return NullUniValue;
+    return NullUniValue ;
 }
 
 static const CRPCCommand commands[] =

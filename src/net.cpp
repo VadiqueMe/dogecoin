@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #if defined(HAVE_CONFIG_H)
 #include "config/bitcoin-config.h"
@@ -38,7 +38,7 @@
 
 #include <math.h>
 
-// Dump addresses to peers.dat and banlist.dat every 15 minutes (900s)
+// Dump addresses to peers.dat and banlist.dat every 15 minutes (900 s)
 #define DUMP_ADDRESSES_INTERVAL 900
 
 // We add a random period time (0 to 1 seconds) to feeler connections to prevent synchronization.
@@ -1370,37 +1370,38 @@ void CConnman::ThreadSocketHandler()
             int64_t nTime = GetSystemTimeInSeconds();
             if (nTime - pnode->nTimeConnected > 60)
             {
-                if (pnode->nLastRecv == 0 || pnode->nLastSend == 0)
+                if ( pnode->nLastRecv == 0 || pnode->nLastSend == 0 )
                 {
-                    LogPrint("net", "socket no message in first 60 seconds, %d %d from %d\n", pnode->nLastRecv != 0, pnode->nLastSend != 0, pnode->id);
-                    pnode->fDisconnect = true;
+                    LogPrint( "net", "socket no message in first 60 seconds, %d %d from peer=%d\n",
+                                pnode->nLastRecv != 0, pnode->nLastSend != 0, pnode->id ) ;
+                    pnode->fDisconnect = true ;
                 }
-                else if (nTime - pnode->nLastSend > TIMEOUT_INTERVAL)
+                else if ( nTime - pnode->nLastSend > TIMEOUT_INTERVAL )
                 {
-                    LogPrintf("socket sending timeout: %is\n", nTime - pnode->nLastSend);
-                    pnode->fDisconnect = true;
+                    LogPrintf( "peer=%d socket sending timeout: %i s\n", pnode->id, nTime - pnode->nLastSend ) ;
+                    pnode->fDisconnect = true ;
                 }
-                else if (nTime - pnode->nLastRecv > (pnode->nVersion > BIP0031_VERSION ? TIMEOUT_INTERVAL : 90*60))
+                else if ( nTime - pnode->nLastRecv > ( pnode->nVersion > BIP0031_VERSION ? TIMEOUT_INTERVAL : 90 * 60 ) )
                 {
-                    LogPrintf("socket receive timeout: %is\n", nTime - pnode->nLastRecv);
-                    pnode->fDisconnect = true;
+                    LogPrintf( "peer=%d socket receive timeout: %i s\n", pnode->id, nTime - pnode->nLastRecv ) ;
+                    pnode->fDisconnect = true ;
                 }
-                else if (pnode->nPingNonceSent && pnode->nPingUsecStart + TIMEOUT_INTERVAL * 1000000 < GetTimeMicros())
+                else if ( pnode->nPingNonceSent && pnode->nPingUsecStart + TIMEOUT_INTERVAL * 1000000 < GetTimeMicros() )
                 {
-                    LogPrintf("ping timeout: %fs\n", 0.000001 * (GetTimeMicros() - pnode->nPingUsecStart));
-                    pnode->fDisconnect = true;
+                    LogPrintf( "peer=%d ping timeout: %.6f s\n", pnode->id, 0.000001 * ( GetTimeMicros() - pnode->nPingUsecStart ) ) ;
+                    pnode->fDisconnect = true ;
                 }
-                else if (!pnode->fSuccessfullyConnected)
+                else if ( ! pnode->fSuccessfullyConnected )
                 {
-                    LogPrintf("version handshake timeout from %d\n", pnode->id);
-                    pnode->fDisconnect = true;
+                    LogPrintf( "version handshake timeout from peer=%d\n", pnode->id ) ;
+                    pnode->fDisconnect = true ;
                 }
             }
         }
         {
-            LOCK(cs_vNodes);
-            BOOST_FOREACH(CNode* pnode, vNodesCopy)
-                pnode->Release();
+            LOCK( cs_vNodes ) ;
+            for ( CNode * pnode : vNodesCopy )
+                pnode->Release() ;
         }
     }
 }
@@ -1637,8 +1638,8 @@ void CConnman::DumpAddresses()
     CAddrDB adb;
     adb.Write(addrman);
 
-    LogPrint("net", "Flushed %d addresses to peers.dat  %dms\n",
-           addrman.size(), GetTimeMillis() - nStart);
+    LogPrint( "net", "Flushed %d addresses to peers.dat in %.3f s\n",
+                addrman.size(), 0.001 * ( GetTimeMillis() - nStart ) ) ;
 }
 
 void CConnman::DumpData()
@@ -2243,8 +2244,8 @@ bool CConnman::Start(CScheduler& scheduler, std::string& strNodeError, Options c
     int64_t nStart = GetTimeMillis();
     {
         CAddrDB adb;
-        if (adb.Read(addrman))
-            LogPrintf("Loaded %i addresses from peers.dat  %dms\n", addrman.size(), GetTimeMillis() - nStart);
+        if ( adb.Read( addrman ) )
+            LogPrintf( "Loaded %i addresses from peers.dat in %.3f s\n", addrman.size(), 0.001 * ( GetTimeMillis() - nStart ) ) ;
         else {
             addrman.Clear(); // Addrman can be in an inconsistent state after failure, reset it
             LogPrintf("Invalid or missing peers.dat; recreating\n");
@@ -2262,8 +2263,8 @@ bool CConnman::Start(CScheduler& scheduler, std::string& strNodeError, Options c
         SetBannedSetDirty(false); // no need to write down, just read data
         SweepBanned(); // sweep out unused entries
 
-        LogPrint("net", "Loaded %d banned node ips/subnets from banlist.dat  %dms\n",
-            banmap.size(), GetTimeMillis() - nStart);
+        LogPrint( "net", "Loaded %d banned node ips/subnets from banlist.dat in %.3f s\n",
+            banmap.size(), 0.001 * ( GetTimeMillis() - nStart ) ) ;
     } else {
         LogPrintf("Invalid or missing banlist.dat; recreating\n");
         SetBannedSetDirty(true); // force write

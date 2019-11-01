@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "clientmodel.h"
 
@@ -183,7 +183,7 @@ void ClientModel::updateAlert(const QString &hash, int status)
 
 bool ClientModel::inInitialBlockDownload() const
 {
-    return IsInitialBlockDownload();
+    return IsInitialBlockDownload() ;
 }
 
 enum BlockSource ClientModel::getBlockSource() const

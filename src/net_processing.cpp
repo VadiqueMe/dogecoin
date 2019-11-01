@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "net_processing.h"
 
@@ -287,8 +287,8 @@ void FinalizeNode(NodeId nodeid, bool& fUpdateConnectionTime) {
         fUpdateConnectionTime = true;
     }
 
-    BOOST_FOREACH(const QueuedBlock& entry, state->vBlocksInFlight) {
-        mapBlocksInFlight.erase(entry.hash);
+    for ( const QueuedBlock & entry : state->vBlocksInFlight ) {
+        mapBlocksInFlight.erase( entry.hash ) ;
     }
     EraseOrphansFor(nodeid);
     nPreferredDownload -= state->fPreferredDownload;
@@ -729,10 +729,6 @@ void Misbehaving( NodeId pnode, int howmuch )
 
 
 
-
-
-
-//////////////////////////////////////////////////////////////////////////////
 //
 // blockchain -> download logic notification
 //
@@ -1253,15 +1249,20 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
         }
 
         // disconnect from peers older than this proto version
+        static const int MIN_PEER_PROTO_VERSION_INITIAL_DOWNLOAD = 70003 ;
         static const int MIN_PEER_PROTO_VERSION = 60003 ;
-        if ( nVersion < MIN_PEER_PROTO_VERSION )
+        if ( nVersion < MIN_PEER_PROTO_VERSION ||
+                ( IsInitialBlockDownload() && nVersion < MIN_PEER_PROTO_VERSION_INITIAL_DOWNLOAD ) )
         {
             // disconnect from peers older than this proto version
-            LogPrintf( "peer=%d using obsolete version %i; disconnecting\n", pfrom->id, nVersion ) ;
-            connman.PushMessage(pfrom, CNetMsgMaker(INIT_PROTO_VERSION).Make(NetMsgType::REJECT, strCommand, REJECT_OBSOLETE,
-                               strprintf("Version must be %d or greater", MIN_PEER_PROTO_VERSION)));
-            pfrom->fDisconnect = true;
-            return false;
+            LogPrintf( "peer=%d is using obsolete version %i; disconnecting\n", pfrom->id, nVersion ) ;
+            connman.PushMessage( pfrom, CNetMsgMaker( INIT_PROTO_VERSION ).Make(
+                NetMsgType::REJECT, strCommand, REJECT_OBSOLETE,
+                strprintf( "Version must be %d or above",
+                    IsInitialBlockDownload() ? MIN_PEER_PROTO_VERSION_INITIAL_DOWNLOAD : MIN_PEER_PROTO_VERSION )
+            ) ) ;
+            pfrom->fDisconnect = true ;
+            return false ;
         }
 
         if (nVersion == 10300)
@@ -1353,14 +1354,14 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
             connman.MarkAddressGood(pfrom->addr);
         }
 
-        std::string remoteAddr;
-        if (fLogIPs)
-            remoteAddr = ", peeraddr=" + pfrom->addr.ToString();
+        std::string remoteAddr ;
+        if ( fLogIPs )
+            remoteAddr = ", peeraddr=" + pfrom->addr.ToString() ;
 
-        LogPrintf("receive version message: %s: version %d, blocks=%d, us=%s, peer=%d%s\n",
-                  cleanSubVer, pfrom->nVersion,
-                  pfrom->nStartingHeight, addrMe.ToString(), pfrom->id,
-                  remoteAddr);
+        LogPrintf( "receive version message: %s: version %d, blocks=%d, me=%s, peer=%d%s\n",
+                   cleanSubVer, pfrom->nVersion,
+                   pfrom->nStartingHeight, addrMe.ToString(), pfrom->id,
+                   remoteAddr ) ;
 
         int64_t nTimeOffset = nTime - GetTime();
         pfrom->nTimeOffset = nTimeOffset;
@@ -1373,7 +1374,7 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
                 pfrom->PushAlert(item.second);
         }
 
-        // Feeler connections exist only to verify if address is online.
+        // Feeler connections exist only to verify if address is online
         if (pfrom->fFeeler) {
             assert(pfrom->fInbound == false);
             pfrom->fDisconnect = true;
