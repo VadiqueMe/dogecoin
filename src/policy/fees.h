@@ -1,9 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#ifndef BITCOIN_POLICYESTIMATOR_H
-#define BITCOIN_POLICYESTIMATOR_H
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
+
+#ifndef DOGECOIN_POLICYESTIMATOR_H
+#define DOGECOIN_POLICYESTIMATOR_H
 
 #include "amount.h"
 #include "uint256.h"
@@ -129,9 +131,8 @@ public:
     /** Record a new transaction entering the mempool*/
     unsigned int NewTx(unsigned int nBlockHeight, double val);
 
-    /** Remove a transaction from mempool tracking stats*/
-    void removeTx(unsigned int entryHeight, unsigned int nBestSeenHeight,
-                  unsigned int bucketIndex);
+    /** Remove a transaction from mempool tracking stats */
+    void confirmStatsRemoveTx( unsigned int entryHeight, unsigned int nBestSeenHeight, unsigned int bucketIndex ) ;
 
     /** Update our estimates by decaying our historical moving average and updating
         with the data gathered from the current block */
@@ -153,15 +154,6 @@ public:
 
     /** Return the max number of confirms we're tracking */
     unsigned int GetMaxConfirms() { return confAvg.size(); }
-
-    /** Write state of estimation data to a file*/
-    void Write(CAutoFile& fileout);
-
-    /**
-     * Read saved state of estimation data from a file and replace all internal data structures and
-     * variables with this state.
-     */
-    void Read(CAutoFile& filein);
 };
 
 
@@ -199,26 +191,19 @@ class CBlockPolicyEstimator
 {
 public:
     /** Create new BlockPolicyEstimator and initialize stats tracking classes with default values */
-    CBlockPolicyEstimator(const CFeeRate& minRelayFee);
+    CBlockPolicyEstimator( const CFeeRate & minRelayFee ) ;
 
     /** Process all the transactions that have been included in a block */
-    void processBlock(unsigned int nBlockHeight,
-                      std::vector<const CTxMemPoolEntry*>& entries);
+    void feesProcessBlock( unsigned int nBlockHeight, std::vector< const CTxMemPoolEntry * > & entries ) ;
 
-    /** Process a transaction confirmed in a block*/
-    bool processBlockTx(unsigned int nBlockHeight, const CTxMemPoolEntry* entry);
+    /** Process a transaction confirmed in a block */
+    bool feesProcessBlockTx( unsigned int nBlockHeight, const CTxMemPoolEntry* entry ) ;
 
-    /** Process a transaction accepted to the mempool*/
-    void processTransaction(const CTxMemPoolEntry& entry, bool validFeeEstimate);
+    /** Process a transaction accepted to the mempool */
+    void feesProcessTransaction( const CTxMemPoolEntry & entry ) ;
 
-    /** Remove a transaction from the mempool tracking stats*/
-    bool removeTx(uint256 hash);
-
-    /** Write estimation data to a file */
-    void Write(CAutoFile& fileout);
-
-    /** Read estimation data from a file */
-    void Read(CAutoFile& filein, int nFileVersion);
+    /** Remove a transaction from the mempool tracking stats */
+    bool policyEstimatorRemoveTx( uint256 hash ) ;
 
 private:
     CFeeRate minTrackedFee;    //!< Passed to constructor to avoid dependency on main
@@ -236,8 +221,7 @@ private:
     /** Classes to track historical data on transaction confirmations */
     TxConfirmStats feeStats;
 
-    unsigned int trackedTxs;
-    unsigned int untrackedTxs;
+    unsigned int trackedTxs ;
 };
 
 class FeeFilterRounder
@@ -253,4 +237,4 @@ private:
     std::set<double> feeset;
     FastRandomContext insecure_rand;
 };
-#endif /*BITCOIN_POLICYESTIMATOR_H */
+#endif

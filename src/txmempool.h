@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_TXMEMPOOL_H
-#define BITCOIN_TXMEMPOOL_H
+#ifndef DOGECOIN_TXMEMPOOL_H
+#define DOGECOIN_TXMEMPOOL_H
 
 #include <memory>
 #include <set>
@@ -535,9 +535,9 @@ public:
     // addUnchecked must updated state for all ancestors of a given transaction,
     // to track size/count of descendant transactions.  First version of
     // addUnchecked can be used to have it call CalculateMemPoolAncestors(), and
-    // then invoke the second version.
-    bool addUnchecked(const uint256& hash, const CTxMemPoolEntry &entry, bool validFeeEstimate = true);
-    bool addUnchecked(const uint256& hash, const CTxMemPoolEntry &entry, setEntries &setAncestors, bool validFeeEstimate = true);
+    // then invoke the second version
+    bool addUnchecked( const uint256 & hash, const CTxMemPoolEntry & entry ) ;
+    bool addUnchecked( const uint256 & hash, const CTxMemPoolEntry & entry, setEntries & setAncestors ) ;
 
     void removeRecursive( const CTransaction & tx, MemPoolRemovalReason reason = MemPoolRemovalReason::UNKNOWN ) ;
     void removeForReorg(const CCoinsViewCache *pcoins, unsigned int nMemPoolHeight, int flags);

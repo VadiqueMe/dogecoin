@@ -567,18 +567,6 @@ std::string FormatStateMessage(const CValidationState &state)
         state.GetRejectCode());
 }
 
-static bool IsCurrentForFeeEstimation()
-{
-    AssertLockHeld(cs_main);
-    if ( IsInitialBlockDownload() )
-        return false ;
-    if (chainActive.Tip()->GetBlockTime() < (GetTime() - MAX_FEE_ESTIMATION_TIP_AGE))
-        return false;
-    if (chainActive.Height() < pindexBestHeader->nHeight - 1)
-        return false;
-    return true;
-}
-
 bool AcceptToMemoryPoolWorker( CTxMemPool& pool, CValidationState& state, const CTransactionRef& ptx, bool fLimitFree,
                                bool* pfMissingInputs, int64_t nAcceptTime, std::list<CTransactionRef>* plTxnReplaced,
                                std::vector<uint256>& vHashTxnToUncache )
@@ -934,14 +922,8 @@ bool AcceptToMemoryPoolWorker( CTxMemPool& pool, CValidationState& state, const 
         }
         pool.RemoveStaged(allConflicting, false, MemPoolRemovalReason::REPLACED);
 
-        // This transaction should only count for fee estimation if it isn't a
-        // BIP 125 replacement transaction (may not be widely supported), the
-        // node is not behind, and the transaction is not dependent on any other
-        // transactions in the mempool.
-        bool validForFeeEstimation = !fReplacementTransaction && IsCurrentForFeeEstimation() && pool.HasNoInputsOf(tx);
-
         // Store transaction in memory
-        pool.addUnchecked(hash, entry, setAncestors, validForFeeEstimation);
+        pool.addUnchecked( hash, entry, setAncestors ) ;
     }
 
     GetMainSignals().SyncTransaction(tx, NULL, CMainSignals::SYNC_TRANSACTION_NOT_IN_BLOCK);

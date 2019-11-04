@@ -1,7 +1,8 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "policy/fees.h"
 #include "policy/policy.h"
@@ -173,78 +174,6 @@ double TxConfirmStats::EstimateMedianVal(int confTarget, double sufficientTxVal,
     return median;
 }
 
-void TxConfirmStats::Write(CAutoFile& fileout)
-{
-    fileout << decay;
-    fileout << buckets;
-    fileout << avg;
-    fileout << txCtAvg;
-    fileout << confAvg;
-}
-
-void TxConfirmStats::Read(CAutoFile& filein)
-{
-    // Read data file into temporary variables and do some very basic sanity checking
-    std::vector<double> fileBuckets;
-    std::vector<double> fileAvg;
-    std::vector<std::vector<double> > fileConfAvg;
-    std::vector<double> fileTxCtAvg;
-    double fileDecay;
-    size_t maxConfirms;
-    size_t numBuckets;
-
-    filein >> fileDecay;
-    if (fileDecay <= 0 || fileDecay >= 1)
-        throw std::runtime_error("Corrupt estimates file. Decay must be between 0 and 1 (non-inclusive)");
-    filein >> fileBuckets;
-    numBuckets = fileBuckets.size();
-    if (numBuckets <= 1 || numBuckets > 1000)
-        throw std::runtime_error("Corrupt estimates file. Must have between 2 and 1000 feerate buckets");
-    filein >> fileAvg;
-    if (fileAvg.size() != numBuckets)
-        throw std::runtime_error("Corrupt estimates file. Mismatch in feerate average bucket count");
-    filein >> fileTxCtAvg;
-    if (fileTxCtAvg.size() != numBuckets)
-        throw std::runtime_error("Corrupt estimates file. Mismatch in tx count bucket count");
-    filein >> fileConfAvg;
-    maxConfirms = fileConfAvg.size();
-    if (maxConfirms <= 0 || maxConfirms > 6 * 24 * 7) // one week
-        throw std::runtime_error("Corrupt estimates file.  Must maintain estimates for between 1 and 1008 (one week) confirms");
-    for (unsigned int i = 0; i < maxConfirms; i++) {
-        if (fileConfAvg[i].size() != numBuckets)
-            throw std::runtime_error("Corrupt estimates file. Mismatch in feerate conf average bucket count");
-    }
-    // Now that we've processed the entire feerate estimate data file and not
-    // thrown any errors, we can copy it to our data structures
-    decay = fileDecay;
-    buckets = fileBuckets;
-    avg = fileAvg;
-    confAvg = fileConfAvg;
-    txCtAvg = fileTxCtAvg;
-    bucketMap.clear();
-
-    // Resize the current block variables which aren't stored in the data file
-    // to match the number of confirms and buckets
-    curBlockConf.resize(maxConfirms);
-    for (unsigned int i = 0; i < maxConfirms; i++) {
-        curBlockConf[i].resize(buckets.size());
-    }
-    curBlockTxCt.resize(buckets.size());
-    curBlockVal.resize(buckets.size());
-
-    unconfTxs.resize(maxConfirms);
-    for (unsigned int i = 0; i < maxConfirms; i++) {
-        unconfTxs[i].resize(buckets.size());
-    }
-    oldUnconfTxs.resize(buckets.size());
-
-    for (unsigned int i = 0; i < buckets.size(); i++)
-        bucketMap[buckets[i]] = i;
-
-    LogPrint("estimatefee", "Reading estimates: %u buckets counting confirms up to %u blocks\n",
-             numBuckets, maxConfirms);
-}
-
 unsigned int TxConfirmStats::NewTx(unsigned int nBlockHeight, double val)
 {
     unsigned int bucketindex = bucketMap.lower_bound(val)->second;
@@ -253,14 +182,14 @@ unsigned int TxConfirmStats::NewTx(unsigned int nBlockHeight, double val)
     return bucketindex;
 }
 
-void TxConfirmStats::removeTx(unsigned int entryHeight, unsigned int nBestSeenHeight, unsigned int bucketindex)
+void TxConfirmStats::confirmStatsRemoveTx( unsigned int entryHeight, unsigned int nBestSeenHeight, unsigned int bucketindex )
 {
     //nBestSeenHeight is not updated yet for the new block
     int blocksAgo = nBestSeenHeight - entryHeight;
     if (nBestSeenHeight == 0)  // the BlockPolicyEstimator hasn't seen any blocks yet
         blocksAgo = 0;
-    if (blocksAgo < 0) {
-        LogPrint("estimatefee", "Blockpolicy error, blocks ago is negative for mempool tx\n");
+    if ( blocksAgo < 0 ) {
+        LogPrintf( "(estimatefee:blockpolicy) blocks ago is negative for mempool tx\n" ) ;
         return;  //This can't happen because we call this with our best seen height, no entries can have higher
     }
 
@@ -268,38 +197,37 @@ void TxConfirmStats::removeTx(unsigned int entryHeight, unsigned int nBestSeenHe
         if (oldUnconfTxs[bucketindex] > 0)
             oldUnconfTxs[bucketindex]--;
         else
-            LogPrint("estimatefee", "Blockpolicy error, mempool tx removed from >25 blocks,bucketIndex=%u already\n",
-                     bucketindex);
+            LogPrintf( "(estimatefee:blockpolicy) mempool tx removed from >25 blocks, bucketIndex=%u already\n",
+                       bucketindex ) ;
     }
     else {
         unsigned int blockIndex = entryHeight % unconfTxs.size();
         if (unconfTxs[blockIndex][bucketindex] > 0)
             unconfTxs[blockIndex][bucketindex]--;
         else
-            LogPrint("estimatefee", "Blockpolicy error, mempool tx removed from blockIndex=%u,bucketIndex=%u already\n",
-                     blockIndex, bucketindex);
+            LogPrintf( "(estimatefee:blockpolicy) mempool tx removed from blockIndex=%u, bucketIndex=%u already\n",
+                       blockIndex, bucketindex ) ;
     }
 }
 
-// This function is called from CTxMemPool::removeUnchecked to ensure
-// txs removed from the mempool for any reason are no longer
-// tracked. Txs that were part of a block have already been removed in
-// processBlockTx to ensure they are never double tracked, but it is
-// of no harm to try to remove them again.
-bool CBlockPolicyEstimator::removeTx(uint256 hash)
+// This function is called to ensure that txs removed from the mempool
+// for any reason are no longer tracked. Txs that were part of a block
+// have already been removed in feesProcessBlockTx to ensure they are never
+// double tracked, but it's no harm to try to remove them again
+bool CBlockPolicyEstimator::policyEstimatorRemoveTx( uint256 hash )
 {
-    std::map<uint256, TxStatsInfo>::iterator pos = mapMemPoolTxs.find(hash);
-    if (pos != mapMemPoolTxs.end()) {
-        feeStats.removeTx(pos->second.blockHeight, nBestSeenHeight, pos->second.bucketIndex);
-        mapMemPoolTxs.erase(hash);
-        return true;
+    std::map<uint256, TxStatsInfo>::iterator pos = mapMemPoolTxs.find( hash ) ;
+    if ( pos != mapMemPoolTxs.end() ) {
+        feeStats.confirmStatsRemoveTx( pos->second.blockHeight, nBestSeenHeight, pos->second.bucketIndex ) ;
+        mapMemPoolTxs.erase( hash ) ;
+        return true ;
     } else {
-        return false;
+        return false ;
     }
 }
 
 CBlockPolicyEstimator::CBlockPolicyEstimator(const CFeeRate& _minRelayFee)
-    : nBestSeenHeight(0), trackedTxs(0), untrackedTxs(0)
+    : nBestSeenHeight( 0 ), trackedTxs( 0 )
 {
     static_assert(MIN_FEERATE > 0, "Min feerate must be nonzero");
     minTrackedFee = _minRelayFee < CFeeRate(MIN_FEERATE) ? CFeeRate(MIN_FEERATE) : _minRelayFee;
@@ -313,13 +241,13 @@ CBlockPolicyEstimator::CBlockPolicyEstimator(const CFeeRate& _minRelayFee)
     feeStats.Initialize(vfeelist, MAX_BLOCK_CONFIRMS, DEFAULT_DECAY);
 }
 
-void CBlockPolicyEstimator::processTransaction(const CTxMemPoolEntry& entry, bool validFeeEstimate)
+void CBlockPolicyEstimator::feesProcessTransaction( const CTxMemPoolEntry & entry )
 {
     unsigned int txHeight = entry.GetHeight();
     uint256 hash = entry.GetTx().GetHash();
     if (mapMemPoolTxs.count(hash)) {
-        LogPrint("estimatefee", "Blockpolicy error mempool tx %s already being tracked\n",
-                 hash.ToString().c_str());
+        LogPrintf( "(estimatefee:blockpolicy) mempool tx %s is already being tracked\n",
+                   hash.ToString().c_str() ) ;
 	return;
     }
 
@@ -331,13 +259,7 @@ void CBlockPolicyEstimator::processTransaction(const CTxMemPoolEntry& entry, boo
         return;
     }
 
-    // Only want to be updating estimates when our blockchain is synced,
-    // otherwise we'll miscalculate how many blocks its taking to get included.
-    if (!validFeeEstimate) {
-        untrackedTxs++;
-        return;
-    }
-    trackedTxs++;
+    trackedTxs++ ;
 
     // Feerates are stored and reported as BTC-per-kb:
     CFeeRate feeRate(entry.GetFee(), entry.GetTxSize());
@@ -346,21 +268,21 @@ void CBlockPolicyEstimator::processTransaction(const CTxMemPoolEntry& entry, boo
     mapMemPoolTxs[hash].bucketIndex = feeStats.NewTx( txHeight, (double)feeRate.GetFeePerKiloByte() ) ;
 }
 
-bool CBlockPolicyEstimator::processBlockTx(unsigned int nBlockHeight, const CTxMemPoolEntry* entry)
+bool CBlockPolicyEstimator::feesProcessBlockTx( unsigned int nBlockHeight, const CTxMemPoolEntry * entry )
 {
-    if (!removeTx(entry->GetTx().GetHash())) {
+    if ( ! policyEstimatorRemoveTx( entry->GetTx().GetHash() ) ) {
         // This transaction wasn't being tracked for fee estimation
-        return false;
+        return false ;
     }
 
     // How many blocks did it take for miners to include this transaction?
     // blocksToConfirm is 1-based, so a transaction included in the earliest
     // possible block has confirmation count of 1
-    int blocksToConfirm = nBlockHeight - entry->GetHeight();
-    if (blocksToConfirm <= 0) {
+    int blocksToConfirm = nBlockHeight - entry->GetHeight() ;
+    if ( blocksToConfirm <= 0 ) {
         // This can't happen because we don't process transactions from a block with a height
         // lower than our greatest seen height
-        LogPrint("estimatefee", "Blockpolicy error Transaction had negative blocksToConfirm\n");
+        LogPrintf( "(estimatefee:blockpolicy) transaction has negative blocks-to-confirm\n" ) ;
         return false;
     }
 
@@ -371,8 +293,7 @@ bool CBlockPolicyEstimator::processBlockTx(unsigned int nBlockHeight, const CTxM
     return true;
 }
 
-void CBlockPolicyEstimator::processBlock(unsigned int nBlockHeight,
-                                         std::vector<const CTxMemPoolEntry*>& entries)
+void CBlockPolicyEstimator::feesProcessBlock( unsigned int nBlockHeight, std::vector< const CTxMemPoolEntry * > & entries )
 {
     if (nBlockHeight <= nBestSeenHeight) {
         // Ignore side chains and re-orgs; assuming they are random
@@ -391,39 +312,19 @@ void CBlockPolicyEstimator::processBlock(unsigned int nBlockHeight,
     // Clear the current block state and update unconfirmed circular buffer
     feeStats.ClearCurrent(nBlockHeight);
 
-    unsigned int countedTxs = 0;
-    // Repopulate the current block states
-    for (unsigned int i = 0; i < entries.size(); i++) {
-        if (processBlockTx(nBlockHeight, entries[i]))
-            countedTxs++;
+    unsigned int countedTxs = 0 ;
+    for ( unsigned int i = 0 ; i < entries.size() ; i ++ ) {
+        if ( feesProcessBlockTx( nBlockHeight, entries[i] ) )
+            countedTxs++ ;
     }
 
     // Update all exponential averages with the current block state
     feeStats.UpdateMovingAverages();
 
-    LogPrint("estimatefee", "Blockpolicy after updating estimates for %u of %u txs in block, since last block %u of %u tracked, new mempool map size %u\n",
-             countedTxs, entries.size(), trackedTxs, trackedTxs + untrackedTxs, mapMemPoolTxs.size());
+    LogPrintf( "(estimatefee) block policy after updating estimates for %u of %u txs in block, %u tracked since last block, new mempool map size %u\n",
+               countedTxs, entries.size(), trackedTxs, mapMemPoolTxs.size() ) ;
 
-    trackedTxs = 0;
-    untrackedTxs = 0;
-}
-
-void CBlockPolicyEstimator::Write(CAutoFile& fileout)
-{
-    fileout << nBestSeenHeight;
-    feeStats.Write(fileout);
-}
-
-void CBlockPolicyEstimator::Read(CAutoFile& filein, int nFileVersion)
-{
-    int nFileBestSeenHeight;
-    filein >> nFileBestSeenHeight;
-    feeStats.Read(filein);
-    nBestSeenHeight = nFileBestSeenHeight;
-    if (nFileVersion < 139900) {
-        TxConfirmStats priStats;
-        priStats.Read(filein);
-    }
+    trackedTxs = 0 ;
 }
 
 FeeFilterRounder::FeeFilterRounder( const CFeeRate& minIncrementalFee )

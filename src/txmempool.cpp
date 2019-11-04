@@ -402,7 +402,7 @@ void CTxMemPool::AddTransactionsUpdated(unsigned int n)
     nTransactionsUpdated += n;
 }
 
-bool CTxMemPool::addUnchecked(const uint256& hash, const CTxMemPoolEntry &entry, setEntries &setAncestors, bool validFeeEstimate)
+bool CTxMemPool::addUnchecked( const uint256 & hash, const CTxMemPoolEntry & entry, setEntries & setAncestors )
 {
     NotifyEntryAdded(entry.GetSharedTx());
     // Add to memory pool without checking anything.
@@ -423,9 +423,9 @@ bool CTxMemPool::addUnchecked(const uint256& hash, const CTxMemPoolEntry &entry,
         }
     }
 
-    // Update cachedInnerUsage to include contained transaction's usage.
+    // Update cachedInnerUsage to include contained transaction's usage
     // (When we update the entry for in-mempool parents, memory usage will be
-    // further updated.)
+    // further updated)
     cachedInnerUsage += entry.DynamicMemoryUsage();
 
     const CTransaction& tx = newit->GetTx();
@@ -439,7 +439,7 @@ bool CTxMemPool::addUnchecked(const uint256& hash, const CTxMemPoolEntry &entry,
     // children, because such children would be orphans.
     // An exception to that is if a transaction enters that used to be in a block.
     // In that case, our disconnect block logic will call UpdateTransactionsFromBlock
-    // to clean up the mess we're leaving here.
+    // to clean up the mess we're leaving here
 
     // Update ancestors with information about this tx
     BOOST_FOREACH (const uint256 &phash, setParentTransactions) {
@@ -453,7 +453,7 @@ bool CTxMemPool::addUnchecked(const uint256& hash, const CTxMemPoolEntry &entry,
 
     nTransactionsUpdated++;
     totalTxSize += entry.GetTxSize();
-    minerPolicyEstimator->processTransaction(entry, validFeeEstimate);
+    minerPolicyEstimator->feesProcessTransaction( entry ) ;
 
     vTxHashes.emplace_back(tx.GetWitnessHash(), newit);
     newit->vTxHashesIdx = vTxHashes.size() - 1;
@@ -483,15 +483,17 @@ void CTxMemPool::removeUnchecked(txiter it, MemPoolRemovalReason reason)
     mapLinks.erase(it);
     mapTx.erase(it);
     nTransactionsUpdated++;
-    minerPolicyEstimator->removeTx(hash);
+    minerPolicyEstimator->policyEstimatorRemoveTx( hash ) ;
 }
 
 // Calculates descendants of entry that are not already in setDescendants, and adds to
 // setDescendants. Assumes entryit is already a tx in the mempool and setMemPoolChildren
-// is correct for tx and all descendants.
+// is correct for tx and all descendants
+
 // Also assumes that if an entry is in setDescendants already, then all
 // in-mempool descendants of it are already in setDescendants as well, so that we
-// can save time by not iterating over those entries.
+// can save time by not iterating over those entries
+
 void CTxMemPool::CalculateDescendants(txiter entryit, setEntries &setDescendants)
 {
     setEntries stage;
@@ -618,7 +620,7 @@ void CTxMemPool::removeForBlock(const std::vector<CTransactionRef>& vtx, unsigne
             entries.push_back(&*i);
     }
     // Before the txs in the new block have been removed from the mempool, update policy estimates
-    minerPolicyEstimator->processBlock(nBlockHeight, entries);
+    minerPolicyEstimator->feesProcessBlock( nBlockHeight, entries ) ;
     for (const auto& tx : vtx)
     {
         txiter it = mapTx.find(tx->GetHash());
@@ -982,14 +984,14 @@ int CTxMemPool::Expire(int64_t time) {
     return stage.size();
 }
 
-bool CTxMemPool::addUnchecked(const uint256&hash, const CTxMemPoolEntry &entry, bool validFeeEstimate)
+bool CTxMemPool::addUnchecked( const uint256 & hash, const CTxMemPoolEntry & entry )
 {
     LOCK(cs);
     setEntries setAncestors;
     uint64_t nNoLimit = std::numeric_limits<uint64_t>::max();
     std::string dummy;
     CalculateMemPoolAncestors(entry, setAncestors, nNoLimit, nNoLimit, nNoLimit, nNoLimit, dummy);
-    return addUnchecked(hash, entry, setAncestors, validFeeEstimate);
+    return addUnchecked( hash, entry, setAncestors ) ;
 }
 
 void CTxMemPool::UpdateChild(txiter entry, txiter child, bool add)
