@@ -246,12 +246,12 @@
         <translation>%1 lemaradás</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Az utolsóként kapott blokk kora: %1.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>Az utolsóként kapott blokk kora: %1</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Ez utáni tranzakciók még nem lesznek láthatóak. </translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Ez utáni tranzakciók még nem lesznek láthatóak</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1228,13 +1228,6 @@
     <message>
         <source>Verify &amp;Message</source>
         <translation>Üzenet ellenőrzése</translation>
-    </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[teszthálózat]</translation>
     </message>
 </context>
 <context>

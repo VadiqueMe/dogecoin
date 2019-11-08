@@ -128,24 +128,28 @@
         <translation>Въведете новата парола повторно</translation>
     </message>
     <message>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Въведете новата парола към портфейла.&lt;br/&gt;Моля ползвайте парола съставена от &lt;b&gt;десет или повече произволни символа&lt;/b&gt;, или &lt;b&gt;осем или повече думи&lt;/b&gt;.</translation>
+        <source>Enter the new passphrase to the wallet</source>
+        <translation>Въведете новата парола към портфейла</translation>
+    </message>
+    <message>
+        <source>Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;</source>
+        <translation>Моля ползвайте парола съставена от &lt;b&gt;десет или повече произволни символа&lt;/b&gt;, или &lt;b&gt;осем или повече думи&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
         <translation>Шифриране на портфейла</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Тази операция изисква Вашата парола за отключване на портфейла.</translation>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
+        <translation>Тази операция изисква Вашата парола за отключване на портфейла</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>Отключване на портфейла</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>Тази операция изисква Вашата парола за дешифриране на портфейла.</translation>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
+        <translation>Тази операция изисква Вашата парола за дешифриране на портфейла</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
@@ -156,8 +160,8 @@
         <translation>Смяна на паролата</translation>
     </message>
     <message>
-        <source>Enter the old passphrase and new passphrase to the wallet.</source>
-        <translation>Въведете старата парола и новата прола към портфейла.</translation>
+        <source>Enter the old passphrase and new passphrase to the wallet</source>
+        <translation>Въведете старата парола и новата прола към портфейла</translation>
     </message>
     <message>
         <source>Confirm wallet encryption</source>
@@ -184,11 +188,11 @@
         <translation>Шифрирането беше неуспешно</translation>
     </message>
     <message>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>Шифрирането на портфейла беше неуспешно, поради софтуерен проблем. Портфейлът не е шифриран.</translation>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted</source>
+        <translation>Шифрирането на портфейла беше неуспешно, поради софтуерен проблем. Портфейлът не е шифриран</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
+        <source>The supplied passphrases do not match</source>
         <translation>Паролите не съвпадат</translation>
     </message>
     <message>
@@ -196,20 +200,20 @@
         <translation>Неуспешно отключване на портфейла</translation>
     </message>
     <message>
-        <source>The passphrase entered for the wallet decryption was incorrect.</source>
-        <translation>Паролата въведена за дешифриране на портфейла е грешна.</translation>
+        <source>The passphrase entered for the wallet decryption was incorrect</source>
+        <translation>Паролата въведена за дешифриране на портфейла е грешна</translation>
     </message>
     <message>
         <source>Wallet decryption failed</source>
         <translation>Дешифрирането на портфейла беше неуспешно</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
-        <translation>Паролата на портфейла беше променена успешно.</translation>
+        <source>Wallet passphrase was successfully changed</source>
+        <translation>Паролата на портфейла беше променена успешно</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
-        <translation>Внимание: Caps Lock (главни букви) е включен.</translation>
+        <translation>Внимание: Caps Lock (главни букви) е включен!</translation>
     </message>
 </context>
 <context>
@@ -406,12 +410,12 @@
         <translation>%1 зад</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Последния получен блок е генериран преди %1.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>Последния получен блок е генериран преди %1</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Транзакции след това няма все още да бъдат видими.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Транзакции след това няма все още да бъдат видими</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1784,13 +1788,6 @@
     <message>
         <source>Message verified.</source>
         <translation>Съобщението е потвърдено.</translation>
-    </message>
-</context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
     </message>
 </context>
 <context>

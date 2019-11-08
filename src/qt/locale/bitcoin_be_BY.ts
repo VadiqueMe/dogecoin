@@ -128,24 +128,28 @@
         <translation>Паўтарыце новую кодавую фразу</translation>
     </message>
     <message>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Увядзіце новы пароль для гаманца.&lt;br/&gt;Парольная фраза павинна складацца&lt;b&gt; не меньш чым з дзесяці сімвалаў&lt;/b&gt;, ці &lt;b&gt;больш чым з васьмі слоў&lt;/b&gt;.</translation>
+        <source>Enter the new passphrase to the wallet</source>
+        <translation>Увядзіце новы пароль для гаманца</translation>
+    </message>
+    <message>
+        <source>Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;</source>
+        <translation>Калі ласка, выкарыстоўвайце фразу &lt;b&gt;з дзесяці і больш выпадковых знакаў&lt;/b&gt; альбо &lt;b&gt;васьмі і больш слоў&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
         <translation>Зашыфраваць гаманец.</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Гэтая аперацыя патрабуе кодавую фразу, каб рзблакаваць гаманец.</translation>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
+        <translation>Гэтая аперацыя патрабуе кодавую фразу каб рзблакаваць гаманец</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>Разблакаваць гаманец</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>Гэтая аперацыя патрабуе пароль каб расшыфраваць гаманец.</translation>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
+        <translation>Гэтая аперацыя патрабуе пароль каб расшыфраваць гаманец</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
@@ -184,11 +188,11 @@
         <translation>Шыфраванне гаманца няўдалае</translation>
     </message>
     <message>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>Шыфраванне гаманца не адбылося з-за ўнутранай памылкі. Гаманец незашыфраваны.</translation>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted</source>
+        <translation>Шыфраванне гаманца не адбылося з-за ўнутранай памылкі. Гаманец незашыфраваны</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
+        <source>The supplied passphrases do not match</source>
         <translation>Уведдзеныя паролі не супадаюць</translation>
     </message>
     <message>
@@ -196,16 +200,16 @@
         <translation>Разблакаванне гаманца няўдалае</translation>
     </message>
     <message>
-        <source>The passphrase entered for the wallet decryption was incorrect.</source>
-        <translation>Уведзены пароль  для расшыфравання гаманца памылковы</translation>
+        <source>The passphrase entered for the wallet decryption was incorrect</source>
+        <translation>Уведзены пароль для расшыфравання гаманца памылковы</translation>
     </message>
     <message>
         <source>Wallet decryption failed</source>
         <translation>Расшыфраванне гаманца няўдалае</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
-        <translation>Парольная фраза гаманца паспяхова зменена.</translation>
+        <source>Wallet passphrase was successfully changed</source>
+        <translation>Парольная фраза гаманца паспяхова зменена</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
@@ -374,12 +378,12 @@
         <translation>%1 таму</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Апошні прыняты блок генераваны %1 таму.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>Апошні прыняты блок генераваны %1 таму</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Транзакцыи пасля гэтай не будуць бачныя.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Транзакцыи пасля гэтай не будуць бачныя</translation>
     </message>
     <message>
         <source>Error</source>
@@ -916,13 +920,6 @@
     <message>
         <source>Alt+P</source>
         <translation>Alt+P</translation>
-    </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
     </message>
 </context>
 <context>

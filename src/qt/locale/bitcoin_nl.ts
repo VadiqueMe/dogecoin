@@ -128,23 +128,27 @@
         <translation>Herhaal nieuw wachtwoord</translation>
     </message>
     <message>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Voer een nieuw wachtwoord in voor uw portemonnee.&lt;br/&gt;Gebruik een wachtwoord van &lt;b&gt;tien of meer willekeurige karakters&lt;/b&gt;, of &lt;b&gt;acht of meer woorden&lt;/b&gt;.</translation>
+        <source>Enter the new passphrase to the wallet</source>
+        <translation>Voer een nieuw wachtwoord in voor uw portemonnee</translation>
+    </message>
+    <message>
+        <source>Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;</source>
+        <translation>Gebruik een wachtwoord van &lt;b&gt;tien of meer willekeurige karakters&lt;/b&gt;, of &lt;b&gt;acht of meer woorden&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
         <translation>Versleutel portemonnee</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Deze operatie vereist uw portemonneewachtwoord om de portemonnee te openen.</translation>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
+        <translation>Deze operatie vereist uw portemonneewachtwoord om de portemonnee te openen</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>Open portemonnee</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
         <translation>Deze operatie vereist uw portemonneewachtwoord om de portemonnee te ontsleutelen</translation>
     </message>
     <message>
@@ -156,8 +160,8 @@
         <translation>Wijzig wachtwoord</translation>
     </message>
     <message>
-        <source>Enter the old passphrase and new passphrase to the wallet.</source>
-        <translation>Voer het oude en nieuwe wachtwoord in voor uw portemonnee.</translation>
+        <source>Enter the old passphrase and new passphrase to the wallet</source>
+        <translation>Voer het oude en nieuwe wachtwoord in voor uw portemonnee</translation>
     </message>
     <message>
         <source>Confirm wallet encryption</source>
@@ -188,11 +192,11 @@
         <translation>Portemonneeversleuteling mislukt</translation>
     </message>
     <message>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>Portemonneeversleuteling mislukt door een interne fout. Uw portemonnee is niet versleuteld.</translation>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted</source>
+        <translation>Portemonneeversleuteling mislukt door een interne fout. Uw portemonnee is niet versleuteld</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
+        <source>The supplied passphrases do not match</source>
         <translation>De opgegeven wachtwoorden komen niet overeen</translation>
     </message>
     <message>
@@ -200,16 +204,16 @@
         <translation>Portemonnee openen mislukt</translation>
     </message>
     <message>
-        <source>The passphrase entered for the wallet decryption was incorrect.</source>
-        <translation>Het opgegeven wachtwoord voor de portemonnee-ontsleuteling is niet correct.</translation>
+        <source>The passphrase entered for the wallet decryption was incorrect</source>
+        <translation>Het opgegeven wachtwoord voor de portemonnee-ontsleuteling is niet correct</translation>
     </message>
     <message>
         <source>Wallet decryption failed</source>
         <translation>Portemonnee-ontsleuteling mislukt</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
-        <translation>Portemonneewachtwoord is met succes gewijzigd.</translation>
+        <source>Wallet passphrase was successfully changed</source>
+        <translation>Portemonneewachtwoord is met succes gewijzigd</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
@@ -434,12 +438,12 @@
         <translation>%1 achter</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Laatst ontvangen blok was %1 geleden gegenereerd.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>Laatst ontvangen blok was %1 geleden gegenereerd</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Transacties na dit moment zullen nu nog niet zichtbaar zijn.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Transacties na dit moment zullen nu nog niet zichtbaar zijn</translation>
     </message>
     <message>
         <source>Error</source>
@@ -842,12 +846,12 @@
         <translation>Vorm</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the bitcoin network, as detailed below.</source>
-        <translation>Recente transacties zijn mogelijk nog niet zichtbaar. De balans van de geldbeugel is daarom mogelijk niet correct. Deze informatie is correct van zodra de synchronisatie met het Bitcoin-netwerk werd voltooid, zoals onderaan beschreven.</translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the dogecoin network, as detailed below</source>
+        <translation>Recente transacties zijn mogelijk nog niet zichtbaar. De balans van de geldbeugel is daarom mogelijk niet correct. Deze informatie is correct van zodra de synchronisatie met het dogecoin-netwerk werd voltooid, zoals onderaan beschreven</translation>
     </message>
     <message>
-        <source>Attempting to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation>Poging om dogecoins te besteden die door "nog niet weergegeven" transacties worden beïnvloed, worden niet door het netwerk geaccepteerd.</translation>
+        <source>Attempting to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network</source>
+        <translation>Poging om dogecoins te besteden die door "nog niet weergegeven" transacties worden beïnvloed, worden niet door het netwerk geaccepteerd</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -2307,13 +2311,6 @@
     </message>
 </context>
 <context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnetwerk]</translation>
-    </message>
-</context>
-<context>
     <name>TrafficGraphWidget</name>
     <message>
         <source>KB/s</source>
@@ -2451,7 +2448,7 @@
         <translation>Transactie-ID</translation>
     </message>
     <message>
-        <source>Transaction full size</source>
+        <source>Full size of transaction</source>
         <translation>Transactie totale grootte</translation>
     </message>
     <message>

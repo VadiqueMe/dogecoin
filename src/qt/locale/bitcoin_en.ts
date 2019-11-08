@@ -160,8 +160,11 @@
         <translation>Repeat new passphrase</translation>
     </message>
     <message>
-        <location filename="../askpassphrasedialog.cpp" line="+46"/>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
+        <source>Enter the new passphrase to the wallet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -171,7 +174,7 @@
     </message>
     <message>
         <location line="+3"/>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -181,7 +184,7 @@
     </message>
     <message>
         <location line="+3"/>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -196,7 +199,7 @@
     </message>
     <message>
         <location line="+1"/>
-        <source>Enter the old passphrase and new passphrase to the wallet.</source>
+        <source>Enter the old passphrase and new passphrase to the wallet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -240,7 +243,7 @@
     </message>
     <message>
         <location line="-54"/>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -258,7 +261,7 @@
         <location line="+1"/>
         <location line="+11"/>
         <location line="+19"/>
-        <source>The passphrase entered for the wallet decryption was incorrect.</source>
+        <source>The passphrase entered for the wallet decryption was incorrect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -268,7 +271,7 @@
     </message>
     <message>
         <location line="+14"/>
-        <source>Wallet passphrase was successfully changed.</source>
+        <source>Wallet passphrase was successfully changed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -581,13 +584,13 @@
     </message>
     <message>
         <location line="+19"/>
-        <source>Last received block was generated %1 ago.</source>
-        <translation type="unfinished">Last received block was generated %1 ago.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation type="unfinished">Last received block was generated %1 ago</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation type="unfinished">Transactions after this will not yet be visible.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation type="unfinished">Transactions after this will not yet be visible</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -1093,12 +1096,12 @@
     </message>
     <message>
         <location line="+119"/>
-        <source>Recent transactions may not yet be visible, and therefore your wallet&apos;s balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the dogecoin network, as detailed below.</source>
+        <source>Recent transactions may not yet be visible, and therefore your wallet&apos;s balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the dogecoin network, as detailed below</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+19"/>
-        <source>Attempting to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
+        <source>Attempting to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3226,14 +3229,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>SplashScreen</name>
-    <message>
-        <location filename="../networkstyle.cpp" line="+19"/>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
-    </message>
-</context>
-<context>
     <name>TrafficGraphWidget</name>
     <message>
         <location filename="../trafficgraphwidget.cpp" line="+79"/>
@@ -3431,7 +3426,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+1"/>
-        <source>Transaction full size</source>
+        <source>Full size of transaction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

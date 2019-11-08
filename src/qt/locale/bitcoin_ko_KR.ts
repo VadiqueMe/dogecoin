@@ -128,24 +128,28 @@
         <translation>새로운 암호 재확인</translation>
     </message>
     <message>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>지갑에 새로운 비밀문구를 입력하세요.&lt;br/&gt;비밀문구를 &lt;b&gt;열 개 이상의 무작위 글자&lt;/b&gt; 혹은 &lt;b&gt;여덟개 이상의 단어로&lt;b&gt; 정하세요.</translation>
+        <source>Enter the new passphrase to the wallet</source>
+        <translation>지갑에 새로운 비밀문구를 입력하세요</translation>
+    </message>
+    <message>
+        <source>Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;</source>
+        <translation>비밀문구를 &lt;b&gt;열 개 이상의 무작위 글자&lt;/b&gt; 혹은 &lt;b&gt;여덟개 이상의 단어로&lt;b&gt; 정하세요</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
         <translation>지갑 암호화</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>이 작업을 실행하려면 사용자 지갑의 암호가 필요합니다.</translation>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
+        <translation>이 작업을 실행하려면 사용자 지갑의 암호가 필요합니다</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>지갑 잠금해제</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>이 작업은 지갑을 해독하기 위해 사용자 지갑의 암호가 필요합니다.</translation>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
+        <translation>이 작업은 지갑을 해독하기 위해 사용자 지갑의 암호가 필요합니다</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
@@ -156,8 +160,8 @@
         <translation>암호 변경</translation>
     </message>
     <message>
-        <source>Enter the old passphrase and new passphrase to the wallet.</source>
-        <translation>지갑의 기존 암호와 새로운 암호를 입력해주세요.</translation>
+        <source>Enter the old passphrase and new passphrase to the wallet</source>
+        <translation>지갑의 기존 암호와 새로운 암호를 입력해주세요</translation>
     </message>
     <message>
         <source>Confirm wallet encryption</source>
@@ -188,28 +192,28 @@
         <translation>지갑 암호화 실패</translation>
     </message>
     <message>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>지갑 암호화는 내부 에러로 인해 실패했습니다.  당신의 지갑은 암호화 되지 않았습니다.</translation>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted</source>
+        <translation>지갑 암호화는 내부 에러로 인해 실패했습니다.  당신의 지갑은 암호화 되지 않았습니다</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
-        <translation>지정한 암호가 일치하지 않습니다.</translation>
+        <source>The supplied passphrases do not match</source>
+        <translation>지정한 암호가 일치하지 않습니다</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>
         <translation>지갑 잠금해제 실패</translation>
     </message>
     <message>
-        <source>The passphrase entered for the wallet decryption was incorrect.</source>
-        <translation>지갑 해독을 위한 암호가 틀렸습니다.</translation>
+        <source>The passphrase entered for the wallet decryption was incorrect</source>
+        <translation>지갑 해독을 위한 암호가 틀렸습니다</translation>
     </message>
     <message>
         <source>Wallet decryption failed</source>
         <translation>지갑 복호화 실패</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
-        <translation>지갑 비밀번호가 성공적으로 변경되었습니다.</translation>
+        <source>Wallet passphrase was successfully changed</source>
+        <translation>지갑 비밀번호가 성공적으로 변경되었습니다</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
@@ -434,12 +438,12 @@
         <translation>%1 뒤에</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>최근에 받은 블록은 %1 전에 생성되었습니다.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>최근에 받은 블록은 %1 전에 생성되었습니다</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>이 후의 거래들은 아직 보이지 않을 것입니다.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>이 후의 거래들은 아직 보이지 않을 것입니다</translation>
     </message>
     <message>
         <source>Error</source>
@@ -842,12 +846,12 @@
         <translation>유형</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the bitcoin network, as detailed below.</source>
-        <translation>최근 거래는 아직 보이지 않을 것입니다, 그러므로 당신의 지갑의 잔액이 틀릴 수도 있습니다. 이 정보는 비트코인 네트워크와 완전한 동기화가 완료되면 아래의 설명과 같이 정확해집니다.</translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the dogecoin network, as detailed below</source>
+        <translation>최근 거래는 아직 보이지 않을 것입니다, 그러므로 당신의 지갑의 잔액이 틀릴 수도 있습니다. 이 정보는 dogecoin 네트워크와 완전한 동기화가 완료되면 아래의 설명과 같이 정확해집니다</translation>
     </message>
     <message>
-        <source>Attempting to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation>아직 표시되지 않은 거래의 영향을 받는 비트코인을 사용하려고 하는 것은 네트워크에서 허가되지 않습니다.</translation>
+        <source>Attempting to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network</source>
+        <translation>아직 표시되지 않은 거래의 영향을 받는 DOGE 을 사용하려고 하는 것은 네트워크에서 허가되지 않습니다</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -2307,13 +2311,6 @@
     </message>
 </context>
 <context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[테스트넷]</translation>
-    </message>
-</context>
-<context>
     <name>TrafficGraphWidget</name>
     <message>
         <source>KB/s</source>
@@ -2455,7 +2452,7 @@
         <translation>거래 ID</translation>
     </message>
     <message>
-        <source>Transaction full size</source>
+        <source>Full size of transaction</source>
         <translation>거래 총 크기</translation>
     </message>
     <message>

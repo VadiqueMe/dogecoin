@@ -120,24 +120,28 @@
         <translation>Repita a nova frase de frase de segurança</translation>
     </message>
     <message>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Insira a nova frase de segurança para a carteira. &lt;br/&gt; Por favor, utilize uma frase de segurança de &lt;b&gt;10 ou mais carateres aleatórios,&lt;/b&gt; ou &lt;b&gt;oito ou mais palavras&lt;/b&gt;.</translation>
+        <source>Enter the new passphrase to the wallet</source>
+        <translation>Insira a nova frase de segurança para a carteira</translation>
+    </message>
+    <message>
+        <source>Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;</source>
+        <translation>Por favor, utilize uma frase de segurança de &lt;b&gt;10 ou mais carateres aleatórios&lt;/b&gt;, ou &lt;b&gt;oito ou mais palavras&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
         <translation>Encriptar carteira</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Esta operação precisa da sua frase de segurança da carteira para desbloquear a mesma.</translation>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
+        <translation>Esta operação precisa da sua frase de segurança da carteira para desbloquear a mesma</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>Desbloquear carteira</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>Esta operação precisa da sua frase de segurança da carteira para desencriptar a mesma.</translation>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
+        <translation>Esta operação precisa da sua frase de segurança da carteira para desencriptar a mesma</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
@@ -148,8 +152,8 @@
         <translation>Alterar frase de segurança</translation>
     </message>
     <message>
-        <source>Enter the old passphrase and new passphrase to the wallet.</source>
-        <translation>Insira a frase de segurança antiga e a nova frase de segurança para a carteira.</translation>
+        <source>Enter the old passphrase and new passphrase to the wallet</source>
+        <translation>Insira a frase de segurança antiga e a nova frase de segurança para a carteira</translation>
     </message>
     <message>
         <source>Confirm wallet encryption</source>
@@ -172,8 +176,8 @@
         <translation>Encriptação da carteira falhou</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
-        <translation>As frases de segurança fornecidas não coincidem.</translation>
+        <source>The supplied passphrases do not match</source>
+        <translation>As frases de segurança fornecidas não coincidem</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>
@@ -184,8 +188,8 @@
         <translation>Desencriptação da carteira falhou</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
-        <translation>A frase de segurança da carteira foi alterada com sucesso.</translation>
+        <source>Wallet passphrase was successfully changed</source>
+        <translation>A frase de segurança da carteira foi alterada com sucesso</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
@@ -406,12 +410,12 @@
         <translation>%1 em atraso</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>O último bloco recebido foi gerado há %1.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>O último bloco recebido foi gerado há %1</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>As transações depois de isto ainda não serão visíveis.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>As transações depois de isto ainda não serão visíveis</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1913,13 +1917,6 @@
     <message>
         <source>Reset all verify message fields</source>
         <translation>Repor todos os campos de verificação de mensagem</translation>
-    </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[rede de testes]</translation>
     </message>
 </context>
 <context>

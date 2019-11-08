@@ -128,24 +128,28 @@
         <translation>Gentag ny adgangskode</translation>
     </message>
     <message>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Indtast det nye kodeord til tegnebogen.&lt;br/&gt;Brug venligst et kodeord på &lt;b&gt;ti eller flere tilfældige tegn&lt;/b&gt; eller &lt;b&gt;otte eller flere ord&lt;/b&gt;.</translation>
+        <source>Enter the new passphrase to the wallet</source>
+        <translation>Indtast det nye kodeord til tegnebogen</translation>
+    </message>
+    <message>
+        <source>Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;</source>
+        <translation>Brug venligst et kodeord på &lt;b&gt;ti eller flere tilfældige tegn&lt;/b&gt; eller &lt;b&gt;otte eller flere ord&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
         <translation>Kryptér tegnebog</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Denne funktion har brug for din tegnebogs adgangskode for at låse tegnebogen op.</translation>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
+        <translation>Denne funktion har brug for din tegnebogs adgangskode for at låse tegnebogen op</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>Lås tegnebog op</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>Denne funktion har brug for din tegnebogs adgangskode for at dekryptere tegnebogen.</translation>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
+        <translation>Denne funktion har brug for din tegnebogs adgangskode for at dekryptere tegnebogen</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
@@ -156,8 +160,8 @@
         <translation>Skift adgangskode</translation>
     </message>
     <message>
-        <source>Enter the old passphrase and new passphrase to the wallet.</source>
-        <translation>Indtast den gamle adgangskode og en ny adgangskode til tegnebogen.</translation>
+        <source>Enter the old passphrase and new passphrase to the wallet</source>
+        <translation>Indtast den gamle adgangskode og en ny adgangskode til tegnebogen</translation>
     </message>
     <message>
         <source>Confirm wallet encryption</source>
@@ -188,28 +192,28 @@
         <translation>Tegnebogskryptering mislykkedes</translation>
     </message>
     <message>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>Tegnebogskryptering mislykkedes på grund af en intern fejl. Din tegnebog blev ikke krypteret.</translation>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted</source>
+        <translation>Tegnebogskryptering mislykkedes på grund af en intern fejl. Din tegnebog blev ikke krypteret</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
-        <translation>De angivne adgangskoder stemmer ikke overens.</translation>
+        <source>The supplied passphrases do not match</source>
+        <translation>De angivne adgangskoder stemmer ikke overens</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>
         <translation>Tegnebogsoplåsning mislykkedes</translation>
     </message>
     <message>
-        <source>The passphrase entered for the wallet decryption was incorrect.</source>
-        <translation>Den angivne adgangskode for tegnebogsdekrypteringen er forkert.</translation>
+        <source>The passphrase entered for the wallet decryption was incorrect</source>
+        <translation>Den angivne adgangskode for tegnebogsdekrypteringen er forkert</translation>
     </message>
     <message>
         <source>Wallet decryption failed</source>
         <translation>Tegnebogsdekryptering mislykkedes</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
-        <translation>Tegnebogens adgangskode blev ændret.</translation>
+        <source>Wallet passphrase was successfully changed</source>
+        <translation>Tegnebogens adgangskode blev ændret</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
@@ -434,12 +438,12 @@
         <translation>%1 bagud</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Senest modtagne blok blev genereret for %1 siden.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>Senest modtagne blok blev genereret for %1 siden</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Transaktioner herefter vil endnu ikke være synlige.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Transaktioner herefter vil endnu ikke være synlige</translation>
     </message>
     <message>
         <source>Error</source>
@@ -842,12 +846,12 @@
         <translation>Formular</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the dogecoin network, as detailed below.</source>
-        <translation>Nylige transaktioner er måske ikke synlige endnu, og derfor kan din tegnebogs saldo være ukorrekt. Denne information vil være korrekt, når din tegnebog er færdig med at synkronisere med dogecoin-netværket, som detaljerne herunder viser.</translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the dogecoin network, as detailed below</source>
+        <translation>Nylige transaktioner er måske ikke synlige endnu, og derfor kan din tegnebogs saldo være ukorrekt. Denne information vil være korrekt, når din tegnebog er færdig med at synkronisere med dogecoin-netværket, som detaljerne herunder viser</translation>
     </message>
     <message>
-        <source>Attempting to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation>Forsøg på at bruge dogecoin, som er indeholdt i endnu-ikke-viste transaktioner, accepteres ikke af netværket.</translation>
+        <source>Attempting to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network</source>
+        <translation>Forsøg på at bruge dogecoin, som er indeholdt i endnu-ikke-viste transaktioner, accepteres ikke af netværket</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -2307,13 +2311,6 @@
     </message>
 </context>
 <context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnetværk]</translation>
-    </message>
-</context>
-<context>
     <name>TrafficGraphWidget</name>
     <message>
         <source>KB/s</source>
@@ -2455,7 +2452,7 @@
         <translation>Transaktions-ID</translation>
     </message>
     <message>
-        <source>Transaction full size</source>
+        <source>Full size of transaction</source>
         <translation>Totalstørrelse af transaktion</translation>
     </message>
     <message>

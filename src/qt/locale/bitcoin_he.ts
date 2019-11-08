@@ -302,12 +302,12 @@
         <translation>%1 מאחור</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>המקטע האחרון שהתקבל נוצר לפני %1.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>המקטע האחרון שהתקבל נוצר לפני %1</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>ההעברות שבוצעו לאחר העברה זו לא יופיעו.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>ההעברות שבוצעו לאחר העברה זו לא יופיעו</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1454,13 +1454,6 @@
     <message>
         <source>Reset all verify message fields</source>
         <translation>איפוס כל שדות אימות ההודעה</translation>
-    </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[רשת-בדיקה]</translation>
     </message>
 </context>
 <context>

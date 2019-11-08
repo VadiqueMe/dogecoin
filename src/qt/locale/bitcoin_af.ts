@@ -128,24 +128,28 @@
         <translation>Herhaal nuwe wagwoord</translation>
     </message>
     <message>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Tik die nuwe wagwoord vir u beursie.&lt;br/&gt;Gerbuik asseblief 'n wagwoord met &lt;b&gt;tien of meer lukrake karakters&lt;/b&gt;, of &lt;b&gt;agt of meer woorde&lt;/b&gt;.</translation>
+        <source>Enter the new passphrase to the wallet</source>
+        <translation>Tik die nuwe wagwoord vir u beursie</translation>
+    </message>
+    <message>
+        <source>Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;</source>
+        <translation>Gerbuik asseblief 'n wagwoord met &lt;b&gt;tien of meer lukrake karakters&lt;/b&gt;, of &lt;b&gt;agt of meer woorde&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
         <translation>Kodifiseer beursie</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>U het u beursie se wagwoord nodig om toegang tot u beursie te verkry.</translation>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
+        <translation>U het u beursie se wagwoord nodig om toegang tot u beursie te verkry</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>Sluit beursie oop</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>U het u beursie se wagwoord nodig om u beursie se kode te ontsyfer.</translation>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
+        <translation>U het u beursie se wagwoord nodig om u beursie se kode te ontsyfer</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
@@ -184,28 +188,28 @@
         <translation>Kodifikasie was onsuksesvol</translation>
     </message>
     <message>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>Weens 'n interne fout het kodifikasie het nie geslaag nie.  U beursie is nie gekodifiseer nie</translation>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted</source>
+        <translation>Weens 'n interne fout het kodifikasie het nie geslaag nie. U beursie is nie gekodifiseer nie</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
-        <translation>Die wagwoorde stem nie ooreen nie.</translation>
+        <source>The supplied passphrases do not match</source>
+        <translation>Die wagwoorde stem nie ooreen nie</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>
         <translation>Die beursie is nie oopgesluit nie</translation>
     </message>
     <message>
-        <source>The passphrase entered for the wallet decryption was incorrect.</source>
-        <translation>U het die verkeerde wagwoord ingetik.</translation>
+        <source>The passphrase entered for the wallet decryption was incorrect</source>
+        <translation>U het die verkeerde wagwoord ingetik</translation>
     </message>
     <message>
         <source>Wallet decryption failed</source>
         <translation>Beursie-dekripsie het misluk</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
-        <translation>Beursie wagwoordfrase is suksesvol verander.</translation>
+        <source>Wallet passphrase was successfully changed</source>
+        <translation>Beursie wagwoordfrase is suksesvol verander</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
@@ -406,12 +410,12 @@
         <translation>%1 agter</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Laaste ontvange blok is %1 gelede gegenereer.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>Laaste ontvange blok is %1 gelede gegenereer</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Transaksies hierna sal nog nie sigbaar wees nie.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Transaksies hierna sal nog nie sigbaar wees nie</translation>
     </message>
     <message>
         <source>Error</source>

@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #ifndef BITCOIN_PRIMITIVES_TRANSACTION_H
 #define BITCOIN_PRIMITIVES_TRANSACTION_H
@@ -318,12 +318,12 @@ public:
     }
 
     // Compute a hash that includes both transaction and witness data
-    uint256 GetWitnessHash() const;
+    uint256 GetWitnessHash() const ;
 
-    // Return sum of txouts.
-    CAmount GetValueOut() const;
+    // Return sum of txouts
+    CAmount GetValueOut() const ;
     // GetValueIn() is a method on CCoinsViewCache, because
-    // inputs must be known to compute value in.
+    // inputs must be known to compute value in
 
     // Compute priority, given priority of inputs and (optionally) tx size
     double ComputePriority(double dPriorityInputs, unsigned int nTxSize=0) const;
@@ -332,11 +332,9 @@ public:
     unsigned int CalculateModifiedSize(unsigned int nTxSize=0) const;
 
     /**
-     * Get the total transaction size in bytes, including witness data.
-     * "Total Size" defined in BIP141 and BIP144.
-     * @return Total transaction size in bytes
+     * @return size of transaction in bytes, including witness data
      */
-    unsigned int GetTotalSize() const;
+    unsigned int GetFullSize() const ;
 
     bool IsCoinBase() const
     {

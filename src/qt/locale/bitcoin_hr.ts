@@ -262,12 +262,12 @@
         <translation>Obrađeno %n blokova povijesti transakcije</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Zadnji primljeni blok je bio ustvaren prije %1.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>Zadnji primljeni blok je bio ustvaren prije %1</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Transakcije izvršene za tim blokom nisu još prikazane.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Transakcije izvršene za tim blokom nisu još prikazane</translation>
     </message>
     <message>
         <source>Error</source>
@@ -920,13 +920,6 @@
     <message>
         <source>Verify &amp;Message</source>
         <translation>&amp;Potvrdite poruku</translation>
-    </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
     </message>
 </context>
 <context>

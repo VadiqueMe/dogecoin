@@ -298,12 +298,12 @@
         <translation>%1 тому</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Останній отриманий блок було згенеровано %1 тому.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>Останній отриманий блок було згенеровано %1 тому</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Пізніші транзакції не буде видно.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Пізніші транзакції не буде видно</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1556,13 +1556,6 @@
     <message>
         <source>Reset all verify message fields</source>
         <translation>Скинути всі поля перевірки повідомлення</translation>
-    </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[тестова мережа]</translation>
     </message>
 </context>
 <context>

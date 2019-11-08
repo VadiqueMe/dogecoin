@@ -230,12 +230,12 @@
         <translation>%1 орқада</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Сўнги қабул қилинган блок %1 олдин яратилган.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>Сўнги қабул қилинган блок %1 олдин яратилган</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Бундан кейинги пул ўтказмалари кўринмайдиган бўлади.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Бундан кейинги пул ўтказмалари кўринмайдиган бўлади</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1066,13 +1066,6 @@
     <message>
         <source>Clear &amp;All</source>
         <translation>Барчасини &amp; Тозалаш</translation>
-    </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
     </message>
 </context>
 <context>

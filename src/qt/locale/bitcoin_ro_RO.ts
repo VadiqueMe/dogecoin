@@ -242,12 +242,12 @@
         <translation>%1 în urmă</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Ultimul bloc recepţionat a fost generat acum %1.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>Ultimul bloc recepţionat a fost generat acum %1</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Tranzacţiile după aceasta nu vor fi vizibile încă.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Tranzacţiile după aceasta nu vor fi vizibile încă</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1420,13 +1420,6 @@
     <message>
         <source>Reset all verify message fields</source>
         <translation>Resetează toate cîmpurile mesajelor semnate</translation>
-    </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
     </message>
 </context>
 <context>

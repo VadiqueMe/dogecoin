@@ -128,24 +128,28 @@
         <translation>Répéter la phrase de passe</translation>
     </message>
     <message>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Saisissez la nouvelle phrase de passe du porte-monnaie.&lt;br/&gt;Veuillez utiliser une phrase de passe composée de &lt;b&gt;dix caractères aléatoires ou plus&lt;/b&gt;, ou de &lt;b&gt;huit mots ou plus&lt;/b&gt;.</translation>
+        <source>Enter the new passphrase to the wallet</source>
+        <translation>Saisissez la nouvelle phrase de passe du porte-monnaie</translation>
+    </message>
+    <message>
+        <source>Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;</source>
+        <translation>Veuillez utiliser une phrase de passe composée de &lt;b&gt;dix caractères aléatoires ou plus&lt;/b&gt;, ou de &lt;b&gt;huit mots ou plus&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
         <translation>Chiffrer le porte-monnaie</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Cette opération nécessite votre phrase de passe pour déverrouiller le porte-monnaie.</translation>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
+        <translation>Cette opération nécessite votre phrase de passe pour déverrouiller le porte-monnaie</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>Déverrouiller le porte-monnaie</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>Cette opération nécessite votre phrase de passe pour déchiffrer le porte-monnaie.</translation>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
+        <translation>Cette opération nécessite votre phrase de passe pour déchiffrer le porte-monnaie</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
@@ -156,8 +160,8 @@
         <translation>Changer la phrase de passe</translation>
     </message>
     <message>
-        <source>Enter the old passphrase and new passphrase to the wallet.</source>
-        <translation>Saisir l'ancienne puis la nouvelle phrase de passe du porte-monnaie.</translation>
+        <source>Enter the old passphrase and new passphrase to the wallet</source>
+        <translation>Saisir l'ancienne puis la nouvelle phrase de passe du porte-monnaie</translation>
     </message>
     <message>
         <source>Confirm wallet encryption</source>
@@ -188,28 +192,28 @@
         <translation>Échec de chiffrement du porte-monnaie</translation>
     </message>
     <message>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>Le chiffrement du porte-monnaie a échoué en raison d'une erreur interne. Votre porte-monnaie n'a pas été chiffré.</translation>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted</source>
+        <translation>Le chiffrement du porte-monnaie a échoué en raison d'une erreur interne. Votre porte-monnaie n'a pas été chiffré</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
-        <translation>Les phrases de passe saisies ne correspondent pas.</translation>
+        <source>The supplied passphrases do not match</source>
+        <translation>Les phrases de passe saisies ne correspondent pas</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>
         <translation>Échec de déverrouillage du porte-monnaie</translation>
     </message>
     <message>
-        <source>The passphrase entered for the wallet decryption was incorrect.</source>
-        <translation>La phrase de passe saisie pour déchiffrer le porte-monnaie était erronée.</translation>
+        <source>The passphrase entered for the wallet decryption was incorrect</source>
+        <translation>La phrase de passe saisie pour déchiffrer le porte-monnaie était erronée</translation>
     </message>
     <message>
         <source>Wallet decryption failed</source>
         <translation>Échec de déchiffrement du porte-monnaie</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
-        <translation>La phrase de passe du porte-monnaie a été modifiée avec succès.</translation>
+        <source>Wallet passphrase was successfully changed</source>
+        <translation>La phrase de passe du porte-monnaie a été modifiée avec succès</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
@@ -434,12 +438,12 @@
         <translation>en retard de %1</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Le dernier bloc reçu avait été généré il y a %1.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>Le dernier bloc reçu avait été généré il y a %1</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Les transactions suivantes ne seront pas déjà visibles.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Les transactions suivantes ne seront pas déjà visibles</translation>
     </message>
     <message>
         <source>Error</source>
@@ -842,12 +846,12 @@
         <translation>Formulaire</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the dogecoin network, as detailed below.</source>
-        <translation>Les transactions récentes ne sont peut-être pas encore visibles, et par conséquent, le solde de votre porte-monnaie est peut-être erroné. Cette information sera juste une fois que votre porte-monnaie aura fini de se synchroniser avec le réseau Bitcoin, comme décrit ci-dessous. </translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the dogecoin network, as detailed below</source>
+        <translation>Les transactions récentes ne sont peut-être pas encore visibles, et par conséquent, le solde de votre porte-monnaie est peut-être erroné. Cette information sera juste une fois que votre porte-monnaie aura fini de se synchroniser avec le réseau dogecoin, comme décrit ci-dessous</translation>
     </message>
     <message>
-        <source>Attempting to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation>Toute tentative de dépense de dogecoins affectés par des transactions qui ne sont pas encore affichées ne sera pas acceptée par le réseau.</translation>
+        <source>Attempting to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network</source>
+        <translation>Toute tentative de dépense de dogecoins affectés par des transactions qui ne sont pas encore affichées ne sera pas acceptée par le réseau</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -2307,13 +2311,6 @@
     </message>
 </context>
 <context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
-    </message>
-</context>
-<context>
     <name>TrafficGraphWidget</name>
     <message>
         <source>KB/s</source>
@@ -2455,7 +2452,7 @@
         <translation>ID de la transaction</translation>
     </message>
     <message>
-        <source>Transaction full size</source>
+        <source>Full size of transaction</source>
         <translation>Taille totale de la transaction</translation>
     </message>
     <message>

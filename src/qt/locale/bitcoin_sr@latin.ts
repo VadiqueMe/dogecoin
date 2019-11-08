@@ -60,24 +60,28 @@
         <translation>Ponovo unesite pristupnu frazu</translation>
     </message>
     <message>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Unesite novu pristupnu frazu u novčanik. &lt;br/&gt;Molimo, koristite pristupnu frazu koja ima &lt;b&gt; deset ili više nasumičnih znakova&lt;/b&gt;, ili &lt;b&gt;osam ili više reči&lt;/b&gt;.</translation>
+        <source>Enter the new passphrase to the wallet</source>
+        <translation>Unesite novu pristupnu frazu u novčanik</translation>
+    </message>
+    <message>
+        <source>Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;</source>
+        <translation>Molimo, koristite pristupnu frazu koja ima &lt;b&gt; deset ili više nasumičnih znakova&lt;/b&gt;, ili &lt;b&gt;osam ili više reči&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
         <translation>Šifrujte novčanik</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Da biste otključali novčanik potrebno je da unesete svoju pristupnu frazu.</translation>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
+        <translation>Da biste otključali novčanik potrebno je da unesete svoju pristupnu frazu</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>Otključajte novčanik</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>Da biste dešifrovali novčanik, potrebno je da unesete svoju pristupnu frazu.</translation>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
+        <translation>Da biste dešifrovali novčanik potrebno je da unesete svoju pristupnu frazu</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>

@@ -218,7 +218,7 @@
         <translation>%1 aizmugurē</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
+        <source>Transactions after this will not yet be visible</source>
         <translation>Transakcijas pēc šī vel nebūs redzamas</translation>
     </message>
     <message>
@@ -994,13 +994,6 @@
     <message>
         <source>Reset all verify message fields</source>
         <translation>Atiestatīt visus laukus</translation>
-    </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnets]</translation>
     </message>
 </context>
 <context>

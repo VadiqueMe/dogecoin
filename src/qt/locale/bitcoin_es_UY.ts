@@ -382,13 +382,6 @@
         <source>Alt+P</source>
         <translation>Alt+P</translation>
     </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[prueba_de_red]</translation>
-    </message>
 </context>
 <context>
     <name>TrafficGraphWidget</name>

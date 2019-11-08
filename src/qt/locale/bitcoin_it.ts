@@ -128,24 +128,28 @@
         <translation>Ripeti la nuova passphrase</translation>
     </message>
     <message>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Inserisci la nuova passphrase per il portamonete.&lt;br/&gt;Si consiglia di utilizzare &lt;b&gt;almeno dieci caratteri casuali&lt;/b&gt; oppure &lt;b&gt;otto o più parole&lt;/b&gt;.</translation>
+        <source>Enter the new passphrase to the wallet</source>
+        <translation>Inserisci la nuova passphrase per il portamonete</translation>
+    </message>
+    <message>
+        <source>Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;</source>
+        <translation>Si consiglia di utilizzare &lt;b&gt;almeno dieci caratteri casuali&lt;/b&gt; oppure &lt;b&gt;otto o più parole&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
         <translation>Cifra il portamonete</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Questa operazione necessita della passphrase per sbloccare il portamonete.</translation>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
+        <translation>Questa operazione necessita della passphrase per sbloccare il portamonete</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>Sblocca il portamonete</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>Quest'operazione necessita della passphrase per decifrare il portamonete,</translation>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
+        <translation>Quest'operazione necessita della passphrase per decifrare il portamonete</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
@@ -156,8 +160,8 @@
         <translation>Cambia la passphrase</translation>
     </message>
     <message>
-        <source>Enter the old passphrase and new passphrase to the wallet.</source>
-        <translation>Inserisci la vecchia e la nuova passphrase per il portamonete.</translation>
+        <source>Enter the old passphrase and new passphrase to the wallet</source>
+        <translation>Inserisci la vecchia e la nuova passphrase per il portamonete</translation>
     </message>
     <message>
         <source>Confirm wallet encryption</source>
@@ -184,19 +188,19 @@
         <translation>Il processo di crittografia del tuo portafogli è fallito</translation>
     </message>
     <message>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>Crittaggio fallito a causa di un errore interno. Il portamonete non è stato crittato.</translation>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted</source>
+        <translation>Crittaggio fallito a causa di un errore interno. Il portamonete non è stato crittato</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
-        <translation>Le frasi di accesso non corrispondono.</translation>
+        <source>The supplied passphrases do not match</source>
+        <translation>Le frasi di accesso non corrispondono</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>
         <translation>Sbloccaggio del portafoglio fallito</translation>
     </message>
     <message>
-        <source>The passphrase entered for the wallet decryption was incorrect.</source>
+        <source>The passphrase entered for the wallet decryption was incorrect</source>
         <translation>La frase inserita per decrittografare il tuo portafoglio è incorretta</translation>
     </message>
     <message>
@@ -204,8 +208,8 @@
         <translation>Decrittazione del portamonete fallita.</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
-        <translation>La frase di accesso al portamonete è stata cambiata con successo.</translation>
+        <source>Wallet passphrase was successfully changed</source>
+        <translation>La frase di accesso al portamonete è stata cambiata con successo</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
@@ -414,12 +418,12 @@
         <translation>Indietro di %1</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>L'ultimo blocco ricevuto è stato generato %1 fa.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>L'ultimo blocco ricevuto è stato generato %1 fa</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Le transazioni effettuate successivamente non sono ancora visibili.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Le transazioni effettuate successivamente non sono ancora visibili</translation>
     </message>
     <message>
         <source>Error</source>
@@ -2141,13 +2145,6 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
     <message>
         <source>Message verified.</source>
         <translation>Messaggio verificato.</translation>
-    </message>
-</context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
     </message>
 </context>
 <context>

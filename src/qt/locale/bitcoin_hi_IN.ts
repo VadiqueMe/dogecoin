@@ -353,13 +353,6 @@
         <source>Signature</source>
         <translation>हस्ताक्षर</translation>
     </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[टेस्टनेट]</translation>
-    </message>
 </context>
 <context>
     <name>TrafficGraphWidget</name>

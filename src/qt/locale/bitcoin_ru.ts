@@ -128,24 +128,28 @@
         <translation>Повторите новый пароль</translation>
     </message>
     <message>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Введите новый пароль бумажника.&lt;br/&gt;Используйте пароль, состоящий из &lt;b&gt;десяти или более случайных символов&lt;/b&gt;, или &lt;b&gt;восьми или более слов&lt;/b&gt;.</translation>
+        <source>Enter the new passphrase to the wallet</source>
+        <translation>Введите новый пароль для бумажника</translation>
+    </message>
+    <message>
+        <source>Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;</source>
+        <translation>Пожалуйста используйте фразу, состоящую из &lt;b&gt;десяти или более случайных символов&lt;/b&gt;, или из &lt;b&gt;восьми или более слов&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
         <translation>Зашифровать бумажник</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Для выполнения операции требуется пароль вашего бумажника.</translation>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
+        <translation>Для выполнения операции нужен пароль от вашего бумажника</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>Разблокировать бумажник</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>Для выполнения операции требуется пароль вашего бумажника.</translation>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
+        <translation>Для выполнения операции нужен пароль от вашего бумажника</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
@@ -156,8 +160,8 @@
         <translation>Сменить пароль</translation>
     </message>
     <message>
-        <source>Enter the old passphrase and new passphrase to the wallet.</source>
-        <translation>Введите старый и новый пароль для бумажника.</translation>
+        <source>Enter the old passphrase and new passphrase to the wallet</source>
+        <translation>Введите старый и новый пароль для бумажника</translation>
     </message>
     <message>
         <source>Confirm wallet encryption</source>
@@ -185,31 +189,31 @@
     </message>
     <message>
         <source>Wallet encryption failed</source>
-        <translation>Не удалось зашифровать бумажник</translation>
+        <translation>Не получилось зашифровать бумажник</translation>
     </message>
     <message>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>Шифрование бумажника не удалось из-за внутренней ошибки. Ваш бумажник не был зашифрован.</translation>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted</source>
+        <translation>Шифрование бумажника не удалось из-за внутренней ошибки. Твой бумажник не был зашифрован</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
-        <translation>Введённые пароли не совпадают.</translation>
+        <source>The supplied passphrases do not match</source>
+        <translation>Введённые пароли не совпадают</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>
         <translation>Разблокировка бумажника не удалась</translation>
     </message>
     <message>
-        <source>The passphrase entered for the wallet decryption was incorrect.</source>
-        <translation>Неверный пароль для расшифровки бумажника.</translation>
+        <source>The passphrase entered for the wallet decryption was incorrect</source>
+        <translation>Неверный пароль для расшифровки бумажника</translation>
     </message>
     <message>
         <source>Wallet decryption failed</source>
         <translation>Расшифровка бумажника не удалась</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
-        <translation>Пароль бумажника успешно изменён.</translation>
+        <source>Wallet passphrase was successfully changed</source>
+        <translation>Пароль бумажника успешно изменён</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
@@ -434,12 +438,12 @@
         <translation>%1 позади</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Последний полученный блок был сгенерирован %1 назад.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>Последний полученный блок был сгенерирован %1 назад</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Транзакции после него пока не будут видны.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Транзакции после этого пока не будут видны</translation>
     </message>
     <message>
         <source>Error</source>
@@ -842,12 +846,12 @@
         <translation>Форма</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the dogecoin network, as detailed below.</source>
-        <translation>Недавние транзакции могут быть пока не видны, поэтому ваш баланс может отображаться некорректно. Эта информация станет корректной, как только ваш бумажник будет синхронизирован с сетью, см. подробности ниже.</translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the dogecoin network, as detailed below</source>
+        <translation>Недавние транзакции могут быть пока не видны, поэтому ваш баланс может отображаться некорректно. Эта информация станет корректной, как только ваш бумажник будет синхронизирован с сетью dogecoin, подробности ниже</translation>
     </message>
     <message>
-        <source>Attempting to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation>Попытка потратить биткоины из ещё не отображённых транзакций будет отвергнута сетью.</translation>
+        <source>Attempting to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network</source>
+        <translation>Попытка потратить дожкоины из ещё не отображённых транзакций будет отвергнута сетью</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -2307,13 +2311,6 @@
     </message>
 </context>
 <context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[тестовая сеть]</translation>
-    </message>
-</context>
-<context>
     <name>TrafficGraphWidget</name>
     <message>
         <source>KB/s</source>
@@ -2455,7 +2452,7 @@
         <translation>ID транзакции</translation>
     </message>
     <message>
-        <source>Transaction full size</source>
+        <source>Full size of transaction</source>
         <translation>Полный размер транзакции</translation>
     </message>
     <message>

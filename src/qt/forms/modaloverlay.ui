@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>640</width>
-    <height>385</height>
+    <height>404</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" stretch="0">
+  <layout class="QVBoxLayout" name="rootVerticalLayout" stretch="0">
    <property name="sizeConstraint">
     <enum>QLayout::SetDefaultConstraint</enum>
    </property>
@@ -59,19 +59,19 @@ QLabel { color: rgb(40,40,40);  }</string>
           <number>0</number>
          </property>
          <property name="leftMargin">
-          <number>10</number>
+          <number>20</number>
          </property>
          <property name="topMargin">
-          <number>10</number>
+          <number>20</number>
          </property>
          <property name="rightMargin">
-          <number>10</number>
+          <number>20</number>
          </property>
          <property name="bottomMargin">
-          <number>10</number>
+          <number>20</number>
          </property>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayoutIconText" stretch="0,1">
+          <layout class="QHBoxLayout" name="horizontalLayoutIconText" stretch="0,0,1,0">
            <property name="topMargin">
             <number>20</number>
            </property>
@@ -120,6 +120,19 @@ QLabel { color: rgb(40,40,40);  }</string>
             </layout>
            </item>
            <item>
+            <spacer name="horizontalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>10</width>
+               <height>1</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
             <layout class="QVBoxLayout" name="verticalLayoutInfoText">
              <property name="leftMargin">
               <number>0</number>
@@ -130,13 +143,20 @@ QLabel { color: rgb(40,40,40);  }</string>
              <item>
               <widget class="QLabel" name="infoText">
                <property name="text">
-                <string>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the dogecoin network, as detailed below.</string>
+                <string>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the dogecoin network, as detailed below</string>
                </property>
                <property name="textFormat">
                 <enum>Qt::RichText</enum>
                </property>
                <property name="wordWrap">
                 <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="spacerBeforeBold">
+               <property name="text">
+                <string/>
                </property>
               </widget>
              </item>
@@ -149,7 +169,7 @@ QLabel { color: rgb(40,40,40);  }</string>
                 </font>
                </property>
                <property name="text">
-                <string>Attempting to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network.</string>
+                <string>Attempting to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network</string>
                </property>
                <property name="textFormat">
                 <enum>Qt::RichText</enum>
@@ -173,6 +193,19 @@ QLabel { color: rgb(40,40,40);  }</string>
               </spacer>
              </item>
             </layout>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_3">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>10</width>
+               <height>1</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </item>

@@ -128,24 +128,28 @@
         <translation>Powtórz nowe hasło</translation>
     </message>
     <message>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Wprowadź nowe hasło do portfela.&lt;br/&gt;Proszę używać hasła złożonego z &lt;b&gt;10 lub więcej losowych znaków&lt;/b&gt; albo &lt;b&gt;8 lub więcej słów.&lt;/b&gt;</translation>
+        <source>Enter the new passphrase to the wallet</source>
+        <translation>Wprowadź nowe hasło do portfela</translation>
+    </message>
+    <message>
+        <source>Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;</source>
+        <translation>Proszę używać hasła złożonego z &lt;b&gt;10 lub więcej losowych znaków&lt;/b&gt; albo &lt;b&gt;8 lub więcej słów&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
         <translation>Zaszyfruj portfel</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Ta operacja wymaga hasła do portfela aby odblokować portfel.</translation>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
+        <translation>Ta operacja wymaga hasła do portfela aby odblokować portfel</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>Odblokuj portfel</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>Ta operacja wymaga hasła portfela, aby go odszyfrować.</translation>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
+        <translation>Ta operacja wymaga hasła portfela, aby go odszyfrować</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
@@ -156,8 +160,8 @@
         <translation>Zmień hasło</translation>
     </message>
     <message>
-        <source>Enter the old passphrase and new passphrase to the wallet.</source>
-        <translation>Podaj stare i nowe hasło do portfela.</translation>
+        <source>Enter the old passphrase and new passphrase to the wallet</source>
+        <translation>Podaj stare i nowe hasło do portfela</translation>
     </message>
     <message>
         <source>Confirm wallet encryption</source>
@@ -188,28 +192,28 @@
         <translation>Szyfrowanie portfela nie powiodło się</translation>
     </message>
     <message>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>Szyfrowanie portfela nie powiodło się z powodu wewnętrznego błędu. Twój portfel nie został zaszyfrowany.</translation>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted</source>
+        <translation>Szyfrowanie portfela nie powiodło się z powodu wewnętrznego błędu. Twój portfel nie został zaszyfrowany</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
-        <translation>Podane hasła nie są takie same.</translation>
+        <source>The supplied passphrases do not match</source>
+        <translation>Podane hasła nie są takie same</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>
         <translation>Odblokowanie portfela nie powiodło się</translation>
     </message>
     <message>
-        <source>The passphrase entered for the wallet decryption was incorrect.</source>
-        <translation>Wprowadzone hasło do odszyfrowania portfela jest niepoprawne.</translation>
+        <source>The passphrase entered for the wallet decryption was incorrect</source>
+        <translation>Wprowadzone hasło do odszyfrowania portfela jest niepoprawne</translation>
     </message>
     <message>
         <source>Wallet decryption failed</source>
         <translation>Odszyfrowanie portfela nie powiodło się</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
-        <translation>Hasło do portfela zostało pomyślnie zmienione.</translation>
+        <source>Wallet passphrase was successfully changed</source>
+        <translation>Hasło do portfela zostało pomyślnie zmienione</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
@@ -418,12 +422,12 @@
         <translation>%1 za</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Ostatni otrzymany blok został wygenerowany %1 temu.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>Ostatni otrzymany blok został wygenerowany %1 temu</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Transakcje po tym momencie nie będą jeszcze widoczne.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Transakcje po tym momencie nie będą jeszcze widoczne</translation>
     </message>
     <message>
         <source>Error</source>
@@ -2081,13 +2085,6 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
     <message>
         <source>Message signed.</source>
         <translation>Wiadomość podpisana.</translation>
-    </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
     </message>
 </context>
 <context>

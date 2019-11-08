@@ -124,7 +124,7 @@
         <translation>رمزنگاری کیف پول</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
         <translation>این عملیات نیاز به عبارت کیف پول شما برای بازگشایی کیف پول دارد</translation>
     </message>
     <message>
@@ -132,8 +132,8 @@
         <translation>باز کردن قفل کیف پول</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>این عملیات نیاز به عبارت کیف پول شما برای رمزگشایی کیف پول دارد.</translation>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
+        <translation>این عملیات نیاز به عبارت کیف پول شما برای رمزگشایی کیف پول دارد</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
@@ -144,8 +144,8 @@
         <translation>تغییر گذرواژه</translation>
     </message>
     <message>
-        <source>Enter the old passphrase and new passphrase to the wallet.</source>
-        <translation>عبارت کهنه و جدید کیف پول را وارد کنید.</translation>
+        <source>Enter the old passphrase and new passphrase to the wallet</source>
+        <translation>عبارت کهنه و جدید کیف پول را وارد کنید</translation>
     </message>
     <message>
         <source>Confirm wallet encryption</source>
@@ -164,8 +164,8 @@
         <translation>رمزنگاری کیف پول با شکست مواجه شد</translation>
     </message>
     <message>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>رمزنگاری کیف پول بنا به یک خطای داخلی با شکست مواجه شد. کیف پول شما رمزنگاری نشد.</translation>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted</source>
+        <translation>رمزنگاری کیف پول بنا به یک خطای داخلی با شکست مواجه شد. کیف پول شما رمزنگاری نشد</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>
@@ -176,8 +176,8 @@
         <translation>رمزگشایی کیف پول با شکست مواجه شد</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
-        <translation>گذرواژهٔ کیف پول با موفقیت عوض شد.</translation>
+        <source>Wallet passphrase was successfully changed</source>
+        <translation>گذرواژهٔ کیف پول با موفقیت عوض شد</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
@@ -394,12 +394,12 @@
         <translation>%1 عقب‌تر</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>آخرین بلاک دریافتی %1 پیش ایجاد شده است.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>آخرین بلاک دریافتی %1 پیش ایجاد شده است</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>تراکنش‌های بعد از این هنوز قابل مشاهده نیستند.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>تراکنش‌های بعد از این هنوز قابل مشاهده نیستند</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1536,13 +1536,6 @@
     <message>
         <source>Reset all verify message fields</source>
         <translation>بازنشانی تمام فیلدهای پیام</translation>
-    </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>آزمایش شبکه</translation>
     </message>
 </context>
 <context>

@@ -166,12 +166,12 @@
         <translation>Pipamilian command-line</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Ing tatauling block a metanggap,  me-generate ya %1 ing milabas</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>Ing tatauling block a metanggap, me-generate ya %1 ing milabas</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Ing transaksion kaibat na nini ali yapa magsilbing ipakit.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Ing transaksion kaibat na nini ali yapa magsilbing ipakit</translation>
     </message>
     <message>
         <source>Error</source>
@@ -658,13 +658,6 @@
     <message>
         <source>Reset all verify message fields</source>
         <translation>Ibalik king dati reng ngan fields na ning pamag beripikang mensayi</translation>
-    </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
     </message>
 </context>
 <context>

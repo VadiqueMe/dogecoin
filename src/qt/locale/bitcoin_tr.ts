@@ -128,24 +128,28 @@
         <translation>Yeni parolayı tekrarlayınız</translation>
     </message>
     <message>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Cüzdan için yeni parolayı giriniz.&lt;br/&gt;Lütfen &lt;b&gt;on ya da daha fazla rastgele karakter&lt;/b&gt; veya &lt;b&gt;sekiz ya da daha fazla kelime&lt;/b&gt; içeren bir parola kullanınız.</translation>
+        <source>Enter the new passphrase to the wallet</source>
+        <translation>Cüzdan için yeni parolayı giriniz</translation>
+    </message>
+    <message>
+        <source>Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;</source>
+        <translation>Lütfen &lt;b&gt;on ya da daha fazla rastgele karakter&lt;/b&gt; veya &lt;b&gt;sekiz ya da daha fazla kelime&lt;/b&gt; içeren bir parola kullanınız</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
         <translation>Cüzdanı şifrele</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Bu eylem cüzdan kilidini açmak için cüzdan parolanızı gerektirir.</translation>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
+        <translation>Bu eylem cüzdan kilidini açmak için cüzdan parolanızı gerektirir</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>Cüzdan kilidini kaldır</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>Bu eylem, cüzdan şifresini çözmek için cüzdan parolanıza ihtiyaç duyuyor.</translation>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
+        <translation>Bu eylem, cüzdan şifresini çözmek için cüzdan parolanıza ihtiyaç duyuyor</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
@@ -188,12 +192,12 @@
         <translation>Cüzdan şifreleme başarısız</translation>
     </message>
     <message>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>Dahili bir hata yüzünden cüzdan şifrelemesi başarısız oldu. Cüzdanın şifrelenmedi.</translation>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted</source>
+        <translation>Dahili bir hata yüzünden cüzdan şifrelemesi başarısız oldu. Cüzdanın şifrelenmedi</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
-        <translation>Girilen parolalar birbiriyle eşleşmiyor.</translation>
+        <source>The supplied passphrases do not match</source>
+        <translation>Girilen parolalar birbiriyle eşleşmiyor</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>
@@ -208,8 +212,8 @@
         <translation>Cüzdan şifresinin açılması başarısız oldu</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
-        <translation>Cüzdan parolası başarılı bir şekilde değiştirildi.</translation>
+        <source>Wallet passphrase was successfully changed</source>
+        <translation>Cüzdan parolası başarılı bir şekilde değiştirildi</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
@@ -434,12 +438,12 @@
         <translation>%1 geride</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Son alınan blok %1 önce oluşturulmuştu.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>Son alınan blok %1 önce oluşturulmuştu</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Bundan sonraki işlemler henüz görüntülenemez.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Bundan sonraki işlemler henüz görüntülenemez</translation>
     </message>
     <message>
         <source>Error</source>
@@ -842,12 +846,12 @@
         <translation>Form</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the dogecoin network, as detailed below.</source>
-        <translation>Son işlemler henüz görünmeyebilir ve bu nedenle cüzdanınızın bakiyesi yanlış olabilir. Bu bilgiler, aşağıda detaylandırıldığı gibi, cüzdanınız dogecoin ağı ile senkronizasyonunu tamamladığında doğru olacaktır. </translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the dogecoin network, as detailed below</source>
+        <translation>Son işlemler henüz görünmeyebilir ve bu nedenle cüzdanınızın bakiyesi yanlış olabilir. Bu bilgiler, aşağıda detaylandırıldığı gibi, cüzdanınız dogecoin ağı ile senkronizasyonunu tamamladığında doğru olacaktır</translation>
     </message>
     <message>
-        <source>Attempting to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation>Henüz görüntülenmeyen işlemlerden etkilenen dogecoinleri harcama girişiminde bulunmak ağ tarafından kabul edilmeyecektir.</translation>
+        <source>Attempting to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network</source>
+        <translation>Henüz görüntülenmeyen işlemlerden etkilenen dogecoinleri harcama girişiminde bulunmak ağ tarafından kabul edilmeyecektir</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -2303,13 +2307,6 @@
     </message>
 </context>
 <context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
-    </message>
-</context>
-<context>
     <name>TrafficGraphWidget</name>
     <message>
         <source>KB/s</source>
@@ -2451,7 +2448,7 @@
         <translation>İşlem ID'si</translation>
     </message>
     <message>
-        <source>Transaction full size</source>
+        <source>Full size of transaction</source>
         <translation>İşlemin toplam boyutu</translation>
     </message>
     <message>

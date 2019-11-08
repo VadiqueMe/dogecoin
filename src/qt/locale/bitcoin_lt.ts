@@ -827,13 +827,6 @@
         <source>Verify &amp;Message</source>
         <translation>&amp;Patikrinti žinutę</translation>
     </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testavimotinklas]</translation>
-    </message>
 </context>
 <context>
     <name>TrafficGraphWidget</name>

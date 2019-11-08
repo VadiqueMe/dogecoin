@@ -250,12 +250,12 @@
         <translation>imam še %1 zaostanka</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Zadnji prejeti blok je star %1.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>Zadnji prejeti blok je star %1</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Novejše transakcije še ne bodo vidne.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Novejše transakcije še ne bodo vidne</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1404,13 +1404,6 @@
     <message>
         <source>Reset all verify message fields</source>
         <translation>Počisti vsa polja za vnos v oknu za preverjanje</translation>
-    </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
     </message>
 </context>
 <context>

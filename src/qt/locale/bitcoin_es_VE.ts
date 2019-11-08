@@ -166,12 +166,12 @@
         <translation>%1 detrás</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>El último bloque recibido fue generado hace %1 hora(s).</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>El último bloque recibido se generó hace %1</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Transacciones después de esta no serán visibles todavía.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Transacciones después de esta no serán visibles todavía</translation>
     </message>
     <message>
         <source>Error</source>

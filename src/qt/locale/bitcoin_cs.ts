@@ -128,24 +128,28 @@
         <translation>Totéž heslo ještě jednou</translation>
     </message>
     <message>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Zadej nové heslo k peněžence.&lt;br/&gt;Použij &lt;b&gt;alespoň deset náhodných znaků&lt;/b&gt; nebo &lt;b&gt;alespoň osm slov&lt;/b&gt;.</translation>
+        <source>Enter the new passphrase to the wallet</source>
+        <translation>Zadej nové heslo k peněžence</translation>
+    </message>
+    <message>
+        <source>Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;</source>
+        <translation>Použij &lt;b&gt;alespoň deset náhodných znaků&lt;/b&gt; nebo &lt;b&gt;alespoň osm slov&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
         <translation>Zašifruj peněženku</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>K provedení této operace musíš zadat heslo k peněžence, aby se mohla odemknout.</translation>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
+        <translation>K provedení této operace musíš zadat heslo k peněžence, aby se mohla odemknout</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>Odemkni peněženku</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>K provedení této operace musíš zadat heslo k peněžence, aby se mohla dešifrovat.</translation>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
+        <translation>K provedení této operace musíš zadat heslo k peněžence, aby se mohla dešifrovat</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
@@ -156,8 +160,8 @@
         <translation>Změň heslo</translation>
     </message>
     <message>
-        <source>Enter the old passphrase and new passphrase to the wallet.</source>
-        <translation>Zadej staré a nové heslo k peněžence.</translation>
+        <source>Enter the old passphrase and new passphrase to the wallet</source>
+        <translation>Zadej staré a nové heslo k peněžence</translation>
     </message>
     <message>
         <source>Confirm wallet encryption</source>
@@ -188,28 +192,28 @@
         <translation>Zašifrování peněženky selhalo</translation>
     </message>
     <message>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>Zašifrování peněženky selhalo kvůli vnitřní chybě. Tvá peněženka tedy nebyla zašifrována.</translation>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted</source>
+        <translation>Zašifrování peněženky selhalo kvůli vnitřní chybě. Tvá peněženka tedy nebyla zašifrována</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
-        <translation>Zadaná hesla nejsou shodná.</translation>
+        <source>The supplied passphrases do not match</source>
+        <translation>Zadaná hesla nejsou shodná</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>
         <translation>Nepodařilo se odemknout peněženku</translation>
     </message>
     <message>
-        <source>The passphrase entered for the wallet decryption was incorrect.</source>
-        <translation>Nezadal jsi správné heslo pro dešifrování peněženky.</translation>
+        <source>The passphrase entered for the wallet decryption was incorrect</source>
+        <translation>Nezadal jsi správné heslo pro dešifrování peněženky</translation>
     </message>
     <message>
         <source>Wallet decryption failed</source>
         <translation>Nepodařilo se dešifrovat peněženku</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
-        <translation>Heslo k peněžence bylo v pořádku změněno.</translation>
+        <source>Wallet passphrase was successfully changed</source>
+        <translation>Heslo k peněžence bylo v pořádku změněno</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
@@ -434,12 +438,12 @@
         <translation>Stahuji ještě %1 bloků transakcí</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Poslední stažený blok byl vygenerován %1 zpátky.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>Poslední stažený blok byl vygenerován %1 zpátky</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Následné transakce ještě nebudou vidět.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Následné transakce ještě nebudou vidět</translation>
     </message>
     <message>
         <source>Error</source>
@@ -842,12 +846,12 @@
         <translation>Formulář</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the dogecoin network, as detailed below.</source>
-        <translation>Nedávné transakce ještě nemusí být vidět, takže stav tvého účtu nemusí být platný. Jakmile se však tvá peněženka dosynchronizuje s dogecoinovou sítí (viz informace níže), tak už bude stav správně.</translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the dogecoin network, as detailed below</source>
+        <translation>Nedávné transakce ještě nemusí být vidět, takže stav tvého účtu nemusí být platný. Jakmile se však tvá peněženka dosynchronizuje s dogecoinovou sítí (viz informace níže), tak už bude stav správně</translation>
     </message>
     <message>
-        <source>Attempting to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation>Utrácení dogecoinů, které už utratily zatím nezobrazené transakce, nebude dogecoinovou sítí umožněno.</translation>
+        <source>Attempting to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network</source>
+        <translation>Utrácení dogecoinů, které už utratily zatím nezobrazené transakce, nebude dogecoinovou sítí umožněno</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -2307,13 +2311,6 @@
     </message>
 </context>
 <context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
-    </message>
-</context>
-<context>
     <name>TrafficGraphWidget</name>
     <message>
         <source>KB/s</source>
@@ -2455,7 +2452,7 @@
         <translation>ID transakce</translation>
     </message>
     <message>
-        <source>Transaction full size</source>
+        <source>Full size of transaction</source>
         <translation>Celková velikost transakce</translation>
     </message>
     <message>

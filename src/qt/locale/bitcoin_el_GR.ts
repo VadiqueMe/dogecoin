@@ -290,12 +290,12 @@
         <translation>%1 πίσω</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Το τελευταίο μπλοκ που ελήφθη δημιουργήθηκε %1 πριν.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>Το τελευταίο μπλοκ που ελήφθη δημιουργήθηκε %1 πριν</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Οι συναλλαγές μετά από αυτό δεν θα είναι ακόμη ορατες.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Οι συναλλαγές μετά από αυτό δεν θα είναι ακόμη ορατες</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1404,13 +1404,6 @@
     <message>
         <source>Reset all verify message fields</source>
         <translation>Επαναφορά όλων επαλήθευμενων πεδίων μήνυματος </translation>
-    </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
     </message>
 </context>
 <context>

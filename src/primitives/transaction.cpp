@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "primitives/transaction.h"
 
@@ -37,8 +37,8 @@ std::string CTxIn::ToString() const
         str += strprintf(", coinbase %s", HexStr(scriptSig));
     else
         str += strprintf(", scriptSig=%s", HexStr(scriptSig).substr(0, 24));
-    if (nSequence != SEQUENCE_FINAL)
-        str += strprintf(", nSequence=%u", nSequence);
+    if ( nSequence != SEQUENCE_FINAL )
+        str += strprintf( ", nSequence=0x%x", nSequence ) ;
     str += ")";
     return str;
 }
@@ -118,9 +118,9 @@ unsigned int CTransaction::CalculateModifiedSize(unsigned int nTxSize) const
     return nTxSize;
 }
 
-unsigned int CTransaction::GetTotalSize() const
+unsigned int CTransaction::GetFullSize() const
 {
-    return ::GetSerializeSize(*this, SER_NETWORK, PROTOCOL_VERSION);
+    return ::GetSerializeSize( *this, SER_NETWORK, PROTOCOL_VERSION ) ;
 }
 
 std::string CTransaction::ToString() const

@@ -262,12 +262,12 @@
         <translation>%1 chậm trễ</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
+        <source>Last received block was generated %1 ago</source>
         <translation>Khối (block) cuối cùng nhận được cách đây %1</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Những giao dịch sau đó sẽ không hiện thị.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Những giao dịch sau đó sẽ không hiện thị</translation>
     </message>
     <message>
         <source>Error</source>

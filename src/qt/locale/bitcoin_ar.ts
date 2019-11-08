@@ -128,15 +128,19 @@
         <translation>ادخل كلمة المرور الجديدة مرة أخرى</translation>
     </message>
     <message>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>أدخل عبارة مرور جديدة إلى المحفظة. الرجاء استخدام عبارة مرور تتكون من10 حروف عشوائية على الاقل, أو أكثر من 7 كلمات</translation>
+        <source>Enter the new passphrase to the wallet</source>
+        <translation>أدخل عبارة مرور جديدة إلى المحفظة</translation>
+    </message>
+    <message>
+        <source>Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;</source>
+        <translation>الرجاء استخدام عبارة مرور تتكون من 10 حروف عشوائية على الاقل, أو أكثر من 7 كلمات</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
         <translation>تشفير المحفظة</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
         <translation>هذه العملية تحتاج كلمة مرور محفظتك لفتحها</translation>
     </message>
     <message>
@@ -144,8 +148,8 @@
         <translation>إفتح المحفظة</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>هذه العملية تحتاج كلمة مرور محفظتك لفك تشفيرها </translation>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
+        <translation>هذه العملية تحتاج كلمة مرور محفظتك لفك تشفيرها</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
@@ -184,11 +188,11 @@
         <translation>فشل تشفير المحفظة</translation>
     </message>
     <message>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>فشل تشفير المحفظة بسبب خطأ داخلي. لم يتم تشفير محفظتك.</translation>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted</source>
+        <translation>فشل تشفير المحفظة بسبب خطأ داخلي. لم يتم تشفير محفظتك</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
+        <source>The supplied passphrases do not match</source>
         <translation>كلمتي المرور ليستا متطابقتان</translation>
     </message>
     <message>
@@ -196,15 +200,15 @@
         <translation>فشل فتح المحفظة</translation>
     </message>
     <message>
-        <source>The passphrase entered for the wallet decryption was incorrect.</source>
-        <translation>كلمة المرور التي تم إدخالها لفك تشفير المحفظة غير صحيحة.</translation>
+        <source>The passphrase entered for the wallet decryption was incorrect</source>
+        <translation>كلمة المرور التي تم إدخالها لفك تشفير المحفظة غير صحيحة</translation>
     </message>
     <message>
         <source>Wallet decryption failed</source>
         <translation>فشل   فك التشفير المحفظة</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
+        <source>Wallet passphrase was successfully changed</source>
         <translation>لقد تم تغير عبارة مرور المحفظة بنجاح</translation>
     </message>
     <message>
@@ -406,12 +410,12 @@
         <translation>خلف %1</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>تم توليد الكتلة المستقبلة الأخيرة منذ %1.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>تم توليد الكتلة المستقبلة الأخيرة منذ %1</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>المعاملات بعد ذلك لن تكون مريئة بعد.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>المعاملات بعد ذلك لن تكون مريئة بعد</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1482,13 +1486,6 @@
     <message>
         <source>Message verified.</source>
         <translation>تم تأكيد الرسالة.</translation>
-    </message>
-</context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
     </message>
 </context>
 <context>

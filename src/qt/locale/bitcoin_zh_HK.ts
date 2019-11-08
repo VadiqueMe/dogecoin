@@ -124,16 +124,16 @@
         <translation>加密錢包</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>這個動作需要你的錢包密碼來將錢包解鎖。</translation>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
+        <translation>這個動作需要你的錢包密碼來將錢包解鎖</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>解鎖錢包</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>這個動作需要你的錢包密碼來將錢包解密。</translation>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
+        <translation>這個動作需要你的錢包密碼來將錢包解密</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
@@ -176,28 +176,28 @@
         <translation>錢包加密失敗</translation>
     </message>
     <message>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>因內部錯誤導致錢包加密失敗，你的錢包尚未加密。</translation>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted</source>
+        <translation>因內部錯誤導致錢包加密失敗，你的錢包尚未加密</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
-        <translation>提供的密碼不一致。</translation>
+        <source>The supplied passphrases do not match</source>
+        <translation>提供的密碼不一致</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>
         <translation>錢包解鎖失敗</translation>
     </message>
     <message>
-        <source>The passphrase entered for the wallet decryption was incorrect.</source>
-        <translation>用來解密錢包的密碼不對。</translation>
+        <source>The passphrase entered for the wallet decryption was incorrect</source>
+        <translation>用來解密錢包的密碼不對</translation>
     </message>
     <message>
         <source>Wallet decryption failed</source>
         <translation>錢包解密失敗</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
-        <translation>錢包密碼已成功更改。</translation>
+        <source>Wallet passphrase was successfully changed</source>
+        <translation>錢包密碼已成功更改</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>

@@ -298,12 +298,12 @@
         <translation>en retard de %1</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Le dernier bloc reçu a été généré %1.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>Le dernier bloc reçu a été généré %1</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Les transactions ne seront plus visible après ceci.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Les transactions ne seront plus visible après ceci</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1372,13 +1372,6 @@
     <message>
         <source>Verify &amp;Message</source>
         <translation>Vérifier &amp;Message</translation>
-    </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
     </message>
 </context>
 <context>

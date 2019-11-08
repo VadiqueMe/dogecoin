@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #if defined(HAVE_CONFIG_H)
 #include "config/bitcoin-config.h"
@@ -42,32 +42,34 @@ AskPassphraseDialog::AskPassphraseDialog(Mode _mode, QWidget *parent) :
 
     switch(mode)
     {
-        case Encrypt: // Ask passphrase x2
-            ui->warningLabel->setText(tr("Enter the new passphrase to the wallet.<br/>Please use a passphrase of <b>ten or more random characters</b>, or <b>eight or more words</b>."));
-            ui->passLabel1->hide();
-            ui->passEdit1->hide();
-            setWindowTitle(tr("Encrypt wallet"));
-            break;
-        case Unlock: // Ask passphrase
-            ui->warningLabel->setText(tr("This operation needs your wallet passphrase to unlock the wallet."));
-            ui->passLabel2->hide();
-            ui->passEdit2->hide();
-            ui->passLabel3->hide();
-            ui->passEdit3->hide();
-            setWindowTitle(tr("Unlock wallet"));
-            break;
-        case Decrypt:   // Ask passphrase
-            ui->warningLabel->setText(tr("This operation needs your wallet passphrase to decrypt the wallet."));
-            ui->passLabel2->hide();
-            ui->passEdit2->hide();
-            ui->passLabel3->hide();
-            ui->passEdit3->hide();
-            setWindowTitle(tr("Decrypt wallet"));
-            break;
-        case ChangePass: // Ask old passphrase + new passphrase x2
-            setWindowTitle(tr("Change passphrase"));
-            ui->warningLabel->setText(tr("Enter the old passphrase and new passphrase to the wallet."));
-            break;
+        case Encrypt: { // Ask passphrase twice
+            QString first( tr("Enter the new passphrase to the wallet") ) ;
+            QString second( tr("Please use a passphrase of <b>ten or more random characters</b>, or <b>eight or more words</b>") ) ;
+            ui->warningLabel->setText( first + "<br/><br/>" + second ) ;
+            ui->passLabel1->hide() ;
+            ui->passEdit1->hide() ;
+            setWindowTitle( tr("Encrypt wallet") ) ;
+            } break;
+        case Unlock: { // Ask passphrase
+            ui->warningLabel->setText( tr("This operation needs your wallet passphrase to unlock the wallet") ) ;
+            ui->passLabel2->hide() ;
+            ui->passEdit2->hide() ;
+            ui->passLabel3->hide() ;
+            ui->passEdit3->hide() ;
+            setWindowTitle( tr("Unlock wallet") ) ;
+            } break;
+        case Decrypt: { // Ask passphrase
+            ui->warningLabel->setText( tr("This operation needs your wallet passphrase to decrypt the wallet") ) ;
+            ui->passLabel2->hide() ;
+            ui->passEdit2->hide() ;
+            ui->passLabel3->hide() ;
+            ui->passEdit3->hide() ;
+            setWindowTitle( tr("Decrypt wallet") ) ;
+            } break;
+        case ChangePass: { // Ask old passphrase + new passphrase twice
+            setWindowTitle( tr("Change passphrase") ) ;
+            ui->warningLabel->setText( tr("Enter the old passphrase and new passphrase to the wallet") ) ;
+            } break;
     }
     textChanged();
     connect(ui->passEdit1, SIGNAL(textChanged(QString)), this, SLOT(textChanged()));
@@ -135,15 +137,15 @@ void AskPassphraseDialog::accept()
                 }
                 else
                 {
-                    QMessageBox::critical(this, tr("Wallet encryption failed"),
-                                         tr("Wallet encryption failed due to an internal error. Your wallet was not encrypted."));
+                    QMessageBox::critical( this, tr("Wallet encryption failed"),
+                                           tr("Wallet encryption failed due to an internal error. Your wallet was not encrypted") ) ;
                 }
                 QDialog::accept(); // Success
             }
             else
             {
-                QMessageBox::critical(this, tr("Wallet encryption failed"),
-                                     tr("The supplied passphrases do not match."));
+                QMessageBox::critical( this, tr("Wallet encryption failed"),
+                                       tr("The supplied passphrases do not match") ) ;
             }
         }
         else
@@ -154,8 +156,8 @@ void AskPassphraseDialog::accept()
     case Unlock:
         if(!model->setWalletLocked(false, oldpass))
         {
-            QMessageBox::critical(this, tr("Wallet unlock failed"),
-                                  tr("The passphrase entered for the wallet decryption was incorrect."));
+            QMessageBox::critical( this, tr("Wallet unlock failed"),
+                                   tr("The passphrase entered for the wallet decryption was incorrect") ) ;
         }
         else
         {
@@ -165,8 +167,8 @@ void AskPassphraseDialog::accept()
     case Decrypt:
         if(!model->setWalletEncrypted(false, oldpass))
         {
-            QMessageBox::critical(this, tr("Wallet decryption failed"),
-                                  tr("The passphrase entered for the wallet decryption was incorrect."));
+            QMessageBox::critical( this, tr("Wallet decryption failed"),
+                                   tr("The passphrase entered for the wallet decryption was incorrect") ) ;
         }
         else
         {
@@ -178,20 +180,20 @@ void AskPassphraseDialog::accept()
         {
             if(model->changePassphrase(oldpass, newpass1))
             {
-                QMessageBox::information(this, tr("Wallet encrypted"),
-                                     tr("Wallet passphrase was successfully changed."));
+                QMessageBox::information( this, tr("Wallet encrypted"),
+                                          tr("Wallet passphrase was successfully changed") ) ;
                 QDialog::accept(); // Success
             }
             else
             {
-                QMessageBox::critical(this, tr("Wallet encryption failed"),
-                                     tr("The passphrase entered for the wallet decryption was incorrect."));
+                QMessageBox::critical( this, tr("Wallet encryption failed"),
+                                       tr("The passphrase entered for the wallet decryption was incorrect") ) ;
             }
         }
         else
         {
-            QMessageBox::critical(this, tr("Wallet encryption failed"),
-                                 tr("The supplied passphrases do not match."));
+            QMessageBox::critical( this, tr("Wallet encryption failed"),
+                                   tr("The supplied passphrases do not match") ) ;
         }
         break;
     }

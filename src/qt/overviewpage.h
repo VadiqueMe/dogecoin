@@ -1,13 +1,14 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_QT_OVERVIEWPAGE_H
-#define BITCOIN_QT_OVERVIEWPAGE_H
+#ifndef DOGECOIN_QT_OVERVIEWPAGE_H
+#define DOGECOIN_QT_OVERVIEWPAGE_H
 
 #include "amount.h"
 
 #include <QWidget>
+#include <QLabel>
 #include <memory>
 
 class ClientModel;
@@ -23,6 +24,26 @@ namespace Ui {
 QT_BEGIN_NAMESPACE
 class QModelIndex;
 QT_END_NAMESPACE
+
+class ClickableLabel : public QLabel
+{
+    Q_OBJECT
+
+public:
+
+    explicit ClickableLabel( QWidget * parent = Q_NULLPTR, Qt::WindowFlags f = Qt::WindowFlags() )
+        : QLabel( parent ) { }
+
+    ~ClickableLabel() { }
+
+Q_SIGNALS:
+    void clicked() ;
+
+protected:
+
+    void mouseReleaseEvent( QMouseEvent * event ) {  Q_EMIT clicked() ;  }
+
+} ;
 
 /** Overview ("home") page widget */
 class OverviewPage : public QWidget
@@ -59,12 +80,17 @@ private:
     TxViewDelegate *txdelegate;
     std::unique_ptr<TransactionFilterProxy> filter;
 
+    bool reverseOrObverse ;
+    std::unique_ptr< ClickableLabel > pictureOfCoin ;
+
 private Q_SLOTS:
+    void toggleObverseReverse() ;
     void updateDisplayUnit();
     void handleTransactionClicked(const QModelIndex &index);
     void updateAlerts(const QString &warnings);
     void updateWatchOnlyLabels(bool showWatchOnly);
     void handleOutOfSyncWarningClicks();
-};
 
-#endif // BITCOIN_QT_OVERVIEWPAGE_H
+} ;
+
+#endif

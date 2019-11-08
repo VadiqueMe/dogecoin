@@ -870,12 +870,11 @@ void BitcoinGUI::setNumBlocks(int count, const QDateTime& blockDate, double nVer
         labelBlocksIcon->setPixmap(platformStyle->SingleColorIcon(":/icons/synced").pixmap(STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE));
 
 #ifdef ENABLE_WALLET
-        if(walletFrame)
-        {
-            walletFrame->showOutOfSyncWarning(false);
-            modalOverlay->showHide(true, true);
+        if ( walletFrame != nullptr ) {
+            walletFrame->showOutOfSyncWarning( false ) ;
+            modalOverlay->showHide( true, true ) ;
         }
-#endif // ENABLE_WALLET
+#endif
 
         progressBarLabel->setVisible(false);
         progressBar->setVisible(false);
@@ -906,12 +905,12 @@ void BitcoinGUI::setNumBlocks(int count, const QDateTime& blockDate, double nVer
             walletFrame->showOutOfSyncWarning(true);
             modalOverlay->showHide();
         }
-#endif // ENABLE_WALLET
+#endif
 
-        tooltip += QString("<br>");
-        tooltip += tr("Last received block was generated %1 ago.").arg(timeBehindText);
-        tooltip += QString("<br>");
-        tooltip += tr("Transactions after this will not yet be visible.");
+        tooltip += QString( ".<br>" ) ;
+        tooltip += tr( "Last received block was generated %1 ago" ).arg( timeBehindText ) ;
+        tooltip += QString( ".<br>" ) ;
+        tooltip += tr( "Transactions after this will not yet be visible" ) ;
     }
 
     // Don't word-wrap this (fixed-width) tooltip

@@ -274,11 +274,11 @@
         <translation>%1 ตามหลัง</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
+        <source>Last received block was generated %1 ago</source>
         <translation>บล็อกสุดท้ายที่ได้รับ สร้างขึ้นเมื่อ %1 มาแล้ว</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
+        <source>Transactions after this will not yet be visible</source>
         <translation>รายการหลังจากนี้ จะไม่แสดงให้เห็น</translation>
     </message>
     <message>
@@ -837,13 +837,6 @@
     </context>
 <context>
     <name>SignVerifyMessageDialog</name>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
-    </message>
 </context>
 <context>
     <name>TrafficGraphWidget</name>

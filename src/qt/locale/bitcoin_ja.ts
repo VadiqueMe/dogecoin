@@ -128,24 +128,28 @@
         <translation>新しいパスフレーズをもう一度</translation>
     </message>
     <message>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>ウォレットの新しいパスフレーズを入力してください。&lt;br/&gt;&lt;b&gt;10文字以上のランダムな文字&lt;/b&gt;で構成されたものか、&lt;b&gt;8単語以上の単語&lt;/b&gt;で構成されたパスフレーズを使用してください。</translation>
+        <source>Enter the new passphrase to the wallet</source>
+        <translation>ウォレットの新しいパスフレーズを入力してください</translation>
+    </message>
+    <message>
+        <source>Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;</source>
+        <translation>&lt;b&gt;10文字以上のランダムな文字&lt;/b&gt;で構成されたものか、&lt;b&gt;8単語以上の単語&lt;/b&gt;で構成されたパスフレーズを使用してください</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
         <translation>ウォレットを暗号化する</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>この操作はウォレットをアンロックするためにパスフレーズが必要です。</translation>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
+        <translation>この操作はウォレットをアンロックするためにパスフレーズが必要です</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>ウォレットをアンロックする</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>この操作はウォレットの暗号化解除のためにパスフレーズが必要です。</translation>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
+        <translation>この操作はウォレットの暗号化解除のためにパスフレーズが必要です</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
@@ -156,8 +160,8 @@
         <translation>パスフレーズの変更</translation>
     </message>
     <message>
-        <source>Enter the old passphrase and new passphrase to the wallet.</source>
-        <translation>ウォレットの古いパスフレーズおよび新しいパスフレーズを入力してください。</translation>
+        <source>Enter the old passphrase and new passphrase to the wallet</source>
+        <translation>ウォレットの古いパスフレーズおよび新しいパスフレーズを入力してください</translation>
     </message>
     <message>
         <source>Confirm wallet encryption</source>
@@ -188,28 +192,28 @@
         <translation>ウォレットの暗号化に失敗しました</translation>
     </message>
     <message>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>内部エラーによりウォレットの暗号化が失敗しました。ウォレットは暗号化されませんでした。</translation>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted</source>
+        <translation>内部エラーによりウォレットの暗号化が失敗しました。ウォレットは暗号化されませんでした</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
-        <translation>パスフレーズが同じではありません。</translation>
+        <source>The supplied passphrases do not match</source>
+        <translation>パスフレーズが同じではありません</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>
         <translation>ウォレットのアンロックに失敗しました</translation>
     </message>
     <message>
-        <source>The passphrase entered for the wallet decryption was incorrect.</source>
-        <translation>ウォレットの暗号化解除のパスフレーズが正しくありません。</translation>
+        <source>The passphrase entered for the wallet decryption was incorrect</source>
+        <translation>ウォレットの暗号化解除のパスフレーズが正しくありません</translation>
     </message>
     <message>
         <source>Wallet decryption failed</source>
         <translation>ウォレットの暗号化解除に失敗しました</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
-        <translation>ウォレットのパスフレーズの変更が成功しました。</translation>
+        <source>Wallet passphrase was successfully changed</source>
+        <translation>ウォレットのパスフレーズの変更が成功しました</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
@@ -434,12 +438,12 @@
         <translation>%1 遅延</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>最後に受信されたブロックは %1 前に生成されました。</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>最後に受信されたブロックは %1 前に生成されました</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>この後の取引はまだ表示されません。</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>この後の取引はまだ表示されません</translation>
     </message>
     <message>
         <source>Error</source>
@@ -842,12 +846,12 @@
         <translation>フォーム</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the dogecoin network, as detailed below.</source>
-        <translation>確認できない最近のトランザクションがあるかもしれません。これによりウォレットの残高は不正確なものである可能性があります。この情報はウォレットが一度ビットコインネットワークへの同期が完了すると正確なものとなります。詳細は下記を参照してください。</translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the dogecoin network, as detailed below</source>
+        <translation>確認できない最近のトランザクションがあるかもしれません。これによりウォレットの残高は不正確なものである可能性があります。この情報はウォレットが一度 dogecoin ンネットワークへの同期が完了すると正確なものとなります。詳細は下記を参照してください</translation>
     </message>
     <message>
-        <source>Attempting to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation>まだ表示されていないトランザクションが影響するビットコインを使用しようとすると、ネットワークから認証がなされないでしょう。</translation>
+        <source>Attempting to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network</source>
+        <translation>まだ表示されていないトランザクションが影響する DOGE を使用しようとすると、ネットワークから認証がなされないでしょう</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -2307,13 +2311,6 @@
     </message>
 </context>
 <context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
-    </message>
-</context>
-<context>
     <name>TrafficGraphWidget</name>
     <message>
         <source>KB/s</source>
@@ -2455,7 +2452,7 @@
         <translation>取引 ID</translation>
     </message>
     <message>
-        <source>Transaction full size</source>
+        <source>Full size of transaction</source>
         <translation>トランザクションの全体サイズ</translation>
     </message>
     <message>

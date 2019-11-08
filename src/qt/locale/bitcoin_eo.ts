@@ -294,12 +294,12 @@
         <translation>mankas %1</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Lasta ricevita bloko kreiĝis antaŭ %1.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>Lasta ricevita bloko kreiĝis antaŭ %1</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Transakcioj por tio ankoraŭ ne videblas.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Transakcioj por tio ankoraŭ ne videblas</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1160,13 +1160,6 @@
     <message>
         <source>Reset all verify message fields</source>
         <translation>Reagordigi ĉiujn prikontrolajn kampojn</translation>
-    </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
     </message>
 </context>
 <context>

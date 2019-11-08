@@ -128,24 +128,28 @@
         <translation>Repetiu la nova contrasenya</translation>
     </message>
     <message>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Introduïu la contrasenya nova al moneder.&lt;br/&gt;Utilitzeu una contrasenya de &lt;b&gt;deu o més caràcters aleatoris&lt;/b&gt;, o &lt;b&gt;vuit o més paraules&lt;/b&gt;.</translation>
+        <source>Enter the new passphrase to the wallet</source>
+        <translation>Introduïu la contrasenya nova al moneder</translation>
+    </message>
+    <message>
+        <source>Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;</source>
+        <translation>Utilitzeu una contrasenya de &lt;b&gt;deu o més caràcters aleatoris&lt;/b&gt;, o &lt;b&gt;vuit o més paraules&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
         <translation>Encripta el moneder</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Aquesta operació requereix la contrasenya del moneder per a desbloquejar-lo.</translation>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
+        <translation>Aquesta operació requereix la contrasenya del moneder per a desbloquejar-lo</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>Desbloqueja el moneder</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>Aquesta operació requereix la contrasenya del moneder per desencriptar-lo.</translation>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
+        <translation>Aquesta operació requereix la contrasenya del moneder per desencriptar-lo</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
@@ -156,8 +160,8 @@
         <translation>Canvia la contrasenya</translation>
     </message>
     <message>
-        <source>Enter the old passphrase and new passphrase to the wallet.</source>
-        <translation>Introduïu la contrasenya antiga i la contrasenya nova al moneder.</translation>
+        <source>Enter the old passphrase and new passphrase to the wallet</source>
+        <translation>Introduïu la contrasenya antiga i la contrasenya nova al moneder</translation>
     </message>
     <message>
         <source>Confirm wallet encryption</source>
@@ -188,28 +192,28 @@
         <translation>L'encriptació del moneder ha fallat</translation>
     </message>
     <message>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>L'encriptació del moneder ha fallat per un error intern. El moneder no ha estat encriptat.</translation>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted</source>
+        <translation>L'encriptació del moneder ha fallat per un error intern. El moneder no ha estat encriptat</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
-        <translation>Les contrasenyes introduïdes no coincideixen.</translation>
+        <source>The supplied passphrases do not match</source>
+        <translation>Les contrasenyes introduïdes no coincideixen</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>
         <translation>El desbloqueig del moneder ha fallat</translation>
     </message>
     <message>
-        <source>The passphrase entered for the wallet decryption was incorrect.</source>
-        <translation>La contrasenya introduïda per a desencriptar el moneder és incorrecta.</translation>
+        <source>The passphrase entered for the wallet decryption was incorrect</source>
+        <translation>La contrasenya introduïda per a desencriptar el moneder és incorrecta</translation>
     </message>
     <message>
         <source>Wallet decryption failed</source>
         <translation>La desencriptació del moneder ha fallat</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
-        <translation>La contrasenya del moneder ha estat modificada correctament.</translation>
+        <source>Wallet passphrase was successfully changed</source>
+        <translation>La contrasenya del moneder ha estat modificada correctament</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
@@ -430,12 +434,12 @@
         <translation>%1 darrere</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>El darrer bloc rebut ha estat generat fa %1.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>El darrer bloc rebut ha estat generat fa %1</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Les transaccions a partir d'això no seran visibles.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Les transaccions a partir d'això no seran visibles</translation>
     </message>
     <message>
         <source>Error</source>
@@ -2180,13 +2184,6 @@
     <message>
         <source>Message verified.</source>
         <translation>Missatge verificat.</translation>
-    </message>
-</context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
     </message>
 </context>
 <context>

@@ -132,16 +132,16 @@
         <translation>Enkriptatu zorroa</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Eragiketa honek zorroaren pasahitza behar du zorroa desblokeatzeko.</translation>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
+        <translation>Eragiketa honek zorroaren pasahitza behar du zorroa desblokeatzeko</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>Desblokeatu zorroa</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>Eragiketa honek zure zorroaren pasahitza behar du, zorroa desenkriptatzeko.</translation>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
+        <translation>Eragiketa honek zure zorroaren pasahitza behar du, zorroa desenkriptatzeko</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
@@ -176,8 +176,8 @@
         <translation>Zorroaren enkriptazioak huts egin du</translation>
     </message>
     <message>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>Zorroaren enkriptazioak huts egin du barne-errore baten ondorioz. Zure zorroa ez da enkriptatu.</translation>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted</source>
+        <translation>Zorroaren enkriptazioak huts egin du barne-errore baten ondorioz. Zure zorroa ez da enkriptatu</translation>
     </message>
     <message>
         <source>The supplied passphrases do not match.</source>
@@ -558,13 +558,6 @@
     <message>
         <source>Alt+P</source>
         <translation>Alt+P</translation>
-    </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
     </message>
 </context>
 <context>

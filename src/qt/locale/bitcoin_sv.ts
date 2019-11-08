@@ -129,24 +129,28 @@ Var vänlig och försök igen.</translation>
         <translation>Upprepa nytt lösenord</translation>
     </message>
     <message>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Ange plånbokens nya lösenord. &lt;br/&gt; Använd ett lösenord på &lt;b&gt;tio eller fler slumpmässiga tecken,&lt;/b&gt; eller &lt;b&gt;åtta eller fler ord.&lt;/b&gt;.</translation>
+        <source>Enter the new passphrase to the wallet</source>
+        <translation>Ange plånbokens nya lösenord</translation>
+    </message>
+    <message>
+        <source>Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;</source>
+        <translation>Använd ett lösenord på &lt;b&gt;tio eller fler slumpmässiga tecken&lt;/b&gt;, eller &lt;b&gt;åtta eller fler ord&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
         <translation>Kryptera plånbok</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Denna operation behöver din plånboks lösenord för att låsa upp plånboken.</translation>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
+        <translation>Denna operation behöver din plånboks lösenord för att låsa upp plånboken</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>Lås upp plånbok</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>Denna operation behöver din plånboks lösenord för att dekryptera plånboken.</translation>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
+        <translation>Denna operation behöver din plånboks lösenord för att dekryptera plånboken</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
@@ -189,28 +193,28 @@ Var vänlig och försök igen.</translation>
         <translation>Kryptering av plånbok misslyckades</translation>
     </message>
     <message>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>Kryptering av plånbok misslyckades på grund av ett internt fel. Din plånbok blev inte krypterad.</translation>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted</source>
+        <translation>Kryptering av plånbok misslyckades på grund av ett internt fel. Din plånbok blev inte krypterad</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
-        <translation>De angivna lösenorden överensstämmer inte.</translation>
+        <source>The supplied passphrases do not match</source>
+        <translation>De angivna lösenorden överensstämmer inte</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>
         <translation>Misslyckades låsa upp plånboken</translation>
     </message>
     <message>
-        <source>The passphrase entered for the wallet decryption was incorrect.</source>
-        <translation>Lösenordet för dekryptering av plånboken var felaktig.</translation>
+        <source>The passphrase entered for the wallet decryption was incorrect</source>
+        <translation>Lösenordet för dekryptering av plånboken var felaktig</translation>
     </message>
     <message>
         <source>Wallet decryption failed</source>
         <translation>Dekryptering av plånbok misslyckades</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
-        <translation>Plånbokens lösenord har ändrats.</translation>
+        <source>Wallet passphrase was successfully changed</source>
+        <translation>Plånbokens lösenord har ändrats</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
@@ -435,12 +439,12 @@ Var vänlig och försök igen.</translation>
         <translation>%1 efter</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Senast mottagna block genererades för %1 sen.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>Senast mottagna block genererades för %1 sen</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Transaktioner efter denna kommer inte ännu vara synliga.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Transaktioner efter denna kommer inte ännu vara synliga</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1921,13 +1925,6 @@ Var vänlig och försök igen.</translation>
     <message>
         <source>Message verified.</source>
         <translation>Meddelande verifierat.</translation>
-    </message>
-</context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
     </message>
 </context>
 <context>

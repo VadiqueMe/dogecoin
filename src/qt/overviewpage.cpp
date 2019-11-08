@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "overviewpage.h"
 #include "ui_overviewpage.h"
@@ -105,7 +105,8 @@ public:
     int unit;
     const PlatformStyle *platformStyle;
 
-};
+} ;
+
 #include "overviewpage.moc"
 
 OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) :
@@ -120,6 +121,8 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
     currentWatchUnconfBalance(-1),
     currentWatchImmatureBalance(-1),
     txdelegate(new TxViewDelegate(platformStyle, this))
+    , reverseOrObverse( true )
+    , pictureOfCoin( new ClickableLabel() )
 {
     ui->setupUi(this);
 
@@ -141,6 +144,15 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
     showOutOfSyncWarning(true);
     connect(ui->labelWalletStatus, SIGNAL(clicked()), this, SLOT(handleOutOfSyncWarningClicks()));
     connect(ui->labelTransactionsStatus, SIGNAL(clicked()), this, SLOT(handleOutOfSyncWarningClicks()));
+
+    std::unique_ptr< QPixmap > coinpic( new QPixmap( ":/icons/wallet_bgcoin" ) ) ;
+    pictureOfCoin->setPixmap( *coinpic );
+    pictureOfCoin->setScaledContents( false ) ;
+    pictureOfCoin->setText( "" ) ;
+    pictureOfCoin->setAlignment( Qt::AlignCenter ) ;
+    pictureOfCoin->setMargin( 2 ) ;
+    connect( pictureOfCoin.get(), SIGNAL( clicked() ), this, SLOT( toggleObverseReverse() ) ) ;
+    ui->verticalLayoutForBalancesAndCoin->addWidget( pictureOfCoin.get() ) ;
 }
 
 void OverviewPage::handleTransactionClicked(const QModelIndex &index)
@@ -157,6 +169,14 @@ void OverviewPage::handleOutOfSyncWarningClicks()
 OverviewPage::~OverviewPage()
 {
     delete ui;
+}
+
+void OverviewPage::toggleObverseReverse()
+{
+    reverseOrObverse = ! reverseOrObverse ;
+
+    std::unique_ptr< QPixmap > coinpic( new QPixmap( reverseOrObverse ? ":/icons/wallet_bgcoin" : ":/icons/wallet_bgcoin_reverse" ) ) ;
+    pictureOfCoin->setPixmap( *coinpic );
 }
 
 void OverviewPage::setBalance(const CAmount& balance, const CAmount& unconfirmedBalance, const CAmount& immatureBalance, const CAmount& watchOnlyBalance, const CAmount& watchUnconfBalance, const CAmount& watchImmatureBalance)

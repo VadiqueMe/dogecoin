@@ -186,12 +186,12 @@
         <translation>%1 post</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Postremum acceptum frustum generatum est %1 abhinc.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>Postremum acceptum frustum generatum est %1 abhinc</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Transactiones post hoc nondum visibiles erunt.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Transactiones post hoc nondum visibiles erunt</translation>
     </message>
     <message>
         <source>Error</source>
@@ -682,13 +682,6 @@
     <message>
         <source>Reset all verify message fields</source>
         <translation>Reconstitue omnes campos verificandi nuntii</translation>
-    </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
     </message>
 </context>
 <context>

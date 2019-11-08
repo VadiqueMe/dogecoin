@@ -262,12 +262,12 @@
         <translation>%1 jäljessä</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Viimeisin vastaanotettu lohko tuotettu %1.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>Viimeisin vastaanotettu lohko tuotettu %1</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Tämän jälkeiset rahansiirrot eivät ole vielä näkyvissä.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Tämän jälkeiset rahansiirrot eivät ole vielä näkyvissä</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1548,13 +1548,6 @@
     <message>
         <source>Reset all verify message fields</source>
         <translation>Tyhjennä kaikki varmista-viesti-kentät</translation>
-    </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
     </message>
 </context>
 <context>

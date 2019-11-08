@@ -112,16 +112,16 @@
         <translation>Enkripteer beursie</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Hierdie operasie benodig 'n wagwoord om die beursie oop te sluit.</translation>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
+        <translation>Hierdie operasie benodig 'n wagwoord om die beursie oop te sluit</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>Sluit beursie oop</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>Hierdie operasie benodig 'n wagwoord om die beursie oop te sluit.</translation>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
+        <translation>Hierdie operasie benodig 'n wagwoord om die beursie oop te sluit</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
@@ -132,8 +132,8 @@
         <translation>Verander wagfrase</translation>
     </message>
     <message>
-        <source>Enter the old passphrase and new passphrase to the wallet.</source>
-        <translation>Tik in die ou wagfrase en die nuwe wagfrase vir die beursie.</translation>
+        <source>Enter the old passphrase and new passphrase to the wallet</source>
+        <translation>Tik in die ou wagfrase en die nuwe wagfrase vir die beursie</translation>
     </message>
     <message>
         <source>Confirm wallet encryption</source>
@@ -148,11 +148,11 @@
         <translation>Die beursie kon nie bewaak word nie</translation>
     </message>
     <message>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>Beursie bewaaking het misluk as gevolg van 'n interne fout. Die beursie is nie bewaak nie!</translation>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted</source>
+        <translation>Beursie bewaaking het misluk as gevolg van 'n interne fout. Die beursie is nie bewaak nie</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
+        <source>The supplied passphrases do not match</source>
         <translation>Die wagfrase stem nie ooreen nie</translation>
     </message>
     <message>
@@ -160,16 +160,16 @@
         <translation>Beursie oopsluiting het misluk</translation>
     </message>
     <message>
-        <source>The passphrase entered for the wallet decryption was incorrect.</source>
-        <translation>Die wagfrase wat ingetik was om die beursie oop te sluit, was verkeerd.</translation>
+        <source>The passphrase entered for the wallet decryption was incorrect</source>
+        <translation>Die wagfrase wat ingetik was om die beursie oop te sluit, was verkeerd</translation>
     </message>
     <message>
         <source>Wallet decryption failed</source>
         <translation>Beursie dekripsie het misluk</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
-        <translation>Die beursie se wagfrase verandering was suksesvol.</translation>
+        <source>Wallet passphrase was successfully changed</source>
+        <translation>Die beursie se wagfrase verandering was suksesvol</translation>
     </message>
     </context>
 <context>

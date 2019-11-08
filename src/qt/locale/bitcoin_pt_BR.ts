@@ -128,23 +128,27 @@
         <translation>Repita a nova frase de segurança</translation>
     </message>
     <message>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Insira a nova senha para a carteira.&lt;br/&gt;Favor usar uma senha com &lt;b&gt;dez ou mais caracteres aleatórios&lt;/b&gt;, ou &lt;b&gt;oito ou mais palavras&lt;/b&gt;.</translation>
+        <source>Enter the new passphrase to the wallet</source>
+        <translation>Insira a nova senha para a carteira</translation>
+    </message>
+    <message>
+        <source>Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;</source>
+        <translation>Favor usar uma senha com &lt;b&gt;dez ou mais caracteres aleatórios&lt;/b&gt;, ou &lt;b&gt;oito ou mais palavras&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
         <translation>Criptografar carteira</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Esta operação precisa da sua senha para desbloquear a carteira.</translation>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
+        <translation>Esta operação precisa da sua senha para desbloquear a carteira</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>Desbloquear carteira</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
         <translation>Esta operação precisa da sua senha para descriptografar a carteira</translation>
     </message>
     <message>
@@ -156,8 +160,8 @@
         <translation>Alterar senha</translation>
     </message>
     <message>
-        <source>Enter the old passphrase and new passphrase to the wallet.</source>
-        <translation>Insira a senha antiga e a nova para a carteira.</translation>
+        <source>Enter the old passphrase and new passphrase to the wallet</source>
+        <translation>Insira a senha antiga e a nova para a carteira</translation>
     </message>
     <message>
         <source>Confirm wallet encryption</source>
@@ -184,28 +188,28 @@
         <translation>Falha ao criptografar carteira</translation>
     </message>
     <message>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>Falha na criptografia devido a um erro inerno. Sua carteira não foi criptografada.</translation>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted</source>
+        <translation>Falha na criptografia devido a um erro inerno. Sua carteira não foi criptografada</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
-        <translation>As senhas não conferem.</translation>
+        <source>The supplied passphrases do not match</source>
+        <translation>As senhas não conferem</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>
         <translation>Falha ao desbloquear carteira</translation>
     </message>
     <message>
-        <source>The passphrase entered for the wallet decryption was incorrect.</source>
-        <translation>A senha inserida para descriptografar a carteira está incorreta.</translation>
+        <source>The passphrase entered for the wallet decryption was incorrect</source>
+        <translation>A senha inserida para descriptografar a carteira está incorreta</translation>
     </message>
     <message>
         <source>Wallet decryption failed</source>
         <translation>Falha ao descriptografar a carteira</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
-        <translation>A senha da carteira foi alterada com êxito.</translation>
+        <source>Wallet passphrase was successfully changed</source>
+        <translation>A senha da carteira foi alterada com êxito</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
@@ -430,12 +434,12 @@
         <translation>%1 atrás</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Último bloco recebido foi gerado %1 atrás.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>Último bloco recebido foi gerado %1 atrás</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Transações após isso ainda não estão visíveis.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Transações após isso ainda não estão visíveis</translation>
     </message>
     <message>
         <source>Error</source>
@@ -838,12 +842,12 @@
         <translation>Formulário</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the dogecoin network, as detailed below.</source>
-        <translation>Transações recentes podem não estar visíveis ainda, portanto o seu saldo pode estar incorreto. Esta informação será corrigida assim que sua carteira for sincronizada com a rede, como detalhado abaixo.</translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the dogecoin network, as detailed below</source>
+        <translation>Transações recentes podem não estar visíveis ainda, portanto o seu saldo pode estar incorreto. Esta informação será corrigida assim que sua carteira for sincronizada com a rede, como detalhado abaixo</translation>
     </message>
     <message>
-        <source>Attempting to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation>Gastar moedas de transações desconhecidas podem não ser aceitas pela rede.</translation>
+        <source>Attempting to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network</source>
+        <translation>Gastar moedas de transações desconhecidas podem não ser aceitas pela rede</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -2303,13 +2307,6 @@
     </message>
 </context>
 <context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
-    </message>
-</context>
-<context>
     <name>TrafficGraphWidget</name>
     <message>
         <source>KB/s</source>
@@ -2451,7 +2448,7 @@
         <translation>ID da transação</translation>
     </message>
     <message>
-        <source>Transaction full size</source>
+        <source>Full size of transaction</source>
         <translation>Tamanho tota da transação</translation>
     </message>
     <message>

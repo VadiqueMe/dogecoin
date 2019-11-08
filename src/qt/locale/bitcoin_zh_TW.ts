@@ -128,24 +128,28 @@
         <translation>重複新密碼</translation>
     </message>
     <message>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>輸入錢包的新密碼。&lt;br/&gt;密碼請用&lt;b&gt;10 個以上的隨機字元&lt;/b&gt;，或是&lt;b&gt;8 個以上的字詞&lt;/b&gt;。</translation>
+        <source>Enter the new passphrase to the wallet</source>
+        <translation>輸入錢包的新密碼</translation>
+    </message>
+    <message>
+        <source>Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;</source>
+        <translation>密碼請用 &lt;b&gt;10 個以上的隨機字元&lt;/b&gt;，或是 &lt;b&gt;8 個以上的字詞&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
         <translation>加密錢包</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>這個動作需要你的錢包密碼來解鎖錢包。</translation>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
+        <translation>這個動作需要你的錢包密碼來解鎖錢包</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>解鎖錢包</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>這個動作需要你的錢包密碼來把錢包解密。</translation>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
+        <translation>這個動作需要你的錢包密碼來把錢包解密</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
@@ -188,8 +192,8 @@
         <translation>錢包加密失敗</translation>
     </message>
     <message>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>因為內部錯誤導致錢包加密失敗。你的錢包還是沒加密。</translation>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted</source>
+        <translation>因為內部錯誤導致錢包加密失敗。你的錢包還是沒加密</translation>
     </message>
     <message>
         <source>The supplied passphrases do not match.</source>
@@ -200,16 +204,16 @@
         <translation>錢包解鎖失敗</translation>
     </message>
     <message>
-        <source>The passphrase entered for the wallet decryption was incorrect.</source>
-        <translation>輸入要用來解密錢包的密碼不對。</translation>
+        <source>The passphrase entered for the wallet decryption was incorrect</source>
+        <translation>輸入要用來解密錢包的密碼不對</translation>
     </message>
     <message>
         <source>Wallet decryption failed</source>
         <translation>錢包解密失敗</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
-        <translation>錢包密碼改成功了。</translation>
+        <source>Wallet passphrase was successfully changed</source>
+        <translation>錢包密碼改成功了</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
@@ -434,12 +438,12 @@
         <translation>落後 %1</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>最近收到的區塊是在 %1 以前生出來的。</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>最近收到的區塊是在 %1 以前生出來的</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>暫時會看不到在這之後的交易。</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>暫時會看不到在這之後的交易</translation>
     </message>
     <message>
         <source>Error</source>
@@ -842,12 +846,12 @@
         <translation>表單</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the dogecoin network, as detailed below.</source>
-        <translation>最近的交易可能還看不到，因此錢包餘額可能不正確。在錢包軟體完成跟 dogecoin 網路的同步後，這裡的資訊就會正確。詳情請見下面。</translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the dogecoin network, as detailed below</source>
+        <translation>最近的交易可能還看不到，因此錢包餘額可能不正確。在錢包軟體完成跟 dogecoin 網路的同步後，這裡的資訊就會正確。詳情請見下面</translation>
     </message>
     <message>
-        <source>Attempting to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation>使用還沒顯示出來的交易所影響到的 dogecoin 可能會不被網路所接受。</translation>
+        <source>Attempting to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network</source>
+        <translation>使用還沒顯示出來的交易所影響到的 dogecoin 可能會不被網路所接受</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -2303,13 +2307,6 @@
     </message>
 </context>
 <context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
-    </message>
-</context>
-<context>
     <name>TrafficGraphWidget</name>
     <message>
         <source>KB/s</source>
@@ -2451,7 +2448,7 @@
         <translation>交易識別碼</translation>
     </message>
     <message>
-        <source>Transaction full size</source>
+        <source>Full size of transaction</source>
         <translation>交易總大小</translation>
     </message>
     <message>

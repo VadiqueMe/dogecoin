@@ -226,12 +226,12 @@
         <translation>%1 გავლილია</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
+        <source>Last received block was generated %1 ago</source>
         <translation>ბოლო მიღებული ბლოკის გენერირებიდან გასულია %1</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>შემდგომი ტრანსაქციები ნაჩვენები ჯერ არ იქნება.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>შემდგომი ტრანსაქციები ნაჩვენები ჯერ არ იქნება</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1022,13 +1022,6 @@
     <message>
         <source>Reset all verify message fields</source>
         <translation>ვერიფიკაციის ყველა ველის წაშლა</translation>
-    </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
     </message>
 </context>
 <context>

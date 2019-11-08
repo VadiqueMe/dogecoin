@@ -112,16 +112,16 @@
         <translation>Kripto portofolin</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Ky veprim ka nevojë per frazkalimin e portofolit tuaj që të ç'kyç portofolin.</translation>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
+        <translation>Ky veprim ka nevojë per frazkalimin e portofolit tuaj që të ç'kyç portofolin</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
-        <translation>ç'kyç portofolin.</translation>
+        <translation>ç'kyç portofolin</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>Ky veprim kërkon frazkalimin e portofolit tuaj që të dekriptoj portofolin.</translation>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
+        <translation>Ky veprim kërkon frazkalimin e portofolit tuaj që të dekriptoj portofolin</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
@@ -148,8 +148,8 @@
         <translation>Enkriptimi i portofolit dështoi</translation>
     </message>
     <message>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>Enkriptimi i portofolit dështoi për shkak të një gabimi të brëndshëm. portofoli juaj nuk u enkriptua.</translation>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted</source>
+        <translation>Enkriptimi i portofolit dështoi për shkak të një gabimi të brëndshëm. Portofoli juaj nuk u enkriptua</translation>
     </message>
     <message>
         <source>The supplied passphrases do not match.</source>
@@ -590,13 +590,6 @@
     <message>
         <source>Alt+P</source>
         <translation>Alt+P</translation>
-    </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testo rrjetin]</translation>
     </message>
 </context>
 <context>

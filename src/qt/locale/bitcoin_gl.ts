@@ -214,12 +214,12 @@
         <translation>%1 detrás</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>O último bloque recibido foi xerado fai %1.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>O último bloque recibido foi xerado fai %1</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>As transaccións despois desta non serán todavía visibles.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>As transaccións despois desta non serán todavía visibles</translation>
     </message>
     <message>
         <source>Error</source>
@@ -894,13 +894,6 @@
     <message>
         <source>Reset all verify message fields</source>
         <translation>Restaurar todos os campos de verificación de mensaxe</translation>
-    </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
     </message>
 </context>
 <context>

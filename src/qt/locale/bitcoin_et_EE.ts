@@ -80,12 +80,12 @@
         <translation>Rahakoti krüpteerimine ebaõnnestus</translation>
     </message>
     <message>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>Rahakoti krüpteerimine ebaõnnestus sisemise vea tõttu. Sinu rahakotti ei krüpteeritud.</translation>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted</source>
+        <translation>Rahakoti krüpteerimine ebaõnnestus sisemise vea tõttu. Sinu rahakotti ei krüpteeritud</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
-        <translation>Sisestatud paroolid ei kattu.</translation>
+        <source>The supplied passphrases do not match</source>
+        <translation>Sisestatud paroolid ei kattu</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>
@@ -96,8 +96,8 @@
         <translation>Rahakoti dekrüpteerimine ebaõnnestus</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
-        <translation>Rahakoti parooli vahetus õnnestus.</translation>
+        <source>Wallet passphrase was successfully changed</source>
+        <translation>Rahakoti parooli vahetus õnnestus</translation>
     </message>
     </context>
 <context>
@@ -166,8 +166,8 @@
         <translation>%1 ajast maas</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Hilisemad transaktsioonid ei ole veel nähtavad.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Hilisemad transaktsioonid ei ole veel nähtavad</translation>
     </message>
     <message>
         <source>Error</source>
@@ -594,13 +594,6 @@
     <message>
         <source>Message verified.</source>
         <translation>Sõnum verifitseeritud.</translation>
-    </message>
-</context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[test võrk]</translation>
     </message>
 </context>
 <context>

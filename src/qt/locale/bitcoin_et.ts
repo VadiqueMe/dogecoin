@@ -128,24 +128,28 @@
         <translation>Korda salafraasi</translation>
     </message>
     <message>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Sisesta uus salafraas rahakotti.&lt;br/&gt;Kasuta salafraasi millles on&lt;b&gt;kümme või rohkem juhuslikku sümbolit&lt;b&gt;,või&lt;b&gt;kaheksa või rohkem sõna&lt;b/&gt;.</translation>
+        <source>Enter the new passphrase to the wallet</source>
+        <translation>Sisesta uus salafraas rahakotti</translation>
+    </message>
+    <message>
+        <source>Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;</source>
+        <translation>Kasuta salafraasi millles on &lt;b&gt;kümme või rohkem juhuslikku sümbolit&lt;/b&gt;, või &lt;b&gt;kaheksa või rohkem sõna&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
         <translation>Krüpteeri rahakott</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Antud operatsioon vajab rahakoti lahtilukustamiseks salafraasi.</translation>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
+        <translation>Antud operatsioon vajab rahakoti lahtilukustamiseks salafraasi</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>Ava rahakoti lukk</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>Antud operatsioon vajab rahakoti dekrüpteerimiseks salafraasi.</translation>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
+        <translation>Antud operatsioon vajab rahakoti dekrüpteerimiseks salafraasi</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
@@ -156,12 +160,12 @@
         <translation>Vaheta salafraasi</translation>
     </message>
     <message>
-        <source>Enter the old passphrase and new passphrase to the wallet.</source>
-        <translation>Sisesta vana salafraas ja uus salafraas rahakotti.</translation>
+        <source>Enter the old passphrase and new passphrase to the wallet</source>
+        <translation>Sisesta vana salafraas ja uus salafraas rahakotti</translation>
     </message>
     <message>
         <source>Confirm wallet encryption</source>
-        <translation>Kinnita rahakoti krüpteerimine.</translation>
+        <translation>Kinnita rahakoti krüpteerimine</translation>
     </message>
     <message>
         <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR DOGECOINS&lt;/b&gt;!</source>
@@ -180,32 +184,32 @@
         <translation>Rahakoti krüpteerimine ebaõnnestus</translation>
     </message>
     <message>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>Rahakoti krüpteerimine ebaõnnestus sisemise tõrke tõttu. Sinu rahakott ei ole krüpteeritud.</translation>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted</source>
+        <translation>Rahakoti krüpteerimine ebaõnnestus sisemise tõrke tõttu. Sinu rahakott ei ole krüpteeritud</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
-        <translation>Sisestatud salafraasid ei kattu.</translation>
+        <source>The supplied passphrases do not match</source>
+        <translation>Sisestatud salafraasid ei kattu</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>
         <translation>Rahakoti lahtilukustamine ebaõnnestus</translation>
     </message>
     <message>
-        <source>The passphrase entered for the wallet decryption was incorrect.</source>
-        <translation>Rahakoti dekrüpteerimiseks sisestatud salafraas ei ole õige.</translation>
+        <source>The passphrase entered for the wallet decryption was incorrect</source>
+        <translation>Rahakoti dekrüpteerimiseks sisestatud salafraas ei ole õige</translation>
     </message>
     <message>
         <source>Wallet decryption failed</source>
         <translation>Rahakoti dekrüpteerimine ebaõnnestus</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
-        <translation>Rahakoti salafraas on edukalt vahetatud.</translation>
+        <source>Wallet passphrase was successfully changed</source>
+        <translation>Rahakoti salafraas on edukalt vahetatud</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
-        <translation>Hoiatus:Klaviatuuri suurtähelukk on peal.</translation>
+        <translation>Hoiatus:Klaviatuuri suurtähelukk on peal!</translation>
     </message>
 </context>
 <context>
@@ -378,12 +382,12 @@
         <translation>%1 maas</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Viimane saabunud blokk loodi %1 tagasi.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>Viimane saabunud blokk loodi %1 tagasi</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Peale seda ei ole tehingud veel nähtavad.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Peale seda ei ole tehingud veel nähtavad</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1456,13 +1460,6 @@
     <message>
         <source>Message verified.</source>
         <translation>Sõnum verifitseeritud.</translation>
-    </message>
-</context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
     </message>
 </context>
 <context>

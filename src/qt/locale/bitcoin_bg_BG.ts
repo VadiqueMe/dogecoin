@@ -132,16 +132,16 @@
         <translation>Криптирай портфейл</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Тази операция изисква вашата парола на портфейла за отключването на портфейла.</translation>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
+        <translation>Тази операция изисква вашата парола на портфейла за отключването на портфейла</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>Отключи портфейла</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>Тази операция изисква вашата парола на портфейла за декриптирането на портфейла.</translation>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
+        <translation>Тази операция изисква вашата парола на портфейла за декриптирането на портфейла</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>

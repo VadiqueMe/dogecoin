@@ -383,13 +383,6 @@
         <source>Alt+P</source>
         <translation>Alt+П</translation>
     </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
-    </message>
 </context>
 <context>
     <name>TrafficGraphWidget</name>

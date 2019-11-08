@@ -124,24 +124,28 @@
         <translation>Ulangi kata kunci baru</translation>
     </message>
     <message>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Masukan kata sandi baru ke dompet.&lt;br/&gt;Mohon gunakan kata sandi &lt;b&gt;sepuluh karakter acak atau lebih&lt;/b&gt;, atau &lt;b&gt; delapan atau lebih beberapa kata &lt;/​​b&gt;.</translation>
+        <source>Enter the new passphrase to the wallet</source>
+        <translation>Masukan kata sandi baru ke dompet</translation>
+    </message>
+    <message>
+        <source>Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;</source>
+        <translation>Mohon gunakan kata sandi &lt;b&gt;sepuluh karakter acak atau lebih&lt;/b&gt;, atau &lt;b&gt; delapan atau lebih beberapa kata &lt;/​​b&gt;</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
         <translation>Enkripsi dompet</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Operasi ini memerlukan kata sandi dompet Anda untuk membuka dompet.</translation>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
+        <translation>Operasi ini memerlukan kata sandi dompet Anda untuk membuka dompet</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>Buka dompet</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>Operasi ini memerlukan kata sandi dompet Anda untuk mendekripsikan dompet.</translation>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
+        <translation>Operasi ini memerlukan kata sandi dompet Anda untuk mendekripsikan dompet</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
@@ -152,8 +156,8 @@
         <translation>Ganti kata sandi</translation>
     </message>
     <message>
-        <source>Enter the old passphrase and new passphrase to the wallet.</source>
-        <translation>Masukkan kata sandi lama dan kata sandi baru ke dompet.</translation>
+        <source>Enter the old passphrase and new passphrase to the wallet</source>
+        <translation>Masukkan kata sandi lama dan kata sandi baru ke dompet</translation>
     </message>
     <message>
         <source>Confirm wallet encryption</source>
@@ -184,28 +188,28 @@
         <translation>Pengenkripsian dompet gagal</translation>
     </message>
     <message>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>Pengenkripsian dompet gagal karena kesalahan internal. Dompet Anda tidak dienkripsi.</translation>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted</source>
+        <translation>Pengenkripsian dompet gagal karena kesalahan internal. Dompet Anda tidak dienkripsi</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
-        <translation>Kata sandi yang dimasukkan tidak cocok.</translation>
+        <source>The supplied passphrases do not match</source>
+        <translation>Kata sandi yang dimasukkan tidak cocok</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>
         <translation>Membuka dompet gagal</translation>
     </message>
     <message>
-        <source>The passphrase entered for the wallet decryption was incorrect.</source>
-        <translation>Kata sandi yang dimasukkan untuk dekripsi dompet salah.</translation>
+        <source>The passphrase entered for the wallet decryption was incorrect</source>
+        <translation>Kata sandi yang dimasukkan untuk dekripsi dompet salah</translation>
     </message>
     <message>
         <source>Wallet decryption failed</source>
         <translation>Dekripsi dompet gagal</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
-        <translation>Kata sandi berhasil diganti.</translation>
+        <source>Wallet passphrase was successfully changed</source>
+        <translation>Kata sandi berhasil diganti</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
@@ -430,12 +434,12 @@
         <translation>kurang %1</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Blok terakhir yang diterima %1 lalu.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>Blok terakhir yang diterima %1 lalu</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Transaksi setelah ini belum akan terlihat.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Transaksi setelah ini belum akan terlihat</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1482,13 +1486,6 @@
     <message>
         <source>Reset all verify message fields</source>
         <translation>Hapus semua bidang verifikasi pesan</translation>
-    </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
     </message>
 </context>
 <context>

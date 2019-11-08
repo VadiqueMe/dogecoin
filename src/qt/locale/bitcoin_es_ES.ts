@@ -128,24 +128,28 @@
         <translation>Repita la nueva contraseña</translation>
     </message>
     <message>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Introduzca la nueva frase clave del monedero. &lt;br/&gt;Por favor utilice una frase clave de &lt;b&gt;diez o más carácteres aleatorios&lt;/b&gt;, o &lt;b&gt;ocho o más palabras&lt;/b&gt;.</translation>
+        <source>Enter the new passphrase to the wallet</source>
+        <translation>Introduzca la nueva frase clave del monedero</translation>
+    </message>
+    <message>
+        <source>Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;</source>
+        <translation>Por favor utilice una frase clave de &lt;b&gt;diez o más carácteres aleatorios&lt;/b&gt;, o &lt;b&gt;ocho o más palabras&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
         <translation>Monedero encriptado</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Esta operación necesita su frase clave de monedero para desbloquear el monedero.</translation>
+        <source>This operation needs your wallet passphrase to unlock the wallet</source>
+        <translation>Esta operación necesita su frase clave de monedero para desbloquear el monedero</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>Desbloquear monedero</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>Esta operación necesita su frase clave de cartera para desencriptar el monedero.</translation>
+        <source>This operation needs your wallet passphrase to decrypt the wallet</source>
+        <translation>Esta operación necesita su frase clave de cartera para desencriptar el monedero</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
@@ -156,8 +160,8 @@
         <translation>Cambiar frase clave</translation>
     </message>
     <message>
-        <source>Enter the old passphrase and new passphrase to the wallet.</source>
-        <translation>Introduzca la vieja frase clave y la nueva flase clave para el monedero.</translation>
+        <source>Enter the old passphrase and new passphrase to the wallet</source>
+        <translation>Introduzca la vieja frase clave y la nueva flase clave para el monedero</translation>
     </message>
     <message>
         <source>Confirm wallet encryption</source>
@@ -188,28 +192,28 @@
         <translation>Fracasó la encriptación de monedero</translation>
     </message>
     <message>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>Falló la encriptación del monedero debido a un error interno. Su monedero no fue encriptado.</translation>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted</source>
+        <translation>Falló la encriptación del monedero debido a un error interno. Su monedero no fue encriptado</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
-        <translation>La frase clave introducida no coincide.</translation>
+        <source>The supplied passphrases do not match</source>
+        <translation>La frase clave introducida no coincide</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>
         <translation>Fracasó el desbloqueo del monedero</translation>
     </message>
     <message>
-        <source>The passphrase entered for the wallet decryption was incorrect.</source>
-        <translation>La frase clave introducida para la encriptación del monedero es incorrecta.</translation>
+        <source>The passphrase entered for the wallet decryption was incorrect</source>
+        <translation>La frase clave introducida para la encriptación del monedero es incorrecta</translation>
     </message>
     <message>
         <source>Wallet decryption failed</source>
         <translation>Fracasó la encriptación del monedero</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
-        <translation>La frase clave del monedero se ha cambiado con éxito.</translation>
+        <source>Wallet passphrase was successfully changed</source>
+        <translation>La frase clave del monedero se ha cambiado con éxito</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
@@ -434,12 +438,12 @@
         <translation>%1 atrás</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>El último bloque recibido fue generado hace %1.</translation>
+        <source>Last received block was generated %1 ago</source>
+        <translation>El último bloque recibido fue generado hace %1</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Las transacciones posteriores aún no están visibles.</translation>
+        <source>Transactions after this will not yet be visible</source>
+        <translation>Las transacciones posteriores aún no están visibles</translation>
     </message>
     <message>
         <source>Error</source>
@@ -2216,13 +2220,6 @@
     <message>
         <source>Message verified.</source>
         <translation>Mensaje verificado.</translation>
-    </message>
-</context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
     </message>
 </context>
 <context>
