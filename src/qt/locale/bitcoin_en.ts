@@ -1921,9 +1921,8 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../bitcoinunits.cpp" line="+176"/>
         <source>Amount</source>
-        <translation type="unfinished">Amount</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../guiutil.cpp" line="+128"/>

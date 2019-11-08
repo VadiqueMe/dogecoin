@@ -5,7 +5,7 @@
 
 #include "coinamountfield.h"
 
-#include "bitcoinunits.h"
+#include "unitsofcoin.h"
 #include "guiconstants.h"
 #include "qvaluecombobox.h"
 
@@ -23,10 +23,10 @@ class AmountSpinBox: public QAbstractSpinBox
     Q_OBJECT
 
 public:
-    explicit AmountSpinBox(QWidget *parent):
-        QAbstractSpinBox(parent),
-        currentUnit(BitcoinUnits::BTC),
-        singleStep(100000000) // koinu
+    explicit AmountSpinBox( QWidget * parent ) :
+        QAbstractSpinBox( parent ),
+        currentUnit( UnitsOfCoin::oneCoin ),
+        singleStep( UnitsOfCoin::factor( currentUnit ) )
     {
         setAlignment(Qt::AlignRight);
 
@@ -49,7 +49,7 @@ public:
         CAmount val = parse(input, &valid);
         if(valid)
         {
-            input = BitcoinUnits::format(currentUnit, val, false, BitcoinUnits::separatorAlways);
+            input = UnitsOfCoin::format( currentUnit, val, false, UnitsOfCoin::separatorAlways ) ;
             lineEdit()->setText(input);
         }
     }
@@ -61,7 +61,7 @@ public:
 
     void setValue(const CAmount& value)
     {
-        lineEdit()->setText(BitcoinUnits::format(currentUnit, value, false, BitcoinUnits::separatorAlways));
+        lineEdit()->setText( UnitsOfCoin::format( currentUnit, value, false, UnitsOfCoin::separatorAlways ) ) ;
         Q_EMIT valueChanged();
     }
 
@@ -70,7 +70,7 @@ public:
         bool valid = false;
         CAmount val = value(&valid);
         val = val + steps * singleStep;
-        val = qMin(qMax(val, CAmount(0)), BitcoinUnits::maxMoney());
+        val = qMin( qMax( val, CAmount(0) ), UnitsOfCoin::maxMoney() ) ;
         setValue(val);
     }
 
@@ -100,7 +100,7 @@ public:
 
             const QFontMetrics fm(fontMetrics());
             int h = lineEdit()->minimumSizeHint().height();
-            int w = fm.width(BitcoinUnits::format(BitcoinUnits::BTC, BitcoinUnits::maxMoney(), false, BitcoinUnits::separatorAlways));
+            int w = fm.width( UnitsOfCoin::format( UnitsOfCoin::oneCoin, UnitsOfCoin::maxMoney(), false, UnitsOfCoin::separatorAlways ) ) ;
             w += 2; // cursor blinking space
 
             QStyleOptionSpinBox opt;
@@ -138,10 +138,10 @@ private:
     CAmount parse(const QString &text, bool *valid_out=0) const
     {
         CAmount val = 0;
-        bool valid = BitcoinUnits::parse(currentUnit, text, &val);
+        bool valid = UnitsOfCoin::parse( currentUnit, text, &val ) ;
         if(valid)
         {
-            if(val < 0 || val > BitcoinUnits::maxMoney())
+            if ( val < 0 || val > UnitsOfCoin::maxMoney() )
                 valid = false;
         }
         if(valid_out)
@@ -179,7 +179,7 @@ protected:
         {
             if(val > 0)
                 rv |= StepDownEnabled;
-            if(val < BitcoinUnits::maxMoney())
+            if ( val < UnitsOfCoin::maxMoney() )
                 rv |= StepUpEnabled;
         }
         return rv;
@@ -200,13 +200,13 @@ CoinAmountField::CoinAmountField(QWidget *parent) :
     amount->installEventFilter(this);
     amount->setMaximumWidth(170);
 
-    QHBoxLayout *layout = new QHBoxLayout(this);
-    layout->addWidget(amount);
-    unit = new QValueComboBox(this);
-    unit->setModel(new BitcoinUnits(this));
-    layout->addWidget(unit);
-    layout->addStretch(1);
-    layout->setContentsMargins(0,0,0,0);
+    QHBoxLayout *layout = new QHBoxLayout( this ) ;
+    layout->addWidget( amount ) ;
+    unit = new QValueComboBox( this ) ;
+    unit->setModel( new UnitsOfCoin( this ) ) ;
+    layout->addWidget( unit ) ;
+    layout->addStretch( 1 ) ;
+    layout->setContentsMargins( 0, 0, 0, 0 ) ;
 
     setLayout(layout);
 
@@ -286,8 +286,8 @@ void CoinAmountField::unitChanged(int idx)
     // Use description tooltip for current unit for the combobox
     unit->setToolTip(unit->itemData(idx, Qt::ToolTipRole).toString());
 
-    // Determine new unit ID
-    int newUnit = unit->itemData(idx, BitcoinUnits::UnitRole).toInt();
+    // get new unit id
+    int newUnit = unit->itemData( idx, UnitsOfCoin::UnitRole ).toInt() ;
 
     amount->setDisplayUnit(newUnit);
 }

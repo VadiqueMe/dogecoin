@@ -11,7 +11,7 @@
 #include "ui_helpmessagedialog.h"
 #include "ui_paperwalletdialog.h"
 
-#include "bitcoinunits.h"
+#include "unitsofcoin.h"
 
 #ifdef ENABLE_WALLET
 #include "sendcoinsdialog.h"
@@ -445,15 +445,15 @@ void PaperWalletDialog::on_printButton_clicked()
         }
     }
 
-    // Stolen from sendcoinsdialog.cpp
+    // copied from sendcoinsdialog.cpp
     qint64 txFee = tx->getTransactionFee();
     QString questionString = tr("Are you sure you want to send?");
     questionString.append("<br /><br />%1");
 
-    if (txFee > 0) {
-        // append fee string if a fee is required
+    if ( txFee > 0 ) {
+        // append fee string if there's a non-zero fee
         questionString.append("<hr /><span style='color:#aa0000;'>");
-        questionString.append(BitcoinUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), txFee));
+        questionString.append( UnitsOfCoin::formatWithUnit( model->getOptionsModel()->getDisplayUnit(), txFee ) ) ;
         questionString.append("</span> ");
         questionString.append(tr("added as transaction fee"));
     }
@@ -462,13 +462,13 @@ void PaperWalletDialog::on_printButton_clicked()
     questionString.append("<hr />");
     qint64 totalAmount = tx->getTotalTransactionAmount() + txFee;
     QStringList alternativeUnits;
-    Q_FOREACH (BitcoinUnits::Unit u, BitcoinUnits::availableUnits()) {
+    Q_FOREACH ( UnitsOfCoin::Unit u, UnitsOfCoin::availableUnits() ) {
         if (u != model->getOptionsModel()->getDisplayUnit())
-            alternativeUnits.append(BitcoinUnits::formatWithUnit(u, totalAmount));
+            alternativeUnits.append( UnitsOfCoin::formatWithUnit( u, totalAmount ) ) ;
     }
 
     questionString.append(tr("Total Amount %1 (= %2)")
-                              .arg(BitcoinUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), totalAmount))
+                              .arg( UnitsOfCoin::formatWithUnit( model->getOptionsModel()->getDisplayUnit(), totalAmount ) )
                               .arg(alternativeUnits.join(" " + tr("or") + " ")));
 
     QMessageBox::StandardButton retval = QMessageBox::question(this, tr("Confirm send coins"), questionString.arg(formatted.join("<br />")), QMessageBox::Yes | QMessageBox::Cancel, QMessageBox::Cancel);

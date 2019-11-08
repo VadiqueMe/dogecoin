@@ -1,12 +1,12 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "sendcoinsdialog.h"
 #include "ui_sendcoinsdialog.h"
 
 #include "addresstablemodel.h"
-#include "bitcoinunits.h"
+#include "unitsofcoin.h"
 #include "clientmodel.h"
 #include "coincontroldialog.h"
 #include "guiutil.h"
@@ -225,8 +225,9 @@ void SendCoinsDialog::on_sendButton_clicked()
     prepareStatus = model->prepareTransaction(currentTransaction, &ctrl);
 
     // process prepareStatus and on error generate message shown to user
-    processSendCoinsReturn(prepareStatus,
-        BitcoinUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), currentTransaction.getTransactionFee()));
+    processSendCoinsReturn( prepareStatus,
+        UnitsOfCoin::formatWithUnit( model->getOptionsModel()->getDisplayUnit(), currentTransaction.getTransactionFee() )
+    ) ;
 
     if(prepareStatus.status != WalletModel::OK) {
         fNewRecipientAllowed = true;
@@ -238,7 +239,7 @@ void SendCoinsDialog::on_sendButton_clicked()
     Q_FOREACH(const SendCoinsRecipient &rcp, currentTransaction.getRecipients())
     {
         // generate bold amount string
-        QString amount = "<b>" + BitcoinUnits::formatHtmlWithUnit(model->getOptionsModel()->getDisplayUnit(), rcp.amount);
+        QString amount = "<b>" + UnitsOfCoin::formatHtmlWithUnit( model->getOptionsModel()->getDisplayUnit(), rcp.amount ) ;
         amount.append("</b>");
         // generate monospace address string
         QString address = "<span style='font-family: monospace;'>" + rcp.address;
@@ -279,7 +280,7 @@ void SendCoinsDialog::on_sendButton_clicked()
     {
         // append fee string if a fee is required
         questionString.append("<hr /><span style='color:#aa0000;'>");
-        questionString.append(BitcoinUnits::formatHtmlWithUnit(model->getOptionsModel()->getDisplayUnit(), txFee));
+        questionString.append( UnitsOfCoin::formatHtmlWithUnit( model->getOptionsModel()->getDisplayUnit(), txFee ) ) ;
         questionString.append("</span> ");
         questionString.append(tr("added as transaction fee"));
 
@@ -291,13 +292,13 @@ void SendCoinsDialog::on_sendButton_clicked()
     questionString.append("<hr />");
     CAmount totalAmount = currentTransaction.getTotalTransactionAmount() + txFee;
     QStringList alternativeUnits;
-    Q_FOREACH(BitcoinUnits::Unit u, BitcoinUnits::availableUnits())
+    Q_FOREACH ( UnitsOfCoin::Unit u, UnitsOfCoin::availableUnits() )
     {
-        if(u != model->getOptionsModel()->getDisplayUnit())
-            alternativeUnits.append(BitcoinUnits::formatHtmlWithUnit(u, totalAmount));
+        if ( u != model->getOptionsModel()->getDisplayUnit() )
+            alternativeUnits.append( UnitsOfCoin::formatHtmlWithUnit( u, totalAmount ) ) ;
     }
     questionString.append(tr("Total Amount %1")
-        .arg(BitcoinUnits::formatHtmlWithUnit(model->getOptionsModel()->getDisplayUnit(), totalAmount)));
+        .arg( UnitsOfCoin::formatHtmlWithUnit( model->getOptionsModel()->getDisplayUnit(), totalAmount ) )) ;
     questionString.append(QString("<span style='font-size:10pt;font-weight:normal;'><br />(=%2)</span>")
         .arg(alternativeUnits.join(" " + tr("or") + "<br />")));
 
@@ -466,10 +467,8 @@ void SendCoinsDialog::setBalance(const CAmount& balance, const CAmount& unconfir
     Q_UNUSED(watchUnconfirmedBalance);
     Q_UNUSED(watchImmatureBalance);
 
-    if(model && model->getOptionsModel())
-    {
-        ui->labelBalance->setText(BitcoinUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), balance));
-    }
+    if ( model && model->getOptionsModel() )
+        ui->labelBalance->setText( UnitsOfCoin::formatWithUnit( model->getOptionsModel()->getDisplayUnit(), balance ) ) ;
 }
 
 void SendCoinsDialog::updateDisplayUnit()
@@ -514,7 +513,7 @@ void SendCoinsDialog::processSendCoinsReturn(const WalletModel::SendCoinsReturn 
         msgParams.second = CClientUIInterface::MSG_ERROR;
         break;
     case WalletModel::AbsurdFee:
-        msgParams.first = tr("A fee higher than %1 is considered an absurdly high fee.").arg(BitcoinUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), maxTxFee));
+        msgParams.first = tr("A fee higher than %1 is considered an absurdly high fee.").arg( UnitsOfCoin::formatWithUnit( model->getOptionsModel()->getDisplayUnit(), maxTxFee ) ) ;
         break;
     case WalletModel::PaymentRequestExpired:
         msgParams.first = tr("Payment request expired.");
@@ -592,8 +591,8 @@ void SendCoinsDialog::updateFeeMinimizedLabel()
     if (ui->radioSmartFee->isChecked())
         ui->labelFeeMinimized->setText(ui->labelSmartFee->text());
     else {
-        ui->labelFeeMinimized->setText(BitcoinUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), ui->customFee->value()) +
-            ((ui->radioCustomPerKilobyte->isChecked()) ? "/kB" : ""));
+        ui->labelFeeMinimized->setText( UnitsOfCoin::formatWithUnit( model->getOptionsModel()->getDisplayUnit(), ui->customFee->value() ) +
+            ( ( ui->radioCustomPerKilobyte->isChecked() ) ? "/kB" : "" ) ) ;
     }
 }
 
@@ -602,8 +601,8 @@ void SendCoinsDialog::updateSmartFeeLabel()
     if ( ! model || ! model->getOptionsModel() )
         return;
 
-    ui->labelSmartFee->setText( BitcoinUnits::formatWithUnit( model->getOptionsModel()->getDisplayUnit(),
-                                                              CWallet::fallbackFee.GetFeePerKiloByte() ) + "/kB" );
+    ui->labelSmartFee->setText( UnitsOfCoin::formatWithUnit( model->getOptionsModel()->getDisplayUnit(),
+                                                             CWallet::fallbackFee.GetFeePerKiloByte() ) + "/kB" );
     updateFeeMinimizedLabel() ;
 }
 

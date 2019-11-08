@@ -8,7 +8,7 @@
 
 #include "addressbookpage.h"
 #include "addresstablemodel.h"
-#include "bitcoinunits.h"
+#include "unitsofcoin.h"
 #include "guiutil.h"
 #include "guiconstants.h"
 #include "optionsmodel.h"
@@ -333,7 +333,7 @@ void ReceiveCoinsDialog::updateRequest()
     html += "<a href=\""+uri+"\">" + GUIUtil::HtmlEscape(uri) + "</a><br>";
     html += "<b>"+tr("Address")+"</b>: " + GUIUtil::HtmlEscape(info.address) + "<br>";
     if ( info.amount )
-        html += "<b>" + tr("Amount")+"</b>: " + BitcoinUnits::formatHtmlWithUnit( model->getOptionsModel()->getDisplayUnit(), info.amount ) + "<br>" ;
+        html += "<b>" + tr("Amount")+"</b>: " + UnitsOfCoin::formatHtmlWithUnit( model->getOptionsModel()->getDisplayUnit(), info.amount ) + "<br>" ;
     if(!info.label.isEmpty())
         html += "<b>"+tr("Label")+"</b>: " + GUIUtil::HtmlEscape(info.label) + "<br>";
     if(!info.message.isEmpty())

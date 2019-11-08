@@ -1,11 +1,11 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "guiutil.h"
 
 #include "coinaddressvalidator.h"
-#include "bitcoinunits.h"
+#include "unitsofcoin.h"
 #include "qvalidatedlineedit.h"
 #include "walletmodel.h"
 
@@ -189,7 +189,7 @@ bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out)
         {
             if(!i->second.isEmpty())
             {
-                if(!BitcoinUnits::parse(BitcoinUnits::BTC, i->second, &rv.amount))
+                if ( ! UnitsOfCoin::parse( UnitsOfCoin::oneCoin, i->second, &rv.amount ) )
                 {
                     return false;
                 }
@@ -228,7 +228,7 @@ QString formatBitcoinURI(const SendCoinsRecipient &info)
 
     if (info.amount)
     {
-        ret += QString("?amount=%1").arg(BitcoinUnits::format(BitcoinUnits::BTC, info.amount, false, BitcoinUnits::separatorNever));
+        ret += QString( "?amount=%1" ).arg( UnitsOfCoin::format( UnitsOfCoin::oneCoin, info.amount, false, UnitsOfCoin::separatorNever ) ) ;
         paramCount++;
     }
 

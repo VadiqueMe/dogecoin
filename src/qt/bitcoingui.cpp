@@ -9,7 +9,7 @@
 
 #include "bitcoingui.h"
 
-#include "bitcoinunits.h"
+#include "unitsofcoin.h"
 #include "clientmodel.h"
 #include "guiconstants.h"
 #include "guiutil.h"
@@ -1035,7 +1035,7 @@ void BitcoinGUI::incomingTransaction(const QString& date, int unit, const CAmoun
 {
     // On new transaction, make an info balloon
     QString msg = tr("Date: %1\n").arg(date) +
-                  tr("Amount: %1\n").arg(BitcoinUnits::formatWithUnit(unit, amount, true)) +
+                  tr("Amount: %1\n").arg( UnitsOfCoin::formatWithUnit( unit, amount, true ) ) +
                   tr("Type: %1\n").arg(type);
     if (!label.isEmpty())
         msg += tr("Label: %1\n").arg(label);
@@ -1261,12 +1261,12 @@ UnitDisplayStatusBarControl::UnitDisplayStatusBarControl(const PlatformStyle *pl
 {
     createContextMenu();
     setToolTip( tr("Unit to show amounts in. Click to choose another unit") ) ;
-    QList<BitcoinUnits::Unit> units = BitcoinUnits::availableUnits();
+    QList< UnitsOfCoin::Unit > units = UnitsOfCoin::availableUnits() ;
     int max_width = 0;
     const QFontMetrics fm(font());
-    Q_FOREACH (const BitcoinUnits::Unit unit, units)
+    Q_FOREACH (const UnitsOfCoin::Unit unit, units)
     {
-        max_width = qMax(max_width, fm.width(BitcoinUnits::name(unit)));
+        max_width = qMax(max_width, fm.width( UnitsOfCoin::name( unit ) )) ;
     }
     setMinimumSize(max_width, 0);
     setAlignment(Qt::AlignRight | Qt::AlignVCenter);
@@ -1283,9 +1283,9 @@ void UnitDisplayStatusBarControl::mousePressEvent(QMouseEvent *event)
 void UnitDisplayStatusBarControl::createContextMenu()
 {
     menu = new QMenu(this);
-    Q_FOREACH(BitcoinUnits::Unit u, BitcoinUnits::availableUnits())
+    Q_FOREACH( UnitsOfCoin::Unit u, UnitsOfCoin::availableUnits() )
     {
-        QAction *menuAction = new QAction(QString(BitcoinUnits::name(u)), this);
+        QAction *menuAction = new QAction( QString( UnitsOfCoin::name( u ) ), this ) ;
         menuAction->setData(QVariant(u));
         menu->addAction(menuAction);
     }
@@ -1310,7 +1310,7 @@ void UnitDisplayStatusBarControl::setOptionsModel(OptionsModel *_optionsModel)
 /** When Display Units are changed on OptionsModel it will refresh the display text of the control on the status bar */
 void UnitDisplayStatusBarControl::updateDisplayUnit(int newUnits)
 {
-    setText(BitcoinUnits::name(newUnits));
+    setText( UnitsOfCoin::name( newUnits ) ) ;
 }
 
 /** Shows context menu with Display Unit options by the mouse coordinates */

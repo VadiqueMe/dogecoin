@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #if defined(HAVE_CONFIG_H)
 #include "config/bitcoin-config.h"
@@ -8,7 +8,7 @@
 
 #include "optionsmodel.h"
 
-#include "bitcoinunits.h"
+#include "unitsofcoin.h"
 #include "guiutil.h"
 
 #include "amount.h"
@@ -69,9 +69,9 @@ void OptionsModel::Init(bool resetSettings)
     fMinimizeOnClose = settings.value("fMinimizeOnClose").toBool();
 
     // Display
-    if (!settings.contains("nDisplayUnit"))
-        settings.setValue("nDisplayUnit", BitcoinUnits::BTC);
-    nDisplayUnit = settings.value("nDisplayUnit").toInt();
+    if ( ! settings.contains( "nDisplayUnit" ) )
+        settings.setValue( "nDisplayUnit", UnitsOfCoin::oneCoin ) ;
+    nDisplayUnit = settings.value( "nDisplayUnit" ).toInt() ;
 
     if (!settings.contains("strThirdPartyTxUrls"))
         settings.setValue("strThirdPartyTxUrls", "https://dogechain.info/tx/%s|https://chain.so/tx/DOGE/%s");

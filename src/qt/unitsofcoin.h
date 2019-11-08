@@ -1,9 +1,10 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_QT_BITCOINUNITS_H
-#define BITCOIN_QT_BITCOINUNITS_H
+#ifndef DOGECOIN_QT_UNITSOFCOIN_H
+#define DOGECOIN_QT_UNITSOFCOIN_H
 
 #include "amount.h"
 
@@ -41,26 +42,24 @@
 #define THIN_SP_UTF8 REAL_THIN_SP_UTF8
 #define THIN_SP_HTML HTML_HACK_SP
 
-/** Bitcoin unit definitions. Encapsulates parsing and formatting
-   and serves as list model for drop-down selection boxes.
+/* Units of coin definitions. Encapsulates parsing and formatting
+   and serves as list model for drop-down selection boxes
 */
-class BitcoinUnits: public QAbstractListModel
+class UnitsOfCoin: public QAbstractListModel
 {
     Q_OBJECT
 
 public:
-    explicit BitcoinUnits(QObject *parent);
+    explicit UnitsOfCoin( QObject * parent ) ;
 
-    /** Bitcoin units.
-      @note Source: https://en.bitcoin.it/wiki/Units . Please add only sensible ones
-     */
     enum Unit
     {
-        MBTC,
-        kBTC,
-        BTC,
-        mBTC,
-        uBTC
+        MCoin,
+        kCoin,
+        oneCoin,
+        mCoin,
+        uCoin,
+        Cointoshi
     };
 
     enum SeparatorStyle
@@ -70,14 +69,10 @@ public:
         separatorAlways
     };
 
-    //! @name Static API
-    //! Unit conversion and formatting
-    ///@{
-
-    //! Get list of units, for drop-down box
+    // get list of units, for drop-down box
     static QList<Unit> availableUnits();
-    //! Is unit ID valid?
-    static bool valid(int unit);
+    // is this unit known?
+    static bool isOk( int unit ) ;
     //! Short name
     static QString name(int unit);
     //! Longer description
@@ -96,18 +91,14 @@ public:
     static bool parse(int unit, const QString &value, CAmount *val_out);
     //! Gets title for amount column including current display unit if optionsModel reference available */
     static QString getAmountColumnTitle(int unit);
-    ///@}
 
-    //! @name AbstractListModel implementation
-    //! List model for unit drop-down selection box.
-    ///@{
+    // list model for unit drop-down selection box
     enum RoleIndex {
         /** Unit identifier */
         UnitRole = Qt::UserRole
     };
     int rowCount(const QModelIndex &parent) const;
     QVariant data(const QModelIndex &index, int role) const;
-    ///@}
 
     static QString removeSpaces(QString text)
     {
@@ -119,12 +110,14 @@ public:
         return text;
     }
 
-    //! Return maximum number of base units (Satoshis)
-    static CAmount maxMoney();
+    // return maximum number of coin units (cointoshis)
+    static CAmount maxMoney() ;
 
 private:
-    QList<BitcoinUnits::Unit> unitlist;
-};
-typedef BitcoinUnits::Unit BitcoinUnit;
+    QList< UnitsOfCoin::Unit > unitlist ;
 
-#endif // BITCOIN_QT_BITCOINUNITS_H
+} ;
+
+typedef UnitsOfCoin::Unit UnitOfCoin ;
+
+#endif
