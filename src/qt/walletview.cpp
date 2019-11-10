@@ -216,6 +216,9 @@ void WalletView::updateDigPage()
     generateCoinsPage->getNumberOfThreadsList().setCurrentText( qthrea ) ;
 
     generateCoinsPage->refreshBlockSubsudy() ;
+
+    generateCoinsPage->updateTipBlockInfo() ;
+    generateCoinsPage->updateThreadTabs() ;
 }
 
 void WalletView::gotoSignMessageTab(QString addr)

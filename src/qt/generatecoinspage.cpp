@@ -6,9 +6,12 @@
 
 #include "optionsmodel.h"
 
-#include "miner.h"
 #include "chainparams.h"
+#include "unitsofcoin.h"
 #include "util.h"
+#include "validation.h"
+
+#include <QDateTime>
 
 GenerateCoinsPage::GenerateCoinsPage( const PlatformStyle * style, QWidget * parent )
     : QDialog( parent )
@@ -81,8 +84,10 @@ void GenerateCoinsPage::toggleGenerateBlocks( int qtCheckState )
         if ( ui->numberOfThreadsList->currentText() != "0" )
             ui->numberOfThreadsList->setCurrentText( "0" ) ;
 
-        if ( HowManyMiningThreads() > 0 )
+        if ( HowManyMiningThreads() > 0 ) {
             GenerateCoins( false, 0, Params() ) ;
+            rebuildThreadTabs() ;
+        }
     }
     else /* if ( qtCheckState == Qt::Checked ) */
     {
@@ -92,8 +97,10 @@ void GenerateCoinsPage::toggleGenerateBlocks( int qtCheckState )
             ui->numberOfThreadsList->setCurrentText( threads ) ;
         }
 
-        if ( HowManyMiningThreads() != threads.toInt() )
+        if ( HowManyMiningThreads() != threads.toInt() ) {
             GenerateCoins( true, threads.toInt(), Params() ) ;
+            rebuildThreadTabs() ;
+        }
     }
 }
 
@@ -103,8 +110,10 @@ void GenerateCoinsPage::changeNumberOfThreads( const QString & threads )
 
     bool generate = ( threads != "0" ) ;
     ui->generateBlocksYesNo->setChecked( generate ) ;
-    if ( HowManyMiningThreads() != threads.toInt() )
+    if ( HowManyMiningThreads() != threads.toInt() ) {
         GenerateCoins( generate, threads.toInt(), Params() ) ;
+        rebuildThreadTabs() ;
+    }
 }
 
 void GenerateCoinsPage::updateDisplayUnit()
@@ -113,4 +122,172 @@ void GenerateCoinsPage::updateDisplayUnit()
     {
         ui->newBlockSubsidy->setDisplayUnit( walletModel->getOptionsModel()->getDisplayUnit() ) ;
     }
+}
+
+void GenerateCoinsPage::updateTipBlockInfo()
+{
+    if ( chainActive.Tip() == nullptr )
+    {   // no blocks in chain
+        ui->tipBlockHeight->setText( "0" ) ;
+        ui->tipBlockTime->setText( QString( "Genesis block" ) +
+                " @ " +  QDateTime::fromTime_t( Params().GenesisBlock().GetBlockTime() ).toString() ) ;
+
+        ui->tipBlockVersion->setVisible( false );
+        ui->tipBlockVersionLabel->setVisible( false );
+        ui->tipBlockBits->setVisible( false );
+        ui->tipBlockBitsLabel->setVisible( false );
+        ui->tipBlockNonce->setVisible( false );
+        ui->tipBlockNonceLabel->setVisible( false );
+        ui->tipBlockHashSublayoutContainer->setVisible( false ) ;
+        ui->tipBlockHashLabel->setVisible( false ) ;
+
+        return ;
+    }
+
+    // height
+
+    int chainHeight = chainActive.Tip()->nHeight /* chainActive.Height() */ ;
+    QString heightString = QString::number( chainHeight ) ;
+
+    QChar thinSpace = /* U+2009 THIN SPACE */ 0x2009 ;
+    int length = heightString.size() ;
+    int digitsInGroup = 3 ;
+    if ( length > ( digitsInGroup + 1 ) )
+        for ( int i = digitsInGroup ; i < length ; i += digitsInGroup )
+            heightString.insert( length - i, thinSpace ) ;
+
+    ui->tipBlockHeight->setText( heightString ) ;
+
+    // time
+
+    int64_t blockTime = chainActive.Tip()->GetBlockTime() ;
+
+    auto ago = std::chrono::system_clock::now() - std::chrono::system_clock::from_time_t( blockTime ) ;
+    using days_duration = std::chrono::duration < int, std::ratio_multiply < std::ratio< 24 >, std::chrono::hours::period >::type > ;
+    auto days = std::chrono::duration_cast< days_duration >( ago ).count() ;
+    auto hours = std::chrono::duration_cast< std::chrono::hours >( ago ).count() - ( 24 * days ) ;
+    auto minutes = std::chrono::duration_cast< std::chrono::minutes >( ago ).count() - ( 60 * hours ) - ( 60 * 24 * days ) ;
+    auto seconds = std::chrono::duration_cast< std::chrono::seconds >( ago ).count() - ( 60 * minutes ) - ( 60 * 60 * hours ) - ( 60 * 60 * 24 * days ) ;
+
+    QString agoString ;
+    if ( days > 0 ) agoString += QString::number( days ) + " day" ;
+    if ( days > 1 ) agoString += "s" ;
+    if ( agoString.size() > 0 && hours > 0 ) agoString += " " ;
+    if ( hours > 0 ) agoString += QString::number( hours ) + " hour" ;
+    if ( hours > 1 ) agoString += "s" ;
+    if ( agoString.size() > 0 && minutes > 0 ) agoString += " " ;
+    if ( minutes > 0 ) agoString += QString::number( minutes ) + " minute" ;
+    if ( minutes > 1 ) agoString += "s" ;
+    if ( agoString.size() > 0 && seconds > 0 ) agoString += " " ;
+    if ( seconds > 0 ) agoString += QString::number( seconds ) + " second" ;
+    if ( seconds > 1 ) agoString += "s" ;
+    agoString += ( agoString.size() > 0 ) ? " ago" : "just now" ;
+
+    ui->tipBlockTime->setText(
+        QDateTime::fromTime_t( blockTime ).toString() + " (" + agoString + ")"
+    ) ;
+
+    // get header of tip block
+    CBlockHeader tipBlock = chainActive.Tip()->GetBlockHeader( Params().GetConsensus( chainHeight ) ) ;
+
+    // version
+
+    ui->tipBlockVersion->setVisible( true );
+    ui->tipBlockVersionLabel->setVisible( true );
+
+    QString justHexVersion = QString::number( tipBlock.nVersion, 16 ) ;
+    QString versionString = ( tipBlock.nVersion < 10 ) ? justHexVersion : QString( "0x" ) + justHexVersion ;
+    if ( tipBlock.nVersion & CPureBlockHeader::VERSION_AUXPOW )
+        versionString += " (auxpow)" ;
+    ui->tipBlockVersion->setText( versionString ) ;
+
+    // bits
+
+    ui->tipBlockBits->setVisible( true );
+    ui->tipBlockBitsLabel->setVisible( true );
+
+    arith_uint256 expandedBits = arith_uint256().SetCompact( tipBlock.nBits ) ;
+    ui->tipBlockBits->setText( QString::asprintf( "%08x = %s", tipBlock.nBits, expandedBits.GetHex().c_str() ) ) ;
+
+    // nonce
+
+    ui->tipBlockNonce->setVisible( true );
+    ui->tipBlockNonceLabel->setVisible( true ) ;
+
+    ui->tipBlockNonce->setText( QString::asprintf( "0x%08x", tipBlock.nNonce ) + " = " + QString::number( tipBlock.nNonce ) ) ;
+
+    // hash
+
+    ui->tipBlockHashSublayoutContainer->setVisible( true ) ;
+    ui->tipBlockHashLabel->setVisible( true ) ;
+
+    ui->tipBlockHashSha256->setText( QString::fromStdString( tipBlock.GetHash().ToString() ) ) ;
+    ui->tipBlockHashScrypt->setText( QString::fromStdString( tipBlock.GetPoWHash().ToString() ) ) ;
+}
+
+void GenerateCoinsPage::rebuildThreadTabs()
+{
+    miningTabs.clear() ;
+    ui->detailsForThreads->setVisible( false ) ;
+    ui->spacerAfterThreadTabs->changeSize( 0, 0, QSizePolicy::Maximum, QSizePolicy::Maximum ) ;
+    for ( int i = ui->detailsForThreads->count() - 1 ; i >= 0 ; -- i )
+        ui->detailsForThreads->removeTab( i ) ;
+
+    size_t nThreads = HowManyMiningThreads() ;
+    if ( nThreads > 0 )
+    {
+        for ( size_t thread = 0 ; thread < nThreads ; ++ thread ) {
+            const MiningThread * const miner = getMiningThreadByNumber( thread + 1 ) ;
+            if ( miner != nullptr ) {
+                MiningThreadTab * tab = new MiningThreadTab( /* thread */ miner, /* parent */ ui->detailsForThreads ) ;
+                ui->detailsForThreads->addTab( tab,
+                    QString::fromStdString( toStringWithOrdinalSuffix(tab->getThread()->getNumberOfThread()) ) + QString(" ") + "thread" ) ;
+                miningTabs.push_back( tab ) ;
+            }
+        }
+
+        ui->spacerAfterThreadTabs->changeSize( 1, 10, QSizePolicy::Fixed, QSizePolicy::Fixed ) ;
+        ui->detailsForThreads->setUsesScrollButtons( true ) ;
+        ui->detailsForThreads->setVisible( true ) ;
+    }
+}
+
+void GenerateCoinsPage::updateThreadTabs()
+{
+    if ( ui->detailsForThreads->count() != HowManyMiningThreads() )
+        rebuildThreadTabs() ;
+
+    for ( MiningThreadTab * tab : miningTabs )
+        if ( tab != nullptr && tab->getThread() != nullptr ) {
+            QString bigText ;
+
+            const CBlockTemplate * const candidate = tab->getThread()->getNewBlockCandidate() ;
+            if ( candidate != nullptr ) {
+                bigText += "new block candidate: " ;
+                bigText += "version 0x" + QString::number( candidate->block.nVersion, 16 ) ;
+                bigText += ", " ;
+                bigText += "transactions " + QString::number( candidate->block.vtx.size() ) ;
+                bigText += ", " ;
+                int unit = UnitsOfCoin::oneCoin ;
+                if ( walletModel != nullptr && walletModel->getOptionsModel() != nullptr )
+                    unit = walletModel->getOptionsModel()->getDisplayUnit() ;
+                bigText += "fees " + UnitsOfCoin::formatWithUnit( unit, - candidate->vTxFees[ 0 ] ) ;
+                bigText += ", " ;
+                bigText += "solution " + QString::fromStdString( arith_uint256().SetCompact( candidate->block.nBits ).GetHex() ) ;
+                bigText += "\n\n" ;
+            }
+
+            bigText += QString::fromStdString( tab->getThread()->threadMiningInfoString() ) ;
+            bigText += "\n\n" ;
+
+            size_t blocksGenerated = tab->getThread()->getNumberOfBlocksGeneratedByThisThread() ;
+            if ( blocksGenerated == 0 )
+                bigText += "no blocks were generated by this thread yet" ;
+            else
+                bigText += "this thread has generated " + QString::number( blocksGenerated )
+                                + " block" + ( blocksGenerated > 1 ? "s" : "" )
+                                + " for now" ;
+
+            tab->setTextOfLabel( bigText ) ;
+        }
 }

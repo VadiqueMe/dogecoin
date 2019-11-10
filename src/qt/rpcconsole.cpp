@@ -800,11 +800,11 @@ void RPCConsole::setNetworkActive(bool networkActive)
     updateNetworkState();
 }
 
-void RPCConsole::setNumBlocks(int count, const QDateTime& blockDate, double nVerificationProgress, bool headers)
+void RPCConsole::setNumBlocks( int count, const QDateTime & blockDate, double nVerificationProgress, bool headers )
 {
-    if (!headers) {
-        ui->numberOfBlocks->setText(QString::number(count));
-        ui->lastBlockTime->setText(blockDate.toString());
+    if ( ! headers ) {
+        ui->numberOfBlocks->setText( QString::number( count ) ) ;
+        ui->tipBlockTime->setText( blockDate.toString() ) ;
     }
 }
 

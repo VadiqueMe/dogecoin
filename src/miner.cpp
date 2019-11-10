@@ -139,7 +139,7 @@ std::unique_ptr< CBlockTemplate > BlockAssembler::CreateNewBlock( const CScript 
 
     // Add dummy coinbase tx as first transaction
     pblock->vtx.emplace_back();
-    pblocktemplate->vTxFees.push_back(-1); // updated at end
+    pblocktemplate->vTxFees.push_back( -1 ) ; // will be changed at the end
     pblocktemplate->vTxSigOpsCost.push_back(-1); // updated at end
 
     LOCK2(cs_main, mempool.cs);
@@ -148,11 +148,9 @@ std::unique_ptr< CBlockTemplate > BlockAssembler::CreateNewBlock( const CScript 
 
     const Consensus::Params & consensus = chainparams.GetConsensus( nHeight ) ;
     const int32_t nChainId = consensus.nAuxpowChainId ;
-    // FIXME: Active version bits after the always-auxpow fork!
-    // const int32_t nVersion = ComputeBlockVersion(pindexPrev, consensus);
-    const int32_t nVersion = VERSIONBITS_LAST_OLD_BLOCK_VERSION;
+    const int32_t nVersion = VERSIONBITS_LAST_OLD_BLOCK_VERSION ; // ComputeBlockVersion( pindexPrev, consensus )
     pblock->SetBaseVersion(nVersion, nChainId);
-    // -regtest only: allow overriding block.nVersion with
+    // regtest only: allow overriding block.nVersion with
     // -blockversion=N to test forking scenarios
     if (chainparams.MineBlocksOnDemand())
         pblock->SetBaseVersion(GetArg("-blockversion", pblock->GetBaseVersion()), nChainId);
@@ -193,7 +191,7 @@ std::unique_ptr< CBlockTemplate > BlockAssembler::CreateNewBlock( const CScript 
     coinbaseTx.vin[0].scriptSig = CScript() << nHeight << OP_0;
     pblock->vtx[0] = MakeTransactionRef(std::move(coinbaseTx));
     pblocktemplate->vchCoinbaseCommitment = GenerateCoinbaseCommitment(*pblock, pindexPrev, consensus);
-    pblocktemplate->vTxFees[0] = -nFees;
+    pblocktemplate->vTxFees[ 0 ] = - nFees ;
 
     uint64_t nSerializeSize = GetSerializeSize( *pblock, SER_NETWORK, PROTOCOL_VERSION ) ;
     LogPrintf(
@@ -244,7 +242,7 @@ void BlockAssembler::onlyUnconfirmed(CTxMemPool::setEntries& testSet)
 
 bool BlockAssembler::TestPackage(uint64_t packageSize, int64_t packageSigOpsCost)
 {
-    // TODO: switch to weight-based accounting for packages instead of vsize-based accounting.
+    // TODO: switch to weight-based accounting for packages instead of vsize-based accounting
     if (nBlockWeight + WITNESS_SCALE_FACTOR * packageSize >= nBlockMaxWeight)
         return false;
     if (nBlockSigOpsCost + packageSigOpsCost >= MAX_BLOCK_SIGOPS_COST)
@@ -329,10 +327,10 @@ bool BlockAssembler::TestForBlock(CTxMemPool::txiter iter)
     return true;
 }
 
-void BlockAssembler::AddToBlock(CTxMemPool::txiter iter)
+void BlockAssembler::AddToBlock( CTxMemPool::txiter iter )
 {
     pblock->vtx.emplace_back(iter->GetSharedTx());
-    pblocktemplate->vTxFees.push_back(iter->GetFee());
+    pblocktemplate->vTxFees.push_back( iter->GetFee() ) ;
     pblocktemplate->vTxSigOpsCost.push_back(iter->GetSigOpCost());
     if (fNeedSizeAccounting) {
         nBlockSize += ::GetSerializeSize(iter->GetTx(), SER_NETWORK, PROTOCOL_VERSION);
@@ -658,7 +656,7 @@ void IncrementExtraNonce( CBlock * pblock, const CBlockIndex * pindexPrev, uint3
 //
 // ScanScryptHash scans nonces looking for the scrypt hash not greater than the solution hash
 //
-bool static ScanScryptHash( CPureBlockHeader blockHeader, uint32_t & nNonce, uint256 * phash,
+bool static ScanScryptHash( CPureBlockHeader blockHeader, uint32_t & nNonce, uint256 & blockHash,
                             const arith_uint256 & solutionHash, uint32_t & hashesScanned, arith_uint256 & smallestHash )
 {
     uint256 uint256solution = ArithToUint256( solutionHash ) ;
@@ -672,21 +670,22 @@ bool static ScanScryptHash( CPureBlockHeader blockHeader, uint32_t & nNonce, uin
     while ( true )
     {
         blockHeader.nNonce = nNonce ;
-        scrypt_1024_1_1_256( /* const char* input */ BEGIN(blockHeader), /* char* output */ BEGIN(*phash) ) ;
+        scrypt_1024_1_1_256( /* const char* input */ BEGIN(blockHeader), /* char* output */ BEGIN(blockHash) ) ;
         hashesScanned ++ ;
         nNonce ++ ;
 
-        arith_uint256 arithHash( UintToArith256( *phash ) ) ;
+        arith_uint256 arithHash( UintToArith256( blockHash ) ) ;
+
         if ( arithHash < smallestHash )
             smallestHash = arithHash ;
 
         // see if hash has at least as many zero bytes as the solution has
         bool enoughZeroBytes = true ;
         for ( size_t j = firstLEZeroByte ; j < 32 ; ++ j )
-            if ( ((uint8_t*)phash)[ j ] != 0 ) {  enoughZeroBytes = false ; break ;  }
+            if ( ((uint8_t*)&blockHash)[ j ] != 0 ) {  enoughZeroBytes = false ; break ;  }
 
         if ( enoughZeroBytes ) {
-            LogPrintf( "ScanScryptHash with nonce 0x%x found %s, solution is %s\n", nNonce, phash->GetHex(), solutionHash.GetHex() ) ;
+            LogPrintf( "ScanScryptHash with nonce 0x%x found %s, solution is %s\n", nNonce, blockHash.GetHex(), solutionHash.GetHex() ) ;
 
             if ( arithHash <= solutionHash )
             {
@@ -733,9 +732,9 @@ void MiningThread::MineBlocks()
     GetMainSignals().ScriptForMining( coinbaseScript ) ;
 
     try {
-        // Throw an error if no script was provided.  This can happen
+        // Throw an error if no script was provided. This can happen
         // due to some internal error but also if the keypool is empty.
-        // In the latter case, already the pointer is NULL
+        // In the latter case, already the pointer is nil
         if ( coinbaseScript == nullptr || coinbaseScript->reserveScript.empty() )
             throw std::runtime_error( "No coinbase script available (mining needs a wallet)" ) ;
 
@@ -744,7 +743,7 @@ void MiningThread::MineBlocks()
         while ( ! finished )
         {
             if ( chainparams.MiningRequiresPeers() ) {
-                // Busy-wait for the network to come online so we don't waste time mining
+                // wait for the network to come online hence don't waste time mining
                 // on an obsolete chain
                 do {
                     if ( g_connman->hasConnectedNodes() && ! IsInitialBlockDownload() )
@@ -777,7 +776,7 @@ void MiningThread::MineBlocks()
 
             scanBeginsMillis = GetTimeMillis() ;
             hashesScanned = 0 ;
-            smallestHashBlock = ~arith_uint256() ;
+            smallestHashBlock = ~ arith_uint256() ;
 
             const CPureBlockHeader * const blockHeader = currentBlock ;
             arith_uint256 solutionHash = arith_uint256().SetCompact( blockHeader->nBits ) ;
@@ -795,7 +794,7 @@ void MiningThread::MineBlocks()
             while ( true )
             {
                 // Scan nonces
-                if ( ScanScryptHash( *blockHeader, nNonce, &hash, solutionHash, hashesScanned, smallestHashBlock ) )
+                if ( ScanScryptHash( *blockHeader, nNonce, hash, solutionHash, hashesScanned, smallestHashBlock ) )
                 {
                     // Found a solution
                     currentBlock->nNonce = nNonce ;
@@ -809,7 +808,9 @@ void MiningThread::MineBlocks()
                     LogPrintf( "proof-of-work found with nonce 0x%x\n   scrypt hash %s\n   <= solution %s\n",
                                nNonce, hash.GetHex(), solutionHash.GetHex() ) ;
 
-                    ProcessBlockFound( currentBlock, chainparams ) ;
+                    if ( ProcessBlockFound( currentBlock, chainparams ) )
+                        howManyBlocksWereGeneratedByThisThread ++ ;
+
                     coinbaseScript->KeepScript() ;
 
                     // for regression testing, stop mining after a block is found
@@ -827,13 +828,13 @@ void MiningThread::MineBlocks()
                 // next nonce is random
                 nNonce = randomNumber() ;
 
-                // check if block needs to be rebuilt
-                if ( ! g_connman->hasConnectedNodes() && chainparams.MiningRequiresPeers() ) // regtest doesn't need any peer
+                // check if block candidate needs to be rebuilt
+                if ( pindexPrev != chainActive.Tip() )
                     break ;
                 /* if ( mempool.GetTransactionsUpdated() != transactionsInMempool
                            && GetTimeMillis() - scanBeginsMillis > 60999 )
                     break ; */
-                if ( pindexPrev != chainActive.Tip() )
+                if ( ! g_connman->hasConnectedNodes() && chainparams.MiningRequiresPeers() ) // regtest doesn't need any peer
                     break ;
 
                 const Consensus::Params & consensus = chainparams.GetConsensus( chainActive.Tip()->nHeight + 1 ) ;
@@ -849,11 +850,9 @@ void MiningThread::MineBlocks()
                 }
             }
 
+            LogPrintf( "MiningThread (%d) scanned %s\n", numberOfThread, threadMiningInfoString() ) ;
             allHashesByThread += hashesScanned ;
-            LogPrintf( "MiningThread (%d) scanned %d hashes for current block (%.3f hashes/s) with smallest %s, %ld hashes overall (%.3f hashes/s) smallest ever %s\n",
-                       numberOfThread,
-                       hashesScanned, getBlockHashesPerSecond(), smallestHashBlock.GetHex(),
-                       allHashesByThread, getAllHashesPerSecond(), smallestHashAll.GetHex() ) ;
+            hashesScanned = 0 ;
         }
     } catch ( const std::string & s ) {
         if ( s == "stop" ) {
@@ -864,6 +863,15 @@ void MiningThread::MineBlocks()
         LogPrintf( "MiningThread (%d) runtime error: %s\n", numberOfThread, e.what() ) ;
         return ;
     }
+}
+
+std::string MiningThread::threadMiningInfoString() const
+{
+    return strprintf (
+        "%d hashes for current block candidate (%.3f hashes/s) with smallest %s, %ld hashes overall (%.3f hashes/s) smallest ever %s",
+        howManyHashesAreTriedForCurrentBlock(), getBlockHashesPerSecond(), smallestHashBlock.GetHex(),
+        howManyHashesAreEverTriedByThisThread(), getAllHashesPerSecond(), smallestHashAll.GetHex()
+    ) ;
 }
 
 bool MiningThread::assembleNewBlockCandidate()
@@ -886,6 +894,15 @@ bool MiningThread::assembleNewBlockCandidate()
 
 static std::vector < std::unique_ptr< MiningThread > > miningThreads ;
 static std::mutex miningThreads_mutex ;
+
+const MiningThread * const getMiningThreadByNumber( size_t number )
+{
+    for ( auto const & thread : miningThreads )
+        if ( thread->getNumberOfThread() == number )
+            return thread.get() ;
+
+    return nullptr ;
+}
 
 size_t HowManyMiningThreads()
 {

@@ -32,11 +32,11 @@ static const bool DEFAULT_PRINTPRIORITY = false;
 
 struct CBlockTemplate
 {
-    CBlock block;
-    std::vector<CAmount> vTxFees;
-    std::vector<int64_t> vTxSigOpsCost;
-    std::vector<unsigned char> vchCoinbaseCommitment;
-};
+    CBlock block ;
+    std::vector< CAmount > vTxFees ;
+    std::vector< int64_t > vTxSigOpsCost ;
+    std::vector< unsigned char > vchCoinbaseCommitment ;
+} ;
 
 // Container for tracking updates to ancestor feerate as we include (parent)
 // transactions in a block
@@ -235,6 +235,7 @@ public:
         , numberOfThread( number )
         , chainparams( params )
         , coinbaseScript( nullptr )
+        , howManyBlocksWereGeneratedByThisThread( 0 )
         , currentCandidate( nullptr )
         , smallestHashBlock( ~ arith_uint256() )
         , smallestHashAll( ~ arith_uint256() )
@@ -259,19 +260,31 @@ public:
 
     void MineBlocks() ;
 
+    std::string threadMiningInfoString() const ;
+
+    size_t getNumberOfThread() const {  return numberOfThread ;  }
+
+    size_t getNumberOfBlocksGeneratedByThisThread() const {  return howManyBlocksWereGeneratedByThisThread ;  }
+
+    const CBlockTemplate * const getNewBlockCandidate() const {  return currentCandidate.get() ;  }
+
     const arith_uint256 & getSmallestHashFoundForCurrentBlock() const {  return smallestHashBlock ;  }
 
     const arith_uint256 & getSmallestHashFoundByThread() const {  return smallestHashAll ;  }
 
+    uint32_t howManyHashesAreTriedForCurrentBlock() const {  return hashesScanned ;  }
+
+    uint64_t howManyHashesAreEverTriedByThisThread() const {  return allHashesByThread + hashesScanned ;  }
+
     double getBlockHashesPerSecond() const
     {
-        double blockHashesPerMillisecond = (double)hashesScanned / ( GetTimeMillis() - scanBeginsMillis ) ;
+        double blockHashesPerMillisecond = (double)howManyHashesAreTriedForCurrentBlock() / ( GetTimeMillis() - scanBeginsMillis ) ;
         return 1000 * blockHashesPerMillisecond ;
     }
 
     double getAllHashesPerSecond() const
     {
-        double allHashesPerMillisecond = (double)allHashesByThread / ( GetTimeMillis() - threadBeginsMillis ) ;
+        double allHashesPerMillisecond = (double)howManyHashesAreEverTriedByThisThread() / ( GetTimeMillis() - threadBeginsMillis ) ;
         return 1000 * allHashesPerMillisecond ;
     }
 
@@ -290,6 +303,8 @@ private:
 
     std::shared_ptr< CReserveScript > coinbaseScript ;
 
+    size_t howManyBlocksWereGeneratedByThisThread ;
+
     std::unique_ptr< CBlockTemplate > currentCandidate ;
 
     arith_uint256 smallestHashBlock ;
@@ -307,6 +322,8 @@ private:
     bool finished ;
 
 } ;
+
+const MiningThread * const getMiningThreadByNumber( size_t number ) ;
 
 size_t HowManyMiningThreads() ;
 

@@ -87,11 +87,6 @@ CAmount maxTxFee = DEFAULT_TRANSACTION_MAXFEE ;
 
 CTxMemPool mempool(::minRelayTxFee);
 
-/**
- * Returns true if there are nRequired or more blocks of minVersion or above
- * in the last Consensus::Params::nMajorityWindow blocks, starting at pstart and going backwards.
- */
-static bool IsSuperMajority(int minVersion, const CBlockIndex* pstart, unsigned nRequired, const Consensus::Params& consensusParams);
 static void CheckBlockIndex(const Consensus::Params& consensusParams);
 
 /** Constant stuff for coinbase transactions we create: */
@@ -1661,6 +1656,22 @@ static int64_t nTimeIndex = 0;
 static int64_t nTimeCallbacks = 0;
 static int64_t nTimeTotal = 0;
 
+/**
+ * Returns true if there are nRequired or more blocks of minVersion or above
+ * in the last consensusParams.nMajorityWindow blocks, starting at pstart and going backwards
+ */
+static bool IsSuperMajority( int minVersion, const CBlockIndex * pstart, unsigned nRequired, const Consensus::Params & consensusParams )
+{
+    unsigned int nFound = 0;
+    for (int i = 0; i < consensusParams.nMajorityWindow && nFound < nRequired && pstart != NULL; i++)
+    {
+        if (pstart->GetBaseVersion() >= minVersion)
+            ++nFound;
+        pstart = pstart->pprev;
+    }
+    return nFound >= nRequired ;
+}
+
 bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pindex,
                   CCoinsViewCache& view, const CChainParams& chainparams, bool fJustCheck)
 {
@@ -2918,22 +2929,19 @@ std::vector<unsigned char> GenerateCoinbaseCommitment(CBlock& block, const CBloc
     return commitment;
 }
 
-bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& state, const CBlockIndex* pindexPrev, int64_t nAdjustedTime)
+bool ContextualCheckBlockHeader( const CBlockHeader & block, CValidationState & state, const CBlockIndex * pindexPrev, int64_t nAdjustedTime )
 {
     const int nHeight = pindexPrev == NULL ? 0 : pindexPrev->nHeight + 1;
-    const Consensus::Params& consensusParams = Params().GetConsensus(nHeight);
+    const Consensus::Params& consensusParams = Params().GetConsensus( nHeight ) ;
 
-    // Disallow legacy blocks after merge-mining start.
-    if (!consensusParams.fAllowLegacyBlocks
-        && block.IsLegacy())
-        return state.DoS( 20, error("%s : legacy block after auxpow start", __func__),
+    if ( block.IsLegacy() && ! consensusParams.fAllowLegacyBlocks )
+        return state.DoS( 20, error( "%s : legacy block when it is too late", __func__ ),
                           REJECT_INVALID, "late-legacy-block" ) ;
 
-    // Dogecoin: Disallow AuxPow blocks before it is activated.
+    // Dogecoin: Disallow AuxPow blocks before it is activated
     // TODO: Remove this test, as checkpoints will enforce this for us now
     // NOTE: Previously this had its own fAllowAuxPoW flag, but that's always the opposite of fAllowLegacyBlocks
-    if (consensusParams.fAllowLegacyBlocks
-        && block.IsAuxpow())
+    if ( consensusParams.fAllowLegacyBlocks && block.IsAuxpow() )
         return state.DoS( 20, error("%s : auxpow blocks are not allowed at height %d, parameters effective from %d",
                                     __func__, pindexPrev->nHeight + 1, consensusParams.nHeightEffective),
                           REJECT_INVALID, "early-auxpow-block" ) ;
@@ -2953,16 +2961,20 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
     // Reject outdated version blocks when 95% (75% on testnet) of the network has upgraded:
     // check for version 2, 3 and 4 upgrades
     // Dogecoin: Version 2 enforcement was never used
-    if((block.GetBaseVersion() < 3 && nHeight >= consensusParams.BIP66Height))
-            return state.Invalid(false, REJECT_OBSOLETE, strprintf("bad-version(0x%08x)", block.GetBaseVersion()),
-                                 strprintf("rejected nVersion=0x%08x block", block.GetBaseVersion()));
+    if ( ( block.GetBaseVersion() < 3 && nHeight >= consensusParams.BIP66Height ) )
+        return state.Invalid(
+            false, REJECT_OBSOLETE, strprintf( "obsolete-version(0x%x)", block.nVersion ),
+            strprintf( "rejected version=0x%x block as obsolete", block.nVersion )
+        ) ;
 
     // Dogecoin: Introduce supermajority rules for v4 blocks
-    if (block.GetBaseVersion() < 4 && IsSuperMajority(4, pindexPrev, consensusParams.nMajorityRejectBlockOutdated, consensusParams))
-        return state.Invalid(error("%s : rejected nVersion=3 block", __func__),
-                             REJECT_OBSOLETE, "bad-version");
+    if ( block.GetBaseVersion() < 4 && IsSuperMajority( 4, pindexPrev, consensusParams.nMajorityRejectBlockOutdated, consensusParams ) )
+        return state.Invalid(
+            false, REJECT_OBSOLETE, strprintf( "obsolete-version(0x%x)", block.nVersion ),
+            strprintf( "rejected v3 block (version=0x%x) due to supermajority of v4 blocks", block.nVersion )
+        ) ;
 
-    return true;
+    return true ;
 }
 
 bool ContextualCheckBlock(const CBlock& block, CValidationState& state, const CBlockIndex* pindexPrev)
@@ -3195,18 +3207,6 @@ static bool AcceptBlock(const std::shared_ptr<const CBlock>& pblock, CValidation
         FlushStateToDisk(state, FLUSH_STATE_NONE); // we just allocated more disk space for block files
 
     return true;
-}
-
-static bool IsSuperMajority(int minVersion, const CBlockIndex* pstart, unsigned nRequired, const Consensus::Params& consensusParams)
-{
-    unsigned int nFound = 0;
-    for (int i = 0; i < consensusParams.nMajorityWindow && nFound < nRequired && pstart != NULL; i++)
-    {
-        if (pstart->GetBaseVersion() >= minVersion)
-            ++nFound;
-        pstart = pstart->pprev;
-    }
-    return (nFound >= nRequired);
 }
 
 bool ProcessNewBlock(const CChainParams& chainparams, const std::shared_ptr<const CBlock> pblock, bool fForceProcessing, bool *fNewBlock)
@@ -4228,7 +4228,7 @@ bool LoadMempool(void)
         return false;
     }
 
-    LogPrintf("Imported mempool transactions from disk: %i successes, %i failed, %i expired\n", count, failed, skipped);
+    LogPrintf( "Imported mempool transactions from disk: %i okay, %i failed, %i expired\n", count, failed, skipped ) ;
     return true;
 }
 

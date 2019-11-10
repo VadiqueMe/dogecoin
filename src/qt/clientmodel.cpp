@@ -117,12 +117,13 @@ quint64 ClientModel::getTotalBytesSent() const
 
 QDateTime ClientModel::getLastBlockDate() const
 {
-    LOCK(cs_main);
+    LOCK( cs_main ) ;
 
-    if (chainActive.Tip())
-        return QDateTime::fromTime_t(chainActive.Tip()->GetBlockTime());
+    if ( chainActive.Tip() != nullptr )
+        return QDateTime::fromTime_t( chainActive.Tip()->GetBlockTime() ) ;
 
-    return QDateTime::fromTime_t(Params().GenesisBlock().GetBlockTime()); // Genesis block's time of current network
+    // when the chain has no blocks, return time of the genesis block
+    return QDateTime::fromTime_t( Params().GenesisBlock().GetBlockTime() ) ;
 }
 
 long ClientModel::getMempoolSize() const
