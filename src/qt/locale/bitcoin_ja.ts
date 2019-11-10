@@ -2593,30 +2593,6 @@
         <source>(no label)</source>
         <translation>（ラベル無し）</translation>
     </message>
-    <message>
-        <source>Transaction status. Hover over this field to show number of confirmations.</source>
-        <translation>取引の状況。このフィールドの上にカーソルを置くと検証の数を表示します。</translation>
-    </message>
-    <message>
-        <source>Date and time that the transaction was received.</source>
-        <translation>取引を受信した日時。</translation>
-    </message>
-    <message>
-        <source>Type of transaction.</source>
-        <translation>取引の種類。</translation>
-    </message>
-    <message>
-        <source>Whether or not a watch-only address is involved in this transaction.</source>
-        <translation>監視限定アドレスがこのトランザクションに含まれているかどうか</translation>
-    </message>
-    <message>
-        <source>User-defined intent/purpose of the transaction.</source>
-        <translation>ユーザ定義のトランザクションの意図や目的。</translation>
-    </message>
-    <message>
-        <source>Amount removed from or added to balance.</source>
-        <translation>残高に追加または削除された総額。</translation>
-    </message>
 </context>
 <context>
     <name>TransactionView</name>

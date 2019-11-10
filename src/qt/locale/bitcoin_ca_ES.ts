@@ -2421,30 +2421,6 @@
         <source>(no label)</source>
         <translation>(sense etiqueta)</translation>
     </message>
-    <message>
-        <source>Transaction status. Hover over this field to show number of confirmations.</source>
-        <translation>Estat de la transacció. Desplaceu-vos sobre aquest camp per mostrar el nombre de confirmacions.</translation>
-    </message>
-    <message>
-        <source>Date and time that the transaction was received.</source>
-        <translation>Data i hora en que la transacció va ser rebuda.</translation>
-    </message>
-    <message>
-        <source>Type of transaction.</source>
-        <translation>Tipus de transacció.</translation>
-    </message>
-    <message>
-        <source>Whether or not a watch-only address is involved in this transaction.</source>
-        <translation>Si està implicada o no una adreça només de lectura en la transacció.</translation>
-    </message>
-    <message>
-        <source>User-defined intent/purpose of the transaction.</source>
-        <translation>Intenció/propòsit de la transacció definida per l'usuari.</translation>
-    </message>
-    <message>
-        <source>Amount removed from or added to balance.</source>
-        <translation>Import extret o afegit del balanç.</translation>
-    </message>
 </context>
 <context>
     <name>TransactionView</name>

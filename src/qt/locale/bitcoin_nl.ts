@@ -2589,30 +2589,6 @@
         <source>(no label)</source>
         <translation>(geen label)</translation>
     </message>
-    <message>
-        <source>Transaction status. Hover over this field to show number of confirmations.</source>
-        <translation>Transactiestatus. Houd de cursor boven dit veld om het aantal bevestigingen te laten zien.</translation>
-    </message>
-    <message>
-        <source>Date and time that the transaction was received.</source>
-        <translation>Datum en tijd waarop deze transactie is ontvangen.</translation>
-    </message>
-    <message>
-        <source>Type of transaction.</source>
-        <translation>Type transactie.</translation>
-    </message>
-    <message>
-        <source>Whether or not a watch-only address is involved in this transaction.</source>
-        <translation>Of er een alleen-bekijken-adres is betrokken bij deze transactie.</translation>
-    </message>
-    <message>
-        <source>User-defined intent/purpose of the transaction.</source>
-        <translation>Door gebruiker gedefinieerde intentie/doel van de transactie.</translation>
-    </message>
-    <message>
-        <source>Amount removed from or added to balance.</source>
-        <translation>Bedrag verwijderd van of toegevoegd aan saldo.</translation>
-    </message>
 </context>
 <context>
     <name>TransactionView</name>

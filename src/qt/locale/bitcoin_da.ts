@@ -2593,30 +2593,6 @@
         <source>(no label)</source>
         <translation>(ingen mærkat)</translation>
     </message>
-    <message>
-        <source>Transaction status. Hover over this field to show number of confirmations.</source>
-        <translation>Transaktionsstatus. Hold musen over dette felt for at vise antallet af bekræftelser.</translation>
-    </message>
-    <message>
-        <source>Date and time that the transaction was received.</source>
-        <translation>Dato og klokkeslæt for modtagelse af transaktionen.</translation>
-    </message>
-    <message>
-        <source>Type of transaction.</source>
-        <translation>Transaktionstype.</translation>
-    </message>
-    <message>
-        <source>Whether or not a watch-only address is involved in this transaction.</source>
-        <translation>Afgør hvorvidt en kigge-adresse er involveret i denne transaktion.</translation>
-    </message>
-    <message>
-        <source>User-defined intent/purpose of the transaction.</source>
-        <translation>Brugerdefineret hensigt/formål med transaktionen.</translation>
-    </message>
-    <message>
-        <source>Amount removed from or added to balance.</source>
-        <translation>Beløb trukket fra eller tilføjet balance.</translation>
-    </message>
 </context>
 <context>
     <name>TransactionView</name>

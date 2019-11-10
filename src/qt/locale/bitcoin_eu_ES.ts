@@ -663,22 +663,6 @@
         <source>(no label)</source>
         <translation>(etiketarik ez)</translation>
     </message>
-    <message>
-        <source>Transaction status. Hover over this field to show number of confirmations.</source>
-        <translation>Transakzioaren egoera. Pasatu sagua gainetik konfirmazio kopurua ikusteko.</translation>
-    </message>
-    <message>
-        <source>Date and time that the transaction was received.</source>
-        <translation>Transakzioa jasotako data eta ordua.</translation>
-    </message>
-    <message>
-        <source>Type of transaction.</source>
-        <translation>Transakzio mota.</translation>
-    </message>
-    <message>
-        <source>Amount removed from or added to balance.</source>
-        <translation>Saldoan kendu edo gehitutako kopurua.</translation>
-    </message>
 </context>
 <context>
     <name>TransactionView</name>

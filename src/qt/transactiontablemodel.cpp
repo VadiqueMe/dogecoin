@@ -658,37 +658,20 @@ QVariant TransactionTableModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-QVariant TransactionTableModel::headerData(int section, Qt::Orientation orientation, int role) const
+QVariant TransactionTableModel::headerData( int section, Qt::Orientation orientation, int role ) const
 {
-    if(orientation == Qt::Horizontal)
+    if ( orientation == Qt::Horizontal )
     {
-        if(role == Qt::DisplayRole)
+        if ( role == Qt::DisplayRole )
         {
-            return columns[section];
+            return columns[ section ] ;
         }
-        else if (role == Qt::TextAlignmentRole)
+        else if ( role == Qt::TextAlignmentRole )
         {
-            return column_alignments[section];
-        } else if (role == Qt::ToolTipRole)
-        {
-            switch(section)
-            {
-            case Status:
-                return tr("Transaction status. Hover over this field to show number of confirmations.");
-            case Date:
-                return tr("Date and time that the transaction was received.");
-            case Type:
-                return tr("Type of transaction.");
-            case Watchonly:
-                return tr("Whether or not a watch-only address is involved in this transaction.");
-            case ToAddress:
-                return tr("User-defined intent/purpose of the transaction.");
-            case Amount:
-                return tr("Amount removed from or added to balance.");
-            }
+            return column_alignments[ section ] ;
         }
     }
-    return QVariant();
+    return QVariant() ;
 }
 
 QModelIndex TransactionTableModel::index(int row, int column, const QModelIndex &parent) const

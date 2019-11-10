@@ -2563,30 +2563,6 @@
         <source>(no label)</source>
         <translation>(无标签)</translation>
     </message>
-    <message>
-        <source>Transaction status. Hover over this field to show number of confirmations.</source>
-        <translation>交易状态。 鼠标移到此区域可显示确认项数量。</translation>
-    </message>
-    <message>
-        <source>Date and time that the transaction was received.</source>
-        <translation>接收到交易的时间</translation>
-    </message>
-    <message>
-        <source>Type of transaction.</source>
-        <translation>交易类别。</translation>
-    </message>
-    <message>
-        <source>Whether or not a watch-only address is involved in this transaction.</source>
-        <translation>该交易中是否涉及  观察地址(watch-only address)。</translation>
-    </message>
-    <message>
-        <source>User-defined intent/purpose of the transaction.</source>
-        <translation>用户定义的该交易的意图/目的。</translation>
-    </message>
-    <message>
-        <source>Amount removed from or added to balance.</source>
-        <translation>从余额添加或移除的金额。</translation>
-    </message>
 </context>
 <context>
     <name>TransactionView</name>

@@ -2589,30 +2589,6 @@
         <source>(no label)</source>
         <translation>(無標記)</translation>
     </message>
-    <message>
-        <source>Transaction status. Hover over this field to show number of confirmations.</source>
-        <translation>交易狀態。把游標停在欄位上會顯示確認次數。</translation>
-    </message>
-    <message>
-        <source>Date and time that the transaction was received.</source>
-        <translation>收到交易的日期和時間。</translation>
-    </message>
-    <message>
-        <source>Type of transaction.</source>
-        <translation>交易的種類。</translation>
-    </message>
-    <message>
-        <source>Whether or not a watch-only address is involved in this transaction.</source>
-        <translation>不論如何有一個只能觀看的地只有參與這次的交易</translation>
-    </message>
-    <message>
-        <source>User-defined intent/purpose of the transaction.</source>
-        <translation>使用者定義的交易動機或理由。</translation>
-    </message>
-    <message>
-        <source>Amount removed from or added to balance.</source>
-        <translation>要減掉或加進餘額的金額。</translation>
-    </message>
 </context>
 <context>
     <name>TransactionView</name>

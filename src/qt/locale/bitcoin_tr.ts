@@ -2589,30 +2589,6 @@
         <source>(no label)</source>
         <translation>(etiket yok)</translation>
     </message>
-    <message>
-        <source>Transaction status. Hover over this field to show number of confirmations.</source>
-        <translation>İşlem durumu. Doğrulama sayısını görüntülemek için fare imlecini bu alanın üzerinde tutunuz.</translation>
-    </message>
-    <message>
-        <source>Date and time that the transaction was received.</source>
-        <translation>İşlemin alındığı tarih ve zaman.</translation>
-    </message>
-    <message>
-        <source>Type of transaction.</source>
-        <translation>İşlemin türü.</translation>
-    </message>
-    <message>
-        <source>Whether or not a watch-only address is involved in this transaction.</source>
-        <translation>Bu işleme sadece-izlenen bir adresin dahil edilip, edilmediği.</translation>
-    </message>
-    <message>
-        <source>User-defined intent/purpose of the transaction.</source>
-        <translation>İşlemin kullanıcı tanımlı amacı.</translation>
-    </message>
-    <message>
-        <source>Amount removed from or added to balance.</source>
-        <translation>Bakiyeden kaldırılan ya da bakiyeye eklenen tutar.</translation>
-    </message>
 </context>
 <context>
     <name>TransactionView</name>

@@ -1037,22 +1037,6 @@
         <source>(no label)</source>
         <translation>непазначаны</translation>
     </message>
-    <message>
-        <source>Transaction status. Hover over this field to show number of confirmations.</source>
-        <translation>Статус транзакцыі. Навядзіце курсар на гэтае поле, каб паказаць колькасць пацверджанняў.</translation>
-    </message>
-    <message>
-        <source>Date and time that the transaction was received.</source>
-        <translation>Дата і час, калі транзакцыя была прынята.</translation>
-    </message>
-    <message>
-        <source>Type of transaction.</source>
-        <translation>Тып транзакцыі</translation>
-    </message>
-    <message>
-        <source>Amount removed from or added to balance.</source>
-        <translation>Колькасць аднятая ці даданая да балансу.</translation>
-    </message>
 </context>
 <context>
     <name>TransactionView</name>

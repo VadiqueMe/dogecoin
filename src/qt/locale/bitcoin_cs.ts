@@ -2593,30 +2593,6 @@
         <source>(no label)</source>
         <translation>(bez označení)</translation>
     </message>
-    <message>
-        <source>Transaction status. Hover over this field to show number of confirmations.</source>
-        <translation>Stav transakce. Najetím myši na toto políčko si zobrazíš počet potvrzení.</translation>
-    </message>
-    <message>
-        <source>Date and time that the transaction was received.</source>
-        <translation>Datum a čas přijetí transakce.</translation>
-    </message>
-    <message>
-        <source>Type of transaction.</source>
-        <translation>Druh transakce.</translation>
-    </message>
-    <message>
-        <source>Whether or not a watch-only address is involved in this transaction.</source>
-        <translation>Zda tato transakce zahrnuje i některou sledovanou adresu.</translation>
-    </message>
-    <message>
-        <source>User-defined intent/purpose of the transaction.</source>
-        <translation>Uživatelsky určený účel transakce.</translation>
-    </message>
-    <message>
-        <source>Amount removed from or added to balance.</source>
-        <translation>Částka odečtená z nebo přičtená k účtu.</translation>
-    </message>
 </context>
 <context>
     <name>TransactionView</name>

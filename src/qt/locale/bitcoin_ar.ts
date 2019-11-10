@@ -1663,22 +1663,6 @@
         <source>(no label)</source>
         <translation>(لا وصف)</translation>
     </message>
-    <message>
-        <source>Transaction status. Hover over this field to show number of confirmations.</source>
-        <translation>حالة المعاملة. تحوم حول هذا الحقل لعرض عدد  التأكيدات.</translation>
-    </message>
-    <message>
-        <source>Date and time that the transaction was received.</source>
-        <translation>التاريخ والوقت الذي تم فيه تلقي المعاملة.</translation>
-    </message>
-    <message>
-        <source>Type of transaction.</source>
-        <translation>نوع المعاملات</translation>
-    </message>
-    <message>
-        <source>Amount removed from or added to balance.</source>
-        <translation>المبلغ الذي أزيل أو أضيف الى الرصيد</translation>
-    </message>
 </context>
 <context>
     <name>TransactionView</name>

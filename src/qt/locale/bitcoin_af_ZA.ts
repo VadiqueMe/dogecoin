@@ -626,14 +626,6 @@
         <source>(no label)</source>
         <translation>(geen etiket)</translation>
     </message>
-    <message>
-        <source>Date and time that the transaction was received.</source>
-        <translation>Datum en tyd wat die transaksie ontvang was.</translation>
-    </message>
-    <message>
-        <source>Type of transaction.</source>
-        <translation>Tipe transaksie.</translation>
-    </message>
     </context>
 <context>
     <name>TransactionView</name>

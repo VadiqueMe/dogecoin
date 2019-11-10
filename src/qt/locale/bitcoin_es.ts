@@ -2593,30 +2593,6 @@
         <source>(no label)</source>
         <translation>(sin etiqueta)</translation>
     </message>
-    <message>
-        <source>Transaction status. Hover over this field to show number of confirmations.</source>
-        <translation>Estado de transacción. Pasa el ratón sobre este campo para ver el número de confirmaciones.</translation>
-    </message>
-    <message>
-        <source>Date and time that the transaction was received.</source>
-        <translation>Fecha y hora en que se recibió la transacción.</translation>
-    </message>
-    <message>
-        <source>Type of transaction.</source>
-        <translation>Tipo de transacción.</translation>
-    </message>
-    <message>
-        <source>Whether or not a watch-only address is involved in this transaction.</source>
-        <translation>Si una dirección watch-only está involucrada en esta transacción o no.</translation>
-    </message>
-    <message>
-        <source>User-defined intent/purpose of the transaction.</source>
-        <translation>Descripción de la transacción definido por el usuario.</translation>
-    </message>
-    <message>
-        <source>Amount removed from or added to balance.</source>
-        <translation>Cantidad retirada o añadida al saldo.</translation>
-    </message>
 </context>
 <context>
     <name>TransactionView</name>

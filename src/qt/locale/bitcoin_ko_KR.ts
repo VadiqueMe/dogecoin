@@ -2593,30 +2593,6 @@
         <source>(no label)</source>
         <translation>(라벨 없음)</translation>
     </message>
-    <message>
-        <source>Transaction status. Hover over this field to show number of confirmations.</source>
-        <translation>거래상황. 마우스를 올리면 검증횟수가 표시됩니다.</translation>
-    </message>
-    <message>
-        <source>Date and time that the transaction was received.</source>
-        <translation>거래가 이루어진 날짜와 시각.</translation>
-    </message>
-    <message>
-        <source>Type of transaction.</source>
-        <translation>거래의 종류.</translation>
-    </message>
-    <message>
-        <source>Whether or not a watch-only address is involved in this transaction.</source>
-        <translation>조회전용 주소가 이 거래에 참여하는지 여부입니다.</translation>
-    </message>
-    <message>
-        <source>User-defined intent/purpose of the transaction.</source>
-        <translation>거래에 대한 사용자 정의 intent/purpose</translation>
-    </message>
-    <message>
-        <source>Amount removed from or added to balance.</source>
-        <translation>변경된 잔고.</translation>
-    </message>
 </context>
 <context>
     <name>TransactionView</name>

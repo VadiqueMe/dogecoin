@@ -2017,22 +2017,6 @@
         <source>(no label)</source>
         <translation>(без име)</translation>
     </message>
-    <message>
-        <source>Transaction status. Hover over this field to show number of confirmations.</source>
-        <translation>Състояние на транзакцията. Задръжте върху това поле за брой потвърждения.</translation>
-    </message>
-    <message>
-        <source>Date and time that the transaction was received.</source>
-        <translation>Дата и час на получаване на транзакцията.</translation>
-    </message>
-    <message>
-        <source>Type of transaction.</source>
-        <translation>Вид транзакция.</translation>
-    </message>
-    <message>
-        <source>Amount removed from or added to balance.</source>
-        <translation>Сума извадена или добавена към баланса.</translation>
-    </message>
 </context>
 <context>
     <name>TransactionView</name>

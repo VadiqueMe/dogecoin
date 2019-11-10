@@ -2358,30 +2358,6 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
         <source>(no label)</source>
         <translation>(nessuna etichetta)</translation>
     </message>
-    <message>
-        <source>Transaction status. Hover over this field to show number of confirmations.</source>
-        <translation>Stato della transazione. Passare con il mouse su questo campo per visualizzare il numero di conferme.</translation>
-    </message>
-    <message>
-        <source>Date and time that the transaction was received.</source>
-        <translation>Data e ora in cui la transazione è stata ricevuta.</translation>
-    </message>
-    <message>
-        <source>Type of transaction.</source>
-        <translation>Tipo di transazione.</translation>
-    </message>
-    <message>
-        <source>Whether or not a watch-only address is involved in this transaction.</source>
-        <translation>Indica se un indirizzo di sola lettura sia o meno coinvolto in questa transazione.</translation>
-    </message>
-    <message>
-        <source>User-defined intent/purpose of the transaction.</source>
-        <translation>Intento/scopo della transazione definito dall'utente.</translation>
-    </message>
-    <message>
-        <source>Amount removed from or added to balance.</source>
-        <translation>Importo rimosso o aggiunto al saldo.</translation>
-    </message>
 </context>
 <context>
     <name>TransactionView</name>
