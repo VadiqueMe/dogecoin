@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #ifdef HAVE_CONFIG_H
 #include "config/bitcoin-config.h"
@@ -408,28 +408,28 @@ bool static ConnectSocketDirectly(const CService &addrConnect, SOCKET& hSocketRe
         return false;
     }
 
-    SOCKET hSocket = socket(((struct sockaddr*)&sockaddr)->sa_family, SOCK_STREAM, IPPROTO_TCP);
-    if (hSocket == INVALID_SOCKET)
-        return false;
+    SOCKET hSocket = socket( (( struct sockaddr* )&sockaddr)->sa_family, SOCK_STREAM, IPPROTO_TCP ) ;
+    if ( hSocket == INVALID_SOCKET )
+        return false ;
 
     int set = 1;
 #ifdef SO_NOSIGPIPE
     // Different way of disabling SIGPIPE on BSD
-    setsockopt(hSocket, SOL_SOCKET, SO_NOSIGPIPE, (void*)&set, sizeof(int));
+    setsockopt( hSocket, SOL_SOCKET, SO_NOSIGPIPE, (void*)&set, sizeof(int) ) ;
 #endif
 
     //Disable Nagle's algorithm
 #ifdef WIN32
     setsockopt(hSocket, IPPROTO_TCP, TCP_NODELAY, (const char*)&set, sizeof(int));
 #else
-    setsockopt(hSocket, IPPROTO_TCP, TCP_NODELAY, (void*)&set, sizeof(int));
+    setsockopt( hSocket, IPPROTO_TCP, TCP_NODELAY, (void*)&set, sizeof(int) ) ;
 #endif
 
     // Set to non-blocking
     if (!SetSocketNonBlocking(hSocket, true))
         return error("ConnectSocketDirectly: Setting socket to non-blocking failed, error %s\n", NetworkErrorString(WSAGetLastError()));
 
-    if (connect(hSocket, (struct sockaddr*)&sockaddr, len) == SOCKET_ERROR)
+    if ( connect( hSocket, (struct sockaddr*)&sockaddr, len ) == SOCKET_ERROR )
     {
         int nErr = WSAGetLastError();
         // WSAEINVAL is here because some legacy version of winsock uses it
@@ -439,35 +439,36 @@ bool static ConnectSocketDirectly(const CService &addrConnect, SOCKET& hSocketRe
             fd_set fdset;
             FD_ZERO(&fdset);
             FD_SET(hSocket, &fdset);
-            int nRet = select(hSocket + 1, NULL, &fdset, NULL, &timeout);
-            if (nRet == 0)
+            int nRet = select( hSocket + 1, NULL, &fdset, NULL, &timeout ) ;
+            if ( nRet == 0 )
             {
-                LogPrint("net", "connection to %s timeout\n", addrConnect.ToString());
-                CloseSocket(hSocket);
-                return false;
+                LogPrintf( "%s to %s timeout\n", __func__, addrConnect.ToString() );
+                CloseSocket( hSocket ) ;
+                return false ;
             }
-            if (nRet == SOCKET_ERROR)
+            if ( nRet == SOCKET_ERROR )
             {
-                LogPrintf("select() for %s failed: %s\n", addrConnect.ToString(), NetworkErrorString(WSAGetLastError()));
-                CloseSocket(hSocket);
-                return false;
+                LogPrintf( "select() for %s failed: %s\n", addrConnect.ToString(), NetworkErrorString( WSAGetLastError() ) ) ;
+                CloseSocket( hSocket ) ;
+                return false ;
             }
+
             socklen_t nRetSize = sizeof(nRet);
 #ifdef WIN32
             if (getsockopt(hSocket, SOL_SOCKET, SO_ERROR, (char*)(&nRet), &nRetSize) == SOCKET_ERROR)
 #else
-            if (getsockopt(hSocket, SOL_SOCKET, SO_ERROR, &nRet, &nRetSize) == SOCKET_ERROR)
+            if ( getsockopt( hSocket, SOL_SOCKET, SO_ERROR, &nRet, &nRetSize ) == SOCKET_ERROR )
 #endif
             {
-                LogPrintf("getsockopt() for %s failed: %s\n", addrConnect.ToString(), NetworkErrorString(WSAGetLastError()));
-                CloseSocket(hSocket);
-                return false;
+                LogPrintf( "getsockopt for %s failed: %s\n", addrConnect.ToString(), NetworkErrorString( WSAGetLastError() ) ) ;
+                CloseSocket( hSocket ) ;
+                return false ;
             }
-            if (nRet != 0)
+            if ( nRet != 0 )
             {
-                LogPrintf("connect() to %s failed after select(): %s\n", addrConnect.ToString(), NetworkErrorString(nRet));
-                CloseSocket(hSocket);
-                return false;
+                LogPrintf( "connect to %s failed after select(): %s\n", addrConnect.ToString(), NetworkErrorString( nRet ) ) ;
+                CloseSocket( hSocket ) ;
+                return false ;
             }
         }
 #ifdef WIN32
@@ -476,14 +477,15 @@ bool static ConnectSocketDirectly(const CService &addrConnect, SOCKET& hSocketRe
         else
 #endif
         {
-            LogPrintf("connect() to %s failed: %s\n", addrConnect.ToString(), NetworkErrorString(WSAGetLastError()));
-            CloseSocket(hSocket);
-            return false;
+            LogPrintf( "connect to %s failed: %s\n", addrConnect.ToString(), NetworkErrorString( WSAGetLastError() ) ) ;
+            CloseSocket( hSocket ) ;
+            return false ;
         }
     }
 
-    hSocketRet = hSocket;
-    return true;
+    LogPrintf( "%s to %s ok\n", __func__, addrConnect.ToString() );
+    hSocketRet = hSocket ;
+    return true ;
 }
 
 bool SetProxy(enum Network net, const proxyType &addrProxy) {
@@ -653,13 +655,12 @@ std::string NetworkErrorString(int err)
     }
 }
 #else
-std::string NetworkErrorString(int err)
+std::string NetworkErrorString( int err )
 {
     char buf[256];
     const char *s = buf;
     buf[0] = 0;
-    /* Too bad there are two incompatible implementations of the
-     * thread-safe strerror. */
+    /* there are two incompatible implementations of the thread-safe strerror */
 #ifdef STRERROR_R_CHAR_P /* GNU variant can return a pointer outside the passed buffer */
     s = strerror_r(err, buf, sizeof(buf));
 #else /* POSIX variant always returns message in buffer */

@@ -242,7 +242,7 @@ void UpdatePreferredDownload(CNode* node, CNodeState* state)
     nPreferredDownload += state->fPreferredDownload;
 }
 
-void PushNodeVersion(CNode *pnode, CConnman& connman, int64_t nTime)
+void PushNodeVersion( CNode * pnode, CConnman & connman, int64_t nTime )
 {
     ServiceFlags nLocalNodeServices = pnode->GetLocalServices();
     uint64_t nonce = pnode->GetLocalNonce();
@@ -253,13 +253,17 @@ void PushNodeVersion(CNode *pnode, CConnman& connman, int64_t nTime)
     CAddress addrYou = (addr.IsRoutable() && !IsProxy(addr) ? addr : CAddress(CService(), addr.nServices));
     CAddress addrMe = CAddress(CService(), nLocalNodeServices);
 
-    connman.PushMessage(pnode, CNetMsgMaker(INIT_PROTO_VERSION).Make(NetMsgType::VERSION, PROTOCOL_VERSION, (uint64_t)nLocalNodeServices, nTime, addrYou, addrMe,
-            nonce, strSubVersion, nNodeStartingHeight, ::fRelayTxes));
+    connman.PushMessage( pnode, CNetMsgMaker( INIT_PROTO_VERSION ).Make(
+        NetMsgType::VERSION, PROTOCOL_VERSION, (uint64_t)nLocalNodeServices, nTime,
+        addrYou, addrMe, nonce, strSubVersion, nNodeStartingHeight, ::fRelayTxes
+    ) ) ;
 
-    if (fLogIPs)
-        LogPrint("net", "send version message: version %d, blocks=%d, us=%s, them=%s, peer=%d\n", PROTOCOL_VERSION, nNodeStartingHeight, addrMe.ToString(), addrYou.ToString(), nodeid);
-    else
-        LogPrint("net", "send version message: version %d, blocks=%d, us=%s, peer=%d\n", PROTOCOL_VERSION, nNodeStartingHeight, addrMe.ToString(), nodeid);
+    std::string remoteAddr ;
+    if ( fLogIPs )
+        remoteAddr = "peeraddr=" + addrYou.ToString() + ", " ;
+
+    LogPrintf( "send version message: %s version %d, blocks=%d, me=%s, %speer=%d\n",
+               strSubVersion, PROTOCOL_VERSION, nNodeStartingHeight, addrMe.ToString(), remoteAddr, nodeid );
 }
 
 void InitializeNode(CNode *pnode, CConnman& connman) {
@@ -1357,7 +1361,7 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
         if ( fLogIPs )
             remoteAddr = ", peeraddr=" + pfrom->addr.ToString() ;
 
-        LogPrintf( "receive version message: %s: version %d, blocks=%d, me=%s, peer=%d%s\n",
+        LogPrintf( "receive version message: %s version %d, blocks=%d, me=%s, peer=%d%s\n",
                    cleanSubVer, pfrom->nVersion,
                    pfrom->nStartingHeight, addrMe.ToString(), pfrom->id,
                    remoteAddr ) ;
@@ -1368,9 +1372,9 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
 
         // Relay alerts
         {
-            LOCK(cs_mapAlerts);
-            BOOST_FOREACH(PAIRTYPE(const uint256, CAlert)& item, mapAlerts)
-                pfrom->PushAlert(item.second);
+            LOCK( cs_mapAlerts ) ;
+            for ( PAIRTYPE( const uint256, CAlert ) & item : mapAlerts )
+                 pfrom->PushAlert( item.second ) ;
         }
 
         // Feeler connections exist only to verify if address is online

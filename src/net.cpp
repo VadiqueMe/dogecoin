@@ -2710,10 +2710,10 @@ CNode::CNode(NodeId idIn, ServiceFlags nLocalServicesIn, int nMyStartingHeightIn
         mapRecvBytesPerMsgCmd[msg] = 0;
     mapRecvBytesPerMsgCmd[NET_MESSAGE_COMMAND_OTHER] = 0;
 
-    if (fLogIPs)
-        LogPrint("net", "Added connection to %s peer=%d\n", addrName, id);
+    if ( fLogIPs )
+        LogPrintf( "added connection to %s, peer=%d\n", addrName, id ) ;
     else
-        LogPrint("net", "Added connection peer=%d\n", id);
+        LogPrintf( "added connection, peer=%d\n", id ) ;
 }
 
 CNode::~CNode()
