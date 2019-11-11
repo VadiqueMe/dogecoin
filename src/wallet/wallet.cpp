@@ -2041,22 +2041,22 @@ void CWallet::AvailableCoins(vector<COutput>& vCoins, bool fOnlyConfirmed, const
                 continue;
 
             // We should not consider coins from transactions that are replacing
-            // other transactions.
+            // other transactions
             //
-            // Example: There is a transaction A which is replaced by bumpfee
-            // transaction B. In this case, we want to prevent creation of
-            // a transaction B' which spends an output of B.
+            // Example: There is a transaction A which is replaced by transaction B.
+            // In this case, we want to prevent creation of a transaction B' which
+            // spends an output of B
             //
-            // Reason: If transaction A were initially confirmed, transactions B
-            // and B' would no longer be valid, so the user would have to create
-            // a new transaction C to replace B'. However, in the case of a
-            // one-block reorg, transactions B' and C might BOTH be accepted,
+            // Reason: If transaction A was initially confirmed, transactions B
+            // and B' would no longer be valid, and the user would have to create
+            // a new transaction C to replace B'. However, in the case
+            // of a one-block reorg, transactions B' and C may BOTH be accepted,
             // when the user only wanted one of them. Specifically, there could
             // be a 1-block reorg away from the chain where transactions A and C
             // were accepted to another chain where B, B', and C were all
-            // accepted.
-            if (nDepth == 0 && fOnlyConfirmed && pcoin->mapValue.count("replaces_txid")) {
-                continue;
+            // accepted
+            if ( nDepth == 0 && fOnlyConfirmed && pcoin->mapValue.count( "replaces_txid" ) ) {
+                continue ;
             }
 
             // Similarly, we should not consider coins from transactions that

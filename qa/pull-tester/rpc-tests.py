@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Copyright (c) 2014-2016 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
-# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+# file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 """
 Run Regression Test Suite
@@ -153,9 +153,6 @@ testScripts = [
     'signmessages.py',
     # 'nulldummy.py',
     'import-rescan.py',
-    # While fee bumping should work in Doge, these tests depend on free transactions, which we don't support.
-    # Disable until we can do a full rewrite of the tests (possibly upstream), or revise fee schedule, or something
-    # 'bumpfee.py',
     'rpcnamedargs.py',
     'listsinceblock.py',
     'p2p-leaktests.py',
