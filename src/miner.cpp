@@ -659,14 +659,6 @@ void IncrementExtraNonce( CBlock * pblock, const CBlockIndex * pindexPrev, uint3
 bool static ScanScryptHash( CPureBlockHeader blockHeader, uint32_t & nNonce, uint256 & blockHash,
                             const arith_uint256 & solutionHash, uint32_t & hashesScanned, arith_uint256 & smallestHash )
 {
-    uint256 uint256solution = ArithToUint256( solutionHash ) ;
-    size_t firstLEZeroByte = 32 ;
-    for ( ; firstLEZeroByte > 1 ; -- firstLEZeroByte )
-        if ( ((uint8_t*)&uint256solution)[ firstLEZeroByte - 1 ] != 0 )
-            break ;
-
-    if ( firstLEZeroByte == 32 ) return true ; // nothing to look for
-
     while ( true )
     {
         blockHeader.nNonce = nNonce ;
@@ -679,22 +671,13 @@ bool static ScanScryptHash( CPureBlockHeader blockHeader, uint32_t & nNonce, uin
         if ( arithHash < smallestHash )
             smallestHash = arithHash ;
 
-        // see if hash has at least as many zero bytes as the solution has
-        bool enoughZeroBytes = true ;
-        for ( size_t j = firstLEZeroByte ; j < 32 ; ++ j )
-            if ( ((uint8_t*)&blockHash)[ j ] != 0 ) {  enoughZeroBytes = false ; break ;  }
-
-        if ( enoughZeroBytes ) {
-            LogPrintf( "ScanScryptHash with nonce 0x%x found %s, solution is %s\n", nNonce, blockHash.GetHex(), solutionHash.GetHex() ) ;
-
-            if ( arithHash <= solutionHash )
-            {
-                // found a solution
-                return true ;
-            }
+        if ( arithHash <= solutionHash )
+        {
+            // found a solution
+            return true ;
         }
 
-        // Not found after trying for a while
+        // not found after trying for a while
         if ( ( nNonce & 0xfff ) == 0 )
             return false ;
     }
