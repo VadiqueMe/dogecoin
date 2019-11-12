@@ -151,7 +151,6 @@ shows where each field has been moved to:
 `"timeoffset"`	   | `getnetworkinfo()["timeoffset"]`
 `"connections"`	   | `getnetworkinfo()["connections"]`
 `"proxy"`	   | `getnetworkinfo()["networks"][0]["proxy"]`
-`"difficulty"`	   | `getblockchaininfo()["difficulty"]`
 `"testnet"`	   | `getblockchaininfo()["chain"] == "test"`
 `"keypoololdest"`  | `getwalletinfo()["keypoololdest"]`
 `"keypoolsize"`	   | `getwalletinfo()["keypoolsize"]`

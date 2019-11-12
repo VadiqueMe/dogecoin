@@ -307,7 +307,6 @@ UniValue getmininginfo( const JSONRPCRequest& request )
             "  \"currentblocksize\": nnn,   (numeric) The last block size\n"
             "  \"currentblockweight\": nnn, (numeric) The last block weight\n"
             "  \"currentblocktx\": nnn,     (numeric) The last block transaction\n"
-            "  \"difficulty\": xxx.xxxxx    (numeric) The current difficulty\n"
             "  \"errors\": \"...\"            (string) Current errors\n"
             "  \"networkhashps\": nnn,      (numeric) The network hashes per second\n"
             "  \"generate\": true|false     (boolean) If the generation is on or off (see getgenerate or setgenerate)\n"
@@ -327,7 +326,6 @@ UniValue getmininginfo( const JSONRPCRequest& request )
     obj.push_back(Pair("currentblocksize", (uint64_t)nLastBlockSize));
     obj.push_back(Pair("currentblockweight", (uint64_t)nLastBlockWeight));
     obj.push_back(Pair("currentblocktx",   (uint64_t)nLastBlockTx));
-    obj.push_back(Pair("difficulty",       (double)GetDifficulty()));
     obj.push_back(Pair("errors",           GetWarnings("statusbar")));
     obj.push_back(Pair("networkhashps",    getnetworkhashps( request ))) ;
     obj.push_back(Pair("generate",         getgenerate( request ))) ;
