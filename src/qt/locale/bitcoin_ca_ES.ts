@@ -795,8 +795,8 @@
         <translation>Us donem la benvinguda</translation>
     </message>
     <message>
-        <source>Welcome to %1.</source>
-        <translation>Us donem la benvinguda a %1.</translation>
+        <source>Welcome to %1</source>
+        <translation>Us donem la benvinguda a %1</translation>
     </message>
     <message>
         <source>As this is the first time the program is launched, you can choose where %1 will store its data.</source>
@@ -2549,16 +2549,16 @@
         <translation>L'exportació ha fallat</translation>
     </message>
     <message>
-        <source>There was an error trying to save the transaction history to %1.</source>
-        <translation>S'ha produït un error en provar de desar l'historial de transacció a %1.</translation>
+        <source>There was an error trying to save the transaction history to %1</source>
+        <translation>S'ha produït un error en provar de desar l'historial de transacció a %1</translation>
     </message>
     <message>
         <source>Exporting Successful</source>
         <translation>Exportació amb èxit</translation>
     </message>
     <message>
-        <source>The transaction history was successfully saved to %1.</source>
-        <translation>L'historial de transaccions s'ha desat correctament a %1.</translation>
+        <source>The transaction history was successfully saved to %1</source>
+        <translation>L'historial de transaccions s'ha desat correctament a %1</translation>
     </message>
     <message>
         <source>Range:</source>
@@ -2613,16 +2613,16 @@
         <translation>Ha fallat la còpia de seguretat</translation>
     </message>
     <message>
-        <source>There was an error trying to save the wallet data to %1.</source>
-        <translation>S'ha produït un error en provar de desar les dades del moneder a %1.</translation>
+        <source>There was an error trying to save the wallet data to %1</source>
+        <translation>S'ha produït un error en provar de desar les dades del moneder a %1</translation>
     </message>
     <message>
         <source>Backup Successful</source>
         <translation>La còpia de seguretat s'ha realitzat correctament</translation>
     </message>
     <message>
-        <source>The wallet data was successfully saved to %1.</source>
-        <translation>S'han desat les dades del moneder correctament a %1.</translation>
+        <source>The wallet data was successfully saved to %1</source>
+        <translation>S'han desat les dades del moneder correctament a %1</translation>
     </message>
 </context>
 <context>

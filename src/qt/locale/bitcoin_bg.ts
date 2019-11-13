@@ -755,8 +755,8 @@
         <translation>Добре дошли</translation>
     </message>
     <message>
-        <source>Welcome to %1.</source>
-        <translation>Добре дошли в %1.</translation>
+        <source>Welcome to %1</source>
+        <translation>Добре дошли в %1</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -2145,8 +2145,8 @@
         <translation>Изнасянето е успешна</translation>
     </message>
     <message>
-        <source>The transaction history was successfully saved to %1.</source>
-        <translation>Историята с транзакциите беше успешно запазена в %1.</translation>
+        <source>The transaction history was successfully saved to %1</source>
+        <translation>Историята с транзакциите беше успешно запазена в %1</translation>
     </message>
     <message>
         <source>Range:</source>
@@ -2197,16 +2197,16 @@
         <translation>Неуспешно запазване на портфейла</translation>
     </message>
     <message>
-        <source>There was an error trying to save the wallet data to %1.</source>
-        <translation>Възникна грешка при запазването на информацията за портфейла в %1.</translation>
+        <source>There was an error trying to save the wallet data to %1</source>
+        <translation>Възникна грешка при запазването на информацията за портфейла в %1</translation>
     </message>
     <message>
         <source>Backup Successful</source>
         <translation>Успешно запазване на портфейла</translation>
     </message>
     <message>
-        <source>The wallet data was successfully saved to %1.</source>
-        <translation>Информацията за портфейла беше успешно запазена в %1.</translation>
+        <source>The wallet data was successfully saved to %1</source>
+        <translation>Информацията за портфейла беше успешно запазена в %1</translation>
     </message>
 </context>
 <context>

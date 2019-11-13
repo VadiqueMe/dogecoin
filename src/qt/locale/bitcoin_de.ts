@@ -803,8 +803,8 @@
         <translation>Willkommen</translation>
     </message>
     <message>
-        <source>Welcome to %1.</source>
-        <translation>Willkommen zu %1.</translation>
+        <source>Welcome to %1</source>
+        <translation>Willkommen zu %1</translation>
     </message>
     <message>
         <source>As this is the first time the program is launched, you can choose where %1 will store its data.</source>
@@ -2725,16 +2725,16 @@
         <translation>Exportieren fehlgeschlagen</translation>
     </message>
     <message>
-        <source>There was an error trying to save the transaction history to %1.</source>
-        <translation>Beim Speichern des Transaktionsverlaufs nach %1 ist ein Fehler aufgetreten.</translation>
+        <source>There was an error trying to save the transaction history to %1</source>
+        <translation>Beim Speichern des Transaktionsverlaufs nach %1 ist ein Fehler aufgetreten</translation>
     </message>
     <message>
         <source>Exporting Successful</source>
         <translation>Exportieren erfolgreich</translation>
     </message>
     <message>
-        <source>The transaction history was successfully saved to %1.</source>
-        <translation>Speichern des Transaktionsverlaufs nach %1 war erfolgreich.</translation>
+        <source>The transaction history was successfully saved to %1</source>
+        <translation>Speichern des Transaktionsverlaufs nach %1 war erfolgreich</translation>
     </message>
     <message>
         <source>Range:</source>
@@ -2789,16 +2789,16 @@
         <translation>Sicherung fehlgeschlagen</translation>
     </message>
     <message>
-        <source>There was an error trying to save the wallet data to %1.</source>
-        <translation>Beim Speichern der Wallet-Daten nach %1 ist ein Fehler aufgetreten.</translation>
+        <source>There was an error trying to save the wallet data to %1</source>
+        <translation>Beim Speichern der Wallet-Daten nach %1 ist ein Fehler aufgetreten</translation>
     </message>
     <message>
         <source>Backup Successful</source>
         <translation>Sicherung erfolgreich</translation>
     </message>
     <message>
-        <source>The wallet data was successfully saved to %1.</source>
-        <translation>Speichern der Wallet-Daten nach %1 war erfolgreich.</translation>
+        <source>The wallet data was successfully saved to %1</source>
+        <translation>Speichern der Wallet-Daten nach %1 war erfolgreich</translation>
     </message>
 </context>
 <context>

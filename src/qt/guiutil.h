@@ -1,9 +1,10 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_QT_GUIUTIL_H
-#define BITCOIN_QT_GUIUTIL_H
+#ifndef DOGECOIN_QT_GUIUTIL_H
+#define DOGECOIN_QT_GUIUTIL_H
 
 #include "amount.h"
 
@@ -30,7 +31,7 @@ class QUrl;
 class QWidget;
 QT_END_NAMESPACE
 
-/** Utility functions used by the Bitcoin Qt UI.
+/** Utility functions used by the Dogecoin Qt UI
  */
 namespace GUIUtil
 {
@@ -45,10 +46,13 @@ namespace GUIUtil
     void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent);
     void setupAmountWidget(QLineEdit *widget, QWidget *parent);
 
-    // Parse "bitcoin:" URI into recipient object, return true on successful parsing
-    bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out);
-    bool parseBitcoinURI(QString uri, SendCoinsRecipient *out);
-    QString formatBitcoinURI(const SendCoinsRecipient &info);
+    // Parse "dogecoin:" URI into recipient object, return true on successful parsing
+    bool parseDogecoinURI( const QUrl &uri, SendCoinsRecipient * out ) ;
+    bool parseDogecoinURI( QString uri, SendCoinsRecipient * out ) ;
+    QString formatDogecoinURI( const SendCoinsRecipient & info ) ;
+
+    // Makes title for amount column including current display unit if optionsModel reference available
+    QString makeTitleForAmountColumn( int unit ) ;
 
     // HTML escaping for rich text controls
     QString HtmlEscape(const QString& str, bool fMultiLine=false);
@@ -241,4 +245,4 @@ namespace GUIUtil
 
 } // namespace GUIUtil
 
-#endif // BITCOIN_QT_GUIUTIL_H
+#endif

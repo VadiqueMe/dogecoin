@@ -803,8 +803,8 @@
         <translation>Vítej</translation>
     </message>
     <message>
-        <source>Welcome to %1.</source>
-        <translation>Vítej v %1.</translation>
+        <source>Welcome to %1</source>
+        <translation>Vítej v %1</translation>
     </message>
     <message>
         <source>As this is the first time the program is launched, you can choose where %1 will store its data.</source>
@@ -2729,16 +2729,16 @@
         <translation>Exportování selhalo</translation>
     </message>
     <message>
-        <source>There was an error trying to save the transaction history to %1.</source>
-        <translation>Při ukládání transakční historie do %1 se přihodila nějaká chyba.</translation>
+        <source>There was an error trying to save the transaction history to %1</source>
+        <translation>Při ukládání transakční historie do %1 se přihodila nějaká chyba</translation>
     </message>
     <message>
         <source>Exporting Successful</source>
         <translation>Úspěšně vyexportováno</translation>
     </message>
     <message>
-        <source>The transaction history was successfully saved to %1.</source>
-        <translation>Transakční historie byla v pořádku uložena do %1.</translation>
+        <source>The transaction history was successfully saved to %1</source>
+        <translation>Transakční historie byla v pořádku uložena do %1</translation>
     </message>
     <message>
         <source>Range:</source>
@@ -2793,16 +2793,16 @@
         <translation>Zálohování selhalo</translation>
     </message>
     <message>
-        <source>There was an error trying to save the wallet data to %1.</source>
-        <translation>Při ukládání peněženky do %1 se přihodila nějaká chyba.</translation>
+        <source>There was an error trying to save the wallet data to %1</source>
+        <translation>Při ukládání peněženky do %1 se přihodila nějaká chyba</translation>
     </message>
     <message>
         <source>Backup Successful</source>
         <translation>Úspěšně zazálohováno</translation>
     </message>
     <message>
-        <source>The wallet data was successfully saved to %1.</source>
-        <translation>Data z peněženky byla v pořádku uložena do %1.</translation>
+        <source>The wallet data was successfully saved to %1</source>
+        <translation>Data z peněženky byla v pořádku uložena do %1</translation>
     </message>
 </context>
 <context>

@@ -541,8 +541,8 @@
         <translation>Welkom</translation>
     </message>
     <message>
-        <source>Welcome to %1.</source>
-        <translation>Welkom by %1.</translation>
+        <source>Welcome to %1</source>
+        <translation>Welkom by %1</translation>
     </message>
     <message>
         <source>Error</source>

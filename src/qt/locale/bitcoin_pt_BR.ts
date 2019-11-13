@@ -799,7 +799,7 @@
         <translation>Bem-vindo</translation>
     </message>
     <message>
-        <source>Welcome to %1.</source>
+        <source>Welcome to %1</source>
         <translation>Bem vindo ao %1</translation>
     </message>
     <message>
@@ -2725,16 +2725,16 @@
         <translation>Falha na exportação</translation>
     </message>
     <message>
-        <source>There was an error trying to save the transaction history to %1.</source>
-        <translation>Ocorreu um erro ao tentar salvar o histórico de transações em %1.</translation>
+        <source>There was an error trying to save the transaction history to %1</source>
+        <translation>Ocorreu um erro ao tentar salvar o histórico de transações em %1</translation>
     </message>
     <message>
         <source>Exporting Successful</source>
         <translation>Exportação feita com êxito</translation>
     </message>
     <message>
-        <source>The transaction history was successfully saved to %1.</source>
-        <translation>O histórico de transação foi gravado com êxito em %1.</translation>
+        <source>The transaction history was successfully saved to %1</source>
+        <translation>O histórico de transação foi gravado com êxito em %1</translation>
     </message>
     <message>
         <source>Range:</source>
@@ -2789,16 +2789,16 @@
         <translation>Falha no backup</translation>
     </message>
     <message>
-        <source>There was an error trying to save the wallet data to %1.</source>
-        <translation>Ocorreu um erro ao tentar salvar os dados da carteira em %1.</translation>
+        <source>There was an error trying to save the wallet data to %1</source>
+        <translation>Ocorreu um erro ao tentar salvar os dados da carteira em %1</translation>
     </message>
     <message>
         <source>Backup Successful</source>
         <translation>Êxito no backup</translation>
     </message>
     <message>
-        <source>The wallet data was successfully saved to %1.</source>
-        <translation>Os dados da carteira foram salvos com êxito em %1.</translation>
+        <source>The wallet data was successfully saved to %1</source>
+        <translation>Os dados da carteira foram salvos com êxito em %1</translation>
     </message>
 </context>
 <context>

@@ -803,7 +803,7 @@
         <translation>Добро пожаловать</translation>
     </message>
     <message>
-        <source>Welcome to %1.</source>
+        <source>Welcome to %1</source>
         <translation>Добро пожаловать в %1</translation>
     </message>
     <message>
@@ -2729,16 +2729,16 @@
         <translation>Экспорт не удался</translation>
     </message>
     <message>
-        <source>There was an error trying to save the transaction history to %1.</source>
-        <translation>Произошла ошибка при сохранении истории транзакций в %1.</translation>
+        <source>There was an error trying to save the transaction history to %1</source>
+        <translation>Произошла ошибка при сохранении истории транзакций в %1</translation>
     </message>
     <message>
         <source>Exporting Successful</source>
         <translation>Экспорт успешно завершён</translation>
     </message>
     <message>
-        <source>The transaction history was successfully saved to %1.</source>
-        <translation>История транзакций была успешно сохранена в %1.</translation>
+        <source>The transaction history was successfully saved to %1</source>
+        <translation>История транзакций была успешно сохранена в %1</translation>
     </message>
     <message>
         <source>Range:</source>
@@ -2793,16 +2793,16 @@
         <translation>Резервное копирование не удалось</translation>
     </message>
     <message>
-        <source>There was an error trying to save the wallet data to %1.</source>
-        <translation>Произошла ошибка при сохранении данных бумажника в %1.</translation>
+        <source>There was an error trying to save the wallet data to %1</source>
+        <translation>Произошла ошибка при сохранении данных бумажника в %1</translation>
     </message>
     <message>
         <source>Backup Successful</source>
         <translation>Резервное копирование успешно завершено</translation>
     </message>
     <message>
-        <source>The wallet data was successfully saved to %1.</source>
-        <translation>Данные бумажника были успешно сохранены в %1.</translation>
+        <source>The wallet data was successfully saved to %1</source>
+        <translation>Данные бумажника были успешно сохранены в %1</translation>
     </message>
 </context>
 <context>

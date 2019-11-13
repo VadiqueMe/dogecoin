@@ -733,7 +733,7 @@
         <translation>أهلا</translation>
     </message>
     <message>
-        <source>Welcome to %1.</source>
+        <source>Welcome to %1</source>
         <translation> اهلا بكم في %1</translation>
     </message>
     <message>

@@ -803,8 +803,8 @@
         <translation>Velkommen</translation>
     </message>
     <message>
-        <source>Welcome to %1.</source>
-        <translation>Velkommen til %1.</translation>
+        <source>Welcome to %1</source>
+        <translation>Velkommen til %1</translation>
     </message>
     <message>
         <source>As this is the first time the program is launched, you can choose where %1 will store its data.</source>
@@ -2729,16 +2729,16 @@
         <translation>Eksport mislykkedes</translation>
     </message>
     <message>
-        <source>There was an error trying to save the transaction history to %1.</source>
-        <translation>En fejl opstod under gemning af transaktionshistorik til %1.</translation>
+        <source>There was an error trying to save the transaction history to %1</source>
+        <translation>En fejl opstod under gemning af transaktionshistorik til %1</translation>
     </message>
     <message>
         <source>Exporting Successful</source>
         <translation>Eksport problemfri</translation>
     </message>
     <message>
-        <source>The transaction history was successfully saved to %1.</source>
-        <translation>Transaktionshistorikken blev gemt til %1.</translation>
+        <source>The transaction history was successfully saved to %1</source>
+        <translation>Transaktionshistorikken blev gemt til %1</translation>
     </message>
     <message>
         <source>Range:</source>
@@ -2793,16 +2793,16 @@
         <translation>Sikkerhedskopiering mislykkedes</translation>
     </message>
     <message>
-        <source>There was an error trying to save the wallet data to %1.</source>
-        <translation>Der skete en fejl under gemning af tegnebogsdata til %1.</translation>
+        <source>There was an error trying to save the wallet data to %1</source>
+        <translation>Der skete en fejl under gemning af tegnebogsdata til %1</translation>
     </message>
     <message>
         <source>Backup Successful</source>
         <translation>Sikkerhedskopiering problemfri</translation>
     </message>
     <message>
-        <source>The wallet data was successfully saved to %1.</source>
-        <translation>Tegnebogsdata blev gemt til %1.</translation>
+        <source>The wallet data was successfully saved to %1</source>
+        <translation>Tegnebogsdata blev gemt til %1</translation>
     </message>
 </context>
 <context>

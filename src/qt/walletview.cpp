@@ -109,7 +109,7 @@ void WalletView::setBitcoinGUI(BitcoinGUI *gui)
         // Pass through transaction notifications
         connect(this, SIGNAL(incomingTransaction(QString,int,CAmount,QString,QString,QString)), gui, SLOT(incomingTransaction(QString,int,CAmount,QString,QString,QString)));
 
-        // Connect HD enabled state signal 
+        // Connect HD enabled status changed signal
         connect(this, SIGNAL(hdEnabledStatusChanged(int)), gui, SLOT(setHDStatus(int)));
     }
 }
@@ -280,13 +280,13 @@ void WalletView::backupWallet()
     if (filename.isEmpty())
         return;
 
-    if (!walletModel->backupWallet(filename)) {
-        Q_EMIT message(tr("Backup Failed"), tr("There was an error trying to save the wallet data to %1.").arg(filename),
-            CClientUIInterface::MSG_ERROR);
-        }
+    if ( walletModel->backupWallet( filename ) ) {
+        Q_EMIT message( tr("Backup Successful"), tr("The wallet data was successfully saved to %1").arg( filename ),
+            CClientUIInterface::MSG_INFORMATION ) ;
+    }
     else {
-        Q_EMIT message(tr("Backup Successful"), tr("The wallet data was successfully saved to %1.").arg(filename),
-            CClientUIInterface::MSG_INFORMATION);
+        Q_EMIT message( tr("Backup Failed"), tr("There was an error trying to save the wallet data to %1").arg( filename ),
+            CClientUIInterface::MSG_ERROR ) ;
     }
 }
 

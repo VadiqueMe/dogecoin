@@ -803,7 +803,7 @@
         <translation>Bienvenido</translation>
     </message>
     <message>
-        <source>Welcome to %1.</source>
+        <source>Welcome to %1</source>
         <translation>Bienvenido a %1</translation>
     </message>
     <message>
@@ -2729,16 +2729,16 @@
         <translation>Falló la exportación</translation>
     </message>
     <message>
-        <source>There was an error trying to save the transaction history to %1.</source>
-        <translation>Ha habido un error al intentar guardar la transacción con %1.</translation>
+        <source>There was an error trying to save the transaction history to %1</source>
+        <translation>Ha habido un error al intentar guardar la transacción con %1</translation>
     </message>
     <message>
         <source>Exporting Successful</source>
         <translation>Exportación finalizada</translation>
     </message>
     <message>
-        <source>The transaction history was successfully saved to %1.</source>
-        <translation>La transacción ha sido guardada en %1.</translation>
+        <source>The transaction history was successfully saved to %1</source>
+        <translation>La transacción ha sido guardada en %1</translation>
     </message>
     <message>
         <source>Range:</source>
@@ -2793,16 +2793,16 @@
         <translation>La copia de seguridad ha fallado</translation>
     </message>
     <message>
-        <source>There was an error trying to save the wallet data to %1.</source>
-        <translation>Ha habido un error al intentar guardar los datos del monedero en %1.</translation>
+        <source>There was an error trying to save the wallet data to %1</source>
+        <translation>Ha habido un error al intentar guardar los datos del monedero en %1</translation>
     </message>
     <message>
         <source>Backup Successful</source>
         <translation>Se ha completado con éxito la copia de respaldo</translation>
     </message>
     <message>
-        <source>The wallet data was successfully saved to %1.</source>
-        <translation>Los datos del monedero se han guardado con éxito en %1.</translation>
+        <source>The wallet data was successfully saved to %1</source>
+        <translation>Los datos del monedero se han guardado con éxito en %1</translation>
     </message>
 </context>
 <context>

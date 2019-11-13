@@ -1037,7 +1037,7 @@
     </message>
     <message>
         <location line="+9"/>
-        <source>Welcome to %1.</source>
+        <source>Welcome to %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3775,7 +3775,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+0"/>
-        <source>There was an error trying to save the transaction history to %1.</source>
+        <source>There was an error trying to save the transaction history to %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3785,7 +3785,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+0"/>
-        <source>The transaction history was successfully saved to %1.</source>
+        <source>The transaction history was successfully saved to %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3852,7 +3852,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+0"/>
-        <source>There was an error trying to save the wallet data to %1.</source>
+        <source>There was an error trying to save the wallet data to %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3862,7 +3862,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+0"/>
-        <source>The wallet data was successfully saved to %1.</source>
+        <source>The wallet data was successfully saved to %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

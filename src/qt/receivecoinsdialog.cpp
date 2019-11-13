@@ -295,7 +295,7 @@ void ReceiveCoinsDialog::copyURI()
     }
 
     const RecentRequestsTableModel * const submodel = model->getRecentRequestsTableModel();
-    const QString uri = GUIUtil::formatBitcoinURI(submodel->entry(sel.row()).recipient);
+    const QString uri = GUIUtil::formatDogecoinURI( submodel->entry( sel.row() ).recipient ) ;
     GUIUtil::setClipboard(uri);
 }
 
@@ -324,7 +324,7 @@ void ReceiveCoinsDialog::updateRequest()
         target = info.address;
     setWindowTitle(tr("Request payment to %1").arg(target));
 
-    QString uri = GUIUtil::formatBitcoinURI(info);
+    QString uri = GUIUtil::formatDogecoinURI( info ) ;
     ui->btnSaveAs->setEnabled(false);
     QString html;
     html += "<html><font face='verdana, arial, helvetica, sans-serif'>";
@@ -389,7 +389,7 @@ void ReceiveCoinsDialog::updateRequest()
 
 void ReceiveCoinsDialog::on_btnCopyURI_clicked()
 {
-    GUIUtil::setClipboard(GUIUtil::formatBitcoinURI(info));
+    GUIUtil::setClipboard( GUIUtil::formatDogecoinURI( info ) ) ;
 }
 
 void ReceiveCoinsDialog::on_btnCopyAddress_clicked()

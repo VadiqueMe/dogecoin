@@ -523,7 +523,7 @@
         <translation>ยินดีต้อนรับ</translation>
     </message>
     <message>
-        <source>Welcome to %1.</source>
+        <source>Welcome to %1</source>
         <translation>ยินดีต้องรับสู่ %1</translation>
     </message>
     <message>

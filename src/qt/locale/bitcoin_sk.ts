@@ -795,7 +795,7 @@
         <translation>Vitajte</translation>
     </message>
     <message>
-        <source>Welcome to %1.</source>
+        <source>Welcome to %1</source>
         <translation>Vitajte v %1</translation>
     </message>
     <message>
@@ -2670,16 +2670,16 @@
         <translation>Export zlyhal</translation>
     </message>
     <message>
-        <source>There was an error trying to save the transaction history to %1.</source>
-        <translation>Vyskytla sa chyba pri pokuse o uloženie histórie transakcií do %1.</translation>
+        <source>There was an error trying to save the transaction history to %1</source>
+        <translation>Vyskytla sa chyba pri pokuse o uloženie histórie transakcií do %1</translation>
     </message>
     <message>
         <source>Exporting Successful</source>
         <translation>Export úspešný</translation>
     </message>
     <message>
-        <source>The transaction history was successfully saved to %1.</source>
-        <translation>História transakciá bola úspešne uložená do %1.</translation>
+        <source>The transaction history was successfully saved to %1</source>
+        <translation>História transakciá bola úspešne uložená do %1</translation>
     </message>
     <message>
         <source>Range:</source>
@@ -2734,16 +2734,16 @@
         <translation>Zálohovanie zlyhalo</translation>
     </message>
     <message>
-        <source>There was an error trying to save the wallet data to %1.</source>
-        <translation>Vyskytla sa chyba pri pokuse o uloženie dát peňaženky do %1.</translation>
+        <source>There was an error trying to save the wallet data to %1</source>
+        <translation>Vyskytla sa chyba pri pokuse o uloženie dát peňaženky do %1</translation>
     </message>
     <message>
         <source>Backup Successful</source>
         <translation>Záloha úspešná</translation>
     </message>
     <message>
-        <source>The wallet data was successfully saved to %1.</source>
-        <translation>Dáta peňaženky boli úspešne uložené do %1.</translation>
+        <source>The wallet data was successfully saved to %1</source>
+        <translation>Dáta peňaženky boli úspešne uložené do %1</translation>
     </message>
 </context>
 <context>

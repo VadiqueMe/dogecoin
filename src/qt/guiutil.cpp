@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -146,7 +147,7 @@ void setupAmountWidget(QLineEdit *widget, QWidget *parent)
     widget->setAlignment(Qt::AlignRight|Qt::AlignVCenter);
 }
 
-bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out)
+bool parseDogecoinURI( const QUrl & uri, SendCoinsRecipient * out )
 {
     // return if URI is not valid or is no dogecoin: URI
     if(!uri.isValid() || uri.scheme() != QString("dogecoin"))
@@ -207,21 +208,21 @@ bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out)
     return true;
 }
 
-bool parseBitcoinURI(QString uri, SendCoinsRecipient *out)
+bool parseDogecoinURI( QString uri, SendCoinsRecipient * out )
 {
     // Convert dogecoin:// to dogecoin:
     //
     //    Cannot handle this later, because dogecoin:// will cause Qt to see the part after // as host,
-    //    which will lower-case it (and thus invalidate the address).
+    //    which will lower-case it (and thus invalidate the address)
     if(uri.startsWith("dogecoin://", Qt::CaseInsensitive))
     {
         uri.replace(0, 11, "dogecoin:");
     }
     QUrl uriInstance(uri);
-    return parseBitcoinURI(uriInstance, out);
+    return parseDogecoinURI( uriInstance, out ) ;
 }
 
-QString formatBitcoinURI(const SendCoinsRecipient &info)
+QString formatDogecoinURI( const SendCoinsRecipient & info )
 {
     QString ret = QString("dogecoin:%1").arg(info.address);
     int paramCount = 0;
@@ -247,6 +248,16 @@ QString formatBitcoinURI(const SendCoinsRecipient &info)
     }
 
     return ret;
+}
+
+QString makeTitleForAmountColumn( int unit )
+{
+    QString amountTitle = QObject::tr( "Amount" ) ;
+    if ( UnitsOfCoin::isOk( unit ) )
+    {
+        amountTitle += " (" + UnitsOfCoin::name( unit ) + ")" ;
+    }
+    return amountTitle ;
 }
 
 QString HtmlEscape(const QString& str, bool fMultiLine)

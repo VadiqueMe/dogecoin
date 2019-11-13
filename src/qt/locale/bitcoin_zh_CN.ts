@@ -791,9 +791,8 @@
         <translation>欢迎</translation>
     </message>
     <message>
-        <source>Welcome to %1.</source>
-        <translation>
-歡迎來到 %1</translation>
+        <source>Welcome to %1</source>
+        <translation>歡迎來到 %1</translation>
     </message>
     <message>
         <source>As this is the first time the program is launched, you can choose where %1 will store its data.</source>
@@ -2699,16 +2698,16 @@
         <translation>导出失败</translation>
     </message>
     <message>
-        <source>There was an error trying to save the transaction history to %1.</source>
-        <translation>导出交易历史到 %1 时发生错误。</translation>
+        <source>There was an error trying to save the transaction history to %1</source>
+        <translation>导出交易历史到 %1 时发生错误</translation>
     </message>
     <message>
         <source>Exporting Successful</source>
         <translation>导出成功</translation>
     </message>
     <message>
-        <source>The transaction history was successfully saved to %1.</source>
-        <translation>交易历史已成功保存到 %1。</translation>
+        <source>The transaction history was successfully saved to %1</source>
+        <translation>交易历史已成功保存到 %1</translation>
     </message>
     <message>
         <source>Range:</source>
@@ -2763,16 +2762,16 @@
         <translation>备份失败</translation>
     </message>
     <message>
-        <source>There was an error trying to save the wallet data to %1.</source>
-        <translation>尝试保存钱包数据至 %1 时发生错误。</translation>
+        <source>There was an error trying to save the wallet data to %1</source>
+        <translation>尝试保存钱包数据至 %1 时发生错误</translation>
     </message>
     <message>
         <source>Backup Successful</source>
         <translation>备份成功</translation>
     </message>
     <message>
-        <source>The wallet data was successfully saved to %1.</source>
-        <translation>钱包数据成功保存至 %1 。</translation>
+        <source>The wallet data was successfully saved to %1</source>
+        <translation>钱包数据成功保存至 %1</translation>
     </message>
 </context>
 <context>

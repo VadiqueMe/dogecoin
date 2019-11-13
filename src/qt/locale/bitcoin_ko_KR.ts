@@ -803,8 +803,8 @@
         <translation>환영합니다</translation>
     </message>
     <message>
-        <source>Welcome to %1.</source>
-        <translation>%1에 오신것을 환영합니다.</translation>
+        <source>Welcome to %1</source>
+        <translation>%1에 오신것을 환영합니다</translation>
     </message>
     <message>
         <source>As this is the first time the program is launched, you can choose where %1 will store its data.</source>
@@ -2729,16 +2729,16 @@
         <translation>내보내기 실패</translation>
     </message>
     <message>
-        <source>There was an error trying to save the transaction history to %1.</source>
-        <translation>%1으로 거래 기록을 저장하는데 에러가 있었습니다.</translation>
+        <source>There was an error trying to save the transaction history to %1</source>
+        <translation>%1으로 거래 기록을 저장하는데 에러가 있었습니다</translation>
     </message>
     <message>
         <source>Exporting Successful</source>
         <translation>내보내기 성공</translation>
     </message>
     <message>
-        <source>The transaction history was successfully saved to %1.</source>
-        <translation>거래 기록이 성공적으로 %1에 저장되었습니다.</translation>
+        <source>The transaction history was successfully saved to %1</source>
+        <translation>거래 기록이 성공적으로 %1에 저장되었습니다</translation>
     </message>
     <message>
         <source>Range:</source>
@@ -2793,16 +2793,16 @@
         <translation>백업 실패</translation>
     </message>
     <message>
-        <source>There was an error trying to save the wallet data to %1.</source>
-        <translation>지갑 데이터를 %1 폴더에 저장하는 동안 오류가 발생했습니다. </translation>
+        <source>There was an error trying to save the wallet data to %1</source>
+        <translation>지갑 데이터를 %1 폴더에 저장하는 동안 오류가 발생했습니다</translation>
     </message>
     <message>
         <source>Backup Successful</source>
         <translation>백업 성공</translation>
     </message>
     <message>
-        <source>The wallet data was successfully saved to %1.</source>
-        <translation>지갑 정보가 %1에 성공적으로 저장되었습니다.</translation>
+        <source>The wallet data was successfully saved to %1</source>
+        <translation>지갑 정보가 %1에 성공적으로 저장되었습니다</translation>
     </message>
 </context>
 <context>

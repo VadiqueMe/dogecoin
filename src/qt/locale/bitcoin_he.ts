@@ -501,8 +501,8 @@
         <translation>ברוך בואך</translation>
     </message>
     <message>
-        <source>Welcome to %1.</source>
-        <translation>ברוך הבא ל %1.</translation>
+        <source>Welcome to %1</source>
+        <translation>ברוך הבא ל %1</translation>
     </message>
     <message>
         <source>Use the default data directory</source>

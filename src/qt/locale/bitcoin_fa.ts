@@ -711,8 +711,8 @@
         <translation>خوش‌آمدید</translation>
     </message>
     <message>
-        <source>Welcome to %1.</source>
-        <translation>به %1 خوش‌آمدید.</translation>
+        <source>Welcome to %1</source>
+        <translation>به %1 خوش‌آمدید</translation>
     </message>
     <message>
         <source>Use the default data directory</source>

@@ -511,8 +511,8 @@
         <translation>Tervetuloa</translation>
     </message>
     <message>
-        <source>Welcome to %1.</source>
-        <translation>Tervetuloa %1 pariin.</translation>
+        <source>Welcome to %1</source>
+        <translation>Tervetuloa %1 pariin</translation>
     </message>
     <message>
         <source>As this is the first time the program is launched, you can choose where %1 will store its data.</source>

@@ -803,8 +803,8 @@
         <translation>ようこそ</translation>
     </message>
     <message>
-        <source>Welcome to %1.</source>
-        <translation>%1 へようこそ。</translation>
+        <source>Welcome to %1</source>
+        <translation>%1 へようこそ</translation>
     </message>
     <message>
         <source>As this is the first time the program is launched, you can choose where %1 will store its data.</source>
@@ -2729,16 +2729,16 @@
         <translation>エクスポートに失敗しました</translation>
     </message>
     <message>
-        <source>There was an error trying to save the transaction history to %1.</source>
-        <translation>トランザクション履歴を %1 へ保存する際にエラーが発生しました。</translation>
+        <source>There was an error trying to save the transaction history to %1</source>
+        <translation>トランザクション履歴を %1 へ保存する際にエラーが発生しました</translation>
     </message>
     <message>
         <source>Exporting Successful</source>
         <translation>エクスポートに成功しました</translation>
     </message>
     <message>
-        <source>The transaction history was successfully saved to %1.</source>
-        <translation>トランザクション履歴は正常に%1に保存されました。</translation>
+        <source>The transaction history was successfully saved to %1</source>
+        <translation>トランザクション履歴は正常に%1に保存されました</translation>
     </message>
     <message>
         <source>Range:</source>
@@ -2793,16 +2793,16 @@
         <translation>バックアップに失敗しました</translation>
     </message>
     <message>
-        <source>There was an error trying to save the wallet data to %1.</source>
-        <translation>ウォレットデータを%1へ保存する際にエラーが発生しました。</translation>
+        <source>There was an error trying to save the wallet data to %1</source>
+        <translation>ウォレットデータを%1へ保存する際にエラーが発生しました</translation>
     </message>
     <message>
         <source>Backup Successful</source>
         <translation>バックアップ成功</translation>
     </message>
     <message>
-        <source>The wallet data was successfully saved to %1.</source>
-        <translation>ウォレット データは正常に%1に保存されました。</translation>
+        <source>The wallet data was successfully saved to %1</source>
+        <translation>ウォレット データは正常に%1に保存されました</translation>
     </message>
 </context>
 <context>

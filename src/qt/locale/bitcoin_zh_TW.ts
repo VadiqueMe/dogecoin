@@ -803,8 +803,8 @@
         <translation>歡迎</translation>
     </message>
     <message>
-        <source>Welcome to %1.</source>
-        <translation>歡迎使用 %1。</translation>
+        <source>Welcome to %1</source>
+        <translation>歡迎使用 %1</translation>
     </message>
     <message>
         <source>As this is the first time the program is launched, you can choose where %1 will store its data.</source>
@@ -2725,16 +2725,16 @@
         <translation>匯出失敗</translation>
     </message>
     <message>
-        <source>There was an error trying to save the transaction history to %1.</source>
-        <translation>儲存交易記錄到 %1 時發生錯誤。</translation>
+        <source>There was an error trying to save the transaction history to %1</source>
+        <translation>儲存交易記錄到 %1 時發生錯誤</translation>
     </message>
     <message>
         <source>Exporting Successful</source>
         <translation>匯出成功</translation>
     </message>
     <message>
-        <source>The transaction history was successfully saved to %1.</source>
-        <translation>交易記錄已經成功儲存到 %1 了。</translation>
+        <source>The transaction history was successfully saved to %1</source>
+        <translation>交易記錄已經成功儲存到 %1 了</translation>
     </message>
     <message>
         <source>Range:</source>
@@ -2789,16 +2789,16 @@
         <translation>備份失敗</translation>
     </message>
     <message>
-        <source>There was an error trying to save the wallet data to %1.</source>
-        <translation>儲存錢包資料到 %1 時發生錯誤。</translation>
+        <source>There was an error trying to save the wallet data to %1</source>
+        <translation>儲存錢包資料到 %1 時發生錯誤</translation>
     </message>
     <message>
         <source>Backup Successful</source>
         <translation>備份成功</translation>
     </message>
     <message>
-        <source>The wallet data was successfully saved to %1.</source>
-        <translation>錢包的資料已經成功儲存到 %1 了。</translation>
+        <source>The wallet data was successfully saved to %1</source>
+        <translation>錢包的資料已經成功儲存到 %1 了</translation>
     </message>
 </context>
 <context>

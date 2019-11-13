@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "paymentserver.h"
 
@@ -216,7 +216,7 @@ void PaymentServer::ipcParseCommandLine(int argc, char* argv[])
             savedPaymentRequests.append(arg);
 
             SendCoinsRecipient r;
-            if (GUIUtil::parseBitcoinURI(arg, &r) && !r.address.isEmpty())
+            if ( GUIUtil::parseDogecoinURI( arg, &r ) && ! r.address.isEmpty() )
             {
                 CDogecoinAddress address( r.address.toStdString() ) ;
 
@@ -437,7 +437,7 @@ void PaymentServer::handleURIOrFile(const QString& s)
         else // normal URI
         {
             SendCoinsRecipient recipient;
-            if (GUIUtil::parseBitcoinURI(s, &recipient))
+            if ( GUIUtil::parseDogecoinURI( s, &recipient ) )
             {
                 CDogecoinAddress address( recipient.address.toStdString() ) ;
                 if (!address.IsValid()) {

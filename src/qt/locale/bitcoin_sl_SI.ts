@@ -479,7 +479,7 @@
         <translation>Dobrodošli</translation>
     </message>
     <message>
-        <source>Welcome to %1.</source>
+        <source>Welcome to %1</source>
         <translation>Dobrodošli v %1</translation>
     </message>
     <message>

@@ -559,14 +559,6 @@
 <context>
     <name>Intro</name>
     <message>
-        <source>Welcome</source>
-        <translation>Welcome</translation>
-    </message>
-    <message>
-        <source>Welcome to %1.</source>
-        <translation>Welcome to %1.</translation>
-    </message>
-    <message>
         <source>As this is the first time the program is launched, you can choose where %1 will store its data.</source>
         <translation>As this is the first time the program is launched, you can choose where %1 will store its data.</translation>
     </message>

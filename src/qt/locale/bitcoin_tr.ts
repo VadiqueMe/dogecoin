@@ -803,8 +803,8 @@
         <translation>Hoş geldiniz</translation>
     </message>
     <message>
-        <source>Welcome to %1.</source>
-        <translation>%1'a hoş geldiniz.</translation>
+        <source>Welcome to %1</source>
+        <translation>%1'a hoş geldiniz</translation>
     </message>
     <message>
         <source>As this is the first time the program is launched, you can choose where %1 will store its data.</source>
@@ -2725,16 +2725,16 @@
         <translation>Dışarı aktarmada hata</translation>
     </message>
     <message>
-        <source>There was an error trying to save the transaction history to %1.</source>
-        <translation>İşlem tarihçesinin %1 konumuna kaydedilmeye çalışıldığı sırada bir hata meydana geldi.</translation>
+        <source>There was an error trying to save the transaction history to %1</source>
+        <translation>İşlem tarihçesinin %1 konumuna kaydedilmeye çalışıldığı sırada bir hata meydana geldi</translation>
     </message>
     <message>
         <source>Exporting Successful</source>
         <translation>Dışarı Aktarma Başarılı</translation>
     </message>
     <message>
-        <source>The transaction history was successfully saved to %1.</source>
-        <translation>İşlem tarihçesi %1 konumuna başarıyla kaydedildi.</translation>
+        <source>The transaction history was successfully saved to %1</source>
+        <translation>İşlem tarihçesi %1 konumuna başarıyla kaydedildi</translation>
     </message>
     <message>
         <source>Range:</source>
@@ -2789,16 +2789,16 @@
         <translation>Yedekleme Başarısız Oldu</translation>
     </message>
     <message>
-        <source>There was an error trying to save the wallet data to %1.</source>
-        <translation>Cüzdan verilerinin %1 konumuna kaydedilmesi sırasında bir hata meydana geldi.</translation>
+        <source>There was an error trying to save the wallet data to %1</source>
+        <translation>Cüzdan verilerinin %1 konumuna kaydedilmesi sırasında bir hata meydana geldi</translation>
     </message>
     <message>
         <source>Backup Successful</source>
         <translation>Yedekleme Başarılı</translation>
     </message>
     <message>
-        <source>The wallet data was successfully saved to %1.</source>
-        <translation>Cüzdan verileri %1 konumuna başarıyla kaydedildi.</translation>
+        <source>The wallet data was successfully saved to %1</source>
+        <translation>Cüzdan verileri %1 konumuna başarıyla kaydedildi</translation>
     </message>
 </context>
 <context>

@@ -348,16 +348,16 @@ void TransactionView::exportClicked()
     writer.addColumn(tr("Type"), TransactionTableModel::Type, Qt::EditRole);
     writer.addColumn(tr("Label"), 0, TransactionTableModel::LabelRole);
     writer.addColumn(tr("Address"), 0, TransactionTableModel::AddressRole);
-    writer.addColumn( UnitsOfCoin::getAmountColumnTitle( model->getOptionsModel()->getDisplayUnit() ), 0, TransactionTableModel::FormattedAmountRole ) ;
+    writer.addColumn( GUIUtil::makeTitleForAmountColumn( model->getOptionsModel()->getDisplayUnit() ), 0, TransactionTableModel::FormattedAmountRole ) ;
     writer.addColumn(tr("ID"), 0, TransactionTableModel::TxIDRole);
 
-    if(!writer.write()) {
-        Q_EMIT message(tr("Exporting Failed"), tr("There was an error trying to save the transaction history to %1.").arg(filename),
-            CClientUIInterface::MSG_ERROR);
+    if ( ! writer.write() ) {
+        Q_EMIT message( tr("Exporting Failed"), tr("There was an error trying to save the transaction history to %1").arg( filename ),
+            CClientUIInterface::MSG_ERROR ) ;
     }
     else {
-        Q_EMIT message(tr("Exporting Successful"), tr("The transaction history was successfully saved to %1.").arg(filename),
-            CClientUIInterface::MSG_INFORMATION);
+        Q_EMIT message( tr("Exporting Successful"), tr("The transaction history was successfully saved to %1").arg( filename ),
+            CClientUIInterface::MSG_INFORMATION ) ;
     }
 }
 

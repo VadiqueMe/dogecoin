@@ -2297,16 +2297,16 @@
         <translation>L'exportació ha fallat</translation>
     </message>
     <message>
-        <source>There was an error trying to save the transaction history to %1.</source>
-        <translation>S'ha produït un error en provar de guardar l'historial de transacció a %1.</translation>
+        <source>There was an error trying to save the transaction history to %1</source>
+        <translation>S'ha produït un error en provar de guardar l'historial de transacció a %1</translation>
     </message>
     <message>
         <source>Exporting Successful</source>
         <translation>Exportació amb èxit</translation>
     </message>
     <message>
-        <source>The transaction history was successfully saved to %1.</source>
-        <translation>L'historial de transaccions s'ha guardat correctament a %1.</translation>
+        <source>The transaction history was successfully saved to %1</source>
+        <translation>L'historial de transaccions s'ha guardat correctament a %1</translation>
     </message>
     <message>
         <source>Range:</source>
@@ -2361,16 +2361,16 @@
         <translation>Ha fallat la còpia de seguretat</translation>
     </message>
     <message>
-        <source>There was an error trying to save the wallet data to %1.</source>
-        <translation>S'ha produït un error en provar de guardar les dades del moneder a %1.</translation>
+        <source>There was an error trying to save the wallet data to %1</source>
+        <translation>S'ha produït un error en provar de guardar les dades del moneder a %1</translation>
     </message>
     <message>
         <source>Backup Successful</source>
         <translation>La còpia de seguretat s'ha realitzat correctament</translation>
     </message>
     <message>
-        <source>The wallet data was successfully saved to %1.</source>
-        <translation>S'han guardat les dades del moneder correctament a %1.</translation>
+        <source>The wallet data was successfully saved to %1</source>
+        <translation>S'han guardat les dades del moneder correctament a %1</translation>
     </message>
 </context>
 <context>

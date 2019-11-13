@@ -728,8 +728,8 @@ Var vänlig och försök igen.</translation>
         <translation>Välkommen</translation>
     </message>
     <message>
-        <source>Welcome to %1.</source>
-        <translation>Välkommen till %1.</translation>
+        <source>Welcome to %1</source>
+        <translation>Välkommen till %1</translation>
     </message>
     <message>
         <source>As this is the first time the program is launched, you can choose where %1 will store its data.</source>

@@ -194,16 +194,6 @@ bool UnitsOfCoin::parse( int unit, const QString &value, CAmount *val_out )
     return ok;
 }
 
-QString UnitsOfCoin::getAmountColumnTitle( int unit )
-{
-    QString amountTitle = QObject::tr("Amount");
-    if ( UnitsOfCoin::isOk( unit ) )
-    {
-        amountTitle += " (" + UnitsOfCoin::name( unit ) + ")" ;
-    }
-    return amountTitle;
-}
-
 int UnitsOfCoin::rowCount( const QModelIndex & parent ) const
 {
     Q_UNUSED(parent);

@@ -26,8 +26,6 @@
 #include <QIcon>
 #include <QList>
 
-#include <boost/foreach.hpp>
-
 // Amount column is right-aligned it contains numbers
 static int column_alignments[] = {
         Qt::AlignLeft|Qt::AlignVCenter, /* status */
@@ -145,10 +143,10 @@ public:
                 {
                     parent->beginInsertRows(QModelIndex(), lowerIndex, lowerIndex+toInsert.size()-1);
                     int insert_idx = lowerIndex;
-                    Q_FOREACH(const TransactionRecord &rec, toInsert)
+                    for ( const TransactionRecord & rec : toInsert )
                     {
-                        cachedWallet.insert(insert_idx, rec);
-                        insert_idx += 1;
+                        cachedWallet.insert( insert_idx, rec ) ;
+                        insert_idx ++ ;
                     }
                     parent->endInsertRows();
                 }
@@ -243,7 +241,7 @@ TransactionTableModel::TransactionTableModel(const PlatformStyle *_platformStyle
         fProcessingQueuedTransactions(false),
         platformStyle(_platformStyle)
 {
-    columns << QString() << QString() << tr("Date") << tr("Type") << tr("Label") << UnitsOfCoin::getAmountColumnTitle( walletModel->getOptionsModel()->getDisplayUnit() ) ;
+    columns << QString() << QString() << tr("Date") << tr("Type") << tr("Label") << GUIUtil::makeTitleForAmountColumn( walletModel->getOptionsModel()->getDisplayUnit() ) ;
     priv->refreshWallet();
 
     connect(walletModel->getOptionsModel(), SIGNAL(displayUnitChanged(int)), this, SLOT(updateDisplayUnit()));
@@ -260,7 +258,7 @@ TransactionTableModel::~TransactionTableModel()
 /** Updates the column title to "Amount (DisplayUnit)" and emits headerDataChanged() signal for table headers to react */
 void TransactionTableModel::updateAmountColumnTitle()
 {
-    columns[Amount] = UnitsOfCoin::getAmountColumnTitle( walletModel->getOptionsModel()->getDisplayUnit() ) ;
+    columns[Amount] = GUIUtil::makeTitleForAmountColumn( walletModel->getOptionsModel()->getDisplayUnit() ) ;
     Q_EMIT headerDataChanged(Qt::Horizontal,Amount,Amount);
 }
 
@@ -583,7 +581,7 @@ QVariant TransactionTableModel::data(const QModelIndex &index, int role) const
         {
             return COLOR_TX_STATUS_DANGER;
         }
-        // Non-confirmed (but not immature) as transactions are grey
+        // Non-confirmed (but not immature) transactions are grey
         if(!rec->status.countsForBalance && rec->status.status != TransactionStatus::Immature)
         {
             return COLOR_UNCONFIRMED;
