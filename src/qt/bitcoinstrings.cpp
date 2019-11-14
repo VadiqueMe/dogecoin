@@ -152,7 +152,7 @@ QT_TRANSLATE_NOOP("bitcoin-core", ""
 "will download the whole blockchain again."),
 QT_TRANSLATE_NOOP("bitcoin-core", ""
 "Set lowest fee rate (in %s/kB) for transactions to be included in block "
-"creation. (default: %s)"),
+"creation (default: %s)"),
 QT_TRANSLATE_NOOP("bitcoin-core", ""
 "Set maximum size of high-priority/low-fee transactions in bytes (default: %d)"),
 QT_TRANSLATE_NOOP("bitcoin-core", ""

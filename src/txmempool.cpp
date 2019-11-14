@@ -1046,14 +1046,10 @@ void CTxMemPool::TrimToSize(size_t sizelimit, std::vector<uint256>* pvNoSpendsRe
     while (!mapTx.empty() && DynamicMemoryUsage() > sizelimit) {
         indexed_transaction_set::index<descendant_score>::type::iterator it = mapTx.get<descendant_score>().begin();
 
-        // We set the new mempool min fee to the feerate of the removed set, plus the
-        // "minimum reasonable fee rate" (ie some value under which we consider txn
-        // to have 0 fee). This way, we don't allow txn to enter mempool with feerate
-        // equal to txn which were removed with no block in between.
-        CFeeRate removed(it->GetModFeesWithDescendants(), it->GetSizeWithDescendants());
-        removed += incrementalRelayFee;
-        trackPackageRemoved(removed);
-        maxFeeRateRemoved = std::max(maxFeeRateRemoved, removed);
+        // set the new mempool fee to the feerate of the removed set
+        CFeeRate removed( it->GetModFeesWithDescendants(), it->GetSizeWithDescendants() ) ;
+        trackPackageRemoved( removed ) ;
+        maxFeeRateRemoved = std::max( maxFeeRateRemoved, removed ) ;
 
         setEntries stage;
         CalculateDescendants(mapTx.project<0>(it), stage);

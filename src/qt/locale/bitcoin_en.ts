@@ -4110,7 +4110,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+3"/>
-        <source>Set lowest fee rate (in %s/kB) for transactions to be included in block creation. (default: %s)</source>
+        <source>Set lowest fee rate (in %s/kB) for transactions to be included in block creation (default: %s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

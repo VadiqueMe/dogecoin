@@ -2944,8 +2944,8 @@
         <translation>古いブロックの剪定 (削除) を有効にすることでストレージの必要量を削減する。これにより pruneblockchain RPC を呼び出すことで指定されたブロックを削除することができます。またターゲットサイズが MiB 単位で指定された場合には古いブロックの自動剪定が有効となります。このモードは -txindex および -rescan オプションと互換性がありません。警告: この設定を最有効化するにはすべてのブロックチェーンの再ダウンロードが必要となります。(デフォルト: 0 = ブロックの剪定を無効化する, 1 = RPC 経由での手動剪定を許可する, &gt;%u = MiB 単位で指定されたターゲットサイズを常に下回るようにブロックファイルを自動的に剪定する)</translation>
     </message>
     <message>
-        <source>Set lowest fee rate (in %s/kB) for transactions to be included in block creation. (default: %s)</source>
-        <translation>ブロック生成時に取り込まれるトランザクションの最低手数料率 (%s/kB 単位)。(デフォルト: %s)</translation>
+        <source>Set lowest fee rate (in %s/kB) for transactions to be included in block creation (default: %s)</source>
+        <translation>ブロック生成時に取り込まれるトランザクションの最低手数料率 (%s/kB 単位) (デフォルト: %s)</translation>
     </message>
     <message>
         <source>Set the number of script verification threads (%u to %d, 0 = auto, &lt;0 = leave that many cores free, default: %d)</source>

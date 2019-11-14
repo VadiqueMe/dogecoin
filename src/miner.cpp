@@ -343,7 +343,7 @@ void BlockAssembler::AddToBlock( CTxMemPool::txiter iter )
 
     bool fPrintPriority = GetBoolArg( "-printpriority", DEFAULT_PRINTPRIORITY ) ;
     if ( fPrintPriority ) {
-        double dPriority = iter->GetPriority(nHeight);
+        double dPriority = iter->GetPriority( nHeight ) ;
         CAmount dummy;
         mempool.ApplyDeltas(iter->GetTx().GetHash(), dPriority, dummy);
         LogPrintf("priority %.1f fee %s tx %s\n",
@@ -417,8 +417,8 @@ void BlockAssembler::SortForBlock(const CTxMemPool::setEntries& package, CTxMemP
 // transactions and storing a temporary modified state in mapModifiedTxs.
 // Each time through the loop, we compare the best transaction in
 // mapModifiedTxs with the next transaction in the mempool to decide what
-// transaction package to work on next.
-void BlockAssembler::addPackageTxs(int &nPackagesSelected, int &nDescendantsUpdated)
+// transaction package to work on next
+void BlockAssembler::addPackageTxs( int & nPackagesSelected, int & nDescendantsUpdated )
 {
     // mapModifiedTx will store sorted packages after they are modified
     // because some of their txs are already in the block
@@ -550,13 +550,12 @@ void BlockAssembler::addPackageTxs(int &nPackagesSelected, int &nDescendantsUpda
 
 void BlockAssembler::addPriorityTxs()
 {
-    // How much of the block should be dedicated to high-priority transactions,
-    // included regardless of the fees they pay
-    unsigned int nBlockPrioritySize = GetArg("-blockprioritysize", DEFAULT_BLOCK_PRIORITY_SIZE);
-    nBlockPrioritySize = std::min(nBlockMaxSize, nBlockPrioritySize);
+    // How much of the block should be dedicated to high-priority/low-fee transactions
+    unsigned int nBlockPrioritySize = GetArg( "-blockprioritysize", DEFAULT_BLOCK_PRIORITY_SIZE ) ;
+    nBlockPrioritySize = std::min( nBlockMaxSize, nBlockPrioritySize ) ;
 
-    if (nBlockPrioritySize == 0) {
-        return;
+    if ( nBlockPrioritySize == 0 ) {
+        return ;
     }
 
     bool fSizeAccounting = fNeedSizeAccounting;

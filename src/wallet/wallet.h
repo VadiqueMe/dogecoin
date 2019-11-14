@@ -50,12 +50,6 @@ static const CAmount DEFAULT_TRANSACTION_FEE = 0;
 static const CAmount DEFAULT_FALLBACK_FEE = 0;
 //! -mintxfee default
 static const CAmount DEFAULT_TRANSACTION_MINFEE = 0;
-//! minimum recommended increment for BIP 125 replacement txs
-static const CAmount WALLET_INCREMENTAL_RELAY_FEE = COIN * 2;
-//! target minimum change amount
-static const CAmount MIN_CHANGE = CENT ;
-//! final minimum change amount after paying for fees
-static const CAmount MIN_FINAL_CHANGE = MIN_CHANGE / 2 ;
 //! Default for -spendzeroconfchange
 static const bool DEFAULT_SPEND_ZEROCONF_CHANGE = true;
 //! Default for -sendfreetransactions
@@ -876,11 +870,8 @@ public:
     /** Set whether this wallet broadcasts transactions. */
     void SetBroadcastTransactions(bool broadcast) { fBroadcastTransactions = broadcast; }
 
-    /* Mark a transaction (and it in-wallet descendants) as abandoned so its inputs may be respent. */
-    bool AbandonTransaction(const uint256& hashTx);
-
-    /** Mark a transaction as replaced by another transaction (e.g., BIP 125). */
-    bool MarkReplaced(const uint256& originalHash, const uint256& newHash);
+    /* Mark a transaction (and its in-wallet descendants) as abandoned so its inputs may be respent */
+    bool AbandonTransaction( const uint256& hashTx ) ;
 
     /* Returns the wallets help message */
     static std::string GetWalletHelpString(bool showDebug);

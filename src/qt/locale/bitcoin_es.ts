@@ -2947,8 +2947,8 @@
         <translation>Reducir los requerimientos de almacenamiento habilitando la poda (eliminación) de los bloques viejos. Esto permite que la cadena de bloqueo RPC sea llamada para eliminar bloques específicos, y habilita la poda automática de bloques viejos si se provee el tamaño de un objetivo en MiB. Este modo es incompatible con -txindex and -rescan. Precaución: Revertir este ajuste requiere volver a descargar la cadena de bloqueo completa. (predefinido: 0 = deshabilita bloques de poda, 1 = permite la poda manual mediante RPC, &gt;%u = elimina automáticamente los archivos de bloqueo para permanecer bajo el tamaño del objetivo especificado en MiB)</translation>
     </message>
     <message>
-        <source>Set lowest fee rate (in %s/kB) for transactions to be included in block creation. (default: %s)</source>
-        <translation>Establecer la tasa más baja (en %s/kB) por transacciones para incluirse en la creación de bloque. (predeterminado: %s)</translation>
+        <source>Set lowest fee rate (in %s/kB) for transactions to be included in block creation (default: %s)</source>
+        <translation>Establecer la tasa más baja (en %s/kB) por transacciones para incluirse en la creación de bloque (predeterminado: %s)</translation>
     </message>
     <message>
         <source>Set the number of script verification threads (%u to %d, 0 = auto, &lt;0 = leave that many cores free, default: %d)</source>

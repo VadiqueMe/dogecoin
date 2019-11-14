@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -847,35 +848,6 @@ void CWallet::MarkDirty()
         BOOST_FOREACH(PAIRTYPE(const uint256, CWalletTx)& item, mapWallet)
             item.second.MarkDirty();
     }
-}
-
-bool CWallet::MarkReplaced(const uint256& originalHash, const uint256& newHash)
-{
-    LOCK(cs_wallet);
-
-    auto mi = mapWallet.find(originalHash);
-
-    // There is a bug if MarkReplaced is not called on an existing wallet transaction.
-    assert(mi != mapWallet.end());
-
-    CWalletTx& wtx = (*mi).second;
-
-    // Ensure for now that we're not overwriting data
-    assert(wtx.mapValue.count("replaced_by_txid") == 0);
-
-    wtx.mapValue["replaced_by_txid"] = newHash.ToString();
-
-    CWalletDB walletdb(strWalletFile, "r+");
-
-    bool success = true;
-    if (!walletdb.WriteTx(wtx)) {
-        LogPrintf("%s: Updating walletdb tx %s failed", __func__, wtx.GetHash().ToString());
-        success = false;
-    }
-
-    NotifyTransactionChanged(this, originalHash, CT_UPDATED);
-
-    return success;
 }
 
 bool CWallet::AddToWallet( const CWalletTx& wtxIn, bool fFlushOnClose )
@@ -2131,8 +2103,7 @@ static void ApproximateBestSubset(vector<pair<CAmount, pair<const CWalletTx*,uns
     }
 }
 
-bool CWallet::SelectCoinsMinConf(const CAmount& nTargetValue, const int nConfMine, const int nConfTheirs, const uint64_t nMaxAncestors, vector<COutput> vCoins,
-                                 set<pair<const CWalletTx*,unsigned int> >& setCoinsRet, CAmount& nValueRet) const
+bool CWallet::SelectCoinsMinConf( const CAmount & nTargetValue, const int nConfMine, const int nConfTheirs, const uint64_t nMaxAncestors, std::vector< COutput > vCoins, std::set< std::pair< const CWalletTx *, unsigned int > > & setCoinsRet, CAmount & nValueRet ) const
 {
     setCoinsRet.clear();
     nValueRet = 0;
@@ -2146,7 +2117,7 @@ bool CWallet::SelectCoinsMinConf(const CAmount& nTargetValue, const int nConfMin
 
     random_shuffle(vCoins.begin(), vCoins.end(), GetRandInt);
 
-    BOOST_FOREACH(const COutput &output, vCoins)
+    for ( const COutput & output : vCoins )
     {
         if (!output.fSpendable)
             continue;
@@ -2162,20 +2133,20 @@ bool CWallet::SelectCoinsMinConf(const CAmount& nTargetValue, const int nConfMin
         int i = output.i;
         CAmount n = pcoin->tx->vout[i].nValue;
 
-        pair<CAmount,pair<const CWalletTx*,unsigned int> > coin = make_pair(n,make_pair(pcoin, i));
+        std::pair< CAmount, std::pair< const CWalletTx *, unsigned int > > coin = std::make_pair( n, std::make_pair( pcoin, i ) ) ;
 
-        if (n == nTargetValue)
+        if ( n == nTargetValue )
         {
             setCoinsRet.insert(coin.second);
             nValueRet += coin.first;
             return true;
         }
-        else if (n < nTargetValue + MIN_CHANGE)
+        else if ( n < nTargetValue )
         {
             vValue.push_back(coin);
             nTotalLower += n;
         }
-        else if (n < coinLowestLarger.first)
+        else if ( n < coinLowestLarger.first )
         {
             coinLowestLarger = coin;
         }
@@ -2206,14 +2177,12 @@ bool CWallet::SelectCoinsMinConf(const CAmount& nTargetValue, const int nConfMin
     vector<char> vfBest;
     CAmount nBest;
 
-    ApproximateBestSubset(vValue, nTotalLower, nTargetValue, vfBest, nBest);
-    if (nBest != nTargetValue && nTotalLower >= nTargetValue + MIN_CHANGE)
-        ApproximateBestSubset(vValue, nTotalLower, nTargetValue + MIN_CHANGE, vfBest, nBest);
+    ApproximateBestSubset( vValue, nTotalLower, nTargetValue, vfBest, nBest ) ;
 
     // If we have a bigger coin and (either the stochastic approximation didn't find a good solution,
     //                                   or the next bigger coin is closer), return the bigger coin
-    if (coinLowestLarger.second.first &&
-        ((nBest != nTargetValue && nBest < nTargetValue + MIN_CHANGE) || coinLowestLarger.first <= nBest))
+    if ( coinLowestLarger.second.first &&
+        ( ( nBest != nTargetValue && nBest < nTargetValue ) || coinLowestLarger.first <= nBest ) )
     {
         setCoinsRet.insert(coinLowestLarger.second);
         nValueRet += coinLowestLarger.first;
@@ -2606,11 +2575,11 @@ bool CWallet::CreateTransaction(const vector<CRecipient>& vecSend, CWalletTx& wt
                 if (nChangePosInOut != -1 && nSubtractFeeFromAmount == 0) {
                     CAmount additionalFeeNeeded = nFeeNeeded - nFeeRet;
                     vector<CTxOut>::iterator change_position = txNew.vout.begin()+nChangePosInOut;
-                    // Only reduce change if remaining amount is still a large enough output.
-                    if (change_position->nValue >= MIN_FINAL_CHANGE + additionalFeeNeeded) {
-                        change_position->nValue -= additionalFeeNeeded;
-                        nFeeRet += additionalFeeNeeded;
-                        break; // Done, able to increase fee from change
+                    // Only reduce change if remaining amount is still a large enough output
+                    if ( change_position->nValue >= additionalFeeNeeded ) {
+                        change_position->nValue -= additionalFeeNeeded ;
+                        nFeeRet += additionalFeeNeeded ;
+                        break ; // Done, able to increase fee from change
                     }
                 }
 

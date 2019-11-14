@@ -2940,7 +2940,7 @@
         <translation>Réduire les exigences de stockage en activant l'élagage (suppression) des anciens blocs. Cela permet d'appeler le RPC « pruneblockchain » pour supprimer des blocs précis et active l'élagage automatique des anciens blocs si une taille cible en Mio est fournie. Ce mode n'est pas compatible avec -txindex et -rescan. Avertissement : ramener ce paramètre à sa valeur antérieure exige de retélécharger l'intégralité de la chaîne de blocs (par défaut : 0 = désactiver l'élagage des blocs, 1 = permettre l'élagage manuel par RPC, &gt;%u = élaguer automatiquement les fichiers de blocs pour rester en deçà de la taille cible précisée en Mio).</translation>
     </message>
     <message>
-        <source>Set lowest fee rate (in %s/kB) for transactions to be included in block creation. (default: %s)</source>
+        <source>Set lowest fee rate (in %s/kB) for transactions to be included in block creation (default: %s)</source>
         <translation>Définir le taux minimal de frais (en %s/ko) pour les transactions à inclure dans la création de blocs (par défaut : %s)</translation>
     </message>
     <message>

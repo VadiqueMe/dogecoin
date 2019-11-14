@@ -1,6 +1,6 @@
 // Copyright (c) 2012-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "txmempool.h"
 #include "wallet/wallet.h"
@@ -196,34 +196,8 @@ BOOST_AUTO_TEST_CASE(coin_selection_tests)
         BOOST_CHECK_EQUAL(nValueRet, 2 * COIN);  // we should get 2 BTC in 1 coin
         BOOST_CHECK_EQUAL(setCoinsRet.size(), 1U);
 
-        // empty the wallet and start again, now with fractions of a cent, to test small change avoidance
-
-        empty_wallet();
-        add_coin(MIN_CHANGE * 1 / 10);
-        add_coin(MIN_CHANGE * 2 / 10);
-        add_coin(MIN_CHANGE * 3 / 10);
-        add_coin(MIN_CHANGE * 4 / 10);
-        add_coin(MIN_CHANGE * 5 / 10);
-
-        // try making 1 * MIN_CHANGE from the 1.5 * MIN_CHANGE
-        // we'll get change smaller than MIN_CHANGE whatever happens, so can expect MIN_CHANGE exactly
-        BOOST_CHECK( wallet.SelectCoinsMinConf(MIN_CHANGE, 1, 1, 0, vCoins, setCoinsRet, nValueRet));
-        BOOST_CHECK_EQUAL(nValueRet, MIN_CHANGE);
-
-        // but if we add a bigger coin, small change is avoided
-        add_coin(1111*MIN_CHANGE);
-
-        // try making 1 from 0.1 + 0.2 + 0.3 + 0.4 + 0.5 + 1111 = 1112.5
-        BOOST_CHECK( wallet.SelectCoinsMinConf(1 * MIN_CHANGE, 1, 1, 0, vCoins, setCoinsRet, nValueRet));
-        BOOST_CHECK_EQUAL(nValueRet, 1 * MIN_CHANGE); // we should get the exact amount
-
-        // if we add more small coins:
-        add_coin(MIN_CHANGE * 6 / 10);
-        add_coin(MIN_CHANGE * 7 / 10);
-
-        // and try again to make 1.0 * MIN_CHANGE
-        BOOST_CHECK( wallet.SelectCoinsMinConf(1 * MIN_CHANGE, 1, 1, 0, vCoins, setCoinsRet, nValueRet));
-        BOOST_CHECK_EQUAL(nValueRet, 1 * MIN_CHANGE); // we should get the exact amount
+        // empty the wallet to restart again
+        empty_wallet() ;
 
         // run the 'mtgox' test (see http://blockexplorer.com/tx/29a3efd3ef04f9153d47a990bd7b048a4b2d213daaa5fb8ed670fb85f13bdbcf)
         // they tried to consolidate 10 50k coins into one 500k coin, and ended up with 50k in change
@@ -235,64 +209,7 @@ BOOST_AUTO_TEST_CASE(coin_selection_tests)
         BOOST_CHECK_EQUAL(nValueRet, 500000 * COIN); // we should get the exact amount
         BOOST_CHECK_EQUAL(setCoinsRet.size(), 10U); // in ten coins
 
-        // if there's not enough in the smaller coins to make at least 1 * MIN_CHANGE change (0.5+0.6+0.7 < 1.0+1.0),
-        // we need to try finding an exact subset anyway
-
-        // sometimes it will fail, and so we use the next biggest coin:
-        empty_wallet();
-        add_coin(MIN_CHANGE * 5 / 10);
-        add_coin(MIN_CHANGE * 6 / 10);
-        add_coin(MIN_CHANGE * 7 / 10);
-        add_coin(1111 * MIN_CHANGE);
-        BOOST_CHECK( wallet.SelectCoinsMinConf(1 * MIN_CHANGE, 1, 1, 0, vCoins, setCoinsRet, nValueRet));
-        BOOST_CHECK_EQUAL(nValueRet, 1111 * MIN_CHANGE); // we get the bigger coin
-        BOOST_CHECK_EQUAL(setCoinsRet.size(), 1U);
-
-        // but sometimes it's possible, and we use an exact subset (0.4 + 0.6 = 1.0)
-        empty_wallet();
-        add_coin(MIN_CHANGE * 4 / 10);
-        add_coin(MIN_CHANGE * 6 / 10);
-        add_coin(MIN_CHANGE * 8 / 10);
-        add_coin(1111 * MIN_CHANGE);
-        BOOST_CHECK( wallet.SelectCoinsMinConf(MIN_CHANGE, 1, 1, 0, vCoins, setCoinsRet, nValueRet));
-        BOOST_CHECK_EQUAL(nValueRet, MIN_CHANGE);   // we should get the exact amount
-        BOOST_CHECK_EQUAL(setCoinsRet.size(), 2U); // in two coins 0.4+0.6
-
-        // test avoiding small change
-        empty_wallet();
-        add_coin(MIN_CHANGE * 5 / 100);
-        add_coin(MIN_CHANGE * 1);
-        add_coin(MIN_CHANGE * 100);
-
-        // trying to make 100.01 from these three coins
-        BOOST_CHECK(wallet.SelectCoinsMinConf(MIN_CHANGE * 10001 / 100, 1, 1, 0, vCoins, setCoinsRet, nValueRet));
-        BOOST_CHECK_EQUAL(nValueRet, MIN_CHANGE * 10105 / 100); // we should get all coins
-        BOOST_CHECK_EQUAL(setCoinsRet.size(), 3U);
-
-        // but if we try to make 99.9, we should take the bigger of the two small coins to avoid small change
-        BOOST_CHECK(wallet.SelectCoinsMinConf(MIN_CHANGE * 9990 / 100, 1, 1, 0, vCoins, setCoinsRet, nValueRet));
-        BOOST_CHECK_EQUAL(nValueRet, 101 * MIN_CHANGE);
-        BOOST_CHECK_EQUAL(setCoinsRet.size(), 2U);
-
-        // test with many inputs
-        for (CAmount amt=1500; amt < COIN; amt*=10) {
-             empty_wallet();
-             // Create 676 inputs (=  (old MAX_STANDARD_TX_SIZE == 100000)  / 148 bytes per input)
-             for (uint16_t j = 0; j < 676; j++)
-                 add_coin(amt);
-             BOOST_CHECK(wallet.SelectCoinsMinConf(2000, 1, 1, 0, vCoins, setCoinsRet, nValueRet));
-             if (amt - 2000 < MIN_CHANGE) {
-                 // needs more than one input:
-                 uint16_t returnSize = std::ceil((2000.0 + MIN_CHANGE)/amt);
-                 CAmount returnValue = amt * returnSize;
-                 BOOST_CHECK_EQUAL(nValueRet, returnValue);
-                 BOOST_CHECK_EQUAL(setCoinsRet.size(), returnSize);
-             } else {
-                 // one input is sufficient:
-                 BOOST_CHECK_EQUAL(nValueRet, amt);
-                 BOOST_CHECK_EQUAL(setCoinsRet.size(), 1U);
-             }
-        }
+        empty_wallet() ;
 
         // test randomness
         {

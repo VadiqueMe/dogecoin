@@ -2936,8 +2936,8 @@
         <translation>%s가 유용하다고 생각한다면 프로젝트에 공헌해주세요. 이 소프트웨어에 대한 보다 자세한 정보는 %s를 방문해주십시오.</translation>
     </message>
     <message>
-        <source>Set lowest fee rate (in %s/kB) for transactions to be included in block creation. (default: %s)</source>
-        <translation>블록 생성시 거래가 포함되도록 최저 수수료율을 설정하십시오 (%s/kB 단위). (기본값: %s)</translation>
+        <source>Set lowest fee rate (in %s/kB) for transactions to be included in block creation (default: %s)</source>
+        <translation>블록 생성시 거래가 포함되도록 최저 수수료율을 설정하십시오 (%s/kB 단위) (기본값: %s)</translation>
     </message>
     <message>
         <source>Set the number of script verification threads (%u to %d, 0 = auto, &lt;0 = leave that many cores free, default: %d)</source>

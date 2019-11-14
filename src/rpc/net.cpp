@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "rpc/server.h"
 
@@ -418,7 +418,6 @@ UniValue getnetworkinfo(const JSONRPCRequest& request)
             "  ,...\n"
             "  ],\n"
             "  \"relayfee\": x.xxxxxxxx,                (numeric) minimum relay fee for non-free transactions in " + CURRENCY_UNIT + "/kB\n"
-            "  \"incrementalfee\": x.xxxxxxxx,          (numeric) minimum fee increment for mempool limiting or BIP 125 replacement in " + CURRENCY_UNIT + "/kB\n"
             "  \"localaddresses\": [                    (array) list of local addresses\n"
             "  {\n"
             "    \"address\": \"xxxx\",                 (string) network address\n"
@@ -449,7 +448,6 @@ UniValue getnetworkinfo(const JSONRPCRequest& request)
     }
     obj.push_back(Pair("networks",      GetNetworksInfo()));
     obj.push_back(Pair("relayfee", ValueFromAmount( ::minRelayTxFee.GetFeePerKiloByte() ))) ;
-    obj.push_back(Pair("incrementalfee", ValueFromAmount( ::incrementalRelayFee.GetFeePerKiloByte() ))) ;
     UniValue localAddresses(UniValue::VARR);
     {
         LOCK(cs_mapLocalHost);

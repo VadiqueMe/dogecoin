@@ -2940,7 +2940,7 @@
         <translation>Beperk benodigde opslag door trimmen (verwijderen) van oude blokken in te schakelen. Dit maakt het mogelijk om de pruneblockchain RPC aan te roepen om specifieke blokken te verwijderen, en maakt het automatische trimmen van oude blokken mogelijk wanneer een doelgrootte in MiB is voorzien. Deze modus is niet compatibele met -txindex en -rescan. Waarschuwing: Terugzetten van deze instellingen vereist het opnieuw downloaden van gehele de blokketen. (standaard:0 = uitzetten trimmodus, 1 = manueel trimmen via RPC toestaan, &gt;%u = automatisch blokbestanden trimmen om beneden de gespecificeerde doelgrootte in MiB te blijven)</translation>
     </message>
     <message>
-        <source>Set lowest fee rate (in %s/kB) for transactions to be included in block creation. (default: %s)</source>
+        <source>Set lowest fee rate (in %s/kB) for transactions to be included in block creation (default: %s)</source>
         <translation>Specificeer het laagste tarief (in %s/kB) voor transacties die bij het maken van een blok moeten worden in rekening worden gebracht (standaard: %s)</translation>
     </message>
     <message>
