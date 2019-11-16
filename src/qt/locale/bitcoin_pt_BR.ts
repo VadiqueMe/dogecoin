@@ -3208,10 +3208,6 @@
         <translation>Use UPnP para mapear a porta de entrada (padrão: %u)</translation>
     </message>
     <message>
-        <source>Use the test chain</source>
-        <translation>Usar a rede de testes</translation>
-    </message>
-    <message>
         <source>User Agent comment (%s) contains unsafe characters.</source>
         <translation>Comentário do Agente de Usuário (%s) contém caracteres inseguros.</translation>
     </message>

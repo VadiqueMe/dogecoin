@@ -135,13 +135,12 @@ BitcoinGUI::BitcoinGUI( const PlatformStyle * style, const NetworkStyle * networ
 #ifdef ENABLE_WALLET
     enableWallet = WalletModel::isWalletEnabled();
 #endif // ENABLE_WALLET
-    if(enableWallet)
-    {
-        windowTitle += tr("Wallet");
+    if ( enableWallet ) {
+        windowTitle += tr( "Wallet" ) ;
     } else {
-        windowTitle += tr("Node");
+        windowTitle += tr( "Node" ) ;
     }
-    windowTitle += " " + networkStyle->getTitleAddText();
+    windowTitle += " " + networkStyle->getTextToAppendToTitle() ;
 #ifndef Q_OS_MAC
     QApplication::setWindowIcon(networkStyle->getTrayAndWindowIcon());
     setWindowIcon(networkStyle->getTrayAndWindowIcon());
@@ -619,7 +618,7 @@ void BitcoinGUI::createTrayIcon(const NetworkStyle *networkStyle)
 {
 #ifndef Q_OS_MAC
     trayIcon = new QSystemTrayIcon(this);
-    QString toolTip = tr("%1 client").arg(tr(PACKAGE_NAME)) + " " + networkStyle->getTitleAddText();
+    QString toolTip = tr( "%1 client" ).arg( tr(PACKAGE_NAME) ) + " " + networkStyle->getTextToAppendToTitle() ;
     trayIcon->setToolTip(toolTip);
     trayIcon->setIcon(networkStyle->getTrayAndWindowIcon());
     trayIcon->hide();

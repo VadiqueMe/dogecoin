@@ -3212,12 +3212,8 @@
         <translation>Использовать UPnP для проброса порта (по умолчанию: %u)</translation>
     </message>
     <message>
-        <source>Use the test chain</source>
-        <translation>Использовать тестовую цепочку</translation>
-    </message>
-    <message>
         <source>User Agent comment (%s) contains unsafe characters.</source>
-        <translation>Комментарий пользователя (%s) содержит небезопасные символы.</translation>
+        <translation>Юзер-агент (%s) содержит тревожные символы.</translation>
     </message>
     <message>
         <source>Verifying blocks...</source>

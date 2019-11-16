@@ -3216,10 +3216,6 @@
         <translation>Brug UPnP til at konfigurere den lyttende port (standard: %u)</translation>
     </message>
     <message>
-        <source>Use the test chain</source>
-        <translation>Brug testkæden</translation>
-    </message>
-    <message>
         <source>User Agent comment (%s) contains unsafe characters.</source>
         <translation>Brugeragent-kommentar (%s) indeholder usikre tegn.</translation>
     </message>

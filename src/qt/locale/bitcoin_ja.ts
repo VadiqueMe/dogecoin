@@ -3217,10 +3217,6 @@
         <translation>リッスンポートの割当に UPnP を使用 (初期値: %u)</translation>
     </message>
     <message>
-        <source>Use the test chain</source>
-        <translation>テストチェインを利用する</translation>
-    </message>
-    <message>
         <source>User Agent comment (%s) contains unsafe characters.</source>
         <translation>ユーザエージェントのコメント (%s) には安全でない文字が含まれています。</translation>
     </message>

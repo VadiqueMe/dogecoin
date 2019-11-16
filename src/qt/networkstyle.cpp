@@ -1,6 +1,7 @@
 // Copyright (c) 2014-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "networkstyle.h"
 
@@ -9,22 +10,22 @@
 #include <QApplication>
 
 static const struct {
-    const char *networkId;
-    const char *appName;
-    const int iconColorHueShift;
-    const int iconColorSaturationReduction;
-    const char *titleAddText;
+    const char * networkId ;
+    const char * appName ;
+    const int iconColorHueShift ;
+    const int iconColorSaturationReduction ;
+    const char * textToAppendToTitle ;
 } network_styles[] = {
     { "main", QAPP_APP_NAME_DEFAULT, 0, 0, "" },
+    { "inu", QAPP_APP_NAME_INU, 333, 22, "( inu )" },
     { "test", QAPP_APP_NAME_TESTNET, 70, 30, "[testnet]" },
     { "regtest", QAPP_APP_NAME_TESTNET, 160, 30, "[regtest]" }
 } ;
-static const unsigned network_styles_count = sizeof(network_styles)/sizeof(*network_styles);
+static const size_t network_styles_count = sizeof( network_styles ) / sizeof( *network_styles ) ;
 
-// titleAddText needs to be const char* for tr()
-NetworkStyle::NetworkStyle(const QString &_appName, const int iconColorHueShift, const int iconColorSaturationReduction, const char *_titleAddText):
-    appName(_appName),
-    titleAddText(qApp->translate("SplashScreen", _titleAddText))
+NetworkStyle::NetworkStyle( const QString & name, const int iconColorHueShift, const int iconColorSaturationReduction, const std::string & textToAppend ):
+    appName( name ),
+    textToAppendToTitle( QString::fromStdString( textToAppend ) )
 {
     // load pixmap
     QPixmap pixmap(":/icons/bitcoin");
@@ -79,18 +80,20 @@ NetworkStyle::NetworkStyle(const QString &_appName, const int iconColorHueShift,
     trayAndWindowIcon   = QIcon(pixmap.scaled(QSize(256,256)));
 }
 
-const NetworkStyle *NetworkStyle::instantiate(const QString &networkId)
+const NetworkStyle * NetworkStyle::instantiate( const QString & networkId )
 {
-    for (unsigned x=0; x<network_styles_count; ++x)
+    for ( size_t x = 0 ; x < network_styles_count ; ++ x )
     {
-        if (networkId == network_styles[x].networkId)
+        if ( networkId == network_styles[ x ].networkId )
         {
             return new NetworkStyle(
-                    network_styles[x].appName,
-                    network_styles[x].iconColorHueShift,
-                    network_styles[x].iconColorSaturationReduction,
-                    network_styles[x].titleAddText);
+                    network_styles[ x ].appName,
+                    network_styles[ x ].iconColorHueShift,
+                    network_styles[ x ].iconColorSaturationReduction,
+                    network_styles[ x ].textToAppendToTitle
+            ) ;
         }
     }
-    return 0;
+
+    return nullptr ;
 }

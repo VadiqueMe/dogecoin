@@ -1,4 +1,5 @@
 // Copyright (c) 2015 The Dogecoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -104,7 +105,8 @@ bool CheckAuxPowProofOfWork( const CBlockHeader & block, const Consensus::Params
         //LogPrintf( "Checking proof-of-work for block with scrypt hash %s\n", blockScryptHash.GetHex() ) ;
 
         if ( ! CheckProofOfWork( blockScryptHash, block.nBits, params ) )
-            return error("%s : non-AUX proof of work failed", __func__);
+            return error( "%s : non-aux proof of work failed, 0x%s > 0x%s", __func__,
+                            blockScryptHash.GetHex(), arith_uint256().SetCompact( block.nBits ).GetHex() ) ;
 
         return true ;
     }

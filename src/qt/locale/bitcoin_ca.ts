@@ -2800,10 +2800,6 @@
         <translation>Utilitza UPnP per a mapejar el port d'escolta (per defecte: %u)</translation>
     </message>
     <message>
-        <source>Use the test chain</source>
-        <translation>Utilitza la cadena de proves</translation>
-    </message>
-    <message>
         <source>Verifying blocks...</source>
         <translation>S'estan verificant els blocs...</translation>
     </message>

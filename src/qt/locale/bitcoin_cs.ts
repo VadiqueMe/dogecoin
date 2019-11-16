@@ -3216,10 +3216,6 @@
         <translation>Použít UPnP k namapování naslouchacího portu (výchozí: %u)</translation>
     </message>
     <message>
-        <source>Use the test chain</source>
-        <translation>Použít testovací řetězec</translation>
-    </message>
-    <message>
         <source>User Agent comment (%s) contains unsafe characters.</source>
         <translation>Komentář u typu klienta (%s) obsahuje riskantní znaky.</translation>
     </message>

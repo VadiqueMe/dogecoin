@@ -3208,10 +3208,6 @@
         <translation>리슨(Listen) 포트를 할당하기 위해 UPnP 사용 (기본값: %u)</translation>
     </message>
     <message>
-        <source>Use the test chain</source>
-        <translation>테스트 체인 사용</translation>
-    </message>
-    <message>
         <source>User Agent comment (%s) contains unsafe characters.</source>
         <translation>사용자 정의 코멘트 (%s)에 안전하지 못한 글자가 포함되어 있습니다.</translation>
     </message>

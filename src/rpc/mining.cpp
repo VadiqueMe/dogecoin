@@ -312,7 +312,7 @@ UniValue getmininginfo( const JSONRPCRequest& request )
             "  \"generate\": true|false     (boolean) If the generation is on or off (see getgenerate or setgenerate)\n"
             "  \"genthreads\": n            (numeric) Number of threads running for generation (see getgenerate or setgenerate)\n"
             "  \"pooledtx\": n              (numeric) The size of the mempool\n"
-            "  \"chain\": \"xxxx\",           (string) Current network name as defined in BIP70 (main, test, regtest)\n"
+            "  \"chain\": \"xxxx\",           (string) Current network name (main, inu, test, regtest)\n"
             "}\n"
             "\nExamples:\n"
             + HelpExampleCli( "getmininginfo", "" )

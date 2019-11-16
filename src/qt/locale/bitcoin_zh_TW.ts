@@ -3213,10 +3213,6 @@
         <translation>使用通用隨插即用 (UPnP) 協定來設定對應的服務連接埠(預設值: %u)</translation>
     </message>
     <message>
-        <source>Use the test chain</source>
-        <translation>使用測試區塊鏈</translation>
-    </message>
-    <message>
         <source>User Agent comment (%s) contains unsafe characters.</source>
         <translation>使用者代理註解(%s)中含有不安全的字元。</translation>
     </message>

@@ -1,9 +1,10 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_QT_GUICONSTANTS_H
-#define BITCOIN_QT_GUICONSTANTS_H
+#ifndef DOGECOIN_QT_GUICONSTANTS_H
+#define DOGECOIN_QT_GUICONSTANTS_H
 
 /* Milliseconds between model updates */
 static const int MODEL_UPDATE_DELAY = 250;
@@ -34,16 +35,14 @@ static const bool DEFAULT_SPLASHSCREEN = true;
 /* Transaction list -- TX status decoration - default color */
 #define COLOR_BLACK QColor(0, 0, 0)
 
-/* Tooltips longer than this (in characters) are converted into rich text,
-   so that they can be word-wrapped.
- */
-static const int TOOLTIP_WRAP_THRESHOLD = 80;
+/* Tooltips longer than this (in characters) are converted into rich text, so that they can be word-wrapped */
+static const size_t TOOLTIP_WRAP_THRESHOLD = 80 ;
 
-/* Maximum allowed URI length */
-static const int MAX_URI_LENGTH = 255;
+/* Maximum length of URI */
+static const size_t MAX_URI_LENGTH = 255 ;
 
 /* QRCodeDialog -- size of exported QR Code image */
-#define QR_IMAGE_SIZE 300
+static const unsigned int QR_IMAGE_SIZE = 300 ;
 
 /* Number of frames in spinner animation */
 #define SPINNER_FRAMES 36
@@ -51,6 +50,7 @@ static const int MAX_URI_LENGTH = 255;
 #define QAPP_ORG_NAME "Dogecoin"
 #define QAPP_ORG_DOMAIN "dogecoin.org"
 #define QAPP_APP_NAME_DEFAULT "Dogecoin-Qt"
+#define QAPP_APP_NAME_INU "Dogecoin-Qt-inu"
 #define QAPP_APP_NAME_TESTNET "Dogecoin-Qt-testnet"
 
-#endif // BITCOIN_QT_GUICONSTANTS_H
+#endif

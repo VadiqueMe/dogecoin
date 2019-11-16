@@ -1,7 +1,8 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "chainparams.h"
 #include "consensus/merkle.h"
@@ -9,6 +10,9 @@
 #include "tinyformat.h"
 #include "util.h"
 #include "utilstrencodings.h"
+#include "arith_uint256.h"
+
+#include <iomanip> // std::get_time
 
 #include <assert.h>
 
@@ -16,7 +20,7 @@
 
 #include "chainparamsseeds.h"
 
-static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesisOutputScript, uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
+static CBlock CreateGenesisBlock( const char * pszTimestamp, const CScript & genesisOutputScript, uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount & genesisReward )
 {
     CMutableTransaction txNew;
     txNew.nVersion = 1;
@@ -26,33 +30,27 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
     txNew.vout[0].nValue = genesisReward;
     txNew.vout[0].scriptPubKey = genesisOutputScript;
 
-    CBlock genesis;
-    genesis.nTime    = nTime;
-    genesis.nBits    = nBits;
-    genesis.nNonce   = nNonce;
-    genesis.nVersion = nVersion;
-    genesis.vtx.push_back(MakeTransactionRef(std::move(txNew)));
-    genesis.hashPrevBlock.SetNull();
-    genesis.hashMerkleRoot = BlockMerkleRoot(genesis);
-    return genesis;
+    CBlock genesis ;
+    genesis.nTime    = nTime ;
+    genesis.nBits    = nBits ;
+    genesis.nNonce   = nNonce ;
+    genesis.nVersion = nVersion ;
+    genesis.vtx.push_back( MakeTransactionRef( std::move( txNew ) ) ) ;
+    genesis.hashPrevBlock.SetNull() ;
+    genesis.hashMerkleRoot = BlockMerkleRoot( genesis ) ;
+    return genesis ;
 }
 
 /**
  * Build the genesis block. Note that the output of its generation
  * transaction cannot be spent since it did not originally exist in the
- * database.
- *
- * CBlock(hash=000000000019d6, ver=1, hashPrevBlock=00000000000000, hashMerkleRoot=4a5e1e, nTime=1386325540, nBits=0x1e0ffff0, nNonce=99943, vtx=1)
- *   CTransaction(hash=4a5e1e, ver=1, vin.size=1, vout.size=1, nLockTime=0)
- *     CTxIn(COutPoint(000000, -1), coinbase 04ffff001d0104455468652054696d65732030332f4a616e2f32303039204368616e63656c6c6f72206f6e206272696e6b206f66207365636f6e64206261696c6f757420666f722062616e6b73)
- *     CTxOut(nValue=50.00000000, scriptPubKey=0x5F1DF16B2B704C8A578D0B)
- *   vMerkleTree: 4a5e1e
+ * database
  */
-static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
+static CBlock CreateGenesisBlock( uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount & genesisReward )
 {
-    const char* pszTimestamp = "Nintondo";
-    const CScript genesisOutputScript = CScript() << ParseHex("040184710fa689ad5023690c80f3a49c8f13f8d45b8c857fbcbc8bc4a8e4d3eb4b10f4d4604fa08dce601aaf0f470216fe1b51850b4acf21b179c45070ac7b03a9") << OP_CHECKSIG;
-    return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
+    const char* pszTimestamp = "Nintondo" ;
+    const CScript genesisOutputScript = CScript() << ParseHex( "040184710fa689ad5023690c80f3a49c8f13f8d45b8c857fbcbc8bc4a8e4d3eb4b10f4d4604fa08dce601aaf0f470216fe1b51850b4acf21b179c45070ac7b03a9" ) << OP_CHECKSIG ;
+    return CreateGenesisBlock( pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward ) ;
 }
 
 /**
@@ -109,10 +107,10 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1479168000; // November 15th, 2016.
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 0; // Disabled
 
-        // The best chain should have at least this much work.
+        // The best chain should have at least this much work
         consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000141a39e783aad4f660f");
 
-        // By default assume that the signatures in ancestors of this block are valid.
+        // By default assume that the signatures in ancestors of this block are valid
         consensus.defaultAssumeValid = uint256S("0x77e3f4a4bcb4a2c15e8015525e3d15b466f6c022f6ca82698f329edef7d9777e"); // 2,510,150
 
         // AuxPoW parameters
@@ -208,9 +206,160 @@ public:
 };
 static CMainParams mainParams;
 
+
+/**
+ * Inu network
+ */
+
+class CInuParams : public CChainParams {
+
+public:
+    CInuParams() {
+        strNetworkID = "inu" ;
+
+        consensus.nSubsidyHalvingInterval = 1000000 ;
+        consensus.powLimit = uint256S( "0x0007ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" ) ; // ~uint256(0) >> 13
+        consensus.nPowTargetTimespan = 60 ; // 1 minute
+        consensus.nPowTargetSpacing = 60 ; // 1 minute
+        consensus.fDigishieldDifficultyCalculation = true ;
+        consensus.nCoinbaseMaturity = 10 ;
+        consensus.fPowAllowMinDifficultyBlocks = false ;
+        consensus.fPowAllowDigishieldMinDifficultyBlocks = false ;
+        consensus.fPowNoRetargeting = false ;
+        consensus.nRuleChangeActivationThreshold = 9576 ; // 95% of 10 080
+        consensus.nMinerConfirmationWindow = 10080 ; // 60 * 24 * 7 = 10 080 blocks, or one week
+
+        consensus.nMajorityEnforceBlockUpgrade = 9800 ;
+        consensus.nMajorityRejectBlockOutdated = 9900 ;
+        consensus.nMajorityWindow = 10000 ;
+        consensus.BIP34Height = 1 ;
+        consensus.BIP34Hash = uint256S( "0x00" ) ;
+        consensus.BIP66Height = 1 ;
+
+        consensus.vDeployments[ Consensus::DEPLOYMENT_TESTDUMMY ].bit = 28 ;
+        struct std::tm startTime ;
+        {
+            std::istringstream ss( "2018-01-01 12:00:00" ) ;
+            ss >> std::get_time( &startTime, "%Y-%m-%d %H:%M:%S" ) ;
+        }
+        consensus.vDeployments[ Consensus::DEPLOYMENT_TESTDUMMY ].nStartTime = mktime( &startTime ) ;
+        struct std::tm timeout ;
+        {
+            std::istringstream ss( "2018-12-31 12:00:00" ) ;
+            ss >> std::get_time( &timeout, "%Y-%m-%d %H:%M:%S" ) ;
+        }
+        consensus.vDeployments[ Consensus::DEPLOYMENT_TESTDUMMY ].nTimeout = mktime( &timeout ) ;
+
+        // Deployment of BIP68, BIP112, and BIP113
+        consensus.vDeployments[ Consensus::DEPLOYMENT_CSV ].bit = 0 ;
+        consensus.vDeployments[ Consensus::DEPLOYMENT_CSV ].nStartTime = mktime( &startTime ) ;
+        consensus.vDeployments[ Consensus::DEPLOYMENT_CSV ].nTimeout = mktime( &timeout ) ;
+
+        // Deployment of SegWit (BIP141, BIP143, and BIP147)
+        consensus.vDeployments[ Consensus::DEPLOYMENT_SEGWIT ].bit = 1 ;
+        consensus.vDeployments[ Consensus::DEPLOYMENT_SEGWIT ].nStartTime = mktime( &startTime ) ;
+        consensus.vDeployments[ Consensus::DEPLOYMENT_SEGWIT ].nTimeout = 0 ; // disabled
+
+        // The best chain should have at least this much work
+        consensus.nMinimumChainWork = uint256S( "0x0000000000000000000000000000000000000000000000000000000000000001" ) ;
+
+        // By default assume that the signatures in ancestors of this block are valid
+        consensus.defaultAssumeValid = uint256S( "0x00" ) ;
+
+        consensus.nAuxpowChainId = 0x62 ; // 98 Josh Wise
+        consensus.fStrictChainId = true ; // auxpow parameter ??
+        consensus.fAllowLegacyBlocks = false ;
+        consensus.nHeightEffective = 0 ; // auxpow parameter ??
+
+        pConsensusRoot = &consensus ;
+
+        /* The message start string is designed to be unlikely to occur in common texts */
+        pchMessageStart[ 0 ] = 0xc0 ;
+        pchMessageStart[ 1 ] = 0xc0 ;
+        pchMessageStart[ 2 ] = 0xbe ;
+        pchMessageStart[ 3 ] = ',' ;
+        vAlertPubKey = ParseHex( "0002be4a11a5dae4db797db0064d0d77394eb3fab20706012cd62e12c4000448af4430006340be5a43a35e1856fbb13aa90c555557772da8f6d065b499b06f51dc" ) ;
+        nDefaultPort = 55336 ;
+        nPruneAfterHeight = 100000 ;
+
+        struct std::tm genesisTime ;
+        {
+            std::istringstream ss( "2019-11-16 12:11:10" ) ;
+            ss >> std::get_time( &genesisTime, "%Y-%m-%d %H:%M:%S" ) ;
+        }
+
+     /*
+        arith_uint256 maxScryptHashGenesis = UintToArith256( consensus.powLimit ) ;
+        arith_uint256 maxShaHashGenesis = UintToArith256( consensus.powLimit ) << 2 ;
+        uint32_t nonce = 0xbe000000 ;
+        while ( nonce >= 0x2be )
+        {
+            genesis = CreateGenesisBlock(
+                mktime( &genesisTime ),
+                nonce,
+                UintToArith256( consensus.powLimit ).GetCompact(), // bits
+                0x620004, // version
+                1 * COIN
+            ) ;
+
+            if ( UintToArith256( genesis.GetPoWHash() ) <= maxScryptHashGenesis &&
+                    UintToArith256( genesis.GetHash() ) <= maxShaHashGenesis )
+                break ;
+
+            -- nonce ;
+        }
+
+        std::cout << "genesis block's time is " << std::put_time( &genesisTime, "%Y-%m-%d %H:%M:%S" ) << std::endl ;
+        printf( "genesis block's nonce is 0x%08x\n", genesis.nNonce ) ;
+        printf( "genesis block's hash-merkle-root is 0x%s\n", genesis.hashMerkleRoot.GetHex().c_str() );
+        printf( "genesis block's scrypt hash is 0x%s\n", genesis.GetPoWHash().GetHex().c_str() ) ;
+        printf( "genesis block's sha256 hash is 0x%s\n", genesis.GetHash().GetHex().c_str() ) ;
+     */
+
+        const uint32_t genesisNonce = 0xbd2ba4a2 ;
+        // genesis block's scrypt hash is 0x0007cd78e651b9d124d2073e9272fb3ff5d53b00927c6ea4db08e8a5ada78ff3
+        // genesis block's sha256 hash is 0x000aa3a75133cd33ef50cf2377479563fa9170259dc52a44834ea3b6987840f7
+
+        genesis = CreateGenesisBlock( mktime( &genesisTime ), genesisNonce, /* bits */ UintToArith256( consensus.powLimit ).GetCompact(), /* version */ 0x620004, 1 * COIN ) ;
+
+        consensus.hashGenesisBlock = genesis.GetHash() ;
+
+        assert ( UintToArith256( genesis.GetPoWHash() ) <= UintToArith256( consensus.powLimit ) &&
+                    UintToArith256( genesis.GetHash() ) <= ( UintToArith256( consensus.powLimit ) << 2 ) ) ;
+
+        uint256 expectedShaHashOfGenesis = uint256S( "0x000aa3a75133cd33ef50cf2377479563fa9170259dc52a44834ea3b6987840f7" ) ;
+        uint256 expectedMerkleRootOfGenesis = uint256S( "0x1553b4400a70b51fae69eaf8c771f97b1f8996bcd5dbfaad4212d793377f335c" ) ;
+
+        assert( consensus.hashGenesisBlock == expectedShaHashOfGenesis ) ;
+        assert( genesis.hashMerkleRoot == expectedMerkleRootOfGenesis ) ;
+
+        base58Prefixes[ PUBKEY_ADDRESS ] = std::vector< unsigned char >( 1, 'u' ) ;
+        base58Prefixes[ SCRIPT_ADDRESS ] = std::vector< unsigned char >( 1, 0xbe ) ;
+        base58Prefixes[ SECRET_KEY ] =     std::vector< unsigned char >( 1, 0xaa ) ;
+        base58Prefixes[ EXT_PUBLIC_KEY ] = boost::assign::list_of( 0x0a )( 0xbc )( 0x20 )( 0x88 ).convert_to_container< std::vector< unsigned char > >() ;
+        base58Prefixes[ EXT_SECRET_KEY ] = boost::assign::list_of( 0x0a )( 0xbc )( 0x80 )( 0xdd ).convert_to_container< std::vector< unsigned char > >() ;
+
+        vSeeds.clear() ;
+        vFixedSeeds.clear() ;
+
+        fMiningRequiresPeers = false /* true */ ;
+        fDefaultConsistencyChecks = false ;
+        fRequireStandard = true ;
+        fMineBlocksOnDemand = false ;
+
+        checkpointData = (CCheckpointData) {
+            boost::assign::map_list_of
+            (       0, uint256S( "0x000aa3a75133cd33ef50cf2377479563fa9170259dc52a44834ea3b6987840f7" ) )
+        } ;
+    }
+};
+static CInuParams inuParams ;
+
+
 /**
  * Testnet (v3)
  */
+
 class CTestNetParams : public CChainParams {
 private:
     Consensus::Params digishieldConsensus;
@@ -353,9 +502,11 @@ public:
 };
 static CTestNetParams testNetParams;
 
+
 /**
  * Regression test
  */
+
 class CRegTestParams : public CChainParams {
 private:
     Consensus::Params digishieldConsensus;
@@ -389,11 +540,11 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 0;
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 999999999999ULL;
 
-        // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x00");
+        // The best chain should have at least this much work
+        consensus.nMinimumChainWork = uint256S( "0x00" ) ;
 
-        // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x00");
+        // By default assume that the signatures in ancestors of this block are valid
+        consensus.defaultAssumeValid = uint256S( "0x00" ) ;
 
         // AuxPow parameters
         consensus.nAuxpowChainId = 0x0062; // 98 - Josh Wise!
@@ -473,7 +624,8 @@ const CChainParams & Params() {
     return *pCurrentParams ;
 }
 
-const Consensus::Params *Consensus::Params::GetConsensus(uint32_t nTargetHeight) const {
+const Consensus::Params *Consensus::Params::GetConsensus(uint32_t nTargetHeight) const
+{
     if (nTargetHeight < this -> nHeightEffective && this -> pLeft != NULL) {
         return this -> pLeft -> GetConsensus(nTargetHeight);
     } else if (nTargetHeight > this -> nHeightEffective && this -> pRight != NULL) {
@@ -487,14 +639,16 @@ const Consensus::Params *Consensus::Params::GetConsensus(uint32_t nTargetHeight)
     return this;
 }
 
-CChainParams& Params(const std::string& chain)
+CChainParams & Params( const std::string & chain )
 {
-    if (chain == CBaseChainParams::MAIN)
-            return mainParams;
-    else if (chain == CBaseChainParams::TESTNET)
-            return testNetParams;
-    else if (chain == CBaseChainParams::REGTEST)
-            return regTestParams;
+    if ( chain == CBaseChainParams::MAIN )
+            return mainParams ;
+    else if ( chain == CBaseChainParams::INU )
+            return inuParams ;
+    else if ( chain == CBaseChainParams::TESTNET )
+            return testNetParams ;
+    else if ( chain == CBaseChainParams::REGTEST )
+            return regTestParams ;
     else
         throw std::runtime_error( strprintf("%s: unknown chain %s", __func__, chain) ) ;
 }

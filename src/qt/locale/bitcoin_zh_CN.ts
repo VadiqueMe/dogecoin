@@ -3046,10 +3046,6 @@
         <translation>使用UPnp映射监听端口 (默认: %u) </translation>
     </message>
     <message>
-        <source>Use the test chain</source>
-        <translation>使用测试链</translation>
-    </message>
-    <message>
         <source>User Agent comment (%s) contains unsafe characters.</source>
         <translation>用户代理评论(%s)包含不安全的字符。</translation>
     </message>

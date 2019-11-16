@@ -3204,10 +3204,6 @@
         <translation>UPnP verwenden, um eine Portweiterleitung einzurichten (Standard: %u)</translation>
     </message>
     <message>
-        <source>Use the test chain</source>
-        <translation>Die Testchain verwenden</translation>
-    </message>
-    <message>
         <source>User Agent comment (%s) contains unsafe characters.</source>
         <translation>Der User Agent Kommentar  (%s) enthält unsichere Zeichen.</translation>
     </message>

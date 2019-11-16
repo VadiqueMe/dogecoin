@@ -3212,10 +3212,6 @@
         <translation>Utiliser l'UPnP pour mapper le port d'écoute (par défaut : %u)</translation>
     </message>
     <message>
-        <source>Use the test chain</source>
-        <translation>Utiliser la chaîne de test</translation>
-    </message>
-    <message>
         <source>User Agent comment (%s) contains unsafe characters.</source>
         <translation>Le commentaire d'agent utilisateur (%s) contient des caractères dangereux.</translation>
     </message>
