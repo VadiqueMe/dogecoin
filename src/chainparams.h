@@ -38,11 +38,7 @@ struct ChainTxData {
 };
 
 /**
- * CChainParams defines various tweakable parameters of a given instance of the
- * Bitcoin system. There are three: the main network on which people trade goods
- * and services, the public test network which gets reset from time to time and
- * a regression test mode which is intended for private networks only. It has
- * minimal difficulty to ensure that blocks can be found instantly.
+ * CChainParams defines various tweakable parameters of a given instance
  */
 class CChainParams
 {
@@ -65,18 +61,21 @@ public:
     const std::vector<unsigned char>& AlertKey() const { return vAlertPubKey; }
     int GetDefaultPort() const { return nDefaultPort; }
 
+    /** Return the name of network (main, inu, test, regtest) */
+    const std::string & NameOfNetwork() const {  return networkName ;  }
+
     const CBlock & GenesisBlock() const {  return genesis ;  }
+
     /** Make miner wait to have peers to avoid wasting work */
-    bool MiningRequiresPeers() const { return fMiningRequiresPeers; }
+    bool MiningRequiresPeers() const {  return fMiningRequiresPeers ;  }
+
     /** Default value for -checkmempool and -checkblockindex argument */
-    bool DefaultConsistencyChecks() const { return fDefaultConsistencyChecks; }
+    bool DefaultConsistencyChecks() const {  return fDefaultConsistencyChecks ;  }
     /** Policy: Filter transactions that do not match well-defined patterns */
     bool RequireStandard() const { return fRequireStandard; }
     uint64_t PruneAfterHeight() const { return nPruneAfterHeight; }
     /** Make miner stop after a block is found. In RPC, don't return until nGenProcLimit blocks are generated */
     bool MineBlocksOnDemand() const { return fMineBlocksOnDemand; }
-    /** Return the name of network (main, inu, test, regtest) */
-    std::string NetworkIDString() const {  return strNetworkID ;  }
     const std::vector<CDNSSeedData>& DNSSeeds() const { return vSeeds; }
     const std::vector<unsigned char>& Base58Prefix(Base58Type type) const { return base58Prefixes[type]; }
     const std::vector<SeedSpec6>& FixedSeeds() const { return vFixedSeeds; }
@@ -95,7 +94,7 @@ protected:
     uint64_t nPruneAfterHeight;
     std::vector<CDNSSeedData> vSeeds;
     std::vector<unsigned char> base58Prefixes[MAX_BASE58_TYPES];
-    std::string strNetworkID;
+    std::string networkName ;
     CBlock genesis ;
     std::vector<SeedSpec6> vFixedSeeds;
     bool fMiningRequiresPeers;
@@ -112,10 +111,11 @@ protected:
  */
 const CChainParams & Params() ;
 
-/**
- * @returns CChainParams for the given name of chain
- */
-CChainParams & Params( const std::string & chain ) ;
+/** Return the name of the current chain (main, inu, test, regtest) */
+const std::string & NameOfChain() ;
+
+/** Return CChainParams for the given name of chain */
+CChainParams & ParamsFor( const std::string & chain ) ;
 
 /**
  * Sets the params returned by Params() to those for the given name of chain

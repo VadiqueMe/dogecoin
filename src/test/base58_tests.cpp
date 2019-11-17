@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "base58.h"
 
@@ -123,7 +123,7 @@ BOOST_AUTO_TEST_CASE( base58_keys_valid_parse )
     UniValue tests = read_json(std::string(json_tests::base58_keys_valid, json_tests::base58_keys_valid + sizeof(json_tests::base58_keys_valid)));
     CDogecoinSecret secret ;
     CDogecoinAddress addr ;
-    SelectParams( CBaseChainParams::MAIN ) ;
+    SelectParams( "main" ) ;
 
     for (unsigned int idx = 0; idx < tests.size(); idx++) {
         UniValue test = tests[idx];
@@ -136,13 +136,15 @@ BOOST_AUTO_TEST_CASE( base58_keys_valid_parse )
         std::string exp_base58string = test[0].get_str();
         std::vector<unsigned char> exp_payload = ParseHex(test[1].get_str());
         const UniValue &metadata = test[2].get_obj();
-        bool isPrivkey = find_value(metadata, "isPrivkey").get_bool();
-        bool isTestnet = find_value(metadata, "isTestnet").get_bool();
-        if (isTestnet)
-            SelectParams(CBaseChainParams::TESTNET);
+
+        bool isTestnet = find_value( metadata, "isTestnet" ).get_bool() ;
+        if ( isTestnet )
+            SelectParams( "test" ) ;
         else
-            SelectParams(CBaseChainParams::MAIN);
-        if(isPrivkey)
+            SelectParams( "main" ) ;
+
+        bool isPrivkey = find_value( metadata, "isPrivkey" ).get_bool() ;
+        if ( isPrivkey )
         {
             bool isCompressed = find_value(metadata, "isCompressed").get_bool();
             // Must be valid private key
@@ -190,13 +192,15 @@ BOOST_AUTO_TEST_CASE(base58_keys_valid_gen)
         std::string exp_base58string = test[0].get_str();
         std::vector<unsigned char> exp_payload = ParseHex(test[1].get_str());
         const UniValue &metadata = test[2].get_obj();
-        bool isPrivkey = find_value(metadata, "isPrivkey").get_bool();
-        bool isTestnet = find_value(metadata, "isTestnet").get_bool();
-        if (isTestnet)
-            SelectParams(CBaseChainParams::TESTNET);
+
+        bool isTestnet = find_value( metadata, "isTestnet" ).get_bool() ;
+        if ( isTestnet )
+            SelectParams( "test" ) ;
         else
-            SelectParams(CBaseChainParams::MAIN);
-        if(isPrivkey)
+            SelectParams( "main" ) ;
+
+        bool isPrivkey = find_value( metadata, "isPrivkey" ).get_bool() ;
+        if ( isPrivkey )
         {
             bool isCompressed = find_value(metadata, "isCompressed").get_bool();
             CKey key;
@@ -238,7 +242,7 @@ BOOST_AUTO_TEST_CASE(base58_keys_valid_gen)
     CTxDestination nodest = CNoDestination() ;
     BOOST_CHECK( ! dummyAddr.Set( nodest ) ) ;
 
-    SelectParams( CBaseChainParams::MAIN ) ;
+    SelectParams( "main" ) ;
 }
 
 // Goal: check that base58 parsing code is robust against a variety of corrupted data

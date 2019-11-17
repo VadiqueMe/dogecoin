@@ -1,6 +1,7 @@
 // Copyright (c) 2012-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
+
 #include "addrman.h"
 #include "test/test_bitcoin.h"
 #include <string>
@@ -112,7 +113,7 @@ BOOST_AUTO_TEST_CASE(caddrdb_read)
     CAddrMan addrman2;
     CAddrDB adb;
     BOOST_CHECK(addrman2.size() == 0);
-    adb.Read(addrman2, ssPeers2);
+    adb.ReadListOfPeersFrom( addrman2, ssPeers2 ) ;
     BOOST_CHECK(addrman2.size() == 3);
 }
 
@@ -144,7 +145,7 @@ BOOST_AUTO_TEST_CASE(caddrdb_read_corrupted)
     CAddrMan addrman2;
     CAddrDB adb;
     BOOST_CHECK(addrman2.size() == 0);
-    adb.Read(addrman2, ssPeers2);
+    adb.ReadListOfPeersFrom( addrman2, ssPeers2 ) ;
     BOOST_CHECK(addrman2.size() == 0);
 }
 

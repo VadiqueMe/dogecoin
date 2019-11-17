@@ -220,30 +220,24 @@ void PaymentServer::ipcParseCommandLine(int argc, char* argv[])
             {
                 CDogecoinAddress address( r.address.toStdString() ) ;
 
-                if (address.IsValid(Params(CBaseChainParams::MAIN)))
-                {
-                    SelectParams(CBaseChainParams::MAIN);
-                }
-                else if (address.IsValid(Params(CBaseChainParams::TESTNET)))
-                {
-                    SelectParams(CBaseChainParams::TESTNET);
-                }
+                std::vector< std::string > chains = { "main", "inu", "test" } ;
+                for ( const std::string & chain : chains )
+                    if ( address.IsValid( ParamsFor( chain ) ) )
+                        SelectParams( chain ) ;
             }
         }
         else if (QFile::exists(arg)) // Filename
         {
             savedPaymentRequests.append(arg);
 
-            PaymentRequestPlus request;
-            if (readPaymentRequestFromFile(arg, request))
+            PaymentRequestPlus request ;
+            if ( readPaymentRequestFromFile( arg, request ) )
             {
-                if (request.getDetails().genesis() == "1a91e3dace36e2be3bf030a65679fe821aa1d6ef92e7c9902eb318182c355691")
+                std::vector< std::string > chains = { "main", "inu", "test" } ;
+                for ( const std::string & chain : chains )
                 {
-                    SelectParams(CBaseChainParams::MAIN);
-                }
-                else if (request.getDetails().genesis() == "bb0a78264637406b6360aad926284d544d7049f45189db5664f3c4d07350559e")
-                {
-                    SelectParams(CBaseChainParams::TESTNET);
+                    if ( request.getDetails().genesis() == ParamsFor( chain ).GenesisBlock().GetHash().GetHex() )
+                        SelectParams( chain ) ;
                 }
             }
         }

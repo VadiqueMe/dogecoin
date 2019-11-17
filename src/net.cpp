@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -414,12 +415,11 @@ void CConnman::DumpBanlist()
     CBanDB bandb;
     banmap_t banmap;
     GetBanned(banmap);
-    if (bandb.Write(banmap)) {
-        SetBannedSetDirty(false);
-    }
+    if ( bandb.WriteBanSet( banmap ) )
+        SetBannedSetDirty( false ) ;
 
-    LogPrint("net", "Flushed %d banned node ips/subnets to banlist.dat  %dms\n",
-        banmap.size(), GetTimeMillis() - nStart);
+    LogPrintf( "Flushed %d banned node ips/subnets to banlist.dat in %.3f s\n",
+                banmap.size(), 0.001 * ( GetTimeMillis() - nStart ) ) ;
 }
 
 void CNode::CloseSocketDisconnect()
@@ -1636,9 +1636,9 @@ void CConnman::DumpAddresses()
     int64_t nStart = GetTimeMillis();
 
     CAddrDB adb;
-    adb.Write(addrman);
+    adb.WriteListOfPeers( addrman ) ;
 
-    LogPrint( "net", "Flushed %d addresses to peers.dat in %.3f s\n",
+    LogPrintf( "Flushed %d addresses to peers.dat in %.3f s\n",
                 addrman.size(), 0.001 * ( GetTimeMillis() - nStart ) ) ;
 }
 
@@ -2243,10 +2243,11 @@ bool CConnman::Start(CScheduler& scheduler, std::string& strNodeError, Options c
     // Load addresses from peers.dat
     int64_t nStart = GetTimeMillis();
     {
-        CAddrDB adb;
-        if ( adb.Read( addrman ) )
-            LogPrintf( "Loaded %i addresses from peers.dat in %.3f s\n", addrman.size(), 0.001 * ( GetTimeMillis() - nStart ) ) ;
-        else {
+        CAddrDB adb ;
+        if ( adb.ReadListOfPeers( addrman ) ) {
+            LogPrintf( "Loaded %i addresses from peers.dat in %.3f s\n",
+                addrman.size(), 0.001 * ( GetTimeMillis() - nStart ) ) ;
+        } else {
             addrman.Clear(); // Addrman can be in an inconsistent state after failure, reset it
             LogPrintf("Invalid or missing peers.dat; recreating\n");
             DumpAddresses();
@@ -2258,12 +2259,12 @@ bool CConnman::Start(CScheduler& scheduler, std::string& strNodeError, Options c
     nStart = GetTimeMillis();
     CBanDB bandb;
     banmap_t banmap;
-    if (bandb.Read(banmap)) {
+    if ( bandb.ReadBanSet( banmap ) ) {
         SetBanned(banmap); // thread save setter
         SetBannedSetDirty(false); // no need to write down, just read data
         SweepBanned(); // sweep out unused entries
 
-        LogPrint( "net", "Loaded %d banned node ips/subnets from banlist.dat in %.3f s\n",
+        LogPrintf( "Loaded %d banned node ips/subnets from banlist.dat in %.3f s\n",
             banmap.size(), 0.001 * ( GetTimeMillis() - nStart ) ) ;
     } else {
         LogPrintf("Invalid or missing banlist.dat; recreating\n");

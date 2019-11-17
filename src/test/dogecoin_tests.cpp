@@ -1,6 +1,6 @@
 // Copyright (c) 2015 The Dogecoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "arith_uint256.h"
 #include "chainparams.h"
@@ -62,7 +62,7 @@ BOOST_AUTO_TEST_CASE(subsidy_limit_test)
 {
     int nHeight = 0;
     int nStepSize= 1;
-    const CChainParams& mainParams = Params(CBaseChainParams::MAIN);
+    const CChainParams & mainParams = ParamsFor( "main" ) ;
     CAmount nSum = 0;
     uint256 prevHash = uint256S("0");
 
@@ -107,8 +107,8 @@ BOOST_AUTO_TEST_CASE(subsidy_limit_test)
 
 BOOST_AUTO_TEST_CASE(get_next_work_difficulty_limit)
 {
-    SelectParams(CBaseChainParams::MAIN);
-    const Consensus::Params& params = Params().GetConsensus(0);
+    SelectParams( "main" ) ;
+    const Consensus::Params & params = Params().GetConsensus( 0 ) ;
 
     CBlockIndex pindexLast;
     int64_t nLastRetargetTime = 1386474927; // Block # 1
@@ -121,8 +121,8 @@ BOOST_AUTO_TEST_CASE(get_next_work_difficulty_limit)
 
 BOOST_AUTO_TEST_CASE(get_next_work_pre_digishield)
 {
-    SelectParams(CBaseChainParams::MAIN);
-    const Consensus::Params& params = Params().GetConsensus(0);
+    SelectParams( "main" ) ;
+    const Consensus::Params & params = Params().GetConsensus( 0 ) ;
     
     CBlockIndex pindexLast;
     int64_t nLastRetargetTime = 1386942008; // Block 9359
@@ -135,8 +135,8 @@ BOOST_AUTO_TEST_CASE(get_next_work_pre_digishield)
 
 BOOST_AUTO_TEST_CASE(get_next_work_digishield)
 {
-    SelectParams(CBaseChainParams::MAIN);
-    const Consensus::Params& params = Params().GetConsensus(145000);
+    SelectParams( "main" ) ;
+    const Consensus::Params & params = Params().GetConsensus( 145000 ) ;
     
     CBlockIndex pindexLast;
     int64_t nLastRetargetTime = 1395094427;
@@ -150,8 +150,8 @@ BOOST_AUTO_TEST_CASE(get_next_work_digishield)
 
 BOOST_AUTO_TEST_CASE(get_next_work_digishield_modulated_upper)
 {
-    SelectParams(CBaseChainParams::MAIN);
-    const Consensus::Params& params = Params().GetConsensus(145000);
+    SelectParams( "main" ) ;
+    const Consensus::Params & params = Params().GetConsensus( 145000 ) ;
     
     CBlockIndex pindexLast;
     int64_t nLastRetargetTime = 1395100835;
@@ -165,8 +165,8 @@ BOOST_AUTO_TEST_CASE(get_next_work_digishield_modulated_upper)
 
 BOOST_AUTO_TEST_CASE(get_next_work_digishield_modulated_lower)
 {
-    SelectParams(CBaseChainParams::MAIN);
-    const Consensus::Params& params = Params().GetConsensus(145000);
+    SelectParams( "main" ) ;
+    const Consensus::Params & params = Params().GetConsensus( 145000 ) ;
     
     CBlockIndex pindexLast;
     int64_t nLastRetargetTime = 1395380517;
@@ -180,8 +180,8 @@ BOOST_AUTO_TEST_CASE(get_next_work_digishield_modulated_lower)
 
 BOOST_AUTO_TEST_CASE(get_next_work_digishield_rounding)
 {
-    SelectParams(CBaseChainParams::MAIN);
-    const Consensus::Params& params = Params().GetConsensus(145000);
+    SelectParams( "main" ) ;
+    const Consensus::Params & params = Params().GetConsensus( 145000 ) ;
     
     CBlockIndex pindexLast;
     int64_t nLastRetargetTime = 1395094679;
@@ -196,8 +196,8 @@ BOOST_AUTO_TEST_CASE(get_next_work_digishield_rounding)
 
 BOOST_AUTO_TEST_CASE(hardfork_parameters)
 {
-    SelectParams(CBaseChainParams::MAIN);
-    const Consensus::Params& initialParams = Params().GetConsensus(0);
+    SelectParams( "main" ) ;
+    const Consensus::Params & initialParams = Params().GetConsensus( 0 ) ;
 
     BOOST_CHECK_EQUAL(initialParams.nPowTargetTimespan, 14400);
     BOOST_CHECK_EQUAL(initialParams.fAllowLegacyBlocks, true);

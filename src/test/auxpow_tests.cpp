@@ -1,6 +1,6 @@
 // Copyright (c) 2014-2015 Daniel Kraft
 // Distributed under the MIT/X11 software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "auxpow.h"
 #include "chainparams.h"
@@ -348,15 +348,15 @@ mineBlock(CBlockHeader& block, bool ok, int nBits = -1)
 
 BOOST_AUTO_TEST_CASE(auxpow_pow)
 {
-    /* Use regtest parameters to allow mining with easy difficulty.  */
-    SelectParams(CBaseChainParams::REGTEST);
-    const Consensus::Params& params = Params().GetConsensus(371337);
+    /* Use regtest parameters for mining with easy difficulty */
+    SelectParams( "regtest" ) ;
+    const Consensus::Params & params = Params().GetConsensus( 371337 ) ;
 
     const arith_uint256 target = (~arith_uint256(0) >> 1);
     CBlockHeader block;
     block.nBits = target.GetCompact();
 
-    /* Verify the block version checks.  */
+    /* Verify the block version checks */
 
     block.nVersion = 1;
     mineBlock(block, true);

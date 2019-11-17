@@ -1,6 +1,6 @@
 // Copyright (c) 2014-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "chain.h"
 #include "versionbits.h"
@@ -209,7 +209,7 @@ BOOST_AUTO_TEST_CASE(versionbits_test)
     }
 
     // Sanity checks of version bit deployments
-    const Consensus::Params &mainnetParams = Params(CBaseChainParams::MAIN).GetConsensus(0);
+    const Consensus::Params & mainnetParams = ParamsFor( "main" ).GetConsensus( 0 ) ;
     for (int i=0; i<(int) Consensus::MAX_VERSION_BITS_DEPLOYMENTS; i++) {
         uint32_t bitmask = VersionBitsMask(mainnetParams, (Consensus::DeploymentPos)i);
         // Make sure that no deployment tries to set an invalid bit.
@@ -233,9 +233,8 @@ BOOST_AUTO_TEST_CASE(versionbits_test)
 
 BOOST_AUTO_TEST_CASE(versionbits_computeblockversion)
 {
-    // Check that ComputeBlockVersion will set the appropriate bit correctly
-    // on mainnet.
-    const Consensus::Params &mainnetParams = Params(CBaseChainParams::MAIN).GetConsensus(0);
+    // Check that ComputeBlockVersion will set the appropriate bit correctly on mainnet
+    const Consensus::Params & mainnetParams = ParamsFor( "main" ).GetConsensus( 0 ) ;
 
     // Use the TESTDUMMY deployment for testing purposes.
     int64_t bit = mainnetParams.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit;

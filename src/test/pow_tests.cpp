@@ -72,8 +72,8 @@ BOOST_FIXTURE_TEST_SUITE(pow_tests, BasicTestingSetup)
 
 BOOST_AUTO_TEST_CASE(GetBlockProofEquivalentTime_test)
 {
-    SelectParams(CBaseChainParams::MAIN);
-    const Consensus::Params& params = Params().GetConsensus(0);
+    SelectParams( "main" ) ;
+    const Consensus::Params & params = Params().GetConsensus( 0 ) ;
 
     std::vector<CBlockIndex> blocks(10000);
     for (int i = 0; i < 10000; i++) {

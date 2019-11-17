@@ -1,7 +1,8 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "addrdb.h"
 
@@ -18,10 +19,10 @@
 
 CBanDB::CBanDB()
 {
-    pathBanlist = GetDataDir() / "banlist.dat";
+    pathBanlist = GetDataDir() / "banlist.dat" ;
 }
 
-bool CBanDB::Write(const banmap_t& banSet)
+bool CBanDB::WriteBanSet( const banmap_t & banSet )
 {
     // Generate random temporary filename
     unsigned short randv = 0;
@@ -39,8 +40,10 @@ bool CBanDB::Write(const banmap_t& banSet)
     boost::filesystem::path pathTmp = GetDataDir() / tmpfn;
     FILE *file = fopen(pathTmp.string().c_str(), "wb");
     CAutoFile fileout(file, SER_DISK, CLIENT_VERSION);
-    if (fileout.IsNull())
-        return error("%s: Failed to open file %s", __func__, pathTmp.string());
+    if ( fileout.IsNull() ) {
+        LogPrintf( "%s: Can't open file %s\n", __func__, pathTmp.string() ) ;
+        return false ;
+    }
 
     // Write and commit header, data
     try {
@@ -59,13 +62,15 @@ bool CBanDB::Write(const banmap_t& banSet)
     return true;
 }
 
-bool CBanDB::Read(banmap_t& banSet)
+bool CBanDB::ReadBanSet( banmap_t & banSet )
 {
     // open input file, and associate with CAutoFile
     FILE *file = fopen(pathBanlist.string().c_str(), "rb");
-    CAutoFile filein(file, SER_DISK, CLIENT_VERSION);
-    if (filein.IsNull())
-        return error("%s: Failed to open file %s", __func__, pathBanlist.string());
+    CAutoFile filein( file, SER_DISK, CLIENT_VERSION ) ;
+    if ( filein.IsNull() ) {
+        LogPrintf( "%s: Can't open file %s\n", __func__, pathBanlist.string() ) ;
+        return false ;
+    }
 
     // use file size to size memory buffer
     uint64_t fileSize = boost::filesystem::file_size(pathBanlist);
@@ -115,10 +120,10 @@ bool CBanDB::Read(banmap_t& banSet)
 
 CAddrDB::CAddrDB()
 {
-    pathAddr = GetDataDir() / "peers.dat";
+    pathAddr = GetDataDir() / "peers.dat" ;
 }
 
-bool CAddrDB::Write(const CAddrMan& addr)
+bool CAddrDB::WriteListOfPeers( const CAddrMan & addr )
 {
     // Generate random temporary filename
     unsigned short randv = 0;
@@ -156,13 +161,15 @@ bool CAddrDB::Write(const CAddrMan& addr)
     return true;
 }
 
-bool CAddrDB::Read(CAddrMan& addr)
+bool CAddrDB::ReadListOfPeers( CAddrMan & addr )
 {
     // open input file, and associate with CAutoFile
     FILE *file = fopen(pathAddr.string().c_str(), "rb");
-    CAutoFile filein(file, SER_DISK, CLIENT_VERSION);
-    if (filein.IsNull())
-        return error("%s: Failed to open file %s", __func__, pathAddr.string());
+    CAutoFile filein( file, SER_DISK, CLIENT_VERSION ) ;
+    if ( filein.IsNull() ) {
+        LogPrintf( "%s: Can't open file %s\n", __func__, pathAddr.string() ) ;
+        return false ;
+    }
 
     // use file size to size memory buffer
     uint64_t fileSize = boost::filesystem::file_size(pathAddr);
@@ -191,10 +198,10 @@ bool CAddrDB::Read(CAddrMan& addr)
     if (hashIn != hashTmp)
         return error("%s: Checksum mismatch, data corrupted", __func__);
 
-    return Read(addr, ssPeers);
+    return ReadListOfPeersFrom( addr, ssPeers ) ;
 }
 
-bool CAddrDB::Read(CAddrMan& addr, CDataStream& ssPeers)
+bool CAddrDB::ReadListOfPeersFrom( CAddrMan & addr, CDataStream & ssPeers )
 {
     unsigned char pchMsgTmp[4];
     try {

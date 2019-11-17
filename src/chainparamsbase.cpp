@@ -11,19 +11,13 @@
 
 #include <assert.h>
 
-const std::string CBaseChainParams::MAIN = "main" ;
-const std::string CBaseChainParams::INU = "inu" ;
-const std::string CBaseChainParams::TESTNET = "test" ;
-const std::string CBaseChainParams::REGTEST = "regtest" ;
-
 void AppendParamsHelpMessages( std::string & strUsage, bool debugHelp )
 {
     strUsage += HelpMessageGroup( _("Chain selection options:") ) ;
     strUsage += HelpMessageOpt( "-inu", "Use the inu chain" ) ;
     strUsage += HelpMessageOpt( "-testnet", "Use the test chain" ) ;
-    if (debugHelp) {
+    if ( debugHelp )
         strUsage += HelpMessageOpt( "-regtest", "Enter regression testing, which uses a special chain in which blocks can be solved instantly. This is intended for testing tools and app development" ) ;
-    }
 }
 
 /**
@@ -48,7 +42,7 @@ public:
     CBaseInuParams()
     {
         nRPCPort = 55334 ;
-        strDataDir = "inuchain" ;
+        dataDir = "inuchain" ;
     }
 } ;
 static CBaseInuParams inuParams ;
@@ -62,7 +56,7 @@ public:
     CBaseTestNetParams()
     {
         nRPCPort = 44555 ;
-        strDataDir = "testnet3" ;
+        dataDir = "testnet3" ;
     }
 } ;
 static CBaseTestNetParams testNetParams ;
@@ -75,11 +69,11 @@ class CBaseRegTestParams : public CBaseChainParams
 public:
     CBaseRegTestParams()
     {
-        nRPCPort = 18332;
-        strDataDir = "regtest";
+        nRPCPort = 18332 ;
+        dataDir = "regtest" ;
     }
 };
-static CBaseRegTestParams regTestParams;
+static CBaseRegTestParams regTestParams ;
 
 static CBaseChainParams * pCurrentBaseParams = nullptr ;
 
@@ -89,47 +83,39 @@ const CBaseChainParams & BaseParams()
     return *pCurrentBaseParams ;
 }
 
-CBaseChainParams & BaseParams( const std::string & chain )
+CBaseChainParams & BaseParamsFor( const std::string & chain )
 {
-    if ( chain == CBaseChainParams::MAIN )
-        return mainParams ;
-    else if ( chain == CBaseChainParams::INU )
-        return inuParams ;
-    else if ( chain == CBaseChainParams::TESTNET )
-        return testNetParams ;
-    else if ( chain == CBaseChainParams::REGTEST )
-        return regTestParams ;
+    if ( chain == "main" ) return mainParams ;
+    else if ( chain == "inu" ) return inuParams ;
+    else if ( chain == "test" ) return testNetParams ;
+    else if ( chain == "regtest" ) return regTestParams ;
     else
         throw std::runtime_error( strprintf( "%s: unknown chain %s", __func__, chain ) ) ;
 }
 
 void SelectBaseParams( const std::string & chain )
 {
-    pCurrentBaseParams = &BaseParams( chain ) ;
+    pCurrentBaseParams = &BaseParamsFor( chain ) ;
 }
 
-std::string ChainNameFromCommandLine()
+std::string ChainNameFromArguments()
 {
     bool inuChain = GetBoolArg( "-inu", false ) ;
-    bool fRegTest = GetBoolArg( "-regtest", false ) ;
     bool fTestNet = GetBoolArg( "-testnet", false ) ;
+    bool fRegTest = GetBoolArg( "-regtest", false ) ;
 
     if ( fTestNet && fRegTest )
         throw std::runtime_error( "-regtest and -testnet together?" ) ;
     if ( inuChain && ( fTestNet || fRegTest ) )
         throw std::runtime_error( "-inu and -regtest/-testnet together?" ) ;
 
-    if ( fRegTest )
-        return CBaseChainParams::REGTEST ;
-    if ( fTestNet )
-        return CBaseChainParams::TESTNET ;
-    if ( inuChain )
-        return CBaseChainParams::INU ;
+    std::string chain = "main" ;
 
-    return CBaseChainParams::MAIN ;
-}
+    if ( fRegTest ) chain = "regtest" ;
+    if ( fTestNet ) chain = "test" ;
+    if ( inuChain ) chain = "inu" ;
 
-bool AreBaseParamsConfigured()
-{
-    return pCurrentBaseParams != nullptr ;
+    LogPrintf( "%s: \"%s\"\n", __func__, chain ) ;
+
+    return chain ;
 }

@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #if defined(HAVE_CONFIG_H)
 #include "config/bitcoin-config.h"
@@ -32,7 +32,7 @@ static const int CONTINUE_EXECUTION=-1;
 
 //
 // This function returns either one of EXIT_ codes when it's expected to stop the process or
-// CONTINUE_EXECUTION when it's expected to continue further.
+// CONTINUE_EXECUTION when it's expected to continue further
 //
 static int AppInitRawTx(int argc, char* argv[])
 {
@@ -41,12 +41,13 @@ static int AppInitRawTx(int argc, char* argv[])
     //
     ParseParameters(argc, argv);
 
-    // Check for -testnet or -regtest parameter (Params() calls are only valid after this clause)
+    // Look for chain name parameter
+    // Params() work only after this clause
     try {
-        SelectParams(ChainNameFromCommandLine());
-    } catch (const std::exception& e) {
-        fprintf(stderr, "Error: %s\n", e.what());
-        return EXIT_FAILURE;
+        SelectParams( ChainNameFromArguments() ) ;
+    } catch ( const std::exception & e ) {
+        fprintf( stderr, "Error: %s\n", e.what() ) ;
+        return EXIT_FAILURE ;
     }
 
     fCreateBlank = GetBoolArg("-create", false);

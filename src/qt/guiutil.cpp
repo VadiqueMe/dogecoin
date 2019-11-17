@@ -603,12 +603,11 @@ TableViewLastColumnResizingFixer::TableViewLastColumnResizingFixer(QTableView* t
 #ifdef WIN32
 boost::filesystem::path static StartupShortcutPath()
 {
-    std::string chain = ChainNameFromCommandLine();
-    if (chain == CBaseChainParams::MAIN)
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "Dogecoin.lnk";
-    if (chain == CBaseChainParams::TESTNET) // Remove this special case when CBaseChainParams::TESTNET = "testnet4"
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "Dogecoin (testnet).lnk";
-    return GetSpecialFolderPath(CSIDL_STARTUP) / strprintf("Dogecoin (%s).lnk", chain);
+    std::string chain = ChainNameFromArguments() ;
+    if ( chain == "main" )
+        return GetSpecialFolderPath( CSIDL_STARTUP ) / "Dogecoin.lnk" ;
+    /* else */
+    return GetSpecialFolderPath( CSIDL_STARTUP ) / strprintf( "Dogecoin (%s).lnk", chain ) ;
 }
 
 bool GetStartOnSystemStartup()
@@ -638,10 +637,13 @@ bool SetStartOnSystemStartup(bool fAutoStart)
             TCHAR pszExePath[MAX_PATH];
             GetModuleFileName(NULL, pszExePath, sizeof(pszExePath));
 
-            // Start client minimized
-            QString strArgs = "-min";
-            // Set testnet / regtest options
-            strArgs += QString::fromStdString(strprintf(" -testnet=%d -regtest=%d", GetBoolArg("-testnet", false), GetBoolArg("-regtest", false)));
+            // begin minimized
+            QString strArgs = "-minimized" ;
+            // choice of chain
+            const std::string & chain = NameOfChain() ;
+            if ( chain == "inu" ) strArgs += " -inu" ;
+            if ( chain == "test" ) strArgs += " -testnet" ;
+            if ( chain == "regtest" ) strArgs += " -regtest" ;
 
 #ifdef UNICODE
             boost::scoped_array<TCHAR> args(new TCHAR[strArgs.length() + 1]);
@@ -703,10 +705,11 @@ boost::filesystem::path static GetAutostartDir()
 
 boost::filesystem::path static GetAutostartFilePath()
 {
-    std::string chain = ChainNameFromCommandLine();
-    if (chain == CBaseChainParams::MAIN)
-        return GetAutostartDir() / "bitcoin.desktop";
-    return GetAutostartDir() / strprintf("bitcoin-%s.lnk", chain);
+    std::string chain = ChainNameFromArguments() ;
+    if ( chain == "main" )
+        return GetAutostartDir() / "bitcoin.desktop" ;
+    /* else */
+    return GetAutostartDir() / strprintf( "bitcoin-%s.lnk", chain ) ;
 }
 
 bool GetStartOnSystemStartup()
@@ -744,15 +747,23 @@ bool SetStartOnSystemStartup(bool fAutoStart)
         boost::filesystem::ofstream optionFile(GetAutostartFilePath(), std::ios_base::out|std::ios_base::trunc);
         if (!optionFile.good())
             return false;
-        std::string chain = ChainNameFromCommandLine();
-        // Write a bitcoin.desktop file to the autostart directory:
+
+        const std::string & chain = NameOfChain() ;
+
+        // Write a bitcoin.desktop file to the autostart directory
         optionFile << "[Desktop Entry]\n";
         optionFile << "Type=Application\n";
-        if (chain == CBaseChainParams::MAIN)
+        if ( chain == "main" )
             optionFile << "Name=Dogecoin\n";
         else
-            optionFile << strprintf("Name=Dogecoin (%s)\n", chain);
-        optionFile << "Exec=" << pszExePath << strprintf(" -min -testnet=%d -regtest=%d\n", GetBoolArg("-testnet", false), GetBoolArg("-regtest", false));
+            optionFile << strprintf( "Name=Dogecoin (%s)\n", chain ) ;
+
+        optionFile << "Exec=" << pszExePath << " -minimized"
+                << ( ( chain == "inu" ) ? " -inu" : "" )
+                << ( ( chain == "test" ) ? " -testnet" : "" )
+                << ( ( chain == "regtest" ) ? " -regtest" : "" )
+                << "\n" ;
+
         optionFile << "Terminal=false\n";
         optionFile << "Hidden=false\n";
         optionFile.close();

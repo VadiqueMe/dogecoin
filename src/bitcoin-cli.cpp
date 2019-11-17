@@ -38,7 +38,10 @@ std::string HelpMessageCli()
     AppendParamsHelpMessages(strUsage);
     strUsage += HelpMessageOpt("-named", strprintf(_("Pass named instead of positional arguments (default: %s)"), DEFAULT_NAMED));
     strUsage += HelpMessageOpt("-rpcconnect=<ip>", strprintf(_("Send commands to node running on <ip> (default: %s)"), DEFAULT_RPCCONNECT));
-    strUsage += HelpMessageOpt("-rpcport=<port>", strprintf(_("Connect to JSON-RPC on <port> (default: %u or testnet: %u)"), BaseParams(CBaseChainParams::MAIN).RPCPort(), BaseParams(CBaseChainParams::TESTNET).RPCPort()));
+    strUsage += HelpMessageOpt( "-rpcport=<port>",
+                   strprintf( "Connect to JSON-RPC on <port> (main: %u, inu: %u, testnet: %u)",
+                       BaseParamsFor( "main" ).RPCPort(), BaseParamsFor( "inu" ).RPCPort(), BaseParamsFor( "test" ).RPCPort()
+                   ) ) ;
     strUsage += HelpMessageOpt("-rpcwait", _("Wait for RPC server to start"));
     strUsage += HelpMessageOpt("-rpcuser=<user>", _("Username for JSON-RPC connections"));
     strUsage += HelpMessageOpt("-rpcpassword=<pw>", _("Password for JSON-RPC connections"));
@@ -106,12 +109,13 @@ static int AppInitRPC(int argc, char* argv[])
         fprintf(stderr,"Error reading configuration file: %s\n", e.what());
         return EXIT_FAILURE;
     }
-    // Check for -testnet or -regtest parameter (BaseParams() calls are only valid after this clause)
+    // Look for chain name parameter
+    // BaseParams() work only after this clause
     try {
-        SelectBaseParams(ChainNameFromCommandLine());
-    } catch (const std::exception& e) {
-        fprintf(stderr, "Error: %s\n", e.what());
-        return EXIT_FAILURE;
+        SelectBaseParams( ChainNameFromArguments() ) ;
+    } catch ( const std::exception & e ) {
+        fprintf( stderr, "Error: %s\n", e.what() ) ;
+        return EXIT_FAILURE ;
     }
     if (GetBoolArg("-rpcssl", false))
     {

@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #if defined(HAVE_CONFIG_H)
 #include "config/bitcoin-config.h"
@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
     ECC_Start();
     SetupEnvironment();
     SetupNetworking();
-    SelectParams(CBaseChainParams::MAIN);
+    SelectParams( "main" ) ;
     noui_connect();
 
     bool fInvalid = false;

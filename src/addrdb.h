@@ -1,10 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_ADDRDB_H
-#define BITCOIN_ADDRDB_H
+#ifndef DOGECOIN_ADDRDB_H
+#define DOGECOIN_ADDRDB_H
 
 #include "serialize.h"
 
@@ -76,27 +77,27 @@ public:
 
 typedef std::map<CSubNet, CBanEntry> banmap_t;
 
-/** Access to the (IP) address database (peers.dat) */
+/** Access to the database of peer addresses (peers.dat) */
 class CAddrDB
 {
 private:
-    boost::filesystem::path pathAddr;
+    boost::filesystem::path pathAddr ;
 public:
-    CAddrDB();
-    bool Write(const CAddrMan& addr);
-    bool Read(CAddrMan& addr);
-    bool Read(CAddrMan& addr, CDataStream& ssPeers);
+    CAddrDB() ;
+    bool WriteListOfPeers( const CAddrMan & addr ) ;
+    bool ReadListOfPeers( CAddrMan & addr ) ;
+    bool ReadListOfPeersFrom( CAddrMan & addr, CDataStream & ssPeers ) ;
 };
 
-/** Access to the banlist database (banlist.dat) */
+/** Access to the banlist database */
 class CBanDB
 {
 private:
-    boost::filesystem::path pathBanlist;
+    boost::filesystem::path pathBanlist ;
 public:
-    CBanDB();
-    bool Write(const banmap_t& banSet);
-    bool Read(banmap_t& banSet);
+    CBanDB() ;
+    bool WriteBanSet( const banmap_t & banSet ) ;
+    bool ReadBanSet( banmap_t & banSet ) ;
 };
 
-#endif // BITCOIN_ADDRDB_H
+#endif

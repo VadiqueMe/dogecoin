@@ -322,16 +322,16 @@ UniValue getmininginfo( const JSONRPCRequest& request )
     LOCK( cs_main ) ;
 
     UniValue obj( UniValue::VOBJ ) ;
-    obj.push_back(Pair("blocks",           (int)chainActive.Height()));
-    obj.push_back(Pair("currentblocksize", (uint64_t)nLastBlockSize));
-    obj.push_back(Pair("currentblockweight", (uint64_t)nLastBlockWeight));
-    obj.push_back(Pair("currentblocktx",   (uint64_t)nLastBlockTx));
-    obj.push_back(Pair("errors",           GetWarnings("statusbar")));
-    obj.push_back(Pair("networkhashps",    getnetworkhashps( request ))) ;
-    obj.push_back(Pair("generate",         getgenerate( request ))) ;
-    obj.push_back(Pair("genthreads",       HowManyMiningThreads())) ;
-    obj.push_back(Pair("pooledtx",         (uint64_t)mempool.size()));
-    obj.push_back(Pair("chain",            Params().NetworkIDString()));
+    obj.push_back(Pair( "blocks",             (int)chainActive.Height() )) ;
+    obj.push_back(Pair( "currentblocksize",   (uint64_t)nLastBlockSize )) ;
+    obj.push_back(Pair( "currentblockweight", (uint64_t)nLastBlockWeight )) ;
+    obj.push_back(Pair( "currentblocktx",     (uint64_t)nLastBlockTx )) ;
+    obj.push_back(Pair( "errors",             GetWarnings( "statusbar" ) )) ;
+    obj.push_back(Pair( "networkhashps",      getnetworkhashps( request ) )) ;
+    obj.push_back(Pair( "generate",           getgenerate( request ) )) ;
+    obj.push_back(Pair( "genthreads",         HowManyMiningThreads() )) ;
+    obj.push_back(Pair( "pooledtx",           (uint64_t)mempool.size() ));
+    obj.push_back(Pair( "chain",              Params().NameOfNetwork() )) ;
     return obj ;
 }
 

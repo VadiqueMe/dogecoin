@@ -69,8 +69,9 @@ private:
     Consensus::Params digishieldConsensus;
     Consensus::Params auxpowConsensus;
 public:
-    CMainParams() {
-        strNetworkID = "main";
+    CMainParams()
+    {
+        networkName = "main" ;
 
         // Blocks 0 - 144999 are conventional difficulty calculation
         consensus.nSubsidyHalvingInterval = 100000;
@@ -214,8 +215,9 @@ static CMainParams mainParams;
 class CInuParams : public CChainParams {
 
 public:
-    CInuParams() {
-        strNetworkID = "inu" ;
+    CInuParams()
+    {
+        networkName = "inu" ;
 
         consensus.nSubsidyHalvingInterval = 1000000 ;
         consensus.powLimit = uint256S( "0x0007ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" ) ; // ~uint256(0) >> 13
@@ -366,8 +368,9 @@ private:
     Consensus::Params auxpowConsensus;
     Consensus::Params minDifficultyConsensus;
 public:
-    CTestNetParams() {
-        strNetworkID = "test";
+    CTestNetParams()
+    {
+        networkName = "test" ;
 
         // Blocks 0 - 144999 are pre-Digishield
         consensus.nHeightEffective = 0;
@@ -512,8 +515,10 @@ private:
     Consensus::Params digishieldConsensus;
     Consensus::Params auxpowConsensus;
 public:
-    CRegTestParams() {
-        strNetworkID = "regtest";
+    CRegTestParams()
+    {
+        networkName = "regtest" ;
+
         consensus.nSubsidyHalvingInterval = 150;
         consensus.nMajorityEnforceBlockUpgrade = 750;
         consensus.nMajorityRejectBlockOutdated = 950;
@@ -624,6 +629,11 @@ const CChainParams & Params() {
     return *pCurrentParams ;
 }
 
+const std::string & NameOfChain()
+{
+    return Params().NameOfNetwork() ;
+}
+
 const Consensus::Params *Consensus::Params::GetConsensus(uint32_t nTargetHeight) const
 {
     if (nTargetHeight < this -> nHeightEffective && this -> pLeft != NULL) {
@@ -639,24 +649,24 @@ const Consensus::Params *Consensus::Params::GetConsensus(uint32_t nTargetHeight)
     return this;
 }
 
-CChainParams & Params( const std::string & chain )
+CChainParams & ParamsFor( const std::string & chain )
 {
-    if ( chain == CBaseChainParams::MAIN )
+    if ( chain == "main" )
             return mainParams ;
-    else if ( chain == CBaseChainParams::INU )
+    else if ( chain == "inu" )
             return inuParams ;
-    else if ( chain == CBaseChainParams::TESTNET )
+    else if ( chain == "test" )
             return testNetParams ;
-    else if ( chain == CBaseChainParams::REGTEST )
+    else if ( chain == "regtest" )
             return regTestParams ;
     else
-        throw std::runtime_error( strprintf("%s: unknown chain %s", __func__, chain) ) ;
+        throw std::runtime_error( strprintf( "%s: unknown chain %s", __func__, chain ) ) ;
 }
 
 void SelectParams( const std::string & network )
 {
     SelectBaseParams( network ) ;
-    pCurrentParams = &Params( network ) ;
+    pCurrentParams = &ParamsFor( network ) ;
 }
 
 void UpdateRegtestBIP9Parameters(Consensus::DeploymentPos d, int64_t nStartTime, int64_t nTimeout)

@@ -1123,15 +1123,15 @@ UniValue getblockchaininfo(const JSONRPCRequest& request)
     LOCK(cs_main);
 
     UniValue obj(UniValue::VOBJ);
-    obj.push_back(Pair("chain",                 Params().NetworkIDString()));
-    obj.push_back(Pair("blocks",                (int)chainActive.Height()));
-    obj.push_back(Pair("headers",               pindexBestHeader ? pindexBestHeader->nHeight : -1));
-    obj.push_back(Pair("bestblockhash",         chainActive.Tip()->GetBlockHash().GetHex()));
-    obj.push_back(Pair("mediantime",            (int64_t)chainActive.Tip()->GetMedianTimePast()));
-    obj.push_back(Pair("verificationprogress",  GuessVerificationProgress(Params().TxData(), chainActive.Tip())));
-    obj.push_back(Pair("initialblockdownload",  IsInitialBlockDownload()));
-    obj.push_back(Pair("chainwork",             chainActive.Tip()->nChainWork.GetHex()));
-    obj.push_back(Pair("pruned",                fPruneMode));
+    obj.push_back(Pair( "chain",                 Params().NameOfNetwork() )) ;
+    obj.push_back(Pair( "blocks",                (int)chainActive.Height() )) ;
+    obj.push_back(Pair( "headers",               pindexBestHeader ? pindexBestHeader->nHeight : -1 )) ;
+    obj.push_back(Pair( "bestblockhash",         chainActive.Tip()->GetBlockHash().GetHex() )) ;
+    obj.push_back(Pair( "mediantime",            (int64_t)chainActive.Tip()->GetMedianTimePast() )) ;
+    obj.push_back(Pair( "verificationprogress",  GuessVerificationProgress( Params().TxData(), chainActive.Tip() ) )) ;
+    obj.push_back(Pair( "initialblockdownload",  IsInitialBlockDownload() )) ;
+    obj.push_back(Pair( "chainwork",             chainActive.Tip()->nChainWork.GetHex() )) ;
+    obj.push_back(Pair( "pruned",                fPruneMode )) ;
 
     const Consensus::Params& consensusParams = Params().GetConsensus(0);
     CBlockIndex* tip = chainActive.Tip();

@@ -99,7 +99,7 @@ TestingSetup::~TestingSetup()
         boost::filesystem::remove_all(pathTemp);
 }
 
-TestChain240Setup::TestChain240Setup() : TestingSetup(CBaseChainParams::REGTEST)
+TestChain240Setup::TestChain240Setup() : TestingSetup( "regtest" )
 {
     // Generate a 240-block chain:
     coinbaseKey.MakeNewKey(true);

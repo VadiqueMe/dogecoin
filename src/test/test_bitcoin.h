@@ -1,9 +1,9 @@
 // Copyright (c) 2015-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_TEST_TEST_BITCOIN_H
-#define BITCOIN_TEST_TEST_BITCOIN_H
+#ifndef TEST_BITCOIN_H
+#define TEST_BITCOIN_H
 
 #include "chainparamsbase.h"
 #include "key.h"
@@ -14,29 +14,26 @@
 #include <boost/filesystem.hpp>
 #include <boost/thread.hpp>
 
-/** Basic testing setup.
- * This just configures logging and chain parameters.
- */
+/** Basic testing setup. This just configures logging and chain parameters */
 struct BasicTestingSetup {
     ECCVerifyHandle globalVerifyHandle;
 
-    BasicTestingSetup(const std::string& chainName = CBaseChainParams::MAIN);
-    ~BasicTestingSetup();
-};
+    BasicTestingSetup( const std::string & chainName = "main" ) ;
+    ~BasicTestingSetup() ;
+} ;
 
 /** Testing setup that configures a complete environment.
- * Included are data directory, coins database, script check threads setup.
- */
-class CConnman;
+ *  Included are data directory, coins database, script check threads setup */
+class CConnman ;
 struct TestingSetup: public BasicTestingSetup {
     CCoinsViewDB *pcoinsdbview;
     boost::filesystem::path pathTemp;
     boost::thread_group threadGroup;
     CConnman* connman;
 
-    TestingSetup(const std::string& chainName = CBaseChainParams::MAIN);
-    ~TestingSetup();
-};
+    TestingSetup( const std::string & chainName = "main" ) ;
+    ~TestingSetup() ;
+} ;
 
 class CBlock;
 struct CMutableTransaction;

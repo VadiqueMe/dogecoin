@@ -2920,10 +2920,6 @@
         <translation>압축 블록 재구성을 위해 메모리에 보관해야하는 추가 거래 (기본값: %u)</translation>
     </message>
     <message>
-        <source>If this block is in the chain assume that it and its ancestors are valid and potentially skip their script verification (0 to verify all, default: %s, testnet: %s)</source>
-        <translation>이 블록이 체인에 있으면 해당 블록과 그 조상이 유효하며 잠재적으로 스크립트 확인을 건너 뜁니다 (0은 모두 확인, 기본값: %s, testnet: %s)</translation>
-    </message>
-    <message>
         <source>Maximum allowed median peer time offset adjustment. Local perspective of time may be influenced by peers forward or backward by this amount. (default: %u seconds)</source>
         <translation>허용 된 최대 중간 피어 시간 오프셋 조정. 시간에 대한 지역적 전망치는 전방 또는 후방의 피어에 의해 영향을 받을 수 있습니다. (기본값: %u 초)</translation>
     </message>
@@ -3566,14 +3562,6 @@
     <message>
         <source>Invalid -proxy address: '%s'</source>
         <translation>잘못된 -proxy 주소입니다: '%s'</translation>
-    </message>
-    <message>
-        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: %u or testnet: %u)</source>
-        <translation>JSON-RPC 연결을 &lt;port&gt;포트로 받기 (기본값: %u 혹은 테스트넷: %u)</translation>
-    </message>
-    <message>
-        <source>Listen for connections on &lt;port&gt; (default: %u or testnet: %u)</source>
-        <translation>&lt;port&gt;포트로 연결 받기 (기본값: %u 혹은 테스트넷: %u)</translation>
     </message>
     <message>
         <source>Maintain at most &lt;n&gt; connections to peers (default: %u)</source>

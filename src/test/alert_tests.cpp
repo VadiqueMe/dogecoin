@@ -1,6 +1,6 @@
 // Copyright (c) 2013-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 // Unit tests for alert system
 
@@ -120,7 +120,7 @@ BOOST_FIXTURE_TEST_SUITE(Alert_tests, ReadAlerts)
 BOOST_AUTO_TEST_CASE(AlertApplies)
 {
     SetMockTime(11);
-    const std::vector<unsigned char>& alertKey = Params(CBaseChainParams::MAIN).AlertKey();
+    const std::vector< unsigned char > & alertKey = ParamsFor( "main" ).AlertKey() ;
 
     BOOST_FOREACH(const CAlert& alert, alerts)
     {
@@ -161,7 +161,7 @@ BOOST_AUTO_TEST_CASE(AlertApplies)
 BOOST_AUTO_TEST_CASE(AlertNotify)
 {
     SetMockTime(11);
-    const std::vector<unsigned char>& alertKey = Params(CBaseChainParams::MAIN).AlertKey();
+    const std::vector< unsigned char > & alertKey = ParamsFor( "main" ).AlertKey() ;
 
     boost::filesystem::path temp = GetTempPath() /
         boost::filesystem::unique_path("alertnotify-%%%%.txt");

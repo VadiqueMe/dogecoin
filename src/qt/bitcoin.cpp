@@ -482,15 +482,11 @@ void BitcoinApplication::initializeResult(int retval)
         }
 #endif
 
-        // If -min option passed, start window minimized.
-        if(GetBoolArg("-min", false))
-        {
-            window->showMinimized();
-        }
+        if ( GetBoolArg( "-minimized", false ) )
+            window->showMinimized() ;
         else
-        {
-            window->show();
-        }
+            window->show() ;
+
         Q_EMIT splashFinished(window);
 
 #ifdef ENABLE_WALLET
@@ -625,24 +621,29 @@ int main(int argc, char *argv[])
     // - QSettings() will use the new application name after this, resulting in network-specific settings
     // - Needs to be done before createOptionsModel
 
-    // Check for -testnet or -regtest parameter (Params() calls are only valid after this clause)
+    // Look for chain name parameter
+    // Params() work only after this clause
     try {
-        SelectParams(ChainNameFromCommandLine());
-    } catch(std::exception &e) {
-        QMessageBox::critical(0, QObject::tr(PACKAGE_NAME), QObject::tr("Error: %1").arg(e.what()));
-        return EXIT_FAILURE;
+        SelectParams( ChainNameFromArguments() ) ;
+    } catch( std::exception & e ) {
+        QMessageBox::critical( 0, QObject::tr(PACKAGE_NAME), QObject::tr("Error: %1").arg( e.what() ) ) ;
+        return EXIT_FAILURE ;
     }
+
 #ifdef ENABLE_WALLET
     // Parse URIs on command line -- this can affect Params()
     PaymentServer::ipcParseCommandLine(argc, argv);
 #endif
 
-    QScopedPointer<const NetworkStyle> networkStyle(NetworkStyle::instantiate(QString::fromStdString(Params().NetworkIDString())));
-    assert(!networkStyle.isNull());
-    // Allow for separate UI settings for testnets
-    QApplication::setApplicationName(networkStyle->getAppName());
-    // Re-initialize translations after changing application name (language in network-specific settings can be different)
-    initTranslations(qtTranslatorBase, qtTranslator, translatorBase, translator);
+    QScopedPointer< const NetworkStyle > networkStyle( NetworkStyle::instantiate(
+            QString::fromStdString( Params().NameOfNetwork() ) )
+        ) ;
+    assert( ! networkStyle.isNull() ) ;
+
+    QApplication::setApplicationName( networkStyle->getAppName() ) ;
+    // Re-initialize translations after changing the name of application
+    // (language in chain-specific settings can differ)
+    initTranslations( qtTranslatorBase, qtTranslator, translatorBase, translator ) ;
 
 #ifdef ENABLE_WALLET
     /// 8. URI IPC sending
@@ -681,8 +682,8 @@ int main(int argc, char *argv[])
     // Subscribe to global signals from core
     uiInterface.InitMessage.connect(InitMessage);
 
-    if (GetBoolArg("-splash", DEFAULT_SPLASHSCREEN) && !GetBoolArg("-min", false))
-        app.createSplashScreen(networkStyle.data());
+    if ( GetBoolArg( "-splash", DEFAULT_SPLASHSCREEN ) && ! GetBoolArg( "-minimized", false ) )
+        app.createSplashScreen( networkStyle.data() ) ;
 
     try
     {
