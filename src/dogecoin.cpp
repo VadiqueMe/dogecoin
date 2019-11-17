@@ -99,12 +99,12 @@ bool CheckAuxPowProofOfWork( const CBlockHeader & block, const Consensus::Params
     /* If there is no auxpow, just check the block hash */
     if ( ! block.auxpow ) {
         if ( block.IsAuxpow() )
-            return error("%s : no auxpow on block with auxpow in version", __func__);
+            return error( "%s : no auxpow on a block with auxpow in version", __func__ );
 
         uint256 blockScryptHash = block.GetPoWHash() ;
         //LogPrintf( "Checking proof-of-work for block with scrypt hash %s\n", blockScryptHash.GetHex() ) ;
 
-        if ( ! CheckProofOfWork( blockScryptHash, block.nBits, params ) )
+        if ( ! CheckProofOfWork( block, block.nBits, params ) )
             return error( "%s : non-aux proof of work failed, 0x%s > 0x%s", __func__,
                             blockScryptHash.GetHex(), arith_uint256().SetCompact( block.nBits ).GetHex() ) ;
 
@@ -114,23 +114,34 @@ bool CheckAuxPowProofOfWork( const CBlockHeader & block, const Consensus::Params
     // Block has auxpow, check it
 
     if ( ! block.IsAuxpow() )
-        return error("%s : auxpow on block with non-auxpow version", __func__);
+        return error( "%s : auxpow on a block with non-auxpow version", __func__ ) ;
 
     if ( ! block.auxpow->check( block.GetHash(), block.GetChainId(), params ) )
-        return error("%s : AUX POW is not valid", __func__);
+        return error( "%s : auxpow is not valid", __func__ ) ;
 
-    uint256 parentBlockScryptHash = block.auxpow->getParentBlockPoWHash() ;
-    //LogPrintf( "Checking auxiliary proof-of-work for parent block with scrypt hash %s\n", parentBlockScryptHash.GetHex() ) ;
-
-    if ( ! CheckProofOfWork( parentBlockScryptHash, block.nBits, params ) )
-        return error("%s : AUX proof of work failed", __func__);
+    if ( ! CheckAuxProofOfWork( *block.auxpow.get(), block.nBits, params ) )
+        return error( "%s : aux proof of work failed", __func__ ) ;
 
     return true ;
 }
 
 CAmount GetDogecoinBlockSubsidy( int nHeight, const Consensus::Params & consensusParams, uint256 prevHash )
 {
-    int halvings = nHeight / consensusParams.nSubsidyHalvingInterval ;
+    if ( NameOfChain() == "inu" )
+    {   /*
+           inu chain gives for each new block a random subsidy from 1 COIN to 10000
+           the first 1234 blocks have a random subsidy from 1 COIN to 100
+        */
+
+        const std::string cseed_str = prevHash.ToString().substr( 16, 10 ) ;
+        const char * cseed = cseed_str.c_str() ;
+        char * endp = nullptr ;
+        long seed = strtol( cseed, &endp, 16 ) ;
+        const CAmount max = ( nHeight > 1234 ) ? 10000 : 100 ;
+        int random = generateMTRandom( seed, max - 1 ) ;
+
+        return ( 1 + random ) * COIN ;
+    }
 
     if ( ! consensusParams.fSimplifiedRewards )
     {
@@ -139,12 +150,14 @@ CAmount GetDogecoinBlockSubsidy( int nHeight, const Consensus::Params & consensu
         const char* cseed = cseed_str.c_str() ;
         char* endp = nullptr ;
         long seed = strtol( cseed, &endp, 16 ) ;
-        CAmount maxReward = ( 1000000 >> halvings ) - 1 ;
+        int halvings = nHeight / consensusParams.nSubsidyHalvingInterval ;
+        const CAmount maxReward = ( 1000000 >> halvings ) - 1 ;
         int rand = generateMTRandom( seed, maxReward ) ;
 
         return ( 1 + rand ) * COIN ;
     } else if ( nHeight < ( 6 * consensusParams.nSubsidyHalvingInterval ) ) {
-        // New-style constant rewards for each halving interval
+        // Mid-style constant rewards for each halving interval
+        int halvings = nHeight / consensusParams.nSubsidyHalvingInterval ;
         return ( 500000 * COIN ) >> halvings ;
     } else {
         // Constant inflation

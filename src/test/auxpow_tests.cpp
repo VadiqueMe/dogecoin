@@ -317,13 +317,13 @@ BOOST_AUTO_TEST_CASE(check_auxpow)
 
 /**
  * Mine a block (assuming minimal difficulty) that either matches
- * or doesn't match the difficulty target specified in the block header.
- * @param block The block to mine (by updating nonce).
- * @param ok Whether the block should be ok for PoW.
- * @param nBits Use this as difficulty if specified.
+ * or doesn't match the difficulty target specified in the block header
+ * @param block The block to mine (by updating nonce)
+ * @param ok Whether the block should be ok for PoW
+ * @param nBits Use this as difficulty if specified
  */
 static void
-mineBlock(CBlockHeader& block, bool ok, int nBits = -1)
+mineBlock( CBlockHeader & block, bool ok, int nBits = -1 )
 {
     if (nBits == -1)
         nBits = block.nBits;
@@ -341,9 +341,9 @@ mineBlock(CBlockHeader& block, bool ok, int nBits = -1)
     }
 
     if (ok)
-        BOOST_CHECK(CheckProofOfWork(block.GetPoWHash(), nBits, Params().GetConsensus(0)));
+        BOOST_CHECK( CheckProofOfWork( block, nBits, Params().GetConsensus(0) ) ) ;
     else
-        BOOST_CHECK(!CheckProofOfWork(block.GetPoWHash(), nBits, Params().GetConsensus(0)));
+        BOOST_CHECK( ! CheckProofOfWork( block, nBits, Params().GetConsensus(0) ) ) ;
 }
 
 BOOST_AUTO_TEST_CASE(auxpow_pow)

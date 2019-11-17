@@ -47,8 +47,9 @@ static CBlock BuildBlockTestCase() {
     bool mutated;
     block.hashMerkleRoot = BlockMerkleRoot(block, &mutated);
     assert(!mutated);
-    while (!CheckProofOfWork(block.GetPoWHash(), block.nBits, Params().GetConsensus(0))) ++block.nNonce;
-    return block;
+
+    while ( ! CheckProofOfWork( block, block.nBits, Params().GetConsensus(0) ) ) ++ block.nNonce ;
+    return block ;
 }
 
 // Number of shared use_counts we expect for a tx we havent touched
@@ -289,7 +290,8 @@ BOOST_AUTO_TEST_CASE(EmptyBlockRoundTripTest)
     bool mutated;
     block.hashMerkleRoot = BlockMerkleRoot(block, &mutated);
     assert(!mutated);
-    while (!CheckProofOfWork(block.GetPoWHash(), block.nBits, Params().GetConsensus(0))) ++block.nNonce;
+
+    while ( ! CheckProofOfWork( block, block.nBits, Params().GetConsensus(0) ) ) ++ block.nNonce ;
 
     // Test simple header round-trip with only coinbase
     {

@@ -178,13 +178,13 @@ UniValue generateBlocks( std::shared_ptr < CReserveScript > coinbaseScript, int 
 
     while ( nHeight < nHeightEnd && nMaxTries > 0 )
     {
-        std::unique_ptr< CBlockTemplate > pblocktemplate(
+        std::unique_ptr< CBlockTemplate > blockCandidate(
                 BlockAssembler( Params() ).CreateNewBlock( coinbaseScript->reserveScript, fMineWitnessTx )
         ) ;
-        if ( pblocktemplate.get() == nullptr )
+        if ( blockCandidate.get() == nullptr )
             throw JSONRPCError( RPC_INTERNAL_ERROR, "Couldn't create new block" ) ;
 
-        CBlock *pblock = &pblocktemplate->block ;
+        CBlock *pblock = &blockCandidate->block ;
         {
             LOCK( cs_main ) ;
             IncrementExtraNonce( pblock, chainActive.Tip(), nExtraNonce ) ;
@@ -199,7 +199,7 @@ UniValue generateBlocks( std::shared_ptr < CReserveScript > coinbaseScript, int 
         int loop = 0 ;
         while ( nMaxTries > 0 && loop < nInnerLoopCount )
         {
-            if ( CheckProofOfWork( pblock->GetPoWHash(), pblock->nBits, Params().GetConsensus( nHeight ) ) ) {
+            if ( CheckProofOfWork( blockCandidate->block, blockCandidate->block.nBits, Params().GetConsensus( nHeight ) ) ) {
                 // found a solution
                 found = true ;
                 break ;

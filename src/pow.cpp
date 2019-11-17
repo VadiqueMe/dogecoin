@@ -1,7 +1,8 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "pow.h"
 
@@ -112,7 +113,7 @@ unsigned int GetNextWorkRequired( const CBlockIndex * pindexLast, const CBlockHe
     return bnNew.GetCompact();
 } */
 
-bool CheckProofOfWork( uint256 hash, unsigned int nBits, const Consensus::Params & params )
+bool CheckProofOfWork( const CBlockHeader & block, unsigned int nBits, const Consensus::Params & params )
 {
     bool fNegative ;
     bool fOverflow ;
@@ -124,6 +125,30 @@ bool CheckProofOfWork( uint256 hash, unsigned int nBits, const Consensus::Params
     if ( fNegative || solutionHash == 0 || fOverflow || solutionHash > UintToArith256( params.powLimit ) )
         return false ;
 
-    // Proof that hash is not bigger than solution
-    return UintToArith256( hash ) <= solutionHash ;
+    // Proof that block's hash is not bigger than solution
+
+    if ( NameOfChain() == "inu" ) {
+        return ( UintToArith256( block.GetPoWHash() ) <= solutionHash )
+                    && ( UintToArith256( block.GetHash() ) <= ( solutionHash << 2 ) ) ;
+    }
+
+    return UintToArith256( block.GetPoWHash() ) <= solutionHash ;
+}
+
+bool CheckAuxProofOfWork( const CAuxPow & auxpow, unsigned int nBits, const Consensus::Params & params )
+{
+    if ( NameOfChain() == "inu" ) return false ; // auxpow isn't proof for inu chain
+
+    bool fNegative ;
+    bool fOverflow ;
+    arith_uint256 solutionHash ;
+
+    solutionHash.SetCompact( nBits, &fNegative, &fOverflow ) ;
+
+    // Check range
+    if ( fNegative || solutionHash == 0 || fOverflow || solutionHash > UintToArith256( params.powLimit ) )
+        return false ;
+
+    // Proof that hash of a block from another chain is not bigger than solution
+    return UintToArith256( auxpow.getParentBlockPoWHash() ) <= solutionHash ;
 }
