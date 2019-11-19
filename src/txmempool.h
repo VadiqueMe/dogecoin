@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -315,25 +316,23 @@ struct entry_time {};
 struct mining_score {};
 struct ancestor_score {};
 
-class CBlockPolicyEstimator;
-
 /**
- * Information about a mempool transaction.
+ * Information about a mempool transaction
  */
 struct TxMempoolInfo
 {
     /** The transaction itself */
-    CTransactionRef tx;
+    CTransactionRef tx ;
 
-    /** Time the transaction entered the mempool. */
-    int64_t nTime;
+    /** Time the transaction entered the mempool */
+    int64_t nTime ;
 
-    /** Feerate of the transaction. */
-    CFeeRate feeRate;
+    /** Feerate of the transaction */
+    CFeeRate feeRate ;
 
-    /** The fee delta. */
-    int64_t nFeeDelta;
-};
+    /** The fee delta */
+    int64_t nFeeDelta ;
+} ;
 
 /** Reason why a transaction was removed from the mempool,
  * this is passed to the notification signal.
@@ -427,7 +426,6 @@ class CTxMemPool
 private:
     uint32_t nCheckFrequency; //!< Value n means that n times in 2^32 we check.
     unsigned int nTransactionsUpdated; //!< Used by getblocktemplate to trigger CreateNewBlock() invocation
-    CBlockPolicyEstimator* minerPolicyEstimator;
 
     uint64_t totalTxSize;      //!< sum of all mempool tx's virtual sizes. Differs from serialized tx size since witness data is discounted. Defined in BIP 141.
     uint64_t cachedInnerUsage; //!< sum of dynamic memory usage of all the map elements (NOT the maps themselves)
@@ -510,10 +508,8 @@ public:
     indirectmap<COutPoint, const CTransaction*> mapNextTx;
     std::map<uint256, std::pair<double, CAmount> > mapDeltas;
 
-    /** Create a new CTxMemPool.
-     */
-    CTxMemPool(const CFeeRate& _minReasonableRelayFee);
-    ~CTxMemPool();
+    CTxMemPool() ; // create a new CTxMemPool
+    ~CTxMemPool() ;
 
     const CTransaction & getTxByHash( uint256 hash ) ;
 

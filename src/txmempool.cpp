@@ -11,7 +11,6 @@
 #include "consensus/validation.h"
 #include "validation.h"
 #include "policy/policy.h"
-#include "policy/fees.h"
 #include "streams.h"
 #include "timedata.h"
 #include "util.h"
@@ -349,8 +348,8 @@ void CTxMemPoolEntry::UpdateAncestorState(int64_t modifySize, CAmount modifyFee,
     assert(int(nSigOpCostWithAncestors) >= 0);
 }
 
-CTxMemPool::CTxMemPool(const CFeeRate& _minReasonableRelayFee) :
-    nTransactionsUpdated(0)
+CTxMemPool::CTxMemPool() :
+    nTransactionsUpdated( 0 )
 {
     _clear(); //lock free clear
 
@@ -358,14 +357,9 @@ CTxMemPool::CTxMemPool(const CFeeRate& _minReasonableRelayFee) :
     // accepting transactions becomes O(N^2) where N is the number
     // of transactions in the pool
     nCheckFrequency = 0;
-
-    minerPolicyEstimator = new CBlockPolicyEstimator(_minReasonableRelayFee);
 }
 
-CTxMemPool::~CTxMemPool()
-{
-    delete minerPolicyEstimator;
-}
+CTxMemPool::~CTxMemPool() { }
 
 const CTransaction & CTxMemPool::getTxByHash( uint256 hash )
 {
@@ -453,7 +447,6 @@ bool CTxMemPool::addUnchecked( const uint256 & hash, const CTxMemPoolEntry & ent
 
     nTransactionsUpdated++;
     totalTxSize += entry.GetTxSize();
-    minerPolicyEstimator->feesProcessTransaction( entry ) ;
 
     vTxHashes.emplace_back(tx.GetWitnessHash(), newit);
     newit->vTxHashesIdx = vTxHashes.size() - 1;
@@ -483,7 +476,6 @@ void CTxMemPool::removeUnchecked(txiter it, MemPoolRemovalReason reason)
     mapLinks.erase(it);
     mapTx.erase(it);
     nTransactionsUpdated++;
-    minerPolicyEstimator->policyEstimatorRemoveTx( hash ) ;
 }
 
 // Calculates descendants of entry that are not already in setDescendants, and adds to
@@ -619,8 +611,6 @@ void CTxMemPool::removeForBlock(const std::vector<CTransactionRef>& vtx, unsigne
         if (i != mapTx.end())
             entries.push_back(&*i);
     }
-    // Before the txs in the new block have been removed from the mempool, update policy estimates
-    minerPolicyEstimator->feesProcessBlock( nBlockHeight, entries ) ;
     for (const auto& tx : vtx)
     {
         txiter it = mapTx.find(tx->GetHash());

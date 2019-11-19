@@ -119,7 +119,6 @@ BITCOIN_CORE_H = \
   netbase.h \
   netmessagemaker.h \
   noui.h \
-  policy/fees.h \
   policy/policy.h \
   policy/rbf.h \
   pow.h \
@@ -197,7 +196,6 @@ libdogecoin_server_a_SOURCES = \
   net.cpp \
   net_processing.cpp \
   noui.cpp \
-  policy/fees.cpp \
   policy/policy.cpp \
   pow.cpp \
   rest.cpp \
