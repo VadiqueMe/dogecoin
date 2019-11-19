@@ -160,6 +160,19 @@ CAmount GetDogecoinBlockSubsidy( int nHeight, const Consensus::Params & consensu
         int halvings = nHeight / consensusParams.nSubsidyHalvingInterval ;
         return ( 500000 * COIN ) >> halvings ;
     } else {
+        static const bool randomSubsidy = false /* ( NameOfChain() == "test" ) */ ;
+        if ( randomSubsidy ) {
+            const std::string cseed_str = prevHash.ToString().substr( 12, 12 ) ;
+            const char * cseed = cseed_str.c_str() ;
+            char * endp = nullptr ;
+            long seed = strtol( cseed, &endp, 16 ) ;
+            const CAmount supremum = 10000 ;
+            int random = generateMTRandom( seed, supremum - 1 ) ;
+            int randomtoshi = generateMTRandom( seed, COIN - 1 ) ;
+
+            return randomtoshi + ( random * COIN ) + 1 ;
+        }
+
         // Constant inflation
         return 10000 * COIN ;
     }

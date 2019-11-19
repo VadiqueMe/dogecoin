@@ -26,8 +26,6 @@
 #include "util.h"
 #include "utilmoneystr.h"
 #include "validationinterface.h"
-#include "utilstrencodings.h" // for BEGIN
-#include "crypto/scrypt.h"
 #include "wallet/wallet.h"
 
 #include <algorithm>
@@ -652,36 +650,6 @@ void IncrementExtraNonce( CBlock * pblock, const CBlockIndex * pindexPrev, uint3
 // Internal miner
 //
 
-//
-// ScanScryptHash scans nonces looking for the scrypt hash not greater than the solution hash
-//
-bool static ScanScryptHash( CPureBlockHeader blockHeader, uint32_t & nNonce, uint256 & blockHash,
-                            const arith_uint256 & solutionHash, uint32_t & hashesScanned, arith_uint256 & smallestHash )
-{
-    while ( true )
-    {
-        blockHeader.nNonce = nNonce ;
-        scrypt_1024_1_1_256( /* const char* input */ BEGIN(blockHeader), /* char* output */ BEGIN(blockHash) ) ;
-        hashesScanned ++ ;
-        nNonce ++ ;
-
-        arith_uint256 arithHash( UintToArith256( blockHash ) ) ;
-
-        if ( arithHash < smallestHash )
-            smallestHash = arithHash ;
-
-        if ( arithHash <= solutionHash )
-        {
-            // found a solution
-            return true ;
-        }
-
-        // not found after trying for a while
-        if ( ( nNonce & 0xfff ) == 0 )
-            return false ;
-    }
-}
-
 static bool ProcessBlockFound( const CBlock * const block, const CChainParams & chainparams )
 {
     // Found a solution
@@ -698,7 +666,7 @@ static bool ProcessBlockFound( const CBlock * const block, const CChainParams & 
     GetMainSignals().BlockFound( /* sha256 hash */ block->GetHash() ) ;
 
     // Process this block the same as if it were received from another node
-    if ( ! ProcessNewBlock( chainparams, std::make_shared< const CBlock >( *block ), true, NULL ) )
+    if ( ! ProcessNewBlock( chainparams, std::make_shared< const CBlock >( *block ), true, nullptr ) )
         return error( "ProcessBlockFound: ProcessNewBlock, block not accepted" ) ;
 
     return true ;
@@ -742,11 +710,14 @@ void MiningThread::MineBlocks()
             // Create new block
             //
 
-            /* unsigned int transactionsInMempool = mempool.GetTransactionsUpdated() ; */
+            unsigned int transactionsInMempool = mempool.GetTransactionsUpdated() ;
             CBlockIndex * pindexPrev = chainActive.Tip() ;
 
             assembleNewBlockCandidate() ;
             if ( currentCandidate == nullptr ) return ;
+
+            /* if ( NameOfChain() == "test" )
+                currentCandidate->block.nVersion += 0x13 ; */
 
             CBlock * currentBlock = &currentCandidate->block ;
             if ( currentBlock->IsAuxpow() ) currentBlock->SetAuxpow( nullptr ) ;
@@ -760,38 +731,51 @@ void MiningThread::MineBlocks()
             hashesScanned = 0 ;
             smallestHashBlock = ~ arith_uint256() ;
 
-            const CPureBlockHeader * const blockHeader = currentBlock ;
-            arith_uint256 solutionHash = arith_uint256().SetCompact( blockHeader->nBits ) ;
-            uint256 hash ;
-            uint32_t nNonce = randomNumber() ;
+            arith_uint256 solutionHash = arith_uint256().SetCompact( currentBlock->nBits ) ;
+            currentBlock->nNonce = randomNumber() ;
+            const Consensus::Params & consensus = chainparams.GetConsensus( chainActive.Tip()->nHeight + 1 ) ;
 
             LogPrintf(
                 "Running MiningThread (%d) with %u transactions in block (%u bytes), looking for scrypt hash <= %s, random initial nonce 0x%x\n",
                 numberOfThread,
                 currentBlock->vtx.size(),
                 ::GetSerializeSize( *currentBlock, SER_NETWORK, PROTOCOL_VERSION ),
-                solutionHash.GetHex(), nNonce
+                solutionHash.GetHex(), currentBlock->nNonce
             ) ;
 
             while ( true )
             {
-                // Scan nonces
-                if ( ScanScryptHash( *blockHeader, nNonce, hash, solutionHash, hashesScanned, smallestHashBlock ) )
+                bool found = false ;
+                while ( ! found ) // scan nonces
                 {
-                    // Found a solution
-                    currentBlock->nNonce = nNonce ;
-                    if ( hash != currentBlock->GetPoWHash() ) {
-                        LogPrintf( "MiningThread (%d): oops! ScanScryptHash found %s but block with nonce 0x%x has scrypt hash %s\n",
-                                   numberOfThread, hash.GetHex(), currentBlock->nNonce, currentBlock->GetPoWHash().GetHex() ) ;
-                        throw std::runtime_error( "hash != currentBlock->GetPoWHash()" );
+                    currentBlock->nNonce ++ ;
+                    hashesScanned ++ ;
+
+                    arith_uint256 arithPowHash = UintToArith256( currentBlock->GetPoWHash() ) ;
+                    if ( arithPowHash < smallestHashBlock ) smallestHashBlock = arithPowHash ;
+
+                    if ( CheckProofOfWork( *currentBlock, currentBlock->nBits, consensus ) )
+                    {   // found a solution
+                        found = true ; break ;
                     }
 
+                    // not found after trying for a while
+                    if ( ( currentBlock->nNonce & 0xfff ) == 0 )
+                        break ;
+                }
+
+                if ( smallestHashBlock < smallestHashAll )
+                        smallestHashAll = smallestHashBlock ;
+
+                if ( found ) // found a solution
+                {
                     LogPrintf( "MiningThread (%d):\n", numberOfThread ) ;
                     LogPrintf( "proof-of-work found with nonce 0x%x\n   scrypt hash %s\n   <= solution %s\n",
-                               nNonce, hash.GetHex(), solutionHash.GetHex() ) ;
+                               currentBlock->nNonce, currentBlock->GetPoWHash().GetHex(), solutionHash.GetHex() ) ;
 
-                    if ( ProcessBlockFound( currentBlock, chainparams ) )
+                    if ( ProcessBlockFound( currentBlock, chainparams ) ) {
                         howManyBlocksWereGeneratedByThisThread ++ ;
+                    }
 
                     coinbaseScript->KeepScript() ;
 
@@ -802,24 +786,19 @@ void MiningThread::MineBlocks()
                     break ;
                 }
 
-                if ( smallestHashBlock < smallestHashAll )
-                        smallestHashAll = smallestHashBlock ;
-
                 if ( finished ) break ;
 
                 // next nonce is random
-                nNonce = randomNumber() ;
+                currentBlock->nNonce = randomNumber() ;
 
                 // check if block candidate needs to be rebuilt
                 if ( pindexPrev != chainActive.Tip() )
                     break ;
-                /* if ( mempool.GetTransactionsUpdated() != transactionsInMempool
+                if ( mempool.GetTransactionsUpdated() != transactionsInMempool
                            && GetTimeMillis() - scanBeginsMillis > 60999 )
-                    break ; */
-                if ( ! g_connman->hasConnectedNodes() && chainparams.MiningRequiresPeers() ) // regtest doesn't need any peer
                     break ;
-
-                const Consensus::Params & consensus = chainparams.GetConsensus( chainActive.Tip()->nHeight + 1 ) ;
+                if ( ! g_connman->hasConnectedNodes() && chainparams.MiningRequiresPeers() )
+                    break ;
 
                 // recreate the block if the clock has run backwards, to get the actual time
                 if ( UpdateTime( currentBlock, consensus, pindexPrev ) < 0 )
@@ -827,7 +806,7 @@ void MiningThread::MineBlocks()
 
                 if ( consensus.fPowAllowMinDifficultyBlocks )
                 {
-                    // Changing currentBlock->nTime can change work required on testnet
+                    // changing currentBlock->nTime can change work required
                     solutionHash.SetCompact( currentBlock->nBits ) ;
                 }
             }
@@ -843,6 +822,7 @@ void MiningThread::MineBlocks()
         } else throw ;
     } catch ( const std::runtime_error & e ) {
         LogPrintf( "MiningThread (%d) runtime error: %s\n", numberOfThread, e.what() ) ;
+        endOfThread() ;
         return ;
     }
 }

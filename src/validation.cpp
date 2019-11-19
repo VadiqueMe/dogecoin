@@ -2567,7 +2567,14 @@ bool InvalidateBlock( CValidationState & state, const CChainParams & chainparams
     return true ;
 }
 
-bool ResetBlockFailureFlags( CBlockIndex * pindex ) {
+bool ResetBlockFailureFlags( CBlockIndex * pindex )
+{
+    if ( pindex == nullptr ) return false ;
+
+    LogPrintf( "%s: reconsidering block sha256_hash=%s height=%d date=%s\n", __func__,
+                pindex->GetBlockHash().ToString(), pindex->nHeight,
+                    DateTimeStrFormat( "%Y-%m-%d %H:%M:%S", pindex->GetBlockTime() ) ) ;
+
     AssertLockHeld( cs_main ) ;
 
     int nHeight = pindex->nHeight ;
@@ -2598,9 +2605,6 @@ bool ResetBlockFailureFlags( CBlockIndex * pindex ) {
         pindex = pindex->pprev;
     }
 
-    LogPrintf( "%s: reconsidered block sha256_hash=%s height=%d date=%s\n", __func__,
-                pindex->GetBlockHash().ToString(), pindex->nHeight,
-                    DateTimeStrFormat( "%Y-%m-%d %H:%M:%S", pindex->GetBlockTime() ) ) ;
     return true ;
 }
 

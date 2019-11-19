@@ -115,7 +115,7 @@ std::string ChainNameFromArguments()
     if ( fTestNet ) chain = "test" ;
     if ( inuChain ) chain = "inu" ;
 
-    LogPrintf( "%s: \"%s\"\n", __func__, chain ) ;
+    ///LogPrintf( "%s: \"%s\"\n", __func__, chain ) ;
 
     return chain ;
 }
