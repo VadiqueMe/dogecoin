@@ -545,14 +545,14 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
     if (strMode != "template")
         throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid mode");
 
-    if(!g_connman)
-        throw JSONRPCError(RPC_CLIENT_P2P_DISABLED, "Error: Peer-to-peer functionality missing or disabled");
+    if ( ! g_connman )
+        throw JSONRPCError( RPC_CLIENT_P2P_DISABLED, "Peer-to-peer functionality is absent" ) ;
 
-    if (g_connman->GetNodeCount(CConnman::CONNECTIONS_ALL) == 0)
-        throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "Bitcoin is not connected!");
+    if ( g_connman->GetNodeCount( CConnman::CONNECTIONS_ALL ) == 0 )
+        throw JSONRPCError( RPC_CLIENT_NOT_CONNECTED, "Dogecoin is not connected!" ) ;
 
-    if (IsInitialBlockDownload())
-        throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Bitcoin is downloading blocks...");
+    if ( IsInitialBlockDownload() )
+        throw JSONRPCError( RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Dogecoin is downloading blocks..." ) ;
 
     static unsigned int nTransactionsUpdatedLast;
 
@@ -899,7 +899,7 @@ UniValue getauxblockbip22(const JSONRPCRequest& request)
             "  \"coinbasevalue\"      (numeric) value of the block's coinbase\n"
             "  \"bits\"               (string) compressed target of the block\n"
             "  \"height\"             (numeric) height of the block\n"
-            "  \"_target\"            (string) target in reversed byte order, deprecated\n"
+            "  \"target\"            (string) target in reversed sequence of bytes\n"
             "}\n"
             "\nResult (with arguments):\n"
             "xxxxx        (boolean) whether the submitted block was correct\n"
@@ -1005,7 +1005,7 @@ UniValue getauxblockbip22(const JSONRPCRequest& request)
         result.push_back(Pair("coinbasevalue", (int64_t)pblock->vtx[0]->vout[0].nValue));
         result.push_back(Pair("bits", strprintf("%08x", pblock->nBits)));
         result.push_back(Pair("height", static_cast<int64_t> (pindexPrev->nHeight + 1)));
-        result.push_back(Pair("_target", HexStr(BEGIN(target), END(target))));
+        result.push_back( Pair("target", HexStr( BEGIN(target), END(target) )) ) ;
 
         return result;
     }

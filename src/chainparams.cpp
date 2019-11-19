@@ -141,7 +141,7 @@ public:
         /**
          * The message start string is designed to be unlikely to occur in normal data.
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
-         * a large 32-bit integer with any alignment.
+         * a large 32-bit integer with any alignment
          */
         pchMessageStart[0] = 0xc0;
         pchMessageStart[1] = 0xc0;
@@ -607,9 +607,9 @@ public:
             0
         } ;
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);
-        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,239);
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>( 1, 0x6f ) ;
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>( 1, 0xc4 ) ;
+        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>( 1, 0xef ) ;
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x35)(0x87)(0xCF).convert_to_container<std::vector<unsigned char> >();
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x35)(0x83)(0x94).convert_to_container<std::vector<unsigned char> >();
     }

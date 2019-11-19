@@ -1,19 +1,18 @@
 #!/usr/bin/env python
+
 # Copyright (c) 2014 Daniel Kraft
 # Copyright (c) 2015-2018 The Dogecoin Core developers
 # Distributed under the MIT software license, see the accompanying
-# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+# file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 # General code for scrypt auxpow testing.  This includes routines to
 # solve an auxpow header and to generate auxpow blocks with scrypt.
-# extends and modifies auxpow module by Daniel Kraft.
+# extends and modifies auxpow module by Daniel Kraft
 
-# This module requires a built and installed version of the ltc_scrypt
-# package, which can be downloaded from:
-# https://pypi.python.org/packages/source/l/ltc_scrypt/ltc_scrypt-1.0.tar.gz
+# This module requires an installed version of the litecoin_scrypt package
 
 from .auxpow import *
-import ltc_scrypt
+import litecoin_scrypt
 
 def computeAuxpowWithChainId (block, target, chainid, ok):
   """
@@ -101,4 +100,4 @@ def getScryptPoW(hexData):
   """
 
   data = bytes.fromhex(hexData)
-  return reverseHex(ltc_scrypt.getPoWHash(data).hex())
+  return reverseHex(litecoin_scrypt.getPoWHash(data).hex())

@@ -1134,7 +1134,7 @@ void BitcoinGUI::updateBottomBarShowsDigging()
     generatingLabel->setVisible( nThreads > 0 ) ;
     generatingLabel->setToolTip(
         QString( "<nobr>") + QString( "Digging is <b>on</b>" ) + QString( "</nobr>")
-            + " <nobr>(" + QString::number( nThreads ) + " threads)</nobr>"
+            + " <nobr>(" + QString::number( nThreads ) + " " + ( nThreads == 1 ? "thread" : "threads" ) + ")</nobr>"
     ) ;
 
     if ( walletFrame != nullptr ) walletFrame->refreshDigPage() ;

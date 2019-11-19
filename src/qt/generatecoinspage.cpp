@@ -234,6 +234,7 @@ void GenerateCoinsPage::rebuildThreadTabs()
         ui->detailsForThreads->removeTab( i ) ;
 
     size_t nThreads = HowManyMiningThreads() ;
+    ui->threadsLabel->setText( nThreads == 1 ? "thread" : "threads" ) ;
     if ( nThreads > 0 )
     {
         for ( size_t thread = 0 ; thread < nThreads ; ++ thread ) {

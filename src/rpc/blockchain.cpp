@@ -1024,8 +1024,8 @@ static UniValue SoftForkMajorityDesc(int version, CBlockIndex* pindex, const Con
             CBlockIndex* pstart = pindex;
             for (int i = 0; i < consensusParams.nMajorityWindow && pstart != NULL; i++)
             {
-                if (pstart->nVersion >= version)
-                    ++nFound;
+                if ( pstart->GetBaseVersion() >= CPureBlockHeader::GetBaseVersion( version ) )
+                    ++nFound ;
                 pstart = pstart->pprev;
             }
 
