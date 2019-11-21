@@ -196,8 +196,8 @@
         <translation>因為內部錯誤導致錢包加密失敗。你的錢包還是沒加密</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
-        <translation>提供的密碼不一樣。</translation>
+        <source>The supplied passphrases do not match</source>
+        <translation>提供的密碼不一樣</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>

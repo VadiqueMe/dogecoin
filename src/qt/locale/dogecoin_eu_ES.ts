@@ -180,8 +180,8 @@
         <translation>Zorroaren enkriptazioak huts egin du barne-errore baten ondorioz. Zure zorroa ez da enkriptatu</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
-        <translation>Eman dituzun pasahitzak ez datoz bat.</translation>
+        <source>The supplied passphrases do not match</source>
+        <translation>Eman dituzun pasahitzak ez datoz bat</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>

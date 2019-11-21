@@ -830,29 +830,29 @@ void BitcoinGUI::setNumBlocks(int count, const QDateTime& blockDate, double nVer
     enum BlockSource blockSource = clientModel->getBlockSource();
     switch (blockSource) {
         case BLOCK_SOURCE_NETWORK:
-            if (header) {
-                updateHeadersSyncProgressLabel();
-                return;
+            if ( header ) {
+                updateHeadersSyncProgressLabel() ;
+                return ;
             }
-            progressBarLabel->setText(tr("Synchronizing with network..."));
-            updateHeadersSyncProgressLabel();
-            break;
+            progressBarLabel->setText( tr("Synchronizing with network...") ) ;
+            updateHeadersSyncProgressLabel() ;
+            break ;
         case BLOCK_SOURCE_DISK:
-            if (header) {
-                progressBarLabel->setText(tr("Indexing blocks on disk..."));
+            if ( header ) {
+                progressBarLabel->setText( tr("Indexing blocks on disk...") ) ;
             } else {
-                progressBarLabel->setText(tr("Processing blocks on disk..."));
+                progressBarLabel->setText( tr("Processing blocks on disk...") ) ;
             }
-            break;
+            break ;
         case BLOCK_SOURCE_REINDEX:
-            progressBarLabel->setText(tr("Reindexing blocks on disk..."));
-            break;
+            progressBarLabel->setText( tr("Reindexing blocks on disk...") ) ;
+            break ;
         case BLOCK_SOURCE_NONE:
-            if (header) {
-                return;
+            if ( header ) {
+                return ;
             }
-            progressBarLabel->setText(tr("Connecting to peers..."));
-            break;
+            progressBarLabel->setText( tr("Connecting to peers...") ) ;
+            break ;
     }
 
     QString tooltip;

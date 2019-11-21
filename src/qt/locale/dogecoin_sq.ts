@@ -152,8 +152,8 @@
         <translation>Enkriptimi i portofolit dështoi për shkak të një gabimi të brëndshëm. Portofoli juaj nuk u enkriptua</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
-        <translation>Frazkalimet e plotësuara nuk përputhen.</translation>
+        <source>The supplied passphrases do not match</source>
+        <translation>Frazkalimet e plotësuara nuk përputhen</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>

@@ -71,12 +71,12 @@
        </property>
        <item>
         <property name="text">
-         <string>0</string>
+         <string notr="true">0</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>1</string>
+         <string notr="true">1</string>
         </property>
        </item>
       </widget>
@@ -163,7 +163,7 @@
      </property>
      <widget class="QWidget" name="thread_tab">
       <attribute name="title">
-       <string>Thread</string>
+       <string notr="true">Thread</string>
       </attribute>
      </widget>
     </widget>
@@ -293,7 +293,7 @@
              <cursorShape>IBeamCursor</cursorShape>
             </property>
             <property name="text">
-             <string>a number</string>
+             <string notr="true">a number</string>
             </property>
             <property name="textFormat">
              <enum>Qt::PlainText</enum>
@@ -333,7 +333,7 @@
              <cursorShape>IBeamCursor</cursorShape>
             </property>
             <property name="text">
-             <string>10:09:54 (6 seconds ago)</string>
+             <string notr="true">10:09:54 (6 seconds ago)</string>
             </property>
             <property name="textFormat">
              <enum>Qt::PlainText</enum>
@@ -373,7 +373,7 @@
              <cursorShape>IBeamCursor</cursorShape>
             </property>
             <property name="text">
-             <string>0x (hexadecimal)</string>
+             <string notr="true">0x (hexadecimal)</string>
             </property>
             <property name="textFormat">
              <enum>Qt::PlainText</enum>
@@ -413,7 +413,7 @@
              <cursorShape>IBeamCursor</cursorShape>
             </property>
             <property name="text">
-             <string>tipBlock.nBits</string>
+             <string notr="true">tipBlock.nBits</string>
             </property>
             <property name="textFormat">
              <enum>Qt::PlainText</enum>
@@ -453,7 +453,7 @@
              <cursorShape>IBeamCursor</cursorShape>
             </property>
             <property name="text">
-             <string>n o n c e</string>
+             <string notr="true">n o n c e</string>
             </property>
             <property name="textFormat">
              <enum>Qt::PlainText</enum>
@@ -532,7 +532,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>sha256</string>
+                <string notr="true">sha256</string>
                </property>
                <property name="textFormat">
                 <enum>Qt::PlainText</enum>
@@ -554,7 +554,7 @@
                 <cursorShape>IBeamCursor</cursorShape>
                </property>
                <property name="text">
-                <string>[SHA-256]</string>
+                <string notr="true">[SHA-256]</string>
                </property>
                <property name="textFormat">
                 <enum>Qt::PlainText</enum>
@@ -578,7 +578,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>scrypt</string>
+                <string notr="true">scrypt</string>
                </property>
                <property name="textFormat">
                 <enum>Qt::PlainText</enum>
@@ -600,7 +600,7 @@
                 <cursorShape>IBeamCursor</cursorShape>
                </property>
                <property name="text">
-                <string>[Scrypt]</string>
+                <string notr="true">[Scrypt]</string>
                </property>
                <property name="textFormat">
                 <enum>Qt::PlainText</enum>
