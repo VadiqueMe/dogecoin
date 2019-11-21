@@ -960,8 +960,8 @@
         <translation>Minimiser au lieu de quitter l'application lorsque la fenêtre est fermée. Si cette option est activée, l'application ne sera fermée qu'en sélectionnant Quitter dans le menu.</translation>
     </message>
     <message>
-        <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>URL de tiers (p. ex. un explorateur de blocs) apparaissant dans l'onglet des transactions comme éléments du menu contextuel. %s dans l'URL est remplacé par le hachage de la transaction. Les URL multiples sont séparées par une barre verticale |.</translation>
+        <source>Third party URLs (like a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |</source>
+        <translation>URL de tiers (p. ex. un explorateur de blocs) apparaissant dans l'onglet des transactions comme éléments du menu contextuel. %s dans l'URL est remplacé par le hachage de la transaction. Les URL multiples sont séparées par une barre verticale |</translation>
     </message>
     <message>
         <source>Third party transaction URLs</source>
@@ -1088,20 +1088,16 @@
         <translation>&amp;Affichage</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>&amp;Langue de l'interface utilisateur :</translation>
+        <source>Language of interface</source>
+        <translation>Langue de l'interface</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting %1.</source>
-        <translation>La langue de l'interface utilisateur peut être définie ici. Ce réglage sera pris en compte après redémarrage de %1.</translation>
+        <source>The language of interface can be set here. This setting will take effect after restarting %1</source>
+        <translation>La langue de l'interface utilisateur peut être définie ici. Ce réglage sera pris en compte après redémarrage de %1</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>&amp;Unité d'affichage des montants :</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Choisir la sous-unité par défaut d'affichage dans l'interface et lors d'envoi de pièces.</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Unité d'affichage des montants</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -2466,10 +2462,6 @@
     <message>
         <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to "not accepted" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
         <translation>Les pièces générées doivent mûrir pendant %1 blocs avant de pouvoir être dépensées. Lorsque ce bloc a été généré, il a été diffusé sur le réseau pour être ajouté à la chaîne de blocs. Si son intégration à la chaîne échoue, son état sera modifié en « refusée » et il ne sera pas possible de le dépenser. Cela peut arriver occasionnellement si un autre nœud génère un bloc à quelques secondes du vôtre.</translation>
-    </message>
-    <message>
-        <source>Debug information</source>
-        <translation>Informations de débogage</translation>
     </message>
     <message>
         <source>Transaction</source>

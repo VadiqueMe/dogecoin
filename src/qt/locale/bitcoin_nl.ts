@@ -960,8 +960,8 @@
         <translation>Minimaliseren in plaats van de applicatie af te sluiten wanneer het venster is afgesloten. Als deze optie is ingeschakeld, zal de toepassing pas worden afgesloten na het selecteren van Exit in het menu.</translation>
     </message>
     <message>
-        <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>URL's van derden (bijvoorbeeld block explorer) die in de transacties tab verschijnen als contextmenuelementen. %s in de URL is vervangen door transactiehash. Verscheidene URL's zijn gescheiden door een verticale streep |.  </translation>
+        <source>Third party URLs (like a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |</source>
+        <translation>URL's van derden (bijvoorbeeld block explorer) die in de transacties tab verschijnen als contextmenuelementen. %s in de URL is vervangen door transactiehash. Verscheidene URL's zijn gescheiden door een verticale streep |</translation>
     </message>
     <message>
         <source>Third party transaction URLs</source>
@@ -1088,20 +1088,16 @@
         <translation>&amp;Interface</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>Taal &amp;Gebruikersinterface:</translation>
+        <source>Language of interface</source>
+        <translation>Taal gebruikersinterface</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting %1.</source>
-        <translation>De taal van de gebruikersinterface kan hier ingesteld worden. Deze instelling zal pas van kracht worden nadat %1 herstart wordt.</translation>
+        <source>The language of interface can be set here. This setting will take effect after restarting %1</source>
+        <translation>De taal van de gebruikersinterface kan hier ingesteld worden. Deze instelling zal pas van kracht worden nadat %1 herstart wordt</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>&amp;Eenheid om bedrag in te tonen:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Kies de standaardonderverdelingseenheid om weer te geven in uw programma, en voor het versturen van munten</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Eenheid om bedrag in te tonen</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -2462,10 +2458,6 @@
     <message>
         <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to "not accepted" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
         <translation>Gegenereerde munten moeten %1 blokken rijpen voordat ze kunnen worden besteed. Toen dit blok gegenereerd werd, werd het uitgezonden naar het netwerk om aan de blokketen toegevoegd te worden. Als het niet lukt om in de keten toegevoegd te worden, zal de status te veranderen naar "niet geaccepteerd" en zal het niet besteedbaar zijn. Dit kan soms gebeuren als een ander knooppunt een blok genereert binnen een paar seconden na die van u.</translation>
-    </message>
-    <message>
-        <source>Debug information</source>
-        <translation>Debug-informatie</translation>
     </message>
     <message>
         <source>Transaction</source>

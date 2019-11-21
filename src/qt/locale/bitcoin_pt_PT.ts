@@ -876,9 +876,8 @@
         <translation>Minimize ao invés de sair da aplicação quando a janela é fechada. Com esta  opção selecionada, a aplicação apenas será encerrada quando escolher Sair da aplicação no menú.</translation>
     </message>
     <message>
-        <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>URLs de outrem (ex. um explorador de blocos) que aparece no separador de transações como itens do menu de contexto.
-%s do URL é substituído por hash de transação. Vários URLs são separados por barra vertical |.</translation>
+        <source>Third party URLs (like a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |</source>
+        <translation>URLs de outrem (ex. um explorador de blocos) que aparece no separador de transações como itens do menu de contexto. %s do URL é substituído por hash de transação. Vários URLs são separados por barra vertical |</translation>
     </message>
     <message>
         <source>Third party transaction URLs</source>
@@ -1005,16 +1004,12 @@
         <translation>&amp;Visualização</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>&amp;Linguagem da interface de utilizador:</translation>
+        <source>Language of interface</source>
+        <translation>Linguagem da interface</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>&amp;Unidade para mostrar quantias:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Escolha a unidade da subdivisão predefinida para ser mostrada na interface e quando enviar as moedas.</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Unidade para mostrar quantias</translation>
     </message>
     <message>
         <source>&amp;OK</source>

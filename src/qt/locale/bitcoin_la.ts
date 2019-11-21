@@ -374,16 +374,12 @@
         <translation>&amp;UI</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>&amp;Lingua monstranda utenti:</translation>
+        <source>Language of interface</source>
+        <translation>Lingua communicationis</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>&amp;Unita qua quantitates monstrare:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Selige praedefinitam unitam subdivisionis monstrare in interfacie et quando nummos mittere</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Unit ut ostendam quantōrum</translation>
     </message>
     <message>
         <source>&amp;OK</source>

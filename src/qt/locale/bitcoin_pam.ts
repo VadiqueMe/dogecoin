@@ -346,16 +346,12 @@
         <translation>&amp;Ipalto</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>Amanu na ning user interface:</translation>
+        <source>Language of interface</source>
+        <translation>Wika ng interface</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>Ing &amp;Unit a ipakit king alaga ning:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Pilinan ing default subdivision unit a ipalto o ipakit king interface at istung magpadala kang barya.</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Yunit upang ipakita halaga sa</translation>
     </message>
     <message>
         <source>&amp;OK</source>

@@ -522,16 +522,12 @@
         <translation>&amp;ჩვენება</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>სამომხმარებ&amp;ლო ენა:</translation>
+        <source>Language of interface</source>
+        <translation>ინტერფეისის ენა</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>ერთეუ&amp;ლი:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>აირჩიეთ გასაგზავნი თანხის ნაგულისხმევი ერთეული.</translation>
+        <source>Unit to show amounts in</source>
+        <translation>ერთეული</translation>
     </message>
     <message>
         <source>&amp;OK</source>

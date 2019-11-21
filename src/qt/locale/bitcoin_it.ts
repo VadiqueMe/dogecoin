@@ -900,9 +900,8 @@
         <translation>Riduci ad icona invece di uscire dall'applicazione quando la finestra viene chiusa. Attivando questa opzione l'applicazione terminerà solo dopo aver selezionato Esci dal menu File.</translation>
     </message>
     <message>
-        <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>URL di terze parti (ad es. un block explorer) che appaiono nella tabella delle transazioni come voci nel menu contestuale. "%s" nell'URL è sostituito dall'hash della transazione.
-Per specificare più URL separarli con una barra verticale "|".</translation>
+        <source>Third party URLs (like a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |</source>
+        <translation>URL di terze parti (ad es. un block explorer) che appaiono nella tabella delle transazioni come voci nel menu contestuale. "%s" nell'URL è sostituito dall'hash della transazione. Per specificare più URL separarli con una barra verticale "|"</translation>
     </message>
     <message>
         <source>Third party transaction URLs</source>
@@ -1029,20 +1028,16 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
         <translation>&amp;Mostra</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>&amp;Lingua Interfaccia Utente:</translation>
+        <source>Language of interface</source>
+        <translation>Lingua dell'interfaccia</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting %1.</source>
-        <translation>La lingua dell'interfaccia utente può essere impostata qui. L'impostazione avrà effetto dopo il riavvio %1.</translation>
+        <source>The language of interface can be set here. This setting will take effect after restarting %1</source>
+        <translation>La lingua dell'interfaccia utente può essere impostata qui. L'impostazione avrà effetto dopo il riavvio %1</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>&amp;Unità di misura con cui visualizzare gli importi:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Scegli l'unità di suddivisione predefinita da utilizzare per l'interfaccia e per l'invio di dogecoin.</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Unità con cui visualizzare gli importi</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -2263,10 +2258,6 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
     <message>
         <source>Merchant</source>
         <translation>Commerciante</translation>
-    </message>
-    <message>
-        <source>Debug information</source>
-        <translation>Informazione di debug</translation>
     </message>
     <message>
         <source>Transaction</source>

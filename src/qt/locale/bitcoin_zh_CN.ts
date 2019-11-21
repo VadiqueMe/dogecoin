@@ -944,8 +944,8 @@
         <translation>窗口被关闭时最小化而不是退出应用程序。当此选项启用时，应用程序只会在菜单中选择退出时退出。</translation>
     </message>
     <message>
-        <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>出现在交易的选项卡的上下文菜单项的第三方网址 (例如：区块链接查询) 。 %s的URL被替换为交易哈希。多个的URL需要竖线 | 分隔。</translation>
+        <source>Third party URLs (like a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |</source>
+        <translation>出现在交易的选项卡的上下文菜单项的第三方网址 (例如：区块链接查询)。%s的URL被替换为交易哈希。多个的URL需要竖线 | 分隔</translation>
     </message>
     <message>
         <source>Third party transaction URLs</source>
@@ -1072,20 +1072,16 @@
         <translation>显示(&amp;D)</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>用户界面语言(&amp;L)：</translation>
+        <source>Language of interface</source>
+        <translation>用户界面语言</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting %1.</source>
-        <translation>可以在这里设定用户界面的语言。这个设定在重启 %1 后才会生效。</translation>
+        <source>The language of interface can be set here. This setting will take effect after restarting %1</source>
+        <translation>可以在这里设定用户界面的语言。这个设定在重启 %1 后才会生效</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>比特币金额单位(&amp;U)：</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>选择比特币单位。</translation>
+        <source>Unit to show amounts in</source>
+        <translation>比特币金额单位</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -2447,10 +2443,6 @@
     <message>
         <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to "not accepted" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
         <translation>生成的比特币在可以使用前必须有 %1 个成熟的区块。当您生成了此区块后，它将被广播到网络中以加入区块链。如果它未成功进入区块链，其状态将变更为“不接受”并且不可使用。这可能偶尔会发生，如果另一个节点比你早几秒钟成功生成一个区块。</translation>
-    </message>
-    <message>
-        <source>Debug information</source>
-        <translation>调试信息</translation>
     </message>
     <message>
         <source>Transaction</source>

@@ -952,8 +952,8 @@
         <translation>Minimalizovať namiesto ukončenia aplikácie keď sa okno zavrie. Keď je zvolená táto možnosť, aplikácia sa zavrie len po zvolení Ukončiť v menu.</translation>
     </message>
     <message>
-        <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>URL tretích strán (napr. prehliadač blockchain) ktoré sa zobrazujú v záložke transakcií ako položky kontextového menu. %s v URL je nahradené hash-om transakcie. Viaceré URL sú oddelené zvislou čiarou |.</translation>
+        <source>Third party URLs (like a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |</source>
+        <translation>URL tretích strán (napr. prehliadač blockchain) ktoré sa zobrazujú v záložke transakcií ako položky kontextového menu. %s v URL je nahradené hash-om transakcie. Viaceré URL sú oddelené zvislou čiarou |</translation>
     </message>
     <message>
         <source>Third party transaction URLs</source>
@@ -1080,20 +1080,16 @@
         <translation>&amp;Zobrazenie</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>Jazyk užívateľského rozhrania:</translation>
+        <source>Language of interface</source>
+        <translation>Jazyk rozhrania</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting %1.</source>
-        <translation>Jazyk uživateľského rozhrania sa dá nastaviť tu. Toto nastavenie sa uplatní až po reštarte %1.</translation>
+        <source>The language of interface can be set here. This setting will take effect after restarting %1</source>
+        <translation>Jazyk uživateľského rozhrania sa dá nastaviť tu. Toto nastavenie sa uplatní až po reštarte %1</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>&amp;Zobrazovať hodnoty v jednotkách:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Zvoľte ako deliť dogecoin pri zobrazovaní pri platbách a užívateľskom rozhraní.</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Zobrazovať hodnoty v jednotkách</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -2419,10 +2415,6 @@
     <message>
         <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to "not accepted" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
         <translation>Vytvorené coins musia dospieť %1 blokov kým môžu byť minuté. Keď vytvoríte tento blok, bude rozoslaný do siete aby bol akceptovaný do reťaze blokov. Ak sa nedostane reťaze, jeho stav sa zmení na "zamietnutý" a nebude sa dať minúť. Toto sa môže občas stať ak iná nóda vytvorí blok približne v tom istom čase.</translation>
-    </message>
-    <message>
-        <source>Debug information</source>
-        <translation>Ladiace informácie</translation>
     </message>
     <message>
         <source>Transaction</source>

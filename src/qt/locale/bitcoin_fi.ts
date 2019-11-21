@@ -628,12 +628,12 @@
         <translation>Minimoi ikkuna ohjelman sulkemisen sijasta kun ikkuna suljetaan. Kun tämä asetus on käytössä, ohjelma suljetaan vain valittaessa valikosta Poistu.</translation>
     </message>
     <message>
-        <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>Ulkopuoliset URL-osoitteet (esim. block explorer,) jotka esiintyvät siirrot-välilehdellä valikossa. %s URL-osoitteessa korvataan siirtotunnuksella. Useampi URL-osoite on eroteltu pystyviivalla |.</translation>
+        <source>Third party URLs (like a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |</source>
+        <translation>Ulkopuoliset URL-osoitteet (esim. block explorer), jotka esiintyvät siirrot-välilehdellä valikossa. %s URL-osoitteessa korvataan siirtotunnuksella. Useampi URL-osoite on eroteltu pystyviivalla |</translation>
     </message>
     <message>
         <source>Third party transaction URLs</source>
-        <translation>Kolmannen osapuolen rahansiirto URL:t</translation>
+        <translation>Kolmannen osapuolen rahansiirto URL-osoitteet</translation>
     </message>
     <message>
         <source>Active command-line options that override above options:</source>
@@ -748,20 +748,16 @@
         <translation>&amp;Käyttöliittymä</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>&amp;Käyttöliittymän kieli</translation>
+        <source>Language of interface</source>
+        <translation>Käyttöliittymän kieli</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting %1.</source>
-        <translation>Tässä voit määritellä käyttöliittymän kielen. Muutokset astuvat voimaan seuraavan kerran, kun %1 käynnistetään.</translation>
+        <source>The language of interface can be set here. This setting will take effect after restarting %1</source>
+        <translation>Tässä voit määritellä käyttöliittymän kielen. Muutokset astuvat voimaan seuraavan kerran, kun %1 käynnistetään</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
+        <source>Unit to show amounts in</source>
         <translation>Yksikkö jona dogecoin-määrät näytetään</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Valitse mitä yksikköä käytetään ensisijaisesti dogecoin-määrien näyttämiseen.</translation>
     </message>
     <message>
         <source>&amp;OK</source>

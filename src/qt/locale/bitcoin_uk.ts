@@ -632,8 +632,8 @@
         <translation>Згортати замість закриття. Якщо ця опція включена, програма закриється лише після вибору відповідного пункту в меню.</translation>
     </message>
     <message>
-        <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>Сторонні URL (наприклад, block explorer), що з'являться на вкладці транзакцій у вигляді пункту контекстного меню. %s в URL буде замінено на хеш транзакції. Для відокремлення URLів використовуйте вертикальну риску |.</translation>
+        <source>Third party URLs (like a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |</source>
+        <translation>Сторонні URL (наприклад, block explorer), що з'являться на вкладці транзакцій у вигляді пункту контекстного меню. %s в URL буде замінено на хеш транзакції. Для відокремлення URLів використовуйте вертикальну риску |</translation>
     </message>
     <message>
         <source>Third party transaction URLs</source>
@@ -752,16 +752,12 @@
         <translation>&amp;Відображення</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>Мов&amp;а інтерфейсу користувача:</translation>
+        <source>Language of interface</source>
+        <translation>Мова інтерфейсу</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>В&amp;имірювати монети в:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Виберіть одиницю вимірювання монет, яка буде відображатись в гаманці та при відправленні.</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Вимірювати монети в</translation>
     </message>
     <message>
         <source>&amp;OK</source>

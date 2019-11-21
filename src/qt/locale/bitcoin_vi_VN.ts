@@ -544,8 +544,8 @@
         <translation>&amp;Hiển thị</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>Giao diện người dùng &amp; ngôn ngữ</translation>
+        <source>Language of interface</source>
+        <translation>Ngôn ngữ giao diện</translation>
     </message>
     <message>
         <source>&amp;OK</source>

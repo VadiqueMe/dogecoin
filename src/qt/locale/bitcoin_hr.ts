@@ -580,16 +580,12 @@
         <translation>&amp;Prikaz</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>Jezi&amp;k sučelja:</translation>
+        <source>Language of interface</source>
+        <translation>Jezik sučelja</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>&amp;Jedinica za prikaz iznosa:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Izaberite željeni najmanji dio dogecoina koji će biti prikazan u sučelju i koji će se koristiti za plaćanje.</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Jedinica za prikaz iznosa</translation>
     </message>
     <message>
         <source>&amp;OK</source>

@@ -506,16 +506,12 @@
         <translation>&amp;Interfaz</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>I&amp;dioma de la interfaz de usuario</translation>
+        <source>Language of interface</source>
+        <translation>Idioma de la interfaz</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>Mostrar las cantidades en la &amp;unidad:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Elegir la subdivisión predeterminada para mostrar cantidades en la interfaz y cuando se envían monedas.</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Mostrar las cantidades en la unidad</translation>
     </message>
     <message>
         <source>&amp;OK</source>

@@ -865,8 +865,8 @@ Var vänlig och försök igen.</translation>
         <translation>Minimera istället för att stänga programmet när fönstret stängs. När detta alternativ är aktiverat stängs programmet endast genom att välja Stäng i menyn.</translation>
     </message>
     <message>
-        <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>Tredjeparts URL:er (t.ex. en blockutforskare) som finns i transaktionstabben som ett menyval i sammanhanget. %s i URL:en ersätts med tansaktionshashen. Flera URL:er är separerade med vertikala streck |.</translation>
+        <source>Third party URLs (like a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |</source>
+        <translation>Tredjeparts URL:er (t.ex. en blockutforskare) som finns i transaktionstabben som ett menyval i sammanhanget. %s i URL:en ersätts med tansaktionshashen. Flera URL:er är separerade med vertikala streck |</translation>
     </message>
     <message>
         <source>Third party transaction URLs</source>
@@ -993,20 +993,16 @@ Var vänlig och försök igen.</translation>
         <translation>&amp;Visa</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>Användargränssnittets &amp;språk: </translation>
+        <source>Language of interface</source>
+        <translation>Användargränssnittets språk</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting %1.</source>
-        <translation>Användargränssnittets språk kan ställas in här. Denna inställning träder i kraft efter en omstart av %1.</translation>
+        <source>The language of interface can be set here. This setting will take effect after restarting %1</source>
+        <translation>Användargränssnittets språk kan ställas in här. Denna inställning träder i kraft efter en omstart av %1</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>&amp;Måttenhet att visa belopp i: </translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Välj en måttenhet att visa i gränssnittet och när du skickar mynt.</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Måttenhet att visa belopp i</translation>
     </message>
     <message>
         <source>&amp;OK</source>

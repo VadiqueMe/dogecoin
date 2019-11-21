@@ -142,7 +142,7 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *pa
     QAction *copyLabelAction = new QAction(tr("Copy label"), this);
     QAction *copyAmountAction = new QAction(tr("Copy amount"), this);
     QAction *copyTxIDAction = new QAction(tr("Copy transaction ID"), this);
-    QAction *copyTxHexAction = new QAction(tr("Copy raw transaction"), this);
+    QAction * copyTxHexAction = new QAction( tr("Copy raw transaction"), this ) ;
     QAction *copyTxPlainText = new QAction(tr("Copy full transaction details"), this);
     QAction *editLabelAction = new QAction(tr("Edit label"), this);
     QAction *showDetailsAction = new QAction(tr("Show transaction details"), this);
@@ -152,17 +152,17 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *pa
     contextMenu->addAction(copyLabelAction);
     contextMenu->addAction(copyAmountAction);
     contextMenu->addAction(copyTxIDAction);
-    contextMenu->addAction(copyTxHexAction);
+    contextMenu->addAction( copyTxHexAction ) ;
     contextMenu->addAction(copyTxPlainText);
     contextMenu->addAction(showDetailsAction);
     contextMenu->addSeparator();
     contextMenu->addAction(abandonAction);
     contextMenu->addAction(editLabelAction);
 
-    mapperThirdPartyTxUrls = new QSignalMapper(this);
+    mapperThirdPartyTxUrls = new QSignalMapper( this ) ;
 
     // Connect actions
-    connect(mapperThirdPartyTxUrls, SIGNAL(mapped(QString)), this, SLOT(openThirdPartyTxUrl(QString)));
+    connect( mapperThirdPartyTxUrls, SIGNAL( mapped(QString) ), this, SLOT( openThirdPartyTxUrl(QString) ) ) ;
 
     connect(dateWidget, SIGNAL(activated(int)), this, SLOT(chooseDate(int)));
     connect(typeWidget, SIGNAL(activated(int)), this, SLOT(chooseType(int)));
@@ -178,19 +178,19 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *pa
     connect(copyLabelAction, SIGNAL(triggered()), this, SLOT(copyLabel()));
     connect(copyAmountAction, SIGNAL(triggered()), this, SLOT(copyAmount()));
     connect(copyTxIDAction, SIGNAL(triggered()), this, SLOT(copyTxID()));
-    connect(copyTxHexAction, SIGNAL(triggered()), this, SLOT(copyTxHex()));
+    connect( copyTxHexAction, SIGNAL( triggered() ), this, SLOT( copyTxHex() ) ) ;
     connect(copyTxPlainText, SIGNAL(triggered()), this, SLOT(copyTxPlainText()));
     connect(editLabelAction, SIGNAL(triggered()), this, SLOT(editLabel()));
     connect(showDetailsAction, SIGNAL(triggered()), this, SLOT(showDetails()));
 }
 
-void TransactionView::setModel(WalletModel *_model)
+void TransactionView::setModel( WalletModel * walletModel )
 {
-    this->model = _model;
-    if(_model)
+    this->model = walletModel ;
+    if ( model != nullptr )
     {
         transactionProxyModel = new TransactionFilterProxy(this);
-        transactionProxyModel->setSourceModel(_model->getTransactionTableModel());
+        transactionProxyModel->setSourceModel( model->getTransactionTableModel() ) ;
         transactionProxyModel->setDynamicSortFilter(true);
         transactionProxyModel->setSortCaseSensitivity(Qt::CaseInsensitive);
         transactionProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
@@ -214,30 +214,29 @@ void TransactionView::setModel(WalletModel *_model)
 
         columnResizingFixer = new GUIUtil::TableViewLastColumnResizingFixer(transactionView, AMOUNT_MINIMUM_COLUMN_WIDTH, MINIMUM_COLUMN_WIDTH, this);
 
-        if (_model->getOptionsModel())
+        if ( model->getOptionsModel() != nullptr )
         {
             // Add third party transaction URLs to context menu
-            QStringList listUrls = _model->getOptionsModel()->getThirdPartyTxUrls().split("|", QString::SkipEmptyParts);
-            for (int i = 0; i < listUrls.size(); ++i)
+            QStringList listUrls = model->getOptionsModel()->getThirdPartyTxUrls().split( "|", QString::SkipEmptyParts ) ;
+            for ( size_t i = 0 ; i < listUrls.size() ; ++ i )
             {
-                QString host = QUrl(listUrls[i].trimmed(), QUrl::StrictMode).host();
-                if (!host.isEmpty())
+                QString host = QUrl( listUrls[ i ].trimmed(), QUrl::StrictMode ).host() ;
+                if ( ! host.isEmpty() )
                 {
-                    QAction *thirdPartyTxUrlAction = new QAction(host, this); // use host as menu item label
-                    if (i == 0)
-                        contextMenu->addSeparator();
-                    contextMenu->addAction(thirdPartyTxUrlAction);
-                    connect(thirdPartyTxUrlAction, SIGNAL(triggered()), mapperThirdPartyTxUrls, SLOT(map()));
-                    mapperThirdPartyTxUrls->setMapping(thirdPartyTxUrlAction, listUrls[i].trimmed());
+                    QAction * thirdPartyTxUrlAction = new QAction( host, this ) ; // use host as menu item label
+                    if ( i == 0 ) contextMenu->addSeparator() ;
+                    contextMenu->addAction( thirdPartyTxUrlAction ) ;
+                    connect( thirdPartyTxUrlAction, SIGNAL( triggered() ), mapperThirdPartyTxUrls, SLOT( map() ) ) ;
+                    mapperThirdPartyTxUrls->setMapping( thirdPartyTxUrlAction, listUrls[ i ].trimmed() ) ;
                 }
             }
         }
 
         // show/hide column Watch-only
-        updateWatchOnlyColumn(_model->haveWatchOnly());
+        updateWatchOnlyColumn( model->haveWatchOnly() ) ;
 
         // Watch-only signal
-        connect(_model, SIGNAL(notifyWatchonlyChanged(bool)), this, SLOT(updateWatchOnlyColumn(bool)));
+        connect( model, SIGNAL( notifyWatchonlyChanged(bool) ), this, SLOT( updateWatchOnlyColumn(bool) ) ) ;
     }
 }
 
@@ -419,7 +418,7 @@ void TransactionView::copyTxID()
 
 void TransactionView::copyTxHex()
 {
-    GUIUtil::copyEntryData(transactionView, 0, TransactionTableModel::TxHexRole);
+    GUIUtil::copyEntryData( transactionView, 0, TransactionTableModel::TxHexRole ) ;
 }
 
 void TransactionView::copyTxPlainText()

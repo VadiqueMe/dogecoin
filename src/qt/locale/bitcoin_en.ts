@@ -1242,7 +1242,7 @@
     <message>
         <location line="+80"/>
         <location line="+13"/>
-        <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
+        <source>Third party URLs (like a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1407,23 +1407,18 @@
     </message>
     <message>
         <location line="+8"/>
-        <source>User Interface &amp;language:</source>
-        <translation>User Interface &amp;language:</translation>
+        <source>Language of interface</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+13"/>
-        <source>The user interface language can be set here. This setting will take effect after restarting %1.</source>
+        <source>The language of interface can be set here. This setting will take effect after restarting %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+11"/>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>&amp;Unit to show amounts in:</translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Choose the default subdivision unit to show in the interface and when sending coins.</translation>
+        <source>Unit to show amounts in</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+612"/>
@@ -3441,11 +3436,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <location line="+7"/>
         <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to &quot;not accepted&quot; and it won&apos;t be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Debug information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

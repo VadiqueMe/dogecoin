@@ -780,16 +780,12 @@
         <translation>&amp;Kuva</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>Kasutajaliidese &amp;keel:</translation>
+        <source>Language of interface</source>
+        <translation>Kasutajaliidese keel</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>Summade kuvamise &amp;Unit:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Vali liideses ning müntide saatmisel kuvatav vaikimisi alajaotus.</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Summade kuvamise unit</translation>
     </message>
     <message>
         <source>&amp;OK</source>

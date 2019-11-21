@@ -632,12 +632,12 @@
         <translation>มินิไมซ์แอพ แทนการออกจากแอพพลิเคชั่น เมื่อวินโดว์ได้รับการปิด เมื่อเลือกตัวเลือกนี้ แอพพลิเคชั่น จะถูกปิด ก็ต่อเมื่อ มีการเลือกเมนู Exit/ออกจากระบบ เท่านั้น</translation>
     </message>
     <message>
-        <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
+        <source>Third party URLs (like a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |</source>
         <translation>URL แบบอื่น (ยกตัวอย่าง เอ็กพลอเลอร์บล็อก) ที่อยู่ใน เมนูรายการ ลำดับ %s ใน URL จะถูกเปลี่ยนด้วย รายการแฮช URL ที่เป็นแบบหลายๆอัน จะถูกแยก โดย เครื่องหมายเส้นบาร์ตั้ง |</translation>
     </message>
     <message>
         <source>Third party transaction URLs</source>
-        <translation>URI รายการ แบบของเจ้าอื่นๆ</translation>
+        <translation>URL รายการ แบบของเจ้าอื่นๆ</translation>
     </message>
     <message>
         <source>Active command-line options that override above options:</source>

@@ -880,16 +880,12 @@
         <translation>&amp;نمایش</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>زبان &amp;رابط کاربری:</translation>
+        <source>Language of interface</source>
+        <translation>زبان رابط</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>&amp;واحد نمایش مبالغ:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>انتخاب واحد پول مورد استفاده برای نمایش در پنجره‌ها و برای ارسال سکه.</translation>
+        <source>Unit to show amounts in</source>
+        <translation>واحد نمایش مبالغ</translation>
     </message>
     <message>
         <source>&amp;OK</source>

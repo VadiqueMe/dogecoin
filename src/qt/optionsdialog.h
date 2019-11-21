@@ -1,9 +1,10 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_QT_OPTIONSDIALOG_H
-#define BITCOIN_QT_OPTIONSDIALOG_H
+#ifndef DOGECOIN_QT_OPTIONSDIALOG_H
+#define DOGECOIN_QT_OPTIONSDIALOG_H
 
 #include <QDialog>
 #include <QValidator>
@@ -19,7 +20,7 @@ namespace Ui {
 class OptionsDialog;
 }
 
-/** Proxy address widget validator, checks for a valid proxy address.
+/** Proxy address widget validator, checks for a valid proxy address
  */
 class ProxyAddressValidator : public QValidator
 {
@@ -31,14 +32,14 @@ public:
     State validate(QString &input, int &pos) const;
 };
 
-/** Preferences dialog. */
+/** Preferences dialog */
 class OptionsDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit OptionsDialog(QWidget *parent, bool enableWallet);
-    ~OptionsDialog();
+    explicit OptionsDialog( QWidget * parent, bool enableWallet, bool showUrlsField = true ) ;
+    ~OptionsDialog() ;
 
     void setModel(OptionsModel *model);
     void setMapper();
@@ -62,9 +63,10 @@ Q_SIGNALS:
     void proxyIpChecks(QValidatedLineEdit *pUiProxyIp, int nProxyPort);
 
 private:
-    Ui::OptionsDialog *ui;
-    OptionsModel *model;
-    QDataWidgetMapper *mapper;
+    Ui::OptionsDialog * ui ;
+    OptionsModel * model ;
+    QDataWidgetMapper * mapper ;
+    bool showThirdPartyUrlsOption ;
 };
 
-#endif // BITCOIN_QT_OPTIONSDIALOG_H
+#endif

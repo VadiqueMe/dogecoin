@@ -916,8 +916,8 @@
         <translation>Minimalizuje zamiast zakończyć działanie programu przy zamykaniu okna. Kiedy ta opcja jest włączona, program zakończy działanie po wybieraniu Zamknij w menu.</translation>
     </message>
     <message>
-        <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>Zewnętrzne URL podglądu transakcji (np. eksplorator bloków), które będą wyświetlały się w menu kontekstowym, w zakładce transakcji. %s będzie zamieniany w adresie na hash transakcji. Oddziel wiele adresów pionową kreską |.</translation>
+        <source>Third party URLs (like a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |</source>
+        <translation>Zewnętrzne URL podglądu transakcji (np. eksplorator bloków), które będą wyświetlały się w menu kontekstowym, w zakładce transakcji. %s będzie zamieniany w adresie na hash transakcji. Oddziel wiele adresów pionową kreską |</translation>
     </message>
     <message>
         <source>Third party transaction URLs</source>
@@ -1044,20 +1044,16 @@
         <translation>&amp;Wyświetlanie</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>Język &amp;użytkownika:</translation>
+        <source>Language of interface</source>
+        <translation>Język użytkownika</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting %1.</source>
-        <translation>Można tu ustawić język interfejsu uzytkownika. Ustawienie przyniesie skutek po ponownym uruchomieniu %1.</translation>
+        <source>The language of interface can be set here. This setting will take effect after restarting %1</source>
+        <translation>Można tu ustawić język interfejsu uzytkownika. Ustawienie przyniesie skutek po ponownym uruchomieniu %1</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>&amp;Jednostka pokazywana przy kwocie:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Wybierz podział jednostki pokazywany w interfejsie  oraz podczas wysyłania monet</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Jednostka pokazywana przy kwocie</translation>
     </message>
     <message>
         <source>&amp;OK</source>

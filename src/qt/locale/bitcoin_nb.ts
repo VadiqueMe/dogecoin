@@ -688,8 +688,8 @@
         <translation>Minimer i stedet for å avslutte applikasjonen når vinduet lukkes. Når dette er valgt, vil applikasjonen avsluttes kun etter at Avslutte er valgt i menyen.</translation>
     </message>
     <message>
-        <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>Tredjepart URLer (f. eks. en blokkutforsker) som dukker opp i transaksjonsfanen som kontekst meny elementer. %s i URLen er erstattet med transaksjonen sin hash. Flere URLer er separert av en vertikal linje |.</translation>
+        <source>Third party URLs (like a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |</source>
+        <translation>Tredjepart URLer (f. eks. en blokkutforsker) som dukker opp i transaksjonsfanen som kontekst meny elementer. %s i URLen er erstattet med transaksjonen sin hash. Flere URLer er separert av en vertikal linje |</translation>
     </message>
     <message>
         <source>Third party transaction URLs</source>
@@ -812,16 +812,12 @@
         <translation>&amp;Visning</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>&amp;Språk for brukergrensesnitt</translation>
+        <source>Language of interface</source>
+        <translation>Språk for brukergrensesnitt</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>&amp;Enhet for visning av beløper:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Velg standard delt enhet for visning i grensesnittet og for sending av dogecoins.</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Enhet for visning av beløper</translation>
     </message>
     <message>
         <source>&amp;OK</source>

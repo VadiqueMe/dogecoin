@@ -250,8 +250,8 @@
         <translation>новчаник</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>&amp;Јединица за приказивање износа:</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Јединица за приказивање износа</translation>
     </message>
     <message>
         <source>&amp;OK</source>

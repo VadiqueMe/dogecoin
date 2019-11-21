@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #ifndef BITCOIN_QT_OPTIONSMODEL_H
 #define BITCOIN_QT_OPTIONSMODEL_H
@@ -13,12 +13,13 @@ QT_BEGIN_NAMESPACE
 class QNetworkProxy;
 QT_END_NAMESPACE
 
-/** Interface from Qt to configuration data structure for Bitcoin client.
+/** Interface from Qt to configuration data structure for Dogecoin peer.
    To Qt, the options are presented as a list with the different options
    laid out vertically.
    This can be changed to a tree once the settings become sufficiently
-   complex.
+   complex
  */
+
 class OptionsModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -38,7 +39,7 @@ public:
         ProxyUseTor,            // bool
         ProxyIPTor,             // QString
         ProxyPortTor,           // int
-        DisplayUnit,            // BitcoinUnits::Unit
+        DisplayUnit,            // UnitsOfCoin::Unit
         ThirdPartyTxUrls,       // QString
         Language,               // QString
         HideCoinControlFeatures,// bool
@@ -63,7 +64,7 @@ public:
     bool getMinimizeToTray() { return fMinimizeToTray; }
     bool getMinimizeOnClose() { return fMinimizeOnClose; }
     int getDisplayUnit() { return nDisplayUnit; }
-    QString getThirdPartyTxUrls() { return strThirdPartyTxUrls; }
+    QString getThirdPartyTxUrls() {  return thirdPartyTxUrls ;  }
     bool getProxySettings(QNetworkProxy& proxy) const;
     bool getHideCoinControlFeatures() { return fHideCoinControlFeatures ; }
     const QString& getOverriddenByCommandLine() { return strOverriddenByCommandLine; }
@@ -79,7 +80,7 @@ private:
     bool fMinimizeOnClose;
     QString language;
     int nDisplayUnit;
-    QString strThirdPartyTxUrls;
+    QString thirdPartyTxUrls ;
     bool fHideCoinControlFeatures ;
     /* settings that were overridden by command-line */
     QString strOverriddenByCommandLine;

@@ -960,8 +960,8 @@
         <translation>當視窗關閉時，把應用程式縮到最小，而不是結束。當勾選這個選項時，只能夠用選單中的結束來關掉應用程式。</translation>
     </message>
     <message>
-        <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>在交易頁籤的情境選單出現的第三方網址連結(URL)，比如說區塊探索網站。網址中的 %s 會被取代為交易的雜湊值。可以用直線符號 | 來分隔多個連結。</translation>
+        <source>Third party URLs (like a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |</source>
+        <translation>在交易頁籤的情境選單出現的第三方網址連結(URL)，比如說區塊探索網站。網址中的 %s 會被取代為交易的雜湊值。可以用直線符號 | 來分隔多個連結</translation>
     </message>
     <message>
         <source>Third party transaction URLs</source>
@@ -1088,20 +1088,16 @@
         <translation>顯示</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>使用界面語言:</translation>
+        <source>Language of interface</source>
+        <translation>使用界面語言</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting %1.</source>
-        <translation>可以在這裡設定使用者介面的語言。這個設定在重啓 %1 後才會生效。</translation>
+        <source>The language of interface can be set here. This setting will take effect after restarting %1</source>
+        <translation>可以在這裡設定使用者介面的語言。這個設定在重啓 %1 後才會生效</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>金額顯示單位:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>選擇操作界面和付款時，預設顯示金額的細分單位。</translation>
+        <source>Unit to show amounts in</source>
+        <translation>金額顯示單位</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -2462,10 +2458,6 @@
     <message>
         <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to "not accepted" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
         <translation>生產出來的錢要再等 %1 個區塊生出來後才成熟可以用。當區塊生產出來時會公布到網路上，來被加進區塊鏈。如果加失敗了，狀態就會變成「不被接受」，而且不能夠花。如果在你生產出區塊的幾秒鐘內，也有其他節點生產出來的話，就有可能會發生這種情形。</translation>
-    </message>
-    <message>
-        <source>Debug information</source>
-        <translation>除錯資訊</translation>
     </message>
     <message>
         <source>Transaction</source>

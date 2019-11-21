@@ -628,12 +628,12 @@
         <translation>Ελαχιστοποίηση αντί για έξοδο κατά το κλείσιμο του παραθύρου. Όταν αυτή η επιλογή είναι ενεργοποιημένη, η εφαρμογή θα κλείνει μόνο αν επιλεχθεί η Έξοδος στο μενού.</translation>
     </message>
     <message>
-        <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>URLs από τρίτους (π.χ. ένας εξερευνητής μπλοκ) τα οποία εμφανίζονται στην καρτέλα συναλλαγών ως στοιχεία μενού. Το %s στα URL αντικαθιστάται από την τιμή της κατατεμαχισμένης συναλλαγής.</translation>
+        <source>Third party URLs (like a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |</source>
+        <translation>URLs από τρίτους (π.χ. ένας εξερευνητής μπλοκ) τα οποία εμφανίζονται στην καρτέλα συναλλαγών ως στοιχεία μενού. Το %s στα URL αντικαθιστάται από την τιμή της κατατεμαχισμένης συναλλαγής</translation>
     </message>
     <message>
         <source>Third party transaction URLs</source>
-        <translation>Διευθύνσεις τρίτων συναλλαγών.</translation>
+        <translation>Διευθύνσεις τρίτων συναλλαγών</translation>
     </message>
     <message>
         <source>Active command-line options that override above options:</source>
@@ -720,16 +720,12 @@
         <translation>&amp;Απεικόνιση</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>Γλώσσα περιβάλλοντος εργασίας: </translation>
+        <source>Language of interface</source>
+        <translation>Γλώσσα περιβάλλοντος εργασίας</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>&amp;Μονάδα μέτρησης:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Διαλέξτε την προεπιλεγμένη υποδιαίρεση που θα εμφανίζεται όταν στέλνετε νομίσματα.</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Μονάδα μέτρησης</translation>
     </message>
     <message>
         <source>&amp;OK</source>

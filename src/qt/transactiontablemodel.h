@@ -17,7 +17,7 @@ class WalletModel;
 
 class CWallet;
 
-/** UI model for the transaction table of a wallet.
+/** UI model for the transaction table of a wallet
  */
 class TransactionTableModel : public QAbstractTableModel
 {
@@ -85,7 +85,7 @@ private:
     CWallet* wallet;
     WalletModel *walletModel;
     QStringList columns;
-    TransactionTablePriv *priv;
+    TransactionTablePriv * priv ;
     bool fProcessingQueuedTransactions;
     const PlatformStyle *platformStyle;
 
@@ -114,7 +114,8 @@ public Q_SLOTS:
     /* Needed to update fProcessingQueuedTransactions through a QueuedConnection */
     void setProcessingQueuedTransactions(bool value) { fProcessingQueuedTransactions = value; }
 
-    friend class TransactionTablePriv;
-};
+    friend class TransactionTablePriv ;
+
+} ;
 
 #endif

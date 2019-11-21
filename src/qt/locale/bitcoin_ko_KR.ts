@@ -960,8 +960,8 @@
         <translation>창을 닫으면 종료 대신 트레이로 보내기. 이 옵션을 활성화하면 메뉴에서 종료를 선택한 후에만 어플리케이션이 종료됩니다.</translation>
     </message>
     <message>
-        <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>서드-파티 URLs (예. 블록 탐색기)는 거래 탭의 컨텍스트 메뉴에 나타납니다. URL의 %s는 거래 해시값으로 대체됩니다. 여러 URLs는 수직 바 | 에서 나누어 집니다.</translation>
+        <source>Third party URLs (like a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |</source>
+        <translation>서드-파티 URLs (예. 블록 탐색기)는 거래 탭의 컨텍스트 메뉴에 나타납니다. URL의 %s는 거래 해시값으로 대체됩니다. 여러 URLs는 수직 바 | 에서 나누어 집니다</translation>
     </message>
     <message>
         <source>Third party transaction URLs</source>
@@ -1088,20 +1088,16 @@
         <translation>표시(&amp;D)</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>사용자 인터페이스 언어(&amp;L):</translation>
+        <source>Language of interface</source>
+        <translation>사용자 인터페이스 언어</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting %1.</source>
-        <translation>사용자 인터페이스 언어를 여기서 설정할 수 있습니다. 이 설정은 %1을 다시 시작할때 적용됩니다.</translation>
+        <source>The language of interface can be set here. This setting will take effect after restarting %1</source>
+        <translation>사용자 인터페이스 언어를 여기서 설정할 수 있습니다. 이 설정은 %1을 다시 시작할때 적용됩니다</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>거래액을 표시할 단위(&amp;U):</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>인터페이스에 표시하고 코인을 보낼때 사용할 기본 최소화 단위를 선택하십시오.</translation>
+        <source>Unit to show amounts in</source>
+        <translation>거래액을 표시할 단위</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -2466,10 +2462,6 @@
     <message>
         <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to "not accepted" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
         <translation>신규 채굴된 코인이 사용되기 위해서는 %1 개의 블록이 경과되어야 합니다. 블록을 생성할 때 블록체인에 추가되도록 네트워크에 전파되는 과정을 거치는데, 블록체인에 포함되지 못하고 실패한다면 해당 블록의 상태는 '미승인'으로 표현되고 비트코인 또한 사용될 수 없습니다. 이 현상은 다른 노드가 비슷한 시간대에 동시에 블록을 생성할 때 종종 발생할 수 있습니다. </translation>
-    </message>
-    <message>
-        <source>Debug information</source>
-        <translation>디버깅 정보</translation>
     </message>
     <message>
         <source>Transaction</source>

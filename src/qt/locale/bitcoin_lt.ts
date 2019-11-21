@@ -454,16 +454,12 @@
         <translation>&amp;Rodymas</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>Naudotojo sąsajos &amp;kalba:</translation>
+        <source>Language of interface</source>
+        <translation>Sąsajos kalba</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>&amp;Vienetai, kuriais rodyti sumas:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Rodomų ir siunčiamų monetų kiekio matavimo vienetai</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Vienetai kuriais rodyti sumas</translation>
     </message>
     <message>
         <source>&amp;OK</source>

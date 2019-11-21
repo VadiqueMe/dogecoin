@@ -788,8 +788,8 @@
         <translation>Minimalisasi aplikasi ketika jendela ditutup. Ketika pilihan ini dipilih, aplikasi akan menutup seluruhnya jika anda memilih Keluar di menu yang tersedia.</translation>
     </message>
     <message>
-        <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>URL pihak ketika (misalnya sebuah block explorer) yang mumcul dalam tab transaksi sebagai konteks menu. %s dalam URL diganti dengan kode transaksi. URL dipisahkan dengan tanda vertikal |.</translation>
+        <source>Third party URLs (like a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |</source>
+        <translation>URL pihak ketika (misalnya sebuah block explorer) yang mumcul dalam tab transaksi sebagai konteks menu. %s dalam URL diganti dengan kode transaksi. URL dipisahkan dengan tanda vertikal |</translation>
     </message>
     <message>
         <source>Third party transaction URLs</source>
@@ -888,16 +888,12 @@
         <translation>&amp;Tampilan</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>&amp;Bahasa Antarmuka Pengguna:</translation>
+        <source>Language of interface</source>
+        <translation>Bahasa antarmuka</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>&amp;Unit untuk menunjukkan nilai:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Pilihan standar unit yang ingin ditampilkan pada layar aplikasi dan saat mengirim koin.</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Unit untuk menunjukkan nilai</translation>
     </message>
     <message>
         <source>&amp;OK</source>

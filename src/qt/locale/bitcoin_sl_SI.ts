@@ -580,8 +580,8 @@
         <translation>Ko zaprete glavno okno programa, bo program tekel še naprej, okno pa bo zgolj minimirano. Program v tem primeru ustavite tako, da v meniju izberete ukaz Izhod.</translation>
     </message>
     <message>
-        <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>Naslovi URL tretjih oseb (npr. raziskovalec blokov), ki bodo navedeni v kontekstnem meniju seznama transakcij. Niz %s iz naslova URL je nadomeščen s hash vrednostjo transakcije. Več zaporednih naslovov URL je med seboj ločenih z znakom |.</translation>
+        <source>Third party URLs (like a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |</source>
+        <translation>Naslovi URL tretjih oseb (npr. raziskovalec blokov), ki bodo navedeni v kontekstnem meniju seznama transakcij. Niz %s iz naslova URL je nadomeščen s hash vrednostjo transakcije. Več zaporednih naslovov URL je med seboj ločenih z znakom |</translation>
     </message>
     <message>
         <source>Third party transaction URLs</source>
@@ -676,16 +676,12 @@
         <translation>&amp;Prikaz</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>&amp;Jezik uporabniškega vmesnika:</translation>
+        <source>Language of interface</source>
+        <translation>Jezik vmesnika</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>&amp;Enota za prikaz zneskov:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Izberite privzeto mersko enoto za prikaz v uporabniškem vmesniku in pri pošiljanju kovancev.</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Enota za prikaz zneskov</translation>
     </message>
     <message>
         <source>&amp;OK</source>

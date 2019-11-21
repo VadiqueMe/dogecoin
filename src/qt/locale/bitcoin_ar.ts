@@ -850,8 +850,8 @@
         <translation>&amp;عرض</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>واجهة المستخدم &amp;اللغة:</translation>
+        <source>Language of interface</source>
+        <translation>لغة الواجهة</translation>
     </message>
     <message>
         <source>&amp;OK</source>

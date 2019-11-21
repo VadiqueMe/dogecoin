@@ -612,16 +612,12 @@
         <translation>&amp;Megjelenítés</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>Felhasználófelület nye&amp;lve:</translation>
+        <source>Language of interface</source>
+        <translation>Felhasználófelület nyelve</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>&amp;Mértékegység:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Válaszd ki az interfészen és érmék küldésekor megjelenítendő alapértelmezett alegységet.</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Mértékegység</translation>
     </message>
     <message>
         <source>&amp;OK</source>

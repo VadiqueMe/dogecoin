@@ -960,8 +960,8 @@
         <translation>Minimér i stedet for at lukke applikationen, når vinduet lukkes. Når denne indstilling er aktiveret, vil applikationen først blive lukket, når Afslut vælges i menuen.</translation>
     </message>
     <message>
-        <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>Tredjeparts-URL'er (fx et blokhåndteringsværktøj), der vises i transaktionsfanen som genvejsmenupunkter. %s i URL'en erstattes med transaktionens hash. Flere URL'er separeres med en lodret streg |.</translation>
+        <source>Third party URLs (like a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |</source>
+        <translation>Tredjeparts-URL'er (fx et blokhåndteringsværktøj), der vises i transaktionsfanen som genvejsmenupunkter. %s i URL'en erstattes med transaktionens hash. Flere URL'er separeres med en lodret streg |</translation>
     </message>
     <message>
         <source>Third party transaction URLs</source>
@@ -1088,20 +1088,16 @@
         <translation>&amp;Visning</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>&amp;Sprog for brugergrænseflade:</translation>
+        <source>Language of interface</source>
+        <translation>Sprog for brugergrænseflade</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting %1.</source>
-        <translation>Sproget for brugerfladen kan vælges her. Denne indstilling vil træde i kraft efter genstart af %1.</translation>
+        <source>The language of interface can be set here. This setting will take effect after restarting %1</source>
+        <translation>Sproget for brugerfladen kan vælges her. Denne indstilling vil træde i kraft efter genstart af %1</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>&amp;Enhed, som beløb vises i:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Vælg standard for underopdeling af enhed, som skal vises i brugergrænsefladen og ved afsendelse af dogecoins.</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Enhed, som beløb vises i</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -2466,10 +2462,6 @@
     <message>
         <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to "not accepted" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
         <translation>Minede dogecoins skal modne %1 blokke, før de kan bruges. Da du genererede denne blok, blev den transmitteret til netværket for at blive føjet til blokkæden. Hvis det ikke lykkes at få den i kæden, vil dens tilstand ændres til “ikke accepteret”, og den vil ikke kunne bruges. Dette kan ske nu og da, hvis en anden knude udvinder en blok inden for nogle få sekunder fra din.</translation>
-    </message>
-    <message>
-        <source>Debug information</source>
-        <translation>Fejlsøgningsinformation</translation>
     </message>
     <message>
         <source>Transaction</source>

@@ -640,16 +640,12 @@
         <translation>&amp;Aspekto</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>&amp;Lingvo de la fasado:</translation>
+        <source>Language of interface</source>
+        <translation>Lingvo de la fasado</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>&amp;Unuo por vidigi sumojn:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Elekti la defaŭltan manieron por montri bitmonajn sumojn en la interfaco, kaj kiam vi sendos bitmonon.</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Unuo por vidigi sumojn</translation>
     </message>
     <message>
         <source>&amp;OK</source>

@@ -960,8 +960,8 @@
         <translation>Zavřením se aplikace minimalizuje. Pokud je tato volba zaškrtnuta, tak se aplikace ukončí pouze zvolením Konec v menu.</translation>
     </message>
     <message>
-        <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>URL třetích stran (např. block exploreru), která se zobrazí v kontextovém menu v záložce Transakce. %s v URL se nahradí hashem transakce. Více URL odděl svislítkem |.</translation>
+        <source>Third party URLs (like a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |</source>
+        <translation>URL třetích stran (např. block exploreru), která se zobrazí v kontextovém menu v záložce Transakce. %s v URL se nahradí hashem transakce. Více URL odděl svislítkem |</translation>
     </message>
     <message>
         <source>Third party transaction URLs</source>
@@ -1088,20 +1088,16 @@
         <translation>Zobr&amp;azení</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>&amp;Jazyk uživatelského rozhraní:</translation>
+        <source>Language of interface</source>
+        <translation>Jazyk rozhraní</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting %1.</source>
-        <translation>Tady lze nastavit jazyk uživatelského rozhraní. Nastavení se projeví až po restartování %1.</translation>
+        <source>The language of interface can be set here. This setting will take effect after restarting %1</source>
+        <translation>Tady lze nastavit jazyk uživatelského rozhraní. Nastavení se projeví až po restartování %1</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>Je&amp;dnotka pro částky:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Zvol výchozí podjednotku, která se bude zobrazovat v programu a při posílání mincí.</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Jednotka pro částky</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -2466,10 +2462,6 @@
     <message>
         <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to "not accepted" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
         <translation>Vygenerované mince musí čekat %1 bloků, než mohou být utraceny. Když jsi vygeneroval tenhle blok, tak byl rozposlán do sítě, aby byl přidán do řetězce bloků. Pokud se mu nepodaří dostat se do řetězce, změní se na „neakceptovaný“ a nepůjde utratit. To se občas může stát, pokud jiný uzel vygeneruje blok zhruba ve stejném okamžiku jako ty.</translation>
-    </message>
-    <message>
-        <source>Debug information</source>
-        <translation>Ladicí informace</translation>
     </message>
     <message>
         <source>Transaction</source>

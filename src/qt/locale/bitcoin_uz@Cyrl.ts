@@ -522,12 +522,12 @@
         <translation>&amp;Кўрсатиш</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>Фойдаланувчи интерфейси &amp;тили:</translation>
+        <source>Language of interface</source>
+        <translation>Фойдаланувчи интерфейси тили</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>Миқдорларни кўрсатиш учун &amp;қисм:</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Миқдорларни кўрсатиш учун қисм</translation>
     </message>
     <message>
         <source>&amp;OK</source>

@@ -576,8 +576,8 @@
         <translation>Minimizează fereastra în locul părăsirii programului în momentul închiderii ferestrei. Cînd acestă opţiune e activă, aplicaţia se va opri doar în momentul selectării comenzii 'Închide aplicaţia' din menu.</translation>
     </message>
     <message>
-        <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>URL-uri terţe părţi (de exemplu, un explorator de bloc), care apar în tab-ul tranzacţiilor ca elemente de meniu contextual. %s în URL este înlocuit cu hash de tranzacţie. URL-urile multiple sînt separate prin bară verticală |.</translation>
+        <source>Third party URLs (like a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |</source>
+        <translation>URL-uri terţe părţi (de exemplu, un explorator de bloc), care apar în tab-ul tranzacţiilor ca elemente de meniu contextual. %s în URL este înlocuit cu hash de tranzacţie. URL-urile multiple sînt separate prin bară verticală |</translation>
     </message>
     <message>
         <source>Third party transaction URLs</source>
@@ -680,16 +680,12 @@
         <translation>&amp;Afişare</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>&amp;Limbă interfaţă utilizator</translation>
+        <source>Language of interface</source>
+        <translation>Limbă interfaţă</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>&amp;Unitatea de măsură pentru afişarea sumelor:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Alegeţi subdiviziunea folosită la afişarea interfeţei şi la trimiterea de dogecoin.</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Unitatea de măsură pentru afişarea sumelor</translation>
     </message>
     <message>
         <source>&amp;OK</source>

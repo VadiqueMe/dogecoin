@@ -679,7 +679,7 @@ void BitcoinGUI::optionsClicked()
     if(!clientModel || !clientModel->getOptionsModel())
         return;
 
-    OptionsDialog dlg(this, enableWallet);
+    OptionsDialog dlg( this, enableWallet, /* show third party urls option or not */ NameOfChain() == "main" ) ;
     dlg.setModel(clientModel->getOptionsModel());
     dlg.exec();
 }

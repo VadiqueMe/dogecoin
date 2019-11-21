@@ -672,14 +672,6 @@
         <translation>Minimise instead of exit the application when the window is closed. When this option is enabled, the application will be closed only after selecting Exit in the menu.</translation>
     </message>
     <message>
-        <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</translation>
-    </message>
-    <message>
-        <source>Third party transaction URLs</source>
-        <translation>Third party transaction URLs</translation>
-    </message>
-    <message>
         <source>Active command-line options that override above options:</source>
         <translation>Active command-line options that override above options:</translation>
     </message>
@@ -798,38 +790,6 @@
     <message>
         <source>&amp;Display</source>
         <translation>&amp;Display</translation>
-    </message>
-    <message>
-        <source>User Interface &amp;language:</source>
-        <translation>User Interface &amp;language:</translation>
-    </message>
-    <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting %1.</source>
-        <translation>The user interface language can be set here. This setting will take effect after restarting %1.</translation>
-    </message>
-    <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>&amp;Unit to show amounts in:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Choose the default subdivision unit to show in the interface and when sending coins.</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation>&amp;OK</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation>&amp;Cancel</translation>
-    </message>
-    <message>
-        <source>default</source>
-        <translation>default</translation>
-    </message>
-    <message>
-        <source>none</source>
-        <translation>none</translation>
     </message>
     <message>
         <source>Confirm options reset</source>
@@ -1677,13 +1637,6 @@
         <translation>Exporting Failed</translation>
     </message>
     </context>
-<context>
-    <name>UnitDisplayStatusBarControl</name>
-    <message>
-        <source>Unit to show amounts in. Click to choose another unit</source>
-        <translation>Unit to show amounts in. Click to select another unit</translation>
-    </message>
-</context>
 <context>
     <name>WalletFrame</name>
     </context>

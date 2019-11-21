@@ -960,8 +960,8 @@
         <translation>ウィンドウを閉じる際にアプリケーションを終了するのではなく、最小化します。このオプションが有効化された場合、メニューから終了を選択した場合にのみアプリケーションは閉じられます。</translation>
     </message>
     <message>
-        <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>トランザクションタブのコンテキストメニュー項目に表示する、サードパーティURL (例えばブロックエクスプローラ)。URL中の%sはトランザクションのハッシュ値に置き換えられます。垂直バー | で区切ることで、複数のURLを指定できます。</translation>
+        <source>Third party URLs (like a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |</source>
+        <translation>トランザクションタブのコンテキストメニュー項目に表示する、サードパーティURL (例えばブロックエクスプローラ)。URL中の%sはトランザクションのハッシュ値に置き換えられます。垂直バー | で区切ることで、複数のURLを指定できます</translation>
     </message>
     <message>
         <source>Third party transaction URLs</source>
@@ -1088,20 +1088,16 @@
         <translation>表示 (&amp;D)</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>ユーザインターフェースの言語 (&amp;l) :</translation>
+        <source>Language of interface</source>
+        <translation>ユーザインターフェースの言語</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting %1.</source>
-        <translation>ここでユーザインターフェースの言語を設定できます。設定を反映するには %1 を再起動します。</translation>
+        <source>The language of interface can be set here. This setting will take effect after restarting %1</source>
+        <translation>ここでユーザインターフェースの言語を設定できます。設定を反映するには %1 を再起動します</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>額を表示する単位 (&amp;U) :</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>インターフェース上の表示とコインの送信で使用する単位を選択します。</translation>
+        <source>Unit to show amounts in</source>
+        <translation>額を表示する単位</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -2466,10 +2462,6 @@
     <message>
         <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to "not accepted" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
         <translation>生成されたコインは使う前に%1のブロックを完成させる必要があります。あなたが生成した時、このブロックはブロック チェーンに追加されるネットワークにブロードキャストされました。チェーンに追加されるのが失敗した場合、状態が"不承認"に変更されて使えなくなるでしょう。これは、別のノードがあなたの数秒前にブロックを生成する場合に時々起こるかもしれません。</translation>
-    </message>
-    <message>
-        <source>Debug information</source>
-        <translation>デバッグ情報</translation>
     </message>
     <message>
         <source>Transaction</source>

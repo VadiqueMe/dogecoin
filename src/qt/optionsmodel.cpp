@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -18,6 +19,7 @@
 #include "netbase.h"
 #include "txdb.h" // for -dbcache defaults
 #include "intro.h"
+#include "chainparams.h" // NameOfChain
 
 #ifdef ENABLE_WALLET
 #include "wallet/wallet.h"
@@ -73,21 +75,25 @@ void OptionsModel::Init(bool resetSettings)
         settings.setValue( "nDisplayUnit", UnitsOfCoin::oneCoin ) ;
     nDisplayUnit = settings.value( "nDisplayUnit" ).toInt() ;
 
-    if (!settings.contains("strThirdPartyTxUrls"))
-        settings.setValue("strThirdPartyTxUrls", "https://dogechain.info/tx/%s|https://chain.so/tx/DOGE/%s");
-    strThirdPartyTxUrls = settings.value("strThirdPartyTxUrls", "").toString();
+    if ( ! settings.contains( "thirdPartyTxUrls" ) )
+        settings.setValue( "thirdPartyTxUrls",
+                ( NameOfChain() == "main" )
+                    ? "https://dogechain.info/tx/%s|https://chain.so/tx/DOGE/%s"
+                    : ""
+        ) ;
+    thirdPartyTxUrls = settings.value( "thirdPartyTxUrls", "" ).toString() ;
 
-    if (!settings.contains("fCoinControlFeatures"))
+    if ( ! settings.contains( "fCoinControlFeatures" ) )
         settings.setValue( "fCoinControlFeatures", true );
     fHideCoinControlFeatures = ! settings.value( "fCoinControlFeatures", true ).toBool();
 
     // These are shared with the core or have a command-line parameter
-    // and we want command-line parameters to overwrite the GUI settings.
+    // and we want command-line parameters to overwrite the GUI settings
     //
-    // If setting doesn't exist create it with defaults.
+    // If setting doesn't exist create it with defaults
     //
     // If SoftSetArg() or SoftSetBoolArg() return false we were overridden
-    // by command-line and show this in the UI.
+    // by command-line and show this in the UI
 
     // Main
     if (!settings.contains("nDatabaseCache"))
@@ -231,22 +237,22 @@ QVariant OptionsModel::data(const QModelIndex & index, int role) const
 
 #ifdef ENABLE_WALLET
         case SpendZeroConfChange:
-            return settings.value("bSpendZeroConfChange");
+            return settings.value( "bSpendZeroConfChange" ) ;
 #endif
         case DisplayUnit:
-            return nDisplayUnit;
+            return nDisplayUnit ;
         case ThirdPartyTxUrls:
-            return strThirdPartyTxUrls;
+            return thirdPartyTxUrls ;
         case Language:
-            return settings.value("language");
+            return settings.value( "language" ) ;
         case HideCoinControlFeatures:
-            return fHideCoinControlFeatures;
+            return fHideCoinControlFeatures ;
         case DatabaseCache:
-            return settings.value("nDatabaseCache");
+            return settings.value( "nDatabaseCache" ) ;
         case ThreadsScriptVerif:
-            return settings.value("nThreadsScriptVerif");
+            return settings.value( "nThreadsScriptVerif" ) ;
         case Listen:
-            return settings.value("fListen");
+            return settings.value( "fListen" ) ;
         default:
             return QVariant();
         }
@@ -360,12 +366,12 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
             setDisplayUnit(value);
             break;
         case ThirdPartyTxUrls:
-            if (strThirdPartyTxUrls != value.toString()) {
-                strThirdPartyTxUrls = value.toString();
-                settings.setValue("strThirdPartyTxUrls", strThirdPartyTxUrls);
-                setRestartRequired(true);
+            if ( thirdPartyTxUrls != value.toString() ) {
+                thirdPartyTxUrls = value.toString() ;
+                settings.setValue( "thirdPartyTxUrls", thirdPartyTxUrls ) ;
+                setRestartRequired( true ) ;
             }
-            break;
+            break ;
         case Language:
             if (settings.value("language") != value) {
                 settings.setValue("language", value);

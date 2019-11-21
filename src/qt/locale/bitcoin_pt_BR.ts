@@ -956,12 +956,12 @@
         <translation>Minimizar em vez de fechar o programa quando a janela for fechada. Quando essa opção estiver ativa, o programa só será fechado somente pela opção Sair no menu Arquivo.</translation>
     </message>
     <message>
-        <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>URLs de terceiros (exemplo: explorador de blocos) que aparecem na aba de transações como itens do menu de contexto. %s na URL é substituido pela hash da transação. Múltiplas URLs são separadas pela barra vertical |.</translation>
+        <source>Third party URLs (like a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |</source>
+        <translation>URLs de terceiros (exemplo: explorador de blocos) que aparecem na aba de transações como itens do menu de contexto. %s na URL é substituido pela hash da transação. Múltiplas URLs são separadas pela barra vertical |</translation>
     </message>
     <message>
         <source>Third party transaction URLs</source>
-        <translation>URLs de transação de terceiros:</translation>
+        <translation>URLs de transação de terceiros</translation>
     </message>
     <message>
         <source>Active command-line options that override above options:</source>
@@ -1084,20 +1084,16 @@
         <translation>&amp;Mostrar</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>&amp;Linguagem da interface:</translation>
+        <source>Language of interface</source>
+        <translation>Linguagem da interface</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting %1.</source>
+        <source>The language of interface can be set here. This setting will take effect after restarting %1</source>
         <translation>O idioma de interface do usuário pode ser definido aqui. Essa configuração terá efeito após reiniciar o %1</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>&amp;Unidade usada para mostrar quantidades:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Escolha a unidade padrão de subdivisão para interface mostrar quando enviar dogecoins.</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Unidade usada para mostrar quantidades</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -2462,10 +2458,6 @@
     <message>
         <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to "not accepted" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
         <translation>Moedas recém minerados precisam aguardar %1 blocos antes de serem gastos. Quando o bloco foi gerado, ele foi disseminado pela rede para ser adicionado à blockchain. Se ele falhar em ser inserido na cadeia, seu estado será modificado para "não aceito" e ele não poderá ser gasto. Isso pode acontecer eventualmente quando blocos são gerados quase que simultaneamente.</translation>
-    </message>
-    <message>
-        <source>Debug information</source>
-        <translation>Depurar informação</translation>
     </message>
     <message>
         <source>Transaction</source>

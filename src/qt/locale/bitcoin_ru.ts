@@ -960,12 +960,12 @@
         <translation>Сворачивать вместо закрытия. Если данная опция будет выбрана — приложение закроется только после выбора соответствующего пункта в меню.</translation>
     </message>
     <message>
-        <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>Сторонние URL (например, block explorer), которые отображаются на вкладке транзакций как пункты контекстного меню. %s в URL заменяется хэшем транзакции. URL отделяются друг от друга вертикальной чертой |.</translation>
+        <source>Third party URLs (like a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |</source>
+        <translation>Сторонние URLы (например обзор блоков), показываемые на вкладке транзакций как пункты контекстного меню. %s в URLе заменяется хэшем транзакции. Разные URLы отделяются вертикальной полоской |</translation>
     </message>
     <message>
         <source>Third party transaction URLs</source>
-        <translation>Сторонние URL транзакций.</translation>
+        <translation>Сторонние URLы для транзакций</translation>
     </message>
     <message>
         <source>Active command-line options that override above options:</source>
@@ -1088,20 +1088,16 @@
         <translation>О&amp;тображение</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>&amp;Язык интерфейса:</translation>
+        <source>Language of interface</source>
+        <translation>Язык интерфейса</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting %1.</source>
-        <translation>Здесь можно установить язык пользовательского интерфейса. Настройки вступят в силу после перезагрузки %1</translation>
+        <source>The language of interface can be set here. This setting will take effect after restarting %1</source>
+        <translation>Здесь можно установить язык интерфейса. Эта настройка будет действовать после перезапуска %1</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>&amp;Отображать суммы в единицах: </translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Выберите единицу измерения монет при отображении и отправке.</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Показывать суммы в единицах</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -2466,10 +2462,6 @@
     <message>
         <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to "not accepted" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
         <translation>Сгенерированные монеты должны подождать %1 блоков, прежде чем они могут быть потрачены. Когда вы сгенерировали этот блок, он был отправлен в сеть для добавления в цепочку блоков. Если он не попадёт в цепь, его статус изменится на "не принят", и монеты будут недействительны. Это иногда происходит в случае, если другой узел сгенерирует блок на несколько секунд раньше вас.</translation>
-    </message>
-    <message>
-        <source>Debug information</source>
-        <translation>Отладочная информация</translation>
     </message>
     <message>
         <source>Transaction</source>

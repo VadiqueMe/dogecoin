@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -26,13 +27,14 @@
 #include <QMessageBox>
 #include <QTimer>
 
-OptionsDialog::OptionsDialog(QWidget *parent, bool enableWallet) :
-    QDialog(parent),
-    ui(new Ui::OptionsDialog),
-    model(0),
-    mapper(0)
+OptionsDialog::OptionsDialog( QWidget * parent, bool enableWallet, bool showUrlsField )
+    : QDialog( parent )
+    , ui( new Ui::OptionsDialog )
+    , model( nullptr )
+    , mapper( nullptr )
+    , showThirdPartyUrlsOption( showUrlsField )
 {
-    ui->setupUi(this);
+    ui->setupUi( this ) ;
 
     /* Main elements init */
     ui->databaseCache->setMinimum(nMinDbCache);
@@ -106,9 +108,17 @@ OptionsDialog::OptionsDialog(QWidget *parent, bool enableWallet) :
 #endif
         }
     }
+
+    ui->thirdPartyTxUrlsField->setVisible( showThirdPartyUrlsOption ) ;
+    ui->thirdPartyTxUrlsLabel->setVisible( showThirdPartyUrlsOption ) ;
+
+    if ( showThirdPartyUrlsOption ) {
 #if QT_VERSION >= 0x040700
-    ui->thirdPartyTxUrls->setPlaceholderText("https://example.com/tx/%s");
+        ui->thirdPartyTxUrlsField->setPlaceholderText( "https://example.com/tx/%s" ) ;
 #endif
+
+        ui->thirdPartyTxUrlsLabel->setToolTip( ui->thirdPartyTxUrlsField->toolTip() ) ;
+    }
 
     ui->unit->setModel( new UnitsOfCoin( this ) ) ;
 
@@ -166,7 +176,9 @@ void OptionsDialog::setModel(OptionsModel *_model)
     connect(ui->connectSocksTor, SIGNAL(clicked(bool)), this, SLOT(showRestartWarning()));
     /* Display */
     connect(ui->lang, SIGNAL(valueChanged()), this, SLOT(showRestartWarning()));
-    connect(ui->thirdPartyTxUrls, SIGNAL(textChanged(const QString &)), this, SLOT(showRestartWarning()));
+
+    if ( showThirdPartyUrlsOption )
+        connect( ui->thirdPartyTxUrlsField, SIGNAL( textChanged(const QString &) ), this, SLOT( showRestartWarning() ) ) ;
 }
 
 void OptionsDialog::setMapper()
@@ -200,9 +212,10 @@ void OptionsDialog::setMapper()
 #endif
 
     /* Display */
-    mapper->addMapping(ui->lang, OptionsModel::Language);
-    mapper->addMapping(ui->unit, OptionsModel::DisplayUnit);
-    mapper->addMapping(ui->thirdPartyTxUrls, OptionsModel::ThirdPartyTxUrls);
+    mapper->addMapping( ui->lang, OptionsModel::Language ) ;
+    mapper->addMapping( ui->unit, OptionsModel::DisplayUnit ) ;
+    if ( showThirdPartyUrlsOption )
+        mapper->addMapping( ui->thirdPartyTxUrlsField, OptionsModel::ThirdPartyTxUrls ) ;
 }
 
 void OptionsDialog::setOkButtonState(bool fState)

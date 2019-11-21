@@ -912,16 +912,12 @@
         <translation>&amp;Интерфейс</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>Език:</translation>
+        <source>Language of interface</source>
+        <translation>Език</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>Мерна единица за показваните суми:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Изберете единиците, показвани по подразбиране в интерфейса.</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Мерна единица за показваните суми</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -1906,10 +1902,6 @@
     <message>
         <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to "not accepted" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
         <translation>Генерираните монети трябва да отлежат %1 блока преди да могат да бъдат похарчени. Когато генерираш блока, той се разпространява в мрежата, за да се добави в блок-веригата. Ако не успее да се добави във веригата, неговия статус  ще се стане "неприет" и няма да може да се похарчи. Това е възможно да се случи случайно, ако друг възел генерира блок няколко секунди след твоя.</translation>
-    </message>
-    <message>
-        <source>Debug information</source>
-        <translation>Информация за грешките</translation>
     </message>
     <message>
         <source>Transaction</source>

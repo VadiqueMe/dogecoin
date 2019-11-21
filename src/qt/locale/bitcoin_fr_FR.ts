@@ -716,8 +716,8 @@
         <translation>&amp;Afficher</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>Interface utilisateur &amp;langage:</translation>
+        <source>Language of interface</source>
+        <translation>Langage d'interface</translation>
     </message>
     <message>
         <source>&amp;OK</source>

@@ -929,11 +929,11 @@
     </message>
     <message>
         <source>Minimize instead of exit the application when the window is closed. When this option is enabled, the application will be closed only after selecting Exit in the menu.</source>
-        <translation>Minimitza en comptes de sortir de l'aplicació quan la finestra es tanca. Quan s'habilita aquesta opció l'aplicació es tancara només quan se selecciona Surt del menú. </translation>
+        <translation>Minimitza en comptes de sortir de l'aplicació quan la finestra es tanca. Quan s'habilita aquesta opció l'aplicació es tancara només quan se selecciona Surt del menú</translation>
     </message>
     <message>
-        <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>URL de terceres parts (p. ex. explorador de blocs) que apareix en la pestanya de transaccions com elements del menú contextual. %s en l'URL es reemplaçat pel resum de la transacció. Diferents URL estan separades per una barra vertical |.</translation>
+        <source>Third party URLs (like a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |</source>
+        <translation>URL de terceres parts (p. ex. explorador de blocs) que apareix en la pestanya de transaccions com elements del menú contextual. %s en l'URL es reemplaçat pel resum de la transacció. Diferents URL estan separades per una barra vertical |</translation>
     </message>
     <message>
         <source>Third party transaction URLs</source>
@@ -1060,20 +1060,16 @@
         <translation>&amp;Pantalla</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>&amp;Llengua de la interfície d'usuari:</translation>
+        <source>Language of interface</source>
+        <translation>Llengua de la interfície</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting %1.</source>
-        <translation>Aquí es pot definir la llengua de la interfície d'usuari. Aquest paràmetre tindrà efecte en reiniciar el %1.</translation>
+        <source>The language of interface can be set here. This setting will take effect after restarting %1</source>
+        <translation>Aquí es pot definir la llengua de la interfície d'usuari. Aquest paràmetre tindrà efecte en reiniciar el %1</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>&amp;Unitats per mostrar els imports en:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Selecciona la unitat de subdivisió per defecte per mostrar en la interfície quan s'envien monedes.</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Unitats per mostrar els imports en</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -2302,10 +2298,6 @@
     <message>
         <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to "not accepted" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
         <translation>Les monedes generades han de madurar %1 blocs abans de poder ser gastades. Quan genereu aquest bloc, es farà saber a la xarxa per tal d'afegir-lo a la cadena de blocs. Si no pot fer-se lloc a la cadena, el seu estat canviarà a «no acceptat» i no es podrà gastar. Això pot passar ocasionalment si un altre node genera un bloc en un marge de segons respecte al vostre.</translation>
-    </message>
-    <message>
-        <source>Debug information</source>
-        <translation>Informació de depuració</translation>
     </message>
     <message>
         <source>Transaction</source>

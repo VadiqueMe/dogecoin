@@ -960,8 +960,8 @@
         <translation>Pencere kapatıldığında uygulamadan çıkmak yerine uygulamayı küçültür. Bu seçenek etkinleştirildiğinde, uygulama sadece menüden çıkış seçildiğinde kapanacaktır.</translation>
     </message>
     <message>
-        <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>İşlemler sekmesinde bağlam menüsü unsurları olarak görünen üçüncü taraf bağlantıları (mesela bir blok tarayıcısı). URL'deki %s, işlem hash değeri ile değiştirilecektir. Birden çok bağlantılar düşey çubuklar | ile ayrılacaktır.</translation>
+        <source>Third party URLs (like a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |</source>
+        <translation>İşlemler sekmesinde bağlam menüsü unsurları olarak görünen üçüncü taraf bağlantıları (mesela bir blok tarayıcısı). URL'deki %s, işlem hash değeri ile değiştirilecektir. Birden çok bağlantılar düşey çubuklar | ile ayrılacaktır</translation>
     </message>
     <message>
         <source>Third party transaction URLs</source>
@@ -1088,20 +1088,16 @@
         <translation>&amp;Görünüm</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>Kullanıcı arayüzü &amp;lisanı:</translation>
+        <source>Language of interface</source>
+        <translation>Arayüz dili</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting %1.</source>
-        <translation>Kullanıcı arayüzünün dili burada belirtilebilir. Bu ayar %1 tekrar başlatıldığında etkinleşecektir.</translation>
+        <source>The language of interface can be set here. This setting will take effect after restarting %1</source>
+        <translation>Kullanıcı arayüzünün dili burada belirtilebilir. Bu ayar %1 tekrar başlatıldığında etkinleşecektir</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>Tutarı göstermek için &amp;birim:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Dogecoin gönderildiğinde arayüzde gösterilecek varsayılan alt birimi seçiniz.</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Tutarı göstermek için birim</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -2462,10 +2458,6 @@
     <message>
         <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to "not accepted" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
         <translation>Oluşturulan dogecoin'lerin harcanabilmelerinden önce %1 blok beklemeleri gerekmektedir. Bu blok, oluşturduğunuzda, blok zincirine eklenmesi için ağda yayınlandı. Zincire eklenmesi başarısız olursa, durumu "kabul edilmedi" olarak değiştirilecek ve harcanamayacaktır. Bu, bazen başka bir düğüm sizden birkaç saniye önce ya da sonra blok oluşturursa meydana gelebilir.</translation>
-    </message>
-    <message>
-        <source>Debug information</source>
-        <translation>Hata ayıklama bilgisi</translation>
     </message>
     <message>
         <source>Transaction</source>

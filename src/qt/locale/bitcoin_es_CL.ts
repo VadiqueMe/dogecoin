@@ -380,12 +380,8 @@
         <translation>&amp;Mostrado</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>&amp;Unidad en la que mostrar cantitades:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Elige la subdivisión por defecto para mostrar cantidaded en la interfaz cuando se envien monedas</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Unidad en la que mostrar cantitades</translation>
     </message>
     <message>
         <source>&amp;OK</source>

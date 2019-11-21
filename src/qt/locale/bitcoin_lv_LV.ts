@@ -526,16 +526,12 @@
         <translation>&amp;Izskats</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>Lietotāja interfeiss un &amp;valoda:</translation>
+        <source>Language of interface</source>
+        <translation>Interfeisa valoda</translation>
     </message>
     <message>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>&amp;Vienības, kurās attēlot daudzumus:</translation>
-    </message>
-    <message>
-        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Izvēlēties dalījuma vienību pēc noklusēšanas, ko izmantot interfeisā un nosūtot bitkoinu.</translation>
+        <source>Unit to show amounts in</source>
+        <translation>Vienības, kurās attēlot daudzumus</translation>
     </message>
     <message>
         <source>&amp;OK</source>

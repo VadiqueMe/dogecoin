@@ -13,7 +13,6 @@
 #include "transactionrecord.h"
 #include "walletmodel.h"
 
-#include "core_io.h"
 #include "validation.h"
 #include "sync.h"
 #include "uint256.h"
@@ -89,9 +88,9 @@ public:
     }
 
     /* Update our model of the wallet incrementally, to synchronize our model of the wallet
-       with that of the core.
+       with that of the core
 
-       Call with transaction that was added, removed or changed.
+       Call with transaction that was added, removed or changed
      */
     void updateWallet(const uint256 &hash, int status, bool showTransaction)
     {
@@ -183,11 +182,11 @@ public:
 
             // Get required locks upfront. This avoids the GUI from getting
             // stuck if the core is holding the locks for a longer time - for
-            // example, during a wallet rescan.
+            // example, during a wallet rescan
             //
             // If a status update is needed (blocks came in since last check),
             //  update the status of this transaction from the wallet. Otherwise,
-            // simply re-use the cached status.
+            // simply re-use the cached status
             TRY_LOCK(cs_main, lockMain);
             if(lockMain)
             {
@@ -219,19 +218,7 @@ public:
         }
         return QString();
     }
-
-    QString getTxHex(TransactionRecord *rec)
-    {
-        LOCK2(cs_main, wallet->cs_wallet);
-        std::map<uint256, CWalletTx>::iterator mi = wallet->mapWallet.find(rec->hash);
-        if(mi != wallet->mapWallet.end())
-        {
-            std::string strHex = EncodeHexTx(static_cast<CTransaction>(mi->second));
-            return QString::fromStdString(strHex);
-        }
-        return QString();
-    }
-};
+} ;
 
 TransactionTableModel::TransactionTableModel(const PlatformStyle *_platformStyle, CWallet* _wallet, WalletModel *parent):
         QAbstractTableModel(parent),
@@ -615,8 +602,8 @@ QVariant TransactionTableModel::data(const QModelIndex &index, int role) const
         return rec->getTxID();
     case TxHashRole:
         return QString::fromStdString(rec->hash.ToString());
-    case TxHexRole:
-        return priv->getTxHex(rec);
+    case TxHexRole :
+        return TransactionDesc::getTxHex( rec, wallet ) ;
     case TxPlainTextRole:
         {
             QString details;

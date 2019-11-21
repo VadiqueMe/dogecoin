@@ -547,7 +547,7 @@
          <item>
           <widget class="QLabel" name="langLabel">
            <property name="text">
-            <string>User Interface &amp;language:</string>
+            <string>Language of interface</string>
            </property>
            <property name="textFormat">
             <enum>Qt::PlainText</enum>
@@ -560,7 +560,7 @@
          <item>
           <widget class="QValueComboBox" name="lang">
            <property name="toolTip">
-            <string>The user interface language can be set here. This setting will take effect after restarting %1.</string>
+            <string>The language of interface can be set here. This setting will take effect after restarting %1</string>
            </property>
           </widget>
          </item>
@@ -571,7 +571,7 @@
          <item>
           <widget class="QLabel" name="unitLabel">
            <property name="text">
-            <string>&amp;Unit to show amounts in:</string>
+            <string>Unit to show amounts in</string>
            </property>
            <property name="textFormat">
             <enum>Qt::PlainText</enum>
@@ -583,9 +583,6 @@
          </item>
          <item>
           <widget class="QValueComboBox" name="unit">
-           <property name="toolTip">
-            <string>Choose the default subdivision unit to show in the interface and when sending coins.</string>
-           </property>
           </widget>
          </item>
         </layout>
@@ -594,21 +591,18 @@
         <layout class="QHBoxLayout" name="horizontalLayout_3_Display">
          <item>
           <widget class="QLabel" name="thirdPartyTxUrlsLabel">
-           <property name="toolTip">
-            <string>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</string>
-           </property>
            <property name="text">
             <string>Third party transaction URLs</string>
            </property>
            <property name="buddy">
-            <cstring>thirdPartyTxUrls</cstring>
+            <cstring>thirdPartyTxUrlsField</cstring>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="thirdPartyTxUrls">
+          <widget class="QLineEdit" name="thirdPartyTxUrlsField">
            <property name="toolTip">
-            <string>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</string>
+            <string>Third party URLs (like a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |</string>
            </property>
           </widget>
          </item>
