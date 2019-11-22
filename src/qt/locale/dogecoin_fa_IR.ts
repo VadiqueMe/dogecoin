@@ -74,10 +74,6 @@
         <translation>به روز رسانی با شبکه...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>و بازبینی</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>و تراکنش</translation>
     </message>
@@ -126,16 +122,8 @@
         <translation>رمز مربوط به رمزگذاریِ wallet را تغییر دهید</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>کیف پول</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>و ارسال</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

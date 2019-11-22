@@ -99,10 +99,6 @@
         <translation>नेटवर्कमा समिकरण हुँदै...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>शारांश</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>नोड</translation>
     </message>

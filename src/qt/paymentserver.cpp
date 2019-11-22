@@ -46,15 +46,15 @@
 #include <QUrlQuery>
 #endif
 
-const int BITCOIN_IPC_CONNECT_TIMEOUT = 1000; // milliseconds
-const QString BITCOIN_IPC_PREFIX("bitcoin:");
+const int DOGECOIN_IPC_CONNECT_TIMEOUT = 1000 ; // milliseconds
+const QString DOGECOIN_IPC_PREFIX( "dogecoin:" ) ;
 // BIP70 payment protocol messages
-const char* BIP70_MESSAGE_PAYMENTACK = "PaymentACK";
-const char* BIP70_MESSAGE_PAYMENTREQUEST = "PaymentRequest";
+const char* BIP70_MESSAGE_PAYMENTACK = "PaymentACK" ;
+const char* BIP70_MESSAGE_PAYMENTREQUEST = "PaymentRequest" ;
 // BIP71 payment protocol media types
-const char* BIP71_MIMETYPE_PAYMENT = "application/bitcoin-payment";
-const char* BIP71_MIMETYPE_PAYMENTACK = "application/bitcoin-paymentack";
-const char* BIP71_MIMETYPE_PAYMENTREQUEST = "application/bitcoin-paymentrequest";
+const char* BIP71_MIMETYPE_PAYMENT = "application/dogecoin-payment" ;
+const char* BIP71_MIMETYPE_PAYMENTACK = "application/dogecoin-paymentack" ;
+const char* BIP71_MIMETYPE_PAYMENTREQUEST = "application/dogecoin-paymentrequest" ;
 
 struct X509StoreDeleter {
       void operator()(X509_STORE* b) {
@@ -207,11 +207,11 @@ void PaymentServer::ipcParseCommandLine(int argc, char* argv[])
         if (arg.startsWith("-"))
             continue;
 
-        // If the bitcoin: URI contains a payment request, we are not able to detect the
+        // If the dogecoin: URI contains a payment request, we are not able to detect the
         // network as that would require fetching and parsing the payment request.
         // That means clicking such an URI which contains a testnet payment request
-        // will start a mainnet instance and throw a "wrong network" error.
-        if (arg.startsWith(BITCOIN_IPC_PREFIX, Qt::CaseInsensitive)) // bitcoin: URI
+        // will start a mainnet instance and throw a "wrong network" error
+        if ( arg.startsWith( DOGECOIN_IPC_PREFIX, Qt::CaseInsensitive ) ) // dogecoin: URI
         {
             savedPaymentRequests.append(arg);
 
@@ -263,7 +263,7 @@ bool PaymentServer::ipcSendCommandLine()
     {
         QLocalSocket* socket = new QLocalSocket();
         socket->connectToServer(ipcServerName(), QIODevice::WriteOnly);
-        if (!socket->waitForConnected(BITCOIN_IPC_CONNECT_TIMEOUT))
+        if ( ! socket->waitForConnected( DOGECOIN_IPC_CONNECT_TIMEOUT ) )
         {
             delete socket;
             socket = NULL;
@@ -278,7 +278,7 @@ bool PaymentServer::ipcSendCommandLine()
 
         socket->write(block);
         socket->flush();
-        socket->waitForBytesWritten(BITCOIN_IPC_CONNECT_TIMEOUT);
+        socket->waitForBytesWritten( DOGECOIN_IPC_CONNECT_TIMEOUT ) ;
         socket->disconnectFromServer();
 
         delete socket;
@@ -301,7 +301,7 @@ PaymentServer::PaymentServer(QObject* parent, bool startLocalServer) :
     GOOGLE_PROTOBUF_VERIFY_VERSION;
 
     // Install global event filter to catch QFileOpenEvents
-    // on Mac: sent when you click bitcoin: links
+    // on Mac: sent when you click dogecoin: links
     // other OSes: helpful when dealing with payment request files
     if (parent)
         parent->installEventFilter(this);
@@ -333,9 +333,9 @@ PaymentServer::~PaymentServer()
 }
 
 //
-// OSX-specific way of handling bitcoin: URIs and PaymentRequest mime types.
+// OSX-specific way of handling dogecoin: URIs and PaymentRequest mime types.
 // Also used by paymentservertests.cpp and when opening a payment request file
-// via "Open URI..." menu entry.
+// via "Open URI..." menu entry
 //
 bool PaymentServer::eventFilter(QObject *object, QEvent *event)
 {
@@ -359,7 +359,7 @@ void PaymentServer::initNetManager()
     if (netManager != NULL)
         delete netManager;
 
-    // netManager is used to fetch paymentrequests given in bitcoin: URIs
+    // netManager is used to fetch paymentrequests given in dogecoin: URIs
     netManager = new QNetworkAccessManager(this);
 
     QNetworkProxy proxy;
@@ -399,7 +399,7 @@ void PaymentServer::handleURIOrFile(const QString& s)
         return;
     }
 
-    if (s.startsWith(BITCOIN_IPC_PREFIX, Qt::CaseInsensitive)) // bitcoin: URI
+    if ( s.startsWith( DOGECOIN_IPC_PREFIX, Qt::CaseInsensitive ) ) // dogecoin: URI
     {
 #if QT_VERSION < 0x050000
         QUrl uri(s);
@@ -564,10 +564,10 @@ bool PaymentServer::processPaymentRequest(const PaymentRequestPlus& request, Sen
             return false;
         }
 
-        // Bitcoin amounts are stored as (optional) uint64 in the protobuf messages (see paymentrequest.proto),
+        // Coin amounts are stored as (optional) uint64 in the protobuf messages (see paymentrequest.proto),
         // but CAmount is defined as int64_t. Because of that we need to verify that amounts are in a valid range
-        // and no overflow has happened.
-        if (!verifyAmount(sendingTo.second)) {
+        // and no overflow has happened
+        if ( ! verifyAmount( sendingTo.second ) ) {
             Q_EMIT message(tr("Payment request rejected"), tr("Invalid payment request."), CClientUIInterface::MSG_ERROR);
             return false;
         }
@@ -576,7 +576,7 @@ bool PaymentServer::processPaymentRequest(const PaymentRequestPlus& request, Sen
         CTxOut txOut(sendingTo.second, sendingTo.first);
 
         recipient.amount += sendingTo.second;
-        // Also verify that the final amount is still in a valid range after adding additional amounts.
+        // Also verify that the final amount is still in a valid range after adding additional amounts
         if (!verifyAmount(recipient.amount)) {
             Q_EMIT message(tr("Payment request rejected"), tr("Invalid payment request."), CClientUIInterface::MSG_ERROR);
             return false;

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Copyright (c) 2014-2016 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
-# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+# file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #
 # Test REST interface
@@ -9,7 +9,7 @@
 
 
 from test_framework import scrypt_auxpow as auxpow
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import DogecoinTestFramework
 from test_framework.util import *
 from struct import *
 from io import BytesIO
@@ -45,7 +45,7 @@ def http_post_call(host, port, path, requestdata = '', response_object = 0):
 
     return conn.getresponse().read()
 
-class RESTTest (BitcoinTestFramework):
+class RESTTest (DogecoinTestFramework):
     FORMAT_SEPARATOR = "."
 
     def __init__(self):

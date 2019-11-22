@@ -138,10 +138,6 @@
         <translation>בסנכרון עם הרשת…</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;סקירה</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>מפרק</translation>
     </message>
@@ -226,20 +222,8 @@
         <translation>&amp;אימות הודעה…</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>ביטקוין</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>ארנק</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;שליחה</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;קבלה</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

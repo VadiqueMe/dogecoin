@@ -150,20 +150,8 @@
         <translation>&amp;Verifică mesajul...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Portofel</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;Trimite</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;Primește</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

@@ -102,10 +102,6 @@
         <translation>Usklađivanje s mrežom ...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Pregled</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>Čvor</translation>
     </message>
@@ -186,20 +182,8 @@
         <translation>&amp;Potvrdite poruku...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Novčanik</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;Pošalji</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>Pri&amp;mi</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

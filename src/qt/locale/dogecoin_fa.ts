@@ -206,10 +206,6 @@
         <translation>همگام‌سازی با شبکه...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;بررسی اجمالی</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>گره</translation>
     </message>
@@ -310,20 +306,8 @@
         <translation>با&amp;زبینی پیام...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>بیت‌کوین</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>کیف پول</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;ارسال</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;دریافت</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

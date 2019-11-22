@@ -4,10 +4,10 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #if defined(HAVE_CONFIG_H)
-#include "config/bitcoin-config.h"
+#include "config/dogecoin-config.h"
 #endif
 
-#include "bitcoingui.h"
+#include "gui.h"
 
 #include "chainparams.h"
 #include "clientmodel.h"
@@ -85,23 +85,23 @@ Q_IMPORT_PLUGIN(QCocoaIntegrationPlugin);
 Q_DECLARE_METATYPE(bool*)
 Q_DECLARE_METATYPE(CAmount)
 
-static void InitMessage(const std::string &message)
+static void InitMessage( const std::string & message )
 {
-    LogPrintf("init message: %s\n", message);
+    LogPrintf( "init message: %s\n", message ) ;
 }
 
 /*
-   Translate string to current locale using Qt.
+   Translate string to current locale using Qt
  */
-static std::string Translate(const char* psz)
+static std::string Translate( const char * psz )
 {
-    return QCoreApplication::translate("bitcoin-core", psz).toStdString();
+    return QCoreApplication::translate( "dogecoin-core", psz ).toStdString() ;
 }
 
 static QString GetLangTerritory()
 {
     QSettings settings;
-    // Get desired locale (e.g. "de_DE")
+    // Get desired locale (e.g. "es_ES")
     // 1) System default language
     QString lang_territory = QLocale::system().name();
     // 2) Language from QSettings
@@ -134,19 +134,19 @@ static void initTranslations(QTranslator &qtTranslatorBase, QTranslator &qtTrans
     // - First load the translator for the base language, without territory
     // - Then load the more specific locale translator
 
-    // Load e.g. qt_de.qm
+    // Load e.g. qt_fr.qm
     if (qtTranslatorBase.load("qt_" + lang, QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
         QApplication::installTranslator(&qtTranslatorBase);
 
-    // Load e.g. qt_de_DE.qm
+    // Load e.g. qt_fr_FR.qm
     if (qtTranslator.load("qt_" + lang_territory, QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
         QApplication::installTranslator(&qtTranslator);
 
-    // Load e.g. bitcoin_de.qm (shortcut "de" needs to be defined in bitcoin.qrc)
+    // Load e.g. dogecoin_pt.qm (shortcut "pt" needs to be defined in dogecoin.qrc)
     if (translatorBase.load(lang, ":/translations/"))
         QApplication::installTranslator(&translatorBase);
 
-    // Load e.g. bitcoin_de_DE.qm (shortcut "de_DE" needs to be defined in bitcoin.qrc)
+    // Load e.g. dogecoin_pt_PT.qm (shortcut "pt_PT" needs to be defined in dogecoin.qrc)
     if (translator.load(lang_territory, ":/translations/"))
         QApplication::installTranslator(&translator);
 }
@@ -167,14 +167,15 @@ void DebugMessageHandler(QtMsgType type, const QMessageLogContext& context, cons
 }
 #endif
 
-/** Class encapsulating Bitcoin Core startup and shutdown.
- * Allows running startup and shutdown in a different thread from the UI thread.
+/* Class encapsulating Dogecoin Core startup and shutdown.
+ * Allows running startup and shutdown in a different thread from the UI thread
  */
-class BitcoinCore: public QObject
+class DogecoinCore: public QObject
 {
     Q_OBJECT
+
 public:
-    explicit BitcoinCore();
+    explicit DogecoinCore() ;
 
 public Q_SLOTS:
     void initialize();
@@ -193,13 +194,13 @@ private:
     void handleRunawayException(const std::exception *e);
 };
 
-/** Main Bitcoin application object */
-class BitcoinApplication: public QApplication
+/** Main Dogecoin application object */
+class DogecoinApplication: public QApplication
 {
     Q_OBJECT
 public:
-    explicit BitcoinApplication(int &argc, char **argv);
-    ~BitcoinApplication();
+    explicit DogecoinApplication( int & argc, char ** argv ) ;
+    ~DogecoinApplication() ;
 
 #ifdef ENABLE_WALLET
     /// Create payment server
@@ -222,7 +223,7 @@ public:
     /// Get process return value
     int getReturnValue() { return returnValue; }
 
-    /// Get window identifier of QMainWindow (BitcoinGUI)
+    /// Get window identifier of QMainWindow (DogecoinGUI)
     WId getMainWinId() const;
 
 public Q_SLOTS:
@@ -241,7 +242,7 @@ private:
     QThread *coreThread;
     OptionsModel *optionsModel;
     ClientModel *clientModel;
-    BitcoinGUI *window;
+    DogecoinGUI * window ;
     QTimer *pollShutdownTimer;
 #ifdef ENABLE_WALLET
     PaymentServer* paymentServer;
@@ -254,20 +255,20 @@ private:
     void startThread();
 };
 
-#include "bitcoin.moc"
+#include "dogecoin.moc"
 
-BitcoinCore::BitcoinCore():
+DogecoinCore::DogecoinCore():
     QObject()
 {
 }
 
-void BitcoinCore::handleRunawayException(const std::exception *e)
+void DogecoinCore::handleRunawayException( const std::exception * e )
 {
     PrintExceptionContinue(e, "Runaway exception");
     Q_EMIT runawayException(QString::fromStdString(GetWarnings("gui")));
 }
 
-void BitcoinCore::initialize()
+void DogecoinCore::initialize()
 {
     try
     {
@@ -296,7 +297,7 @@ void BitcoinCore::initialize()
     }
 }
 
-void BitcoinCore::shutdown()
+void DogecoinCore::shutdown()
 {
     try
     {
@@ -313,7 +314,7 @@ void BitcoinCore::shutdown()
     }
 }
 
-BitcoinApplication::BitcoinApplication(int &argc, char **argv):
+DogecoinApplication::DogecoinApplication( int & argc, char ** argv ) :
     QApplication(argc, argv),
     coreThread(0),
     optionsModel(0),
@@ -329,17 +330,17 @@ BitcoinApplication::BitcoinApplication(int &argc, char **argv):
     setQuitOnLastWindowClosed(false);
 
     // UI per-platform customization
-    // This must be done inside the BitcoinApplication constructor, or after it, because
+    // This must be done inside the DogecoinApplication constructor, or after it, because
     // PlatformStyle::instantiate requires a QApplication
-    std::string platformName;
-    platformName = GetArg("-uiplatform", BitcoinGUI::DEFAULT_UIPLATFORM);
-    platformStyle = PlatformStyle::instantiate(QString::fromStdString(platformName));
+    std::string platformName ;
+    platformName = GetArg( "-uiplatform", DogecoinGUI::DEFAULT_UIPLATFORM ) ;
+    platformStyle = PlatformStyle::instantiate( QString::fromStdString( platformName ) ) ;
     if (!platformStyle) // Fall back to "other" if specified name not found
         platformStyle = PlatformStyle::instantiate("other");
     assert(platformStyle);
 }
 
-BitcoinApplication::~BitcoinApplication()
+DogecoinApplication::~DogecoinApplication()
 {
     if(coreThread)
     {
@@ -362,71 +363,70 @@ BitcoinApplication::~BitcoinApplication()
 }
 
 #ifdef ENABLE_WALLET
-void BitcoinApplication::createPaymentServer()
+void DogecoinApplication::createPaymentServer()
 {
-    paymentServer = new PaymentServer(this);
+    paymentServer = new PaymentServer( this ) ;
 }
 #endif
 
-void BitcoinApplication::createOptionsModel(bool resetSettings)
+void DogecoinApplication::createOptionsModel( bool resetSettings )
 {
-    optionsModel = new OptionsModel(NULL, resetSettings);
+    optionsModel = new OptionsModel( NULL, resetSettings ) ;
 }
 
-void BitcoinApplication::createWindow(const NetworkStyle *networkStyle)
+void DogecoinApplication::createWindow( const NetworkStyle * networkStyle )
 {
-    window = new BitcoinGUI(platformStyle, networkStyle, 0);
+    window = new DogecoinGUI( platformStyle, networkStyle, 0 ) ;
 
     pollShutdownTimer = new QTimer(window);
     connect(pollShutdownTimer, SIGNAL(timeout()), window, SLOT(detectShutdown()));
     pollShutdownTimer->start(200);
 }
 
-void BitcoinApplication::createSplashScreen(const NetworkStyle *networkStyle)
+void DogecoinApplication::createSplashScreen( const NetworkStyle * networkStyle )
 {
-    SplashScreen *splash = new SplashScreen(0, networkStyle);
+    SplashScreen * splash = new SplashScreen( 0, networkStyle ) ;
     // We don't hold a direct pointer to the splash screen after creation, but the splash
-    // screen will take care of deleting itself when slotFinish happens.
+    // screen will take care of deleting itself when slotFinish happens
     splash->show();
     connect(this, SIGNAL(splashFinished(QWidget*)), splash, SLOT(slotFinish(QWidget*)));
     connect(this, SIGNAL(requestedShutdown()), splash, SLOT(close()));
 }
 
-void BitcoinApplication::startThread()
+void DogecoinApplication::startThread()
 {
-    if(coreThread)
-        return;
-    coreThread = new QThread(this);
-    BitcoinCore *executor = new BitcoinCore();
-    executor->moveToThread(coreThread);
+    if ( coreThread != nullptr ) return ;
+    coreThread = new QThread( this ) ;
+    DogecoinCore * core = new DogecoinCore() ;
+    core->moveToThread( coreThread ) ;
 
-    /*  communication to and from thread */
-    connect(executor, SIGNAL(initializeResult(int)), this, SLOT(initializeResult(int)));
-    connect(executor, SIGNAL(shutdownResult(int)), this, SLOT(shutdownResult(int)));
-    connect(executor, SIGNAL(runawayException(QString)), this, SLOT(handleRunawayException(QString)));
-    connect(this, SIGNAL(requestedInitialize()), executor, SLOT(initialize()));
-    connect(this, SIGNAL(requestedShutdown()), executor, SLOT(shutdown()));
-    /*  make sure executor object is deleted in its own thread */
-    connect(this, SIGNAL(stopThread()), executor, SLOT(deleteLater()));
-    connect(this, SIGNAL(stopThread()), coreThread, SLOT(quit()));
+    /* communication to and from thread */
+    connect( core, SIGNAL( initializeResult(int) ), this, SLOT( initializeResult(int) ) ) ;
+    connect( core, SIGNAL( shutdownResult(int) ), this, SLOT( shutdownResult(int) ) ) ;
+    connect( core, SIGNAL( runawayException(QString) ), this, SLOT( handleRunawayException(QString) ) ) ;
+    connect( this, SIGNAL( requestedInitialize() ), core, SLOT( initialize() ) ) ;
+    connect( this, SIGNAL( requestedShutdown() ), core, SLOT( shutdown() ) ) ;
+    /*  make sure core object is deleted in its own thread */
+    connect( this, SIGNAL( stopThread() ), core, SLOT( deleteLater() ) ) ;
+    connect( this, SIGNAL( stopThread() ), coreThread, SLOT( quit() ) ) ;
 
-    coreThread->start();
+    coreThread->start() ;
 }
 
-void BitcoinApplication::parameterSetup()
+void DogecoinApplication::parameterSetup()
 {
     InitLogging();
     InitParameterInteraction();
 }
 
-void BitcoinApplication::requestInitialize()
+void DogecoinApplication::requestInitialize()
 {
     qDebug() << __func__ << ": Requesting initialize";
     startThread();
     Q_EMIT requestedInitialize();
 }
 
-void BitcoinApplication::requestShutdown()
+void DogecoinApplication::requestShutdown()
 {
     // Show a simple window indicating shutdown status
     // Do this first as some of the steps may take some time below,
@@ -453,7 +453,7 @@ void BitcoinApplication::requestShutdown()
     Q_EMIT requestedShutdown();
 }
 
-void BitcoinApplication::initializeResult(int retval)
+void DogecoinApplication::initializeResult( int retval )
 {
     qDebug() << __func__ << ": Initialization result: " << retval;
     // Set exit result: 0 if successful, 1 if failure
@@ -473,10 +473,10 @@ void BitcoinApplication::initializeResult(int retval)
 #ifdef ENABLE_WALLET
         if(pwalletMain)
         {
-            walletModel = new WalletModel(platformStyle, pwalletMain, optionsModel);
+            walletModel = new WalletModel( platformStyle, pwalletMain, optionsModel ) ;
 
-            window->addWallet(BitcoinGUI::DEFAULT_WALLET, walletModel);
-            window->setCurrentWallet(BitcoinGUI::DEFAULT_WALLET);
+            window->addWallet( DogecoinGUI::DEFAULT_WALLET, walletModel ) ;
+            window->setCurrentWallet( DogecoinGUI::DEFAULT_WALLET ) ;
 
             connect(walletModel, SIGNAL(coinsSent(CWallet*,SendCoinsRecipient,QByteArray)),
                              paymentServer, SLOT(fetchPaymentACK(CWallet*,const SendCoinsRecipient&,QByteArray)));
@@ -492,7 +492,7 @@ void BitcoinApplication::initializeResult(int retval)
 
 #ifdef ENABLE_WALLET
         // Now that initialization/startup is done, process any command-line
-        // bitcoin: URIs or payment requests:
+        // dogecoin: URIs or payment requests:
         connect(paymentServer, SIGNAL(receivedPaymentRequest(SendCoinsRecipient)),
                          window, SLOT(handlePaymentRequest(SendCoinsRecipient)));
         connect(window, SIGNAL(receivedURI(QString)),
@@ -506,27 +506,26 @@ void BitcoinApplication::initializeResult(int retval)
     }
 }
 
-void BitcoinApplication::shutdownResult(int retval)
+void DogecoinApplication::shutdownResult( int retval )
 {
     qDebug() << __func__ << ": Shutdown result: " << retval;
     quit(); // Exit main loop after shutdown finished
 }
 
-void BitcoinApplication::handleRunawayException(const QString &message)
+void DogecoinApplication::handleRunawayException( const QString & message )
 {
-    QMessageBox::critical(0, "Runaway exception", BitcoinGUI::tr("A fatal error occurred. Dogecoin can no longer continue safely and will quit.") + QString("\n\n") + message);
+    QMessageBox::critical( 0, "Runaway exception", tr("A fatal error occurred. Dogecoin can no longer continue safely and will quit.") + QString("\n\n") + message ) ;
     ::exit(EXIT_FAILURE);
 }
 
-WId BitcoinApplication::getMainWinId() const
+WId DogecoinApplication::getMainWinId() const
 {
-    if (!window)
-        return 0;
+    if ( window == nullptr ) return 0 ;
 
-    return window->winId();
+    return window->winId() ;
 }
 
-#ifndef BITCOIN_QT_TEST
+#ifndef DOGECOIN_QT_TEST
 int main(int argc, char *argv[])
 {
     SetupEnvironment();
@@ -544,13 +543,13 @@ int main(int argc, char *argv[])
     QTextCodec::setCodecForCStrings(QTextCodec::codecForTr());
 #endif
 
-    Q_INIT_RESOURCE( bitcoin ) ;
+    Q_INIT_RESOURCE( dogecoin ) ;
     Q_INIT_RESOURCE( dogecoin_locale ) ;
 
 #if QT_VERSION >= 0x050600
     QGuiApplication::setAttribute( Qt::AA_EnableHighDpiScaling ) ;
 #endif
-    BitcoinApplication app( argc, argv ) ;
+    DogecoinApplication app( argc, argv ) ;
 #if QT_VERSION > 0x050100
     // Generate high-dpi pixmaps
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
@@ -600,7 +599,7 @@ int main(int argc, char *argv[])
     if (!Intro::pickDataDirectory())
         return EXIT_SUCCESS;
 
-    /// 6. Determine availability of data directory and parse bitcoin.conf
+    /// 6. Determine availability of data directory and parse dogecoin.conf
     /// - Do not call GetDataDir(true) before this step finishes
     if (!boost::filesystem::is_directory(GetDataDir(false)))
     {
@@ -609,7 +608,7 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
     try {
-        ReadConfigFile(GetArg("-conf", BITCOIN_CONF_FILENAME));
+        ReadConfigFile(GetArg("-conf", DOGECOIN_CONF_FILENAME));
     } catch (const std::exception& e) {
         QMessageBox::critical(0, QObject::tr(PACKAGE_NAME),
                               QObject::tr("Error: Cannot parse configuration file: %1. Only use key=value syntax.").arg(e.what()));
@@ -657,7 +656,7 @@ int main(int argc, char *argv[])
         exit(EXIT_SUCCESS);
 
     // Start up the payment server early, too, so impatient users that click on
-    // bitcoin: links repeatedly have their payment requests routed to this process:
+    // dogecoin: links repeatedly have their payment requests routed to this process:
     app.createPaymentServer();
 #endif
 
@@ -705,4 +704,4 @@ int main(int argc, char *argv[])
     }
     return app.getReturnValue();
 }
-#endif // BITCOIN_QT_TEST
+#endif // #ifndef DOGECOIN_QT_TEST

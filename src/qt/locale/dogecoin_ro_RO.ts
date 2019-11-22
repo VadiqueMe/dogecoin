@@ -82,10 +82,6 @@
         <translation>Se sincronizează cu reţeaua...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Imagine de ansamblu</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>Nod</translation>
     </message>
@@ -162,20 +158,8 @@
         <translation>&amp;Verifică mesaj...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Portofel</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>Trimite</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>P&amp;rimeşte</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

@@ -134,10 +134,6 @@
         <translation>Синхронізація з мережею...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Огляд</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>Вузол</translation>
     </message>
@@ -218,20 +214,8 @@
         <translation>П&amp;еревірити повідомлення...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Гаманець</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;Відправити</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;Отримати</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

@@ -28,7 +28,7 @@ NetworkStyle::NetworkStyle( const QString & name, const int iconColorHueShift, c
     textToAppendToTitle( QString::fromStdString( textToAppend ) )
 {
     // load pixmap
-    QPixmap pixmap(":/icons/bitcoin");
+    QPixmap pixmap(":/icons/dogecoin");
 
     if(iconColorHueShift != 0 && iconColorSaturationReduction != 0)
     {

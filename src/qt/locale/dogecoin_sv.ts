@@ -243,10 +243,6 @@ Var vänlig och försök igen.</translation>
         <translation>Synkroniserar med nätverk...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Översikt</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>Nod</translation>
     </message>
@@ -351,20 +347,8 @@ Var vänlig och försök igen.</translation>
         <translation>&amp;Verifiera meddelande...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Plånbok</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;Skicka</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;Ta emot</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

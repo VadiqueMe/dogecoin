@@ -178,10 +178,6 @@
         <translation>Синхронизиране с мрежата...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>Преглед</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>Възел</translation>
     </message>

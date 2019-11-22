@@ -238,10 +238,6 @@
         <translation>Sinkronisasi dengan jaringan...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Kilasan</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>Node</translation>
     </message>
@@ -346,20 +342,8 @@
         <translation>&amp;Verifikasi pesan...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Dompet</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;Kirim</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;Menerima</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

@@ -110,10 +110,6 @@
         <translation>Võrguga sünkroniseerimine...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Ülevaade</translation>
-    </message>
-    <message>
         <source>Quit application</source>
         <translation>Välju rakendusest</translation>
     </message>
@@ -128,10 +124,6 @@
     <message>
         <source>Reindexing blocks on disk...</source>
         <translation>Kõvakettal olevate plokkide reindekseerimine...</translation>
-    </message>
-    <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
     </message>
     <message>
         <source>Wallet</source>

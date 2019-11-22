@@ -70,7 +70,7 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="../bitcoin.qrc">
+         <iconset resource="../dogecoin.qrc">
           <normaloff>:/icons/address-book</normaloff>:/icons/address-book</iconset>
         </property>
         <property name="iconSize">
@@ -93,7 +93,7 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="../bitcoin.qrc">
+         <iconset resource="../dogecoin.qrc">
           <normaloff>:/icons/editpaste</normaloff>:/icons/editpaste</iconset>
         </property>
         <property name="iconSize">
@@ -116,7 +116,7 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="../bitcoin.qrc">
+         <iconset resource="../dogecoin.qrc">
           <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
         </property>
         <property name="iconSize">
@@ -704,7 +704,7 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="../bitcoin.qrc">
+         <iconset resource="../dogecoin.qrc">
           <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
         </property>
        </widget>
@@ -1264,7 +1264,7 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="../bitcoin.qrc">
+         <iconset resource="../dogecoin.qrc">
           <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
         </property>
        </widget>
@@ -1337,7 +1337,7 @@
   <tabstop>deleteButton_s</tabstop>
  </tabstops>
  <resources>
-  <include location="../bitcoin.qrc"/>
+  <include location="../dogecoin.qrc"/>
  </resources>
  <connections/>
 </ui>

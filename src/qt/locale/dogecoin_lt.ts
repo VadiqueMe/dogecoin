@@ -78,10 +78,6 @@
         <translation>Sinchronizavimas su tinklu ...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Apžvalga</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>Taškas</translation>
     </message>
@@ -162,20 +158,8 @@
         <translation>&amp;Tikrinti žinutę...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Piniginė</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;Siųsti</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;Gauti</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

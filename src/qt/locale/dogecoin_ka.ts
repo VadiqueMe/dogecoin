@@ -74,10 +74,6 @@
         <translation>ქსელთან სინქრონიზება...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>მიმ&amp;ოხილვა</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>კვანძი</translation>
     </message>
@@ -154,20 +150,8 @@
         <translation>&amp;ვერიფიკაცია</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>საფულე</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;გაგზავნა</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;მიღება</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

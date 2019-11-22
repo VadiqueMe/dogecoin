@@ -242,10 +242,6 @@
         <translation>正在与网络同步...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>概况(&amp;O)</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>节点</translation>
     </message>
@@ -346,20 +342,8 @@
         <translation>验证消息(&amp;V)...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>狗狗币</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>钱包</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>发送(&amp;S)</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>接收(&amp;R)</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

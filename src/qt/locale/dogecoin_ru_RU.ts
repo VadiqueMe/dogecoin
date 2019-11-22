@@ -62,10 +62,6 @@
 <context>
     <name>DogecoinGUI</name>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin Core</translation>
-    </message>
-    <message>
         <source>&amp;Command-line options</source>
         <translation>Опции командной строки</translation>
     </message>

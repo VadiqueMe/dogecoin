@@ -1,10 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_INIT_H
-#define BITCOIN_INIT_H
+#ifndef DOGECOIN_INIT_H
+#define DOGECOIN_INIT_H
 
 #include <string>
 
@@ -26,39 +27,39 @@ void InitLogging();
 //!Parameter interaction: change current parameters depending on various rules
 void InitParameterInteraction();
 
-/** Initialize bitcoin core: Basic context setup.
- *  @note This can be done before daemonization.
- *  @pre Parameters should be parsed and config file should be read.
+/** Initialize bitcoin core: Basic context setup
+ *  @note This can be done before daemonization
+ *  @pre Parameters should be parsed and config file should be read
  */
 bool AppInitBasicSetup();
 /**
- * Initialization: parameter interaction.
- * @note This can be done before daemonization.
- * @pre Parameters should be parsed and config file should be read, AppInitBasicSetup should have been called.
+ * Initialization: parameter interaction
+ * @note This can be done before daemonization
+ * @pre Parameters should be parsed and config file should be read, AppInitBasicSetup should have been called
  */
 bool AppInitParameterInteraction();
 /**
- * Initialization sanity checks: ecc init, sanity checks, dir lock.
- * @note This can be done before daemonization.
- * @pre Parameters should be parsed and config file should be read, AppInitParameterInteraction should have been called.
+ * Initialization sanity checks: ecc init, sanity checks, dir lock
+ * @note This can be done before daemonization
+ * @pre Parameters should be parsed and config file should be read, AppInitParameterInteraction should have been called
  */
 bool AppInitSanityChecks();
 /**
- * Bitcoin core main initialization.
- * @note This should only be done after daemonization.
- * @pre Parameters should be parsed and config file should be read, AppInitSanityChecks should have been called.
+ * Bitcoin core main initialization
+ * @note This should only be done after daemonization
+ * @pre Parameters should be parsed and config file should be read, AppInitSanityChecks should have been called
  */
 bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler);
 
-/** The help message mode determines what help message to show */
-enum HelpMessageMode {
-    HMM_BITCOIND,
-    HMM_BITCOIN_QT
-};
+/** Determines what help message to show */
+enum WhatHelpMessage {
+    HELP_MESSAGE_DOGECOIND,
+    HELP_MESSAGE_DOGECOIN_QT
+} ;
 
 /** Help for options shared between UI and daemon (for -help) */
-std::string HelpMessage(HelpMessageMode mode);
+std::string HelpMessage( WhatHelpMessage what ) ;
 /** Returns licensing information (for -version) */
 std::string LicenseInfo();
 
-#endif // BITCOIN_INIT_H
+#endif

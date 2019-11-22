@@ -206,10 +206,6 @@
         <translation>Sarearekin sinkronizatzen...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Gainbegiratu</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transakzioak</translation>
     </message>

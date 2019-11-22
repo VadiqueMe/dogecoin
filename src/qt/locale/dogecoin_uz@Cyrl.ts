@@ -74,10 +74,6 @@
         <translation>Тармоқ билан синхронланмоқда...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Кўриб чиқиш</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>Улам</translation>
     </message>
@@ -154,20 +150,8 @@
         <translation>Хабарни &amp;тасдиқлаш...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Ҳамён</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;Жўнатиш</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;Қабул қилиш</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

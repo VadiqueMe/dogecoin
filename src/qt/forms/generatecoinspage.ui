@@ -643,7 +643,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../bitcoin.qrc"/>
+  <include location="../dogecoin.qrc"/>
  </resources>
  <connections/>
 </ui>

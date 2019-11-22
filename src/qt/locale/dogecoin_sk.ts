@@ -242,10 +242,6 @@
         <translation>Synchronizácia so sieťou...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Prehľad</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>Uzol</translation>
     </message>
@@ -350,20 +346,8 @@
         <translation>O&amp;veriť správu...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Peňaženka</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;Odoslať</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;Prijať</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

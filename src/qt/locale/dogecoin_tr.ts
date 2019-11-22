@@ -242,10 +242,6 @@
         <translation>Ağ ile senkronize ediliyor...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Genel bakış</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>Düğüm</translation>
     </message>
@@ -350,20 +346,8 @@
         <translation>İletiyi &amp;kontrol et...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Cüzdan</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;Gönder</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;Al</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

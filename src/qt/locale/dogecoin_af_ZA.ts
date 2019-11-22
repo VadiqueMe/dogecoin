@@ -182,10 +182,6 @@
         <translation>Sinchroniseer met die netwerk ...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Oorsig</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transaksies</translation>
     </message>
@@ -204,10 +200,6 @@
     <message>
         <source>&amp;Options...</source>
         <translation>&amp;Opsies</translation>
-    </message>
-    <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
     </message>
     <message>
         <source>Wallet</source>

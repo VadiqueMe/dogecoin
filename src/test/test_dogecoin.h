@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef TEST_BITCOIN_H
-#define TEST_BITCOIN_H
+#ifndef TEST_DOGECOIN_H
+#define TEST_DOGECOIN_H
 
 #include "chainparamsbase.h"
 #include "key.h"
@@ -74,7 +74,7 @@ struct TestMemPoolEntryHelper
     TestMemPoolEntryHelper() :
         nFee(0), nTime(0), dPriority(0.0), nHeight(1),
         spendsCoinbase(false), sigOpCost(4) { }
-    
+
     CTxMemPoolEntry FromTx(const CMutableTransaction &tx, CTxMemPool *pool = NULL);
     CTxMemPoolEntry FromTx(const CTransaction &tx, CTxMemPool *pool = NULL);
 

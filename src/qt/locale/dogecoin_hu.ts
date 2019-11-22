@@ -82,10 +82,6 @@
         <translation>Szinkronizálás a hálózattal...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Áttekintés</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>Csomópont</translation>
     </message>
@@ -166,20 +162,8 @@
         <translation>Üzenet &amp;valódiságának ellenőrzése</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Tárca</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;Küldés</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;Fogadás</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

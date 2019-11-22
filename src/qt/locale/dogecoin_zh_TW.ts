@@ -242,10 +242,6 @@
         <translation>正在跟網路進行同步...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>總覽</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>節點</translation>
     </message>
@@ -350,20 +346,8 @@
         <translation>驗證訊息...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>錢包</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>付款</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>收款</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

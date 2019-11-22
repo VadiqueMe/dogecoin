@@ -82,10 +82,6 @@
         <translation>Synkronoidaan verkon kanssa...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Yleisnäkymä</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>Solmu</translation>
     </message>
@@ -174,20 +170,8 @@
         <translation>Varmista &amp;viesti...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Lompakko</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;Lähetä</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;Vastaanota</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

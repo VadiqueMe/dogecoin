@@ -242,10 +242,6 @@
         <translation>Синхронизация с сетью...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Обзор</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>Узел</translation>
     </message>
@@ -350,20 +346,8 @@
         <translation>&amp;Проверить сообщение...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Бумажник</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;Отправить</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;Получить</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

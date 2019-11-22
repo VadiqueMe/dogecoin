@@ -1,6 +1,6 @@
 // Copyright (c) 2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "rpcnestedtests.h"
 
@@ -42,7 +42,7 @@ void RPCNestedTests::rpcNestedTests()
     RegisterAllCoreRPCCommands(tableRPC);
     tableRPC.appendCommand("rpcNestedTest", &vRPCCommands[0]);
     ClearDatadirCache();
-    std::string path = QDir::tempPath().toStdString() + "/" + strprintf("test_bitcoin_qt_%lu_%i", (unsigned long)GetTime(), (int)(GetRand(100000)));
+    std::string path = QDir::tempPath().toStdString() + "/" + strprintf( "test_dogecoin_qt_%lu_%i", (unsigned long)GetTime(), (int)( GetRand(100000) ) ) ;
     QDir dir(QString::fromStdString(path));
     dir.mkpath(".");
     ForceSetArg("-datadir", path);

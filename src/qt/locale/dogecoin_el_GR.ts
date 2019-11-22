@@ -134,10 +134,6 @@
         <translation>Συγχρονισμός με το δίκτυο...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Επισκόπηση</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>Κόμβος</translation>
     </message>
@@ -218,20 +214,8 @@
         <translation>&amp;Επιβεβαίωση μηνύματος</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Πορτοφόλι</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;Αποστολή</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;Παραλαβή </translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

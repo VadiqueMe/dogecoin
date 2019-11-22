@@ -70,20 +70,8 @@
         <translation>Құпия сөзді өзгерту</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Биткоин</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Әмиян</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>Жіберу</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>Алу</translation>
     </message>
     <message>
         <source>&amp;File</source>

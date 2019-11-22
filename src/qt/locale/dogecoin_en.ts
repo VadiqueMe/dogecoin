@@ -297,9 +297,190 @@
     </message>
 </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>ClientModel</name>
     <message>
-        <location filename="../bitcoingui.cpp" line="+139"/>
+        <location filename="../clientmodel.cpp" line="+178"/>
+        <source>Network Alert</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CoinControlDialog</name>
+    <message>
+        <location filename="../forms/coincontroldialog.ui" line="+14"/>
+        <source>Coin Selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+34"/>
+        <source>Quantity:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>Bytes:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+45"/>
+        <source>Amount:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+45"/>
+        <source>Fee:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+45"/>
+        <source>After Fee:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>Change:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+56"/>
+        <source>(un)select all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Tree mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>List mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+56"/>
+        <source>Amount</source>
+        <translation type="unfinished">Amount</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Received with label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Received with address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Date</source>
+        <translation type="unfinished">Date</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Confirmations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Confirmed</source>
+        <translation type="unfinished">Confirmed</translation>
+    </message>
+    <message>
+        <location filename="../coincontroldialog.cpp" line="+55"/>
+        <source>Copy address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Copy label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <location line="+26"/>
+        <source>Copy amount</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-25"/>
+        <source>Copy transaction ID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Lock unspent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Unlock unspent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>Copy quantity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Copy fee</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Copy after fee</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Copy bytes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Copy change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+317"/>
+        <source>(%1 locked)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+168"/>
+        <source>Can vary +/- %1 koinu(s) per input.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+40"/>
+        <location line="+53"/>
+        <source>(no label)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-7"/>
+        <source>change from %1 (%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>(change)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DogecoinApplication</name>
+    <message>
+        <location filename="../dogecoin.cpp" line="+517"/>
+        <source>A fatal error occurred. Dogecoin can no longer continue safely and will quit.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DogecoinGUI</name>
+    <message>
+        <location filename="../gui.cpp" line="+139"/>
         <source>Wallet</source>
         <translation type="unfinished">Wallet</translation>
     </message>
@@ -309,24 +490,9 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+169"/>
-        <source>&amp;Wow</source>
-        <translation type="unfinished">&amp;Wow</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>&amp;Such Send</source>
-        <translation type="unfinished">&amp;Such Send</translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>&amp;Much Receive</source>
-        <translation type="unfinished">&amp;Much Receive</translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>&amp;Transactions</source>
-        <translation type="unfinished">&amp;Transactions</translation>
+        <location line="+201"/>
+        <source>Transactions</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+24"/>
@@ -600,12 +766,7 @@
         <translation type="unfinished">Transactions after this will not yet be visible</translation>
     </message>
     <message>
-        <location line="+13"/>
-        <source>Dogecoin</source>
-        <translation type="unfinished">Dogecoin</translation>
-    </message>
-    <message>
-        <location line="+14"/>
+        <location line="+28"/>
         <source>Error</source>
         <translation type="unfinished">Error</translation>
     </message>
@@ -678,184 +839,6 @@
         <location line="+8"/>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;locked&lt;/b&gt;</source>
         <translation type="unfinished">Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;locked&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <location filename="../bitcoin.cpp" line="+517"/>
-        <source>A fatal error occurred. Dogecoin can no longer continue safely and will quit.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ClientModel</name>
-    <message>
-        <location filename="../clientmodel.cpp" line="+178"/>
-        <source>Network Alert</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>CoinControlDialog</name>
-    <message>
-        <location filename="../forms/coincontroldialog.ui" line="+14"/>
-        <source>Coin Selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+34"/>
-        <source>Quantity:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+29"/>
-        <source>Bytes:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+45"/>
-        <source>Amount:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+45"/>
-        <source>Fee:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+45"/>
-        <source>After Fee:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+32"/>
-        <source>Change:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+56"/>
-        <source>(un)select all</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>Tree mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>List mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+56"/>
-        <source>Amount</source>
-        <translation type="unfinished">Amount</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Received with label</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Received with address</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Date</source>
-        <translation type="unfinished">Date</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Confirmations</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Confirmed</source>
-        <translation type="unfinished">Confirmed</translation>
-    </message>
-    <message>
-        <location filename="../coincontroldialog.cpp" line="+55"/>
-        <source>Copy address</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Copy label</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <location line="+26"/>
-        <source>Copy amount</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-25"/>
-        <source>Copy transaction ID</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Lock unspent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Unlock unspent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+22"/>
-        <source>Copy quantity</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Copy fee</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Copy after fee</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Copy bytes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Copy change</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+317"/>
-        <source>(%1 locked)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+168"/>
-        <source>Can vary +/- %1 koinu(s) per input.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+40"/>
-        <location line="+53"/>
-        <source>(no label)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-7"/>
-        <source>change from %1 (%2)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>(change)</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2057,7 +2040,7 @@ p, li { white-space: pre-wrap; }
         </translation>
     </message>
     <message>
-        <location filename="../bitcoin.cpp" line="+177"/>
+        <location filename="../dogecoin.cpp" line="+176"/>
         <source>%1 didn&apos;t yet exit safely...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3807,7 +3790,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <location filename="../bitcoingui.cpp" line="+140"/>
+        <location filename="../gui.cpp" line="+140"/>
         <source>Unit to show amounts in. Click to choose another unit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3872,15 +3855,20 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>dogecoin-core</name>
     <message>
-        <location filename="../bitcoinstrings.cpp" line="+12"/>
+        <location filename="../translationstrings.cpp" line="+12"/>
         <source>Dogecoin Core</source>
         <translation type="unfinished">Dogecoin Core</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>The %s developers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Bitcoin Core and Dogecoin Core</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3995,8 +3983,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+3"/>
-        <source>Execute command when the best block changes (%s in cmd is replaced by block hash)</source>
-        <translation type="unfinished">Execute command when the best block changes (%s in cmd is replaced by block hash)</translation>
+        <source>Execute command when the best block changes (%s in cmd is replaced by block hash, %i is replaced by block number)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
@@ -4125,6 +4113,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+3"/>
+        <source>Set the number of threads for coin generation if enabled (-1 = all cores, default: %d)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
         <source>Sets the serialization of raw transaction or block hex returned in non-verbose mode, non-segwit(0) or segwit(1) (default: %d)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4140,26 +4133,16 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+5"/>
-        <source>The transaction amount is too small to send after the fee has been deducted</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
         <source>This is the transaction fee you may pay when fee estimates are not available.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit %s and cryptographic software written by Eric Young and UPnP software written by Thomas Bernard.</source>
+        <source>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit %s and cryptographic software written by Eric Young and UPnP software written by Thomas Bernard. Paper wallet art provided by Anacoluthia</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+5"/>
         <source>Total length of network version string (%i) exceeds maximum length (%i). Reduce the number or size of uacomments.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4490,6 +4473,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+1"/>
+        <source>Generate coins (default: %u)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>How many blocks to check at startup (default: %u, 0 = all)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4690,6 +4678,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+1"/>
+        <source>Receive and display P2P network alerts (default: %u)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4825,11 +4818,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+1"/>
-        <source>The transaction amount is too small to pay the fee</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>The wallet will avoid paying less than the minimum relay fee.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4862,11 +4850,6 @@ p, li { white-space: pre-wrap; }
         <location line="+1"/>
         <source>Tor control port to use if onion listening enabled (default: %s)</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Transaction amount too small</source>
-        <translation type="unfinished">Transaction amount too small</translation>
     </message>
     <message>
         <location line="+1"/>

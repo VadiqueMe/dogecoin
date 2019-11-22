@@ -5,7 +5,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #if defined(HAVE_CONFIG_H)
-#include "config/bitcoin-config.h"
+#include "config/dogecoin-config.h"
 #endif
 
 #include "util.h"
@@ -104,7 +104,7 @@ namespace boost {
 
 using namespace std;
 
-const char * const BITCOIN_CONF_FILENAME = "dogecoin.conf";
+const char * const DOGECOIN_CONF_FILENAME = "dogecoin.conf";
 const char * const BITCOIN_PID_FILENAME = "dogecoind.pid";
 
 const char * const LOG_FILE_NAME = "debug.log" ;

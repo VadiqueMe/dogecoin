@@ -70,10 +70,6 @@
         <translation>Синхронизација со мрежата...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Преглед</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>Јазол</translation>
     </message>
@@ -134,20 +130,8 @@
         <translation>&amp;Потврди порака...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Биткоин</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Паричник</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;Испрати</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;Прими</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

@@ -42,10 +42,6 @@
         <translation>नेटवर्क से समकालिक (मिल) रहा है ...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;विवरण</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp; लेन-देन</translation>
     </message>
@@ -68,10 +64,6 @@
     <message>
         <source>Change the passphrase used for wallet encryption</source>
         <translation>पहचान शब्द/अक्षर जो वॉलेट एनक्रिपशन के लिए इस्तेमाल किया है उसे बदलिए!</translation>
-    </message>
-    <message>
-        <source>Dogecoin</source>
-        <translation>बीटकोइन</translation>
     </message>
     <message>
         <source>Wallet</source>

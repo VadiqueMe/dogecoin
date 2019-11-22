@@ -242,10 +242,6 @@
         <translation>Synchronizacja z siecią...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>P&amp;odsumowanie</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>Węzeł</translation>
     </message>
@@ -334,20 +330,8 @@
         <translation>&amp;Zweryfikuj wiadomość...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Portfel</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>Wyślij</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>Odbie&amp;rz</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

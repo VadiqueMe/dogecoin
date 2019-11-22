@@ -94,10 +94,6 @@
         <translation>กำลังทำข้อมูลให้ตรงกันกับเครือข่าย ...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;ภาพรวม</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>Node/โหนด</translation>
     </message>
@@ -186,20 +182,8 @@
         <translation>&amp;ยืนยันข้อความ...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>กระเป๋าเงิน</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;ส่ง</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;รับ</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

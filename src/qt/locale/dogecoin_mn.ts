@@ -122,10 +122,6 @@
         <translation>Оношилгоо ба засварын консолыг онгойлго</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Биткойн</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Түрүйвч</translation>
     </message>

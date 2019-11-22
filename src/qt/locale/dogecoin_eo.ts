@@ -142,10 +142,6 @@
         <translation>Sinkronigante kun reto...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Superrigardo</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>Nodo</translation>
     </message>
@@ -222,20 +218,8 @@
         <translation>&amp;Kontroli mesaĝon...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogemono</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Monujo</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;Such Sendi</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;Ricevi</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

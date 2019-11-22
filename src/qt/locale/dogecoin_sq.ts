@@ -178,10 +178,6 @@
         <translation>Duke u sinkronizuar me rrjetin...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Përmbledhje</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transaksionet</translation>
     </message>
@@ -202,20 +198,8 @@
         <translation>Ndrysho frazkalimin e përdorur per enkriptimin e portofolit</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Portofol</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;Dergo</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;Merr</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

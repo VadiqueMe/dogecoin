@@ -58,10 +58,6 @@
         <translation>Cysoni â'r rhwydwaith...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Trosolwg</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Trafodion</translation>
     </message>
@@ -106,20 +102,8 @@
         <translation>Newid y cyfrinymadrodd a ddefnyddiwyd ar gyfer amgryptio'r waled</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Waled</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;Anfon</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;Derbyn</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

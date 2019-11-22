@@ -5,12 +5,12 @@
 
 # Test the "getauxblock" merge-mining RPC interface
 
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import DogecoinTestFramework
 from test_framework.util import *
 
 from test_framework import scrypt_auxpow as auxpow
 
-class GetAuxBlockTest (BitcoinTestFramework):
+class GetAuxBlockTest (DogecoinTestFramework):
 
   def run_test (self):
     # Generate a block so that we are not "downloading blocks"

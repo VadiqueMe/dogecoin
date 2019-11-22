@@ -66,10 +66,6 @@
         <translation>Mag-sychronize ne king network...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Wow</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transaksion</translation>
     </message>
@@ -128,10 +124,6 @@
     <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Beripikan ing message...</translation>
-    </message>
-    <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
     </message>
     <message>
         <source>Wallet</source>

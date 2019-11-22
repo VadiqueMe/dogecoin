@@ -238,10 +238,6 @@
         <translation>Netwerk-sinkronisasie...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Oorsig</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>Node</translation>
     </message>
@@ -338,20 +334,8 @@
         <translation>Maak ontfouting en diagnostiese konsole oop</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Beursie</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;Stuur</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;Ontvang</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

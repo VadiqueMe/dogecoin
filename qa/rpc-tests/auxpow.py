@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 # Copyright (c) 2015-2018 The Dogecoin Core developers
 # Distributed under the MIT software license, see the accompanying
-# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+# file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #
 # Test AuxPOW RPC interface and constraints
 #
 
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import DogecoinTestFramework
 from test_framework.util import *
 from test_framework import scrypt_auxpow
 
-class AuxPOWTest (BitcoinTestFramework):
+class AuxPOWTest (DogecoinTestFramework):
     REWARD = 500000 # reward per block
     CHAIN_ID = "62"
     DIGISHIELD_START = 10 # nHeight when digishield starts

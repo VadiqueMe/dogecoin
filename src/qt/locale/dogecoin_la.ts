@@ -62,10 +62,6 @@
         <translation>Synchronizans cum rete...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Summarium</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transactiones</translation>
     </message>
@@ -126,20 +122,8 @@
         <translation>&amp;Verifica nuntium...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Cassidile</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;Mitte</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;Accipe</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

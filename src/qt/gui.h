@@ -3,11 +3,11 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef DOGECOIN_QT_BITCOINGUI_H
-#define DOGECOIN_QT_BITCOINGUI_H
+#ifndef DOGECOIN_QT_GUI_H
+#define DOGECOIN_QT_GUI_H
 
 #if defined(HAVE_CONFIG_H)
-#include "config/bitcoin-config.h"
+#include "config/dogecoin-config.h"
 #endif
 
 #include "amount.h"
@@ -42,10 +42,10 @@ class QProgressDialog;
 QT_END_NAMESPACE
 
 /**
-  Bitcoin GUI main class. This class represents the main window of the Bitcoin UI. It communicates with both the client and
-  wallet models to give the user an up-to-date view of the current core state.
+  GUI main class. This class represents the main window of the Dogecoin UI. It communicates with both the client and
+  wallet models to give the user an up-to-date view of the current core
 */
-class BitcoinGUI : public QMainWindow
+class DogecoinGUI : public QMainWindow
 {
     Q_OBJECT
 
@@ -53,8 +53,8 @@ public:
     static const QString DEFAULT_WALLET;
     static const std::string DEFAULT_UIPLATFORM;
 
-    explicit BitcoinGUI( const PlatformStyle * style, const NetworkStyle * networkStyle, QWidget * parent = nullptr ) ;
-    ~BitcoinGUI() ;
+    explicit DogecoinGUI( const PlatformStyle * style, const NetworkStyle * networkStyle, QWidget * parent = nullptr ) ;
+    ~DogecoinGUI() ;
 
     /** Set the client model.
         The client model represents the part of the core that communicates with the P2P network, and is wallet-agnostic

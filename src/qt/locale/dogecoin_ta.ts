@@ -54,10 +54,6 @@
 <context>
     <name>DogecoinGUI</name>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;கண்ணோட்டம்</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;பரிவர்த்தனைகள்</translation>
     </message>
@@ -90,20 +86,8 @@
         <translation>&amp;செய்தியை சரிசெய்...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>பணப்பை</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;அனுப்பு</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;பெறு</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

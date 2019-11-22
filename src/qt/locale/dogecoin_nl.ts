@@ -242,10 +242,6 @@
         <translation>Synchroniseren met netwerk...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Overzicht</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>Node</translation>
     </message>
@@ -350,20 +346,8 @@
         <translation>&amp;Verifiëer bericht...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Portemonnee</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;Verstuur</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;Ontvangen</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

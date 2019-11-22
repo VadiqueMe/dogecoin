@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Copyright (c) 2014-2016 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
-# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+# file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #
 # Test spending coinbase transactions.
@@ -13,11 +13,11 @@
 # but less mature coinbase spends are NOT.
 #
 
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import DogecoinTestFramework
 from test_framework.util import *
 
 # Create one-input, one-output, no-fee transaction:
-class MempoolSpendCoinbaseTest(BitcoinTestFramework):
+class MempoolSpendCoinbaseTest(DogecoinTestFramework):
 
     def __init__(self):
         super().__init__()

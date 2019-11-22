@@ -43,14 +43,14 @@ AC_DEFUN([DOGECOIN_FIND_BDB5],[
     AC_MSG_RESULT([no])
     AC_MSG_ERROR([libdb_cxx headers missing, Dogecoin Core requires this library for wallet (--disable-wallet to disable wallet functionality)])
   elif test "x$bdb5path" = "xX"; then
-    BITCOIN_SUBDIR_TO_INCLUDE(BDB_CPPFLAGS,[${bdbpath}],db_cxx)
+    SUBDIR_TO_INCLUDE(BDB_CPPFLAGS,[${bdbpath}],db_cxx)
     AC_ARG_WITH([incompatible-bdb],[AS_HELP_STRING([--with-incompatible-bdb], [use a bdb version other than 5.1 or 5.3])],[
       AC_MSG_WARN([Found Berkeley DB other than 5.1 or 5.3; wallets opened by this build may be not portable!])
     ],[
       AC_MSG_ERROR([Found Berkeley DB other than 5.1 or 5.3, needed for portable wallets (--with-incompatible-bdb to ignore or --disable-wallet to disable wallet functionality)])
     ])
   else
-    BITCOIN_SUBDIR_TO_INCLUDE(BDB_CPPFLAGS,[${bdb5path}],db_cxx)
+    SUBDIR_TO_INCLUDE(BDB_CPPFLAGS,[${bdb5path}],db_cxx)
     bdbpath="${bdb5path}"
   fi
   AC_SUBST(BDB_CPPFLAGS)

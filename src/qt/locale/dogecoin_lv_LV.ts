@@ -74,10 +74,6 @@
         <translation>Sinhronizācija ar tīklu...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Pārskats</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>Node</translation>
     </message>
@@ -154,20 +150,8 @@
         <translation>&amp;Pārbaudīt ziņojumu...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Maciņš</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;Sūtīt</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;Saņemt</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

@@ -238,10 +238,6 @@
         <translation>مزامنة مع الشبكة ...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;نظرة عامة</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>جهاز</translation>
     </message>
@@ -330,20 +326,8 @@
         <translation>&amp;التحقق من الرسالة...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>بت كوين</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>محفظة</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;ارسل</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;استقبل</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

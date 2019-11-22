@@ -1,7 +1,7 @@
 #!/bin/sh
 # Copyright (c) 2014-2016 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
-# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+# file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 INPUT=$(cat /dev/stdin)
 VALID=false
@@ -16,7 +16,7 @@ for LINE in $(echo "$INPUT" | gpg --trust-model always "$@" 2>/dev/null); do
 		done < ./contrib/verify-commits/trusted-keys
 		;;
 	"[GNUPG:] REVKEYSIG "*)
-		[ "$BITCOIN_VERIFY_COMMITS_ALLOW_REVSIG" != 1 ] && exit 1
+		[ "$DOGECOIN_VERIFY_COMMITS_ALLOW_REVSIG" != 1 ] && exit 1
 		REVSIG=true
 		GOODREVSIG="[GNUPG:] GOODSIG ${LINE#* * *}"
 		;;

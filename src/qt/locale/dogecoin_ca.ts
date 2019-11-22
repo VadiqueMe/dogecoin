@@ -242,10 +242,6 @@
         <translation>S'està sincronitzant amb la xarxa ...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Panorama general</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>Node</translation>
     </message>
@@ -346,20 +342,8 @@
         <translation>&amp;Verifica el missatge...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Moneder</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;Envia</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;Rep</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

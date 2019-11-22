@@ -230,10 +230,6 @@
         <translation>Сінхранізацыя з сецівам...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>Агляд</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>Вузел</translation>
     </message>
@@ -310,20 +306,8 @@
         <translation>Праверыць паведамленне...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Біткойн</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Гаманец</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>Даслаць</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>Атрымаць</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

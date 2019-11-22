@@ -78,10 +78,6 @@
         <translation>Синхронизација са мрежом у току...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Општи преглед</translation>
-    </message>
-    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Трансакције</translation>
     </message>
@@ -124,10 +120,6 @@
     <message>
         <source>Wallet</source>
         <translation>новчаник</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;Пошаљи</translation>
     </message>
     <message>
         <source>&amp;File</source>

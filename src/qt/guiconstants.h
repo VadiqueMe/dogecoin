@@ -7,15 +7,15 @@
 #define DOGECOIN_QT_GUICONSTANTS_H
 
 /* Milliseconds between model updates */
-static const int MODEL_UPDATE_DELAY = 250;
+static const int MODEL_UPDATE_DELAY = 250 ;
 
 /* AskPassphraseDialog -- Maximum passphrase length */
-static const int MAX_PASSPHRASE_SIZE = 1024;
+static const int MAX_PASSPHRASE_SIZE = 1024 ;
 
-/* BitcoinGUI -- Size of icons in status bar */
-static const int STATUSBAR_ICONSIZE = 16;
+/* Size of icons in the bottom bar */
+static const int BOTTOMBAR_ICONSIZE = 16 ;
 
-static const bool DEFAULT_SPLASHSCREEN = true;
+static const bool DEFAULT_SPLASHSCREEN = true ;
 
 /* Invalid field background style */
 #define STYLE_INVALID "background:#FF8080"

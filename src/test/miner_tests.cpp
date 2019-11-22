@@ -17,7 +17,7 @@
 #include "util.h"
 #include "utilstrencodings.h"
 
-#include "test/test_bitcoin.h"
+#include "test/test_dogecoin.h"
 
 #include <memory>
 

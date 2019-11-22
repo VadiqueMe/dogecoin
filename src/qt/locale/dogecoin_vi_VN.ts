@@ -102,10 +102,6 @@
         <translation>Đồng bộ hóa với mạng</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Tổng quan</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>Node</translation>
     </message>
@@ -190,20 +186,8 @@
         <translation>&amp;Tin nhắn xác thực</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Ví</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;Gửi</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;Nhận</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

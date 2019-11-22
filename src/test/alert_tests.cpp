@@ -14,7 +14,7 @@
 #include "utilstrencodings.h"
 
 #include "test/testutil.h"
-#include "test/test_bitcoin.h"
+#include "test/test_dogecoin.h"
 
 #include <fstream>
 

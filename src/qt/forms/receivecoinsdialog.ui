@@ -150,7 +150,7 @@
                 <string>&amp;Request payment</string>
                </property>
                <property name="icon">
-                <iconset resource="../bitcoin.qrc">
+                <iconset resource="../dogecoin.qrc">
                  <normaloff>:/icons/receiving_addresses</normaloff>:/icons/receiving_addresses</iconset>
                </property>
               </widget>
@@ -180,7 +180,7 @@
                 <string>Clear</string>
                </property>
                <property name="icon">
-                <iconset resource="../bitcoin.qrc">
+                <iconset resource="../dogecoin.qrc">
                  <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
                </property>
                <property name="autoDefault">
@@ -286,7 +286,7 @@
               <string>Remove</string>
              </property>
              <property name="icon">
-              <iconset resource="../bitcoin.qrc">
+              <iconset resource="../dogecoin.qrc">
                <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
              </property>
              <property name="autoDefault">
@@ -442,7 +442,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../bitcoin.qrc"/>
+  <include location="../dogecoin.qrc"/>
  </resources>
  <connections/>
 </ui>

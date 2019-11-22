@@ -242,10 +242,6 @@
         <translation>ネットワークに同期中……</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>概要(&amp;O)</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>ノード</translation>
     </message>
@@ -350,20 +346,8 @@
         <translation>メッセージの検証... (&amp;V)</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>ウォレット</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>送金 (&amp;S)</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>入金 (&amp;R)</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

@@ -1,10 +1,10 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "walletframe.h"
 
-#include "bitcoingui.h"
+#include "gui.h"
 #include "walletview.h"
 
 #include <cstdio>
@@ -13,10 +13,10 @@
 #include <QHBoxLayout>
 #include <QLabel>
 
-WalletFrame::WalletFrame(const PlatformStyle *_platformStyle, BitcoinGUI *_gui) :
-    QFrame(_gui),
-    gui(_gui),
-    platformStyle(_platformStyle)
+WalletFrame::WalletFrame( const PlatformStyle * style, DogecoinGUI * _gui ) :
+    QFrame( _gui ),
+    gui( _gui ),
+    platformStyle( style )
 {
     // Leave HBox hook for adding a list view later
     QHBoxLayout *walletFrameLayout = new QHBoxLayout(this);
@@ -39,18 +39,18 @@ void WalletFrame::setClientModel(ClientModel *_clientModel)
     this->clientModel = _clientModel;
 }
 
-bool WalletFrame::addWallet(const QString& name, WalletModel *walletModel)
+bool WalletFrame::addWallet( const QString & name, WalletModel * walletModel )
 {
     if (!gui || !clientModel || !walletModel || mapWalletViews.count(name) > 0)
         return false;
 
     WalletView *walletView = new WalletView(platformStyle, this);
-    walletView->setBitcoinGUI(gui);
+    walletView->setGUI( gui ) ;
     walletView->setClientModel(clientModel);
     walletView->setWalletModel(walletModel);
     walletView->showOutOfSyncWarning(bOutOfSync);
 
-     /* TODO we should goto the currently selected page once dynamically adding wallets is supported */
+    /* TODO goto the currently selected page once dynamically adding wallets is supported */
     walletView->gotoOverviewPage();
     walletStack->addWidget(walletView);
     mapWalletViews[name] = walletView;

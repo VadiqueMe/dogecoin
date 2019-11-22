@@ -1,16 +1,16 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_QT_UTILITYDIALOG_H
-#define BITCOIN_QT_UTILITYDIALOG_H
+#ifndef DOGECOIN_QT_UTILITYDIALOG_H
+#define DOGECOIN_QT_UTILITYDIALOG_H
 
 #include <QDialog>
 #include <QObject>
 #include "walletmodel.h"
 
-class BitcoinGUI;
-class ClientModel;
+class DogecoinGUI ;
+class ClientModel ;
 
 namespace Ui {
     class HelpMessageDialog;
@@ -68,11 +68,11 @@ class ShutdownWindow : public QWidget
     Q_OBJECT
 
 public:
-    ShutdownWindow(QWidget *parent=0, Qt::WindowFlags f=0);
-    static QWidget *showShutdownWindow(BitcoinGUI *window);
+    ShutdownWindow( QWidget * parent = nullptr, Qt::WindowFlags f = 0 ) ;
+    static QWidget * showShutdownWindow( DogecoinGUI * window ) ;
 
 protected:
-    void closeEvent(QCloseEvent *event);
+    void closeEvent( QCloseEvent * event ) ;
 };
 
-#endif // BITCOIN_QT_UTILITYDIALOG_H
+#endif

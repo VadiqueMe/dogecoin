@@ -18,7 +18,7 @@ FORMS += \
     ../src/qt/forms/generatecoinspage.ui \
 
 RESOURCES += \
-    ../src/qt/bitcoin.qrc
+    ../src/qt/dogecoin.qrc
 
 
 QT += \

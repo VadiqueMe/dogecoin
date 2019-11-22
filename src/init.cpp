@@ -5,7 +5,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #if defined(HAVE_CONFIG_H)
-#include "config/bitcoin-config.h"
+#include "config/dogecoin-config.h"
 #endif
 
 #include "init.h"
@@ -308,7 +308,7 @@ void OnRPCPreCommand(const CRPCCommand& cmd)
         throw JSONRPCError(RPC_FORBIDDEN_BY_SAFE_MODE, std::string("Safe mode: ") + strWarning);
 }
 
-std::string HelpMessage(HelpMessageMode mode)
+std::string HelpMessage( WhatHelpMessage what )
 {
     const bool showDebug = GetBoolArg("-help-debug", false);
 
@@ -330,8 +330,8 @@ std::string HelpMessage(HelpMessageMode mode)
             ParamsFor( "inu" ).GetConsensus( 0 ).defaultAssumeValid.GetHex(),
             ParamsFor( "test" ).GetConsensus( 0 ).defaultAssumeValid.GetHex()
         ) ) ;
-    strUsage += HelpMessageOpt("-conf=<file>", strprintf(_("Specify configuration file (default: %s)"), BITCOIN_CONF_FILENAME));
-    if (mode == HMM_BITCOIND)
+    strUsage += HelpMessageOpt("-conf=<file>", strprintf(_("Specify configuration file (default: %s)"), DOGECOIN_CONF_FILENAME));
+    if ( what == HELP_MESSAGE_DOGECOIND )
     {
 #if HAVE_DECL_DAEMON
         strUsage += HelpMessageOpt("-daemon", _("Run in the background as a daemon and accept commands"));
@@ -439,7 +439,7 @@ std::string HelpMessage(HelpMessageMode mode)
         strUsage += HelpMessageOpt("-bip9params=deployment:start:end", "Use given start/end times for specified BIP9 deployment (regtest-only)");
     }
     std::string debugCategories = "addrman, alert, bench, cmpctblock, coindb, db, http, libevent, lock, mempool, mempoolrej, net, proxy, prune, rand, reindex, rpc, selectcoins, tor, zmq"; // Don't translate these and qt below
-    if (mode == HMM_BITCOIN_QT)
+    if ( what == HELP_MESSAGE_DOGECOIN_QT )
         debugCategories += ", qt";
     strUsage += HelpMessageOpt("-debug=<category>", strprintf(_("Output debugging information (default: %u, supplying <category> is optional)"), 0) + ". " +
         _("If <category> is not supplied or if <category> = 1, output all debugging information.") + _("<category> can be:") + " " + debugCategories + ".");
@@ -1163,7 +1163,7 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
         LogPrintf("Startup time: %s\n", DateTimeStrFormat("%Y-%m-%d %H:%M:%S", GetTime()));
     LogPrintf("Default data directory %s\n", GetDefaultDataDir().string());
     LogPrintf("Using data directory %s\n", GetDataDir().string());
-    LogPrintf("Using config file %s\n", GetConfigFile(GetArg("-conf", BITCOIN_CONF_FILENAME)).string());
+    LogPrintf("Using config file %s\n", GetConfigFile(GetArg("-conf", DOGECOIN_CONF_FILENAME)).string());
     LogPrintf("Using at most %i automatic connections (%i file descriptors available)\n", nMaxConnections, nFD);
 
     InitSignatureCache();

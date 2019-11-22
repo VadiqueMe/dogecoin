@@ -242,10 +242,6 @@
         <translation>네트워크와 동기화중...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>개요(&amp;O)</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>노드</translation>
     </message>
@@ -350,20 +346,8 @@
         <translation>메시지 확인(&amp;V)...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>도지코인</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>지갑</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>보내기(&amp;S)</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>받기(&amp;R)</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

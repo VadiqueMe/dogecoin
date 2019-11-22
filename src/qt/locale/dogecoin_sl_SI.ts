@@ -82,10 +82,6 @@
         <translation>Dohitevam omrežje ...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>Pre&amp;gled</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>Vozlišče</translation>
     </message>
@@ -162,20 +158,8 @@
         <translation>&amp;Preveri sporočilo ...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Denarnica</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;Pošlji</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>P&amp;rejmi</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

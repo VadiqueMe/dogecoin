@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 # Copyright (c) 2015-2016 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
-# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+# file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #
 # Test PreciousBlock code
 #
 
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import DogecoinTestFramework
 from test_framework.util import (
     assert_equal,
     connect_nodes_bi,
@@ -37,7 +37,7 @@ def node_sync_via_rpc(nodes):
                 continue
             unidirectional_node_sync_via_rpc(node_src, node_dest)
 
-class PreciousTest(BitcoinTestFramework):
+class PreciousTest(DogecoinTestFramework):
     def __init__(self):
         super().__init__()
         self.setup_clean_chain = True

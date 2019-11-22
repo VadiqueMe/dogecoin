@@ -707,9 +707,9 @@ boost::filesystem::path static GetAutostartFilePath()
 {
     std::string chain = ChainNameFromArguments() ;
     if ( chain == "main" )
-        return GetAutostartDir() / "bitcoin.desktop" ;
+        return GetAutostartDir() / "dogecoin.desktop" ;
     /* else */
-    return GetAutostartDir() / strprintf( "bitcoin-%s.lnk", chain ) ;
+    return GetAutostartDir() / strprintf( "dogecoin-%s.lnk", chain ) ;
 }
 
 bool GetStartOnSystemStartup()

@@ -122,7 +122,7 @@ QT_MOC_CPP = \
   qt/moc_bantablemodel.cpp \
   qt/moc_coinaddressvalidator.cpp \
   qt/moc_coinamountfield.cpp \
-  qt/moc_bitcoingui.cpp \
+  qt/moc_gui.cpp \
   qt/moc_unitsofcoin.cpp \
   qt/moc_clientmodel.cpp \
   qt/moc_coincontroldialog.cpp \
@@ -164,19 +164,19 @@ QT_MOC_CPP = \
   qt/moc_walletmodel.cpp \
   qt/moc_walletview.cpp
 
-BITCOIN_MM = \
+DOGECOIN_MM = \
   qt/macdockiconhandler.mm \
   qt/macnotificationhandler.mm
 
 QT_MOC = \
-  qt/bitcoin.moc \
+  qt/dogecoin.moc \
   qt/coinamountfield.moc \
   qt/intro.moc \
   qt/overviewpage.moc \
   qt/rpcconsole.moc
 
-QT_QRC_CPP = qt/qrc_bitcoin.cpp
-QT_QRC = qt/bitcoin.qrc
+QT_QRC_CPP = qt/qrc_dogecoin.cpp
+QT_QRC = qt/dogecoin.qrc
 QT_QRC_LOCALE_CPP = qt/qrc_dogecoin_locale.cpp
 QT_QRC_LOCALE = qt/dogecoin_locale.qrc
 
@@ -184,14 +184,14 @@ PROTOBUF_CC = qt/paymentrequest.pb.cc
 PROTOBUF_H = qt/paymentrequest.pb.h
 PROTOBUF_PROTO = qt/paymentrequest.proto
 
-BITCOIN_QT_H = \
+DOGECOIN_QT_H = \
   qt/addressbookpage.h \
   qt/addresstablemodel.h \
   qt/askpassphrasedialog.h \
   qt/bantablemodel.h \
   qt/coinaddressvalidator.h \
   qt/coinamountfield.h \
-  qt/bitcoingui.h \
+  qt/gui.h \
   qt/unitsofcoin.h \
   qt/clientmodel.h \
   qt/coincontroldialog.h \
@@ -245,9 +245,9 @@ RES_ICONS = \
   qt/res/icons/address-book.png \
   qt/res/icons/about.png \
   qt/res/icons/about_qt.png \
-  qt/res/icons/bitcoin.ico \
-  qt/res/icons/bitcoin_testnet.ico \
-  qt/res/icons/bitcoin.png \
+  qt/res/icons/dogecoin.ico \
+  qt/res/icons/dogecoin_testnet.ico \
+  qt/res/icons/dogecoin.png \
   qt/res/icons/chevron.png \
   qt/res/icons/clock1.png \
   qt/res/icons/clock2.png \
@@ -303,11 +303,11 @@ RES_ICONS = \
   qt/res/icons/warning.png \
   qt/res/icons/verify.png
 
-BITCOIN_QT_BASE_CPP = \
+DOGECOIN_QT_BASE_CPP = \
   qt/bantablemodel.cpp \
   qt/coinaddressvalidator.cpp \
   qt/coinamountfield.cpp \
-  qt/bitcoingui.cpp \
+  qt/gui.cpp \
   qt/unitsofcoin.cpp \
   qt/clientmodel.cpp \
   qt/csvmodelwriter.cpp \
@@ -328,9 +328,9 @@ BITCOIN_QT_BASE_CPP = \
   qt/utilitydialog.cpp \
   qt/verticallabel.cpp
 
-BITCOIN_QT_WINDOWS_CPP = qt/winshutdownmonitor.cpp
+DOGECOIN_QT_WINDOWS_CPP = qt/winshutdownmonitor.cpp
 
-BITCOIN_QT_WALLET_CPP = \
+DOGECOIN_QT_WALLET_CPP = \
   qt/addressbookpage.cpp \
   qt/addresstablemodel.cpp \
   qt/askpassphrasedialog.cpp \
@@ -360,12 +360,12 @@ BITCOIN_QT_WALLET_CPP = \
   qt/walletmodeltransaction.cpp \
   qt/walletview.cpp
 
-BITCOIN_QT_CPP = $(BITCOIN_QT_BASE_CPP)
+DOGECOIN_QT_CPP = $(DOGECOIN_QT_BASE_CPP)
 if TARGET_WINDOWS
-BITCOIN_QT_CPP += $(BITCOIN_QT_WINDOWS_CPP)
+DOGECOIN_QT_CPP += $(DOGECOIN_QT_WINDOWS_CPP)
 endif
 if ENABLE_WALLET
-BITCOIN_QT_CPP += $(BITCOIN_QT_WALLET_CPP)
+DOGECOIN_QT_CPP += $(DOGECOIN_QT_WALLET_CPP)
 endif
 
 RES_IMAGES =
@@ -380,16 +380,16 @@ RES_FONTS = \
   qt/res/fonts/ComicNeue-Regular-Oblique.ttf \
   qt/res/fonts/ComicNeue-Regular.ttf
 
-BITCOIN_RC = qt/res/bitcoin-qt-res.rc
+DOGECOIN_RC = qt/res/dogecoin-qt-res.rc
 
-BITCOIN_QT_INCLUDES = -I$(builddir)/qt -I$(srcdir)/qt -I$(srcdir)/qt/forms \
+DOGECOIN_QT_INCLUDES = -I$(builddir)/qt -I$(srcdir)/qt -I$(srcdir)/qt/forms \
   -I$(builddir)/qt/forms -DQT_NO_KEYWORDS
 
-qt_libdogecoinqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+qt_libdogecoinqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(DOGECOIN_INCLUDES) $(DOGECOIN_QT_INCLUDES) \
   $(QT_INCLUDES) $(QT_DBUS_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS)
 qt_libdogecoinqt_a_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
 
-qt_libdogecoinqt_a_SOURCES = $(BITCOIN_QT_CPP) $(BITCOIN_QT_H) $(QT_FORMS_UI) \
+qt_libdogecoinqt_a_SOURCES = $(DOGECOIN_QT_CPP) $(DOGECOIN_QT_H) $(QT_FORMS_UI) \
   $(QT_QRC) $(QT_QRC_LOCALE) $(QT_TS) $(PROTOBUF_PROTO) $(RES_ICONS) $(RES_IMAGES) $(RES_MOVIES) $(RES_FONTS)
 
 nodist_qt_libdogecoinqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(PROTOBUF_CC) \
@@ -408,17 +408,17 @@ $(qt_libdogecoinqt_a_OBJECTS) $(qt_dogecoin_qt_OBJECTS) : | $(QT_MOC)
 $(QT_MOC): $(PROTOBUF_H)
 $(QT_MOC_CPP): $(PROTOBUF_H)
 
-# bitcoin-qt binary #
-qt_dogecoin_qt_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+# dogecoin-qt binary #
+qt_dogecoin_qt_CPPFLAGS = $(AM_CPPFLAGS) $(DOGECOIN_INCLUDES) $(DOGECOIN_QT_INCLUDES) \
   $(QT_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS)
 qt_dogecoin_qt_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
 
-qt_dogecoin_qt_SOURCES = qt/bitcoin.cpp
+qt_dogecoin_qt_SOURCES = qt/dogecoin.cpp
 if TARGET_DARWIN
-  qt_dogecoin_qt_SOURCES += $(BITCOIN_MM)
+  qt_dogecoin_qt_SOURCES += $(DOGECOIN_MM)
 endif
 if TARGET_WINDOWS
-  qt_dogecoin_qt_SOURCES += $(BITCOIN_RC)
+  qt_dogecoin_qt_SOURCES += $(DOGECOIN_RC)
 endif
 qt_dogecoin_qt_LDADD = qt/libdogecoinqt.a $(LIBDOGECOIN_SERVER)
 if ENABLE_WALLET
@@ -438,11 +438,11 @@ QT_QM=$(QT_TS:.ts=.qm)
 
 SECONDARY: $(QT_QM)
 
-$(srcdir)/qt/bitcoinstrings.cpp: $(libbitcoin_server_a_SOURCES) $(libbitcoin_wallet_a_SOURCES) $(libbitcoin_common_a_SOURCES) $(libbitcoin_zmq_a_SOURCES) $(libbitcoin_consensus_a_SOURCES) $(libbitcoin_util_a_SOURCES)
+$(srcdir)/qt/translationstrings.cpp: $(libdogecoin_server_a_SOURCES) $(libdogecoin_wallet_a_SOURCES) $(libdogecoin_common_a_SOURCES) $(libdogecoin_zmq_a_SOURCES) $(libdogecoin_consensus_a_SOURCES) $(libdogecoin_util_a_SOURCES)
 	@test -n $(XGETTEXT) || echo "xgettext is required for updating translations"
 	$(AM_V_GEN) cd $(srcdir); XGETTEXT=$(XGETTEXT) PACKAGE_NAME="$(PACKAGE_NAME)" COPYRIGHT_HOLDERS="$(COPYRIGHT_HOLDERS)" COPYRIGHT_HOLDERS_SUBSTITUTION="$(COPYRIGHT_HOLDERS_SUBSTITUTION)" $(PYTHON) ../share/qt/extract_strings_qt.py $^
 
-translate: $(srcdir)/qt/bitcoinstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(BITCOIN_QT_BASE_CPP) qt/bitcoin.cpp $(BITCOIN_QT_WINDOWS_CPP) $(BITCOIN_QT_WALLET_CPP) $(BITCOIN_QT_H) $(BITCOIN_MM)
+translate: $(srcdir)/qt/translationstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(DOGECOIN_QT_BASE_CPP) qt/dogecoin.cpp $(DOGECOIN_QT_WINDOWS_CPP) $(DOGECOIN_QT_WALLET_CPP) $(DOGECOIN_QT_H) $(DOGECOIN_MM)
 	@test -n $(LUPDATE) || echo "lupdate is required for updating translations"
 	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts $(srcdir)/qt/locale/dogecoin_en.ts
 
@@ -455,7 +455,7 @@ $(QT_QRC_LOCALE_CPP): $(QT_QRC_LOCALE) $(QT_QM)
 
 $(QT_QRC_CPP): $(QT_QRC) $(QT_FORMS_H) $(RES_ICONS) $(RES_IMAGES) $(RES_MOVIES) $(RES_FONTS) $(PROTOBUF_H)
 	@test -f $(RCC)
-	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name bitcoin $< | \
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name dogecoin $< | \
 	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
 
 CLEAN_QT = $(nodist_qt_libdogecoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno

@@ -242,10 +242,6 @@
         <translation>Synchronizuji se se sítí...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Přehled</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>Uzel</translation>
     </message>
@@ -350,20 +346,8 @@
         <translation>&amp;Ověř zprávu...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Peněženka</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>P&amp;ošli</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>Při&amp;jmi</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

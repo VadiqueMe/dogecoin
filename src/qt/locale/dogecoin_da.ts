@@ -242,10 +242,6 @@
         <translation>Synkroniserer med netværk…</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Oversigt</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>Knude</translation>
     </message>
@@ -350,20 +346,8 @@
         <translation>&amp;Verificér besked…</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Tegnebog</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;Such Send</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;Modtag</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

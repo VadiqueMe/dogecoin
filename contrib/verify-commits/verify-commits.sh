@@ -1,7 +1,7 @@
 #!/bin/sh
 # Copyright (c) 2014-2016 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
-# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+# file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 # Not technically POSIX-compliant due to use of "local", but almost every
 # shell anyone uses today supports it, so its probably fine
@@ -18,9 +18,9 @@ IS_SIGNED () {
 		return 0;
 	fi
 	if [ "${REVSIG_ALLOWED#*$1}" != "$REVSIG_ALLOWED" ]; then
-		export BITCOIN_VERIFY_COMMITS_ALLOW_REVSIG=1
+		export DOGECOIN_VERIFY_COMMITS_ALLOW_REVSIG=1
 	else
-		export BITCOIN_VERIFY_COMMITS_ALLOW_REVSIG=0
+		export DOGECOIN_VERIFY_COMMITS_ALLOW_REVSIG=0
 	fi
 	if ! git -c "gpg.program=${DIR}/gpg.sh" verify-commit $1 > /dev/null 2>&1; then
 		return 1;

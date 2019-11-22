@@ -238,10 +238,6 @@
         <translation>Sincronizando com a rede...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Visão geral</translation>
-    </message>
-    <message>
         <source>Node</source>
         <translation>Nó</translation>
     </message>
@@ -346,20 +342,8 @@
         <translation>&amp;Verificar mensagem...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Carteira</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;Enviar</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;Receber</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>

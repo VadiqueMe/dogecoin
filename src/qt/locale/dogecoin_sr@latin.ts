@@ -130,10 +130,6 @@
         <translation>Usklađivanje sa mrežom...</translation>
     </message>
     <message>
-        <source>&amp;Wow</source>
-        <translation>&amp;Pregled</translation>
-    </message>
-    <message>
         <source>Quit application</source>
         <translation>Isključi aplikaciju</translation>
     </message>
@@ -162,20 +158,8 @@
         <translation>&amp;Proveri poruku...</translation>
     </message>
     <message>
-        <source>Dogecoin</source>
-        <translation>Dogecoin</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Novčanik</translation>
-    </message>
-    <message>
-        <source>&amp;Such Send</source>
-        <translation>&amp;Pošalji</translation>
-    </message>
-    <message>
-        <source>&amp;Much Receive</source>
-        <translation>&amp;Primi</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>
