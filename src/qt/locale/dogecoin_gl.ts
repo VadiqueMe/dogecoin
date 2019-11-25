@@ -1034,10 +1034,6 @@
         <translation>Fallou a sinatura da transacción</translation>
     </message>
     <message>
-        <source>Transaction amount too small</source>
-        <translation>A cantidade da transacción é demasiado pequena</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>A transacción é demasiado grande</translation>
     </message>

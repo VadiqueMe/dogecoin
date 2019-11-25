@@ -1732,14 +1732,6 @@
         <translation>Tehingu allkirjastamine ebaõnnestus</translation>
     </message>
     <message>
-        <source>The transaction amount is too small to pay the fee</source>
-        <translation>Tehingu summa on tasu maksmiseks liiga väikene</translation>
-    </message>
-    <message>
-        <source>Transaction amount too small</source>
-        <translation>Tehingu summa liiga väikene</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>Tehing liiga suur</translation>
     </message>

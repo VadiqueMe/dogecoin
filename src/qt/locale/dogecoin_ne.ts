@@ -561,10 +561,6 @@
         <translation>सान्दर्भिक चेतावनी प्राप्त गर्दा आदेश कार्यान्वयन गर्नुहोस् नभए धेरै लामो फोर्क देखा पर्न सक्छ । (cmd को %s लाई सन्देशले प्रतिस्थापन गर्छ)</translation>
     </message>
     <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for relaying, mining and transaction creation (default: %s)</source>
-        <translation>रिले, खनन वा कारोबारको सिर्जनाको लागि यो भन्दा कम शुल्क (%s/kB मा) लाई शून्य शुल्कको रूपमा लिइन्छ । (डिफल्ट: %s)</translation>
-    </message>
-    <message>
         <source>If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</source>
         <translation>paytxfee सेट गरिएको छैन भने, औसतमा n ब्लक भित्र कारोबार पुष्टिकरण सुरु होस् भन्नका लागि पर्याप्त शुल्क समावेश गर्नुहोस् (डिफल्ट: %u)</translation>
     </message>
@@ -583,10 +579,6 @@
     <message>
         <source>Set maximum size of high-priority/low-fee transactions in bytes (default: %d)</source>
         <translation>बाइटमा उच्च-प्राथमिकता/कम शुल्कको कारोबारको अधिकतम आकार सेट गर्नुहोस् (डिफल्ट: %d)</translation>
-    </message>
-    <message>
-        <source>The transaction amount is too small to send after the fee has been deducted</source>
-        <translation>कारोबार रकम शुल्क कटौती गरेपछि पठाउँदा धेरै नै सानो हुन्छ</translation>
     </message>
     <message>
         <source>Use hierarchical deterministic key generation (HD) after BIP32. Only has effect during wallet creation/first start</source>

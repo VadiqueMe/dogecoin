@@ -2317,10 +2317,6 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
         <translation>Deweloperzy %s</translation>
     </message>
     <message>
-        <source>A fee rate (in %s/kB) that will be used when fee estimation has insufficient data (default: %s)</source>
-        <translation>Stawka prowizji (w %s/kB), która będzie użyta, gdy oszacowane dane o prowizjach nie będą wystarczające (domyślnie: %s)</translation>
-    </message>
-    <message>
         <source>Accept relayed transactions received from whitelisted peers even when not relaying transactions (default: %d)</source>
         <translation>Accept relayed transactions received from whitelisted peers even when not relaying transactions (default: %d)</translation>
     </message>
@@ -2473,10 +2469,6 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
         <translation>Nieprawidłowa kwota dla -%s=&lt;amount&gt;: '%s'</translation>
     </message>
     <message>
-        <source>Invalid amount for -fallbackfee=&lt;amount&gt;: '%s'</source>
-        <translation>Nieprawidłowa kwota dla -fallbackfee=&lt;amount&gt;: '%s'</translation>
-    </message>
-    <message>
         <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
         <translation>Utrzymuj obszar pamięci dla transakcji poniżej &lt;n&gt; MB (default: %u)</translation>
     </message>
@@ -2613,10 +2605,6 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
         <translation>Uruchom polecenie przy otrzymaniu odpowiedniego powiadomienia lub gdy zobaczymy naprawdę długie rozgałęzienie (%s w poleceniu jest podstawiane za komunikat)</translation>
     </message>
     <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for relaying, mining and transaction creation (default: %s)</source>
-        <translation>Opłaty (w %s/Kb) mniejsze niż ta, będą traktowane jako zerowe przy tworzeniu, przesyłaniu i zatwierdzaniu transakcji (domyślnie: %s)</translation>
-    </message>
-    <message>
         <source>If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</source>
         <translation>Jeżeli nie ustawiono paytxfee, dołącz wystarczająca opłatę, aby transakcja mogła zostać zatwierdzona w ciągu średniej ilości n bloków (domyślnie: %u)</translation>
     </message>
@@ -2631,10 +2619,6 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
     <message>
         <source>Set maximum size of high-priority/low-fee transactions in bytes (default: %d)</source>
         <translation>Ustaw maksymalny rozmiar transakcji o wysokim priorytecie/niskiej prowizji w bajtach (domyślnie: %d)</translation>
-    </message>
-    <message>
-        <source>The transaction amount is too small to send after the fee has been deducted</source>
-        <translation>Zbyt niska kwota transakcji do wysłania po odjęciu opłaty</translation>
     </message>
     <message>
         <source>Use hierarchical deterministic key generation (HD) after BIP32. Only has effect during wallet creation/first start</source>
@@ -2721,10 +2705,6 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
         <translation>Podpisywanie transakcji nie powiodło się</translation>
     </message>
     <message>
-        <source>The transaction amount is too small to pay the fee</source>
-        <translation>Zbyt niska kwota transakcji by zapłacić opłatę</translation>
-    </message>
-    <message>
         <source>This is experimental software.</source>
         <translation>To oprogramowanie eksperymentalne.</translation>
     </message>
@@ -2735,10 +2715,6 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
     <message>
         <source>Tor control port to use if onion listening enabled (default: %s)</source>
         <translation>Port kontrolny sieci Tor jeśli onion listening jest włączone (domyślnie: %s)</translation>
-    </message>
-    <message>
-        <source>Transaction amount too small</source>
-        <translation>Zbyt niska kwota transakcji </translation>
     </message>
     <message>
         <source>Transaction too large</source>
@@ -2795,10 +2771,6 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
     <message>
         <source>Do not keep transactions in the mempool longer than &lt;n&gt; hours (default: %u)</source>
         <translation>Nie trzymaj w pamięci transakcji starszych niż &lt;n&gt; godz. (domyślnie: %u)</translation>
-    </message>
-    <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for transaction creation (default: %s)</source>
-        <translation>Opłaty (w %s/Kb) mniejsze niż ta będą traktowane jako bez opłaty przy tworzeniu transakcji (domyślnie: %s)</translation>
     </message>
     <message>
         <source>How thorough the block verification of -checkblocks is (0-4, default: %u)</source>

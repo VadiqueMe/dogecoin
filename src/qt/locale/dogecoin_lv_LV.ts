@@ -1094,10 +1094,6 @@
         <translation>Transakcijas parakstīšana neizdevās</translation>
     </message>
     <message>
-        <source>Transaction amount too small</source>
-        <translation>Transakcijas summa ir pārāk maza</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>Transakcija ir pārāk liela</translation>
     </message>

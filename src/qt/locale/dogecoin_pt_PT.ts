@@ -2044,10 +2044,6 @@
         <translation>Dogecoin Core</translation>
     </message>
     <message>
-        <source>A fee rate (in %s/kB) that will be used when fee estimation has insufficient data (default: %s)</source>
-        <translation>Uma percentagem da taxa (em %s/kB) que será utilizada quando a estimativa da taxa tiver dados insuficientes (predefinição: %s)</translation>
-    </message>
-    <message>
         <source>Accept relayed transactions received from whitelisted peers even when not relaying transactions (default: %d)</source>
         <translation>Aceitar as transações retransmitidas recebidas dos pares na lista branca, mesmo quando não retransmitir as transações (predefinição: %d)</translation>
     </message>
@@ -2188,10 +2184,6 @@
         <translation>Valor inválido para -%s=&lt;amount&gt;: '%s'</translation>
     </message>
     <message>
-        <source>Invalid amount for -fallbackfee=&lt;amount&gt;: '%s'</source>
-        <translation>Valor inválido para -fallbackfee=&lt;amount&gt;: '%s'</translation>
-    </message>
-    <message>
         <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
         <translation>Manter o banco de memória da transação abaixo de &lt;n&gt; megabytes (predefinição: %u)</translation>
     </message>
@@ -2300,10 +2292,6 @@
         <translation>Executar comando quando um alerta relevante for recebido ou em caso de uma divisão longa da cadeia de blocos (no comando, %s é substituído pela mensagem)</translation>
     </message>
     <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for relaying, mining and transaction creation (default: %s)</source>
-        <translation>Taxas (em %s/kB) inferiores a este valor são consideradas nulas para propagação, mineração e criação de transações (predefinição: %s)</translation>
-    </message>
-    <message>
         <source>If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</source>
         <translation>Caso o paytxfee não seja definido, inclua uma taxa suficiente para que as transacções comecem a ser confirmadas, em média, dentro de n blocos (padrão: %u)</translation>
     </message>
@@ -2322,10 +2310,6 @@
     <message>
         <source>Set maximum size of high-priority/low-fee transactions in bytes (default: %d)</source>
         <translation>Definir tamanho máximo de transações com alta-prioridade/baixa-taxa em bytes (por defeito: %d)</translation>
-    </message>
-    <message>
-        <source>The transaction amount is too small to send after the fee has been deducted</source>
-        <translation>O montante da transacção é demasiado baixo após a dedução da taxa</translation>
     </message>
     <message>
         <source>Whitelisted peers cannot be DoS banned and their transactions are always relayed, even if they are already in the mempool, useful e.g. for a gateway</source>
@@ -2412,10 +2396,6 @@
         <translation>Falhou assinatura da transação</translation>
     </message>
     <message>
-        <source>The transaction amount is too small to pay the fee</source>
-        <translation>O montante da transacção é demasiado baixo para pagar a taxa</translation>
-    </message>
-    <message>
         <source>This is experimental software.</source>
         <translation>Isto é software experimental.</translation>
     </message>
@@ -2426,10 +2406,6 @@
     <message>
         <source>Tor control port to use if onion listening enabled (default: %s)</source>
         <translation>Porta de controlo Tor a utilizar se a escuta cebola estiver ativada (predefinição: %s)</translation>
-    </message>
-    <message>
-        <source>Transaction amount too small</source>
-        <translation>Quantia da transação é muito baixa</translation>
     </message>
     <message>
         <source>Transaction too large</source>
@@ -2494,10 +2470,6 @@
     <message>
         <source>Do not keep transactions in the mempool longer than &lt;n&gt; hours (default: %u)</source>
         <translation>Não guardar transações no banco de memória por mais de &lt;n&gt; horas (predefinição: %u)</translation>
-    </message>
-    <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for transaction creation (default: %s)</source>
-        <translation>Taxas (em %s/kB) abaixo deste valor são consideradas nulas para a criação de transacções (padrão: %s)</translation>
     </message>
     <message>
         <source>How thorough the block verification of -checkblocks is (0-4, default: %u)</source>

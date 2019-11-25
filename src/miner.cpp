@@ -89,12 +89,13 @@ BlockAssembler::BlockAssembler( const CChainParams & _chainparams )
             nBlockMaxWeight = nBlockMaxSize * WITNESS_SCALE_FACTOR;
         }
     }
-    if (IsArgSet("-blockmintxfee")) {
-        CAmount n = 0;
-        ParseMoney(GetArg("-blockmintxfee", ""), n);
-        blockMinFeeRate = CFeeRate(n);
+
+    if ( IsArgSet( "-blockmintxfee" ) ) {
+        CAmount n = 0 ;
+        ParseMoney( GetArg( "-blockmintxfee", "" ), n ) ;
+        blockMinFeeRate = CFeeRate( n ) ;
     } else {
-        blockMinFeeRate = CFeeRate(DEFAULT_BLOCK_MIN_TX_FEE);
+        blockMinFeeRate = CFeeRate( 0 ) ;
     }
 
     // Limit weight to between 4K and MAX_BLOCK_WEIGHT-4K for sanity:

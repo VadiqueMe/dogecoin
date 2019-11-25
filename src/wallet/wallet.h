@@ -44,12 +44,8 @@ extern bool fSendFreeTransactions;
 extern bool fWalletRbf;
 
 static const unsigned int DEFAULT_KEYPOOL_SIZE = 200 ;
-//! -paytxfee default
-static const CAmount DEFAULT_TRANSACTION_FEE = 0;
-//! -fallbackfee default
-static const CAmount DEFAULT_FALLBACK_FEE = 0;
-//! -mintxfee default
-static const CAmount DEFAULT_TRANSACTION_MINFEE = 0;
+// -paytxfee default
+static const CAmount DEFAULT_TRANSACTION_FEE = 0 ;
 //! Default for -spendzeroconfchange
 static const bool DEFAULT_SPEND_ZEROCONF_CHANGE = true;
 //! Default for -sendfreetransactions
@@ -736,19 +732,6 @@ public:
     bool AddAccountingEntry(const CAccountingEntry&, CWalletDB *pwalletdb);
     template <typename ContainerType>
     bool DummySignTx(CMutableTransaction &txNew, const ContainerType &coins);
-
-    static CFeeRate minTxFee;
-    static CFeeRate fallbackFee;
-    /**
-     * Estimate the minimum fee considering user set parameters
-     * and the required fee
-     */
-    static CAmount GetMinimumFee(const CMutableTransaction& tx, unsigned int nTxBytes, unsigned int nConfirmTarget, const CTxMemPool& pool);
-    /**
-     * Estimate the minimum fee considering required fee and targetFee or if 0
-     * then fee estimation for nConfirmTarget
-     */
-    static CAmount GetMinimumFee(const CMutableTransaction& tx, unsigned int nTxBytes, unsigned int nConfirmTarget, const CTxMemPool& pool, CAmount targetFee);
 
     bool NewKeyPool();
     bool TopUpKeyPool(unsigned int kpSize = 0);

@@ -2848,10 +2848,6 @@
         <translation>%s geliştiricileri</translation>
     </message>
     <message>
-        <source>A fee rate (in %s/kB) that will be used when fee estimation has insufficient data (default: %s)</source>
-        <translation>Ücret tahmini için yetersiz veri bulunduğunda kullanılacak ücret oranı (%s/kB olarak) (varsayılan: %s)</translation>
-    </message>
-    <message>
         <source>Accept relayed transactions received from whitelisted peers even when not relaying transactions (default: %d)</source>
         <translation>İşlemler aktarılmadığında dahi beyaz listedeki eşlerden aktarılan işlemleri kabul et (varsayılan: %d)</translation>
     </message>
@@ -2914,10 +2910,6 @@
     <message>
         <source>The block database contains a block which appears to be from the future. This may be due to your computer's date and time being set incorrectly. Only rebuild the block database if you are sure that your computer's date and time are correct</source>
         <translation>Blok veritabanı gelecekten gibi görünen bir blok içermektedir. Bu, bilgisayarınızın saat ve tarihinin yanlış ayarlanmış olmasından kaynaklanabilir. Blok veritabanını sadece bilgisayarınızın tarih ve saatinin doğru olduğundan eminseniz yeniden derleyin.</translation>
-    </message>
-    <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
-        <translation>Bu kararlı sürümden önceki bir deneme sürümüdür. - risklerini bilerek kullanma sorumluluğu sizdedir - dogecoin oluşturmak ya da ticari uygulamalar için kullanmayınız</translation>
     </message>
     <message>
         <source>Unable to rewind the database to a pre-fork state. You will need to redownload the blockchain</source>
@@ -3088,10 +3080,6 @@
         <translation>-%s=&lt;tutar&gt; için geçersiz tutar: '%s'</translation>
     </message>
     <message>
-        <source>Invalid amount for -fallbackfee=&lt;amount&gt;: '%s'</source>
-        <translation> -fallbackfee=&lt;tutar&gt; için geçersiz tutar: '%s'</translation>
-    </message>
-    <message>
         <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
         <translation>İşlem bellek alanını &lt;n&gt; megabayttan düşük tut (varsayılan: %u)</translation>
     </message>
@@ -3232,10 +3220,6 @@
         <translation>İlgili bir uyarı alındığında ya da gerçekten uzun bir çatallama gördüğümüzde komutu çalıştır (komuttaki %s mesaj ile değiştirilir)</translation>
     </message>
     <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for relaying, mining and transaction creation (default: %s)</source>
-        <translation>Bundan düşük ücretler (%s/kB olarak) aktarma, oluşturma ve işlem yaratma için sıfır değerinde ücret olarak kabul edilir (varsayılan: %s)</translation>
-    </message>
-    <message>
         <source>If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</source>
         <translation>Eğer paytxfee ayarlanmadıysa kafi derecede ücret ekleyin ki işlemler teyite vasati n blok içinde başlasın (varsayılan: %u)</translation>
     </message>
@@ -3254,10 +3238,6 @@
     <message>
         <source>Set maximum size of high-priority/low-fee transactions in bytes (default: %d)</source>
         <translation>Yüksek öncelikli/düşük ücretli işlemlerin en yüksek boyutunu bayt olarak ayarla (varsayılan: %d)</translation>
-    </message>
-    <message>
-        <source>The transaction amount is too small to send after the fee has been deducted</source>
-        <translation>Bu işlem, tutar düşüldükten sonra göndermek için çok düşük</translation>
     </message>
     <message>
         <source>Use hierarchical deterministic key generation (HD) after BIP32. Only has effect during wallet creation/first start</source>
@@ -3348,10 +3328,6 @@
         <translation>İşlemin imzalanması başarısız oldu</translation>
     </message>
     <message>
-        <source>The transaction amount is too small to pay the fee</source>
-        <translation>İşlemdeki dogecoin tutarı ücreti ödemek için çok düşük</translation>
-    </message>
-    <message>
         <source>This is experimental software.</source>
         <translation>Bu, deneysel bir yazılımdır.</translation>
     </message>
@@ -3362,10 +3338,6 @@
     <message>
         <source>Tor control port to use if onion listening enabled (default: %s)</source>
         <translation>Eğer onion dinlemesi etkinse kullanılacak Tor kontrol portu (varsayılan: %s)</translation>
-    </message>
-    <message>
-        <source>Transaction amount too small</source>
-        <translation>İşlem tutarı çok düşük</translation>
     </message>
     <message>
         <source>Transaction too large</source>
@@ -3434,10 +3406,6 @@
     <message>
         <source>Equivalent bytes per sigop in transactions for relay and mining (default: %u)</source>
         <translation>Oluşturma ve aktarma işlemlerinde sigop başına eşdeğer bayt (varsayılan: %u)</translation>
-    </message>
-    <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for transaction creation (default: %s)</source>
-        <translation>Bundan düşük ücretler (%s/kB olarak) işlem oluşturulması için sıfır değerinde ücret olarak kabul edilir (varsayılan: %s)</translation>
     </message>
     <message>
         <source>Force relay of transactions from whitelisted peers even if they violate local relay policy (default: %d)</source>
@@ -3598,14 +3566,6 @@
     <message>
         <source>Starting network threads...</source>
         <translation>Ağ iş parçacıkları başlatılıyor...</translation>
-    </message>
-    <message>
-        <source>The wallet will avoid paying less than the minimum relay fee.</source>
-        <translation>Cüzdan en az aktarma ücretinden daha az ödeme yapmaktan sakınacaktır.</translation>
-    </message>
-    <message>
-        <source>This is the minimum transaction fee you pay on every transaction.</source>
-        <translation>Bu her işlemde ödeceğiniz en düşük işlem ücretidir.</translation>
     </message>
     <message>
         <source>This is the transaction fee you will pay if you send a transaction.</source>

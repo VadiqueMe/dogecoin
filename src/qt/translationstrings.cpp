@@ -8,18 +8,16 @@
 #else
 #define UNUSED
 #endif
-static const char UNUSED *bitcoin_strings[] = {
+static const char UNUSED *translation_strings[] = {
 QT_TRANSLATE_NOOP("dogecoin-core", "Dogecoin Core"),
 QT_TRANSLATE_NOOP("dogecoin-core", "The %s developers"),
+QT_TRANSLATE_NOOP("dogecoin-core", "Bitcoin Core and Dogecoin Core"),
 QT_TRANSLATE_NOOP("dogecoin-core", ""
 "(1 = keep tx meta data e.g. account owner and payment request information, 2 "
 "= drop tx meta data)"),
 QT_TRANSLATE_NOOP("dogecoin-core", ""
 "-maxtxfee is set very high! Fees this large could be paid on a single "
 "transaction."),
-QT_TRANSLATE_NOOP("dogecoin-core", ""
-"A fee rate (in %s/kB) that will be used when fee estimation has insufficient "
-"data (default: %s)"),
 QT_TRANSLATE_NOOP("dogecoin-core", ""
 "Accept connections from outside (default: 1 if no -proxy or -connect/-"
 "noconnect)"),
@@ -76,16 +74,10 @@ QT_TRANSLATE_NOOP("dogecoin-core", ""
 "TxID)"),
 QT_TRANSLATE_NOOP("dogecoin-core", ""
 "Execute command when the best block changes (%s in cmd is replaced by block "
-"hash)"),
+"hash, %i is replaced by block number)"),
 QT_TRANSLATE_NOOP("dogecoin-core", ""
 "Extra transactions to keep in memory for compact block reconstructions "
 "(default: %u)"),
-QT_TRANSLATE_NOOP("dogecoin-core", ""
-"Fees (in %s/kB) smaller than this are considered zero fee for relaying, "
-"mining and transaction creation (default: %s)"),
-QT_TRANSLATE_NOOP("dogecoin-core", ""
-"Fees (in %s/kB) smaller than this are considered zero fee for transaction "
-"creation (default: %s)"),
 QT_TRANSLATE_NOOP("dogecoin-core", ""
 "Force relay of transactions from whitelisted peers even if they violate "
 "local relay policy (default: %d)"),
@@ -97,9 +89,6 @@ QT_TRANSLATE_NOOP("dogecoin-core", ""
 QT_TRANSLATE_NOOP("dogecoin-core", ""
 "If paytxfee is not set, include enough fee so transactions begin "
 "confirmation on average within n blocks (default: %u)"),
-QT_TRANSLATE_NOOP("dogecoin-core", ""
-"Invalid amount for -maxtxfee=<amount>: '%s' (must be at least the minrelay "
-"fee of %s to prevent stuck transactions)"),
 QT_TRANSLATE_NOOP("dogecoin-core", ""
 "Maintain a full transaction index, used by the getrawtransaction rpc call "
 "(default: %u)"),
@@ -155,6 +144,9 @@ QT_TRANSLATE_NOOP("dogecoin-core", ""
 "Set the number of script verification threads (%u to %d, 0 = auto, <0 = "
 "leave that many cores free, default: %d)"),
 QT_TRANSLATE_NOOP("dogecoin-core", ""
+"Set the number of threads for coin generation if enabled (-1 = all cores, "
+"default: %d)"),
+QT_TRANSLATE_NOOP("dogecoin-core", ""
 "Sets the serialization of raw transaction or block hex returned in non-"
 "verbose mode, non-segwit(0) or segwit(1) (default: %d)"),
 QT_TRANSLATE_NOOP("dogecoin-core", ""
@@ -165,16 +157,10 @@ QT_TRANSLATE_NOOP("dogecoin-core", ""
 "rebuild the block database if you are sure that your computer's date and "
 "time are correct"),
 QT_TRANSLATE_NOOP("dogecoin-core", ""
-"The transaction amount is too small to send after the fee has been deducted"),
-QT_TRANSLATE_NOOP("dogecoin-core", ""
-"This is a pre-release test build - use at your own risk - do not use for "
-"mining or merchant applications"),
-QT_TRANSLATE_NOOP("dogecoin-core", ""
-"This is the transaction fee you may pay when fee estimates are not available."),
-QT_TRANSLATE_NOOP("dogecoin-core", ""
 "This product includes software developed by the OpenSSL Project for use in "
 "the OpenSSL Toolkit %s and cryptographic software written by Eric Young and "
-"UPnP software written by Thomas Bernard."),
+"UPnP software written by Thomas Bernard. Paper wallet art provided by "
+"Anacoluthia"),
 QT_TRANSLATE_NOOP("dogecoin-core", ""
 "Total length of network version string (%i) exceeds maximum length (%i). "
 "Reduce the number or size of uacomments."),
@@ -279,6 +265,7 @@ QT_TRANSLATE_NOOP("dogecoin-core", "Error: A fatal internal error occurred, see 
 QT_TRANSLATE_NOOP("dogecoin-core", "Error: Disk space is low!"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Failed to listen on any port. Use -listen=0 if you want this."),
 QT_TRANSLATE_NOOP("dogecoin-core", "Fee (in %s/kB) to add to transactions you send (default: %s)"),
+QT_TRANSLATE_NOOP("dogecoin-core", "Generate coins (default: %u)"),
 QT_TRANSLATE_NOOP("dogecoin-core", "How many blocks to check at startup (default: %u, 0 = all)"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Importing..."),
 QT_TRANSLATE_NOOP("dogecoin-core", "Imports blocks from external blk000??.dat file on startup"),
@@ -290,8 +277,6 @@ QT_TRANSLATE_NOOP("dogecoin-core", "Insufficient funds"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Invalid -onion address: '%s'"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Invalid -proxy address: '%s'"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Invalid amount for -%s=<amount>: '%s'"),
-QT_TRANSLATE_NOOP("dogecoin-core", "Invalid amount for -fallbackfee=<amount>: '%s'"),
-QT_TRANSLATE_NOOP("dogecoin-core", "Invalid amount for -paytxfee=<amount>: '%s' (must be at least %s)"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Invalid netmask specified in -whitelist: '%s'"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Keep at most <n> unconnectable transactions in memory (default: %u)"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Keep the transaction memory pool below <n> megabytes (default: %u)"),
@@ -319,6 +304,7 @@ QT_TRANSLATE_NOOP("dogecoin-core", "Pruning blockstore..."),
 QT_TRANSLATE_NOOP("dogecoin-core", "RPC server options:"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Rebuild chain state and block index from the blk*.dat files on disk"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Rebuild chain state from the currently indexed blocks"),
+QT_TRANSLATE_NOOP("dogecoin-core", "Receive and display P2P network alerts (default: %u)"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Reducing -maxconnections from %d to %d, because of system limitations."),
 QT_TRANSLATE_NOOP("dogecoin-core", "Relay and mine data carrier transactions (default: %u)"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Relay non-P2SH multisig (default: %u)"),
@@ -345,15 +331,11 @@ QT_TRANSLATE_NOOP("dogecoin-core", "Specify your own public address"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Spend unconfirmed change when sending transactions (default: %u)"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Starting network threads..."),
 QT_TRANSLATE_NOOP("dogecoin-core", "The source code is on %s"),
-QT_TRANSLATE_NOOP("dogecoin-core", "The transaction amount is too small to pay the fee"),
-QT_TRANSLATE_NOOP("dogecoin-core", "The wallet will avoid paying less than the minimum relay fee."),
 QT_TRANSLATE_NOOP("dogecoin-core", "This is experimental software."),
-QT_TRANSLATE_NOOP("dogecoin-core", "This is the minimum transaction fee you pay on every transaction."),
 QT_TRANSLATE_NOOP("dogecoin-core", "This is the transaction fee you will pay if you send a transaction."),
 QT_TRANSLATE_NOOP("dogecoin-core", "Threshold for disconnecting misbehaving peers (default: %u)"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Tor control port password (default: empty)"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Tor control port to use if onion listening enabled (default: %s)"),
-QT_TRANSLATE_NOOP("dogecoin-core", "Transaction amount too small"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Transaction amounts must not be negative"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Transaction has too long of a mempool chain"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Transaction must have at least one recipient"),

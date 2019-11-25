@@ -446,7 +446,7 @@ UniValue getnetworkinfo(const JSONRPCRequest& request)
         obj.push_back( Pair( "connections", (int)g_connman->GetNodeCount( CConnman::CONNECTIONS_ALL ) ) ) ;
     }
     obj.push_back(Pair("networks",      GetNetworksInfo()));
-    obj.push_back(Pair("relayfee", ValueFromAmount( ::minRelayTxFee.GetFeePerKiloByte() ))) ;
+    obj.push_back( Pair( "relayfee", ValueFromAmount( 0 ) ) ) ;
     UniValue localAddresses(UniValue::VARR);
     {
         LOCK(cs_mapLocalHost);

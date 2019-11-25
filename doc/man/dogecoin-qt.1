@@ -278,16 +278,6 @@ Do not load the wallet and disable wallet RPC calls
 .IP
 Set key pool size to <n> (default: 100)
 .HP
-\fB\-fallbackfee=\fR<amt>
-.IP
-A fee rate (in DOGE/kB) that will be used when fee estimation has
-insufficient data (default: 1.00)
-.HP
-\fB\-mintxfee=\fR<amt>
-.IP
-Fees (in DOGE/kB) smaller than this are considered zero fee for
-transaction creation (default: 1.00)
-.HP
 \fB\-paytxfee=\fR<amt>
 .IP
 Fee (in DOGE/kB) to add to transactions you send (default: 0.00)
@@ -386,11 +376,6 @@ Include IP addresses in debug output (default: 0)
 \fB\-logtimestamps\fR
 .IP
 Prepend debug output with timestamp (default: 1)
-.HP
-\fB\-minrelaytxfee=\fR<amt>
-.IP
-Fees (in DOGE/kB) smaller than this are considered zero fee for
-relaying, mining and transaction creation (default: 1.00)
 .HP
 \fB\-maxtxfee=\fR<amt>
 .IP

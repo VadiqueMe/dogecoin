@@ -1133,10 +1133,6 @@
         <translation>Transacción falló</translation>
     </message>
     <message>
-        <source>Transaction amount too small</source>
-        <translation>Monto de la transacción muy pequeño</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>Transacción demasiado grande</translation>
     </message>

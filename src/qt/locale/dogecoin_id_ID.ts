@@ -1666,10 +1666,6 @@
         <translation>Tandatangani transaksi tergagal</translation>
     </message>
     <message>
-        <source>Transaction amount too small</source>
-        <translation>Nilai transaksi terlalu kecil</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>Transaksi terlalu besar</translation>
     </message>

@@ -2596,10 +2596,6 @@
         <translation>Sviluppatori di %s</translation>
     </message>
     <message>
-        <source>A fee rate (in %s/kB) that will be used when fee estimation has insufficient data (default: %s)</source>
-        <translation>Un importo (in %s/kB) che sarà utilizzato quando la stima delle commissioni non ha abbastanza dati (default: %s)</translation>
-    </message>
-    <message>
         <source>Accept relayed transactions received from whitelisted peers even when not relaying transactions (default: %d)</source>
         <translation>Accetta le transazioni trasmesse ricevute da peers in whitelist anche se non si stanno trasmettendo transazioni (default: %d)</translation>
     </message>
@@ -2800,10 +2796,6 @@
         <translation>Importo non valido per -%s=&lt;amount&gt;: '%s'</translation>
     </message>
     <message>
-        <source>Invalid amount for -fallbackfee=&lt;amount&gt;: '%s'</source>
-        <translation>Importo non valido per -fallbackfee=&lt;amount&gt;: '%s'</translation>
-    </message>
-    <message>
         <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
         <translation>Mantieni la memory pool delle transazioni al di sotto di &lt;n&gt; megabytes (default: %u)</translation>
     </message>
@@ -2944,10 +2936,6 @@
         <translation>Esegue un comando in caso di ricezione di un allarme pertinente o se si rileva un fork molto lungo (%s in cmd è sostituito dal messaggio)</translation>
     </message>
     <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for relaying, mining and transaction creation (default: %s)</source>
-        <translation>Le commissioni (in %s/kB) inferiori a questo valore sono considerate pari a zero per trasmissione, mining e creazione della transazione (default: %s)</translation>
-    </message>
-    <message>
         <source>If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</source>
         <translation>Nel caso in cui paytxfee non sia impostato, include una commissione tale da ottenere un avvio delle conferme entro una media di n blocchi (predefinito: %u)</translation>
     </message>
@@ -2966,10 +2954,6 @@
     <message>
         <source>Set maximum size of high-priority/low-fee transactions in bytes (default: %d)</source>
         <translation>Imposta la dimensione massima in byte delle transazioni ad alta-priorità/basse-commissioni (predefinito: %d)</translation>
-    </message>
-    <message>
-        <source>The transaction amount is too small to send after the fee has been deducted</source>
-        <translation>L'importo della transazione risulta troppo basso per l'invio una volta dedotte le commissioni.</translation>
     </message>
     <message>
         <source>Use hierarchical deterministic key generation (HD) after BIP32. Only has effect during wallet creation/first start</source>
@@ -3060,10 +3044,6 @@
         <translation>Firma transazione fallita</translation>
     </message>
     <message>
-        <source>The transaction amount is too small to pay the fee</source>
-        <translation>L'importo della transazione è troppo basso per pagare la commissione</translation>
-    </message>
-    <message>
         <source>This is experimental software.</source>
         <translation>Questo è un software sperimentale.</translation>
     </message>
@@ -3074,10 +3054,6 @@
     <message>
         <source>Tor control port to use if onion listening enabled (default: %s)</source>
         <translation>Porta di controllo Tor da usare se in ascolto su onion (default: %s)</translation>
-    </message>
-    <message>
-        <source>Transaction amount too small</source>
-        <translation>Importo transazione troppo piccolo</translation>
     </message>
     <message>
         <source>Transaction too large</source>
@@ -3146,10 +3122,6 @@
     <message>
         <source>Equivalent bytes per sigop in transactions for relay and mining (default: %u)</source>
         <translation>Byte equivalenti per ottimizzazione segnale dedicati a ritrasmissione ed estrazione (default: %u)</translation>
-    </message>
-    <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for transaction creation (default: %s)</source>
-        <translation>Le commissioni (in %s/kB) inferiori a questo valore sono considerate pari a zero per la creazione della transazione (default: %s)</translation>
     </message>
     <message>
         <source>How thorough the block verification of -checkblocks is (0-4, default: %u)</source>

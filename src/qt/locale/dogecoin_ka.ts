@@ -1174,10 +1174,6 @@
         <translation>ტრანსაქციების ხელმოწერა ვერ მოხერხდა</translation>
     </message>
     <message>
-        <source>Transaction amount too small</source>
-        <translation>ტრანსაქციების რაოდენობა ძალიან ცოტაა</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>ტრანსაქცია ძალიან დიდია</translation>
     </message>

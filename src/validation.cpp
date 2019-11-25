@@ -82,7 +82,6 @@ bool fEnableReplacement = DEFAULT_ENABLE_REPLACEMENT;
 
 uint256 hashAssumeValid;
 
-CFeeRate minRelayTxFee = CFeeRate( DEFAULT_MIN_RELAY_TX_FEE ) ;
 CAmount maxTxFee = DEFAULT_TRANSACTION_MAXFEE ;
 
 CTxMemPool mempool ;
@@ -744,8 +743,8 @@ bool AcceptToMemoryPoolWorker( CTxMemPool& pool, CValidationState& state, const 
 
         // Continuously rate-limit free (really, very-low-fee) transactions
         // This mitigates 'penny-flooding' -- sending thousands of free transactions just to
-        // be annoying or make others' transactions take longer to confirm.
-        if (fLimitFree && nModifiedFees < GetDogecoinMinRelayFee(tx, nSize, !fLimitFree))
+        // be annoying or make others' transactions take longer to confirm
+        if ( fLimitFree && nModifiedFees < GetDogecoinMinRelayFee( tx, nSize ) )
         {
             static CCriticalSection csFreeLimiter;
             static double dFreeCount;

@@ -281,10 +281,6 @@
         <translation>Информация</translation>
     </message>
     <message>
-        <source>Transaction amount too small</source>
-        <translation>Транзакция өте кішкентай</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>Транзакция өте үлкен</translation>
     </message>

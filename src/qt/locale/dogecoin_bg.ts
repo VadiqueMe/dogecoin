@@ -2256,10 +2256,6 @@
         <translation>Това е експериментален софтуер.</translation>
     </message>
     <message>
-        <source>Transaction amount too small</source>
-        <translation>Сумата на транзакцията е твърде малка</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>Транзакцията е твърде голяма</translation>
     </message>

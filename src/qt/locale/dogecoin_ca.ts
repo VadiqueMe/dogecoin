@@ -2840,10 +2840,6 @@
         <translation>Defineix la mida màxima de transaccions d'alta prioritat / baixa comissió en bytes (per defecte: %d)</translation>
     </message>
     <message>
-        <source>The transaction amount is too small to send after the fee has been deducted</source>
-        <translation>L'import de la transacció és massa petit per enviar-la després que se'n dedueixi la comissió</translation>
-    </message>
-    <message>
         <source>Whitelisted peers cannot be DoS banned and their transactions are always relayed, even if they are already in the mempool, useful e.g. for a gateway</source>
         <translation>Els iguals en la llista blanca no poden ser bandejats per DoS i es transmetran sempre llurs transaccions, fins i tot si ja són a la mempool. Això és útil, p. ex., per a una passarel·la</translation>
     </message>
@@ -2912,16 +2908,8 @@
         <translation>Ha fallat la signatura de la transacció</translation>
     </message>
     <message>
-        <source>The transaction amount is too small to pay the fee</source>
-        <translation>L'import de la transacció és massa petit per pagar-ne una comissió</translation>
-    </message>
-    <message>
         <source>This is experimental software.</source>
         <translation>Això és programari experimental.</translation>
-    </message>
-    <message>
-        <source>Transaction amount too small</source>
-        <translation>Import de la transacció massa petit</translation>
     </message>
     <message>
         <source>Transaction too large</source>

@@ -1256,10 +1256,6 @@
         <translation>Гэта эксперыментальная праграма.</translation>
     </message>
     <message>
-        <source>Transaction amount too small</source>
-        <translation>Транзакцыя занадта малая</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>Транзакцыя занадта вялікая</translation>
     </message>

@@ -1666,10 +1666,6 @@
         <translation>הרץ פקודה כאשר ההתראה הרלוונטית מתקבלת או כשאנחנו עדים לפיצול ארוך מאוד (%s בשורת הפקודה יוחלף ע"י ההודעה)</translation>
     </message>
     <message>
-        <source>The transaction amount is too small to send after the fee has been deducted</source>
-        <translation>סכום העברה נמוך מדי לשליחה אחרי גביית העמלה</translation>
-    </message>
-    <message>
         <source>Connect through SOCKS5 proxy</source>
         <translation>התחברות דרך מתווך SOCKS5</translation>
     </message>
@@ -1710,16 +1706,8 @@
         <translation>החתימה על ההעברה נכשלה</translation>
     </message>
     <message>
-        <source>The transaction amount is too small to pay the fee</source>
-        <translation>סכום ההעברה נמוך מכדי לשלם את העמלה</translation>
-    </message>
-    <message>
         <source>This is experimental software.</source>
         <translation>זוהי תכנית נסיונית.</translation>
-    </message>
-    <message>
-        <source>Transaction amount too small</source>
-        <translation>סכום ההעברה קטן מדי</translation>
     </message>
     <message>
         <source>Transaction too large</source>

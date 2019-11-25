@@ -2849,10 +2849,6 @@
         <translation>%s 開發人員</translation>
     </message>
     <message>
-        <source>A fee rate (in %s/kB) that will be used when fee estimation has insufficient data (default: %s)</source>
-        <translation>當沒有足夠的資料計算預估手續費時，所使用的手續費費率(單位是 %s/kB, 預設值: %s)</translation>
-    </message>
-    <message>
         <source>Accept relayed transactions received from whitelisted peers even when not relaying transactions (default: %d)</source>
         <translation>接受從白名點節點收到的轉發交易，即使沒有(符合準則)轉發出去(預設值: %d)</translation>
     </message>
@@ -2915,10 +2911,6 @@
     <message>
         <source>The block database contains a block which appears to be from the future. This may be due to your computer's date and time being set incorrectly. Only rebuild the block database if you are sure that your computer's date and time are correct</source>
         <translation>區塊資料庫中有來自未來的區塊。可能是你電腦的日期時間不對。如果確定電腦日期時間沒錯的話，就重建區塊資料庫看看。</translation>
-    </message>
-    <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
-        <translation>這是個還沒發表的測試版本 - 使用請自負風險 - 請不要用來開採或做商業應用</translation>
     </message>
     <message>
         <source>Unable to rewind the database to a pre-fork state. You will need to redownload the blockchain</source>
@@ -3089,10 +3081,6 @@
         <translation>參數 -%s=&lt;金額&gt; 指定的金額無效: '%s'</translation>
     </message>
     <message>
-        <source>Invalid amount for -fallbackfee=&lt;amount&gt;: '%s'</source>
-        <translation>設定 -fallbackfee=&lt;金額&gt; 的金額無效: '%s'</translation>
-    </message>
-    <message>
         <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
         <translation>在記憶體暫存池中保持最多 &lt;n&gt; 個百萬位元組的交易(預設值: %u)</translation>
     </message>
@@ -3233,10 +3221,6 @@
         <translation>當收到相關警示，或發現相當長的分支時，所要執行的指令(指令中的 %s 會被取代成警示訊息)</translation>
     </message>
     <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for relaying, mining and transaction creation (default: %s)</source>
-        <translation>當處理轉發的交易、挖礦、或製造交易時，如果每千位元組(kB)的手續費比這個值(單位是 %s)低，就視為沒付手續費(預設值: %s)</translation>
-    </message>
-    <message>
         <source>If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</source>
         <translation>當沒有設定 paytxfee 時，自動包含可以讓交易能在平均 n 個區塊內開始確認的手續費(預設值: %u)</translation>
     </message>
@@ -3255,10 +3239,6 @@
     <message>
         <source>Set maximum size of high-priority/low-fee transactions in bytes (default: %d)</source>
         <translation>設定高優先度或低手續費的交易資料大小上限成多少位元組(預設值: %d)</translation>
-    </message>
-    <message>
-        <source>The transaction amount is too small to send after the fee has been deducted</source>
-        <translation>扣除手續費後的交易金額太少而不能傳送</translation>
     </message>
     <message>
         <source>Use hierarchical deterministic key generation (HD) after BIP32. Only has effect during wallet creation/first start</source>
@@ -3349,10 +3329,6 @@
         <translation>簽署交易失敗</translation>
     </message>
     <message>
-        <source>The transaction amount is too small to pay the fee</source>
-        <translation>交易金額太少而付不起手續費</translation>
-    </message>
-    <message>
         <source>This is experimental software.</source>
         <translation>這套軟體屬於實驗性質。</translation>
     </message>
@@ -3363,10 +3339,6 @@
     <message>
         <source>Tor control port to use if onion listening enabled (default: %s)</source>
         <translation>開啟聽候 onion 連線時的 Tor 控制埠號碼(預設值: %s)</translation>
-    </message>
-    <message>
-        <source>Transaction amount too small</source>
-        <translation>交易金額太小</translation>
     </message>
     <message>
         <source>Transaction too large</source>
@@ -3435,10 +3407,6 @@
     <message>
         <source>Equivalent bytes per sigop in transactions for relay and mining (default: %u)</source>
         <translation>轉發和開採時，交易資料中每個 sigop 的等同位元組數(預設值: %u)</translation>
-    </message>
-    <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for transaction creation (default: %s)</source>
-        <translation>當製造交易時，如果每千位元組(kB)的手續費比這個值(單位是 %s)低，就視為沒付手續費(預設值: %s)</translation>
     </message>
     <message>
         <source>Force relay of transactions from whitelisted peers even if they violate local relay policy (default: %d)</source>
@@ -3601,24 +3569,12 @@
         <translation>正在啟動網路執行緒...</translation>
     </message>
     <message>
-        <source>The wallet will avoid paying less than the minimum relay fee.</source>
-        <translation>錢包軟體會付多於最小轉發費用的手續費。</translation>
-    </message>
-    <message>
-        <source>This is the minimum transaction fee you pay on every transaction.</source>
-        <translation>這是你每次交易付款時最少要付的手續費。</translation>
-    </message>
-    <message>
         <source>This is the transaction fee you will pay if you send a transaction.</source>
         <translation>這是你交易付款時所要付的手續費。</translation>
     </message>
     <message>
         <source>Threshold for disconnecting misbehaving peers (default: %u)</source>
         <translation>與亂搞的節點斷線的臨界值 (預設: %u)</translation>
-    </message>
-    <message>
-        <source>Transaction amounts must not be negative</source>
-        <translation>交易金額不能是負的</translation>
     </message>
     <message>
         <source>Transaction has too long of a mempool chain</source>

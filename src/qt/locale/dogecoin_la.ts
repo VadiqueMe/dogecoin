@@ -794,10 +794,6 @@
         <translation>Signandum transactionis abortum est</translation>
     </message>
     <message>
-        <source>Transaction amount too small</source>
-        <translation>Magnitudo transactionis nimis parva</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>Transactio nimis magna</translation>
     </message>

@@ -1660,10 +1660,6 @@
         <translation>Acesta este un program experimental.</translation>
     </message>
     <message>
-        <source>Transaction amount too small</source>
-        <translation>Suma tranzacţionată este prea mică</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>Tranzacţie prea mare</translation>
     </message>

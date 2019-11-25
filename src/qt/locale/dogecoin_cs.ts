@@ -2852,10 +2852,6 @@
         <translation>Vývojáři %s</translation>
     </message>
     <message>
-        <source>A fee rate (in %s/kB) that will be used when fee estimation has insufficient data (default: %s)</source>
-        <translation>Sazba poplatku (v %s/kB), která se použije, pokud nebude k dispozici dostatek dat pro automatický odhad poplatku (výchozí: %s)</translation>
-    </message>
-    <message>
         <source>Accept relayed transactions received from whitelisted peers even when not relaying transactions (default: %d)</source>
         <translation>Přijímat přeposílané transakce obdržené od vždy vítaných protějšků, i když transakce nepřeposíláme (výchozí: %d)</translation>
     </message>
@@ -2918,10 +2914,6 @@
     <message>
         <source>The block database contains a block which appears to be from the future. This may be due to your computer's date and time being set incorrectly. Only rebuild the block database if you are sure that your computer's date and time are correct</source>
         <translation>Databáze bloků obsahuje blok, který vypadá jako z budoucnosti, což může být kvůli špatně nastavenému datu a času na tvém počítači. Nech databázi bloků přestavět pouze v případě, že si jsi jistý, že máš na počítači správný datum a čas</translation>
-    </message>
-    <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
-        <translation>Tohle je testovací verze – používej ji jen na vlastní riziko, ale rozhodně ji nepoužívej k těžbě nebo pro obchodní aplikace</translation>
     </message>
     <message>
         <source>Unable to rewind the database to a pre-fork state. You will need to redownload the blockchain</source>
@@ -3092,10 +3084,6 @@
         <translation>Neplatná částka pro -%s=&lt;částka&gt;: '%s'</translation>
     </message>
     <message>
-        <source>Invalid amount for -fallbackfee=&lt;amount&gt;: '%s'</source>
-        <translation>Neplatná částka pro -fallbackfee=&lt;částka&gt;: '%s'</translation>
-    </message>
-    <message>
         <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
         <translation>Udržovat zasobník transakcí menší než &lt;n&gt; megabajtů (výchozí: %u)</translation>
     </message>
@@ -3236,10 +3224,6 @@
         <translation>Spustit příkaz, když přijde relevantní upozornění nebo když dojde k opravdu dlouhému rozštěpení řetezce bloků (%s se v příkazu nahradí zprávou)</translation>
     </message>
     <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for relaying, mining and transaction creation (default: %s)</source>
-        <translation>Poplatky (v %s/kB) menší než tato hodnota jsou považovány za nulové pro účely přeposílání, těžení a vytváření transakcí (výchozí: %s)</translation>
-    </message>
-    <message>
         <source>If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</source>
         <translation>Pokud paytxfee není nastaveno, platit dostatečný poplatek na to, aby začaly být transakce potvrzovány v průměru během n bloků (výchozí: %u)</translation>
     </message>
@@ -3258,10 +3242,6 @@
     <message>
         <source>Set maximum size of high-priority/low-fee transactions in bytes (default: %d)</source>
         <translation>Nastavit maximální velikost prioritních/nízkopoplatkových transakcí v bajtech (výchozí: %d)</translation>
-    </message>
-    <message>
-        <source>The transaction amount is too small to send after the fee has been deducted</source>
-        <translation>Částka v transakci po odečtení poplatku je příliš malá na odeslání</translation>
     </message>
     <message>
         <source>Use hierarchical deterministic key generation (HD) after BIP32. Only has effect during wallet creation/first start</source>
@@ -3352,10 +3332,6 @@
         <translation>Nepodařilo se podepsat transakci</translation>
     </message>
     <message>
-        <source>The transaction amount is too small to pay the fee</source>
-        <translation>Částka v transakci je příliš malá na pokrytí poplatku</translation>
-    </message>
-    <message>
         <source>This is experimental software.</source>
         <translation>Tohle je experimentální program.</translation>
     </message>
@@ -3366,10 +3342,6 @@
     <message>
         <source>Tor control port to use if onion listening enabled (default: %s)</source>
         <translation>Ovládací port Toru, je-li zapnuté onion naslouchání (výchozí: %s)</translation>
-    </message>
-    <message>
-        <source>Transaction amount too small</source>
-        <translation>Částka v transakci je příliš malá</translation>
     </message>
     <message>
         <source>Transaction too large</source>
@@ -3438,10 +3410,6 @@
     <message>
         <source>Equivalent bytes per sigop in transactions for relay and mining (default: %u)</source>
         <translation>Ekvivalent bajtů za každý sigop v transakcích – pro účely přeposílání a těžení (výchozí: %u)</translation>
-    </message>
-    <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for transaction creation (default: %s)</source>
-        <translation>Poplatky (v %s/kB) menší než tato hodnota jsou považovány za nulové pro účely vytváření transakcí (výchozí: %s)</translation>
     </message>
     <message>
         <source>Force relay of transactions from whitelisted peers even if they violate local relay policy (default: %d)</source>
@@ -3598,14 +3566,6 @@
     <message>
         <source>Starting network threads...</source>
         <translation>Spouštím síťová vlákna…</translation>
-    </message>
-    <message>
-        <source>The wallet will avoid paying less than the minimum relay fee.</source>
-        <translation>Peněženka zaručí přiložení poplatku alespoň ve výši minima pro přenos transakce.</translation>
-    </message>
-    <message>
-        <source>This is the minimum transaction fee you pay on every transaction.</source>
-        <translation>Toto je minimální poplatek, který zaplatíš za každou transakci.</translation>
     </message>
     <message>
         <source>This is the transaction fee you will pay if you send a transaction.</source>

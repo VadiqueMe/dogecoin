@@ -1784,10 +1784,6 @@
         <translation>Virheellinen määrä -%s=&lt;amount&gt;: '%s'</translation>
     </message>
     <message>
-        <source>Invalid amount for -fallbackfee=&lt;amount&gt;: '%s'</source>
-        <translation>Virheellinen määrä -fallbackfee=&lt;amount&gt;: '%s'</translation>
-    </message>
-    <message>
         <source>Loading banlist...</source>
         <translation>Ladataan kieltolistaa...</translation>
     </message>
@@ -1888,10 +1884,6 @@
         <translation>Aseta maksimikoko korkea prioriteetti/pieni palkkio rahansiirtoihin tavuissa (oletus: %d)</translation>
     </message>
     <message>
-        <source>The transaction amount is too small to send after the fee has been deducted</source>
-        <translation>Siirtomäärä on liian pieni lähetettäväksi kulun vähentämisen jälkeen.</translation>
-    </message>
-    <message>
         <source>(default: %u)</source>
         <translation>(oletus: %u)</translation>
     </message>
@@ -1960,10 +1952,6 @@
         <translation>Siirron vahvistus epäonnistui</translation>
     </message>
     <message>
-        <source>The transaction amount is too small to pay the fee</source>
-        <translation>Rahansiirron määrä on liian pieni kattaakseen maksukulun</translation>
-    </message>
-    <message>
         <source>This is experimental software.</source>
         <translation>Tämä on ohjelmistoa kokeelliseen käyttöön.</translation>
     </message>
@@ -1974,10 +1962,6 @@
     <message>
         <source>Tor control port to use if onion listening enabled (default: %s)</source>
         <translation>Tor-hallintaportti jota käytetään jos onion-kuuntelu on käytössä (oletus: %s)</translation>
-    </message>
-    <message>
-        <source>Transaction amount too small</source>
-        <translation>Siirtosumma liian pieni</translation>
     </message>
     <message>
         <source>Transaction too large</source>

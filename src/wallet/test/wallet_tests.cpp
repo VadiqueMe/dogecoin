@@ -408,20 +408,4 @@ BOOST_FIXTURE_TEST_CASE(importwallet_rescan, TestChain240Setup)
     ::pwalletMain = pwalletMainBackup;
 }
 
-BOOST_AUTO_TEST_CASE(GetMinimumFee_test)
-{
-    uint64_t value = 1000 * COIN; // 1,000 DOGE
-
-    CMutableTransaction tx;
-    CTxMemPool pool ;
-    CTxOut txout1(value, (CScript)vector<unsigned char>(24, 0));
-    tx.vout.push_back(txout1);
-
-    int64_t nMinTxFee = 0 * COIN ;
-
-    BOOST_CHECK_EQUAL(CWallet::GetMinimumFee(tx, 250, 0, pool), nMinTxFee);
-    BOOST_CHECK_EQUAL(CWallet::GetMinimumFee(tx, 1000, 0, pool), nMinTxFee);
-    BOOST_CHECK_EQUAL(CWallet::GetMinimumFee(tx, 1999, 0, pool), 2 * nMinTxFee);
-}
-
 BOOST_AUTO_TEST_SUITE_END()

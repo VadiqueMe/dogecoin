@@ -2855,10 +2855,6 @@
         <translation>Los desarrolladores de %s</translation>
     </message>
     <message>
-        <source>A fee rate (in %s/kB) that will be used when fee estimation has insufficient data (default: %s)</source>
-        <translation>Una comision (en %s/kB) que sera usada cuando las estimacion de comision no disponga de suficientes datos (predeterminado: %s)</translation>
-    </message>
-    <message>
         <source>Accept relayed transactions received from whitelisted peers even when not relaying transactions (default: %d)</source>
         <translation>Aceptar transacciones retransmitidas recibidas desde nodos en la lista blanca incluso cuando no estés retransmitiendo transacciones (predeterminado: %d)</translation>
     </message>
@@ -2921,10 +2917,6 @@
     <message>
         <source>The block database contains a block which appears to be from the future. This may be due to your computer's date and time being set incorrectly. Only rebuild the block database if you are sure that your computer's date and time are correct</source>
         <translation>La base de datos de bloques contiene un bloque que parece ser del futuro. Esto puede ser porque la fecha y hora de tu ordenador están mal ajustados. Reconstruye la base de datos de bloques solo si estas seguro de que la fecha y hora de tu ordenador estan ajustados correctamente.</translation>
-    </message>
-    <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
-        <translation>Esta es una versión de prueba prelanzada - utilícelo a su propio riesgo - no lo utilice para aplicaciones de minería o comerciales</translation>
     </message>
     <message>
         <source>Unable to rewind the database to a pre-fork state. You will need to redownload the blockchain</source>
@@ -3095,10 +3087,6 @@
         <translation>Cantidad no valida para -%s=&lt;amount&gt;: '%s'</translation>
     </message>
     <message>
-        <source>Invalid amount for -fallbackfee=&lt;amount&gt;: '%s'</source>
-        <translation>Cantidad inválida para -fallbackfee=&lt;amount&gt;: '%s'</translation>
-    </message>
-    <message>
         <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
         <translation>Mantener la memoria de transacciones por debajo de &lt;n&gt; megabytes (predeterminado: %u)</translation>
     </message>
@@ -3239,10 +3227,6 @@
         <translation>Ejecutar un comando cuando se reciba una alerta importante o cuando veamos un fork demasiado largo (%s en cmd se reemplazará por el mensaje)</translation>
     </message>
     <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for relaying, mining and transaction creation (default: %s)</source>
-        <translation>Las comisiones (en %s/kB) mas pequeñas que esto se consideran como cero comisión para la retransmisión, minería y creación de la transacción (predeterminado: %s)</translation>
-    </message>
-    <message>
         <source>If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</source>
         <translation>Si el pago de comisión no está establecido, incluir la cuota suficiente para que las transacciones comiencen la confirmación en una media de n bloques ( por defecto :%u)</translation>
     </message>
@@ -3261,10 +3245,6 @@
     <message>
         <source>Set maximum size of high-priority/low-fee transactions in bytes (default: %d)</source>
         <translation>Establecer tamaño máximo de las transacciones de alta prioridad/baja comisión en bytes (predeterminado: %d)</translation>
-    </message>
-    <message>
-        <source>The transaction amount is too small to send after the fee has been deducted</source>
-        <translation>Monto de transacción muy pequeña luego de la deducción por comisión</translation>
     </message>
     <message>
         <source>Use hierarchical deterministic key generation (HD) after BIP32. Only has effect during wallet creation/first start</source>
@@ -3355,10 +3335,6 @@
         <translation>Transacción falló</translation>
     </message>
     <message>
-        <source>The transaction amount is too small to pay the fee</source>
-        <translation>Cantidad de la transacción demasiado pequeña para pagar la comisión</translation>
-    </message>
-    <message>
         <source>This is experimental software.</source>
         <translation>Este software es experimental.</translation>
     </message>
@@ -3369,10 +3345,6 @@
     <message>
         <source>Tor control port to use if onion listening enabled (default: %s)</source>
         <translation>Puerto de control de Tor a utilizar si la escucha de onion esta activada (predeterminado: %s)</translation>
-    </message>
-    <message>
-        <source>Transaction amount too small</source>
-        <translation>Cantidad de la transacción demasiado pequeña</translation>
     </message>
     <message>
         <source>Transaction too large</source>
@@ -3443,10 +3415,6 @@
     <message>
         <source>Equivalent bytes per sigop in transactions for relay and mining (default: %u)</source>
         <translation>Bytes equivalentes por sigop en transacciones para retrasmisión y minado (predeterminado: %u)</translation>
-    </message>
-    <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for transaction creation (default: %s)</source>
-        <translation>Las comisiones (en %s/kB) menores que esto son consideradas de cero comision para la creacion de transacciones (predeterminado: %s)</translation>
     </message>
     <message>
         <source>Force relay of transactions from whitelisted peers even if they violate local relay policy (default: %d)</source>
@@ -3608,14 +3576,6 @@ Establecer la serialización de las transacciones sin procesar o el bloque hex d
     <message>
         <source>Starting network threads...</source>
         <translation>Iniciando funciones de red...</translation>
-    </message>
-    <message>
-        <source>The wallet will avoid paying less than the minimum relay fee.</source>
-        <translation>El monedero evitará pagar menos que la cuota de retransmisión mínima.</translation>
-    </message>
-    <message>
-        <source>This is the minimum transaction fee you pay on every transaction.</source>
-        <translation>Esta es la tarifa mínima de transacción que usted paga en cada transacción.</translation>
     </message>
     <message>
         <source>This is the transaction fee you will pay if you send a transaction.</source>

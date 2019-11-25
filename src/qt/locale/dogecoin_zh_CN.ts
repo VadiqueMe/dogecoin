@@ -2814,10 +2814,6 @@
         <translation>%s 开发人员</translation>
     </message>
     <message>
-        <source>A fee rate (in %s/kB) that will be used when fee estimation has insufficient data (default: %s)</source>
-        <translation>当费用估计数据(default: %s)不足时将会启用的费率 (in %s/kB) </translation>
-    </message>
-    <message>
         <source>Accept relayed transactions received from whitelisted peers even when not relaying transactions (default: %d)</source>
         <translation>即使在无关联交易(默认: %d)时也接受来自白名单同行的关联交易</translation>
     </message>
@@ -2950,10 +2946,6 @@
         <translation>无效的 -onion 地址：“%s”</translation>
     </message>
     <message>
-        <source>Invalid amount for -fallbackfee=&lt;amount&gt;: '%s'</source>
-        <translation>-fallbackfee 的无效数额=&lt;amount&gt;: '%s'</translation>
-    </message>
-    <message>
         <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
         <translation>保持交易内存池大小低于&lt;n&gt;MB（默认：%u）</translation>
     </message>
@@ -3066,10 +3058,6 @@
         <translation>当收到相关提醒或者我们看到一个长分叉时执行命令（%s 将替换为消息）</translation>
     </message>
     <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for relaying, mining and transaction creation (default: %s)</source>
-        <translation>交易费(in %s/kB)比这更小的在关联、挖掘和生成交易时将被视为零费交易 (默认: %s)</translation>
-    </message>
-    <message>
         <source>If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</source>
         <translation>如果未设置交易费用，自动添加足够的交易费以确保交易在平均n个数据块内被确认 (默认: %u) </translation>
     </message>
@@ -3088,10 +3076,6 @@
     <message>
         <source>Set maximum size of high-priority/low-fee transactions in bytes (default: %d)</source>
         <translation>设置 高优先级/低交易费 交易的最大字节  (缺省: %d)</translation>
-    </message>
-    <message>
-        <source>The transaction amount is too small to send after the fee has been deducted</source>
-        <translation>在交易费被扣除后发送的交易金额太小</translation>
     </message>
     <message>
         <source>Whitelisted peers cannot be DoS banned and their transactions are always relayed, even if they are already in the mempool, useful e.g. for a gateway</source>
@@ -3178,10 +3162,6 @@
         <translation>签署交易失败</translation>
     </message>
     <message>
-        <source>The transaction amount is too small to pay the fee</source>
-        <translation>交易金额太小，不足以支付交易费</translation>
-    </message>
-    <message>
         <source>This is experimental software.</source>
         <translation>这是实验性的软件。</translation>
     </message>
@@ -3192,10 +3172,6 @@
     <message>
         <source>Tor control port to use if onion listening enabled (default: %s)</source>
         <translation>开启监听 onion 连接时的 Tor 控制端口号 (默认值: %s)</translation>
-    </message>
-    <message>
-        <source>Transaction amount too small</source>
-        <translation>交易量太小</translation>
     </message>
     <message>
         <source>Transaction too large</source>
@@ -3261,10 +3237,6 @@
     <message>
         <source>Do not keep transactions in the mempool longer than &lt;n&gt; hours (default: %u)</source>
         <translation>不要让交易留在内存池中超过 &lt;n&gt; 个小时 (默认值: %u)</translation>
-    </message>
-    <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for transaction creation (default: %s)</source>
-        <translation>当产生交易时，如果每千字节 (kB) 的手续费比这个值 (单位是 %s) 低，就视为没支付手续费 (默认值: %s)</translation>
     </message>
     <message>
         <source>How thorough the block verification of -checkblocks is (0-4, default: %u)</source>

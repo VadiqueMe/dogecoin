@@ -507,9 +507,7 @@ void CoinControlDialog::updateLabels( WalletModel * model, QDialog * dialog )
                 nBytes -= 34;
 
         // Fee
-        nPayFee = CWallet::GetMinimumFee(txDummy, nBytes, nTxConfirmTarget, mempool);
-        if (nPayFee > 0 && coinControl->nMinimumTotalFee > nPayFee)
-            nPayFee = coinControl->nMinimumTotalFee;
+        nPayFee = 0 ;
 
         // Allow free?
         bool fAllowFree = true ;
@@ -555,12 +553,12 @@ void CoinControlDialog::updateLabels( WalletModel * model, QDialog * dialog )
     l4->setText( UnitsOfCoin::formatWithUnit( nDisplayUnit, nAfterFee ) ) ;  // After Fee
     l5->setText(((nBytes > 0) ? ASYMP_UTF8 : "") + QString::number(nBytes)); // Bytes
     l8->setText( UnitsOfCoin::formatWithUnit( nDisplayUnit, nChange ) ) ;    // Change
-    if (nPayFee > 0 && (coinControl->nMinimumTotalFee < nPayFee))
+    if ( nPayFee > 0 /* false */ )
     {
-        l3->setText(ASYMP_UTF8 + l3->text());
-        l4->setText(ASYMP_UTF8 + l4->text());
-        if (nChange > 0 && !CoinControlDialog::fSubtractFeeFromAmount)
-            l8->setText(ASYMP_UTF8 + l8->text());
+        l3->setText( ASYMP_UTF8 + l3->text() ) ;
+        l4->setText( ASYMP_UTF8 + l4->text() ) ;
+        if ( nChange > 0 && ! CoinControlDialog::fSubtractFeeFromAmount )
+            l8->setText( ASYMP_UTF8 + l8->text() ) ;
     }
 
     // how many satoshis the estimated fee can vary per byte we guess wrong

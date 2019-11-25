@@ -56,7 +56,6 @@ UniValue getinfo(const JSONRPCRequest& request)
             "  \"keypoolsize\": xxxx,        (numeric) how many new keys are pre-generated\n"
             "  \"unlocked_until\": ttt,      (numeric) the timestamp in seconds since epoch (midnight Jan 1 1970 GMT) that the wallet is unlocked for transfers, or 0 if the wallet is locked\n"
             "  \"paytxfee\": x.xxxx,         (numeric) the transaction fee set in " + CURRENCY_UNIT + "/kB\n"
-            "  \"relayfee\": x.xxxx,         (numeric) minimum relay fee for non-free transactions in " + CURRENCY_UNIT + "/kB\n"
             "  \"errors\": \"...\"           (string) any error messages\n"
             "}\n"
             "\nExamples:\n"
@@ -96,7 +95,6 @@ UniValue getinfo(const JSONRPCRequest& request)
         obj.push_back(Pair("unlocked_until", nWalletUnlockTime));
     obj.push_back(Pair("paytxfee", ValueFromAmount( payTxFee.GetFeePerKiloByte() ))) ;
 #endif
-    obj.push_back(Pair("relayfee", ValueFromAmount( ::minRelayTxFee.GetFeePerKiloByte() ))) ;
     obj.push_back(Pair("errors",        GetWarnings("statusbar")));
     return obj;
 }

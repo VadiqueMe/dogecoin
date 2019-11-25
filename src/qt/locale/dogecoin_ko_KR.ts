@@ -2852,10 +2852,6 @@
         <translation>%s 개발자</translation>
     </message>
     <message>
-        <source>A fee rate (in %s/kB) that will be used when fee estimation has insufficient data (default: %s)</source>
-        <translation>충분한 데이터가 축적되지 않은 상태에서의 수수료 추정 기능이 사용하는 수수료 비율(%s/kB) (기본값: %s)</translation>
-    </message>
-    <message>
         <source>Accept relayed transactions received from whitelisted peers even when not relaying transactions (default: %d)</source>
         <translation>거래의 중계를 하지 않더라도 화이트 리스트에 포함된 피어에서 받은 트랜잭션은 중계하기 (기본값: %d)</translation>
     </message>
@@ -2910,10 +2906,6 @@
     <message>
         <source>The block database contains a block which appears to be from the future. This may be due to your computer's date and time being set incorrectly. Only rebuild the block database if you are sure that your computer's date and time are correct</source>
         <translation>블록 데이터베이스에 미래의 블록이 포함되어 있습니다. 이것은 사용자의 컴퓨터의 날짜와 시간이 올바르게 설정되어 있지 않을때 나타날 수 있습니다. 만약 사용자의 컴퓨터의 날짜와 시간이 올바르다고 확신할 때에만 블록 데이터 베이스의 재구성을 하십시오</translation>
-    </message>
-    <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
-        <translation>출시 전의 테스트 빌드 입니다. - 스스로의 책임하에 사용하십시오 - 채굴이나 상업적 용도로 프로그램으로 사용하지 마십시오</translation>
     </message>
     <message>
         <source>Unable to rewind the database to a pre-fork state. You will need to redownload the blockchain</source>
@@ -3084,10 +3076,6 @@
         <translation>유효하지 않은 금액 -%s=&lt;amount&gt;: '%s'</translation>
     </message>
     <message>
-        <source>Invalid amount for -fallbackfee=&lt;amount&gt;: '%s'</source>
-        <translation>유효하지 않은 금액 -fallbackfee=&lt;amount&gt;: '%s'</translation>
-    </message>
-    <message>
         <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
         <translation>거래 메모리 풀의 용량을 &lt;n&gt;메가바이트 아래로 유지하기 (기본값: %u)</translation>
     </message>
@@ -3228,10 +3216,6 @@
         <translation>이 사항과 관련있는 경고가 발생하거나 아주 긴 포크가 발생했을 때 명령어를 실행해 주세요. (cmd 명령어 목록에서 %s는 메시지로 대체됩니다) </translation>
     </message>
     <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for relaying, mining and transaction creation (default: %s)</source>
-        <translation>해당 금액(%s/kB) 보다 적은 수수료는 중계, 채굴, 거래 생성에서 수수료 면제로 간주됩니다 (기본값: %s)</translation>
-    </message>
-    <message>
         <source>If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</source>
         <translation>paytxfee가 설정되어 있지 않다면 평균 n 블록안에 승인이 이루어지도록 충분한 수수료가 포함됩니다 (기본값: %u)</translation>
     </message>
@@ -3250,10 +3234,6 @@
     <message>
         <source>Set maximum size of high-priority/low-fee transactions in bytes (default: %d)</source>
         <translation>최대 크기를 최우선으로 설정 / 바이트당 최소 수수료로 거래(기본값: %d)</translation>
-    </message>
-    <message>
-        <source>The transaction amount is too small to send after the fee has been deducted</source>
-        <translation>거래액이 수수료를 지불하기엔 너무 작습니다</translation>
     </message>
     <message>
         <source>Use hierarchical deterministic key generation (HD) after BIP32. Only has effect during wallet creation/first start</source>
@@ -3344,10 +3324,6 @@
         <translation>거래를 서명하는것을 실패하였습니다.</translation>
     </message>
     <message>
-        <source>The transaction amount is too small to pay the fee</source>
-        <translation>거래액이 수수료를 지불하기엔 너무 작습니다</translation>
-    </message>
-    <message>
         <source>This is experimental software.</source>
         <translation>이 소프트웨어는 시험적입니다.</translation>
     </message>
@@ -3358,10 +3334,6 @@
     <message>
         <source>Tor control port to use if onion listening enabled (default: %s)</source>
         <translation>onion 열림이 활성화시 Tor 관리 포트 사용 (기본값: %s)</translation>
-    </message>
-    <message>
-        <source>Transaction amount too small</source>
-        <translation>거래액이 너무 적습니다</translation>
     </message>
     <message>
         <source>Transaction too large</source>
@@ -3426,10 +3398,6 @@
     <message>
         <source>Equivalent bytes per sigop in transactions for relay and mining (default: %u)</source>
         <translation>릴레이 및 마이닝 거래의 sigop 당 동등한 바이트 (기본값: %u)</translation>
-    </message>
-    <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for transaction creation (default: %s)</source>
-        <translation>해당 금액(%s/kB) 보다 적은 수수료는 수수료 면제로 간주됩니다.(기본값: %s)</translation>
     </message>
     <message>
         <source>Force relay of transactions from whitelisted peers even if they violate local relay policy (default: %d)</source>
@@ -3590,14 +3558,6 @@
     <message>
         <source>Starting network threads...</source>
         <translation>네트워크 스레드 시작중...</translation>
-    </message>
-    <message>
-        <source>The wallet will avoid paying less than the minimum relay fee.</source>
-        <translation>지갑은 최소 중계 수수료보다 적은 금액을 지불하는 것을 피할 것입니다.</translation>
-    </message>
-    <message>
-        <source>This is the minimum transaction fee you pay on every transaction.</source>
-        <translation>이것은 모든 거래에서 지불하는 최소 거래 수수료입니다.</translation>
     </message>
     <message>
         <source>This is the transaction fee you will pay if you send a transaction.</source>

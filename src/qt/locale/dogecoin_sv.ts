@@ -2077,10 +2077,6 @@ Var vänlig och försök igen.</translation>
         <translation>%s-utvecklarna</translation>
     </message>
     <message>
-        <source>A fee rate (in %s/kB) that will be used when fee estimation has insufficient data (default: %s)</source>
-        <translation>En avgiftskurs (i %s/kB) som används när det inte finns tillräcklig data för att uppskatta avgiften (förvalt: %s)</translation>
-    </message>
-    <message>
         <source>Accept relayed transactions received from whitelisted peers even when not relaying transactions (default: %d)</source>
         <translation>Acceptera vidarebefodrade transaktioner från vitlistade noder även när transaktioner inte vidarebefodras (förvalt: %d)</translation>
     </message>
@@ -2281,10 +2277,6 @@ Var vänlig och försök igen.</translation>
         <translation>Ogiltigt belopp för -%s=&lt;belopp&gt;:'%s'</translation>
     </message>
     <message>
-        <source>Invalid amount for -fallbackfee=&lt;amount&gt;: '%s'</source>
-        <translation>Ogiltigt belopp för -fallbackfee=&lt;belopp&gt;: '%s'</translation>
-    </message>
-    <message>
         <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
         <translation>Håll minnespoolen över transaktioner under &lt;n&gt; megabyte (förvalt: %u)</translation>
     </message>
@@ -2425,10 +2417,6 @@ Var vänlig och försök igen.</translation>
         <translation>Exekvera kommando när ett relevant meddelande är mottagen eller när vi ser en väldigt lång förgrening (%s i cmd är utbytt med ett meddelande)</translation>
     </message>
     <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for relaying, mining and transaction creation (default: %s)</source>
-        <translation>Avgifter (i %s/kB) mindre än detta betraktas som nollavgift för vidarebefordran, mining och transaktionsskapande (förvalt: %s)</translation>
-    </message>
-    <message>
         <source>If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</source>
         <translation>Om paytxfee inte är satt, inkludera tillräcklig avgift så att transaktionen börjar att konfirmeras inom n blocks (förvalt: %u)</translation>
     </message>
@@ -2447,10 +2435,6 @@ Var vänlig och försök igen.</translation>
     <message>
         <source>Set maximum size of high-priority/low-fee transactions in bytes (default: %d)</source>
         <translation>Sätt den maximala storleken av hög-prioriterade/låg-avgifts transaktioner i byte (förvalt: %d)</translation>
-    </message>
-    <message>
-        <source>The transaction amount is too small to send after the fee has been deducted</source>
-        <translation>Transaktionen är för liten att skicka efter det att avgiften har dragits</translation>
     </message>
     <message>
         <source>Use hierarchical deterministic key generation (HD) after BIP32. Only has effect during wallet creation/first start</source>
@@ -2541,10 +2525,6 @@ Var vänlig och försök igen.</translation>
         <translation>Signering av transaktion misslyckades</translation>
     </message>
     <message>
-        <source>The transaction amount is too small to pay the fee</source>
-        <translation>Transaktionen är för liten för att betala avgiften</translation>
-    </message>
-    <message>
         <source>This is experimental software.</source>
         <translation>Detta är experimentmjukvara.</translation>
     </message>
@@ -2555,10 +2535,6 @@ Var vänlig och försök igen.</translation>
     <message>
         <source>Tor control port to use if onion listening enabled (default: %s)</source>
         <translation>Tor-kontrollport att använda om onion är aktiverat (förval: %s)</translation>
-    </message>
-    <message>
-        <source>Transaction amount too small</source>
-        <translation>Transaktions belopp för liten</translation>
     </message>
     <message>
         <source>Transaction too large</source>
@@ -2627,10 +2603,6 @@ Var vänlig och försök igen.</translation>
     <message>
         <source>Equivalent bytes per sigop in transactions for relay and mining (default: %u)</source>
         <translation>Samma antal byte per sigop i transaktioner som vi reläar och bryter (förvalt: %u)</translation>
-    </message>
-    <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for transaction creation (default: %s)</source>
-        <translation>Avgifter (i %s/kB) mindre än detta anses vara nollavgifter vid skapande av transaktion (standard: %s)</translation>
     </message>
     <message>
         <source>How thorough the block verification of -checkblocks is (0-4, default: %u)</source>

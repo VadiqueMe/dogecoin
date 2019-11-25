@@ -1948,10 +1948,6 @@
         <translation>Utfør kommando når et relevant varsel er mottatt eller vi ser en veldig lang gaffel (%s i kommando er erstattet med melding)</translation>
     </message>
     <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for relaying, mining and transaction creation (default: %s)</source>
-        <translation>Gebyrer (i %s/kB) mindre enn dette anses som null gebyr for videresending, graving og laging av transaksjoner (standardverdi: %s)</translation>
-    </message>
-    <message>
         <source>If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</source>
         <translation>Hvis paytxfee ikke er angitt, inkluderer da nok i gebyr til at transaksjoner gjennomsnittligt bekreftes innen n blokker (standardverdi: %u)</translation>
     </message>
@@ -1970,10 +1966,6 @@
     <message>
         <source>Set maximum size of high-priority/low-fee transactions in bytes (default: %d)</source>
         <translation>Sett maksimum størrelse for transaksjoner med høy prioritet / lavt gebyr, i bytes (standardverdi: %d)</translation>
-    </message>
-    <message>
-        <source>The transaction amount is too small to send after the fee has been deducted</source>
-        <translation>Transaksjonsbeløpet er for lite til å sendes etter at gebyret er fratrukket</translation>
     </message>
     <message>
         <source>Whitelisted peers cannot be DoS banned and their transactions are always relayed, even if they are already in the mempool, useful e.g. for a gateway</source>
@@ -2060,10 +2052,6 @@
         <translation>Signering av transaksjon feilet</translation>
     </message>
     <message>
-        <source>The transaction amount is too small to pay the fee</source>
-        <translation>Transaksjonsbeløpet er for lite til å betale gebyr</translation>
-    </message>
-    <message>
         <source>This is experimental software.</source>
         <translation>Dette er eksperimentell programvare.</translation>
     </message>
@@ -2074,10 +2062,6 @@
     <message>
         <source>Tor control port to use if onion listening enabled (default: %s)</source>
         <translation>Tor-kontrollport å bruke hvis onion-lytting er aktivert (standardverdi: %s)</translation>
-    </message>
-    <message>
-        <source>Transaction amount too small</source>
-        <translation>Transaksjonen er for liten</translation>
     </message>
     <message>
         <source>Transaction too large</source>
@@ -2138,10 +2122,6 @@
     <message>
         <source>Do not keep transactions in the mempool longer than &lt;n&gt; hours (default: %u)</source>
         <translation>Ikke hold transaksjoner i minnet lenger enn &lt;n&gt; timer (standard: %u)</translation>
-    </message>
-    <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for transaction creation (default: %s)</source>
-        <translation>Gebyrer (i %s/Kb) mindre enn dette anses som null gebyr for laging av transaksjoner (standardverdi: %s)</translation>
     </message>
     <message>
         <source>How thorough the block verification of -checkblocks is (0-4, default: %u)</source>

@@ -1328,10 +1328,6 @@
         <translation>ĝi estas eksperimenta programo</translation>
     </message>
     <message>
-        <source>Transaction amount too small</source>
-        <translation>Transakcia sumo tro malgranda</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>Transakcio estas tro granda</translation>
     </message>

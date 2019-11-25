@@ -1633,10 +1633,6 @@ Importation ...</translation>
         <translation>C'est un logiciel expérimental.</translation>
     </message>
     <message>
-        <source>Transaction amount too small</source>
-        <translation>Montant de la transaction trop bas</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>Transaction trop grande</translation>
     </message>

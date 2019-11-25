@@ -2848,10 +2848,6 @@
         <translation>De %s ontwikkelaars</translation>
     </message>
     <message>
-        <source>A fee rate (in %s/kB) that will be used when fee estimation has insufficient data (default: %s)</source>
-        <translation>Een transactietarief (in %s/kB) dat gebruikt wordt als de transactiekosten schatting niet genoeg data heeft. (normaal: %s)</translation>
-    </message>
-    <message>
         <source>Accept relayed transactions received from whitelisted peers even when not relaying transactions (default: %d)</source>
         <translation>Accepteer doorgestuurde transacties ontvangen van goedgekeurde peers, ook wanneer je zelf geen transacties doorstuurt (standaard: %d)</translation>
     </message>
@@ -2914,10 +2910,6 @@
     <message>
         <source>The block database contains a block which appears to be from the future. This may be due to your computer's date and time being set incorrectly. Only rebuild the block database if you are sure that your computer's date and time are correct</source>
         <translation>De blokdatabase bevat een blok dat lijkt uit de toekomst te komen. Dit kan gebeuren omdat de datum en tijd van uw computer niet goed staat. Herbouw de blokdatabase pas nadat u de datum en tijd van uw computer correct heeft ingesteld.</translation>
-    </message>
-    <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
-        <translation>Dit is een pre-release testversie - gebruik op eigen risico! Gebruik deze niet voor het delven van munten of handelsdoeleinden</translation>
     </message>
     <message>
         <source>Unable to rewind the database to a pre-fork state. You will need to redownload the blockchain</source>
@@ -3088,10 +3080,6 @@
         <translation>Ongeldig bedrag voor -%s=&lt;bedrag&gt;: '%s'</translation>
     </message>
     <message>
-        <source>Invalid amount for -fallbackfee=&lt;amount&gt;: '%s'</source>
-        <translation>Ongeldig bedrag voor -fallbackfee=&lt;bedrag&gt;: '%s'</translation>
-    </message>
-    <message>
         <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
         <translation>De transactiegeheugenpool moet onder de &lt;n&gt; megabytes blijven (standaard: %u)</translation>
     </message>
@@ -3232,10 +3220,6 @@
         <translation>Voer opdracht uit zodra een waarschuwing is ontvangen of wanneer we een erg lange fork detecteren (%s in opdracht wordt vervangen door bericht)</translation>
     </message>
     <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for relaying, mining and transaction creation (default: %s)</source>
-        <translation>Transactiekosten (in %s/kB) kleiner dan dit worden beschouw dat geen transactiekosten in rekening worden gebracht voor doorgeven, mijnen en transactiecreatie (standaard: %s)</translation>
-    </message>
-    <message>
         <source>If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</source>
         <translation>Als paytxfee niet is ingesteld, voeg voldoende transactiekosten toe zodat transacties starten met bevestigingen binnen in n blokken (standaard: %u)</translation>
     </message>
@@ -3254,10 +3238,6 @@
     <message>
         <source>Set maximum size of high-priority/low-fee transactions in bytes (default: %d)</source>
         <translation>Stel maximumgrootte in bytes in voor hoge-prioriteits-/lage-transactiekosten-transacties (standaard: %d)</translation>
-    </message>
-    <message>
-        <source>The transaction amount is too small to send after the fee has been deducted</source>
-        <translation>Het transactiebedrag is te klein om te versturen nadat de transactiekosten in mindering zijn gebracht</translation>
     </message>
     <message>
         <source>Use hierarchical deterministic key generation (HD) after BIP32. Only has effect during wallet creation/first start</source>
@@ -3348,10 +3328,6 @@
         <translation>Ondertekenen van transactie mislukt</translation>
     </message>
     <message>
-        <source>The transaction amount is too small to pay the fee</source>
-        <translation>Het transactiebedrag is te klein om transactiekosten in rekening te brengen</translation>
-    </message>
-    <message>
         <source>This is experimental software.</source>
         <translation>Dit is experimentele software.</translation>
     </message>
@@ -3362,10 +3338,6 @@
     <message>
         <source>Tor control port to use if onion listening enabled (default: %s)</source>
         <translation>Tor bepaalt welke poort te gebruiken als luisteren naar onion wordt gebruikt (standaard: %s)</translation>
-    </message>
-    <message>
-        <source>Transaction amount too small</source>
-        <translation>Transactiebedrag te klein</translation>
     </message>
     <message>
         <source>Transaction too large</source>
@@ -3434,10 +3406,6 @@
     <message>
         <source>Equivalent bytes per sigop in transactions for relay and mining (default: %u)</source>
         <translation>Equivalent byter per sigop in transactions voor doorsturen en mijnen (standaard: %u)</translation>
-    </message>
-    <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for transaction creation (default: %s)</source>
-        <translation>Transactiekosten (in %s/kB) kleiner dan dit worden beschouwd dat geen transactiekosten in rekening worden gebracht voor transactiecreatie (standaard: %s)</translation>
     </message>
     <message>
         <source>Force relay of transactions from whitelisted peers even if they violate local relay policy (default: %d)</source>
@@ -3594,14 +3562,6 @@
     <message>
         <source>Starting network threads...</source>
         <translation>Netwerkthread starten...</translation>
-    </message>
-    <message>
-        <source>The wallet will avoid paying less than the minimum relay fee.</source>
-        <translation>De portemonnee vermijdt minder te betalen dan het minimale relay vergoeding.</translation>
-    </message>
-    <message>
-        <source>This is the minimum transaction fee you pay on every transaction.</source>
-        <translation>Dit is het minimum transactietarief dat je betaald op elke transactie.</translation>
     </message>
     <message>
         <source>This is the transaction fee you will pay if you send a transaction.</source>

@@ -1700,10 +1700,6 @@
         <translation>Η εφαρμογή είναι σε πειραματικό στάδιο.</translation>
     </message>
     <message>
-        <source>Transaction amount too small</source>
-        <translation>Το ποσό της συναλλαγής είναι πολύ μικρο </translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>Η συναλλαγή ειναι πολύ μεγάλη </translation>
     </message>

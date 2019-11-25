@@ -459,8 +459,6 @@ std::string HelpMessage( WhatHelpMessage what )
         strUsage += HelpMessageOpt("-maxsigcachesize=<n>", strprintf("Limit size of signature cache to <n> MiB (default: %u)", DEFAULT_MAX_SIG_CACHE_SIZE));
         strUsage += HelpMessageOpt( "-maxtipage=<n>", strprintf( "Maximum tip age in seconds to consider node in initial block download (default: %u)", DEFAULT_MAX_TIP_AGE ) ) ;
     }
-    strUsage += HelpMessageOpt("-minrelaytxfee=<amt>", strprintf(_("Fees (in %s/kB) smaller than this are considered zero fee for relaying, mining and transaction creation (default: %s)"),
-        CURRENCY_UNIT, FormatMoney( DEFAULT_MIN_RELAY_TX_FEE ))) ;
     strUsage += HelpMessageOpt("-maxtxfee=<amt>", strprintf(_("Maximum total fees (in %s) to use in a single wallet transaction or raw transaction; setting this too low may abort large transactions (default: %s)"),
         CURRENCY_UNIT, FormatMoney( DEFAULT_TRANSACTION_MAXFEE ))) ;
     strUsage += HelpMessageOpt("-printtoconsole", _("Send trace/debug info to console instead of debug log file"));
@@ -485,7 +483,7 @@ std::string HelpMessage( WhatHelpMessage what )
     strUsage += HelpMessageOpt("-blockmaxweight=<n>", strprintf(_("Set maximum BIP141 block weight (default: %d)"), DEFAULT_BLOCK_MAX_WEIGHT));
     strUsage += HelpMessageOpt("-blockmaxsize=<n>", strprintf(_("Set maximum block size in bytes (default: %d)"), DEFAULT_BLOCK_MAX_SIZE));
     strUsage += HelpMessageOpt( "-blockprioritysize=<n>", strprintf( _("Set maximum size of high-priority/low-fee transactions in bytes (default: %d)"), DEFAULT_BLOCK_PRIORITY_SIZE ) ) ;
-    strUsage += HelpMessageOpt( "-blockmintxfee=<amt>", strprintf( _("Set lowest fee rate (in %s/kB) for transactions to be included in block creation (default: %s)"), CURRENCY_UNIT, FormatMoney( DEFAULT_BLOCK_MIN_TX_FEE ) ) ) ;
+    strUsage += HelpMessageOpt( "-blockmintxfee=<amt>", strprintf( _("Set lowest fee rate (in %s/kB) for transactions to be included in block creation (default: %s)"), CURRENCY_UNIT, FormatMoney( 0 ) ) ) ;
     if (showDebug)
         strUsage += HelpMessageOpt("-blockversion=<n>", "Override block version to test forking scenarios");
 
@@ -994,28 +992,13 @@ bool AppInitParameterInteraction()
     if (nConnectTimeout <= 0)
         nConnectTimeout = DEFAULT_CONNECT_TIMEOUT;
 
-    // Fee-per-kilobyte amount considered the same as "free"
-    // If you are mining, be careful setting this:
-    // if you set it to zero then
-    // a transaction spammer can cheaply fill blocks using
-    // 1-satoshi-fee transactions. It should be set above the real
-    // cost to you of processing a transaction.
-    if (IsArgSet("-minrelaytxfee"))
-    {
-        CAmount n = 0;
-        if (!ParseMoney(GetArg("-minrelaytxfee", ""), n) || 0 == n)
-            return InitError(AmountErrMsg("minrelaytxfee", GetArg("-minrelaytxfee", "")));
-        // High fee check is done afterward in CWallet::ParameterInteraction()
-        ::minRelayTxFee = CFeeRate(n);
-    }
-
     // Sanity check argument for min fee for including tx in block
     // TODO: Harmonize which arguments need sanity checking and where that happens
-    if (IsArgSet("-blockmintxfee"))
+    if ( IsArgSet( "-blockmintxfee" ) )
     {
-        CAmount n = 0;
-        if (!ParseMoney(GetArg("-blockmintxfee", ""), n))
-            return InitError(AmountErrMsg("blockmintxfee", GetArg("-blockmintxfee", "")));
+        CAmount n = 0 ;
+        if ( ! ParseMoney( GetArg("-blockmintxfee", "" ), n ) )
+            return InitError( AmountErrMsg( "blockmintxfee", GetArg( "-blockmintxfee", "" ) ) ) ;
     }
 
     fRequireStandard = ! GetBoolArg( "-acceptnonstdtxn", ! chainparams.RequireStandard() ) ;

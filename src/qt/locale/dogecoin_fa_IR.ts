@@ -494,10 +494,6 @@
         <translation>به عنوان daemon بک گراند را اجرا کنید و دستورات را قبول نمایید</translation>
     </message>
     <message>
-        <source>The transaction amount is too small to send after the fee has been deducted</source>
-        <translation>مبلغ تراکنش کمتر از آن است که پس از کسر هزینه  تراکنش قابل ارسال باشد</translation>
-    </message>
-    <message>
         <source>RPC server options:</source>
         <translation>گزینه های سرویس دهنده RPC:</translation>
     </message>

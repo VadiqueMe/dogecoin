@@ -1850,10 +1850,6 @@
         <translation>فشل توقيع المعاملة</translation>
     </message>
     <message>
-        <source>Transaction amount too small</source>
-        <translation>قيمة العملية صغيره جدا</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>المعاملة طويلة جدا</translation>
     </message>

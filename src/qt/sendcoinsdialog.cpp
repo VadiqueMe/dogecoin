@@ -18,7 +18,7 @@
 #include "base58.h"
 #include "chainparams.h"
 #include "wallet/coincontrol.h"
-#include "validation.h" // mempool and minRelayTxFee
+#include "validation.h"
 #include "ui_interface.h"
 #include "txmempool.h"
 #include "wallet/wallet.h"
@@ -156,7 +156,7 @@ void SendCoinsDialog::setWalletModel( WalletModel * model )
         connect(ui->groupCustomFee, SIGNAL(buttonClicked(int)), this, SLOT(coinControlUpdateLabels()));
         connect(ui->customFee, SIGNAL(valueChanged()), this, SLOT(updateGlobalFeeVariables()));
         connect(ui->customFee, SIGNAL(valueChanged()), this, SLOT(coinControlUpdateLabels()));
-        ui->customFee->setSingleStep( DEFAULT_MIN_RELAY_TX_FEE ) ;
+        ui->customFee->setSingleStep( 1 /* * ... */ ) ;
         updateFeeSectionControls();
         updateSmartFeeLabel();
         updateGlobalFeeVariables();
@@ -570,17 +570,11 @@ void SendCoinsDialog::updateGlobalFeeVariables()
     if (ui->radioSmartFee->isChecked())
     {
         payTxFee = CFeeRate( 0 ) ;
-
-        // set nMinimumTotalFee to 0 to not accidentally pay a custom fee
-        CoinControlDialog::coinControl->nMinimumTotalFee = 0 ;
     }
     else
     {
-        payTxFee = CFeeRate(ui->customFee->value());
-
-        // if user has selected to set a minimum absolute fee, pass the value to coincontrol
-        // set nMinimumTotalFee to 0 in case of user has selected that the fee is per KB
-        CoinControlDialog::coinControl->nMinimumTotalFee = ui->radioCustomAtLeast->isChecked() ? ui->customFee->value() : 0;
+        payTxFee = CFeeRate( ui->customFee->value() ) ;
+        /* ui->radioCustomAtLeast->isChecked() ? ui->customFee->value() : 0 */
     }
 }
 
@@ -592,8 +586,10 @@ void SendCoinsDialog::updateFeeMinimizedLabel()
     if (ui->radioSmartFee->isChecked())
         ui->labelFeeMinimized->setText(ui->labelSmartFee->text());
     else {
-        ui->labelFeeMinimized->setText( UnitsOfCoin::formatWithUnit( walletModel->getOptionsModel()->getDisplayUnit(), ui->customFee->value() ) +
-            ( ( ui->radioCustomPerKilobyte->isChecked() ) ? "/kB" : "" ) ) ;
+        ui->labelFeeMinimized->setText( UnitsOfCoin::formatWithUnit(
+                walletModel->getOptionsModel()->getDisplayUnit(), ui->customFee->value() ) +
+                    ( ( ui->radioCustomPerKilobyte->isChecked() ) ? "/kB" : ""
+            ) ) ;
     }
 }
 
@@ -603,7 +599,7 @@ void SendCoinsDialog::updateSmartFeeLabel()
         return ;
 
     ui->labelSmartFee->setText( UnitsOfCoin::formatWithUnit( walletModel->getOptionsModel()->getDisplayUnit(),
-                                                             CWallet::fallbackFee.GetFeePerKiloByte() ) + "/kB" );
+                                                             0 ) + "/kB" );
     updateFeeMinimizedLabel() ;
 }
 

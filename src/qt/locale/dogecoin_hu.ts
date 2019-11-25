@@ -1376,10 +1376,6 @@
         <translation>Ez egy kísérleti szoftver.</translation>
     </message>
     <message>
-        <source>Transaction amount too small</source>
-        <translation>Tranzakció összege túl alacsony</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>Túl nagy tranzakció</translation>
     </message>

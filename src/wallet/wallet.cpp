@@ -39,26 +39,14 @@ using namespace std;
 CWallet* pwalletMain = nullptr ;
 
 /** Transaction fee set by the user */
-CFeeRate payTxFee(DEFAULT_TRANSACTION_FEE);
+CFeeRate payTxFee( DEFAULT_TRANSACTION_FEE ) ;
 unsigned int nTxConfirmTarget = DEFAULT_TX_CONFIRMATIONS ;
-bool bSpendZeroConfChange = DEFAULT_SPEND_ZEROCONF_CHANGE;
-bool fSendFreeTransactions = DEFAULT_SEND_FREE_TRANSACTIONS;
-bool fWalletRbf = DEFAULT_WALLET_RBF;
+bool bSpendZeroConfChange = DEFAULT_SPEND_ZEROCONF_CHANGE ;
+bool fSendFreeTransactions = DEFAULT_SEND_FREE_TRANSACTIONS ;
+bool fWalletRbf = DEFAULT_WALLET_RBF ;
 
 const char * const DEFAULT_WALLET_FILE = "much.wow" ;
-const uint32_t BIP32_HARDENED_KEY_LIMIT = 0x80000000;
-
-/**
- * Fees smaller than this are considered zero fee (for transaction creation)
- * Override with -mintxfee
- */
-CFeeRate CWallet::minTxFee = CFeeRate( DEFAULT_TRANSACTION_MINFEE ) ;
-
-/**
- * Dogecoin: Use this fee instead of fee estimation
- * Override with -fallbackfee
- */
-CFeeRate CWallet::fallbackFee = CFeeRate( DEFAULT_FALLBACK_FEE ) ;
+const uint32_t BIP32_HARDENED_KEY_LIMIT = 0x80000000 ;
 
 /** @defgroup mapWallet
  *
@@ -2286,15 +2274,13 @@ bool CWallet::FundTransaction(CMutableTransaction& tx, CAmount& nFeeRet, bool ov
         vecSend.push_back(recipient);
     }
 
-    CCoinControl coinControl;
-    coinControl.destChange = destChange;
-    coinControl.fAllowOtherInputs = true;
-    coinControl.fAllowWatchOnly = includeWatching;
-    coinControl.fOverrideFeeRate = overrideEstimatedFeeRate;
-    coinControl.nFeeRate = specificFeeRate;
+    CCoinControl coinControl ;
+    coinControl.destChange = destChange ;
+    coinControl.fAllowOtherInputs = true ;
+    coinControl.fAllowWatchOnly = includeWatching ;
 
-    BOOST_FOREACH(const CTxIn& txin, tx.vin)
-        coinControl.Select(txin.prevout);
+    for ( const CTxIn & txin : tx.vin )
+        coinControl.Select( txin.prevout ) ;
 
     CReserveKey reservekey(this);
     CWalletTx wtx;
@@ -2309,7 +2295,7 @@ bool CWallet::FundTransaction(CMutableTransaction& tx, CAmount& nFeeRet, bool ov
         tx.vout[idx].nValue = wtx.tx->vout[idx].nValue;
 
     // Add new txins (keeping original txin scriptSig/order)
-    BOOST_FOREACH(const CTxIn& txin, wtx.tx->vin)
+    for ( const CTxIn & txin : wtx.tx->vin )
     {
         if (!coinControl.IsSelected(txin.prevout))
         {
@@ -2549,13 +2535,7 @@ bool CWallet::CreateTransaction(const vector<CRecipient>& vecSend, CWalletTx& wt
                         break ;
                 }
 
-                CAmount nFeeNeeded = GetMinimumFee(txNew, nBytes, currentConfirmationTarget, mempool);
-                if (coinControl && nFeeNeeded > 0 && coinControl->nMinimumTotalFee > nFeeNeeded) {
-                    nFeeNeeded = coinControl->nMinimumTotalFee;
-                }
-                if (coinControl && coinControl->fOverrideFeeRate)
-                    nFeeNeeded = coinControl->nFeeRate.GetFee(nBytes);
-
+                CAmount nFeeNeeded( 0 );
                 if ( nFeeRet >= nFeeNeeded ) {
                     // TODO: The case where nSubtractFeeFromAmount > 0 remains
                     // to be addressed because it requires returning the fee to
@@ -2704,25 +2684,6 @@ bool CWallet::AddAccountingEntry(const CAccountingEntry& acentry, CWalletDB *pwa
     wtxOrdered.insert(make_pair(entry.nOrderPos, TxPair((CWalletTx*)0, &entry)));
 
     return true;
-}
-
-CAmount CWallet::GetMinimumFee( const CMutableTransaction& tx, unsigned int nTxBytes, unsigned int nConfirmTarget, const CTxMemPool& pool )
-{
-    // payTxFee is the user-set global for desired feerate
-    return GetMinimumFee( tx, nTxBytes, nConfirmTarget, pool, payTxFee.GetFee( nTxBytes ) ) ;
-}
-
-CAmount CWallet::GetMinimumFee( const CMutableTransaction& tx, unsigned int nTxBytes, unsigned int nConfirmTarget, const CTxMemPool& pool, CAmount targetFee )
-{
-    CAmount nFeeNeeded = targetFee ;
-    if ( nFeeNeeded == 0 )
-        nFeeNeeded = fallbackFee.GetFee( nTxBytes ) ;
-
-    // never exceed the maximum
-    if ( nFeeNeeded > maxTxFee )
-        nFeeNeeded = maxTxFee ;
-
-    return nFeeNeeded ;
 }
 
 
@@ -3431,12 +3392,7 @@ std::string CWallet::GetWalletHelpString(bool showDebug)
     std::string strUsage = HelpMessageGroup(_("Wallet options:"));
     strUsage += HelpMessageOpt("-disablewallet", _("Do not load the wallet and disable wallet RPC calls"));
     strUsage += HelpMessageOpt("-keypool=<n>", strprintf(_("Set key pool size to <n> (default: %u)"), DEFAULT_KEYPOOL_SIZE));
-    strUsage += HelpMessageOpt("-fallbackfee=<amt>", strprintf(_("A fee rate (in %s/kB) that will be used when fee estimation has insufficient data (default: %s)"),
-                                                               CURRENCY_UNIT, FormatMoney(DEFAULT_FALLBACK_FEE)));
-    strUsage += HelpMessageOpt("-mintxfee=<amt>", strprintf(_("Fees (in %s/kB) smaller than this are considered zero fee for transaction creation (default: %s)"),
-                                                            CURRENCY_UNIT, FormatMoney(DEFAULT_TRANSACTION_MINFEE)));
-    strUsage += HelpMessageOpt("-paytxfee=<amt>", strprintf(_("Fee (in %s/kB) to add to transactions you send (default: %s)"),
-                                                            CURRENCY_UNIT, FormatMoney( payTxFee.GetFeePerKiloByte() )));
+    strUsage += HelpMessageOpt("-paytxfee=<amt>", strprintf(_("Fee (in %s/kB) to add to transactions you send (default: %s)"), CURRENCY_UNIT, FormatMoney( payTxFee.GetFeePerKiloByte() )));
     strUsage += HelpMessageOpt("-rescan", _("Rescan the block chain for missing wallet transactions on startup"));
     strUsage += HelpMessageOpt("-salvagewallet", _("Attempt to recover private keys from a corrupt wallet on startup"));
     if (showDebug)
@@ -3703,31 +3659,7 @@ bool CWallet::ParameterInteraction()
     if (GetArg("-prune", 0) && GetBoolArg("-rescan", false))
         return InitError(_("Rescans are not possible in pruned mode. You will need to use -reindex which will download the whole blockchain again."));
 
-    if ( ::minRelayTxFee.GetFeePerKiloByte() > HIGH_TX_FEE_PER_KB )
-        InitWarning(AmountHighWarn("-minrelaytxfee") + " " +
-                    _("The wallet will avoid paying less than the minimum relay fee."));
-
-    if (IsArgSet("-mintxfee"))
-    {
-        CAmount n = 0;
-        if (!ParseMoney(GetArg("-mintxfee", ""), n) || 0 == n)
-            return InitError(AmountErrMsg("mintxfee", GetArg("-mintxfee", "")));
-        if (n > HIGH_TX_FEE_PER_KB)
-            InitWarning(AmountHighWarn("-mintxfee") + " " +
-                        _("This is the minimum transaction fee you pay on every transaction."));
-        CWallet::minTxFee = CFeeRate(n);
-    }
-    if (IsArgSet("-fallbackfee"))
-    {
-        CAmount nFeePerK = 0 ;
-        if (!ParseMoney(GetArg("-fallbackfee", ""), nFeePerK))
-            return InitError(strprintf(_("Invalid amount for -fallbackfee=<amount>: '%s'"), GetArg("-fallbackfee", "")));
-        if (nFeePerK > HIGH_TX_FEE_PER_KB)
-            InitWarning(AmountHighWarn("-fallbackfee") + " " +
-                        _("This is the transaction fee you may pay when fee estimates are not available."));
-        CWallet::fallbackFee = CFeeRate(nFeePerK);
-    }
-    if (IsArgSet("-paytxfee"))
+    if ( IsArgSet( "-paytxfee" ) )
     {
         CAmount nFeePerK = 0 ;
         if (!ParseMoney(GetArg("-paytxfee", ""), nFeePerK))
@@ -3736,26 +3668,16 @@ bool CWallet::ParameterInteraction()
             InitWarning(AmountHighWarn("-paytxfee") + " " +
                         _("This is the transaction fee you will pay if you send a transaction."));
 
-        payTxFee = CFeeRate(nFeePerK, 1000);
-        if (payTxFee < ::minRelayTxFee)
-        {
-            return InitError(strprintf(_("Invalid amount for -paytxfee=<amount>: '%s' (must be at least %s)"),
-                                       GetArg("-paytxfee", ""), ::minRelayTxFee.ToString()));
-        }
+        payTxFee = CFeeRate( nFeePerK, 1000 ) ;
     }
-    if (IsArgSet("-maxtxfee"))
+    if ( IsArgSet( "-maxtxfee" ) )
     {
-        CAmount nMaxFee = 0;
+        CAmount nMaxFee = 0 ;
         if (!ParseMoney(GetArg("-maxtxfee", ""), nMaxFee))
             return InitError(AmountErrMsg("maxtxfee", GetArg("-maxtxfee", "")));
         if (nMaxFee > HIGH_MAX_TX_FEE)
             InitWarning(_("-maxtxfee is set very high! Fees this large could be paid on a single transaction."));
-        maxTxFee = nMaxFee;
-        if (CFeeRate(maxTxFee, 1000) < ::minRelayTxFee)
-        {
-            return InitError(strprintf(_("Invalid amount for -maxtxfee=<amount>: '%s' (must be at least the minrelay fee of %s to prevent stuck transactions)"),
-                                       GetArg("-maxtxfee", ""), ::minRelayTxFee.ToString()));
-        }
+        maxTxFee = nMaxFee ;
     }
     nTxConfirmTarget = GetArg( "-txconfirmtarget", DEFAULT_TX_CONFIRMATIONS );
     bSpendZeroConfChange = GetBoolArg("-spendzeroconfchange", DEFAULT_SPEND_ZEROCONF_CHANGE);

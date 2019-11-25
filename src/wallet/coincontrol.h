@@ -1,13 +1,13 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_WALLET_COINCONTROL_H
-#define BITCOIN_WALLET_COINCONTROL_H
+#ifndef DOGECOIN_WALLET_COINCONTROL_H
+#define DOGECOIN_WALLET_COINCONTROL_H
 
 #include "primitives/transaction.h"
 
-/** Coin Control Features. */
+/** Coin Control Features */
 class CCoinControl
 {
 public:
@@ -16,12 +16,6 @@ public:
     bool fAllowOtherInputs;
     //! Includes watch only addresses which match the ISMINE_WATCH_SOLVABLE criteria
     bool fAllowWatchOnly;
-    //! Minimum absolute fee (not per kilobyte)
-    CAmount nMinimumTotalFee;
-    //! Override estimated feerate
-    bool fOverrideFeeRate;
-    //! Feerate to use if overrideFeeRate is true
-    CFeeRate nFeeRate;
     //! Override the default confirmation target, 0 = use default
     int nConfirmTarget;
 
@@ -36,9 +30,6 @@ public:
         fAllowOtherInputs = false;
         fAllowWatchOnly = false;
         setSelected.clear();
-        nMinimumTotalFee = 0;
-        nFeeRate = CFeeRate(0);
-        fOverrideFeeRate = false;
         nConfirmTarget = 0;
     }
 
@@ -76,4 +67,4 @@ private:
     std::set<COutPoint> setSelected;
 };
 
-#endif // BITCOIN_WALLET_COINCONTROL_H
+#endif

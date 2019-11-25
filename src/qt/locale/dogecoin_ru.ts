@@ -2916,10 +2916,6 @@
         <translation>База данных блоков содержит блок, который появляется из будущего. Это может из-за некорректно установленных даты и времени на вашем компьютере. Остается только перестроивать базу блоков, если вы уверены, что дата и время корректны.</translation>
     </message>
     <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
-        <translation>Это пре-релизная тестовая сборка - используйте на свой страх и риск - не используйте для добычи или торговых приложений</translation>
-    </message>
-    <message>
         <source>Unable to rewind the database to a pre-fork state. You will need to redownload the blockchain</source>
         <translation>Невозможно отмотать базу данных до пред-форкового состояния. Вам будет необходимо перекачать цепочку блоков.</translation>
     </message>
@@ -3085,11 +3081,7 @@
     </message>
     <message>
         <source>Invalid amount for -%s=&lt;amount&gt;: '%s'</source>
-        <translation>Неверная сумма для -%s=&lt;amount&gt;: '%s'</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -fallbackfee=&lt;amount&gt;: '%s'</source>
-        <translation>Недопустимая сумма для -fallbackfee=&lt;amount&gt;: '%s'</translation>
+        <translation>Недопустимая сумма для -%s=&lt;amount&gt;: '%s'</translation>
     </message>
     <message>
         <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
@@ -3232,10 +3224,6 @@
         <translation>Выполнить команду, когда приходит соответствующее сообщение о тревоге или наблюдается очень длинное расщепление цепи (%s в команде заменяется на сообщение)</translation>
     </message>
     <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for relaying, mining and transaction creation (default: %s)</source>
-        <translation>Комиссии (в %s/Кб) меньшие этого значения считаются нулевыми для создания, ретрансляции, получения транзакции (по умолчанию: %s)</translation>
-    </message>
-    <message>
         <source>If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</source>
         <translation>Если paytxfee не задан, включить достаточную комиссию для подтверждения транзакции в среднем за n блоков (по умолчанию: %u)</translation>
     </message>
@@ -3254,10 +3242,6 @@
     <message>
         <source>Set maximum size of high-priority/low-fee transactions in bytes (default: %d)</source>
         <translation>Задать максимальный размер высокоприоритетных/низкокомиссионных транзакций в байтах (по умолчанию: %d)</translation>
-    </message>
-    <message>
-        <source>The transaction amount is too small to send after the fee has been deducted</source>
-        <translation>Сумма транзакции за вычетом комиссии слишком мала</translation>
     </message>
     <message>
         <source>Use hierarchical deterministic key generation (HD) after BIP32. Only has effect during wallet creation/first start</source>
@@ -3348,10 +3332,6 @@
         <translation>Не удалось подписать транзакцию</translation>
     </message>
     <message>
-        <source>The transaction amount is too small to pay the fee</source>
-        <translation>Сумма транзакции слишком мала для уплаты комиссии</translation>
-    </message>
-    <message>
         <source>This is experimental software.</source>
         <translation>Это экспериментальное ПО.</translation>
     </message>
@@ -3362,10 +3342,6 @@
     <message>
         <source>Tor control port to use if onion listening enabled (default: %s)</source>
         <translation>Порт контроля Tor используется, если включено прослушивание onion (по умолчанию: %s)</translation>
-    </message>
-    <message>
-        <source>Transaction amount too small</source>
-        <translation>Сумма транзакции слишком мала</translation>
     </message>
     <message>
         <source>Transaction too large</source>
@@ -3434,10 +3410,6 @@
     <message>
         <source>Equivalent bytes per sigop in transactions for relay and mining (default: %u)</source>
         <translation>Эквивалентных байт на sigop в транзакциях для ретрансляции или добычи (по умолчанию: %u)</translation>
-    </message>
-    <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for transaction creation (default: %s)</source>
-        <translation>Комиссии (в %s/Кб) меньшие этого значения считаются нулевыми при создании транзакций (по умолчанию: %s)</translation>
     </message>
     <message>
         <source>Force relay of transactions from whitelisted peers even if they violate local relay policy (default: %d)</source>
@@ -3600,14 +3572,6 @@
         <translation>Запускаем сетевые потоки...</translation>
     </message>
     <message>
-        <source>The wallet will avoid paying less than the minimum relay fee.</source>
-        <translation>Бумажник постарается не платить меньше, чем минимальная комиссия передачи.</translation>
-    </message>
-    <message>
-        <source>This is the minimum transaction fee you pay on every transaction.</source>
-        <translation>Это минимальная комиссия, которую вы платите с каждой транзакцией.</translation>
-    </message>
-    <message>
         <source>This is the transaction fee you will pay if you send a transaction.</source>
         <translation>Это комиссия, которую вы заплатите за эту транзакцию.</translation>
     </message>
@@ -3617,7 +3581,7 @@
     </message>
     <message>
         <source>Transaction amounts must not be negative</source>
-        <translation>Сумма транзакции не должна быть негативной</translation>
+        <translation>Сумма транзакции не может быть отрицательной</translation>
     </message>
     <message>
         <source>Transaction has too long of a mempool chain</source>

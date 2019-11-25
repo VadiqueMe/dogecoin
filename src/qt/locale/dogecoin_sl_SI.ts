@@ -1640,10 +1640,6 @@
         <translation>Program je eksperimentalne narave.</translation>
     </message>
     <message>
-        <source>Transaction amount too small</source>
-        <translation>Znesek je pramajhen</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>Transkacija je prevelika</translation>
     </message>

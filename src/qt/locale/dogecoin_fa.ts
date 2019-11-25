@@ -1708,10 +1708,6 @@
         <translation>اطلاعات ردگیری/اشکال‌زدایی را به جای فایل لاگ اشکال‌زدایی به کنسول بفرستید</translation>
     </message>
     <message>
-        <source>Transaction amount too small</source>
-        <translation>مقدار تراکنش بسیار کم است</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
         <translation>تراکنش بسیار بزرگ است</translation>
     </message>

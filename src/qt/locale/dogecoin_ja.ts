@@ -2852,10 +2852,6 @@
         <translation>%s の開発者</translation>
     </message>
     <message>
-        <source>A fee rate (in %s/kB) that will be used when fee estimation has insufficient data (default: %s)</source>
-        <translation>十分なデータが蓄積されていない場合に手数料推定機能が利用する手数料レート (%s/kB) (デフォルト: %s)</translation>
-    </message>
-    <message>
         <source>Accept relayed transactions received from whitelisted peers even when not relaying transactions (default: %d)</source>
         <translation>トランザクションの中継を行っていない場合でも、ホワイトリストのピアから受け取った中継トランザクションは受け取るようにする (デフォルト: %d)</translation>
     </message>
@@ -2918,10 +2914,6 @@
     <message>
         <source>The block database contains a block which appears to be from the future. This may be due to your computer's date and time being set incorrectly. Only rebuild the block database if you are sure that your computer's date and time are correct</source>
         <translation>ブロックのデータベースに未来の時刻のブロックが含まれています。これはおそらくお使いのコンピュータに設定されている日時が間違っていることを示しています。お使いのコンピュータの日時が本当に正しい場合にのみ、ブロックのデータベースの再構築を行ってください。</translation>
-    </message>
-    <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
-        <translation>これはリリース前のテストビルドです - 各自の責任で利用すること - 採掘や商取引に使用しないでください</translation>
     </message>
     <message>
         <source>Unable to rewind the database to a pre-fork state. You will need to redownload the blockchain</source>
@@ -3093,10 +3085,6 @@
         <translation>-%s=&lt;数量&gt; に対する不正な額: '%s'</translation>
     </message>
     <message>
-        <source>Invalid amount for -fallbackfee=&lt;amount&gt;: '%s'</source>
-        <translation>不正な額 -fallbackfee=&lt;amount&gt;: '%s'</translation>
-    </message>
-    <message>
         <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
         <translation>トランザクションのメモリ・プールの総量を &lt;n&gt; メガバイト以下に維持する (初期値: %u)</translation>
     </message>
@@ -3237,10 +3225,6 @@
         <translation>関連のアラートをもらってもすごく長いのフォークを見てもコマンドを実行 (コマンドの中にあるの%sはメッセージから置き換えさせる)</translation>
     </message>
     <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for relaying, mining and transaction creation (default: %s)</source>
-        <translation>トランザクションの中継、採掘および作成の際には、この値未満の手数料 (%s/kB単位) はゼロであるとみなす (デフォルト: %s)</translation>
-    </message>
-    <message>
         <source>If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</source>
         <translation>paytxfee が設定されていなかった場合、平均して n ブロック以内にトランザクションが検証され始めるのに十分な手数料を含める (初期値: %u)</translation>
     </message>
@@ -3259,10 +3243,6 @@
     <message>
         <source>Set maximum size of high-priority/low-fee transactions in bytes (default: %d)</source>
         <translation>最優先/最低手数料の最大サイズをバイトで指定 (初期値: %d)</translation>
-    </message>
-    <message>
-        <source>The transaction amount is too small to send after the fee has been deducted</source>
-        <translation>手数料差引後のトランザクションの金額が小さすぎるため、送金できません。</translation>
     </message>
     <message>
         <source>Use hierarchical deterministic key generation (HD) after BIP32. Only has effect during wallet creation/first start</source>
@@ -3353,10 +3333,6 @@
         <translation>取引の署名に失敗しました</translation>
     </message>
     <message>
-        <source>The transaction amount is too small to pay the fee</source>
-        <translation>トランザクションの金額が小さすぎて手数料を支払えません</translation>
-    </message>
-    <message>
         <source>This is experimental software.</source>
         <translation>これは実験的なソフトウェアです。</translation>
     </message>
@@ -3367,10 +3343,6 @@
     <message>
         <source>Tor control port to use if onion listening enabled (default: %s)</source>
         <translation>Onion のリッスンが有効になっている場合に使用するTor管理ポート (初期値: %s)</translation>
-    </message>
-    <message>
-        <source>Transaction amount too small</source>
-        <translation>取引の額が小さ過ぎます</translation>
     </message>
     <message>
         <source>Transaction too large</source>
@@ -3439,10 +3411,6 @@
     <message>
         <source>Equivalent bytes per sigop in transactions for relay and mining (default: %u)</source>
         <translation>中継や採掘を行う際のトランザクション内の、sigopあたりバイト数の相当量 (初期値: %u)</translation>
-    </message>
-    <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for transaction creation (default: %s)</source>
-        <translation>トランザクション作成の際、この値未満の手数料 (%s/kB単位) はゼロであるとみなす (デフォルト: %s)</translation>
     </message>
     <message>
         <source>Force relay of transactions from whitelisted peers even if they violate local relay policy (default: %d)</source>
@@ -3603,14 +3571,6 @@
     <message>
         <source>Starting network threads...</source>
         <translation>ネットワークのスレッドを起動しています...</translation>
-    </message>
-    <message>
-        <source>The wallet will avoid paying less than the minimum relay fee.</source>
-        <translation>ウォレットは最小中継手数料を下回る額の支払を拒否します。</translation>
-    </message>
-    <message>
-        <source>This is the minimum transaction fee you pay on every transaction.</source>
-        <translation>これはすべてのトランザクションに対して最低限支払うべき手数料です。</translation>
     </message>
     <message>
         <source>This is the transaction fee you will pay if you send a transaction.</source>

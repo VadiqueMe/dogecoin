@@ -2852,10 +2852,6 @@
         <translation>Udviklerne af %s</translation>
     </message>
     <message>
-        <source>A fee rate (in %s/kB) that will be used when fee estimation has insufficient data (default: %s)</source>
-        <translation>En gebyrsats (i %s/kB), som vil blive brugt, hvis gebyrestimering har utilstrækkelig data (standard: %s)</translation>
-    </message>
-    <message>
         <source>Accept relayed transactions received from whitelisted peers even when not relaying transactions (default: %d)</source>
         <translation>Acceptér videresendte transaktioner, der modtages fra hvidlistede knuder, selv når transaktioner ikke videresendes (standard: %d)</translation>
     </message>
@@ -2918,10 +2914,6 @@
     <message>
         <source>The block database contains a block which appears to be from the future. This may be due to your computer's date and time being set incorrectly. Only rebuild the block database if you are sure that your computer's date and time are correct</source>
         <translation>Blokdatabasen indeholder en blok, som ser ud til at være fra fremtiden. Dette kan skyldes, at din computers dato og tid ikke er sat korrekt. Genopbyg kun blokdatabasen, hvis du er sikker på, at din computers dato og tid er korrekt</translation>
-    </message>
-    <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
-        <translation>Dette er en foreløbig testudgivelse – brug på eget ansvar – brug ikke til mining eller handelsprogrammer</translation>
     </message>
     <message>
         <source>Unable to rewind the database to a pre-fork state. You will need to redownload the blockchain</source>
@@ -3092,10 +3084,6 @@
         <translation>Ugyldigt beløb for -%s=&lt;beløb&gt;: “%s”</translation>
     </message>
     <message>
-        <source>Invalid amount for -fallbackfee=&lt;amount&gt;: '%s'</source>
-        <translation>Ugyldigt beløb for -fallbackfee=&lt;beløb&gt;: “%s”</translation>
-    </message>
-    <message>
         <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
         <translation>Hold hukommelsespuljen med transaktioner under &lt;n&gt; megabyte (standard: %u)</translation>
     </message>
@@ -3236,10 +3224,6 @@
         <translation>Udfør kommando, når en relevant alarm modtages eller vi ser en virkelig lang udsplitning (%s i cmd erstattes af besked)</translation>
     </message>
     <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for relaying, mining and transaction creation (default: %s)</source>
-        <translation>Gebyrer (i %s/kB) mindre end dette opfattes som intet gebyr for videresendelse, mining og oprettelse af transaktioner (standard: %s)</translation>
-    </message>
-    <message>
         <source>If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</source>
         <translation>Hvis paytxfee ikke er sat, inkluderes nok gebyr til at transaktioner begynder at blive bekræftet ingen for gennemsnitligt n blokke (standard: %u)</translation>
     </message>
@@ -3258,10 +3242,6 @@
     <message>
         <source>Set maximum size of high-priority/low-fee transactions in bytes (default: %d)</source>
         <translation>Sæt maksimumstørrelse for højprioritet/lavgebyr-transaktioner i byte (standard: %d)</translation>
-    </message>
-    <message>
-        <source>The transaction amount is too small to send after the fee has been deducted</source>
-        <translation>Transaktionsbeløbet er for lille til at sende, når gebyret er trukket fra</translation>
     </message>
     <message>
         <source>Use hierarchical deterministic key generation (HD) after BIP32. Only has effect during wallet creation/first start</source>
@@ -3352,10 +3332,6 @@
         <translation>Signering af transaktion mislykkedes</translation>
     </message>
     <message>
-        <source>The transaction amount is too small to pay the fee</source>
-        <translation>Transaktionsbeløbet er for lille til at betale gebyret</translation>
-    </message>
-    <message>
         <source>This is experimental software.</source>
         <translation>Dette er eksperimentelt software.</translation>
     </message>
@@ -3366,10 +3342,6 @@
     <message>
         <source>Tor control port to use if onion listening enabled (default: %s)</source>
         <translation>Tor kontrolport, der skal bruges, hvis onion-lytning er aktiveret (standard: %s)</translation>
-    </message>
-    <message>
-        <source>Transaction amount too small</source>
-        <translation>Transaktionsbeløb er for lavt</translation>
     </message>
     <message>
         <source>Transaction too large</source>
@@ -3438,10 +3410,6 @@
     <message>
         <source>Equivalent bytes per sigop in transactions for relay and mining (default: %u)</source>
         <translation>Tilsvarende bytes pr. sigop i transaktioner, som videresendes og mines (standard: %u)</translation>
-    </message>
-    <message>
-        <source>Fees (in %s/kB) smaller than this are considered zero fee for transaction creation (default: %s)</source>
-        <translation>Gebyrer (i %s/kB) mindre end dette opfattes som intet gebyr under oprettelse af transaktioner (standard: %s)</translation>
     </message>
     <message>
         <source>Force relay of transactions from whitelisted peers even if they violate local relay policy (default: %d)</source>
@@ -3603,14 +3571,6 @@
     <message>
         <source>Starting network threads...</source>
         <translation>Starter netværkstråde…</translation>
-    </message>
-    <message>
-        <source>The wallet will avoid paying less than the minimum relay fee.</source>
-        <translation>Tegnebogen vil undgå at betale mindre end minimum-videresendelsesgebyret.</translation>
-    </message>
-    <message>
-        <source>This is the minimum transaction fee you pay on every transaction.</source>
-        <translation>Dette er det transaktionsgebyr, du minimum betaler for hver transaktion.</translation>
     </message>
     <message>
         <source>This is the transaction fee you will pay if you send a transaction.</source>
