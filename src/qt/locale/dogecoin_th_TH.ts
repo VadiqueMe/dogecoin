@@ -286,10 +286,6 @@
         <translation>แสดง %1 ข้อความช่วยเหลือ เพื่อแสดงรายการ ตัวเลือกที่เป็นไปได้สำหรับ Dogecoin command-line</translation>
     </message>
     <message>
-        <source>%1 client</source>
-        <translation>%1 ลูกค้า</translation>
-    </message>
-    <message>
         <source>Catching up...</source>
         <translation>กำลังตามให้ทัน...</translation>
     </message>

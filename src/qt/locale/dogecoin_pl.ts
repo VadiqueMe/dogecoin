@@ -434,10 +434,6 @@
         <translation>Pokaż pomoc %1 aby zobaczyć listę wszystkich opcji lnii poleceń.</translation>
     </message>
     <message>
-        <source>%1 client</source>
-        <translation>%1 klient</translation>
-    </message>
-    <message>
         <source>Catching up...</source>
         <translation>Trwa synchronizacja…</translation>
     </message>
@@ -1305,8 +1301,8 @@
         <translation>NIEDOSTĘPNE</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Wersja klienta</translation>
+        <source>Version</source>
+        <translation>Wersja</translation>
     </message>
     <message>
         <source>Information</source>
@@ -1315,10 +1311,6 @@
     <message>
         <source>Debug window</source>
         <translation>Okno debugowania</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Ogólne</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -2723,10 +2715,6 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
         <translation>Pokaż wszystkie opcje odpluskwiania (użycie: --help -help-debug)</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>Zmniejsz plik debug log przy starcie programu (domyślnie: 1 jeśli nie użyto -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

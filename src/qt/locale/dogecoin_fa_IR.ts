@@ -299,8 +299,8 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>Client version</source>
-        <translation>ویرایش کنسول RPC</translation>
+        <source>Version</source>
+        <translation>نسخه</translation>
     </message>
     <message>
         <source>Network</source>

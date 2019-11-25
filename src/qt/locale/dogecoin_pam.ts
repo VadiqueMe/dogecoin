@@ -427,8 +427,8 @@
         <translation>N/A</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Bersion ning Cliente</translation>
+        <source>Version</source>
+        <translation>Bersion</translation>
     </message>
     <message>
         <source>Information</source>

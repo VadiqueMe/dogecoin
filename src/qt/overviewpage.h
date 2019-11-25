@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -11,7 +12,7 @@
 #include <QLabel>
 #include <memory>
 
-class ClientModel;
+class NetworkModel ;
 class TransactionFilterProxy;
 class TxViewDelegate;
 class PlatformStyle;
@@ -54,8 +55,8 @@ public:
     explicit OverviewPage(const PlatformStyle *platformStyle, QWidget *parent = 0);
     ~OverviewPage();
 
-    void setClientModel(ClientModel *clientModel);
-    void setWalletModel(WalletModel *walletModel);
+    void setNetworkModel( NetworkModel * networkModel ) ;
+    void setWalletModel( WalletModel * walletModel ) ;
     void showOutOfSyncWarning(bool fShow);
 
 public Q_SLOTS:
@@ -68,8 +69,8 @@ Q_SIGNALS:
 
 private:
     Ui::OverviewPage *ui;
-    ClientModel *clientModel;
-    WalletModel *walletModel;
+    NetworkModel * networkModel ;
+    WalletModel * walletModel ;
     CAmount currentBalance;
     CAmount currentUnconfirmedBalance;
     CAmount currentImmatureBalance;

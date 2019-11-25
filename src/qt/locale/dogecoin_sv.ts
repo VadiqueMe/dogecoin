@@ -451,10 +451,6 @@ Var vänlig och försök igen.</translation>
         <translation>Visa %1 hjälpmeddelande för att få en lista med möjliga Dogecoin kommandoradsalternativ.</translation>
     </message>
     <message>
-        <source>%1 client</source>
-        <translation>%1-klient</translation>
-    </message>
-    <message>
         <source>Connecting to peers...</source>
         <translation>Ansluter till noder...</translation>
     </message>
@@ -1214,8 +1210,8 @@ Var vänlig och försök igen.</translation>
         <translation>ej tillgänglig</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Klient-version</translation>
+        <source>Version</source>
+        <translation>Version</translation>
     </message>
     <message>
         <source>Information</source>
@@ -1224,10 +1220,6 @@ Var vänlig och försök igen.</translation>
     <message>
         <source>Debug window</source>
         <translation>Debug fönster</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Generell</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -2543,10 +2535,6 @@ Var vänlig och försök igen.</translation>
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
         <translation>Visa alla avlusningsalternativ (använd: --help -help-debug)</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>Krymp debug log filen vid klient start (förvalt: 1 vid ingen -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

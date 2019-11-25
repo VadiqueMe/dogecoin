@@ -631,8 +631,8 @@
         <translation>მიუწვდ.</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>კლიენტის ვერსია</translation>
+        <source>Version</source>
+        <translation>ვერსია</translation>
     </message>
     <message>
         <source>Information</source>
@@ -641,10 +641,6 @@
     <message>
         <source>Debug window</source>
         <translation>დახვეწის ფანჯარა</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>საერთო</translation>
     </message>
     <message>
         <source>Startup time</source>
@@ -1172,10 +1168,6 @@
     <message>
         <source>Send trace/debug info to console instead of debug log file</source>
         <translation>ტრასირების/დახვეწის ინფოს გაგზავნა კონსოლზე debug log ფაილის ნაცვლად</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>debug log ფაილის შეკუმშვა გაშვებისას (ნაგულისხმევია: 1 როცა არ აყენია -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

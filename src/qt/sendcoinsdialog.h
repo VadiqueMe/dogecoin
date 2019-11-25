@@ -1,9 +1,9 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_QT_SENDCOINSDIALOG_H
-#define BITCOIN_QT_SENDCOINSDIALOG_H
+#ifndef DOGECOIN_QT_SENDCOINSDIALOG_H
+#define DOGECOIN_QT_SENDCOINSDIALOG_H
 
 #include "walletmodel.h"
 
@@ -12,8 +12,8 @@
 #include <QString>
 #include <QTimer>
 
-class ClientModel;
-class OptionsModel;
+class NetworkModel ;
+class OptionsModel ;
 class PlatformStyle;
 class SendCoinsEntry;
 class SendCoinsRecipient;
@@ -35,8 +35,8 @@ public:
     explicit SendCoinsDialog(const PlatformStyle *platformStyle, QWidget *parent = 0);
     ~SendCoinsDialog();
 
-    void setClientModel(ClientModel *clientModel);
-    void setModel(WalletModel *model);
+    void setNetworkModel( NetworkModel * model ) ;
+    void setWalletModel( WalletModel * model ) ;
 
     /** Set up the tab chain manually, as Qt messes up the tab chain by default in some cases (issue https://bugreports.qt-project.org/browse/QTBUG-10907).
      */
@@ -56,9 +56,9 @@ public Q_SLOTS:
                     const CAmount& watchOnlyBalance, const CAmount& watchUnconfBalance, const CAmount& watchImmatureBalance);
 
 private:
-    Ui::SendCoinsDialog *ui;
-    ClientModel *clientModel;
-    WalletModel *model;
+    Ui::SendCoinsDialog * ui ;
+    NetworkModel * networkModel ;
+    WalletModel * walletModel ;
     bool fNewRecipientAllowed;
     bool fFeeMinimized;
     const PlatformStyle *platformStyle;
@@ -117,4 +117,4 @@ private:
     int secDelay;
 };
 
-#endif // BITCOIN_QT_SENDCOINSDIALOG_H
+#endif

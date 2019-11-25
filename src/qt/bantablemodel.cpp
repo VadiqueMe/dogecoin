@@ -1,10 +1,10 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "bantablemodel.h"
 
-#include "clientmodel.h"
+#include "networkmodel.h"
 #include "guiconstants.h"
 #include "guiutil.h"
 
@@ -82,9 +82,9 @@ public:
     }
 };
 
-BanTableModel::BanTableModel(ClientModel *parent) :
-    QAbstractTableModel(parent),
-    clientModel(parent)
+BanTableModel::BanTableModel( NetworkModel * parent ) :
+    QAbstractTableModel( parent ),
+    networkModel( parent )
 {
     columns << tr("IP/Netmask") << tr("Banned Until");
     priv.reset(new BanTablePriv());

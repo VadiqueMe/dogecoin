@@ -7,7 +7,7 @@
 
 #include "addresstablemodel.h"
 #include "unitsofcoin.h"
-#include "clientmodel.h"
+#include "networkmodel.h"
 #include "coincontroldialog.h"
 #include "guiutil.h"
 #include "optionsmodel.h"
@@ -35,8 +35,8 @@
 SendCoinsDialog::SendCoinsDialog(const PlatformStyle *_platformStyle, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SendCoinsDialog),
-    clientModel(0),
-    model(0),
+    networkModel( nullptr ),
+    walletModel( nullptr ),
     fNewRecipientAllowed(true),
     fFeeMinimized(true),
     platformStyle(_platformStyle)
@@ -111,40 +111,41 @@ SendCoinsDialog::SendCoinsDialog(const PlatformStyle *_platformStyle, QWidget *p
     minimizeFeeSection(settings.value("fFeeSectionMinimized").toBool());
 }
 
-void SendCoinsDialog::setClientModel(ClientModel *_clientModel)
+void SendCoinsDialog::setNetworkModel( NetworkModel * model )
 {
-    this->clientModel = _clientModel;
+    this->networkModel = model ;
 
-    if (_clientModel) {
-        connect(_clientModel, SIGNAL(numBlocksChanged(int,QDateTime,double,bool)), this, SLOT(updateSmartFeeLabel()));
+    if ( model != nullptr ) {
+        connect( model, SIGNAL( numBlocksChanged(int, QDateTime, double, bool) ), this, SLOT( updateSmartFeeLabel() ) ) ;
     }
 }
 
-void SendCoinsDialog::setModel(WalletModel *_model)
+void SendCoinsDialog::setWalletModel( WalletModel * model )
 {
-    this->model = _model;
+    this->walletModel = model ;
 
-    if(_model && _model->getOptionsModel())
+    if ( model && model->getOptionsModel() )
     {
         for(int i = 0; i < ui->entries->count(); ++i)
         {
             SendCoinsEntry *entry = qobject_cast<SendCoinsEntry*>(ui->entries->itemAt(i)->widget());
             if(entry)
             {
-                entry->setModel(_model);
+                entry->setWalletModel( model ) ;
             }
         }
 
-        setBalance(_model->getBalance(), _model->getUnconfirmedBalance(), _model->getImmatureBalance(),
-                   _model->getWatchBalance(), _model->getWatchUnconfirmedBalance(), _model->getWatchImmatureBalance());
-        connect(_model, SIGNAL(balanceChanged(CAmount,CAmount,CAmount,CAmount,CAmount,CAmount)), this, SLOT(setBalance(CAmount,CAmount,CAmount,CAmount,CAmount,CAmount)));
-        connect(_model->getOptionsModel(), SIGNAL(displayUnitChanged(int)), this, SLOT(updateDisplayUnit()));
+        setBalance( model->getBalance(), model->getUnconfirmedBalance(), model->getImmatureBalance(),
+                    model->getWatchBalance(), model->getWatchUnconfirmedBalance(), model->getWatchImmatureBalance() ) ;
+        connect( model, SIGNAL(balanceChanged(CAmount,CAmount,CAmount,CAmount,CAmount,CAmount)),
+                 this, SLOT(setBalance(CAmount,CAmount,CAmount,CAmount,CAmount,CAmount)) ) ;
+        connect(model->getOptionsModel(), SIGNAL(displayUnitChanged(int)), this, SLOT(updateDisplayUnit()));
         updateDisplayUnit();
 
         // Coin Control
-        connect(_model->getOptionsModel(), SIGNAL(displayUnitChanged(int)), this, SLOT(coinControlUpdateLabels()));
-        connect( _model->getOptionsModel(), SIGNAL(hideCoinControlFeaturesChanged(bool)), this, SLOT(coinControlFeatureChanged(bool)) );
-        ui->frameCoinControl->setVisible( ! _model->getOptionsModel()->getHideCoinControlFeatures() );
+        connect( model->getOptionsModel(), SIGNAL(displayUnitChanged(int)), this, SLOT(coinControlUpdateLabels()) );
+        connect( model->getOptionsModel(), SIGNAL(hideCoinControlFeaturesChanged(bool)), this, SLOT(coinControlFeatureChanged(bool)) );
+        ui->frameCoinControl->setVisible( ! model->getOptionsModel()->getHideCoinControlFeatures() );
         coinControlUpdateLabels();
 
         // fee section
@@ -175,8 +176,8 @@ SendCoinsDialog::~SendCoinsDialog()
 
 void SendCoinsDialog::on_sendButton_clicked()
 {
-    if(!model || !model->getOptionsModel())
-        return;
+    if ( ! walletModel || ! walletModel->getOptionsModel() )
+        return ;
 
     QList<SendCoinsRecipient> recipients;
     bool valid = true;
@@ -203,8 +204,8 @@ void SendCoinsDialog::on_sendButton_clicked()
     }
 
     fNewRecipientAllowed = false;
-    WalletModel::UnlockContext ctx(model->requestUnlock());
-    if(!ctx.isValid())
+    WalletModel::UnlockContext unlock( walletModel->requestUnlock() ) ;
+    if ( ! unlock.isValid() )
     {
         // Unlock wallet was cancelled
         fNewRecipientAllowed = true;
@@ -217,16 +218,16 @@ void SendCoinsDialog::on_sendButton_clicked()
 
     // Always use a CCoinControl instance, use the CoinControlDialog instance if CoinControl has been enabled
     CCoinControl ctrl;
-    if ( ! model->getOptionsModel()->getHideCoinControlFeatures() )
+    if ( ! walletModel->getOptionsModel()->getHideCoinControlFeatures() )
         ctrl = *CoinControlDialog::coinControl;
 
     ctrl.nConfirmTarget = 0 ;
 
-    prepareStatus = model->prepareTransaction(currentTransaction, &ctrl);
+    prepareStatus = walletModel->prepareTransaction( currentTransaction, &ctrl ) ;
 
     // process prepareStatus and on error generate message shown to user
     processSendCoinsReturn( prepareStatus,
-        UnitsOfCoin::formatWithUnit( model->getOptionsModel()->getDisplayUnit(), currentTransaction.getTransactionFee() )
+        UnitsOfCoin::formatWithUnit( walletModel->getOptionsModel()->getDisplayUnit(), currentTransaction.getTransactionFee() )
     ) ;
 
     if(prepareStatus.status != WalletModel::OK) {
@@ -239,7 +240,7 @@ void SendCoinsDialog::on_sendButton_clicked()
     Q_FOREACH(const SendCoinsRecipient &rcp, currentTransaction.getRecipients())
     {
         // generate bold amount string
-        QString amount = "<b>" + UnitsOfCoin::formatHtmlWithUnit( model->getOptionsModel()->getDisplayUnit(), rcp.amount ) ;
+        QString amount = "<b>" + UnitsOfCoin::formatHtmlWithUnit( walletModel->getOptionsModel()->getDisplayUnit(), rcp.amount ) ;
         amount.append("</b>");
         // generate monospace address string
         QString address = "<span style='font-family: monospace;'>" + rcp.address;
@@ -280,7 +281,7 @@ void SendCoinsDialog::on_sendButton_clicked()
     {
         // append fee string if a fee is required
         questionString.append("<hr /><span style='color:#aa0000;'>");
-        questionString.append( UnitsOfCoin::formatHtmlWithUnit( model->getOptionsModel()->getDisplayUnit(), txFee ) ) ;
+        questionString.append( UnitsOfCoin::formatHtmlWithUnit( walletModel->getOptionsModel()->getDisplayUnit(), txFee ) ) ;
         questionString.append("</span> ");
         questionString.append(tr("added as transaction fee"));
 
@@ -294,11 +295,11 @@ void SendCoinsDialog::on_sendButton_clicked()
     QStringList alternativeUnits;
     Q_FOREACH ( UnitsOfCoin::Unit u, UnitsOfCoin::availableUnits() )
     {
-        if ( u != model->getOptionsModel()->getDisplayUnit() )
+        if ( u != walletModel->getOptionsModel()->getDisplayUnit() )
             alternativeUnits.append( UnitsOfCoin::formatHtmlWithUnit( u, totalAmount ) ) ;
     }
     questionString.append(tr("Total Amount %1")
-        .arg( UnitsOfCoin::formatHtmlWithUnit( model->getOptionsModel()->getDisplayUnit(), totalAmount ) )) ;
+        .arg( UnitsOfCoin::formatHtmlWithUnit( walletModel->getOptionsModel()->getDisplayUnit(), totalAmount ) )) ;
     questionString.append(QString("<span style='font-size:10pt;font-weight:normal;'><br />(=%2)</span>")
         .arg(alternativeUnits.join(" " + tr("or") + "<br />")));
 
@@ -314,7 +315,7 @@ void SendCoinsDialog::on_sendButton_clicked()
     }
 
     // now send the prepared transaction
-    WalletModel::SendCoinsReturn sendStatus = model->sendCoins(currentTransaction);
+    WalletModel::SendCoinsReturn sendStatus = walletModel->sendCoins( currentTransaction ) ;
     // process sendStatus and on error generate message shown to user
     processSendCoinsReturn(sendStatus);
 
@@ -352,7 +353,7 @@ void SendCoinsDialog::accept()
 SendCoinsEntry *SendCoinsDialog::addEntry()
 {
     SendCoinsEntry *entry = new SendCoinsEntry(platformStyle, this);
-    entry->setModel(model);
+    entry->setWalletModel( walletModel ) ;
     ui->entries->addWidget(entry);
     connect(entry, SIGNAL(removeEntry(SendCoinsEntry*)), this, SLOT(removeEntry(SendCoinsEntry*)));
     connect(entry, SIGNAL(payAmountChanged()), this, SLOT(coinControlUpdateLabels()));
@@ -467,15 +468,15 @@ void SendCoinsDialog::setBalance(const CAmount& balance, const CAmount& unconfir
     Q_UNUSED(watchUnconfirmedBalance);
     Q_UNUSED(watchImmatureBalance);
 
-    if ( model && model->getOptionsModel() )
-        ui->labelBalance->setText( UnitsOfCoin::formatWithUnit( model->getOptionsModel()->getDisplayUnit(), balance ) ) ;
+    if ( walletModel && walletModel->getOptionsModel() )
+        ui->labelBalance->setText( UnitsOfCoin::formatWithUnit( walletModel->getOptionsModel()->getDisplayUnit(), balance ) ) ;
 }
 
 void SendCoinsDialog::updateDisplayUnit()
 {
-    setBalance(model->getBalance(), 0, 0, 0, 0, 0);
-    ui->customFee->setDisplayUnit(model->getOptionsModel()->getDisplayUnit());
-    updateSmartFeeLabel();
+    setBalance( walletModel->getBalance(), 0, 0, 0, 0, 0 ) ;
+    ui->customFee->setDisplayUnit( walletModel->getOptionsModel()->getDisplayUnit() ) ;
+    updateSmartFeeLabel() ;
 }
 
 void SendCoinsDialog::processSendCoinsReturn(const WalletModel::SendCoinsReturn &sendCoinsReturn, const QString &msgArg)
@@ -513,7 +514,7 @@ void SendCoinsDialog::processSendCoinsReturn(const WalletModel::SendCoinsReturn 
         msgParams.second = CClientUIInterface::MSG_ERROR;
         break;
     case WalletModel::AbsurdFee:
-        msgParams.first = tr("A fee higher than %1 is considered an absurdly high fee.").arg( UnitsOfCoin::formatWithUnit( model->getOptionsModel()->getDisplayUnit(), maxTxFee ) ) ;
+        msgParams.first = tr("A fee higher than %1 is considered an absurdly high fee.").arg( UnitsOfCoin::formatWithUnit( walletModel->getOptionsModel()->getDisplayUnit(), maxTxFee ) ) ;
         break;
     case WalletModel::PaymentRequestExpired:
         msgParams.first = tr("Payment request expired.");
@@ -585,23 +586,23 @@ void SendCoinsDialog::updateGlobalFeeVariables()
 
 void SendCoinsDialog::updateFeeMinimizedLabel()
 {
-    if(!model || !model->getOptionsModel())
-        return;
+    if ( ! walletModel || ! walletModel->getOptionsModel() )
+        return ;
 
     if (ui->radioSmartFee->isChecked())
         ui->labelFeeMinimized->setText(ui->labelSmartFee->text());
     else {
-        ui->labelFeeMinimized->setText( UnitsOfCoin::formatWithUnit( model->getOptionsModel()->getDisplayUnit(), ui->customFee->value() ) +
+        ui->labelFeeMinimized->setText( UnitsOfCoin::formatWithUnit( walletModel->getOptionsModel()->getDisplayUnit(), ui->customFee->value() ) +
             ( ( ui->radioCustomPerKilobyte->isChecked() ) ? "/kB" : "" ) ) ;
     }
 }
 
 void SendCoinsDialog::updateSmartFeeLabel()
 {
-    if ( ! model || ! model->getOptionsModel() )
-        return;
+    if ( ! walletModel || ! walletModel->getOptionsModel() )
+        return ;
 
-    ui->labelSmartFee->setText( UnitsOfCoin::formatWithUnit( model->getOptionsModel()->getDisplayUnit(),
+    ui->labelSmartFee->setText( UnitsOfCoin::formatWithUnit( walletModel->getOptionsModel()->getDisplayUnit(),
                                                              CWallet::fallbackFee.GetFeePerKiloByte() ) + "/kB" );
     updateFeeMinimizedLabel() ;
 }
@@ -643,25 +644,25 @@ void SendCoinsDialog::coinControlClipboardChange()
 }
 
 // Coin Control: settings menu - coin control on/off
-void SendCoinsDialog::coinControlFeatureChanged(bool checked)
+void SendCoinsDialog::coinControlFeatureChanged( bool checked )
 {
-    ui->frameCoinControl->setVisible( ! checked );
+    ui->frameCoinControl->setVisible( ! checked ) ;
 
-    if ( checked && model ) // coin control features off
-        CoinControlDialog::coinControl->SetNull();
+    if ( checked && walletModel != nullptr ) // coin control features off
+        CoinControlDialog::coinControl->SetNull() ;
 
     // make sure we set back the confirmation target
-    updateGlobalFeeVariables();
-    coinControlUpdateLabels();
+    updateGlobalFeeVariables() ;
+    coinControlUpdateLabels() ;
 }
 
 // Coin Control: button inputs -> show actual coin control dialog
 void SendCoinsDialog::coinControlButtonClicked()
 {
-    CoinControlDialog dlg(platformStyle);
-    dlg.setModel(model);
-    dlg.exec();
-    coinControlUpdateLabels();
+    CoinControlDialog dlg( platformStyle ) ;
+    dlg.setWalletModel( walletModel ) ;
+    dlg.exec() ;
+    coinControlUpdateLabels() ;
 }
 
 // Coin Control: checkbox custom change address
@@ -682,7 +683,7 @@ void SendCoinsDialog::coinControlChangeChecked(int state)
 // Coin Control: custom change address changed
 void SendCoinsDialog::coinControlChangeEdited(const QString& text)
 {
-    if (model && model->getAddressTableModel())
+    if ( walletModel && walletModel->getAddressTableModel() )
     {
         // Default to no change address until verified
         CoinControlDialog::coinControl->destChange = CNoDestination();
@@ -702,7 +703,7 @@ void SendCoinsDialog::coinControlChangeEdited(const QString& text)
         {
             CKeyID keyid;
             addr.GetKeyID(keyid);
-            if (!model->havePrivKey(keyid)) // Unknown change address
+            if ( ! walletModel->havePrivKey( keyid ) ) // Unknown change address
             {
                 ui->labelCoinControlChangeLabel->setText(tr("Warning: Unknown change address"));
 
@@ -724,7 +725,7 @@ void SendCoinsDialog::coinControlChangeEdited(const QString& text)
                 ui->labelCoinControlChangeLabel->setStyleSheet("QLabel{color:black;}");
 
                 // Query label
-                QString associatedLabel = model->getAddressTableModel()->labelForAddress(text);
+                QString associatedLabel = walletModel->getAddressTableModel()->labelForAddress( text ) ;
                 if (!associatedLabel.isEmpty())
                     ui->labelCoinControlChangeLabel->setText(associatedLabel);
                 else
@@ -739,10 +740,10 @@ void SendCoinsDialog::coinControlChangeEdited(const QString& text)
 // Coin Control: update labels
 void SendCoinsDialog::coinControlUpdateLabels()
 {
-    if (!model || !model->getOptionsModel())
-        return;
+    if ( ! walletModel || ! walletModel->getOptionsModel() )
+        return ;
 
-    if ( ! model->getOptionsModel()->getHideCoinControlFeatures() )
+    if ( ! walletModel->getOptionsModel()->getHideCoinControlFeatures() )
     {
         // enable minimum absolute fee UI controls
         ui->radioCustomAtLeast->setVisible(true);
@@ -775,7 +776,7 @@ void SendCoinsDialog::coinControlUpdateLabels()
     if (CoinControlDialog::coinControl->HasSelected())
     {
         // actual coin control calculation
-        CoinControlDialog::updateLabels(model, this);
+        CoinControlDialog::updateLabels( walletModel, this ) ;
 
         // show coin control stats
         ui->labelCoinControlAutomaticallySelected->hide();

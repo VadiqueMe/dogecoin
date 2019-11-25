@@ -1021,8 +1021,8 @@
         <translation>ناموجود</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>نسخهٔ کلاینت</translation>
+        <source>Version</source>
+        <translation>نسخه</translation>
     </message>
     <message>
         <source>Information</source>
@@ -1031,10 +1031,6 @@
     <message>
         <source>Debug window</source>
         <translation>پنجرهٔ اشکالزدایی</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>عمومی</translation>
     </message>
     <message>
         <source>Startup time</source>
@@ -1710,10 +1706,6 @@
     <message>
         <source>Send trace/debug info to console instead of debug log file</source>
         <translation>اطلاعات ردگیری/اشکال‌زدایی را به جای فایل لاگ اشکال‌زدایی به کنسول بفرستید</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>فایل debug log  را در startup مشتری کوچک کن (پیش فرض:1 اگر اشکال زدایی روی نداد)</translation>
     </message>
     <message>
         <source>Transaction amount too small</source>

@@ -757,8 +757,8 @@
         <translation>Nem elérhető</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Kliens verzió</translation>
+        <source>Version</source>
+        <translation>Verzió</translation>
     </message>
     <message>
         <source>Information</source>
@@ -767,10 +767,6 @@
     <message>
         <source>Debug window</source>
         <translation>Debug ablak</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Általános</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>

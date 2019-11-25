@@ -124,7 +124,7 @@ QT_MOC_CPP = \
   qt/moc_coinamountfield.cpp \
   qt/moc_gui.cpp \
   qt/moc_unitsofcoin.cpp \
-  qt/moc_clientmodel.cpp \
+  qt/moc_networkmodel.cpp \
   qt/moc_coincontroldialog.cpp \
   qt/moc_coincontroltreewidget.cpp \
   qt/moc_csvmodelwriter.cpp \
@@ -193,7 +193,7 @@ DOGECOIN_QT_H = \
   qt/coinamountfield.h \
   qt/gui.h \
   qt/unitsofcoin.h \
-  qt/clientmodel.h \
+  qt/networkmodel.h \
   qt/coincontroldialog.h \
   qt/coincontroltreewidget.h \
   qt/csvmodelwriter.h \
@@ -309,7 +309,7 @@ DOGECOIN_QT_BASE_CPP = \
   qt/coinamountfield.cpp \
   qt/gui.cpp \
   qt/unitsofcoin.cpp \
-  qt/clientmodel.cpp \
+  qt/networkmodel.cpp \
   qt/csvmodelwriter.cpp \
   qt/guiutil.cpp \
   qt/intro.cpp \

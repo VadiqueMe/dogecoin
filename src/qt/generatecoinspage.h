@@ -60,7 +60,7 @@ public:
     explicit GenerateCoinsPage( const PlatformStyle * style, QWidget * parent = nullptr ) ;
     ~GenerateCoinsPage() ;
 
-    void setModel( WalletModel * model ) ;
+    void setWalletModel( WalletModel * model ) ;
 
     QCheckBox & getGenerateBlocksCheckbox() ;
     QComboBox & getNumberOfThreadsList() ;

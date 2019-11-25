@@ -335,7 +335,6 @@ QT_TRANSLATE_NOOP("dogecoin-core", "Set maximum BIP141 block weight (default: %d
 QT_TRANSLATE_NOOP("dogecoin-core", "Set maximum block size in bytes (default: %d)"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Set the number of threads to service RPC calls (default: %d)"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Show all debugging options (usage: --help -help-debug)"),
-QT_TRANSLATE_NOOP("dogecoin-core", "Shrink debug log file on client startup (default: 1 when no -debug)"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Signing transaction failed"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Specify configuration file (default: %s)"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Specify connection timeout in milliseconds (minimum: 1, default: %d)"),

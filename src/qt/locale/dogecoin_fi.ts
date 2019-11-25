@@ -274,10 +274,6 @@
         <translation>Näytä %1 ohjeet saadaksesi listan mahdollisista Dogecoinin komentorivivalinnoista</translation>
     </message>
     <message>
-        <source>%1 client</source>
-        <translation>%1-asiakas</translation>
-    </message>
-    <message>
         <source>Catching up...</source>
         <translation>Saavutetaan verkkoa...</translation>
     </message>
@@ -925,8 +921,8 @@
         <translation>Ei saatavilla</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Pääteohjelman versio</translation>
+        <source>Version</source>
+        <translation>Versio</translation>
     </message>
     <message>
         <source>Information</source>
@@ -935,10 +931,6 @@
     <message>
         <source>Debug window</source>
         <translation>Debug-ikkuna</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Yleinen</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -1962,10 +1954,6 @@
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
         <translation>Näytä kaikki debuggaus valinnat: (käyttö: --help -help-debug)</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>Pienennä debug log tiedosto käynnistyksen yhteydessä (vakioasetus: 1 kun ei -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

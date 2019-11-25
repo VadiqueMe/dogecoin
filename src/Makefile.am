@@ -90,7 +90,7 @@ DOGECOIN_CORE_H = \
   chainparamsseeds.h \
   checkpoints.h \
   checkqueue.h \
-  clientversion.h \
+  peerversion.h \
   coins.h \
   compat.h \
   compat/byteswap.h \
@@ -175,7 +175,7 @@ obj/build.h: FORCE
 	@$(MKDIR_P) $(builddir)/obj
 	@$(top_srcdir)/share/genbuild.sh $(abs_top_builddir)/src/obj/build.h \
 	  $(abs_top_srcdir)
-libdogecoin_util_a-clientversion.$(OBJEXT): obj/build.h
+libdogecoin_util_a-peerversion.$(OBJEXT): obj/build.h
 
 # server: shared between dogecoind and dogecoin-qt
 libdogecoin_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(DOGECOIN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
@@ -338,7 +338,7 @@ libdogecoin_util_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libdogecoin_util_a_SOURCES = \
   support/lockedpool.cpp \
   chainparamsbase.cpp \
-  clientversion.cpp \
+  peerversion.cpp \
   compat/glibc_sanity.cpp \
   compat/glibcxx_sanity.cpp \
   compat/strnlen.cpp \

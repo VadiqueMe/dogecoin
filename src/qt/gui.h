@@ -20,8 +20,8 @@
 #include <QSystemTrayIcon>
 #include <QTimer>
 
-class ClientModel;
-class NetworkStyle;
+class NetworkModel ;
+class NetworkStyle ;
 class Notificator;
 class OptionsModel;
 class PlatformStyle;
@@ -42,8 +42,8 @@ class QProgressDialog;
 QT_END_NAMESPACE
 
 /**
-  GUI main class. This class represents the main window of the Dogecoin UI. It communicates with both the client and
-  wallet models to give the user an up-to-date view of the current core
+  GUI main class. This class represents the main window of the Dogecoin UI. It communicates
+  with both the network and wallet models to give the user an up-to-date view
 */
 class DogecoinGUI : public QMainWindow
 {
@@ -56,10 +56,10 @@ public:
     explicit DogecoinGUI( const PlatformStyle * style, const NetworkStyle * networkStyle, QWidget * parent = nullptr ) ;
     ~DogecoinGUI() ;
 
-    /** Set the client model.
-        The client model represents the part of the core that communicates with the P2P network, and is wallet-agnostic
+    /** Set the network model
+        The network model represents the part that communicates with the P2P network, and is wallet-agnostic
      */
-    void setClientModel(ClientModel *clientModel);
+    void setNetworkModel( NetworkModel * networkModel ) ;
 
 #ifdef ENABLE_WALLET
     /** Set the wallet model which represents a dogecoin wallet
@@ -79,8 +79,8 @@ protected:
     bool eventFilter(QObject *object, QEvent *event);
 
 private:
-    ClientModel *clientModel;
-    WalletFrame *walletFrame;
+    NetworkModel * networkModel ;
+    WalletFrame * walletFrame ;
 
     UnitDisplayStatusBarControl *unitDisplayControl;
     QLabel *labelWalletEncryptionIcon;
@@ -146,10 +146,10 @@ private:
     /** Enable or disable all wallet-related actions */
     void setWalletActionsEnabled(bool enabled);
 
-    /** Connect core signals to GUI client */
-    void subscribeToCoreSignals();
-    /** Disconnect core signals from GUI client */
-    void unsubscribeFromCoreSignals();
+    /** Connect core signals to GUI */
+    void subscribeToCoreSignals() ;
+    /** Disconnect core signals from GUI */
+    void unsubscribeFromCoreSignals() ;
 
     /** Update UI with latest network info from model */
     void updateNetworkState();

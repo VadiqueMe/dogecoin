@@ -1,9 +1,9 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_QT_TRANSACTIONVIEW_H
-#define BITCOIN_QT_TRANSACTIONVIEW_H
+#ifndef DOGECOIN_QT_TRANSACTIONVIEW_H
+#define DOGECOIN_QT_TRANSACTIONVIEW_H
 
 #include "guiutil.h"
 
@@ -26,7 +26,7 @@ class QTableView;
 QT_END_NAMESPACE
 
 /** Widget showing the transaction list for a wallet, including a filter row.
-    Using the filter row, the user can view or export a subset of the transactions.
+    Using the filter row, the user can view or export a subset of the transactions
   */
 class TransactionView : public QWidget
 {
@@ -35,7 +35,7 @@ class TransactionView : public QWidget
 public:
     explicit TransactionView(const PlatformStyle *platformStyle, QWidget *parent = 0);
 
-    void setModel(WalletModel *model);
+    void setWalletModel( WalletModel * model ) ;
 
     // Date ranges for filter
     enum DateEnum
@@ -59,7 +59,7 @@ public:
     };
 
 private:
-    WalletModel *model;
+    WalletModel * walletModel ;
     TransactionFilterProxy *transactionProxyModel;
     QTableView *transactionView;
 
@@ -115,6 +115,6 @@ public Q_SLOTS:
     void exportClicked();
     void focusTransaction(const QModelIndex&);
 
-};
+} ;
 
-#endif // BITCOIN_QT_TRANSACTIONVIEW_H
+#endif

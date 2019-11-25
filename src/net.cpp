@@ -12,7 +12,7 @@
 
 #include "addrman.h"
 #include "chainparams.h"
-#include "clientversion.h"
+#include "peerversion.h"
 #include "consensus/consensus.h"
 #include "crypto/common.h"
 #include "crypto/sha256.h"
@@ -441,8 +441,8 @@ void CConnman::ClearBanned()
         setBannedIsDirty = true;
     }
     DumpBanlist(); //store banlist to disk
-    if(clientInterface)
-        clientInterface->BannedListChanged();
+    if ( clientInterface != nullptr )
+        clientInterface->BannedListChanged() ;
 }
 
 bool CConnman::IsBanned(CNetAddr ip)
@@ -502,11 +502,11 @@ void CConnman::Ban(const CSubNet& subNet, const BanReason &banReason, int64_t ba
         else
             return;
     }
-    if(clientInterface)
-        clientInterface->BannedListChanged();
+    if ( clientInterface != nullptr )
+        clientInterface->BannedListChanged() ;
     {
         LOCK(cs_vNodes);
-        BOOST_FOREACH(CNode* pnode, vNodes) {
+        for ( CNode* pnode : vNodes ) {
             if (subNet.Match((CNetAddr)pnode->addr))
                 pnode->fDisconnect = true;
         }
@@ -527,8 +527,8 @@ bool CConnman::Unban(const CSubNet &subNet) {
             return false;
         setBannedIsDirty = true;
     }
-    if(clientInterface)
-        clientInterface->BannedListChanged();
+    if ( clientInterface != nullptr )
+        clientInterface->BannedListChanged() ;
     DumpBanlist(); //store banlist to disk immediately
     return true;
 }
@@ -1168,8 +1168,8 @@ void CConnman::ThreadSocketHandler()
         }
         if(vNodesSize != nPrevNodeCount) {
             nPrevNodeCount = vNodesSize;
-            if(clientInterface)
-                clientInterface->NotifyNumConnectionsChanged(nPrevNodeCount);
+            if ( clientInterface != nullptr )
+                clientInterface->NotifyNumConnectionsChanged( nPrevNodeCount ) ;
         }
 
         //
@@ -1469,7 +1469,7 @@ void ThreadMapPort()
             }
         }
 
-        std::string strDesc = "Dogecoin " + FormatFullVersion();
+        std::string strDesc = "Dogecoin " + FormatFullVersion() ;
 
         try {
             while (true) {
@@ -2206,7 +2206,7 @@ CConnman::CConnman(uint64_t nSeed0In, uint64_t nSeed1In) : nSeed0(nSeed0In), nSe
     nMaxOutbound = 0;
     nMaxAddnode = 0;
     nBestHeight = 0;
-    clientInterface = NULL;
+    clientInterface = nullptr ;
     flagInterruptMsgProc = false;
 }
 
@@ -2238,7 +2238,7 @@ bool CConnman::Start(CScheduler& scheduler, std::string& strNodeError, Options c
     SetBestHeight(connOptions.nBestHeight);
 
     clientInterface = connOptions.uiInterface;
-    if (clientInterface)
+    if ( clientInterface != nullptr )
         clientInterface->InitMessage(_("Loading addresses..."));
     // Load addresses from peers.dat
     int64_t nStart = GetTimeMillis();
@@ -2253,7 +2253,7 @@ bool CConnman::Start(CScheduler& scheduler, std::string& strNodeError, Options c
             DumpAddresses();
         }
     }
-    if (clientInterface)
+    if ( clientInterface != nullptr )
         clientInterface->InitMessage(_("Loading banlist..."));
     // Load addresses from banlist.dat
     nStart = GetTimeMillis();

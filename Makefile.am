@@ -66,7 +66,7 @@ COVERAGE_INFO = baseline_filtered_combined.info baseline.info \
   leveldb_baseline_filtered.info test_dogecoin_coverage.info test_dogecoin.info
 
 dist-hook:
-	-$(GIT) archive --format=tar HEAD -- src/clientversion.cpp | $(AMTAR) -C $(top_distdir) -xf -
+	-$(GIT) archive --format=tar HEAD -- src/peerversion.cpp | $(AMTAR) -C $(top_distdir) -xf -
 
 $(DOGECOIN_WIN_INSTALLER): all-recursive
 	$(MKDIR_P) $(top_builddir)/release

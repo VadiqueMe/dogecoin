@@ -881,8 +881,8 @@
         <translation>Μη διαθέσιμο</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Έκδοση Πελάτη</translation>
+        <source>Version</source>
+        <translation>Εκδοχή</translation>
     </message>
     <message>
         <source>Information</source>
@@ -891,10 +891,6 @@
     <message>
         <source>Debug window</source>
         <translation>Παράθυρο αποσφαλμάτωσης</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Γενικά</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -1694,10 +1690,6 @@
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
         <translation>Προβολή όλων των επιλογών εντοπισμού σφαλμάτων (χρήση: --help -help-debug)</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>Συρρίκνωση του αρχείο debug log κατα την εκκίνηση του πελάτη (προεπιλογή: 1 όταν δεν-debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

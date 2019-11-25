@@ -7,7 +7,7 @@
 #include "alert.h"
 #include "chain.h"
 #include "chainparams.h"
-#include "clientversion.h"
+#include "peerversion.h"
 #include "data/alertTests.raw.h"
 #include "serialize.h"
 #include "streams.h"
@@ -86,7 +86,7 @@ struct ReadAlerts : public TestingSetup
     ReadAlerts()
     {
         std::vector<unsigned char> vch(alertTests, alertTests + sizeof(alertTests));
-        CDataStream stream(vch, SER_DISK, CLIENT_VERSION);
+        CDataStream stream( vch, SER_DISK, PEER_VERSION ) ;
         try {
             while (!stream.eof())
             {
@@ -175,7 +175,7 @@ BOOST_AUTO_TEST_CASE(AlertNotify)
     BOOST_CHECK_EQUAL(r.size(), 4u);
 
 // Windows built-in echo semantics are different than posixy shells. Quotes and
-// whitespace are printed literally.
+// whitespace are printed literally
 
 #ifndef WIN32
     BOOST_CHECK_EQUAL(r[0], "Alert 1");

@@ -1,9 +1,10 @@
 // Copyright (c) 2011-2015 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "trafficgraphwidget.h"
-#include "clientmodel.h"
+#include "networkmodel.h"
 
 #include <QPainter>
 #include <QColor>
@@ -16,7 +17,7 @@
 #define XMARGIN                 10
 #define YMARGIN                 10
 
-TrafficGraphWidget::TrafficGraphWidget(QWidget *parent) :
+TrafficGraphWidget::TrafficGraphWidget( QWidget * parent ) :
     QWidget(parent),
     timer(0),
     fMax(0.0f),
@@ -25,18 +26,20 @@ TrafficGraphWidget::TrafficGraphWidget(QWidget *parent) :
     vSamplesOut(),
     nLastBytesIn(0),
     nLastBytesOut(0),
-    clientModel(0)
+    networkModel( nullptr )
+    , colorForSent( Qt::red )
+    , colorForReceived( Qt::green )
 {
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), SLOT(updateRates()));
 }
 
-void TrafficGraphWidget::setClientModel(ClientModel *model)
+void TrafficGraphWidget::setNetworkModel( NetworkModel * model )
 {
-    clientModel = model;
-    if(model) {
-        nLastBytesIn = model->getTotalBytesRecv();
-        nLastBytesOut = model->getTotalBytesSent();
+    networkModel = model ;
+    if ( model != nullptr ) {
+        nLastBytesIn = model->getTotalBytesRecv() ;
+        nLastBytesOut = model->getTotalBytesSent() ;
     }
 }
 
@@ -103,27 +106,35 @@ void TrafficGraphWidget::paintEvent(QPaintEvent *)
     }
 
     if ( ! vSamplesIn.empty() ) {
-        QPainterPath p;
-        paintPath(p, vSamplesIn);
-        painter.fillPath(p, QColor(0, 255, 255, 128));
-        painter.setPen(Qt::cyan);
-        painter.drawPath(p);
+        QPainterPath p ;
+        paintPath( p, vSamplesIn ) ;
+
+        QColor transparentColorForReceived(
+            colorForReceived.red(), colorForReceived.green(), colorForReceived.blue(),
+            colorForReceived.alpha() >> 1
+        ) ;
+        painter.fillPath( p, transparentColorForReceived ) ;
+        painter.setPen( colorForReceived ) ;
+        painter.drawPath( p ) ;
     }
     if ( ! vSamplesOut.empty() ) {
-        QPainterPath p;
-        paintPath(p, vSamplesOut);
-        painter.fillPath(p, QColor(255, 255, 0, 128));
-        painter.setPen(Qt::yellow);
-        painter.drawPath(p);
+        QPainterPath p ;
+        paintPath( p, vSamplesOut ) ;
+
+        QColor transparentColorForSent = colorForSent ;
+        transparentColorForSent.setAlpha( colorForSent.alpha() >> 1 ) ;
+        painter.fillPath( p, transparentColorForSent ) ;
+        painter.setPen( colorForSent ) ;
+        painter.drawPath( p ) ;
     }
 }
 
 void TrafficGraphWidget::updateRates()
 {
-    if(!clientModel) return;
+    if ( networkModel == nullptr ) return ;
 
-    quint64 bytesIn = clientModel->getTotalBytesRecv(),
-            bytesOut = clientModel->getTotalBytesSent();
+    quint64 bytesIn = networkModel->getTotalBytesRecv(),
+            bytesOut = networkModel->getTotalBytesSent() ;
     float inRate = (bytesIn - nLastBytesIn) / 1024.0f * 1000 / timer->interval();
     float outRate = (bytesOut - nLastBytesOut) / 1024.0f * 1000 / timer->interval();
     vSamplesIn.push_front(inRate);
@@ -167,9 +178,9 @@ void TrafficGraphWidget::clear()
     vSamplesIn.clear();
     fMax = 0.0f;
 
-    if(clientModel) {
-        nLastBytesIn = clientModel->getTotalBytesRecv();
-        nLastBytesOut = clientModel->getTotalBytesSent();
+    if ( networkModel != nullptr ) {
+        nLastBytesIn = networkModel->getTotalBytesRecv() ;
+        nLastBytesOut = networkModel->getTotalBytesSent() ;
     }
     timer->start();
 }

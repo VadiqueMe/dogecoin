@@ -637,8 +637,8 @@
         <translation>N/A</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Verzija klijenta</translation>
+        <source>Version</source>
+        <translation>Verzija</translation>
     </message>
     <message>
         <source>Information</source>

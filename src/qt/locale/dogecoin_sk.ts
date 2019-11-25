@@ -450,10 +450,6 @@
         <translation>Ukáž %1 zoznam možných nastavení Dogecoinu pomocou príkazového riadku</translation>
     </message>
     <message>
-        <source>%1 client</source>
-        <translation>%1 klient</translation>
-    </message>
-    <message>
         <source>Connecting to peers...</source>
         <translation>Pripája sa k partnerom...</translation>
     </message>
@@ -1393,8 +1389,8 @@
         <translation>nie je k dispozícii</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Verzia klienta</translation>
+        <source>Version</source>
+        <translation>Verzia</translation>
     </message>
     <message>
         <source>Information</source>
@@ -1403,10 +1399,6 @@
     <message>
         <source>Debug window</source>
         <translation>Okno pre ladenie</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Všeobecné</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -3179,10 +3171,6 @@
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
         <translation>Zobraziť všetky možnosti ladenia (použitie: --help --help-debug)</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>Zmenšiť debug log pri spustení klienta (predvolené: 1 ak bez -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

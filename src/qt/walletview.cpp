@@ -8,7 +8,7 @@
 #include "addressbookpage.h"
 #include "askpassphrasedialog.h"
 #include "gui.h"
-#include "clientmodel.h"
+#include "networkmodel.h"
 #include "guiutil.h"
 #include "optionsmodel.h"
 #include "overviewpage.h"
@@ -37,7 +37,7 @@
 
 WalletView::WalletView( const PlatformStyle * style, QWidget * parent ) :
     QStackedWidget(parent),
-    clientModel(0),
+    networkModel( nullptr ),
     walletModel(0),
     platformStyle( style )
 {
@@ -114,28 +114,31 @@ void WalletView::setGUI( DogecoinGUI * gui )
     }
 }
 
-void WalletView::setClientModel(ClientModel *_clientModel)
+void WalletView::setNetworkModel( NetworkModel * model )
 {
-    this->clientModel = _clientModel;
+    this->networkModel = model ;
 
-    overviewPage->setClientModel(_clientModel);
-    sendCoinsPage->setClientModel(_clientModel);
+    overviewPage->setNetworkModel( model ) ;
+    sendCoinsPage->setNetworkModel( model ) ;
 }
 
 void WalletView::setWalletModel( WalletModel * model )
 {
     this->walletModel = model ;
 
-    transactionView->setModel( model );
+    transactionView->setWalletModel( model );
     overviewPage->setWalletModel( model ) ;
-    receiveCoinsPage->setModel( model ) ;
-    sendCoinsPage->setModel( model ) ;
-    generateCoinsPage->setModel( model );
-    usedReceivingAddressesPage->setModel( model->getAddressTableModel() ) ;
-    usedSendingAddressesPage->setModel( model->getAddressTableModel() ) ;
+    receiveCoinsPage->setWalletModel( model ) ;
+    sendCoinsPage->setWalletModel( model ) ;
+    generateCoinsPage->setWalletModel( model );
 
     if ( model != nullptr )
     {
+        if ( model->getAddressTableModel() != nullptr ) {
+            usedReceivingAddressesPage->setAddressTableModel( model->getAddressTableModel() ) ;
+            usedSendingAddressesPage->setAddressTableModel( model->getAddressTableModel() ) ;
+        }
+
         // Receive and pass through messages from wallet model
         connect( model, SIGNAL( message(QString, QString, unsigned int) ), this, SIGNAL( message(QString, QString, unsigned int) ) ) ;
 
@@ -161,8 +164,8 @@ void WalletView::setWalletModel( WalletModel * model )
 void WalletView::processNewTransaction(const QModelIndex& parent, int start, int /*end*/)
 {
     // Prevent balloon-spam when initial block download is in progress
-    if (!walletModel || !clientModel || clientModel->inInitialBlockDownload())
-        return;
+    if ( ! walletModel || ! networkModel || networkModel->inInitialBlockDownload() )
+        return ;
 
     TransactionTableModel *ttm = walletModel->getTransactionTableModel();
     if (!ttm || ttm->processingQueuedTransactions())
@@ -226,7 +229,7 @@ void WalletView::gotoSignMessageTab(QString addr)
     // calls show() in showTab_SM()
     SignVerifyMessageDialog *signVerifyMessageDialog = new SignVerifyMessageDialog(platformStyle, this);
     signVerifyMessageDialog->setAttribute(Qt::WA_DeleteOnClose);
-    signVerifyMessageDialog->setModel(walletModel);
+    signVerifyMessageDialog->setWalletModel( walletModel ) ;
     signVerifyMessageDialog->showTab_SM(true);
 
     if (!addr.isEmpty())
@@ -238,7 +241,7 @@ void WalletView::gotoVerifyMessageTab(QString addr)
     // calls show() in showTab_VM()
     SignVerifyMessageDialog *signVerifyMessageDialog = new SignVerifyMessageDialog(platformStyle, this);
     signVerifyMessageDialog->setAttribute(Qt::WA_DeleteOnClose);
-    signVerifyMessageDialog->setModel(walletModel);
+    signVerifyMessageDialog->setWalletModel( walletModel ) ;
     signVerifyMessageDialog->showTab_VM(true);
 
     if (!addr.isEmpty())
@@ -265,7 +268,7 @@ void WalletView::encryptWallet(bool status)
     if(!walletModel)
         return;
     AskPassphraseDialog dlg(status ? AskPassphraseDialog::Encrypt : AskPassphraseDialog::Decrypt, this);
-    dlg.setModel(walletModel);
+    dlg.setWalletModel( walletModel ) ;
     dlg.exec();
 
     updateEncryptionStatus();
@@ -293,7 +296,7 @@ void WalletView::backupWallet()
 void WalletView::changePassphrase()
 {
     AskPassphraseDialog dlg(AskPassphraseDialog::ChangePass, this);
-    dlg.setModel(walletModel);
+    dlg.setWalletModel( walletModel ) ;
     dlg.exec();
 }
 
@@ -305,7 +308,7 @@ void WalletView::unlockWallet()
     if (walletModel->getEncryptionStatus() == WalletModel::Locked)
     {
         AskPassphraseDialog dlg(AskPassphraseDialog::Unlock, this);
-        dlg.setModel(walletModel);
+        dlg.setWalletModel( walletModel ) ;
         dlg.exec();
     }
 }
@@ -360,11 +363,10 @@ void WalletView::requestedSyncWarningInfo()
 
 void WalletView::printPaperWallets()
 {
-    if(!walletModel)
-        return;
+    if ( walletModel == nullptr ) return ;
 
-    PaperWalletDialog dlg(this);
-    dlg.setModel(walletModel);
-    dlg.setClientModel(clientModel);
-    dlg.exec();
+    PaperWalletDialog dlg( this ) ;
+    dlg.setWalletModel( walletModel ) ;
+    dlg.setNetworkModel( networkModel ) ;
+    dlg.exec() ;
 }

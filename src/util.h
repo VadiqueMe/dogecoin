@@ -117,6 +117,8 @@ void OpenDebugLog();
 void ShrinkLogFile() ;
 void runCommand(const std::string& strCommand);
 
+std::string FormatBytes( uint64_t bytes ) ;
+
 inline bool IsSwitchChar(char c)
 {
 #ifdef WIN32

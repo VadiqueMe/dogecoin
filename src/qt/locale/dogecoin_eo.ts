@@ -753,8 +753,8 @@
         <translation>neaplikebla</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Versio de kliento</translation>
+        <source>Version</source>
+        <translation>Versio</translation>
     </message>
     <message>
         <source>Information</source>
@@ -763,10 +763,6 @@
     <message>
         <source>Debug window</source>
         <translation>Sencimiga fenestro</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Ĝenerala</translation>
     </message>
     <message>
         <source>Startup time</source>
@@ -1322,10 +1318,6 @@
     <message>
         <source>Send trace/debug info to console instead of debug log file</source>
         <translation>Sendi spurajn/sencimigajn informojn al la konzolo anstataŭ al dosiero debug log</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>Malpligrandigi la sencimigan protokol-dosieron kiam kliento lanĉiĝas (defaŭlte: 1 kiam mankas -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

@@ -925,8 +925,8 @@
         <translation>Н/Д</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Версія клієнту</translation>
+        <source>Version</source>
+        <translation>Версія</translation>
     </message>
     <message>
         <source>Information</source>
@@ -935,10 +935,6 @@
     <message>
         <source>Debug window</source>
         <translation>Вікно зневадження</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Загальна</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -1974,10 +1970,6 @@
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
         <translation>Показати всі налагоджувальні параметри (використання: --help -help-debug)</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>Стискати файл debug log під час старту клієнта (типово: 1 коли відсутній параметр -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

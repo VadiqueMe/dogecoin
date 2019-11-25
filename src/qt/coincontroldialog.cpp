@@ -43,11 +43,11 @@ bool CCoinControlWidgetItem::operator<(const QTreeWidgetItem &other) const {
     return QTreeWidgetItem::operator<(other);
 }
 
-CoinControlDialog::CoinControlDialog(const PlatformStyle *_platformStyle, QWidget *parent) :
+CoinControlDialog::CoinControlDialog( const PlatformStyle * style, QWidget * parent ) :
     QDialog(parent),
     ui(new Ui::CoinControlDialog),
-    model(0),
-    platformStyle(_platformStyle)
+    walletModel( nullptr ),
+    platformStyle( style )
 {
     ui->setupUi(this);
 
@@ -155,15 +155,15 @@ CoinControlDialog::~CoinControlDialog()
     delete ui;
 }
 
-void CoinControlDialog::setModel(WalletModel *_model)
+void CoinControlDialog::setWalletModel( WalletModel * model )
 {
-    this->model = _model;
+    this->walletModel = model ;
 
-    if(_model && _model->getOptionsModel() && _model->getAddressTableModel())
+    if ( model && model->getOptionsModel() && model->getAddressTableModel() )
     {
-        updateView();
-        updateLabelLocked();
-        CoinControlDialog::updateLabels(_model, this);
+        updateView() ;
+        updateLabelLocked() ;
+        CoinControlDialog::updateLabels( model, this ) ;
     }
 }
 
@@ -193,7 +193,7 @@ void CoinControlDialog::buttonSelectAllClicked()
     ui->treeWidget->setEnabled(true);
     if (state == Qt::Unchecked)
         coinControl->UnSelectAll(); // just to be sure
-    CoinControlDialog::updateLabels(model, this);
+    CoinControlDialog::updateLabels( walletModel, this ) ;
 }
 
 // context menu
@@ -208,7 +208,7 @@ void CoinControlDialog::showMenu(const QPoint &point)
         if (item->text(COLUMN_TXHASH).length() == 64) // transaction hash is 64 characters (this means its a child node, so its not a parent node in tree mode)
         {
             copyTransactionHashAction->setEnabled(true);
-            if (model->isLockedCoin(uint256S(item->text(COLUMN_TXHASH).toStdString()), item->text(COLUMN_VOUT_INDEX).toUInt()))
+            if ( walletModel->isLockedCoin( uint256S( item->text( COLUMN_TXHASH ).toStdString() ), item->text( COLUMN_VOUT_INDEX ).toUInt() ) )
             {
                 lockAction->setEnabled(false);
                 unlockAction->setEnabled(true);
@@ -268,7 +268,7 @@ void CoinControlDialog::lockCoin()
         contextMenuItem->setCheckState(COLUMN_CHECKBOX, Qt::Unchecked);
 
     COutPoint outpt(uint256S(contextMenuItem->text(COLUMN_TXHASH).toStdString()), contextMenuItem->text(COLUMN_VOUT_INDEX).toUInt());
-    model->lockCoin(outpt);
+    walletModel->lockCoin( outpt ) ;
     contextMenuItem->setDisabled(true);
     contextMenuItem->setIcon(COLUMN_CHECKBOX, platformStyle->SingleColorIcon(":/icons/lock_closed"));
     updateLabelLocked();
@@ -278,7 +278,7 @@ void CoinControlDialog::lockCoin()
 void CoinControlDialog::unlockCoin()
 {
     COutPoint outpt(uint256S(contextMenuItem->text(COLUMN_TXHASH).toStdString()), contextMenuItem->text(COLUMN_VOUT_INDEX).toUInt());
-    model->unlockCoin(outpt);
+    walletModel->unlockCoin( outpt ) ;
     contextMenuItem->setDisabled(false);
     contextMenuItem->setIcon(COLUMN_CHECKBOX, QIcon());
     updateLabelLocked();
@@ -351,17 +351,17 @@ void CoinControlDialog::headerSectionClicked(int logicalIndex)
 }
 
 // toggle tree mode
-void CoinControlDialog::radioTreeMode(bool checked)
+void CoinControlDialog::radioTreeMode( bool checked )
 {
-    if (checked && model)
-        updateView();
+    if ( checked && walletModel )
+        updateView() ;
 }
 
 // toggle list mode
-void CoinControlDialog::radioListMode(bool checked)
+void CoinControlDialog::radioListMode( bool checked )
 {
-    if (checked && model)
-        updateView();
+    if ( checked && walletModel )
+        updateView() ;
 }
 
 // checkbox clicked by user
@@ -379,8 +379,8 @@ void CoinControlDialog::viewItemChanged(QTreeWidgetItem* item, int column)
             coinControl->Select(outpt);
 
         // selection changed -> update labels
-        if (ui->treeWidget->isEnabled()) // do not update on every click for (un)select all
-            CoinControlDialog::updateLabels(model, this);
+        if ( ui->treeWidget->isEnabled() ) // do not update on every click for (un)select all
+            CoinControlDialog::updateLabels( walletModel, this ) ;
     }
 
     // TODO: Remove this temporary qt5 fix after Qt5.3 and Qt5.4 are no longer used.
@@ -398,7 +398,7 @@ void CoinControlDialog::viewItemChanged(QTreeWidgetItem* item, int column)
 void CoinControlDialog::updateLabelLocked()
 {
     std::vector<COutPoint> vOutpts;
-    model->listLockedCoins(vOutpts);
+    walletModel->listLockedCoins( vOutpts ) ;
     if (vOutpts.size() > 0)
     {
        ui->labelLocked->setText(tr("(%1 locked)").arg(vOutpts.size()));
@@ -407,10 +407,9 @@ void CoinControlDialog::updateLabelLocked()
     else ui->labelLocked->setVisible(false);
 }
 
-void CoinControlDialog::updateLabels(WalletModel *model, QDialog* dialog)
+void CoinControlDialog::updateLabels( WalletModel * model, QDialog * dialog )
 {
-    if (!model)
-        return;
+    if ( model == nullptr ) return ;
 
     // nPayAmount
     CAmount nPayAmount = 0;
@@ -443,7 +442,7 @@ void CoinControlDialog::updateLabels(WalletModel *model, QDialog* dialog)
     coinControl->ListSelected(vCoinControl);
     model->getOutputs(vCoinControl, vOutputs);
 
-    BOOST_FOREACH(const COutput& out, vOutputs) {
+    for ( const COutput & out : vOutputs ) {
         // unselect already spent, very unlikely scenario, this could happen
         // when selected are spent elsewhere, like rpc or another computer
         uint256 txhash = out.tx->GetHash();
@@ -587,8 +586,8 @@ void CoinControlDialog::updateLabels(WalletModel *model, QDialog* dialog)
 
 void CoinControlDialog::updateView()
 {
-    if (!model || !model->getOptionsModel() || !model->getAddressTableModel())
-        return;
+    if ( ! walletModel || ! walletModel->getOptionsModel() || ! walletModel->getAddressTableModel() )
+        return ;
 
     bool treeMode = ui->radioTreeMode->isChecked();
 
@@ -598,16 +597,17 @@ void CoinControlDialog::updateView()
     QFlags<Qt::ItemFlag> flgCheckbox = Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable;
     QFlags<Qt::ItemFlag> flgTristate = Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable | Qt::ItemIsTristate;
 
-    int nDisplayUnit = model->getOptionsModel()->getDisplayUnit();
+    int nDisplayUnit = walletModel->getOptionsModel()->getDisplayUnit() ;
 
-    std::map<QString, std::vector<COutput> > mapCoins;
-    model->listCoins(mapCoins);
+    std::map< QString, std::vector< COutput > > mapCoins ;
+    walletModel->listCoins( mapCoins ) ;
 
-    BOOST_FOREACH(const PAIRTYPE(QString, std::vector<COutput>)& coins, mapCoins) {
+    for ( const PAIRTYPE( QString, std::vector< COutput > ) & coins : mapCoins )
+    {
         CCoinControlWidgetItem *itemWalletAddress = new CCoinControlWidgetItem();
         itemWalletAddress->setCheckState(COLUMN_CHECKBOX, Qt::Unchecked);
         QString sWalletAddress = coins.first;
-        QString sWalletLabel = model->getAddressTableModel()->labelForAddress(sWalletAddress);
+        QString sWalletLabel = walletModel->getAddressTableModel()->labelForAddress( sWalletAddress ) ;
         if (sWalletLabel.isEmpty())
             sWalletLabel = tr("(no label)");
 
@@ -628,7 +628,8 @@ void CoinControlDialog::updateView()
 
         CAmount nSum = 0;
         int nChildren = 0;
-        BOOST_FOREACH(const COutput& out, coins.second) {
+        for ( const COutput & out : coins.second )
+        {
             nSum += out.tx->tx->vout[out.i].nValue;
             nChildren++;
 
@@ -660,7 +661,7 @@ void CoinControlDialog::updateView()
             }
             else if (!treeMode)
             {
-                QString sLabel = model->getAddressTableModel()->labelForAddress(sAddress);
+                QString sLabel = walletModel->getAddressTableModel()->labelForAddress( sAddress ) ;
                 if (sLabel.isEmpty())
                     sLabel = tr("(no label)");
                 itemOutput->setText(COLUMN_LABEL, sLabel);
@@ -686,7 +687,7 @@ void CoinControlDialog::updateView()
             itemOutput->setText(COLUMN_VOUT_INDEX, QString::number(out.i));
 
              // disable locked coins
-            if (model->isLockedCoin(txhash, out.i))
+            if ( walletModel->isLockedCoin( txhash, out.i ) )
             {
                 COutPoint outpt(txhash, out.i);
                 coinControl->UnSelect(outpt); // just to be sure

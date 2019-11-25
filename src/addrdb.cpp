@@ -8,7 +8,7 @@
 
 #include "addrman.h"
 #include "chainparams.h"
-#include "clientversion.h"
+#include "peerversion.h"
 #include "hash.h"
 #include "random.h"
 #include "streams.h"
@@ -30,16 +30,16 @@ bool CBanDB::WriteBanSet( const banmap_t & banSet )
     std::string tmpfn = strprintf("banlist.dat.%04x", randv);
 
     // serialize banlist, checksum data up to that point, then append csum
-    CDataStream ssBanlist(SER_DISK, CLIENT_VERSION);
+    CDataStream ssBanlist( SER_DISK, PEER_VERSION ) ;
     ssBanlist << FLATDATA(Params().MessageStart());
     ssBanlist << banSet;
     uint256 hash = Hash(ssBanlist.begin(), ssBanlist.end());
     ssBanlist << hash;
 
     // open temp output file, and associate with CAutoFile
-    boost::filesystem::path pathTmp = GetDataDir() / tmpfn;
-    FILE *file = fopen(pathTmp.string().c_str(), "wb");
-    CAutoFile fileout(file, SER_DISK, CLIENT_VERSION);
+    boost::filesystem::path pathTmp = GetDataDir() / tmpfn ;
+    FILE *file = fopen( pathTmp.string().c_str(), "wb" ) ;
+    CAutoFile fileout( file, SER_DISK, PEER_VERSION ) ;
     if ( fileout.IsNull() ) {
         LogPrintf( "%s: Can't open file %s\n", __func__, pathTmp.string() ) ;
         return false ;
@@ -66,7 +66,7 @@ bool CBanDB::ReadBanSet( banmap_t & banSet )
 {
     // open input file, and associate with CAutoFile
     FILE *file = fopen(pathBanlist.string().c_str(), "rb");
-    CAutoFile filein( file, SER_DISK, CLIENT_VERSION ) ;
+    CAutoFile filein( file, SER_DISK, PEER_VERSION ) ;
     if ( filein.IsNull() ) {
         LogPrintf( "%s: Can't open file %s\n", __func__, pathBanlist.string() ) ;
         return false ;
@@ -92,7 +92,7 @@ bool CBanDB::ReadBanSet( banmap_t & banSet )
     }
     filein.fclose();
 
-    CDataStream ssBanlist(vchData, SER_DISK, CLIENT_VERSION);
+    CDataStream ssBanlist( vchData, SER_DISK, PEER_VERSION ) ;
 
     // verify stored checksum matches input data
     uint256 hashTmp = Hash(ssBanlist.begin(), ssBanlist.end());
@@ -131,7 +131,7 @@ bool CAddrDB::WriteListOfPeers( const CAddrMan & addr )
     std::string tmpfn = strprintf("peers.dat.%04x", randv);
 
     // serialize addresses, checksum data up to that point, then append csum
-    CDataStream ssPeers(SER_DISK, CLIENT_VERSION);
+    CDataStream ssPeers( SER_DISK, PEER_VERSION ) ;
     ssPeers << FLATDATA(Params().MessageStart());
     ssPeers << addr;
     uint256 hash = Hash(ssPeers.begin(), ssPeers.end());
@@ -140,7 +140,7 @@ bool CAddrDB::WriteListOfPeers( const CAddrMan & addr )
     // open temp output file, and associate with CAutoFile
     boost::filesystem::path pathTmp = GetDataDir() / tmpfn;
     FILE *file = fopen(pathTmp.string().c_str(), "wb");
-    CAutoFile fileout(file, SER_DISK, CLIENT_VERSION);
+    CAutoFile fileout( file, SER_DISK, PEER_VERSION ) ;
     if (fileout.IsNull())
         return error("%s: Failed to open file %s", __func__, pathTmp.string());
 
@@ -165,7 +165,7 @@ bool CAddrDB::ReadListOfPeers( CAddrMan & addr )
 {
     // open input file, and associate with CAutoFile
     FILE *file = fopen(pathAddr.string().c_str(), "rb");
-    CAutoFile filein( file, SER_DISK, CLIENT_VERSION ) ;
+    CAutoFile filein( file, SER_DISK, PEER_VERSION ) ;
     if ( filein.IsNull() ) {
         LogPrintf( "%s: Can't open file %s\n", __func__, pathAddr.string() ) ;
         return false ;
@@ -191,7 +191,7 @@ bool CAddrDB::ReadListOfPeers( CAddrMan & addr )
     }
     filein.fclose();
 
-    CDataStream ssPeers(vchData, SER_DISK, CLIENT_VERSION);
+    CDataStream ssPeers( vchData, SER_DISK, PEER_VERSION ) ;
 
     // verify stored checksum matches input data
     uint256 hashTmp = Hash(ssPeers.begin(), ssPeers.end());

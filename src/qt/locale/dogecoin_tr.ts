@@ -450,10 +450,6 @@
         <translation>Olası Dogecoin komut satırı seçeneklerinin listesini görmek için %1 yardım mesajını göster</translation>
     </message>
     <message>
-        <source>%1 client</source>
-        <translation>%1 istemci</translation>
-    </message>
-    <message>
         <source>Connecting to peers...</source>
         <translation>Eşlere bağlanılıyor...</translation>
     </message>
@@ -1413,8 +1409,8 @@
         <translation>Mevcut değil</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>İstemci sürümü</translation>
+        <source>Version</source>
+        <translation>Sürüm</translation>
     </message>
     <message>
         <source>Information</source>
@@ -1423,10 +1419,6 @@
     <message>
         <source>Debug window</source>
         <translation>Hata ayıklama penceresi</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Genel</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -3350,10 +3342,6 @@
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
         <translation>Tüm hata ayıklama seçeneklerini göster (kullanımı: --help -help-debug)</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>İstemci başlatıldığında debug log dosyasını küçült (varsayılan: -debug bulunmadığında 1)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

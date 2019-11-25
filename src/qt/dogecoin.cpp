@@ -10,7 +10,7 @@
 #include "gui.h"
 
 #include "chainparams.h"
-#include "clientmodel.h"
+#include "networkmodel.h"
 #include "guiconstants.h"
 #include "guiutil.h"
 #include "intro.h"
@@ -239,11 +239,11 @@ Q_SIGNALS:
     void splashFinished(QWidget *window);
 
 private:
-    QThread *coreThread;
-    OptionsModel *optionsModel;
-    ClientModel *clientModel;
+    QThread * coreThread ;
+    OptionsModel * optionsModel ;
+    NetworkModel * networkModel ;
     DogecoinGUI * window ;
-    QTimer *pollShutdownTimer;
+    QTimer * pollShutdownTimer ;
 #ifdef ENABLE_WALLET
     PaymentServer* paymentServer;
     WalletModel *walletModel;
@@ -317,8 +317,8 @@ void DogecoinCore::shutdown()
 DogecoinApplication::DogecoinApplication( int & argc, char ** argv ) :
     QApplication(argc, argv),
     coreThread(0),
-    optionsModel(0),
-    clientModel(0),
+    optionsModel( nullptr ),
+    networkModel( nullptr ),
     window(0),
     pollShutdownTimer(0),
 #ifdef ENABLE_WALLET
@@ -436,7 +436,7 @@ void DogecoinApplication::requestShutdown()
     qDebug() << __func__ << ": Requesting shutdown";
     startThread();
     window->hide();
-    window->setClientModel(0);
+    window->setNetworkModel( nullptr ) ;
     pollShutdownTimer->stop();
 
 #ifdef ENABLE_WALLET
@@ -444,8 +444,8 @@ void DogecoinApplication::requestShutdown()
     delete walletModel;
     walletModel = 0;
 #endif
-    delete clientModel;
-    clientModel = 0;
+    delete networkModel ;
+    networkModel = nullptr ;
 
     StartShutdown();
 
@@ -467,8 +467,8 @@ void DogecoinApplication::initializeResult( int retval )
         paymentServer->setOptionsModel(optionsModel);
 #endif
 
-        clientModel = new ClientModel(optionsModel);
-        window->setClientModel(clientModel);
+        networkModel = new NetworkModel( optionsModel ) ;
+        window->setNetworkModel( networkModel ) ;
 
 #ifdef ENABLE_WALLET
         if(pwalletMain)

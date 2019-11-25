@@ -446,10 +446,6 @@
         <translation>Mostrar a mensagem de ajuda do %1 para obter uma lista com possíveis opções de linha de comando Dogecoin</translation>
     </message>
     <message>
-        <source>%1 client</source>
-        <translation>%1 cliente</translation>
-    </message>
-    <message>
         <source>Connecting to peers...</source>
         <translation>Conectando...</translation>
     </message>
@@ -1409,8 +1405,8 @@
         <translation>N/A</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Versão do cliente</translation>
+        <source>Version</source>
+        <translation>Versão</translation>
     </message>
     <message>
         <source>Information</source>
@@ -1419,10 +1415,6 @@
     <message>
         <source>Debug window</source>
         <translation>Janela de depuração</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Geral</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -3346,10 +3338,6 @@
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
         <translation>Exibir todas opções de depuração (uso: --help -help-debug)</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>Encolher arquivo debug log ao iniciar o cliente (padrão 1 se opção -debug não estiver presente)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

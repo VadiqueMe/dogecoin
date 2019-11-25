@@ -35,8 +35,8 @@
 #include <QUrl>
 #include <QVBoxLayout>
 
-TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *parent) :
-    QWidget(parent), model(0), transactionProxyModel(0),
+TransactionView::TransactionView( const PlatformStyle * platformStyle, QWidget * parent ) :
+    QWidget(parent), walletModel( nullptr ), transactionProxyModel(0),
     transactionView(0), abandonAction(0), columnResizingFixer(0)
 {
     // Build filter row
@@ -184,9 +184,9 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *pa
     connect(showDetailsAction, SIGNAL(triggered()), this, SLOT(showDetails()));
 }
 
-void TransactionView::setModel( WalletModel * walletModel )
+void TransactionView::setWalletModel( WalletModel * model )
 {
-    this->model = walletModel ;
+    this->walletModel = model ;
     if ( model != nullptr )
     {
         transactionProxyModel = new TransactionFilterProxy(this);
@@ -198,7 +198,7 @@ void TransactionView::setModel( WalletModel * walletModel )
         transactionProxyModel->setSortRole(Qt::EditRole);
 
         transactionView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        transactionView->setModel(transactionProxyModel);
+        transactionView->setModel( transactionProxyModel ) ;
         transactionView->setAlternatingRowColors(true);
         transactionView->setSelectionBehavior(QAbstractItemView::SelectRows);
         transactionView->setSelectionMode(QAbstractItemView::ExtendedSelection);
@@ -316,7 +316,7 @@ void TransactionView::changedAmount(const QString &amount)
     if(!transactionProxyModel)
         return;
     CAmount amount_parsed = 0;
-    if ( UnitsOfCoin::parse( model->getOptionsModel()->getDisplayUnit(), amount, &amount_parsed ) )
+    if ( UnitsOfCoin::parse( walletModel->getOptionsModel()->getDisplayUnit(), amount, &amount_parsed ) )
     {
         transactionProxyModel->setMinAmount(amount_parsed);
     }
@@ -329,26 +329,26 @@ void TransactionView::changedAmount(const QString &amount)
 void TransactionView::exportClicked()
 {
     // CSV is currently the only supported format
-    QString filename = GUIUtil::getSaveFileName(this,
+    QString filename = GUIUtil::getSaveFileName( this,
         tr("Export Transaction History"), QString(),
-        tr("Comma separated file (*.csv)"), NULL);
+        tr("Comma separated file (*.csv)"), NULL ) ;
 
-    if (filename.isNull())
-        return;
+    if ( filename.isNull() )
+        return ;
 
-    CSVModelWriter writer(filename);
+    CSVModelWriter writer( filename ) ;
 
+    writer.setModel( transactionProxyModel ) ;
     // name, column, role
-    writer.setModel(transactionProxyModel);
-    writer.addColumn(tr("Confirmed"), 0, TransactionTableModel::ConfirmedRole);
-    if (model && model->haveWatchOnly())
-        writer.addColumn(tr("Watch-only"), TransactionTableModel::Watchonly);
-    writer.addColumn(tr("Date"), 0, TransactionTableModel::DateRole);
-    writer.addColumn(tr("Type"), TransactionTableModel::Type, Qt::EditRole);
-    writer.addColumn(tr("Label"), 0, TransactionTableModel::LabelRole);
-    writer.addColumn(tr("Address"), 0, TransactionTableModel::AddressRole);
-    writer.addColumn( GUIUtil::makeTitleForAmountColumn( model->getOptionsModel()->getDisplayUnit() ), 0, TransactionTableModel::FormattedAmountRole ) ;
-    writer.addColumn(tr("ID"), 0, TransactionTableModel::TxIDRole);
+    writer.addColumn( tr("Confirmed"), 0, TransactionTableModel::ConfirmedRole ) ;
+    if ( walletModel && walletModel->haveWatchOnly() )
+        writer.addColumn( tr("Watch-only"), TransactionTableModel::Watchonly ) ;
+    writer.addColumn( tr("Date"), 0, TransactionTableModel::DateRole ) ;
+    writer.addColumn( tr("Type"), TransactionTableModel::Type, Qt::EditRole ) ;
+    writer.addColumn( tr("Label"), 0, TransactionTableModel::LabelRole ) ;
+    writer.addColumn( tr("Address"), 0, TransactionTableModel::AddressRole ) ;
+    writer.addColumn( GUIUtil::makeTitleForAmountColumn( walletModel->getOptionsModel()->getDisplayUnit() ), 0, TransactionTableModel::FormattedAmountRole ) ;
+    writer.addColumn( tr("ID"), 0, TransactionTableModel::TxIDRole ) ;
 
     if ( ! writer.write() ) {
         Q_EMIT message( tr("Exporting Failed"), tr("There was an error trying to save the transaction history to %1").arg( filename ),
@@ -370,7 +370,7 @@ void TransactionView::contextualMenu(const QPoint &point)
     // check if transaction can be abandoned, disable context menu action in case it doesn't
     uint256 hash;
     hash.SetHex(selection.at(0).data(TransactionTableModel::TxHashRole).toString().toStdString());
-    abandonAction->setEnabled( model->transactionCanBeAbandoned( hash ) ) ;
+    abandonAction->setEnabled( walletModel->transactionCanBeAbandoned( hash ) ) ;
 
     if(index.isValid())
     {
@@ -390,10 +390,10 @@ void TransactionView::abandonTx()
     hash.SetHex(hashQStr.toStdString());
 
     // Abandon the wallet transaction over the walletModel
-    model->abandonTransaction(hash);
+    walletModel->abandonTransaction( hash ) ;
 
     // Update the table
-    model->getTransactionTableModel()->updateTransaction(hashQStr, CT_UPDATED, false);
+    walletModel->getTransactionTableModel()->updateTransaction( hashQStr, CT_UPDATED, false ) ;
 }
 
 void TransactionView::copyAddress()
@@ -428,12 +428,12 @@ void TransactionView::copyTxPlainText()
 
 void TransactionView::editLabel()
 {
-    if(!transactionView->selectionModel() ||!model)
-        return;
+    if ( ! transactionView->selectionModel() || ! walletModel ) return ;
+
     QModelIndexList selection = transactionView->selectionModel()->selectedRows();
     if(!selection.isEmpty())
     {
-        AddressTableModel *addressBook = model->getAddressTableModel();
+        AddressTableModel * addressBook = walletModel->getAddressTableModel() ;
         if(!addressBook)
             return;
         QString address = selection.at(0).data(TransactionTableModel::AddressRole).toString();
@@ -443,7 +443,7 @@ void TransactionView::editLabel()
             return;
         }
         // Is address in address book? Address book can miss address when a transaction is
-        // sent from outside the UI.
+        // sent from outside the UI
         int idx = addressBook->lookupAddress(address);
         if(idx != -1)
         {
@@ -456,16 +456,15 @@ void TransactionView::editLabel()
                 type == AddressTableModel::Receive
                 ? EditAddressDialog::EditReceivingAddress
                 : EditAddressDialog::EditSendingAddress, this);
-            dlg.setModel(addressBook);
+            dlg.setAddressTableModel( addressBook ) ;
             dlg.loadRow(idx);
             dlg.exec();
         }
         else
         {
             // Add sending address
-            EditAddressDialog dlg(EditAddressDialog::NewSendingAddress,
-                this);
-            dlg.setModel(addressBook);
+            EditAddressDialog dlg( EditAddressDialog::NewSendingAddress, this ) ;
+            dlg.setAddressTableModel( addressBook ) ;
             dlg.setAddress(address);
             dlg.exec();
         }

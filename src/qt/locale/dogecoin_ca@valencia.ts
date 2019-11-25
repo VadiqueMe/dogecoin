@@ -1169,8 +1169,8 @@
         <translation>N/A</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Versió del client</translation>
+        <source>Version</source>
+        <translation>Versió</translation>
     </message>
     <message>
         <source>Information</source>
@@ -1179,10 +1179,6 @@
     <message>
         <source>Debug window</source>
         <translation>Finestra de depuració</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>General</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -2630,10 +2626,6 @@
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
         <translation>Mostra totes les opcions de depuració (ús: --help  --help-debug)</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>Redueix el fitxer debug log durant l'inici del client (per defecte: 1 quan no -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

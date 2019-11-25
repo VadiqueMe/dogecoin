@@ -1,11 +1,11 @@
 // Copyright (c) 2012-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_DBWRAPPER_H
-#define BITCOIN_DBWRAPPER_H
+#ifndef DOGECOIN_DBWRAPPER_H
+#define DOGECOIN_DBWRAPPER_H
 
-#include "clientversion.h"
+#include "peerversion.h"
 #include "serialize.h"
 #include "streams.h"
 #include "util.h"
@@ -58,9 +58,12 @@ private:
 
 public:
     /**
-     * @param[in] _parent   CDBWrapper that this batch is to be submitted to
+     * @param[in] wrapper   CDBWrapper that this batch is to be submitted to
      */
-    CDBBatch(const CDBWrapper &_parent) : parent(_parent), ssKey(SER_DISK, CLIENT_VERSION), ssValue(SER_DISK, CLIENT_VERSION) { };
+    CDBBatch( const CDBWrapper & wrapper )
+        : parent( wrapper )
+        , ssKey( SER_DISK, PEER_VERSION )
+        , ssValue( SER_DISK, PEER_VERSION ) { } ;
 
     template <typename K, typename V>
     void Write(const K& key, const V& value)
@@ -112,7 +115,7 @@ public:
     void SeekToFirst();
 
     template<typename K> void Seek(const K& key) {
-        CDataStream ssKey(SER_DISK, CLIENT_VERSION);
+        CDataStream ssKey( SER_DISK, PEER_VERSION ) ;
         ssKey.reserve(DBWRAPPER_PREALLOC_KEY_SIZE);
         ssKey << key;
         leveldb::Slice slKey(ssKey.data(), ssKey.size());
@@ -124,8 +127,8 @@ public:
     template<typename K> bool GetKey(K& key) {
         leveldb::Slice slKey = piter->key();
         try {
-            CDataStream ssKey(slKey.data(), slKey.data() + slKey.size(), SER_DISK, CLIENT_VERSION);
-            ssKey >> key;
+            CDataStream ssKey( slKey.data(), slKey.data() + slKey.size(), SER_DISK, PEER_VERSION ) ;
+            ssKey >> key ;
         } catch (const std::exception&) {
             return false;
         }
@@ -139,7 +142,7 @@ public:
     template<typename V> bool GetValue(V& value) {
         leveldb::Slice slValue = piter->value();
         try {
-            CDataStream ssValue(slValue.data(), slValue.data() + slValue.size(), SER_DISK, CLIENT_VERSION);
+            CDataStream ssValue( slValue.data(), slValue.data() + slValue.size(), SER_DISK, PEER_VERSION ) ;
             ssValue.Xor(dbwrapper_private::GetObfuscateKey(parent));
             ssValue >> value;
         } catch (const std::exception&) {
@@ -205,7 +208,7 @@ public:
     template <typename K, typename V>
     bool Read(const K& key, V& value) const
     {
-        CDataStream ssKey(SER_DISK, CLIENT_VERSION);
+        CDataStream ssKey( SER_DISK, PEER_VERSION ) ;
         ssKey.reserve(DBWRAPPER_PREALLOC_KEY_SIZE);
         ssKey << key;
         leveldb::Slice slKey(ssKey.data(), ssKey.size());
@@ -219,7 +222,7 @@ public:
             dbwrapper_private::HandleError(status);
         }
         try {
-            CDataStream ssValue(strValue.data(), strValue.data() + strValue.size(), SER_DISK, CLIENT_VERSION);
+            CDataStream ssValue( strValue.data(), strValue.data() + strValue.size(), SER_DISK, PEER_VERSION ) ;
             ssValue.Xor(obfuscate_key);
             ssValue >> value;
         } catch (const std::exception&) {
@@ -239,7 +242,7 @@ public:
     template <typename K>
     bool Exists(const K& key) const
     {
-        CDataStream ssKey(SER_DISK, CLIENT_VERSION);
+        CDataStream ssKey( SER_DISK, PEER_VERSION ) ;
         ssKey.reserve(DBWRAPPER_PREALLOC_KEY_SIZE);
         ssKey << key;
         leveldb::Slice slKey(ssKey.data(), ssKey.size());
@@ -288,5 +291,4 @@ public:
     bool IsEmpty();
 };
 
-#endif // BITCOIN_DBWRAPPER_H
-
+#endif

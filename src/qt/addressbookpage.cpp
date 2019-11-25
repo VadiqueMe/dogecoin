@@ -21,10 +21,10 @@
 #include <QMessageBox>
 #include <QSortFilterProxyModel>
 
-AddressBookPage::AddressBookPage(const PlatformStyle *platformStyle, Mode _mode, Tabs _tab, QWidget *parent) :
+AddressBookPage::AddressBookPage( const PlatformStyle * platformStyle, Mode _mode, Tabs _tab, QWidget * parent ) :
     QDialog(parent),
     ui(new Ui::AddressBookPage),
-    model(0),
+    addressTableModel( nullptr ),
     mode(_mode),
     tab(_tab)
 {
@@ -107,14 +107,14 @@ AddressBookPage::~AddressBookPage()
     delete ui;
 }
 
-void AddressBookPage::setModel(AddressTableModel *_model)
+void AddressBookPage::setAddressTableModel( AddressTableModel * model )
 {
-    this->model = _model;
-    if(!_model)
-        return;
+    this->addressTableModel = model ;
+    if ( model == nullptr )
+        return ;
 
-    proxyModel = new QSortFilterProxyModel(this);
-    proxyModel->setSourceModel(_model);
+    proxyModel = new QSortFilterProxyModel( this ) ;
+    proxyModel->setSourceModel( addressTableModel ) ;
     proxyModel->setDynamicSortFilter(true);
     proxyModel->setSortCaseSensitivity(Qt::CaseInsensitive);
     proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
@@ -147,7 +147,7 @@ void AddressBookPage::setModel(AddressTableModel *_model)
         this, SLOT( selectionChanged() ) ) ;
 
     // Select row for newly created address
-    connect(_model, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(selectNewAddress(QModelIndex,int,int)));
+    connect( addressTableModel, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(selectNewAddress(QModelIndex,int,int)) ) ;
 
     selectionChanged();
 }
@@ -164,8 +164,8 @@ void AddressBookPage::onCopyLabelAction()
 
 void AddressBookPage::onEditAction()
 {
-    if ( ! model ) return ;
-    if ( ! ui->addressBookTableView->selectionModel() ) return ;
+    if ( addressTableModel == nullptr ) return ;
+    if ( ui->addressBookTableView->selectionModel() == nullptr ) return ;
 
     QModelIndexList indexes = ui->addressBookTableView->selectionModel()->selectedRows() ;
     if(indexes.isEmpty())
@@ -175,7 +175,7 @@ void AddressBookPage::onEditAction()
         tab == SendingTab ?
         EditAddressDialog::EditSendingAddress :
         EditAddressDialog::EditReceivingAddress, this);
-    dlg.setModel(model);
+    dlg.setAddressTableModel( addressTableModel ) ;
     QModelIndex origIndex = proxyModel->mapToSource(indexes.at(0));
     dlg.loadRow(origIndex.row());
     dlg.exec();
@@ -183,18 +183,15 @@ void AddressBookPage::onEditAction()
 
 void AddressBookPage::on_newAddress_clicked()
 {
-    if(!model)
-        return;
+    if ( addressTableModel == nullptr ) return ;
 
     EditAddressDialog dlg(
         tab == SendingTab ?
         EditAddressDialog::NewSendingAddress :
         EditAddressDialog::NewReceivingAddress, this);
-    dlg.setModel(model);
-    if(dlg.exec())
-    {
-        newAddressToSelect = dlg.getAddress();
-    }
+    dlg.setAddressTableModel( addressTableModel ) ;
+    if ( dlg.exec() )
+        newAddressToSelect = dlg.getAddress() ;
 }
 
 void AddressBookPage::on_deleteAddress_clicked()
@@ -213,9 +210,9 @@ void AddressBookPage::selectionChanged()
 {
     // Set button states based on selected tab and selection
     QTableView * table = ui->addressBookTableView ;
-    if ( ! table->selectionModel() ) return ;
+    if ( table->selectionModel() == nullptr ) return ;
 
-    if(table->selectionModel()->hasSelection())
+    if ( table->selectionModel()->hasSelection() )
     {
         switch(tab)
         {
@@ -276,10 +273,10 @@ void AddressBookPage::on_exportButton_clicked()
 
     CSVModelWriter writer(filename);
 
+    writer.setModel( proxyModel ) ;
     // name, column, role
-    writer.setModel(proxyModel);
-    writer.addColumn("Label", AddressTableModel::Label, Qt::EditRole);
-    writer.addColumn("Address", AddressTableModel::Address, Qt::EditRole);
+    writer.addColumn( "Label", AddressTableModel::Label, Qt::EditRole ) ;
+    writer.addColumn( "Address", AddressTableModel::Address, Qt::EditRole ) ;
 
     if(!writer.write()) {
         QMessageBox::critical(this, tr("Exporting Failed"),
@@ -298,7 +295,7 @@ void AddressBookPage::contextualMenu( const QPoint & point )
 
 void AddressBookPage::selectNewAddress(const QModelIndex &parent, int begin, int /*end*/)
 {
-    QModelIndex idx = proxyModel->mapFromSource(model->index(begin, AddressTableModel::Address, parent));
+    QModelIndex idx = proxyModel->mapFromSource( addressTableModel->index( begin, AddressTableModel::Address, parent ) ) ;
     if(idx.isValid() && (idx.data(Qt::EditRole).toString() == newAddressToSelect))
     {
         // Select row of newly created address, once

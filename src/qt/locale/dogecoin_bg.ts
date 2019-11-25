@@ -422,10 +422,6 @@
         <translation>Покажи %1 помощно съобщение за да получиш лист с възможни Биткойн команди</translation>
     </message>
     <message>
-        <source>%1 client</source>
-        <translation>%1 клиент</translation>
-    </message>
-    <message>
         <source>Catching up...</source>
         <translation>Зарежда блокове...</translation>
     </message>
@@ -1133,8 +1129,8 @@
         <translation>Несъществуващ</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Версия на клиента</translation>
+        <source>Version</source>
+        <translation>Версия</translation>
     </message>
     <message>
         <source>Information</source>
@@ -1143,10 +1139,6 @@
     <message>
         <source>Debug window</source>
         <translation>Прозорец с грешки</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Основни</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>

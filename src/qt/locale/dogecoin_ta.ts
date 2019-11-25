@@ -375,8 +375,8 @@
         <translation>N/A</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>வாடிக்கையாளர் பதிப்பு</translation>
+        <source>Version</source>
+        <translation>பதிப்பு</translation>
     </message>
     <message>
         <source>Information</source>

@@ -450,10 +450,6 @@
         <translation>Показать помощь по %1, чтобы получить список доступных параметров командной строки</translation>
     </message>
     <message>
-        <source>%1 client</source>
-        <translation>%1 клиент</translation>
-    </message>
-    <message>
         <source>Connecting to peers...</source>
         <translation>Подключение к пирам...</translation>
     </message>
@@ -1413,8 +1409,8 @@
         <translation>Н/Д</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Версия клиента</translation>
+        <source>Version</source>
+        <translation>Версия</translation>
     </message>
     <message>
         <source>Information</source>
@@ -1423,10 +1419,6 @@
     <message>
         <source>Debug window</source>
         <translation>Окно отладки</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Общие</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -3350,10 +3342,6 @@
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
         <translation>Показать все отладочные параметры (использование: --help -help-debug)</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>Сжимать файл debug log при запуске клиента (по умолчанию: 1, если нет -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

@@ -7,8 +7,8 @@
 #include "config/dogecoin-config.h"
 #endif
 
+#include "peerversion.h"
 #include "chainparams.h"
-#include "clientversion.h"
 #include "compat.h"
 #include "rpc/server.h"
 #include "init.h"
@@ -31,7 +31,7 @@
  *
  * \section intro_sec Introduction
  *
- * This is the developer documentation of the reference client for an experimental new digital currency called Bitcoin (https://www.bitcoin.org/),
+ * This is the developer documentation of the peer for an experimental new digital currency called Bitcoin (https://www.bitcoin.org/),
  * which enables instant payments to anyone, anywhere in the world. Bitcoin uses peer-to-peer technology to operate
  * with no central authority: managing transactions and issuing money are carried out collectively by the network.
  *
@@ -124,10 +124,10 @@ bool AppInit(int argc, char* argv[])
             if (!IsSwitchChar(argv[i][0]) && !boost::algorithm::istarts_with(argv[i], "dogecoin:"))
                 fCommandLine = true;
 
-        if (fCommandLine)
+        if ( fCommandLine )
         {
-            fprintf(stderr, "Error: There is no RPC client functionality in dogecoind anymore. Use the dogecoin-cli utility instead.\n");
-            exit(EXIT_FAILURE);
+            fprintf( stderr, "Error: There is no RPC client functionality in dogecoind anymore. Use the dogecoin-cli utility instead\n" ) ;
+            exit( EXIT_FAILURE ) ;
         }
         // -server defaults to true for bitcoind but not for the GUI so do this here
         SoftSetBoolArg("-server", true);

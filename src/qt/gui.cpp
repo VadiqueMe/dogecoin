@@ -10,7 +10,7 @@
 #include "gui.h"
 
 #include "unitsofcoin.h"
-#include "clientmodel.h"
+#include "networkmodel.h"
 #include "guiconstants.h"
 #include "guiutil.h"
 #include "modaloverlay.h"
@@ -84,7 +84,7 @@ const QString DogecoinGUI::DEFAULT_WALLET = "~Default" ;
 DogecoinGUI::DogecoinGUI( const PlatformStyle * style, const NetworkStyle * networkStyle, QWidget * parent ) :
     QMainWindow(parent),
     enableWallet(false),
-    clientModel(0),
+    networkModel( nullptr ),
     walletFrame(0),
     unitDisplayControl(0),
     labelWalletEncryptionIcon(0),
@@ -419,7 +419,7 @@ void DogecoinGUI::createActions()
     connect(toggleHideAction, SIGNAL(triggered()), this, SLOT(toggleHidden()));
     connect(showHelpMessageAction, SIGNAL(triggered()), this, SLOT(showHelpMessageClicked()));
     connect(openRPCConsoleAction, SIGNAL(triggered()), this, SLOT(showDebugWindow()));
-    // prevents an open debug window from becoming stuck/unusable on client shutdown
+    // prevents an open debug window from becoming stuck/unusable on shutdown
     connect(quitAction, SIGNAL(triggered()), rpcConsole, SLOT(hide()));
 
 #ifdef ENABLE_WALLET
@@ -506,47 +506,47 @@ void DogecoinGUI::createToolBars()
     }
 }
 
-void DogecoinGUI::setClientModel(ClientModel *_clientModel)
+void DogecoinGUI::setNetworkModel( NetworkModel * model )
 {
-    this->clientModel = _clientModel;
-    if(_clientModel)
+    this->networkModel = model ;
+    if ( model != nullptr )
     {
         // Create system tray menu (or setup the dock menu) that late to prevent users from calling actions,
-        // while the client has not yet fully loaded
+        // while the peer has not yet fully loaded
         createTrayIconMenu();
 
-        // Keep up to date with client
-        updateNetworkState();
-        connect(_clientModel, SIGNAL(numConnectionsChanged(int)), this, SLOT(setNumConnections(int)));
-        connect(_clientModel, SIGNAL(networkActiveChanged(bool)), this, SLOT(setNetworkActive(bool)));
+        // Keep up to date with the peer
+        updateNetworkState() ;
+        connect( model, SIGNAL( numConnectionsChanged(int) ), this, SLOT( setNumConnections(int) ) ) ;
+        connect( model, SIGNAL( networkActiveChanged(bool) ), this, SLOT( setNetworkActive(bool) ) ) ;
 
-        modalOverlay->setKnownBestHeight(_clientModel->getHeaderTipHeight(), QDateTime::fromTime_t(_clientModel->getHeaderTipTime()));
-        setNumBlocks(_clientModel->getNumBlocks(), _clientModel->getLastBlockDate(), _clientModel->getVerificationProgress(NULL), false);
-        connect(_clientModel, SIGNAL(numBlocksChanged(int,QDateTime,double,bool)), this, SLOT(setNumBlocks(int,QDateTime,double,bool)));
+        modalOverlay->setKnownBestHeight( model->getHeaderTipHeight(), QDateTime::fromTime_t( model->getHeaderTipTime() ) ) ;
+        setNumBlocks( model->getNumBlocks(), model->getLastBlockDate(), model->getVerificationProgress( NULL ), false ) ;
+        connect( model, SIGNAL( numBlocksChanged(int, QDateTime, double, bool) ), this, SLOT( setNumBlocks(int, QDateTime, double, bool) ) ) ;
 
-        // Receive and report messages from client model
-        connect(_clientModel, SIGNAL(message(QString,QString,unsigned int)), this, SLOT(message(QString,QString,unsigned int)));
+        // Receive and report messages from network model
+        connect( model, SIGNAL( message(QString, QString, unsigned int) ), this, SLOT( message(QString, QString, unsigned int) ) ) ;
 
         // Show progress dialog
-        connect(_clientModel, SIGNAL(showProgress(QString,int)), this, SLOT(showProgress(QString,int)));
+        connect( model, SIGNAL( showProgress(QString, int) ), this, SLOT( showProgress(QString, int) ) ) ;
 
-        rpcConsole->setClientModel(_clientModel);
+        rpcConsole->setNetworkModel( model ) ;
 #ifdef ENABLE_WALLET
-        if(walletFrame)
+        if ( walletFrame != nullptr )
         {
-            walletFrame->setClientModel(_clientModel);
+            walletFrame->setNetworkModel( model ) ;
         }
-#endif // ENABLE_WALLET
-        unitDisplayControl->setOptionsModel(_clientModel->getOptionsModel());
+#endif
+        unitDisplayControl->setOptionsModel( model->getOptionsModel() ) ;
 
-        OptionsModel* optionsModel = _clientModel->getOptionsModel();
-        if(optionsModel)
+        OptionsModel* optionsModel = model->getOptionsModel() ;
+        if ( optionsModel != nullptr )
         {
-            // be aware of the tray icon disable state change reported by the OptionsModel object.
-            connect(optionsModel,SIGNAL(hideTrayIconChanged(bool)),this,SLOT(setTrayIconVisible(bool)));
+            // be aware of the tray icon disable state change
+            connect( optionsModel, SIGNAL( hideTrayIconChanged(bool) ), this, SLOT( setTrayIconVisible(bool) ) ) ;
 
-            // initialize the disable state of the tray icon with the current value in the model.
-            setTrayIconVisible(optionsModel->getHideTrayIcon());
+            // initialize the disable state of the tray icon with the current value in the model
+            setTrayIconVisible( optionsModel->getHideTrayIcon() ) ;
         }
     } else {
         // Disable possibility to show main window via action
@@ -557,14 +557,14 @@ void DogecoinGUI::setClientModel(ClientModel *_clientModel)
             trayIconMenu->clear();
         }
         // Propagate cleared model to child objects
-        rpcConsole->setClientModel(nullptr);
+        rpcConsole->setNetworkModel( nullptr ) ;
 #ifdef ENABLE_WALLET
-        if (walletFrame)
+        if ( walletFrame != nullptr )
         {
-            walletFrame->setClientModel(nullptr);
+            walletFrame->setNetworkModel( nullptr ) ;
         }
 #endif // ENABLE_WALLET
-        unitDisplayControl->setOptionsModel(nullptr);
+        unitDisplayControl->setOptionsModel( nullptr ) ;
     }
 }
 
@@ -618,7 +618,7 @@ void DogecoinGUI::createTrayIcon(const NetworkStyle *networkStyle)
 {
 #ifndef Q_OS_MAC
     trayIcon = new QSystemTrayIcon(this);
-    QString toolTip = tr( "%1 client" ).arg( tr(PACKAGE_NAME) ) + " " + networkStyle->getTextToAppendToTitle() ;
+    QString toolTip = tr(PACKAGE_NAME) + " peer " + networkStyle->getTextToAppendToTitle() ;
     trayIcon->setToolTip(toolTip);
     trayIcon->setIcon(networkStyle->getTrayAndWindowIcon());
     trayIcon->hide();
@@ -676,28 +676,28 @@ void DogecoinGUI::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
 
 void DogecoinGUI::optionsClicked()
 {
-    if(!clientModel || !clientModel->getOptionsModel())
-        return;
+    if ( ! networkModel || ! networkModel->getOptionsModel() )
+        return ;
 
     OptionsDialog dlg( this, enableWallet, /* show third party urls option or not */ NameOfChain() == "main" ) ;
-    dlg.setModel(clientModel->getOptionsModel());
+    dlg.setOptionsModel( networkModel->getOptionsModel() ) ;
     dlg.exec();
 }
 
 void DogecoinGUI::aboutClicked()
 {
-    if ( clientModel == nullptr ) return ;
+    if ( networkModel == nullptr ) return ;
 
-    HelpMessageDialog dlg(this, true);
-    dlg.exec();
+    HelpMessageDialog dlg( this, true ) ;
+    dlg.exec() ;
 }
 
 void DogecoinGUI::showDebugWindow()
 {
-    rpcConsole->showNormal();
-    rpcConsole->show();
-    rpcConsole->raise();
-    rpcConsole->activateWindow();
+    rpcConsole->showNormal() ;
+    rpcConsole->show() ;
+    rpcConsole->raise() ;
+    rpcConsole->activateWindow() ;
 }
 
 void DogecoinGUI::showDebugWindowActivateConsole()
@@ -765,7 +765,7 @@ void DogecoinGUI::gotoVerifyMessageTab(QString addr)
 
 void DogecoinGUI::updateNetworkState()
 {
-    int count = clientModel->getNumConnections() ;
+    int count = networkModel->getNumConnections() ;
     QString icon ;
     switch ( count )
     {
@@ -778,7 +778,7 @@ void DogecoinGUI::updateNetworkState()
 
     QString tooltip ;
 
-    if ( clientModel->isNetworkActive() ) {
+    if ( networkModel->isNetworkActive() ) {
         tooltip = tr( "%n active connection(s) to Dogecoin network", "", count ) + QString( ".<br>" ) + tr( "Click to switch network activity off" ) ;
     } else {
         tooltip = tr( "Network activity is off" )  + QString( ".<br>" ) + tr( "Click to turn it back on" ) ;
@@ -804,9 +804,9 @@ void DogecoinGUI::setNetworkActive(bool networkActive)
 
 void DogecoinGUI::updateHeadersSyncProgressLabel()
 {
-    int64_t headersTipTime = clientModel->getHeaderTipTime();
-    int headersTipHeight = clientModel->getHeaderTipHeight();
-    int estHeadersLeft = (GetTime() - headersTipTime) / Params().GetConsensus(headersTipHeight).nPowTargetSpacing;
+    int64_t headersTipTime = networkModel->getHeaderTipTime() ;
+    int headersTipHeight = networkModel->getHeaderTipHeight() ;
+    int estHeadersLeft = ( GetTime() - headersTipTime ) / Params().GetConsensus( headersTipHeight ).nPowTargetSpacing ;
     if (estHeadersLeft > HEADER_HEIGHT_DELTA_SYNC)
         progressBarLabel->setText(tr("Syncing Headers (%1%)...").arg(QString::number(100.0 / (headersTipHeight+estHeadersLeft)*headersTipHeight, 'f', 1)));
 }
@@ -820,14 +820,13 @@ void DogecoinGUI::setNumBlocks(int count, const QDateTime& blockDate, double nVe
         else
             modalOverlay->tipUpdate(count, blockDate, nVerificationProgress);
     }
-    if (!clientModel)
-        return;
+    if ( networkModel == nullptr ) return ;
 
     // Prevent orphan statusbar messages (e.g. hover Quit in main menu, wait until chain-sync starts -> garbled text)
     statusBar()->clearMessage();
 
     // Acquire current block source
-    enum BlockSource blockSource = clientModel->getBlockSource();
+    enum BlockSource blockSource = networkModel->getBlockSource() ;
     switch (blockSource) {
         case BLOCK_SOURCE_NETWORK:
             if ( header ) {
@@ -986,7 +985,7 @@ void DogecoinGUI::changeEvent(QEvent *e)
 #ifndef Q_OS_MAC // Ignored on Mac
     if(e->type() == QEvent::WindowStateChange)
     {
-        if(clientModel && clientModel->getOptionsModel() && clientModel->getOptionsModel()->getMinimizeToTray())
+        if ( networkModel && networkModel->getOptionsModel() && networkModel->getOptionsModel()->getMinimizeToTray() )
         {
             QWindowStateChangeEvent *wsevt = static_cast<QWindowStateChangeEvent*>(e);
             if(!(wsevt->oldState() & Qt::WindowMinimized) && isMinimized())
@@ -1002,9 +1001,9 @@ void DogecoinGUI::changeEvent(QEvent *e)
 void DogecoinGUI::closeEvent(QCloseEvent *event)
 {
 #ifndef Q_OS_MAC // Ignored on Mac
-    if(clientModel && clientModel->getOptionsModel())
+    if ( networkModel && networkModel->getOptionsModel() )
     {
-        if(!clientModel->getOptionsModel()->getMinimizeOnClose())
+        if ( ! networkModel->getOptionsModel()->getMinimizeOnClose() )
         {
             // close rpcConsole in case it was open to make some space for the shutdown window
             rpcConsole->close();
@@ -1143,8 +1142,7 @@ void DogecoinGUI::updateBottomBarShowsDigging()
 
 void DogecoinGUI::showNormalIfMinimized(bool fToggleHidden)
 {
-    if(!clientModel)
-        return;
+    if ( networkModel == nullptr ) return ;
 
     // activateWindow() (sometimes) helps with keyboard focus on Windows
     if (isHidden())
@@ -1237,22 +1235,20 @@ static bool ThreadSafeMessageBox( DogecoinGUI * gui, const std::string & message
 
 void DogecoinGUI::subscribeToCoreSignals()
 {
-    // Connect signals to client
     uiInterface.ThreadSafeMessageBox.connect(boost::bind(ThreadSafeMessageBox, this, _1, _2, _3));
     uiInterface.ThreadSafeQuestion.connect(boost::bind(ThreadSafeMessageBox, this, _1, _3, _4));
 }
 
 void DogecoinGUI::unsubscribeFromCoreSignals()
 {
-    // Disconnect signals from client
     uiInterface.ThreadSafeMessageBox.disconnect(boost::bind(ThreadSafeMessageBox, this, _1, _2, _3));
     uiInterface.ThreadSafeQuestion.disconnect(boost::bind(ThreadSafeMessageBox, this, _1, _3, _4));
 }
 
 void DogecoinGUI::toggleNetworkActive()
 {
-    if ( clientModel != nullptr )
-        clientModel->setNetworkActive( ! clientModel->isNetworkActive() ) ;
+    if ( networkModel != nullptr )
+        networkModel->setNetworkActive( ! networkModel->isNetworkActive() ) ;
 }
 
 UnitDisplayStatusBarControl::UnitDisplayStatusBarControl(const PlatformStyle *platformStyle) :

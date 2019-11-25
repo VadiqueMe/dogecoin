@@ -41,8 +41,8 @@ public:
     explicit OptionsDialog( QWidget * parent, bool enableWallet, bool showUrlsField = true ) ;
     ~OptionsDialog() ;
 
-    void setModel(OptionsModel *model);
-    void setMapper();
+    void setOptionsModel( OptionsModel * model ) ;
+    void setMapper() ;
 
 private Q_SLOTS:
     /* set OK button state (enabled / disabled) */
@@ -64,7 +64,7 @@ Q_SIGNALS:
 
 private:
     Ui::OptionsDialog * ui ;
-    OptionsModel * model ;
+    OptionsModel * optionsModel ;
     QDataWidgetMapper * mapper ;
     bool showThirdPartyUrlsOption ;
 };

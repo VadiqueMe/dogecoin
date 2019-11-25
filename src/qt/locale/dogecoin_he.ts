@@ -851,8 +851,8 @@
         <translation>לא זמין</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>גרסת מנשק</translation>
+        <source>Version</source>
+        <translation>גרסה</translation>
     </message>
     <message>
         <source>Information</source>
@@ -861,10 +861,6 @@
     <message>
         <source>Debug window</source>
         <translation>חלון ניפוי</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>כללי</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -1708,10 +1704,6 @@
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
         <translation>הצגת כל אפשרויות הניפוי (שימוש: ‎--help -help-debug)</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>כיווץ הקובץ debug log בהפעלת הלקוח (בררת מחדל: 1 ללא ‎-debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

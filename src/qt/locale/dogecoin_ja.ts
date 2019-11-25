@@ -450,10 +450,6 @@
         <translation>有効な Dogecoin のコマンドライン オプションを見るために %1 のヘルプメッセージを表示します。</translation>
     </message>
     <message>
-        <source>%1 client</source>
-        <translation>%1 クライアント</translation>
-    </message>
-    <message>
         <source>Connecting to peers...</source>
         <translation>ピアに接続しています...</translation>
     </message>
@@ -1413,8 +1409,8 @@
         <translation>N/A</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>クライアントのバージョン</translation>
+        <source>Version</source>
+        <translation>バージョン</translation>
     </message>
     <message>
         <source>Information</source>
@@ -1423,10 +1419,6 @@
     <message>
         <source>Debug window</source>
         <translation>デバッグ ウインドウ</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>一般</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -3355,10 +3347,6 @@
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
         <translation>すべてのデバッグオプションを表示する (使い方: --help -help-debug)</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>クライアント起動時に debug log ファイルを縮小 (初期値: -debug オプションを指定しない場合は1)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

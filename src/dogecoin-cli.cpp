@@ -8,7 +8,7 @@
 #endif
 
 #include "chainparamsbase.h"
-#include "clientversion.h"
+#include "peerversion.h"
 #include "rpc/client.h"
 #include "rpc/protocol.h"
 #include "util.h"
@@ -23,10 +23,10 @@
 
 #include <univalue.h>
 
-static const char DEFAULT_RPCCONNECT[] = "127.0.0.1";
-static const int DEFAULT_HTTP_CLIENT_TIMEOUT=900;
-static const bool DEFAULT_NAMED=false;
-static const int CONTINUE_EXECUTION=-1;
+static const char DEFAULT_RPCCONNECT[] = "127.0.0.1" ;
+static const int DEFAULT_HTTP_CLIENT_TIMEOUT = 900 ;
+static const bool DEFAULT_NAMED = false ;
+static const int CONTINUE_EXECUTION = -1 ;
 
 std::string HelpMessageCli()
 {

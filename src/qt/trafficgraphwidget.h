@@ -1,14 +1,15 @@
 // Copyright (c) 2011-2015 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_QT_TRAFFICGRAPHWIDGET_H
-#define BITCOIN_QT_TRAFFICGRAPHWIDGET_H
+#ifndef QT_TRAFFICGRAPHWIDGET_H
+#define QT_TRAFFICGRAPHWIDGET_H
 
 #include <QWidget>
 #include <QQueue>
 
-class ClientModel;
+class NetworkModel ;
 
 QT_BEGIN_NAMESPACE
 class QPaintEvent;
@@ -20,9 +21,13 @@ class TrafficGraphWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit TrafficGraphWidget(QWidget *parent = 0);
-    void setClientModel(ClientModel *model);
+    explicit TrafficGraphWidget( QWidget * parent = nullptr ) ;
+
+    void setNetworkModel( NetworkModel * model ) ;
     int getGraphRangeMins() const;
+
+    void setSentColor( const QColor & color ) {  colorForSent = color ;  }
+    void setReceivedColor( const QColor & color ) {  colorForReceived = color ;  }
 
 protected:
     void paintEvent(QPaintEvent *);
@@ -42,7 +47,11 @@ private:
     QQueue<float> vSamplesOut;
     quint64 nLastBytesIn;
     quint64 nLastBytesOut;
-    ClientModel *clientModel;
-};
+    NetworkModel * networkModel ;
 
-#endif // BITCOIN_QT_TRAFFICGRAPHWIDGET_H
+    QColor colorForSent ;
+    QColor colorForReceived ;
+
+} ;
+
+#endif

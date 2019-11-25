@@ -418,10 +418,6 @@
         <translation>Atualizado</translation>
     </message>
     <message>
-        <source>%1 client</source>
-        <translation>Cliente %1</translation>
-    </message>
-    <message>
         <source>Catching up...</source>
         <translation>Recuperando o atraso...</translation>
     </message>
@@ -1205,8 +1201,8 @@
         <translation>N/D</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Versão do Cliente</translation>
+        <source>Version</source>
+        <translation>Versão</translation>
     </message>
     <message>
         <source>Information</source>
@@ -1215,10 +1211,6 @@
     <message>
         <source>Debug window</source>
         <translation>Janela de depuração</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Geral</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -2414,10 +2406,6 @@
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
         <translation>Mostrar todas as opções de depuração (utilização: --help -help-debug)</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>Encolher ficheiro debug log ao iniciar o cliente (por defeito: 1 sem -debug definido)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

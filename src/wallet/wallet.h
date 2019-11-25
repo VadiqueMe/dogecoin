@@ -80,7 +80,7 @@ class CWalletTx;
 /** (client) version numbers for particular wallet features */
 enum WalletFeature
 {
-    FEATURE_BASE = 10500, // the earliest version new wallets supports (only useful for getinfo's clientversion output)
+    FEATURE_BASE = 10500, // the earliest version new wallets supports (only useful for getinfo's version output)
 
     FEATURE_WALLETCRYPT = 40000, // wallet encryption
     FEATURE_COMPRPUBKEY = 60000, // compressed public keys
@@ -828,8 +828,8 @@ public:
     //! change which version we're allowed to upgrade to (note that this does not immediately imply upgrading to that format)
     bool SetMaxVersion(int nVersion);
 
-    //! get the current wallet format (the oldest client version guaranteed to understand this wallet)
-    int GetVersion() { LOCK(cs_wallet); return nWalletVersion; }
+    //! get the current wallet format (the oldest version guaranteed to understand this wallet)
+    int GetVersion() {  LOCK( cs_wallet ) ; return nWalletVersion ;  }
 
     //! Get wallet transactions that conflict with given transaction (spend same outputs)
     std::set<uint256> GetConflicts(const uint256& txid) const;

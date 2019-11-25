@@ -450,10 +450,6 @@
         <translation>Vis %1 hjælpebesked for at få en liste over mulige tilvalg for Dogecoin kommandolinje</translation>
     </message>
     <message>
-        <source>%1 client</source>
-        <translation>%1-klient</translation>
-    </message>
-    <message>
         <source>Connecting to peers...</source>
         <translation>Forbinder til knuder…</translation>
     </message>
@@ -1413,8 +1409,8 @@
         <translation>N/A</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Klientversion</translation>
+        <source>Version</source>
+        <translation>Version</translation>
     </message>
     <message>
         <source>Information</source>
@@ -1423,10 +1419,6 @@
     <message>
         <source>Debug window</source>
         <translation>Fejlsøgningsvindue</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Generelt</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -3354,10 +3346,6 @@
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
         <translation>Vis alle tilvalg for fejlsøgning (brug: --help -help-debug)</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>Formindsk debug log filen ved klientopstart (standard: 1 hvis ikke -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

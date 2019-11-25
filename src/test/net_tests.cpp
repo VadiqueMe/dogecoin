@@ -18,7 +18,7 @@ class CAddrManSerializationMock : public CAddrMan
 public:
     virtual void Serialize(CDataStream& s) const = 0;
 
-    //! Ensure that bucket placement is always the same for testing purposes.
+    //! Ensure that bucket placement is always the same for testing purposes
     void MakeDeterministic()
     {
         nKey.SetNull();
@@ -63,12 +63,12 @@ public:
 
 CDataStream AddrmanToStream(CAddrManSerializationMock& _addrman)
 {
-    CDataStream ssPeersIn(SER_DISK, CLIENT_VERSION);
+    CDataStream ssPeersIn( SER_DISK, PEER_VERSION ) ;
     ssPeersIn << FLATDATA(Params().MessageStart());
     ssPeersIn << _addrman;
     std::string str = ssPeersIn.str();
     std::vector<unsigned char> vchData(str.begin(), str.end());
-    return CDataStream(vchData, SER_DISK, CLIENT_VERSION);
+    return CDataStream( vchData, SER_DISK, PEER_VERSION ) ;
 }
 
 BOOST_FIXTURE_TEST_SUITE(net_tests, BasicTestingSetup)

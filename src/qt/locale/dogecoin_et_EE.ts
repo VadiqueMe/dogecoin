@@ -359,10 +359,6 @@
         <translation>Informatsioon</translation>
     </message>
     <message>
-        <source>General</source>
-        <translation>Üldine</translation>
-    </message>
-    <message>
         <source>Network</source>
         <translation>Võrk</translation>
     </message>

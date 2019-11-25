@@ -1,9 +1,9 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_QT_COINCONTROLDIALOG_H
-#define BITCOIN_QT_COINCONTROLDIALOG_H
+#ifndef DOGECOIN_QT_COINCONTROLDIALOG_H
+#define DOGECOIN_QT_COINCONTROLDIALOG_H
 
 #include "amount.h"
 
@@ -47,7 +47,7 @@ public:
     explicit CoinControlDialog(const PlatformStyle *platformStyle, QWidget *parent = 0);
     ~CoinControlDialog();
 
-    void setModel(WalletModel *model);
+    void setWalletModel( WalletModel * model ) ;
 
     // static because also called from sendcoinsdialog
     static void updateLabels(WalletModel*, QDialog*);
@@ -58,7 +58,7 @@ public:
 
 private:
     Ui::CoinControlDialog *ui;
-    WalletModel *model;
+    WalletModel * walletModel ;
     int sortColumn;
     Qt::SortOrder sortOrder;
 
@@ -109,4 +109,4 @@ private Q_SLOTS:
     void updateLabelLocked();
 };
 
-#endif // BITCOIN_QT_COINCONTROLDIALOG_H
+#endif

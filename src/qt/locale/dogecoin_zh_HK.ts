@@ -493,10 +493,6 @@
         <translation>除錯視窗</translation>
     </message>
     <message>
-        <source>General</source>
-        <translation>一般</translation>
-    </message>
-    <message>
         <source>Received</source>
         <translation>已接收</translation>
     </message>

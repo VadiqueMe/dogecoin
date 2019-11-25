@@ -446,10 +446,6 @@
         <translation>显示 %1 帮助信息，获取可用命令行选项列表</translation>
     </message>
     <message>
-        <source>%1 client</source>
-        <translation>%1 客戶</translation>
-    </message>
-    <message>
         <source>Connecting to peers...</source>
         <translation>正在连接到节点……</translation>
     </message>
@@ -1398,8 +1394,8 @@
         <translation>不可用</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>客户端版本</translation>
+        <source>Version</source>
+        <translation>版本</translation>
     </message>
     <message>
         <source>Information</source>
@@ -1408,10 +1404,6 @@
     <message>
         <source>Debug window</source>
         <translation>调试窗口</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>常规</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -3180,10 +3172,6 @@
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
         <translation>显示所有调试选项 (用法: --帮助 -帮助调试)</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>客户端启动时压缩debug log文件(缺省：no-debug模式时为1)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

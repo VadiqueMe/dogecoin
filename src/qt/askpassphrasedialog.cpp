@@ -22,7 +22,7 @@ AskPassphraseDialog::AskPassphraseDialog(Mode _mode, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AskPassphraseDialog),
     mode(_mode),
-    model(0),
+    walletModel( nullptr ),
     fCapsLock(false)
 {
     ui->setupUi(this);
@@ -83,21 +83,22 @@ AskPassphraseDialog::~AskPassphraseDialog()
     delete ui;
 }
 
-void AskPassphraseDialog::setModel(WalletModel *_model)
+void AskPassphraseDialog::setWalletModel( WalletModel * model )
 {
-    this->model = _model;
+    this->walletModel = model ;
 }
 
 void AskPassphraseDialog::accept()
 {
+    if ( walletModel == nullptr ) return ;
+
     SecureString oldpass, newpass1, newpass2;
-    if(!model)
-        return;
     oldpass.reserve(MAX_PASSPHRASE_SIZE);
     newpass1.reserve(MAX_PASSPHRASE_SIZE);
     newpass2.reserve(MAX_PASSPHRASE_SIZE);
+
     // TODO: get rid of this .c_str() by implementing SecureString::operator=(std::string)
-    // Alternately, find a way to make this input mlock()'d to begin with.
+    // Alternately, find a way to make this input mlock()'d to begin with
     oldpass.assign(ui->passEdit1->text().toStdString().c_str());
     newpass1.assign(ui->passEdit2->text().toStdString().c_str());
     newpass2.assign(ui->passEdit3->text().toStdString().c_str());
@@ -120,7 +121,7 @@ void AskPassphraseDialog::accept()
         {
             if(newpass1 == newpass2)
             {
-                if(model->setWalletEncrypted(true, newpass1))
+                if ( walletModel->setWalletEncrypted( true, newpass1 ) )
                 {
                     QMessageBox::warning(this, tr("Wallet encrypted"),
                                          "<qt>" +
@@ -154,7 +155,7 @@ void AskPassphraseDialog::accept()
         }
         } break;
     case Unlock:
-        if(!model->setWalletLocked(false, oldpass))
+        if ( ! walletModel->setWalletLocked( false, oldpass ) )
         {
             QMessageBox::critical( this, tr("Wallet unlock failed"),
                                    tr("The passphrase entered for the wallet decryption was incorrect") ) ;
@@ -165,7 +166,7 @@ void AskPassphraseDialog::accept()
         }
         break;
     case Decrypt:
-        if(!model->setWalletEncrypted(false, oldpass))
+        if ( ! walletModel->setWalletEncrypted( false, oldpass ) )
         {
             QMessageBox::critical( this, tr("Wallet decryption failed"),
                                    tr("The passphrase entered for the wallet decryption was incorrect") ) ;
@@ -176,9 +177,9 @@ void AskPassphraseDialog::accept()
         }
         break;
     case ChangePass:
-        if(newpass1 == newpass2)
+        if ( newpass1 == newpass2 )
         {
-            if(model->changePassphrase(oldpass, newpass1))
+            if ( walletModel->changePassphrase( oldpass, newpass1 ) )
             {
                 QMessageBox::information( this, tr("Wallet encrypted"),
                                           tr("Wallet passphrase was successfully changed") ) ;

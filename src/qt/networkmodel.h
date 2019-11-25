@@ -1,9 +1,10 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_QT_CLIENTMODEL_H
-#define BITCOIN_QT_CLIENTMODEL_H
+#ifndef DOGECOIN_QT_NETWORKMODEL_H
+#define DOGECOIN_QT_NETWORKMODEL_H
 
 #include <QObject>
 #include <QDateTime>
@@ -37,14 +38,15 @@ enum NumConnections {
     CONNECTIONS_ALL  = (CONNECTIONS_IN | CONNECTIONS_OUT),
 };
 
-/** Model for Bitcoin network client. */
-class ClientModel : public QObject
+/** Model for the peer of the Dogecoin network */
+
+class NetworkModel : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit ClientModel(OptionsModel *optionsModel, QObject *parent = 0);
-    ~ClientModel();
+    explicit NetworkModel( OptionsModel * optionsModel, QObject * parent = nullptr ) ;
+    ~NetworkModel() ;
 
     OptionsModel *getOptionsModel();
     PeerTableModel *getPeerTableModel();
@@ -77,10 +79,10 @@ public:
     //! Return warnings to be displayed in status bar
     QString getStatusBarWarnings() const;
 
-    QString formatFullVersion() const;
-    QString formatSubVersion() const;
-    QString formatClientStartupTime() const;
-    QString dataDir() const;
+    QString formatFullVersion() const ;
+    QString formatSubVersion() const ;
+    QString formatPeerStartupTime() const ;
+    QString dataDir() const ;
 
     // caches for the best header
     mutable std::atomic<int> cachedBestHeaderHeight;
@@ -116,6 +118,7 @@ public Q_SLOTS:
     void updateNetworkActive(bool networkActive);
     void updateAlert(const QString &hash, int status);
     void updateBanlist();
-};
 
-#endif // BITCOIN_QT_CLIENTMODEL_H
+} ;
+
+#endif

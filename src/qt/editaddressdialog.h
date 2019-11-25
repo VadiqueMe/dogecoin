@@ -1,9 +1,9 @@
 // Copyright (c) 2011-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_QT_EDITADDRESSDIALOG_H
-#define BITCOIN_QT_EDITADDRESSDIALOG_H
+#ifndef DOGECOIN_QT_EDITADDRESSDIALOG_H
+#define DOGECOIN_QT_EDITADDRESSDIALOG_H
 
 #include <QDialog>
 
@@ -17,7 +17,7 @@ QT_BEGIN_NAMESPACE
 class QDataWidgetMapper;
 QT_END_NAMESPACE
 
-/** Dialog for editing an address and associated information.
+/** Dialog for editing an address and associated information
  */
 class EditAddressDialog : public QDialog
 {
@@ -31,10 +31,10 @@ public:
         EditSendingAddress
     };
 
-    explicit EditAddressDialog(Mode mode, QWidget *parent);
-    ~EditAddressDialog();
+    explicit EditAddressDialog( Mode mode, QWidget * parent ) ;
+    ~EditAddressDialog() ;
 
-    void setModel(AddressTableModel *model);
+    void setAddressTableModel( AddressTableModel * model ) ;
     void loadRow(int row);
 
     QString getAddress() const;
@@ -49,9 +49,9 @@ private:
     Ui::EditAddressDialog *ui;
     QDataWidgetMapper *mapper;
     Mode mode;
-    AddressTableModel *model;
+    AddressTableModel * addressTableModel ;
 
     QString address;
 };
 
-#endif // BITCOIN_QT_EDITADDRESSDIALOG_H
+#endif

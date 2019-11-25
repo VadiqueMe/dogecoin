@@ -1,11 +1,11 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "alert.h"
 
-#include "clientversion.h"
+#include "peerversion.h"
 #include "net.h"
 #include "netmessagemaker.h"
 #include "pubkey.h"
@@ -114,7 +114,7 @@ bool CAlert::Cancels(const CAlert& alert) const
 
 bool CAlert::AppliesTo(int nVersion, const std::string& strSubVerIn) const
 {
-    // TODO: rework for client-version-embedded-in-strSubVer ?
+    // TODO: rework for version-embedded-in-strSubVer ?
     return (IsInEffect() &&
             nMinVer <= nVersion && nVersion <= nMaxVer &&
             (setSubVer.empty() || setSubVer.count(strSubVerIn)));
@@ -122,7 +122,7 @@ bool CAlert::AppliesTo(int nVersion, const std::string& strSubVerIn) const
 
 bool CAlert::AppliesToMe() const
 {
-    return AppliesTo(PROTOCOL_VERSION, FormatSubVersion(CLIENT_NAME, CLIENT_VERSION, std::vector<std::string>()));
+    return AppliesTo( PROTOCOL_VERSION, FormatSubVersion( PEER_NAME, PEER_VERSION, std::vector<std::string>() ) ) ;
 }
 
 bool CAlert::CheckSignature( const std::vector < unsigned char > & alertKey ) const
@@ -133,7 +133,7 @@ bool CAlert::CheckSignature( const std::vector < unsigned char > & alertKey ) co
         return error( "CAlert::CheckSignature verify signature failed" ) ;
 
     // Now unserialize the data
-    CDataStream sMsg(vchMsg, SER_NETWORK, PROTOCOL_VERSION);
+    CDataStream sMsg( vchMsg, SER_NETWORK, PROTOCOL_VERSION ) ;
     sMsg >> *(CUnsignedAlert*)this;
     return true;
 }

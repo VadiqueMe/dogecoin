@@ -446,10 +446,6 @@
         <translation>Mostra el missatge d'ajuda del %1 per obtenir una llista amb les possibles opcions de línia d'ordres de Dogecoin</translation>
     </message>
     <message>
-        <source>%1 client</source>
-        <translation>Client de %1</translation>
-    </message>
-    <message>
         <source>Catching up...</source>
         <translation>S'està posant al dia ...</translation>
     </message>
@@ -1337,8 +1333,8 @@
         <translation>N/A</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Versió del client</translation>
+        <source>Version</source>
+        <translation>Versió</translation>
     </message>
     <message>
         <source>Information</source>
@@ -1347,10 +1343,6 @@
     <message>
         <source>Debug window</source>
         <translation>Finestra de depuració</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>General</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -2914,10 +2906,6 @@
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
         <translation>Mostra totes les opcions de depuració (ús: --help  --help-debug)</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>Redueix el fitxer debug log durant l'inici del client (per defecte: 1 quan no -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

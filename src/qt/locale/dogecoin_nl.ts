@@ -450,10 +450,6 @@
         <translation>Toon het %1 hulpbericht om een lijst te krijgen met mogelijke Dogecoin commandoregelopties</translation>
     </message>
     <message>
-        <source>%1 client</source>
-        <translation>%1 client</translation>
-    </message>
-    <message>
         <source>Connecting to peers...</source>
         <translation>Gelijke worden verbonden...</translation>
     </message>
@@ -1413,8 +1409,8 @@
         <translation>N.v.t.</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Clientversie</translation>
+        <source>Version</source>
+        <translation>Versie</translation>
     </message>
     <message>
         <source>Information</source>
@@ -1423,10 +1419,6 @@
     <message>
         <source>Debug window</source>
         <translation>Debug venster</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Algemeen</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -3350,10 +3342,6 @@
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
         <translation>Toon alle foutopsporingsopties (gebruik: --help -help-debug)</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>Verklein debug log-bestand bij het opstarten van de client (standaard: 1 als geen -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

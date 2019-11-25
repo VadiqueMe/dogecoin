@@ -167,10 +167,6 @@
         <translation>زانیاری</translation>
     </message>
     <message>
-        <source>General</source>
-        <translation>گشتی</translation>
-    </message>
-    <message>
         <source>Network</source>
         <translation>تۆڕ</translation>
     </message>

@@ -8,7 +8,7 @@
 #include "guiutil.h"
 #include "optionsmodel.h"
 
-#include "clientversion.h"
+#include "peerversion.h"
 #include "streams.h"
 
 #include <boost/foreach.hpp>
@@ -172,8 +172,8 @@ void RecentRequestsTableModel::addNewRequest(const SendCoinsRecipient &recipient
     newEntry.date = QDateTime::currentDateTime();
     newEntry.recipient = recipient;
 
-    CDataStream ss(SER_DISK, CLIENT_VERSION);
-    ss << newEntry;
+    CDataStream ss( SER_DISK, PEER_VERSION ) ;
+    ss << newEntry ;
 
     if (!walletModel->saveReceiveRequest(recipient.address.toStdString(), newEntry.id, ss.str()))
         return;
@@ -184,8 +184,8 @@ void RecentRequestsTableModel::addNewRequest(const SendCoinsRecipient &recipient
 // called from ctor when loading from wallet
 void RecentRequestsTableModel::addNewRequest(const std::string &recipient)
 {
-    std::vector<char> data(recipient.begin(), recipient.end());
-    CDataStream ss(data, SER_DISK, CLIENT_VERSION);
+    std::vector< char > data( recipient.begin(), recipient.end() ) ;
+    CDataStream ss( data, SER_DISK, PEER_VERSION ) ;
 
     RecentRequestEntry entry;
     ss >> entry;

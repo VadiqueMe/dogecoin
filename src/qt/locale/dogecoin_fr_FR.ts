@@ -306,10 +306,6 @@
         <translation>À jour</translation>
     </message>
     <message>
-        <source>%1 client</source>
-        <translation>%1 client</translation>
-    </message>
-    <message>
         <source>Catching up...</source>
         <translation>Rattrapage...</translation>
     </message>
@@ -857,8 +853,8 @@
         <translation>N/A </translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Version du client</translation>
+        <source>Version</source>
+        <translation>Version</translation>
     </message>
     <message>
         <source>Information</source>
@@ -867,10 +863,6 @@
     <message>
         <source>Debug window</source>
         <translation>Fenêtre de débogage </translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Général</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>

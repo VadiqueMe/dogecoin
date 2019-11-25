@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "editaddressdialog.h"
 #include "ui_editaddressdialog.h"
@@ -11,12 +11,12 @@
 #include <QDataWidgetMapper>
 #include <QMessageBox>
 
-EditAddressDialog::EditAddressDialog(Mode _mode, QWidget *parent) :
+EditAddressDialog::EditAddressDialog( Mode _mode, QWidget * parent ) :
     QDialog(parent),
     ui(new Ui::EditAddressDialog),
     mapper(0),
     mode(_mode),
-    model(0)
+    addressTableModel( nullptr )
 {
     ui->setupUi(this);
 
@@ -49,13 +49,13 @@ EditAddressDialog::~EditAddressDialog()
     delete ui;
 }
 
-void EditAddressDialog::setModel(AddressTableModel *_model)
+void EditAddressDialog::setAddressTableModel( AddressTableModel * model )
 {
-    this->model = _model;
-    if(!_model)
-        return;
+    this->addressTableModel = model ;
+    if ( model == nullptr )
+        return ;
 
-    mapper->setModel(_model);
+    mapper->setModel( addressTableModel ) ;
     mapper->addMapping(ui->labelEdit, AddressTableModel::Label);
     mapper->addMapping(ui->addressEdit, AddressTableModel::Address);
 }
@@ -67,17 +67,16 @@ void EditAddressDialog::loadRow(int row)
 
 bool EditAddressDialog::saveCurrentRow()
 {
-    if(!model)
-        return false;
+    if ( addressTableModel == nullptr ) return false ;
 
     switch(mode)
     {
     case NewReceivingAddress:
     case NewSendingAddress:
-        address = model->addRow(
+        address = addressTableModel->addRow(
                 mode == NewSendingAddress ? AddressTableModel::Send : AddressTableModel::Receive,
                 ui->labelEdit->text(),
-                ui->addressEdit->text());
+                ui->addressEdit->text() ) ;
         break;
     case EditReceivingAddress:
     case EditSendingAddress:
@@ -92,11 +91,11 @@ bool EditAddressDialog::saveCurrentRow()
 
 void EditAddressDialog::accept()
 {
-    if ( ! model ) return ;
+    if ( addressTableModel == nullptr ) return ;
 
     if ( ! saveCurrentRow() )
     {
-        switch( model->getEditStatus() )
+        switch ( addressTableModel->getEditStatus() )
         {
         case AddressTableModel::OK:
             // unknown reason, just reject

@@ -605,10 +605,6 @@
         <translation>Thông tin</translation>
     </message>
     <message>
-        <source>General</source>
-        <translation>Nhìn Chung</translation>
-    </message>
-    <message>
         <source>Name</source>
         <translation>Tên</translation>
     </message>

@@ -683,12 +683,8 @@
         <translation>n.v.t.</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Kliëntweergawe</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Algemeen</translation>
+        <source>Version</source>
+        <translation>Weergawe</translation>
     </message>
     <message>
         <source>Network</source>

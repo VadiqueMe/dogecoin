@@ -7,7 +7,7 @@
 #endif
 
 #include "base58.h"
-#include "clientversion.h"
+#include "peerversion.h"
 #include "coins.h"
 #include "consensus/consensus.h"
 #include "core_io.h"

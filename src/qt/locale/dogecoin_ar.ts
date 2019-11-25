@@ -422,10 +422,6 @@
         <translation>بين اشارة المساعدة %1 للحصول على قائمة من خيارات اوامر البت كوين المحتملة </translation>
     </message>
     <message>
-        <source>%1 client</source>
-        <translation>الزبون %1</translation>
-    </message>
-    <message>
         <source>Catching up...</source>
         <translation>اللحاق بالركب ...</translation>
     </message>
@@ -951,8 +947,8 @@
         <translation>غير معروف</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>نسخه العميل</translation>
+        <source>Version</source>
+        <translation>النسخة</translation>
     </message>
     <message>
         <source>Information</source>
@@ -961,10 +957,6 @@
     <message>
         <source>Debug window</source>
         <translation>نافذة المعالجة</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>عام</translation>
     </message>
     <message>
         <source>Startup time</source>

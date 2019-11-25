@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "signverifymessagedialog.h"
 #include "ui_signverifymessagedialog.h"
@@ -20,11 +20,11 @@
 
 #include <QClipboard>
 
-SignVerifyMessageDialog::SignVerifyMessageDialog(const PlatformStyle *_platformStyle, QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::SignVerifyMessageDialog),
-    model(0),
-    platformStyle(_platformStyle)
+SignVerifyMessageDialog::SignVerifyMessageDialog( const PlatformStyle * style, QWidget * parent ) :
+    QDialog( parent ),
+    ui( new Ui::SignVerifyMessageDialog ),
+    walletModel( nullptr ),
+    platformStyle( style )
 {
     ui->setupUi(this);
 
@@ -60,9 +60,9 @@ SignVerifyMessageDialog::~SignVerifyMessageDialog()
     delete ui;
 }
 
-void SignVerifyMessageDialog::setModel(WalletModel *_model)
+void SignVerifyMessageDialog::setWalletModel( WalletModel * model )
 {
-    this->model = _model;
+    this->walletModel = model ;
 }
 
 void SignVerifyMessageDialog::setAddress_SM(const QString &address)
@@ -93,10 +93,10 @@ void SignVerifyMessageDialog::showTab_VM(bool fShow)
 
 void SignVerifyMessageDialog::on_addressBookButton_SM_clicked()
 {
-    if (model && model->getAddressTableModel())
+    if ( walletModel && walletModel->getAddressTableModel() )
     {
         AddressBookPage dlg(platformStyle, AddressBookPage::ForSelection, AddressBookPage::ReceivingTab, this);
-        dlg.setModel(model->getAddressTableModel());
+        dlg.setAddressTableModel( walletModel->getAddressTableModel() ) ;
         if (dlg.exec())
         {
             setAddress_SM(dlg.getReturnValue());
@@ -111,8 +111,7 @@ void SignVerifyMessageDialog::on_pasteButton_SM_clicked()
 
 void SignVerifyMessageDialog::on_signMessageButton_SM_clicked()
 {
-    if (!model)
-        return;
+    if ( walletModel == nullptr ) return ;
 
     /* Clear old signature to ensure users don't get confused on error with an old signature displayed */
     ui->signatureOut_SM->clear();
@@ -133,7 +132,7 @@ void SignVerifyMessageDialog::on_signMessageButton_SM_clicked()
         return;
     }
 
-    WalletModel::UnlockContext ctx(model->requestUnlock());
+    WalletModel::UnlockContext ctx( walletModel->requestUnlock() ) ;
     if (!ctx.isValid())
     {
         ui->statusLabel_SM->setStyleSheet("QLabel { color: red; }");
@@ -142,7 +141,7 @@ void SignVerifyMessageDialog::on_signMessageButton_SM_clicked()
     }
 
     CKey key;
-    if (!model->getPrivKey(keyID, key))
+    if ( ! walletModel->getPrivKey( keyID, key ) )
     {
         ui->statusLabel_SM->setStyleSheet("QLabel { color: red; }");
         ui->statusLabel_SM->setText(tr("Private key for the entered address is not available."));
@@ -184,10 +183,10 @@ void SignVerifyMessageDialog::on_clearButton_SM_clicked()
 
 void SignVerifyMessageDialog::on_addressBookButton_VM_clicked()
 {
-    if (model && model->getAddressTableModel())
+    if ( walletModel && walletModel->getAddressTableModel() )
     {
         AddressBookPage dlg(platformStyle, AddressBookPage::ForSelection, AddressBookPage::SendingTab, this);
-        dlg.setModel(model->getAddressTableModel());
+        dlg.setAddressTableModel( walletModel->getAddressTableModel() ) ;
         if (dlg.exec())
         {
             setAddress_VM(dlg.getReturnValue());

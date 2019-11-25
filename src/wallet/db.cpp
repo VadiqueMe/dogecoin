@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "db.h"
 
@@ -287,7 +287,7 @@ CDB::CDB(const std::string& strFilename, const char* pszMode, bool fFlushOnClose
             if (fCreate && !Exists(string("version"))) {
                 bool fTmp = fReadOnly;
                 fReadOnly = false;
-                WriteVersion(CLIENT_VERSION);
+                WriteVersion( PEER_VERSION ) ;
                 fReadOnly = fTmp;
             }
 
@@ -382,8 +382,8 @@ bool CDB::Rewrite(const string& strFile, const char* pszSkip)
                     Dbc* pcursor = db.GetCursor();
                     if (pcursor)
                         while (fSuccess) {
-                            CDataStream ssKey(SER_DISK, CLIENT_VERSION);
-                            CDataStream ssValue(SER_DISK, CLIENT_VERSION);
+                            CDataStream ssKey( SER_DISK, PEER_VERSION ) ;
+                            CDataStream ssValue( SER_DISK, PEER_VERSION ) ;
                             int ret1 = db.ReadAtCursor(pcursor, ssKey, ssValue);
                             if (ret1 == DB_NOTFOUND) {
                                 pcursor->close();
@@ -397,9 +397,9 @@ bool CDB::Rewrite(const string& strFile, const char* pszSkip)
                                 strncmp(ssKey.data(), pszSkip, std::min(ssKey.size(), strlen(pszSkip))) == 0)
                                 continue;
                             if (strncmp(ssKey.data(), "\x07version", 8) == 0) {
-                                // Update version:
-                                ssValue.clear();
-                                ssValue << CLIENT_VERSION;
+                                // update version
+                                ssValue.clear() ;
+                                ssValue << PEER_VERSION ;
                             }
                             Dbt datKey(ssKey.data(), ssKey.size());
                             Dbt datValue(ssValue.data(), ssValue.size());

@@ -450,10 +450,6 @@
         <translation>Seznam argumentů Dogecoinu pro příkazovou řádku získáš v nápovědě %1</translation>
     </message>
     <message>
-        <source>%1 client</source>
-        <translation>%1 klient</translation>
-    </message>
-    <message>
         <source>Connecting to peers...</source>
         <translation>Připojuji se…</translation>
     </message>
@@ -1413,8 +1409,8 @@
         <translation>nedostupná informace</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Verze klienta</translation>
+        <source>Version</source>
+        <translation>Verze</translation>
     </message>
     <message>
         <source>Information</source>
@@ -1423,10 +1419,6 @@
     <message>
         <source>Debug window</source>
         <translation>Ladicí okno</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Obecné</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -3354,10 +3346,6 @@
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
         <translation>Zobrazit všechny možnosti ladění (užití: --help -help-debug)</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>Při spuštění klienta zmenšit soubor debug log (výchozí: 1, pokud není zadáno -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

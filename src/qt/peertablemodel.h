@@ -1,9 +1,9 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_QT_PEERTABLEMODEL_H
-#define BITCOIN_QT_PEERTABLEMODEL_H
+#ifndef DOGECOIN_QT_PEERTABLEMODEL_H
+#define DOGECOIN_QT_PEERTABLEMODEL_H
 
 #include "net_processing.h" // For CNodeStateStats
 #include "net.h"
@@ -11,8 +11,8 @@
 #include <QAbstractTableModel>
 #include <QStringList>
 
-class ClientModel;
-class PeerTablePriv;
+class NetworkModel ;
+class PeerTablePriv ;
 
 QT_BEGIN_NAMESPACE
 class QTimer;
@@ -38,15 +38,16 @@ private:
 
 /**
    Qt model providing information about connected peers, similar to the
-   "getpeerinfo" RPC call. Used by the rpc console UI.
+   "getpeerinfo" RPC call
  */
 class PeerTableModel : public QAbstractTableModel
 {
     Q_OBJECT
 
 public:
-    explicit PeerTableModel(ClientModel *parent = 0);
-    ~PeerTableModel();
+    explicit PeerTableModel( NetworkModel * parent = nullptr ) ;
+    ~PeerTableModel() ;
+
     const CNodeCombinedStats *getNodeStats(int idx);
     int getRowByNodeId(NodeId nodeid);
     void startAutoRefresh();
@@ -74,10 +75,9 @@ public Q_SLOTS:
     void refresh();
 
 private:
-    ClientModel *clientModel;
     QStringList columns;
     std::unique_ptr<PeerTablePriv> priv;
     QTimer *timer;
 };
 
-#endif // BITCOIN_QT_PEERTABLEMODEL_H
+#endif

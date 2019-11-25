@@ -104,6 +104,18 @@ namespace boost {
 
 using namespace std;
 
+std::string FormatBytes( uint64_t bytes )
+{
+    if ( bytes < 1024 )
+        return std::to_string( bytes ) + " B" ;
+    if ( bytes < 1024 * 1024 )
+        return std::to_string( bytes / 1024 ) + " KiB" ;
+    if ( bytes < 1024 * 1024 * 1024 )
+        return std::to_string( bytes / 1024 / 1024 ) + " MiB" ;
+
+    return std::to_string( bytes / 1024 / 1024 / 1024 ) + " GiB" ;
+}
+
 const char * const DOGECOIN_CONF_FILENAME = "dogecoin.conf";
 const char * const BITCOIN_PID_FILENAME = "dogecoind.pid";
 

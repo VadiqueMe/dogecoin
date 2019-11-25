@@ -450,10 +450,6 @@
         <translation>Zeige den "%1"-Hilfetext, um eine Liste mit möglichen Kommandozeilenoptionen zu erhalten</translation>
     </message>
     <message>
-        <source>%1 client</source>
-        <translation>%1 Client</translation>
-    </message>
-    <message>
         <source>Connecting to peers...</source>
         <translation>Verbinde mit Netzwerk...</translation>
     </message>
@@ -1409,8 +1405,8 @@
         <translation>k.A.</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Clientversion</translation>
+        <source>Version</source>
+        <translation>Version</translation>
     </message>
     <message>
         <source>Information</source>
@@ -1419,10 +1415,6 @@
     <message>
         <source>Debug window</source>
         <translation>Debugfenster</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Allgemein</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -3342,10 +3334,6 @@
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
         <translation>Zeige alle Debuggingoptionen (Benutzung: --help -help-debug)</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>Protokolldatei debug log beim Starten des Clients kürzen (Standard: 1, wenn kein -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

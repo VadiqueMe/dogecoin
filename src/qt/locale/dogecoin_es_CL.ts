@@ -429,8 +429,8 @@
         <translation>N/A</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Versión del Cliente</translation>
+        <source>Version</source>
+        <translation>Versión</translation>
     </message>
     <message>
         <source>Information</source>
@@ -439,10 +439,6 @@
     <message>
         <source>Debug window</source>
         <translation>Ventana Debug</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>General</translation>
     </message>
     <message>
         <source>Startup time</source>
@@ -463,11 +459,6 @@
     <message>
         <source>Block chain</source>
         <translation>Bloquea cadena</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>version
-</translation>
     </message>
     <message>
         <source>&amp;Open</source>

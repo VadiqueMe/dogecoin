@@ -190,10 +190,6 @@
         <translation>Informacije</translation>
     </message>
     <message>
-        <source>%1 client</source>
-        <translation>%1 klijent</translation>
-    </message>
-    <message>
         <source>Date: %1
 </source>
         <translation>Datum: %1

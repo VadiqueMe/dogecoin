@@ -171,10 +171,6 @@
         <translation>Маалымат</translation>
     </message>
     <message>
-        <source>General</source>
-        <translation>Жалпы</translation>
-    </message>
-    <message>
         <source>Network</source>
         <translation>&amp;Тармак</translation>
     </message>

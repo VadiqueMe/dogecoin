@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "sendcoinsentry.h"
 #include "ui_sendcoinsentry.h"
@@ -15,11 +15,11 @@
 #include <QApplication>
 #include <QClipboard>
 
-SendCoinsEntry::SendCoinsEntry(const PlatformStyle *_platformStyle, QWidget *parent) :
-    QStackedWidget(parent),
-    ui(new Ui::SendCoinsEntry),
-    model(0),
-    platformStyle(_platformStyle)
+SendCoinsEntry::SendCoinsEntry( const PlatformStyle * style, QWidget * parent ) :
+    QStackedWidget( parent ),
+    ui( new Ui::SendCoinsEntry ),
+    walletModel( nullptr ),
+    platformStyle( style )
 {
     ui->setupUi(this);
 
@@ -62,11 +62,11 @@ void SendCoinsEntry::on_pasteButton_clicked()
 
 void SendCoinsEntry::on_addressBookButton_clicked()
 {
-    if(!model)
-        return;
+    if ( walletModel == nullptr ) return ;
+
     AddressBookPage dlg(platformStyle, AddressBookPage::ForSelection, AddressBookPage::SendingTab, this);
-    dlg.setModel(model->getAddressTableModel());
-    if(dlg.exec())
+    dlg.setAddressTableModel( walletModel->getAddressTableModel() ) ;
+    if ( dlg.exec() )
     {
         ui->payTo->setText(dlg.getReturnValue());
         ui->payAmount->setFocus();
@@ -78,12 +78,12 @@ void SendCoinsEntry::on_payTo_textChanged(const QString &address)
     updateLabel(address);
 }
 
-void SendCoinsEntry::setModel(WalletModel *_model)
+void SendCoinsEntry::setWalletModel( WalletModel * model )
 {
-    this->model = _model;
+    this->walletModel = model ;
 
-    if (_model && _model->getOptionsModel())
-        connect(_model->getOptionsModel(), SIGNAL(displayUnitChanged(int)), this, SLOT(updateDisplayUnit()));
+    if ( model && model->getOptionsModel() )
+        connect( model->getOptionsModel(), SIGNAL( displayUnitChanged(int) ), this, SLOT( updateDisplayUnit() ) ) ;
 
     clear();
 }
@@ -117,8 +117,7 @@ void SendCoinsEntry::deleteClicked()
 
 bool SendCoinsEntry::validate()
 {
-    if (!model)
-        return false;
+    if ( walletModel == nullptr ) return false ;
 
     // Check input validity
     bool retval = true;
@@ -127,10 +126,10 @@ bool SendCoinsEntry::validate()
     if (recipient.paymentRequest.IsInitialized())
         return retval;
 
-    if (!model->validateAddress(ui->payTo->text()))
+    if ( ! walletModel->validateAddress( ui->payTo->text() ) )
     {
-        ui->payTo->setValid(false);
-        retval = false;
+        ui->payTo->setValid( false ) ;
+        retval = false ;
     }
 
     if (!ui->payAmount->validate())
@@ -232,22 +231,21 @@ void SendCoinsEntry::setFocus()
 
 void SendCoinsEntry::updateDisplayUnit()
 {
-    if(model && model->getOptionsModel())
+    if ( walletModel && walletModel->getOptionsModel() )
     {
         // Update payAmount with the current unit
-        ui->payAmount->setDisplayUnit(model->getOptionsModel()->getDisplayUnit());
-        ui->payAmount_is->setDisplayUnit(model->getOptionsModel()->getDisplayUnit());
-        ui->payAmount_s->setDisplayUnit(model->getOptionsModel()->getDisplayUnit());
+        ui->payAmount->setDisplayUnit( walletModel->getOptionsModel()->getDisplayUnit() ) ;
+        ui->payAmount_is->setDisplayUnit( walletModel->getOptionsModel()->getDisplayUnit() ) ;
+        ui->payAmount_s->setDisplayUnit( walletModel->getOptionsModel()->getDisplayUnit() ) ;
     }
 }
 
 bool SendCoinsEntry::updateLabel(const QString &address)
 {
-    if(!model)
-        return false;
+    if ( walletModel == nullptr ) return false ;
 
     // Fill in label from address book, if address has an associated label
-    QString associatedLabel = model->getAddressTableModel()->labelForAddress(address);
+    QString associatedLabel = walletModel->getAddressTableModel()->labelForAddress( address ) ;
     if(!associatedLabel.isEmpty())
     {
         ui->addAsLabel->setText(associatedLabel);

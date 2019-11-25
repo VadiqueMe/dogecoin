@@ -390,10 +390,6 @@
         <translation>Ajakohane</translation>
     </message>
     <message>
-        <source>%1 client</source>
-        <translation>%1 klient</translation>
-    </message>
-    <message>
         <source>Catching up...</source>
         <translation>Jõuan järgi...</translation>
     </message>
@@ -901,8 +897,8 @@
         <translation>N/A</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Kliendi versioon</translation>
+        <source>Version</source>
+        <translation>Versioon</translation>
     </message>
     <message>
         <source>Information</source>
@@ -911,10 +907,6 @@
     <message>
         <source>Debug window</source>
         <translation>Debugimise aken</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Üldine</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -1734,10 +1726,6 @@
     <message>
         <source>Send trace/debug info to console instead of debug log file</source>
         <translation>Saada jälitus/debug, debug log faili asemel, konsooli</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>Kahanda programmi käivitamisel debug log faili (vaikeväärtus: 1, kui ei ole -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

@@ -1,17 +1,17 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_QT_BANTABLEMODEL_H
-#define BITCOIN_QT_BANTABLEMODEL_H
+#ifndef DOGECOIN_QT_BANTABLEMODEL_H
+#define DOGECOIN_QT_BANTABLEMODEL_H
 
 #include "net.h"
 
 #include <QAbstractTableModel>
 #include <QStringList>
 
-class ClientModel;
-class BanTablePriv;
+class NetworkModel ;
+class BanTablePriv ;
 
 struct CCombinedBan {
     CSubNet subnet;
@@ -39,7 +39,7 @@ class BanTableModel : public QAbstractTableModel
     Q_OBJECT
 
 public:
-    explicit BanTableModel(ClientModel *parent = 0);
+    explicit BanTableModel( NetworkModel * parent = nullptr ) ;
     ~BanTableModel();
     void startAutoRefresh();
     void stopAutoRefresh();
@@ -65,9 +65,9 @@ public Q_SLOTS:
     void refresh();
 
 private:
-    ClientModel *clientModel;
+    NetworkModel * networkModel ;
     QStringList columns;
     std::unique_ptr<BanTablePriv> priv;
 };
 
-#endif // BITCOIN_QT_BANTABLEMODEL_H
+#endif

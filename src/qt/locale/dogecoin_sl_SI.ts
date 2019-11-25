@@ -258,10 +258,6 @@
         <translation>Posodobljeno</translation>
     </message>
     <message>
-        <source>%1 client</source>
-        <translation>%1 odjemalec</translation>
-    </message>
-    <message>
         <source>Catching up...</source>
         <translation>Dohitevam omrežje ...</translation>
     </message>
@@ -849,8 +845,8 @@
         <translation>Neznano</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Različica odjemalca</translation>
+        <source>Version</source>
+        <translation>Različica</translation>
     </message>
     <message>
         <source>Information</source>
@@ -859,10 +855,6 @@
     <message>
         <source>Debug window</source>
         <translation>Razhroščevalno okno</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Splošno</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -1638,10 +1630,6 @@
     <message>
         <source>Send trace/debug info to console instead of debug log file</source>
         <translation>Pošilja sledilne/razhroščevalne informacije na konzolo namesto v datoteko debug log</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>Ob zagonu skrajšaj datoteko debug log (privzeto: 1, če ni vklopljena opcija -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

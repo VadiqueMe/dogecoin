@@ -41,15 +41,13 @@ Check out the source code in the following directory hierarchy.
 Update the following:
 
 - `configure.ac`:
-    - `_CLIENT_VERSION_MAJOR`
-    - `_CLIENT_VERSION_MINOR`
-    - `_CLIENT_VERSION_REVISION`
-    - Don't forget to set `_CLIENT_VERSION_IS_RELEASE` to `true`
-- `src/clientversion.h`: (this mirrors `configure.ac` - see issue #3539)
-    - `CLIENT_VERSION_MAJOR`
-    - `CLIENT_VERSION_MINOR`
-    - `CLIENT_VERSION_REVISION`
-    - Don't forget to set `CLIENT_VERSION_IS_RELEASE` to `true`
+    - `_VERSION_MAJOR`
+    - `_VERSION_MINOR`
+    - `_VERSION_REVISION`
+- `src/peerversion.h`:
+    - `PEER_VERSION_MAJOR`
+    - `PEER_VERSION_MINOR`
+    - `PEER_VERSION_REVISION`
 - `doc/README.md` and `doc/README_windows.txt`
 - `doc/Doxyfile`: `PROJECT_NUMBER` contains the full version
 - `contrib/gitian-descriptors/*.yml`: usually one'd want to do this on master after branching off the release - but be sure to at least do it before a new major release
@@ -265,4 +263,3 @@ Note: check that SHA256SUMS itself doesn't end up in SHA256SUMS, which is a spur
 - Add release notes for the new version to the directory `doc/release-notes` in git master
 
 - To the moon!
-

@@ -10,7 +10,7 @@
 #include <QStackedWidget>
 
 class DogecoinGUI ;
-class ClientModel;
+class NetworkModel ;
 class OverviewPage;
 class PlatformStyle;
 class ReceiveCoinsDialog;
@@ -29,8 +29,7 @@ QT_END_NAMESPACE
 /*
   WalletView class. This class represents the view to a single wallet.
   It was added to support multiple wallet functionality. Each wallet gets its own WalletView instance.
-  It communicates with both the client and the wallet models to give the user an up-to-date view of the
-  current core state
+  It communicates with both the network and the wallet models to give the user an up-to-date view
 */
 class WalletView : public QStackedWidget
 {
@@ -41,12 +40,14 @@ public:
     ~WalletView() ;
 
     void setGUI( DogecoinGUI * gui ) ;
-    /** Set the client model.
-        The client model represents the part of the core that communicates with the P2P network, and is wallet-agnostic
+
+    /** Set the network model
+        The network model represents the part of the core that communicates with the P2P network, and is wallet-agnostic
     */
-    void setClientModel(ClientModel *clientModel);
-    /** Set the wallet model.
-        The wallet model represents a bitcoin wallet, and offers access to the list of transactions, address book and sending
+    void setNetworkModel( NetworkModel * networkModel ) ;
+
+    /** Set the wallet model
+        The wallet model represents a dogecoin wallet, and offers access to the list of transactions, address book and sending
         functionality
     */
     void setWalletModel( WalletModel * model ) ;
@@ -56,8 +57,8 @@ public:
     void showOutOfSyncWarning(bool fShow);
 
 private:
-    ClientModel *clientModel;
-    WalletModel *walletModel;
+    NetworkModel * networkModel ;
+    WalletModel * walletModel ;
 
     OverviewPage * overviewPage ;
     QWidget * transactionsPage ;

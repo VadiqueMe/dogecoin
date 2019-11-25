@@ -446,10 +446,6 @@
         <translation>Tampilkan %1 pesan bantuan untuk mendapatkan daftar opsi baris perintah Bitcoin yang memungkinkan</translation>
     </message>
     <message>
-        <source>%1 client</source>
-        <translation>%1 klien</translation>
-    </message>
-    <message>
         <source>Connecting to peers...</source>
         <translation>Menghubungkan ke peer...</translation>
     </message>
@@ -1013,8 +1009,8 @@
         <translation>T/S</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Versi Klien</translation>
+        <source>Version</source>
+        <translation>Versi</translation>
     </message>
     <message>
         <source>Information</source>
@@ -1023,10 +1019,6 @@
     <message>
         <source>Debug window</source>
         <translation>Jendela debug</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Umum</translation>
     </message>
     <message>
         <source>Startup time</source>
@@ -1668,10 +1660,6 @@
     <message>
         <source>Send trace/debug info to console instead of debug log file</source>
         <translation>Kirim info jejak/debug ke konsol bukan berkas debug log</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>Mengecilkan berkas debug log saat klien berjalan  (Standar: 1 jika tidak -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

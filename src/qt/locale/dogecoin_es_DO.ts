@@ -603,8 +603,8 @@
         <translation>N/D</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Versión del cliente</translation>
+        <source>Version</source>
+        <translation>Versión</translation>
     </message>
     <message>
         <source>Information</source>
@@ -613,10 +613,6 @@
     <message>
         <source>Debug window</source>
         <translation>Ventana de depuración</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>General</translation>
     </message>
     <message>
         <source>Startup time</source>
@@ -1131,10 +1127,6 @@
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
         <translation>Mostrar todas las opciones de depuración (uso: --help -help-debug)</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>Reducir el archivo debug log al iniciar el cliente (predeterminado: 1 sin -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

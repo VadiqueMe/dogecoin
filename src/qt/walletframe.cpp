@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -34,20 +35,20 @@ WalletFrame::~WalletFrame()
 {
 }
 
-void WalletFrame::setClientModel(ClientModel *_clientModel)
+void WalletFrame::setNetworkModel( NetworkModel * model )
 {
-    this->clientModel = _clientModel;
+    this->networkModel = model ;
 }
 
 bool WalletFrame::addWallet( const QString & name, WalletModel * walletModel )
 {
-    if (!gui || !clientModel || !walletModel || mapWalletViews.count(name) > 0)
-        return false;
+    if ( ! gui || ! networkModel || ! walletModel || mapWalletViews.count( name ) > 0 )
+        return false ;
 
     WalletView *walletView = new WalletView(platformStyle, this);
     walletView->setGUI( gui ) ;
-    walletView->setClientModel(clientModel);
-    walletView->setWalletModel(walletModel);
+    walletView->setNetworkModel( networkModel ) ;
+    walletView->setWalletModel( walletModel ) ;
     walletView->showOutOfSyncWarning(bOutOfSync);
 
     /* TODO goto the currently selected page once dynamically adding wallets is supported */

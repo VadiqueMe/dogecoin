@@ -30,7 +30,7 @@
 OptionsDialog::OptionsDialog( QWidget * parent, bool enableWallet, bool showUrlsField )
     : QDialog( parent )
     , ui( new Ui::OptionsDialog )
-    , model( nullptr )
+    , optionsModel( nullptr )
     , mapper( nullptr )
     , showThirdPartyUrlsOption( showUrlsField )
 {
@@ -138,27 +138,27 @@ OptionsDialog::OptionsDialog( QWidget * parent, bool enableWallet, bool showUrls
 
 OptionsDialog::~OptionsDialog()
 {
-    delete ui;
+    delete ui ;
 }
 
-void OptionsDialog::setModel(OptionsModel *_model)
+void OptionsDialog::setOptionsModel( OptionsModel * model )
 {
-    this->model = _model;
+    this->optionsModel = model ;
 
-    if(_model)
+    if ( model != nullptr )
     {
         /* check if client restart is needed and show persistent message */
-        if (_model->isRestartRequired())
-            showRestartWarning(true);
+        if ( model->isRestartRequired() )
+            showRestartWarning( true ) ;
 
-        QString strLabel = _model->getOverriddenByCommandLine();
+        QString strLabel = model->getOverriddenByCommandLine() ;
         if (strLabel.isEmpty())
             strLabel = tr("none");
         ui->overriddenByCommandLineLabel->setText(strLabel);
 
-        mapper->setModel(_model);
-        setMapper();
-        mapper->toFirst();
+        mapper->setModel( model ) ;
+        setMapper() ;
+        mapper->toFirst() ;
 
         updateDefaultProxyNets();
     }
@@ -225,7 +225,7 @@ void OptionsDialog::setOkButtonState(bool fState)
 
 void OptionsDialog::on_resetButton_clicked()
 {
-    if(model)
+    if ( optionsModel != nullptr )
     {
         // confirmation dialog
         QMessageBox::StandardButton btnRetVal = QMessageBox::question(this, tr("Confirm options reset"),
@@ -236,8 +236,8 @@ void OptionsDialog::on_resetButton_clicked()
             return;
 
         /* reset all options and close GUI */
-        model->Reset();
-        QApplication::quit();
+        optionsModel->Reset() ;
+        QApplication::quit() ;
     }
 }
 
@@ -286,8 +286,8 @@ void OptionsDialog::showRestartWarning(bool fPersistent)
 void OptionsDialog::clearStatusLabel()
 {
     ui->statusLabel->clear();
-    if (model && model->isRestartRequired()) {
-        showRestartWarning(true);
+    if ( optionsModel && optionsModel->isRestartRequired() ) {
+        showRestartWarning( true ) ;
     }
 }
 

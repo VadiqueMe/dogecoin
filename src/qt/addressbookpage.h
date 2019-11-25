@@ -1,9 +1,9 @@
 // Copyright (c) 2011-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_QT_ADDRESSBOOKPAGE_H
-#define BITCOIN_QT_ADDRESSBOOKPAGE_H
+#ifndef DOGECOIN_QT_ADDRESSBOOKPAGE_H
+#define DOGECOIN_QT_ADDRESSBOOKPAGE_H
 
 #include <QDialog>
 
@@ -23,7 +23,7 @@ class QSortFilterProxyModel;
 class QTableView;
 QT_END_NAMESPACE
 
-/** Widget that shows a list of sending or receiving addresses.
+/** Widget that shows a list of sending or receiving addresses
   */
 class AddressBookPage : public QDialog
 {
@@ -40,18 +40,18 @@ public:
         ForEditing  /**< Open address book for editing */
     };
 
-    explicit AddressBookPage(const PlatformStyle *platformStyle, Mode mode, Tabs tab, QWidget *parent);
+    explicit AddressBookPage( const PlatformStyle * style, Mode mode, Tabs tab, QWidget * parent ) ;
     ~AddressBookPage();
 
-    void setModel(AddressTableModel *model);
-    const QString &getReturnValue() const { return returnValue; }
+    void setAddressTableModel( AddressTableModel * model ) ;
+    const QString & getReturnValue() const {  return returnValue ;  }
 
 public Q_SLOTS:
     void done(int retval);
 
 private:
-    Ui::AddressBookPage *ui;
-    AddressTableModel *model;
+    Ui::AddressBookPage * ui ;
+    AddressTableModel * addressTableModel ;
     Mode mode;
     Tabs tab;
     QString returnValue;
@@ -83,6 +83,7 @@ private Q_SLOTS:
 
 Q_SIGNALS:
     void sendCoins(QString addr);
-};
 
-#endif // BITCOIN_QT_ADDRESSBOOKPAGE_H
+} ;
+
+#endif

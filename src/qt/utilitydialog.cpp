@@ -21,16 +21,16 @@
 
 #include "optionsmodel.h"
 #include "gui.h"
-#include "clientmodel.h"
+#include "networkmodel.h"
 #include "guiconstants.h"
 #include "intro.h"
 #include "paymentrequestplus.h"
 #include "guiutil.h"
 
-#include "clientversion.h"
 #include "init.h"
 #include "util.h"
 #include "net.h"
+#include "peerversion.h"
 #include "utilstrencodings.h"
 
 #include <stdio.h>
@@ -68,9 +68,9 @@ HelpMessageDialog::HelpMessageDialog(QWidget *parent, bool about) :
 {
     ui->setupUi(this);
 
-    QString version = tr(PACKAGE_NAME) + " " + tr("version") + " " + QString::fromStdString(FormatFullVersion());
+    QString version = tr(PACKAGE_NAME) + " " + tr("version") + " " + QString::fromStdString( FormatFullVersion() ) ;
     /* On x86 add a bit specifier to the version so that users can distinguish between
-     * 32 and 64 bit builds. On other architectures, 32/64 bit may be more ambiguous.
+     * 32 and 64 bit builds. On other architectures, 32/64 bit may be more ambiguous
      */
 #if defined(__x86_64__)
     version += " " + tr("(%1-bit)").arg(64);
@@ -211,26 +211,26 @@ PaperWalletDialog::PaperWalletDialog(QWidget *parent) :
     setFixedSize(size());
 }
 
-void PaperWalletDialog::setClientModel(ClientModel *_clientModel)
+void PaperWalletDialog::setNetworkModel( NetworkModel * network )
 {
-    this->clientModel = _clientModel;
+    this->networkModel = network ;
 
     // FIXME: This cannot be the right way of doing something on open
-    if ( _clientModel && _clientModel->isNetworkActive() ) {
+    if ( networkModel && networkModel->isNetworkActive() ) {
         QMessageBox::critical(this, "Warning: Network Activity Detected", tr("It is recommended to disconnect from the internet before printing paper wallets. Even though paper wallets are generated on your local computer, it is still possible to unknowingly have malware that transmits your screen to a remote location. It is also recommended to print to a local printer vs a network printer since that network traffic can be monitored. Some advanced printers also store copies of each printed document. Proceed with caution relative to the amount of value you plan to store on each address."), QMessageBox::Ok, QMessageBox::Ok);
     }
 }
 
-void PaperWalletDialog::setModel(WalletModel *model)
+void PaperWalletDialog::setWalletModel( WalletModel * model )
 {
     RandAddSeed();
-    this->model = model;
-    this->on_getNewAddress_clicked();
+    this->walletModel = model ;
+    this->on_getNewAddress_clicked() ;
 }
 
 PaperWalletDialog::~PaperWalletDialog()
 {
-    delete ui;
+    delete ui ;
 }
 
 void PaperWalletDialog::on_getNewAddress_clicked()
@@ -404,8 +404,7 @@ void PaperWalletDialog::on_printButton_clicked()
             return;
         }
 
-
-        WalletModel::UnlockContext ctx(this->model->requestUnlock());
+        WalletModel::UnlockContext ctx( walletModel->requestUnlock() ) ;
         if (!ctx.isValid()) {
             return;
         }
@@ -420,10 +419,10 @@ void PaperWalletDialog::on_printButton_clicked()
         tx = new WalletModelTransaction(recipients);
 
         WalletModel::SendCoinsReturn prepareStatus;
-        if ( ! this->model->getOptionsModel()->getHideCoinControlFeatures() )
-            prepareStatus = this->model->prepareTransaction( *tx, CoinControlDialog::coinControl );
+        if ( ! walletModel->getOptionsModel()->getHideCoinControlFeatures() )
+            prepareStatus = walletModel->prepareTransaction( *tx, CoinControlDialog::coinControl );
         else
-            prepareStatus = this->model->prepareTransaction( *tx ) ;
+            prepareStatus = walletModel->prepareTransaction( *tx ) ;
 
         if (prepareStatus.status == WalletModel::InvalidAddress) {
             QMessageBox::critical(this, tr("Send Coins"), tr("The recipient address is not valid, please recheck."), QMessageBox::Ok, QMessageBox::Ok);
@@ -453,7 +452,7 @@ void PaperWalletDialog::on_printButton_clicked()
     if ( txFee > 0 ) {
         // append fee string if there's a non-zero fee
         questionString.append("<hr /><span style='color:#aa0000;'>");
-        questionString.append( UnitsOfCoin::formatWithUnit( model->getOptionsModel()->getDisplayUnit(), txFee ) ) ;
+        questionString.append( UnitsOfCoin::formatWithUnit( walletModel->getOptionsModel()->getDisplayUnit(), txFee ) ) ;
         questionString.append("</span> ");
         questionString.append(tr("added as transaction fee"));
     }
@@ -463,12 +462,12 @@ void PaperWalletDialog::on_printButton_clicked()
     qint64 totalAmount = tx->getTotalTransactionAmount() + txFee;
     QStringList alternativeUnits;
     Q_FOREACH ( UnitsOfCoin::Unit u, UnitsOfCoin::availableUnits() ) {
-        if (u != model->getOptionsModel()->getDisplayUnit())
+        if ( u != walletModel->getOptionsModel()->getDisplayUnit() )
             alternativeUnits.append( UnitsOfCoin::formatWithUnit( u, totalAmount ) ) ;
     }
 
     questionString.append(tr("Total Amount %1 (= %2)")
-                              .arg( UnitsOfCoin::formatWithUnit( model->getOptionsModel()->getDisplayUnit(), totalAmount ) )
+                              .arg( UnitsOfCoin::formatWithUnit( walletModel->getOptionsModel()->getDisplayUnit(), totalAmount ) )
                               .arg(alternativeUnits.join(" " + tr("or") + " ")));
 
     QMessageBox::StandardButton retval = QMessageBox::question(this, tr("Confirm send coins"), questionString.arg(formatted.join("<br />")), QMessageBox::Yes | QMessageBox::Cancel, QMessageBox::Cancel);
@@ -478,7 +477,7 @@ void PaperWalletDialog::on_printButton_clicked()
         return;
     }
 
-    WalletModel::SendCoinsReturn sendStatus = this->model->sendCoins(*tx);
+    WalletModel::SendCoinsReturn sendStatus = walletModel->sendCoins( *tx ) ;
 
     if (sendStatus.status == WalletModel::TransactionCommitFailed) {
         QMessageBox::critical( this, tr("Send Coins"), "The transaction was rejected! This might happen if some of the coins in your wallet were already spent, such as if you used a copy of wallet file and coins were spent in the copy but not marked as spent here", QMessageBox::Ok, QMessageBox::Ok ) ;

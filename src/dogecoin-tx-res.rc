@@ -1,8 +1,8 @@
 #include <windows.h>             // needed for VERSIONINFO
-#include "clientversion.h"       // holds the needed client version information
+#include "peerversion.h"
 
-#define VER_PRODUCTVERSION     CLIENT_VERSION_MAJOR,CLIENT_VERSION_MINOR,CLIENT_VERSION_REVISION,CLIENT_VERSION_BUILD
-#define VER_PRODUCTVERSION_STR STRINGIZE(CLIENT_VERSION_MAJOR) "." STRINGIZE(CLIENT_VERSION_MINOR) "." STRINGIZE(CLIENT_VERSION_REVISION) "." STRINGIZE(CLIENT_VERSION_BUILD)
+#define VER_PRODUCTVERSION     PEER_VERSION_MAJOR,PEER_VERSION_MINOR,PEER_VERSION_REVISION,PEER_VERSION_BUILD
+#define VER_PRODUCTVERSION_STR STRINGIZE(PEER_VERSION_MAJOR) "." STRINGIZE(PEER_VERSION_MINOR) "." STRINGIZE(PEER_VERSION_REVISION) "." STRINGIZE(PEER_VERSION_BUILD)
 #define VER_FILEVERSION        VER_PRODUCTVERSION
 #define VER_FILEVERSION_STR    VER_PRODUCTVERSION_STR
 
@@ -21,7 +21,7 @@ BEGIN
             VALUE "FileVersion",        VER_FILEVERSION_STR
             VALUE "InternalName",       "dogecoin-tx"
             VALUE "LegalCopyright",     COPYRIGHT_STR
-            VALUE "LegalTrademarks1",   "Distributed under the MIT software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php."
+            VALUE "LegalTrademarks1",   "Distributed under the MIT software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php"
             VALUE "OriginalFilename",   "dogecoin-tx.exe"
             VALUE "ProductName",        "dogecoin-tx"
             VALUE "ProductVersion",     VER_PRODUCTVERSION_STR

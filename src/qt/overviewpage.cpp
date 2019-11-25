@@ -7,7 +7,7 @@
 #include "ui_overviewpage.h"
 
 #include "unitsofcoin.h"
-#include "clientmodel.h"
+#include "networkmodel.h"
 #include "guiconstants.h"
 #include "guiutil.h"
 #include "optionsmodel.h"
@@ -113,8 +113,8 @@ public:
 OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::OverviewPage),
-    clientModel(0),
-    walletModel(0),
+    networkModel( nullptr ),
+    walletModel( nullptr ),
     currentBalance(-1),
     currentUnconfirmedBalance(-1),
     currentImmatureBalance(-1),
@@ -223,10 +223,10 @@ void OverviewPage::updateWatchOnlyLabels(bool showWatchOnly)
         ui->labelWatchImmature->hide();
 }
 
-void OverviewPage::setClientModel(ClientModel *model)
+void OverviewPage::setNetworkModel( NetworkModel * model )
 {
-    this->clientModel = model;
-    if(model)
+    this->networkModel = model ;
+    if ( model != nullptr )
     {
         // Show warning if this is a prerelease version
         connect(model, SIGNAL(alertsChanged(QString)), this, SLOT(updateAlerts(QString)));
@@ -248,8 +248,8 @@ void OverviewPage::setWalletModel(WalletModel *model)
         filter->setShowInactive(false);
         filter->sort(TransactionTableModel::Date, Qt::DescendingOrder);
 
-        ui->listTransactions->setModel(filter.get());
-        ui->listTransactions->setModelColumn(TransactionTableModel::ToAddress);
+        ui->listTransactions->setModel( filter.get() ) ;
+        ui->listTransactions->setModelColumn( TransactionTableModel::ToAddress ) ;
 
         // Keep up to date with wallet
         setBalance(model->getBalance(), model->getUnconfirmedBalance(), model->getImmatureBalance(),

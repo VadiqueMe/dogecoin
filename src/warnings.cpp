@@ -1,17 +1,14 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "alert.h"
 #include "sync.h"
-#include "clientversion.h"
 #include "uint256.h"
 #include "util.h"
 #include "utilstrencodings.h"
 #include "warnings.h"
-
-#include <boost/foreach.hpp>
 
 CCriticalSection cs_warnings;
 std::string strMiscWarning;
@@ -85,7 +82,7 @@ std::string GetWarnings(const std::string& strFor)
     // Alerts
     {
         LOCK(cs_mapAlerts);
-        BOOST_FOREACH(PAIRTYPE(const uint256, CAlert)& item, mapAlerts)
+        for ( PAIRTYPE( const uint256, CAlert ) & item : mapAlerts )
         {
             const CAlert& alert = item.second;
             if (alert.AppliesToMe() && alert.nPriority > nPriority)

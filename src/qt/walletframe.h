@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -9,7 +10,7 @@
 #include <QMap>
 
 class DogecoinGUI ;
-class ClientModel;
+class NetworkModel ;
 class PlatformStyle;
 class SendCoinsRecipient;
 class WalletModel;
@@ -34,7 +35,7 @@ public:
     explicit WalletFrame( const PlatformStyle * style, DogecoinGUI *_gui = nullptr ) ;
     ~WalletFrame() ;
 
-    void setClientModel(ClientModel *clientModel);
+    void setNetworkModel( NetworkModel * model ) ;
 
     bool addWallet(const QString& name, WalletModel *walletModel);
     bool setCurrentWallet(const QString& name);
@@ -50,9 +51,9 @@ Q_SIGNALS:
     void requestedSyncWarningInfo();
 
 private:
-    QStackedWidget *walletStack;
+    QStackedWidget * walletStack ;
     DogecoinGUI * gui ;
-    ClientModel *clientModel;
+    NetworkModel * networkModel ;
     QMap< QString, WalletView * > mapWalletViews ;
 
     bool bOutOfSync;

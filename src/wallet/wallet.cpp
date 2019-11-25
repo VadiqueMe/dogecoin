@@ -1345,7 +1345,7 @@ bool CWallet::SetHDMasterKey( const CPubKey & pubkey )
 {
     LOCK( cs_wallet ) ;
 
-    // ensure this wallet file can only be opened by clients supporting hardened "HD" derivation
+    // ensure this wallet file can only be opened by peers supporting hardened "HD" derivation
     SetMinVersion( FEATURE_HD ) ;
 
     // store the keyid (hash160) together with
@@ -3522,9 +3522,9 @@ CWallet* CWallet::CreateWalletFromFile(const std::string walletFile)
         int nMaxVersion = GetArg("-upgradewallet", 0);
         if (nMaxVersion == 0) // the -upgradewallet without argument case
         {
-            LogPrintf("Performing wallet upgrade to %i\n", FEATURE_LATEST);
-            nMaxVersion = CLIENT_VERSION;
-            walletInstance->SetMinVersion(FEATURE_LATEST); // permanently upgrade the wallet immediately
+            LogPrintf( "Performing wallet upgrade to %i\n", FEATURE_LATEST ) ;
+            nMaxVersion = PEER_VERSION ;
+            walletInstance->SetMinVersion( FEATURE_LATEST ) ; // permanently upgrade the wallet immediately
         }
         else
             LogPrintf("Allowing wallet upgrade up to %i\n", nMaxVersion);

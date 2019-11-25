@@ -1,6 +1,6 @@
 // Copyright (c) 2014-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "coins.h"
 #include "script/standard.h"
@@ -433,7 +433,7 @@ BOOST_AUTO_TEST_CASE(updatecoins_simulation_test)
 BOOST_AUTO_TEST_CASE(ccoins_serialization)
 {
     // Good example
-    CDataStream ss1(ParseHex("0104835800816115944e077fe7c803cfa57f29b36bf87c1d358bb85e"), SER_DISK, CLIENT_VERSION);
+    CDataStream ss1( ParseHex( "0104835800816115944e077fe7c803cfa57f29b36bf87c1d358bb85e" ), SER_DISK, PEER_VERSION ) ;
     CCoins cc1;
     ss1 >> cc1;
     BOOST_CHECK_EQUAL(cc1.nVersion, 1);
@@ -446,7 +446,7 @@ BOOST_AUTO_TEST_CASE(ccoins_serialization)
     BOOST_CHECK_EQUAL(HexStr(cc1.vout[1].scriptPubKey), HexStr(GetScriptForDestination(CKeyID(uint160(ParseHex("816115944e077fe7c803cfa57f29b36bf87c1d35"))))));
 
     // Good example
-    CDataStream ss2(ParseHex("0109044086ef97d5790061b01caab50f1b8e9c50a5057eb43c2d9563a4eebbd123008c988f1a4a4de2161e0f50aac7f17e7f9555caa486af3b"), SER_DISK, CLIENT_VERSION);
+    CDataStream ss2( ParseHex( "0109044086ef97d5790061b01caab50f1b8e9c50a5057eb43c2d9563a4eebbd123008c988f1a4a4de2161e0f50aac7f17e7f9555caa486af3b" ), SER_DISK, PEER_VERSION ) ;
     CCoins cc2;
     ss2 >> cc2;
     BOOST_CHECK_EQUAL(cc2.nVersion, 1);
@@ -462,10 +462,10 @@ BOOST_AUTO_TEST_CASE(ccoins_serialization)
     BOOST_CHECK_EQUAL(HexStr(cc2.vout[16].scriptPubKey), HexStr(GetScriptForDestination(CKeyID(uint160(ParseHex("8c988f1a4a4de2161e0f50aac7f17e7f9555caa4"))))));
 
     // Smallest possible example
-    CDataStream ssx(SER_DISK, CLIENT_VERSION);
+    CDataStream ssx( SER_DISK, PEER_VERSION ) ;
     BOOST_CHECK_EQUAL(HexStr(ssx.begin(), ssx.end()), "");
 
-    CDataStream ss3(ParseHex("0002000600"), SER_DISK, CLIENT_VERSION);
+    CDataStream ss3( ParseHex( "0002000600" ), SER_DISK, PEER_VERSION ) ;
     CCoins cc3;
     ss3 >> cc3;
     BOOST_CHECK_EQUAL(cc3.nVersion, 0);
@@ -477,7 +477,7 @@ BOOST_AUTO_TEST_CASE(ccoins_serialization)
     BOOST_CHECK_EQUAL(cc3.vout[0].scriptPubKey.size(), 0);
 
     // scriptPubKey that ends beyond the end of the stream
-    CDataStream ss4(ParseHex("0002000800"), SER_DISK, CLIENT_VERSION);
+    CDataStream ss4( ParseHex( "0002000800" ), SER_DISK, PEER_VERSION ) ;
     try {
         CCoins cc4;
         ss4 >> cc4;
@@ -486,11 +486,11 @@ BOOST_AUTO_TEST_CASE(ccoins_serialization)
     }
 
     // Very large scriptPubKey (3*10^9 bytes) past the end of the stream
-    CDataStream tmp(SER_DISK, CLIENT_VERSION);
+    CDataStream tmp( SER_DISK, PEER_VERSION ) ;
     uint64_t x = 3000000000ULL;
     tmp << VARINT(x);
     BOOST_CHECK_EQUAL(HexStr(tmp.begin(), tmp.end()), "8a95c0bb00");
-    CDataStream ss5(ParseHex("0002008a95c0bb0000"), SER_DISK, CLIENT_VERSION);
+    CDataStream ss5( ParseHex( "0002008a95c0bb0000" ), SER_DISK, PEER_VERSION ) ;
     try {
         CCoins cc5;
         ss5 >> cc5;

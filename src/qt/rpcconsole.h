@@ -1,9 +1,10 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_QT_RPCCONSOLE_H
-#define BITCOIN_QT_RPCCONSOLE_H
+#ifndef DOGECOIN_QT_RPCCONSOLE_H
+#define DOGECOIN_QT_RPCCONSOLE_H
 
 #include "guiutil.h"
 #include "peertablemodel.h"
@@ -16,9 +17,9 @@
 
 #include <QFileSystemWatcher>
 
-class ClientModel;
-class PlatformStyle;
-class RPCTimerInterface;
+class NetworkModel ;
+class PlatformStyle ;
+class RPCTimerInterface ;
 
 namespace Ui {
     class RPCConsole;
@@ -29,7 +30,6 @@ class QMenu;
 class QItemSelection;
 QT_END_NAMESPACE
 
-/** Local Bitcoin RPC console. */
 class RPCConsole: public QWidget
 {
     Q_OBJECT
@@ -43,7 +43,7 @@ public:
         return RPCParseCommandLine(strResult, strCommand, true, pstrFilteredOut);
     }
 
-    void setClientModel(ClientModel *model);
+    void setNetworkModel( NetworkModel * model ) ;
 
     enum MessageClass {
         MC_ERROR,
@@ -126,16 +126,15 @@ public Q_SLOTS:
     void showContextMenuForLog( const QPoint & where ) ;
 
 Q_SIGNALS:
-    // For RPC command executor
-    void stopExecutor();
-    void cmdRequest(const QString &command);
+    // For RPC command performer
+    void stopPerformer() ;
+    void cmdRequest( const QString & command ) ;
 
 private:
-    static QString FormatBytes(quint64 bytes);
-    void startExecutor();
-    void setTrafficGraphRange(int mins);
-    /** show detailed information on ui about selected node */
-    void updateNodeDetail(const CNodeCombinedStats *stats);
+    void startPerformer() ;
+    void setTrafficGraphRange( int mins ) ;
+    /** show detailed information about selected node */
+    void updateNodeDetail( const CNodeCombinedStats * stats ) ;
 
     enum ColumnWidths
     {
@@ -148,7 +147,7 @@ private:
     };
 
     Ui::RPCConsole *ui;
-    ClientModel *clientModel;
+    NetworkModel * networkModel ;
     QStringList history;
     int historyPtr;
     QString cmdBeforeBrowsing;
@@ -167,8 +166,8 @@ private:
     quint64 resetBytesRecv ;
     quint64 resetBytesSent ;
 
-    /** Update UI with latest network info from model. */
+    /** Update UI with latest network info from model */
     void updateNetworkState();
 };
 
-#endif // BITCOIN_QT_RPCCONSOLE_H
+#endif

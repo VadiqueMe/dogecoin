@@ -99,7 +99,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+189"/>
+        <location line="+186"/>
         <source>Export Address List</source>
         <translation type="unfinished"></translation>
     </message>
@@ -205,7 +205,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+44"/>
+        <location line="+45"/>
         <source>Confirm wallet encryption</source>
         <translation type="unfinished"></translation>
     </message>
@@ -293,14 +293,6 @@
     <message>
         <location line="+0"/>
         <source>Banned Until</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ClientModel</name>
-    <message>
-        <location filename="../clientmodel.cpp" line="+178"/>
-        <source>Network Alert</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -448,13 +440,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+168"/>
+        <location line="+167"/>
         <source>Can vary +/- %1 koinu(s) per input.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+40"/>
-        <location line="+53"/>
+        <location line="+41"/>
+        <location line="+54"/>
         <source>(no label)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -674,13 +666,8 @@
         <source>Tabs toolbar</source>
         <translation type="unfinished">Tabs toolbar</translation>
     </message>
-    <message>
-        <location line="+127"/>
-        <source>%1 client</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message numerus="yes">
-        <location line="+161"/>
+        <location line="+288"/>
         <source>%n active connection(s) to Dogecoin network</source>
         <translation type="unfinished">
             <numerusform>%n active connection to Dogecoin network</numerusform>
@@ -708,7 +695,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="+25"/>
         <source>Synchronizing with network...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -879,7 +866,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+72"/>
+        <location line="+71"/>
         <source>The entered address &quot;%1&quot; is already in the address book</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1176,6 +1163,14 @@
     <message>
         <location filename="../modaloverlay.cpp" line="-1"/>
         <source>Unknown. Syncing Headers (%1)...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NetworkModel</name>
+    <message>
+        <location filename="../networkmodel.cpp" line="+178"/>
+        <source>Network Alert</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1718,7 +1713,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="+14"/>
         <source>Paper wallet %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1917,7 +1912,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>PeerTableModel</name>
     <message>
-        <location filename="../peertablemodel.cpp" line="+117"/>
+        <location filename="../peertablemodel.cpp" line="+116"/>
         <source>User Agent</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2089,18 +2084,18 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>RPCConsole</name>
     <message>
-        <location filename="../forms/debugwindow.ui" line="+56"/>
+        <location filename="../forms/debugwindow.ui" line="+64"/>
+        <location line="+16"/>
+        <location line="+59"/>
+        <location line="+55"/>
+        <location line="+49"/>
+        <location line="+23"/>
+        <location line="+37"/>
+        <location line="+16"/>
         <location line="+26"/>
+        <location line="+16"/>
         <location line="+26"/>
-        <location line="+23"/>
-        <location line="+26"/>
-        <location line="+52"/>
-        <location line="+23"/>
-        <location line="+52"/>
-        <location line="+23"/>
-        <location line="+52"/>
-        <location line="+23"/>
-        <location line="+712"/>
+        <location line="+620"/>
         <location line="+23"/>
         <location line="+23"/>
         <location line="+23"/>
@@ -2122,12 +2117,7 @@ p, li { white-space: pre-wrap; }
         <translation>N/A</translation>
     </message>
     <message>
-        <location line="-1442"/>
-        <source>Client version</source>
-        <translation>Client version</translation>
-    </message>
-    <message>
-        <location line="-22"/>
+        <location line="-1377"/>
         <source>Information</source>
         <translation>Information</translation>
     </message>
@@ -2137,12 +2127,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+25"/>
-        <source>General</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+56"/>
+        <location line="+360"/>
         <source>Using BerkeleyDB version</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2152,58 +2137,58 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="-121"/>
         <source>Startup time</source>
         <translation>Startup time</translation>
     </message>
     <message>
-        <location line="+45"/>
+        <location line="-46"/>
         <source>Network</source>
         <translation>Network</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+53"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+7"/>
         <source>Number of connections</source>
         <translation>Number of connections</translation>
     </message>
     <message>
-        <location line="+45"/>
+        <location line="-135"/>
         <source>Block chain</source>
         <translation>Block chain</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+177"/>
         <source>Current number of blocks</source>
         <translation>Current number of blocks</translation>
     </message>
     <message>
-        <location line="+68"/>
+        <location line="-115"/>
         <source>Memory Pool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+36"/>
         <source>Current number of transactions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="-134"/>
         <source>Memory usage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+37"/>
+        <location line="+286"/>
         <source>Log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+416"/>
-        <location line="+558"/>
+        <location line="+373"/>
+        <location line="+515"/>
         <source>Received</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2230,8 +2215,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+55"/>
-        <location filename="../rpcconsole.cpp" line="+474"/>
-        <location line="+772"/>
+        <location filename="../rpcconsole.cpp" line="+540"/>
+        <location line="+758"/>
         <source>Select a peer to view detailed information</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2246,7 +2231,8 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="-891"/>
+        <location line="+914"/>
         <source>Version</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2266,23 +2252,23 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-1176"/>
-        <location line="+1084"/>
+        <location line="-993"/>
+        <location line="+901"/>
         <source>User Agent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-642"/>
+        <location line="-559"/>
         <source>Decrease font size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+29"/>
+        <location line="+32"/>
         <source>Increase font size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+636"/>
+        <location line="+550"/>
         <source>Services</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2332,12 +2318,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-1181"/>
+        <location line="-1184"/>
         <source>Last block time</source>
         <translation>Last block time</translation>
     </message>
     <message>
-        <location line="+164"/>
+        <location line="+253"/>
         <source>&amp;Open</source>
         <translation>&amp;Open</translation>
     </message>
@@ -2357,7 +2343,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../rpcconsole.cpp" line="-466"/>
+        <location filename="../rpcconsole.cpp" line="-451"/>
         <source>In:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2435,7 +2421,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+308"/>
+        <location line="+295"/>
         <source>(node id: %1)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2550,7 +2536,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../receivecoinsdialog.cpp" line="+325"/>
+        <location filename="../receivecoinsdialog.cpp" line="+328"/>
         <source>Request payment to %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2632,7 +2618,7 @@ p, li { white-space: pre-wrap; }
     <name>SendCoinsDialog</name>
     <message>
         <location filename="../forms/sendcoinsdialog.ui" line="+14"/>
-        <location filename="../sendcoinsdialog.cpp" line="+528"/>
+        <location filename="../sendcoinsdialog.cpp" line="+529"/>
         <source>Send Coins</source>
         <translation>Send Coins</translation>
     </message>
@@ -2773,7 +2759,7 @@ p, li { white-space: pre-wrap; }
         <translation>S&amp;end</translation>
     </message>
     <message>
-        <location filename="../sendcoinsdialog.cpp" line="-459"/>
+        <location filename="../sendcoinsdialog.cpp" line="-460"/>
         <source>Copy quantity</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2803,7 +2789,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+180"/>
+        <location line="+181"/>
         <location line="+5"/>
         <location line="+5"/>
         <location line="+4"/>
@@ -3153,7 +3139,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+83"/>
+        <location line="+82"/>
         <location line="+80"/>
         <source>The entered address is invalid.</source>
         <translation type="unfinished"></translation>
@@ -3222,7 +3208,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>TrafficGraphWidget</name>
     <message>
-        <location filename="../trafficgraphwidget.cpp" line="+79"/>
+        <location filename="../trafficgraphwidget.cpp" line="+82"/>
         <source>KB/s</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3777,7 +3763,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+147"/>
+        <location line="+146"/>
         <source>Range:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3790,7 +3776,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <location filename="../gui.cpp" line="+140"/>
+        <location filename="../gui.cpp" line="+137"/>
         <source>Unit to show amounts in. Click to choose another unit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3798,7 +3784,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>WalletFrame</name>
     <message>
-        <location filename="../walletframe.cpp" line="+28"/>
+        <location filename="../walletframe.cpp" line="+29"/>
         <source>No wallet has been loaded.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3824,7 +3810,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Export the data in the current tab to a file</translation>
     </message>
     <message>
-        <location line="+224"/>
+        <location line="+227"/>
         <source>Backup Wallet</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4760,11 +4746,6 @@ p, li { white-space: pre-wrap; }
         <location line="+1"/>
         <source>Show all debugging options (usage: --help -help-debug)</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation type="unfinished">Shrink debug log file on client startup (default: 1 when no -debug)</translation>
     </message>
     <message>
         <location line="+1"/>

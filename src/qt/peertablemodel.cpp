@@ -1,10 +1,10 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "peertablemodel.h"
 
-#include "clientmodel.h"
+#include "networkmodel.h"
 #include "guiconstants.h"
 #include "guiutil.h"
 
@@ -109,9 +109,8 @@ public:
     }
 };
 
-PeerTableModel::PeerTableModel(ClientModel *parent) :
+PeerTableModel::PeerTableModel( NetworkModel * parent ) :
     QAbstractTableModel(parent),
-    clientModel(parent),
     timer(0)
 {
     columns << tr("NodeId") << tr("Node/Service") << tr("User Agent") << tr("Ping");

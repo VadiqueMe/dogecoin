@@ -1,12 +1,12 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_WALLET_DB_H
-#define BITCOIN_WALLET_DB_H
+#ifndef DOGECOIN_WALLET_DB_H
+#define DOGECOIN_WALLET_DB_H
 
-#include "clientversion.h"
+#include "peerversion.h"
 #include "serialize.h"
 #include "streams.h"
 #include "sync.h"
@@ -117,7 +117,7 @@ protected:
             return false;
 
         // Key
-        CDataStream ssKey(SER_DISK, CLIENT_VERSION);
+        CDataStream ssKey( SER_DISK, PEER_VERSION ) ;
         ssKey.reserve(1000);
         ssKey << key;
         Dbt datKey(ssKey.data(), ssKey.size());
@@ -131,7 +131,7 @@ protected:
         if (datValue.get_data() != NULL) {
             // Unserialize value
             try {
-                CDataStream ssValue((char*)datValue.get_data(), (char*)datValue.get_data() + datValue.get_size(), SER_DISK, CLIENT_VERSION);
+                CDataStream ssValue( (char*)datValue.get_data(), (char*)datValue.get_data() + datValue.get_size(), SER_DISK, PEER_VERSION ) ;
                 ssValue >> value;
                 success = true;
             } catch (const std::exception&) {
@@ -154,13 +154,13 @@ protected:
             assert(!"Write called on database in read-only mode");
 
         // Key
-        CDataStream ssKey(SER_DISK, CLIENT_VERSION);
+        CDataStream ssKey( SER_DISK, PEER_VERSION ) ;
         ssKey.reserve(1000);
         ssKey << key;
         Dbt datKey(ssKey.data(), ssKey.size());
 
         // Value
-        CDataStream ssValue(SER_DISK, CLIENT_VERSION);
+        CDataStream ssValue( SER_DISK, PEER_VERSION ) ;
         ssValue.reserve(10000);
         ssValue << value;
         Dbt datValue(ssValue.data(), ssValue.size());
@@ -183,7 +183,7 @@ protected:
             assert(!"Erase called on database in read-only mode");
 
         // Key
-        CDataStream ssKey(SER_DISK, CLIENT_VERSION);
+        CDataStream ssKey( SER_DISK, PEER_VERSION ) ;
         ssKey.reserve(1000);
         ssKey << key;
         Dbt datKey(ssKey.data(), ssKey.size());
@@ -203,7 +203,7 @@ protected:
             return false;
 
         // Key
-        CDataStream ssKey(SER_DISK, CLIENT_VERSION);
+        CDataStream ssKey( SER_DISK, PEER_VERSION ) ;
         ssKey.reserve(1000);
         ssKey << key;
         Dbt datKey(ssKey.data(), ssKey.size());
@@ -306,4 +306,4 @@ public:
     bool static Rewrite(const std::string& strFile, const char* pszSkip = NULL);
 };
 
-#endif // BITCOIN_WALLET_DB_H
+#endif

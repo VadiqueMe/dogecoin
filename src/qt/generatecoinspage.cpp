@@ -51,7 +51,7 @@ GenerateCoinsPage::~GenerateCoinsPage()
     delete ui ;
 }
 
-void GenerateCoinsPage::setModel( WalletModel * model )
+void GenerateCoinsPage::setWalletModel( WalletModel * model )
 {
     walletModel = model ;
 

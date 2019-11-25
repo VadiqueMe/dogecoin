@@ -10,7 +10,6 @@
 
 #include "networkstyle.h"
 
-#include "clientversion.h"
 #include "init.h"
 #include "util.h"
 #include "ui_interface.h"
@@ -174,7 +173,7 @@ void SplashScreen::ConnectWallet(CWallet* wallet)
 
 void SplashScreen::subscribeToCoreSignals()
 {
-    // Connect signals to client
+    // Connect signals
     uiInterface.InitMessage.connect(boost::bind(InitMessage, this, _1));
     uiInterface.ShowProgress.connect(boost::bind(ShowProgress, this, _1, _2));
 #ifdef ENABLE_WALLET
@@ -184,7 +183,7 @@ void SplashScreen::subscribeToCoreSignals()
 
 void SplashScreen::unsubscribeFromCoreSignals()
 {
-    // Disconnect signals from client
+    // Disconnect signals
     uiInterface.InitMessage.disconnect(boost::bind(InitMessage, this, _1));
     uiInterface.ShowProgress.disconnect(boost::bind(ShowProgress, this, _1, _2));
 #ifdef ENABLE_WALLET

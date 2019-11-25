@@ -10,7 +10,7 @@
 #include "walletmodel.h"
 
 class DogecoinGUI ;
-class ClientModel ;
+class NetworkModel ;
 
 namespace Ui {
     class HelpMessageDialog;
@@ -26,13 +26,14 @@ public:
     explicit PaperWalletDialog(QWidget *parent);
     ~PaperWalletDialog();
 
-    void setClientModel(ClientModel *clientModel);
-    void setModel(WalletModel *model);
+    void setNetworkModel( NetworkModel * networkModel ) ;
+    void setWalletModel( WalletModel * model ) ;
 
 private:
-    Ui::PaperWalletDialog *ui;
-    ClientModel *clientModel;
-    WalletModel *model;
+    Ui::PaperWalletDialog * ui ;
+    NetworkModel * networkModel ;
+    WalletModel * walletModel ;
+
     static const int PAPER_WALLET_READJUST_LIMIT = 20;
     static const int PAPER_WALLET_PAGE_MARGIN = 50;
 

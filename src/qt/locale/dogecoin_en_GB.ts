@@ -322,10 +322,6 @@
         <translation>Show the %1 help message to get a list with possible Dogecoin command-line options</translation>
     </message>
     <message>
-        <source>%1 client</source>
-        <translation>%1 client</translation>
-    </message>
-    <message>
         <source>Catching up...</source>
         <translation>Catching up...</translation>
     </message>
@@ -937,20 +933,12 @@
         <translation>N/A</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Client version</translation>
-    </message>
-    <message>
         <source>Information</source>
         <translation>Information</translation>
     </message>
     <message>
         <source>Debug window</source>
         <translation>Debug window</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>General</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -2151,10 +2139,6 @@
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
         <translation>Show all debugging options (usage: --help -help-debug)</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>Shrink debug log file on client startup (default: 1 when no -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

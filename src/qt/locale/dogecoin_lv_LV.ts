@@ -623,8 +623,8 @@
         <translation>N/A</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Klienta versija</translation>
+        <source>Version</source>
+        <translation>Versija</translation>
     </message>
     <message>
         <source>Information</source>
@@ -633,10 +633,6 @@
     <message>
         <source>Debug window</source>
         <translation>Atkļūdošanas logs</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Vispārējs</translation>
     </message>
     <message>
         <source>Startup time</source>

@@ -1,9 +1,9 @@
 // Copyright (c) 2011-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_QT_ASKPASSPHRASEDIALOG_H
-#define BITCOIN_QT_ASKPASSPHRASEDIALOG_H
+#ifndef DOGECOIN_QT_ASKPASSPHRASEDIALOG_H
+#define DOGECOIN_QT_ASKPASSPHRASEDIALOG_H
 
 #include <QDialog>
 
@@ -13,7 +13,7 @@ namespace Ui {
     class AskPassphraseDialog;
 }
 
-/** Multifunctional dialog to ask for passphrases. Used for encryption, unlocking, and changing the passphrase.
+/** Multifunctional dialog to ask for passphrases. Used for encryption, unlocking, and changing the passphrase
  */
 class AskPassphraseDialog : public QDialog
 {
@@ -27,17 +27,17 @@ public:
         Decrypt     /**< Ask passphrase and decrypt wallet */
     };
 
-    explicit AskPassphraseDialog(Mode mode, QWidget *parent);
-    ~AskPassphraseDialog();
+    explicit AskPassphraseDialog( Mode mode, QWidget * parent ) ;
+    ~AskPassphraseDialog() ;
 
     void accept();
 
-    void setModel(WalletModel *model);
+    void setWalletModel( WalletModel * model ) ;
 
 private:
     Ui::AskPassphraseDialog *ui;
     Mode mode;
-    WalletModel *model;
+    WalletModel * walletModel ;
     bool fCapsLock;
 
 private Q_SLOTS:

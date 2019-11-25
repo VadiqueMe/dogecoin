@@ -307,16 +307,12 @@
         <translation>Алга Байна</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Клиентийн хувилбар</translation>
+        <source>Version</source>
+        <translation>Хувилбар</translation>
     </message>
     <message>
         <source>Information</source>
         <translation>Мэдээллэл</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Ерѳнхий</translation>
     </message>
     <message>
         <source>Network</source>

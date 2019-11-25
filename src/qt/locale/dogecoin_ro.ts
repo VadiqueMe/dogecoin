@@ -515,8 +515,8 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>Client version</source>
-        <translation>Versiunea clientului</translation>
+        <source>Version</source>
+        <translation>Versiune</translation>
     </message>
     <message>
         <source>Information</source>
@@ -525,10 +525,6 @@
     <message>
         <source>Debug window</source>
         <translation>Fereastra pentru depanare</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>General</translation>
     </message>
     <message>
         <source>Network</source>

@@ -450,10 +450,6 @@
         <translation>사용할 수 있는 비트코인 명령줄 옵션 목록을 가져오기 위해 %1 도움말 메시지를 표시합니다.</translation>
     </message>
     <message>
-        <source>%1 client</source>
-        <translation>%1 클라이언트</translation>
-    </message>
-    <message>
         <source>Connecting to peers...</source>
         <translation>피어에 연결중...</translation>
     </message>
@@ -1413,8 +1409,8 @@
         <translation>없음</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>클라이언트 버전</translation>
+        <source>Version</source>
+        <translation>버전</translation>
     </message>
     <message>
         <source>Information</source>
@@ -1423,10 +1419,6 @@
     <message>
         <source>Debug window</source>
         <translation>디버그 창</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>일반</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -3346,10 +3338,6 @@
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
         <translation>모든 디버그 설정 보기(설정: --help -help-debug)</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>클라이언트 시작시 debug log 파일 비우기(기본값: 디버그 안할때 1)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

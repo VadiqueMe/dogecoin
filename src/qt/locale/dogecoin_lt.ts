@@ -547,8 +547,8 @@
         <translation>nėra</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Kliento versija</translation>
+        <source>Version</source>
+        <translation>Versija</translation>
     </message>
     <message>
         <source>Information</source>

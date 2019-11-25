@@ -675,8 +675,8 @@
         <translation>Тўғри келмайди</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Мижоз номи</translation>
+        <source>Version</source>
+        <translation>Версияси</translation>
     </message>
     <message>
         <source>Information</source>
@@ -685,10 +685,6 @@
     <message>
         <source>Debug window</source>
         <translation>Тузатиш ойнаси</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Асосий</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -720,7 +716,7 @@
     </message>
     <message>
         <source>Version</source>
-        <translation>Версия</translation>
+        <translation>Версияси</translation>
     </message>
     <message>
         <source>User Agent</source>

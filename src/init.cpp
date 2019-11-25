@@ -468,7 +468,7 @@ std::string HelpMessage( WhatHelpMessage what )
     {
         strUsage += HelpMessageOpt( "-printpriority", strprintf("Log transaction priority and fee per kB when mining blocks (default: %u)", DEFAULT_PRINTPRIORITY) ) ;
     }
-    strUsage += HelpMessageOpt("-shrinkdebugfile", _("Shrink debug log file on client startup (default: 1 when no -debug)"));
+    strUsage += HelpMessageOpt( "-shrinkdebugfile", "Shrink debug log file on startup (default: 1 when no -debug)" ) ;
 
     AppendParamsHelpMessages(strUsage, showDebug);
 
@@ -1225,7 +1225,7 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
             uacomments.push_back(cmt);
         }
     }
-    strSubVersion = FormatSubVersion( CLIENT_NAME, CLIENT_VERSION, uacomments ) ;
+    strSubVersion = FormatSubVersion( PEER_NAME, PEER_VERSION, uacomments ) ;
     if (strSubVersion.size() > MAX_SUBVERSION_LENGTH) {
         return InitError(strprintf(_("Total length of network version string (%i) exceeds maximum length (%i). Reduce the number or size of uacomments."),
             strSubVersion.size(), MAX_SUBVERSION_LENGTH));

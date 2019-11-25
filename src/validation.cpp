@@ -963,8 +963,9 @@ bool GetTransaction(const uint256 &hash, CTransactionRef &txOut, const Consensus
 
     if (fTxIndex) {
         CDiskTxPos postx;
-        if (pblocktree->ReadTxIndex(hash, postx)) {
-            CAutoFile file(OpenBlockFile(postx, true), SER_DISK, CLIENT_VERSION);
+        if ( pblocktree->ReadTxIndex( hash, postx ) )
+        {
+            CAutoFile file( OpenBlockFile( postx, true ), SER_DISK, PEER_VERSION ) ;
             if (file.IsNull())
                 return error("%s: OpenBlockFile failed", __func__);
             CBlockHeader header;
@@ -1019,7 +1020,7 @@ bool GetTransaction(const uint256 &hash, CTransactionRef &txOut, const Consensus
 bool WriteBlockToDisk(const CBlock& block, CDiskBlockPos& pos, const CMessageHeader::MessageStartChars& messageStart)
 {
     // Open history file to append
-    CAutoFile fileout(OpenBlockFile(pos), SER_DISK, CLIENT_VERSION);
+    CAutoFile fileout( OpenBlockFile( pos ), SER_DISK, PEER_VERSION ) ;
     if (fileout.IsNull())
         return error("WriteBlockToDisk: OpenBlockFile failed");
 
@@ -1037,8 +1038,7 @@ bool WriteBlockToDisk(const CBlock& block, CDiskBlockPos& pos, const CMessageHea
     return true;
 }
 
-/* Generic implementation of block reading that can handle
-   both a block and its header.  */
+/* Generic implementation of block reading that can handle both a block and its header */
 
 template<typename T>
 static bool ReadBlockOrHeader(T& block, const CDiskBlockPos& pos, const Consensus::Params& consensusParams)
@@ -1046,7 +1046,7 @@ static bool ReadBlockOrHeader(T& block, const CDiskBlockPos& pos, const Consensu
     block.SetNull();
 
     // Open history file to read
-    CAutoFile filein(OpenBlockFile(pos, true), SER_DISK, CLIENT_VERSION);
+    CAutoFile filein( OpenBlockFile( pos, true ), SER_DISK, PEER_VERSION ) ;
     if (filein.IsNull())
         return error("ReadBlockFromDisk: OpenBlockFile failed for %s", pos.ToString());
 
@@ -1399,7 +1399,7 @@ namespace {
 bool UndoWriteToDisk(const CBlockUndo& blockundo, CDiskBlockPos& pos, const uint256& hashBlock, const CMessageHeader::MessageStartChars& messageStart)
 {
     // Open history file to append
-    CAutoFile fileout(OpenUndoFile(pos), SER_DISK, CLIENT_VERSION);
+    CAutoFile fileout( OpenUndoFile( pos ), SER_DISK, PEER_VERSION ) ;
     if (fileout.IsNull())
         return error("%s: OpenUndoFile failed", __func__);
 
@@ -1426,7 +1426,7 @@ bool UndoWriteToDisk(const CBlockUndo& blockundo, CDiskBlockPos& pos, const uint
 bool UndoReadFromDisk(CBlockUndo& blockundo, const CDiskBlockPos& pos, const uint256& hashBlock)
 {
     // Open history file to read
-    CAutoFile filein(OpenUndoFile(pos, true), SER_DISK, CLIENT_VERSION);
+    CAutoFile filein( OpenUndoFile( pos, true ), SER_DISK, PEER_VERSION ) ;
     if (filein.IsNull())
         return error("%s: OpenUndoFile failed", __func__);
 
@@ -1862,7 +1862,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
         UpdateCoins(tx, view, i == 0 ? undoDummy : blockundo.vtxundo.back(), pindex->nHeight);
 
         vPos.push_back(std::make_pair(tx.GetHash(), pos));
-        pos.nTxOffset += ::GetSerializeSize(tx, SER_DISK, CLIENT_VERSION);
+        pos.nTxOffset += ::GetSerializeSize( tx, SER_DISK, PEER_VERSION ) ;
     }
     int64_t nTime3 = GetTimeMicros(); nTimeConnect += nTime3 - nTime2;
     LogPrint("bench", "      - Connect %u transactions: %.2fms (%.3fms/tx, %.3fms/txin) [%.2fs]\n", (unsigned)block.vtx.size(), 0.001 * (nTime3 - nTime2), 0.001 * (nTime3 - nTime2) / block.vtx.size(), nInputs <= 1 ? 0 : 0.001 * (nTime3 - nTime2) / (nInputs-1), nTimeConnect * 0.000001);
@@ -1888,10 +1888,10 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     {
         if (pindex->GetUndoPos().IsNull()) {
             CDiskBlockPos _pos;
-            if (!FindUndoPos(state, pindex->nFile, _pos, ::GetSerializeSize(blockundo, SER_DISK, CLIENT_VERSION) + 40))
-                return error("ConnectBlock(): FindUndoPos failed");
-            if (!UndoWriteToDisk(blockundo, _pos, pindex->pprev->GetBlockHash(), chainparams.MessageStart()))
-                return AbortNode(state, "Failed to write undo data");
+            if ( ! FindUndoPos( state, pindex->nFile, _pos, ::GetSerializeSize( blockundo, SER_DISK, PEER_VERSION ) + 40 ) )
+                return error( "ConnectBlock(): FindUndoPos failed" ) ;
+            if ( ! UndoWriteToDisk( blockundo, _pos, pindex->pprev->GetBlockHash(), chainparams.MessageStart() ) )
+                return AbortNode( state, "Failed to write undo data" ) ;
 
             // update nUndoPos in block index
             pindex->nUndoPos = _pos.nPos;
@@ -3192,7 +3192,7 @@ static bool AcceptBlock(const std::shared_ptr<const CBlock>& pblock, CValidation
 
     // Write block to history file
     try {
-        unsigned int nBlockSize = ::GetSerializeSize(block, SER_DISK, CLIENT_VERSION);
+        unsigned int nBlockSize = ::GetSerializeSize( block, SER_DISK, PEER_VERSION ) ;
         CDiskBlockPos blockPos;
         if (dbp != NULL)
             blockPos = *dbp;
@@ -3547,9 +3547,8 @@ bool static LoadBlockIndexDB(const CChainParams& chainparams)
     for (std::set<int>::iterator it = setBlkDataFiles.begin(); it != setBlkDataFiles.end(); it++)
     {
         CDiskBlockPos pos(*it, 0);
-        if (CAutoFile(OpenBlockFile(pos, true), SER_DISK, CLIENT_VERSION).IsNull()) {
-            return false;
-        }
+        if ( CAutoFile( OpenBlockFile( pos, true ), SER_DISK, PEER_VERSION ).IsNull() )
+            return false ;
     }
 
     // Check whether we have ever pruned block & undo files
@@ -3824,7 +3823,7 @@ bool InitBlockIndex(const CChainParams& chainparams)
         try {
             CBlock &block = const_cast<CBlock&>(chainparams.GenesisBlock());
             // Start new block file
-            unsigned int nBlockSize = ::GetSerializeSize(block, SER_DISK, CLIENT_VERSION);
+            unsigned int nBlockSize = ::GetSerializeSize( block, SER_DISK, PEER_VERSION ) ;
             CDiskBlockPos blockPos;
             CValidationState state;
             if (!FindBlockPos(state, blockPos, nBlockSize+8, 0, block.GetBlockTime()))
@@ -3853,7 +3852,7 @@ bool LoadExternalBlockFile(const CChainParams& chainparams, FILE* fileIn, CDiskB
     int nLoaded = 0;
     try {
         // This takes over fileIn and calls fclose() on it in the CBufferedFile destructor
-        CBufferedFile blkdat(fileIn, 2*MAX_BLOCK_SERIALIZED_SIZE, MAX_BLOCK_SERIALIZED_SIZE+8, SER_DISK, CLIENT_VERSION);
+        CBufferedFile blkdat( fileIn, 2 * MAX_BLOCK_SERIALIZED_SIZE, MAX_BLOCK_SERIALIZED_SIZE + 8, SER_DISK, PEER_VERSION ) ;
         uint64_t nRewind = blkdat.GetPos();
         while (!blkdat.eof()) {
             boost::this_thread::interruption_point();
@@ -4174,10 +4173,10 @@ bool LoadMempool(void)
 {
     int64_t nExpiryTimeout = GetArg("-mempoolexpiry", DEFAULT_MEMPOOL_EXPIRY) * 60 * 60;
     FILE* filestr = fopen((GetDataDir() / "mempool.dat").string().c_str(), "rb");
-    CAutoFile file(filestr, SER_DISK, CLIENT_VERSION);
-    if (file.IsNull()) {
-        LogPrintf("Failed to open mempool file from disk. Continuing anyway.\n");
-        return false;
+    CAutoFile file( filestr, SER_DISK, PEER_VERSION ) ;
+    if ( file.IsNull() ) {
+        LogPrintf( "Failed to open mempool file from disk. Continuing anyway\n" ) ;
+        return false ;
     }
 
     int64_t count = 0;
@@ -4259,7 +4258,7 @@ void DumpMempool()
             return;
         }
 
-        CAutoFile file(filestr, SER_DISK, CLIENT_VERSION);
+        CAutoFile file( filestr, SER_DISK, PEER_VERSION ) ;
 
         uint64_t version = MEMPOOL_DUMP_VERSION;
         file << version;

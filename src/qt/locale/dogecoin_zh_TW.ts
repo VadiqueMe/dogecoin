@@ -450,10 +450,6 @@
         <translation>顯示 %1 的說明訊息，來取得可用命令列選項的列表</translation>
     </message>
     <message>
-        <source>%1 client</source>
-        <translation>%1 客戶端軟體</translation>
-    </message>
-    <message>
         <source>Connecting to peers...</source>
         <translation>正在跟其他節點連線中...</translation>
     </message>
@@ -1413,8 +1409,8 @@
         <translation>未知</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>客戶端軟體版本</translation>
+        <source>Version</source>
+        <translation>版本</translation>
     </message>
     <message>
         <source>Information</source>
@@ -1423,10 +1419,6 @@
     <message>
         <source>Debug window</source>
         <translation>除錯視窗</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>普通</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -3351,10 +3343,6 @@
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
         <translation>顯示所有的除錯選項 (用法: --help --help-debug)</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>客戶端軟體啓動時把 debug log 檔縮小(預設值: 當沒有 -debug 時為 1)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

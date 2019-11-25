@@ -857,8 +857,8 @@
         <translation>indisponibil</translation>
     </message>
     <message>
-        <source>Client version</source>
-        <translation>Versiune client</translation>
+        <source>Version</source>
+        <translation>Versiune</translation>
     </message>
     <message>
         <source>Information</source>
@@ -867,10 +867,6 @@
     <message>
         <source>Debug window</source>
         <translation>Fereastra de depanare</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>General</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -1654,10 +1650,6 @@
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
         <translation>Arată toate opţiunile de depanare (uz: --help -help-debug)</translation>
-    </message>
-    <message>
-        <source>Shrink debug log file on client startup (default: 1 when no -debug)</source>
-        <translation>Micşorează fişierul debug log la pornirea clientului (implicit: 1 cînd nu se foloseşte -debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>
