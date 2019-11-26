@@ -768,7 +768,17 @@
         <translation type="unfinished">Information</translation>
     </message>
     <message>
-        <location line="+91"/>
+        <location line="+63"/>
+        <source>Are you sure?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Really quit?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+37"/>
         <source>Date: %1
 </source>
         <translation type="unfinished"></translation>

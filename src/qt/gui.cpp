@@ -998,26 +998,39 @@ void DogecoinGUI::changeEvent(QEvent *e)
 #endif
 }
 
-void DogecoinGUI::closeEvent(QCloseEvent *event)
+void DogecoinGUI::closeEvent( QCloseEvent * event )
 {
-#ifndef Q_OS_MAC // Ignored on Mac
-    if ( networkModel && networkModel->getOptionsModel() )
+#ifdef Q_OS_MAC // "minimize on close" is ignored on Mac
+    bool minimizeOnClose = false ;
+#else
+    bool minimizeOnClose = ( networkModel && networkModel->getOptionsModel()
+                                && networkModel->getOptionsModel()->getMinimizeOnClose() ) ;
+#endif
+    if ( ! minimizeOnClose )
     {
-        if ( ! networkModel->getOptionsModel()->getMinimizeOnClose() )
+        QMessageBox::StandardButton reply ;
+        reply = QMessageBox::question( this, tr("Are you sure?"), tr("Really quit?"), QMessageBox::Yes | QMessageBox::No ) ;
+        if ( reply != QMessageBox::Yes )
         {
-            // close rpcConsole in case it was open to make some space for the shutdown window
-            rpcConsole->close();
-
-            QApplication::quit();
-        }
-        else
-        {
-            QMainWindow::showMinimized();
-            event->ignore();
+            event->ignore() ;
+            return ;
         }
     }
+
+#ifndef Q_OS_MAC // ignored on Mac
+    if ( minimizeOnClose )
+    {
+        QMainWindow::showMinimized() ;
+        event->ignore() ;
+        return ;
+    }
+
+    // close rpcConsole in case it was open to make some space for the shutdown window
+    rpcConsole->close() ;
+
+    QApplication::quit() ;
 #else
-    QMainWindow::closeEvent(event);
+    QMainWindow::closeEvent( event ) ;
 #endif
 }
 
