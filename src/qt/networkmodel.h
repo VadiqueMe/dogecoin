@@ -13,7 +13,6 @@
 
 class AddressTableModel;
 class BanTableModel;
-class OptionsModel;
 class PeerTableModel;
 class TransactionTableModel;
 
@@ -45,12 +44,11 @@ class NetworkModel : public QObject
     Q_OBJECT
 
 public:
-    explicit NetworkModel( OptionsModel * optionsModel, QObject * parent = nullptr ) ;
+    explicit NetworkModel( QObject * parent, bool sureDoIt ) ;
     ~NetworkModel() ;
 
-    OptionsModel *getOptionsModel();
-    PeerTableModel *getPeerTableModel();
-    BanTableModel *getBanTableModel();
+    PeerTableModel * getPeerTableModel() {  return peerTableModel ;  }
+    BanTableModel * getBanTableModel() {  return banTableModel ;  }
 
     //! Return number of connections, default is in- and outbound (total)
     int getNumConnections(unsigned int flags = CONNECTIONS_ALL) const;
@@ -89,9 +87,8 @@ public:
     mutable std::atomic<int64_t> cachedBestHeaderTime;
 
 private:
-    OptionsModel *optionsModel;
-    PeerTableModel *peerTableModel;
-    BanTableModel *banTableModel;
+    PeerTableModel * peerTableModel ;
+    BanTableModel * banTableModel ;
 
     QTimer *pollTimer;
 

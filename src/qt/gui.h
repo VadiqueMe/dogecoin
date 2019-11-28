@@ -59,7 +59,9 @@ public:
     /** Set the network model
         The network model represents the part that communicates with the P2P network, and is wallet-agnostic
      */
-    void setNetworkModel( NetworkModel * networkModel ) ;
+    void setNetworkModel( NetworkModel * model ) ;
+
+    void setOptionsModel( OptionsModel * model ) ;
 
 #ifdef ENABLE_WALLET
     /** Set the wallet model which represents a dogecoin wallet
@@ -80,6 +82,7 @@ protected:
 
 private:
     NetworkModel * networkModel ;
+    OptionsModel * optionsModel ;
     WalletFrame * walletFrame ;
 
     UnitDisplayStatusBarControl *unitDisplayControl;

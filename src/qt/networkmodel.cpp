@@ -32,13 +32,14 @@ static const int64_t nPeerStartupTime = GetTime() ;
 static int64_t nLastHeaderTipUpdateNotification = 0;
 static int64_t nLastBlockTipUpdateNotification = 0;
 
-NetworkModel::NetworkModel( OptionsModel * options, QObject * parent ) :
+NetworkModel::NetworkModel( QObject * parent, bool sureDoIt ) :
     QObject( parent ),
-    optionsModel( options ),
     peerTableModel( nullptr ),
     banTableModel( nullptr ),
     pollTimer( 0 )
 {
+    assert ( sureDoIt ) ;
+
     cachedBestHeaderHeight = -1;
     cachedBestHeaderTime = -1;
     peerTableModel = new PeerTableModel(this);
@@ -217,21 +218,6 @@ bool NetworkModel::isNetworkActive() const
 QString NetworkModel::getStatusBarWarnings() const
 {
     return QString::fromStdString( GetWarnings( "gui" ) ) ;
-}
-
-OptionsModel * NetworkModel::getOptionsModel()
-{
-    return optionsModel ;
-}
-
-PeerTableModel * NetworkModel::getPeerTableModel()
-{
-    return peerTableModel ;
-}
-
-BanTableModel * NetworkModel::getBanTableModel()
-{
-    return banTableModel ;
 }
 
 QString NetworkModel::formatFullVersion() const

@@ -85,6 +85,7 @@ DogecoinGUI::DogecoinGUI( const PlatformStyle * style, const NetworkStyle * netw
     QMainWindow(parent),
     enableWallet(false),
     networkModel( nullptr ),
+    optionsModel( nullptr ),
     walletFrame(0),
     unitDisplayControl(0),
     labelWalletEncryptionIcon(0),
@@ -537,24 +538,13 @@ void DogecoinGUI::setNetworkModel( NetworkModel * model )
             walletFrame->setNetworkModel( model ) ;
         }
 #endif
-        unitDisplayControl->setOptionsModel( model->getOptionsModel() ) ;
-
-        OptionsModel* optionsModel = model->getOptionsModel() ;
-        if ( optionsModel != nullptr )
-        {
-            // be aware of the tray icon disable state change
-            connect( optionsModel, SIGNAL( hideTrayIconChanged(bool) ), this, SLOT( setTrayIconVisible(bool) ) ) ;
-
-            // initialize the disable state of the tray icon with the current value in the model
-            setTrayIconVisible( optionsModel->getHideTrayIcon() ) ;
-        }
     } else {
         // Disable possibility to show main window via action
-        toggleHideAction->setEnabled(false);
-        if(trayIconMenu)
+        toggleHideAction->setEnabled( false ) ;
+        if ( trayIconMenu )
         {
             // Disable context menu on tray icon
-            trayIconMenu->clear();
+            trayIconMenu->clear() ;
         }
         // Propagate cleared model to child objects
         rpcConsole->setNetworkModel( nullptr ) ;
@@ -564,7 +554,19 @@ void DogecoinGUI::setNetworkModel( NetworkModel * model )
             walletFrame->setNetworkModel( nullptr ) ;
         }
 #endif // ENABLE_WALLET
-        unitDisplayControl->setOptionsModel( nullptr ) ;
+    }
+}
+
+void DogecoinGUI::setOptionsModel( OptionsModel * model )
+{
+    this->optionsModel = model ;
+
+    unitDisplayControl->setOptionsModel( model ) ;
+
+    if ( model != nullptr )
+    {
+        connect( model, SIGNAL( hideTrayIconChanged(bool) ), this, SLOT( setTrayIconVisible(bool) ) ) ;
+        setTrayIconVisible( model->getHideTrayIcon() ) ;
     }
 }
 
@@ -676,11 +678,10 @@ void DogecoinGUI::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
 
 void DogecoinGUI::optionsClicked()
 {
-    if ( ! networkModel || ! networkModel->getOptionsModel() )
-        return ;
+    if ( optionsModel == nullptr ) return ;
 
     OptionsDialog dlg( this, enableWallet, /* show third party urls option or not */ NameOfChain() == "main" ) ;
-    dlg.setOptionsModel( networkModel->getOptionsModel() ) ;
+    dlg.setOptionsModel( optionsModel ) ;
     dlg.exec();
 }
 
@@ -979,13 +980,14 @@ void DogecoinGUI::message( const QString & title, const QString & message, unsig
         notificator->notify((Notificator::Class)nNotifyIcon, strTitle, message);
 }
 
-void DogecoinGUI::changeEvent(QEvent *e)
+void DogecoinGUI::changeEvent( QEvent * e )
 {
-    QMainWindow::changeEvent(e);
+    QMainWindow::changeEvent( e ) ;
+
 #ifndef Q_OS_MAC // Ignored on Mac
-    if(e->type() == QEvent::WindowStateChange)
+    if ( e->type() == QEvent::WindowStateChange )
     {
-        if ( networkModel && networkModel->getOptionsModel() && networkModel->getOptionsModel()->getMinimizeToTray() )
+        if ( optionsModel && optionsModel->getMinimizeToTray() )
         {
             QWindowStateChangeEvent *wsevt = static_cast<QWindowStateChangeEvent*>(e);
             if(!(wsevt->oldState() & Qt::WindowMinimized) && isMinimized())
@@ -1003,8 +1005,7 @@ void DogecoinGUI::closeEvent( QCloseEvent * event )
 #ifdef Q_OS_MAC // "minimize on close" is ignored on Mac
     bool minimizeOnClose = false ;
 #else
-    bool minimizeOnClose = ( networkModel && networkModel->getOptionsModel()
-                                && networkModel->getOptionsModel()->getMinimizeOnClose() ) ;
+    bool minimizeOnClose = ( optionsModel && optionsModel->getMinimizeOnClose() ) ;
 #endif
     if ( ! minimizeOnClose )
     {
@@ -1265,7 +1266,7 @@ void DogecoinGUI::toggleNetworkActive()
 }
 
 UnitDisplayStatusBarControl::UnitDisplayStatusBarControl(const PlatformStyle *platformStyle) :
-    optionsModel(0),
+    optionsModel( nullptr ),
     menu(0)
 {
     createContextMenu();
@@ -1302,17 +1303,13 @@ void UnitDisplayStatusBarControl::createContextMenu()
 }
 
 /** Lets the control know about the Options Model (and its signals) */
-void UnitDisplayStatusBarControl::setOptionsModel(OptionsModel *_optionsModel)
+void UnitDisplayStatusBarControl::setOptionsModel( OptionsModel * model )
 {
-    if (_optionsModel)
+    this->optionsModel = model ;
+    if ( model != nullptr )
     {
-        this->optionsModel = _optionsModel;
-
-        // be aware of a display unit change reported by the OptionsModel object.
-        connect(_optionsModel,SIGNAL(displayUnitChanged(int)),this,SLOT(updateDisplayUnit(int)));
-
-        // initialize the display units label with the current value in the model.
-        updateDisplayUnit(_optionsModel->getDisplayUnit());
+        connect( model, SIGNAL( displayUnitChanged(int) ), this, SLOT( updateDisplayUnit(int) ) ) ;
+        updateDisplayUnit( model->getDisplayUnit() ) ;
     }
 }
 
@@ -1329,11 +1326,11 @@ void UnitDisplayStatusBarControl::onDisplayUnitsClicked(const QPoint& point)
     menu->exec(globalPos);
 }
 
-/** Tells underlying optionsModel to update its current display unit. */
-void UnitDisplayStatusBarControl::onMenuSelection(QAction* action)
+/** Tells underlying optionsModel to update its current display unit */
+void UnitDisplayStatusBarControl::onMenuSelection( QAction * action )
 {
-    if (action)
+    if ( action && optionsModel )
     {
-        optionsModel->setDisplayUnit(action->data());
+        optionsModel->setDisplayUnit( action->data() ) ;
     }
 }

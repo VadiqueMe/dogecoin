@@ -242,7 +242,7 @@ private:
     QThread * coreThread ;
     OptionsModel * optionsModel ;
     NetworkModel * networkModel ;
-    DogecoinGUI * window ;
+    DogecoinGUI * guiWindow ;
     QTimer * pollShutdownTimer ;
 #ifdef ENABLE_WALLET
     PaymentServer* paymentServer;
@@ -319,7 +319,7 @@ DogecoinApplication::DogecoinApplication( int & argc, char ** argv ) :
     coreThread(0),
     optionsModel( nullptr ),
     networkModel( nullptr ),
-    window(0),
+    guiWindow( nullptr ),
     pollShutdownTimer(0),
 #ifdef ENABLE_WALLET
     paymentServer(0),
@@ -350,14 +350,20 @@ DogecoinApplication::~DogecoinApplication()
         qDebug() << __func__ << ": Stopped thread";
     }
 
-    delete window;
-    window = 0;
+    delete guiWindow ;
+    guiWindow = nullptr ;
+
 #ifdef ENABLE_WALLET
     delete paymentServer;
     paymentServer = 0;
 #endif
-    delete optionsModel;
-    optionsModel = 0;
+
+    delete optionsModel ;
+    optionsModel = nullptr ;
+
+    delete networkModel ;
+    networkModel = nullptr ;
+
     delete platformStyle;
     platformStyle = 0;
 }
@@ -376,11 +382,11 @@ void DogecoinApplication::createOptionsModel( bool resetSettings )
 
 void DogecoinApplication::createWindow( const NetworkStyle * networkStyle )
 {
-    window = new DogecoinGUI( platformStyle, networkStyle, 0 ) ;
+    guiWindow = new DogecoinGUI( platformStyle, networkStyle ) ;
 
-    pollShutdownTimer = new QTimer(window);
-    connect(pollShutdownTimer, SIGNAL(timeout()), window, SLOT(detectShutdown()));
-    pollShutdownTimer->start(200);
+    pollShutdownTimer = new QTimer( guiWindow ) ;
+    connect( pollShutdownTimer, SIGNAL( timeout() ), guiWindow, SLOT( detectShutdown() ) ) ;
+    pollShutdownTimer->start( 200 ) ;
 }
 
 void DogecoinApplication::createSplashScreen( const NetworkStyle * networkStyle )
@@ -430,19 +436,20 @@ void DogecoinApplication::requestShutdown()
 {
     // Show a simple window indicating shutdown status
     // Do this first as some of the steps may take some time below,
-    // for example the RPC console may still be executing a command.
-    shutdownWindow.reset(ShutdownWindow::showShutdownWindow(window));
+    // for example the RPC console may still be running some command
+    shutdownWindow.reset( ShutdownWindow::showShutdownWindow( guiWindow ) ) ;
 
     qDebug() << __func__ << ": Requesting shutdown";
     startThread();
-    window->hide();
-    window->setNetworkModel( nullptr ) ;
+    guiWindow->hide() ;
+    guiWindow->setNetworkModel( nullptr ) ;
+    guiWindow->setOptionsModel( nullptr ) ;
     pollShutdownTimer->stop();
 
 #ifdef ENABLE_WALLET
-    window->removeAllWallets();
-    delete walletModel;
-    walletModel = 0;
+    guiWindow->removeAllWallets() ;
+    delete walletModel ;
+    walletModel = nullptr ;
 #endif
     delete networkModel ;
     networkModel = nullptr ;
@@ -467,39 +474,41 @@ void DogecoinApplication::initializeResult( int retval )
         paymentServer->setOptionsModel(optionsModel);
 #endif
 
-        networkModel = new NetworkModel( optionsModel ) ;
-        window->setNetworkModel( networkModel ) ;
+        networkModel = new NetworkModel( /* parent */ nullptr, true ) ;
+
+        guiWindow->setNetworkModel( networkModel ) ;
+        guiWindow->setOptionsModel( optionsModel ) ;
 
 #ifdef ENABLE_WALLET
         if(pwalletMain)
         {
             walletModel = new WalletModel( platformStyle, pwalletMain, optionsModel ) ;
 
-            window->addWallet( DogecoinGUI::DEFAULT_WALLET, walletModel ) ;
-            window->setCurrentWallet( DogecoinGUI::DEFAULT_WALLET ) ;
+            guiWindow->addWallet( DogecoinGUI::DEFAULT_WALLET, walletModel ) ;
+            guiWindow->setCurrentWallet( DogecoinGUI::DEFAULT_WALLET ) ;
 
-            connect(walletModel, SIGNAL(coinsSent(CWallet*,SendCoinsRecipient,QByteArray)),
-                             paymentServer, SLOT(fetchPaymentACK(CWallet*,const SendCoinsRecipient&,QByteArray)));
+            connect( walletModel, SIGNAL( coinsSent(CWallet*, SendCoinsRecipient, QByteArray) ),
+                             paymentServer, SLOT( fetchPaymentACK(CWallet*, const SendCoinsRecipient&, QByteArray) ) ) ;
         }
 #endif
 
         if ( GetBoolArg( "-minimized", false ) )
-            window->showMinimized() ;
+            guiWindow->showMinimized() ;
         else
-            window->show() ;
+            guiWindow->show() ;
 
-        Q_EMIT splashFinished(window);
+        Q_EMIT splashFinished( guiWindow ) ;
 
 #ifdef ENABLE_WALLET
         // Now that initialization/startup is done, process any command-line
-        // dogecoin: URIs or payment requests:
-        connect(paymentServer, SIGNAL(receivedPaymentRequest(SendCoinsRecipient)),
-                         window, SLOT(handlePaymentRequest(SendCoinsRecipient)));
-        connect(window, SIGNAL(receivedURI(QString)),
-                         paymentServer, SLOT(handleURIOrFile(QString)));
-        connect(paymentServer, SIGNAL(message(QString,QString,unsigned int)),
-                         window, SLOT(message(QString,QString,unsigned int)));
-        QTimer::singleShot(100, paymentServer, SLOT(uiReady()));
+        // dogecoin: URIs or payment requests
+        connect( paymentServer, SIGNAL( receivedPaymentRequest(SendCoinsRecipient) ),
+                         guiWindow, SLOT( handlePaymentRequest(SendCoinsRecipient) ) ) ;
+        connect( guiWindow, SIGNAL( receivedURI(QString) ),
+                         paymentServer, SLOT( handleURIOrFile(QString) ) ) ;
+        connect( paymentServer, SIGNAL( message(QString, QString, unsigned int) ),
+                         guiWindow, SLOT( message(QString, QString, unsigned int) ) ) ;
+        QTimer::singleShot( 100, paymentServer, SLOT( uiReady() ) ) ;
 #endif
     } else {
         quit(); // Exit main loop
@@ -520,9 +529,9 @@ void DogecoinApplication::handleRunawayException( const QString & message )
 
 WId DogecoinApplication::getMainWinId() const
 {
-    if ( window == nullptr ) return 0 ;
+    if ( guiWindow == nullptr ) return 0 ;
 
-    return window->winId() ;
+    return guiWindow->winId() ;
 }
 
 #ifndef DOGECOIN_QT_TEST
@@ -530,8 +539,7 @@ int main(int argc, char *argv[])
 {
     SetupEnvironment();
 
-    /// 1. Parse command-line options. These take precedence over anything else.
-    // Command-line options take precedence:
+    /// 1. Parse command-line options
     ParseParameters(argc, argv);
 
     // Do not refer to data directory yet, this can be overridden by Intro::pickDataDirectory
