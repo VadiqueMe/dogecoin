@@ -84,14 +84,14 @@ extern double NSAppKitVersionNumber;
 
 namespace GUIUtil {
 
-QString dateTimeStr(const QDateTime &date)
+QString dateTimeStr( const QDateTime & date )
 {
-    return date.date().toString(Qt::SystemLocaleShortDate) + QString(" ") + date.toString("hh:mm");
+    return date.date().toString( Qt::SystemLocaleShortDate ) + QString( " " ) + date.toString( "hh:mm:ss" ) ;
 }
 
-QString dateTimeStr(qint64 nTime)
+QString dateTimeStr( qint64 nTime )
 {
-    return dateTimeStr(QDateTime::fromTime_t((qint32)nTime));
+    return dateTimeStr( QDateTime::fromTime_t( (qint32)nTime ) ) ;
 }
 
 QFont fixedPitchFont()

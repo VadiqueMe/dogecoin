@@ -57,7 +57,7 @@ QString TransactionDesc::toHTML( CWallet * wallet, CWalletTx & wtx, TransactionR
     strHTML.reserve(4000);
     strHTML += "<html><font face='verdana, arial, helvetica, sans-serif'>";
 
-    int64_t nTime = wtx.GetTxTime();
+    int64_t nTime = wtx.GetTxTime() ;
     CAmount nCredit = wtx.GetCredit(ISMINE_ALL);
     CAmount nDebit = wtx.GetDebit(ISMINE_ALL);
     CAmount nNet = nCredit - nDebit;
@@ -73,7 +73,7 @@ QString TransactionDesc::toHTML( CWallet * wallet, CWalletTx & wtx, TransactionR
     }
     strHTML += "<br>";
 
-    strHTML += "<b>" + tr("Date") + ":</b> " + (nTime ? GUIUtil::dateTimeStr(nTime) : "") + "<br>";
+    strHTML += "<b>" + tr("Date") + ":</b> " + ( nTime != 0 ? GUIUtil::dateTimeStr( nTime ) : "0" ) + "<br>" ;
 
     //
     // From
