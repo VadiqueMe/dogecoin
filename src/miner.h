@@ -237,13 +237,13 @@ public:
         , coinbaseScript( nullptr )
         , howManyBlocksWereGeneratedByThisThread( 0 )
         , currentCandidate( nullptr )
-        , smallestHashBlock( ~ arith_uint256() )
-        , smallestHashAll( ~ arith_uint256() )
+        , smallestScryptHashBlock( ~ arith_uint256() )
+        , smallestScryptHashAll( ~ arith_uint256() )
         , randomDevice()
         , randomNumber( randomDevice() )
         , threadBeginsMillis( GetTimeMillis() )
-        , allHashesByThread( 0 )
-        , hashesScanned( 0 )
+        , allNoncesByThread( 0 )
+        , noncesScanned( 0 )
         , scanBeginsMillis( threadBeginsMillis )
         , finished( false )
     { }
@@ -268,24 +268,24 @@ public:
 
     const CBlockTemplate * const getNewBlockCandidate() const {  return currentCandidate.get() ;  }
 
-    const arith_uint256 & getSmallestHashFoundForCurrentBlock() const {  return smallestHashBlock ;  }
+    const arith_uint256 & getSmallestScryptHashFoundForCurrentBlock() const {  return smallestScryptHashBlock ;  }
 
-    const arith_uint256 & getSmallestHashFoundByThread() const {  return smallestHashAll ;  }
+    const arith_uint256 & getSmallestScryptHashEverFoundByThisThread() const {  return smallestScryptHashAll ;  }
 
-    uint32_t howManyHashesAreTriedForCurrentBlock() const {  return hashesScanned ;  }
+    uint32_t howManyNoncesAreTriedForCurrentBlock() const {  return noncesScanned ;  }
 
-    uint64_t howManyHashesAreEverTriedByThisThread() const {  return allHashesByThread + hashesScanned ;  }
+    uint64_t howManyNoncesAreEverTriedByThisThread() const {  return allNoncesByThread + noncesScanned ;  }
 
-    double getBlockHashesPerSecond() const
+    double getBlockNoncesPerSecond() const
     {
-        double blockHashesPerMillisecond = (double)howManyHashesAreTriedForCurrentBlock() / ( GetTimeMillis() - scanBeginsMillis ) ;
-        return 1000 * blockHashesPerMillisecond ;
+        double blockNoncesPerMillisecond = (double)howManyNoncesAreTriedForCurrentBlock() / ( GetTimeMillis() - scanBeginsMillis ) ;
+        return 1000 * blockNoncesPerMillisecond ;
     }
 
-    double getAllHashesPerSecond() const
+    double getAllNoncesPerSecond() const
     {
-        double allHashesPerMillisecond = (double)howManyHashesAreEverTriedByThisThread() / ( GetTimeMillis() - threadBeginsMillis ) ;
-        return 1000 * allHashesPerMillisecond ;
+        double allNoncesPerMillisecond = (double)howManyNoncesAreEverTriedByThisThread() / ( GetTimeMillis() - threadBeginsMillis ) ;
+        return 1000 * allNoncesPerMillisecond ;
     }
 
     void endOfThread( bool bin = true ) ;
@@ -307,16 +307,16 @@ private:
 
     std::unique_ptr< CBlockTemplate > currentCandidate ;
 
-    arith_uint256 smallestHashBlock ;
-    arith_uint256 smallestHashAll ;
+    arith_uint256 smallestScryptHashBlock ;
+    arith_uint256 smallestScryptHashAll ;
 
     std::random_device randomDevice ;
     std::mt19937 randomNumber ;
 
     int64_t threadBeginsMillis ;
-    uint64_t allHashesByThread ;
+    uint64_t allNoncesByThread ;
 
-    uint32_t hashesScanned ;
+    uint32_t noncesScanned ;
     int64_t scanBeginsMillis ;
 
     bool finished ;

@@ -273,8 +273,13 @@ void GenerateCoinsPage::updateThreadTabs()
                 if ( walletModel != nullptr && walletModel->getOptionsModel() != nullptr )
                     unit = walletModel->getOptionsModel()->getDisplayUnit() ;
                 bigText += "fees " + UnitsOfCoin::formatWithUnit( unit, - candidate->vTxFees[ 0 ] ) ;
-                bigText += ", " ;
-                bigText += "solution " + QString::fromStdString( arith_uint256().SetCompact( candidate->block.nBits ).GetHex() ) ;
+                bigText += "\n\n" ;
+
+                arith_uint256 bitsUint256 = arith_uint256().SetCompact( candidate->block.nBits ) ;
+                bigText += "solution is " ;
+                bigText += "scrypt hash <= " + QString::fromStdString( bitsUint256.GetHex() ) ;
+                if ( NameOfChain() == "inu" )
+                    bigText += " and sha256 hash <= " + QString::fromStdString( ( bitsUint256 << 2 ).GetHex() ) ;
                 bigText += "\n\n" ;
             }
 

@@ -731,8 +731,8 @@ void MiningThread::MineBlocks()
             //
 
             scanBeginsMillis = GetTimeMillis() ;
-            hashesScanned = 0 ;
-            smallestHashBlock = ~ arith_uint256() ;
+            noncesScanned = 0 ;
+            smallestScryptHashBlock = ~ arith_uint256() ;
 
             arith_uint256 solutionHash = arith_uint256().SetCompact( currentBlock->nBits ) ;
             currentBlock->nNonce = randomNumber() ;
@@ -752,10 +752,10 @@ void MiningThread::MineBlocks()
                 while ( ! found ) // scan nonces
                 {
                     currentBlock->nNonce ++ ;
-                    hashesScanned ++ ;
+                    noncesScanned ++ ;
 
                     arith_uint256 arithPowHash = UintToArith256( currentBlock->GetPoWHash() ) ;
-                    if ( arithPowHash < smallestHashBlock ) smallestHashBlock = arithPowHash ;
+                    if ( arithPowHash < smallestScryptHashBlock ) smallestScryptHashBlock = arithPowHash ;
 
                     if ( CheckProofOfWork( *currentBlock, currentBlock->nBits, consensus ) )
                     {   // found a solution
@@ -767,8 +767,8 @@ void MiningThread::MineBlocks()
                         break ;
                 }
 
-                if ( smallestHashBlock < smallestHashAll )
-                        smallestHashAll = smallestHashBlock ;
+                if ( smallestScryptHashBlock < smallestScryptHashAll )
+                        smallestScryptHashAll = smallestScryptHashBlock ;
 
                 if ( found ) // found a solution
                 {
@@ -815,8 +815,8 @@ void MiningThread::MineBlocks()
             }
 
             LogPrintf( "MiningThread (%d) scanned %s\n", numberOfThread, threadMiningInfoString() ) ;
-            allHashesByThread += hashesScanned ;
-            hashesScanned = 0 ;
+            allNoncesByThread += noncesScanned ;
+            noncesScanned = 0 ;
         }
     } catch ( const std::string & s ) {
         if ( s == "stop" ) {
@@ -833,9 +833,9 @@ void MiningThread::MineBlocks()
 std::string MiningThread::threadMiningInfoString() const
 {
     return strprintf (
-        "%d hashes for current block candidate (%.3f hashes/s) with smallest %s, %ld hashes overall (%.3f hashes/s) smallest ever %s",
-        howManyHashesAreTriedForCurrentBlock(), getBlockHashesPerSecond(), smallestHashBlock.GetHex(),
-        howManyHashesAreEverTriedByThisThread(), getAllHashesPerSecond(), smallestHashAll.GetHex()
+        "%d nonces for current block candidate (%.3f nonces/s) with smallest scrypt hash %s, %ld nonces overall (%.3f nonces/s) smallest scrypt hash ever %s",
+        howManyNoncesAreTriedForCurrentBlock(), getBlockNoncesPerSecond(), smallestScryptHashBlock.GetHex(),
+        howManyNoncesAreEverTriedByThisThread(), getAllNoncesPerSecond(), smallestScryptHashAll.GetHex()
     ) ;
 }
 
