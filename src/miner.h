@@ -245,6 +245,7 @@ public:
         , allNoncesByThread( 0 )
         , noncesScanned( 0 )
         , scanBeginsMillis( threadBeginsMillis )
+        , verbose( false )
         , finished( false )
     { }
 
@@ -263,6 +264,8 @@ public:
     std::string threadMiningInfoString() const ;
 
     size_t getNumberOfThread() const {  return numberOfThread ;  }
+
+    void setVerbose( bool newVerbose ) {  this->verbose = newVerbose ;  }
 
     size_t getNumberOfBlocksGeneratedByThisThread() const {  return howManyBlocksWereGeneratedByThisThread ;  }
 
@@ -318,6 +321,8 @@ private:
 
     uint32_t noncesScanned ;
     int64_t scanBeginsMillis ;
+
+    bool verbose ;
 
     bool finished ;
 

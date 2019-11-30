@@ -739,11 +739,12 @@ void MiningThread::MineBlocks()
             const Consensus::Params & consensus = chainparams.GetConsensus( chainActive.Tip()->nHeight + 1 ) ;
 
             LogPrintf(
-                "Running MiningThread (%d) with %u transactions in block (%u bytes), looking for scrypt hash <= %s, random initial nonce 0x%x\n",
+                "Running MiningThread (%d) with %u transactions in block (%u bytes)%s%s\n",
                 numberOfThread,
                 currentBlock->vtx.size(),
                 ::GetSerializeSize( *currentBlock, SER_NETWORK, PROTOCOL_VERSION ),
-                solutionHash.GetHex(), currentBlock->nNonce
+                ( verbose ? strprintf( ", looking for scrypt hash <= %s", solutionHash.GetHex() ) : "" ),
+                ( verbose ? strprintf( ", random initial nonce 0x%x", currentBlock->nNonce ) : "" )
             ) ;
 
             while ( true )
@@ -814,7 +815,9 @@ void MiningThread::MineBlocks()
                 }
             }
 
-            LogPrintf( "MiningThread (%d) scanned %s\n", numberOfThread, threadMiningInfoString() ) ;
+            if ( verbose )
+                LogPrintf( "MiningThread (%d) scanned %s\n", numberOfThread, threadMiningInfoString() ) ;
+
             allNoncesByThread += noncesScanned ;
             noncesScanned = 0 ;
         }
