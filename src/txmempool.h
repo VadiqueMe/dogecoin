@@ -15,6 +15,7 @@
 #include <string>
 
 #include "amount.h"
+#include "feerate.h"
 #include "coins.h"
 #include "indirectmap.h"
 #include "primitives/transaction.h"

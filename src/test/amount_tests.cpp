@@ -1,6 +1,7 @@
 // Copyright (c) 2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "amount.h"
 #include "test/test_dogecoin.h"
@@ -11,47 +12,28 @@ BOOST_FIXTURE_TEST_SUITE(amount_tests, BasicTestingSetup)
 
 BOOST_AUTO_TEST_CASE(GetFeeTest)
 {
-    CFeeRate feeRate;
+    CFeeRate feeRate ;
 
-    feeRate = CFeeRate(0);
-    // Must always return 0
-    BOOST_CHECK_EQUAL(feeRate.GetFee(0), 0);
-    BOOST_CHECK_EQUAL(feeRate.GetFee(1e5), 0);
+    feeRate = CFeeRate( 0 ) ;
+    // Expected to always return 0
+    BOOST_CHECK_EQUAL( feeRate.GetFeePerBytes( 0 ), 0 ) ;
+    BOOST_CHECK_EQUAL( feeRate.GetFeePerBytes( 1e5 ), 0 ) ;
 
-    feeRate = CFeeRate(1000);
-    // Must always just return the arg
-    BOOST_CHECK_EQUAL(feeRate.GetFee(0), 0);
-    BOOST_CHECK_EQUAL(feeRate.GetFee(1), 1000);
-    BOOST_CHECK_EQUAL(feeRate.GetFee(121), 1000);
-    BOOST_CHECK_EQUAL(feeRate.GetFee(999), 1000);
-    BOOST_CHECK_EQUAL(feeRate.GetFee(1e3), 1000);
-    BOOST_CHECK_EQUAL(feeRate.GetFee(9e3), 9000);
+    feeRate = CFeeRate( 1000 ) ;
+    BOOST_CHECK_EQUAL( feeRate.GetFeePerBytes( 0 ), 0 ) ;
+    BOOST_CHECK_EQUAL( feeRate.GetFeePerBytes( 1 ), 1000 ) ;
+    BOOST_CHECK_EQUAL( feeRate.GetFeePerBytes( 121 ), 1000 ) ;
+    BOOST_CHECK_EQUAL( feeRate.GetFeePerBytes( 999 ), 1000 ) ;
+    BOOST_CHECK_EQUAL( feeRate.GetFeePerBytes( 1e3 ), 1000 ) ;
+    BOOST_CHECK_EQUAL( feeRate.GetFeePerBytes( 9e3 ), 9000 ) ;
 
-    feeRate = CFeeRate(-1000);
-    // Must always just return -1 * arg
-    BOOST_CHECK_EQUAL(feeRate.GetFee(0), 0);
-    BOOST_CHECK_EQUAL(feeRate.GetFee(1), -1000);
-    BOOST_CHECK_EQUAL(feeRate.GetFee(121), -1000);
-    BOOST_CHECK_EQUAL(feeRate.GetFee(999), -1000);
-    BOOST_CHECK_EQUAL(feeRate.GetFee(1e3), -1000);
-    BOOST_CHECK_EQUAL(feeRate.GetFee(9e3), -9000);
-
-    feeRate = CFeeRate(123);
-    // Truncates the result, if not integer
-    BOOST_CHECK_EQUAL(feeRate.GetFee(0), 0);
-    BOOST_CHECK_EQUAL(feeRate.GetFee(8), 123); // Special case: returns 1 instead of 0
-    BOOST_CHECK_EQUAL(feeRate.GetFee(9), 123);
-    BOOST_CHECK_EQUAL(feeRate.GetFee(121), 123);
-    BOOST_CHECK_EQUAL(feeRate.GetFee(122), 123);
-    BOOST_CHECK_EQUAL(feeRate.GetFee(999), 123);
-    BOOST_CHECK_EQUAL(feeRate.GetFee(1e3), 123);
-    BOOST_CHECK_EQUAL(feeRate.GetFee(9e3), 1107);
-
-    feeRate = CFeeRate(-123);
-    // Truncates the result, if not integer
-    BOOST_CHECK_EQUAL(feeRate.GetFee(0), 0);
-    BOOST_CHECK_EQUAL(feeRate.GetFee(8), -123); // Special case: returns -1 instead of 0
-    BOOST_CHECK_EQUAL(feeRate.GetFee(9), -123);
+    feeRate = CFeeRate( -1000 ) ; // negative fees uhm
+    BOOST_CHECK_EQUAL( feeRate.GetFeePerBytes( 0 ), 0 ) ;
+    BOOST_CHECK_EQUAL( feeRate.GetFeePerBytes( 1 ), -1000 ) ;
+    BOOST_CHECK_EQUAL( feeRate.GetFeePerBytes( 121 ), -1000 ) ;
+    BOOST_CHECK_EQUAL( feeRate.GetFeePerBytes( 999 ), -1000 ) ;
+    BOOST_CHECK_EQUAL( feeRate.GetFeePerBytes( 1e3 ), -1000 ) ;
+    BOOST_CHECK_EQUAL( feeRate.GetFeePerBytes( 9e3 ), -9000 ) ;
 
     // Check full constructor
     // default value

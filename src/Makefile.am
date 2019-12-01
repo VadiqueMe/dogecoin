@@ -276,6 +276,7 @@ libdogecoin_consensus_a_SOURCES = \
   consensus/merkle.h \
   consensus/params.h \
   consensus/validation.h \
+  feerate.h \
   hash.cpp \
   hash.h \
   prevector.h \
@@ -316,6 +317,7 @@ libdogecoin_common_a_SOURCES = \
   compressor.cpp \
   core_read.cpp \
   core_write.cpp \
+  feerate.cpp \
   key.cpp \
   keystore.cpp \
   netaddress.cpp \

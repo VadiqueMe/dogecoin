@@ -45,15 +45,16 @@ bool UnitsOfCoin::isOk( int unit )
 
 QString UnitsOfCoin::name( int unit )
 {
+    QString nameOfCurrency = QString::fromStdString( NAME_OF_CURRENCY ) ;
     switch ( unit )
     {
-    case MCoin : return QString( "MDOGE" ) ;
-    case kCoin : return QString( "kDOGE" ) ;
-    case oneCoin : return QString( "DOGE" ) ;
-    case mCoin : return QString( "mDOGE" ) ;
-    case uCoin : return QString::fromUtf8( "μDOGE" ) ;
+    case MCoin : return QString( "M" ) + nameOfCurrency ;
+    case kCoin : return QString( "k" ) + nameOfCurrency ;
+    case oneCoin : return nameOfCurrency ;
+    case mCoin : return QString( "m" ) + nameOfCurrency ;
+    case uCoin : return QString::fromUtf8( "μ" ) + nameOfCurrency ;
     case Cointoshi : return QString( "dogetoshi" ) ;
-    default: return QString( "some DOGE" ) ;
+    default: return QString( "some " ) + nameOfCurrency ;
     }
 }
 

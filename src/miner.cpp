@@ -488,9 +488,9 @@ void BlockAssembler::addPackageTxs( int & nPackagesSelected, int & nDescendantsU
             packageSigOpsCost = modit->nSigOpCostWithAncestors;
         }
 
-        if (packageFees < blockMinFeeRate.GetFee(packageSize)) {
+        if ( packageFees < blockMinFeeRate.GetFeePerBytes( packageSize ) ) {
             // Everything else we might consider has a lower fee rate
-            return;
+            return ;
         }
 
         if (!TestPackage(packageSize, packageSigOpsCost)) {

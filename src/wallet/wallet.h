@@ -7,6 +7,7 @@
 #define BITCOIN_WALLET_WALLET_H
 
 #include "amount.h"
+#include "feerate.h"
 #include "auxpow.h"
 #include "streams.h"
 #include "tinyformat.h"

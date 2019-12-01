@@ -20,6 +20,8 @@
 #include <QSystemTrayIcon>
 #include <QTimer>
 
+#include <memory> // std::unique_ptr
+
 class NetworkModel ;
 class NetworkStyle ;
 class Notificator;
