@@ -360,38 +360,36 @@ BOOST_AUTO_TEST_CASE(auxpow_pow)
 
     block.nVersion = 1;
     mineBlock(block, true);
-    BOOST_CHECK(CheckAuxPowProofOfWork(block, params));
+    BOOST_CHECK( CheckDogecoinProofOfWork( block, params ) ) ;
 
     // Dogecoin block version 2 can be both AuxPoW and regular, so test 3
 
     block.nVersion = 3;
     mineBlock(block, true);
-    BOOST_CHECK(!CheckAuxPowProofOfWork(block, params));
+    BOOST_CHECK( ! CheckDogecoinProofOfWork( block, params ) ) ;
 
     block.SetBaseVersion(2, params.nAuxpowChainId);
     mineBlock(block, true);
-    BOOST_CHECK(CheckAuxPowProofOfWork(block, params));
+    BOOST_CHECK( CheckDogecoinProofOfWork( block, params ) ) ;
 
     block.SetChainId(params.nAuxpowChainId + 1);
     mineBlock(block, true);
-    BOOST_CHECK(!CheckAuxPowProofOfWork(block, params));
+    BOOST_CHECK( ! CheckDogecoinProofOfWork( block, params ) ) ;
 
-    /* Check the case when the block does not have auxpow (this is true
-     right now).  */
+    /* Check the case when the block does not have auxpow */
 
     block.SetChainId(params.nAuxpowChainId);
     block.SetAuxpowFlag(true);
     mineBlock(block, true);
-    BOOST_CHECK(!CheckAuxPowProofOfWork(block, params));
+    BOOST_CHECK( ! CheckDogecoinProofOfWork( block, params ) ) ;
 
     block.SetAuxpowFlag(false);
     mineBlock(block, true);
-    BOOST_CHECK(CheckAuxPowProofOfWork(block, params));
+    BOOST_CHECK( CheckDogecoinProofOfWork( block, params ) ) ;
     mineBlock(block, false);
-    BOOST_CHECK(!CheckAuxPowProofOfWork(block, params));
+    BOOST_CHECK( ! CheckDogecoinProofOfWork( block, params ) ) ;
 
-    /* ****************************************** */
-    /* Check the case that the block has auxpow.  */
+    /* Check the case that the block has auxpow */
 
     CAuxpowBuilder builder(5, 42);
     CAuxPow auxpow;
@@ -401,22 +399,22 @@ BOOST_AUTO_TEST_CASE(auxpow_pow)
     const int index = CAuxPow::getExpectedIndex(nonce, ourChainId, height);
     std::vector<unsigned char> auxRoot, data;
 
-    /* Valid auxpow, PoW check of parent block.  */
+    /* Valid auxpow, PoW check of parent block */
     block.SetAuxpowFlag(true);
     auxRoot = builder.buildAuxpowChain(block.GetHash(), height, index);
     data = CAuxpowBuilder::buildCoinbaseData(true, auxRoot, height, nonce);
     builder.setCoinbase(CScript() << data);
     mineBlock(builder.parentBlock, false, block.nBits);
     block.SetAuxpow(new CAuxPow(builder.get()));
-    BOOST_CHECK(!CheckAuxPowProofOfWork(block, params));
+    BOOST_CHECK( ! CheckDogecoinProofOfWork( block, params ) ) ;
     mineBlock(builder.parentBlock, true, block.nBits);
     block.SetAuxpow(new CAuxPow(builder.get()));
-    BOOST_CHECK(CheckAuxPowProofOfWork(block, params));
+    BOOST_CHECK( CheckDogecoinProofOfWork( block, params ) ) ;
 
-    /* Mismatch between auxpow being present and block.nVersion.  Note that
-     block.SetAuxpow sets also the version and that we want to ensure
-     that the block hash itself doesn't change due to version changes.
-     This requires some work arounds.  */
+    /* Mismatch between auxpow being present and block.nVersion.
+     Note that block.SetAuxpow sets also the version and that we want
+     to ensure that the block hash itself doesn't change due to version changes.
+     This requires some work arounds */
     block.SetAuxpowFlag(false);
     const uint256 hashAux = block.GetHash();
     auxRoot = builder.buildAuxpowChain(hashAux, height, index);
@@ -427,18 +425,18 @@ BOOST_AUTO_TEST_CASE(auxpow_pow)
     BOOST_CHECK(hashAux != block.GetHash());
     block.SetAuxpowFlag(false);
     BOOST_CHECK(hashAux == block.GetHash());
-    BOOST_CHECK(!CheckAuxPowProofOfWork(block, params));
+    BOOST_CHECK( ! CheckDogecoinProofOfWork( block, params ) ) ;
 
-    /* Modifying the block invalidates the PoW.  */
+    /* Modifying the block invalidates the PoW */
     block.SetAuxpowFlag(true);
     auxRoot = builder.buildAuxpowChain(block.GetHash(), height, index);
     data = CAuxpowBuilder::buildCoinbaseData(true, auxRoot, height, nonce);
     builder.setCoinbase(CScript() << data);
     mineBlock(builder.parentBlock, true, block.nBits);
     block.SetAuxpow(new CAuxPow(builder.get()));
-    BOOST_CHECK(CheckAuxPowProofOfWork(block, params));
+    BOOST_CHECK( CheckDogecoinProofOfWork( block, params ) ) ;
     tamperWith(block.hashMerkleRoot);
-    BOOST_CHECK(!CheckAuxPowProofOfWork(block, params));
+    BOOST_CHECK( ! CheckDogecoinProofOfWork( block, params ) ) ;
 }
 
 /* ************************************************************************** */

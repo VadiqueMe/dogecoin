@@ -105,20 +105,19 @@ public:
 
         // Deployment of SegWit (BIP141, BIP143, and BIP147)
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].bit = 1;
-        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1479168000; // November 15th, 2016.
+        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1479168000; // November 15th, 2016
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 0; // Disabled
 
-        // The best chain should have at least this much work
+        // The best chain has at least this much work
         consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000141a39e783aad4f660f");
 
         // By default assume that the signatures in ancestors of this block are valid
         consensus.defaultAssumeValid = uint256S("0x77e3f4a4bcb4a2c15e8015525e3d15b466f6c022f6ca82698f329edef7d9777e"); // 2,510,150
 
-        // AuxPoW parameters
-        consensus.nAuxpowChainId = 0x0062; // 98 - Josh Wise!
-        consensus.fStrictChainId = true;
-        consensus.fAllowLegacyBlocks = true;
-        consensus.nHeightEffective = 0;
+        consensus.nAuxpowChainId = 0x0062 ; // 98 - Josh Wise!
+        consensus.fStrictChainId = true ;
+        consensus.fAllowLegacyBlocks = true ;
+        consensus.nHeightEffective = 0 ;
 
         // Blocks 145000 - 371336 are Digishield without AuxPoW
         digishieldConsensus = consensus;
@@ -196,7 +195,7 @@ public:
         } ;
 
         chainTxData = ChainTxData {
-            // Data as of block 77e3f4a4bcb4a2c15e8015525e3d15b466f6c022f6ca82698f329edef7d9777e (height 2510150).
+            // Data as of block 77e3f4a4bcb4a2c15e8015525e3d15b466f6c022f6ca82698f329edef7d9777e (height 2510150)
             // Tx estimate based on average of year 2018 (~27k transactions per day)
             1544484077, // * UNIX timestamp of last checkpoint block
             42797508,   // * total number of transactions between genesis and last checkpoint
@@ -224,7 +223,7 @@ public:
         consensus.nPowTargetTimespan = 60 ; // 1 minute
         consensus.nPowTargetSpacing = 60 ; // 1 minute
         consensus.fDigishieldDifficultyCalculation = true ;
-        consensus.nCoinbaseMaturity = 10 ;
+        consensus.nCoinbaseMaturity = 12 ;
         consensus.fPowAllowMinDifficultyBlocks = false ;
         consensus.fPowAllowDigishieldMinDifficultyBlocks = false ;
         consensus.fPowNoRetargeting = false ;
@@ -238,19 +237,20 @@ public:
         consensus.BIP34Hash = uint256S( "0x00" ) ;
         consensus.BIP66Height = 1 ;
 
-        consensus.vDeployments[ Consensus::DEPLOYMENT_TESTDUMMY ].bit = 28 ;
         struct std::tm startTime ;
         {
-            std::istringstream ss( "2018-01-01 12:00:00" ) ;
+            std::istringstream ss( "2019-07-08 11:00:11" ) ;
             ss >> std::get_time( &startTime, "%Y-%m-%d %H:%M:%S" ) ;
         }
-        consensus.vDeployments[ Consensus::DEPLOYMENT_TESTDUMMY ].nStartTime = mktime( &startTime ) ;
         struct std::tm timeout ;
         {
-            std::istringstream ss( "2018-12-31 12:00:00" ) ;
+            std::istringstream ss( "2019-10-01 00:01:00" ) ;
             ss >> std::get_time( &timeout, "%Y-%m-%d %H:%M:%S" ) ;
         }
-        consensus.vDeployments[ Consensus::DEPLOYMENT_TESTDUMMY ].nTimeout = mktime( &timeout ) ;
+
+        /* consensus.vDeployments[ Consensus::DEPLOYMENT_TESTDUMMY ].bit = 28 ;
+        consensus.vDeployments[ Consensus::DEPLOYMENT_TESTDUMMY ].nStartTime = mktime( &startTime ) ;
+        consensus.vDeployments[ Consensus::DEPLOYMENT_TESTDUMMY ].nTimeout = mktime( &timeout ) ; */
 
         // Deployment of BIP68, BIP112, and BIP113
         consensus.vDeployments[ Consensus::DEPLOYMENT_CSV ].bit = 0 ;
@@ -262,16 +262,16 @@ public:
         consensus.vDeployments[ Consensus::DEPLOYMENT_SEGWIT ].nStartTime = mktime( &startTime ) ;
         consensus.vDeployments[ Consensus::DEPLOYMENT_SEGWIT ].nTimeout = 0 ; // disabled
 
-        // The best chain should have at least this much work
-        consensus.nMinimumChainWork = uint256S( "0x0000000000000000000000000000000000000000000000000000000000000001" ) ;
+        // The best chain has at least this much work
+        consensus.nMinimumChainWork = uint256S( "0x0000000000000000000000000000000000000000000000000000000000052439" ) ;
 
         // By default assume that the signatures in ancestors of this block are valid
         consensus.defaultAssumeValid = uint256S( "0x00" ) ;
 
         consensus.nAuxpowChainId = 0x62 ; // 98 Josh Wise
-        consensus.fStrictChainId = true ; // auxpow parameter ??
+        consensus.fStrictChainId = false ;
         consensus.fAllowLegacyBlocks = false ;
-        consensus.nHeightEffective = 0 ; // auxpow parameter ??
+        consensus.nHeightEffective = 0 ; // parameters apply since this block
 
         pConsensusRoot = &consensus ;
 
@@ -282,7 +282,7 @@ public:
         pchMessageStart[ 3 ] = ',' ;
         vAlertPubKey = ParseHex( "0002be4a11a5dae4db797db0064d0d77394eb3fab20706012cd62e12c4000448af4430006340be5a43a35e1856fbb13aa90c555557772da8f6d065b499b06f51dc" ) ;
         nDefaultPort = 55336 ;
-        nPruneAfterHeight = 100000 ;
+        nPruneAfterHeight = 10000 ;
 
         struct std::tm genesisTime ;
         {
@@ -352,6 +352,19 @@ public:
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
             (       0, uint256S( "0x000aa3a75133cd33ef50cf2377479563fa9170259dc52a44834ea3b6987840f7" ) )
+            (      40, uint256S( "0x000eeb2e5549cbd3b79478cd66a2a3376004e83aeb3646c4f7efd967456cc4ce" ) )
+        } ;
+
+        struct std::tm lastCheckpointTime ;
+        {
+            std::istringstream ss( "2019-12-01 20:31:16" ) ;
+            ss >> std::get_time( &lastCheckpointTime, "%Y-%m-%d %H:%M:%S" ) ;
+        }
+        chainTxData = ChainTxData {
+            // data as of block 000eeb2e5549cbd3b79478cd66a2a3376004e83aeb3646c4f7efd967456cc4ce (height 40)
+            mktime( &lastCheckpointTime ),
+            42, // number of all transactions in all blocks at last checkpoint
+            25 // estimated number of transactions per day after checkpoint
         } ;
     }
 };
@@ -409,17 +422,16 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1462060800; // May 1st 2016
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 0; // Disabled
 
-        // The best chain should have at least this much work.
+        // The best chain has at least this much work
         consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000000000001030d1382ade");
 
-        // By default assume that the signatures in ancestors of this block are valid.
+        // By default assume that the signatures in ancestors of this block are valid
         consensus.defaultAssumeValid = uint256S("0x6943eaeaba98dc7d09f7e73398daccb4abcabb18b66c8c875e52b07638d93951"); // 900,000
 
-        // AuxPoW parameters
-        consensus.nAuxpowChainId = 0x0062; // 98 - Josh Wise!
-        consensus.fStrictChainId = false;
-        consensus.nHeightEffective = 0;
-        consensus.fAllowLegacyBlocks = true;
+        consensus.nAuxpowChainId = 0x0062 ; // 98 - Josh Wise!
+        consensus.fStrictChainId = false ;
+        consensus.nHeightEffective = 0 ;
+        consensus.fAllowLegacyBlocks = true ;
 
         // Blocks 145000 - 157499 are Digishield without minimum difficulty on all blocks
         digishieldConsensus = consensus;
@@ -545,16 +557,15 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 0;
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 999999999999ULL;
 
-        // The best chain should have at least this much work
+        // The best chain has at least this much work
         consensus.nMinimumChainWork = uint256S( "0x00" ) ;
 
         // By default assume that the signatures in ancestors of this block are valid
         consensus.defaultAssumeValid = uint256S( "0x00" ) ;
 
-        // AuxPow parameters
-        consensus.nAuxpowChainId = 0x0062; // 98 - Josh Wise!
-        consensus.fStrictChainId = true;
-        consensus.fAllowLegacyBlocks = true;
+        consensus.nAuxpowChainId = 0x0062 ; // 98 - Josh Wise!
+        consensus.fStrictChainId = true ;
+        consensus.fAllowLegacyBlocks = true ;
 
         // Dogecoin parameters
         consensus.fSimplifiedRewards = true;
@@ -588,8 +599,8 @@ public:
         assert(consensus.hashGenesisBlock == uint256S("0x3d2160a3b5dc4a9d62e7e66a295f70313ac808440ef7400d6c0772171ce973a5"));
         assert(genesis.hashMerkleRoot == uint256S("0x5b2a3f53f605d62c53e62932dac6925e3d74afa5a4b459745c36d42d0ed26a69"));
 
-        vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
-        vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
+        vFixedSeeds.clear() ; // regtest doesn't have any fixed seeds
+        vSeeds.clear() ;      // regtest doesn't have any DNS seeds
 
         fMiningRequiresPeers = false;
         fDefaultConsistencyChecks = true;
@@ -634,19 +645,19 @@ const std::string & NameOfChain()
     return Params().NameOfNetwork() ;
 }
 
-const Consensus::Params *Consensus::Params::GetConsensus(uint32_t nTargetHeight) const
+const Consensus::Params * Consensus::Params::GetConsensus( uint32_t nTargetHeight ) const
 {
-    if (nTargetHeight < this -> nHeightEffective && this -> pLeft != NULL) {
-        return this -> pLeft -> GetConsensus(nTargetHeight);
-    } else if (nTargetHeight > this -> nHeightEffective && this -> pRight != NULL) {
-        const Consensus::Params *pCandidate = this -> pRight -> GetConsensus(nTargetHeight);
-        if (pCandidate->nHeightEffective <= nTargetHeight) {
-            return pCandidate;
+    if ( nTargetHeight < this -> nHeightEffective && this -> pLeft != NULL ) {
+        return this -> pLeft -> GetConsensus( nTargetHeight ) ;
+    } else if ( nTargetHeight > this -> nHeightEffective && this -> pRight != NULL ) {
+        const Consensus::Params * pCandidate = this -> pRight -> GetConsensus( nTargetHeight ) ;
+        if ( pCandidate->nHeightEffective <= nTargetHeight ) {
+            return pCandidate ;
         }
     }
 
     // No better match below the target height
-    return this;
+    return this ;
 }
 
 CChainParams & ParamsFor( const std::string & chain )

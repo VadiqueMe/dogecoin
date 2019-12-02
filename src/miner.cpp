@@ -719,8 +719,10 @@ void MiningThread::MineBlocks()
             assembleNewBlockCandidate() ;
             if ( currentCandidate == nullptr ) return ;
 
-            /* if ( NameOfChain() == "test" )
-                currentCandidate->block.nVersion += 0x13 ; */
+            if ( NameOfChain() == "test" ) {
+                currentCandidate->block.nVersion &= 0xff ;
+                currentCandidate->block.nVersion |= randomNumber() & 0xff0000 ;
+            }
 
             CBlock * currentBlock = &currentCandidate->block ;
             if ( currentBlock->IsAuxpow() ) currentBlock->SetAuxpow( nullptr ) ;

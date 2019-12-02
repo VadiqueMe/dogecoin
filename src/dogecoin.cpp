@@ -84,17 +84,18 @@ unsigned int CalculateDogecoinNextWorkRequired( const CBlockIndex * pindexLast, 
     return bnNew.GetCompact() ;
 }
 
-bool CheckAuxPowProofOfWork( const CBlockHeader & block, const Consensus::Params & params )
+bool CheckDogecoinProofOfWork( const CBlockHeader & block, const Consensus::Params & params )
 {
     /* Except for legacy blocks with full version 1, ensure that
-       the chain ID is correct.  Legacy blocks are not allowed since
+       the chain ID is correct. Legacy blocks are not accepted since
        the merge-mining start, which is checked in AcceptBlockHeader
-       where the height is known.  */
-    if (!block.IsLegacy() && params.fStrictChainId && block.GetChainId() != params.nAuxpowChainId)
-        return error("%s : block does not have our chain ID"
-                     " (got %d, expected %d, full nVersion %d)",
-                     __func__, block.GetChainId(),
-                     params.nAuxpowChainId, block.nVersion);
+       where the height is known */
+    if ( ! block.IsLegacy() && params.fStrictChainId && block.GetChainId() != params.nAuxpowChainId )
+        return error( "%s : block does not have our chain ID"
+                      " (got %d, expected %d, full nVersion 0x%x)",
+                      __func__,
+                      block.GetChainId(), params.nAuxpowChainId,
+                      block.nVersion ) ;
 
     /* If there is no auxpow, just check the block hash */
     if ( ! block.auxpow ) {
@@ -133,14 +134,29 @@ CAmount GetDogecoinBlockSubsidy( int nHeight, const Consensus::Params & consensu
            the first 1234 blocks have a random subsidy from 1 COIN to 100
         */
 
-        const std::string cseed_str = prevHash.ToString().substr( 16, 10 ) ;
-        const char * cseed = cseed_str.c_str() ;
-        char * endp = nullptr ;
-        long seed = strtol( cseed, &endp, 16 ) ;
-        const CAmount max = ( nHeight > 1234 ) ? 10000 : 100 ;
-        int random = generateMTRandom( seed, max - 1 ) ;
+        static const bool randomSubsidy = true ;
+        if ( randomSubsidy )
+        {
+            int random = 0 ;
+            {
+                const std::string cseed_str = prevHash.ToString().substr( 16, 10 ) ;
+                const char * cseed = cseed_str.c_str() ;
+                long seed = strtol( cseed, nullptr, /* hex */ 16 ) ;
+                const CAmount supremum = ( nHeight > 1234 ) ? 10000 : 100 ;
+                random = generateMTRandom( seed, supremum - 1 ) ;
+            }
 
-        return ( 1 + random ) * COIN ;
+            int randomtoshi = COIN - 1 ;
+            if ( nHeight > 1234 ) {
+                const std::string cseedoshi_str = prevHash.ToString().substr( 12, 12 ) ;
+                const char * cseedoshi = cseedoshi_str.c_str() ;
+                long seed = strtol( cseedoshi, nullptr, /* hex */ 16 ) ;
+                randomtoshi = generateMTRandom( seed, COIN - 1 ) ;
+            }
+
+            return randomtoshi + ( random * COIN ) + 1 ;
+        }
+        else return 87654321 ;
     }
 
     if ( ! consensusParams.fSimplifiedRewards )
@@ -160,19 +176,6 @@ CAmount GetDogecoinBlockSubsidy( int nHeight, const Consensus::Params & consensu
         int halvings = nHeight / consensusParams.nSubsidyHalvingInterval ;
         return ( 500000 * COIN ) >> halvings ;
     } else {
-        static const bool randomSubsidy = false /* ( NameOfChain() == "test" ) */ ;
-        if ( randomSubsidy ) {
-            const std::string cseed_str = prevHash.ToString().substr( 12, 12 ) ;
-            const char * cseed = cseed_str.c_str() ;
-            char * endp = nullptr ;
-            long seed = strtol( cseed, &endp, 16 ) ;
-            const CAmount supremum = 10000 ;
-            int random = generateMTRandom( seed, supremum - 1 ) ;
-            int randomtoshi = generateMTRandom( seed, COIN - 1 ) ;
-
-            return randomtoshi + ( random * COIN ) + 1 ;
-        }
-
         // Constant inflation
         return 10000 * COIN ;
     }
