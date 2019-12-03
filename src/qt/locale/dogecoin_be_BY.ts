@@ -986,8 +986,8 @@
         <translation>Пацверджана (%1 пацверджанняў)</translation>
     </message>
     <message>
-        <source>This block was not received by any other nodes and will probably not be accepted!</source>
-        <translation>Гэты блок не быў прыняты іншымі вузламі і магчыма не будзе ўхвалены!</translation>
+        <source>This block was not received by any other nodes and will probably not be accepted</source>
+        <translation>Гэты блок не быў прыняты іншымі вузламі і магчыма не будзе ўхвалены</translation>
     </message>
     <message>
         <source>Generated but not accepted</source>

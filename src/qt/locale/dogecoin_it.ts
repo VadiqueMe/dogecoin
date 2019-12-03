@@ -2290,8 +2290,8 @@
         <translation>Confermata (%1 conferme)</translation>
     </message>
     <message>
-        <source>This block was not received by any other nodes and will probably not be accepted!</source>
-        <translation>Questo blocco non è stato ricevuto da alcun altro nodo e probabilmente non sarà accettato!</translation>
+        <source>This block was not received by any other nodes and will probably not be accepted</source>
+        <translation>Questo blocco non è stato ricevuto da alcun altro nodo e probabilmente non sarà accettato</translation>
     </message>
     <message>
         <source>Generated but not accepted</source>

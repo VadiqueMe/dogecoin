@@ -2522,8 +2522,8 @@
         <translation>未成熟（%1検証。%2検証完了後に使用可能となります）</translation>
     </message>
     <message>
-        <source>This block was not received by any other nodes and will probably not be accepted!</source>
-        <translation>このブロックは他のどのノードによっても受け取られないで、多分受け入れられないでしょう！</translation>
+        <source>This block was not received by any other nodes and will probably not be accepted</source>
+        <translation>このブロックは他のどのノードによっても受け取られないで、多分受け入れられないでしょう</translation>
     </message>
     <message>
         <source>Generated but not accepted</source>

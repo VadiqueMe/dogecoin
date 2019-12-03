@@ -2518,8 +2518,8 @@
         <translation>Niet beschikbaar (%1 bevestigingen, zal beschikbaar zijn na %2)</translation>
     </message>
     <message>
-        <source>This block was not received by any other nodes and will probably not be accepted!</source>
-        <translation>Dit blok is niet ontvangen bij andere nodes en zal waarschijnlijk niet worden geaccepteerd!</translation>
+        <source>This block was not received by any other nodes and will probably not be accepted</source>
+        <translation>Dit blok is niet ontvangen bij andere nodes en zal waarschijnlijk niet worden geaccepteerd</translation>
     </message>
     <message>
         <source>Generated but not accepted</source>

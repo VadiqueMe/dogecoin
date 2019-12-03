@@ -33,7 +33,7 @@ class TransactionView : public QWidget
     Q_OBJECT
 
 public:
-    explicit TransactionView(const PlatformStyle *platformStyle, QWidget *parent = 0);
+    explicit TransactionView( const PlatformStyle * platformStyle, QWidget * parent = nullptr ) ;
 
     void setWalletModel( WalletModel * model ) ;
 
@@ -60,30 +60,31 @@ public:
 
 private:
     WalletModel * walletModel ;
-    TransactionFilterProxy *transactionProxyModel;
-    QTableView *transactionView;
+    TransactionFilterProxy * transactionProxyModel ;
+    QTableView * transactionTableView ;
 
-    QComboBox *dateWidget;
-    QComboBox *typeWidget;
-    QComboBox *watchOnlyWidget;
-    QLineEdit *addressWidget;
-    QLineEdit *amountWidget;
+    QComboBox * dateWidget ;
+    QComboBox * typeWidget ;
+    QComboBox * watchOnlyWidget ;
+    QLineEdit * addressWidget ;
+    QLineEdit * amountWidget ;
 
     QMenu *contextMenu;
     QSignalMapper *mapperThirdPartyTxUrls;
 
-    QFrame *dateRangeWidget;
-    QDateTimeEdit *dateFrom;
-    QDateTimeEdit *dateTo;
-    QAction *abandonAction;
+    QFrame * dateRangeWidget ;
+    QDateTimeEdit * dateFrom ;
+    QDateTimeEdit * dateTo ;
 
-    QWidget *createDateRangeWidget();
+    QAction * abandonAction ;
 
-    GUIUtil::TableViewLastColumnResizingFixer *columnResizingFixer;
+    GUIUtil::TableViewLastColumnResizingFixer * columnResizingFixer ;
 
-    virtual void resizeEvent(QResizeEvent* event);
+    static QFrame * createDateRangeWidget( QDateTimeEdit * dateFrom, QDateTimeEdit * dateTo ) ;
 
-    bool eventFilter(QObject *obj, QEvent *event);
+    virtual void resizeEvent( QResizeEvent * event ) ;
+
+    bool eventFilter( QObject * obj, QEvent * event ) ;
 
 private Q_SLOTS:
     void contextualMenu(const QPoint &);
@@ -103,8 +104,7 @@ private Q_SLOTS:
 Q_SIGNALS:
     void doubleClicked(const QModelIndex&);
 
-    /**  Fired when a message should be reported to the user */
-    void message(const QString &title, const QString &message, unsigned int style);
+    void message( const QString & title, const QString & message, unsigned int style ) ;
 
 public Q_SLOTS:
     void chooseDate(int idx);

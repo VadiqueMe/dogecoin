@@ -2522,8 +2522,8 @@
         <translation>충분히 숙성되지 않은 상태 (%1 승인, %2 후에 사용 가능합니다)</translation>
     </message>
     <message>
-        <source>This block was not received by any other nodes and will probably not be accepted!</source>
-        <translation>이 블록은 다른 노드로부터 받지 않아 허용되지 않을 것임!</translation>
+        <source>This block was not received by any other nodes and will probably not be accepted</source>
+        <translation>이 블록은 다른 노드로부터 받지 않아 허용되지 않을 것임</translation>
     </message>
     <message>
         <source>Generated but not accepted</source>

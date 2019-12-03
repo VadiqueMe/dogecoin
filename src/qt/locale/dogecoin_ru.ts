@@ -2522,8 +2522,8 @@
         <translation>Незрелый (%1 подтверждений, будет доступно после %2)</translation>
     </message>
     <message>
-        <source>This block was not received by any other nodes and will probably not be accepted!</source>
-        <translation>Этот блок не был получен другими узлами и, возможно, не будет принят!</translation>
+        <source>This block was not received by any other nodes and will probably not be accepted</source>
+        <translation>Этот блок не был получен другими узлами и, возможно, не будет принят</translation>
     </message>
     <message>
         <source>Generated but not accepted</source>

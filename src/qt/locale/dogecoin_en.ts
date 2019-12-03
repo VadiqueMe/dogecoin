@@ -464,7 +464,7 @@
 <context>
     <name>DogecoinApplication</name>
     <message>
-        <location filename="../dogecoin.cpp" line="+517"/>
+        <location filename="../dogecoin.cpp" line="+526"/>
         <source>A fatal error occurred. Dogecoin can no longer continue safely and will quit.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -472,7 +472,7 @@
 <context>
     <name>DogecoinGUI</name>
     <message>
-        <location filename="../gui.cpp" line="+139"/>
+        <location filename="../gui.cpp" line="+140"/>
         <source>Wallet</source>
         <translation type="unfinished">Wallet</translation>
     </message>
@@ -768,7 +768,7 @@
         <translation type="unfinished">Information</translation>
     </message>
     <message>
-        <location line="+63"/>
+        <location line="+67"/>
         <source>Are you sure?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1179,7 +1179,7 @@
 <context>
     <name>NetworkModel</name>
     <message>
-        <location filename="../networkmodel.cpp" line="+178"/>
+        <location filename="../networkmodel.cpp" line="+179"/>
         <source>Network Alert</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2045,7 +2045,7 @@ p, li { white-space: pre-wrap; }
         </translation>
     </message>
     <message>
-        <location filename="../dogecoin.cpp" line="+176"/>
+        <location filename="../dogecoin.cpp" line="+175"/>
         <source>%1 didn&apos;t yet exit safely...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3475,7 +3475,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>TransactionTableModel</name>
     <message>
-        <location filename="../transactiontablemodel.cpp" line="+231"/>
+        <location filename="../transactiontablemodel.cpp" line="+232"/>
         <source>Date</source>
         <translation type="unfinished">Date</translation>
     </message>
@@ -3539,7 +3539,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+3"/>
-        <source>This block was not received by any other nodes and will probably not be accepted!</source>
+        <source>This block was not received by any other nodes and will probably not be accepted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3592,7 +3592,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>TransactionView</name>
     <message>
-        <location filename="../transactionview.cpp" line="+69"/>
+        <location filename="../transactionview.cpp" line="+72"/>
         <location line="+16"/>
         <source>All</source>
         <translation type="unfinished"></translation>
@@ -3708,7 +3708,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+185"/>
+        <location line="+186"/>
         <source>Export Transaction History</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3773,7 +3773,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+146"/>
+        <location line="+147"/>
         <source>Range:</source>
         <translation type="unfinished"></translation>
     </message>

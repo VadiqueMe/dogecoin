@@ -2522,8 +2522,8 @@
         <translation>Nedozráno (%1 potvrzení, dozraje při %2 potvrzeních)</translation>
     </message>
     <message>
-        <source>This block was not received by any other nodes and will probably not be accepted!</source>
-        <translation>Tento blok nedostal žádný jiný uzel a pravděpodobně nebude akceptován!</translation>
+        <source>This block was not received by any other nodes and will probably not be accepted</source>
+        <translation>Tento blok nedostal žádný jiný uzel a pravděpodobně nebude akceptován</translation>
     </message>
     <message>
         <source>Generated but not accepted</source>

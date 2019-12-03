@@ -184,7 +184,7 @@ class ReplaceByFeeTest(DogecoinTestFramework):
         except JSONRPCException as exp:
             assert_equal(exp.error['code'], -26) # insufficient fee
         else:
-            assert(False) # transaction mistakenly accepted!
+            assert(False) # transaction mistakenly accepted
 
         # Accepted with sufficient fee
         dbl_tx = CTransaction()

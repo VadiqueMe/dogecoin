@@ -644,8 +644,8 @@
         <translation>I/E konfirmuar(%1 konfirmime)</translation>
     </message>
     <message>
-        <source>This block was not received by any other nodes and will probably not be accepted!</source>
-        <translation>Ky bllok është marrë nga ndonjë nyje dhe ka shumë mundësi të mos pranohet! </translation>
+        <source>This block was not received by any other nodes and will probably not be accepted</source>
+        <translation>Ky bllok është marrë nga ndonjë nyje dhe ka shumë mundësi të mos pranohet</translation>
     </message>
     <message>
         <source>Generated but not accepted</source>

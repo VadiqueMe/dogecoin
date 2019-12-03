@@ -1604,8 +1604,8 @@
         <translation>يتعارض</translation>
     </message>
     <message>
-        <source>This block was not received by any other nodes and will probably not be accepted!</source>
-        <translation>لم يتم تلقى هذه الكتلة (Block) من قبل أي العقد الأخرى وربما لن تكون مقبولة!</translation>
+        <source>This block was not received by any other nodes and will probably not be accepted</source>
+        <translation>لم يتم تلقى هذه الكتلة (Block) من قبل أي العقد الأخرى وربما لن تكون مقبولة</translation>
     </message>
     <message>
         <source>Generated but not accepted</source>

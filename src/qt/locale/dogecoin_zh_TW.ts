@@ -2518,8 +2518,8 @@
         <translation>未成熟(確認 %1 次，會在 %2 次後可用)</translation>
     </message>
     <message>
-        <source>This block was not received by any other nodes and will probably not be accepted!</source>
-        <translation>沒有其他節點收到這個區塊，也許它不會被接受！</translation>
+        <source>This block was not received by any other nodes and will probably not be accepted</source>
+        <translation>沒有其他節點收到這個區塊，也許它不會被接受</translation>
     </message>
     <message>
         <source>Generated but not accepted</source>

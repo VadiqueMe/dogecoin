@@ -2467,8 +2467,8 @@
         <translation>Nezrelé (%1 potvrdení, bude dostupné po %2)</translation>
     </message>
     <message>
-        <source>This block was not received by any other nodes and will probably not be accepted!</source>
-        <translation>Ten blok nebol prijatý žiadnym iným uzlom a pravdepodobne nebude akceptovaný!</translation>
+        <source>This block was not received by any other nodes and will probably not be accepted</source>
+        <translation>Ten blok nebol prijatý žiadnym iným uzlom a pravdepodobne nebude akceptovaný</translation>
     </message>
     <message>
         <source>Generated but not accepted</source>

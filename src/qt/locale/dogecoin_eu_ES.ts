@@ -628,8 +628,8 @@
         <translation>Konfirmatuta (%1 konfirmazio)</translation>
     </message>
     <message>
-        <source>This block was not received by any other nodes and will probably not be accepted!</source>
-        <translation>Bloke hau ez du beste inongo nodorik jaso, eta seguruenik ez da onartuko!</translation>
+        <source>This block was not received by any other nodes and will probably not be accepted</source>
+        <translation>Bloke hau ez du beste inongo nodorik jaso, eta seguruenik ez da onartuko</translation>
     </message>
     <message>
         <source>Generated but not accepted</source>

@@ -2350,8 +2350,8 @@
         <translation>Immadur (%1 confirmacions, serà disponible després de %2)</translation>
     </message>
     <message>
-        <source>This block was not received by any other nodes and will probably not be accepted!</source>
-        <translation>Aquest bloc no ha estat rebut per cap altre node i probablement no serà acceptat!</translation>
+        <source>This block was not received by any other nodes and will probably not be accepted</source>
+        <translation>Aquest bloc no ha estat rebut per cap altre node i probablement no serà acceptat</translation>
     </message>
     <message>
         <source>Generated but not accepted</source>

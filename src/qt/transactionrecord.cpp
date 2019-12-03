@@ -1,6 +1,7 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "transactionrecord.h"
 
@@ -14,7 +15,7 @@
 
 #include <boost/foreach.hpp>
 
-/* Return positive answer if transaction should be shown in list.
+/* Return positive answer if transaction should be shown in list
  */
 bool TransactionRecord::showTransaction(const CWalletTx &wtx)
 {
@@ -189,6 +190,8 @@ void TransactionRecord::updateStatus(const CWalletTx &wtx)
     status.depth = wtx.GetDepthInMainChain();
     status.cur_num_blocks = chainActive.Height();
 
+    static const int magicConstantForConsideringOffline = 3 * 60 ;
+
     if (!CheckFinalTx(wtx))
     {
         if (wtx.tx->nLockTime < LOCKTIME_THRESHOLD)
@@ -203,56 +206,55 @@ void TransactionRecord::updateStatus(const CWalletTx &wtx)
         }
     }
     // For generated transactions, determine maturity
-    else if(type == TransactionRecord::Generated)
+    else if ( type == TransactionRecord::Generated )
     {
-        if (wtx.GetBlocksToMaturity() > 0)
+        if ( wtx.GetBlocksToMaturity() > 0 )
         {
-            status.status = TransactionStatus::Immature;
+            status.status = TransactionStatus::Immature ;
 
-            if (wtx.IsInMainChain())
+            if ( wtx.IsInMainChain() )
             {
-                status.matures_in = wtx.GetBlocksToMaturity();
+                status.matures_in = wtx.GetBlocksToMaturity() ;
 
                 // Check if the block was requested by anyone
-                if (GetAdjustedTime() - wtx.nTimeReceived > 2 * 60 && wtx.GetRequestCount() == 0)
-                    status.status = TransactionStatus::MaturesWarning;
+                if ( GetAdjustedTime() - wtx.nTimeReceived > magicConstantForConsideringOffline && wtx.GetRequestCount() == 0 )
+                    status.status = TransactionStatus::MaturesWarning ;
             }
             else
             {
-                status.status = TransactionStatus::NotAccepted;
+                status.status = TransactionStatus::NotAccepted ;
             }
         }
         else
         {
-            status.status = TransactionStatus::Confirmed;
+            status.status = TransactionStatus::Confirmed ;
         }
     }
     else
     {
-        if (status.depth < 0)
+        if ( status.depth < 0 )
         {
-            status.status = TransactionStatus::Conflicted;
+            status.status = TransactionStatus::Conflicted ;
         }
-        else if (GetAdjustedTime() - wtx.nTimeReceived > 2 * 60 && wtx.GetRequestCount() == 0)
+        else if ( GetAdjustedTime() - wtx.nTimeReceived > magicConstantForConsideringOffline && wtx.GetRequestCount() == 0 )
         {
-            status.status = TransactionStatus::Offline;
+            status.status = TransactionStatus::Offline ;
         }
-        else if (status.depth == 0)
+        else if ( status.depth == 0 )
         {
-            status.status = TransactionStatus::Unconfirmed;
-            if (wtx.isAbandoned())
-                status.status = TransactionStatus::Abandoned;
+            status.status = TransactionStatus::Unconfirmed ;
+            if ( wtx.isAbandoned() )
+                status.status = TransactionStatus::Abandoned ;
         }
-        else if (status.depth < RecommendedNumConfirmations)
+        else if ( status.depth < RecommendedNumConfirmations )
         {
-            status.status = TransactionStatus::Confirming;
+            status.status = TransactionStatus::Confirming ;
         }
         else
         {
-            status.status = TransactionStatus::Confirmed;
+            status.status = TransactionStatus::Confirmed ;
         }
     }
-
 }
 
 bool TransactionRecord::statusUpdateNeeded()

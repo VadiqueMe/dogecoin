@@ -2522,8 +2522,8 @@
         <translation>Umoden (%1 bekræftelser; vil være tilgængelig efter %2)</translation>
     </message>
     <message>
-        <source>This block was not received by any other nodes and will probably not be accepted!</source>
-        <translation>Denne blok blev ikke modtaget af nogen andre knuder og vil formentlig ikke blive accepteret!</translation>
+        <source>This block was not received by any other nodes and will probably not be accepted</source>
+        <translation>Denne blok blev ikke modtaget af nogen andre knuder og vil formentlig ikke blive accepteret</translation>
     </message>
     <message>
         <source>Generated but not accepted</source>

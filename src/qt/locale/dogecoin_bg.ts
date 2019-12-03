@@ -1946,8 +1946,8 @@
         <translation>Неплатим (%1 потвърждения, ще бъде платим след %2)</translation>
     </message>
     <message>
-        <source>This block was not received by any other nodes and will probably not be accepted!</source>
-        <translation>Блокът не е получен от останалите участници и най-вероятно няма да бъде одобрен.</translation>
+        <source>This block was not received by any other nodes and will probably not be accepted</source>
+        <translation>Блокът не е получен от останалите участници и най-вероятно няма да бъде одобрен</translation>
     </message>
     <message>
         <source>Generated but not accepted</source>

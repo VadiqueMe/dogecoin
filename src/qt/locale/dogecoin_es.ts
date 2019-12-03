@@ -2522,8 +2522,8 @@
         <translation>No disponible (%1 confirmaciones. Estarán disponibles al cabo de %2)</translation>
     </message>
     <message>
-        <source>This block was not received by any other nodes and will probably not be accepted!</source>
-        <translation>Este bloque no ha sido recibido por otros nodos y probablemente no sea aceptado!</translation>
+        <source>This block was not received by any other nodes and will probably not be accepted</source>
+        <translation>Este bloque no ha sido recibido por otros nodos y probablemente no sea aceptado</translation>
     </message>
     <message>
         <source>Generated but not accepted</source>

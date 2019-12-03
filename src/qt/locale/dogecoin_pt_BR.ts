@@ -2518,8 +2518,8 @@
         <translation>Recém-criado (%1 confirmações, disponível somente após %2)</translation>
     </message>
     <message>
-        <source>This block was not received by any other nodes and will probably not be accepted!</source>
-        <translation>Este bloco não foi recebido por nenhum outro participante da rede e provavelmente não será aceito!</translation>
+        <source>This block was not received by any other nodes and will probably not be accepted</source>
+        <translation>Este bloco não foi recebido por nenhum outro participante da rede e provavelmente não será aceito</translation>
     </message>
     <message>
         <source>Generated but not accepted</source>

@@ -2522,8 +2522,8 @@
         <translation>Immature (%1 confirmations, sera disponible après %2)</translation>
     </message>
     <message>
-        <source>This block was not received by any other nodes and will probably not be accepted!</source>
-        <translation>Ce bloc n’a été reçu par aucun autre nœud et ne sera probablement pas accepté !</translation>
+        <source>This block was not received by any other nodes and will probably not be accepted</source>
+        <translation>Ce bloc n’a été reçu par aucun autre nœud et ne sera probablement pas accepté</translation>
     </message>
     <message>
         <source>Generated but not accepted</source>

@@ -2518,8 +2518,8 @@
         <translation>Unreif (%1 Bestätigungen, wird verfügbar sein nach %2)</translation>
     </message>
     <message>
-        <source>This block was not received by any other nodes and will probably not be accepted!</source>
-        <translation>Dieser Block wurde vom Netzwerk nicht angenommen und wird wahrscheinlich nicht bestätigt werden!</translation>
+        <source>This block was not received by any other nodes and will probably not be accepted</source>
+        <translation>Dieser Block wurde vom Netzwerk nicht angenommen und wird wahrscheinlich nicht bestätigt werden</translation>
     </message>
     <message>
         <source>Generated but not accepted</source>

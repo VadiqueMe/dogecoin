@@ -2491,8 +2491,8 @@
         <translation>未成熟 (%1 个确认，将在 %2 个后可用)</translation>
     </message>
     <message>
-        <source>This block was not received by any other nodes and will probably not be accepted!</source>
-        <translation>此数据块未被任何其他节点接收，可能不被接受！</translation>
+        <source>This block was not received by any other nodes and will probably not be accepted</source>
+        <translation>此数据块未被任何其他节点接收，可能不被接受</translation>
     </message>
     <message>
         <source>Generated but not accepted</source>
