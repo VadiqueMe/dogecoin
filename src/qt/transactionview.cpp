@@ -41,34 +41,28 @@ TransactionView::TransactionView( const PlatformStyle * platformStyle, QWidget *
     transactionTableView( nullptr ), abandonAction( nullptr ), columnResizingFixer( nullptr )
 {
     // Build filter row
-    setContentsMargins(0,0,0,0);
+    setContentsMargins( 0, 0, 0, 0 ) ;
 
-    QHBoxLayout *hlayout = new QHBoxLayout();
-    hlayout->setContentsMargins(0,0,0,0);
+    QHBoxLayout * hlayout = new QHBoxLayout() ;
+    hlayout->setContentsMargins( 0, 0, 0, 0 ) ;
 
-    if (platformStyle->getUseExtraSpacing()) {
-        hlayout->setSpacing(5);
-        hlayout->addSpacing(26);
-    } else {
-        hlayout->setSpacing(0);
-        hlayout->addSpacing(23);
-    }
+    spacerBeforeFilteringWidgets = new QSpacerItem(
+            /* width */ 23, /* height */ 7,
+            /* hPolicy */ QSizePolicy::Fixed, /* vPolicy */ QSizePolicy::Fixed ) ;
 
-    watchOnlyWidget = new QComboBox(this);
-    watchOnlyWidget->setFixedWidth(24);
-    watchOnlyWidget->addItem("", TransactionFilterProxy::WatchOnlyFilter_All);
-    watchOnlyWidget->addItem(platformStyle->SingleColorIcon(":/icons/eye_plus"), "", TransactionFilterProxy::WatchOnlyFilter_Yes);
-    watchOnlyWidget->addItem(platformStyle->SingleColorIcon(":/icons/eye_minus"), "", TransactionFilterProxy::WatchOnlyFilter_No);
-    hlayout->addWidget(watchOnlyWidget);
+    hlayout->addItem( spacerBeforeFilteringWidgets ) ;
 
-    static const int magicFixedWidth = 120 ;
+    watchOnlyWidget = new QComboBox( this ) ;
+    watchOnlyWidget->setFixedWidth( 24 ) ;
+    watchOnlyWidget->addItem( "", TransactionFilterProxy::WatchOnlyFilter_All ) ;
+    watchOnlyWidget->addItem( platformStyle->SingleColorIcon( ":/icons/eye_plus" ), "", TransactionFilterProxy::WatchOnlyFilter_Yes ) ;
+    watchOnlyWidget->addItem( platformStyle->SingleColorIcon( ":/icons/eye_minus" ), "", TransactionFilterProxy::WatchOnlyFilter_No ) ;
+    hlayout->addWidget( watchOnlyWidget ) ;
+
+    static const int initialWidth = 120 ;
 
     dateWidget = new QComboBox( this ) ;
-    if ( platformStyle->getUseExtraSpacing() ) {
-        dateWidget->setFixedWidth( magicFixedWidth + 1 );
-    } else {
-        dateWidget->setFixedWidth( magicFixedWidth );
-    }
+    dateWidget->setFixedWidth( initialWidth ) ;
     dateWidget->addItem( tr("All"), All ) ;
     dateWidget->addItem( tr("Today"), Today ) ;
     dateWidget->addItem( tr("This week"), ThisWeek ) ;
@@ -79,11 +73,7 @@ TransactionView::TransactionView( const PlatformStyle * platformStyle, QWidget *
     hlayout->addWidget( dateWidget ) ;
 
     typeWidget = new QComboBox( this ) ;
-    if ( platformStyle->getUseExtraSpacing() ) {
-        typeWidget->setFixedWidth( magicFixedWidth + 1 ) ;
-    } else {
-        typeWidget->setFixedWidth( magicFixedWidth ) ;
-    }
+    typeWidget->setFixedWidth( initialWidth ) ;
 
     typeWidget->addItem( tr("All"), TransactionFilterProxy::ALL_TYPES ) ;
     typeWidget->addItem( tr("Received with"), TransactionFilterProxy::TYPE(TransactionRecord::RecvWithAddress) |
@@ -106,11 +96,8 @@ TransactionView::TransactionView( const PlatformStyle * platformStyle, QWidget *
 #if QT_VERSION >= 0x040700
     amountWidget->setPlaceholderText( tr("Min amount") ) ;
 #endif
-    if ( platformStyle->getUseExtraSpacing() ) {
-        amountWidget->setFixedWidth( 97 ) ;
-    } else {
-        amountWidget->setFixedWidth( 100 ) ;
-    }
+
+    amountWidget->setFixedWidth( initialWidth ) ;
     amountWidget->setValidator( new QDoubleValidator( 0, 1e20, 8, this ) ) ;
     hlayout->addWidget( amountWidget ) ;
 
@@ -218,14 +205,28 @@ void TransactionView::setWalletModel( WalletModel * model )
         transactionTableView->sortByColumn( TransactionTableModel::Date, Qt::DescendingOrder ) ;
         transactionTableView->verticalHeader()->hide() ;
 
-        transactionTableView->setColumnWidth( TransactionTableModel::Status, STATUS_COLUMN_WIDTH ) ;
-        transactionTableView->setColumnWidth( TransactionTableModel::Watchonly, WATCHONLY_COLUMN_WIDTH ) ;
-        transactionTableView->setColumnWidth( TransactionTableModel::Date, DATE_COLUMN_WIDTH ) ;
-        transactionTableView->setColumnWidth( TransactionTableModel::Type, TYPE_COLUMN_WIDTH ) ;
-        transactionTableView->setColumnWidth( TransactionTableModel::Amount, AMOUNT_MINIMUM_COLUMN_WIDTH ) ;
+        transactionTableView->resizeColumnsToContents() ;
 
+        static const int add2widths = 12 ;
+        transactionTableView->setColumnWidth(
+                TransactionTableModel::Date,
+                transactionTableView->columnWidth( TransactionTableModel::Date ) + add2widths ) ;
+        transactionTableView->setColumnWidth(
+                TransactionTableModel::Type,
+                transactionTableView->columnWidth( TransactionTableModel::Type ) + add2widths ) ;
+        transactionTableView->setColumnWidth(
+                TransactionTableModel::Status,
+                transactionTableView->columnWidth( TransactionTableModel::Status ) + ( add2widths >> 1 ) ) ;
+
+        static const int minimum_width_of_column = 23 ;
         columnResizingFixer = new GUIUtil::TableViewLastColumnResizingFixer(
-                                    transactionTableView, AMOUNT_MINIMUM_COLUMN_WIDTH, MINIMUM_COLUMN_WIDTH, this ) ;
+                                    transactionTableView,
+                                    transactionTableView->columnWidth( TransactionTableModel::Amount ),
+                                    minimum_width_of_column, this ) ;
+
+        // resize filtering widgets along with table columns
+        connect( transactionTableView->horizontalHeader(), SIGNAL( geometriesChanged() ), this, SLOT( updateWidths() ) ) ;
+        connect( transactionTableView->horizontalHeader(), SIGNAL( sectionResized(int, int, int) ), this, SLOT( updateWidths() ) ) ;
 
         if ( model->getOptionsModel() != nullptr )
         {
@@ -251,6 +252,19 @@ void TransactionView::setWalletModel( WalletModel * model )
         // Watch-only signal
         connect( model, SIGNAL( notifyWatchonlyChanged(bool) ), this, SLOT( updateWatchOnlyColumn(bool) ) ) ;
     }
+}
+
+void TransactionView::updateWidths()
+{
+    spacerBeforeFilteringWidgets->changeSize(
+            /* width */ transactionTableView->columnViewportPosition( TransactionTableModel::Date ),
+            /* height */ 7,
+            /* hPolicy */ QSizePolicy::Fixed, /* vPolicy */ QSizePolicy::Fixed ) ;
+
+    dateWidget->setFixedWidth( transactionTableView->columnWidth( TransactionTableModel::Date ) ) ;
+    typeWidget->setFixedWidth( transactionTableView->columnWidth( TransactionTableModel::Type ) ) ;
+    addressWidget->setFixedWidth( transactionTableView->columnWidth( TransactionTableModel::ToAddress ) ) ;
+    amountWidget->setFixedWidth( transactionTableView->columnWidth( TransactionTableModel::Amount ) ) ;
 }
 
 void TransactionView::chooseDate(int idx)

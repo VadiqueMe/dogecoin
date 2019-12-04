@@ -26,15 +26,14 @@
 #include <QIcon>
 #include <QList>
 
-// Amount column is right-aligned it contains numbers
 static int column_alignments[] = {
-        Qt::AlignLeft|Qt::AlignVCenter, /* status */
-        Qt::AlignLeft|Qt::AlignVCenter, /* watchonly */
-        Qt::AlignLeft|Qt::AlignVCenter, /* date */
-        Qt::AlignLeft|Qt::AlignVCenter, /* type */
-        Qt::AlignLeft|Qt::AlignVCenter, /* address */
-        Qt::AlignRight|Qt::AlignVCenter /* amount */
-    };
+        Qt::AlignCenter, /* status column, centers in both dimensions */
+        Qt::AlignLeft | Qt::AlignVCenter, /* watchonly */
+        Qt::AlignLeft | Qt::AlignVCenter, /* date */
+        Qt::AlignLeft | Qt::AlignVCenter, /* type */
+        Qt::AlignLeft | Qt::AlignVCenter, /* address */
+        Qt::AlignRight | Qt::AlignVCenter /* amount */
+    } ;
 
 // Comparison operator for sort/binary search of model tx list
 struct TxLessThan
@@ -66,13 +65,12 @@ public:
     CWallet *wallet;
     TransactionTableModel *parent;
 
-    /* Local cache of wallet.
-     * As it is in the same order as the CWallet, by definition
-     * this is sorted by sha256.
+    /* Local cache of wallet
+     * As it is in the same order as the CWallet, by definition this is sorted by sha256
      */
-    QList<TransactionRecord> cachedWallet;
+    QList< TransactionRecord > cachedWallet ;
 
-    /* Query entire wallet anew from core.
+    /* Query entire wallet anew from core
      */
     void refreshWallet()
     {
@@ -564,10 +562,9 @@ QVariant TransactionTableModel::data(const QModelIndex &index, int role) const
     case Qt::TextAlignmentRole:
         return column_alignments[index.column()];
     case Qt::ForegroundRole:
-        // Use the "danger" color for abandoned transactions
-        if(rec->status.status == TransactionStatus::Abandoned)
+        if ( rec->status.status == TransactionStatus::Abandoned )
         {
-            return COLOR_TX_STATUS_DANGER;
+            return COLOR_TX_STATUS_ABANDONED ;
         }
         // Non-confirmed (but not immature) transactions are grey
         if(!rec->status.countsForBalance && rec->status.status != TransactionStatus::Immature)

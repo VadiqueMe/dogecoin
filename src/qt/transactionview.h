@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -22,7 +23,8 @@ class QLineEdit;
 class QMenu;
 class QModelIndex;
 class QSignalMapper;
-class QTableView;
+class QTableView ;
+class QSpacerItem ;
 QT_END_NAMESPACE
 
 /** Widget showing the transaction list for a wallet, including a filter row.
@@ -49,20 +51,12 @@ public:
         Range
     };
 
-    enum ColumnWidths {
-        STATUS_COLUMN_WIDTH = 30,
-        WATCHONLY_COLUMN_WIDTH = 23,
-        DATE_COLUMN_WIDTH = 120,
-        TYPE_COLUMN_WIDTH = 113,
-        AMOUNT_MINIMUM_COLUMN_WIDTH = 120,
-        MINIMUM_COLUMN_WIDTH = 23
-    };
-
 private:
     WalletModel * walletModel ;
     TransactionFilterProxy * transactionProxyModel ;
     QTableView * transactionTableView ;
 
+    QSpacerItem * spacerBeforeFilteringWidgets ;
     QComboBox * dateWidget ;
     QComboBox * typeWidget ;
     QComboBox * watchOnlyWidget ;
@@ -87,6 +81,7 @@ private:
     bool eventFilter( QObject * obj, QEvent * event ) ;
 
 private Q_SLOTS:
+    void updateWidths() ;
     void contextualMenu(const QPoint &);
     void dateRangeChanged();
     void showDetails();
