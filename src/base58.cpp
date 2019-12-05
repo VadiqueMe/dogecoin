@@ -233,15 +233,21 @@ bool CDogecoinAddress::Set(const CTxDestination& dest)
 
 bool CDogecoinAddress::IsValid() const
 {
-    return IsValid(Params());
+    return IsValid( Params() ) ;
 }
 
-bool CDogecoinAddress::IsValid(const CChainParams& params) const
+bool CDogecoinAddress::IsValid( const CChainParams & params ) const
 {
-    bool fCorrectSize = vchData.size() == 20;
-    bool fKnownVersion = vchVersion == params.Base58Prefix(CChainParams::PUBKEY_ADDRESS) ||
-                         vchVersion == params.Base58Prefix(CChainParams::SCRIPT_ADDRESS);
-    return fCorrectSize && fKnownVersion;
+    return IsValid( params.Base58Prefix( CChainParams::PUBKEY_ADDRESS ),
+                    params.Base58Prefix( CChainParams::SCRIPT_ADDRESS ) ) ;
+}
+
+bool CDogecoinAddress::IsValid( const std::vector< unsigned char > & pubkeyPrefix,
+                                const std::vector< unsigned char > & scriptPrefix ) const
+{
+    bool fCorrectSize = vchData.size() == 20 ;
+    bool fKnownVersion = vchVersion == pubkeyPrefix || vchVersion == scriptPrefix ;
+    return fCorrectSize && fKnownVersion ;
 }
 
 CTxDestination CDogecoinAddress::Get() const
@@ -271,6 +277,35 @@ bool CDogecoinAddress::GetKeyID(CKeyID& keyID) const
 bool CDogecoinAddress::IsScript() const
 {
     return IsValid() && vchVersion == Params().Base58Prefix(CChainParams::SCRIPT_ADDRESS);
+}
+
+// just some dummy data to generate a random-looking (but consistent) address
+static const uint8_t dummydata[] = {
+        0xbe, 0x2a, 0x1f, 0xdc, 0x15, 0xeb, 0x60, 0x92,
+        0x58, 0x96, 0xb6, 0x7d, 0x06, 0x52, 0x88, 0x92,
+        0x59, 0x15, 0xae, 0xb3, 0x72, 0xc0, 0x66, 0x47
+} ;
+
+// generate a dummy address with invalid CRC starting with the network prefix
+std::string CDogecoinAddress::DummyDogecoinAddress( const CChainParams & params )
+{
+    return DummyDogecoinAddress(
+                params.Base58Prefix( CChainParams::PUBKEY_ADDRESS ),
+                params.Base58Prefix( CChainParams::SCRIPT_ADDRESS ) ) ;
+}
+
+std::string CDogecoinAddress::DummyDogecoinAddress( const std::vector< unsigned char > & pubkeyPrefix,
+                                                    const std::vector< unsigned char > & scriptPrefix )
+{
+    std::vector< unsigned char > sourcedata = pubkeyPrefix ;
+    sourcedata.insert( sourcedata.end(), dummydata, dummydata + sizeof( dummydata ) ) ;
+    for ( int i = 0 ; i < 0x100 ; ++ i ) { // try every trailing byte
+        std::string s = EncodeBase58( sourcedata.data(), sourcedata.data() + sourcedata.size() ) ;
+        if ( ! CDogecoinAddress( s ).IsValid( pubkeyPrefix, scriptPrefix ) )
+            return s ;
+        sourcedata[ sourcedata.size() - 1 ] += 1 ;
+    }
+    throw std::runtime_error( "too valid addresses from dummydata" ) ;
 }
 
 void CDogecoinSecret::SetKey( const CKey & vchSecret )

@@ -96,8 +96,11 @@ public:
     bool Set( const CKeyID & id ) ;
     bool Set( const CScriptID &id ) ;
     bool Set( const CTxDestination & dest ) ;
+
     bool IsValid() const ;
     bool IsValid( const CChainParams & params ) const ;
+    bool IsValid( const std::vector< unsigned char > & pubkeyPrefix,
+                  const std::vector< unsigned char > & scriptPrefix ) const ;
 
     CDogecoinAddress() {}
     CDogecoinAddress( const CTxDestination & dest ) {  Set( dest ) ;  }
@@ -107,6 +110,10 @@ public:
     CTxDestination Get() const ;
     bool GetKeyID( CKeyID & keyID ) const ;
     bool IsScript() const ;
+
+    static std::string DummyDogecoinAddress( const CChainParams & params ) ;
+    static std::string DummyDogecoinAddress( const std::vector< unsigned char > & pubkeyPrefix,
+                                             const std::vector< unsigned char > & scriptPrefix ) ;
 } ;
 
 /**

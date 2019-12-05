@@ -11,6 +11,7 @@
 #include "util.h"
 #include "utilstrencodings.h"
 #include "arith_uint256.h"
+#include "base58.h"
 
 #include <iomanip> // std::get_time
 
@@ -340,6 +341,12 @@ public:
         base58Prefixes[ SECRET_KEY ] =     std::vector< unsigned char >( 1, 0xaa ) ;
         base58Prefixes[ EXT_PUBLIC_KEY ] = boost::assign::list_of( 0x0a )( 0xbc )( 0x20 )( 0x88 ).convert_to_container< std::vector< unsigned char > >() ;
         base58Prefixes[ EXT_SECRET_KEY ] = boost::assign::list_of( 0x0a )( 0xbc )( 0x80 )( 0xdd ).convert_to_container< std::vector< unsigned char > >() ;
+
+        printf( "network address example %s\n",
+                CDogecoinAddress::DummyDogecoinAddress(
+                    Base58Prefix( CChainParams::PUBKEY_ADDRESS ),
+                    Base58Prefix( CChainParams::SCRIPT_ADDRESS )
+                ).c_str() ) ;
 
         vSeeds.clear() ;
         vFixedSeeds.clear() ;

@@ -102,8 +102,6 @@ namespace boost {
 
 } // namespace boost
 
-using namespace std;
-
 std::string FormatBytes( uint64_t bytes )
 {
     if ( bytes < 1024 )
@@ -121,10 +119,11 @@ const char * const BITCOIN_PID_FILENAME = "dogecoind.pid";
 
 const char * const LOG_FILE_NAME = "debug.log" ;
 
-CCriticalSection cs_args;
-map<string, string> mapArgs;
-static map<string, vector<string> > _mapMultiArgs;
-const map<string, vector<string> >& mapMultiArgs = _mapMultiArgs;
+CCriticalSection cs_args ;
+std::map< std::string, std::string > mapArgs ;
+static std::map< std::string, std::vector< std::string > > _mapMultiArgs ;
+const std::map< std::string, std::vector< std::string > > & mapMultiArgs = _mapMultiArgs ;
+
 bool fDebug = false;
 bool fPrintToConsole = false;
 bool fPrintToDebugLog = true;
@@ -233,22 +232,22 @@ bool LogAcceptCategory(const char* category)
         // This helps prevent issues debugging global destructors,
         // where mapMultiArgs might be deleted before another
         // global destructor calls LogPrint()
-        static boost::thread_specific_ptr<set<string> > ptrCategory;
+        static boost::thread_specific_ptr< std::set< std::string > > ptrCategory ;
         if (ptrCategory.get() == NULL)
         {
-            if (mapMultiArgs.count("-debug")) {
-                const vector<string>& categories = mapMultiArgs.at("-debug");
-                ptrCategory.reset(new set<string>(categories.begin(), categories.end()));
+            if ( mapMultiArgs.count( "-debug" ) ) {
+                const std::vector< std::string > & categories = mapMultiArgs.at( "-debug" ) ;
+                ptrCategory.reset( new std::set< std::string >( categories.begin(), categories.end() ) ) ;
                 // thread_specific_ptr automatically deletes the set when the thread ends
             } else
-                ptrCategory.reset(new set<string>());
+                ptrCategory.reset( new std::set< std::string >() ) ;
         }
-        const set<string>& setCategories = *ptrCategory.get();
+        const std::set< std::string > & setCategories = *ptrCategory.get() ;
 
         // if not debugging everything and not debugging specific category, LogPrint does nothing
-        if (setCategories.count(string("")) == 0 &&
-            setCategories.count(string("1")) == 0 &&
-            setCategories.count(string(category)) == 0)
+        if (setCategories.count( std::string("") ) == 0 &&
+            setCategories.count( std::string("1") ) == 0 &&
+            setCategories.count( std::string( category ) ) == 0)
             return false;
     }
     return true;
@@ -257,11 +256,11 @@ bool LogAcceptCategory(const char* category)
 /**
  * fStartedNewLine is a state variable held by the calling context that will
  * suppress printing of the timestamp when multiple calls are made that don't
- * end in a newline. Initialize it to true, and hold it, in the calling context.
+ * end in a newline. Initialize it to true, and hold it, in the calling context
  */
-static std::string LogTimestampStr(const std::string &str, std::atomic_bool *fStartedNewLine)
+static std::string LogTimestampStr( const std::string & str, std::atomic_bool * fStartedNewLine )
 {
-    string strStamped;
+    std::string strStamped ;
 
     if (!fLogTimestamps)
         return str;
@@ -288,7 +287,7 @@ int LogPrintStr( const std::string & str )
     int ret = 0 ; // number of characters written
     static std::atomic_bool fStartedNewLine( true ) ;
 
-    string strTimestamped = LogTimestampStr( str, &fStartedNewLine ) ;
+    std::string strTimestamped = LogTimestampStr( str, &fStartedNewLine ) ;
 
     if ( fPrintToConsole )
     {
@@ -549,22 +548,22 @@ boost::filesystem::path GetConfigFile(const std::string& confPath)
     return pathConfigFile;
 }
 
-void ReadConfigFile(const std::string& confPath)
+void ReadConfigFile( const std::string & confPath )
 {
-    boost::filesystem::ifstream streamConfig(GetConfigFile(confPath));
-    if (!streamConfig.good())
-        return; // No bitcoin.conf file is OK
+    boost::filesystem::ifstream streamConfig( GetConfigFile( confPath ) ) ;
+    if ( ! streamConfig.good() )
+        return ; // no dogecoin.conf file
 
     {
         LOCK(cs_args);
-        set<string> setOptions;
+        std::set< std::string > setOptions ;
         setOptions.insert("*");
 
         for (boost::program_options::detail::config_file_iterator it(streamConfig, setOptions), end; it != end; ++it)
         {
-            // Don't overwrite existing settings so command line settings override bitcoin.conf
-            string strKey = string("-") + it->string_key;
-            string strValue = it->value[0];
+            // Don't overwrite existing settings so command line settings override dogecoin.conf
+            std::string strKey = std::string( "-" ) + it->string_key ;
+            std::string strValue = it->value[ 0 ] ;
             InterpretNegativeSetting(strKey, strValue);
             if (mapArgs.count(strKey) == 0)
                 mapArgs[strKey] = strValue;

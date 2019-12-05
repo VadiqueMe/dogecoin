@@ -101,37 +101,14 @@ QFont fixedPitchFont()
     return font;
 }
 
-// Just some dummy data to generate an convincing random-looking (but consistent) address
-static const uint8_t dummydata[] = {
-    0xbe, 0x2a, 0x1f, 0xdc, 0x15, 0xeb, 0x60, 0x92,
-    0x58, 0x96, 0xb6, 0x7d, 0x06, 0x52, 0x88, 0x92,
-    0x59, 0x15, 0xae, 0xb1, 0x72, 0xc0, 0x66, 0x47
-} ;
-
-// Generate a dummy address with invalid CRC starting with the network prefix
-static std::string DummyAddress( const CChainParams & params )
-{
-    std::vector< unsigned char > sourcedata = params.Base58Prefix( CChainParams::PUBKEY_ADDRESS ) ;
-    sourcedata.insert( sourcedata.end(), dummydata, dummydata + sizeof( dummydata ) ) ;
-    for ( int i = 0 ; i < 0x100 ; ++i ) { // try every trailing byte
-        std::string s = EncodeBase58( sourcedata.data(), sourcedata.data() + sourcedata.size() ) ;
-        if ( ! CDogecoinAddress( s ).IsValid() )
-            return s ;
-        sourcedata[ sourcedata.size() - 1 ] += 1 ;
-    }
-    return "..." ;
-}
-
 void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent)
 {
     parent->setFocusProxy(widget);
 
     widget->setFont(fixedPitchFont());
 #if QT_VERSION >= 0x040700
-    // We don't want translators to use own addresses in translations
-    // and this is the only place where this address is supplied
     widget->setPlaceholderText( QObject::tr( "Enter a Dogecoin address (like %1)" ).arg(
-        QString::fromStdString( DummyAddress( Params() ) )
+        QString::fromStdString( CDogecoinAddress::DummyDogecoinAddress( Params() ) )
     ) ) ;
 #endif
     widget->setValidator( new CoinAddressEntryValidator( parent ) ) ;
