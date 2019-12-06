@@ -1061,10 +1061,10 @@ bool AppInitParameterInteraction()
                 return InitError(strprintf("Invalid nTimeout (%s)", vDeploymentParams[2]));
             }
             bool found = false;
-            for (int j=0; j<(int)Consensus::MAX_VERSION_BITS_DEPLOYMENTS; ++j)
+            for ( int j = 0 ; j < (int)Consensus::MAX_VERSION_BITS_DEPLOYMENTS ; ++ j )
             {
-                if (vDeploymentParams[0].compare(VersionBitsDeploymentInfo[j].name) == 0) {
-                    UpdateRegtestBIP9Parameters(Consensus::DeploymentPos(j), nStartTime, nTimeout);
+                if ( vDeploymentParams[ 0 ].compare( VersionBitsDeploymentInfo[ j ].name ) == 0 ) {
+                    UpdateRegtestBIP9Parameters( Consensus::DeploymentPos( j ), nStartTime, nTimeout ) ;
                     found = true;
                     LogPrintf("Setting BIP9 activation parameters for %s to start=%ld, timeout=%ld\n", vDeploymentParams[0], nStartTime, nTimeout);
                     break;
@@ -1119,7 +1119,8 @@ bool AppInitSanityChecks()
 
 bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
 {
-    const CChainParams& chainparams = Params();
+    const CChainParams & chainparams = Params() ;
+
     // ********************************************************* Step 4a: application initialization
     // After daemonization get the data directory lock again and hold on to it until exit
     // This creates a slight window for a race condition to happen, however this condition is harmless: it

@@ -31,7 +31,7 @@ public:
         nRPCPort = 22555 ;
     }
 } ;
-static CBaseMainParams mainParams ;
+static std::unique_ptr< CBaseMainParams > mainBaseParams ( nullptr ) ;
 
 /**
  * Inu chain
@@ -45,7 +45,7 @@ public:
         dataDir = "inuchain" ;
     }
 } ;
-static CBaseInuParams inuParams ;
+static std::unique_ptr< CBaseInuParams > inuBaseParams ( nullptr ) ;
 
 /**
  * Testnet (v3)
@@ -59,7 +59,7 @@ public:
         dataDir = "testnet3" ;
     }
 } ;
-static CBaseTestNetParams testNetParams ;
+static std::unique_ptr< CBaseTestNetParams > testNetBaseParams ( nullptr ) ;
 
 /*
  * Regression test
@@ -72,8 +72,8 @@ public:
         nRPCPort = 18332 ;
         dataDir = "regtest" ;
     }
-};
-static CBaseRegTestParams regTestParams ;
+} ;
+static std::unique_ptr< CBaseRegTestParams > regTestBaseParams ( nullptr ) ;
 
 static CBaseChainParams * pCurrentBaseParams = nullptr ;
 
@@ -85,11 +85,19 @@ const CBaseChainParams & BaseParams()
 
 CBaseChainParams & BaseParamsFor( const std::string & chain )
 {
-    if ( chain == "main" ) return mainParams ;
-    else if ( chain == "inu" ) return inuParams ;
-    else if ( chain == "test" ) return testNetParams ;
-    else if ( chain == "regtest" ) return regTestParams ;
-    else
+    if ( chain == "main" ) {
+        if ( mainBaseParams == nullptr ) mainBaseParams.reset( new CBaseMainParams() ) ;
+        return *mainBaseParams.get() ;
+    } else if ( chain == "inu" ) {
+        if ( inuBaseParams == nullptr ) inuBaseParams.reset( new CBaseInuParams() ) ;
+        return *inuBaseParams.get() ;
+    } else if ( chain == "test" ) {
+        if ( testNetBaseParams == nullptr ) testNetBaseParams.reset( new CBaseTestNetParams() ) ;
+        return *testNetBaseParams.get() ;
+    } else if ( chain == "regtest" ) {
+        if ( regTestBaseParams == nullptr ) regTestBaseParams.reset( new CBaseRegTestParams() ) ;
+        return *regTestBaseParams.get() ;
+    } else
         throw std::runtime_error( strprintf( "%s: unknown chain %s", __func__, chain ) ) ;
 }
 

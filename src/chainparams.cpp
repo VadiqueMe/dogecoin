@@ -205,7 +205,7 @@ public:
         } ;
     }
 };
-static CMainParams mainParams;
+static std::unique_ptr< CMainParams > mainParams( nullptr ) ;
 
 
 /**
@@ -342,11 +342,11 @@ public:
         base58Prefixes[ EXT_PUBLIC_KEY ] = boost::assign::list_of( 0x0a )( 0xbc )( 0x20 )( 0x88 ).convert_to_container< std::vector< unsigned char > >() ;
         base58Prefixes[ EXT_SECRET_KEY ] = boost::assign::list_of( 0x0a )( 0xbc )( 0x80 )( 0xdd ).convert_to_container< std::vector< unsigned char > >() ;
 
-        printf( "network address example %s\n",
+        /* printf( "network address example %s\n",
                 CDogecoinAddress::DummyDogecoinAddress(
                     Base58Prefix( CChainParams::PUBKEY_ADDRESS ),
                     Base58Prefix( CChainParams::SCRIPT_ADDRESS )
-                ).c_str() ) ;
+                ).c_str() ) ; */
 
         vSeeds.clear() ;
         vFixedSeeds.clear() ;
@@ -375,7 +375,7 @@ public:
         } ;
     }
 };
-static CInuParams inuParams ;
+static std::unique_ptr< CInuParams > inuParams( nullptr ) ;
 
 
 /**
@@ -522,7 +522,7 @@ public:
 
     }
 };
-static CTestNetParams testNetParams;
+static std::unique_ptr< CTestNetParams > testNetParams( nullptr ) ;
 
 
 /**
@@ -632,13 +632,13 @@ public:
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x35)(0x83)(0x94).convert_to_container<std::vector<unsigned char> >();
     }
 
-    void UpdateBIP9Parameters(Consensus::DeploymentPos d, int64_t nStartTime, int64_t nTimeout)
+    void changeBIP9Parameters( Consensus::DeploymentPos d, int64_t nStartTime, int64_t nTimeout )
     {
-        consensus.vDeployments[d].nStartTime = nStartTime;
-        consensus.vDeployments[d].nTimeout = nTimeout;
+        consensus.vDeployments[ d ].nStartTime = nStartTime ;
+        consensus.vDeployments[ d ].nTimeout = nTimeout ;
     }
 };
-static CRegTestParams regTestParams;
+static std::unique_ptr< CRegTestParams > regTestParams( nullptr ) ;
 
 static CChainParams * pCurrentParams = nullptr ;
 
@@ -669,15 +669,19 @@ const Consensus::Params * Consensus::Params::GetConsensus( uint32_t nTargetHeigh
 
 CChainParams & ParamsFor( const std::string & chain )
 {
-    if ( chain == "main" )
-            return mainParams ;
-    else if ( chain == "inu" )
-            return inuParams ;
-    else if ( chain == "test" )
-            return testNetParams ;
-    else if ( chain == "regtest" )
-            return regTestParams ;
-    else
+    if ( chain == "main" ) {
+            if ( mainParams == nullptr ) mainParams.reset( new CMainParams() ) ;
+            return *mainParams.get() ;
+    } else if ( chain == "inu" ) {
+            if ( inuParams == nullptr ) inuParams.reset( new CInuParams() ) ;
+            return *inuParams.get() ;
+    } else if ( chain == "test" ) {
+            if ( testNetParams == nullptr ) testNetParams.reset( new CTestNetParams() ) ;
+            return *testNetParams.get() ;
+    } else if ( chain == "regtest" ) {
+            if ( regTestParams == nullptr ) regTestParams.reset( new CRegTestParams() ) ;
+            return *regTestParams.get() ;
+    } else
         throw std::runtime_error( strprintf( "%s: unknown chain %s", __func__, chain ) ) ;
 }
 
@@ -687,7 +691,8 @@ void SelectParams( const std::string & network )
     pCurrentParams = &ParamsFor( network ) ;
 }
 
-void UpdateRegtestBIP9Parameters(Consensus::DeploymentPos d, int64_t nStartTime, int64_t nTimeout)
+void UpdateRegtestBIP9Parameters( Consensus::DeploymentPos d, int64_t nStartTime, int64_t nTimeout )
 {
-    regTestParams.UpdateBIP9Parameters(d, nStartTime, nTimeout);
+    if ( regTestParams != nullptr )
+        regTestParams->changeBIP9Parameters( d, nStartTime, nTimeout ) ;
 }

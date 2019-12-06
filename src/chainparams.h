@@ -85,25 +85,24 @@ public:
 protected:
     CChainParams() {}
 
-    Consensus::Params consensus;
-    Consensus::Params *pConsensusRoot; // Binary search tree root
-    CMessageHeader::MessageStartChars pchMessageStart;
-    //! Raw pub key bytes for the broadcast alert signing key.
-    std::vector<unsigned char> vAlertPubKey;
-    int nDefaultPort;
-    uint64_t nPruneAfterHeight;
-    std::vector<CDNSSeedData> vSeeds;
+    Consensus::Params consensus ;
+    Consensus::Params * pConsensusRoot ; // binary search tree root
+    CMessageHeader::MessageStartChars pchMessageStart ;
+    std::vector<unsigned char> vAlertPubKey ; // raw pub key bytes for the broadcast alert signing key
+    int nDefaultPort ;
+    uint64_t nPruneAfterHeight ;
+    std::vector< CDNSSeedData > vSeeds ;
     std::vector< unsigned char > base58Prefixes[ MAX_BASE58_TYPES ] ;
     std::string networkName ;
     CBlock genesis ;
-    std::vector<SeedSpec6> vFixedSeeds;
-    bool fMiningRequiresPeers;
-    bool fDefaultConsistencyChecks;
-    bool fRequireStandard;
-    bool fMineBlocksOnDemand;
+    std::vector< SeedSpec6 > vFixedSeeds ;
+    bool fMiningRequiresPeers ;
+    bool fDefaultConsistencyChecks ;
+    bool fRequireStandard ;
+    bool fMineBlocksOnDemand ;
     CCheckpointData checkpointData ;
     ChainTxData chainTxData ;
-};
+} ;
 
 /**
  * Return the currently selected parameters. This won't change after app
@@ -124,8 +123,8 @@ CChainParams & ParamsFor( const std::string & chain ) ;
 void SelectParams( const std::string & chain ) ;
 
 /**
- * Allows modifying the BIP9 regtest parameters.
+ * Modify BIP9 parameters for the regtest chain
  */
-void UpdateRegtestBIP9Parameters(Consensus::DeploymentPos d, int64_t nStartTime, int64_t nTimeout);
+void UpdateRegtestBIP9Parameters( Consensus::DeploymentPos d, int64_t nStartTime, int64_t nTimeout ) ;
 
 #endif
