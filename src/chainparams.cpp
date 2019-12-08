@@ -72,8 +72,6 @@ private:
 public:
     CMainParams()
     {
-        networkName = "main" ;
-
         // Blocks 0 - 144999 are conventional difficulty calculation
         consensus.nSubsidyHalvingInterval = 100000;
         consensus.nMajorityEnforceBlockUpgrade = 1500;
@@ -148,7 +146,6 @@ public:
         pchMessageStart[2] = 0xc0;
         pchMessageStart[3] = 0xc0;
         vAlertPubKey = ParseHex("04d4da7a5dae4db797d9b0644d57a5cd50e05a70f36091cd62e2fc41c98ded06340be5a43a35e185690cd9cde5d72da8f6d065b499b06f51dcfba14aad859f443a");
-        nDefaultPort = 22556;
         nPruneAfterHeight = 100000;
 
         genesis = CreateGenesisBlock(1386325540, 99943, 0x1e0ffff0, 1, 88 * COIN);
@@ -173,10 +170,10 @@ public:
         //vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_main, pnSeed6_main + ARRAYLEN(pnSeed6_main));
         vFixedSeeds.clear();
 
-        fMiningRequiresPeers = true;
-        fDefaultConsistencyChecks = false;
-        fRequireStandard = true;
-        fMineBlocksOnDemand = false;
+        fMiningRequiresPeers = true ;
+        fDefaultConsistencyChecks = false ;
+        fRequireStandardTxs = true ;
+        fMineBlocksOnDemand = false ;
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
@@ -217,8 +214,6 @@ class CInuParams : public CChainParams {
 public:
     CInuParams()
     {
-        networkName = "inu" ;
-
         consensus.nSubsidyHalvingInterval = 1000000 ;
         consensus.powLimit = uint256S( "0x0007ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" ) ; // ~uint256(0) >> 13
         consensus.nPowTargetTimespan = 60 ; // 1 minute
@@ -282,7 +277,6 @@ public:
         pchMessageStart[ 2 ] = 0xbe ;
         pchMessageStart[ 3 ] = ',' ;
         vAlertPubKey = ParseHex( "0002be4a11a5dae4db797db0064d0d77394eb3fab20706012cd62e12c4000448af4430006340be5a43a35e1856fbb13aa90c555557772da8f6d065b499b06f51dc" ) ;
-        nDefaultPort = 55336 ;
         nPruneAfterHeight = 10000 ;
 
         struct std::tm genesisTime ;
@@ -353,7 +347,7 @@ public:
 
         fMiningRequiresPeers = false /* true */ ;
         fDefaultConsistencyChecks = false ;
-        fRequireStandard = true ;
+        fRequireStandardTxs = true ;
         fMineBlocksOnDemand = false ;
 
         checkpointData = (CCheckpointData) {
@@ -371,7 +365,7 @@ public:
             // data as of block 000eeb2e5549cbd3b79478cd66a2a3376004e83aeb3646c4f7efd967456cc4ce (height 40)
             mktime( &lastCheckpointTime ),
             42, // number of all transactions in all blocks at last checkpoint
-            25 // estimated number of transactions per day after checkpoint
+            0.01 // estimated number of transactions per second after checkpoint
         } ;
     }
 };
@@ -390,8 +384,6 @@ private:
 public:
     CTestNetParams()
     {
-        networkName = "test" ;
-
         // Blocks 0 - 144999 are pre-Digishield
         consensus.nHeightEffective = 0;
         consensus.nPowTargetTimespan = 4 * 60 * 60; // pre-digishield: 4 hours
@@ -472,7 +464,6 @@ public:
         pchMessageStart[2] = 0xb7;
         pchMessageStart[3] = 0xdc;
         vAlertPubKey = ParseHex("042756726da3c7ef515d89212ee1705023d14be389e25fe15611585661b9a20021908b2b80a3c7200a0139dd2b26946606aab0eef9aa7689a6dc2c7eee237fa834");
-        nDefaultPort = 44556;
         nPruneAfterHeight = 1000;
 
         genesis = CreateGenesisBlock(1391503289, 997879, 0x1e0ffff0, 1, 88 * COIN);
@@ -497,10 +488,10 @@ public:
         //TODO: fix this for dogecoin -- plddr
         //vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_test, pnSeed6_test + ARRAYLEN(pnSeed6_test));
 
-        fMiningRequiresPeers = true;
-        fDefaultConsistencyChecks = false;
-        fRequireStandard = false;
-        fMineBlocksOnDemand = false;
+        fMiningRequiresPeers = true ;
+        fDefaultConsistencyChecks = false ;
+        fRequireStandardTxs = false ;
+        fMineBlocksOnDemand = false ;
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
@@ -517,7 +508,7 @@ public:
             // Data as of block a2179767a87ee4e95944703976fee63578ec04fa3ac2fc1c9c2c83587d096977 (height 1202214)
             1514565123, // * UNIX timestamp of last checkpoint block
             2005610,    // * total number of transactions between genesis and last checkpoint
-            1000 // * estimated number of transactions per day after checkpoint
+            1000 // * estimated number of transactions per second after checkpoint
         } ;
 
     }
@@ -536,8 +527,6 @@ private:
 public:
     CRegTestParams()
     {
-        networkName = "regtest" ;
-
         consensus.nSubsidyHalvingInterval = 150;
         consensus.nMajorityEnforceBlockUpgrade = 750;
         consensus.nMajorityRejectBlockOutdated = 950;
@@ -596,7 +585,6 @@ public:
         pchMessageStart[1] = 0xbf;
         pchMessageStart[2] = 0xb5;
         pchMessageStart[3] = 0xda;
-        nDefaultPort = 18444;
         nPruneAfterHeight = 1000;
 
         genesis = CreateGenesisBlock(1296688602, 2, 0x207fffff, 1, 88 * COIN);
@@ -609,10 +597,10 @@ public:
         vFixedSeeds.clear() ; // regtest doesn't have any fixed seeds
         vSeeds.clear() ;      // regtest doesn't have any DNS seeds
 
-        fMiningRequiresPeers = false;
-        fDefaultConsistencyChecks = true;
-        fRequireStandard = false;
-        fMineBlocksOnDemand = true;
+        fMiningRequiresPeers = false ;
+        fDefaultConsistencyChecks = true ;
+        fRequireStandardTxs = false ;
+        fMineBlocksOnDemand = true ;
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
@@ -645,11 +633,6 @@ static CChainParams * pCurrentParams = nullptr ;
 const CChainParams & Params() {
     assert( pCurrentParams != nullptr ) ;
     return *pCurrentParams ;
-}
-
-const std::string & NameOfChain()
-{
-    return Params().NameOfNetwork() ;
 }
 
 const Consensus::Params * Consensus::Params::GetConsensus( uint32_t nTargetHeight ) const

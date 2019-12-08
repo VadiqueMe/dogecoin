@@ -33,7 +33,7 @@
 /**
  * Return average network hashes per second based on the last 'lookup' blocks,
  * or from the last difficulty change if 'lookup' is nonpositive.
- * If 'height' is nonnegative, compute the estimate at the time when a given block was found.
+ * If 'height' is nonnegative, compute the estimate at the time when a given block was found
  */
 UniValue GetNetworkHashPS(int lookup, int height) {
     CBlockIndex *pb = chainActive.Tip();
@@ -331,7 +331,7 @@ UniValue getmininginfo( const JSONRPCRequest& request )
     obj.push_back(Pair( "generate",           getgenerate( request ) )) ;
     obj.push_back(Pair( "genthreads",         HowManyMiningThreads() )) ;
     obj.push_back(Pair( "pooledtx",           (uint64_t)mempool.size() ));
-    obj.push_back(Pair( "chain",              Params().NameOfNetwork() )) ;
+    obj.push_back(Pair( "chain",              NameOfChain() )) ;
     return obj ;
 }
 

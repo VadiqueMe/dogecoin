@@ -644,7 +644,7 @@ int main(int argc, char *argv[])
 #endif
 
     QScopedPointer< const NetworkStyle > networkStyle( NetworkStyle::instantiate(
-            QString::fromStdString( Params().NameOfNetwork() ) )
+            QString::fromStdString( NameOfChain() ) )
         ) ;
     assert( ! networkStyle.isNull() ) ;
 

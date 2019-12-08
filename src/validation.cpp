@@ -71,7 +71,7 @@ bool fTxIndex = false;
 bool fHavePruned = false;
 bool fPruneMode = false;
 bool fIsBareMultisigStd = DEFAULT_PERMIT_BAREMULTISIG;
-bool fRequireStandard = true;
+bool acceptNonStandardTxs = false ;
 bool fCheckBlockIndex = false;
 bool fCheckpointsEnabled = DEFAULT_CHECKPOINTS_ENABLED;
 size_t nCoinCacheUsage = 5000 * 300;
@@ -586,13 +586,12 @@ bool AcceptToMemoryPoolWorker( CTxMemPool& pool, CValidationState& state, const 
 
     // Rather not work on nonstandard transactions (unless -testnet/-regtest)
     std::string reason;
-    if (fRequireStandard && !IsStandardTx(tx, reason, witnessEnabled))
+    if ( ! acceptNonStandardTxs && ! IsStandardTx( tx, reason, witnessEnabled ) )
         return state.DoS( 0, false, REJECT_NONSTANDARD, reason ) ;
 
     // Only accept nLockTime-using transactions that can be mined in the next
-    // block; we don't want our mempool filled up with transactions that can't
-    // be mined yet.
-    if (!CheckFinalTx(tx, STANDARD_LOCKTIME_VERIFY_FLAGS))
+    // block, don't fill mempool with transactions that can't be mined yet
+    if ( ! CheckFinalTx( tx, STANDARD_LOCKTIME_VERIFY_FLAGS ) )
         return state.DoS( 0, false, REJECT_NONSTANDARD, "non-final" ) ;
 
     // is it already in the memory pool?
@@ -603,7 +602,7 @@ bool AcceptToMemoryPoolWorker( CTxMemPool& pool, CValidationState& state, const 
     std::set<uint256> setConflicts;
     {
     LOCK(pool.cs); // protect pool.mapNextTx
-    BOOST_FOREACH(const CTxIn &txin, tx.vin)
+    for ( const CTxIn & txin : tx.vin )
     {
         auto itConflicting = pool.mapNextTx.find(txin.prevout);
         if (itConflicting != pool.mapNextTx.end())
@@ -612,17 +611,17 @@ bool AcceptToMemoryPoolWorker( CTxMemPool& pool, CValidationState& state, const 
             if (!setConflicts.count(ptxConflicting->GetHash()))
             {
                 // Allow opt-out of transaction replacement by setting
-                // nSequence >= maxint-1 on all inputs.
+                // nSequence >= maxint-1 on all inputs
                 //
                 // maxint-1 is picked to still allow use of nLockTime by
                 // non-replaceable transactions. All inputs rather than just one
                 // is for the sake of multi-party protocols, where we don't
-                // want a single party to be able to disable replacement.
+                // want a single party to be able to disable replacement
                 //
                 // The opt-out ignores descendants as anyone relying on
                 // first-seen mempool behavior should be checking all
                 // unconfirmed ancestors anyway; doing otherwise is hopelessly
-                // insecure.
+                // insecure
                 bool fReplacementOptOut = true;
                 if (fEnableReplacement)
                 {
@@ -665,14 +664,13 @@ bool AcceptToMemoryPoolWorker( CTxMemPool& pool, CValidationState& state, const 
 
         // do all inputs exist?
         // Note that this does not check for the presence of actual outputs (see the next check for that),
-        // and only helps with filling in pfMissingInputs (to determine missing vs spent).
-        BOOST_FOREACH(const CTxIn txin, tx.vin) {
-            if (!pcoinsTip->HaveCoinsInCache(txin.prevout.hash))
-                vHashTxnToUncache.push_back(txin.prevout.hash);
-            if (!view.HaveCoins(txin.prevout.hash)) {
-                if (pfMissingInputs)
-                    *pfMissingInputs = true;
-                return false; // fMissingInputs and !state.IsInvalid() is used to detect this condition, don't set state.Invalid()
+        // and only helps with filling in pfMissingInputs (to determine missing vs spent)
+        for ( const CTxIn & txin : tx.vin ) {
+            if ( ! pcoinsTip->HaveCoinsInCache( txin.prevout.hash ) )
+                vHashTxnToUncache.push_back( txin.prevout.hash ) ;
+            if ( ! view.HaveCoins( txin.prevout.hash ) ) {
+                if ( pfMissingInputs != nullptr ) *pfMissingInputs = true ;
+                return false ; // fMissingInputs and !state.IsInvalid() is used to detect this condition, don't set state.Invalid()
             }
         }
 
@@ -698,11 +696,11 @@ bool AcceptToMemoryPoolWorker( CTxMemPool& pool, CValidationState& state, const 
         }
 
         // Check for non-standard pay-to-script-hash in inputs
-        if (fRequireStandard && !AreInputsStandard(tx, view))
-            return state.Invalid(false, REJECT_NONSTANDARD, "bad-txns-nonstandard-inputs");
+        if ( ! acceptNonStandardTxs && ! AreInputsStandard( tx, view ) )
+            return state.Invalid( false, REJECT_NONSTANDARD, "bad-txns-nonstandard-inputs" ) ;
 
         // Check for non-standard witness in P2WSH
-        if (tx.HasWitness() && fRequireStandard && !IsWitnessStandard(tx, view))
+        if ( tx.HasWitness() && ! acceptNonStandardTxs && ! IsWitnessStandard( tx, view ) )
             return state.DoS( 0, false, REJECT_NONSTANDARD, "bad-witness-nonstandard", true ) ;
 
         int64_t nSigOpsCost = GetTransactionSigOpCost(tx, view, STANDARD_SCRIPT_VERIFY_FLAGS);
@@ -718,9 +716,9 @@ bool AcceptToMemoryPoolWorker( CTxMemPool& pool, CValidationState& state, const 
         double dPriority = view.GetPriority(tx, chainActive.Height(), inChainInputValue);
 
         // Keep track of transactions that spend a coinbase, which we re-scan
-        // during reorgs to ensure COINBASE_MATURITY is still met.
+        // during reorgs to ensure coinbase maturity is still met
         bool fSpendsCoinbase = false;
-        BOOST_FOREACH(const CTxIn &txin, tx.vin) {
+        for ( const CTxIn & txin : tx.vin ) {
             const CCoins *coins = view.AccessCoins(txin.prevout.hash);
             if (coins->IsCoinBase()) {
                 fSpendsCoinbase = true;
@@ -736,10 +734,10 @@ bool AcceptToMemoryPoolWorker( CTxMemPool& pool, CValidationState& state, const 
         // sigops, making it impossible to mine. Since the coinbase transaction
         // itself can contain sigops MAX_STANDARD_TX_SIGOPS is less than
         // MAX_BLOCK_SIGOPS; we still consider this an invalid rather than
-        // merely non-standard transaction.
-        if (nSigOpsCost > MAX_STANDARD_TX_SIGOPS_COST)
-            return state.DoS(0, false, REJECT_NONSTANDARD, "bad-txns-too-many-sigops", false,
-                strprintf("%d", nSigOpsCost));
+        // merely non-standard transaction
+        if ( nSigOpsCost > MAX_STANDARD_TX_SIGOPS_COST )
+            return state.DoS( 0, false, REJECT_NONSTANDARD, "bad-txns-too-many-sigops", false,
+                strprintf( "%d", nSigOpsCost ) ) ;
 
         // Continuously rate-limit free (really, very-low-fee) transactions
         // This mitigates 'penny-flooding' -- sending thousands of free transactions just to
@@ -777,8 +775,8 @@ bool AcceptToMemoryPoolWorker( CTxMemPool& pool, CValidationState& state, const 
         // A transaction that spends outputs that would be replaced by it is invalid. Now
         // that we have the set of all ancestors we can detect this
         // pathological case by making sure setConflicts and setAncestors don't
-        // intersect.
-        BOOST_FOREACH(CTxMemPool::txiter ancestorIt, setAncestors)
+        // intersect
+        for ( CTxMemPool::txiter ancestorIt : setAncestors )
         {
             const uint256 &hashAncestor = ancestorIt->GetTx().GetHash();
             if (setConflicts.count(hashAncestor))
@@ -792,7 +790,7 @@ bool AcceptToMemoryPoolWorker( CTxMemPool& pool, CValidationState& state, const 
         }
 
         // Check if it's economically rational to mine this transaction rather
-        // than the ones it replaces.
+        // than the ones it replaces
         CAmount nConflictingFees = 0;
         size_t nConflictingSize = 0;
         uint64_t nConflictingCount = 0;
@@ -800,7 +798,7 @@ bool AcceptToMemoryPoolWorker( CTxMemPool& pool, CValidationState& state, const 
 
         // If we don't hold the lock allConflicting might be incomplete; the
         // subsequent RemoveStaged() and addUnchecked() calls don't guarantee
-        // mempool consistency for us.
+        // mempool consistency for us
         LOCK(pool.cs);
         const bool fReplacementTransaction = setConflicts.size();
         if (fReplacementTransaction)
@@ -809,7 +807,7 @@ bool AcceptToMemoryPoolWorker( CTxMemPool& pool, CValidationState& state, const 
             std::set<uint256> setConflictsParents;
             const int maxDescendantsToVisit = 100;
             CTxMemPool::setEntries setIterConflicting;
-            BOOST_FOREACH(const uint256 &hashConflicting, setConflicts)
+            for ( const uint256 & hashConflicting : setConflicts )
             {
                 CTxMemPool::txiter mi = pool.mapTx.find(hashConflicting);
                 if (mi == pool.mapTx.end())
@@ -818,25 +816,25 @@ bool AcceptToMemoryPoolWorker( CTxMemPool& pool, CValidationState& state, const 
                 // Save these to avoid repeated lookups
                 setIterConflicting.insert(mi);
 
-                BOOST_FOREACH(const CTxIn &txin, mi->GetTx().vin)
+                for ( const CTxIn & txin : mi->GetTx().vin )
                 {
-                    setConflictsParents.insert(txin.prevout.hash);
+                    setConflictsParents.insert( txin.prevout.hash ) ;
                 }
 
                 nConflictingCount += mi->GetCountWithDescendants();
             }
             // This potentially overestimates the number of actual descendants
             // but we just want to be conservative to avoid doing too much
-            // work.
+            // work
             if (nConflictingCount <= maxDescendantsToVisit) {
                 // If not too many to replace, then calculate the set of
                 // transactions that would have to be evicted
-                BOOST_FOREACH(CTxMemPool::txiter it, setIterConflicting) {
-                    pool.CalculateDescendants(it, allConflicting);
+                for ( CTxMemPool::txiter it : setIterConflicting ) {
+                    pool.CalculateDescendants( it, allConflicting ) ;
                 }
-                BOOST_FOREACH(CTxMemPool::txiter it, allConflicting) {
-                    nConflictingFees += it->GetModifiedFee();
-                    nConflictingSize += it->GetTxSize();
+                for ( CTxMemPool::txiter it : allConflicting ) {
+                    nConflictingFees += it->GetModifiedFee() ;
+                    nConflictingSize += it->GetTxSize() ;
                 }
             } else {
                 return state.DoS( 0, false,
@@ -852,12 +850,12 @@ bool AcceptToMemoryPoolWorker( CTxMemPool& pool, CValidationState& state, const 
                 // We don't want to accept replacements that require low
                 // feerate junk to be mined first. Ideally we'd keep track of
                 // the ancestor feerates and make the decision based on that,
-                // but for now requiring all new inputs to be confirmed works.
+                // but for now requiring all new inputs to be confirmed works
                 if (!setConflictsParents.count(tx.vin[j].prevout.hash))
                 {
                     // Rather than check the UTXO set - potentially expensive -
                     // it's cheaper to just check if the new input refers to a
-                    // tx that's in the mempool.
+                    // tx that's in the mempool
                     if (pool.mapTx.find(tx.vin[j].prevout.hash) != pool.mapTx.end())
                         return state.DoS(0, false,
                                          REJECT_NONSTANDARD, "replacement-adds-unconfirmed", false,
@@ -868,21 +866,21 @@ bool AcceptToMemoryPoolWorker( CTxMemPool& pool, CValidationState& state, const 
         }
 
         unsigned int scriptVerifyFlags = STANDARD_SCRIPT_VERIFY_FLAGS;
-        if (!Params().RequireStandard()) {
+        if ( ! Params().OnlyStandardTransactions() ) {
             scriptVerifyFlags = GetArg("-promiscuousmempoolflags", scriptVerifyFlags);
         }
 
         // Check against previous transactions
-        // This is done last to help prevent CPU exhaustion denial-of-service attacks.
+        // This is done last to help prevent CPU exhaustion denial-of-service attacks
         PrecomputedTransactionData txdata(tx);
         if (!CheckInputs(tx, state, view, true, scriptVerifyFlags, true, txdata)) {
             // SCRIPT_VERIFY_CLEANSTACK requires SCRIPT_VERIFY_WITNESS, so we
             // need to turn both off, and compare against just turning off CLEANSTACK
-            // to see if the failure is specifically due to witness validation.
+            // to see if the failure is specifically due to witness validation
             CValidationState stateDummy; // Want reported failures to be from first CheckInputs
             if (!tx.HasWitness() && CheckInputs(tx, stateDummy, view, true, scriptVerifyFlags & ~(SCRIPT_VERIFY_WITNESS | SCRIPT_VERIFY_CLEANSTACK), true, txdata) &&
                 !CheckInputs(tx, stateDummy, view, true, scriptVerifyFlags & ~SCRIPT_VERIFY_CLEANSTACK, true, txdata)) {
-                // Only the witness is missing, so the transaction itself may be fine.
+                // Only the witness is missing, so the transaction itself may be fine
                 state.SetCorruptionPossible();
             }
             return false; // state filled in by CheckInputs
@@ -2105,8 +2103,8 @@ void static UpdateTip( CBlockIndex * pindexNew, const CChainParams & chainParams
         chainActive.Height(), newBlock.nVersion, newBlock.IsAuxpow() ? "(auxpow)" : "",
         log( chainActive.Tip()->nChainWork.getdouble() ) / log( 2.0 ),
         (unsigned long)chainActive.Tip()->nChainTx,
-        DateTimeStrFormat("%Y-%m-%d %H:%M:%S", chainActive.Tip()->GetBlockTime()),
-        GuessVerificationProgress(chainParams.TxData(), chainActive.Tip()),
+        DateTimeStrFormat( "%Y-%m-%d %H:%M:%S", chainActive.Tip()->GetBlockTime() ),
+        GuessVerificationProgress( chainParams.TxData(), chainActive.Tip() ),
         pcoinsTip->DynamicMemoryUsage() * (1.0 / (1<<20)), pcoinsTip->GetCacheSize() ) ;
 
     if ( ! warningMessages.empty() )
@@ -3573,7 +3571,7 @@ bool static LoadBlockIndexDB(const CChainParams& chainparams)
     LogPrintf("%s: hashBestChain=%s height=%d date=%s progress=%f\n", __func__,
         chainActive.Tip()->GetBlockHash().ToString(), chainActive.Height(),
         DateTimeStrFormat("%Y-%m-%d %H:%M:%S", chainActive.Tip()->GetBlockTime()),
-        GuessVerificationProgress(chainparams.TxData(), chainActive.Tip()));
+        GuessVerificationProgress( chainparams.TxData(), chainActive.Tip() ));
 
     return true;
 }
@@ -4279,22 +4277,19 @@ void DumpMempool()
     }
 }
 
-//! Guess how far we are in the verification process at the given block index
-double GuessVerificationProgress(const ChainTxData& data, CBlockIndex *pindex) {
-    if (pindex == NULL)
-        return 0.0;
+// Guess how far we are in the verification process at the given block index
+double GuessVerificationProgress( const ChainTxData & data, const CBlockIndex * pindex )
+{
+    if ( pindex == nullptr ) return 0 ;
 
-    int64_t nNow = time(NULL);
+    std::time_t secondsNow = std::time( nullptr ) ;
 
-    double fTxTotal;
+    double fTxTotal =
+        ( pindex->nChainTx <= data.nTxCount )
+            ? data.nTxCount + ( secondsNow - data.nTime ) * data.dTxRate
+            : pindex->nChainTx + ( secondsNow - pindex->GetBlockTime() ) * data.dTxRate ;
 
-    if (pindex->nChainTx <= data.nTxCount) {
-        fTxTotal = data.nTxCount + (nNow - data.nTime) * data.dTxRate;
-    } else {
-        fTxTotal = pindex->nChainTx + (nNow - pindex->GetBlockTime()) * data.dTxRate;
-    }
-
-    return pindex->nChainTx / fTxTotal;
+    return pindex->nChainTx / fTxTotal ;
 }
 
 class CMainCleanup

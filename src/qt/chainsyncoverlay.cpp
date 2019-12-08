@@ -1,9 +1,10 @@
 // Copyright (c) 2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#include "modaloverlay.h"
-#include "ui_modaloverlay.h"
+#include "chainsyncoverlay.h"
+#include "ui_chainsyncoverlay.h"
 
 #include "guiutil.h"
 
@@ -12,13 +13,13 @@
 #include <QResizeEvent>
 #include <QPropertyAnimation>
 
-ModalOverlay::ModalOverlay(QWidget *parent) :
-QWidget(parent),
-ui(new Ui::ModalOverlay),
-bestHeaderHeight(0),
-bestHeaderDate(QDateTime()),
-layerIsVisible(false),
-userClosed(false)
+ChainSyncOverlay::ChainSyncOverlay( QWidget * parent )
+    : QWidget( parent )
+    , ui( new Ui::ChainSyncOverlay )
+    , bestHeaderHeight( 0 )
+    , bestHeaderDate( QDateTime() )
+    , layerIsVisible( false )
+    , userClosed( false )
 {
     ui->setupUi(this);
     connect(ui->closeButton, SIGNAL(clicked()), this, SLOT(closeClicked()));
@@ -31,12 +32,12 @@ userClosed(false)
     setVisible(false);
 }
 
-ModalOverlay::~ModalOverlay()
+ChainSyncOverlay::~ChainSyncOverlay()
 {
-    delete ui;
+    delete ui ;
 }
 
-bool ModalOverlay::eventFilter(QObject * obj, QEvent * ev) {
+bool ChainSyncOverlay::eventFilter(QObject * obj, QEvent * ev) {
     if (obj == parent()) {
         if (ev->type() == QEvent::Resize) {
             QResizeEvent * rev = static_cast<QResizeEvent*>(ev);
@@ -53,7 +54,7 @@ bool ModalOverlay::eventFilter(QObject * obj, QEvent * ev) {
 }
 
 //! Tracks parent widget changes
-bool ModalOverlay::event(QEvent* ev) {
+bool ChainSyncOverlay::event(QEvent* ev) {
     if (ev->type() == QEvent::ParentAboutToChange) {
         if (parent()) parent()->removeEventFilter(this);
     }
@@ -66,7 +67,7 @@ bool ModalOverlay::event(QEvent* ev) {
     return QWidget::event(ev);
 }
 
-void ModalOverlay::setKnownBestHeight(int count, const QDateTime& blockDate)
+void ChainSyncOverlay::setKnownBestHeight(int count, const QDateTime& blockDate)
 {
     if (count > bestHeaderHeight) {
         bestHeaderHeight = count;
@@ -74,7 +75,7 @@ void ModalOverlay::setKnownBestHeight(int count, const QDateTime& blockDate)
     }
 }
 
-void ModalOverlay::tipUpdate(int count, const QDateTime& blockDate, double nVerificationProgress)
+void ChainSyncOverlay::tipUpdate(int count, const QDateTime& blockDate, double nVerificationProgress)
 {
     QDateTime currentDate = QDateTime::currentDateTime();
 
@@ -139,14 +140,14 @@ void ModalOverlay::tipUpdate(int count, const QDateTime& blockDate, double nVeri
     }
 }
 
-void ModalOverlay::toggleVisibility()
+void ChainSyncOverlay::toggleVisibility()
 {
     showHide(layerIsVisible, true);
     if (!layerIsVisible)
         userClosed = true;
 }
 
-void ModalOverlay::showHide(bool hide, bool userRequested)
+void ChainSyncOverlay::showHide(bool hide, bool userRequested)
 {
     if ( (layerIsVisible && !hide) || (!layerIsVisible && hide) || (!hide && userClosed && !userRequested))
         return;
@@ -165,7 +166,7 @@ void ModalOverlay::showHide(bool hide, bool userRequested)
     layerIsVisible = !hide;
 }
 
-void ModalOverlay::closeClicked()
+void ChainSyncOverlay::closeClicked()
 {
     showHide(true);
     userClosed = true;

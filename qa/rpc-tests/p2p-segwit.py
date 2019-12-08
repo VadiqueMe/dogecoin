@@ -1241,8 +1241,7 @@ class SegWitTest(DogecoinTestFramework):
         tx2.wit.vtxinwit.append(CTxInWitness())
         tx2.wit.vtxinwit[0].scriptWitness.stack = [ witness_program ]
         tx2.rehash()
-        # Gets accepted to test_node, because standardness of outputs isn't
-        # checked with fRequireStandard
+        # Gets accepted to test_node which has fRequireStandardTxs=false
         self.test_node.test_transaction_acceptance(tx2, with_witness=True, accepted=True)
         self.std_node.test_transaction_acceptance(tx2, with_witness=True, accepted=False)
         temp_utxo.pop() # last entry in temp_utxo was the output we just spent
@@ -1259,13 +1258,13 @@ class SegWitTest(DogecoinTestFramework):
         tx3.vout.append(CTxOut(total_value - 1000, CScript([OP_TRUE])))
         tx3.rehash()
         # Spending a higher version witness output is not allowed by policy,
-        # even with fRequireStandard=false.
+        # even with fRequireStandardTxs=false
         self.test_node.test_transaction_acceptance(tx3, with_witness=True, accepted=False)
         self.test_node.sync_with_ping()
         with mininode_lock:
             assert(b"reserved for soft-fork upgrades" in self.test_node.last_reject.reason)
 
-        # Building a block with the transaction must be valid, however.
+        # Building a block with the transaction must be valid, however
         block = self.build_next_block()
         self.update_witness_block_with_transactions(block, [tx2, tx3])
         self.test_node.test_witness_block(block, accepted=True)
@@ -1956,7 +1955,7 @@ class SegWitTest(DogecoinTestFramework):
         # Setup the p2p connections and start up the network thread.
         self.test_node = TestNode() # sets NODE_WITNESS|NODE_NETWORK
         self.old_node = TestNode()  # only NODE_NETWORK
-        self.std_node = TestNode() # for testing node1 (fRequireStandard=true)
+        self.std_node = TestNode() # for testing node1 (fRequireStandardTxs=true)
 
         self.p2p_connections = [self.test_node, self.old_node]
 

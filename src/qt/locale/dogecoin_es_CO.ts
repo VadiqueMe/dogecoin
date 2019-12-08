@@ -186,7 +186,7 @@
     </message>
     </context>
 <context>
-    <name>ModalOverlay</name>
+    <name>ChainSyncOverlay</name>
     </context>
 <context>
     <name>OpenURIDialog</name>

@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -82,41 +83,21 @@ static const int MAX_SCRIPTCHECK_THREADS = 16;
 static const int DEFAULT_SCRIPTCHECK_THREADS = 0;
 /** Number of blocks that can be requested at any given time from a single peer */
 static const int MAX_BLOCKS_IN_TRANSIT_PER_PEER = 64 ;
-/** Timeout in seconds during which a peer must stall block download progress before being disconnected. */
+/** Timeout in seconds during which a peer must stall block download progress before being disconnected */
 static const unsigned int BLOCK_STALLING_TIMEOUT = 2;
 /** Number of headers sent in one getheaders result. We rely on the assumption that if a peer sends
- *  less than this number, we reached its tip. Changing this value is a protocol upgrade. */
+ *  less than this number, we reached its tip. Changing this value is a protocol upgrade */
 static const unsigned int MAX_HEADERS_RESULTS = 2000;
 /** Maximum depth of blocks we're willing to serve as compact blocks to peers
- *  when requested. For older blocks, a regular BLOCK response will be sent. */
+ *  when requested. For older blocks, a regular BLOCK response will be sent */
 static const int MAX_CMPCTBLOCK_DEPTH = 5;
-/** Maximum depth of blocks we're willing to respond to GETBLOCKTXN requests for. */
+/** Maximum depth of blocks we're willing to respond to GETBLOCKTXN requests for */
 static const int MAX_BLOCKTXN_DEPTH = 10;
-/** Size of the "block download window": how far ahead of our current height do we fetch?
- *  Larger windows tolerate larger download speed differences between peer, but increase the potential
- *  degree of disordering of blocks on disk (which make reindexing and in the future perhaps pruning
- *  harder). We'll probably want to make this a per-peer adaptive value at some point. */
-static const unsigned int BLOCK_DOWNLOAD_WINDOW = 1024;
-/** Time to wait (in seconds) between writing blocks/block index to disk. */
-static const unsigned int DATABASE_WRITE_INTERVAL = 60 * 60;
-/** Time to wait (in seconds) between flushing chainstate to disk. */
-static const unsigned int DATABASE_FLUSH_INTERVAL = 24 * 60 * 60;
-/** Maximum length of reject messages. */
-static const unsigned int MAX_REJECT_MESSAGE_LENGTH = 111;
-/** Average delay between local address broadcasts in seconds. */
-static const unsigned int AVG_LOCAL_ADDRESS_BROADCAST_INTERVAL = 24 * 24 * 60;
-/** Average delay between peer address broadcasts in seconds. */
-static const unsigned int AVG_ADDRESS_BROADCAST_INTERVAL = 30;
-/** Average delay between trickled inventory transmissions in seconds.
- *  Blocks and whitelisted receivers bypass this, outbound peers get half this delay. */
-static const unsigned int INVENTORY_BROADCAST_INTERVAL = 5;
-/** Maximum number of inventory items to send per transmission.
- *  Limits the impact of low-fee transaction floods. */
-static const unsigned int INVENTORY_BROADCAST_MAX = 7 * INVENTORY_BROADCAST_INTERVAL;
-/** Block download timeout base, expressed in millionths of the block interval (i.e. 10 min) */
-static const int64_t BLOCK_DOWNLOAD_TIMEOUT_BASE = 1000000;
-/** Additional block download timeout per parallel downloading peer (i.e. 5 min) */
-static const int64_t BLOCK_DOWNLOAD_TIMEOUT_PER_PEER = 500000;
+
+/** Time to wait (in seconds) between writing blocks/block index to disk */
+static const unsigned int DATABASE_WRITE_INTERVAL = 60 * 60 ;
+/** Time to wait (in seconds) between flushing chainstate to disk */
+static const unsigned int DATABASE_FLUSH_INTERVAL = 24 * 60 * 60 ;
 
 static const unsigned int DEFAULT_LIMITFREERELAY = 128;
 static const bool DEFAULT_RELAYPRIORITY = true;
@@ -132,12 +113,6 @@ static const unsigned int DEFAULT_BANSCORE_THRESHOLD = 100;
 
 /** Default for -mempoolreplacement */
 static const bool DEFAULT_ENABLE_REPLACEMENT = true;
-
-/** Maximum number of headers to announce when relaying blocks with headers message.*/
-static const unsigned int MAX_BLOCKS_TO_ANNOUNCE = 8;
-
-/** Maximum number of unconnecting headers announcements before DoS score */
-static const int MAX_UNCONNECTING_HEADERS = 10;
 
 static const bool DEFAULT_PEERBLOOMFILTERS = true;
 
@@ -162,7 +137,7 @@ extern bool fReindex;
 extern int nScriptCheckThreads;
 extern bool fTxIndex;
 extern bool fIsBareMultisigStd;
-extern bool fRequireStandard;
+extern bool acceptNonStandardTxs ;
 extern bool fCheckBlockIndex;
 extern bool fCheckpointsEnabled;
 extern size_t nCoinCacheUsage;
@@ -272,8 +247,8 @@ bool GetTransaction(const uint256 &hash, CTransactionRef &tx, const Consensus::P
 bool ActivateBestChain(CValidationState& state, const CChainParams& chainparams, std::shared_ptr<const CBlock> pblock = std::shared_ptr<const CBlock>());
 /* CAmount GetBitcoinBlockSubsidy( int nHeight, const Consensus::Params & consensusParams ) ; */
 
-/** Guess verification progress (as a fraction between 0.0=genesis and 1.0=current tip). */
-double GuessVerificationProgress(const ChainTxData& data, CBlockIndex* pindex);
+/** Guess verification progress as a number between 0.0=genesis and 1.0=current tip */
+double GuessVerificationProgress( const ChainTxData & data, const CBlockIndex * pindex ) ;
 
 /**
  * Prune block and undo files (blk???.dat and undo???.dat) so that the disk space used is less than a user-defined target.

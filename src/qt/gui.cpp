@@ -13,7 +13,7 @@
 #include "networkmodel.h"
 #include "guiconstants.h"
 #include "guiutil.h"
-#include "modaloverlay.h"
+#include "chainsyncoverlay.h"
 #include "networkstyle.h"
 #include "notificator.h"
 #include "openuridialog.h"
@@ -123,8 +123,8 @@ DogecoinGUI::DogecoinGUI( const PlatformStyle * style, const NetworkStyle * netw
     trayIconMenu(0),
     notificator(0),
     rpcConsole(0),
-    helpMessageDialog(0),
-    modalOverlay(0),
+    chainsyncOverlay( nullptr ),
+    helpMessageDialog( nullptr ),
     prevBlocks(0),
     spinnerFrame(0),
     platformStyle( style ),
@@ -157,7 +157,7 @@ DogecoinGUI::DogecoinGUI( const PlatformStyle * style, const NetworkStyle * netw
 #endif
 
     rpcConsole = new RPCConsole( platformStyle ) ;
-    helpMessageDialog = new HelpMessageDialog( this, false ) ;
+
 #ifdef ENABLE_WALLET
     if ( enableWallet )
     {
@@ -278,12 +278,11 @@ DogecoinGUI::DogecoinGUI( const PlatformStyle * style, const NetworkStyle * netw
 
     connect(connectionsControl, SIGNAL(clicked(QPoint)), this, SLOT(toggleNetworkActive()));
 
-    modalOverlay = new ModalOverlay(this->centralWidget());
 #ifdef ENABLE_WALLET
-    if(enableWallet) {
-        connect(walletFrame, SIGNAL(requestedSyncWarningInfo()), this, SLOT(showModalOverlay()));
-        connect(labelBlocksIcon, SIGNAL(clicked(QPoint)), this, SLOT(showModalOverlay()));
-        connect(progressBar, SIGNAL(clicked(QPoint)), this, SLOT(showModalOverlay()));
+    if ( enableWallet ) {
+        connect( walletFrame, SIGNAL( requestedSyncWarningInfo() ), this, SLOT( showChainsyncOverlay() ) ) ;
+        connect( labelBlocksIcon, SIGNAL( clicked(QPoint) ), this, SLOT( showChainsyncOverlay() ) ) ;
+        connect( progressBar, SIGNAL( clicked(QPoint) ), this, SLOT( showChainsyncOverlay() ) ) ;
     }
 #endif
 }
@@ -521,8 +520,9 @@ void DogecoinGUI::setNetworkModel( NetworkModel * model )
         connect( model, SIGNAL( numConnectionsChanged(int) ), this, SLOT( setNumConnections(int) ) ) ;
         connect( model, SIGNAL( networkActiveChanged(bool) ), this, SLOT( setNetworkActive(bool) ) ) ;
 
-        modalOverlay->setKnownBestHeight( model->getHeaderTipHeight(), QDateTime::fromTime_t( model->getHeaderTipTime() ) ) ;
-        setNumBlocks( model->getNumBlocks(), model->getLastBlockDate(), model->getVerificationProgress( NULL ), false ) ;
+        if ( chainsyncOverlay == nullptr ) chainsyncOverlay.reset( new ChainSyncOverlay( this->centralWidget() ) ) ;
+        chainsyncOverlay->setKnownBestHeight( model->getHeaderTipHeight(), QDateTime::fromTime_t( model->getHeaderTipTime() ) ) ;
+        setNumBlocks( model->getNumBlocks(), model->getLastBlockDate(), model->getVerificationProgress(), false ) ;
         connect( model, SIGNAL( numBlocksChanged(int, QDateTime, double, bool) ), this, SLOT( setNumBlocks(int, QDateTime, double, bool) ) ) ;
 
         // Receive and report messages from network model
@@ -709,7 +709,10 @@ void DogecoinGUI::showDebugWindowActivateConsole()
 
 void DogecoinGUI::showHelpMessageClicked()
 {
-    helpMessageDialog->show();
+    if ( helpMessageDialog == nullptr )
+        helpMessageDialog.reset( new HelpMessageDialog( this, false ) ) ;
+
+    helpMessageDialog->show() ;
 }
 
 #ifdef ENABLE_WALLET
@@ -812,15 +815,15 @@ void DogecoinGUI::updateHeadersSyncProgressLabel()
         progressBarLabel->setText(tr("Syncing Headers (%1%)...").arg(QString::number(100.0 / (headersTipHeight+estHeadersLeft)*headersTipHeight, 'f', 1)));
 }
 
-void DogecoinGUI::setNumBlocks(int count, const QDateTime& blockDate, double nVerificationProgress, bool header)
+void DogecoinGUI::setNumBlocks( int count, const QDateTime & blockDate, double progress, bool header )
 {
-    if (modalOverlay)
-    {
-        if (header)
-            modalOverlay->setKnownBestHeight(count, blockDate);
+    if ( chainsyncOverlay != nullptr ) {
+        if ( header )
+            chainsyncOverlay->setKnownBestHeight( count, blockDate ) ;
         else
-            modalOverlay->tipUpdate(count, blockDate, nVerificationProgress);
+            chainsyncOverlay->tipUpdate( count, blockDate, progress ) ;
     }
+
     if ( networkModel == nullptr ) return ;
 
     // Prevent orphan statusbar messages (e.g. hover Quit in main menu, wait until chain-sync starts -> garbled text)
@@ -863,7 +866,7 @@ void DogecoinGUI::setNumBlocks(int count, const QDateTime& blockDate, double nVe
     tooltip = tr( "Processed %n blocks of transaction history", "", count ) ;
 
     // Set icon state: spinning if catching up, tick otherwise
-    if(secs < 90*60)
+    if ( secs < 90*60 )
     {
         tooltip = tr("Up to date") + QString(".<br>") + tooltip;
         labelBlocksIcon->setPixmap(platformStyle->SingleColorIcon(":/icons/synced").pixmap( BOTTOMBAR_ICONSIZE, BOTTOMBAR_ICONSIZE ));
@@ -871,7 +874,8 @@ void DogecoinGUI::setNumBlocks(int count, const QDateTime& blockDate, double nVe
 #ifdef ENABLE_WALLET
         if ( walletFrame != nullptr ) {
             walletFrame->showOutOfSyncWarning( false ) ;
-            modalOverlay->showHide( true, true ) ;
+            if ( chainsyncOverlay == nullptr ) chainsyncOverlay.reset( new ChainSyncOverlay( this->centralWidget() ) ) ;
+            chainsyncOverlay->showHide( true, true ) ;
         }
 #endif
 
@@ -880,13 +884,14 @@ void DogecoinGUI::setNumBlocks(int count, const QDateTime& blockDate, double nVe
     }
     else
     {
-        QString timeBehindText = GUIUtil::formatNiceTimeOffset(secs);
+        QString timeAgoText = GUIUtil::formatNiceTimeOffset( secs ) ;
 
-        progressBarLabel->setVisible(true);
-        progressBar->setFormat(tr("%1 behind").arg(timeBehindText));
-        progressBar->setMaximum(1000000000);
-        progressBar->setValue(nVerificationProgress * 1000000000.0 + 0.5);
-        progressBar->setVisible(true);
+        progressBarLabel->setVisible( true ) ;
+        progressBar->setFormat( tr("%1 behind").arg( timeAgoText ) ) ;
+        static const int max_progress = 1000000000 ;
+        progressBar->setMaximum( max_progress ) ;
+        progressBar->setValue( progress * (double)max_progress + 0.5 ) ;
+        progressBar->setVisible( true ) ;
 
         tooltip = tr("Catching up...") + QString("<br>") + tooltip;
         if(count != prevBlocks)
@@ -899,20 +904,21 @@ void DogecoinGUI::setNumBlocks(int count, const QDateTime& blockDate, double nVe
         prevBlocks = count;
 
 #ifdef ENABLE_WALLET
-        if(walletFrame)
+        if ( walletFrame != nullptr )
         {
-            walletFrame->showOutOfSyncWarning(true);
-            modalOverlay->showHide();
+            walletFrame->showOutOfSyncWarning( true ) ;
+            if ( chainsyncOverlay == nullptr ) chainsyncOverlay.reset( new ChainSyncOverlay( this->centralWidget() ) ) ;
+            chainsyncOverlay->showHide() ;
         }
 #endif
 
         tooltip += QString( ".<br>" ) ;
-        tooltip += tr( "Last received block was generated %1 ago" ).arg( timeBehindText ) ;
+        tooltip += tr( "Last received block was generated %1 ago" ).arg( timeAgoText ) ;
         tooltip += QString( ".<br>" ) ;
         tooltip += tr( "Transactions after this will not yet be visible" ) ;
     }
 
-    // Don't word-wrap this (fixed-width) tooltip
+    // don't word-wrap this tooltip
     tooltip = QString("<nobr>") + tooltip + QString("</nobr>");
 
     labelBlocksIcon->setToolTip(tooltip);
@@ -1224,10 +1230,13 @@ void DogecoinGUI::setTrayIconVisible(bool fHideTrayIcon)
     }
 }
 
-void DogecoinGUI::showModalOverlay()
+void DogecoinGUI::showChainsyncOverlay()
 {
-    if (modalOverlay && (progressBar->isVisible() || modalOverlay->isLayerVisible()))
-        modalOverlay->toggleVisibility();
+    if ( chainsyncOverlay == nullptr )
+        chainsyncOverlay.reset( new ChainSyncOverlay( this->centralWidget() ) ) ;
+
+    if ( progressBar->isVisible() || chainsyncOverlay->isLayerVisible() )
+        chainsyncOverlay->toggleVisibility() ;
 }
 
 static bool ThreadSafeMessageBox( DogecoinGUI * gui, const std::string & message, const std::string & caption, unsigned int style )

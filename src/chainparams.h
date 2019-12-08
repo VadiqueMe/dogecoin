@@ -59,10 +59,6 @@ public:
 
     const CMessageHeader::MessageStartChars& MessageStart() const { return pchMessageStart; }
     const std::vector<unsigned char>& AlertKey() const { return vAlertPubKey; }
-    int GetDefaultPort() const { return nDefaultPort; }
-
-    /** Return the name of network (main, inu, test, regtest) */
-    const std::string & NameOfNetwork() const {  return networkName ;  }
 
     const CBlock & GenesisBlock() const {  return genesis ;  }
 
@@ -71,8 +67,8 @@ public:
 
     /** Default value for -checkmempool and -checkblockindex argument */
     bool DefaultConsistencyChecks() const {  return fDefaultConsistencyChecks ;  }
-    /** Policy: Filter transactions that do not match well-defined patterns */
-    bool RequireStandard() const { return fRequireStandard; }
+    /** Filter transactions that do not match well-defined patterns */
+    bool OnlyStandardTransactions() const {  return fRequireStandardTxs ;  }
     uint64_t PruneAfterHeight() const { return nPruneAfterHeight; }
     /** Make miner stop after a block is found. In RPC, don't return until nGenProcLimit blocks are generated */
     bool MineBlocksOnDemand() const { return fMineBlocksOnDemand; }
@@ -89,16 +85,14 @@ protected:
     Consensus::Params * pConsensusRoot ; // binary search tree root
     CMessageHeader::MessageStartChars pchMessageStart ;
     std::vector<unsigned char> vAlertPubKey ; // raw pub key bytes for the broadcast alert signing key
-    int nDefaultPort ;
     uint64_t nPruneAfterHeight ;
     std::vector< CDNSSeedData > vSeeds ;
     std::vector< unsigned char > base58Prefixes[ MAX_BASE58_TYPES ] ;
-    std::string networkName ;
     CBlock genesis ;
     std::vector< SeedSpec6 > vFixedSeeds ;
     bool fMiningRequiresPeers ;
     bool fDefaultConsistencyChecks ;
-    bool fRequireStandard ;
+    bool fRequireStandardTxs ;
     bool fMineBlocksOnDemand ;
     CCheckpointData checkpointData ;
     ChainTxData chainTxData ;
@@ -109,9 +103,6 @@ protected:
  * startup, except for unit tests
  */
 const CChainParams & Params() ;
-
-/** Return the name of the current chain (main, inu, test, regtest) */
-const std::string & NameOfChain() ;
 
 /** Return CChainParams for the given name of chain */
 CChainParams & ParamsFor( const std::string & chain ) ;

@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 // Unit tests for denial-of-service detection/prevention code
 
@@ -34,11 +34,11 @@ struct COrphanTx {
 };
 extern std::map<uint256, COrphanTx> mapOrphanTransactions;
 
-CService ip(uint32_t i)
+CService ip( uint32_t i )
 {
-    struct in_addr s;
-    s.s_addr = i;
-    return CService(CNetAddr(s), Params().GetDefaultPort());
+    struct in_addr s ;
+    s.s_addr = i ;
+    return CService( CNetAddr( s ), BaseParams().GetDefaultPort() ) ;
 }
 
 static NodeId id = 0;

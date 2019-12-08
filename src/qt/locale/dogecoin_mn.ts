@@ -230,7 +230,7 @@
     </message>
     </context>
 <context>
-    <name>ModalOverlay</name>
+    <name>ChainSyncOverlay</name>
     <message>
         <source>Last block time</source>
         <translation>Сүүлийн блокийн хугацаа</translation>

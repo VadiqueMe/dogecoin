@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ModalOverlay</class>
- <widget class="ModalOverlay" name="ModalOverlay">
+ <class>ChainSyncOverlay</class>
+ <widget class="ChainSyncOverlay" name="ChainSyncOverlay">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -398,9 +398,9 @@ QLabel { color: rgb(40,40,40);  }</string>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>ModalOverlay</class>
+   <class>ChainSyncOverlay</class>
    <extends>QWidget</extends>
-   <header>modaloverlay.h</header>
+   <header>chainsyncoverlay.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

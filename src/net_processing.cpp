@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -2249,11 +2250,11 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
         // If this looks like it could be a block announcement (nCount <
         // MAX_BLOCKS_TO_ANNOUNCE), use special logic for handling headers that
         // don't connect:
-        // - Send a getheaders message in response to try to connect the chain.
+        // - Send a getheaders message in response to try to connect the chain
         // - The peer can send up to MAX_UNCONNECTING_HEADERS in a row that
         //   don't connect before giving DoS points
         // - Once a headers message is received that is valid and does connect,
-        //   nUnconnectingHeaders gets reset back to 0.
+        //   nUnconnectingHeaders gets reset back to 0
         if (mapBlockIndex.find(headers[0].hashPrevBlock) == mapBlockIndex.end() && nCount < MAX_BLOCKS_TO_ANNOUNCE) {
             nodestate->nUnconnectingHeaders++;
             connman.PushMessage(pfrom, msgMaker.Make(NetMsgType::GETHEADERS, chainActive.GetLocator(pindexBestHeader), uint256()));
@@ -2267,7 +2268,7 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
             // we can use this peer to download.
             UpdateBlockAvailability(pfrom->GetId(), headers.back().GetHash());
 
-            if (nodestate->nUnconnectingHeaders % MAX_UNCONNECTING_HEADERS == 0) {
+            if ( nodestate->nUnconnectingHeaders % MAX_UNCONNECTING_HEADERS == 0 ) {
                 Misbehaving( pfrom->GetId(), 2 ) ;
             }
             return true;

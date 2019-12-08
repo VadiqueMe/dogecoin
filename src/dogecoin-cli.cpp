@@ -39,9 +39,8 @@ std::string HelpMessageCli()
     strUsage += HelpMessageOpt("-named", strprintf(_("Pass named instead of positional arguments (default: %s)"), DEFAULT_NAMED));
     strUsage += HelpMessageOpt("-rpcconnect=<ip>", strprintf(_("Send commands to node running on <ip> (default: %s)"), DEFAULT_RPCCONNECT));
     strUsage += HelpMessageOpt( "-rpcport=<port>",
-                   strprintf( "Connect to JSON-RPC on <port> (main: %u, inu: %u, testnet: %u)",
-                       BaseParamsFor( "main" ).RPCPort(), BaseParamsFor( "inu" ).RPCPort(), BaseParamsFor( "test" ).RPCPort()
-                   ) ) ;
+                    strprintf( "Connect to JSON-RPC on <port> (default for chain \"%s\": %u)", NameOfChain(), BaseParams().RPCPort() )
+                  ) ;
     strUsage += HelpMessageOpt("-rpcwait", _("Wait for RPC server to start"));
     strUsage += HelpMessageOpt("-rpcuser=<user>", _("Username for JSON-RPC connections"));
     strUsage += HelpMessageOpt("-rpcpassword=<pw>", _("Password for JSON-RPC connections"));

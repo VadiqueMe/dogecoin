@@ -137,15 +137,9 @@ size_t NetworkModel::getMempoolDynamicUsage() const
     return mempool.DynamicMemoryUsage();
 }
 
-double NetworkModel::getVerificationProgress( const CBlockIndex * tipIn ) const
+double NetworkModel::getVerificationProgress( const CBlockIndex * tip ) const
 {
-    CBlockIndex *tip = const_cast<CBlockIndex *>(tipIn);
-    if (!tip)
-    {
-        LOCK(cs_main);
-        tip = chainActive.Tip();
-    }
-    return GuessVerificationProgress(Params().TxData(), tip);
+    return GuessVerificationProgress( Params().TxData(), ( tip == nullptr ? chainActive.Tip() : tip ) ) ;
 }
 
 void NetworkModel::updateTimer()
@@ -299,11 +293,11 @@ static void BlockTipChanged( NetworkModel * netmodel, bool initialSync, const CB
     }
     // if we are in-sync, update the UI regardless of last update time
     if (!initialSync || now - nLastUpdateNotification > MODEL_UPDATE_DELAY) {
-        //pass a async signal to the UI thread
+        // pass to the user interface thread
         QMetaObject::invokeMethod(netmodel, "numBlocksChanged", Qt::QueuedConnection,
                                   Q_ARG(int, pIndex->nHeight),
                                   Q_ARG(QDateTime, QDateTime::fromTime_t(pIndex->GetBlockTime())),
-                                  Q_ARG(double, netmodel->getVerificationProgress(pIndex)),
+                                  Q_ARG(double, netmodel->getVerificationProgress( pIndex )),
                                   Q_ARG(bool, fHeader));
         nLastUpdateNotification = now;
     }

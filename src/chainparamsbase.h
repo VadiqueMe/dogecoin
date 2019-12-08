@@ -17,16 +17,23 @@ class CBaseChainParams
 {
 
 public:
+    /** the name of network (main, inu, test, regtest) */
+    const std::string & NameOfNetwork() const {  return networkName ;  }
 
     const std::string & DataDir() const {  return dataDir ;  }
+
+    int GetDefaultPort() const {  return nDefaultPort ;  }
+
     int RPCPort() const {  return nRPCPort ;  }
 
 protected:
 
     CBaseChainParams() {}
 
-    int nRPCPort ;
+    std::string networkName ;
     std::string dataDir ;
+    int nDefaultPort ;
+    int nRPCPort ;
 
 } ;
 
@@ -34,6 +41,9 @@ protected:
  * Append the help messages for the chainparams options to the parameter string
  */
 void AppendParamsHelpMessages( std::string & strUsage, bool debugHelp = true ) ;
+
+/** Return the name of the current chain (main, inu, test, regtest) */
+const std::string & NameOfChain() ;
 
 /**
  * Return the currently selected parameters. This won't change after app

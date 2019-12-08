@@ -534,7 +534,7 @@
     </message>
     </context>
 <context>
-    <name>ModalOverlay</name>
+    <name>ChainSyncOverlay</name>
     <message>
         <source>Hide</source>
         <translation>Versteek</translation>

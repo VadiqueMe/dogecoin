@@ -187,7 +187,7 @@ std::unique_ptr< CBlockTemplate > BlockAssembler::CreateNewBlock( const CScript 
     coinbaseTx.vout.resize(1);
     coinbaseTx.vout[0].scriptPubKey = scriptPubKeyIn;
     CAmount subsidy = GetDogecoinBlockSubsidy( nHeight, consensus, pindexPrev->GetBlockHash() ) ;
-    if ( NameOfChain() == "test" ) subsidy = 1 ;
+    /* if ( NameOfChain() == "test" ) subsidy = 1 ; */
     coinbaseTx.vout[0].nValue = nFees + subsidy ;
     coinbaseTx.vin[0].scriptSig = CScript() << nHeight << OP_0;
     pblock->vtx[0] = MakeTransactionRef(std::move(coinbaseTx));
@@ -719,10 +719,10 @@ void MiningThread::MineBlocks()
             assembleNewBlockCandidate() ;
             if ( currentCandidate == nullptr ) return ;
 
-            if ( NameOfChain() == "test" ) {
+            /* if ( NameOfChain() == "test" ) {
                 currentCandidate->block.nVersion &= 0xff ;
                 currentCandidate->block.nVersion |= randomNumber() & 0xff0000 ;
-            }
+            } */
 
             CBlock * currentBlock = &currentCandidate->block ;
             if ( currentBlock->IsAuxpow() ) currentBlock->SetAuxpow( nullptr ) ;

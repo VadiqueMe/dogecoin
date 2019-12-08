@@ -89,7 +89,7 @@ void CConnman::AddOneShot(const std::string& strDest)
 
 unsigned short GetListenPort()
 {
-    return (unsigned short)(GetArg("-port", Params().GetDefaultPort()));
+    return (unsigned short)( GetArg( "-port", BaseParams().GetDefaultPort() ) ) ;
 }
 
 // find 'best' local address for a particular peer
@@ -359,8 +359,9 @@ CNode* CConnman::ConnectNode(CAddress addrConnect, const char *pszDest, bool fCo
     // Connect
     SOCKET hSocket;
     bool proxyConnectionFailed = false;
-    if (pszDest ? ConnectSocketByName(addrConnect, hSocket, pszDest, Params().GetDefaultPort(), nConnectTimeout, &proxyConnectionFailed) :
-                  ConnectSocket(addrConnect, hSocket, nConnectTimeout, &proxyConnectionFailed))
+    if ( pszDest ?
+            ConnectSocketByName( addrConnect, hSocket, pszDest, BaseParams().GetDefaultPort(), nConnectTimeout, &proxyConnectionFailed ) :
+            ConnectSocket( addrConnect, hSocket, nConnectTimeout, &proxyConnectionFailed ) )
     {
         if (!IsSelectableSocket(hSocket)) {
             LogPrintf("Cannot create connection: non-selectable socket created (fd >= FD_SETSIZE ?)\n");
@@ -1593,11 +1594,11 @@ void CConnman::ThreadDNSAddressSeed()
             ServiceFlags requiredServiceBits = nRelevantServices;
             if (LookupHost(GetDNSHost(seed, &requiredServiceBits).c_str(), vIPs, 0, true))
             {
-                BOOST_FOREACH(const CNetAddr& ip, vIPs)
+                for ( const CNetAddr & ip : vIPs )
                 {
-                    int nOneDay = 24*3600;
-                    CAddress addr = CAddress(CService(ip, Params().GetDefaultPort()), requiredServiceBits);
-                    addr.nTime = GetTime() - 3*nOneDay - GetRand(4*nOneDay); // use a random age between 3 and 7 days old
+                    int oneDaySeconds = 24 * 60 * 60 ;
+                    CAddress addr = CAddress( CService( ip, BaseParams().GetDefaultPort() ), requiredServiceBits ) ;
+                    addr.nTime = GetTime() - 3 * oneDaySeconds - GetRand( 4 * oneDaySeconds ) ; // use a random age between 3 and 7 days old
                     vAdd.push_back(addr);
                     found++;
                 }
@@ -1619,10 +1620,6 @@ void CConnman::ThreadDNSAddressSeed()
 
     LogPrintf("%d addresses found from DNS seeds\n", found);
 }
-
-
-
-
 
 
 
@@ -1808,9 +1805,9 @@ void CConnman::ThreadOpenConnections()
                 continue;
             }
 
-            // do not allow non-default ports, unless after 50 invalid addresses selected already
-            if (addr.GetPort() != Params().GetDefaultPort() && nTries < 50)
-                continue;
+            // don't listen to non-default ports, unless after 50 addresses tried already
+            if ( addr.GetPort() != BaseParams().GetDefaultPort() && nTries < 50 )
+                continue ;
 
             addrConnect = addr;
 
@@ -1867,8 +1864,9 @@ std::vector<AddedNodeInfo> CConnman::GetAddedNodeInfo()
         }
     }
 
-    BOOST_FOREACH(const std::string& strAddNode, lAddresses) {
-        CService service(LookupNumeric(strAddNode.c_str(), Params().GetDefaultPort()));
+    for ( const std::string & strAddNode : lAddresses )
+    {
+        CService service( LookupNumeric( strAddNode.c_str(), BaseParams().GetDefaultPort() ) ) ;
         if (service.IsValid()) {
             // strAddNode is an IP:port
             auto it = mapConnected.find(service);
@@ -1908,13 +1906,13 @@ void CConnman::ThreadOpenAddedConnections()
             if (!info.fConnected) {
                 if (!grant.TryAcquire()) {
                     // If we've used up our semaphore and need a new one, lets not wait here since while we are waiting
-                    // the addednodeinfo state might change.
+                    // the addednodeinfo state might change
                     break;
                 }
                 // If strAddedNode is an IP/port, decode it immediately, so
-                // OpenNetworkConnection can detect existing connections to that IP/port.
+                // OpenNetworkConnection can detect existing connections to that IP/port
                 tried = true;
-                CService service(LookupNumeric(info.strAddedNode.c_str(), Params().GetDefaultPort()));
+                CService service( LookupNumeric( info.strAddedNode.c_str(), BaseParams().GetDefaultPort() ) ) ;
                 OpenNetworkConnection(CAddress(service, NODE_NONE), false, &grant, info.strAddedNode.c_str(), false, false, true);
                 if (!interruptNet.sleep_for(std::chrono::milliseconds(500)))
                     return;

@@ -9,7 +9,6 @@
 #endif
 
 #include "init.h"
-
 #include "addrman.h"
 #include "amount.h"
 #include "chain.h"
@@ -322,13 +321,10 @@ std::string HelpMessage( WhatHelpMessage what )
     strUsage += HelpMessageOpt("-blocknotify=<cmd>", _("Execute command when the best block changes (%s in cmd is replaced by block hash, %i is replaced by block number)"));
     if (showDebug)
         strUsage += HelpMessageOpt("-blocksonly", strprintf(_("Whether to operate in a blocks only mode (default: %u)"), DEFAULT_BLOCKSONLY));
-    strUsage +=HelpMessageOpt(
-        " -assumevalid=<hex>",
+    strUsage += HelpMessageOpt("-assumevalid=<hex>",
         strprintf(
-            "If this block is in the chain assume that it and its ancestors are valid and potentially skip their script verification (0 to verify all, main: %s, inu: %s, test: %s)",
-            ParamsFor( "main" ).GetConsensus( 0 ).defaultAssumeValid.GetHex(),
-            ParamsFor( "inu" ).GetConsensus( 0 ).defaultAssumeValid.GetHex(),
-            ParamsFor( "test" ).GetConsensus( 0 ).defaultAssumeValid.GetHex()
+            "If this block is in the chain assume that it and its ancestors are valid and potentially skip their script verification (0 to verify all, default for chain \"%s\": %u)",
+            NameOfChain(), Params().GetConsensus( 0 ).defaultAssumeValid.GetHex()
         ) ) ;
     strUsage += HelpMessageOpt("-conf=<file>", strprintf(_("Specify configuration file (default: %s)"), DOGECOIN_CONF_FILENAME));
     if ( what == HELP_MESSAGE_DOGECOIND )
@@ -381,10 +377,8 @@ std::string HelpMessage( WhatHelpMessage what )
     strUsage += HelpMessageOpt("-permitbaremultisig", strprintf(_("Relay non-P2SH multisig (default: %u)"), DEFAULT_PERMIT_BAREMULTISIG));
     strUsage += HelpMessageOpt("-peerbloomfilters", strprintf(_("Support filtering of blocks and transaction with bloom filters (default: %u)"), DEFAULT_PEERBLOOMFILTERS));
     strUsage += HelpMessageOpt( "-port=<port>",
-                    strprintf(
-                        "Listen for connections on <port> (main: %u, inu: %u, test: %u)",
-                        ParamsFor( "main" ).GetDefaultPort(), ParamsFor( "inu" ).GetDefaultPort(), ParamsFor( "test" ).GetDefaultPort()
-                    ) ) ;
+                    strprintf( "Listen for connections on <port> (default for chain \"%s\": %u)",
+                        NameOfChain(), BaseParams().GetDefaultPort() ) ) ;
     strUsage += HelpMessageOpt("-proxy=<ip:port>", _("Connect through SOCKS5 proxy"));
     strUsage += HelpMessageOpt("-proxyrandomize", strprintf(_("Randomize credentials for every proxy connection. This enables Tor stream isolation (default: %u)"), DEFAULT_PROXYRANDOMIZE));
     strUsage += HelpMessageOpt("-rpcserialversion", strprintf(_("Sets the serialization of raw transaction or block hex returned in non-verbose mode, non-segwit(0) or segwit(1) (default: %d)"), DEFAULT_RPC_SERIALIZE_VERSION));
@@ -424,8 +418,8 @@ std::string HelpMessage( WhatHelpMessage what )
     {
         strUsage += HelpMessageOpt("-checkblocks=<n>", strprintf(_("How many blocks to check at startup (default: %u, 0 = all)"), DEFAULT_CHECKBLOCKS));
         strUsage += HelpMessageOpt("-checklevel=<n>", strprintf(_("How thorough the block verification of -checkblocks is (0-4, default: %u)"), DEFAULT_CHECKLEVEL));
-        strUsage += HelpMessageOpt( "-checkblockindex", strprintf( "Do a full consistency check for mapBlockIndex, setBlockIndexCandidates, chainActive and mapBlocksUnlinked occasionally. Also sets -checkmempool (default: %u)", Params().DefaultConsistencyChecks() ) ) ;
-        strUsage += HelpMessageOpt( "-checkmempool=<n>", strprintf( "Run checks every <n> transactions (default: %u)", Params().DefaultConsistencyChecks() ) ) ;
+        strUsage += HelpMessageOpt( "-checkblockindex", strprintf( "Do a full consistency check for mapBlockIndex, setBlockIndexCandidates, chainActive and mapBlocksUnlinked occasionally. Also sets -checkmempool (default for chain \"%s\": %u)", NameOfChain(), Params().DefaultConsistencyChecks() ) ) ;
+        strUsage += HelpMessageOpt( "-checkmempool=<n>", strprintf( "Run checks every <n> transactions (default for chain \"%s\": %u)", NameOfChain(), Params().DefaultConsistencyChecks() ) ) ;
         strUsage += HelpMessageOpt("-checkpoints", strprintf("Disable expensive verification for known chain history (default: %u)", DEFAULT_CHECKPOINTS_ENABLED));
         strUsage += HelpMessageOpt("-disablesafemode", strprintf("Disable safemode, override a real safe mode event (default: %u)", DEFAULT_DISABLE_SAFEMODE));
         strUsage += HelpMessageOpt("-testsafemode", strprintf("Force safe mode (default: %u)", DEFAULT_TESTSAFEMODE));
@@ -472,7 +466,7 @@ std::string HelpMessage( WhatHelpMessage what )
 
     strUsage += HelpMessageGroup(_("Node relay options:"));
     if ( showDebug ) {
-        strUsage += HelpMessageOpt( "-acceptnonstdtxn", strprintf( "Relay and mine \"non-standard\" transactions (%sdefault: %u)", "for testnet/regtest; ", ! Params().RequireStandard() ) ) ;
+        strUsage += HelpMessageOpt( "-acceptnonstdtxn", strprintf( "Relay and mine \"non-standard\" transactions (default for chain \"%s\": %u%s)", NameOfChain(), ! Params().OnlyStandardTransactions(), ( Params().OnlyStandardTransactions() ? ", can't be changed" : "" ) ) ) ;
     }
     strUsage += HelpMessageOpt("-bytespersigop", strprintf(_("Equivalent bytes per sigop in transactions for relay and mining (default: %u)"), DEFAULT_BYTES_PER_SIGOP));
     strUsage += HelpMessageOpt("-datacarrier", strprintf(_("Relay and mine data carrier transactions (default: %u)"), DEFAULT_ACCEPT_DATACARRIER));
@@ -496,9 +490,9 @@ std::string HelpMessage( WhatHelpMessage what )
     strUsage += HelpMessageOpt("-rpcpassword=<pw>", _("Password for JSON-RPC connections"));
     strUsage += HelpMessageOpt("-rpcauth=<userpw>", _("Username and hashed password for JSON-RPC connections. The field <userpw> comes in the format: <USERNAME>:<SALT>$<HASH>. A canonical python script is included in share/rpcuser. The client then connects normally using the rpcuser=<USERNAME>/rpcpassword=<PASSWORD> pair of arguments. This option can be specified multiple times"));
     strUsage += HelpMessageOpt( "-rpcport=<port>",
-                    strprintf( "Listen for JSON-RPC connections on <port> (main: %u, inu: %u, test: %u)",
-                        BaseParamsFor( "main" ).RPCPort(), BaseParamsFor( "inu" ).RPCPort(), BaseParamsFor( "test" ).RPCPort()
-                  ) ) ;
+                    strprintf( "Listen for JSON-RPC connections on <port> (default for chain \"%s\": %u)",
+                        NameOfChain(), BaseParams().RPCPort() )
+                  ) ;
     strUsage += HelpMessageOpt("-rpcallowip=<ip>", _("Allow JSON-RPC connections from specified source. Valid for <ip> are a single IP (e.g. 1.2.3.4), a network/netmask (e.g. 1.2.3.4/255.255.255.0) or a network/CIDR (e.g. 1.2.3.4/24). This option can be specified multiple times"));
     strUsage += HelpMessageOpt("-rpcthreads=<n>", strprintf(_("Set the number of threads to service RPC calls (default: %d)"), DEFAULT_HTTP_THREADS));
     if (showDebug) {
@@ -1001,9 +995,9 @@ bool AppInitParameterInteraction()
             return InitError( AmountErrMsg( "blockmintxfee", GetArg( "-blockmintxfee", "" ) ) ) ;
     }
 
-    fRequireStandard = ! GetBoolArg( "-acceptnonstdtxn", ! chainparams.RequireStandard() ) ;
-    if ( chainparams.RequireStandard() && ! fRequireStandard )
-        return InitError( strprintf( "acceptnonstdtxn is not currently supported for %s chain", chainparams.NameOfNetwork() ) ) ;
+    acceptNonStandardTxs = GetBoolArg( "-acceptnonstdtxn", ! chainparams.OnlyStandardTransactions() ) ;
+    if ( chainparams.OnlyStandardTransactions() && acceptNonStandardTxs )
+        return InitError( strprintf( "acceptnonstdtxn is not supported for \"%s\" chain", NameOfChain() ) ) ;
 
     nBytesPerSigOp = GetArg( "-bytespersigop", nBytesPerSigOp ) ;
 
@@ -1563,8 +1557,8 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
         fHaveGenesis = true;
     }
 
-    if (IsArgSet("-blocknotify"))
-        uiInterface.NotifyBlockTip.connect(BlockNotifyCallback);
+    if ( IsArgSet( "-blocknotify" ) )
+        uiInterface.NotifyBlockTip.connect( BlockNotifyCallback ) ;
 
     std::vector<boost::filesystem::path> vImportFiles;
     if (mapMultiArgs.count("-loadblock"))

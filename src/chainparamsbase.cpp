@@ -28,6 +28,8 @@ class CBaseMainParams : public CBaseChainParams
 public:
     CBaseMainParams()
     {
+        networkName = "main" ;
+        nDefaultPort = 22556 ;
         nRPCPort = 22555 ;
     }
 } ;
@@ -41,8 +43,10 @@ class CBaseInuParams : public CBaseChainParams
 public:
     CBaseInuParams()
     {
-        nRPCPort = 55334 ;
+        networkName = "inu" ;
         dataDir = "inuchain" ;
+        nDefaultPort = 55336 ;
+        nRPCPort = 55334 ;
     }
 } ;
 static std::unique_ptr< CBaseInuParams > inuBaseParams ( nullptr ) ;
@@ -55,8 +59,10 @@ class CBaseTestNetParams : public CBaseChainParams
 public:
     CBaseTestNetParams()
     {
-        nRPCPort = 44555 ;
+        networkName = "test" ;
         dataDir = "testnet3" ;
+        nDefaultPort = 44556 ;
+        nRPCPort = 44555 ;
     }
 } ;
 static std::unique_ptr< CBaseTestNetParams > testNetBaseParams ( nullptr ) ;
@@ -69,8 +75,10 @@ class CBaseRegTestParams : public CBaseChainParams
 public:
     CBaseRegTestParams()
     {
-        nRPCPort = 18332 ;
+        networkName = "regtest" ;
         dataDir = "regtest" ;
+        nDefaultPort = 18444 ;
+        nRPCPort = 18332 ;
     }
 } ;
 static std::unique_ptr< CBaseRegTestParams > regTestBaseParams ( nullptr ) ;
@@ -104,6 +112,11 @@ CBaseChainParams & BaseParamsFor( const std::string & chain )
 void SelectBaseParams( const std::string & chain )
 {
     pCurrentBaseParams = &BaseParamsFor( chain ) ;
+}
+
+const std::string & NameOfChain()
+{
+    return BaseParams().NameOfNetwork() ;
 }
 
 std::string ChainNameFromArguments()

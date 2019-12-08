@@ -738,7 +738,7 @@
     </message>
     </context>
 <context>
-    <name>ModalOverlay</name>
+    <name>ChainSyncOverlay</name>
     <message>
         <source>Form</source>
         <translation>نمودج</translation>

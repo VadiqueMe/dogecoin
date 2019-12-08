@@ -602,20 +602,20 @@ void RPCConsole::setNetworkModel( NetworkModel * model )
     ui->trafficGraph->setNetworkModel( model ) ;
     if ( networkModel && networkModel->getPeerTableModel() && networkModel->getBanTableModel() )
     {
-        // Keep up to date with client
-        setNumConnections(model->getNumConnections());
-        connect(model, SIGNAL(numConnectionsChanged(int)), this, SLOT(setNumConnections(int)));
+        // update
+        setNumConnections( model->getNumConnections() ) ;
+        connect( model, SIGNAL( numConnectionsChanged(int) ), this, SLOT( setNumConnections(int) ) ) ;
 
-        setNumBlocks(model->getNumBlocks(), model->getLastBlockDate(), model->getVerificationProgress(NULL), false);
-        connect(model, SIGNAL(numBlocksChanged(int,QDateTime,double,bool)), this, SLOT(setNumBlocks(int,QDateTime,double,bool)));
+        setNumBlocks( model->getNumBlocks(), model->getLastBlockDate(), model->getVerificationProgress(), false ) ;
+        connect( model, SIGNAL( numBlocksChanged(int, QDateTime, double, bool) ), this, SLOT( setNumBlocks(int, QDateTime, double, bool) ) ) ;
 
-        updateNetworkState();
-        connect(model, SIGNAL(networkActiveChanged(bool)), this, SLOT(setNetworkActive(bool)));
+        updateNetworkState() ;
+        connect( model, SIGNAL( networkActiveChanged(bool) ), this, SLOT( setNetworkActive(bool) ) ) ;
 
         updateTrafficStats() ;
-        connect(model, SIGNAL( bytesChanged(quint64,quint64) ), this, SLOT( updateTrafficStats() ));
+        connect( model, SIGNAL( bytesChanged(quint64, quint64) ), this, SLOT( updateTrafficStats() ) ) ;
 
-        connect(model, SIGNAL(mempoolSizeChanged(long,size_t)), this, SLOT(setMempoolSize(long,size_t)));
+        connect( model, SIGNAL( mempoolSizeChanged(long, size_t) ), this, SLOT( setMempoolSize(long, size_t) ) ) ;
 
         // set up peer table
         ui->peerWidget->setModel( model->getPeerTableModel() ) ;
@@ -703,7 +703,7 @@ void RPCConsole::setNetworkModel( NetworkModel * model )
         ui->clientUserAgent->setText(model->formatSubVersion());
         ui->dataDir->setText(model->dataDir());
         ui->startupTime->setText( model->formatPeerStartupTime() ) ;
-        ui->networkName->setText( QString::fromStdString( Params().NameOfNetwork() ) ) ;
+        ui->networkName->setText( QString::fromStdString( NameOfChain() ) ) ;
 
         //Setup autocomplete and attach it
         QStringList wordList;
@@ -866,8 +866,9 @@ void RPCConsole::setNetworkActive(bool networkActive)
     updateNetworkState();
 }
 
-void RPCConsole::setNumBlocks( int count, const QDateTime & blockDate, double nVerificationProgress, bool headers )
+void RPCConsole::setNumBlocks( int count, const QDateTime & blockDate, double progress, bool headers )
 {
+    ( void ) progress ;
     if ( ! headers ) {
         ui->numberOfBlocks->setText( QString::number( count ) ) ;
         ui->tipBlockTime->setText( blockDate.toString() ) ;

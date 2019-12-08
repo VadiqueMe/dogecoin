@@ -297,6 +297,72 @@
     </message>
 </context>
 <context>
+    <name>ChainSyncOverlay</name>
+    <message>
+        <location filename="../forms/chainsyncoverlay.ui" line="+14"/>
+        <source>Form</source>
+        <translation type="unfinished">Form</translation>
+    </message>
+    <message>
+        <location line="+132"/>
+        <source>Recent transactions may not yet be visible, and therefore your wallet&apos;s balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the dogecoin network, as detailed below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>Attempting to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+76"/>
+        <source>Number of blocks left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location line="+26"/>
+        <location filename="../chainsyncoverlay.cpp" line="+139"/>
+        <source>Unknown...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-13"/>
+        <source>Last block time</source>
+        <translation type="unfinished">Last block time</translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>Progress</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+34"/>
+        <source>Progress increase per hour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location line="+20"/>
+        <source>calculating...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-7"/>
+        <source>Estimated time left until synced</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+37"/>
+        <source>Hide</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../chainsyncoverlay.cpp" line="-1"/>
+        <source>Unknown. Syncing Headers (%1)...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CoinControlDialog</name>
     <message>
         <location filename="../forms/coincontroldialog.ui" line="+14"/>
@@ -482,7 +548,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+201"/>
+        <location line="+200"/>
         <source>Transactions</source>
         <translation type="unfinished"></translation>
     </message>
@@ -667,7 +733,7 @@
         <translation type="unfinished">Tabs toolbar</translation>
     </message>
     <message numerus="yes">
-        <location line="+288"/>
+        <location line="+292"/>
         <source>%n active connection(s) to Dogecoin network</source>
         <translation type="unfinished">
             <numerusform>%n active connection to Dogecoin network</numerusform>
@@ -733,17 +799,17 @@
         <translation type="unfinished">Up to date</translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="+19"/>
         <source>%1 behind</source>
         <translation type="unfinished">%1 behind</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+6"/>
         <source>Catching up...</source>
         <translation type="unfinished">Catching up...</translation>
     </message>
     <message>
-        <location line="+19"/>
+        <location line="+20"/>
         <source>Last received block was generated %1 ago</source>
         <translation type="unfinished">Last received block was generated %1 ago</translation>
     </message>
@@ -1111,75 +1177,9 @@
     </message>
 </context>
 <context>
-    <name>ModalOverlay</name>
-    <message>
-        <location filename="../forms/modaloverlay.ui" line="+14"/>
-        <source>Form</source>
-        <translation type="unfinished">Form</translation>
-    </message>
-    <message>
-        <location line="+132"/>
-        <source>Recent transactions may not yet be visible, and therefore your wallet&apos;s balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the dogecoin network, as detailed below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+26"/>
-        <source>Attempting to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+76"/>
-        <source>Number of blocks left</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <location line="+26"/>
-        <location filename="../modaloverlay.cpp" line="+138"/>
-        <source>Unknown...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-13"/>
-        <source>Last block time</source>
-        <translation type="unfinished">Last block time</translation>
-    </message>
-    <message>
-        <location line="+26"/>
-        <source>Progress</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+34"/>
-        <source>Progress increase per hour</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <location line="+20"/>
-        <source>calculating...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-7"/>
-        <source>Estimated time left until synced</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+37"/>
-        <source>Hide</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../modaloverlay.cpp" line="-1"/>
-        <source>Unknown. Syncing Headers (%1)...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>NetworkModel</name>
     <message>
-        <location filename="../networkmodel.cpp" line="+179"/>
+        <location filename="../networkmodel.cpp" line="+173"/>
         <source>Network Alert</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1945,7 +1945,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../guiutil.cpp" line="+255"/>
+        <location filename="../guiutil.cpp" line="+232"/>
         <source>Amount</source>
         <translation type="unfinished">Amount</translation>
     </message>
@@ -2226,7 +2226,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location line="+55"/>
         <location filename="../rpcconsole.cpp" line="+540"/>
-        <location line="+758"/>
+        <location line="+759"/>
         <source>Select a peer to view detailed information</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2353,7 +2353,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../rpcconsole.cpp" line="-451"/>
+        <location filename="../rpcconsole.cpp" line="-452"/>
         <source>In:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2431,7 +2431,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+295"/>
+        <location line="+296"/>
         <source>(node id: %1)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3475,7 +3475,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>TransactionTableModel</name>
     <message>
-        <location filename="../transactiontablemodel.cpp" line="+232"/>
+        <location filename="../transactiontablemodel.cpp" line="+230"/>
         <source>Date</source>
         <translation type="unfinished">Date</translation>
     </message>
@@ -3584,7 +3584,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+213"/>
+        <location line="+212"/>
         <source>(no label)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3592,13 +3592,13 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>TransactionView</name>
     <message>
-        <location filename="../transactionview.cpp" line="+72"/>
-        <location line="+16"/>
+        <location filename="../transactionview.cpp" line="+66"/>
+        <location line="+12"/>
         <source>All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-15"/>
+        <location line="-11"/>
         <source>Today</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3628,7 +3628,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+7"/>
         <source>Received with</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3663,7 +3663,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+36"/>
+        <location line="+42"/>
         <source>Abandon transaction</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3708,7 +3708,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+186"/>
+        <location line="+213"/>
         <source>Export Transaction History</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3773,12 +3773,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+147"/>
+        <location line="+148"/>
         <source>Range:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+10"/>
         <source>to</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3786,7 +3786,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <location filename="../gui.cpp" line="+137"/>
+        <location filename="../gui.cpp" line="+140"/>
         <source>Unit to show amounts in. Click to choose another unit</source>
         <translation type="unfinished"></translation>
     </message>

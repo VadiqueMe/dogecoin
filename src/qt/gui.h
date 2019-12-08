@@ -32,8 +32,8 @@ class SendCoinsRecipient;
 class UnitDisplayStatusBarControl;
 class WalletFrame;
 class WalletModel;
-class HelpMessageDialog;
-class ModalOverlay;
+class ChainSyncOverlay ;
+class HelpMessageDialog ;
 
 class CWallet;
 
@@ -126,8 +126,8 @@ private:
     QMenu *trayIconMenu;
     Notificator *notificator;
     RPCConsole *rpcConsole;
-    HelpMessageDialog *helpMessageDialog;
-    ModalOverlay *modalOverlay;
+    std::unique_ptr< ChainSyncOverlay > chainsyncOverlay ;
+    std::unique_ptr< HelpMessageDialog > helpMessageDialog ;
 
     /** Keep track of previous number of blocks, to detect progress */
     int prevBlocks;
@@ -171,7 +171,7 @@ public Q_SLOTS:
     /** Set network state shown in the UI */
     void setNetworkActive(bool networkActive);
     /** Set number of blocks and last block date shown in the UI */
-    void setNumBlocks(int count, const QDateTime& blockDate, double nVerificationProgress, bool headers);
+    void setNumBlocks( int count, const QDateTime & blockDate, double progress, bool headers ) ;
 
     /** Notify the user of an event from the core network or transaction handling code.
        @param[in] title     the message box / notification title
@@ -257,8 +257,8 @@ private Q_SLOTS:
     /** Toggle networking */
     void toggleNetworkActive();
 
-    void showModalOverlay();
-};
+    void showChainsyncOverlay() ;
+} ;
 
 class UnitDisplayStatusBarControl : public QLabel
 {

@@ -347,7 +347,7 @@ Alihkan fail data ke dalam tab semasa</translation>
     <name>Intro</name>
     </context>
 <context>
-    <name>ModalOverlay</name>
+    <name>ChainSyncOverlay</name>
     </context>
 <context>
     <name>OpenURIDialog</name>
