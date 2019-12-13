@@ -102,12 +102,10 @@ bool CheckDogecoinProofOfWork( const CBlockHeader & block, const Consensus::Para
         if ( block.IsAuxpow() )
             return error( "%s : no auxpow on a block with auxpow in version", __func__ );
 
-        uint256 blockScryptHash = block.GetPoWHash() ;
-        //LogPrintf( "Checking proof-of-work for block with scrypt hash %s\n", blockScryptHash.GetHex() ) ;
-
         if ( ! CheckProofOfWork( block, block.nBits, params ) )
-            return error( "%s : non-aux proof of work failed, 0x%s > 0x%s", __func__,
-                            blockScryptHash.GetHex(), arith_uint256().SetCompact( block.nBits ).GetHex() ) ;
+            return error( "%s : non-aux proof of work failed with bits=%s and hashes scrypt=%s, sha256=%s", __func__,
+                            arith_uint256().SetCompact( block.nBits ).GetHex(),
+                            block.GetPoWHash().GetHex(), block.GetHash().GetHex() ) ;
 
         return true ;
     }

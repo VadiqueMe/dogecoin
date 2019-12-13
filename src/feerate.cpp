@@ -5,7 +5,7 @@
 
 CFeeRate::CFeeRate( const CAmount & nFeePaid, size_t bytes )
 {
-    nCoinuPerK = ( bytes == 0 ) ? 0 : nFeePaid * 1000 / bytes ;
+    nCoinuPerK = ( bytes == 0 ) ? 0 : nFeePaid * 1000 / static_cast< signed >( bytes ) ;
 }
 
 CAmount CFeeRate::GetFeePerBytes( size_t bytes ) const
@@ -14,7 +14,7 @@ CAmount CFeeRate::GetFeePerBytes( size_t bytes ) const
     if ( bytes % 1000 > 0 )
         bytes = bytes - ( bytes % 1000 ) + 1000 ;
 
-    CAmount nFee = nCoinuPerK * bytes / 1000 ;
+    CAmount nFee = nCoinuPerK * static_cast< signed >( bytes ) / 1000 ;
     return nFee ;
 }
 

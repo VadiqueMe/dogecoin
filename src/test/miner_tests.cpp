@@ -29,35 +29,19 @@ static CFeeRate blockMinFeeRate = CFeeRate( 0 ) ;
 
 static
 struct {
-    unsigned char extranonce;
-    unsigned int nonce;
-} blockinfo[] = {
-    {4, 0x127fad2d}, {2, 0x335d1b8f}, {1, 0x33d47094}, {2, 0x0b09ec28},
-    {1, 0x06cf723b}, {2, 0x039202bc}, {1, 0x0a2c9d46}, {2, 0x6225cb92},
-    {2, 0x6ea1513e}, {1, 0x4401bef3}, {1, 0x04d3a1d2}, {2, 0x1c512825},
-    {2, 0x54a03b14}, {1, 0x6048e27d}, {1, 0x1b926afc}, {2, 0x68c4afbd},
-    {2, 0x4439c313}, {1, 0x1263fceb}, {2, 0x834dee3e}, {2, 0xf21ed9dc},
-    {1, 0xdcdac434}, {2, 0x4c1945be}, {1, 0x6d42a594}, {3, 0x20927a30},
-    {3, 0xfd60f461}, {2, 0xd9ad2207}, {2, 0xe7f69d1a}, {1, 0x7fa9b932},
-    {2, 0xb0511080}, {1, 0xe7d24cd5}, {2, 0x3c57e668}, {2, 0x83bfdc2e},
-    {2, 0x6eeb4e10}, {2, 0x9cacbcfd}, {2, 0xb27ea98e}, {2, 0x6d57c5a7},
-    {1, 0x6deb4fa8}, {2, 0xabf625c6}, {2, 0x27e7c569}, {1, 0x89c6e991},
-    {2, 0xc359bc28}, {1, 0x6f25768d}, {2, 0x654a4c31}, {1, 0x5cd03bab},
-    {1, 0xda405f69}, {3, 0xfea453e5}, {2, 0x137d2c3a}, {5, 0xdee2f36e},
-    {1, 0xeccbcf26}, {5, 0x9237dbaa}, {1, 0xb7b9350b}, {1, 0xcd0c7eb2},
-    {1, 0xf5ea5a32}, {2, 0x3486a7f3}, {1, 0xd0a0f2be}, {1, 0xe1238144},
-    {1, 0x28b98a9b}, {1, 0xe79d02aa}, {5, 0xf4555d56}, {5, 0x74da0bb7},
-    {1, 0x18728b91}, {1, 0x07ed3a93}, {6, 0xd7a5e106}, {2, 0xba50b06c},
-    {2, 0x952c830d}, {1, 0xfbd1bb18}, {1, 0x36126967}, {1, 0xcce357d0},
-    {2, 0xff1ec2d6}, {2, 0xbed5dfc9}, {1, 0x0d21fdd7}, {1, 0xd744edea},
-    {1, 0xe09fc8f2}, {5, 0x2ad325c5}, {5, 0x466b6549}, {1, 0x10705d49},
-    {1, 0xf88478ce}, {2, 0xbfda6c4a}, {2, 0x731fe414}, {1, 0x6f1b362e},
-    {2, 0x6be709cf}, {1, 0x60553200}, {2, 0xf6a992f0}, {2, 0x1521f7f5},
-    {1, 0x8b440273}, {1, 0xe9ade0c8}, {1, 0x4d414618}, {5, 0x7b48070d},
-    {1, 0x1202ebae}, {1, 0xd23fe97e}, {1, 0x8d1d6505}, {1, 0xfafbaae3},
-    {1, 0xf200353e}, {1, 0xe77bd65e}, {1, 0x9fa32102}, {2, 0x68dfa747},
-    {0, 0x7c74d78e}, {1, 0x9b79cc6b}, {2, 0xad957cc2}, {2, 0x91acb818}
-};
+    unsigned char extranonce ;
+    unsigned int nonce ;
+} blockinfo [] = {
+    { 4, 0x125c4cb0 }, { 2, 0x334af826 }, { 1, 0x3338e803 }, { 3, 0x6accf95f },
+    { 2, 0x16c63e11 }, { 3, 0xa388397e }, { 1, 0xdd1cf9bd }, { 8, 0x72184e1c },
+    { 5, 0x6e783ce1 }, { 1, 0x43e51633 }, { 1, 0x04bda0ae }, { 2, 0x1c4853bd },
+    { 1, 0x7495d5ec }, { 1, 0x6043b5dd }, { 1, 0x1b8489a0 }, { 2, 0x68b37c03 },
+    { 2, 0x441d1cbb }, { 1, 0x122e2d0e }, { 2, 0x833620ca }, { 2, 0xf2050b82 },
+    { 7, 0xdcc2e490 }, { 3, 0xcee0d38f }, { 6, 0x9849c0eb }, { 4, 0x4434b570 },
+    { 2, 0xeb8befbd }, { 1, 0x553bec3d }, { 3, 0x21e6b23d }, { 0, 0xaa6b60e7 },
+    { 9, 0xde9fb220 }, { 7, 0x773ef3da }, { 11, 0x10efa5d9 }, { 6, 0x677e6319 },
+    { 10, 0xfdc40ff }
+} ;
 
 CBlockIndex CreateBlockIndex(int nHeight)
 {
@@ -75,15 +59,15 @@ bool TestSequenceLocks(const CTransaction &tx, int flags)
 
 // Test suite for ancestor feerate transaction selection.
 // Implemented as an additional function, rather than a separate test case,
-// to allow reusing the blockchain created in CreateNewBlock_validity.
-// Note that this test assumes blockprioritysize is 0.
+// to allow reusing the blockchain created in CreateNewBlock_validity
+// Note that this test assumes blockprioritysize is 0
 void TestPackageSelection(const CChainParams& chainparams, CScript scriptPubKey, std::vector<CTransactionRef>& txFirst)
 {
-    // Test the ancestor feerate transaction selection.
+    // Test the ancestor feerate transaction selection
     TestMemPoolEntryHelper entry;
 
     // Test that a medium fee transaction will be selected after a higher fee
-    // rate package with a low fee rate parent.
+    // rate package with a low fee rate parent
     CMutableTransaction tx;
     tx.vin.resize(1);
     tx.vin[0].scriptSig = CScript() << OP_1;
@@ -147,11 +131,11 @@ void TestPackageSelection(const CChainParams& chainparams, CScript scriptPubKey,
 
     // Test that transaction selection properly updates ancestor fee
     // calculations as ancestor transactions get included in a block.
-    // Add a 0-fee transaction that has 2 outputs.
+    // Add a 0-fee transaction that has 2 outputs
     tx.vin[0].prevout.hash = txFirst[2]->GetHash();
     tx.vout.resize(2);
-    tx.vout[0].nValue = 5000000000LL - 100000000;
-    tx.vout[1].nValue = 100000000; // 1BTC output
+    tx.vout[0].nValue = 5000000000LL - 100000000 ;
+    tx.vout[1].nValue = 100000000 ; // 1 DOGE output
     uint256 hashFreeTx2 = tx.GetHash();
     mempool.addUnchecked(hashFreeTx2, entry.Fee(0).SpendsCoinbase(true).FromTx(tx));
 
@@ -164,14 +148,14 @@ void TestPackageSelection(const CChainParams& chainparams, CScript scriptPubKey,
     mempool.addUnchecked(hashLowFeeTx2, entry.Fee(feeToUse).SpendsCoinbase(false).FromTx(tx));
     pblocktemplate = BlockAssembler(chainparams).CreateNewBlock(scriptPubKey, true);
 
-    // Verify that this tx isn't selected.
+    // Verify that this tx isn't selected
     for (size_t i=0; i<pblocktemplate->block.vtx.size(); ++i) {
         BOOST_CHECK(pblocktemplate->block.vtx[i]->GetHash() != hashFreeTx2);
         BOOST_CHECK(pblocktemplate->block.vtx[i]->GetHash() != hashLowFeeTx2);
     }
 
     // This tx will be mineable, and should cause hashLowFeeTx2 to be selected
-    // as well.
+    // as well
     tx.vin[0].prevout.n = 1;
     tx.vout[0].nValue = 100000000 - 10000; // 10k satoshi fee
     mempool.addUnchecked(tx.GetHash(), entry.Fee(10000).FromTx(tx));
@@ -179,12 +163,15 @@ void TestPackageSelection(const CChainParams& chainparams, CScript scriptPubKey,
     BOOST_CHECK(pblocktemplate->block.vtx[8]->GetHash() == hashLowFeeTx2);
 }
 
-// NOTE: These tests rely on CreateNewBlock doing its own self-validation!
+// NOTE: These tests rely on CreateNewBlock doing its own self-validation
 BOOST_AUTO_TEST_CASE(CreateNewBlock_validity)
 {
     // Note that by default, these tests run with size accounting enabled
     const CChainParams & chainparams = ParamsFor( "main" ) ;
-    // changed this to dogecoin genesis pubkey script
+    BOOST_CHECK( chainparams.GetConsensus( 0 ).hashGenesisBlock ==
+                    uint256S( "0x1a91e3dace36e2be3bf030a65679fe821aa1d6ef92e7c9902eb318182c355691" ) ) ;
+
+    // dogecoin genesis pubkey script
     CScript scriptPubKey = CScript() << ParseHex("040184710fa689ad5023690c80f3a49c8f13f8d45b8c857fbcbc8bc4a8e4d3eb4b10f4d4604fa08dce601aaf0f470216fe1b51850b4acf21b179c45070ac7b03a9") << OP_CHECKSIG;
     std::unique_ptr<CBlockTemplate> pblocktemplate;
     CMutableTransaction tx,tx2;
@@ -198,133 +185,144 @@ BOOST_AUTO_TEST_CASE(CreateNewBlock_validity)
     LOCK(cs_main);
     fCheckpointsEnabled = false;
 
-    // Simple block creation, nothing special yet:
-    BOOST_CHECK(pblocktemplate = BlockAssembler(chainparams).CreateNewBlock(scriptPubKey, true));
-
     // We can't make transactions until we have inputs
-    // Therefore, load 100 blocks :)
-    int baseheight = 0;
-    std::vector<CTransactionRef> txFirst;
-    for (unsigned int i = 0; i < sizeof(blockinfo)/sizeof(*blockinfo); ++i)
+    // Therefore, make some blocks :)
+    int baseheight = 0 ;
+    std::vector< CTransactionRef > txFirst ;
+    size_t number_of_blocks_to_premine = chainparams.GetConsensus( 0 ).nCoinbaseMaturity + 3 /* sizeof( blockinfo ) / sizeof( *blockinfo ) */ ;
+    for ( unsigned int i = 0 ; i < number_of_blocks_to_premine ; ++ i )
     {
+        // create new block candidate for each block
+        // it is needed because each new block's subsidy is random derived from previous block's hash
+        BOOST_CHECK( pblocktemplate = BlockAssembler( chainparams ).CreateNewBlock( scriptPubKey, true ) ) ;
 
-        CBlock *pblock = &pblocktemplate->block; // pointer for convenience
+        CBlock *pblock = &pblocktemplate->block ; // pointer for convenience
         pblock->nVersion = 1;
-        pblock->nTime = chainActive.Tip()->GetBlockTime() + 60;
-        CMutableTransaction txCoinbase(*pblock->vtx[0]);
-        txCoinbase.nVersion = 1;
-        txCoinbase.vin[0].scriptSig = CScript();
-        txCoinbase.vin[0].scriptSig.push_back(blockinfo[i].extranonce);
-        txCoinbase.vin[0].scriptSig.push_back(chainActive.Height());
-        txCoinbase.vout.resize(1); // Ignore the (optional) segwit commitment added by CreateNewBlock (as the hardcoded nonces don't account for this)
-        txCoinbase.vout[0].scriptPubKey = CScript();
-        pblock->vtx[0] = MakeTransactionRef(std::move(txCoinbase));
-        if (txFirst.size() == 0)
-            baseheight = chainActive.Height();
-        if (txFirst.size() < 4)
-            txFirst.push_back(pblock->vtx[0]);
-        pblock->hashMerkleRoot = BlockMerkleRoot(*pblock);
-        pblock->nNonce = blockinfo[i].nonce;
-        std::shared_ptr<const CBlock> shared_pblock = std::make_shared<const CBlock>(*pblock);
-        BOOST_CHECK(ProcessNewBlock(chainparams, shared_pblock, true, NULL));
-        pblock->hashPrevBlock = pblock->GetHash();
+        pblock->nTime = chainActive.Tip()->GetBlockTime() + /* 1 minute and 5 seconds */ 65 ;
+        CMutableTransaction txCoinbase( *pblock->vtx[0] ) ;
+        txCoinbase.nVersion = 1 ;
+        txCoinbase.vin[0].scriptSig = CScript() ;
+        txCoinbase.vin[0].scriptSig.push_back( blockinfo[ i ].extranonce ) ;
+        txCoinbase.vin[0].scriptSig.push_back( chainActive.Height() ) ;
+        txCoinbase.vout.resize( 1 ); // ignore the (optional) segwit commitment added by CreateNewBlock
+        txCoinbase.vout[0].scriptPubKey = CScript() ;
+        pblock->vtx[0] = MakeTransactionRef( std::move( txCoinbase ) ) ;
+
+        if ( txFirst.size() == 0 )
+            baseheight = chainActive.Height() ;
+        if ( txFirst.size() < 4 )
+            txFirst.push_back( pblock->vtx[0] ) ;
+
+        pblock->hashMerkleRoot = BlockMerkleRoot( *pblock ) ;
+        pblock->nNonce = blockinfo[ i ].nonce ;
+        /* while ( ! CheckProofOfWork( *pblock, pblock->nBits, chainparams.GetConsensus( 0 ) ) ) {
+            pblock->nNonce -- ;
+            if ( pblock->nNonce == 0 ) pblock->nNonce = 0xfffffffe ;
+        }
+        LogPrintf( "miner_tests: blockinfo[ %d ].nonce = 0x%x, extraNonce = %d\n", i, pblock->nNonce, blockinfo[ i ].extranonce ) ; */
+        std::shared_ptr< const CBlock > shared_pblock = std::make_shared< const CBlock >( *pblock ) ;
+        BOOST_CHECK( ProcessNewBlock( chainparams, shared_pblock, true, NULL ) ) ;
+        //* pblock->hashPrevBlock = pblock->GetSha256Hash() ; // not needed when the new block candidate is created on every iteration
     }
 
     // Just to make sure we can still make simple blocks
-    BOOST_CHECK(pblocktemplate = BlockAssembler(chainparams).CreateNewBlock(scriptPubKey, true));
+    BOOST_CHECK( pblocktemplate = BlockAssembler( chainparams ).CreateNewBlock( scriptPubKey, true ) ) ;
 
-    const CAmount BLOCKSUBSIDY = 50*COIN;
-    const CAmount LOWFEE = CENT;
-    const CAmount HIGHFEE = COIN;
-    const CAmount HIGHERFEE = 4*COIN;
+    const CAmount LOWFEE = CENT ;
+    static const int number_of_transactions = 1001 ; // 1000 CHECKMULTISIG + 1
+    const CAmount BLOCKSUBSIDY = number_of_transactions * LOWFEE ;
 
     // block sigops > limit: 1000 CHECKMULTISIG + 1
-    tx.vin.resize(1);
+    tx.vin.resize( 1 ) ;
     // NOTE: OP_NOP is used to force 20 SigOps for the CHECKMULTISIG
-    tx.vin[0].scriptSig = CScript() << OP_0 << OP_0 << OP_0 << OP_NOP << OP_CHECKMULTISIG << OP_1;
-    tx.vin[0].prevout.hash = txFirst[0]->GetHash();
-    tx.vin[0].prevout.n = 0;
-    tx.vout.resize(1);
-    tx.vout[0].nValue = BLOCKSUBSIDY;
-    for (unsigned int i = 0; i < 1001; ++i)
+    tx.vin[0].scriptSig = CScript() << OP_0 << OP_0 << OP_0 << OP_NOP << OP_CHECKMULTISIG << OP_1 ;
+    tx.vin[0].prevout.hash = txFirst[ 0 ]->GetHash() ;
+    tx.vin[0].prevout.n = 0 ;
+    tx.vout.resize( 1 ) ;
+    tx.vout[0].nValue = BLOCKSUBSIDY ;
+    for ( unsigned int i = 0 ; i < number_of_transactions ; ++ i )
     {
-        tx.vout[0].nValue -= LOWFEE;
-        hash = tx.GetHash();
-        bool spendsCoinbase = (i == 0) ? true : false; // only first tx spends coinbase
+        tx.vout[0].nValue -= LOWFEE ;
+        hash = tx.GetHash() ;
+        bool spendsCoinbase = ( i == 0 ) ? true : false ; // only first tx spends coinbase
         // If we don't set the # of sig ops in the CTxMemPoolEntry, template creation fails
-        mempool.addUnchecked(hash, entry.Fee(LOWFEE).Time(GetTime()).SpendsCoinbase(spendsCoinbase).FromTx(tx));
-        tx.vin[0].prevout.hash = hash;
+        mempool.addUnchecked( hash, entry.Fee( LOWFEE ).Time( GetTime() ).SpendsCoinbase( spendsCoinbase ).FromTx( tx ) ) ;
+        tx.vin[0].prevout.hash = hash ;
     }
-    BOOST_CHECK_THROW(BlockAssembler(chainparams).CreateNewBlock(scriptPubKey, true), std::runtime_error);
-    mempool.clear();
+    BOOST_CHECK_THROW( BlockAssembler( chainparams ).CreateNewBlock( scriptPubKey, true ), std::runtime_error ) ;
+    mempool.clear() ;
 
-    tx.vin[0].prevout.hash = txFirst[0]->GetHash();
-    tx.vout[0].nValue = BLOCKSUBSIDY;
-    for (unsigned int i = 0; i < 1001; ++i)
+    tx.vin[0].prevout.hash = txFirst[0]->GetHash() ;
+    tx.vout[0].nValue = BLOCKSUBSIDY ;
+    for ( unsigned int i = 0 ; i < number_of_transactions ; ++ i )
     {
-        tx.vout[0].nValue -= LOWFEE;
-        hash = tx.GetHash();
-        bool spendsCoinbase = (i == 0) ? true : false; // only first tx spends coinbase
+        tx.vout[0].nValue -= LOWFEE ;
+        hash = tx.GetHash() ;
+        bool spendsCoinbase = ( i == 0 ) ? true : false ; // only first tx spends coinbase
         // If we do set the # of sig ops in the CTxMemPoolEntry, template creation passes
-        mempool.addUnchecked(hash, entry.Fee(LOWFEE).Time(GetTime()).SpendsCoinbase(spendsCoinbase).SigOpsCost(80).FromTx(tx));
-        tx.vin[0].prevout.hash = hash;
+        mempool.addUnchecked( hash, entry.Fee( LOWFEE ).Time( GetTime() ).SpendsCoinbase( spendsCoinbase ).SigOpsCost( 80 ).FromTx( tx ) ) ;
+        tx.vin[0].prevout.hash = hash ;
     }
-    BOOST_CHECK(pblocktemplate = BlockAssembler(chainparams).CreateNewBlock(scriptPubKey, true));
-    mempool.clear();
+    BOOST_CHECK( pblocktemplate = BlockAssembler( chainparams ).CreateNewBlock( scriptPubKey, true ) ) ;
+    mempool.clear() ;
 
     // block size > limit
-    tx.vin[0].scriptSig = CScript();
+    tx.vin[0].scriptSig = CScript() ;
     // 18 * (520char + DROP) + OP_1 = 9433 bytes
-    std::vector<unsigned char> vchData(520);
-    for (unsigned int i = 0; i < 18; ++i)
-        tx.vin[0].scriptSig << vchData << OP_DROP;
-    tx.vin[0].scriptSig << OP_1;
-    tx.vin[0].prevout.hash = txFirst[0]->GetHash();
-    tx.vout[0].nValue = BLOCKSUBSIDY;
-    for (unsigned int i = 0; i < 128; ++i)
+    std::vector< unsigned char > vchData( 520 ) ;
+    for ( unsigned int i = 0 ; i < 18 ; ++ i )
+        tx.vin[0].scriptSig << vchData << OP_DROP ;
+    tx.vin[0].scriptSig << OP_1 ;
+    tx.vin[0].prevout.hash = txFirst[0]->GetHash() ;
+    tx.vout[0].nValue = BLOCKSUBSIDY ;
+    for ( unsigned int i = 0 ; i < 128 ; ++ i )
     {
-        tx.vout[0].nValue -= LOWFEE;
+        tx.vout[0].nValue -= LOWFEE ;
         hash = tx.GetHash();
         bool spendsCoinbase = (i == 0) ? true : false; // only first tx spends coinbase
-        mempool.addUnchecked(hash, entry.Fee(LOWFEE).Time(GetTime()).SpendsCoinbase(spendsCoinbase).FromTx(tx));
-        tx.vin[0].prevout.hash = hash;
+        mempool.addUnchecked( hash, entry.Fee( LOWFEE ).Time( GetTime() ).SpendsCoinbase( spendsCoinbase ).FromTx( tx ) ) ;
+        tx.vin[0].prevout.hash = hash ;
     }
-    BOOST_CHECK(pblocktemplate = BlockAssembler(chainparams).CreateNewBlock(scriptPubKey, true));
-    mempool.clear();
+    BOOST_CHECK( pblocktemplate = BlockAssembler( chainparams ).CreateNewBlock( scriptPubKey, true ) ) ;
+    mempool.clear() ;
 
     // orphan in mempool, template creation fails
-    hash = tx.GetHash();
-    mempool.addUnchecked(hash, entry.Fee(LOWFEE).Time(GetTime()).FromTx(tx));
-    BOOST_CHECK_THROW(BlockAssembler(chainparams).CreateNewBlock(scriptPubKey, true), std::runtime_error);
-    mempool.clear();
+    hash = tx.GetHash() ;
+    mempool.addUnchecked( hash, entry.Fee( LOWFEE ).Time( GetTime() ).FromTx( tx ) ) ;
+    BOOST_CHECK_THROW( BlockAssembler( chainparams ).CreateNewBlock( scriptPubKey, true ), std::runtime_error ) ;
+    mempool.clear() ;
+
+    const CAmount HIGHFEE = 20 * LOWFEE ;
+    const CAmount HIGHERFEE = 5 * HIGHFEE ;
 
     // child with higher priority than parent
-    tx.vin[0].scriptSig = CScript() << OP_1;
-    tx.vin[0].prevout.hash = txFirst[1]->GetHash();
-    tx.vout[0].nValue = BLOCKSUBSIDY-HIGHFEE;
-    hash = tx.GetHash();
-    mempool.addUnchecked(hash, entry.Fee(HIGHFEE).Time(GetTime()).SpendsCoinbase(true).FromTx(tx));
-    tx.vin[0].prevout.hash = hash;
-    tx.vin.resize(2);
-    tx.vin[1].scriptSig = CScript() << OP_1;
-    tx.vin[1].prevout.hash = txFirst[0]->GetHash();
-    tx.vin[1].prevout.n = 0;
-    tx.vout[0].nValue = tx.vout[0].nValue+BLOCKSUBSIDY-HIGHERFEE; //First txn output + fresh coinbase - new txn fee
-    hash = tx.GetHash();
-    mempool.addUnchecked(hash, entry.Fee(HIGHERFEE).Time(GetTime()).SpendsCoinbase(true).FromTx(tx));
-    BOOST_CHECK(pblocktemplate = BlockAssembler(chainparams).CreateNewBlock(scriptPubKey, true));
-    mempool.clear();
+    tx.vin[0].scriptSig = CScript() << OP_1 ;
+    tx.vin[0].prevout.hash = txFirst[1]->GetHash() ;
+    tx.vout[0].nValue = BLOCKSUBSIDY - HIGHFEE ;
+    hash = tx.GetHash() ;
+    mempool.addUnchecked( hash, entry.Fee( HIGHFEE ).Time( GetTime() ).SpendsCoinbase( true ).FromTx( tx ) ) ;
+    tx.vin[0].prevout.hash = hash ;
+    tx.vin.resize( 2 ) ;
+    tx.vin[1].scriptSig = CScript() << OP_1 ;
+    tx.vin[1].prevout.hash = txFirst[0]->GetHash() ;
+    tx.vin[1].prevout.n = 0 ;
+    tx.vout[0].nValue = tx.vout[0].nValue + BLOCKSUBSIDY - HIGHERFEE ; // first txn output + fresh coinbase - new txn fee
+    hash = tx.GetHash() ;
+    mempool.addUnchecked( hash, entry.Fee( HIGHERFEE ).Time( GetTime() ).SpendsCoinbase( true ).FromTx( tx ) ) ;
+    BOOST_CHECK( pblocktemplate = BlockAssembler( chainparams ).CreateNewBlock( scriptPubKey, true ) ) ;
+    mempool.clear() ;
 
     // coinbase in mempool, template creation fails
-    tx.vin.resize(1);
-    tx.vin[0].prevout.SetNull();
-    tx.vin[0].scriptSig = CScript() << OP_0 << OP_1;
-    tx.vout[0].nValue = 0;
-    hash = tx.GetHash();
-    // give it a fee so it'll get mined
-    mempool.addUnchecked(hash, entry.Fee(LOWFEE).Time(GetTime()).SpendsCoinbase(false).FromTx(tx));
-    BOOST_CHECK_THROW(BlockAssembler(chainparams).CreateNewBlock(scriptPubKey, true), std::runtime_error);
-    mempool.clear();
+    tx.vin.resize( 1 ) ;
+    tx.vin[0].prevout.SetNull() ;
+    tx.vin[0].scriptSig = CScript() << OP_0 << OP_1 ;
+    tx.vout[0].nValue = 0 ;
+    hash = tx.GetHash() ;
+    // no need to give any fee to be mined
+    //* mempool.addUnchecked( hash, entry.Fee( LOWFEE ).Time( GetTime() ).SpendsCoinbase( false ).FromTx( tx ) ) ; *//
+    mempool.addUnchecked( hash, entry.Fee( 0 ).Time( GetTime() ).SpendsCoinbase( false ).FromTx( tx ) ) ;
+    BOOST_CHECK_THROW( BlockAssembler( chainparams ).CreateNewBlock( scriptPubKey, true ), std::runtime_error ) ;
+    mempool.clear() ;
 
     // invalid (pre-p2sh) txn in mempool, template creation fails
     tx.vin[0].prevout.hash = txFirst[0]->GetHash();

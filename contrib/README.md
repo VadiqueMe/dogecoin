@@ -23,22 +23,19 @@ Build Tools and Keys
 
 ### [Debian](/contrib/debian) ###
 Contains files used to package bitcoind/bitcoin-qt
-for Debian-based Linux systems. If you compile bitcoind/bitcoin-qt yourself, there are some useful files here.
+for Debian-based Linux systems. If you compile bitcoind/bitcoin-qt yourself, there are some useful files here
 
 ### [Gitian-descriptors](/contrib/gitian-descriptors) ###
-Notes on getting Gitian builds up and running using KVM.
+Notes on getting Gitian builds up and running using KVM
 
 ### [Gitian-keys](/contrib/gitian-keys)
-PGP keys used for signing Bitcoin Core [Gitian release](/doc/release-process.md) results.
+PGP keys used for signing Bitcoin Core [Gitian release](/doc/release-process.md) results
 
 ### [MacDeploy](/contrib/macdeploy) ###
-Scripts and notes for Mac builds. 
-
-### [RPM](/contrib/rpm) ###
-RPM spec file for building bitcoin-core on RPM based distributions
+Scripts and notes for Mac builds
 
 ### [Gitian-build](/contrib/gitian-build.sh) ###
-Script for running full Gitian builds.
+Script for running full Gitian builds
 
 Test and Verify Tools 
 ---------------------
