@@ -139,18 +139,16 @@ CAmount GetDogecoinBlockSubsidy( int nHeight, const Consensus::Params & consensu
         {
             int random = 0 ;
             {
-                const std::string cseed_str = prevHash.ToString().substr( 16, 10 ) ;
-                const char * cseed = cseed_str.c_str() ;
-                long seed = strtol( cseed, nullptr, /* hex */ 16 ) ;
+                const std::string strseed = prevHash.ToString().substr( 16, 10 ) ;
+                long seed = strtol( strseed.c_str(), nullptr, /* hex */ 16 ) ;
                 const CAmount supremum = ( nHeight > 1234 ) ? 10000 : 100 ;
                 random = generateMTRandom( seed, supremum - 1 ) ;
             }
 
             int randomtoshi = COIN - 1 ;
             if ( nHeight > 1234 ) {
-                const std::string cseedoshi_str = prevHash.ToString().substr( 12, 12 ) ;
-                const char * cseedoshi = cseedoshi_str.c_str() ;
-                long seed = strtol( cseedoshi, nullptr, /* hex */ 16 ) ;
+                const std::string strseedoshi = prevHash.ToString().substr( 12, 12 ) ;
+                long seed = strtol( strseedoshi.c_str(), nullptr, /* hex */ 16 ) ;
                 randomtoshi = generateMTRandom( seed, COIN - 1 ) ;
             }
 
@@ -161,17 +159,21 @@ CAmount GetDogecoinBlockSubsidy( int nHeight, const Consensus::Params & consensu
 
     if ( ! consensusParams.fSimplifiedRewards )
     {
-        // Old-style rewards derived from the previous block hash
-        const std::string cseed_str = prevHash.ToString().substr( 7, 7 ) ;
-        const char* cseed = cseed_str.c_str() ;
-        char* endp = nullptr ;
-        long seed = strtol( cseed, &endp, 16 ) ;
+        // Original rewards derived from the sha256 hash of previous block
+        const std::string strseed = prevHash.ToString().substr( 7, 7 ) ;
+        long seed = strtol( strseed.c_str(), nullptr, /* hex */ 16 ) ;
+
         int halvings = nHeight / consensusParams.nSubsidyHalvingInterval ;
         const CAmount maxReward = ( 1000000 >> halvings ) - 1 ;
         int rand = generateMTRandom( seed, maxReward ) ;
 
-        return ( 1 + rand ) * COIN ;
-    } else if ( nHeight < ( 6 * consensusParams.nSubsidyHalvingInterval ) ) {
+        CAmount reward = ( 1 + rand ) * COIN ;
+        /* LogPrintf( "%s: at height %i with sha256 of previous block %s strseed=\"%s\" seed=%ld reward=%ld\n", __func__,
+                   nHeight, prevHash.GetHex(), strseed, seed, reward ) ; */
+
+        return reward ;
+    }
+    else if ( nHeight < ( 6 * consensusParams.nSubsidyHalvingInterval ) ) {
         // Mid-style constant rewards for each halving interval
         int halvings = nHeight / consensusParams.nSubsidyHalvingInterval ;
         return ( 500000 * COIN ) >> halvings ;

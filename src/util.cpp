@@ -221,9 +221,9 @@ void OpenDebugLog()
     }
 }
 
-bool LogAcceptCategory(const char* category)
+bool LogAcceptCategory( const char * category )
 {
-    if (category != NULL)
+    if ( category != nullptr ) // if ( false )
     {
         if (!fDebug)
             return false;

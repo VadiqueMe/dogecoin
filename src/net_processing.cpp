@@ -1544,8 +1544,8 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
             if (interruptMsgProc)
                 return true;
 
-            bool fAlreadyHave = AlreadyHave(inv);
-            LogPrint("net", "got inv: %s  %s peer=%d\n", inv.ToString(), fAlreadyHave ? "have" : "new", pfrom->id);
+            bool fAlreadyHave = AlreadyHave( inv ) ;
+            LogPrintf( "got inv from peer=%d: %s %s\n", pfrom->id, inv.ToString(), fAlreadyHave ? "already have" : "new" ) ;
 
             if (inv.type == MSG_TX) {
                 inv.type |= nFetchFlags;
@@ -1558,9 +1558,10 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
                     // primary method of announcement on the network, and since, in the case that a node
                     // fell back to inv we probably have a reorg which we should get the headers for first,
                     // we now only provide a getheaders response here. When we receive the headers, we will
-                    // then ask for the blocks we need.
-                    connman.PushMessage(pfrom, msgMaker.Make(NetMsgType::GETHEADERS, chainActive.GetLocator(pindexBestHeader), inv.hash));
-                    LogPrint("net", "getheaders (%d) %s to peer=%d\n", pindexBestHeader->nHeight, inv.hash.ToString(), pfrom->id);
+                    // then ask for the blocks we need
+                    connman.PushMessage( pfrom, msgMaker.Make( NetMsgType::GETHEADERS,
+                                                               chainActive.GetLocator( pindexBestHeader ), inv.hash ) ) ;
+                    LogPrint( "net", "getheaders (height %d) %s to peer=%d\n", pindexBestHeader->nHeight, inv.hash.ToString(), pfrom->id ) ;
                 }
             }
             else

@@ -87,6 +87,7 @@ public:
         consensus.nPowTargetSpacing = 60; // 1 minute
         consensus.fDigishieldDifficultyCalculation = false;
         consensus.nCoinbaseMaturity = 30;
+        consensus.fSimplifiedRewards = false ;
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowAllowDigishieldMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
@@ -222,6 +223,7 @@ public:
         consensus.nCoinbaseMaturity = 12 ;
         consensus.fPowAllowMinDifficultyBlocks = false ;
         consensus.fPowAllowDigishieldMinDifficultyBlocks = false ;
+        consensus.fSimplifiedRewards = false ; // not used for inu chain
         consensus.fPowNoRetargeting = false ;
         consensus.nRuleChangeActivationThreshold = 9576 ; // 95% of 10 080
         consensus.nMinerConfirmationWindow = 10080 ; // 60 * 24 * 7 = 10 080 blocks, or one week
@@ -388,9 +390,10 @@ public:
         consensus.nHeightEffective = 0;
         consensus.nPowTargetTimespan = 4 * 60 * 60; // pre-digishield: 4 hours
         consensus.fDigishieldDifficultyCalculation = false;
-        consensus.nCoinbaseMaturity = 30;
-        consensus.fPowAllowMinDifficultyBlocks = true;
-        consensus.fPowAllowDigishieldMinDifficultyBlocks = false;
+        consensus.nCoinbaseMaturity = 30 ;
+        consensus.fSimplifiedRewards = false ;
+        consensus.fPowAllowMinDifficultyBlocks = true ;
+        consensus.fPowAllowDigishieldMinDifficultyBlocks = false ;
         consensus.nSubsidyHalvingInterval = 100000;
         consensus.nMajorityEnforceBlockUpgrade = 501;
         consensus.nMajorityRejectBlockOutdated = 750;
@@ -564,7 +567,7 @@ public:
         consensus.fAllowLegacyBlocks = true ;
 
         // Dogecoin parameters
-        consensus.fSimplifiedRewards = true;
+        consensus.fSimplifiedRewards = true ; // always on for regtest
         consensus.nCoinbaseMaturity = 60; // For easier testability in RPC tests
 
         digishieldConsensus = consensus;
