@@ -221,8 +221,8 @@ void GenerateCoinsPage::updateTipBlockInfo()
     ui->tipBlockHashSublayoutContainer->setVisible( true ) ;
     ui->tipBlockHashLabel->setVisible( true ) ;
 
-    ui->tipBlockHashSha256->setText( QString::fromStdString( tipBlock.GetHash().ToString() ) ) ;
-    ui->tipBlockHashScrypt->setText( QString::fromStdString( tipBlock.GetPoWHash().ToString() ) ) ;
+    ui->tipBlockHashSha256->setText( QString::fromStdString( tipBlock.GetSha256Hash().ToString() ) ) ;
+    ui->tipBlockHashScrypt->setText( QString::fromStdString( tipBlock.GetScryptHash().ToString() ) ) ;
 }
 
 void GenerateCoinsPage::rebuildThreadTabs()

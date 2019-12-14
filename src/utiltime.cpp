@@ -12,8 +12,6 @@
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/thread.hpp>
 
-using namespace std;
-
 static int64_t nMockTime = 0; //!< For unit testing
 
 int64_t GetTime()
@@ -77,7 +75,7 @@ void MilliSleep(int64_t n)
 #endif
 }
 
-std::string DateTimeStrFormat(const char* pszFormat, int64_t nTime)
+std::string DateTimeStrFormat( const char * pszFormat, int64_t nTime )
 {
     static std::locale classic(std::locale::classic());
     // std::locale takes ownership of the pointer

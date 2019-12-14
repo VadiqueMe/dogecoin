@@ -220,7 +220,7 @@ struct mempoolentry_txid
     typedef uint256 result_type;
     result_type operator() (const CTxMemPoolEntry &entry) const
     {
-        return entry.GetTx().GetHash();
+        return entry.GetTx().GetTxHash() ;
     }
 };
 
@@ -272,10 +272,10 @@ public:
     {
         double f1 = (double)a.GetModifiedFee() * b.GetTxSize();
         double f2 = (double)b.GetModifiedFee() * a.GetTxSize();
-        if (f1 == f2) {
-            return b.GetTx().GetHash() < a.GetTx().GetHash();
+        if ( f1 == f2 ) {
+            return b.GetTx().GetTxHash() < a.GetTx().GetTxHash() ;
         }
-        return f1 > f2;
+        return f1 > f2 ;
     }
 };
 
@@ -299,15 +299,15 @@ public:
         double bFees = b.GetModFeesWithAncestors();
         double bSize = b.GetSizeWithAncestors();
 
-        // Avoid division by rewriting (a/b > c/d) as (a*d > c*b).
+        // Avoid division by rewriting (a/b > c/d) as (a*d > c*b)
         double f1 = aFees * bSize;
         double f2 = aSize * bFees;
 
-        if (f1 == f2) {
-            return a.GetTx().GetHash() < b.GetTx().GetHash();
+        if ( f1 == f2 ) {
+            return a.GetTx().GetTxHash() < b.GetTx().GetTxHash() ;
         }
 
-        return f1 > f2;
+        return f1 > f2 ;
     }
 };
 
@@ -444,34 +444,34 @@ public:
     typedef boost::multi_index_container<
         CTxMemPoolEntry,
         boost::multi_index::indexed_by<
-            // sorted by txid
-            boost::multi_index::hashed_unique<mempoolentry_txid, SaltedTxidHasher>,
+            // sorted by tx hash
+            boost::multi_index::hashed_unique< mempoolentry_txid, SaltedTxHasher >,
             // sorted by fee rate
             boost::multi_index::ordered_non_unique<
-                boost::multi_index::tag<descendant_score>,
-                boost::multi_index::identity<CTxMemPoolEntry>,
+                boost::multi_index::tag< descendant_score >,
+                boost::multi_index::identity< CTxMemPoolEntry >,
                 CompareTxMemPoolEntryByDescendantScore
             >,
             // sorted by entry time
             boost::multi_index::ordered_non_unique<
-                boost::multi_index::tag<entry_time>,
-                boost::multi_index::identity<CTxMemPoolEntry>,
+                boost::multi_index::tag< entry_time >,
+                boost::multi_index::identity< CTxMemPoolEntry >,
                 CompareTxMemPoolEntryByEntryTime
             >,
             // sorted by score (for mining prioritization)
             boost::multi_index::ordered_unique<
-                boost::multi_index::tag<mining_score>,
-                boost::multi_index::identity<CTxMemPoolEntry>,
+                boost::multi_index::tag< mining_score >,
+                boost::multi_index::identity< CTxMemPoolEntry >,
                 CompareTxMemPoolEntryByScore
             >,
             // sorted by fee rate with ancestors
             boost::multi_index::ordered_non_unique<
-                boost::multi_index::tag<ancestor_score>,
-                boost::multi_index::identity<CTxMemPoolEntry>,
+                boost::multi_index::tag< ancestor_score >,
+                boost::multi_index::identity< CTxMemPoolEntry >,
                 CompareTxMemPoolEntryByAncestorFee
             >
         >
-    > indexed_transaction_set;
+    > indexed_transaction_set ;
 
     mutable CCriticalSection cs;
 
@@ -482,7 +482,7 @@ public:
 
     struct CompareIteratorByHash {
         bool operator()(const txiter &a, const txiter &b) const {
-            return a->GetTx().GetHash() < b->GetTx().GetHash();
+            return a->GetTx().GetTxHash() < b->GetTx().GetTxHash() ;
         }
     };
     typedef std::set<txiter, CompareIteratorByHash> setEntries;
@@ -671,18 +671,22 @@ private:
 
 /**
  * CCoinsView that brings transactions from a memorypool into view.
- * It does not check for spendings by memory pool transactions.
+ * It does not check for spendings by memory pool transactions
  */
 class CCoinsViewMemPool : public CCoinsViewBacked
 {
 protected:
-    const CTxMemPool& mempool;
+    const CTxMemPool & mempool ;
 
 public:
-    CCoinsViewMemPool(CCoinsView* baseIn, const CTxMemPool& mempoolIn);
-    bool GetCoins(const uint256 &txid, CCoins &coins) const;
-    bool HaveCoins(const uint256 &txid) const;
-};
+    CCoinsViewMemPool( AbstractCoinsView * in, const CTxMemPool & mempoolIn )
+        : CCoinsViewBacked( in )
+        , mempool( mempoolIn )
+    { }
+
+    virtual bool GetCoins( const uint256 & txhash, CCoins & coins ) const override ;
+    virtual bool HaveCoins( const uint256 & txhash ) const override ;
+} ;
 
 // We want to sort transactions by coin age priority
 typedef std::pair<double, CTxMemPool::txiter> TxCoinAgePriority;

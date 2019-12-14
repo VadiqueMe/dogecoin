@@ -3,7 +3,7 @@
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2016 Daniel Kraft
 // Distributed under the MIT/X11 software license, see the accompanying
-// file license.txt or http://www.opensource.org/licenses/mit-license.php.
+// file license.txt or http://www.opensource.org/licenses/mit-license.php
 
 #include "auxpow.h"
 
@@ -21,15 +21,15 @@
 
 #include <algorithm>
 
-/* Moved from wallet.cpp.  CMerkleTx is necessary for auxpow, independent
-   of an enabled (or disabled) wallet.  Always include the code.  */
+/* Moved from wallet.cpp. CMerkleTx is necessary for auxpow, independent
+   of an enabled (or disabled) wallet */
 
 const uint256 CMerkleTx::ABANDON_HASH( uint256S( "0000000000000000000000000000000000000000000000000000000000000001" ) ) ;
 
 void CMerkleTx::SetMerkleBranch(const CBlockIndex* pindex, int posInBlock)
 {
     // Update the tx's hashBlock
-    hashBlock = pindex->GetBlockHash();
+    hashBlock = pindex->GetBlockSha256Hash() ;
 
     // set the position of the transaction in the block
     nIndex = posInBlock;
@@ -37,7 +37,7 @@ void CMerkleTx::SetMerkleBranch(const CBlockIndex* pindex, int posInBlock)
 
 void CMerkleTx::InitMerkleBranch(const CBlock& block, int posInBlock)
 {
-    hashBlock = block.GetHash();
+    hashBlock = block.GetSha256Hash() ;
     nIndex = posInBlock;
     vMerkleBranch = BlockMerkleBranch(block, nIndex);
 }
@@ -97,14 +97,12 @@ CAuxPow::check(const uint256& hashAuxBlock, int nChainId,
     std::reverse(vchRootHash.begin(), vchRootHash.end()); // correct endian
 
     // Check that we are in the parent block merkle tree
-    if (CheckMerkleBranch(GetHash(), vMerkleBranch, nIndex)
-          != parentBlock.hashMerkleRoot)
-        return error("Aux POW merkle root incorrect");
+    if ( CheckMerkleBranch( GetTxHash(), vMerkleBranch, nIndex ) != parentBlock.hashMerkleRoot )
+        return error( "Aux POW merkle root incorrect" ) ;
 
     const CScript script = tx->vin[0].scriptSig;
 
-    // Check that the same work is not submitted twice to our chain.
-    //
+    // Check that the same work is not submitted twice to the chain
 
     CScript::const_iterator pcHead =
         std::search(script.begin(), script.end(), UBEGIN(pchMergedMiningHeader), UEND(pchMergedMiningHeader));
@@ -118,7 +116,7 @@ CAuxPow::check(const uint256& hashAuxBlock, int nChainId,
     if (pcHead != script.end())
     {
         // Enforce only one chain merkle root by checking that a single instance of the merged
-        // mining header exists just before.
+        // mining header exists just before
         if (script.end() != std::search(pcHead + 1, script.end(), UBEGIN(pchMergedMiningHeader), UEND(pchMergedMiningHeader)))
             return error("Multiple merged mining headers in coinbase");
         if (pcHead + sizeof(pchMergedMiningHeader) != pc)
@@ -126,9 +124,9 @@ CAuxPow::check(const uint256& hashAuxBlock, int nChainId,
     }
     else
     {
-        // For backward compatibility.
-        // Enforce only one chain merkle root by checking that it starts early in the coinbase.
-        // 8-12 bytes are enough to encode extraNonce and nBits.
+        // For backward compatibility
+        // Enforce only one chain merkle root by checking that it starts early in the coinbase
+        // 8-12 bytes are enough to encode extraNonce and nBits
         if (pc - script.begin() > 20)
             return error("Aux POW chain merkle root must start in the first 20 bytes of the parent coinbase");
     }
@@ -207,15 +205,14 @@ CAuxPow::initAuxPow ( CBlockHeader & header )
   /* Set auxpow flag right now, since we take the block hash below */
   header.SetAuxpowFlag( true ) ;
 
-  /* Build a minimal coinbase script input for merge-mining.  */
-  const uint256 blockHash = header.GetHash ();
+  /* Build a minimal coinbase script input for merge-mining */
+  const uint256 blockHash = header.GetSha256Hash ();
   std::vector<unsigned char> inputData(blockHash.begin (), blockHash.end ());
   std::reverse (inputData.begin (), inputData.end ());
   inputData.push_back (1);
   inputData.insert (inputData.end (), 7, 0);
 
-  /* Fake a parent-block coinbase with just the required input
-     script and no outputs.  */
+  /* Fake a parent-block coinbase with just the required input script and no outputs */
   CMutableTransaction coinbase;
   coinbase.vin.resize(1);
   coinbase.vin[0].prevout.SetNull();
@@ -223,7 +220,7 @@ CAuxPow::initAuxPow ( CBlockHeader & header )
   assert (coinbase.vout.empty());
   CTransactionRef coinbaseRef = MakeTransactionRef(coinbase);
 
-  /* Build a fake parent block with the coinbase.  */
+  /* Build a fake parent block with the coinbase */
   CBlock parent;
   parent.nVersion = 1;
   parent.vtx.resize(1);

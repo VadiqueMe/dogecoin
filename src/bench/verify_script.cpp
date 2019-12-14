@@ -1,6 +1,6 @@
 // Copyright (c) 2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "bench.h"
 #include "key.h"
@@ -28,7 +28,7 @@ static CMutableTransaction BuildCreditingTransaction(const CScript& scriptPubKey
     return txCredit;
 }
 
-// FIXME: Dedup with BuildSpendingTransaction in test/script_tests.cpp.
+// FIXME: Dedup with BuildSpendingTransaction in test/script_tests.cpp
 static CMutableTransaction BuildSpendingTransaction(const CScript& scriptSig, const CMutableTransaction& txCredit)
 {
     CMutableTransaction txSpend;
@@ -36,7 +36,7 @@ static CMutableTransaction BuildSpendingTransaction(const CScript& scriptSig, co
     txSpend.nLockTime = 0;
     txSpend.vin.resize(1);
     txSpend.vout.resize(1);
-    txSpend.vin[0].prevout.hash = txCredit.GetHash();
+    txSpend.vin[0].prevout.hash = txCredit.GetTxHash() ;
     txSpend.vin[0].prevout.n = 0;
     txSpend.vin[0].scriptSig = scriptSig;
     txSpend.vin[0].nSequence = CTxIn::SEQUENCE_FINAL;

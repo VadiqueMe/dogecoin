@@ -595,7 +595,7 @@
         <translation>複製金額</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
+        <source>Copy transaction hash</source>
         <translation>複製交易識別碼</translation>
     </message>
     <message>
@@ -2416,7 +2416,7 @@
         <translation>附註</translation>
     </message>
     <message>
-        <source>Transaction ID</source>
+        <source>Hash of transaction</source>
         <translation>交易識別碼</translation>
     </message>
     <message>
@@ -2633,7 +2633,7 @@
         <translation>複製金額</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
+        <source>Copy transaction hash</source>
         <translation>複製交易識別碼</translation>
     </message>
     <message>
@@ -2685,7 +2685,7 @@
         <translation>位址</translation>
     </message>
     <message>
-        <source>ID</source>
+        <source>Hash</source>
         <translation>識別碼</translation>
     </message>
     <message>

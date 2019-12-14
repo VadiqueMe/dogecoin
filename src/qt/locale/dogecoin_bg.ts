@@ -551,8 +551,8 @@
         <translation>Копирай сума</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Копирай транзакция с ID</translation>
+        <source>Copy transaction hash</source>
+        <translation>Копирай транзакция с hash</translation>
     </message>
     <message>
         <source>Lock unspent</source>
@@ -1868,10 +1868,6 @@
         <translation>Коментар</translation>
     </message>
     <message>
-        <source>Transaction ID</source>
-        <translation>ID</translation>
-    </message>
-    <message>
         <source>Merchant</source>
         <translation>Търговец</translation>
     </message>
@@ -2057,8 +2053,8 @@
         <translation>Копирай сума</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Копирай транзакция с ID</translation>
+        <source>Copy transaction hash</source>
+        <translation>Копирай hash</translation>
     </message>
     <message>
         <source>Edit label</source>
@@ -2099,10 +2095,6 @@
     <message>
         <source>Address</source>
         <translation>Адрес</translation>
-    </message>
-    <message>
-        <source>ID</source>
-        <translation>ИД</translation>
     </message>
     <message>
         <source>Exporting Failed</source>

@@ -205,8 +205,8 @@
         <translation>Kopeeri kogus</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Kopeeri transaktsiooni ID</translation>
+        <source>Copy transaction hash</source>
+        <translation>Kopeeri transaktsiooni hash</translation>
     </message>
     <message>
         <source>yes</source>
@@ -610,8 +610,8 @@
         <translation>Kommentaar</translation>
     </message>
     <message>
-        <source>Transaction ID</source>
-        <translation>Transaktsiooni ID</translation>
+        <source>Hash of transaction</source>
+        <translation>Transaktsiooni hash</translation>
     </message>
     <message>
         <source>Amount</source>
@@ -675,8 +675,8 @@
         <translation>Kopeeri summa</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Kopeeri transaktsiooni ID</translation>
+        <source>Copy transaction hash</source>
+        <translation>Kopeeri transaktsiooni hash</translation>
     </message>
     <message>
         <source>Confirmed</source>
@@ -697,10 +697,6 @@
     <message>
         <source>Address</source>
         <translation>Aadress</translation>
-    </message>
-    <message>
-        <source>ID</source>
-        <translation>ID</translation>
     </message>
     <message>
         <source>Range:</source>

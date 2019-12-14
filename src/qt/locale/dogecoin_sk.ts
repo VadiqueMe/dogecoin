@@ -587,8 +587,8 @@
         <translation>Kopírovať sumu</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Kopírovať ID transakcie</translation>
+        <source>Copy transaction hash</source>
+        <translation>Kopírovať hash transakcie</translation>
     </message>
     <message>
         <source>Lock unspent</source>
@@ -2377,8 +2377,8 @@
         <translation>Komentár</translation>
     </message>
     <message>
-        <source>Transaction ID</source>
-        <translation>ID transakcie</translation>
+        <source>Hash of transaction</source>
+        <translation>Hash transakcie</translation>
     </message>
     <message>
         <source>Full size of transaction</source>
@@ -2578,8 +2578,8 @@
         <translation>Kopírovať sumu</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Kopírovať ID transakcie</translation>
+        <source>Copy transaction hash</source>
+        <translation>Kopírovať hash transakcie</translation>
     </message>
     <message>
         <source>Copy raw transaction</source>
@@ -2628,10 +2628,6 @@
     <message>
         <source>Address</source>
         <translation>Adresa</translation>
-    </message>
-    <message>
-        <source>ID</source>
-        <translation>ID</translation>
     </message>
     <message>
         <source>Exporting Failed</source>

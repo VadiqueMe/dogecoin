@@ -1,6 +1,6 @@
 // Copyright (c) 2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "blockencodings.h"
 #include "consensus/consensus.h"
@@ -25,7 +25,7 @@ CBlockHeaderAndShortTxIDs::CBlockHeaderAndShortTxIDs(const CBlock& block, bool f
     prefilledtxn[0] = {0, block.vtx[0]};
     for (size_t i = 1; i < block.vtx.size(); i++) {
         const CTransaction& tx = *block.vtx[i];
-        shorttxids[i - 1] = GetShortID(fUseWTXID ? tx.GetWitnessHash() : tx.GetHash());
+        shorttxids[ i - 1 ] = GetShortID( fUseWTXID ? tx.GetWitnessHash() : tx.GetTxHash() ) ;
     }
 }
 
@@ -164,7 +164,8 @@ ReadStatus PartiallyDownloadedBlock::InitData(const CBlockHeaderAndShortTxIDs& c
             break;
     }
 
-    LogPrint("cmpctblock", "Initialized PartiallyDownloadedBlock for block %s using a cmpctblock of size %lu\n", cmpctblock.header.GetHash().ToString(), GetSerializeSize(cmpctblock, SER_NETWORK, PROTOCOL_VERSION));
+    LogPrint( "cmpctblock", "Initialized PartiallyDownloadedBlock for block %s using a cmpctblock of size %lu\n",
+        cmpctblock.header.GetSha256Hash().ToString(), GetSerializeSize( cmpctblock, SER_NETWORK, PROTOCOL_VERSION ) ) ;
 
     return READ_STATUS_OK;
 }
@@ -177,7 +178,7 @@ bool PartiallyDownloadedBlock::IsTxAvailable(size_t index) const {
 
 ReadStatus PartiallyDownloadedBlock::FillBlock(CBlock& block, const std::vector<CTransactionRef>& vtx_missing) {
     assert(!header.IsNull());
-    uint256 hash = header.GetHash();
+    uint256 hash = header.GetSha256Hash() ;
     block = header;
     block.vtx.resize(txn_available.size());
 
@@ -191,7 +192,7 @@ ReadStatus PartiallyDownloadedBlock::FillBlock(CBlock& block, const std::vector<
             block.vtx[i] = std::move(txn_available[i]);
     }
 
-    // Make sure we can't call FillBlock again.
+    // Make sure we can't call FillBlock again
     header.SetNull();
     txn_available.clear();
 
@@ -212,8 +213,8 @@ ReadStatus PartiallyDownloadedBlock::FillBlock(CBlock& block, const std::vector<
 
     LogPrint("cmpctblock", "Successfully reconstructed block %s with %lu txn prefilled, %lu txn from mempool (incl at least %lu from extra pool) and %lu txn requested\n", hash.ToString(), prefilled_count, mempool_count, extra_count, vtx_missing.size());
     if (vtx_missing.size() < 5) {
-        for (const auto& tx : vtx_missing)
-            LogPrint("cmpctblock", "Reconstructed block %s required tx %s\n", hash.ToString(), tx->GetHash().ToString());
+        for ( const auto & tx : vtx_missing )
+            LogPrint( "cmpctblock", "Reconstructed block %s required tx %s\n", hash.ToString(), tx->GetTxHash().ToString() ) ;
     }
 
     return READ_STATUS_OK;

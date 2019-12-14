@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "core_io.h"
 
@@ -148,10 +148,10 @@ void ScriptPubKeyToUniv(const CScript& scriptPubKey,
 
 void TxToUniv(const CTransaction& tx, const uint256& hashBlock, UniValue& entry)
 {
-    entry.pushKV("txid", tx.GetHash().GetHex());
-    entry.pushKV("hash", tx.GetWitnessHash().GetHex());
-    entry.pushKV("version", tx.nVersion);
-    entry.pushKV("locktime", (int64_t)tx.nLockTime);
+    entry.pushKV( "txid", tx.GetTxHash().GetHex() ) ;
+    entry.pushKV( "hash", tx.GetWitnessHash().GetHex() ) ;
+    entry.pushKV( "version", tx.nVersion ) ;
+    entry.pushKV( "locktime", (int64_t)tx.nLockTime ) ;
 
     UniValue vin(UniValue::VARR);
     for (unsigned int i = 0; i < tx.vin.size(); i++) {

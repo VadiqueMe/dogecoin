@@ -1,10 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2013 The Bitcoin developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_PRIMITIVES_PUREHEADER_H
-#define BITCOIN_PRIMITIVES_PUREHEADER_H
+#ifndef DOGECOIN_PRIMITIVES_PUREHEADER_H
+#define DOGECOIN_PRIMITIVES_PUREHEADER_H
 
 #include "serialize.h"
 #include "uint256.h"
@@ -14,7 +15,7 @@
  * in constructing the full header is useful, because it breaks the cyclic
  * dependency between auxpow (referencing a parent block header) and
  * the block header (referencing an auxpow).  The parent block header
- * does not have auxpow itself, so it is a pure header.
+ * does not have auxpow itself, so it is a pure header
  */
 class CPureBlockHeader
 {
@@ -26,14 +27,14 @@ public:
     static const int32_t VERSION_CHAIN_START = 1 << 16 ;
 
     // header
-    int32_t nVersion;
-    uint256 hashPrevBlock;
-    uint256 hashMerkleRoot;
-    uint32_t nTime;
-    uint32_t nBits;
-    uint32_t nNonce;
+    int32_t nVersion ;
+    uint256 hashPrevBlock ;
+    uint256 hashMerkleRoot ;
+    uint32_t nTime ;
+    uint32_t nBits ;
+    uint32_t nNonce ;
 
-    virtual std::string ToString() const ;
+    std::string ToString() const ;
 
     CPureBlockHeader()
     {
@@ -68,9 +69,9 @@ public:
         return (nBits == 0);
     }
 
-    uint256 GetHash() const ;
+    uint256 GetSha256Hash() const ;
 
-    uint256 GetPoWHash() const ;
+    uint256 GetScryptHash() const ;
 
     int64_t GetBlockTime() const
     {
@@ -81,7 +82,7 @@ public:
        auxpow data and chain ID.  This used to be in the CBlockVersion
        class, but was moved here when we switched back to nVersion being
        a pure int member as preparation to undoing the "abuse" and
-       allowing BIP9 to work.  */
+       allowing BIP9 to work */
 
     /**
      * Extract the base version (without modifiers and chain ID)
@@ -99,15 +100,15 @@ public:
     /**
      * Set the base version (apart from chain ID and auxpow flag) to
      * the one given.  This should only be called when auxpow is not yet
-     * set, to initialise a block!
-     * @param nBaseVersion The base version.
-     * @param nChainId The auxpow chain ID.
+     * set, to initialise a block
+     * @param nBaseVersion The base version
+     * @param nChainId The auxpow chain ID
      */
     void SetBaseVersion(int32_t nBaseVersion, int32_t nChainId);
 
     /**
-     * Extract the chain ID.
-     * @return The chain ID encoded in the version.
+     * Extract the chain ID
+     * @return The chain ID encoded in the version
      */
     inline int32_t GetChainId() const
     {
@@ -115,8 +116,8 @@ public:
     }
 
     /**
-     * Set the chain ID.  This is used for the test suite.
-     * @param ch The chain ID to set.
+     * Set the chain ID.  This is used for the test suite
+     * @param ch The chain ID to set
      */
     inline void SetChainId(int32_t chainId)
     {
@@ -157,4 +158,4 @@ public:
     }
 } ;
 
-#endif // BITCOIN_PRIMITIVES_PUREHEADER_H
+#endif

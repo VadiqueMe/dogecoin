@@ -151,7 +151,7 @@ public:
 
         genesis = CreateGenesisBlock(1386325540, 99943, 0x1e0ffff0, 1, 88 * COIN);
 
-        consensus.hashGenesisBlock = genesis.GetHash();
+        consensus.hashGenesisBlock = genesis.GetSha256Hash() ;
         digishieldConsensus.hashGenesisBlock = consensus.hashGenesisBlock;
         auxpowConsensus.hashGenesisBlock = consensus.hashGenesisBlock;
         assert(consensus.hashGenesisBlock == uint256S("0x1a91e3dace36e2be3bf030a65679fe821aa1d6ef92e7c9902eb318182c355691"));
@@ -289,7 +289,7 @@ public:
 
      /*
         arith_uint256 maxScryptHashGenesis = UintToArith256( consensus.powLimit ) ;
-        arith_uint256 maxShaHashGenesis = UintToArith256( consensus.powLimit ) << 2 ;
+        arith_uint256 maxSha256HashGenesis = UintToArith256( consensus.powLimit ) << 2 ;
         uint32_t nonce = 0xbe000000 ;
         while ( nonce >= 0x2be )
         {
@@ -301,8 +301,8 @@ public:
                 1 * COIN
             ) ;
 
-            if ( UintToArith256( genesis.GetPoWHash() ) <= maxScryptHashGenesis &&
-                    UintToArith256( genesis.GetHash() ) <= maxShaHashGenesis )
+            if ( UintToArith256( genesis.GetScryptHash() ) <= maxScryptHashGenesis &&
+                    UintToArith256( genesis.GetSha256Hash() ) <= maxSha256HashGenesis )
                 break ;
 
             -- nonce ;
@@ -311,8 +311,8 @@ public:
         std::cout << "genesis block's time is " << std::put_time( &genesisTime, "%Y-%m-%d %H:%M:%S" ) << std::endl ;
         printf( "genesis block's nonce is 0x%08x\n", genesis.nNonce ) ;
         printf( "genesis block's hash-merkle-root is 0x%s\n", genesis.hashMerkleRoot.GetHex().c_str() );
-        printf( "genesis block's scrypt hash is 0x%s\n", genesis.GetPoWHash().GetHex().c_str() ) ;
-        printf( "genesis block's sha256 hash is 0x%s\n", genesis.GetHash().GetHex().c_str() ) ;
+        printf( "genesis block's scrypt hash is 0x%s\n", genesis.GetScryptHash().GetHex().c_str() ) ;
+        printf( "genesis block's sha256 hash is 0x%s\n", genesis.GetSha256Hash().GetHex().c_str() ) ;
      */
 
         const uint32_t genesisNonce = 0xbd2ba4a2 ;
@@ -321,10 +321,10 @@ public:
 
         genesis = CreateGenesisBlock( mktime( &genesisTime ), genesisNonce, /* bits */ UintToArith256( consensus.powLimit ).GetCompact(), /* version */ 0x620004, 1 * COIN ) ;
 
-        consensus.hashGenesisBlock = genesis.GetHash() ;
+        consensus.hashGenesisBlock = genesis.GetSha256Hash() ;
 
-        assert ( UintToArith256( genesis.GetPoWHash() ) <= UintToArith256( consensus.powLimit ) &&
-                    UintToArith256( genesis.GetHash() ) <= ( UintToArith256( consensus.powLimit ) << 2 ) ) ;
+        assert ( UintToArith256( genesis.GetScryptHash() ) <= UintToArith256( consensus.powLimit ) &&
+                    UintToArith256( genesis.GetSha256Hash() ) <= ( UintToArith256( consensus.powLimit ) << 2 ) ) ;
 
         uint256 expectedShaHashOfGenesis = uint256S( "0x000aa3a75133cd33ef50cf2377479563fa9170259dc52a44834ea3b6987840f7" ) ;
         uint256 expectedMerkleRootOfGenesis = uint256S( "0x1553b4400a70b51fae69eaf8c771f97b1f8996bcd5dbfaad4212d793377f335c" ) ;
@@ -470,7 +470,7 @@ public:
         nPruneAfterHeight = 1000;
 
         genesis = CreateGenesisBlock(1391503289, 997879, 0x1e0ffff0, 1, 88 * COIN);
-        consensus.hashGenesisBlock = genesis.GetHash();
+        consensus.hashGenesisBlock = genesis.GetSha256Hash() ;
         digishieldConsensus.hashGenesisBlock = consensus.hashGenesisBlock;
         minDifficultyConsensus.hashGenesisBlock = consensus.hashGenesisBlock;
         auxpowConsensus.hashGenesisBlock = consensus.hashGenesisBlock;
@@ -591,7 +591,7 @@ public:
         nPruneAfterHeight = 1000;
 
         genesis = CreateGenesisBlock(1296688602, 2, 0x207fffff, 1, 88 * COIN);
-        consensus.hashGenesisBlock = genesis.GetHash();
+        consensus.hashGenesisBlock = genesis.GetSha256Hash() ;
         digishieldConsensus.hashGenesisBlock = consensus.hashGenesisBlock;
         auxpowConsensus.hashGenesisBlock = consensus.hashGenesisBlock;
         assert(consensus.hashGenesisBlock == uint256S("0x3d2160a3b5dc4a9d62e7e66a295f70313ac808440ef7400d6c0772171ce973a5"));

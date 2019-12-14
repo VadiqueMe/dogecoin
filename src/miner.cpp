@@ -186,7 +186,7 @@ std::unique_ptr< CBlockTemplate > BlockAssembler::CreateNewBlock( const CScript 
     coinbaseTx.vin[0].prevout.SetNull();
     coinbaseTx.vout.resize(1);
     coinbaseTx.vout[0].scriptPubKey = scriptPubKeyIn;
-    CAmount subsidy = GetDogecoinBlockSubsidy( nHeight, consensus, pindexPrev->GetBlockHash() ) ;
+    CAmount subsidy = GetDogecoinBlockSubsidy( nHeight, consensus, pindexPrev->GetBlockSha256Hash() ) ;
     /* if ( NameOfChain() == "test" ) subsidy = 1 ; */
     coinbaseTx.vout[0].nValue = nFees + subsidy ;
     coinbaseTx.vin[0].scriptSig = CScript() << nHeight << OP_0;
@@ -201,7 +201,7 @@ std::unique_ptr< CBlockTemplate > BlockAssembler::CreateNewBlock( const CScript 
     ) ;
 
     // Fill in header
-    pblock->hashPrevBlock  = pindexPrev->GetBlockHash();
+    pblock->hashPrevBlock  = pindexPrev->GetBlockSha256Hash();
     UpdateTime(pblock, consensus, pindexPrev);
     pblock->nBits          = GetNextWorkRequired( pindexPrev, pblock, consensus ) ;
     pblock->nNonce         = 0;
@@ -345,12 +345,12 @@ void BlockAssembler::AddToBlock( CTxMemPool::txiter iter )
     bool fPrintPriority = GetBoolArg( "-printpriority", DEFAULT_PRINTPRIORITY ) ;
     if ( fPrintPriority ) {
         double dPriority = iter->GetPriority( nHeight ) ;
-        CAmount dummy;
-        mempool.ApplyDeltas(iter->GetTx().GetHash(), dPriority, dummy);
+        CAmount dummy ;
+        mempool.ApplyDeltas( iter->GetTx().GetTxHash(), dPriority, dummy ) ;
         LogPrintf("priority %.1f fee %s tx %s\n",
                   dPriority,
                   CFeeRate(iter->GetModifiedFee(), iter->GetTxSize()).ToString(),
-                  iter->GetTx().GetHash().ToString());
+                  iter->GetTx().GetTxHash().ToString());
     }
 }
 
@@ -573,10 +573,10 @@ void BlockAssembler::addPriorityTxs()
     for (CTxMemPool::indexed_transaction_set::iterator mi = mempool.mapTx.begin();
          mi != mempool.mapTx.end(); ++mi)
     {
-        double dPriority = mi->GetPriority(nHeight);
-        CAmount dummy;
-        mempool.ApplyDeltas(mi->GetTx().GetHash(), dPriority, dummy);
-        vecPriority.push_back(TxCoinAgePriority(dPriority, mi));
+        double dPriority = mi->GetPriority( nHeight ) ;
+        CAmount dummy ;
+        mempool.ApplyDeltas( mi->GetTx().GetTxHash(), dPriority, dummy ) ;
+        vecPriority.push_back( TxCoinAgePriority( dPriority, mi ) ) ;
     }
     std::make_heap(vecPriority.begin(), vecPriority.end(), pricomparer);
 
@@ -661,12 +661,12 @@ static bool ProcessBlockFound( const CBlock * const block, const CChainParams & 
 
     {
         LOCK( cs_main );
-        if ( block->hashPrevBlock != chainActive.Tip()->GetBlockHash() )
+        if ( block->hashPrevBlock != chainActive.Tip()->GetBlockSha256Hash() )
             return error( "ProcessBlockFound: generated block is stale" ) ;
     }
 
     // Say about the new block
-    GetMainSignals().BlockFound( /* sha256 hash */ block->GetHash() ) ;
+    GetMainSignals().BlockFound( block->GetSha256Hash() ) ;
 
     // Process this block the same as if it were received from another node
     if ( ! ProcessNewBlock( chainparams, std::make_shared< const CBlock >( *block ), true, nullptr ) )
@@ -757,7 +757,7 @@ void MiningThread::MineBlocks()
                     currentBlock->nNonce ++ ;
                     noncesScanned ++ ;
 
-                    arith_uint256 arithPowHash = UintToArith256( currentBlock->GetPoWHash() ) ;
+                    arith_uint256 arithPowHash = UintToArith256( currentBlock->GetScryptHash() ) ;
                     if ( arithPowHash < smallestScryptHashBlock ) smallestScryptHashBlock = arithPowHash ;
 
                     if ( CheckProofOfWork( *currentBlock, currentBlock->nBits, consensus ) )
@@ -777,7 +777,7 @@ void MiningThread::MineBlocks()
                 {
                     LogPrintf( "MiningThread (%d):\n", numberOfThread ) ;
                     LogPrintf( "proof-of-work found with nonce 0x%x\n   scrypt hash %s\n   <= solution %s\n",
-                               currentBlock->nNonce, currentBlock->GetPoWHash().GetHex(), solutionHash.GetHex() ) ;
+                               currentBlock->nNonce, currentBlock->GetScryptHash().GetHex(), solutionHash.GetHex() ) ;
 
                     if ( ProcessBlockFound( currentBlock, chainparams ) ) {
                         howManyBlocksWereGeneratedByThisThread ++ ;
@@ -922,5 +922,5 @@ CAmount GetCurrentNewBlockSubsidy()
     return GetDogecoinBlockSubsidy(
                 chainActive.Tip()->nHeight + 1,
                 Params().GetConsensus( chainActive.Tip()->nHeight + 1 ),
-                chainActive.Tip()->GetBlockHash() ) ;
+                chainActive.Tip()->GetBlockSha256Hash() ) ;
 }

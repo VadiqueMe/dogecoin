@@ -583,8 +583,8 @@
         <translation>Copiar cantidad</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Copiar ID de transacción</translation>
+        <source>Copy transaction hash</source>
+        <translation>Copiar hash de transacción</translation>
     </message>
     <message>
         <source>Lock unspent</source>
@@ -2320,8 +2320,8 @@
         <translation>Comentario</translation>
     </message>
     <message>
-        <source>Transaction ID</source>
-        <translation>Identificador de transacción (ID)</translation>
+        <source>Hash of transaction</source>
+        <translation>Hash de transacción</translation>
     </message>
     <message>
         <source>Output index</source>
@@ -2529,8 +2529,8 @@
         <translation>Copiar cantidad</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Copiar ID de transacción</translation>
+        <source>Copy transaction hash</source>
+        <translation>Copiar hash de transacción</translation>
     </message>
     <message>
         <source>Copy raw transaction</source>
@@ -2579,10 +2579,6 @@
     <message>
         <source>Address</source>
         <translation>Dirección</translation>
-    </message>
-    <message>
-        <source>ID</source>
-        <translation>ID</translation>
     </message>
     <message>
         <source>Exporting Failed</source>

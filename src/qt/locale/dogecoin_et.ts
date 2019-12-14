@@ -511,8 +511,8 @@
         <translation>Kopeeri summa</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Kopeeri tehingu ID</translation>
+        <source>Copy transaction hash</source>
+        <translation>Kopeeri tehingu hash</translation>
     </message>
     <message>
         <source>Copy quantity</source>
@@ -1581,8 +1581,8 @@
         <translation>Kopeeri summa</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Kopeeri tehingu ID</translation>
+        <source>Copy transaction hash</source>
+        <translation>Kopeeri tehingu hash</translation>
     </message>
     <message>
         <source>Comma separated file (*.csv)</source>
@@ -1605,12 +1605,8 @@
         <translation>Aadress</translation>
     </message>
     <message>
-        <source>ID</source>
-        <translation>ID</translation>
-    </message>
-    <message>
         <source>Exporting Failed</source>
-        <translation>Eksport ebaõnnestus.</translation>
+        <translation>Eksport ebaõnnestus</translation>
     </message>
     </context>
 <context>

@@ -427,7 +427,7 @@
         <translation>Αντιγραφή ποσού</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
+        <source>Copy transaction hash</source>
         <translation>Αντιγραφή ταυτότητας συναλλαγής</translation>
     </message>
     <message>
@@ -1501,7 +1501,7 @@
         <translation>Αντιγραφή ποσού</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
+        <source>Copy transaction hash</source>
         <translation>Αντιγραφή ταυτότητας συναλλαγής</translation>
     </message>
     <message>

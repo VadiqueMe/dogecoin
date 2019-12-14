@@ -1,6 +1,6 @@
 // Copyright (c) 2012-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "bloom.h"
 
@@ -133,16 +133,14 @@ bool CBloomFilter::IsWithinSizeConstraints() const
 
 bool CBloomFilter::IsRelevantAndUpdate(const CTransaction& tx)
 {
-    bool fFound = false;
+    if ( isFull ) return true ;
+    if ( isEmpty ) return false ;
+
+    bool fFound = false ;
     // Match if the filter contains the hash of tx
-    //  for finding tx when they appear in a block
-    if (isFull)
-        return true;
-    if (isEmpty)
-        return false;
-    const uint256& hash = tx.GetHash();
-    if (contains(hash))
-        fFound = true;
+    //  for finding tx when it appears in a block
+    const uint256 & hash = tx.GetTxHash() ;
+    if ( contains( hash ) ) fFound = true ;
 
     for (unsigned int i = 0; i < tx.vout.size(); i++)
     {
@@ -218,9 +216,9 @@ CRollingBloomFilter::CRollingBloomFilter(unsigned int nElements, double fpRate)
 {
     double logFpRate = log(fpRate);
     /* The optimal number of hash functions is log(fpRate) / log(0.5), but
-     * restrict it to the range 1-50. */
+     * restrict it to the range 1-50 */
     nHashFuncs = std::max(1, std::min((int)round(logFpRate / log(0.5)), 50));
-    /* In this rolling bloom filter, we'll store between 2 and 3 generations of nElements / 2 entries. */
+    /* In this rolling bloom filter, we'll store between 2 and 3 generations of nElements / 2 entries */
     nEntriesPerGeneration = (nElements + 1) / 2;
     uint32_t nMaxElements = nEntriesPerGeneration * 3;
     /* The maximum fpRate = pow(1.0 - exp(-nHashFuncs * nMaxElements / nFilterBits), nHashFuncs)
@@ -236,7 +234,7 @@ CRollingBloomFilter::CRollingBloomFilter(unsigned int nElements, double fpRate)
      * bit is treated as unset. If the bits are (01), (10), or (11), the bit is
      * treated as set in generation 1, 2, or 3 respectively.
      * These bits are stored in separate integers: position P corresponds to bit
-     * (P & 63) of the integers data[(P >> 6) * 2] and data[(P >> 6) * 2 + 1]. */
+     * (P & 63) of the integers data[(P >> 6) * 2] and data[(P >> 6) * 2 + 1] */
     data.resize(((nFilterBits + 63) / 64) << 1);
     reset();
 }
@@ -256,7 +254,7 @@ void CRollingBloomFilter::insert(const std::vector<unsigned char>& vKey)
         }
         uint64_t nGenerationMask1 = -(uint64_t)(nGeneration & 1);
         uint64_t nGenerationMask2 = -(uint64_t)(nGeneration >> 1);
-        /* Wipe old entries that used this generation number. */
+        /* Wipe old entries that used this generation number */
         for (uint32_t p = 0; p < data.size(); p += 2) {
             uint64_t p1 = data[p], p2 = data[p + 1];
             uint64_t mask = (p1 ^ nGenerationMask1) | (p2 ^ nGenerationMask2);
@@ -270,7 +268,7 @@ void CRollingBloomFilter::insert(const std::vector<unsigned char>& vKey)
         uint32_t h = RollingBloomHash(n, nTweak, vKey);
         int bit = h & 0x3F;
         uint32_t pos = (h >> 6) % data.size();
-        /* The lowest bit of pos is ignored, and set to zero for the first bit, and to one for the second. */
+        /* The lowest bit of pos is ignored, and set to zero for the first bit, and to one for the second */
         data[pos & ~1] = (data[pos & ~1] & ~(((uint64_t)1) << bit)) | ((uint64_t)(nGeneration & 1)) << bit;
         data[pos | 1] = (data[pos | 1] & ~(((uint64_t)1) << bit)) | ((uint64_t)(nGeneration >> 1)) << bit;
     }

@@ -519,8 +519,8 @@
         <translation>Copia l'import</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Copiar ID de transacció</translation>
+        <source>Copy transaction hash</source>
+        <translation>Copiar hash de transacció</translation>
     </message>
     <message>
         <source>Lock unspent</source>
@@ -2024,8 +2024,8 @@
         <translation>Comentar</translation>
     </message>
     <message>
-        <source>Transaction ID</source>
-        <translation>ID de transacció</translation>
+        <source>Hash of transaction</source>
+        <translation>Hash de transacció</translation>
     </message>
     <message>
         <source>Merchant</source>
@@ -2217,8 +2217,8 @@
         <translation>Copia l'import</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Copiar ID de transacció</translation>
+        <source>Copy transaction hash</source>
+        <translation>Copiar hash de transacció</translation>
     </message>
     <message>
         <source>Edit label</source>
@@ -2259,10 +2259,6 @@
     <message>
         <source>Address</source>
         <translation>Adreça</translation>
-    </message>
-    <message>
-        <source>ID</source>
-        <translation>ID</translation>
     </message>
     <message>
         <source>Exporting Failed</source>

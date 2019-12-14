@@ -555,8 +555,8 @@
         <translation>Copiar valor</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Copiar Id. da transação</translation>
+        <source>Copy transaction hash</source>
+        <translation>Copiar hash da transação</translation>
     </message>
     <message>
         <source>Lock unspent</source>
@@ -1941,8 +1941,8 @@
         <translation>Copiar valor</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Copiar Id. da transação</translation>
+        <source>Copy transaction hash</source>
+        <translation>Copiar hash da transação</translation>
     </message>
     <message>
         <source>Comma separated file (*.csv)</source>

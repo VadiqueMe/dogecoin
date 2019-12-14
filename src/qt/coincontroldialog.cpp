@@ -55,9 +55,9 @@ CoinControlDialog::CoinControlDialog( const PlatformStyle * style, QWidget * par
     QAction *copyAddressAction = new QAction(tr("Copy address"), this);
     QAction *copyLabelAction = new QAction(tr("Copy label"), this);
     QAction *copyAmountAction = new QAction(tr("Copy amount"), this);
-             copyTransactionHashAction = new QAction(tr("Copy transaction ID"), this);  // we need to enable/disable this
-             lockAction = new QAction(tr("Lock unspent"), this);                        // we need to enable/disable this
-             unlockAction = new QAction(tr("Unlock unspent"), this);                    // we need to enable/disable this
+             copyTransactionHashAction = new QAction( tr( "Copy transaction hash" ), this ) ; // need to enable/disable this
+             lockAction = new QAction(tr("Lock unspent"), this);                        // need to enable/disable this
+             unlockAction = new QAction(tr("Unlock unspent"), this);                    // need to enable/disable this
 
     // context menu
     contextMenu = new QMenu(this);
@@ -204,7 +204,7 @@ void CoinControlDialog::showMenu(const QPoint &point)
     {
         contextMenuItem = item;
 
-        // disable some items (like Copy Transaction ID, lock, unlock) for tree roots in context menu
+        // disable some items (like copy transaction hash, lock, unlock) for tree roots in context menu
         if (item->text(COLUMN_TXHASH).length() == 64) // transaction hash is 64 characters (this means its a child node, so its not a parent node in tree mode)
         {
             copyTransactionHashAction->setEnabled(true);
@@ -255,10 +255,10 @@ void CoinControlDialog::copyAddress()
         GUIUtil::setClipboard(contextMenuItem->text(COLUMN_ADDRESS));
 }
 
-// context menu action: copy transaction id
+// context menu action: copy transaction hash
 void CoinControlDialog::copyTransactionHash()
 {
-    GUIUtil::setClipboard(contextMenuItem->text(COLUMN_TXHASH));
+    GUIUtil::setClipboard( contextMenuItem->text( COLUMN_TXHASH ) ) ;
 }
 
 // context menu action: lock coin
@@ -445,7 +445,7 @@ void CoinControlDialog::updateLabels( WalletModel * model, QDialog * dialog )
     for ( const COutput & out : vOutputs ) {
         // unselect already spent, very unlikely scenario, this could happen
         // when selected are spent elsewhere, like rpc or another computer
-        uint256 txhash = out.tx->GetHash();
+        uint256 txhash = out.tx->GetTxHash() ;
         COutPoint outpt(txhash, out.i);
         if (model->isSpent(outpt))
         {
@@ -678,7 +678,7 @@ void CoinControlDialog::updateView()
             itemOutput->setData(COLUMN_CONFIRMATIONS, Qt::UserRole, QVariant((qlonglong)out.nDepth));
 
             // transaction hash
-            uint256 txhash = out.tx->GetHash();
+            uint256 txhash = out.tx->GetTxHash() ;
             itemOutput->setText(COLUMN_TXHASH, QString::fromStdString(txhash.GetHex()));
 
             // vout index

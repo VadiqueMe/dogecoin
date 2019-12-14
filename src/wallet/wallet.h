@@ -1,10 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_WALLET_WALLET_H
-#define BITCOIN_WALLET_WALLET_H
+#ifndef DOGECOIN_WALLET_WALLET_H
+#define DOGECOIN_WALLET_WALLET_H
 
 #include "amount.h"
 #include "feerate.h"
@@ -30,7 +31,6 @@
 #include <utility>
 #include <vector>
 
-#include <boost/shared_ptr.hpp>
 #include <boost/thread.hpp>
 
 extern CWallet* pwalletMain;
@@ -507,14 +507,14 @@ private:
     /**
      * Used to keep track of spent outpoints, and
      * detect and report conflicts (double-spends or
-     * mutated transactions where the mutant gets mined).
+     * mutated transactions where the mutant gets mined)
      */
     typedef std::multimap<COutPoint, uint256> TxSpends;
     TxSpends mapTxSpends;
     void AddToSpends(const COutPoint& outpoint, const uint256& wtxid);
     void AddToSpends(const uint256& wtxid);
 
-    /* Mark a transaction (and its in-wallet descendants) as conflicting with a particular block. */
+    /* Mark a transaction (and its in-wallet descendants) as conflicting with a particular block */
     void MarkConflicted(const uint256& hashBlock, const uint256& hashTx);
 
     void SyncMetaData(std::pair<TxSpends::iterator, TxSpends::iterator>);
@@ -969,4 +969,4 @@ bool CWallet::DummySignTx(CMutableTransaction &txNew, const ContainerType &coins
     }
     return true;
 }
-#endif // BITCOIN_WALLET_WALLET_H
+#endif

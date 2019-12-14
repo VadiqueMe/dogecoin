@@ -22,61 +22,63 @@ void UpdateCoins(const CTransaction& tx, CCoinsViewCache& inputs, CTxUndo &txund
 
 namespace
 {
-class CCoinsViewTest : public CCoinsView
+class CCoinsViewTest : public AbstractCoinsView
 {
-    uint256 hashBestBlock_;
-    std::map<uint256, CCoins> map_;
+    uint256 hashBestBlock_ ;
+    std::map< uint256, CCoins > map_ ;
 
 public:
-    bool GetCoins(const uint256& txid, CCoins& coins) const
+    virtual bool GetCoins( const uint256 & txhash, CCoins & coins ) const override
     {
-        std::map<uint256, CCoins>::const_iterator it = map_.find(txid);
+        std::map< uint256, CCoins >::const_iterator it = map_.find( txhash ) ;
         if (it == map_.end()) {
             return false;
         }
         coins = it->second;
         if (coins.IsPruned() && insecure_rand() % 2 == 0) {
-            // Randomly return false in case of an empty entry.
+            // Randomly return false in case of an empty entry
             return false;
         }
         return true;
     }
 
-    bool HaveCoins(const uint256& txid) const
+    virtual bool HaveCoins( const uint256 & txhash ) const override
     {
-        CCoins coins;
-        return GetCoins(txid, coins);
+        CCoins coins ;
+        return GetCoins( txhash, coins ) ;
     }
 
-    uint256 GetBestBlock() const { return hashBestBlock_; }
+    virtual uint256 GetSha256OfBestBlock() const override {  return hashBestBlock_ ;  }
 
-    bool BatchWrite(CCoinsMap& mapCoins, const uint256& hashBlock)
+    virtual bool BatchWrite( CCoinsMap & mapCoins, const uint256 & blockHash ) override
     {
         for (CCoinsMap::iterator it = mapCoins.begin(); it != mapCoins.end(); ) {
             if (it->second.flags & CCoinsCacheEntry::DIRTY) {
-                // Same optimization used in CCoinsViewDB is to only write dirty entries.
+                // Same optimization used in CCoinsViewDB is to only write dirty entries
                 map_[it->first] = it->second.coins;
                 if (it->second.coins.IsPruned() && insecure_rand() % 3 == 0) {
-                    // Randomly delete empty entries on write.
+                    // Randomly delete empty entries on write
                     map_.erase(it->first);
                 }
             }
             mapCoins.erase(it++);
         }
-        if (!hashBlock.IsNull())
-            hashBestBlock_ = hashBlock;
+        if ( ! blockHash.IsNull() )
+            hashBestBlock_ = blockHash ;
         return true;
     }
-};
+
+    virtual CCoinsViewCursor * Cursor() const override {  return nullptr ;  }
+} ;
 
 class CCoinsViewCacheTest : public CCoinsViewCache
 {
 public:
-    CCoinsViewCacheTest(CCoinsView* base) : CCoinsViewCache(base) {}
+    CCoinsViewCacheTest( AbstractCoinsView * in ) : CCoinsViewCache( in ) { }
 
     void SelfTest() const
     {
-        // Manually recompute the dynamic usage of the whole data, and compare it.
+        // Manually recompute the dynamic usage of the whole data, and compare it
         size_t ret = memusage::DynamicUsage(cacheCoins);
         for (CCoinsMap::iterator it = cacheCoins.begin(); it != cacheCoins.end(); it++) {
             ret += it->second.coins.DynamicMemoryUsage();
@@ -95,14 +97,14 @@ BOOST_FIXTURE_TEST_SUITE(coins_tests, BasicTestingSetup)
 static const unsigned int NUM_SIMULATION_ITERATIONS = 40000;
 
 // This is a large randomized insert/remove simulation test on a variable-size
-// stack of caches on top of CCoinsViewTest.
+// stack of caches on top of CCoinsViewTest
 //
 // It will randomly create/update/delete CCoins entries to a tip of caches, with
 // txids picked from a limited list of random 256-bit hashes. Occasionally, a
-// new tip is added to the stack of caches, or the tip is flushed and removed.
+// new tip is added to the stack of caches, or the tip is flushed and removed
 //
 // During the process, booleans are kept to make sure that the randomized
-// operation hits all branches.
+// operation hits all branches
 BOOST_AUTO_TEST_CASE(coins_cache_simulation_test)
 {
     // Various coverage trackers.
@@ -114,27 +116,27 @@ BOOST_AUTO_TEST_CASE(coins_cache_simulation_test)
     bool found_an_entry = false;
     bool missed_an_entry = false;
 
-    // A simple map to track what we expect the cache stack to represent.
+    // A simple map to track what we expect the cache stack to represent
     std::map<uint256, CCoins> result;
 
     // The cache stack.
-    CCoinsViewTest base; // A CCoinsViewTest at the bottom.
-    std::vector<CCoinsViewCacheTest*> stack; // A stack of CCoinsViewCaches on top.
-    stack.push_back(new CCoinsViewCacheTest(&base)); // Start with one cache.
+    CCoinsViewTest base; // A CCoinsViewTest at the bottom
+    std::vector<CCoinsViewCacheTest*> stack; // A stack of CCoinsViewCaches on top
+    stack.push_back(new CCoinsViewCacheTest(&base)); // Start with one cache
 
-    // Use a limited set of random transaction ids, so we do test overwriting entries.
-    std::vector<uint256> txids;
-    txids.resize(NUM_SIMULATION_ITERATIONS / 8);
-    for (unsigned int i = 0; i < txids.size(); i++) {
-        txids[i] = GetRandHash();
+    // Use a limited set of random transaction hashes, so we do test overwriting entries
+    std::vector< uint256 > txhashes ;
+    txhashes.resize( NUM_SIMULATION_ITERATIONS / 8 ) ;
+    for ( unsigned int i = 0 ; i < txhashes.size() ; i ++ ) {
+        txhashes[ i ] = GetRandHash() ;
     }
 
-    for (unsigned int i = 0; i < NUM_SIMULATION_ITERATIONS; i++) {
-        // Do a random modification.
+    for ( unsigned int i = 0 ; i < NUM_SIMULATION_ITERATIONS ; i ++ ) {
+        // Do a random modification
         {
-            uint256 txid = txids[insecure_rand() % txids.size()]; // txid we're going to modify in this iteration.
-            CCoins& coins = result[txid];
-            CCoinsModifier entry = stack.back()->ModifyCoins(txid);
+            uint256 txhash = txhashes[ insecure_rand() % txhashes.size() ] ; // txhash to modify in this iteration
+            CCoins & coins = result[ txhash ] ;
+            CCoinsModifier entry = stack.back()->ModifyCoins( txhash ) ;
             BOOST_CHECK(coins == *entry);
             if (insecure_rand() % 5 == 0 || coins.IsPruned()) {
                 if (coins.IsPruned()) {
@@ -165,8 +167,8 @@ BOOST_AUTO_TEST_CASE(coins_cache_simulation_test)
                     missed_an_entry = true;
                 }
             }
-            BOOST_FOREACH(const CCoinsViewCacheTest *test, stack) {
-                test->SelfTest();
+            for ( const CCoinsViewCacheTest * test : stack) {
+                test->SelfTest() ;
             }
         }
 
@@ -187,7 +189,7 @@ BOOST_AUTO_TEST_CASE(coins_cache_simulation_test)
             }
             if (stack.size() == 0 || (stack.size() < 4 && insecure_rand() % 2)) {
                 //Add a new cache
-                CCoinsView* tip = &base;
+                AbstractCoinsView * tip = &base ;
                 if (stack.size() > 0) {
                     tip = stack.back();
                 } else {
@@ -275,12 +277,12 @@ BOOST_AUTO_TEST_CASE(updatecoins_simulation_test)
                     // Reuse the exact same coinbase
                     tx = std::get<0>(txd);
                     // shouldn't be available for reconnection if its been duplicated
-                    disconnectedids.erase(tx.GetHash());
+                    disconnectedids.erase( tx.GetTxHash() ) ;
 
-                    duplicateids.insert(tx.GetHash());
+                    duplicateids.insert( tx.GetTxHash() ) ;
                 }
                 else {
-                    coinbaseids.insert(tx.GetHash());
+                    coinbaseids.insert( tx.GetTxHash() ) ;
                 }
                 assert(CTransaction(tx).IsCoinBase());
             }
@@ -295,22 +297,22 @@ BOOST_AUTO_TEST_CASE(updatecoins_simulation_test)
                     tx = std::get<0>(txd);
                     prevouthash = tx.vin[0].prevout.hash;
                     if (!CTransaction(tx).IsCoinBase() && !utxoset.count(prevouthash)) {
-                        disconnectedids.erase(tx.GetHash());
+                        disconnectedids.erase( tx.GetTxHash() ) ;
                         continue;
                     }
 
                     // If this tx is already IN the UTXO, then it must be a coinbase, and it must be a duplicate
-                    if (utxoset.count(tx.GetHash())) {
-                        assert(CTransaction(tx).IsCoinBase());
-                        assert(duplicateids.count(tx.GetHash()));
+                    if ( utxoset.count( tx.GetTxHash() ) ) {
+                        assert( CTransaction( tx ).IsCoinBase() ) ;
+                        assert( duplicateids.count( tx.GetTxHash() ) ) ;
                     }
-                    disconnectedids.erase(tx.GetHash());
+                    disconnectedids.erase( tx.GetTxHash() ) ;
                 }
 
                 // 16/20 times create a regular tx
                 else {
-                    TxData &txd = FindRandomFrom(utxoset);
-                    prevouthash = std::get<0>(txd).GetHash();
+                    TxData & txd = FindRandomFrom( utxoset ) ;
+                    prevouthash = std::get< 0 >( txd ).GetTxHash() ;
 
                     // Construct the tx to spend the coins of prevouthash
                     tx.vin[0].prevout.hash = prevouthash;
@@ -331,17 +333,17 @@ BOOST_AUTO_TEST_CASE(updatecoins_simulation_test)
 
             }
             // Update the expected result to know about the new output coins
-            result[tx.GetHash()].FromTx(tx, height);
+            result[ tx.GetTxHash() ].FromTx( tx, height ) ;
 
             // Call UpdateCoins on the top cache
             CTxUndo undo;
             UpdateCoins(tx, *(stack.back()), undo, height);
 
             // Update the utxo set for future spends
-            utxoset.insert(tx.GetHash());
+            utxoset.insert( tx.GetTxHash() ) ;
 
             // Track this tx and undo info to use later
-            alltxs.insert(std::make_pair(tx.GetHash(),std::make_tuple(tx,undo,oldcoins)));
+            alltxs.insert( std::make_pair( tx.GetTxHash(), std::make_tuple( tx, undo, oldcoins ) ) ) ;
         }
 
         //1/20 times undo a previous transaction
@@ -352,7 +354,7 @@ BOOST_AUTO_TEST_CASE(updatecoins_simulation_test)
             CTxUndo &undo = std::get<1>(txd);
             CCoins &origcoins = std::get<2>(txd);
 
-            uint256 undohash = tx.GetHash();
+            uint256 undohash = tx.GetTxHash() ;
 
             // Update the expected result
             // Remove new outputs
@@ -404,14 +406,14 @@ BOOST_AUTO_TEST_CASE(updatecoins_simulation_test)
             }
         }
         if (insecure_rand() % 100 == 0) {
-            // Every 100 iterations, change the cache stack.
+            // Every 100 iterations, change the cache stack
             if (stack.size() > 0 && insecure_rand() % 2 == 0) {
                 stack.back()->Flush();
                 delete stack.back();
                 stack.pop_back();
             }
             if (stack.size() == 0 || (stack.size() < 4 && insecure_rand() % 2)) {
-                CCoinsView* tip = &base;
+                AbstractCoinsView * tip = &base ;
                 if (stack.size() > 0) {
                     tip = stack.back();
                 }
@@ -560,11 +562,11 @@ void GetCoinsMapEntry(const CCoinsMap& map, CAmount& value, char& flags)
     }
 }
 
-void WriteCoinsViewEntry(CCoinsView& view, CAmount value, char flags)
+void WriteCoinsViewEntry( AbstractCoinsView & view, CAmount value, char flags )
 {
-    CCoinsMap map;
-    InsertCoinsMapEntry(map, value, flags);
-    view.BatchWrite(map, {});
+    CCoinsMap map ;
+    InsertCoinsMapEntry( map, value, flags ) ;
+    view.BatchWrite( map, { } ) ;
 }
 
 class SingleEntryCacheTest
@@ -576,9 +578,9 @@ public:
         cache.usage() += InsertCoinsMapEntry(cache.map(), cache_value, cache_flags);
     }
 
-    CCoinsView root;
-    CCoinsViewCacheTest base{&root};
-    CCoinsViewCacheTest cache{&base};
+    TrivialCoinsView root ;
+    CCoinsViewCacheTest base{ &root } ;
+    CCoinsViewCacheTest cache{ &base } ;
 };
 
 void CheckAccessCoins(CAmount base_value, CAmount cache_value, CAmount expected_value, char cache_flags, char expected_flags)

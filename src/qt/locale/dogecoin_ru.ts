@@ -595,8 +595,8 @@
         <translation>Копировать сумму</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Копировать ID транзакции</translation>
+        <source>Copy transaction hash</source>
+        <translation>Копировать хэш транзакции</translation>
     </message>
     <message>
         <source>Lock unspent</source>
@@ -2420,8 +2420,8 @@
         <translation>Комментарий</translation>
     </message>
     <message>
-        <source>Transaction ID</source>
-        <translation>ID транзакции</translation>
+        <source>Hash of transaction</source>
+        <translation>Хэш транзакции</translation>
     </message>
     <message>
         <source>Full size of transaction</source>
@@ -2637,8 +2637,8 @@
         <translation>Копировать сумму</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Копировать ID транзакции</translation>
+        <source>Copy transaction hash</source>
+        <translation>Копировать хэш транзакции</translation>
     </message>
     <message>
         <source>Copy raw transaction</source>
@@ -2687,10 +2687,6 @@
     <message>
         <source>Address</source>
         <translation>Адрес</translation>
-    </message>
-    <message>
-        <source>ID</source>
-        <translation>ID</translation>
     </message>
     <message>
         <source>Exporting Failed</source>

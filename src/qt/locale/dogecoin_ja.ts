@@ -595,8 +595,8 @@
         <translation>総額のコピー</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>取引 ID をコピー</translation>
+        <source>Copy transaction hash</source>
+        <translation>取引 hash をコピー</translation>
     </message>
     <message>
         <source>Lock unspent</source>
@@ -2420,8 +2420,8 @@
         <translation>コメント</translation>
     </message>
     <message>
-        <source>Transaction ID</source>
-        <translation>取引 ID</translation>
+        <source>Hash of transaction</source>
+        <translation>取引 hash</translation>
     </message>
     <message>
         <source>Full size of transaction</source>
@@ -2637,8 +2637,8 @@
         <translation>総額のコピー</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>取引 ID をコピー</translation>
+        <source>Copy transaction hash</source>
+        <translation>取引 hash をコピー</translation>
     </message>
     <message>
         <source>Copy raw transaction</source>
@@ -2687,10 +2687,6 @@
     <message>
         <source>Address</source>
         <translation>アドレス</translation>
-    </message>
-    <message>
-        <source>ID</source>
-        <translation>ID</translation>
     </message>
     <message>
         <source>Exporting Failed</source>

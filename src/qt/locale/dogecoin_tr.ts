@@ -595,8 +595,8 @@
         <translation>Tutarı kopyala</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>İşlem ID'sini kopyala</translation>
+        <source>Copy transaction hash</source>
+        <translation>İşlem hash'sini kopyala</translation>
     </message>
     <message>
         <source>Lock unspent</source>
@@ -2416,10 +2416,6 @@
         <translation>Yorum</translation>
     </message>
     <message>
-        <source>Transaction ID</source>
-        <translation>İşlem ID'si</translation>
-    </message>
-    <message>
         <source>Full size of transaction</source>
         <translation>İşlemin toplam boyutu</translation>
     </message>
@@ -2633,8 +2629,8 @@
         <translation>Tutarı kopyala</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>İşlem ID'sini kopyala</translation>
+        <source>Copy transaction hash</source>
+        <translation>İşlem hash'sini kopyala</translation>
     </message>
     <message>
         <source>Copy raw transaction</source>
@@ -2683,10 +2679,6 @@
     <message>
         <source>Address</source>
         <translation>Adres</translation>
-    </message>
-    <message>
-        <source>ID</source>
-        <translation>ID</translation>
     </message>
     <message>
         <source>Exporting Failed</source>

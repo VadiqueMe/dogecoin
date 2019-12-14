@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -57,28 +58,28 @@ std::string CTxOut::ToString() const
 CMutableTransaction::CMutableTransaction() : nVersion(CTransaction::CURRENT_VERSION), nLockTime(0) {}
 CMutableTransaction::CMutableTransaction(const CTransaction& tx) : nVersion(tx.nVersion), vin(tx.vin), vout(tx.vout), nLockTime(tx.nLockTime) {}
 
-uint256 CMutableTransaction::GetHash() const
+uint256 CMutableTransaction::GetTxHash() const
 {
-    return SerializeHash(*this, SER_GETHASH, SERIALIZE_TRANSACTION_NO_WITNESS);
+    return SerializeHash( *this, SER_GETHASH, SERIALIZE_TRANSACTION_NO_WITNESS ) ;
 }
 
-uint256 CTransaction::ComputeHash() const
+uint256 CTransaction::ComputeTxHash() const
 {
-    return SerializeHash(*this, SER_GETHASH, SERIALIZE_TRANSACTION_NO_WITNESS);
+    return SerializeHash( *this, SER_GETHASH, SERIALIZE_TRANSACTION_NO_WITNESS ) ;
 }
 
 uint256 CTransaction::GetWitnessHash() const
 {
-    if (!HasWitness()) {
-        return GetHash();
+    if ( ! HasWitness() ) {
+        return GetTxHash() ;
     }
-    return SerializeHash(*this, SER_GETHASH, 0);
+    return SerializeHash( *this, SER_GETHASH, 0 ) ;
 }
 
-/* For backward compatibility, the hash is initialized to 0. TODO: remove the need for this default constructor entirely. */
-CTransaction::CTransaction() : nVersion(CTransaction::CURRENT_VERSION), vin(), vout(), nLockTime(0), hash() {}
-CTransaction::CTransaction(const CMutableTransaction &tx) : nVersion(tx.nVersion), vin(tx.vin), vout(tx.vout), nLockTime(tx.nLockTime), hash(ComputeHash()) {}
-CTransaction::CTransaction(CMutableTransaction &&tx) : nVersion(tx.nVersion), vin(std::move(tx.vin)), vout(std::move(tx.vout)), nLockTime(tx.nLockTime), hash(ComputeHash()) {}
+/* For backward compatibility, the hash is initialized to 0 */
+CTransaction::CTransaction() : nVersion( CTransaction::CURRENT_VERSION ), vin(), vout(), nLockTime( 0 ), hash() { }
+CTransaction::CTransaction( const CMutableTransaction & tx ) : nVersion( tx.nVersion ), vin( tx.vin ), vout( tx.vout ), nLockTime( tx.nLockTime ), hash( ComputeTxHash() ) { }
+CTransaction::CTransaction( CMutableTransaction && tx ) : nVersion( tx.nVersion ), vin( std::move( tx.vin ) ), vout( std::move( tx.vout ) ), nLockTime( tx.nLockTime ), hash( ComputeTxHash() ) { }
 
 CAmount CTransaction::GetValueOut() const
 {
@@ -131,7 +132,7 @@ std::string CTransaction::ToString() const
 {
     std::string str;
     str += strprintf("CTransaction(hash=%s, ver=%d, vin.size=%u, vout.size=%u, nLockTime=%u)\n",
-        GetHash().ToString().substr(0,10),
+        GetTxHash().ToString().substr(0,10),
         nVersion,
         vin.size(),
         vout.size(),

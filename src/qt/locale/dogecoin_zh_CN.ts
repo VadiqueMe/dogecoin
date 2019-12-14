@@ -583,7 +583,7 @@
         <translation>复制金额</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
+        <source>Copy transaction hash</source>
         <translation>复制交易识别码</translation>
     </message>
     <message>
@@ -2401,10 +2401,6 @@
         <translation>备注</translation>
     </message>
     <message>
-        <source>Transaction ID</source>
-        <translation>ID</translation>
-    </message>
-    <message>
         <source>Full size of transaction</source>
         <translation>交易总大小</translation>
     </message>
@@ -2606,7 +2602,7 @@
         <translation>复制金额</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
+        <source>Copy transaction hash</source>
         <translation>复制交易识别码</translation>
     </message>
     <message>
@@ -2656,10 +2652,6 @@
     <message>
         <source>Address</source>
         <translation>地址</translation>
-    </message>
-    <message>
-        <source>ID</source>
-        <translation>ID</translation>
     </message>
     <message>
         <source>Exporting Failed</source>

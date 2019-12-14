@@ -51,7 +51,7 @@ UniValue AuxpowToJSON(const CAuxPow& auxpow)
     {
         UniValue tx(UniValue::VOBJ);
         tx.push_back(Pair("hex", EncodeHexTx(auxpow)));
-        TxToJSON(auxpow, auxpow.parentBlock.GetHash(), tx);
+        TxToJSON( auxpow, auxpow.parentBlock.GetSha256Hash(), tx ) ;
         result.push_back(Pair("tx", tx));
     }
 
@@ -83,7 +83,7 @@ UniValue AuxpowToJSON(const CAuxPow& auxpow)
 UniValue blockheaderToJSON(const CBlockIndex* blockindex)
 {
     UniValue result(UniValue::VOBJ);
-    result.push_back(Pair("hash", blockindex->GetBlockHash().GetHex()));
+    result.push_back(Pair("hash", blockindex->GetBlockSha256Hash().GetHex()));
     int confirmations = -1;
     // Only report confirmations if the block is on the main chain
     if (chainActive.Contains(blockindex))
@@ -100,17 +100,17 @@ UniValue blockheaderToJSON(const CBlockIndex* blockindex)
     result.push_back(Pair("chainwork", blockindex->nChainWork.GetHex()));
 
     if (blockindex->pprev)
-        result.push_back(Pair("previousblockhash", blockindex->pprev->GetBlockHash().GetHex()));
+        result.push_back(Pair("previousblockhash", blockindex->pprev->GetBlockSha256Hash().GetHex()));
     CBlockIndex *pnext = chainActive.Next(blockindex);
     if (pnext)
-        result.push_back(Pair("nextblockhash", pnext->GetBlockHash().GetHex()));
+        result.push_back(Pair("nextblockhash", pnext->GetBlockSha256Hash().GetHex()));
     return result;
 }
 
 UniValue blockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool txDetails = false)
 {
     UniValue result(UniValue::VOBJ);
-    result.push_back(Pair("hash", blockindex->GetBlockHash().GetHex()));
+    result.push_back(Pair("hash", blockindex->GetBlockSha256Hash().GetHex()));
     int confirmations = -1;
     // Only report confirmations if the block is on the main chain
     if (chainActive.Contains(blockindex))
@@ -133,24 +133,25 @@ UniValue blockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool tx
             txs.push_back(objTx);
         }
         else
-            txs.push_back(tx->GetHash().GetHex());
+            txs.push_back( tx->GetTxHash().GetHex() ) ;
     }
-    result.push_back(Pair("tx", txs));
-    result.push_back(Pair("time", block.GetBlockTime()));
-    result.push_back(Pair("mediantime", (int64_t)blockindex->GetMedianTimePast()));
-    result.push_back(Pair("nonce", (uint64_t)block.nNonce));
-    result.push_back(Pair("bits", strprintf("%08x", block.nBits)));
-    result.push_back(Pair("chainwork", blockindex->nChainWork.GetHex()));
+    result.push_back( Pair("tx", txs) ) ;
+    result.push_back( Pair("time", block.GetBlockTime()) ) ;
+    result.push_back( Pair("mediantime", (int64_t)blockindex->GetMedianTimePast()) ) ;
+    result.push_back( Pair("nonce", (uint64_t)block.nNonce) ) ;
+    result.push_back( Pair("bits", strprintf( "%08x", block.nBits )) ) ;
+    result.push_back( Pair("chainwork", blockindex->nChainWork.GetHex()) ) ;
 
     if (block.auxpow)
-        result.push_back(Pair("auxpow", AuxpowToJSON(*block.auxpow)));
+        result.push_back( Pair("auxpow", AuxpowToJSON( *block.auxpow )) ) ;
 
     if (blockindex->pprev)
-        result.push_back(Pair("previousblockhash", blockindex->pprev->GetBlockHash().GetHex()));
+        result.push_back( Pair("previousblockhash", blockindex->pprev->GetBlockSha256Hash().GetHex()) ) ;
     CBlockIndex *pnext = chainActive.Next(blockindex);
     if (pnext)
-        result.push_back(Pair("nextblockhash", pnext->GetBlockHash().GetHex()));
-    return result;
+        result.push_back( Pair("nextblockhash", pnext->GetBlockSha256Hash().GetHex()) ) ;
+
+    return result ;
 }
 
 UniValue getblockcount(const JSONRPCRequest& request)
@@ -183,15 +184,15 @@ UniValue getbestblockhash(const JSONRPCRequest& request)
             + HelpExampleRpc("getbestblockhash", "")
         );
 
-    LOCK(cs_main);
-    return chainActive.Tip()->GetBlockHash().GetHex();
+    LOCK( cs_main ) ;
+    return chainActive.Tip()->GetBlockSha256Hash().GetHex() ;
 }
 
 void RPCNotifyBlockChange(bool ibd, const CBlockIndex * pindex)
 {
     if(pindex) {
         std::lock_guard<std::mutex> lock(cs_blockchange);
-        latestblock.hash = pindex->GetBlockHash();
+        latestblock.hash = pindex->GetBlockSha256Hash();
         latestblock.height = pindex->nHeight;
     }
 	cond_blockchange.notify_all();
@@ -378,13 +379,13 @@ UniValue mempoolToJSON(bool fVerbose = false)
     if (fVerbose)
     {
         LOCK(mempool.cs);
-        UniValue o(UniValue::VOBJ);
+        UniValue o( UniValue::VOBJ ) ;
         for ( const CTxMemPoolEntry & e : mempool.mapTx )
         {
-            const uint256& hash = e.GetTx().GetHash();
-            UniValue info(UniValue::VOBJ);
-            entryToJSON(info, e);
-            o.push_back(Pair(hash.ToString(), info));
+            const uint256 & hash = e.GetTx().GetTxHash() ;
+            UniValue info( UniValue::VOBJ ) ;
+            entryToJSON( info, e ) ;
+            o.push_back( Pair(hash.ToString(), info) ) ;
         }
         return o;
     }
@@ -480,7 +481,7 @@ UniValue getmempoolancestors(const JSONRPCRequest& request)
     if (!fVerbose) {
         UniValue o(UniValue::VARR);
         for ( CTxMemPool::txiter ancestorIt : setAncestors ) {
-            o.push_back(ancestorIt->GetTx().GetHash().ToString());
+            o.push_back( ancestorIt->GetTx().GetTxHash().ToString() ) ;
         }
 
         return o;
@@ -488,7 +489,7 @@ UniValue getmempoolancestors(const JSONRPCRequest& request)
         UniValue o(UniValue::VOBJ);
         for ( CTxMemPool::txiter ancestorIt : setAncestors ) {
             const CTxMemPoolEntry &e = *ancestorIt;
-            const uint256& _hash = e.GetTx().GetHash();
+            const uint256 & _hash = e.GetTx().GetTxHash() ;
             UniValue info(UniValue::VOBJ);
             entryToJSON(info, e);
             o.push_back(Pair(_hash.ToString(), info));
@@ -544,7 +545,7 @@ UniValue getmempooldescendants(const JSONRPCRequest& request)
     if (!fVerbose) {
         UniValue o( UniValue::VARR ) ;
         for ( CTxMemPool::txiter descendantIt : setDescendants ) {
-            o.push_back(descendantIt->GetTx().GetHash().ToString());
+            o.push_back( descendantIt->GetTx().GetTxHash().ToString() ) ;
         }
 
         return o;
@@ -552,7 +553,7 @@ UniValue getmempooldescendants(const JSONRPCRequest& request)
         UniValue o( UniValue::VOBJ ) ;
         for ( CTxMemPool::txiter descendantIt : setDescendants ) {
             const CTxMemPoolEntry &e = *descendantIt;
-            const uint256& _hash = e.GetTx().GetHash();
+            const uint256 & _hash = e.GetTx().GetTxHash() ;
             UniValue info(UniValue::VOBJ);
             entryToJSON(info, e);
             o.push_back(Pair(_hash.ToString(), info));
@@ -616,7 +617,7 @@ UniValue getblockhash(const JSONRPCRequest& request)
         throw JSONRPCError(RPC_INVALID_PARAMETER, "Block height out of range");
 
     CBlockIndex* pblockindex = chainActive[nHeight];
-    return pblockindex->GetBlockHash().GetHex();
+    return pblockindex->GetBlockSha256Hash().GetHex();
 }
 
 UniValue getblockheader(const JSONRPCRequest& request)
@@ -767,13 +768,13 @@ struct CCoinsStats
     CCoinsStats() : nHeight(0), nTransactions(0), nTransactionOutputs(0), nSerializedSize(0), nTotalAmount(0) {}
 };
 
-//! Calculate statistics about the unspent transaction output set
-static bool GetUTXOStats(CCoinsView *view, CCoinsStats &stats)
+// Calculate statistics about the unspent transaction output set
+static bool GetUTXOStats( AbstractCoinsView * view, CCoinsStats & stats )
 {
     std::unique_ptr<CCoinsViewCursor> pcursor(view->Cursor());
 
     CHashWriter ss(SER_GETHASH, PROTOCOL_VERSION);
-    stats.hashBlock = pcursor->GetBestBlock();
+    stats.hashBlock = pcursor->GetSha256HashOfBestBlock() ;
     {
         LOCK(cs_main);
         stats.nHeight = mapBlockIndex.find(stats.hashBlock)->second->nHeight;
@@ -960,9 +961,9 @@ UniValue gettxout(const JSONRPCRequest& request)
     if (n<0 || (unsigned int)n>=coins.vout.size() || coins.vout[n].IsNull())
         return NullUniValue;
 
-    BlockMap::iterator it = mapBlockIndex.find(pcoinsTip->GetBestBlock());
+    BlockMap::iterator it = mapBlockIndex.find( pcoinsTip->GetSha256OfBestBlock() ) ;
     CBlockIndex *pindex = it->second;
-    ret.push_back(Pair("bestblock", pindex->GetBlockHash().GetHex()));
+    ret.push_back(Pair("bestblock", pindex->GetBlockSha256Hash().GetHex()));
     if ((unsigned int)coins.nHeight == MEMPOOL_HEIGHT)
         ret.push_back(Pair("confirmations", 0));
     else
@@ -1126,7 +1127,7 @@ UniValue getblockchaininfo(const JSONRPCRequest& request)
     obj.push_back(Pair( "chain",                 NameOfChain() )) ;
     obj.push_back(Pair( "blocks",                (int)chainActive.Height() )) ;
     obj.push_back(Pair( "headers",               pindexBestHeader ? pindexBestHeader->nHeight : -1 )) ;
-    obj.push_back(Pair( "bestblockhash",         chainActive.Tip()->GetBlockHash().GetHex() )) ;
+    obj.push_back(Pair( "bestblockhash",         chainActive.Tip()->GetBlockSha256Hash().GetHex() )) ;
     obj.push_back(Pair( "mediantime",            (int64_t)chainActive.Tip()->GetMedianTimePast() )) ;
     obj.push_back(Pair( "verificationprogress",  GuessVerificationProgress( Params().TxData(), chainActive.Tip() ) )) ;
     obj.push_back(Pair( "initialblockdownload",  IsInitialBlockDownload() )) ;
@@ -1233,10 +1234,10 @@ UniValue getchaintips( const JSONRPCRequest & request )
     {
         UniValue obj( UniValue::VOBJ ) ;
         obj.push_back( Pair("height", block->nHeight) ) ;
-        obj.push_back( Pair("hash", block->phashBlock->GetHex()) ) ;
+        obj.push_back( Pair("hash", block->GetBlockSha256Hash().GetHex()) ) ;
 
         CBlockHeader blockHeader = block->GetBlockHeader( Params().GetConsensus( block->nHeight ) ) ;
-        obj.push_back( Pair("powhash", blockHeader.GetPoWHash().GetHex()) ) ;
+        obj.push_back( Pair("powhash", blockHeader.GetScryptHash().GetHex()) ) ;
 
         const int branchLen = block->nHeight - chainActive.FindFork( block )->nHeight ;
         obj.push_back( Pair("branchlen", branchLen) ) ;

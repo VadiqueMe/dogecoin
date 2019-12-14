@@ -142,31 +142,32 @@ bool ShutdownRequested()
 /**
  * This is a minimally invasive approach to shutdown on LevelDB read errors from the
  * chainstate, while keeping user interface out of the common library, which is shared
- * between bitcoind, and bitcoin-qt and non-server tools.
+ * between dogecoind, and dogecoin-qt and non-server tools
 */
 class CCoinsViewErrorCatcher : public CCoinsViewBacked
 {
 public:
-    CCoinsViewErrorCatcher(CCoinsView* view) : CCoinsViewBacked(view) {}
-    bool GetCoins(const uint256 &txid, CCoins &coins) const {
+    CCoinsViewErrorCatcher( AbstractCoinsView * view ) : CCoinsViewBacked( view ) { }
+
+    virtual bool GetCoins( const uint256 & txhash, CCoins & coins ) const override {
         try {
-            return CCoinsViewBacked::GetCoins(txid, coins);
-        } catch(const std::runtime_error& e) {
-            uiInterface.ThreadSafeMessageBox(_("Error reading from database, shutting down."), "", CClientUIInterface::MSG_ERROR);
-            LogPrintf("Error reading from database: %s\n", e.what());
+            return CCoinsViewBacked::GetCoins( txhash, coins ) ;
+        } catch( const std::runtime_error & e ) {
+            uiInterface.ThreadSafeMessageBox( _("Error reading from database, shutting down."), "", CClientUIInterface::MSG_ERROR ) ;
+            LogPrintf( "Error reading from database: %s\n", e.what() ) ;
             // Starting the shutdown sequence and returning false to the caller would be
             // interpreted as 'entry not found' (as opposed to unable to read data), and
             // could lead to invalid interpretation. Just exit immediately, as we can't
-            // continue anyway, and all writes should be atomic.
-            abort();
+            // continue anyway, and all writes should be atomic
+            abort() ;
         }
     }
-    // Writes do not need similar protection, as failure to write is handled by the caller.
-};
+    // Writes do not need similar protection, as failure to write is handled by the caller
+} ;
 
-static CCoinsViewDB *pcoinsdbview = NULL;
-static CCoinsViewErrorCatcher *pcoinscatcher = NULL;
-static std::unique_ptr<ECCVerifyHandle> globalVerifyHandle;
+static CCoinsViewDB * pcoinsdbview = nullptr ;
+static CCoinsViewErrorCatcher * pcoinscatcher = nullptr ;
+static std::unique_ptr< ECCVerifyHandle > globalVerifyHandle ;
 
 void Interrupt(boost::thread_group& threadGroup)
 {
@@ -531,7 +532,7 @@ static void BlockNotifyCallback(bool initialSync, const CBlockIndex *pBlockIndex
 
     std::string strCmd = GetArg("-blocknotify", "");
 
-    boost::replace_all(strCmd, "%s", pBlockIndex->GetBlockHash().GetHex());
+    boost::replace_all(strCmd, "%s", pBlockIndex->GetBlockSha256Hash().GetHex());
     boost::replace_all(strCmd, "%i", boost::lexical_cast<std::string>(pBlockIndex->nHeight));
     boost::thread t(runCommand, strCmd); // thread runs free
 }

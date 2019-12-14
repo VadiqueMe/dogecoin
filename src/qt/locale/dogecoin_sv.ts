@@ -588,8 +588,8 @@ Var vänlig och försök igen.</translation>
         <translation>Kopiera belopp</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Kopiera transaktions-ID</translation>
+        <source>Copy transaction hash</source>
+        <translation>Kopiera transaktions-hash</translation>
     </message>
     <message>
         <source>yes</source>
@@ -1970,8 +1970,8 @@ Var vänlig och försök igen.</translation>
         <translation>Kopiera belopp</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Kopiera transaktions-ID</translation>
+        <source>Copy transaction hash</source>
+        <translation>Kopiera transaktions-hash</translation>
     </message>
     <message>
         <source>Comma separated file (*.csv)</source>

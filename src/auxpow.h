@@ -1,11 +1,12 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2016 Daniel Kraft
+// Copyright (c) 2019 vadique
 // Distributed under the MIT/X11 software license, see the accompanying
-// file license.txt or http://www.opensource.org/licenses/mit-license.php.
+// file license.txt or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_AUXPOW_H
-#define BITCOIN_AUXPOW_H
+#ifndef DOGECOIN_AUXPOW_H
+#define DOGECOIN_AUXPOW_H
 
 #include "consensus/params.h"
 #include "consensus/validation.h"
@@ -20,13 +21,13 @@ class CBlock;
 class CBlockHeader;
 class CBlockIndex;
 
-/** Header for merge-mining data in the coinbase.  */
+/** Header for merge-mining data in the coinbase */
 static const unsigned char pchMergedMiningHeader[] = { 0xfa, 0xbe, 'm', 'm' };
 
 /* Because it is needed for auxpow, the definition of CMerkleTx is moved
-   here from wallet.h.  */
+   here from wallet.h */
 
-/** A transaction with a merkle branch linking it to the block chain. */
+/** A transaction with a merkle branch linking it to the block chain */
 class CMerkleTx
 {
 private:
@@ -110,30 +111,30 @@ public:
     bool isAbandoned() const { return hashBlock == ABANDON_HASH ; }
     void setAbandoned() { hashBlock = ABANDON_HASH ; }
 
-    const uint256& GetHash() const { return tx->GetHash(); }
-    bool IsCoinBase() const { return tx->IsCoinBase(); }
+    const uint256 & GetTxHash() const {  return tx->GetTxHash() ;  }
+    bool IsCoinBase() const {  return tx->IsCoinBase() ;  }
 };
 
 /**
  * Data for the merge-mining auxpow.  This is a merkle tx (the parent block's
  * coinbase tx) that can be verified to be in the parent block, and this
  * transaction's input (the coinbase script) contains the reference
- * to the actual merge-mined block.
+ * to the actual merge-mined block
  */
 class CAuxPow : public CMerkleTx
 {
 
-/* Public for the unit tests.  */
+/* Public for the unit tests */
 public:
 
-  /** The merkle branch connecting the aux block to our coinbase.  */
-  std::vector<uint256> vChainMerkleBranch;
+  /** The merkle branch connecting the aux block to our coinbase */
+  std::vector< uint256 > vChainMerkleBranch ;
 
-  /** Merkle tree index of the aux block header in the coinbase.  */
-  int nChainIndex;
+  /** Merkle tree index of the aux block header in the coinbase */
+  int nChainIndex ;
 
-  /** Parent block header (on which the real PoW is done).  */
-  CPureBlockHeader parentBlock;
+  /** Parent block header (on which the real PoW is done) */
+  CPureBlockHeader parentBlock ;
 
 public:
 
@@ -172,41 +173,40 @@ public:
   bool check(const uint256& hashAuxBlock, int nChainId, const Consensus::Params& params) const;
 
   /**
-   * Get the parent block's hash.  This is used to verify that it
-   * satisfies the PoW requirement.
-   * @return The parent block hash.
+   * Get the parent block's hash. This is used to verify that it
+   * satisfies the PoW requirement
+   * @return The parent block's scrypt hash
    */
   inline uint256
-  getParentBlockPoWHash() const
+  getParentBlockScryptHash() const
   {
-    return parentBlock.GetPoWHash ();
+    return parentBlock.GetScryptHash () ;
   }
 
   /**
-   * Return parent block.  This is only used for the temporary parentblock
-   * auxpow version check.
-   * @return The parent block.
+   * Return the parent block. This is only used for the temporary parentblock
+   * auxpow version check, and is not used after the hardfork
+   * @return The parent block
    */
-  /* FIXME: Remove after the hardfork.  */
-  inline const CPureBlockHeader&
-  getParentBlock() const
-  {
-    return parentBlock;
-  }
+  // inline const CPureBlockHeader&
+  // getParentBlock() const
+  // {
+  //   return parentBlock ;
+  // }
 
   /**
-   * Calculate the expected index in the merkle tree.  This is also used
-   * for the test-suite.
-   * @param nNonce The coinbase's nonce value.
-   * @param nChainId The chain ID.
-   * @param h The merkle block height.
-   * @return The expected index for the aux hash.
+   * Calculate the expected index in the merkle tree. This is also used
+   * for the test-suite
+   * @param nNonce The coinbase's nonce value
+   * @param nChainId The chain ID
+   * @param h The merkle block height
+   * @return The expected index for the aux hash
    */
   static int getExpectedIndex(uint32_t nNonce, int nChainId, unsigned h);
 
   /**
    * Check a merkle branch.  This used to be in CBlock, but was removed
-   * upstream.  Thus include it here now.
+   * upstream.  Thus include it here now
    */
   static uint256 CheckMerkleBranch(uint256 hash,
                                    const std::vector<uint256>& vMerkleBranch,
@@ -216,11 +216,11 @@ public:
    * Initialise the auxpow of the given block header.  This constructs
    * a minimal CAuxPow object with a minimal parent block and sets
    * it on the block header.  The auxpow is not necessarily valid, but
-   * can be "mined" to make it valid.
-   * @param header The header to set the auxpow on.
+   * can be "mined" to make it valid
+   * @param header The header to set the auxpow on
    */
-  static void initAuxPow(CBlockHeader& header);
+  static void initAuxPow( CBlockHeader & header ) ;
 
 };
 
-#endif // BITCOIN_AUXPOW_H
+#endif

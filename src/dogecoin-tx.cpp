@@ -67,7 +67,7 @@ static int AppInitRawTx(int argc, char* argv[])
         strUsage += HelpMessageOpt("-?", _("This help message"));
         strUsage += HelpMessageOpt("-create", _("Create new, empty TX."));
         strUsage += HelpMessageOpt("-json", _("Select JSON output"));
-        strUsage += HelpMessageOpt("-txid", _("Output only the hex-encoded transaction id of the resultant transaction."));
+        strUsage += HelpMessageOpt("-txid", _("Output only the hex-encoded transaction hash of the resultant transaction")) ;
         AppendParamsHelpMessages(strUsage);
 
         fprintf(stdout, "%s", strUsage.c_str());
@@ -533,11 +533,11 @@ static void MutateTxSign(CMutableTransaction& tx, const std::string& flagStr)
     // starts as a clone of the raw tx:
     CMutableTransaction mergedTx(txVariants[0]);
     bool fComplete = true;
-    CCoinsView viewDummy;
-    CCoinsViewCache view(&viewDummy);
+    TrivialCoinsView viewDummy ;
+    CCoinsViewCache view( &viewDummy ) ;
 
-    if (!registers.count("privatekeys"))
-        throw std::runtime_error("privatekeys register variable must be set.");
+    if ( ! registers.count( "privatekeys" ) )
+        throw std::runtime_error( "privatekeys register variable must be set" ) ;
     CBasicKeyStore tempKeystore;
     UniValue keysObj = registers["privatekeys"];
 
@@ -709,7 +709,7 @@ static void OutputTxJSON(const CTransaction& tx)
 
 static void OutputTxHash(const CTransaction& tx)
 {
-    std::string strHexHash = tx.GetHash().GetHex(); // the hex-encoded transaction hash (aka the transaction id)
+    std::string strHexHash = tx.GetTxHash().GetHex() ; // the hex-encoded transaction hash
 
     fprintf(stdout, "%s\n", strHexHash.c_str());
 }

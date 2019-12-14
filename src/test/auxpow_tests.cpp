@@ -333,7 +333,7 @@ mineBlock( CBlockHeader & block, bool ok, int nBits = -1 )
 
     block.nNonce = 0;
     while (true) {
-        const bool nowOk = (UintToArith256(block.GetPoWHash()) <= target);
+        const bool nowOk = (UintToArith256(block.GetScryptHash()) <= target);
         if ((ok && nowOk) || (!ok && !nowOk))
             break;
 
@@ -401,7 +401,7 @@ BOOST_AUTO_TEST_CASE(auxpow_pow)
 
     /* Valid auxpow, PoW check of parent block */
     block.SetAuxpowFlag(true);
-    auxRoot = builder.buildAuxpowChain(block.GetHash(), height, index);
+    auxRoot = builder.buildAuxpowChain( block.GetSha256Hash(), height, index ) ;
     data = CAuxpowBuilder::buildCoinbaseData(true, auxRoot, height, nonce);
     builder.setCoinbase(CScript() << data);
     mineBlock(builder.parentBlock, false, block.nBits);
@@ -416,20 +416,20 @@ BOOST_AUTO_TEST_CASE(auxpow_pow)
      to ensure that the block hash itself doesn't change due to version changes.
      This requires some work arounds */
     block.SetAuxpowFlag(false);
-    const uint256 hashAux = block.GetHash();
+    const uint256 hashAux = block.GetSha256Hash() ;
     auxRoot = builder.buildAuxpowChain(hashAux, height, index);
     data = CAuxpowBuilder::buildCoinbaseData(true, auxRoot, height, nonce);
     builder.setCoinbase(CScript() << data);
     mineBlock(builder.parentBlock, true, block.nBits);
     block.SetAuxpow(new CAuxPow(builder.get()));
-    BOOST_CHECK(hashAux != block.GetHash());
+    BOOST_CHECK( hashAux != block.GetSha256Hash() ) ;
     block.SetAuxpowFlag(false);
-    BOOST_CHECK(hashAux == block.GetHash());
+    BOOST_CHECK( hashAux == block.GetSha256Hash() ) ;
     BOOST_CHECK( ! CheckDogecoinProofOfWork( block, params ) ) ;
 
     /* Modifying the block invalidates the PoW */
     block.SetAuxpowFlag(true);
-    auxRoot = builder.buildAuxpowChain(block.GetHash(), height, index);
+    auxRoot = builder.buildAuxpowChain( block.GetSha256Hash(), height, index ) ;
     data = CAuxpowBuilder::buildCoinbaseData(true, auxRoot, height, nonce);
     builder.setCoinbase(CScript() << data);
     mineBlock(builder.parentBlock, true, block.nBits);

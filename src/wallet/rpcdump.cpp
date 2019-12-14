@@ -273,8 +273,8 @@ UniValue importprunedfunds(const JSONRPCRequest& request)
     CMutableTransaction tx;
     if (!DecodeHexTx(tx, request.params[0].get_str()))
         throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "TX decode failed");
-    uint256 hashTx = tx.GetHash();
-    CWalletTx wtx(pwalletMain, MakeTransactionRef(std::move(tx)));
+    uint256 hashTx = tx.GetTxHash() ;
+    CWalletTx wtx( pwalletMain, MakeTransactionRef( std::move( tx ) ) ) ;
 
     CDataStream ssMB(ParseHexV(request.params[1], "proof"), SER_NETWORK, PROTOCOL_VERSION);
     CMerkleBlock merkleBlock;
@@ -288,8 +288,9 @@ UniValue importprunedfunds(const JSONRPCRequest& request)
 
         LOCK(cs_main);
 
-        if (!mapBlockIndex.count(merkleBlock.header.GetHash()) || !chainActive.Contains(mapBlockIndex[merkleBlock.header.GetHash()]))
-            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Block not found in chain");
+        if ( ! mapBlockIndex.count( merkleBlock.header.GetSha256Hash() ) ||
+                ! chainActive.Contains( mapBlockIndex[ merkleBlock.header.GetSha256Hash() ] ) )
+            throw JSONRPCError( RPC_INVALID_ADDRESS_OR_KEY, "Block not found in chain" ) ;
 
         vector<uint256>::const_iterator it;
         if ((it = std::find(vMatch.begin(), vMatch.end(), hashTx))==vMatch.end()) {
@@ -303,7 +304,7 @@ UniValue importprunedfunds(const JSONRPCRequest& request)
     }
 
     wtx.nIndex = txnIndex;
-    wtx.hashBlock = merkleBlock.header.GetHash();
+    wtx.hashBlock = merkleBlock.header.GetSha256Hash() ;
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
@@ -594,7 +595,7 @@ UniValue dumpwallet(const JSONRPCRequest& request)
     // produce output
     file << strprintf( "# Wallet dump created by Dogecoin %s\n", FormatFullVersion() ) ;
     file << strprintf("# * Created on %s\n", EncodeDumpTime(GetTime()));
-    file << strprintf("# * Best block at time of backup was %i (%s),\n", chainActive.Height(), chainActive.Tip()->GetBlockHash().ToString());
+    file << strprintf("# * Best block at time of backup was %i (%s),\n", chainActive.Height(), chainActive.Tip()->GetBlockSha256Hash().ToString());
     file << strprintf("#   mined on %s\n", EncodeDumpTime(chainActive.Tip()->GetBlockTime()));
     file << "\n";
 

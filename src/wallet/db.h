@@ -48,24 +48,21 @@ public:
     bool IsMock() { return fMockDb; }
 
     /**
-     * Verify that database file strFile is OK. If it is not,
-     * call the callback to try to recover.
-     * This must be called BEFORE strFile is opened.
-     * Returns true if strFile is OK.
+     * Verify that database file strFile is OK. If it is not, call the callback
+     * to try to recover. Call this BEFORE strFile is opened. Returns true if strFile is OK
      */
     enum VerifyResult { VERIFY_OK,
                         RECOVER_OK,
-                        RECOVER_FAIL };
-    VerifyResult Verify(const std::string& strFile, bool (*recoverFunc)(CDBEnv& dbenv, const std::string& strFile));
+                        RECOVER_FAIL } ;
+    VerifyResult Verify( const std::string & strFile, bool ( *recoverFunc )( CDBEnv & dbenv, const std::string & strFile ) ) ;
     /**
-     * Salvage data from a file that Verify says is bad.
-     * fAggressive sets the DB_AGGRESSIVE flag (see berkeley DB->verify() method documentation).
-     * Appends binary key/value pairs to vResult, returns true if successful.
-     * NOTE: reads the entire database into memory, so cannot be used
-     * for huge databases.
+     * Salvage data from a file that Verify says is bad
+     * fAggressive sets the DB_AGGRESSIVE flag (see berkeley DB->verify() method documentation)
+     * Appends binary key/value pairs to vResult, returns true on success
+     * NOTE: reads the entire database into memory, so cannot be used for huge databases
      */
     typedef std::pair<std::vector<unsigned char>, std::vector<unsigned char> > KeyValPair;
-    bool Salvage(const std::string& strFile, bool fAggressive, std::vector<KeyValPair>& vResult);
+    bool Salvage( const std::string & strFile, std::vector< KeyValPair > & vResult, bool fAggressive ) ;
 
     bool Open(const boost::filesystem::path& path);
     void Close();

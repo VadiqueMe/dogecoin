@@ -553,10 +553,6 @@
         <translation>Boodskap</translation>
     </message>
     <message>
-        <source>Transaction ID</source>
-        <translation>Transaksie ID</translation>
-    </message>
-    <message>
         <source>Transaction</source>
         <translation>Transaksie</translation>
     </message>
@@ -700,10 +696,6 @@
     <message>
         <source>Address</source>
         <translation>Adres</translation>
-    </message>
-    <message>
-        <source>ID</source>
-        <translation>ID</translation>
     </message>
     <message>
         <source>Exporting Failed</source>

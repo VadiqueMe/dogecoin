@@ -1,9 +1,10 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_QT_TRANSACTIONRECORD_H
-#define BITCOIN_QT_TRANSACTIONRECORD_H
+#ifndef DOGECOIN_QT_TRANSACTIONRECORD_H
+#define DOGECOIN_QT_TRANSACTIONRECORD_H
 
 #include "amount.h"
 #include "uint256.h"
@@ -14,7 +15,7 @@
 class CWallet;
 class CWalletTx;
 
-/** UI model for transaction status. The transaction status is the part of a transaction that will change over time.
+/** UI model for transaction status. The transaction status is the part of a transaction that will change over time
  */
 class TransactionStatus
 {
@@ -85,30 +86,27 @@ public:
     };
 
     /** Number of confirmation recommended for accepting a transaction */
-    static const int RecommendedNumConfirmations = 6;
+    static const int RecommendedNumConfirmations = 6 ;
 
-    TransactionRecord():
-            hash(), time(0), type(Other), address(""),
+    TransactionRecord() :
+            hashOfTransaction(), time( 0 ), type( Other ), address( "" ),
             debit( 0 ), credit( 0 ),
             subtransactionIdx( 0 )
-    {
-    }
+    { }
 
-    TransactionRecord(uint256 _hash, qint64 _time):
-            hash(_hash), time(_time), type(Other), address(""),
+    TransactionRecord( uint256 hashTx, qint64 _time ) :
+            hashOfTransaction( hashTx ), time( _time ), type( Other ), address( "" ),
             debit( 0 ), credit( 0 ),
             subtransactionIdx( 0 )
-    {
-    }
+    { }
 
-    TransactionRecord(uint256 _hash, qint64 _time,
+    TransactionRecord( uint256 hashTx, qint64 _time,
                 Type _type, const std::string &_address,
-                const CAmount& _debit, const CAmount& _credit):
-            hash(_hash), time(_time), type(_type), address(_address),
+                const CAmount& _debit, const CAmount& _credit ) :
+            hashOfTransaction( hashTx ), time( _time ), type( _type ), address( _address ),
             debit( _debit ), credit( _credit ),
             subtransactionIdx( 0 )
-    {
-    }
+    { }
 
     /** Decompose CWallet transaction to model transaction records */
     static bool showTransaction(const CWalletTx &wtx);
@@ -116,7 +114,7 @@ public:
 
     /** @name Immutable transaction attributes
       @{*/
-    uint256 hash;
+    uint256 hashOfTransaction ;
     qint64 time;
     Type type;
     std::string address;
@@ -130,8 +128,8 @@ public:
     /** Whether the transaction was sent/received with a watch-only address */
     bool involvesWatchAddress;
 
-    /** Return the unique identifier for this transaction (part) */
-    QString getTxID() const;
+    /** Return the unique identifier (hash) for this transaction */
+    QString getTxHash() const ;
 
     /** Return the output index of the subtransaction  */
     int getSubtransactionIndex() const ;
@@ -153,4 +151,4 @@ private:
 
 };
 
-#endif // BITCOIN_QT_TRANSACTIONRECORD_H
+#endif

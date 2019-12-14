@@ -595,8 +595,8 @@
         <translation>Kopiér beløb</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Kopiér transaktions-ID</translation>
+        <source>Copy transaction hash</source>
+        <translation>Kopiér transaktions-hash</translation>
     </message>
     <message>
         <source>Lock unspent</source>
@@ -2420,10 +2420,6 @@
         <translation>Kommentar</translation>
     </message>
     <message>
-        <source>Transaction ID</source>
-        <translation>Transaktions-ID</translation>
-    </message>
-    <message>
         <source>Full size of transaction</source>
         <translation>Totalstørrelse af transaktion</translation>
     </message>
@@ -2637,8 +2633,8 @@
         <translation>Kopiér beløb</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Kopiér transaktions-ID</translation>
+        <source>Copy transaction hash</source>
+        <translation>Kopiér transaktions-hash</translation>
     </message>
     <message>
         <source>Copy raw transaction</source>
@@ -2687,10 +2683,6 @@
     <message>
         <source>Address</source>
         <translation>Adresse</translation>
-    </message>
-    <message>
-        <source>ID</source>
-        <translation>ID</translation>
     </message>
     <message>
         <source>Exporting Failed</source>

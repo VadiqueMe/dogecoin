@@ -595,7 +595,7 @@
         <translation>거래액 복사</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
+        <source>Copy transaction hash</source>
         <translation>거래 아이디 복사</translation>
     </message>
     <message>
@@ -2420,8 +2420,8 @@
         <translation>설명</translation>
     </message>
     <message>
-        <source>Transaction ID</source>
-        <translation>거래 ID</translation>
+        <source>Hash of transaction</source>
+        <translation>거래 hash</translation>
     </message>
     <message>
         <source>Full size of transaction</source>
@@ -2637,7 +2637,7 @@
         <translation>거래액 복사</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
+        <source>Copy transaction hash</source>
         <translation>거래 아이디 복사</translation>
     </message>
     <message>
@@ -2689,7 +2689,7 @@
         <translation>주소</translation>
     </message>
     <message>
-        <source>ID</source>
+        <source>Hash</source>
         <translation>아이디</translation>
     </message>
     <message>

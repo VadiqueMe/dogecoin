@@ -397,8 +397,8 @@ BOOST_FIXTURE_TEST_CASE(importwallet_rescan, TestChain240Setup)
 
         BOOST_CHECK_EQUAL(wallet.mapWallet.size(), 3);
         BOOST_CHECK_EQUAL(coinbaseTxns.size(), 243);
-        for (size_t i = 0; i < coinbaseTxns.size(); ++i) {
-            bool found = wallet.GetWalletTx(coinbaseTxns[i].GetHash());
+        for ( size_t i = 0 ; i < coinbaseTxns.size() ; ++ i ) {
+            bool found = wallet.GetWalletTx( coinbaseTxns[ i ].GetTxHash() ) ;
             bool expected = i >= 240;
             BOOST_CHECK_EQUAL(found, expected);
         }

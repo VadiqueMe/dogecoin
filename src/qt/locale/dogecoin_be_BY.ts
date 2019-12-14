@@ -507,8 +507,8 @@
         <translation>Капіяваць колькасць</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Капіяваць ID транзакцыі</translation>
+        <source>Copy transaction hash</source>
+        <translation>Капіяваць hash транзакцыі</translation>
     </message>
     <message>
         <source>Lock unspent</source>
@@ -952,10 +952,6 @@
         <translation>Каментар</translation>
     </message>
     <message>
-        <source>Transaction ID</source>
-        <translation>ID</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Колькасць</translation>
     </message>
@@ -1093,8 +1089,8 @@
         <translation>Капіяваць колькасць</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Капіяваць ID транзакцыі</translation>
+        <source>Copy transaction hash</source>
+        <translation>Капіяваць hash транзакцыі</translation>
     </message>
     <message>
         <source>Edit label</source>
@@ -1123,10 +1119,6 @@
     <message>
         <source>Address</source>
         <translation>Адрас</translation>
-    </message>
-    <message>
-        <source>ID</source>
-        <translation>ID</translation>
     </message>
     <message>
         <source>Exporting Failed</source>

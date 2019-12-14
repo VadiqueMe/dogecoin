@@ -563,8 +563,8 @@
         <translation>Kopiuj kwotę</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Skopiuj ID transakcji</translation>
+        <source>Copy transaction hash</source>
+        <translation>Skopiuj hash transakcji</translation>
     </message>
     <message>
         <source>Lock unspent</source>
@@ -2210,8 +2210,8 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
         <translation>Kopiuj kwotę</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Skopiuj ID transakcji</translation>
+        <source>Copy transaction hash</source>
+        <translation>Skopiuj hash transakcji</translation>
     </message>
     <message>
         <source>Comma separated file (*.csv)</source>

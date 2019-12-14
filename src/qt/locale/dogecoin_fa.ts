@@ -531,7 +531,7 @@
         <translation>کپی مقدار</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
+        <source>Copy transaction hash</source>
         <translation>کپی شناسهٔ تراکنش</translation>
     </message>
     <message>
@@ -1557,7 +1557,7 @@
         <translation>کپی مقدار</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
+        <source>Copy transaction hash</source>
         <translation>کپی شناسهٔ تراکنش</translation>
     </message>
     <message>

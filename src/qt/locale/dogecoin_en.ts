@@ -462,7 +462,7 @@
     </message>
     <message>
         <location line="-25"/>
-        <source>Copy transaction ID</source>
+        <source>Copy transaction hash</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3407,12 +3407,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Transaction ID</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+3"/>
         <source>Full size of transaction</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3432,7 +3427,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="-20"/>
+        <source>Hash of transaction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+43"/>
         <source>Transaction</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3467,7 +3467,7 @@ p, li { white-space: pre-wrap; }
         <translation>This pane shows a detailed description of the transaction</translation>
     </message>
     <message>
-        <location filename="../transactiondescdialog.cpp" line="+17"/>
+        <location filename="../transactiondescdialog.cpp" line="+18"/>
         <source>Details for %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3584,7 +3584,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+212"/>
+        <location line="+210"/>
         <source>(no label)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3684,11 +3684,16 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+1"/>
-        <source>Copy transaction ID</source>
+        <source>Copy transaction hash</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+235"/>
+        <source>Hash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-234"/>
         <source>Copy raw transaction</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3748,12 +3753,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>ID</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
+        <location line="+5"/>
         <source>Exporting Failed</source>
         <translation type="unfinished"></translation>
     </message>

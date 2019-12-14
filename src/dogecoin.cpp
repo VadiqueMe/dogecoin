@@ -105,7 +105,7 @@ bool CheckDogecoinProofOfWork( const CBlockHeader & block, const Consensus::Para
         if ( ! CheckProofOfWork( block, block.nBits, params ) )
             return error( "%s : non-aux proof of work failed with bits=%s and hashes scrypt=%s, sha256=%s", __func__,
                             arith_uint256().SetCompact( block.nBits ).GetHex(),
-                            block.GetPoWHash().GetHex(), block.GetHash().GetHex() ) ;
+                            block.GetScryptHash().GetHex(), block.GetSha256Hash().GetHex() ) ;
 
         return true ;
     }
@@ -115,7 +115,7 @@ bool CheckDogecoinProofOfWork( const CBlockHeader & block, const Consensus::Para
     if ( ! block.IsAuxpow() )
         return error( "%s : auxpow on a block with non-auxpow version", __func__ ) ;
 
-    if ( ! block.auxpow->check( block.GetHash(), block.GetChainId(), params ) )
+    if ( ! block.auxpow->check( block.GetSha256Hash(), block.GetChainId(), params ) )
         return error( "%s : auxpow is not valid", __func__ ) ;
 
     if ( ! CheckAuxProofOfWork( *block.auxpow.get(), block.nBits, params ) )
@@ -173,10 +173,11 @@ CAmount GetDogecoinBlockSubsidy( int nHeight, const Consensus::Params & consensu
     }
     else if ( nHeight < ( 6 * consensusParams.nSubsidyHalvingInterval ) ) {
         // Mid-style constant rewards for each halving interval
+        // six are for 50 0000, 25 0000, 12 5000, 6 2500, 3 1250, 1 5625
         int halvings = nHeight / consensusParams.nSubsidyHalvingInterval ;
         return ( 500000 * COIN ) >> halvings ;
     } else {
-        // Constant inflation
+        // Constant inflation 1 0000 per every new block
         return 10000 * COIN ;
     }
 }

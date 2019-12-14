@@ -55,16 +55,16 @@ bool CWalletDB::ErasePurpose( const std::string & address )
     return Erase( std::make_pair( std::string( "purpose" ), address ) ) ;
 }
 
-bool CWalletDB::WriteTx(const CWalletTx& wtx)
+bool CWalletDB::WriteTx( const CWalletTx & wtx )
 {
-    nWalletDBUpdateCounter++;
-    return Write(std::make_pair(std::string("tx"), wtx.GetHash()), wtx);
+    nWalletDBUpdateCounter ++ ;
+    return Write( std::make_pair( std::string( "tx" ), wtx.GetTxHash() ), wtx ) ;
 }
 
-bool CWalletDB::EraseTx(uint256 hash)
+bool CWalletDB::EraseTx( uint256 hash )
 {
-    nWalletDBUpdateCounter++;
-    return Erase(std::make_pair(std::string("tx"), hash));
+    nWalletDBUpdateCounter ++ ;
+    return Erase( std::make_pair( std::string( "tx" ), hash ) ) ;
 }
 
 bool CWalletDB::WriteKey(const CPubKey& vchPubKey, const CPrivKey& vchPrivKey, const CKeyMetadata& keyMeta)
@@ -304,8 +304,8 @@ ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue,
             CWalletTx wtx;
             ssValue >> wtx;
             CValidationState state;
-            if (!(CheckTransaction(wtx, state) && (wtx.GetHash() == hash) && state.IsValid()))
-                return false;
+            if ( ! ( CheckTransaction( wtx, state ) && ( wtx.GetTxHash() == hash ) && state.IsValid() ) )
+                return false ;
 
             // Undo serialize changes in 31600
             if (31404 <= wtx.fTimeReceivedIsTxTime && wtx.fTimeReceivedIsTxTime <= 31703)
@@ -782,14 +782,14 @@ DBErrors CWalletDB::ZapWalletTx( CWallet * pwallet, std::vector< CWalletTx > & v
 void ThreadFlushWalletDB()
 {
     // Make this thread recognisable as the wallet flushing thread
-    RenameThread("dogecoin-wallet");
+    RenameThread( "wallet-flush" ) ;
 
-    static bool fOneThread;
-    if (fOneThread)
-        return;
-    fOneThread = true;
-    if (!GetBoolArg("-flushwallet", DEFAULT_FLUSHWALLET))
-        return;
+    static bool fOneThread = false ;
+    if ( fOneThread ) return ;
+    fOneThread = true ;
+
+    if ( ! GetBoolArg( "-flushwallet", DEFAULT_FLUSHWALLET ) )
+        return ;
 
     unsigned int nLastSeen = CWalletDB::GetUpdateCounter();
     unsigned int nLastFlushed = CWalletDB::GetUpdateCounter();
@@ -848,51 +848,51 @@ void ThreadFlushWalletDB()
 bool CWalletDB::Recover( CDBEnv & dbenv, const std::string & filename, bool fOnlyKeys )
 {
     // Recovery procedure:
-    //   move wallet file to wallet.timestamp.backup
+    //   rename wallet file appending .backup.timestamp
     //   invoke Salvage with fAggressive=true to get as much data as possible
     //   rewrite salvaged data to fresh wallet file
     //   set -rescan so any missing transactions will be found
-    int64_t now = GetTime();
-    std::string newFilename = strprintf( "wallet.%d.backup", now ) ;
+    std::string newFilename = strprintf( "%s.backup.%d", filename.c_str(), GetTime() ) ;
 
-    int result = dbenv.dbenv->dbrename(NULL, filename.c_str(), NULL,
-                                       newFilename.c_str(), DB_AUTO_COMMIT);
-    if (result == 0)
-        LogPrintf("Renamed %s to %s\n", filename, newFilename);
+    int result = dbenv.dbenv->dbrename( nullptr, filename.c_str(), nullptr,
+                                        newFilename.c_str(), DB_AUTO_COMMIT ) ;
+    if ( result == 0 )
+        LogPrintf( "Renamed %s to %s\n", filename, newFilename ) ;
     else
     {
-        LogPrintf("Failed to rename %s to %s\n", filename, newFilename);
-        return false;
+        LogPrintf( "Failed to rename %s to %s\n", filename, newFilename ) ;
+        return false ;
     }
 
-    std::vector<CDBEnv::KeyValPair> salvagedData;
-    bool fSuccess = dbenv.Salvage(newFilename, true, salvagedData);
-    if (salvagedData.empty())
+    std::vector< CDBEnv::KeyValPair > salvagedData ;
+    bool fSuccess = dbenv.Salvage( newFilename, salvagedData, /* aggressive */ true ) ;
+    if ( salvagedData.empty() )
     {
-        LogPrintf("Salvage(aggressive) found no records in %s.\n", newFilename);
-        return false;
+        LogPrintf( "Salvage(aggressive) found no records in %s\n", newFilename ) ;
+        return false ;
     }
-    LogPrintf("Salvage(aggressive) found %u records\n", salvagedData.size());
+    LogPrintf( "Salvage(aggressive) found %u records\n", salvagedData.size() ) ;
 
-    std::unique_ptr<Db> pdbCopy(new Db(dbenv.dbenv, 0));
-    int ret = pdbCopy->open(NULL,               // Txn pointer
-                            filename.c_str(),   // Filename
-                            "main",             // Logical db name
-                            DB_BTREE,           // Database type
-                            DB_CREATE,          // Flags
-                            0);
-    if (ret > 0)
+    std::unique_ptr< Db > pdbCopy( new Db( dbenv.dbenv, 0 ) ) ;
+    int ret = pdbCopy->open( nullptr,               // Txn pointer
+                             filename.c_str(),   // Filename
+                             "main",             // Logical db name
+                             DB_BTREE,           // Database type
+                             DB_CREATE,          // Flags
+                             0 ) ;
+    if ( ret > 0 )
     {
-        LogPrintf("Cannot create database file %s\n", filename);
-        return false;
+        LogPrintf( "Cannot create database file %s\n", filename ) ;
+        return false ;
     }
-    CWallet dummyWallet;
-    CWalletScanState wss;
+
+    CWallet dummyWallet ;
+    CWalletScanState wss ;
 
     DbTxn* ptxn = dbenv.TxnBegin();
     for ( CDBEnv::KeyValPair & row : salvagedData )
     {
-        if (fOnlyKeys)
+        if ( fOnlyKeys )
         {
             CDataStream ssKey( row.first, SER_DISK, PEER_VERSION ) ;
             CDataStream ssValue( row.second, SER_DISK, PEER_VERSION ) ;
@@ -900,60 +900,59 @@ bool CWalletDB::Recover( CDBEnv & dbenv, const std::string & filename, bool fOnl
             bool fReadOK ;
             {
                 // Required in LoadKeyMetadata():
-                LOCK(dummyWallet.cs_wallet);
+                LOCK( dummyWallet.cs_wallet ) ;
                 fReadOK = ReadKeyValue( &dummyWallet, ssKey, ssValue,
                                         wss, strType, strErr ) ;
             }
-            if (!IsKeyType(strType) && strType != "hdchain")
-                continue;
-            if (!fReadOK)
+            if ( ! IsKeyType( strType ) && strType != "hdchain" )
+                continue ;
+            if ( ! fReadOK )
             {
-                LogPrintf("WARNING: CWalletDB::Recover skipping %s: %s\n", strType, strErr);
-                continue;
+                LogPrintf( "%s skipping %s: %s\n", __func__, strType, strErr ) ;
+                continue ;
             }
         }
-        Dbt datKey(&row.first[0], row.first.size());
-        Dbt datValue(&row.second[0], row.second.size());
-        int ret2 = pdbCopy->put(ptxn, &datKey, &datValue, DB_NOOVERWRITE);
-        if (ret2 > 0)
-            fSuccess = false;
+        Dbt datKey( &row.first[0], row.first.size() ) ;
+        Dbt datValue( &row.second[0], row.second.size() ) ;
+        int ret2 = pdbCopy->put( ptxn, &datKey, &datValue, DB_NOOVERWRITE ) ;
+        if ( ret2 > 0 )
+            fSuccess = false ;
     }
-    ptxn->commit(0);
-    pdbCopy->close(0);
+    ptxn->commit( 0 ) ;
+    pdbCopy->close( 0 ) ;
 
-    return fSuccess;
+    return fSuccess ;
 }
 
-bool CWalletDB::Recover(CDBEnv& dbenv, const std::string& filename)
+bool CWalletDB::Recover( CDBEnv & dbenv, const std::string & filename )
 {
-    return CWalletDB::Recover(dbenv, filename, false);
+    return CWalletDB::Recover( dbenv, filename, false ) ;
 }
 
-bool CWalletDB::WriteDestData(const std::string &address, const std::string &key, const std::string &value)
+bool CWalletDB::WriteDestData( const std::string & address, const std::string & key, const std::string & value )
 {
-    nWalletDBUpdateCounter++;
-    return Write(std::make_pair(std::string("destdata"), std::make_pair(address, key)), value);
+    IncrementUpdateCounter() ;
+    return Write( std::make_pair( std::string( "destdata" ), std::make_pair( address, key ) ), value ) ;
 }
 
-bool CWalletDB::EraseDestData(const std::string &address, const std::string &key)
+bool CWalletDB::EraseDestData( const std::string & address, const std::string & key )
 {
-    nWalletDBUpdateCounter++;
-    return Erase(std::make_pair(std::string("destdata"), std::make_pair(address, key)));
+    IncrementUpdateCounter() ;
+    return Erase( std::make_pair( std::string( "destdata" ), std::make_pair( address, key ) ) ) ;
 }
 
-
-bool CWalletDB::WriteHDChain(const CHDChain& chain)
+bool CWalletDB::WriteHDChain( const CHDChain & chain )
 {
-    nWalletDBUpdateCounter++;
-    return Write(std::string("hdchain"), chain);
+    IncrementUpdateCounter() ;
+    return Write( std::string( "hdchain" ), chain ) ;
 }
 
 void CWalletDB::IncrementUpdateCounter()
 {
-    nWalletDBUpdateCounter++;
+    nWalletDBUpdateCounter ++ ;
 }
 
 unsigned int CWalletDB::GetUpdateCounter()
 {
-    return nWalletDBUpdateCounter;
+    return nWalletDBUpdateCounter ;
 }

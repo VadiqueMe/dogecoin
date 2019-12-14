@@ -13,8 +13,6 @@
 
 #include <stdint.h>
 
-#include <boost/foreach.hpp>
-
 /* Return positive answer if transaction should be shown in list
  */
 bool TransactionRecord::showTransaction(const CWalletTx &wtx)
@@ -40,8 +38,8 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
     CAmount nCredit = wtx.GetCredit(ISMINE_ALL);
     CAmount nDebit = wtx.GetDebit(ISMINE_ALL);
     CAmount nNet = nCredit - nDebit;
-    uint256 hash = wtx.GetHash();
-    std::map<std::string, std::string> mapValue = wtx.mapValue;
+    uint256 txhash = wtx.GetTxHash() ;
+    std::map< std::string, std::string > mapValue = wtx.mapValue ;
 
     if (nNet > 0 || wtx.IsCoinBase())
     {
@@ -54,7 +52,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
             isminetype mine = wallet->IsMine( txout ) ;
             if ( mine )
             {
-                TransactionRecord sub(hash, nTime);
+                TransactionRecord sub( txhash, nTime ) ;
                 CTxDestination address;
                 sub.setSubtransactionIndex( i ) ; // vout index
                 sub.credit = txout.nValue;
@@ -85,7 +83,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
     {
         bool involvesWatchAddress = false;
         isminetype fAllFromMe = ISMINE_SPENDABLE;
-        BOOST_FOREACH(const CTxIn& txin, wtx.tx->vin)
+        for ( const CTxIn & txin : wtx.tx->vin )
         {
             isminetype mine = wallet->IsMine(txin);
             if(mine & ISMINE_WATCH_ONLY) involvesWatchAddress = true;
@@ -93,7 +91,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
         }
 
         isminetype fAllToMe = ISMINE_SPENDABLE;
-        BOOST_FOREACH(const CTxOut& txout, wtx.tx->vout)
+        for ( const CTxOut & txout : wtx.tx->vout )
         {
             isminetype mine = wallet->IsMine(txout);
             if(mine & ISMINE_WATCH_ONLY) involvesWatchAddress = true;
@@ -105,9 +103,11 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
             // Payment to self
             CAmount nChange = wtx.GetChange();
 
-            parts.append(TransactionRecord(hash, nTime, TransactionRecord::SendToSelf, "",
-                            -(nDebit - nChange), nCredit - nChange));
-            parts.last().involvesWatchAddress = involvesWatchAddress;   // maybe pass to TransactionRecord as constructor argument
+            parts.append( TransactionRecord(
+                txhash, nTime, TransactionRecord::SendToSelf, "",
+                - (nDebit - nChange), nCredit - nChange
+            ) ) ;
+            parts.last().involvesWatchAddress = involvesWatchAddress ;  // maybe pass to TransactionRecord as constructor argument
         }
         else if (fAllFromMe)
         {
@@ -118,30 +118,30 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
 
             for ( unsigned int nOut = 0 ; nOut < wtx.tx->vout.size() ; nOut++ )
             {
-                const CTxOut& txout = wtx.tx->vout[nOut];
-                TransactionRecord sub(hash, nTime);
+                const CTxOut & txout = wtx.tx->vout[ nOut ] ;
+                TransactionRecord sub( txhash, nTime ) ;
                 sub.setSubtransactionIndex( nOut ) ;
-                sub.involvesWatchAddress = involvesWatchAddress;
+                sub.involvesWatchAddress = involvesWatchAddress ;
 
                 if(wallet->IsMine(txout))
                 {
                     // Ignore parts sent to self, as this is usually the change
-                    // from a transaction sent back to our own address.
+                    // from a transaction sent back to our own address
                     continue;
                 }
 
                 CTxDestination address ;
                 if ( ExtractDestination( txout.scriptPubKey, address ) )
                 {
-                    // Sent to Dogecoin address
+                    // Send to Dogecoin address
                     sub.type = TransactionRecord::SendToAddress ;
                     sub.address = CDogecoinAddress( address ).ToString() ;
                 }
                 else
                 {
-                    // Sent to IP, or other non-address transaction like OP_EVAL
-                    sub.type = TransactionRecord::SendToOther;
-                    sub.address = mapValue["to"];
+                    // Send to IP, or other non-address transaction like OP_EVAL
+                    sub.type = TransactionRecord::SendToOther ;
+                    sub.address = mapValue[ "to" ] ;
                 }
 
                 CAmount nValue = txout.nValue;
@@ -161,8 +161,8 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
             //
             // Mixed debit transaction, can't break down payees
             //
-            parts.append(TransactionRecord(hash, nTime, TransactionRecord::Other, "", nNet, 0));
-            parts.last().involvesWatchAddress = involvesWatchAddress;
+            parts.append( TransactionRecord( txhash, nTime, TransactionRecord::Other, "", nNet, 0 ) ) ;
+            parts.last().involvesWatchAddress = involvesWatchAddress ;
         }
     }
 
@@ -263,9 +263,9 @@ bool TransactionRecord::statusUpdateNeeded()
     return status.cur_num_blocks != chainActive.Height();
 }
 
-QString TransactionRecord::getTxID() const
+QString TransactionRecord::getTxHash() const
 {
-    return QString::fromStdString(hash.ToString());
+    return QString::fromStdString( hashOfTransaction.ToString() ) ;
 }
 
 int TransactionRecord::getSubtransactionIndex() const

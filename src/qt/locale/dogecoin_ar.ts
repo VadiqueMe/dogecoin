@@ -553,7 +553,7 @@
         <translation>نسخ الكمية</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
+        <source>Copy transaction hash</source>
         <translation>نسخ رقم العملية</translation>
     </message>
     <message>
@@ -1546,7 +1546,7 @@
         <translation>تعليق</translation>
     </message>
     <message>
-        <source>Transaction ID</source>
+        <source>Hash of transaction</source>
         <translation>رقم المعاملة</translation>
     </message>
     <message>
@@ -1711,7 +1711,7 @@
         <translation>نسخ الكمية</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
+        <source>Copy transaction hash</source>
         <translation>نسخ رقم العملية</translation>
     </message>
     <message>
@@ -1747,7 +1747,7 @@
         <translation>عنوان</translation>
     </message>
     <message>
-        <source>ID</source>
+        <source>Hash</source>
         <translation>العنوان</translation>
     </message>
     <message>

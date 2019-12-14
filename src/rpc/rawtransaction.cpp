@@ -61,12 +61,12 @@ void ScriptPubKeyToJSON(const CScript& scriptPubKey, UniValue& out, bool fInclud
 
 void TxToJSON(const CTransaction& tx, const uint256 hashBlock, UniValue& entry)
 {
-    entry.push_back(Pair("txid", tx.GetHash().GetHex()));
-    entry.push_back(Pair("hash", tx.GetWitnessHash().GetHex()));
-    entry.push_back(Pair("size", (int)::GetSerializeSize(tx, SER_NETWORK, PROTOCOL_VERSION)));
-    entry.push_back(Pair("vsize", (int)::GetVirtualTransactionSize(tx)));
-    entry.push_back(Pair("version", tx.nVersion));
-    entry.push_back(Pair("locktime", (int64_t)tx.nLockTime));
+    entry.push_back( Pair("txid", tx.GetTxHash().GetHex()) ) ;
+    entry.push_back( Pair("hash", tx.GetWitnessHash().GetHex()) ) ;
+    entry.push_back( Pair("size", (int)::GetSerializeSize( tx, SER_NETWORK, PROTOCOL_VERSION )) ) ;
+    entry.push_back( Pair("vsize", (int)::GetVirtualTransactionSize( tx )) ) ;
+    entry.push_back( Pair("version", tx.nVersion) ) ;
+    entry.push_back( Pair("locktime", (int64_t)tx.nLockTime) ) ;
 
     UniValue vin(UniValue::VARR);
     for (unsigned int i = 0; i < tx.vin.size(); i++) {
@@ -302,10 +302,10 @@ UniValue gettxoutproof(const JSONRPCRequest& request)
     if(!ReadBlockFromDisk(block, pblockindex, Params().GetConsensus(pblockindex->nHeight)))
         throw JSONRPCError(RPC_INTERNAL_ERROR, "Can't read block from disk");
 
-    unsigned int ntxFound = 0;
-    for (const auto& tx : block.vtx)
-        if (setTxids.count(tx->GetHash()))
-            ntxFound++;
+    unsigned int ntxFound = 0 ;
+    for ( const auto & tx : block.vtx )
+        if ( setTxids.count( tx->GetTxHash() ) > 0 )
+            ntxFound ++ ;
     if (ntxFound != setTxids.size())
         throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "(Not all) transactions not found in specified block");
 
@@ -340,14 +340,16 @@ UniValue verifytxoutproof(const JSONRPCRequest& request)
     if (merkleBlock.txn.ExtractMatches(vMatch, vIndex) != merkleBlock.header.hashMerkleRoot)
         return res;
 
-    LOCK(cs_main);
+    LOCK( cs_main ) ;
 
-    if (!mapBlockIndex.count(merkleBlock.header.GetHash()) || !chainActive.Contains(mapBlockIndex[merkleBlock.header.GetHash()]))
+    if ( ! mapBlockIndex.count( merkleBlock.header.GetSha256Hash() ) ||
+            ! chainActive.Contains( mapBlockIndex[ merkleBlock.header.GetSha256Hash() ] ) )
         throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Block not found in chain");
 
-    BOOST_FOREACH(const uint256& hash, vMatch)
-        res.push_back(hash.GetHex());
-    return res;
+    for ( const uint256 & hash : vMatch )
+        res.push_back( hash.GetHex() ) ;
+
+    return res ;
 }
 
 UniValue createrawtransaction(const JSONRPCRequest& request)
@@ -678,13 +680,13 @@ UniValue signrawtransaction(const JSONRPCRequest& request)
     if (txVariants.empty())
         throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "Missing transaction");
 
-    // mergedTx will end up with all the signatures; it
-    // starts as a clone of the rawtx:
+    // mergedTx will end up with all the signatures
+    // it begins as a clone of the rawtx
     CMutableTransaction mergedTx(txVariants[0]);
 
-    // Fetch previous transactions (inputs):
-    CCoinsView viewDummy;
-    CCoinsViewCache view(&viewDummy);
+    // Fetch previous transactions (inputs)
+    TrivialCoinsView viewDummy ;
+    CCoinsViewCache view( &viewDummy ) ;
     {
         LOCK(mempool.cs);
         CCoinsViewCache &viewChain = *pcoinsTip;
@@ -890,7 +892,7 @@ UniValue sendrawtransaction(const JSONRPCRequest& request)
     if (!DecodeHexTx(mtx, request.params[0].get_str()))
         throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "TX decode failed");
     CTransactionRef tx(MakeTransactionRef(std::move(mtx)));
-    const uint256& hashTx = tx->GetHash();
+    const uint256 & hashTx = tx->GetTxHash() ;
 
     bool fLimitFree = false ;
 

@@ -242,7 +242,7 @@ QString TransactionDesc::toHTML( CWallet * wallet, CWalletTx & wtx, TransactionR
     if (wtx.mapValue.count("comment") && !wtx.mapValue["comment"].empty())
         strHTML += "<br><b>" + tr("Comment") + ":</b><br>" + GUIUtil::HtmlEscape(wtx.mapValue["comment"], true) + "<br>";
 
-    strHTML += "<b>" + tr("Transaction ID") + ":</b> " + rec->getTxID() + "<br>";
+    strHTML += "<b>" + tr("Hash of transaction") + ":</b> " + rec->getTxHash() + "<br>";
     strHTML += "<b>" + tr("Full size of transaction") + ":</b> " + QString::number( wtx.tx->GetFullSize() ) + " bytes<br>" ;
     strHTML += "<b>" + tr("Output index of subtransaction") + ":</b> " + QString::number( rec->getSubtransactionIndex() ) + "<br>" ;
 
@@ -334,7 +334,7 @@ QString TransactionDesc::toHTML( CWallet * wallet, CWalletTx & wtx, TransactionR
 QString TransactionDesc::getTxHex( TransactionRecord * rec, CWallet * wallet )
 {
     LOCK2( cs_main, wallet->cs_wallet ) ;
-    std::map< uint256, CWalletTx >::iterator mi = wallet->mapWallet.find( rec->hash ) ;
+    std::map< uint256, CWalletTx >::iterator mi = wallet->mapWallet.find( rec->hashOfTransaction ) ;
     if ( mi != wallet->mapWallet.end() )
     {
         std::string strHex = EncodeHexTx( static_cast< CTransaction >( mi->second ) ) ;

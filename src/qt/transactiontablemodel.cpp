@@ -36,19 +36,19 @@ static int column_alignments[] = {
     } ;
 
 // Comparison operator for sort/binary search of model tx list
-struct TxLessThan
+struct TxHashLessThan
 {
-    bool operator()(const TransactionRecord &a, const TransactionRecord &b) const
+    bool operator()( const TransactionRecord & a, const TransactionRecord & b ) const
     {
-        return a.hash < b.hash;
+        return a.hashOfTransaction < b.hashOfTransaction ;
     }
-    bool operator()(const TransactionRecord &a, const uint256 &b) const
+    bool operator()( const TransactionRecord & a, const uint256 & b ) const
     {
-        return a.hash < b;
+        return a.hashOfTransaction < b ;
     }
-    bool operator()(const uint256 &a, const TransactionRecord &b) const
+    bool operator()( const uint256 & a, const TransactionRecord & b ) const
     {
-        return a < b.hash;
+        return a < b.hashOfTransaction ;
     }
 };
 
@@ -96,10 +96,10 @@ public:
         qDebug() << "TransactionTablePriv::updateWallet: " + QString::fromStdString(hash.ToString()) + " " + QString::number(status);
 
         // Find bounds of this transaction in model
-        QList<TransactionRecord>::iterator lower = qLowerBound(
-            cachedWallet.begin(), cachedWallet.end(), hash, TxLessThan());
-        QList<TransactionRecord>::iterator upper = qUpperBound(
-            cachedWallet.begin(), cachedWallet.end(), hash, TxLessThan());
+        QList< TransactionRecord >::iterator lower = qLowerBound(
+            cachedWallet.begin(), cachedWallet.end(), hash, TxHashLessThan() ) ;
+        QList< TransactionRecord >::iterator upper = qUpperBound(
+            cachedWallet.begin(), cachedWallet.end(), hash, TxHashLessThan() ) ;
         int lowerIndex = (lower - cachedWallet.begin());
         int upperIndex = (upper - cachedWallet.begin());
         bool inModel = (lower != upper);
@@ -192,7 +192,7 @@ public:
                 TRY_LOCK(wallet->cs_wallet, lockWallet);
                 if(lockWallet && rec->statusUpdateNeeded())
                 {
-                    std::map<uint256, CWalletTx>::iterator mi = wallet->mapWallet.find(rec->hash);
+                    std::map< uint256, CWalletTx >::iterator mi = wallet->mapWallet.find( rec->hashOfTransaction ) ;
 
                     if(mi != wallet->mapWallet.end())
                     {
@@ -209,7 +209,7 @@ public:
     {
         {
             LOCK2(cs_main, wallet->cs_wallet);
-            std::map<uint256, CWalletTx>::iterator mi = wallet->mapWallet.find(rec->hash);
+            std::map< uint256, CWalletTx >::iterator mi = wallet->mapWallet.find( rec->hashOfTransaction ) ;
             if(mi != wallet->mapWallet.end())
             {
                 return TransactionDesc::toHTML(wallet, mi->second, rec, unit);
@@ -596,10 +596,8 @@ QVariant TransactionTableModel::data(const QModelIndex &index, int role) const
         return walletModel->getAddressTableModel()->labelForAddress(QString::fromStdString(rec->address));
     case AmountRole:
         return qint64(rec->credit + rec->debit);
-    case TxIDRole:
-        return rec->getTxID();
-    case TxHashRole:
-        return QString::fromStdString(rec->hash.ToString());
+    case TxHashRole :
+        return rec->getTxHash() ;
     case TxHexRole :
         return TransactionDesc::getTxHex( rec, wallet ) ;
     case TxPlainTextRole:

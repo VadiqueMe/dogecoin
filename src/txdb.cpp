@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "txdb.h"
 
@@ -37,11 +37,12 @@ bool CCoinsViewDB::HaveCoins(const uint256 &txid) const {
     return db.Exists(std::make_pair(DB_COINS, txid));
 }
 
-uint256 CCoinsViewDB::GetBestBlock() const {
-    uint256 hashBestChain;
-    if (!db.Read(DB_BEST_BLOCK, hashBestChain))
-        return uint256();
-    return hashBestChain;
+uint256 CCoinsViewDB::GetSha256OfBestBlock() const
+{
+    uint256 hashBestChain ;
+    if ( ! db.Read( DB_BEST_BLOCK, hashBestChain ) )
+        return uint256() ;
+    return hashBestChain ;
 }
 
 bool CCoinsViewDB::BatchWrite(CCoinsMap &mapCoins, const uint256 &hashBlock) {
@@ -90,12 +91,12 @@ bool CBlockTreeDB::ReadLastBlockFile(int &nFile) {
     return Read(DB_LAST_BLOCK, nFile);
 }
 
-CCoinsViewCursor *CCoinsViewDB::Cursor() const
+CCoinsViewCursor * CCoinsViewDB::Cursor() const
 {
-    CCoinsViewDBCursor *i = new CCoinsViewDBCursor(const_cast<CDBWrapper*>(&db)->NewIterator(), GetBestBlock());
-    /* It seems that there are no "const iterators" for LevelDB.  Since we
+    CCoinsViewDBCursor * i = new CCoinsViewDBCursor( const_cast< CDBWrapper * >( &db )->NewIterator(), GetSha256OfBestBlock() ) ;
+    /* It seems that there are no const iterators for LevelDB. Since we
        only need read operations on it, use a const-cast to get around
-       that restriction.  */
+       that restriction */
     i->pcursor->Seek(DB_COINS);
     // Cache key of first record
     if (i->pcursor->Valid()) {
@@ -144,8 +145,8 @@ bool CBlockTreeDB::WriteBatchSync(const std::vector<std::pair<int, const CBlockF
         batch.Write(std::make_pair(DB_BLOCK_FILES, it->first), *it->second);
     }
     batch.Write(DB_LAST_BLOCK, nLastFile);
-    for (std::vector<const CBlockIndex*>::const_iterator it=blockinfo.begin(); it != blockinfo.end(); it++) {
-        batch.Write(std::make_pair(DB_BLOCK_INDEX, (*it)->GetBlockHash()), CDiskBlockIndex(*it));
+    for ( std::vector< const CBlockIndex * >::const_iterator it = blockinfo.begin() ; it != blockinfo.end() ; it ++ ) {
+        batch.Write( std::make_pair( DB_BLOCK_INDEX, ( *it )->GetBlockSha256Hash() ), CDiskBlockIndex( *it ) ) ;
     }
     return WriteBatch(batch, true);
 }
@@ -187,8 +188,8 @@ bool CBlockTreeDB::LoadBlockIndexGuts(boost::function<CBlockIndex*(const uint256
             CDiskBlockIndex diskindex;
             if (pcursor->GetValue(diskindex)) {
                 // Construct block index object
-                CBlockIndex* pindexNew = insertBlockIndex(diskindex.GetBlockHash());
-                pindexNew->pprev          = insertBlockIndex(diskindex.hashPrev);
+                CBlockIndex* pindexNew = insertBlockIndex(diskindex.GetBlockSha256Hash());
+                pindexNew->pprev          = insertBlockIndex( diskindex.sha256HashPrev ) ;
                 pindexNew->nHeight        = diskindex.nHeight;
                 pindexNew->nFile          = diskindex.nFile;
                 pindexNew->nDataPos       = diskindex.nDataPos;
@@ -201,10 +202,8 @@ bool CBlockTreeDB::LoadBlockIndexGuts(boost::function<CBlockIndex*(const uint256
                 pindexNew->nStatus        = diskindex.nStatus;
                 pindexNew->nTx            = diskindex.nTx;
 
-                /* Bitcoin checks the PoW here.  We don't do this because
-                   the CDiskBlockIndex does not contain the auxpow.
-                   This check isn't important, since the data on disk should
-                   already be valid and can be trusted.  */
+                /* Don't check the proof-of-work here because the CDiskBlockIndex does not contain the auxpow.
+                   This check isn't important, since the data on disk is expected to already be valid and can be trusted */
 
                 pcursor->Next();
             } else {

@@ -591,8 +591,8 @@
         <translation>Copiar quantia</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Copiar ID da transação</translation>
+        <source>Copy transaction hash</source>
+        <translation>Copiar hash da transação</translation>
     </message>
     <message>
         <source>Lock unspent</source>
@@ -2416,8 +2416,8 @@
         <translation>Comentário</translation>
     </message>
     <message>
-        <source>Transaction ID</source>
-        <translation>ID da transação</translation>
+        <source>Hash of transaction</source>
+        <translation>Hash da transação</translation>
     </message>
     <message>
         <source>Full size of transaction</source>
@@ -2633,8 +2633,8 @@
         <translation>Copiar quantia</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Copiar ID da transação</translation>
+        <source>Copy transaction hash</source>
+        <translation>Copiar hash da transação</translation>
     </message>
     <message>
         <source>Copy raw transaction</source>
@@ -2683,10 +2683,6 @@
     <message>
         <source>Address</source>
         <translation>Endereço</translation>
-    </message>
-    <message>
-        <source>ID</source>
-        <translation>ID</translation>
     </message>
     <message>
         <source>Exporting Failed</source>

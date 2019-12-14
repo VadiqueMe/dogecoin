@@ -236,7 +236,7 @@ void PaymentServer::ipcParseCommandLine(int argc, char* argv[])
                 std::vector< std::string > chains = { "main", "inu", "test" } ;
                 for ( const std::string & chain : chains )
                 {
-                    if ( request.getDetails().genesis() == ParamsFor( chain ).GenesisBlock().GetHash().GetHex() )
+                    if ( request.getDetails().genesis() == ParamsFor( chain ).GenesisBlock().GetSha256Hash().GetHex() )
                         SelectParams( chain ) ;
                 }
             }

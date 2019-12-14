@@ -559,8 +559,8 @@
         <translation>Copia l'importo</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Copia l'ID transazione</translation>
+        <source>Copy transaction hash</source>
+        <translation>Copia l'hash transazione</translation>
     </message>
     <message>
         <source>Lock unspent</source>
@@ -2228,8 +2228,8 @@
         <translation>Commento</translation>
     </message>
     <message>
-        <source>Transaction ID</source>
-        <translation>ID della transazione</translation>
+        <source>Hash of transaction</source>
+        <translation>Hash della transazione</translation>
     </message>
     <message>
         <source>Merchant</source>
@@ -2397,8 +2397,8 @@
         <translation>Copia l'importo</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Copia l'ID transazione</translation>
+        <source>Copy transaction hash</source>
+        <translation>Copia l'hash transazione</translation>
     </message>
     <message>
         <source>Copy raw transaction</source>
@@ -2443,10 +2443,6 @@
     <message>
         <source>Address</source>
         <translation>Indirizzo</translation>
-    </message>
-    <message>
-        <source>ID</source>
-        <translation>ID</translation>
     </message>
     <message>
         <source>Exporting Failed</source>

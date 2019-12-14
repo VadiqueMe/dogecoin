@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -289,7 +290,7 @@ private:
     /** Memory only */
     const uint256 hash ;
 
-    uint256 ComputeHash() const;
+    uint256 ComputeTxHash() const ;
 
 public:
     /** Construct a CTransaction that qualifies as IsNull() */
@@ -313,8 +314,8 @@ public:
         return vin.empty() && vout.empty();
     }
 
-    const uint256& GetHash() const {
-        return hash;
+    const uint256 & GetTxHash() const {
+        return hash ;
     }
 
     // Compute a hash that includes both transaction and witness data
@@ -364,7 +365,7 @@ public:
     }
 };
 
-/** A mutable version of CTransaction. */
+/** A mutable version of CTransaction */
 struct CMutableTransaction
 {
     int32_t nVersion;
@@ -391,14 +392,14 @@ struct CMutableTransaction
         Unserialize(s);
     }
 
-    /** Compute the hash of this CMutableTransaction. This is computed on the
-     * fly, as opposed to GetHash() in CTransaction, which uses a cached result.
+    /** Compute the hash of this CMutableTransaction. This is computed on the fly,
+      * as opposed to GetTxHash() in CTransaction, which uses a cached result
      */
-    uint256 GetHash() const;
+    uint256 GetTxHash() const ;
 
-    friend bool operator==(const CMutableTransaction& a, const CMutableTransaction& b)
+    friend bool operator== ( const CMutableTransaction & a, const CMutableTransaction & b )
     {
-        return a.GetHash() == b.GetHash();
+        return a.GetTxHash() == b.GetTxHash() ;
     }
 
     bool HasWitness() const

@@ -128,11 +128,11 @@ bool CheckProofOfWork( const CBlockHeader & block, unsigned int nBits, const Con
     // Proof that block's hash is not bigger than solution
 
     if ( NameOfChain() == "inu" ) {
-        return ( UintToArith256( block.GetPoWHash() ) <= solutionHash )
-                    && ( UintToArith256( block.GetHash() ) <= ( solutionHash << 2 ) ) ;
+        return ( UintToArith256( block.GetScryptHash() ) <= solutionHash )
+                    && ( UintToArith256( block.GetSha256Hash() ) <= ( solutionHash << 2 ) ) ;
     }
 
-    return UintToArith256( block.GetPoWHash() ) <= solutionHash ;
+    return UintToArith256( block.GetScryptHash() ) <= solutionHash ;
 }
 
 bool CheckAuxProofOfWork( const CAuxPow & auxpow, unsigned int nBits, const Consensus::Params & params )
@@ -150,5 +150,5 @@ bool CheckAuxProofOfWork( const CAuxPow & auxpow, unsigned int nBits, const Cons
         return false ;
 
     // Proof that hash of a block from another chain is not bigger than solution
-    return UintToArith256( auxpow.getParentBlockPoWHash() ) <= solutionHash ;
+    return UintToArith256( auxpow.getParentBlockScryptHash() ) <= solutionHash ;
 }

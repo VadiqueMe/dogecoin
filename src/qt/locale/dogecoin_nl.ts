@@ -595,8 +595,8 @@
         <translation>Kopieer bedrag</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Kopieer transactie-ID</translation>
+        <source>Copy transaction hash</source>
+        <translation>Kopieer transactie-hash</translation>
     </message>
     <message>
         <source>Lock unspent</source>
@@ -2416,10 +2416,6 @@
         <translation>Opmerking</translation>
     </message>
     <message>
-        <source>Transaction ID</source>
-        <translation>Transactie-ID</translation>
-    </message>
-    <message>
         <source>Full size of transaction</source>
         <translation>Transactie totale grootte</translation>
     </message>
@@ -2633,8 +2629,8 @@
         <translation>Kopieer bedrag</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Kopieer transactie-ID</translation>
+        <source>Copy transaction hash</source>
+        <translation>Kopieer transactie-hash</translation>
     </message>
     <message>
         <source>Copy raw transaction</source>
@@ -2683,10 +2679,6 @@
     <message>
         <source>Address</source>
         <translation>Adres</translation>
-    </message>
-    <message>
-        <source>ID</source>
-        <translation>ID</translation>
     </message>
     <message>
         <source>Exporting Failed</source>

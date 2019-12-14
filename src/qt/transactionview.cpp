@@ -140,7 +140,7 @@ TransactionView::TransactionView( const PlatformStyle * platformStyle, QWidget *
     QAction *copyAddressAction = new QAction(tr("Copy address"), this);
     QAction *copyLabelAction = new QAction(tr("Copy label"), this);
     QAction *copyAmountAction = new QAction(tr("Copy amount"), this);
-    QAction *copyTxIDAction = new QAction(tr("Copy transaction ID"), this);
+    QAction * copyTxHashAction = new QAction( tr("Copy transaction hash"), this ) ;
     QAction * copyTxHexAction = new QAction( tr("Copy raw transaction"), this ) ;
     QAction *copyTxPlainText = new QAction(tr("Copy full transaction details"), this);
     QAction *editLabelAction = new QAction(tr("Edit label"), this);
@@ -150,7 +150,7 @@ TransactionView::TransactionView( const PlatformStyle * platformStyle, QWidget *
     contextMenu->addAction(copyAddressAction);
     contextMenu->addAction(copyLabelAction);
     contextMenu->addAction(copyAmountAction);
-    contextMenu->addAction(copyTxIDAction);
+    contextMenu->addAction( copyTxHashAction ) ;
     contextMenu->addAction( copyTxHexAction ) ;
     contextMenu->addAction(copyTxPlainText);
     contextMenu->addAction(showDetailsAction);
@@ -176,7 +176,7 @@ TransactionView::TransactionView( const PlatformStyle * platformStyle, QWidget *
     connect(copyAddressAction, SIGNAL(triggered()), this, SLOT(copyAddress()));
     connect(copyLabelAction, SIGNAL(triggered()), this, SLOT(copyLabel()));
     connect(copyAmountAction, SIGNAL(triggered()), this, SLOT(copyAmount()));
-    connect(copyTxIDAction, SIGNAL(triggered()), this, SLOT(copyTxID()));
+    connect( copyTxHashAction, SIGNAL( triggered() ), this, SLOT( copyTxHash() ) ) ;
     connect( copyTxHexAction, SIGNAL( triggered() ), this, SLOT( copyTxHex() ) ) ;
     connect(copyTxPlainText, SIGNAL(triggered()), this, SLOT(copyTxPlainText()));
     connect(editLabelAction, SIGNAL(triggered()), this, SLOT(editLabel()));
@@ -375,7 +375,7 @@ void TransactionView::exportClicked()
     writer.addColumn( tr("Label"), 0, TransactionTableModel::LabelRole ) ;
     writer.addColumn( tr("Address"), 0, TransactionTableModel::AddressRole ) ;
     writer.addColumn( GUIUtil::makeTitleForAmountColumn( walletModel->getOptionsModel()->getDisplayUnit() ), 0, TransactionTableModel::FormattedAmountRole ) ;
-    writer.addColumn( tr("ID"), 0, TransactionTableModel::TxIDRole ) ;
+    writer.addColumn( tr("Hash"), 0, TransactionTableModel::TxHashRole ) ;
 
     if ( ! writer.write() ) {
         Q_EMIT message( tr("Exporting Failed"), tr("There was an error trying to save the transaction history to %1").arg( filename ),
@@ -439,9 +439,9 @@ void TransactionView::copyAmount()
     GUIUtil::copyEntryData( transactionTableView, 0, TransactionTableModel::FormattedAmountRole ) ;
 }
 
-void TransactionView::copyTxID()
+void TransactionView::copyTxHash()
 {
-    GUIUtil::copyEntryData( transactionTableView, 0, TransactionTableModel::TxIDRole ) ;
+    GUIUtil::copyEntryData( transactionTableView, 0, TransactionTableModel::TxHashRole ) ;
 }
 
 void TransactionView::copyTxHex()
