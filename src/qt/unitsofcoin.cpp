@@ -23,6 +23,7 @@ QList< UnitsOfCoin::Unit > UnitsOfCoin::availableUnits()
     unitlist.append( mCoin ) ;
     unitlist.append( oneCoin ) ;
     unitlist.append( kCoin ) ;
+    unitlist.append( theCoin ) ;
     unitlist.append( MCoin ) ;
     return unitlist ;
 }
@@ -32,6 +33,7 @@ bool UnitsOfCoin::isOk( int unit )
     switch ( unit )
     {
     case MCoin :
+    case theCoin :
     case kCoin :
     case oneCoin :
     case mCoin :
@@ -49,6 +51,7 @@ QString UnitsOfCoin::name( int unit )
     switch ( unit )
     {
     case MCoin : return QString( "M" ) + nameOfCurrency ;
+    case theCoin : return nameOfCurrency.replace( 0, 1, "Ð" ) ; // Unicode Character “Ð” (U+00D0)
     case kCoin : return QString( "k" ) + nameOfCurrency ;
     case oneCoin : return nameOfCurrency ;
     case mCoin : return QString( "m" ) + nameOfCurrency ;
@@ -60,14 +63,16 @@ QString UnitsOfCoin::name( int unit )
 
 QString UnitsOfCoin::description( int unit )
 {
+    QString nameOfCurrency = UnitsOfCoin::name( oneCoin ) ;
     switch ( unit )
     {
-    case MCoin : return QString( "Mega-Dogecoins (1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)" ) ;
-    case kCoin : return QString( "Kilo-Dogecoins (1" THIN_SP_UTF8 "000)" ) ;
-    case oneCoin : return QString( "Dogecoins" ) ;
-    case mCoin : return QString( "Milli-Dogecoins (1 / 1" THIN_SP_UTF8 "000)" ) ;
-    case uCoin : return QString( "Micro-Dogecoins (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)" ) ;
-    case Cointoshi : return QString( "Dogetoshis (1 / 1" THIN_SP_UTF8 "0000" THIN_SP_UTF8 "0000)" ) ;
+    case MCoin : return QString( "Mega-Dogecoins (1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000 " + nameOfCurrency + ")" ) ;
+    case theCoin : return QString( "Þe Ðogecoins (1" THIN_SP_UTF8 "0000 " + nameOfCurrency + ")" ) ;
+    case kCoin : return QString( "Kilo-Dogecoins (1" THIN_SP_UTF8 "000 " + nameOfCurrency + ")" ) ;
+    case oneCoin : return QString( "Dogecoins (1 / 1" THIN_SP_UTF8 "0000 " + UnitsOfCoin::name( theCoin ) + ")" ) ;
+    case mCoin : return QString( "Milli-Dogecoins (1 / 1" THIN_SP_UTF8 "000 " + nameOfCurrency + ")" ) ;
+    case uCoin : return QString( "Micro-Dogecoins (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000 " + nameOfCurrency + ")" ) ;
+    case Cointoshi : return QString( "Dogetoshis (1 / 1" THIN_SP_UTF8 "0000" THIN_SP_UTF8 "0000 " + nameOfCurrency + ")" ) ;
     default: return QString( "Wow-Dogecoins (???)" ) ;
     }
 }
@@ -76,11 +81,12 @@ qint64 UnitsOfCoin::factor( int unit )
 {
     switch ( unit )
     {
-    case MCoin :  return 100000000000000 ;
-    case kCoin :  return 100000000000 ;
-    case oneCoin :  return 100000000 ;
-    case mCoin :  return 100000 ;
-    case uCoin :  return 100 ;
+    case MCoin :   return 100000000000000 ;
+    case theCoin : return 1000000000000 ;
+    case kCoin :   return 100000000000 ;
+    case oneCoin : return 100000000 ;
+    case mCoin :   return 100000 ;
+    case uCoin :   return 100 ;
     case Cointoshi : default :  return 1 ;
     }
 }
@@ -90,6 +96,7 @@ int UnitsOfCoin::decimals( int unit )
     switch ( unit )
     {
     case MCoin : return 14 ;
+    case theCoin : return 12 ;
     case kCoin : return 11 ;
     case oneCoin : return 8 ;
     case mCoin : return 5 ;
@@ -98,26 +105,27 @@ int UnitsOfCoin::decimals( int unit )
     }
 }
 
-QString UnitsOfCoin::format( int unit, const CAmount& nIn, bool fPlus, SeparatorStyle separators )
+QString UnitsOfCoin::format( int unit, const CAmount & nIn, bool fPlus, SeparatorStyle separators )
 {   // not using straight sprintf here to NOT to get localized formatting
 
     if ( ! isOk( unit ) )
         return QString( "unknown unit (" ) + QString::number( unit ) + QString( ")" ) ;
 
-    qint64 n = (qint64)nIn;
-    qint64 coin = factor(unit);
-    int num_decimals = decimals(unit);
-    qint64 n_abs = (n > 0 ? n : -n);
-    qint64 quotient = n_abs / coin;
-    qint64 remainder = n_abs % coin;
-    QString quotient_str = QString::number(quotient);
-    QString remainder_str = QString::number(remainder).rightJustified(num_decimals, '0');
+    qint64 n = (qint64)nIn ;
+    qint64 coin = factor( unit ) ;
+    int num_decimals = decimals( unit ) ;
+    qint64 n_abs = ( n > 0 ? n : -n ) ;
+    qint64 quotient = n_abs / coin ;
+    qint64 remainder = n_abs % coin ;
+    QString quotient_str = QString::number( quotient ) ;
+    QString remainder_str = QString::number( remainder ).rightJustified( num_decimals, '0' ) ;
 
     // Use SI-style thin space separators as these are locale independent and can't be
     // confused with the decimal marker
-    QChar thin_sp(THIN_SP_CP);
-    int q_size = quotient_str.size();
-    int digitsInGroup = ( unit == Cointoshi ) ? 4 : 3 ;
+    QChar thin_sp( THIN_SP_CP ) ;
+    int q_size = quotient_str.size() ;
+    const int digitsInGroup = ( unit == Cointoshi || unit == theCoin ) ? 4 : 3 ;
+
     if ( separators == separatorAlways || ( separators == separatorStandard && q_size > ( digitsInGroup + 1 ) ) )
         for ( int i = digitsInGroup ; i < q_size ; i += digitsInGroup )
             quotient_str.insert( q_size - i, thin_sp ) ;
@@ -126,6 +134,12 @@ QString UnitsOfCoin::format( int unit, const CAmount& nIn, bool fPlus, Separator
         quotient_str.insert( 0, '-' ) ;
     else if ( fPlus && n > 0 )
         quotient_str.insert( 0, '+' ) ;
+
+    if ( unit == theCoin && ( separators == separatorAlways || separators == separatorStandard ) ) {
+        // int remainder_size = remainder_str.size() ; // is equal to num_decimals
+        for ( int i = digitsInGroup ; i < num_decimals ; i += digitsInGroup )
+            remainder_str.insert( num_decimals - i, QChar( /* ’ */ 0x2019 ) ) ;
+    }
 
     QString result = quotient_str ;
     if ( unit != Cointoshi )
@@ -140,31 +154,30 @@ QString UnitsOfCoin::format( int unit, const CAmount& nIn, bool fPlus, Separator
 // in a standard space rather than a thin space, due to a bug in Qt's
 // XML whitespace canonicalisation
 //
-// Please take care to use formatHtmlWithUnit instead, when
-// appropriate
+// Please take care to use formatHtmlWithUnit instead, when appropriate
 
-QString UnitsOfCoin::formatWithUnit( int unit, const CAmount& amount, bool plussign, SeparatorStyle separators )
+QString UnitsOfCoin::formatWithUnit( int unit, const CAmount & amount, bool plussign, SeparatorStyle separators )
 {
     return format( unit, amount, plussign, separators ) + QString(" ") + name( unit ) ;
 }
 
-QString UnitsOfCoin::formatHtmlWithUnit( int unit, const CAmount& amount, bool plussign, SeparatorStyle separators )
+QString UnitsOfCoin::formatHtmlWithUnit( int unit, const CAmount & amount, bool plussign, SeparatorStyle separators )
 {
-    QString str(formatWithUnit(unit, amount, plussign, separators));
-    str.replace(QChar(THIN_SP_CP), QString(THIN_SP_HTML));
-    return QString("<span style='white-space: nowrap;'>%1</span>").arg(str);
+    QString str( formatWithUnit( unit, amount, plussign, separators ) ) ;
+    str.replace( QChar( THIN_SP_CP ), QString( THIN_SP_HTML ) ) ;
+    return QString( "<span style='white-space: nowrap;'>%1</span>" ).arg( str ) ;
 }
 
 
-bool UnitsOfCoin::parse( int unit, const QString &value, CAmount *val_out )
+bool UnitsOfCoin::parse( int unit, const QString & value, CAmount * val_out )
 {
     if ( ! isOk( unit ) || value.isEmpty() )
         return false ; // don't parse unknown unit or empty string
 
-    int num_decimals = decimals(unit);
+    int num_decimals = decimals( unit ) ;
 
-    // Ignore spaces and thin spaces when parsing
-    QStringList parts = removeSpaces(value).split(".");
+    // Ignore separators when parsing
+    QStringList parts = removeSpaces( value ).remove( QChar( /* ’ */ 0x2019 ) ).split( "." ) ;
 
     if ( parts.size() > 2 )
         return false ; // more than one dot

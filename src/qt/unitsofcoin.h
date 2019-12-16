@@ -54,12 +54,13 @@ public:
 
     enum Unit
     {
-        MCoin,
-        kCoin,
-        oneCoin,
-        mCoin,
-        uCoin,
-        Cointoshi
+        MCoin = 3,
+        theCoin = 10,
+        kCoin = 2,
+        oneCoin = 0,
+        mCoin = 4,
+        uCoin = 5,
+        Cointoshi = 1
     };
 
     enum SeparatorStyle
@@ -70,17 +71,17 @@ public:
     };
 
     // get list of units, for drop-down box
-    static QList<Unit> availableUnits();
+    static QList< Unit > availableUnits() ;
     // is this unit known?
     static bool isOk( int unit ) ;
-    //! Short name
-    static QString name(int unit);
-    //! Longer description
-    static QString description(int unit);
-    //! Number of Satoshis (1e-8) per unit
-    static qint64 factor(int unit);
-    //! Number of decimals left
-    static int decimals(int unit);
+    // short name
+    static QString name( int unit ) ;
+    // longer description
+    static QString description( int unit ) ;
+    // number of atomary coin units per this unit
+    static qint64 factor( int unit ) ;
+    // number of decimals left
+    static int decimals( int unit ) ;
     //! Format as string
     static QString format(int unit, const CAmount& amount, bool plussign=false, SeparatorStyle separators=separatorStandard);
     //! Format as string (with unit)
@@ -98,21 +99,21 @@ public:
     int rowCount(const QModelIndex &parent) const;
     QVariant data(const QModelIndex &index, int role) const;
 
-    static QString removeSpaces(QString text)
+    static QString removeSpaces( QString text )
     {
-        text.remove(' ');
-        text.remove(QChar(THIN_SP_CP));
+        text.remove( ' ' ) ;
+        text.remove( QChar( THIN_SP_CP ) ) ;
 #if (THIN_SP_CP != REAL_THIN_SP_CP)
-        text.remove(QChar(REAL_THIN_SP_CP));
+        text.remove( QChar( REAL_THIN_SP_CP ) ) ;
 #endif
-        return text;
+        return text ;
     }
 
-    // return maximum number of coin units (cointoshis)
+    // return maximum number of atomary coin units
     static CAmount maxMoney() ;
 
 private:
-    QList< UnitsOfCoin::Unit > unitlist ;
+    QList < UnitsOfCoin::Unit > unitlist ;
 
 } ;
 
