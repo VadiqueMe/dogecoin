@@ -639,10 +639,6 @@
         <translation>いいえ</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 koinu(s) per input.</source>
-        <translation>ひとつの入力につき %1 koinu 前後ずれることがあります。</translation>
-    </message>
-    <message>
         <source>(no label)</source>
         <translation>（ラベル無し）</translation>
     </message>
@@ -2059,10 +2055,6 @@
     <message>
         <source>Choose previously used address</source>
         <translation>前に使用したアドレスを選ぶ</translation>
-    </message>
-    <message>
-        <source>This is a normal payment.</source>
-        <translation>これは通常の支払です。</translation>
     </message>
     <message>
         <source>The Dogecoin address to send the payment to</source>

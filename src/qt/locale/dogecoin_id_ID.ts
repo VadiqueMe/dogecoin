@@ -1347,10 +1347,6 @@
         <translation>Pilih alamat yang telah digunakan sebelumnya</translation>
     </message>
     <message>
-        <source>This is a normal payment.</source>
-        <translation>Ini adalah pembayaran normal</translation>
-    </message>
-    <message>
         <source>Alt+A</source>
         <translation>Alt+J</translation>
     </message>

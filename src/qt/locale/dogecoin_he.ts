@@ -1295,10 +1295,6 @@
         <translation>בחירת כתובת שהייתה בשימוש</translation>
     </message>
     <message>
-        <source>This is a normal payment.</source>
-        <translation>זהו תשלום רגיל.</translation>
-    </message>
-    <message>
         <source>The Dogecoin address to send the payment to</source>
         <translation>כתובת הביטקוין של המוטב</translation>
     </message>

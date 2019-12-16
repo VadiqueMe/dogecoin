@@ -1729,10 +1729,6 @@
         <translation>Escolha o endereço utilizado anteriormente</translation>
     </message>
     <message>
-        <source>This is a normal payment.</source>
-        <translation>Este é um pagamento normal.</translation>
-    </message>
-    <message>
         <source>The Dogecoin address to send the payment to</source>
         <translation>O endereço Dogecoin para enviar o pagamento</translation>
     </message>

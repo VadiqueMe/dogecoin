@@ -10,7 +10,7 @@ CFeeRate::CFeeRate( const CAmount & nFeePaid, size_t bytes )
 
 CAmount CFeeRate::GetFeePerBytes( size_t bytes ) const
 {
-    // Dogecoin: Round up to the nearest 1000 bytes so we get round tx fees
+    // Dogecoin: Round up to the nearest 1000 bytes to have round tx fees
     if ( bytes % 1000 > 0 )
         bytes = bytes - ( bytes % 1000 ) + 1000 ;
 

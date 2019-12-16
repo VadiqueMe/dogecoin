@@ -38,7 +38,7 @@ extern CWallet* pwalletMain;
 /**
  * Settings
  */
-extern CFeeRate payTxFee;
+extern CFeeRate payTxFee ;
 extern unsigned int nTxConfirmTarget;
 extern bool bSpendZeroConfChange;
 extern bool fSendFreeTransactions;

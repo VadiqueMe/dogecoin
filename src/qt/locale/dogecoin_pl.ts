@@ -607,10 +607,6 @@
         <translation>nie</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 koinu(s) per input.</source>
-        <translation>Waha się +/- %1 koinu na wejście.</translation>
-    </message>
-    <message>
         <source>(no label)</source>
         <translation>(brak etykiety)</translation>
     </message>
@@ -1875,10 +1871,6 @@
     <message>
         <source>Choose previously used address</source>
         <translation>Wybierz wcześniej użyty adres</translation>
-    </message>
-    <message>
-        <source>This is a normal payment.</source>
-        <translation>To jest standardowa płatność</translation>
     </message>
     <message>
         <source>The Dogecoin address to send the payment to</source>

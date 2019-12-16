@@ -1722,10 +1722,6 @@ Var vänlig och försök igen.</translation>
         <translation>Välj tidigare använda adresser</translation>
     </message>
     <message>
-        <source>This is a normal payment.</source>
-        <translation>Detta är en normal betalning.</translation>
-    </message>
-    <message>
         <source>The Dogecoin address to send the payment to</source>
         <translation>Dogecoinadress att sända betalning till</translation>
     </message>

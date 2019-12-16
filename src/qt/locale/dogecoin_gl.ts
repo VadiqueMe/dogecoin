@@ -763,10 +763,6 @@
         <translation>Escoller dirección previamente empregada</translation>
     </message>
     <message>
-        <source>This is a normal payment.</source>
-        <translation>Este é un pago normal</translation>
-    </message>
-    <message>
         <source>Alt+A</source>
         <translation>Alt+A</translation>
     </message>

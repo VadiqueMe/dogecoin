@@ -1261,10 +1261,6 @@
         <translation>Alegeţi adrese folosite anterior</translation>
     </message>
     <message>
-        <source>This is a normal payment.</source>
-        <translation>Aceasta este o tranzacţie normală.</translation>
-    </message>
-    <message>
         <source>The Dogecoin address to send the payment to</source>
         <translation>Adresa dogecoin către care se face plata</translation>
     </message>

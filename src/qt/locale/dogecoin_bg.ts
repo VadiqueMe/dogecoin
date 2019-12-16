@@ -1597,10 +1597,6 @@
         <translation>Изберете използван преди адрес</translation>
     </message>
     <message>
-        <source>This is a normal payment.</source>
-        <translation>Това е нормално плащане.</translation>
-    </message>
-    <message>
         <source>Alt+A</source>
         <translation>Alt+A</translation>
     </message>

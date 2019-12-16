@@ -1021,10 +1021,6 @@
         <translation>Elektu la jam uzitan adreson</translation>
     </message>
     <message>
-        <source>This is a normal payment.</source>
-        <translation>Tio estas normala pago.</translation>
-    </message>
-    <message>
         <source>Alt+A</source>
         <translation>Alt+A</translation>
     </message>

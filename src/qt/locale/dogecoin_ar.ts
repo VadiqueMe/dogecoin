@@ -1319,10 +1319,6 @@
         <translation>اختر عنوانا مستخدم سابقا</translation>
     </message>
     <message>
-        <source>This is a normal payment.</source>
-        <translation>هذا دفع اعتيادي</translation>
-    </message>
-    <message>
         <source>The Dogecoin address to send the payment to</source>
         <translation>عنوان البت كوين المرسل اليه الدفع</translation>
     </message>

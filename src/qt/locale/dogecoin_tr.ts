@@ -639,10 +639,6 @@
         <translation>hayır</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 koinu(s) per input.</source>
-        <translation>Girdi başına +/- %1 koinu değişebilir.</translation>
-    </message>
-    <message>
         <source>(no label)</source>
         <translation>(etiket yok)</translation>
     </message>
@@ -2055,10 +2051,6 @@
     <message>
         <source>Choose previously used address</source>
         <translation>Önceden kullanılmış adres seç</translation>
-    </message>
-    <message>
-        <source>This is a normal payment.</source>
-        <translation>Bu, normal bir ödemedir.</translation>
     </message>
     <message>
         <source>The Dogecoin address to send the payment to</source>

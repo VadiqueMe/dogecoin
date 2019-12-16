@@ -506,12 +506,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+165"/>
-        <source>Can vary +/- %1 koinu(s) per input.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+41"/>
+        <location line="+196"/>
         <location line="+54"/>
         <source>(no label)</source>
         <translation type="unfinished"></translation>
@@ -2905,7 +2900,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <location filename="../forms/sendcoinsentry.ui" line="+155"/>
+        <location filename="../forms/sendcoinsentry.ui" line="+152"/>
         <location line="+579"/>
         <location line="+560"/>
         <source>A&amp;mount:</source>
@@ -2927,12 +2922,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-46"/>
-        <source>This is a normal payment.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+39"/>
+        <location line="-7"/>
         <source>The Dogecoin address to send the payment to</source>
         <translation type="unfinished"></translation>
     </message>

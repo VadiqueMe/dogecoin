@@ -1261,10 +1261,6 @@
         <translation>Choisir une adresse précédemment utilisée </translation>
     </message>
     <message>
-        <source>This is a normal payment.</source>
-        <translation>C'est un paiement normal.</translation>
-    </message>
-    <message>
         <source>Alt+A</source>
         <translation>Alt+A</translation>
     </message>

@@ -639,10 +639,6 @@
         <translation>ne</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 koinu(s) per input.</source>
-        <translation>Může se lišit o +/– %1 koinu na každý vstup.</translation>
-    </message>
-    <message>
         <source>(no label)</source>
         <translation>(bez označení)</translation>
     </message>
@@ -2059,10 +2055,6 @@
     <message>
         <source>Choose previously used address</source>
         <translation>Vyber již použitou adresu</translation>
-    </message>
-    <message>
-        <source>This is a normal payment.</source>
-        <translation>Tohle je normální platba.</translation>
     </message>
     <message>
         <source>The Dogecoin address to send the payment to</source>

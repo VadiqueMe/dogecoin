@@ -1389,10 +1389,6 @@
         <translation>انتخاب نشانی پیش‌تر استفاده شده</translation>
     </message>
     <message>
-        <source>This is a normal payment.</source>
-        <translation>این یک پرداخت عادی است</translation>
-    </message>
-    <message>
         <source>The Dogecoin address to send the payment to</source>
         <translation>نشانی بیت‌کوین برای ارسال پرداخت به آن</translation>
     </message>

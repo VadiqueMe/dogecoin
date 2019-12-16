@@ -1253,10 +1253,6 @@
         <translation>Επιλογή διεύθυνσης που έχει ήδη χρησιμοποιηθεί</translation>
     </message>
     <message>
-        <source>This is a normal payment.</source>
-        <translation>Αυτή είναι μια απλή πληρωμή.</translation>
-    </message>
-    <message>
         <source>The Dogecoin address to send the payment to</source>
         <translation>Η διεύθυνση Dogecoin που θα σταλεί η πληρωμή</translation>
     </message>

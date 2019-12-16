@@ -1221,10 +1221,6 @@
         <translation>Izberite enega od že uporabljenih naslovov</translation>
     </message>
     <message>
-        <source>This is a normal payment.</source>
-        <translation>Plačilo je navadne vrste.</translation>
-    </message>
-    <message>
         <source>The Dogecoin address to send the payment to</source>
         <translation>Naslov Dogecoin, na katerega bo plačilo poslano</translation>
     </message>

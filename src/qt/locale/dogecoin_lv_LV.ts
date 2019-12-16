@@ -863,10 +863,6 @@
         <translation>Izvēlies iepriekš izmantoto adresi</translation>
     </message>
     <message>
-        <source>This is a normal payment.</source>
-        <translation>Šis ir parasts maksājums.</translation>
-    </message>
-    <message>
         <source>Alt+A</source>
         <translation>Alt+A</translation>
     </message>

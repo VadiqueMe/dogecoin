@@ -639,10 +639,6 @@
         <translation>nej</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 koinu(s) per input.</source>
-        <translation>Kan variere med ±%1 koinu per input.</translation>
-    </message>
-    <message>
         <source>(no label)</source>
         <translation>(ingen mærkat)</translation>
     </message>
@@ -2059,10 +2055,6 @@
     <message>
         <source>Choose previously used address</source>
         <translation>Vælg tidligere brugt adresse</translation>
-    </message>
-    <message>
-        <source>This is a normal payment.</source>
-        <translation>Dette er en normal betaling.</translation>
     </message>
     <message>
         <source>The Dogecoin address to send the payment to</source>

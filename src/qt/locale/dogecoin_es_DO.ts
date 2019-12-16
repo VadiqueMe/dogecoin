@@ -843,10 +843,6 @@
         <translation>Escoger dirección previamente usada</translation>
     </message>
     <message>
-        <source>This is a normal payment.</source>
-        <translation>Esto es un pago ordinario.</translation>
-    </message>
-    <message>
         <source>Alt+A</source>
         <translation>Alt+A</translation>
     </message>

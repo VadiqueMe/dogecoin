@@ -1377,10 +1377,6 @@
         <translation>Обрати ранiш використовувану адресу</translation>
     </message>
     <message>
-        <source>This is a normal payment.</source>
-        <translation>Це звичайний платіж.</translation>
-    </message>
-    <message>
         <source>The Dogecoin address to send the payment to</source>
         <translation>Адреса Dogecoin для відправлення платежу</translation>
     </message>

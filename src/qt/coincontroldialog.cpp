@@ -527,7 +527,7 @@ void CoinControlDialog::updateLabels( WalletModel * model, QDialog * dialog )
         }
 
         // after fee
-        nAfterFee = std::max<CAmount>(nAmount - nPayFee, 0);
+        nAfterFee = std::max< CAmount >( nAmount - nPayFee, 0 ) ;
     }
 
     // actually update labels
@@ -543,8 +543,8 @@ void CoinControlDialog::updateLabels( WalletModel * model, QDialog * dialog )
     QLabel *l8 = dialog->findChild<QLabel *>("labelCoinControlChange");
 
     // enable/disable "change"
-    dialog->findChild<QLabel *>("labelCoinControlChangeText")   ->setEnabled(nPayAmount > 0);
-    dialog->findChild<QLabel *>("labelCoinControlChange")       ->setEnabled(nPayAmount > 0);
+    dialog->findChild<QLabel *>("labelCoinControlChangeText")->setEnabled( nPayAmount > 0 ) ;
+    dialog->findChild<QLabel *>("labelCoinControlChange")->setEnabled( nPayAmount > 0 ) ;
 
     // stats
     l1->setText(QString::number(nQuantity));                                 // Quantity
@@ -553,7 +553,12 @@ void CoinControlDialog::updateLabels( WalletModel * model, QDialog * dialog )
     l4->setText( UnitsOfCoin::formatWithUnit( nDisplayUnit, nAfterFee ) ) ;  // After Fee
     l5->setText(((nBytes > 0) ? ASYMP_UTF8 : "") + QString::number(nBytes)); // Bytes
     l8->setText( UnitsOfCoin::formatWithUnit( nDisplayUnit, nChange ) ) ;    // Change
-    if ( nPayFee > 0 /* false */ )
+
+    CAmount feeVary( 0 ) ; // how many atomary coin units the estimated fee can vary per byte
+    if ( payTxFee.GetFeePerKiloByte() > 0 ) // payTxFee is global, defined in wallet/wallet.cpp
+        feeVary = payTxFee.GetFeePerBytes( 1 ) ;
+
+    if ( feeVary != 0 && nPayFee > 0 /* false */ )
     {
         l3->setText( ASYMP_UTF8 + l3->text() ) ;
         l4->setText( ASYMP_UTF8 + l4->text() ) ;
@@ -561,25 +566,10 @@ void CoinControlDialog::updateLabels( WalletModel * model, QDialog * dialog )
             l8->setText( ASYMP_UTF8 + l8->text() ) ;
     }
 
-    // how many satoshis the estimated fee can vary per byte we guess wrong
-    double dFeeVary = ( payTxFee.GetFeePerKiloByte() > 0 ) ?
-                        (double)payTxFee.GetFeePerKiloByte() / 1000 :
-                        0.0 ;
-
-    QString toolTip4 = tr("Can vary +/- %1 koinu(s) per input.").arg(dFeeVary);
-
-    l3->setToolTip(toolTip4);
-    l4->setToolTip(toolTip4);
-    l8->setToolTip(toolTip4);
-    dialog->findChild<QLabel *>("labelCoinControlFeeText")      ->setToolTip(l3->toolTip());
-    dialog->findChild<QLabel *>("labelCoinControlAfterFeeText") ->setToolTip(l4->toolTip());
-    dialog->findChild<QLabel *>("labelCoinControlBytesText")    ->setToolTip(l5->toolTip());
-    dialog->findChild<QLabel *>("labelCoinControlChangeText")   ->setToolTip(l8->toolTip());
-
     // Insufficient funds
-    QLabel *label = dialog->findChild<QLabel *>("labelCoinControlInsuffFunds");
-    if (label)
-        label->setVisible(nChange < 0);
+    QLabel * label = dialog->findChild< QLabel * >( "labelCoinControlInsuffFunds" ) ;
+    if ( label != nullptr )
+        label->setVisible( nChange < 0 ) ;
 }
 
 void CoinControlDialog::updateView()

@@ -1369,10 +1369,6 @@
         <translation>Valitse aikaisemmin käytetty osoite</translation>
     </message>
     <message>
-        <source>This is a normal payment.</source>
-        <translation>Tämä on normaali maksu.</translation>
-    </message>
-    <message>
         <source>The Dogecoin address to send the payment to</source>
         <translation>Dogecoin-osoite johon maksu lähetetään</translation>
     </message>

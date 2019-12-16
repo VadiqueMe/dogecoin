@@ -639,10 +639,6 @@
         <translation>нет</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 koinu(s) per input.</source>
-        <translation>Может отличаться на +/- %1 сатоши на вход.</translation>
-    </message>
-    <message>
         <source>(no label)</source>
         <translation>(нет метки)</translation>
     </message>
@@ -2059,10 +2055,6 @@
     <message>
         <source>Choose previously used address</source>
         <translation>Выберите ранее использованный адрес</translation>
-    </message>
-    <message>
-        <source>This is a normal payment.</source>
-        <translation>Это нормальный платёж.</translation>
     </message>
     <message>
         <source>The Dogecoin address to send the payment to</source>

@@ -1401,10 +1401,6 @@
         <translation>Choose previously used address</translation>
     </message>
     <message>
-        <source>This is a normal payment.</source>
-        <translation>This is a normal payment.</translation>
-    </message>
-    <message>
         <source>The Dogecoin address to send the payment to</source>
         <translation>The Dogecoin address to send the payment to</translation>
     </message>

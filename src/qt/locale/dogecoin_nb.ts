@@ -1445,10 +1445,6 @@
         <translation>Velg tidligere brukt adresse</translation>
     </message>
     <message>
-        <source>This is a normal payment.</source>
-        <translation>Dette er en normal betaling.</translation>
-    </message>
-    <message>
         <source>The Dogecoin address to send the payment to</source>
         <translation>Dogecoin-adressen betalingen skal sendes til</translation>
     </message>

@@ -879,10 +879,6 @@
         <translation>აირჩიეთ ადრე გამოყენებული მისამართი</translation>
     </message>
     <message>
-        <source>This is a normal payment.</source>
-        <translation>ეს არის ჩვეულებრივი გადახდა.</translation>
-    </message>
-    <message>
         <source>Alt+A</source>
         <translation>Alt+A</translation>
     </message>

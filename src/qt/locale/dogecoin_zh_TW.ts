@@ -639,10 +639,6 @@
         <translation>否</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 koinu(s) per input.</source>
-        <translation>每組輸入可能有 +/- %1 個 koinu 的誤差。</translation>
-    </message>
-    <message>
         <source>(no label)</source>
         <translation>(無標記)</translation>
     </message>
@@ -2055,10 +2051,6 @@
     <message>
         <source>Choose previously used address</source>
         <translation>選擇先前使用過的位址</translation>
-    </message>
-    <message>
-        <source>This is a normal payment.</source>
-        <translation>這是一筆正常的付款。</translation>
     </message>
     <message>
         <source>The Dogecoin address to send the payment to</source>
