@@ -53,22 +53,16 @@ public:
         CMD_ERROR
     };
 
-    enum TabTypes {
-        TAB_INFO = 0,
-        TAB_CONSOLE = 1,
-        TAB_GRAPH = 2,
-        TAB_PEERS = 3
-    };
-
 protected:
     virtual bool eventFilter(QObject* obj, QEvent *event);
     void keyPressEvent(QKeyEvent *);
 
 private Q_SLOTS:
     void on_lineEdit_returnPressed();
-    void on_tabWidget_currentChanged(int index);
+    void currentTabChangedTo( int index ) ;
     void onFileChange( const QString & whatsChanged ) ;
     void veryLogFile() ;
+    void clearLogSearchFilter() ;
     /** open the debug log from the current datadir */
     void on_openDebugLogButton_clicked() ;
     /** change the time range of the network traffic graph */
@@ -90,7 +84,7 @@ private Q_SLOTS:
     void clearSelectedNode();
 
 public Q_SLOTS:
-    void clear(bool clearHistory = true);
+    void clearConsole( bool clearHistory = true ) ;
     void fontBigger();
     void fontSmaller();
     void setFontSize(int newSize);
@@ -120,8 +114,8 @@ public Q_SLOTS:
     void banSelectedNode(int bantime);
     /** Unban a selected node on the Bans tab */
     void unbanSelectedNode();
-    /** set which tab has the focus (is visible) */
-    void setTabFocus(enum TabTypes tabType);
+
+    void switchToRPCConsoleTab() ;
 
     void showContextMenuForLog( const QPoint & where ) ;
 
@@ -143,7 +137,6 @@ private:
         PING_COLUMN_WIDTH = 80,
         BANSUBNET_COLUMN_WIDTH = 200,
         BANTIME_COLUMN_WIDTH = 250
-
     };
 
     Ui::RPCConsole *ui;
@@ -167,7 +160,7 @@ private:
     quint64 resetBytesSent ;
 
     /** Update UI with latest network info from model */
-    void updateNetworkState();
+    void updateNetworkInfo() ;
 };
 
 #endif

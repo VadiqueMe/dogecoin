@@ -1065,35 +1065,11 @@
     </message>
     <message>
         <source>Enter a Dogecoin address (like %1)</source>
-        <translation>Въведете Биткойн адрес (например %1)</translation>
-    </message>
-    <message>
-        <source>%1 d</source>
-        <translation>%1 ден</translation>
-    </message>
-    <message>
-        <source>%1 h</source>
-        <translation>%1 час</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 минута</translation>
-    </message>
-    <message>
-        <source>%1 s</source>
-        <translation>%1 секунда</translation>
+        <translation>Въведете Dogecoin адрес (например %1)</translation>
     </message>
     <message>
         <source>None</source>
         <translation>Неналичен</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>Несъществуващ</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 милисекунда</translation>
     </message>
     <message>
         <source>%1 and %2</source>

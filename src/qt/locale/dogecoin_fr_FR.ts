@@ -800,32 +800,8 @@
         <translation>Entrer une adresse Dogecoin (e.g. %1)</translation>
     </message>
     <message>
-        <source>%1 d</source>
-        <translation>%1 j</translation>
-    </message>
-    <message>
-        <source>%1 h</source>
-        <translation>%1 h</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 m</translation>
-    </message>
-    <message>
-        <source>%1 s</source>
-        <translation>%1 s</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>Aucun</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>N/A</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 ms</translation>
     </message>
     <message>
         <source>%1 and %2</source>
@@ -1001,20 +977,16 @@
         <translation>Nettoyer la console</translation>
     </message>
     <message>
-        <source>1 &amp;hour</source>
-        <translation>1 &amp;heure</translation>
+        <source>1 hour</source>
+        <translation>1 heure</translation>
     </message>
     <message>
-        <source>1 &amp;day</source>
-        <translation>1 &amp;jour</translation>
+        <source>1 day</source>
+        <translation>1 jour</translation>
     </message>
     <message>
-        <source>1 &amp;week</source>
-        <translation>1 &amp;semaine</translation>
-    </message>
-    <message>
-        <source>1 &amp;year</source>
-        <translation>1 &amp;an</translation>
+        <source>1 week</source>
+        <translation>1 semaine</translation>
     </message>
     <message>
         <source>via %1</source>

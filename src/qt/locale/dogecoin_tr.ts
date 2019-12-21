@@ -1304,32 +1304,8 @@
         <translation>Bir Dogecoin adresi giriniz (mesela %1)</translation>
     </message>
     <message>
-        <source>%1 d</source>
-        <translation>%1 g</translation>
-    </message>
-    <message>
-        <source>%1 h</source>
-        <translation>%1 s</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 d</translation>
-    </message>
-    <message>
-        <source>%1 s</source>
-        <translation>%1 s</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>Boş</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>Mevcut değil</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 ms</translation>
     </message>
     <message numerus="yes">
         <source>%n second(s)</source>
@@ -1589,20 +1565,16 @@
         <translation>Konsolu temizle</translation>
     </message>
     <message>
-        <source>1 &amp;hour</source>
-        <translation>1 &amp;saat</translation>
+        <source>1 hour</source>
+        <translation>1 saat</translation>
     </message>
     <message>
-        <source>1 &amp;day</source>
-        <translation>1 &amp;gün</translation>
+        <source>1 day</source>
+        <translation>1 gün</translation>
     </message>
     <message>
-        <source>1 &amp;week</source>
-        <translation>1 &amp;hafta</translation>
-    </message>
-    <message>
-        <source>1 &amp;year</source>
-        <translation>1 &amp;yıl</translation>
+        <source>1 week</source>
+        <translation>1 hafta</translation>
     </message>
     <message>
         <source>&amp;Disconnect</source>

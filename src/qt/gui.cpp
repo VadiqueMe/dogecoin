@@ -703,8 +703,8 @@ void DogecoinGUI::showDebugWindow()
 
 void DogecoinGUI::showDebugWindowActivateConsole()
 {
-    rpcConsole->setTabFocus(RPCConsole::TAB_CONSOLE);
-    showDebugWindow();
+    rpcConsole->switchToRPCConsoleTab() ;
+    showDebugWindow() ;
 }
 
 void DogecoinGUI::showHelpMessageClicked()
@@ -884,7 +884,7 @@ void DogecoinGUI::setNumBlocks( int count, const QDateTime & blockDate, double p
     }
     else
     {
-        QString timeAgoText = GUIUtil::formatNiceTimeOffset( secs ) ;
+        QString timeAgoText = GUIUtil::niceTimeOffset( secs ) ;
 
         progressBarLabel->setVisible( true ) ;
         progressBar->setFormat( tr("%1 behind").arg( timeAgoText ) ) ;

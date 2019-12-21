@@ -1304,32 +1304,8 @@
         <translation>輸入 Dogecoin 位址 (比如說 %1)</translation>
     </message>
     <message>
-        <source>%1 d</source>
-        <translation>%1 天</translation>
-    </message>
-    <message>
-        <source>%1 h</source>
-        <translation>%1 小時</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 分鐘</translation>
-    </message>
-    <message>
-        <source>%1 s</source>
-        <translation>%1 秒</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>無</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>未知</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 毫秒</translation>
     </message>
     <message numerus="yes">
         <source>%n second(s)</source>
@@ -1589,20 +1565,16 @@
         <translation>清主控台</translation>
     </message>
     <message>
-        <source>1 &amp;hour</source>
+        <source>1 hour</source>
         <translation>1 小時</translation>
     </message>
     <message>
-        <source>1 &amp;day</source>
+        <source>1 day</source>
         <translation>1 天</translation>
     </message>
     <message>
-        <source>1 &amp;week</source>
+        <source>1 week</source>
         <translation>1 星期</translation>
-    </message>
-    <message>
-        <source>1 &amp;year</source>
-        <translation>1 年</translation>
     </message>
     <message>
         <source>&amp;Disconnect</source>

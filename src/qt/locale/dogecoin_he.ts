@@ -806,32 +806,8 @@
         <translation>נא להזין כתובת ביטקוין (למשל: %1)</translation>
     </message>
     <message>
-        <source>%1 d</source>
-        <translation>%1 ימים</translation>
-    </message>
-    <message>
-        <source>%1 h</source>
-        <translation>%1 שעות</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 דקות</translation>
-    </message>
-    <message>
-        <source>%1 s</source>
-        <translation>%1 שניות</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>ללא</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>לא זמין</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 מילישניות</translation>
     </message>
     <message>
         <source>%1 and %2</source>
@@ -1019,20 +995,16 @@
         <translation>ניקוי מסוף הבקרה</translation>
     </message>
     <message>
-        <source>1 &amp;hour</source>
+        <source>1 hour</source>
         <translation>1 שעה</translation>
     </message>
     <message>
-        <source>1 &amp;day</source>
-        <translation>1&amp; יום</translation>
+        <source>1 day</source>
+        <translation>1 יום</translation>
     </message>
     <message>
-        <source>1 &amp;week</source>
-        <translation>1 &amp; שבוע</translation>
-    </message>
-    <message>
-        <source>1 &amp;year</source>
-        <translation>1 &amp; שנה</translation>
+        <source>1 week</source>
+        <translation>1 שבוע</translation>
     </message>
     <message>
         <source>Use up and down arrows to navigate history, and &lt;b&gt;Ctrl-L&lt;/b&gt; to clear screen.</source>

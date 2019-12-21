@@ -340,26 +340,6 @@
         <translation>Сума</translation>
     </message>
     <message>
-        <source>%1 d</source>
-        <translation>%1 д</translation>
-    </message>
-    <message>
-        <source>%1 h</source>
-        <translation>%1 ч</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 м</translation>
-    </message>
-    <message>
-        <source>%1 s</source>
-        <translation>%1 с</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 мс</translation>
-    </message>
-    <message>
         <source>%1 and %2</source>
         <translation>%1 и %2</translation>
     </message>

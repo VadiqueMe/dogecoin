@@ -836,32 +836,8 @@
         <translation>Εισάγετε μια διεύθυνση Dogecoin (π.χ. %1)</translation>
     </message>
     <message>
-        <source>%1 d</source>
-        <translation>%1 d</translation>
-    </message>
-    <message>
-        <source>%1 h</source>
-        <translation>%1 ώ</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 λ</translation>
-    </message>
-    <message>
-        <source>%1 s</source>
-        <translation>%1 s</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>Κανένα</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>Μη διαθέσιμο</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 ms</translation>
     </message>
     <message>
         <source>%1 and %2</source>

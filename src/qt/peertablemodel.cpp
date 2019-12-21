@@ -161,24 +161,24 @@ QVariant PeerTableModel::data(const QModelIndex &index, int role) const
 
     CNodeCombinedStats *rec = static_cast<CNodeCombinedStats*>(index.internalPointer());
 
-    if (role == Qt::DisplayRole) {
-        switch(index.column())
+    if ( role == Qt::DisplayRole ) {
+        switch ( index.column() )
         {
         case NetNodeId:
-            return (qint64)rec->nodeStats.nodeid;
+            return (qint64)rec->nodeStats.nodeid ;
         case Address:
-            return QString::fromStdString(rec->nodeStats.addrName);
+            return QString::fromStdString( rec->nodeStats.addrName ) ;
         case Subversion:
-            return QString::fromStdString(rec->nodeStats.cleanSubVer);
+            return QString::fromStdString( rec->nodeStats.cleanSubVer ) ;
         case Ping:
-            return GUIUtil::formatPingTime(rec->nodeStats.dMinPing);
+            return GUIUtil::formatPingTime( rec->nodeStats.dMinPing ) ;
         }
-    } else if (role == Qt::TextAlignmentRole) {
-        if (index.column() == Ping)
-            return (QVariant)(Qt::AlignRight | Qt::AlignVCenter);
+    } else if ( role == Qt::TextAlignmentRole ) {
+        if ( index.column() == Ping )
+            return (QVariant)( Qt::AlignRight | Qt::AlignVCenter ) ;
     }
 
-    return QVariant();
+    return QVariant() ;
 }
 
 QVariant PeerTableModel::headerData(int section, Qt::Orientation orientation, int role) const

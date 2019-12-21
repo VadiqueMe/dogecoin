@@ -888,32 +888,8 @@
         <translation>Amount</translation>
     </message>
     <message>
-        <source>%1 d</source>
-        <translation>%1 d</translation>
-    </message>
-    <message>
-        <source>%1 h</source>
-        <translation>%1 h</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 m</translation>
-    </message>
-    <message>
-        <source>%1 s</source>
-        <translation>%1 s</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>None</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>N/A</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 ms</translation>
     </message>
     <message>
         <source>%1 and %2</source>
@@ -928,10 +904,6 @@
     </context>
 <context>
     <name>RPCConsole</name>
-    <message>
-        <source>N/A</source>
-        <translation>N/A</translation>
-    </message>
     <message>
         <source>Information</source>
         <translation>Information</translation>
@@ -1107,22 +1079,6 @@
     <message>
         <source>Clear console</source>
         <translation>Clear console</translation>
-    </message>
-    <message>
-        <source>1 &amp;hour</source>
-        <translation>1 &amp;hour</translation>
-    </message>
-    <message>
-        <source>1 &amp;day</source>
-        <translation>1 &amp;day</translation>
-    </message>
-    <message>
-        <source>1 &amp;week</source>
-        <translation>1 &amp;week</translation>
-    </message>
-    <message>
-        <source>1 &amp;year</source>
-        <translation>1 &amp;year</translation>
     </message>
     <message>
         <source>Welcome to the %1 RPC console.</source>

@@ -407,7 +407,10 @@
       <attribute name="title">
        <string>Log</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout2" columnstretch="0,0">
+      <layout class="QVBoxLayout" name="verticalLayoutForLogPage">
+       <property name="spacing">
+        <number>8</number>
+       </property>
        <property name="leftMargin">
         <number>12</number>
        </property>
@@ -420,11 +423,8 @@
        <property name="bottomMargin">
         <number>8</number>
        </property>
-       <property name="spacing">
-        <number>8</number>
-       </property>
-       <item row="0" column="0" colspan="2">
-        <widget class="QPlainTextEdit" name="debugLogTextArea">
+       <item>
+        <widget class="QTextEdit" name="debugLogTextArea">
          <property name="verticalScrollBarPolicy">
           <enum>Qt::ScrollBarAlwaysOn</enum>
          </property>
@@ -448,21 +448,127 @@
          </property>
         </widget>
        </item>
-       <item row="13" column="1">
-        <widget class="QPushButton" name="openDebugLogButton">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
+       <item>
+        <layout class="QGridLayout" name="gridLayoutForBottomOfLog" columnstretch="0,0,0,0,0,0">
+         <property name="leftMargin">
+          <number>0</number>
          </property>
-         <property name="text">
-          <string>&amp;Open</string>
+         <property name="topMargin">
+          <number>0</number>
          </property>
-         <property name="autoDefault">
-          <bool>false</bool>
+         <property name="rightMargin">
+          <number>0</number>
          </property>
-        </widget>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item row="13" column="0">
+          <widget class="QLabel" name="logFilterIconLabel">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="text">
+            <string notr="true"/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="../dogecoin.qrc">:/icons/magnifier</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="13" column="1">
+          <spacer name="beforeLogSearchFilter">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>6</width>
+             <height>1</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="13" column="2">
+          <widget class="QLineEdit" name="searchFilter">
+           <property name="text">
+            <string notr="true"/>
+           </property>
+           <property name="frame">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="13" column="3">
+          <widget class="QPushButton" name="clearLogFilterButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../dogecoin.qrc">
+             <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
+           </property>
+           <property name="flat">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="13" column="4">
+          <spacer name="horizontalSpacerBeforeOpenLogButton">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Preferred</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>60</width>
+             <height>1</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="13" column="5">
+          <widget class="QPushButton" name="openDebugLogButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>&amp;Open</string>
+           </property>
+           <property name="autoDefault">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
@@ -560,7 +666,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="clearButton">
+          <widget class="QPushButton" name="clearConsoleButton">
            <property name="maximumSize">
             <size>
              <width>24</width>
@@ -700,7 +806,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="lblGraphRange">
+            <widget class="QLabel" name="graphRangeInMinutes">
              <property name="minimumSize">
               <size>
                <width>100</width>

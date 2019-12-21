@@ -876,32 +876,8 @@
         <translation>Syötä Dogecoin-osoite (esim. %1)</translation>
     </message>
     <message>
-        <source>%1 d</source>
-        <translation>%1 d</translation>
-    </message>
-    <message>
-        <source>%1 h</source>
-        <translation>%1 h</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 m</translation>
-    </message>
-    <message>
-        <source>%1 s</source>
-        <translation>%1 s</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>Ei yhtään</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>Ei saatavilla</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 ms</translation>
     </message>
     <message>
         <source>%1 and %2</source>
@@ -1101,20 +1077,16 @@
         <translation>Tyhjennä konsoli</translation>
     </message>
     <message>
-        <source>1 &amp;hour</source>
-        <translation>1 &amp;tunti</translation>
+        <source>1 hour</source>
+        <translation>1 tunti</translation>
     </message>
     <message>
-        <source>1 &amp;day</source>
-        <translation>1 &amp;päivä</translation>
+        <source>1 day</source>
+        <translation>1 päivä</translation>
     </message>
     <message>
-        <source>1 &amp;week</source>
-        <translation>1 &amp;viikko</translation>
-    </message>
-    <message>
-        <source>1 &amp;year</source>
-        <translation>1 &amp;vuosi</translation>
+        <source>1 week</source>
+        <translation>1 viikko</translation>
     </message>
     <message>
         <source>Use up and down arrows to navigate history, and &lt;b&gt;Ctrl-L&lt;/b&gt; to clear screen.</source>

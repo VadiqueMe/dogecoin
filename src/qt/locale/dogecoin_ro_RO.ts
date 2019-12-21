@@ -808,32 +808,8 @@
         <translation>Introduceţi o adresă Dogecoin (de exemplu %1)</translation>
     </message>
     <message>
-        <source>%1 d</source>
-        <translation>%1 z</translation>
-    </message>
-    <message>
-        <source>%1 h</source>
-        <translation>%1 h</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 m</translation>
-    </message>
-    <message>
-        <source>%1 s</source>
-        <translation>%1 s</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>Niciuna</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>N/A</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 ms</translation>
     </message>
     <message>
         <source>%1 and %2</source>
@@ -1001,20 +977,16 @@
         <translation>Curăţă consola</translation>
     </message>
     <message>
-        <source>1 &amp;hour</source>
-        <translation>1 &amp;oră</translation>
+        <source>1 hour</source>
+        <translation>1 oră</translation>
     </message>
     <message>
-        <source>1 &amp;day</source>
-        <translation>1 &amp;zi</translation>
+        <source>1 day</source>
+        <translation>1 zi</translation>
     </message>
     <message>
-        <source>1 &amp;week</source>
-        <translation>1 &amp;săptămână</translation>
-    </message>
-    <message>
-        <source>1 &amp;year</source>
-        <translation>1 &amp;an</translation>
+        <source>1 week</source>
+        <translation>1 săptămână</translation>
     </message>
     <message>
         <source>Use up and down arrows to navigate history, and &lt;b&gt;Ctrl-L&lt;/b&gt; to clear screen.</source>

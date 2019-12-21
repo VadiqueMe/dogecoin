@@ -186,31 +186,26 @@ namespace GUIUtil
     /* Convert OS specific boost path to QString through UTF-8 */
     QString boostPathToQString(const boost::filesystem::path &path);
 
-    /* Convert seconds into a QString with days, hours, mins, secs */
-    QString formatDurationStr(int secs);
+    /* Format services bitmask into a user-readable string */
+    QString formatServices( quint64 mask ) ;
 
-    /* Format CNodeStats.nServices bitmask into a user-readable string */
-    QString formatServicesStr(quint64 mask);
+    /* Format dPingTime into a user-readable string or display *, if 0 */
+    QString formatPingTime( double pingSeconds ) ;
 
-    /* Format a CNodeCombinedStats.dPingTime into a user-readable string or display N/A, if 0*/
-    QString formatPingTime(double dPingTime);
+    /* Format a number of seconds into a user-readable string */
+    QString formatTimeOffset( int64_t seconds ) ;
 
-    /* Format a CNodeCombinedStats.nTimeOffset into a user-readable string. */
-    QString formatTimeOffset(int64_t nTimeOffset);
-
-    QString formatNiceTimeOffset(qint64 secs);
+    QString niceTimeOffset( qint64 seconds ) ;
 
     class ClickableLabel : public QLabel
     {
         Q_OBJECT
 
     Q_SIGNALS:
-        /** Emitted when the label is clicked. The relative mouse coordinates of the click are
-         * passed to the signal.
-         */
-        void clicked(const QPoint& point);
+        /* Emitted when the label is clicked. Argument holds relative mouse coordinates of the click */
+        void clicked( const QPoint & point ) ;
     protected:
-        void mouseReleaseEvent(QMouseEvent *event);
+        void mouseReleaseEvent( QMouseEvent * event ) ;
     };
 
     class ClickableProgressBar : public QProgressBar

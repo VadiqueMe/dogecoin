@@ -712,32 +712,8 @@
         <translation>Ad meg egy Dogecoin címet (pl: %1)</translation>
     </message>
     <message>
-        <source>%1 d</source>
-        <translation>%1 n</translation>
-    </message>
-    <message>
-        <source>%1 h</source>
-        <translation>%1 ó</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 p</translation>
-    </message>
-    <message>
-        <source>%1 s</source>
-        <translation>%1 mp</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>Semmi</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>Nem elérhető</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 ms</translation>
     </message>
     <message>
         <source>%1 and %2</source>
@@ -881,20 +857,16 @@
         <translation>Konzol törlése</translation>
     </message>
     <message>
-        <source>1 &amp;hour</source>
-        <translation>1 &amp;óra</translation>
+        <source>1 hour</source>
+        <translation>1 óra</translation>
     </message>
     <message>
-        <source>1 &amp;day</source>
-        <translation>1 &amp;nap</translation>
+        <source>1 day</source>
+        <translation>1 nap</translation>
     </message>
     <message>
-        <source>1 &amp;week</source>
-        <translation>1 &amp;hét</translation>
-    </message>
-    <message>
-        <source>1 &amp;year</source>
-        <translation>1 &amp;év</translation>
+        <source>1 week</source>
+        <translation>1 hét</translation>
     </message>
     <message>
         <source>Use up and down arrows to navigate history, and &lt;b&gt;Ctrl-L&lt;/b&gt; to clear screen.</source>

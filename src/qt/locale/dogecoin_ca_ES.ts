@@ -1268,32 +1268,8 @@
         <translation>Introduïu una adreça de Dogecoin (p. ex. %1)</translation>
     </message>
     <message>
-        <source>%1 d</source>
-        <translation>%1 d</translation>
-    </message>
-    <message>
-        <source>%1 h</source>
-        <translation>%1 h</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 m</translation>
-    </message>
-    <message>
-        <source>%1 s</source>
-        <translation>%1 s</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>Cap</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>N/A</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 ms</translation>
     </message>
     <message>
         <source>%1 and %2</source>
@@ -1324,10 +1300,6 @@
 </context>
 <context>
     <name>RPCConsole</name>
-    <message>
-        <source>N/A</source>
-        <translation>N/A</translation>
-    </message>
     <message>
         <source>Version</source>
         <translation>Versió</translation>
@@ -1501,20 +1473,16 @@
         <translation>Neteja la consola</translation>
     </message>
     <message>
-        <source>1 &amp;hour</source>
-        <translation>1 &amp;hora</translation>
+        <source>1 hour</source>
+        <translation>1 hora</translation>
     </message>
     <message>
-        <source>1 &amp;day</source>
-        <translation>1 &amp;dia</translation>
+        <source>1 day</source>
+        <translation>1 dia</translation>
     </message>
     <message>
-        <source>1 &amp;week</source>
-        <translation>1 &amp;setmana</translation>
-    </message>
-    <message>
-        <source>1 &amp;year</source>
-        <translation>1 &amp;any</translation>
+        <source>1 week</source>
+        <translation>1 setmana</translation>
     </message>
     <message>
         <source>Use up and down arrows to navigate history, and &lt;b&gt;Ctrl-L&lt;/b&gt; to clear screen.</source>

@@ -24,25 +24,25 @@ public:
     explicit TrafficGraphWidget( QWidget * parent = nullptr ) ;
 
     void setNetworkModel( NetworkModel * model ) ;
-    int getGraphRangeMins() const;
+    int getGraphRangeMinutes() const ;
 
     void setSentColor( const QColor & color ) {  colorForSent = color ;  }
     void setReceivedColor( const QColor & color ) {  colorForReceived = color ;  }
 
 protected:
-    void paintEvent(QPaintEvent *);
+    void paintEvent( QPaintEvent * ) ;
 
 public Q_SLOTS:
-    void updateRates();
-    void setGraphRangeMins(int mins);
-    void clear();
+    void updateRates() ;
+    void setGraphRangeMinutes( int minutes ) ;
+    void clearTrafficGraph() ;
 
 private:
     void paintPath(QPainterPath &path, QQueue<float> &samples);
 
     QTimer *timer;
     float fMax;
-    int nMins;
+    int nMinutes ;
     QQueue<float> vSamplesIn;
     QQueue<float> vSamplesOut;
     quint64 nLastBytesIn;

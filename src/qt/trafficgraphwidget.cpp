@@ -17,16 +17,16 @@
 #define XMARGIN                 10
 #define YMARGIN                 10
 
-TrafficGraphWidget::TrafficGraphWidget( QWidget * parent ) :
-    QWidget(parent),
-    timer(0),
-    fMax(0.0f),
-    nMins(0),
-    vSamplesIn(),
-    vSamplesOut(),
-    nLastBytesIn(0),
-    nLastBytesOut(0),
-    networkModel( nullptr )
+TrafficGraphWidget::TrafficGraphWidget( QWidget * parent )
+    : QWidget( parent )
+    , timer( nullptr )
+    , fMax( 0.0f )
+    , nMinutes( 0 )
+    , vSamplesIn()
+    , vSamplesOut()
+    , nLastBytesIn( 0 )
+    , nLastBytesOut( 0 )
+    , networkModel( nullptr )
     , colorForSent( Qt::red )
     , colorForReceived( Qt::green )
 {
@@ -43,9 +43,9 @@ void TrafficGraphWidget::setNetworkModel( NetworkModel * model )
     }
 }
 
-int TrafficGraphWidget::getGraphRangeMins() const
+int TrafficGraphWidget::getGraphRangeMinutes() const
 {
-    return nMins;
+    return nMinutes ;
 }
 
 void TrafficGraphWidget::paintPath(QPainterPath &path, QQueue<float> &samples)
@@ -160,27 +160,27 @@ void TrafficGraphWidget::updateRates()
     update();
 }
 
-void TrafficGraphWidget::setGraphRangeMins(int mins)
+void TrafficGraphWidget::setGraphRangeMinutes( int minutes )
 {
-    nMins = mins;
-    int msecsPerSample = nMins * 60 * 1000 / DESIRED_SAMPLES;
-    timer->stop();
-    timer->setInterval(msecsPerSample);
+    nMinutes = minutes ;
+    int msecsPerSample = nMinutes * 60 * 1000 / DESIRED_SAMPLES ;
+    timer->stop() ;
+    timer->setInterval( msecsPerSample ) ;
 
-    clear();
+    clearTrafficGraph() ;
 }
 
-void TrafficGraphWidget::clear()
+void TrafficGraphWidget::clearTrafficGraph()
 {
-    timer->stop();
+    timer->stop() ;
 
-    vSamplesOut.clear();
-    vSamplesIn.clear();
-    fMax = 0.0f;
+    vSamplesOut.clear() ;
+    vSamplesIn.clear() ;
+    fMax = 0.0f ;
 
     if ( networkModel != nullptr ) {
         nLastBytesIn = networkModel->getTotalBytesRecv() ;
         nLastBytesOut = networkModel->getTotalBytesSent() ;
     }
-    timer->start();
+    timer->start() ;
 }

@@ -41,6 +41,7 @@
 #include <QTimer>
 #include <QStringList>
 #include <QPainter>
+#include <QTextStream>
 
 #if QT_VERSION < 0x050000
 #include <QUrl>
@@ -50,10 +51,10 @@
 // TODO: make it possible to filter out categories (esp debug messages when implemented)
 // TODO: receive errors and debug messages through NetworkModel
 
-const int CONSOLE_HISTORY = 50;
-const int INITIAL_TRAFFIC_GRAPH_MINS = 30 ;
-const QSize FONT_RANGE(4, 40);
-const char fontSizeSettingsKey[] = "consoleFontSize";
+const int CONSOLE_HISTORY = 50 ;
+const int INITIAL_TRAFFIC_GRAPH_MINUTES = 30 ;
+const QSize FONT_RANGE( 4, 40 ) ;
+const char fontSizeSettingsKey[] = "consoleFontSize" ;
 
 const struct {
     const char *url;
@@ -127,11 +128,26 @@ public:
 };
 
 
+/* Convert number of seconds into a QString like 6:07:54 */
+static QString seconds2hmmss( size_t s )
+{
+    size_t hours = s / 3600 ;
+    size_t minutes = ( s % 3600 ) / 60 ;
+    size_t seconds = s % 60 ;
+
+    QStringList strList ;
+    if ( hours > 0 ) strList.append( QString::number( hours ) ) ;
+    strList.append( QString::fromStdString(strprintf( "%02d", minutes )) ) ;
+    strList.append( QString::fromStdString(strprintf( "%02d", seconds )) ) ;
+
+    return strList.join( ":" ) ;
+}
+
+
 #include "rpcconsole.moc"
 
 /**
- * Split shell command line into a list of arguments and optionally execute the command(s).
- * Aims to emulate \c bash and friends.
+ * Split shell command line into a list of arguments and optionally execute the command(s)
  *
  * - Command nesting is possible with parenthesis; for example: validateaddress(getnewaddress())
  * - Arguments are delimited with whitespace or comma
@@ -430,32 +446,40 @@ RPCConsole::RPCConsole( const PlatformStyle * style, QWidget * parent )
     GUIUtil::restoreWindowGeometry("nRPCConsoleWindow", this->size(), this);
 
     ui->debugLogTextArea->setFrameStyle( /* shape */ QFrame::StyledPanel | /* shadow */ QFrame::Plain ) ;
-    ui->debugLogTextArea->setLineWrapMode( QPlainTextEdit::WidgetWidth ) ; // QPlainTextEdit::NoWrap
+    ui->debugLogTextArea->setLineWrapMode( QTextEdit::WidgetWidth ) ; // QTextEdit::NoWrap
     ui->debugLogTextArea->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff ) ; // Qt::ScrollBarAlwaysOn
 
     ui->debugLogTextArea->setContextMenuPolicy( Qt::CustomContextMenu ) ;
     connect( ui->debugLogTextArea, SIGNAL( customContextMenuRequested(const QPoint &) ),
              this, SLOT( showContextMenuForLog(const QPoint &) ) ) ;
 
+    ui->logFilterIconLabel->setPixmap( platformStyle->SingleColorIcon( ":/icons/magnifier" ).pixmap( 24, 24 ) ) ;
+    ui->logFilterIconLabel->setScaledContents( false ) ;
+    ui->searchFilter->setClearButtonEnabled( false ) ; // it got its own custom, and doesn't need for the built-in one
+    ui->clearLogFilterButton->setIcon( platformStyle->SingleColorIcon( ":/icons/remove" ) ) ;
+    connect( ui->searchFilter, SIGNAL( textEdited(const QString &) ), this, SLOT( veryLogFile() ) ) ;
+    connect( ui->clearLogFilterButton, SIGNAL( clicked() ), this, SLOT( clearLogSearchFilter() ) ) ;
+
     if ( platformStyle->getImagesOnButtons() )
         ui->openDebugLogButton->setIcon( platformStyle->SingleColorIcon( ":/icons/export" ) ) ;
 
-    veryLogFile() ;
     connect( &logFileWatcher, SIGNAL( fileChanged(QString) ), this, SLOT( onFileChange(const QString &) ) ) ;
 
-    ui->clearButton->setIcon(platformStyle->SingleColorIcon(":/icons/remove"));
-    ui->fontBiggerButton->setIcon(platformStyle->SingleColorIcon(":/icons/fontbigger"));
-    ui->fontSmallerButton->setIcon(platformStyle->SingleColorIcon(":/icons/fontsmaller"));
+    ui->clearConsoleButton->setIcon( platformStyle->SingleColorIcon( ":/icons/remove" ) ) ;
+    ui->fontBiggerButton->setIcon( platformStyle->SingleColorIcon( ":/icons/fontbigger" ) ) ;
+    ui->fontSmallerButton->setIcon( platformStyle->SingleColorIcon( ":/icons/fontsmaller" ) ) ;
 
     // Install event filter for up and down arrow
     ui->lineEdit->installEventFilter(this);
     ui->messagesWidget->installEventFilter(this);
 
-    connect(ui->clearButton, SIGNAL(clicked()), this, SLOT(clear()));
-    connect(ui->fontBiggerButton, SIGNAL(clicked()), this, SLOT(fontBigger()));
-    connect(ui->fontSmallerButton, SIGNAL(clicked()), this, SLOT(fontSmaller()));
-    connect( ui->buttonClearTrafficGraph, SIGNAL( clicked() ), ui->trafficGraph, SLOT( clear() ) ) ;
+    connect( ui->clearConsoleButton, SIGNAL( clicked() ), this, SLOT( clearConsole() ) ) ;
+    connect( ui->fontBiggerButton, SIGNAL( clicked() ), this, SLOT( fontBigger() ) ) ;
+    connect( ui->fontSmallerButton, SIGNAL( clicked() ), this, SLOT(fontSmaller()));
+    connect( ui->buttonClearTrafficGraph, SIGNAL( clicked() ), ui->trafficGraph, SLOT( clearTrafficGraph() ) ) ;
     connect( ui->buttonResetTrafficValues, SIGNAL( clicked() ), this, SLOT( resetTrafficValues() ) ) ;
+
+    connect( ui->tabWidget, SIGNAL( currentChanged(int) ), this, SLOT( currentTabChangedTo(int) ) ) ;
 
     // set library version labels
 #ifdef ENABLE_WALLET
@@ -534,14 +558,14 @@ RPCConsole::RPCConsole( const PlatformStyle * style, QWidget * parent )
     ui->trafficGraph->setReceivedColor( colorForReceived ) ;
     ui->trafficGraph->setSentColor( colorForSent ) ;
 
-    setTrafficGraphRange( INITIAL_TRAFFIC_GRAPH_MINS ) ;
+    setTrafficGraphRange( INITIAL_TRAFFIC_GRAPH_MINUTES ) ;
 
     ui->detailWidget->hide();
     ui->peerHeading->setText(tr("Select a peer to view detailed information"));
 
     QSettings settings;
     consoleFontSize = settings.value(fontSizeSettingsKey, QFontInfo(QFont()).pointSize()).toInt();
-    clear();
+    clearConsole() ;
 }
 
 RPCConsole::~RPCConsole()
@@ -609,7 +633,7 @@ void RPCConsole::setNetworkModel( NetworkModel * model )
         setNumBlocks( model->getNumBlocks(), model->getLastBlockDate(), model->getVerificationProgress(), false ) ;
         connect( model, SIGNAL( numBlocksChanged(int, QDateTime, double, bool) ), this, SLOT( setNumBlocks(int, QDateTime, double, bool) ) ) ;
 
-        updateNetworkState() ;
+        updateNetworkInfo() ;
         connect( model, SIGNAL( networkActiveChanged(bool) ), this, SLOT( setNetworkActive(bool) ) ) ;
 
         updateTrafficStats() ;
@@ -631,10 +655,9 @@ void RPCConsole::setNetworkModel( NetworkModel * model )
 
         // create peer table context menu actions
         QAction* disconnectAction = new QAction(tr("&Disconnect"), this);
-        QAction* banAction1h      = new QAction(tr("Ban for") + " " + tr("1 &hour"), this);
-        QAction* banAction24h     = new QAction(tr("Ban for") + " " + tr("1 &day"), this);
-        QAction* banAction7d      = new QAction(tr("Ban for") + " " + tr("1 &week"), this);
-        QAction* banAction365d    = new QAction(tr("Ban for") + " " + tr("1 &year"), this);
+        QAction* banAction1h      = new QAction(tr("Ban for") + " " + tr("1 hour"), this);
+        QAction* banAction24h     = new QAction(tr("Ban for") + " " + tr("1 day"), this);
+        QAction* banAction7d      = new QAction(tr("Ban for") + " " + tr("1 week"), this);
 
         // create peer table context menu
         peersTableContextMenu = new QMenu(this);
@@ -642,20 +665,15 @@ void RPCConsole::setNetworkModel( NetworkModel * model )
         peersTableContextMenu->addAction(banAction1h);
         peersTableContextMenu->addAction(banAction24h);
         peersTableContextMenu->addAction(banAction7d);
-        peersTableContextMenu->addAction(banAction365d);
 
-        // Add a signal mapping to allow dynamic context menu arguments.
-        // We need to use int (instead of int64_t), because signal mapper only supports
-        // int or objects, which is okay because max bantime (1 year) is < int_max.
+        // add signal mapping for items of dynamic menu
         QSignalMapper* signalMapper = new QSignalMapper(this);
         signalMapper->setMapping(banAction1h, 60*60);
         signalMapper->setMapping(banAction24h, 60*60*24);
         signalMapper->setMapping(banAction7d, 60*60*24*7);
-        signalMapper->setMapping(banAction365d, 60*60*24*365);
         connect(banAction1h, SIGNAL(triggered()), signalMapper, SLOT(map()));
         connect(banAction24h, SIGNAL(triggered()), signalMapper, SLOT(map()));
         connect(banAction7d, SIGNAL(triggered()), signalMapper, SLOT(map()));
-        connect(banAction365d, SIGNAL(triggered()), signalMapper, SLOT(map()));
         connect(signalMapper, SIGNAL(mapped(int)), this, SLOT(banSelectedNode(int)));
 
         // peer table context menu signals
@@ -768,12 +786,12 @@ void RPCConsole::setFontSize(int newSize)
 
     // clear console (reset icon sizes, default stylesheet) and re-add the content
     float oldPosFactor = 1.0 / ui->messagesWidget->verticalScrollBar()->maximum() * ui->messagesWidget->verticalScrollBar()->value();
-    clear(false);
+    clearConsole( false ) ;
     ui->messagesWidget->setHtml(str);
     ui->messagesWidget->verticalScrollBar()->setValue(oldPosFactor * ui->messagesWidget->verticalScrollBar()->maximum());
 }
 
-void RPCConsole::clear(bool clearHistory)
+void RPCConsole::clearConsole( bool clearHistory )
 {
     ui->messagesWidget->clear();
     if(clearHistory)
@@ -784,7 +802,7 @@ void RPCConsole::clear(bool clearHistory)
     ui->lineEdit->clear();
     ui->lineEdit->setFocus();
 
-    // Add smoothly scaled icon images.
+    // Add smoothly scaled icon images
     // (when using width/height on an img, Qt uses nearest instead of linear interpolation)
     for(int i=0; ICON_MAPPING[i].url; ++i)
     {
@@ -841,7 +859,7 @@ void RPCConsole::message(int category, const QString &message, bool html)
     ui->messagesWidget->append(out);
 }
 
-void RPCConsole::updateNetworkState()
+void RPCConsole::updateNetworkInfo()
 {
     QString connections = QString::number( networkModel->getNumConnections() ) + " (" ;
     connections += tr("In:") + " " + QString::number( networkModel->getNumConnections( CONNECTIONS_IN ) ) + " / " ;
@@ -858,12 +876,12 @@ void RPCConsole::setNumConnections( int count )
 {
     if ( networkModel == nullptr ) return ;
 
-    updateNetworkState();
+    updateNetworkInfo() ;
 }
 
 void RPCConsole::setNetworkActive(bool networkActive)
 {
-    updateNetworkState();
+    updateNetworkInfo() ;
 }
 
 void RPCConsole::setNumBlocks( int count, const QDateTime & blockDate, double progress, bool headers )
@@ -969,12 +987,14 @@ void RPCConsole::startPerformer()
     thread.start() ;
 }
 
-void RPCConsole::on_tabWidget_currentChanged(int index)
+void RPCConsole::currentTabChangedTo( int index )
 {
-    if (ui->tabWidget->widget(index) == ui->tab_console)
-        ui->lineEdit->setFocus();
-    else if (ui->tabWidget->widget(index) != ui->tab_peers)
-        clearSelectedNode();
+    if ( ui->tabWidget->widget( index ) == ui->tab_console )
+        ui->lineEdit->setFocus() ;
+    else if ( ui->tabWidget->widget( index ) == ui->tab_log )
+        veryLogFile() ;
+    else if ( ui->tabWidget->widget( index ) != ui->tab_peers )
+        clearSelectedNode() ;
 }
 
 void RPCConsole::onFileChange( const QString & whatsChanged )
@@ -989,6 +1009,8 @@ void RPCConsole::veryLogFile()
     if ( QFile::exists( pathToLogFile ) ) // log file can be removed and then recreated
         logFileWatcher.addPath( pathToLogFile ) ;
 
+    ui->debugLogTextArea->clear() ;
+
     QFile logFile( pathToLogFile ) ;
     if ( ! logFile.open( QIODevice::ReadOnly ) )
     {
@@ -996,14 +1018,80 @@ void RPCConsole::veryLogFile()
         return ;
     }
 
-    QByteArray log = logFile.readAll() ;
-    if ( ! log.isEmpty() ) {
-        ui->debugLogTextArea->setPlainText(QString::fromStdString( log.toStdString() )) ;
-        ui->debugLogTextArea->verticalScrollBar()->setValue( ui->debugLogTextArea->verticalScrollBar()->maximum() ) ;
-        return ;
+    bool autoScroll = true ;
+    /* = ui->debugLogTextArea->verticalScrollBar()->value() >
+           ( ui->debugLogTextArea->verticalScrollBar()->maximum() - ui->debugLogTextArea->verticalScrollBar()->pageStep() ) */
+
+    if ( logFile.size() > 0 )
+    {
+        {
+            QTextStream logText( &logFile ) ;
+            QStringList logLines ;
+            bool isPlainText = true ;
+            const QString & filter = ui->searchFilter->text() ;
+
+            while ( ! logText.atEnd() )
+            {
+                QString line = logText.readLine() ;
+                if ( filter.isEmpty() )
+                    logLines.append( line ) ; // it's faster than ui->debugLogTextArea->appendPlainText( line )
+                else if ( line.contains( filter, Qt::CaseSensitive ) )
+                {
+                    isPlainText = false ;
+                    line.replace( "<", "&lt;" ) ;
+                    line.replace( ">", "&gt;" ) ;
+                    line.replace( "&", "&amp;" ) ;
+                    line.replace( "\"", "&quot;" ) ;
+
+                    QString filterHtml( filter ) ;
+                    filterHtml.replace( "<", "&lt;" ) ;
+                    filterHtml.replace( ">", "&gt;" ) ;
+                    filterHtml.replace( "&", "&amp;" ) ;
+                    filterHtml.replace( "\"", "&quot;" ) ;
+
+                    int pos = 0 ;
+                    while ( ( pos = line.indexOf( filterHtml, pos, Qt::CaseSensitive ) ) != -1 ) {
+                        line.replace( pos, filterHtml.size(), QString( "<b>" ) + filterHtml + QString( "</b>" ) ) ;
+                        pos += filterHtml.size() + 7 ;
+                    }
+
+                    logLines.append( line ) ;
+                }
+            }
+
+            if ( isPlainText ) {
+                if ( logLines.count() > 0 )
+                    ui->debugLogTextArea->setPlainText( logLines.join( "\n" ) ) ;
+                else
+                    ui->debugLogTextArea->setPlainText( filter.isEmpty() ? "(empty)" : "(not found)" ) ;
+            } else {
+                QString filteredLog = logLines.join( "<br>" ) ;
+                filteredLog.replace( "&lt;", "<" ) ;
+                filteredLog.replace( "&gt;", ">" ) ;
+                filteredLog.replace( "&amp;", "&" ) ;
+                filteredLog.replace( "&quot;", "\"" ) ;
+                ui->debugLogTextArea->setHtml( filteredLog ) ;
+            }
+        }
+    } else {
+        ui->debugLogTextArea->setPlainText( "(empty)" ) ;
     }
 
-    ui->debugLogTextArea->setPlainText( "(empty)" ) ;
+    if ( autoScroll ) {
+        /* ui->debugLogTextArea->verticalScrollBar()->setValue( ui->debugLogTextArea->verticalScrollBar()->maximum() ) ; */
+        ui->debugLogTextArea->moveCursor( QTextCursor::End ) ;
+        ui->debugLogTextArea->ensureCursorVisible() ;
+    }
+
+    ui->debugLogTextArea->setCursorWidth( 0 ) ; // hide cursor
+
+    logFile.close() ;
+}
+
+void RPCConsole::clearLogSearchFilter()
+{
+    ui->searchFilter->clear() ;
+    veryLogFile() ;
 }
 
 void RPCConsole::showContextMenuForLog( const QPoint & where )
@@ -1032,14 +1120,14 @@ void RPCConsole::scrollToEnd()
 void RPCConsole::on_sldGraphRange_valueChanged(int value)
 {
     const int multiplier = 5 ; // each position on the slider represents 5 min
-    int mins = value * multiplier ;
-    setTrafficGraphRange( mins ) ;
+    int minutes = value * multiplier ;
+    setTrafficGraphRange( minutes ) ;
 }
 
-void RPCConsole::setTrafficGraphRange( int mins )
+void RPCConsole::setTrafficGraphRange( int minutes )
 {
-    ui->trafficGraph->setGraphRangeMins( mins ) ;
-    ui->lblGraphRange->setText( GUIUtil::formatDurationStr( mins * 60 ) ) ;
+    ui->trafficGraph->setGraphRangeMinutes( minutes ) ;
+    ui->graphRangeInMinutes->setText( QString::number( minutes ) + " minute" + ( minutes != 1 ? "s" : "" ) ) ;
 }
 
 void RPCConsole::updateTrafficStats( quint64 totalBytesIn, quint64 totalBytesOut )
@@ -1148,24 +1236,23 @@ void RPCConsole::updateNodeDetail(const CNodeCombinedStats *stats)
     if (!stats->nodeStats.addrLocal.empty())
         peerAddrDetails += "<br />" + tr("via %1").arg(QString::fromStdString(stats->nodeStats.addrLocal));
     ui->peerHeading->setText(peerAddrDetails);
-    ui->peerServices->setText(GUIUtil::formatServicesStr(stats->nodeStats.nServices));
-    ui->peerLastSend->setText(stats->nodeStats.nLastSend ? GUIUtil::formatDurationStr(GetSystemTimeInSeconds() - stats->nodeStats.nLastSend) : tr("never"));
-    ui->peerLastRecv->setText(stats->nodeStats.nLastRecv ? GUIUtil::formatDurationStr(GetSystemTimeInSeconds() - stats->nodeStats.nLastRecv) : tr("never"));
+    ui->peerServices->setText( GUIUtil::formatServices( stats->nodeStats.nServices ) ) ;
+    ui->peerLastSend->setText( stats->nodeStats.nLastSend != 0 ? seconds2hmmss( GetSystemTimeInSeconds() - stats->nodeStats.nLastSend ) : tr("never") ) ;
+    ui->peerLastRecv->setText( stats->nodeStats.nLastRecv != 0 ? seconds2hmmss( GetSystemTimeInSeconds() - stats->nodeStats.nLastRecv ) : tr("never") ) ;
     ui->peerBytesSent->setText( QString::fromStdString( FormatBytes( stats->nodeStats.nSendBytes ) ) ) ;
     ui->peerBytesRecv->setText( QString::fromStdString( FormatBytes( stats->nodeStats.nRecvBytes ) ) ) ;
-    ui->peerConnTime->setText(GUIUtil::formatDurationStr(GetSystemTimeInSeconds() - stats->nodeStats.nTimeConnected));
-    ui->peerPingTime->setText(GUIUtil::formatPingTime(stats->nodeStats.dPingTime));
-    ui->peerPingWait->setText(GUIUtil::formatPingTime(stats->nodeStats.dPingWait));
-    ui->peerMinPing->setText(GUIUtil::formatPingTime(stats->nodeStats.dMinPing));
-    ui->timeoffset->setText(GUIUtil::formatTimeOffset(stats->nodeStats.nTimeOffset));
+    ui->peerConnTime->setText( seconds2hmmss( GetSystemTimeInSeconds() - stats->nodeStats.nTimeConnected ) ) ;
+    ui->peerPingTime->setText( GUIUtil::formatPingTime( stats->nodeStats.dPingTime ) ) ;
+    ui->peerPingWait->setText( GUIUtil::formatPingTime( stats->nodeStats.dPingWait ) ) ;
+    ui->peerMinPing->setText( GUIUtil::formatPingTime( stats->nodeStats.dMinPing ) ) ;
+    ui->timeoffset->setText( GUIUtil::formatTimeOffset( stats->nodeStats.nTimeOffset ) ) ;
     ui->peerVersion->setText(QString("%1").arg(QString::number(stats->nodeStats.nVersion)));
     ui->peerSubversion->setText(QString::fromStdString(stats->nodeStats.cleanSubVer));
     ui->peerDirection->setText(stats->nodeStats.fInbound ? tr("Inbound") : tr("Outbound"));
     ui->peerHeight->setText(QString("%1").arg(QString::number(stats->nodeStats.nStartingHeight)));
     ui->peerWhitelisted->setText(stats->nodeStats.fWhitelisted ? tr("Yes") : tr("No"));
 
-    // This check fails for example if the lock was busy and
-    // nodeStateStats couldn't be fetched.
+    // This check fails for example if the lock was busy and nodeStateStats couldn't be fetched
     if (stats->fNodeStateStatsAvailable) {
         // Ban score is init to 0
         ui->peerBanScore->setText(QString("%1").arg(stats->nodeStateStats.nMisbehavior));
@@ -1308,7 +1395,7 @@ void RPCConsole::showOrHideBanTableIfRequired()
     ui->banHeading->setVisible(visible);
 }
 
-void RPCConsole::setTabFocus(enum TabTypes tabType)
+void RPCConsole::switchToRPCConsoleTab()
 {
-    ui->tabWidget->setCurrentIndex(tabType);
+    ui->tabWidget->setCurrentWidget( ui->tab_console ) ;
 }

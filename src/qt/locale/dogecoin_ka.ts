@@ -602,18 +602,6 @@
         <translation>თანხა</translation>
     </message>
     <message>
-        <source>%1 h</source>
-        <translation>%1 სთ</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 წთ</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>მიუწვდ.</translation>
-    </message>
-    <message>
         <source>%1 and %2</source>
         <translation>%1 და %2</translation>
     </message>

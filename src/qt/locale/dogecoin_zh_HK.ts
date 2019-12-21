@@ -408,32 +408,8 @@
         <translation>輸入一個 Dogecoin 位址 (例如 %1)</translation>
     </message>
     <message>
-        <source>%1 d</source>
-        <translation>%1 日</translation>
-    </message>
-    <message>
-        <source>%1 h</source>
-        <translation>%1 小時</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 分</translation>
-    </message>
-    <message>
-        <source>%1 s</source>
-        <translation>%1 秒</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>沒有</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>N/A</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 亳秒</translation>
     </message>
     <message numerus="yes">
         <source>%n second(s)</source>
@@ -480,10 +456,6 @@
 </context>
 <context>
     <name>RPCConsole</name>
-    <message>
-        <source>N/A</source>
-        <translation>N/A</translation>
-    </message>
     <message>
         <source>Information</source>
         <translation>資訊</translation>

@@ -617,24 +617,16 @@
         <translation>Đã gửi</translation>
     </message>
     <message>
-        <source>User Agent</source>
-        <translation>User Agent</translation>
+        <source>1 hour</source>
+        <translation>1 giờ</translation>
     </message>
     <message>
-        <source>1 &amp;hour</source>
-        <translation>1&amp;giờ</translation>
+        <source>1 day</source>
+        <translation>1 ngày</translation>
     </message>
     <message>
-        <source>1 &amp;day</source>
-        <translation>1&amp;ngày</translation>
-    </message>
-    <message>
-        <source>1 &amp;week</source>
-        <translation>1&amp;tuần</translation>
-    </message>
-    <message>
-        <source>1 &amp;year</source>
-        <translation>1&amp;năm</translation>
+        <source>1 week</source>
+        <translation>1 tuần</translation>
     </message>
     <message>
         <source>Use up and down arrows to navigate history, and &lt;b&gt;Ctrl-L&lt;/b&gt; to clear screen.</source>

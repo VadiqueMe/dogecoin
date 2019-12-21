@@ -851,14 +851,6 @@
         <source>Amount</source>
         <translation>Kogus</translation>
     </message>
-    <message>
-        <source>N/A</source>
-        <translation>N/A</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 ms</translation>
-    </message>
     <message numerus="yes">
         <source>%n hour(s)</source>
         <translation><numerusform>%n tund</numerusform><numerusform>%n tundi</numerusform></translation>
@@ -892,10 +884,6 @@
     </context>
 <context>
     <name>RPCConsole</name>
-    <message>
-        <source>N/A</source>
-        <translation>N/A</translation>
-    </message>
     <message>
         <source>Version</source>
         <translation>Versioon</translation>

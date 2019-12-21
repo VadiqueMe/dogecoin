@@ -225,11 +225,6 @@
         <source>Amount</source>
         <translation>राशि</translation>
     </message>
-    <message>
-        <source>N/A</source>
-        <translation>लागू नही
-</translation>
-    </message>
     </context>
 <context>
     <name>QObject::QObject</name>
@@ -241,8 +236,7 @@
     <name>RPCConsole</name>
     <message>
         <source>N/A</source>
-        <translation>लागू नही
-</translation>
+        <translation>लागू नही</translation>
     </message>
     <message>
         <source>Information</source>

@@ -1304,32 +1304,8 @@
         <translation>Zadej dogecoinovou adresu (např. %1)</translation>
     </message>
     <message>
-        <source>%1 d</source>
-        <translation>%1 d</translation>
-    </message>
-    <message>
-        <source>%1 h</source>
-        <translation>%1 h</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 m</translation>
-    </message>
-    <message>
-        <source>%1 s</source>
-        <translation>%1 s</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>Žádné</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>N/A</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 ms</translation>
     </message>
     <message numerus="yes">
         <source>%n second(s)</source>
@@ -1589,20 +1565,16 @@
         <translation>Vyčistit konzoli</translation>
     </message>
     <message>
-        <source>1 &amp;hour</source>
-        <translation>1 &amp;hodinu</translation>
+        <source>1 hour</source>
+        <translation>1 hodinu</translation>
     </message>
     <message>
-        <source>1 &amp;day</source>
-        <translation>1 &amp;den</translation>
+        <source>1 day</source>
+        <translation>1 den</translation>
     </message>
     <message>
-        <source>1 &amp;week</source>
-        <translation>1 &amp;týden</translation>
-    </message>
-    <message>
-        <source>1 &amp;year</source>
-        <translation>1 &amp;rok</translation>
+        <source>1 week</source>
+        <translation>1 týden</translation>
     </message>
     <message>
         <source>&amp;Disconnect</source>

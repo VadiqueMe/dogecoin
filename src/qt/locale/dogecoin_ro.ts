@@ -567,20 +567,16 @@
         <translation>Consolă</translation>
     </message>
     <message>
-        <source>1 &amp;hour</source>
-        <translation>1 &amp;ore</translation>
+        <source>1 hour</source>
+        <translation>1 ore</translation>
     </message>
     <message>
-        <source>1 &amp;day</source>
-        <translation>1 &amp;zi</translation>
+        <source>1 day</source>
+        <translation>1 zi</translation>
     </message>
     <message>
-        <source>1 &amp;week</source>
-        <translation>1 &amp;săptămână</translation>
-    </message>
-    <message>
-        <source>1 &amp;year</source>
-        <translation>1 &amp;an</translation>
+        <source>1 week</source>
+        <translation>1 săptămână</translation>
     </message>
     <message>
         <source>Yes</source>

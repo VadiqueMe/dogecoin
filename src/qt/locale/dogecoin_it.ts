@@ -1232,32 +1232,8 @@
         <translation>Inserisci un indirizzo Dogecoin (ad es. %1)</translation>
     </message>
     <message>
-        <source>%1 d</source>
-        <translation>%1 d</translation>
-    </message>
-    <message>
-        <source>%1 h</source>
-        <translation>%1 h</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 m</translation>
-    </message>
-    <message>
-        <source>%1 s</source>
-        <translation>%1 s</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>Nessuno</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>N/D</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 ms</translation>
     </message>
     <message numerus="yes">
         <source>%n second(s)</source>
@@ -1501,20 +1477,16 @@
         <translation>Cancella console</translation>
     </message>
     <message>
-        <source>1 &amp;hour</source>
-        <translation>1 &amp;ora</translation>
+        <source>1 hour</source>
+        <translation>1 ora</translation>
     </message>
     <message>
-        <source>1 &amp;day</source>
-        <translation>1 &amp;giorno</translation>
+        <source>1 day</source>
+        <translation>1 giorno</translation>
     </message>
     <message>
-        <source>1 &amp;week</source>
-        <translation>1 &amp;settimana</translation>
-    </message>
-    <message>
-        <source>1 &amp;year</source>
-        <translation>1 &amp;anno</translation>
+        <source>1 week</source>
+        <translation>1 settimana</translation>
     </message>
     <message>
         <source>&amp;Disconnect</source>

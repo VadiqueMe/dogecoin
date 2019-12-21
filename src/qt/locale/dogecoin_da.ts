@@ -1304,32 +1304,8 @@
         <translation>Indtast en Dogecoin-adresse (fx %1)</translation>
     </message>
     <message>
-        <source>%1 d</source>
-        <translation>%1 d</translation>
-    </message>
-    <message>
-        <source>%1 h</source>
-        <translation>%1 t</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 m</translation>
-    </message>
-    <message>
-        <source>%1 s</source>
-        <translation>%1 s</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>Ingen</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>N/A</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 ms</translation>
     </message>
     <message numerus="yes">
         <source>%n second(s)</source>
@@ -1400,10 +1376,6 @@
 </context>
 <context>
     <name>RPCConsole</name>
-    <message>
-        <source>N/A</source>
-        <translation>N/A</translation>
-    </message>
     <message>
         <source>Version</source>
         <translation>Version</translation>
@@ -1589,20 +1561,16 @@
         <translation>Ryd konsol</translation>
     </message>
     <message>
-        <source>1 &amp;hour</source>
-        <translation>1 &amp;time</translation>
+        <source>1 hour</source>
+        <translation>1 time</translation>
     </message>
     <message>
-        <source>1 &amp;day</source>
-        <translation>1 &amp;dag</translation>
+        <source>1 day</source>
+        <translation>1 dag</translation>
     </message>
     <message>
-        <source>1 &amp;week</source>
-        <translation>1 &amp;uge</translation>
-    </message>
-    <message>
-        <source>1 &amp;year</source>
-        <translation>1 &amp;år</translation>
+        <source>1 week</source>
+        <translation>1 uge</translation>
     </message>
     <message>
         <source>&amp;Disconnect</source>

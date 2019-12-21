@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "interpreter.h"
 
@@ -101,72 +101,72 @@ bool static IsCompressedPubKey(const valtype &vchPubKey) {
  * A canonical signature exists of: <30> <total len> <02> <len R> <R> <02> <len S> <S> <hashtype>
  * Where R and S are not negative (their first byte has its highest bit not set), and not
  * excessively padded (do not start with a 0 byte, unless an otherwise negative number follows,
- * in which case a single 0 byte is necessary and even required).
+ * in which case a single 0 byte is necessary and even required)
  * 
  * See https://bitcointalk.org/index.php?topic=8392.msg127623#msg127623
  *
- * This function is consensus-critical since BIP66.
+ * This function is consensus-critical since BIP66
  */
 bool static IsValidSignatureEncoding(const std::vector<unsigned char> &sig) {
     // Format: 0x30 [total-length] 0x02 [R-length] [R] 0x02 [S-length] [S] [sighash]
     // * total-length: 1-byte length descriptor of everything that follows,
-    //   excluding the sighash byte.
-    // * R-length: 1-byte length descriptor of the R value that follows.
+    //   excluding the sighash byte
+    // * R-length: 1-byte length descriptor of the R value that follows
     // * R: arbitrary-length big-endian encoded R value. It must use the shortest
     //   possible encoding for a positive integers (which means no null bytes at
-    //   the start, except a single one when the next byte has its highest bit set).
-    // * S-length: 1-byte length descriptor of the S value that follows.
-    // * S: arbitrary-length big-endian encoded S value. The same rules apply.
+    //   the start, except a single one when the next byte has its highest bit set)
+    // * S-length: 1-byte length descriptor of the S value that follows
+    // * S: arbitrary-length big-endian encoded S value. The same limits apply
     // * sighash: 1-byte value indicating what data is hashed (not part of the DER
     //   signature)
 
-    // Minimum and maximum size constraints.
+    // Minimum and maximum size constraints
     if (sig.size() < 9) return false;
     if (sig.size() > 73) return false;
 
-    // A signature is of type 0x30 (compound).
+    // A signature is of type 0x30 (compound)
     if (sig[0] != 0x30) return false;
 
-    // Make sure the length covers the entire signature.
+    // Make sure the length covers the entire signature
     if (sig[1] != sig.size() - 3) return false;
 
-    // Extract the length of the R element.
+    // Extract the length of the R element
     unsigned int lenR = sig[3];
 
-    // Make sure the length of the S element is still inside the signature.
+    // Make sure the length of the S element is still inside the signature
     if (5 + lenR >= sig.size()) return false;
 
-    // Extract the length of the S element.
+    // Extract the length of the S element
     unsigned int lenS = sig[5 + lenR];
 
     // Verify that the length of the signature matches the sum of the length
-    // of the elements.
+    // of the elements
     if ((size_t)(lenR + lenS + 7) != sig.size()) return false;
  
-    // Check whether the R element is an integer.
+    // Check whether the R element is an integer
     if (sig[2] != 0x02) return false;
 
-    // Zero-length integers are not allowed for R.
+    // Zero-length integers are not allowed for R
     if (lenR == 0) return false;
 
-    // Negative numbers are not allowed for R.
+    // Negative numbers are not allowed for R
     if (sig[4] & 0x80) return false;
 
     // Null bytes at the start of R are not allowed, unless R would
-    // otherwise be interpreted as a negative number.
+    // otherwise be interpreted as a negative number
     if (lenR > 1 && (sig[4] == 0x00) && !(sig[5] & 0x80)) return false;
 
-    // Check whether the S element is an integer.
+    // Check whether the S element is an integer
     if (sig[lenR + 4] != 0x02) return false;
 
-    // Zero-length integers are not allowed for S.
+    // Zero-length integers are not allowed for S
     if (lenS == 0) return false;
 
-    // Negative numbers are not allowed for S.
+    // Negative numbers are not allowed for S
     if (sig[lenR + 6] & 0x80) return false;
 
     // Null bytes at the start of S are not allowed, unless S would otherwise be
-    // interpreted as a negative number.
+    // interpreted as a negative number
     if (lenS > 1 && (sig[lenR + 6] == 0x00) && !(sig[lenR + 7] & 0x80)) return false;
 
     return true;
@@ -224,22 +224,22 @@ bool static CheckPubKeyEncoding(const valtype &vchPubKey, unsigned int flags, co
 
 bool static CheckMinimalPush(const valtype& data, opcodetype opcode) {
     if (data.size() == 0) {
-        // Could have used OP_0.
+        // Could have used OP_0
         return opcode == OP_0;
     } else if (data.size() == 1 && data[0] >= 1 && data[0] <= 16) {
-        // Could have used OP_1 .. OP_16.
+        // Could have used OP_1 .. OP_16
         return opcode == OP_1 + (data[0] - 1);
     } else if (data.size() == 1 && data[0] == 0x81) {
-        // Could have used OP_1NEGATE.
+        // Could have used OP_1NEGATE
         return opcode == OP_1NEGATE;
     } else if (data.size() <= 75) {
-        // Could have used a direct push (opcode indicating number of bytes pushed + those bytes).
+        // Could have used a direct push (opcode indicating number of bytes pushed + those bytes)
         return opcode == data.size();
     } else if (data.size() <= 255) {
-        // Could have used OP_PUSHDATA.
+        // Could have used OP_PUSHDATA
         return opcode == OP_PUSHDATA1;
     } else if (data.size() <= 65535) {
-        // Could have used OP_PUSHDATA2.
+        // Could have used OP_PUSHDATA2
         return opcode == OP_PUSHDATA2;
     }
     return true;
@@ -282,7 +282,7 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
             if (vchPushValue.size() > MAX_SCRIPT_ELEMENT_SIZE)
                 return set_error(serror, SCRIPT_ERR_PUSH_SIZE);
 
-            // Note how OP_RESERVED does not count towards the opcode limit.
+            // Note how OP_RESERVED does not count towards the opcode limit
             if (opcode > OP_16 && ++nOpCount > MAX_OPS_PER_SCRIPT)
                 return set_error(serror, SCRIPT_ERR_OP_COUNT);
 
@@ -301,7 +301,7 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
                 opcode == OP_MOD ||
                 opcode == OP_LSHIFT ||
                 opcode == OP_RSHIFT)
-                return set_error(serror, SCRIPT_ERR_DISABLED_OPCODE); // Disabled opcodes.
+                return set_error(serror, SCRIPT_ERR_DISABLED_OPCODE); // Disabled opcodes
 
             if (fExec && 0 <= opcode && opcode <= OP_PUSHDATA4) {
                 if (fRequireMinimal && !CheckMinimalPush(vchPushValue, opcode)) {
@@ -336,7 +336,7 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
                     CScriptNum bn((int)opcode - (int)(OP_1 - 1));
                     stack.push_back(bn.getvch());
                     // The result of these opcodes should always be the minimal way to push the data
-                    // they push, so no need for a CheckMinimalPush here.
+                    // they push, so no need for a CheckMinimalPush here
                 }
                 break;
 
@@ -364,25 +364,25 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
                     // operands in the range -2**31+1 to 2**31-1, however it is
                     // legal for opcodes to produce results exceeding that
                     // range. This limitation is implemented by CScriptNum's
-                    // default 4-byte limit.
+                    // default 4-byte limit
                     //
                     // If we kept to that limit we'd have a year 2038 problem,
                     // even though the nLockTime field in transactions
                     // themselves is uint32 which only becomes meaningless
-                    // after the year 2106.
+                    // after the year 2106
                     //
                     // Thus as a special case we tell CScriptNum to accept up
                     // to 5-byte bignums, which are good until 2**39-1, well
-                    // beyond the 2**32-1 limit of the nLockTime field itself.
+                    // beyond the 2**32-1 limit of the nLockTime field itself
                     const CScriptNum nLockTime(stacktop(-1), fRequireMinimal, 5);
 
                     // In the rare event that the argument may be < 0 due to
                     // some arithmetic being done first, you can always use
-                    // 0 MAX CHECKLOCKTIMEVERIFY.
+                    // 0 MAX CHECKLOCKTIMEVERIFY
                     if (nLockTime < 0)
                         return set_error(serror, SCRIPT_ERR_NEGATIVE_LOCKTIME);
 
-                    // Actually compare the specified lock time with the transaction.
+                    // Actually compare the specified lock time with the transaction
                     if (!checker.CheckLockTime(nLockTime))
                         return set_error(serror, SCRIPT_ERR_UNSATISFIED_LOCKTIME);
 
@@ -404,22 +404,22 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
 
                     // nSequence, like nLockTime, is a 32-bit unsigned integer
                     // field. See the comment in CHECKLOCKTIMEVERIFY regarding
-                    // 5-byte numeric operands.
+                    // 5-byte numeric operands
                     const CScriptNum nSequence(stacktop(-1), fRequireMinimal, 5);
 
                     // In the rare event that the argument may be < 0 due to
                     // some arithmetic being done first, you can always use
-                    // 0 MAX CHECKSEQUENCEVERIFY.
+                    // 0 MAX CHECKSEQUENCEVERIFY
                     if (nSequence < 0)
                         return set_error(serror, SCRIPT_ERR_NEGATIVE_LOCKTIME);
 
                     // To provide for future soft-fork extensibility, if the
                     // operand has the disabled lock-time flag set,
-                    // CHECKSEQUENCEVERIFY behaves as a NOP.
+                    // CHECKSEQUENCEVERIFY behaves as a NOP
                     if ((nSequence & CTxIn::SEQUENCE_LOCKTIME_DISABLE_FLAG) != 0)
                         break;
 
-                    // Compare the specified sequence number with the input.
+                    // Compare the specified sequence number with the input
                     if (!checker.CheckSequence(nSequence))
                         return set_error(serror, SCRIPT_ERR_UNSATISFIED_LOCKTIME);
 

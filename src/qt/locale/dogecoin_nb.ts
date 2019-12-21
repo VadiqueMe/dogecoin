@@ -936,32 +936,8 @@
         <translation>Oppgi en Dogecoin-adresse (f.eks. %1)</translation>
     </message>
     <message>
-        <source>%1 d</source>
-        <translation>%1 d</translation>
-    </message>
-    <message>
-        <source>%1 h</source>
-        <translation>%1 t</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 m</translation>
-    </message>
-    <message>
-        <source>%1 s</source>
-        <translation>%1 s</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>Ingen</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>-</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 ms</translation>
     </message>
     <message>
         <source>%1 and %2</source>
@@ -1157,20 +1133,16 @@
         <translation>Tøm konsoll</translation>
     </message>
     <message>
-        <source>1 &amp;hour</source>
-        <translation>1 &amp;time</translation>
+        <source>1 hour</source>
+        <translation>1 time</translation>
     </message>
     <message>
-        <source>1 &amp;day</source>
-        <translation>1 &amp;dag</translation>
+        <source>1 day</source>
+        <translation>1 dag</translation>
     </message>
     <message>
-        <source>1 &amp;week</source>
-        <translation>1 &amp;uke</translation>
-    </message>
-    <message>
-        <source>1 &amp;year</source>
-        <translation>1 &amp;år</translation>
+        <source>1 week</source>
+        <translation>1 uke</translation>
     </message>
     <message>
         <source>Use up and down arrows to navigate history, and &lt;b&gt;Ctrl-L&lt;/b&gt; to clear screen.</source>

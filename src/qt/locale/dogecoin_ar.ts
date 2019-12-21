@@ -902,18 +902,6 @@
         <translation>مبلغ</translation>
     </message>
     <message>
-        <source>%1 h</source>
-        <translation>%1 ساعة</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 دقيقة</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>غير معروف</translation>
-    </message>
-    <message>
         <source>%1 and %2</source>
         <translation>%1 و %2</translation>
     </message>
@@ -1023,20 +1011,16 @@
         <translation>خارج:</translation>
     </message>
     <message>
-        <source>1 &amp;hour</source>
-        <translation>1 &amp;ساعة</translation>
+        <source>1 hour</source>
+        <translation>1 ساعة</translation>
     </message>
     <message>
-        <source>1 &amp;day</source>
-        <translation>1 &amp; يوم</translation>
+        <source>1 day</source>
+        <translation>1 يوم</translation>
     </message>
     <message>
-        <source>1 &amp;week</source>
-        <translation>1 &amp; اسبوع</translation>
-    </message>
-    <message>
-        <source>1 &amp;year</source>
-        <translation>1 &amp; سنة</translation>
+        <source>1 week</source>
+        <translation>1 اسبوع</translation>
     </message>
     <message>
         <source>Use up and down arrows to navigate history, and &lt;b&gt;Ctrl-L&lt;/b&gt; to clear screen.</source>

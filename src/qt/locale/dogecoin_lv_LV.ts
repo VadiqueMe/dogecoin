@@ -594,18 +594,6 @@
         <translation>Daudzums</translation>
     </message>
     <message>
-        <source>%1 h</source>
-        <translation>%1 st</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 m</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>N/A</translation>
-    </message>
-    <message>
         <source>%1 and %2</source>
         <translation>%1 un %2</translation>
     </message>
@@ -618,10 +606,6 @@
     </context>
 <context>
     <name>RPCConsole</name>
-    <message>
-        <source>N/A</source>
-        <translation>N/A</translation>
-    </message>
     <message>
         <source>Version</source>
         <translation>Versija</translation>

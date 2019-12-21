@@ -203,20 +203,16 @@
         <translation>لەدەرەوە</translation>
     </message>
     <message>
-        <source>1 &amp;hour</source>
-        <translation>1&amp;سات</translation>
+        <source>1 hour</source>
+        <translation>1 سات</translation>
     </message>
     <message>
-        <source>1 &amp;day</source>
-        <translation>1&amp;ڕۆژ</translation>
+        <source>1 day</source>
+        <translation>1 ڕۆژ</translation>
     </message>
     <message>
-        <source>1 &amp;week</source>
-        <translation>1&amp;هەفتە</translation>
-    </message>
-    <message>
-        <source>1 &amp;year</source>
-        <translation>1&amp;ساڵ</translation>
+        <source>1 week</source>
+        <translation>1 هەفتە</translation>
     </message>
     <message>
         <source>never</source>

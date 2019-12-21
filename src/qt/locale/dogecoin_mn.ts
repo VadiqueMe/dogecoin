@@ -289,10 +289,6 @@
         <source>Amount</source>
         <translation>Хэмжээ</translation>
     </message>
-    <message>
-        <source>N/A</source>
-        <translation>Алга Байна</translation>
-    </message>
     </context>
 <context>
     <name>QObject::QObject</name>

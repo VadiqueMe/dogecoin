@@ -1950,43 +1950,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+776"/>
-        <source>%1 d</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>%1 h</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>%1 m</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location line="+50"/>
-        <source>%1 s</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-10"/>
+        <location line="+802"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location line="+5"/>
-        <source>N/A</source>
-        <translation type="unfinished">N/A</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>%1 ms</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message numerus="yes">
-        <location line="+18"/>
+        <location line="+25"/>
         <source>%n second(s)</source>
         <translation>
             <numerusform>%n second</numerusform>
@@ -2100,7 +2069,7 @@ p, li { white-space: pre-wrap; }
         <location line="+26"/>
         <location line="+16"/>
         <location line="+26"/>
-        <location line="+620"/>
+        <location line="+726"/>
         <location line="+23"/>
         <location line="+23"/>
         <location line="+23"/>
@@ -2122,7 +2091,7 @@ p, li { white-space: pre-wrap; }
         <translation>N/A</translation>
     </message>
     <message>
-        <location line="-1377"/>
+        <location line="-1483"/>
         <source>Information</source>
         <translation>Information</translation>
     </message>
@@ -2192,7 +2161,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+373"/>
+        <location line="+479"/>
         <location line="+515"/>
         <source>Received</source>
         <translation type="unfinished"></translation>
@@ -2220,8 +2189,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+55"/>
-        <location filename="../rpcconsole.cpp" line="+540"/>
-        <location line="+759"/>
+        <location filename="../rpcconsole.cpp" line="+564"/>
+        <location line="+822"/>
         <source>Select a peer to view detailed information</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2236,8 +2205,8 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-891"/>
-        <location line="+914"/>
+        <location line="-997"/>
+        <location line="+1020"/>
         <source>Version</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2257,8 +2226,8 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-993"/>
-        <location line="+901"/>
+        <location line="-1099"/>
+        <location line="+1007"/>
         <source>User Agent</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2323,17 +2292,17 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-1184"/>
+        <location line="-1290"/>
         <source>Last block time</source>
         <translation>Last block time</translation>
     </message>
     <message>
-        <location line="+253"/>
+        <location line="+357"/>
         <source>&amp;Open</source>
         <translation>&amp;Open</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+13"/>
         <source>Console</source>
         <translation>Console</translation>
     </message>
@@ -2348,7 +2317,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../rpcconsole.cpp" line="-452"/>
+        <location filename="../rpcconsole.cpp" line="-521"/>
         <source>In:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2363,27 +2332,7 @@ p, li { white-space: pre-wrap; }
         <translation>Clear console</translation>
     </message>
     <message>
-        <location filename="../rpcconsole.cpp" line="-214"/>
-        <source>1 &amp;hour</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>1 &amp;day</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>1 &amp;week</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>1 &amp;year</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-4"/>
+        <location filename="../rpcconsole.cpp" line="-209"/>
         <source>&amp;Disconnect</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2391,12 +2340,26 @@ p, li { white-space: pre-wrap; }
         <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
-        <location line="+1"/>
         <source>Ban for</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+48"/>
+        <location line="-2"/>
+        <source>1 hour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>1 day</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>1 week</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+43"/>
         <source>&amp;Unban</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2426,7 +2389,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+296"/>
+        <location line="+366"/>
         <source>(node id: %1)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2462,7 +2425,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+11"/>
         <location line="+6"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>

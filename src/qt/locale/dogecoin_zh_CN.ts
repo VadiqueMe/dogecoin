@@ -1289,32 +1289,8 @@
         <translation>请输入狗狗币地址 (例如: %1)</translation>
     </message>
     <message>
-        <source>%1 d</source>
-        <translation>%1 天</translation>
-    </message>
-    <message>
-        <source>%1 h</source>
-        <translation>%1 小时</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 分钟</translation>
-    </message>
-    <message>
-        <source>%1 s</source>
-        <translation>%1 秒</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>无</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>不可用</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 毫秒</translation>
     </message>
     <message numerus="yes">
         <source>%n second(s)</source>
@@ -1574,20 +1550,16 @@
         <translation>清空控制台</translation>
     </message>
     <message>
-        <source>1 &amp;hour</source>
-        <translation>1 小时(&amp;H)</translation>
+        <source>1 hour</source>
+        <translation>1 小时</translation>
     </message>
     <message>
-        <source>1 &amp;day</source>
-        <translation>1 天(&amp;D)</translation>
+        <source>1 day</source>
+        <translation>1 天</translation>
     </message>
     <message>
-        <source>1 &amp;week</source>
-        <translation>1 周(&amp;W)</translation>
-    </message>
-    <message>
-        <source>1 &amp;year</source>
-        <translation>1 年(&amp;Y)</translation>
+        <source>1 week</source>
+        <translation>1 周</translation>
     </message>
     <message>
         <source>&amp;Disconnect</source>

@@ -1137,32 +1137,8 @@ Var vänlig och försök igen.</translation>
         <translation>Ange en Dogecoin-adress (t.ex. %1)</translation>
     </message>
     <message>
-        <source>%1 d</source>
-        <translation>%1 d</translation>
-    </message>
-    <message>
-        <source>%1 h</source>
-        <translation>%1 h</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 m</translation>
-    </message>
-    <message>
-        <source>%1 s</source>
-        <translation>%1 s</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>Ingen</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>ej tillgänglig</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 ms</translation>
     </message>
     <message numerus="yes">
         <source>%n second(s)</source>
@@ -1390,20 +1366,16 @@ Var vänlig och försök igen.</translation>
         <translation>Rensa konsollen</translation>
     </message>
     <message>
-        <source>1 &amp;hour</source>
-        <translation>1 &amp;timme</translation>
+        <source>1 hour</source>
+        <translation>1 timme</translation>
     </message>
     <message>
-        <source>1 &amp;day</source>
-        <translation>1 &amp;dag</translation>
+        <source>1 day</source>
+        <translation>1 dag</translation>
     </message>
     <message>
-        <source>1 &amp;week</source>
-        <translation>1 &amp;vecka</translation>
-    </message>
-    <message>
-        <source>1 &amp;year</source>
-        <translation>1 &amp;år</translation>
+        <source>1 week</source>
+        <translation>1 vecka</translation>
     </message>
     <message>
         <source>Welcome to the %1 RPC console.</source>

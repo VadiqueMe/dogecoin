@@ -521,18 +521,6 @@
         <source>Amount</source>
         <translation>Suma</translation>
     </message>
-    <message>
-        <source>%1 h</source>
-        <translation>%1 h</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 m</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>nėra</translation>
-    </message>
     </context>
 <context>
     <name>QObject::QObject</name>

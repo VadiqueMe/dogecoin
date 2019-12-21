@@ -408,10 +408,6 @@
         <translation>Cantidad</translation>
     </message>
     <message>
-        <source>N/A</source>
-        <translation>N/A</translation>
-    </message>
-    <message>
         <source>%1 and %2</source>
         <translation>%1 y %2</translation>
     </message>
@@ -424,10 +420,6 @@
     </context>
 <context>
     <name>RPCConsole</name>
-    <message>
-        <source>N/A</source>
-        <translation>N/A</translation>
-    </message>
     <message>
         <source>Version</source>
         <translation>Versión</translation>

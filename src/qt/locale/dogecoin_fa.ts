@@ -976,32 +976,8 @@
         <translation>یک آدرس بیت‌کوین وارد کنید (مثلاً %1)</translation>
     </message>
     <message>
-        <source>%1 d</source>
-        <translation>%1 روز</translation>
-    </message>
-    <message>
-        <source>%1 h</source>
-        <translation>%1 ساعت</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 دقیقه</translation>
-    </message>
-    <message>
-        <source>%1 s</source>
-        <translation>%1 ثانیه</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>هیچکدام</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>ناموجود</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 میلیونم ثانیه</translation>
     </message>
     <message>
         <source>%1 and %2</source>
@@ -1125,20 +1101,16 @@
         <translation>پاکسازی کنسول</translation>
     </message>
     <message>
-        <source>1 &amp;hour</source>
+        <source>1 hour</source>
         <translation>1 ساعت</translation>
     </message>
     <message>
-        <source>1 &amp;day</source>
+        <source>1 day</source>
         <translation>1 روز</translation>
     </message>
     <message>
-        <source>1 &amp;week</source>
+        <source>1 week</source>
         <translation>1 هفته</translation>
-    </message>
-    <message>
-        <source>1 &amp;year</source>
-        <translation>1 سال</translation>
     </message>
     <message>
         <source>Ban for</source>

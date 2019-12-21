@@ -635,27 +635,11 @@
     </message>
     <message>
         <source>Enter a Dogecoin address (like %1)</source>
-        <translation>Dogecoin манзилини киритинг (масалан.  %1)</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 д</translation>
-    </message>
-    <message>
-        <source>%1 s</source>
-        <translation>%1 с</translation>
+        <translation>Dogecoin манзилини киритинг (масалан. %1)</translation>
     </message>
     <message>
         <source>None</source>
         <translation>Йўқ</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>Тўғри келмайди</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 мс</translation>
     </message>
     <message>
         <source>%1 and %2</source>

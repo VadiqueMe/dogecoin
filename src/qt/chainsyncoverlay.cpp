@@ -105,10 +105,10 @@ void ChainSyncOverlay::tipUpdate(int count, const QDateTime& blockDate, double n
             }
         }
         // show progress increase per hour
-        ui->progressIncreasePerH->setText(QString::number(progressPerHour*100, 'f', 2)+"%");
+        ui->progressIncreasePerH->setText( QString::number( progressPerHour * 100, 'f', 2 ) + "%" ) ;
 
         // show expected remaining time
-        ui->expectedTimeLeft->setText(GUIUtil::formatNiceTimeOffset(remainingMSecs/1000.0));
+        ui->expectedTimeLeft->setText( GUIUtil::niceTimeOffset( remainingMSecs / 1000.0 ) ) ;
 
         static const int MAX_SAMPLES = 5000;
         if (blockProcessTime.count() > MAX_SAMPLES)

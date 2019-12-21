@@ -980,18 +980,6 @@
         <translation>Masukkan alamat Dogecoin (contoh %1)</translation>
     </message>
     <message>
-        <source>%1 h</source>
-        <translation>%1 Jam</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 menit</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>T/S</translation>
-    </message>
-    <message>
         <source>%1 and %2</source>
         <translation>%1 dan %2</translation>
     </message>
@@ -1095,20 +1083,16 @@
         <translation>Bersihkan konsol</translation>
     </message>
     <message>
-        <source>1 &amp;hour</source>
-        <translation>1 &amp;jam</translation>
+        <source>1 hour</source>
+        <translation>1 jam</translation>
     </message>
     <message>
-        <source>1 &amp;day</source>
-        <translation>1 &amp;hari</translation>
+        <source>1 day</source>
+        <translation>1 hari</translation>
     </message>
     <message>
-        <source>1 &amp;week</source>
-        <translation>1 &amp;minggu</translation>
-    </message>
-    <message>
-        <source>1 &amp;year</source>
-        <translation>1 &amp;tahun</translation>
+        <source>1 week</source>
+        <translation>1 minggu</translation>
     </message>
     <message>
         <source>Use up and down arrows to navigate history, and &lt;b&gt;Ctrl-L&lt;/b&gt; to clear screen.</source>

@@ -880,32 +880,8 @@
         <translation>Введіть адресу Dogecoin (наприклад %1)</translation>
     </message>
     <message>
-        <source>%1 d</source>
-        <translation>%1 д</translation>
-    </message>
-    <message>
-        <source>%1 h</source>
-        <translation>%1 г</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 х</translation>
-    </message>
-    <message>
-        <source>%1 s</source>
-        <translation>%1 с</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>Відсутні</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>Н/Д</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 мс</translation>
     </message>
     <message>
         <source>%1 and %2</source>
@@ -1093,20 +1069,16 @@
         <translation>Очистити консоль</translation>
     </message>
     <message>
-        <source>1 &amp;hour</source>
-        <translation>1 &amp;годину</translation>
+        <source>1 hour</source>
+        <translation>1 годину</translation>
     </message>
     <message>
-        <source>1 &amp;day</source>
-        <translation>1 &amp;день</translation>
+        <source>1 day</source>
+        <translation>1 день</translation>
     </message>
     <message>
-        <source>1 &amp;week</source>
-        <translation>1 &amp;тиждень</translation>
-    </message>
-    <message>
-        <source>1 &amp;year</source>
-        <translation>1 &amp;рік</translation>
+        <source>1 week</source>
+        <translation>1 тиждень</translation>
     </message>
     <message>
         <source>Use up and down arrows to navigate history, and &lt;b&gt;Ctrl-L&lt;/b&gt; to clear screen.</source>

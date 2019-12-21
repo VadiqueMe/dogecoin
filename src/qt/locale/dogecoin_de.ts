@@ -1304,32 +1304,8 @@
         <translation>Dogecoin-Adresse eingeben (z.B. %1)</translation>
     </message>
     <message>
-        <source>%1 d</source>
-        <translation>%1 d</translation>
-    </message>
-    <message>
-        <source>%1 h</source>
-        <translation>%1 h</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 m</translation>
-    </message>
-    <message>
-        <source>%1 s</source>
-        <translation>%1 s</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>Keine</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>k.A.</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 ms</translation>
     </message>
     <message numerus="yes">
         <source>%n second(s)</source>
@@ -1585,20 +1561,16 @@
         <translation>Konsole zurücksetzen</translation>
     </message>
     <message>
-        <source>1 &amp;hour</source>
-        <translation>1 &amp;Stunde</translation>
+        <source>1 hour</source>
+        <translation>1 Stunde</translation>
     </message>
     <message>
-        <source>1 &amp;day</source>
-        <translation>1 &amp;Tag</translation>
+        <source>1 day</source>
+        <translation>1 Tag</translation>
     </message>
     <message>
-        <source>1 &amp;week</source>
-        <translation>1 &amp;Woche</translation>
-    </message>
-    <message>
-        <source>1 &amp;year</source>
-        <translation>1 &amp;Jahr</translation>
+        <source>1 week</source>
+        <translation>1 Woche</translation>
     </message>
     <message>
         <source>&amp;Disconnect</source>

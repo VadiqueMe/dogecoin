@@ -1545,7 +1545,13 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
                 return true;
 
             bool fAlreadyHave = AlreadyHave( inv ) ;
-            LogPrintf( "got inv from peer=%d: %s %s\n", pfrom->id, inv.ToString(), fAlreadyHave ? "already have" : "new" ) ;
+
+            std::string gotInvMessage = strprintf( "got inv from peer=%d: %s %s\n",
+                                            pfrom->id, inv.ToString(), fAlreadyHave ? "already have" : "new" ) ;
+            if ( fAlreadyHave )
+                LogPrint( "net", gotInvMessage ) ;
+            else // new
+                LogPrintf( gotInvMessage ) ;
 
             if (inv.type == MSG_TX) {
                 inv.type |= nFetchFlags;

@@ -1280,32 +1280,8 @@
         <translation>Introducir una dirección Dogecoin (p. ej. %1)</translation>
     </message>
     <message>
-        <source>%1 d</source>
-        <translation>%1 d</translation>
-    </message>
-    <message>
-        <source>%1 h</source>
-        <translation>%1 h</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 m</translation>
-    </message>
-    <message>
-        <source>%1 s</source>
-        <translation>%1 s</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>Ninguno</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>N/D</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 ms</translation>
     </message>
     <message>
         <source>%1 and %2</source>
@@ -1529,20 +1505,16 @@
         <translation>Borrar consola</translation>
     </message>
     <message>
-        <source>1 &amp;hour</source>
-        <translation>1 &amp;hora</translation>
+        <source>1 hour</source>
+        <translation>1 hora</translation>
     </message>
     <message>
-        <source>1 &amp;day</source>
-        <translation>1 &amp;día</translation>
+        <source>1 day</source>
+        <translation>1 día</translation>
     </message>
     <message>
-        <source>1 &amp;week</source>
-        <translation>1 &amp;semana</translation>
-    </message>
-    <message>
-        <source>1 &amp;year</source>
-        <translation>1 &amp;año</translation>
+        <source>1 week</source>
+        <translation>1 semana</translation>
     </message>
     <message>
         <source>Welcome to the %1 RPC console.</source>

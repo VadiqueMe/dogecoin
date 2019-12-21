@@ -1304,32 +1304,8 @@
         <translation>Введите адрес Dogecoin (например %1)</translation>
     </message>
     <message>
-        <source>%1 d</source>
-        <translation>%1 д</translation>
-    </message>
-    <message>
-        <source>%1 h</source>
-        <translation>%1 ч</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 мин</translation>
-    </message>
-    <message>
-        <source>%1 s</source>
-        <translation>%1 с</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>Ничего</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>Н/Д</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 мс</translation>
     </message>
     <message numerus="yes">
         <source>%n second(s)</source>
@@ -1589,20 +1565,16 @@
         <translation>Очистить консоль</translation>
     </message>
     <message>
-        <source>1 &amp;hour</source>
-        <translation>1 &amp;час</translation>
+        <source>1 hour</source>
+        <translation>1 час</translation>
     </message>
     <message>
-        <source>1 &amp;day</source>
-        <translation>1 &amp;день</translation>
+        <source>1 day</source>
+        <translation>1 день</translation>
     </message>
     <message>
-        <source>1 &amp;week</source>
-        <translation>1 &amp;неделю</translation>
-    </message>
-    <message>
-        <source>1 &amp;year</source>
-        <translation>1 &amp;год</translation>
+        <source>1 week</source>
+        <translation>1 неделю</translation>
     </message>
     <message>
         <source>&amp;Disconnect</source>

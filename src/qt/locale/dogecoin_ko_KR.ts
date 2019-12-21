@@ -1304,32 +1304,8 @@
         <translation>비트코인 주소를 입력하기 (예. %1)</translation>
     </message>
     <message>
-        <source>%1 d</source>
-        <translation>%1 일</translation>
-    </message>
-    <message>
-        <source>%1 h</source>
-        <translation>%1 시간</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 분</translation>
-    </message>
-    <message>
-        <source>%1 s</source>
-        <translation>%1 초</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>없음</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>없음</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 ms</translation>
     </message>
     <message numerus="yes">
         <source>%n second(s)</source>
@@ -1589,20 +1565,16 @@
         <translation>콘솔 초기화</translation>
     </message>
     <message>
-        <source>1 &amp;hour</source>
-        <translation>1시간(&amp;H)</translation>
+        <source>1 hour</source>
+        <translation>1시간</translation>
     </message>
     <message>
-        <source>1 &amp;day</source>
-        <translation>1일(&amp;D)</translation>
+        <source>1 day</source>
+        <translation>1일</translation>
     </message>
     <message>
-        <source>1 &amp;week</source>
-        <translation>1주(&amp;W)</translation>
-    </message>
-    <message>
-        <source>1 &amp;year</source>
-        <translation>1년(&amp;Y)</translation>
+        <source>1 week</source>
+        <translation>1주</translation>
     </message>
     <message>
         <source>&amp;Disconnect</source>

@@ -1304,32 +1304,8 @@
         <translation>Dogecoinアドレスを入力してください (例 %1)</translation>
     </message>
     <message>
-        <source>%1 d</source>
-        <translation>%1日</translation>
-    </message>
-    <message>
-        <source>%1 h</source>
-        <translation>%1 h</translation>
-    </message>
-    <message>
-        <source>%1 m</source>
-        <translation>%1 m</translation>
-    </message>
-    <message>
-        <source>%1 s</source>
-        <translation>%1秒</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>なし</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>N/A</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1ミリ秒</translation>
     </message>
     <message numerus="yes">
         <source>%n second(s)</source>
@@ -1400,10 +1376,6 @@
 </context>
 <context>
     <name>RPCConsole</name>
-    <message>
-        <source>N/A</source>
-        <translation>N/A</translation>
-    </message>
     <message>
         <source>Version</source>
         <translation>バージョン</translation>
@@ -1589,20 +1561,16 @@
         <translation>コンソールをクリア</translation>
     </message>
     <message>
-        <source>1 &amp;hour</source>
-        <translation>1時間 (&amp;H)</translation>
+        <source>1 hour</source>
+        <translation>1時間</translation>
     </message>
     <message>
-        <source>1 &amp;day</source>
-        <translation>1日 (&amp;D)</translation>
+        <source>1 day</source>
+        <translation>1日</translation>
     </message>
     <message>
-        <source>1 &amp;week</source>
-        <translation>1週間 (&amp;W)</translation>
-    </message>
-    <message>
-        <source>1 &amp;year</source>
-        <translation>1年 (&amp;Y)</translation>
+        <source>1 week</source>
+        <translation>1週間</translation>
     </message>
     <message>
         <source>&amp;Disconnect</source>

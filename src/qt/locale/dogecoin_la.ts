@@ -417,10 +417,6 @@
         <source>Amount</source>
         <translation>Quantitas</translation>
     </message>
-    <message>
-        <source>N/A</source>
-        <translation>N/A</translation>
-    </message>
     </context>
 <context>
     <name>QObject::QObject</name>
@@ -430,10 +426,6 @@
     </context>
 <context>
     <name>RPCConsole</name>
-    <message>
-        <source>N/A</source>
-        <translation>N/A</translation>
-    </message>
     <message>
         <source>Version</source>
         <translation>Versio</translation>
