@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "script/standard.h"
 
@@ -10,16 +10,12 @@
 #include "util.h"
 #include "utilstrencodings.h"
 
-#include <boost/foreach.hpp>
-
-using namespace std;
-
-typedef vector<unsigned char> valtype;
+typedef std::vector< unsigned char > valtype ;
 
 bool fAcceptDatacarrier = DEFAULT_ACCEPT_DATACARRIER;
 unsigned nMaxDatacarrierBytes = MAX_OP_RETURN_RELAY;
 
-CScriptID::CScriptID(const CScript& in) : uint160(Hash160(in.begin(), in.end())) {}
+CScriptID::CScriptID( const CScript& in ) : uint160( Hash160( in.begin(), in.end() ) ) { }
 
 const char* GetTxnOutputType(txnouttype t)
 {
@@ -47,13 +43,13 @@ bool Solver( const CScript & scriptPubKey, txnouttype & typeRet, std::vector< st
     if ( mTemplates.empty() )
     {
         // Standard tx, sender provides pubkey, receiver adds signature
-        mTemplates.insert( make_pair( TX_PUBKEY, CScript() << OP_PUBKEY << OP_CHECKSIG ) ) ;
+        mTemplates.insert( std::make_pair( TX_PUBKEY, CScript() << OP_PUBKEY << OP_CHECKSIG ) ) ;
 
         // Dogecoin address tx, sender provides hash of pubkey, receiver provides signature and pubkey
-        mTemplates.insert( make_pair( TX_PUBKEYHASH, CScript() << OP_DUP << OP_HASH160 << OP_PUBKEYHASH << OP_EQUALVERIFY << OP_CHECKSIG ) ) ;
+        mTemplates.insert( std::make_pair( TX_PUBKEYHASH, CScript() << OP_DUP << OP_HASH160 << OP_PUBKEYHASH << OP_EQUALVERIFY << OP_CHECKSIG ) ) ;
 
         // Sender provides N pubkeys, receivers provides M signatures
-        mTemplates.insert( make_pair( TX_MULTISIG, CScript() << OP_SMALLINTEGER << OP_PUBKEYS << OP_SMALLINTEGER << OP_CHECKMULTISIG ) ) ;
+        mTemplates.insert( std::make_pair( TX_MULTISIG, CScript() << OP_SMALLINTEGER << OP_PUBKEYS << OP_SMALLINTEGER << OP_CHECKMULTISIG ) ) ;
     }
 
     vSolutionsRet.clear() ;
@@ -63,13 +59,13 @@ bool Solver( const CScript & scriptPubKey, txnouttype & typeRet, std::vector< st
     if (scriptPubKey.IsPayToScriptHash())
     {
         typeRet = TX_SCRIPTHASH;
-        vector<unsigned char> hashBytes(scriptPubKey.begin()+2, scriptPubKey.begin()+22);
+        std::vector< unsigned char > hashBytes( scriptPubKey.begin() + 2, scriptPubKey.begin() + 22 ) ;
         vSolutionsRet.push_back(hashBytes);
         return true;
     }
 
     int witnessversion;
-    std::vector<unsigned char> witnessprogram;
+    std::vector< unsigned char > witnessprogram ;
     if (scriptPubKey.IsWitnessProgram(witnessversion, witnessprogram)) {
         if (witnessversion == 0 && witnessprogram.size() == 20) {
             typeRet = TX_WITNESS_V0_KEYHASH;
@@ -96,13 +92,13 @@ bool Solver( const CScript & scriptPubKey, txnouttype & typeRet, std::vector< st
 
     // Scan templates
     const CScript& script1 = scriptPubKey;
-    BOOST_FOREACH(const PAIRTYPE(txnouttype, CScript)& tplate, mTemplates)
+    for ( const PAIRTYPE( txnouttype, CScript ) & tplate : mTemplates )
     {
         const CScript& script2 = tplate.second;
         vSolutionsRet.clear();
 
         opcodetype opcode1, opcode2;
-        vector<unsigned char> vch1, vch2;
+        std::vector< unsigned char > vch1, vch2 ;
 
         // Compare
         CScript::const_iterator pc1 = script1.begin();
@@ -179,41 +175,41 @@ bool Solver( const CScript & scriptPubKey, txnouttype & typeRet, std::vector< st
     return false;
 }
 
-bool ExtractDestination(const CScript& scriptPubKey, CTxDestination& addressRet)
+bool ExtractDestination( const CScript & scriptPubKey, CTxDestination & addressRet )
 {
-    vector<valtype> vSolutions;
+    std::vector< valtype > vSolutions ;
     txnouttype whichType;
-    if (!Solver(scriptPubKey, whichType, vSolutions))
-        return false;
+    if ( ! Solver( scriptPubKey, whichType, vSolutions ) )
+        return false ;
 
-    if (whichType == TX_PUBKEY)
+    if ( whichType == TX_PUBKEY )
     {
-        CPubKey pubKey(vSolutions[0]);
-        if (!pubKey.IsValid())
-            return false;
+        CPubKey pubKey( vSolutions[ 0 ] ) ;
+        if ( ! pubKey.IsValid() )
+            return false ;
 
-        addressRet = pubKey.GetID();
-        return true;
+        addressRet = pubKey.GetID() ;
+        return true ;
     }
-    else if (whichType == TX_PUBKEYHASH)
+    else if ( whichType == TX_PUBKEYHASH )
     {
-        addressRet = CKeyID(uint160(vSolutions[0]));
-        return true;
+        addressRet = CKeyID( uint160( vSolutions[ 0 ] ) ) ;
+        return true ;
     }
-    else if (whichType == TX_SCRIPTHASH)
+    else if ( whichType == TX_SCRIPTHASH )
     {
-        addressRet = CScriptID(uint160(vSolutions[0]));
-        return true;
+        addressRet = CScriptID( uint160( vSolutions[ 0 ] ) ) ;
+        return true ;
     }
     // Multisig txns have more than one address...
-    return false;
+    return false ;
 }
 
-bool ExtractDestinations(const CScript& scriptPubKey, txnouttype& typeRet, vector<CTxDestination>& addressRet, int& nRequiredRet)
+bool ExtractDestinations( const CScript & scriptPubKey, txnouttype & typeRet, std::vector< CTxDestination > & addressRet, int & nRequiredRet )
 {
     addressRet.clear();
     typeRet = TX_NONSTANDARD;
-    vector<valtype> vSolutions;
+    std::vector< valtype > vSolutions ;
     if (!Solver(scriptPubKey, typeRet, vSolutions))
         return false;
     if (typeRet == TX_NULL_DATA){
@@ -240,9 +236,9 @@ bool ExtractDestinations(const CScript& scriptPubKey, txnouttype& typeRet, vecto
     else
     {
         nRequiredRet = 1;
-        CTxDestination address;
-        if (!ExtractDestination(scriptPubKey, address))
-           return false;
+        CTxDestination address ;
+        if ( ! ExtractDestination( scriptPubKey, address ) )
+           return false ;
         addressRet.push_back(address);
     }
 
@@ -295,8 +291,8 @@ CScript GetScriptForMultisig(int nRequired, const std::vector<CPubKey>& keys)
     CScript script;
 
     script << CScript::EncodeOP_N(nRequired);
-    BOOST_FOREACH(const CPubKey& key, keys)
-        script << ToByteVector(key);
+    for ( const CPubKey & key : keys )
+        script << ToByteVector( key ) ;
     script << CScript::EncodeOP_N(keys.size()) << OP_CHECKMULTISIG;
     return script;
 }

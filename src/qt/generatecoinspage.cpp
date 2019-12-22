@@ -281,6 +281,16 @@ void GenerateCoinsPage::updateThreadTabs()
                 if ( NameOfChain() == "inu" )
                     bigText += " and sha256 hash <= " + QString::fromStdString( ( bitsUint256 << 2 ).GetHex() ) ;
                 bigText += "\n\n" ;
+
+                if ( candidate->block.vtx[ 0 ] != nullptr ) {
+                    const CScript & scriptPublicKey = candidate->block.vtx[ 0 ]->vout[ 0 ].scriptPubKey ;
+                    CTxDestination destination ;
+                    bigText += "generated coins will go to " ;
+                    if ( ExtractDestination( scriptPublicKey, destination ) )
+                        bigText += "address " + QString::fromStdString( CDogecoinAddress( destination ).ToString() ) ;
+                    else bigText += "unknown address" ;
+                    bigText += "\n\n" ;
+                }
             }
 
             bigText += QString::fromStdString( tab->getThread()->threadMiningInfoString() ) ;

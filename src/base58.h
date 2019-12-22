@@ -105,7 +105,7 @@ public:
     CDogecoinAddress() {}
     CDogecoinAddress( const CTxDestination & dest ) {  Set( dest ) ;  }
     CDogecoinAddress( const std::string & strAddress ) {  SetString( strAddress ) ;  }
-    CDogecoinAddress( const char * pszAddress) {  SetString( pszAddress ) ;  }
+    CDogecoinAddress( const char * pszAddress ) {  SetString( pszAddress ) ;  }
 
     CTxDestination Get() const ;
     bool GetKeyID( CKeyID & keyID ) const ;
