@@ -424,7 +424,7 @@
     </message>
     <message>
         <source>(no label)</source>
-        <translation>немає мітки</translation>
+        <translation>(немає мітки)</translation>
     </message>
     </context>
 <context>
@@ -897,10 +897,6 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>N/A</source>
-        <translation>Н/Д</translation>
-    </message>
-    <message>
         <source>Version</source>
         <translation>Версія</translation>
     </message>
@@ -1023,10 +1019,6 @@
     <message>
         <source>Ping Time</source>
         <translation>Затримка</translation>
-    </message>
-    <message>
-        <source>The duration of a currently outstanding ping.</source>
-        <translation>Тривалість поточної затримки.</translation>
     </message>
     <message>
         <source>Ping Wait</source>
@@ -1200,7 +1192,7 @@
     </message>
     <message>
         <source>(no label)</source>
-        <translation>немає мітки</translation>
+        <translation>(немає мітки)</translation>
     </message>
     </context>
 <context>
@@ -1327,7 +1319,7 @@
     </message>
     <message>
         <source>(no label)</source>
-        <translation>немає мітки</translation>
+        <translation>(немає мітки)</translation>
     </message>
 </context>
 <context>
@@ -1527,7 +1519,7 @@
     </message>
     <message>
         <source>(no label)</source>
-        <translation>немає мітки</translation>
+        <translation>(немає мітки)</translation>
     </message>
     </context>
 <context>

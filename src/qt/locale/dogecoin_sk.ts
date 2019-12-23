@@ -1357,10 +1357,6 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>N/A</source>
-        <translation>nie je k dispozícii</translation>
-    </message>
-    <message>
         <source>Version</source>
         <translation>Verzia</translation>
     </message>
@@ -1496,10 +1492,6 @@
     <message>
         <source>Ping Time</source>
         <translation>Čas odozvy</translation>
-    </message>
-    <message>
-        <source>The duration of a currently outstanding ping.</source>
-        <translation>Trvanie aktuálnej požiadavky na odozvu.</translation>
     </message>
     <message>
         <source>Ping Wait</source>
@@ -2461,10 +2453,6 @@
     <message>
         <source>watch-only</source>
         <translation>Iba sledovanie</translation>
-    </message>
-    <message>
-        <source>(n/a)</source>
-        <translation>(n/a)</translation>
     </message>
     <message>
         <source>(no label)</source>

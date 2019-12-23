@@ -1377,10 +1377,6 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>N/A</source>
-        <translation>nedostupná informace</translation>
-    </message>
-    <message>
         <source>Version</source>
         <translation>Verze</translation>
     </message>
@@ -1515,10 +1511,6 @@
     <message>
         <source>Ping Time</source>
         <translation>Odezva</translation>
-    </message>
-    <message>
-        <source>The duration of a currently outstanding ping.</source>
-        <translation>Jak dlouho už čekám na pong.</translation>
     </message>
     <message>
         <source>Ping Wait</source>
@@ -2516,10 +2508,6 @@
     <message>
         <source>watch-only</source>
         <translation>sledovací</translation>
-    </message>
-    <message>
-        <source>(n/a)</source>
-        <translation>(n/a)</translation>
     </message>
     <message>
         <source>(no label)</source>

@@ -442,8 +442,9 @@ RPCConsole::RPCConsole( const PlatformStyle * style, QWidget * parent )
     , resetBytesRecv( 0 )
     , resetBytesSent( 0 )
 {
-    ui->setupUi(this);
-    GUIUtil::restoreWindowGeometry("nRPCConsoleWindow", this->size(), this);
+    ui->setupUi( this ) ;
+    constructPeerDetailsWidget() ;
+    GUIUtil::restoreWindowGeometry( "nRPCConsoleWindow", this->size(), this ) ;
 
     ui->debugLogTextArea->setFrameStyle( /* shape */ QFrame::StyledPanel | /* shadow */ QFrame::Plain ) ;
     ui->debugLogTextArea->setLineWrapMode( QTextEdit::WidgetWidth ) ; // QTextEdit::NoWrap
@@ -560,9 +561,6 @@ RPCConsole::RPCConsole( const PlatformStyle * style, QWidget * parent )
 
     setTrafficGraphRange( INITIAL_TRAFFIC_GRAPH_MINUTES ) ;
 
-    ui->detailWidget->hide();
-    ui->peerHeading->setText(tr("Select a peer to view detailed information"));
-
     QSettings settings;
     consoleFontSize = settings.value(fontSizeSettingsKey, QFontInfo(QFont()).pointSize()).toInt();
     clearConsole() ;
@@ -570,10 +568,10 @@ RPCConsole::RPCConsole( const PlatformStyle * style, QWidget * parent )
 
 RPCConsole::~RPCConsole()
 {
-    GUIUtil::saveWindowGeometry("nRPCConsoleWindow", this);
-    RPCUnsetTimerInterface(rpcTimerInterface);
-    delete rpcTimerInterface;
-    delete ui;
+    GUIUtil::saveWindowGeometry( "nRPCConsoleWindow", this ) ;
+    RPCUnsetTimerInterface( rpcTimerInterface ) ;
+    delete rpcTimerInterface ;
+    delete ui ;
 }
 
 bool RPCConsole::eventFilter(QObject* obj, QEvent *event)
@@ -681,8 +679,8 @@ void RPCConsole::setNetworkModel( NetworkModel * model )
         connect(disconnectAction, SIGNAL(triggered()), this, SLOT(disconnectSelectedNode()));
 
         // peer table signal handling - update peer details when selecting new node
-        connect(ui->peerWidget->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
-            this, SLOT(peerSelected(const QItemSelection &, const QItemSelection &)));
+        connect( ui->peerWidget->selectionModel(), SIGNAL( selectionChanged(const QItemSelection &, const QItemSelection &) ),
+            this, SLOT( peerSelected(const QItemSelection &, const QItemSelection &) ) ) ;
         // peer table signal handling - update peer details when new nodes are added to the model
         connect(model->getPeerTableModel(), SIGNAL(layoutChanged()), this, SLOT(peerLayoutChanged()));
         // peer table signal handling - cache selected node ids
@@ -711,15 +709,15 @@ void RPCConsole::setNetworkModel( NetworkModel * model )
         connect(unbanAction, SIGNAL(triggered()), this, SLOT(unbanSelectedNode()));
 
         // ban table signal handling - clear peer details when clicking a peer in the ban table
-        connect(ui->banlistWidget, SIGNAL(clicked(const QModelIndex&)), this, SLOT(clearSelectedNode()));
+        connect( ui->banlistWidget, SIGNAL( clicked(const QModelIndex&) ), this, SLOT( clearSelectedNode() ) ) ;
         // ban table signal handling - ensure ban table is shown or hidden (if empty)
-        connect(model->getBanTableModel(), SIGNAL(layoutChanged()), this, SLOT(showOrHideBanTableIfRequired()));
-        showOrHideBanTableIfRequired();
+        connect( model->getBanTableModel(), SIGNAL( layoutChanged() ), this, SLOT( showOrHideBanTableIfRequired() ) ) ;
+        showOrHideBanTableIfRequired() ;
 
         // Provide initial values
-        ui->clientVersion->setText(model->formatFullVersion());
-        ui->clientUserAgent->setText(model->formatSubVersion());
-        ui->dataDir->setText(model->dataDir());
+        ui->versionOfThisPeer->setText( model->formatFullVersion() ) ;
+        ui->nodeUserAgent->setText( model->formatSubVersion() ) ;
+        ui->dataDir->setText( model->dataDir() ) ;
         ui->startupTime->setText( model->formatPeerStartupTime() ) ;
         ui->networkName->setText( QString::fromStdString( NameOfChain() ) ) ;
 
@@ -1148,16 +1146,19 @@ void RPCConsole::resetTrafficValues()
     updateTrafficStats() ;
 }
 
-void RPCConsole::peerSelected(const QItemSelection &selected, const QItemSelection &deselected)
+void RPCConsole::peerSelected( const QItemSelection & selected, const QItemSelection & deselected )
 {
-    Q_UNUSED(deselected);
+    Q_UNUSED( deselected ) ;
 
-    if ( ! networkModel || ! networkModel->getPeerTableModel() || selected.indexes().isEmpty() )
-        return ;
-
-    const CNodeCombinedStats * stats = networkModel->getPeerTableModel()->getNodeStats( selected.indexes().first().row() ) ;
-    if ( stats != nullptr )
-        updateNodeDetail( stats ) ;
+    if ( ! selected.indexes().isEmpty() ) {
+        const CNodeCombinedStats * stats = nullptr ;
+        if ( networkModel && networkModel->getPeerTableModel() )
+            networkModel->getPeerTableModel()->getNodeStats( selected.indexes().first().row() ) ;
+        if ( stats != nullptr )
+            updateNodeDetail( stats ) ;
+    } else {
+        clearSelectedNode() ;
+    }
 }
 
 void RPCConsole::peerLayoutAboutToChange()
@@ -1194,10 +1195,10 @@ void RPCConsole::peerLayoutChanged()
     // be at selectedRow since its position can change after a layout change)
     int detailNodeRow = networkModel->getPeerTableModel()->getRowByNodeId( cachedNodeids.first() ) ;
 
-    if (detailNodeRow < 0)
+    if ( detailNodeRow < 0 )
     {
         // detail node disappeared from table (node disconnected)
-        fUnselect = true;
+        fUnselect = true ;
     }
     else
     {
@@ -1212,8 +1213,8 @@ void RPCConsole::peerLayoutChanged()
         stats = networkModel->getPeerTableModel()->getNodeStats( detailNodeRow ) ;
     }
 
-    if (fUnselect && selectedRow >= 0) {
-        clearSelectedNode();
+    if ( fUnselect && selectedRow >= 0 ) {
+        clearSelectedNode() ;
     }
 
     if (fReselect)
@@ -1228,49 +1229,158 @@ void RPCConsole::peerLayoutChanged()
         updateNodeDetail( stats ) ;
 }
 
-void RPCConsole::updateNodeDetail(const CNodeCombinedStats *stats)
+void RPCConsole::constructPeerDetailsWidget()
 {
-    // update the detail ui with latest node information
-    QString peerAddrDetails(QString::fromStdString(stats->nodeStats.addrName) + " ");
-    peerAddrDetails += tr("(node id: %1)").arg(QString::number(stats->nodeStats.nodeid));
-    if (!stats->nodeStats.addrLocal.empty())
-        peerAddrDetails += "<br />" + tr("via %1").arg(QString::fromStdString(stats->nodeStats.addrLocal));
-    ui->peerHeading->setText(peerAddrDetails);
-    ui->peerServices->setText( GUIUtil::formatServices( stats->nodeStats.nServices ) ) ;
-    ui->peerLastSend->setText( stats->nodeStats.nLastSend != 0 ? seconds2hmmss( GetSystemTimeInSeconds() - stats->nodeStats.nLastSend ) : tr("never") ) ;
-    ui->peerLastRecv->setText( stats->nodeStats.nLastRecv != 0 ? seconds2hmmss( GetSystemTimeInSeconds() - stats->nodeStats.nLastRecv ) : tr("never") ) ;
-    ui->peerBytesSent->setText( QString::fromStdString( FormatBytes( stats->nodeStats.nSendBytes ) ) ) ;
-    ui->peerBytesRecv->setText( QString::fromStdString( FormatBytes( stats->nodeStats.nRecvBytes ) ) ) ;
-    ui->peerConnTime->setText( seconds2hmmss( GetSystemTimeInSeconds() - stats->nodeStats.nTimeConnected ) ) ;
-    ui->peerPingTime->setText( GUIUtil::formatPingTime( stats->nodeStats.dPingTime ) ) ;
-    ui->peerPingWait->setText( GUIUtil::formatPingTime( stats->nodeStats.dPingWait ) ) ;
-    ui->peerMinPing->setText( GUIUtil::formatPingTime( stats->nodeStats.dMinPing ) ) ;
-    ui->timeoffset->setText( GUIUtil::formatTimeOffset( stats->nodeStats.nTimeOffset ) ) ;
-    ui->peerVersion->setText(QString("%1").arg(QString::number(stats->nodeStats.nVersion)));
-    ui->peerSubversion->setText(QString::fromStdString(stats->nodeStats.cleanSubVer));
-    ui->peerDirection->setText(stats->nodeStats.fInbound ? tr("Inbound") : tr("Outbound"));
-    ui->peerHeight->setText(QString("%1").arg(QString::number(stats->nodeStats.nStartingHeight)));
-    ui->peerWhitelisted->setText(stats->nodeStats.fWhitelisted ? tr("Yes") : tr("No"));
+    static bool didOnce = false ;
+    if ( didOnce ) return ;
 
-    // This check fails for example if the lock was busy and nodeStateStats couldn't be fetched
-    if (stats->fNodeStateStatsAvailable) {
-        // Ban score is init to 0
-        ui->peerBanScore->setText(QString("%1").arg(stats->nodeStateStats.nMisbehavior));
+    Qt::TextInteractionFlags interactionWithLabel =
+            Qt::TextSelectableByMouse | Qt::TextSelectableByKeyboard /* | Qt::LinksAccessibleByMouse */ ;
 
-        // Sync height is init to -1
-        if (stats->nodeStateStats.nSyncHeight > -1)
-            ui->peerSyncHeight->setText(QString("%1").arg(stats->nodeStateStats.nSyncHeight));
-        else
-            ui->peerSyncHeight->setText(tr("Unknown"));
+    //
+    // peerHeading
+    //
 
-        // Common height is init to -1
-        if (stats->nodeStateStats.nCommonHeight > -1)
-            ui->peerCommonHeight->setText(QString("%1").arg(stats->nodeStateStats.nCommonHeight));
-        else
-            ui->peerCommonHeight->setText(tr("Unknown"));
+    peerHeading.reset( new QLabel() ) ;
+    peerHeading->setText( tr( "Select a peer to view detailed information" ) ) ;
+    peerHeading->setAlignment( Qt::AlignHCenter | Qt::AlignTop ) ;
+    peerHeading->setWordWrap( true ) ;
+    peerHeading->setTextInteractionFlags( interactionWithLabel ) ;
+    peerHeading->setCursor( Qt::IBeamCursor ) ;
+    peerHeading->setMinimumSize( /* width */ 300, /* height */ 25 ) ;
+    QSizePolicy sizePolicy ;
+       sizePolicy.setHorizontalPolicy( QSizePolicy::Preferred ) ;
+       sizePolicy.setVerticalPolicy( QSizePolicy::Minimum ) ;
+       sizePolicy.setHorizontalStretch( 0 ) ;
+       sizePolicy.setVerticalStretch( 0 ) ;
+    peerHeading->setSizePolicy( sizePolicy ) ;
+
+    ui->gridLayoutForPeersTab->addWidget( peerHeading.get(), /* row */ 0, /* column */ 1 ) ;
+
+    //
+    // peerDetailsWidget and company
+    //
+
+    peerDirection.reset( new QLabel( "?" ) ) ;
+    peerVersion.reset( new QLabel( "?" ) ) ;
+    peerSubversion.reset( new QLabel( "?" ) ) ;
+    peerServices.reset( new QLabel( "?" ) ) ;
+    peerHeight.reset( new QLabel( "?" ) ) ;
+    peerSyncHeight.reset( new QLabel( "?" ) ) ;
+    peerCommonHeight.reset( new QLabel( "?" ) ) ;
+    peerConnTime.reset( new QLabel( "?" ) ) ;
+    peerLastSend.reset( new QLabel( "?" ) ) ;
+    peerLastRecv.reset( new QLabel( "?" ) ) ;
+    peerBytesSent.reset( new QLabel( "?" ) ) ;
+    peerBytesRecv.reset( new QLabel( "?" ) ) ;
+    peerPingTime.reset( new QLabel( "*" ) ) ;
+    peerPingWait.reset( new QLabel( "*" ) ) ;
+    peerMinPing.reset( new QLabel( "*" ) ) ;
+    peerTimeOffset.reset( new QLabel( "?" ) ) ;
+    peerWhitelisted.reset( new QLabel( "?" ) ) ;
+    peerBanScore.reset( new QLabel( "?" ) ) ;
+
+    peerDetails.clear() ;
+    peerDetails.push_back( std::make_pair( tr( "Direction" ), peerDirection.get() ) ) ;
+    peerDetails.push_back( std::make_pair( tr( "Version" ), peerVersion.get() ) ) ;
+    peerDetails.push_back( std::make_pair( tr( "User Agent" ), peerSubversion.get() ) ) ;
+    peerDetails.push_back( std::make_pair( tr( "Services" ), peerServices.get() ) ) ;
+    peerDetails.push_back( std::make_pair( tr( "Starting Block" ), peerHeight.get() ) ) ;
+    peerDetails.push_back( std::make_pair( tr( "Synced Headers" ), peerSyncHeight.get() ) ) ;
+    peerDetails.push_back( std::make_pair( tr( "Synced Blocks" ), peerCommonHeight.get() ) ) ;
+    peerDetails.push_back( std::make_pair( tr( "Connection Time" ), peerConnTime.get() ) ) ;
+    peerDetails.push_back( std::make_pair( tr( "Last Send" ), peerLastSend.get() ) ) ;
+    peerDetails.push_back( std::make_pair( tr( "Last Receive" ), peerLastRecv.get() ) ) ;
+    peerDetails.push_back( std::make_pair( tr( "Sent" ), peerBytesSent.get() ) ) ;
+    peerDetails.push_back( std::make_pair( tr( "Received" ), peerBytesRecv.get() ) ) ;
+    peerDetails.push_back( std::make_pair( tr( "Ping Time" ), peerPingTime.get() ) ) ;
+    peerDetails.push_back( std::make_pair( tr( "Ping Wait" ), peerPingWait.get() ) ) ;
+    peerDetails.push_back( std::make_pair( tr( "Min Ping" ), peerMinPing.get() ) ) ;
+    peerDetails.push_back( std::make_pair( tr( "Time Offset" ), peerTimeOffset.get() ) ) ;
+    peerDetails.push_back( std::make_pair( tr( "Whitelisted" ), peerWhitelisted.get() ) ) ;
+    peerDetails.push_back( std::make_pair( tr( "Ban Score" ), peerBanScore.get() ) ) ;
+
+    peerDetailsWidget.reset( new QWidget() ) ;
+    peerDetailsWidget->hide() ;
+
+    QGridLayout * peerDetailsLayout = new QGridLayout() ;
+    int row = 0 ;
+    for ( std::pair< QString, QLabel * > detail : peerDetails )
+    {
+        QLabel * textLabel = new QLabel( detail.first, peerDetailsWidget.get() ) ;
+        peerDetailsLayout->addWidget( textLabel, row, /* column */ 0 ) ;
+
+        detail.second->setTextFormat( Qt::PlainText ) ;
+        detail.second->setCursor( Qt::IBeamCursor ) ;
+        detail.second->setTextInteractionFlags( interactionWithLabel ) ;
+        detail.second->setBuddy( textLabel ) ;
+        peerDetailsLayout->addWidget( detail.second, row, /* column */ 2 ) ;
+
+        row ++ ;
     }
 
-    ui->detailWidget->show();
+    QSpacerItem * spacerAfterPeerDetails = new QSpacerItem( /* width */ 20, /* height */ 40, QSizePolicy::Fixed, QSizePolicy::Expanding ) ;
+    peerDetailsLayout->addItem( spacerAfterPeerDetails, row, /* column */ 1 ) ;
+
+    peerDetailsWidget->setMinimumSize( /* width */ 300, /* height */ 0 ) ;
+    peerDetailsWidget->setLayout( peerDetailsLayout ) ;
+    ui->gridLayoutForPeersTab->addWidget( peerDetailsWidget.get(), /* row */ 1, /* column */ 1 ) ;
+
+    didOnce = true ;
+}
+
+void RPCConsole::updateNodeDetail( const CNodeCombinedStats * stats )
+{
+    QString peerAddrDetails( QString::fromStdString( stats->nodeStats.addrName ) + " " ) ;
+    peerAddrDetails += tr( "(node id: %1)" ).arg( QString::number( stats->nodeStats.nodeid ) ) ;
+    if ( ! stats->nodeStats.addrLocal.empty() )
+        peerAddrDetails += "<br />" + tr( "via %1" ).arg( QString::fromStdString( stats->nodeStats.addrLocal ) ) ;
+    peerHeading->setText( peerAddrDetails ) ;
+
+    peerServices->setText( GUIUtil::formatServices( stats->nodeStats.nServices ).replace( "&", "&&" ) ) ;
+    peerLastSend->setText( stats->nodeStats.nLastSend != 0 ? seconds2hmmss( GetSystemTimeInSeconds() - stats->nodeStats.nLastSend ) : tr("never") ) ;
+    peerLastRecv->setText( stats->nodeStats.nLastRecv != 0 ? seconds2hmmss( GetSystemTimeInSeconds() - stats->nodeStats.nLastRecv ) : tr("never") ) ;
+    peerBytesSent->setText( QString::fromStdString( FormatBytes( stats->nodeStats.nSendBytes ) ) ) ;
+    peerBytesRecv->setText( QString::fromStdString( FormatBytes( stats->nodeStats.nRecvBytes ) ) ) ;
+    peerConnTime->setText( seconds2hmmss( GetSystemTimeInSeconds() - stats->nodeStats.nTimeConnected ) ) ;
+    peerPingTime->setText( GUIUtil::formatPingTime( stats->nodeStats.dPingTime ) ) ;
+    {
+       double pingWait = stats->nodeStats.dPingWait ;
+       peerPingWait->setText( GUIUtil::formatPingTime( pingWait ) ) ;
+       peerPingWait->setVisible( pingWait > 0 ) ;
+       if ( peerPingWait->buddy() != nullptr ) peerPingWait->buddy()->setVisible( pingWait > 0 ) ;
+    }
+    peerMinPing->setText( GUIUtil::formatPingTime( stats->nodeStats.dMinPing ) ) ;
+    peerTimeOffset->setText( GUIUtil::formatTimeOffset( stats->nodeStats.nTimeOffset ) ) ;
+    peerVersion->setText( QString::number( stats->nodeStats.nVersion ) ) ;
+    peerSubversion->setText( QString::fromStdString( stats->nodeStats.cleanSubVer ) ) ;
+    peerDirection->setText( stats->nodeStats.fInbound ? tr("Inbound") : tr("Outbound") ) ;
+    peerHeight->setText( QString::number( stats->nodeStats.nStartingHeight ) ) ;
+    peerWhitelisted->setText( stats->nodeStats.fWhitelisted ? tr("Yes") : tr("No") ) ;
+
+    // This check fails for example if the lock was busy and nodeStateStats couldn't be fetched
+    if ( stats->fNodeStateStatsAvailable ) {
+        // Sync height is init to -1
+        if ( stats->nodeStateStats.nSyncHeight > -1 )
+            peerSyncHeight->setText( QString( "%1" ).arg( stats->nodeStateStats.nSyncHeight ) ) ;
+        else
+            peerSyncHeight->setText( tr("Unknown") ) ;
+
+        // Common height is init to -1
+        if ( stats->nodeStateStats.nCommonHeight > -1 )
+            peerCommonHeight->setText( QString( "%1" ).arg( stats->nodeStateStats.nCommonHeight ) ) ;
+        else
+            peerCommonHeight->setText( tr("Unknown") ) ;
+
+        // Ban score is init to 0
+        int banScore = stats->nodeStateStats.nMisbehavior ;
+        peerBanScore->setText( QString::number( banScore ) ) ;
+        peerBanScore->setVisible( banScore > 0 ) ;
+        if ( peerBanScore->buddy() != nullptr )
+            peerBanScore->buddy()->setVisible( banScore > 0 ) ;
+    }
+
+    peerDetailsWidget->show() ;
 }
 
 void RPCConsole::resizeEvent(QResizeEvent *event)
@@ -1316,8 +1426,7 @@ void RPCConsole::showBanTableContextMenu(const QPoint& point)
 
 void RPCConsole::disconnectSelectedNode()
 {
-    if(!g_connman)
-        return;
+    if ( g_connman == nullptr ) return ;
 
     // Get selected peer addresses
     QList<QModelIndex> nodes = GUIUtil::getEntryData(ui->peerWidget, PeerTableModel::NetNodeId);
@@ -1326,8 +1435,8 @@ void RPCConsole::disconnectSelectedNode()
         // Get currently selected peer address
         NodeId id = nodes.at(i).data().toLongLong();
         // Find the node, disconnect it and clear the selected node
-        if(g_connman->DisconnectNode(id))
-            clearSelectedNode();
+        if ( g_connman->DisconnectNode( id ) )
+            clearSelectedNode() ;
     }
 }
 
@@ -1380,10 +1489,10 @@ void RPCConsole::unbanSelectedNode()
 
 void RPCConsole::clearSelectedNode()
 {
-    ui->peerWidget->selectionModel()->clearSelection();
-    cachedNodeids.clear();
-    ui->detailWidget->hide();
-    ui->peerHeading->setText(tr("Select a peer to view detailed information"));
+    ui->peerWidget->selectionModel()->clearSelection() ;
+    cachedNodeids.clear() ;
+    peerDetailsWidget->hide() ;
+    peerHeading->setText( tr( "Select a peer to view detailed information" ) ) ;
 }
 
 void RPCConsole::showOrHideBanTableIfRequired()

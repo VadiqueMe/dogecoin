@@ -1429,10 +1429,6 @@
         <translation>Temps de ping</translation>
     </message>
     <message>
-        <source>The duration of a currently outstanding ping.</source>
-        <translation>La duració d'un ping més destacat actualment.</translation>
-    </message>
-    <message>
         <source>Ping Wait</source>
         <translation>Espera de ping</translation>
     </message>
@@ -2340,10 +2336,6 @@
     <message>
         <source>watch-only</source>
         <translation>només lectura</translation>
-    </message>
-    <message>
-        <source>(n/a)</source>
-        <translation>(n/a)</translation>
     </message>
     <message>
         <source>(no label)</source>

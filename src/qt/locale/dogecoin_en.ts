@@ -2058,40 +2058,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>RPCConsole</name>
     <message>
-        <location filename="../forms/debugwindow.ui" line="+64"/>
-        <location line="+16"/>
-        <location line="+59"/>
-        <location line="+55"/>
-        <location line="+49"/>
-        <location line="+23"/>
-        <location line="+37"/>
-        <location line="+16"/>
-        <location line="+26"/>
-        <location line="+16"/>
-        <location line="+26"/>
-        <location line="+726"/>
-        <location line="+23"/>
-        <location line="+23"/>
-        <location line="+23"/>
-        <location line="+23"/>
-        <location line="+23"/>
-        <location line="+23"/>
-        <location line="+23"/>
-        <location line="+23"/>
-        <location line="+23"/>
-        <location line="+23"/>
-        <location line="+23"/>
-        <location line="+23"/>
-        <location line="+23"/>
-        <location line="+23"/>
-        <location line="+26"/>
-        <location line="+23"/>
-        <location line="+23"/>
-        <source>N/A</source>
-        <translation>N/A</translation>
-    </message>
-    <message>
-        <location line="-1483"/>
+        <location filename="../forms/debugwindow.ui" line="+24"/>
         <source>Information</source>
         <translation>Information</translation>
     </message>
@@ -2162,18 +2129,18 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+479"/>
-        <location line="+515"/>
+        <location filename="../rpcconsole.cpp" line="+1295"/>
         <source>Received</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-478"/>
-        <location line="+455"/>
+        <location line="+37"/>
+        <location filename="../rpcconsole.cpp" line="-1"/>
         <source>Sent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-417"/>
+        <location line="+38"/>
         <source>Reset</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2188,51 +2155,50 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+55"/>
-        <location filename="../rpcconsole.cpp" line="+564"/>
-        <location line="+822"/>
+        <location filename="../rpcconsole.cpp" line="-49"/>
+        <location line="+250"/>
         <source>Select a peer to view detailed information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+25"/>
+        <location line="-195"/>
         <source>Whitelisted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="-16"/>
         <source>Direction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-997"/>
-        <location line="+1020"/>
+        <location filename="../forms/debugwindow.ui" line="-894"/>
+        <location filename="../rpcconsole.cpp" line="+1"/>
         <source>Version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+69"/>
+        <location filename="../rpcconsole.cpp" line="+3"/>
         <source>Starting Block</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+1"/>
         <source>Synced Headers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+1"/>
         <source>Synced Blocks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-1099"/>
-        <location line="+1007"/>
+        <location filename="../forms/debugwindow.ui" line="+36"/>
+        <location filename="../rpcconsole.cpp" line="-4"/>
         <source>User Agent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-559"/>
+        <location line="+448"/>
         <source>Decrease font size</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2242,57 +2208,52 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+550"/>
+        <location filename="../rpcconsole.cpp" line="+1"/>
         <source>Services</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+92"/>
+        <location line="+14"/>
         <source>Ban Score</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="-10"/>
         <source>Connection Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+1"/>
         <source>Last Send</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+1"/>
         <source>Last Receive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+69"/>
+        <location line="+3"/>
         <source>Ping Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+23"/>
-        <source>The duration of a currently outstanding ping.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
+        <location line="+1"/>
         <source>Ping Wait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+1"/>
         <source>Min Ping</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+1"/>
         <source>Time Offset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-1290"/>
+        <location filename="../forms/debugwindow.ui" line="-438"/>
         <source>Last block time</source>
         <translation>Last block time</translation>
     </message>
@@ -2317,7 +2278,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../rpcconsole.cpp" line="-521"/>
+        <location filename="../rpcconsole.cpp" line="-436"/>
         <source>In:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2389,7 +2350,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+366"/>
+        <location line="+468"/>
         <source>(node id: %1)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2399,13 +2360,13 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+4"/>
         <location line="+1"/>
         <source>never</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+15"/>
         <source>Inbound</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2425,7 +2386,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+8"/>
         <location line="+6"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>

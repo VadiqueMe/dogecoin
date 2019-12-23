@@ -931,10 +931,6 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>N/A</source>
-        <translation>غير معروف</translation>
-    </message>
-    <message>
         <source>Version</source>
         <translation>النسخة</translation>
     </message>

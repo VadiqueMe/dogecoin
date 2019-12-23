@@ -953,10 +953,6 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>N/A</source>
-        <translation>-</translation>
-    </message>
-    <message>
         <source>Version</source>
         <translation>Versjon</translation>
     </message>
@@ -1087,10 +1083,6 @@
     <message>
         <source>Ping Time</source>
         <translation>Ping-tid</translation>
-    </message>
-    <message>
-        <source>The duration of a currently outstanding ping.</source>
-        <translation>Tidsforløp for utestående ping.</translation>
     </message>
     <message>
         <source>Ping Wait</source>

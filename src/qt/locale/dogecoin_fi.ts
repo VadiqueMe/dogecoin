@@ -893,10 +893,6 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>N/A</source>
-        <translation>Ei saatavilla</translation>
-    </message>
-    <message>
         <source>Version</source>
         <translation>Versio</translation>
     </message>
@@ -1031,10 +1027,6 @@
     <message>
         <source>Ping Time</source>
         <translation>Vasteaika</translation>
-    </message>
-    <message>
-        <source>The duration of a currently outstanding ping.</source>
-        <translation>Tämänhetkisen merkittävän yhteyskokeilun kesto.</translation>
     </message>
     <message>
         <source>Ping Wait</source>

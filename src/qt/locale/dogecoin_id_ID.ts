@@ -993,10 +993,6 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>N/A</source>
-        <translation>T/S</translation>
-    </message>
-    <message>
         <source>Version</source>
         <translation>Versi</translation>
     </message>

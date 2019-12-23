@@ -825,10 +825,6 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>N/A</source>
-        <translation>N/A </translation>
-    </message>
-    <message>
         <source>Version</source>
         <translation>Version</translation>
     </message>

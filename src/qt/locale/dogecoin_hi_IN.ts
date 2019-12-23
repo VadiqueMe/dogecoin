@@ -235,10 +235,6 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>N/A</source>
-        <translation>लागू नही</translation>
-    </message>
-    <message>
         <source>Information</source>
         <translation>जानकारी</translation>
     </message>

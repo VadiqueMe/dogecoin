@@ -299,10 +299,6 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>N/A</source>
-        <translation>Алга Байна</translation>
-    </message>
-    <message>
         <source>Version</source>
         <translation>Хувилбар</translation>
     </message>

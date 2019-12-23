@@ -1513,10 +1513,6 @@
         <translation>Ping時間</translation>
     </message>
     <message>
-        <source>The duration of a currently outstanding ping.</source>
-        <translation>現在実行中のpingにかかっている時間。</translation>
-    </message>
-    <message>
         <source>Ping Wait</source>
         <translation>Ping待ち</translation>
     </message>
@@ -2512,10 +2508,6 @@
     <message>
         <source>watch-only</source>
         <translation>監視限定</translation>
-    </message>
-    <message>
-        <source>(n/a)</source>
-        <translation>(n/a)</translation>
     </message>
     <message>
         <source>(no label)</source>

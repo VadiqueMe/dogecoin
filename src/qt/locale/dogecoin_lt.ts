@@ -531,10 +531,6 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>N/A</source>
-        <translation>nėra</translation>
-    </message>
-    <message>
         <source>Version</source>
         <translation>Versija</translation>
     </message>

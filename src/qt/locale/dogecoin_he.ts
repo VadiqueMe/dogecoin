@@ -823,10 +823,6 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>N/A</source>
-        <translation>לא זמין</translation>
-    </message>
-    <message>
         <source>Version</source>
         <translation>גרסה</translation>
     </message>

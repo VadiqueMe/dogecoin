@@ -92,10 +92,6 @@
         <source>Address</source>
         <translation>Address</translation>
     </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(no label)</translation>
-    </message>
 </context>
 <context>
     <name>AskPassphraseDialog</name>
@@ -437,10 +433,6 @@
     <message>
         <source>Confirmed</source>
         <translation>Confirmed</translation>
-    </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(no label)</translation>
     </message>
     </context>
 <context>
@@ -1037,10 +1029,6 @@
         <translation>Ping Time</translation>
     </message>
     <message>
-        <source>The duration of a currently outstanding ping.</source>
-        <translation>The duration of a currently outstanding ping.</translation>
-    </message>
-    <message>
         <source>Ping Wait</source>
         <translation>Ping Wait</translation>
     </message>
@@ -1201,17 +1189,6 @@
     </message>
     </context>
 <context>
-    <name>RecentRequestsTableModel</name>
-    <message>
-        <source>Label</source>
-        <translation>Label</translation>
-    </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(no label)</translation>
-    </message>
-    </context>
-<context>
     <name>SendCoinsDialog</name>
     <message>
         <source>Send Coins</source>
@@ -1332,10 +1309,6 @@
     <message>
         <source>S&amp;end</source>
         <translation>S&amp;end</translation>
-    </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(no label)</translation>
     </message>
 </context>
 <context>
@@ -1529,17 +1502,6 @@
     <message>
         <source>This pane shows a detailed description of the transaction</source>
         <translation>This pane shows a detailed description of the transaction</translation>
-    </message>
-    </context>
-<context>
-    <name>TransactionTableModel</name>
-    <message>
-        <source>Label</source>
-        <translation>Label</translation>
-    </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(no label)</translation>
     </message>
     </context>
 <context>

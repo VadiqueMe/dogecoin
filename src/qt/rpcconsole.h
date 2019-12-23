@@ -103,7 +103,7 @@ public Q_SLOTS:
     /** Scroll console view to end */
     void scrollToEnd();
     /** Handle selection of peer in peers list */
-    void peerSelected(const QItemSelection &selected, const QItemSelection &deselected);
+    void peerSelected( const QItemSelection & selected, const QItemSelection & deselected ) ;
     /** Handle selection caching before update */
     void peerLayoutAboutToChange();
     /** Handle updated peer information */
@@ -127,6 +127,7 @@ Q_SIGNALS:
 private:
     void startPerformer() ;
     void setTrafficGraphRange( int mins ) ;
+    void constructPeerDetailsWidget() ;
     /** show detailed information about selected node */
     void updateNodeDetail( const CNodeCombinedStats * stats ) ;
 
@@ -161,6 +162,29 @@ private:
 
     /** Update UI with latest network info from model */
     void updateNetworkInfo() ;
-};
+
+    std::unique_ptr< QLabel > peerHeading ;
+    std::unique_ptr< QWidget > peerDetailsWidget ;
+    std::vector< std::pair< QString, QLabel * > > peerDetails ;
+      std::unique_ptr< QLabel > peerDirection ;
+      std::unique_ptr< QLabel > peerVersion ;
+      std::unique_ptr< QLabel > peerSubversion ;
+      std::unique_ptr< QLabel > peerServices ;
+      std::unique_ptr< QLabel > peerHeight ;
+      std::unique_ptr< QLabel > peerSyncHeight ;
+      std::unique_ptr< QLabel > peerCommonHeight ;
+      std::unique_ptr< QLabel > peerConnTime ;
+      std::unique_ptr< QLabel > peerLastSend ;
+      std::unique_ptr< QLabel > peerLastRecv ;
+      std::unique_ptr< QLabel > peerBytesSent ;
+      std::unique_ptr< QLabel > peerBytesRecv ;
+      std::unique_ptr< QLabel > peerPingTime ;
+      std::unique_ptr< QLabel > peerPingWait ;
+      std::unique_ptr< QLabel > peerMinPing ;
+      std::unique_ptr< QLabel > peerTimeOffset ;
+      std::unique_ptr< QLabel > peerWhitelisted ;
+      std::unique_ptr< QLabel > peerBanScore ;
+
+} ;
 
 #endif

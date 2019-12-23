@@ -853,10 +853,6 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>N/A</source>
-        <translation>Μη διαθέσιμο</translation>
-    </message>
-    <message>
         <source>Version</source>
         <translation>Εκδοχή</translation>
     </message>

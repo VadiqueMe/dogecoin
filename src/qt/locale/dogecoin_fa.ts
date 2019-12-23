@@ -993,10 +993,6 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>N/A</source>
-        <translation>ناموجود</translation>
-    </message>
-    <message>
         <source>Version</source>
         <translation>نسخه</translation>
     </message>

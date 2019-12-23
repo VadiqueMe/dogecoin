@@ -1509,10 +1509,6 @@
         <translation>Ping</translation>
     </message>
     <message>
-        <source>The duration of a currently outstanding ping.</source>
-        <translation>A duração de um ping excepcional no momento.</translation>
-    </message>
-    <message>
         <source>Ping Wait</source>
         <translation>Espera de ping</translation>
     </message>
@@ -2508,10 +2504,6 @@
     <message>
         <source>watch-only</source>
         <translation>monitorado</translation>
-    </message>
-    <message>
-        <source>(n/a)</source>
-        <translation>(n/a)</translation>
     </message>
     <message>
         <source>(no label)</source>

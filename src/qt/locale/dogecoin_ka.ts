@@ -615,10 +615,6 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>N/A</source>
-        <translation>მიუწვდ.</translation>
-    </message>
-    <message>
         <source>Version</source>
         <translation>ვერსია</translation>
     </message>

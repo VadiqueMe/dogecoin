@@ -1377,10 +1377,6 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>N/A</source>
-        <translation>없음</translation>
-    </message>
-    <message>
         <source>Version</source>
         <translation>버전</translation>
     </message>
@@ -1515,10 +1511,6 @@
     <message>
         <source>Ping Time</source>
         <translation>Ping 시간</translation>
-    </message>
-    <message>
-        <source>The duration of a currently outstanding ping.</source>
-        <translation>현재 진행중인 PING에 걸린 시간.</translation>
     </message>
     <message>
         <source>Ping Wait</source>

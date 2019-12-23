@@ -915,7 +915,7 @@ QString formatServices( quint64 mask )
 QString formatPingTime( double pingSeconds )
 {
     return ( pingSeconds >= std::numeric_limits< int64_t >::max() / 1e6 || pingSeconds == 0 )
-                ? QString( "*" ) + " (" + QString::number( pingSeconds ) + ")"
+                ? QString( "*" ) /* + " (" + QString::number( pingSeconds ) + ")" */
                 : QString::number( static_cast< int >( pingSeconds * 1000 ), 10 ) + " ms" ;
 }
 

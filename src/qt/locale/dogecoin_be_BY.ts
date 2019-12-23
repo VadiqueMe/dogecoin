@@ -106,7 +106,7 @@
     </message>
     <message>
         <source>(no label)</source>
-        <translation>непазначаны</translation>
+        <translation>(непазначаны)</translation>
     </message>
 </context>
 <context>
@@ -544,7 +544,7 @@
     </message>
     <message>
         <source>(no label)</source>
-        <translation>непазначаны</translation>
+        <translation>(непазначаны)</translation>
     </message>
     </context>
 <context>
@@ -764,7 +764,7 @@
     </message>
     <message>
         <source>(no label)</source>
-        <translation>непазначаны</translation>
+        <translation>(непазначаны)</translation>
     </message>
     </context>
 <context>
@@ -839,7 +839,7 @@
     </message>
     <message>
         <source>(no label)</source>
-        <translation>непазначаны</translation>
+        <translation>(непазначаны)</translation>
     </message>
 </context>
 <context>
@@ -1010,12 +1010,8 @@
         <translation>Здабыта</translation>
     </message>
     <message>
-        <source>(n/a)</source>
-        <translation>(n/a)</translation>
-    </message>
-    <message>
         <source>(no label)</source>
-        <translation>непазначаны</translation>
+        <translation>(непазначаны)</translation>
     </message>
 </context>
 <context>

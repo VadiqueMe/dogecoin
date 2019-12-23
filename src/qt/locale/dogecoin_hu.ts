@@ -729,10 +729,6 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>N/A</source>
-        <translation>Nem elérhető</translation>
-    </message>
-    <message>
         <source>Version</source>
         <translation>Verzió</translation>
     </message>

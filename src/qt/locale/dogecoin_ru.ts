@@ -1377,10 +1377,6 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>N/A</source>
-        <translation>Н/Д</translation>
-    </message>
-    <message>
         <source>Version</source>
         <translation>Версия</translation>
     </message>
@@ -1514,15 +1510,11 @@
     </message>
     <message>
         <source>Ping Time</source>
-        <translation>Время задержки</translation>
-    </message>
-    <message>
-        <source>The duration of a currently outstanding ping.</source>
-        <translation>Длительность текущего пинга.</translation>
+        <translation>Время пинга</translation>
     </message>
     <message>
         <source>Ping Wait</source>
-        <translation>Время задержки</translation>
+        <translation>Задержка пинга</translation>
     </message>
     <message>
         <source>Min Ping</source>

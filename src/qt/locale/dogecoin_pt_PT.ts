@@ -1173,10 +1173,6 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>N/A</source>
-        <translation>N/D</translation>
-    </message>
-    <message>
         <source>Version</source>
         <translation>Versão</translation>
     </message>
@@ -1307,10 +1303,6 @@
     <message>
         <source>Ping Time</source>
         <translation>Tempo de Latência</translation>
-    </message>
-    <message>
-        <source>The duration of a currently outstanding ping.</source>
-        <translation>A duração de um ping atualmente pendente.</translation>
     </message>
     <message>
         <source>Ping Wait</source>

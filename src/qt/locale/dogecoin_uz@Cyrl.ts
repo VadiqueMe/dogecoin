@@ -655,10 +655,6 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>N/A</source>
-        <translation>Тўғри келмайди</translation>
-    </message>
-    <message>
         <source>Version</source>
         <translation>Версияси</translation>
     </message>

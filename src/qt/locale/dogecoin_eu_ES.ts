@@ -652,10 +652,6 @@
         <translation>Bildua</translation>
     </message>
     <message>
-        <source>(n/a)</source>
-        <translation>(n/a)</translation>
-    </message>
-    <message>
         <source>(no label)</source>
         <translation>(etiketarik ez)</translation>
     </message>

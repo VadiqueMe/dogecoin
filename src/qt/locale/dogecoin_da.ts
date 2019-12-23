@@ -1513,10 +1513,6 @@
         <translation>Ping-tid</translation>
     </message>
     <message>
-        <source>The duration of a currently outstanding ping.</source>
-        <translation>Varigheden af den aktuelt igangværende ping.</translation>
-    </message>
-    <message>
         <source>Ping Wait</source>
         <translation>Ping-ventetid</translation>
     </message>
@@ -2508,10 +2504,6 @@
     <message>
         <source>watch-only</source>
         <translation>kigge</translation>
-    </message>
-    <message>
-        <source>(n/a)</source>
-        <translation>(n/a)</translation>
     </message>
     <message>
         <source>(no label)</source>

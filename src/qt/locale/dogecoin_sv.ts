@@ -1182,10 +1182,6 @@ Var vänlig och försök igen.</translation>
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>N/A</source>
-        <translation>ej tillgänglig</translation>
-    </message>
-    <message>
         <source>Version</source>
         <translation>Version</translation>
     </message>
@@ -1320,10 +1316,6 @@ Var vänlig och försök igen.</translation>
     <message>
         <source>Ping Time</source>
         <translation>Pingtid</translation>
-    </message>
-    <message>
-        <source>The duration of a currently outstanding ping.</source>
-        <translation>Tidsåtgången för en nuvarande utestående ping.</translation>
     </message>
     <message>
         <source>Ping Wait</source>

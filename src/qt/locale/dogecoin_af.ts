@@ -655,10 +655,6 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>N/A</source>
-        <translation>n.v.t.</translation>
-    </message>
-    <message>
         <source>Version</source>
         <translation>Weergawe</translation>
     </message>
