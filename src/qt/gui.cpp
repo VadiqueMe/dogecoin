@@ -26,7 +26,7 @@
 #ifdef ENABLE_WALLET
 #include "walletframe.h"
 #include "walletmodel.h"
-#endif // ENABLE_WALLET
+#endif
 
 #ifdef Q_OS_MAC
 #include "macdockiconhandler.h"
@@ -58,6 +58,7 @@
 #include <QStyle>
 #include <QTimer>
 #include <QToolBar>
+#include <QToolButton>
 #include <QVBoxLayout>
 
 #if QT_VERSION < 0x050000
@@ -86,7 +87,7 @@ DogecoinGUI::DogecoinGUI( const PlatformStyle * style, const NetworkStyle * netw
     enableWallet(false),
     networkModel( nullptr ),
     optionsModel( nullptr ),
-    walletFrame(0),
+    walletFrame( nullptr ),
     unitDisplayControl(0),
     labelWalletEncryptionIcon(0),
     labelWalletHDStatusIcon(0),
@@ -115,10 +116,11 @@ DogecoinGUI::DogecoinGUI( const PlatformStyle * style, const NetworkStyle * netw
     backupWalletAction(0),
     changePassphraseAction(0),
     aboutQtAction(0),
-    openRPCConsoleAction(0),
+    openConsoleWindowMenuAction( nullptr ),
     openAction(0),
     showHelpMessageAction(0),
     digTabAction( nullptr ),
+    showDebugWindowButton( nullptr ),
     trayIcon(0),
     trayIconMenu(0),
     notificator(0),
@@ -135,7 +137,7 @@ DogecoinGUI::DogecoinGUI( const PlatformStyle * style, const NetworkStyle * netw
     QString windowTitle = tr(PACKAGE_NAME) + " - ";
 #ifdef ENABLE_WALLET
     enableWallet = WalletModel::isWalletEnabled();
-#endif // ENABLE_WALLET
+#endif
     if ( enableWallet ) {
         windowTitle += tr( "Wallet" ) ;
     } else {
@@ -165,7 +167,7 @@ DogecoinGUI::DogecoinGUI( const PlatformStyle * style, const NetworkStyle * netw
         walletFrame = new WalletFrame( platformStyle, this ) ;
         setCentralWidget( walletFrame ) ;
     } else
-#endif // ENABLE_WALLET
+#endif
     {
         /* When compiled without wallet or -disablewallet is provided,
          * the central widget is the rpc console
@@ -361,7 +363,7 @@ void DogecoinGUI::createActions()
     connect( digTabAction, SIGNAL( triggered() ), this, SLOT( gotoDigPage() ) ) ;
     connect( historyTabAction, SIGNAL( triggered() ), this, SLOT( showNormalIfMinimized() ) ) ;
     connect( historyTabAction, SIGNAL( triggered() ), this, SLOT( gotoHistoryPage() ) ) ;
-#endif // ENABLE_WALLET
+#endif
 
     quitAction = new QAction(platformStyle->TextColorIcon(":/icons/quit"), tr("E&xit"), this);
     quitAction->setStatusTip(tr("Quit application"));
@@ -395,10 +397,10 @@ void DogecoinGUI::createActions()
     paperWalletAction = new QAction(QIcon(":/icons/print"), tr("&Print paper wallets"), this);
     paperWalletAction->setStatusTip(tr("Print paper wallets"));
 
-    openRPCConsoleAction = new QAction(platformStyle->TextColorIcon(":/icons/debugwindow"), tr("&Debug window"), this);
-    openRPCConsoleAction->setStatusTip(tr("Open debugging and diagnostic console"));
+    openConsoleWindowMenuAction = new QAction( platformStyle->TextColorIcon( ":/icons/debugwindow" ), tr( "&Debug window" ), this ) ;
+    openConsoleWindowMenuAction->setStatusTip( tr( "Open debugging and diagnostic console" ) ) ;
     // initially disable the debug window menu item
-    openRPCConsoleAction->setEnabled(false);
+    openConsoleWindowMenuAction->setEnabled( false ) ;
 
     usedSendingAddressesAction = new QAction(platformStyle->TextColorIcon(":/icons/address-book"), tr("&Such sending addresses..."), this);
     usedSendingAddressesAction->setStatusTip(tr("Show the list of used sending addresses and labels"));
@@ -418,7 +420,7 @@ void DogecoinGUI::createActions()
     connect(optionsAction, SIGNAL(triggered()), this, SLOT(optionsClicked()));
     connect(toggleHideAction, SIGNAL(triggered()), this, SLOT(toggleHidden()));
     connect(showHelpMessageAction, SIGNAL(triggered()), this, SLOT(showHelpMessageClicked()));
-    connect(openRPCConsoleAction, SIGNAL(triggered()), this, SLOT(showDebugWindow()));
+    connect( openConsoleWindowMenuAction, SIGNAL( triggered() ), this, SLOT( showDebugWindow() ) ) ;
     // prevents an open debug window from becoming stuck/unusable on shutdown
     connect(quitAction, SIGNAL(triggered()), rpcConsole, SLOT(hide()));
 
@@ -435,10 +437,10 @@ void DogecoinGUI::createActions()
         connect(openAction, SIGNAL(triggered()), this, SLOT(openClicked()));
         connect(paperWalletAction, SIGNAL(triggered()), walletFrame, SLOT(printPaperWallets()));
     }
-#endif // ENABLE_WALLET
+#endif
 
-    new QShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_C), this, SLOT(showDebugWindowActivateConsole()));
-    new QShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_D), this, SLOT(showDebugWindow()));
+    new QShortcut( QKeySequence( Qt::CTRL + Qt::SHIFT + Qt::Key_C ), this, SLOT( showDebugWindowActivateConsole() ) ) ;
+    new QShortcut( QKeySequence( Qt::CTRL + Qt::SHIFT + Qt::Key_D ), this, SLOT( showDebugWindow() ) ) ;
 }
 
 void DogecoinGUI::createMenuBar()
@@ -468,7 +470,7 @@ void DogecoinGUI::createMenuBar()
     file->addAction(quitAction);
 
     QMenu *settings = appMenuBar->addMenu(tr("&Settings"));
-    if(walletFrame)
+    if ( walletFrame != nullptr )
     {
         settings->addAction(encryptWalletAction);
         settings->addAction(changePassphraseAction);
@@ -477,9 +479,9 @@ void DogecoinGUI::createMenuBar()
     settings->addAction(optionsAction);
 
     QMenu *help = appMenuBar->addMenu(tr("&Help"));
-    if(walletFrame)
+    if ( walletFrame != nullptr )
     {
-        help->addAction(openRPCConsoleAction);
+        help->addAction( openConsoleWindowMenuAction ) ;
     }
     help->addAction(showHelpMessageAction);
     help->addSeparator();
@@ -503,6 +505,19 @@ void DogecoinGUI::createToolBars()
         if ( receiveCoinsTabAction != nullptr ) toolbar->addAction( receiveCoinsTabAction ) ;
         if ( digTabAction != nullptr ) toolbar->addAction( digTabAction ) ;
         if ( historyTabAction != nullptr ) toolbar->addAction( historyTabAction ) ;
+
+        QWidget * filler = new QWidget( this ) ;
+        filler->setMinimumSize( 25, 5 ) ;
+        filler->setSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::Ignored ) ;
+        toolbar->addWidget( filler ) ;
+
+        showDebugWindowButton = new QToolButton( /* parent */ this ) ;
+        showDebugWindowButton->setIcon( platformStyle->SingleColorIcon( ":/icons/debugwindow" ) ) ;
+        showDebugWindowButton->setCheckable( false ) ;
+        showDebugWindowButton->setShortcut( QKeySequence( Qt::ALT + Qt::Key_0 ) ) ;
+        showDebugWindowButton->setToolButtonStyle( Qt::ToolButtonIconOnly ) ;
+        connect( showDebugWindowButton, SIGNAL( clicked() ), this, SLOT( showDebugWindow() ) ) ;
+        toolbar->addWidget( showDebugWindowButton ) ;
     }
 }
 
@@ -553,7 +568,7 @@ void DogecoinGUI::setNetworkModel( NetworkModel * model )
         {
             walletFrame->setNetworkModel( nullptr ) ;
         }
-#endif // ENABLE_WALLET
+#endif
     }
 }
 
@@ -649,19 +664,19 @@ void DogecoinGUI::createTrayIconMenu()
 #endif
 
     // Configuration of the tray icon (or dock icon) icon menu
-    trayIconMenu->addAction(toggleHideAction);
-    trayIconMenu->addSeparator();
-    trayIconMenu->addAction(sendCoinsMenuAction);
-    trayIconMenu->addAction(receiveCoinsMenuAction);
-    trayIconMenu->addSeparator();
-    trayIconMenu->addAction(signMessageAction);
-    trayIconMenu->addAction(verifyMessageAction);
-    trayIconMenu->addSeparator();
-    trayIconMenu->addAction(optionsAction);
-    trayIconMenu->addAction(openRPCConsoleAction);
+    trayIconMenu->addAction( toggleHideAction ) ;
+    trayIconMenu->addSeparator() ;
+    trayIconMenu->addAction( sendCoinsMenuAction ) ;
+    trayIconMenu->addAction( receiveCoinsMenuAction ) ;
+    trayIconMenu->addSeparator() ;
+    trayIconMenu->addAction( signMessageAction ) ;
+    trayIconMenu->addAction( verifyMessageAction ) ;
+    trayIconMenu->addSeparator() ;
+    trayIconMenu->addAction( optionsAction ) ;
+    trayIconMenu->addAction( openConsoleWindowMenuAction ) ;
 #ifndef Q_OS_MAC // This is built-in on Mac
-    trayIconMenu->addSeparator();
-    trayIconMenu->addAction(quitAction);
+    trayIconMenu->addSeparator() ;
+    trayIconMenu->addAction( quitAction ) ;
 #endif
 }
 
@@ -1044,9 +1059,9 @@ void DogecoinGUI::closeEvent( QCloseEvent * event )
 void DogecoinGUI::showEvent(QShowEvent *event)
 {
     // enable the debug window when the main window shows up
-    openRPCConsoleAction->setEnabled(true);
-    aboutAction->setEnabled(true);
-    optionsAction->setEnabled(true);
+    openConsoleWindowMenuAction->setEnabled( true ) ;
+    aboutAction->setEnabled( true ) ;
+    optionsAction->setEnabled( true ) ;
 }
 
 #ifdef ENABLE_WALLET
@@ -1063,7 +1078,7 @@ void DogecoinGUI::incomingTransaction(const QString& date, int unit, const CAmou
     message((amount)<0 ? tr("Sent transaction") : tr("Incoming transaction"),
              msg, CClientUIInterface::MSG_INFORMATION);
 }
-#endif // ENABLE_WALLET
+#endif
 
 void DogecoinGUI::dragEnterEvent(QDragEnterEvent *event)
 {

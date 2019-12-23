@@ -41,6 +41,7 @@ QT_BEGIN_NAMESPACE
 class QAction;
 class QProgressBar;
 class QProgressDialog;
+class QToolButton ;
 QT_END_NAMESPACE
 
 /**
@@ -117,10 +118,11 @@ private:
     QAction *backupWalletAction;
     QAction *changePassphraseAction;
     QAction *aboutQtAction;
-    QAction *openRPCConsoleAction;
+    QAction * openConsoleWindowMenuAction ;
     QAction *openAction;
     QAction *showHelpMessageAction;
     QAction * digTabAction ;
+    QToolButton * showDebugWindowButton ;
 
     QSystemTrayIcon *trayIcon;
     QMenu *trayIconMenu;

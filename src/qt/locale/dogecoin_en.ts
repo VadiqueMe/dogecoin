@@ -533,7 +533,7 @@
 <context>
     <name>DogecoinGUI</name>
     <message>
-        <location filename="../gui.cpp" line="+140"/>
+        <location filename="../gui.cpp" line="+142"/>
         <source>Wallet</source>
         <translation type="unfinished">Wallet</translation>
     </message>
@@ -728,7 +728,7 @@
         <translation type="unfinished">Tabs toolbar</translation>
     </message>
     <message numerus="yes">
-        <location line="+292"/>
+        <location line="+305"/>
         <source>%n active connection(s) to Dogecoin network</source>
         <translation type="unfinished">
             <numerusform>%n active connection to Dogecoin network</numerusform>
