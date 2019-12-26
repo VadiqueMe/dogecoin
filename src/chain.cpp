@@ -14,10 +14,10 @@ CBlockHeader CBlockIndex::GetBlockHeader( const Consensus::Params & consensusPar
 
     block.nVersion       = nVersion ;
 
-    /* The CBlockIndex object's block header is missing the auxpow.
-       So if this is an auxpow block, read it from disk instead. We only
-       have to read the actual *header*, not the full block */
-    if ( block.IsAuxpow() )
+    /* The CBlockIndex object's block header doesn't include the auxpow.
+       So if this is an auxpow block, read it from disk instead. Only
+       read the actual *header*, not the full block */
+    if ( block.IsAuxpowInVersion() )
     {
         ReadBlockHeaderFromDisk( block, this, consensusParams ) ;
         return block ;
@@ -25,6 +25,7 @@ CBlockHeader CBlockIndex::GetBlockHeader( const Consensus::Params & consensusPar
 
     if ( pprev )
         block.hashPrevBlock = pprev->GetBlockSha256Hash() ;
+
     block.hashMerkleRoot = hashMerkleRoot ;
     block.nTime          = nTime ;
     block.nBits          = nBits ;

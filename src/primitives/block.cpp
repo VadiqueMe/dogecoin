@@ -14,7 +14,7 @@
 void CBlockHeader::SetAuxpow ( CAuxPow * auxpow )
 {
     this->auxpow.reset( auxpow ) ;
-    SetAuxpowFlag( auxpow != nullptr ) ;
+    SetAuxpowInVersion( auxpow != nullptr ) ;
 }
 
 std::string CBlock::ToString() const

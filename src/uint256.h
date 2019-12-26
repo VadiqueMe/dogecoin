@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_UINT256_H
-#define BITCOIN_UINT256_H
+#ifndef DOGECOIN_UINT256_H
+#define DOGECOIN_UINT256_H
 
 #include <assert.h>
 #include <cstring>
@@ -14,7 +14,7 @@
 #include <vector>
 #include "crypto/common.h"
 
-/** Template base class for fixed-sized opaque blobs. */
+/** Template base class for fixed-sized opaque blobs */
 template<unsigned int BITS>
 class base_blob
 {
@@ -104,9 +104,9 @@ public:
     }
 };
 
-/** 160-bit opaque blob.
+/** 160-bit opaque blob
  * @note This type is called uint160 for historical reasons only. It is an opaque
- * blob of 160 bits and has no integer operations.
+ * blob of 160 bits and has no integer operations
  */
 class uint160 : public base_blob<160> {
 public:
@@ -115,10 +115,10 @@ public:
     explicit uint160(const std::vector<unsigned char>& vch) : base_blob<160>(vch) {}
 };
 
-/** 256-bit opaque blob.
+/** 256-bit opaque blob
  * @note This type is called uint256 for historical reasons only. It is an
  * opaque blob of 256 bits and has no integer operations. Use arith_uint256 if
- * those are required.
+ * those are required
  */
 class uint256 : public base_blob<256> {
 public:
@@ -129,7 +129,7 @@ public:
     /** A cheap hash function that just returns 64 bits from the result, it can be
      * used when the contents are considered uniformly random. It is not appropriate
      * when the value can easily be influenced from outside as e.g. a network adversary could
-     * provide values to trigger worst-case behavior.
+     * provide values to trigger worst-case behavior
      */
     uint64_t GetCheapHash() const
     {
@@ -137,9 +137,9 @@ public:
     }
 };
 
-/* uint256 from const char *.
+/* uint256 from const char *
  * This is a separate function because the constructor uint256(const char*) can result
- * in dangerously catching uint256(0).
+ * in dangerously catching uint256(0)
  */
 inline uint256 uint256S(const char *str)
 {
@@ -147,9 +147,9 @@ inline uint256 uint256S(const char *str)
     rv.SetHex(str);
     return rv;
 }
-/* uint256 from std::string.
+/* uint256 from std::string
  * This is a separate function because the constructor uint256(const std::string &str) can result
- * in dangerously catching uint256(0) via std::string(const char*).
+ * in dangerously catching uint256(0) via std::string(const char*)
  */
 inline uint256 uint256S(const std::string& str)
 {
@@ -158,4 +158,4 @@ inline uint256 uint256S(const std::string& str)
     return rv;
 }
 
-#endif // BITCOIN_UINT256_H
+#endif

@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_ARITH_UINT256_H
-#define BITCOIN_ARITH_UINT256_H
+#ifndef DOGECOIN_ARITH_UINT256_H
+#define DOGECOIN_ARITH_UINT256_H
 
 #include <assert.h>
 #include <cstring>
@@ -20,7 +20,7 @@ public:
     explicit uint_error(const std::string& str) : std::runtime_error(str) {}
 };
 
-/** Template base class for unsigned big integers. */
+/** Template base class for unsigned big integers */
 template<unsigned int BITS>
 class base_uint
 {
@@ -238,7 +238,7 @@ public:
 
     /**
      * Returns the position of the highest bit set plus one, or zero if the
-     * value is zero.
+     * value is zero
      */
     unsigned int bits() const;
 
@@ -249,7 +249,7 @@ public:
     }
 };
 
-/** 256-bit unsigned big integer. */
+/** 256-bit unsigned big integer */
 class arith_uint256 : public base_uint<256> {
 public:
     arith_uint256() {}
@@ -260,8 +260,9 @@ public:
     /**
      * The "compact" format is a representation of a whole
      * number N using an unsigned 32bit number similar to a
-     * floating point format.
-     * The most significant 8 bits are the unsigned exponent of base 256.
+     * floating point format
+     *
+     * The leftmost 8 bits are the unsigned exponent of base 256.
      * This exponent can be thought of as "number of bytes of N".
      * The lower 23 bits are the mantissa.
      * Bit number 24 (0x800000) represents the sign of N.
@@ -275,16 +276,16 @@ public:
      * Bitcoin only uses this "compact" format for encoding difficulty
      * targets, which are unsigned 256bit quantities.  Thus, all the
      * complexities of the sign bit and using base 256 are probably an
-     * implementation accident.
+     * implementation accident
      */
-    arith_uint256& SetCompact(uint32_t nCompact, bool *pfNegative = NULL, bool *pfOverflow = NULL);
-    uint32_t GetCompact(bool fNegative = false) const;
+    arith_uint256 & SetCompact( uint32_t nCompact, bool * pfNegative = nullptr, bool * pfOverflow = nullptr ) ;
+    uint32_t GetCompact( bool fNegative = false ) const ;
 
-    friend uint256 ArithToUint256(const arith_uint256 &);
-    friend arith_uint256 UintToArith256(const uint256 &);
+    friend uint256 ArithToUint256( const arith_uint256 & ) ;
+    friend arith_uint256 UintToArith256( const uint256 & ) ;
 };
 
-uint256 ArithToUint256(const arith_uint256 &);
-arith_uint256 UintToArith256(const uint256 &);
+uint256 ArithToUint256( const arith_uint256 & ) ;
+arith_uint256 UintToArith256( const uint256 & ) ;
 
-#endif // BITCOIN_ARITH_UINT256_H
+#endif

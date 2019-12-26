@@ -7,9 +7,9 @@
 #include "chain.h"
 #include "chainparams.h"
 
-bool AllowDigishieldMinDifficultyForBlock(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params);
-CAmount GetDogecoinBlockSubsidy(int nHeight, const Consensus::Params& consensusParams, uint256 prevHash);
-unsigned int CalculateDogecoinNextWorkRequired(const CBlockIndex* pindexLast, int64_t nLastRetargetTime, const Consensus::Params& params);
+bool AcceptDigishieldMinDifficultyForBlock( const CBlockIndex * pindexLast, const CBlockHeader * pblock, const Consensus::Params & params ) ;
+CAmount GetDogecoinBlockSubsidy( int nHeight, const Consensus::Params & consensusParams, uint256 prevHash ) ;
+unsigned int CalculateDogecoinNextWorkRequired( const CBlockIndex* pindexLast, int64_t nLastRetargetTime, const Consensus::Params & params ) ;
 
 /**
  * Check proof-of-work of a block header, taking auxpow into account

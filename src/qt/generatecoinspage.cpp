@@ -223,6 +223,7 @@ void GenerateCoinsPage::updateTipBlockInfo()
 
     ui->tipBlockHashSha256->setText( QString::fromStdString( tipBlock.GetSha256Hash().ToString() ) ) ;
     ui->tipBlockHashScrypt->setText( QString::fromStdString( tipBlock.GetScryptHash().ToString() ) ) ;
+    ui->tipBlockHashLyra2Re2->setText( QString::fromStdString( tipBlock.GetLyra2Re2Hash().ToString() ) ) ;
 }
 
 void GenerateCoinsPage::rebuildThreadTabs()
@@ -277,9 +278,11 @@ void GenerateCoinsPage::updateThreadTabs()
 
                 arith_uint256 bitsUint256 = arith_uint256().SetCompact( candidate->block.nBits ) ;
                 bigText += "solution is " ;
-                bigText += "scrypt hash <= " + QString::fromStdString( bitsUint256.GetHex() ) ;
-                if ( NameOfChain() == "inu" )
-                    bigText += " and sha256 hash <= " + QString::fromStdString( ( bitsUint256 << 2 ).GetHex() ) ;
+                bigText += "scrypt hash <= " + QString::fromStdString( ( bitsUint256 ).GetHex() ) ;
+                if ( NameOfChain() == "inu" ) {
+                    bigText += " and lyra2re2 hash <= " + QString::fromStdString( ( bitsUint256 ).GetHex() ) ;
+                    bigText += " and sha256 hash <= " + QString::fromStdString( ( bitsUint256 << 1 ).GetHex() ) ;
+                }
                 bigText += "\n\n" ;
 
                 if ( candidate->block.vtx[ 0 ] != nullptr ) {

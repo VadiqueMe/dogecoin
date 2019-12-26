@@ -73,6 +73,8 @@ public:
 
     uint256 GetScryptHash() const ;
 
+    uint256 GetLyra2Re2Hash() const ;
+
     int64_t GetBlockTime() const
     {
         return (int64_t)nTime;
@@ -126,19 +128,18 @@ public:
     }
 
     /**
-     * Check if the auxpow flag is set in the version
-     * @return True if this block version is marked as auxpow
+     * Check if the auxpow bit is set in the version
+     * @return True if this block's version is marked as auxpow
      */
-    inline bool IsAuxpow() const
+    inline bool IsAuxpowInVersion() const
     {
         return nVersion & VERSION_AUXPOW ;
     }
 
     /**
-     * Set the auxpow flag
-     * @param auxpow Whether to mark auxpow as true
+     * Set the auxpow bit in the version
      */
-    inline void SetAuxpowFlag( bool auxpow )
+    inline void SetAuxpowInVersion( bool auxpow )
     {
         if ( auxpow )
             nVersion |= VERSION_AUXPOW ;

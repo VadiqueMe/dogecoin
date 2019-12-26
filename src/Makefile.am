@@ -263,9 +263,28 @@ crypto_libdogecoin_crypto_a_SOURCES = \
   crypto/sha256.cpp \
   crypto/sha256.h \
   crypto/sha512.cpp \
-  crypto/sha512.h
+  crypto/sha512.h \
+  algo/sph_types.h \
+  algo/blake.c \
+  algo/bmw.c \
+  algo/cubehash.c \
+  algo/groestl.c \
+  algo/keccak.c \
+  algo/skein.c \
+  algo/blake.h \
+  algo/bmw.h \
+  algo/cubehash.h \
+  algo/groestl.h \
+  algo/keccak.h \
+  algo/skein.h \
+  algo/sponge.cpp \
+  algo/sponge.h \
+  algo/lyra2.cpp \
+  algo/lyra2.h \
+  algo/Lyra2RE.c \
+  algo/Lyra2RE.h
 
-# consensus: shared between all executables that validate any consensus rules.
+# consensus: shared between all executables that validate any consensus rules
 libdogecoin_consensus_a_CPPFLAGS = $(AM_CPPFLAGS) $(DOGECOIN_INCLUDES)
 libdogecoin_consensus_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libdogecoin_consensus_a_SOURCES = \
@@ -332,9 +351,9 @@ libdogecoin_common_a_SOURCES = \
   warnings.cpp \
   $(DOGECOIN_CORE_H)
 
-# util: shared between all executables.
+# util: shared between all executables
 # This library *must* be included to make sure that the glibc
-# backward-compatibility objects and their sanity checks are linked.
+# backward-compatibility objects and their sanity checks are linked
 libdogecoin_util_a_CPPFLAGS = $(AM_CPPFLAGS) $(DOGECOIN_INCLUDES)
 libdogecoin_util_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libdogecoin_util_a_SOURCES = \

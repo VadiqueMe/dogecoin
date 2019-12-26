@@ -308,27 +308,37 @@ std::string CDogecoinAddress::DummyDogecoinAddress( const std::vector< unsigned 
     throw std::runtime_error( "too valid addresses from dummydata" ) ;
 }
 
+void CDogecoinSecret::SetKey( const CKey & vchSecret, const std::vector< unsigned char > & privkeyPrefix )
+{
+    assert( vchSecret.IsValid() ) ;
+    SetData( privkeyPrefix, vchSecret.begin(), vchSecret.size() ) ;
+    if ( vchSecret.IsCompressed() )
+        vchData.push_back( 1 ) ;
+}
+
 void CDogecoinSecret::SetKey( const CKey & vchSecret )
 {
-    assert(vchSecret.IsValid());
-    SetData(Params().Base58Prefix(CChainParams::SECRET_KEY), vchSecret.begin(), vchSecret.size());
-    if (vchSecret.IsCompressed())
-        vchData.push_back(1);
+    SetKey( vchSecret, Params().Base58Prefix( CChainParams::SECRET_KEY ) ) ;
 }
 
 CKey CDogecoinSecret::GetKey()
 {
-    CKey ret;
-    assert(vchData.size() >= 32);
-    ret.Set(vchData.begin(), vchData.begin() + 32, vchData.size() > 32 && vchData[32] == 1);
-    return ret;
+    CKey ret ;
+    assert( vchData.size() >= 32 ) ;
+    ret.Set( vchData.begin(), vchData.begin() + 32, vchData.size() > 32 && vchData[ 32 ] == 1 ) ;
+    return ret ;
+}
+
+bool CDogecoinSecret::IsValidFor( const std::vector< unsigned char > & privkeyPrefix ) const
+{
+    bool fExpectedFormat = vchData.size() == 32 || ( vchData.size() == 33 && vchData[ 32 ] == 1 ) ;
+    bool fCorrectVersion = vchVersion == privkeyPrefix ;
+    return fExpectedFormat && fCorrectVersion ;
 }
 
 bool CDogecoinSecret::IsValid() const
 {
-    bool fExpectedFormat = vchData.size() == 32 || (vchData.size() == 33 && vchData[32] == 1);
-    bool fCorrectVersion = vchVersion == Params().Base58Prefix(CChainParams::SECRET_KEY);
-    return fExpectedFormat && fCorrectVersion;
+    return IsValidFor( Params().Base58Prefix( CChainParams::SECRET_KEY ) ) ;
 }
 
 bool CDogecoinSecret::SetString( const std::string & strSecret )

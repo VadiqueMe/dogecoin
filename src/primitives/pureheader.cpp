@@ -10,6 +10,7 @@
 #include "crypto/scrypt.h"
 #include "hash.h"
 #include "utilstrencodings.h"
+#include "algo/Lyra2RE.h"
 
 #include <sstream>
 #include <boost/format.hpp>
@@ -17,7 +18,7 @@
 void CPureBlockHeader::SetBaseVersion( int32_t nBaseVersion, int32_t nChainId )
 {
     assert( nBaseVersion >= 1 && nBaseVersion < VERSION_AUXPOW ) ;
-    assert( ! IsAuxpow() ) ;
+    assert( ! IsAuxpowInVersion() ) ;
     nVersion = nBaseVersion | ( nChainId * VERSION_CHAIN_START ) ;
 }
 
@@ -28,9 +29,16 @@ uint256 CPureBlockHeader::GetSha256Hash() const
 
 uint256 CPureBlockHeader::GetScryptHash() const
 {
-    uint256 thash ;
-    scrypt_1024_1_1_256( BEGIN(nVersion), BEGIN(thash) ) ;
-    return thash ;
+    uint256 hash ;
+    scrypt_1024_1_1_256( BEGIN(nVersion), BEGIN(hash) ) ;
+    return hash ;
+}
+
+uint256 CPureBlockHeader::GetLyra2Re2Hash() const
+{
+    uint256 hash ;
+    lyra2re2_hash( BEGIN(nVersion), BEGIN(hash) ) ;
+    return hash ;
 }
 
 std::string CPureBlockHeader::ToString() const

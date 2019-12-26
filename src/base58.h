@@ -121,14 +121,18 @@ public:
  */
 class CDogecoinSecret : public CBase58Data
 {
+
 public:
-    void SetKey( const CKey & vchSecret ) ;
     CKey GetKey() ;
+    void SetKey( const CKey & vchSecret ) ;
+    void SetKey( const CKey & vchSecret, const std::vector< unsigned char > & privkeyPrefix ) ;
     bool IsValid() const ;
+    bool IsValidFor( const std::vector< unsigned char > & privkeyPrefix ) const ;
     bool SetString( const std::string & strSecret ) ;
 
-    CDogecoinSecret( const CKey & vchSecret ) { SetKey( vchSecret ) ; }
+    CDogecoinSecret( const CKey & vchSecret ) {  SetKey( vchSecret ) ;  }
     CDogecoinSecret() {}
+
 } ;
 
 template < typename K, int Size, CChainParams::Base58Type Type >

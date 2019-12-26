@@ -14,63 +14,47 @@
 #include "uint256.h"
 #include "util.h"
 
-// Determine if the for the given block, a min difficulty setting applies
-bool AllowMinDifficultyForBlock(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
-{
-    // check if the chain allows minimum difficulty blocks
-    if (!params.fPowAllowMinDifficultyBlocks)
-        return false;
-
-    // Dogecoin: Magic number at which reset protocol switches
-    // check if we allow minimum difficulty at this block-height
-    if (pindexLast->nHeight < 157500)
-        return false;
-
-    // Allow for a minimum block time if the elapsed time > 2*nTargetSpacing
-    return (pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing*2);
-}
-
 unsigned int GetNextWorkRequired( const CBlockIndex * pindexLast, const CBlockHeader * pblock, const Consensus::Params & params )
 {
-    unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
+    unsigned int nProofOfWorkLimit = UintToArith256( params.powLimit ).GetCompact() ;
 
     // Genesis block
-    if (pindexLast == NULL)
-        return nProofOfWorkLimit;
+    if ( pindexLast == nullptr )
+        return nProofOfWorkLimit ;
 
     // Dogecoin: Special rules for minimum difficulty blocks with Digishield
-    if (AllowDigishieldMinDifficultyForBlock(pindexLast, pblock, params))
+    if ( AcceptDigishieldMinDifficultyForBlock( pindexLast, pblock, params ) )
     {
-        // Special difficulty rule for testnet:
-        // If the new block's timestamp is more than 2* nTargetSpacing minutes
-        // then allow mining of a min-difficulty block.
-        return nProofOfWorkLimit;
+        // If the new block's timestamp is more than 2 * nPowTargetSpacing minutes for testnet
+        // or more than 20 * nPowTargetSpacing minutes for inu chain
+        // then allow mining of a min-difficulty block
+        return nProofOfWorkLimit ;
     }
 
     // Only change once per difficulty adjustment interval
-    bool fNewDifficultyProtocol = (pindexLast->nHeight >= 145000);
+    bool fNewDifficultyProtocol = ( pindexLast->nHeight >= 145000 ) || ( NameOfChain() == "inu" ) ;
     const int64_t difficultyAdjustmentInterval = fNewDifficultyProtocol
                                                  ? 1
-                                                 : params.DifficultyAdjustmentInterval();
-    if ((pindexLast->nHeight+1) % difficultyAdjustmentInterval != 0)
+                                                 : params.DifficultyAdjustmentInterval() ;
+    if ( ( pindexLast->nHeight + 1 ) % difficultyAdjustmentInterval != 0 )
     {
-        if (params.fPowAllowMinDifficultyBlocks)
+        if ( params.fPowAllowMinDifficultyBlocks )
         {
-            // Special difficulty rule for testnet:
-            // If the new block's timestamp is more than 2*10 minutes
+            // Special difficulty rule with fPowAllowMinDifficultyBlocks:
+            // If the new block's timestamp is more than 2 * nPowTargetSpacing minutes
             // then allow mining of a min-difficulty block
-            if (pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing*2)
-                return nProofOfWorkLimit;
+            if ( pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing * 2 )
+                return nProofOfWorkLimit ;
             else
             {
                 // Return the last non-special-min-difficulty-rules-block
-                const CBlockIndex* pindex = pindexLast;
-                while (pindex->pprev && pindex->nHeight % params.DifficultyAdjustmentInterval() != 0 && pindex->nBits == nProofOfWorkLimit)
-                    pindex = pindex->pprev;
-                return pindex->nBits;
+                const CBlockIndex * pindex = pindexLast ;
+                while ( pindex->pprev && pindex->nHeight % difficultyAdjustmentInterval != 0 && pindex->nBits == nProofOfWorkLimit )
+                    pindex = pindex->pprev ;
+                return pindex->nBits ;
             }
         }
-        return pindexLast->nBits;
+        return pindexLast->nBits ;
     }
 
     // Litecoin: This fixes an issue where a 51% attack can change difficulty at will.
@@ -129,7 +113,8 @@ bool CheckProofOfWork( const CBlockHeader & block, unsigned int nBits, const Con
 
     if ( NameOfChain() == "inu" ) {
         return ( UintToArith256( block.GetScryptHash() ) <= solutionHash )
-                    && ( UintToArith256( block.GetSha256Hash() ) <= ( solutionHash << 2 ) ) ;
+                    && ( UintToArith256( block.GetLyra2Re2Hash() ) <= solutionHash )
+                        && ( UintToArith256( block.GetSha256Hash() ) <= ( solutionHash << 1 ) ) ;
     }
 
     return UintToArith256( block.GetScryptHash() ) <= solutionHash ;

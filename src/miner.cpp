@@ -725,7 +725,7 @@ void MiningThread::MineBlocks()
             } */
 
             CBlock * currentBlock = &currentCandidate->block ;
-            if ( currentBlock->IsAuxpow() ) currentBlock->SetAuxpow( nullptr ) ;
+            if ( currentBlock->IsAuxpowInVersion() ) currentBlock->SetAuxpow( nullptr ) ;
             IncrementExtraNonce( currentBlock, pindexPrev, nExtraNonce ) ;
 
             //
@@ -799,12 +799,14 @@ void MiningThread::MineBlocks()
 
                 // check if block candidate needs to be rebuilt
                 if ( pindexPrev != chainActive.Tip() )
-                    break ;
+                    break ; // new chain's tip
                 if ( mempool.GetTransactionsUpdated() != transactionsInMempool
                            && GetTimeMillis() - scanBeginsMillis > 60999 )
-                    break ;
+                    break ; // new transactions
+                if ( GetTimeMillis() - scanBeginsMillis > 20 * 60000 )
+                    break ; // too long
                 if ( ! g_connman->hasConnectedNodes() && chainparams.MiningRequiresPeers() )
-                    break ;
+                    break ; // no peers connected
 
                 // recreate the block if the clock has run backwards, to get the actual time
                 if ( UpdateTime( currentBlock, consensus, pindexPrev ) < 0 )

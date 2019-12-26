@@ -379,11 +379,11 @@ BOOST_AUTO_TEST_CASE(auxpow_pow)
     /* Check the case when the block does not have auxpow */
 
     block.SetChainId(params.nAuxpowChainId);
-    block.SetAuxpowFlag(true);
+    block.SetAuxpowInVersion( true ) ;
     mineBlock(block, true);
     BOOST_CHECK( ! CheckDogecoinProofOfWork( block, params ) ) ;
 
-    block.SetAuxpowFlag(false);
+    block.SetAuxpowInVersion( false ) ;
     mineBlock(block, true);
     BOOST_CHECK( CheckDogecoinProofOfWork( block, params ) ) ;
     mineBlock(block, false);
@@ -400,7 +400,7 @@ BOOST_AUTO_TEST_CASE(auxpow_pow)
     std::vector<unsigned char> auxRoot, data;
 
     /* Valid auxpow, PoW check of parent block */
-    block.SetAuxpowFlag(true);
+    block.SetAuxpowInVersion( true ) ;
     auxRoot = builder.buildAuxpowChain( block.GetSha256Hash(), height, index ) ;
     data = CAuxpowBuilder::buildCoinbaseData(true, auxRoot, height, nonce);
     builder.setCoinbase(CScript() << data);
@@ -415,7 +415,7 @@ BOOST_AUTO_TEST_CASE(auxpow_pow)
      Note that block.SetAuxpow sets also the version and that we want
      to ensure that the block hash itself doesn't change due to version changes.
      This requires some work arounds */
-    block.SetAuxpowFlag(false);
+    block.SetAuxpowInVersion( false ) ;
     const uint256 hashAux = block.GetSha256Hash() ;
     auxRoot = builder.buildAuxpowChain(hashAux, height, index);
     data = CAuxpowBuilder::buildCoinbaseData(true, auxRoot, height, nonce);
@@ -423,12 +423,12 @@ BOOST_AUTO_TEST_CASE(auxpow_pow)
     mineBlock(builder.parentBlock, true, block.nBits);
     block.SetAuxpow(new CAuxPow(builder.get()));
     BOOST_CHECK( hashAux != block.GetSha256Hash() ) ;
-    block.SetAuxpowFlag(false);
+    block.SetAuxpowInVersion( false ) ;
     BOOST_CHECK( hashAux == block.GetSha256Hash() ) ;
     BOOST_CHECK( ! CheckDogecoinProofOfWork( block, params ) ) ;
 
     /* Modifying the block invalidates the PoW */
-    block.SetAuxpowFlag(true);
+    block.SetAuxpowInVersion( true ) ;
     auxRoot = builder.buildAuxpowChain( block.GetSha256Hash(), height, index ) ;
     data = CAuxpowBuilder::buildCoinbaseData(true, auxRoot, height, nonce);
     builder.setCoinbase(CScript() << data);

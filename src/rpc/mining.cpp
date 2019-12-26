@@ -982,7 +982,7 @@ UniValue getauxblockbip22(const JSONRPCRequest& request)
 
             // Finalise it by setting the version and building the merkle root
             IncrementExtraNonce( &newBlock->block, pindexPrev, nExtraNonce ) ;
-            newBlock->block.SetAuxpowFlag( true ) ;
+            newBlock->block.SetAuxpowInVersion( true ) ;
 
             // Save
             pblock = &newBlock->block;

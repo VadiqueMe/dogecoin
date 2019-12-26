@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "key.h"
 
@@ -15,7 +15,7 @@
 
 static secp256k1_context* secp256k1_context_sign = NULL;
 
-/** These functions are taken from the libsecp256k1 distribution and are very ugly. */
+/** These functions are taken from the libsecp256k1 distribution and are very ugly */
 static int ec_privkey_import_der(const secp256k1_context* ctx, unsigned char *out32, const unsigned char *privkey, size_t privkeylen) {
     const unsigned char *end = privkey + privkeylen;
     int lenb = 0;

@@ -6,6 +6,8 @@
 #include <boost/random/uniform_int.hpp>
 #include <boost/random/mersenne_twister.hpp>
 
+#include <random>
+
 #include "policy/policy.h"
 #include "arith_uint256.h"
 #include "dogecoin.h"
@@ -22,20 +24,21 @@ int static generateMTRandom(unsigned int s, int range)
 
 // Dogecoin: Normally minimum difficulty blocks can only occur in between
 // retarget blocks. However, once we introduce Digishield every block is
-// a retarget, so we need to handle minimum difficulty on all blocks.
-bool AllowDigishieldMinDifficultyForBlock(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
+// a retarget, so we need to handle minimum difficulty on all blocks
+bool AcceptDigishieldMinDifficultyForBlock( const CBlockIndex * pindexLast, const CBlockHeader * pblock, const Consensus::Params & params )
 {
+    if ( NameOfChain() == "inu" )
+        return ( pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing * 20 ) ;
+
     // check if the chain allows minimum difficulty blocks
-    if (!params.fPowAllowMinDifficultyBlocks)
-        return false;
+    if ( ! params.fPowAllowMinDifficultyBlocks )
+        return false ;
 
-    // check if the chain allows minimum difficulty blocks on recalc blocks
-    if (pindexLast->nHeight < 157500)
-    // if (!params.fPowAllowDigishieldMinDifficultyBlocks)
-        return false;
+    if ( pindexLast->nHeight < 157500 ) // Dogecoin: Magic block-height number
+        return false ;
 
-    // Allow for a minimum block time if the elapsed time > 2*nTargetSpacing
-    return (pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing*2);
+    // accept a minimal proof of work if the elapsed time > 2 * nPowTargetSpacing
+    return ( pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing * 2 ) ;
 }
 
 unsigned int CalculateDogecoinNextWorkRequired( const CBlockIndex * pindexLast, int64_t nFirstBlockTime, const Consensus::Params & params )
@@ -91,29 +94,29 @@ bool CheckDogecoinProofOfWork( const CBlockHeader & block, const Consensus::Para
        the merge-mining start, which is checked in AcceptBlockHeader
        where the height is known */
     if ( ! block.IsLegacy() && params.fStrictChainId && block.GetChainId() != params.nAuxpowChainId )
-        return error( "%s : block does not have our chain ID"
+        return error( "%s : block does not have Dogecoin chain ID"
                       " (got %d, expected %d, full nVersion 0x%x)",
                       __func__,
                       block.GetChainId(), params.nAuxpowChainId,
                       block.nVersion ) ;
 
-    /* If there is no auxpow, just check the block hash */
-    if ( ! block.auxpow ) {
-        if ( block.IsAuxpow() )
-            return error( "%s : no auxpow on a block with auxpow in version", __func__ );
+    if ( block.IsAuxpowInVersion() && block.auxpow == nullptr )
+        return error( "%s : no auxpow on a block with auxpow in version", __func__ );
+    if ( block.auxpow != nullptr && ! block.IsAuxpowInVersion() )
+        return error( "%s : auxpow on a block with non-auxpow version", __func__ ) ;
 
+    /* If there is no auxpow, check the block itself */
+    if ( block.auxpow == nullptr )
+    {
         if ( ! CheckProofOfWork( block, block.nBits, params ) )
-            return error( "%s : non-aux proof of work failed with bits=%s and hashes scrypt=%s, sha256=%s", __func__,
+            return error( "%s : non-aux proof of work failed with bits=%s and hashes scrypt=%s, lyra2re2=%s, sha256=%s", __func__,
                             arith_uint256().SetCompact( block.nBits ).GetHex(),
-                            block.GetScryptHash().GetHex(), block.GetSha256Hash().GetHex() ) ;
+                            block.GetScryptHash().GetHex(), block.GetLyra2Re2Hash().GetHex(), block.GetSha256Hash().GetHex() ) ;
 
         return true ;
     }
 
     // Block has auxpow, check it
-
-    if ( ! block.IsAuxpow() )
-        return error( "%s : auxpow on a block with non-auxpow version", __func__ ) ;
 
     if ( ! block.auxpow->check( block.GetSha256Hash(), block.GetChainId(), params ) )
         return error( "%s : auxpow is not valid", __func__ ) ;
@@ -128,31 +131,22 @@ CAmount GetDogecoinBlockSubsidy( int nHeight, const Consensus::Params & consensu
 {
     if ( NameOfChain() == "inu" )
     {   /*
-           inu chain gives for each new block a random subsidy from 1 COIN to 10000
-           the first 1234 blocks have a random subsidy from 1 COIN to 100
+           inu chain gives for each new block a random subsidy from 1 to 1 0000 0000 0000
         */
 
+        int64_t random = 0 ;
         static const bool randomSubsidy = true ;
         if ( randomSubsidy )
         {
-            int random = 0 ;
-            {
-                const std::string strseed = prevHash.ToString().substr( 16, 10 ) ;
-                long seed = strtol( strseed.c_str(), nullptr, /* hex */ 16 ) ;
-                const CAmount supremum = ( nHeight > 1234 ) ? 10000 : 100 ;
-                random = generateMTRandom( seed, supremum - 1 ) ;
-            }
+            const std::string strseed = prevHash.ToString().substr( 16, 10 ) ;
+            long seed = strtol( strseed.c_str(), nullptr, /* hex */ 16 ) ;
+            const int64_t supremum = 10000 * COIN ;
 
-            int randomtoshi = COIN - 1 ;
-            if ( nHeight > 1234 ) {
-                const std::string strseedoshi = prevHash.ToString().substr( 12, 12 ) ;
-                long seed = strtol( strseedoshi.c_str(), nullptr, /* hex */ 16 ) ;
-                randomtoshi = generateMTRandom( seed, COIN - 1 ) ;
-            }
-
-            return randomtoshi + ( random * COIN ) + 1 ;
+            std::mt19937 generator( seed ) ;
+            std::uniform_int_distribution< long > distribution( 0, supremum - 1 ) ;
+            random = distribution( generator ) ;
         }
-        else return 87654321 ;
+        return 1 + random ;
     }
 
     if ( ! consensusParams.fSimplifiedRewards )

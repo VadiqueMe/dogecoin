@@ -202,8 +202,8 @@ CAuxPow::CheckMerkleBranch (uint256 hash,
 void
 CAuxPow::initAuxPow ( CBlockHeader & header )
 {
-  /* Set auxpow flag right now, since we take the block hash below */
-  header.SetAuxpowFlag( true ) ;
+  /* Set auxpow bit in version now, since we take the block hash below */
+  header.SetAuxpowInVersion( true ) ;
 
   /* Build a minimal coinbase script input for merge-mining */
   const uint256 blockHash = header.GetSha256Hash ();

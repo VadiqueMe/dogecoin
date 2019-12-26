@@ -89,7 +89,6 @@ public:
         consensus.nCoinbaseMaturity = 30 ;
         consensus.fSimplifiedRewards = false ;
         consensus.fPowAllowMinDifficultyBlocks = false;
-        consensus.fPowAllowDigishieldMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 9576; // 95% of 10,080
         consensus.nMinerConfirmationWindow = 10080; // 60 * 24 * 7 = 10,080 blocks, or one week
@@ -215,40 +214,40 @@ class CInuParams : public CChainParams {
 public:
     CInuParams()
     {
-        consensus.nSubsidyHalvingInterval = 1000000 ;
-        consensus.powLimit = uint256S( "0x0007ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" ) ; // ~uint256(0) >> 13
+        consensus.powLimit = ArithToUint256( ( ~ arith_uint256() ) >> 6 ) ;
+        //printf( "powLimit = 0x%s\n", consensus.powLimit.GetHex().c_str() ) ;
+        //printf( "compact powLimit for nBits = 0x%08x\n", UintToArith256( consensus.powLimit ).GetCompact() ) ;
+
         consensus.nPowTargetTimespan = 60 ; // 1 minute
         consensus.nPowTargetSpacing = 60 ; // 1 minute
+        consensus.nCoinbaseMaturity = 60 ; // number of blocks above before generated coins will be spendable
         consensus.fDigishieldDifficultyCalculation = true ;
-        consensus.nCoinbaseMaturity = 12 ;
-        consensus.fPowAllowMinDifficultyBlocks = false ;
-        consensus.fPowAllowDigishieldMinDifficultyBlocks = false ;
+        consensus.nSubsidyHalvingInterval = 1000000 ; // not used for inu chain
         consensus.fSimplifiedRewards = false ; // not used for inu chain
+        consensus.fPowAllowMinDifficultyBlocks = false ; // not used for inu chain
         consensus.fPowNoRetargeting = false ;
+
         consensus.nRuleChangeActivationThreshold = 9576 ; // 95% of 10 080
         consensus.nMinerConfirmationWindow = 10080 ; // 60 * 24 * 7 = 10 080 blocks, or one week
 
         consensus.nMajorityEnforceBlockUpgrade = 9800 ;
         consensus.nMajorityRejectBlockOutdated = 9900 ;
         consensus.nMajorityWindow = 10000 ;
+
         consensus.BIP34Height = 1 ;
         consensus.BIP34Hash = uint256S( "0x00" ) ;
         consensus.BIP66Height = 1 ;
 
         struct std::tm startTime ;
         {
-            std::istringstream ss( "2019-07-08 11:00:11" ) ;
+            std::istringstream ss( "2019-11-11 11:00:11" ) ;
             ss >> std::get_time( &startTime, "%Y-%m-%d %H:%M:%S" ) ;
         }
         struct std::tm timeout ;
         {
-            std::istringstream ss( "2019-10-01 00:01:00" ) ;
+            std::istringstream ss( "2019-12-13 00:11:00" ) ;
             ss >> std::get_time( &timeout, "%Y-%m-%d %H:%M:%S" ) ;
         }
-
-        /* consensus.vDeployments[ Consensus::DEPLOYMENT_TESTDUMMY ].bit = 28 ;
-        consensus.vDeployments[ Consensus::DEPLOYMENT_TESTDUMMY ].nStartTime = mktime( &startTime ) ;
-        consensus.vDeployments[ Consensus::DEPLOYMENT_TESTDUMMY ].nTimeout = mktime( &timeout ) ; */
 
         // Deployment of BIP68, BIP112, and BIP113
         consensus.vDeployments[ Consensus::DEPLOYMENT_CSV ].bit = 0 ;
@@ -261,7 +260,7 @@ public:
         consensus.vDeployments[ Consensus::DEPLOYMENT_SEGWIT ].nTimeout = 0 ; // disabled
 
         // The best chain has at least this much work
-        consensus.nMinimumChainWork = uint256S( "0x0000000000000000000000000000000000000000000000000000000000052439" ) ;
+        consensus.nMinimumChainWork = uint256S( "0x0000000000000000000000000000000000000000000000000000000000000837" ) ;
 
         // By default assume that the signatures in ancestors of this block are valid
         consensus.defaultAssumeValid = uint256S( "0x00" ) ;
@@ -273,23 +272,29 @@ public:
 
         pConsensusRoot = &consensus ;
 
-        /* The message start string is designed to be unlikely to occur in common texts */
-        pchMessageStart[ 0 ] = 0xc0 ;
+        /* the message start string is designed to be unlikely to occur in common texts */
+        /* it is a large 32-bit integer with any sequence of its bytes */
+        pchMessageStart[ 0 ] = 0xd0 ;
         pchMessageStart[ 1 ] = 0xc0 ;
-        pchMessageStart[ 2 ] = 0xbe ;
-        pchMessageStart[ 3 ] = ',' ;
-        vAlertPubKey = ParseHex( "0002be4a11a5dae4db797db0064d0d77394eb3fab20706012cd62e12c4000448af4430006340be5a43a35e1856fbb13aa90c555557772da8f6d065b499b06f51dc" ) ;
+        pchMessageStart[ 2 ] = 0x9e ;
+        pchMessageStart[ 3 ] = 0xbe ;
+
+        /* one who holds the private key corresponding to vAlertPubKey public key
+           can send a message to every node on the network */
+        /* vAlertPubKey = uint256S( "0x00" ) ; */
+
         nPruneAfterHeight = 10000 ;
 
         struct std::tm genesisTime ;
         {
-            std::istringstream ss( "2019-11-16 12:11:10" ) ;
+            std::istringstream ss( "2019-12-25 00:01:22" ) ;
             ss >> std::get_time( &genesisTime, "%Y-%m-%d %H:%M:%S" ) ;
         }
 
-     /*
-        arith_uint256 maxScryptHashGenesis = UintToArith256( consensus.powLimit ) ;
-        arith_uint256 maxSha256HashGenesis = UintToArith256( consensus.powLimit ) << 2 ;
+/*
+        arith_uint256 maxScryptHashGenesis = UintToArith256( consensus.powLimit ) >> 3 ;
+        arith_uint256 maxSha256HashGenesis = UintToArith256( consensus.powLimit ) >> 2 ;
+        arith_uint256 maxLyra2re2HashGenesis = UintToArith256( consensus.powLimit ) >> 3 ;
         uint32_t nonce = 0xbe000000 ;
         while ( nonce >= 0x2be )
         {
@@ -298,14 +303,17 @@ public:
                 nonce,
                 UintToArith256( consensus.powLimit ).GetCompact(), // bits
                 0x620004, // version
-                1 * COIN
+                1 // genesis block's subsidy, cannot be spent anyway
             ) ;
 
             if ( UintToArith256( genesis.GetScryptHash() ) <= maxScryptHashGenesis &&
-                    UintToArith256( genesis.GetSha256Hash() ) <= maxSha256HashGenesis )
+                    UintToArith256( genesis.GetSha256Hash() ) <= maxSha256HashGenesis &&
+                        UintToArith256( genesis.GetLyra2Re2Hash() ) <= maxLyra2re2HashGenesis )
                 break ;
 
             -- nonce ;
+            if ( 0 == ( nonce & 0xffff ) )
+                printf( "scanned for generation of genesis block till nonce 0x%08x\n", nonce ) ;
         }
 
         std::cout << "genesis block's time is " << std::put_time( &genesisTime, "%Y-%m-%d %H:%M:%S" ) << std::endl ;
@@ -313,36 +321,66 @@ public:
         printf( "genesis block's hash-merkle-root is 0x%s\n", genesis.hashMerkleRoot.GetHex().c_str() );
         printf( "genesis block's scrypt hash is 0x%s\n", genesis.GetScryptHash().GetHex().c_str() ) ;
         printf( "genesis block's sha256 hash is 0x%s\n", genesis.GetSha256Hash().GetHex().c_str() ) ;
-     */
+        printf( "genesis block's lyra2re2 hash is 0x%s\n", genesis.GetLyra2Re2Hash().GetHex().c_str() ) ;
+*/
 
-        const uint32_t genesisNonce = 0xbd2ba4a2 ;
-        // genesis block's scrypt hash is 0x0007cd78e651b9d124d2073e9272fb3ff5d53b00927c6ea4db08e8a5ada78ff3
-        // genesis block's sha256 hash is 0x000aa3a75133cd33ef50cf2377479563fa9170259dc52a44834ea3b6987840f7
+        const uint32_t genesisNonce = 0xbced8c00 ;
+        // genesis block's scrypt hash is 0x004e4ce8dac526e67b4245c9d6d1df30c6dc2a8e4a106c80f4619fb11f77dcee
+        // genesis block's sha256 hash is 0x0068ddbf5d570f2589248a9b42ec8480e6fd40d681108a63729e563f0988a6ef
+        // genesis block's lyra2re2 hash is 0x00299a9cc20dd3b9c7b5b57f267c9d35b467ca5aa5d182b11505c9a4e6284765
 
-        genesis = CreateGenesisBlock( mktime( &genesisTime ), genesisNonce, /* bits */ UintToArith256( consensus.powLimit ).GetCompact(), /* version */ 0x620004, 1 * COIN ) ;
+        genesis = CreateGenesisBlock( mktime( &genesisTime ), genesisNonce, /* bits */ UintToArith256( consensus.powLimit ).GetCompact(), /* version */ 0x620004, 1 ) ;
 
         consensus.hashGenesisBlock = genesis.GetSha256Hash() ;
 
-        assert ( UintToArith256( genesis.GetScryptHash() ) <= UintToArith256( consensus.powLimit ) &&
-                    UintToArith256( genesis.GetSha256Hash() ) <= ( UintToArith256( consensus.powLimit ) << 2 ) ) ;
+        uint256 expectedSha256HashOfGenesis = uint256S( "0x0068ddbf5d570f2589248a9b42ec8480e6fd40d681108a63729e563f0988a6ef" ) ;
+        uint256 expectedMerkleRootOfGenesis = uint256S( "0xcde1e3166a191d8e661382004982ade4892ade250dbf7190413ac7a26079b261" ) ;
 
-        uint256 expectedShaHashOfGenesis = uint256S( "0x000aa3a75133cd33ef50cf2377479563fa9170259dc52a44834ea3b6987840f7" ) ;
-        uint256 expectedMerkleRootOfGenesis = uint256S( "0x1553b4400a70b51fae69eaf8c771f97b1f8996bcd5dbfaad4212d793377f335c" ) ;
-
-        assert( consensus.hashGenesisBlock == expectedShaHashOfGenesis ) ;
+        assert( consensus.hashGenesisBlock == expectedSha256HashOfGenesis ) ;
         assert( genesis.hashMerkleRoot == expectedMerkleRootOfGenesis ) ;
 
-        base58Prefixes[ PUBKEY_ADDRESS ] = std::vector< unsigned char >( 1, 'u' ) ;
+        base58Prefixes[ PUBKEY_ADDRESS ] = std::vector< unsigned char >( 1, 0x67 ) ;
         base58Prefixes[ SCRIPT_ADDRESS ] = std::vector< unsigned char >( 1, 0xbe ) ;
-        base58Prefixes[ SECRET_KEY ] =     std::vector< unsigned char >( 1, 0xaa ) ;
+        base58Prefixes[ SECRET_KEY ]   =   std::vector< unsigned char >( 1, 0x77 ) ;
         base58Prefixes[ EXT_PUBLIC_KEY ] = boost::assign::list_of( 0x0a )( 0xbc )( 0x20 )( 0x88 ).convert_to_container< std::vector< unsigned char > >() ;
-        base58Prefixes[ EXT_SECRET_KEY ] = boost::assign::list_of( 0x0a )( 0xbc )( 0x80 )( 0xdd ).convert_to_container< std::vector< unsigned char > >() ;
+        base58Prefixes[ EXT_SECRET_KEY ] = boost::assign::list_of( 0x0a )( 0xbd )( 0x81 )( 0xd9 ).convert_to_container< std::vector< unsigned char > >() ;
 
-        /* printf( "network address example %s\n",
-                CDogecoinAddress::DummyDogecoinAddress(
+/*
+        unsigned char pubkeyFirst = 0x90 ;
+        char networkPrefix = ' ' ;
+        while ( networkPrefix != 'i' )
+        {
+            base58Prefixes[ PUBKEY_ADDRESS ] = std::vector< unsigned char >( 1, pubkeyFirst ) ;
+
+            std::string addressExample = CDogecoinAddress::DummyDogecoinAddress(
                     Base58Prefix( CChainParams::PUBKEY_ADDRESS ),
                     Base58Prefix( CChainParams::SCRIPT_ADDRESS )
-                ).c_str() ) ; */
+                ) ;
+            assert( addressExample.length() > 0 ) ;
+            networkPrefix = addressExample[ 0 ] ;
+            printf( "network address example %s, network prefix '%c' with 0x%02x\n",
+                    addressExample.c_str(), networkPrefix, pubkeyFirst ) ;
+            -- pubkeyFirst ;
+        }
+*/
+/*
+        unsigned char privkeyFirst = 0x77 ;
+        char privkeyPrefix = ' ' ;
+        while ( privkeyPrefix != 'J' )
+        {
+            base58Prefixes[ SECRET_KEY ] = std::vector< unsigned char >( 1, privkeyFirst ) ;
+
+            CKey privateKey ;
+            privateKey.MakeNewKey( true ) ;
+            CDogecoinSecret encodedPrivkey ;
+            encodedPrivkey.SetKey( privateKey, Base58Prefix( CChainParams::SECRET_KEY ) ) ;
+            std::string privateKeyExample = encodedPrivkey.ToString() ;
+            printf( "private key example %s with 0x%02x\n", privateKeyExample.c_str(), privkeyFirst ) ;
+            assert( privateKeyExample.length() > 0 ) ;
+            privkeyPrefix = privateKeyExample[ 0 ] ;
+            -- privkeyFirst ;
+        }
+*/
 
         vSeeds.clear() ;
         vFixedSeeds.clear() ;
@@ -354,23 +392,23 @@ public:
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-            (       0, uint256S( "0x000aa3a75133cd33ef50cf2377479563fa9170259dc52a44834ea3b6987840f7" ) )
-            (      40, uint256S( "0x000eeb2e5549cbd3b79478cd66a2a3376004e83aeb3646c4f7efd967456cc4ce" ) )
+            (       0, uint256S( "0x0068ddbf5d570f2589248a9b42ec8480e6fd40d681108a63729e563f0988a6ef" ) )
+            (      22, uint256S( "0x032d5d139539953299e34a5035e5de2fb1c12424e6cc60c692bba5b4c4755e63" ) )
         } ;
 
         struct std::tm lastCheckpointTime ;
         {
-            std::istringstream ss( "2019-12-01 20:31:16" ) ;
+            std::istringstream ss( "2019-12-26 18:14:08" ) ;
             ss >> std::get_time( &lastCheckpointTime, "%Y-%m-%d %H:%M:%S" ) ;
         }
         chainTxData = ChainTxData {
-            // data as of block 000eeb2e5549cbd3b79478cd66a2a3376004e83aeb3646c4f7efd967456cc4ce (height 40)
+            // data for block 032d5d139539953299e34a5035e5de2fb1c12424e6cc60c692bba5b4c4755e63 at height 22
             mktime( &lastCheckpointTime ),
-            42, // number of all transactions in all blocks at last checkpoint
+            23, // number of all transactions in all blocks at last checkpoint
             0.01 // estimated number of transactions per second after checkpoint
         } ;
     }
-};
+} ;
 static std::unique_ptr< CInuParams > inuParams( nullptr ) ;
 
 
@@ -393,7 +431,6 @@ public:
         consensus.nCoinbaseMaturity = 30 ;
         consensus.fSimplifiedRewards = false ;
         consensus.fPowAllowMinDifficultyBlocks = true ;
-        consensus.fPowAllowDigishieldMinDifficultyBlocks = false ;
         consensus.nSubsidyHalvingInterval = 100000;
         consensus.nMajorityEnforceBlockUpgrade = 501;
         consensus.nMajorityRejectBlockOutdated = 750;
@@ -447,13 +484,11 @@ public:
         // Blocks 157500 - 158099 are Digishield with minimum difficulty on all blocks
         minDifficultyConsensus = digishieldConsensus;
         minDifficultyConsensus.nHeightEffective = 157500;
-        minDifficultyConsensus.fPowAllowDigishieldMinDifficultyBlocks = true;
         minDifficultyConsensus.fPowAllowMinDifficultyBlocks = true;
 
         // Enable AuxPoW at 158100
         auxpowConsensus = minDifficultyConsensus;
         auxpowConsensus.nHeightEffective = 158100;
-        auxpowConsensus.fPowAllowDigishieldMinDifficultyBlocks = true;
         auxpowConsensus.fAllowLegacyBlocks = false;
 
         // Assemble the binary search tree of parameters

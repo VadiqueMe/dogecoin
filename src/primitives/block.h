@@ -37,7 +37,7 @@ public:
     inline void SerializationOp(Stream& s, Operation ser_action) {
         READWRITE(*(CPureBlockHeader*)this);
 
-        if ( this->IsAuxpow() )
+        if ( this->IsAuxpowInVersion() )
         {
             if (ser_action.ForRead())
                 auxpow.reset(new CAuxPow());

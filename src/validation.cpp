@@ -2098,7 +2098,7 @@ void static UpdateTip( CBlockIndex * pindexNew, const CChainParams & chainParams
     CBlockHeader newBlock = chainActive.Tip()->GetBlockHeader( chainParams.GetConsensus( chainActive.Height() ) ) ;
     LogPrintf( "%s: new block sha256_hash=%s scrypt_hash=%s height=%d version=0x%x%s log2_work=%.8g txs=%lu date='%s' progress=%f cache=%.1fMiB(%u txs)\n", __func__,
         /* chainActive.Tip()->GetBlockSha256Hash().ToString() */ newBlock.GetSha256Hash().ToString(), newBlock.GetScryptHash().ToString(),
-        chainActive.Height(), newBlock.nVersion, newBlock.IsAuxpow() ? "(auxpow)" : "",
+        chainActive.Height(), newBlock.nVersion, newBlock.IsAuxpowInVersion() ? "(auxpow)" : "",
         log( chainActive.Tip()->nChainWork.getdouble() ) / log( 2.0 ),
         (unsigned long)chainActive.Tip()->nChainTx,
         DateTimeStrFormat( "%Y-%m-%d %H:%M:%S", chainActive.Tip()->GetBlockTime() ),
@@ -2498,11 +2498,11 @@ bool PreciousBlock(CValidationState& state, const CChainParams& params, CBlockIn
     {
         LOCK(cs_main);
         if (pindex->nChainWork < chainActive.Tip()->nChainWork) {
-            // Nothing to do, this block is not at the tip.
+            // Nothing to do, this block is not at the tip
             return true;
         }
         if (chainActive.Tip()->nChainWork > nLastPreciousChainwork) {
-            // The chain has been extended since the last call, reset the counter.
+            // The chain has been extended since the last call, reset the counter
             nBlockReverseSequenceId = -1;
         }
         nLastPreciousChainwork = chainActive.Tip()->nChainWork;
@@ -2940,13 +2940,13 @@ bool ContextualCheckBlockHeader( const CBlockHeader & block, CValidationState & 
     // Dogecoin: Disallow AuxPow blocks before it is activated
     // TODO: Remove this test, as checkpoints will enforce this for us now
     // NOTE: Previously this had its own fAllowAuxPoW flag, but that's always the opposite of fAllowLegacyBlocks
-    if ( consensusParams.fAllowLegacyBlocks && block.IsAuxpow() )
+    if ( consensusParams.fAllowLegacyBlocks && block.IsAuxpowInVersion() )
         return state.DoS( 20, error("%s : auxpow blocks are not allowed at height %d, parameters effective from %d",
                                     __func__, pindexPrev->nHeight + 1, consensusParams.nHeightEffective),
                           REJECT_INVALID, "early-auxpow-block" ) ;
 
     // Check proof of work
-    if (block.nBits != GetNextWorkRequired(pindexPrev, &block, consensusParams))
+    if ( block.nBits != GetNextWorkRequired( pindexPrev, &block, consensusParams ) )
         return state.DoS( 20, false, REJECT_INVALID, "bad-diffbits", false, "incorrect proof of work" ) ;
 
     // Check timestamp against prev
