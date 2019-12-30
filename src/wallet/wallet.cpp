@@ -2530,11 +2530,7 @@ bool CWallet::CreateTransaction(const vector<CRecipient>& vecSend, CWalletTx& wt
 
                 // Can we complete this as a free transaction?
                 if ( fSendFreeTransactions && nBytes <= MAX_FREE_TRANSACTION_CREATE_SIZE )
-                {
-                    // Require at least hard-coded AllowFree
-                    if ( AllowFree(dPriority) )
-                        break ;
-                }
+                    break ;
 
                 CAmount nFeeNeeded( 0 );
                 if ( nFeeRet >= nFeeNeeded ) {

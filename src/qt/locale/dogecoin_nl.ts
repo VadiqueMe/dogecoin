@@ -2392,10 +2392,6 @@
         <translation>Transactie</translation>
     </message>
     <message>
-        <source>Inputs</source>
-        <translation>Inputs</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Bedrag</translation>
     </message>

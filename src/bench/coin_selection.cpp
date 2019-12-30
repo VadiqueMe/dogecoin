@@ -1,11 +1,10 @@
 // Copyright (c) 2012-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "bench.h"
 #include "wallet/wallet.h"
 
-#include <boost/foreach.hpp>
 #include <set>
 
 static void addCoin(const CAmount& nValue, const CWallet& wallet, std::vector<COutput>& vCoins)
@@ -38,22 +37,22 @@ static void CoinSelection(benchmark::State& state)
     LOCK(wallet.cs_wallet);
 
     while (state.KeepRunning()) {
-        // Empty wallet.
-        BOOST_FOREACH (COutput output, vCoins)
-            delete output.tx;
+        // Empty wallet
+        for ( COutput output : vCoins )
+            delete output.tx ;
         vCoins.clear();
 
-        // Add coins.
-        for (int i = 0; i < 1000; i++)
-            addCoin(1000 * COIN, wallet, vCoins);
-        addCoin(3 * COIN, wallet, vCoins);
+        // Add coins
+        for ( int i = 0 ; i < 1000 ; i ++ )
+            addCoin( 1000 * E8COIN, wallet, vCoins ) ;
+        addCoin( 3 * E8COIN, wallet, vCoins ) ;
 
         std::set<std::pair<const CWalletTx*, unsigned int> > setCoinsRet;
         CAmount nValueRet;
-        bool success = wallet.SelectCoinsMinConf(1003 * COIN, 1, 6, 0, vCoins, setCoinsRet, nValueRet);
-        assert(success);
-        assert(nValueRet == 1003 * COIN);
-        assert(setCoinsRet.size() == 2);
+        bool success = wallet.SelectCoinsMinConf( 1003 * E8COIN, 1, 6, 0, vCoins, setCoinsRet, nValueRet ) ;
+        assert( success ) ;
+        assert( nValueRet == 1003 * E8COIN ) ;
+        assert( setCoinsRet.size() == 2 ) ;
     }
 }
 

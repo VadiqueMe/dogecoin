@@ -4,8 +4,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_PRIMITIVES_TRANSACTION_H
-#define BITCOIN_PRIMITIVES_TRANSACTION_H
+#ifndef DOGECOIN_PRIMITIVES_TRANSACTION_H
+#define DOGECOIN_PRIMITIVES_TRANSACTION_H
 
 #include "amount.h"
 #include "script/script.h"
@@ -58,7 +58,7 @@ public:
 
 /** An input of a transaction.  It contains the location of the previous
  * transaction's output that it claims and a signature that matches the
- * output's public key.
+ * output's public key
  */
 class CTxIn
 {
@@ -74,12 +74,12 @@ public:
 
     /* Below flags apply in the context of BIP 68*/
     /* If this flag set, CTxIn::nSequence is NOT interpreted as a
-     * relative lock-time. */
+     * relative lock-time */
     static const uint32_t SEQUENCE_LOCKTIME_DISABLE_FLAG = (1 << 31);
 
     /* If CTxIn::nSequence encodes a relative lock-time and this flag
      * is set, the relative lock-time has units of 512 seconds,
-     * otherwise it specifies blocks with a granularity of 1. */
+     * otherwise it specifies blocks with a granularity of 1 */
     static const uint32_t SEQUENCE_LOCKTIME_TYPE_FLAG = (1 << 22);
 
     /* If CTxIn::nSequence encodes a relative lock-time, this mask is
@@ -92,7 +92,7 @@ public:
      * for time-based relative lock-time is fixed at 512 seconds.
      * Converting from CTxIn::nSequence to seconds is performed by
      * multiplying by 512 = 2^9, or equivalently shifting up by
-     * 9 bits. */
+     * 9 bits */
     static const int SEQUENCE_LOCKTIME_GRANULARITY = 9;
 
     CTxIn()
@@ -128,7 +128,7 @@ public:
 };
 
 /** An output of a transaction.  It contains the public key that the next input
- * must be able to sign with to claim it.
+ * must be able to sign with to claim it
  */
 class CTxOut
 {
@@ -339,7 +339,7 @@ public:
 
     bool IsCoinBase() const
     {
-        return (vin.size() == 1 && vin[0].prevout.IsNull());
+        return ( vin.size() == 1 && vin[0].prevout.IsNull() ) ;
     }
 
     friend bool operator==(const CTransaction& a, const CTransaction& b)
@@ -420,4 +420,4 @@ template <typename Tx> static inline CTransactionRef MakeTransactionRef(Tx&& txI
 /** Compute the weight of a transaction, as defined by BIP 141 */
 int64_t GetTransactionWeight(const CTransaction &tx);
 
-#endif // BITCOIN_PRIMITIVES_TRANSACTION_H
+#endif

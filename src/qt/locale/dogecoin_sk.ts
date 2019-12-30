@@ -2353,10 +2353,6 @@
         <translation>Transakcie</translation>
     </message>
     <message>
-        <source>Inputs</source>
-        <translation>Vstupy</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Suma</translation>
     </message>

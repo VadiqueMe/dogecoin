@@ -2396,10 +2396,6 @@
         <translation>交易</translation>
     </message>
     <message>
-        <source>Inputs</source>
-        <translation>輸入</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>金額</translation>
     </message>

@@ -2196,10 +2196,6 @@
         <translation>Transazione</translation>
     </message>
     <message>
-        <source>Inputs</source>
-        <translation>Input</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Importo</translation>
     </message>

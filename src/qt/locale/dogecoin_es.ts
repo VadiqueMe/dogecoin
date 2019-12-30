@@ -2400,10 +2400,6 @@
         <translation>Transacción</translation>
     </message>
     <message>
-        <source>Inputs</source>
-        <translation>entradas</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Cantidad</translation>
     </message>

@@ -83,9 +83,9 @@ BOOST_AUTO_TEST_CASE(sign)
     for (int i = 0; i < 4; i++)
     {
         txFrom.vout[i].scriptPubKey = evalScripts[i];
-        txFrom.vout[i].nValue = COIN;
+        txFrom.vout[i].nValue = E8COIN ;
         txFrom.vout[i+4].scriptPubKey = standardScripts[i];
-        txFrom.vout[i+4].nValue = COIN;
+        txFrom.vout[i+4].nValue = E8COIN ;
     }
     BOOST_CHECK(IsStandardTx(txFrom, reason));
 
@@ -181,7 +181,7 @@ BOOST_AUTO_TEST_CASE(set)
     for (int i = 0; i < 4; i++)
     {
         txFrom.vout[i].scriptPubKey = outer[i];
-        txFrom.vout[i].nValue = COIN;
+        txFrom.vout[i].nValue = E8COIN ;
     }
     BOOST_CHECK(IsStandardTx(txFrom, reason));
 
@@ -192,7 +192,7 @@ BOOST_AUTO_TEST_CASE(set)
         txTo[i].vout.resize(1);
         txTo[i].vin[0].prevout.n = i;
         txTo[i].vin[0].prevout.hash = txFrom.GetTxHash() ;
-        txTo[i].vout[0].nValue = 1*COIN;
+        txTo[i].vout[0].nValue = E8COIN ;
         txTo[i].vout[0].scriptPubKey = inner[i];
         BOOST_CHECK_MESSAGE(IsMine(keystore, txFrom.vout[i].scriptPubKey), strprintf("IsMine %d", i));
     }

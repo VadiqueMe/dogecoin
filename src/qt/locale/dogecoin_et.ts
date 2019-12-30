@@ -1476,10 +1476,6 @@
         <translation>Kaupleja</translation>
     </message>
     <message>
-        <source>Inputs</source>
-        <translation>Sisendid</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Summa</translation>
     </message>

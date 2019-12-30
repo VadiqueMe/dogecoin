@@ -2400,10 +2400,6 @@
         <translation>Транзакция</translation>
     </message>
     <message>
-        <source>Inputs</source>
-        <translation>Входы</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Сумма</translation>
     </message>

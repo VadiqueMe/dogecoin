@@ -4,8 +4,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_VALIDATION_H
-#define BITCOIN_VALIDATION_H
+#ifndef DOGECOIN_VALIDATION_H
+#define DOGECOIN_VALIDATION_H
 
 #if defined(HAVE_CONFIG_H)
 #include "config/dogecoin-config.h"
@@ -48,16 +48,16 @@ struct ChainTxData;
 struct PrecomputedTransactionData;
 struct LockPoints;
 
-/** Default for accepting alerts from the P2P network. */
-static const bool DEFAULT_ALERTS = true;
-/** Default for DEFAULT_WHITELISTRELAY. */
-static const bool DEFAULT_WHITELISTRELAY = true;
-/** Default for DEFAULT_WHITELISTFORCERELAY. */
-static const bool DEFAULT_WHITELISTFORCERELAY = true;
+/** Default for accepting alerts from the P2P network */
+static const bool DEFAULT_ALERTS = true ;
+/** Default for DEFAULT_WHITELISTRELAY */
+static const bool DEFAULT_WHITELISTRELAY = true ;
+/** Default for DEFAULT_WHITELISTFORCERELAY */
+static const bool DEFAULT_WHITELISTFORCERELAY = true ;
 //! -maxtxfee default
-static const CAmount DEFAULT_TRANSACTION_MAXFEE = 100 * COIN ;
+static const CAmount DEFAULT_TRANSACTION_MAXFEE = 100 * E8COIN ;
 //! Discourage users to set fees higher than this amount (in satoshis) per kB
-static const CAmount HIGH_TX_FEE_PER_KB = 10 * COIN ;
+static const CAmount HIGH_TX_FEE_PER_KB = 10 * E8COIN ;
 //! -maxtxfee will warn if called with a higher fee than this amount (in satoshis)
 static const CAmount HIGH_MAX_TX_FEE = 10 * HIGH_TX_FEE_PER_KB;
 /** Default for -limitancestorcount, max number of in-mempool ancestors */
@@ -541,4 +541,4 @@ void DumpMempool();
 /** Load the mempool from disk. */
 bool LoadMempool();
 
-#endif // BITCOIN_VALIDATION_H
+#endif

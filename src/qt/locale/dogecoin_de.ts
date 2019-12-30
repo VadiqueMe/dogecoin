@@ -2396,10 +2396,6 @@
         <translation>Transaktion</translation>
     </message>
     <message>
-        <source>Inputs</source>
-        <translation>Eingaben</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Betrag</translation>
     </message>

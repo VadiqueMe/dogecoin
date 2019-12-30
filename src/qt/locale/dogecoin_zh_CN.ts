@@ -2377,10 +2377,6 @@
         <translation>交易</translation>
     </message>
     <message>
-        <source>Inputs</source>
-        <translation>输入</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>金额</translation>
     </message>

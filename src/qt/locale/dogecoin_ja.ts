@@ -2400,10 +2400,6 @@
         <translation>取引</translation>
     </message>
     <message>
-        <source>Inputs</source>
-        <translation>入力</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>総額</translation>
     </message>

@@ -1,7 +1,7 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "rpc/server.h"
 
@@ -133,24 +133,24 @@ CAmount AmountFromValue(const UniValue& value)
     return amount;
 }
 
-UniValue ValueFromAmount(const CAmount& amount)
+UniValue ValueFromAmount( const CAmount & amount )
 {
-    bool sign = amount < 0;
-    int64_t n_abs = (sign ? -amount : amount);
-    int64_t quotient = n_abs / COIN;
-    int64_t remainder = n_abs % COIN;
-    return UniValue(UniValue::VNUM,
-            strprintf("%s%d.%08d", sign ? "-" : "", quotient, remainder));
+    bool sign = amount < 0 ;
+    int64_t n_abs = ( sign ? -amount : amount ) ;
+    int64_t quotient = n_abs / E8COIN ;
+    int64_t remainder = n_abs % E8COIN ;
+    return UniValue( UniValue::VNUM,
+            strprintf( "%s%d.%08d", sign ? "-" : "", quotient, remainder ) ) ;
 }
 
-UniValue ValueFromAmount(const arith_uint256& amount)
+UniValue ValueFromAmount( const arith_uint256 & amount )
 {
-    bool sign = amount < 0;
-    arith_uint256 n_abs = (sign ? -amount : amount);
-    arith_uint256 quotient = n_abs / COIN;
-    arith_uint256 remainder = n_abs - (quotient * COIN);
-    return UniValue(UniValue::VNUM,
-            strprintf("%s%d.%08d", sign ? "-" : "", (int64_t)quotient.getdouble(), (int64_t)remainder.getdouble()));
+    bool sign = amount < 0 ;
+    arith_uint256 n_abs = ( sign ? -amount : amount ) ;
+    arith_uint256 quotient = n_abs / E8COIN ;
+    arith_uint256 remainder = n_abs - ( quotient * E8COIN ) ;
+    return UniValue( UniValue::VNUM,
+            strprintf( "%s%d.%08d", sign ? "-" : "", (int64_t)quotient.getdouble(), (int64_t)remainder.getdouble() ) ) ;
 }
 
 uint256 ParseHashV(const UniValue& v, string strName)

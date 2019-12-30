@@ -2396,10 +2396,6 @@
         <translation>Transação</translation>
     </message>
     <message>
-        <source>Inputs</source>
-        <translation>Entradas</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Quantia</translation>
     </message>

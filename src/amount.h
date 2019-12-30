@@ -13,12 +13,14 @@
 /** amount in atomary coin units, can be negative */
 typedef int64_t CAmount ;
 
-static const CAmount COIN = 100000000 ;
-static const CAmount CENT = 1000000 ;
+static const CAmount E12COIN = 1000000000000 ;
+static const CAmount E8COIN = 100000000 ;
+static const CAmount E6COIN = 1000000 ;
+static const CAmount E8CENT = E6COIN ;
 
 extern const std::string NAME_OF_CURRENCY ;
 
-static const CAmount MAX_MONEY = 10000000000 * COIN ; // max transaction 10 000 000 000
+static const CAmount MAX_MONEY = 1000000 * E12COIN ; // max transaction 1 000 000 0000 0000 0000
 inline bool MoneyRange( const CAmount & nValue ) {  return ( nValue >= 0 && nValue <= MAX_MONEY ) ;  }
 
 #endif

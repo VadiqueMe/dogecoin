@@ -2400,10 +2400,6 @@
         <translation>거래</translation>
     </message>
     <message>
-        <source>Inputs</source>
-        <translation>입력</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>거래액</translation>
     </message>

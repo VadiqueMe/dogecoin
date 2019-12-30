@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2019 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -220,7 +221,7 @@ BOOST_AUTO_TEST_CASE(CreateNewBlock_validity)
     // Just to make sure we can still make simple blocks
     BOOST_CHECK( pblocktemplate = BlockAssembler( chainparams ).CreateNewBlock( scriptPubKey, true ) ) ;
 
-    const CAmount LOWFEE = CENT ;
+    const CAmount LOWFEE = E6COIN ;
     static const int number_of_transactions = 1001 ; // 1000 CHECKMULTISIG + 1
     const CAmount BLOCKSUBSIDY = number_of_transactions * LOWFEE ;
 

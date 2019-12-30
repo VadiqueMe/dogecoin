@@ -605,12 +605,12 @@ void BlockAssembler::addPriorityTxs()
         }
 
         // If this tx fits in the block add it, otherwise keep looping
-        if (TestForBlock(iter)) {
-            AddToBlock(iter);
+        if ( TestForBlock( iter ) ) {
+            AddToBlock( iter ) ;
 
-            // If now that this txs is added we've surpassed our desired priority size
-            // or have dropped below the AllowFreeThreshold, then we're done adding priority txs
-            if (nBlockSize >= nBlockPrioritySize || !AllowFree(actualPriority)) {
+            // If now that this txs is added we've surpassed our desired priority size,
+            // then we're done adding priority txs
+            if ( nBlockSize >= nBlockPrioritySize ) {
                 break;
             }
 

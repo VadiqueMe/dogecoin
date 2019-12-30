@@ -14,8 +14,8 @@ std::string FormatMoney( const CAmount & n )
     // not using straight sprintf here because we do NOT want
     // localized number formatting
     int64_t n_abs = ( n > 0 ? n : -n ) ;
-    int64_t quotient = n_abs / COIN ;
-    int64_t remainder = n_abs % COIN ;
+    int64_t quotient = n_abs / E8COIN ;
+    int64_t remainder = n_abs % E8COIN ;
     std::string str = strprintf( "%d.%08d", quotient, remainder ) ;
 
     // Right-trim excess zeros before the decimal point:
@@ -38,17 +38,16 @@ bool ParseMoney( const std::string & str, CAmount & nRet )
 
 bool ParseMoney( const char * pszIn, CAmount & nRet )
 {
+    const char * p = pszIn ;
+    while ( isspace( *p ) ) p ++ ;
     std::string strWhole;
-    int64_t nUnits = 0;
-    const char* p = pszIn;
-    while (isspace(*p))
-        p++;
-    for (; *p; p++)
+    int64_t nUnits = 0 ;
+    for ( ; *p ; p ++ )
     {
-        if (*p == '.')
+        if ( *p == '.' )
         {
-            p++;
-            int64_t nMult = CENT*10;
+            p ++ ;
+            int64_t nMult = E8CENT * 10 ;
             while (isdigit(*p) && (nMult > 0))
             {
                 nUnits += nMult * (*p++ - '0');
@@ -67,11 +66,12 @@ bool ParseMoney( const char * pszIn, CAmount & nRet )
             return false;
     if (strWhole.size() > 10) // guard against 63 bit overflow
         return false;
-    if (nUnits < 0 || nUnits > COIN)
-        return false;
-    int64_t nWhole = atoi64(strWhole);
-    CAmount nValue = nWhole*COIN + nUnits;
+    if ( nUnits < 0 || nUnits > E8COIN )
+        return false ;
 
-    nRet = nValue;
-    return true;
+    int64_t nWhole = atoi64( strWhole ) ;
+    CAmount nValue = nWhole * E8COIN + nUnits ;
+
+    nRet = nValue ;
+    return true ;
 }

@@ -12,7 +12,7 @@
 
 std::string COutPoint::ToString() const
 {
-    return strprintf("COutPoint(%s, %u)", hash.ToString().substr(0,10), n);
+    return "COutPoint(" + ( IsNull() ? "0" : hash.ToString() ) + ", " + ( ( n < 10 ) ? strprintf( "%u", n ) : strprintf( "0x%x", n ) ) + ")" ;
 }
 
 CTxIn::CTxIn(COutPoint prevoutIn, CScript scriptSigIn, uint32_t nSequenceIn)
@@ -31,17 +31,13 @@ CTxIn::CTxIn(uint256 hashPrevTx, uint32_t nOut, CScript scriptSigIn, uint32_t nS
 
 std::string CTxIn::ToString() const
 {
-    std::string str;
-    str += "CTxIn(";
-    str += prevout.ToString();
-    if (prevout.IsNull())
-        str += strprintf(", coinbase %s", HexStr(scriptSig));
-    else
-        str += strprintf(", scriptSig=%s", HexStr(scriptSig).substr(0, 24));
+    std::string str = "CTxIn(" ;
+    str += prevout.ToString() + ", " ;
+    str += ( prevout.IsNull() ? "coinbase " : "scriptSig=" ) + HexStr( scriptSig ) ;
     if ( nSequence != SEQUENCE_FINAL )
-        str += strprintf( ", nSequence=0x%x", nSequence ) ;
-    str += ")";
-    return str;
+        str += ", " + strprintf( "nSequence=0x%x", nSequence ) ;
+    str += ")" ;
+    return str ;
 }
 
 CTxOut::CTxOut(const CAmount& nValueIn, CScript scriptPubKeyIn)
@@ -52,7 +48,7 @@ CTxOut::CTxOut(const CAmount& nValueIn, CScript scriptPubKeyIn)
 
 std::string CTxOut::ToString() const
 {
-    return strprintf("CTxOut(nValue=%d.%08d, scriptPubKey=%s)", nValue / COIN, nValue % COIN, HexStr(scriptPubKey).substr(0, 30));
+    return strprintf( "CTxOut(nValue=%ld, scriptPubKey=%s)", nValue, HexStr( scriptPubKey ) ) ;
 }
 
 CMutableTransaction::CMutableTransaction() : nVersion(CTransaction::CURRENT_VERSION), nLockTime(0) {}
@@ -130,23 +126,24 @@ unsigned int CTransaction::GetFullSize() const
 
 std::string CTransaction::ToString() const
 {
-    std::string str;
-    str += strprintf("CTransaction(hash=%s, ver=%d, vin.size=%u, vout.size=%u, nLockTime=%u)\n",
-        GetTxHash().ToString().substr(0,10),
+    std::string str ;
+    str += strprintf( "CTransaction(hash=%s, version=%d, vin.size=%u, vout.size=%u, nLockTime=%u)\n",
+        GetTxHash().ToString(),
         nVersion,
         vin.size(),
         vout.size(),
-        nLockTime);
-    for (unsigned int i = 0; i < vin.size(); i++)
-        str += "    " + vin[i].ToString() + "\n";
-    for (unsigned int i = 0; i < vin.size(); i++)
-        str += "    " + vin[i].scriptWitness.ToString() + "\n";
-    for (unsigned int i = 0; i < vout.size(); i++)
-        str += "    " + vout[i].ToString() + "\n";
-    return str;
+        nLockTime ) ;
+    for ( unsigned int i = 0 ; i < vin.size() ; i ++ )
+        str += strprintf( "    vin[%u]: ", i ) + vin[ i ].ToString() + "\n" ;
+    for ( unsigned int i = 0 ; i < vin.size() ; i ++ )
+        if ( ! vin[ i ].scriptWitness.IsNull() )
+            str += strprintf( "    vin[%u].scriptWitness: ", i ) + vin[ i ].scriptWitness.ToString() + "\n" ;
+    for ( unsigned int i = 0 ; i < vout.size() ; i ++ )
+        str += strprintf( "    vout[%u]: ", i ) + vout[ i ].ToString() + "\n" ;
+    return str ;
 }
 
-int64_t GetTransactionWeight(const CTransaction& tx)
+int64_t GetTransactionWeight( const CTransaction & tx )
 {
-    return ::GetSerializeSize(tx, SER_NETWORK, PROTOCOL_VERSION | SERIALIZE_TRANSACTION_NO_WITNESS) * (WITNESS_SCALE_FACTOR -1) + ::GetSerializeSize(tx, SER_NETWORK, PROTOCOL_VERSION);
+    return ::GetSerializeSize( tx, SER_NETWORK, PROTOCOL_VERSION | SERIALIZE_TRANSACTION_NO_WITNESS ) * ( WITNESS_SCALE_FACTOR - 1 ) + ::GetSerializeSize( tx, SER_NETWORK, PROTOCOL_VERSION ) ;
 }

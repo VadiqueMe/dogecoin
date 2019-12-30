@@ -140,7 +140,7 @@ CAmount GetDogecoinBlockSubsidy( int nHeight, const Consensus::Params & consensu
         {
             const std::string strseed = prevHash.ToString().substr( 16, 10 ) ;
             long seed = strtol( strseed.c_str(), nullptr, /* hex */ 16 ) ;
-            const int64_t supremum = 10000 * COIN ;
+            const int64_t supremum = 1 * E12COIN ;
 
             std::mt19937 generator( seed ) ;
             std::uniform_int_distribution< long > distribution( 0, supremum - 1 ) ;
@@ -159,7 +159,7 @@ CAmount GetDogecoinBlockSubsidy( int nHeight, const Consensus::Params & consensu
         const CAmount maxReward = ( 1000000 >> halvings ) - 1 ;
         int rand = generateMTRandom( seed, maxReward ) ;
 
-        CAmount reward = ( 1 + rand ) * COIN ;
+        CAmount reward = ( 1 + rand ) * E8COIN ;
         /* LogPrintf( "%s: at height %i with sha256 of previous block %s strseed=\"%s\" seed=%ld reward=%ld\n", __func__,
                    nHeight, prevHash.GetHex(), strseed, seed, reward ) ; */
 
@@ -169,10 +169,10 @@ CAmount GetDogecoinBlockSubsidy( int nHeight, const Consensus::Params & consensu
         // Mid-style constant rewards for each halving interval
         // six are for 50 0000, 25 0000, 12 5000, 6 2500, 3 1250, 1 5625
         int halvings = nHeight / consensusParams.nSubsidyHalvingInterval ;
-        return ( 500000 * COIN ) >> halvings ;
+        return ( 50 * E12COIN ) >> halvings ;
     } else {
-        // Constant inflation 1 0000 per every new block
-        return 10000 * COIN ;
+        // Constant inflation 1 0000 0000 0000 per every new block
+        return 1 * E12COIN ;
     }
 }
 

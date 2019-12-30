@@ -2392,10 +2392,6 @@
         <translation>İşlem</translation>
     </message>
     <message>
-        <source>Inputs</source>
-        <translation>Girdiler</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Tutar</translation>
     </message>

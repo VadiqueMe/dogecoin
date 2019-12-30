@@ -2004,10 +2004,6 @@
         <translation>Transacció</translation>
     </message>
     <message>
-        <source>Inputs</source>
-        <translation>Entrades</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Import</translation>
     </message>

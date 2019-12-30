@@ -410,8 +410,8 @@ void PaperWalletDialog::on_printButton_clicked()
         }
 
         QList<SendCoinsRecipient> recipients;
-        quint64 amount = (quint64)(amountInput * COIN);
-        Q_FOREACH (const QString& dest, recipientPubKeyHashes) {
+        quint64 amount = (quint64)( amountInput * E8COIN ) ;
+        for ( const QString & dest : recipientPubKeyHashes ) {
             recipients.append(SendCoinsRecipient(dest, tr("Paper wallet %1").arg(dest), amount, ""));
             formatted.append(tr("<b>%1</b> to Paper Wallet <span style='font-family: monospace;'>%2</span>").arg(QString::number(amountInput, 'f', 8), GUIUtil::HtmlEscape(dest)));
         }
@@ -504,14 +504,15 @@ QWidget * ShutdownWindow::showShutdownWindow( DogecoinGUI * window )
     if ( window == nullptr ) return nullptr ;
 
     // Show a simple window indicating shutdown status
-    QWidget *shutdownWindow = new ShutdownWindow();
-    shutdownWindow->setWindowTitle(window->windowTitle());
+    QWidget * shutdownWindow = new ShutdownWindow() ;
+    shutdownWindow->setWindowTitle( tr(PACKAGE_NAME) ) ;
 
     // Center shutdown window at where main window was
-    const QPoint global = window->mapToGlobal(window->rect().center());
-    shutdownWindow->move(global.x() - shutdownWindow->width() / 2, global.y() - shutdownWindow->height() / 2);
-    shutdownWindow->show();
-    return shutdownWindow;
+    const QPoint global = window->mapToGlobal( window->rect().center() ) ;
+    shutdownWindow->move( global.x() - shutdownWindow->width() / 2, global.y() - shutdownWindow->height() / 2 ) ;
+    shutdownWindow->show() ;
+
+    return shutdownWindow ;
 }
 
 void ShutdownWindow::closeEvent(QCloseEvent *event)

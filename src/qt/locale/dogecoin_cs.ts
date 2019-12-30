@@ -2400,10 +2400,6 @@
         <translation>Transakce</translation>
     </message>
     <message>
-        <source>Inputs</source>
-        <translation>Vstupy</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Částka</translation>
     </message>

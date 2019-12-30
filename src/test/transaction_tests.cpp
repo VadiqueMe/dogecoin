@@ -280,40 +280,40 @@ BOOST_AUTO_TEST_CASE(basic_transaction_tests)
 
 //
 // Helper: create two dummy transactions, each with
-// two outputs.  The first has 11 and 50 CENT outputs
-// paid to a TX_PUBKEY, the second 21 and 22 CENT outputs
-// paid to a TX_PUBKEYHASH.
+// two outputs. The first has 11 000000 and 50 000000 outputs
+// paid to a TX_PUBKEY, the second 21 000000 and 22 000000 outputs
+// paid to a TX_PUBKEYHASH
 //
-static std::vector<CMutableTransaction>
-SetupDummyInputs(CBasicKeyStore& keystoreRet, CCoinsViewCache& coinsRet)
+static std::vector< CMutableTransaction >
+SetupDummyInputs( CBasicKeyStore & keystoreRet, CCoinsViewCache & coinsRet )
 {
-    std::vector<CMutableTransaction> dummyTransactions;
-    dummyTransactions.resize(2);
+    std::vector< CMutableTransaction > dummyTransactions ;
+    dummyTransactions.resize( 2 ) ;
 
-    // Add some keys to the keystore:
-    CKey key[4];
-    for (int i = 0; i < 4; i++)
+    // Add four keys to the keystore
+    CKey key[ 4 ] ;
+    for ( int i = 0 ; i < 4 ; i ++ )
     {
-        key[i].MakeNewKey(i % 2);
-        keystoreRet.AddKey(key[i]);
+        key[ i ].MakeNewKey( i % 2 ) ;
+        keystoreRet.AddKey( key[ i ] ) ;
     }
 
     // Create some dummy input transactions
-    dummyTransactions[0].vout.resize(2);
-    dummyTransactions[0].vout[0].nValue = 11*CENT;
-    dummyTransactions[0].vout[0].scriptPubKey << ToByteVector(key[0].GetPubKey()) << OP_CHECKSIG;
-    dummyTransactions[0].vout[1].nValue = 50*CENT;
-    dummyTransactions[0].vout[1].scriptPubKey << ToByteVector(key[1].GetPubKey()) << OP_CHECKSIG;
+    dummyTransactions[ 0 ].vout.resize( 2 ) ;
+    dummyTransactions[ 0 ].vout[ 0 ].nValue = 11 * E6COIN ;
+    dummyTransactions[ 0 ].vout[ 0 ].scriptPubKey << ToByteVector( key[ 0 ].GetPubKey() ) << OP_CHECKSIG ;
+    dummyTransactions[ 0 ].vout[ 1 ].nValue = 50 * E6COIN ;
+    dummyTransactions[ 0 ].vout[ 1 ].scriptPubKey << ToByteVector( key[ 1 ].GetPubKey() ) << OP_CHECKSIG ;
     coinsRet.ModifyCoins( dummyTransactions[ 0 ].GetTxHash() )->FromTx( dummyTransactions[ 0 ], 0 ) ;
 
-    dummyTransactions[1].vout.resize(2);
-    dummyTransactions[1].vout[0].nValue = 21*CENT;
-    dummyTransactions[1].vout[0].scriptPubKey = GetScriptForDestination(key[2].GetPubKey().GetID());
-    dummyTransactions[1].vout[1].nValue = 22*CENT;
-    dummyTransactions[1].vout[1].scriptPubKey = GetScriptForDestination(key[3].GetPubKey().GetID());
+    dummyTransactions[ 1 ].vout.resize( 2 ) ;
+    dummyTransactions[ 1 ].vout[ 0 ].nValue = 21 * E6COIN ;
+    dummyTransactions[ 1 ].vout[ 0 ].scriptPubKey = GetScriptForDestination( key[ 2 ].GetPubKey().GetID() ) ;
+    dummyTransactions[ 1 ].vout[ 1 ].nValue = 22 * E6COIN ;
+    dummyTransactions[ 1 ].vout[ 1 ].scriptPubKey = GetScriptForDestination( key[ 3 ].GetPubKey().GetID() ) ;
     coinsRet.ModifyCoins( dummyTransactions[ 1 ].GetTxHash() )->FromTx( dummyTransactions[ 1 ], 0 ) ;
 
-    return dummyTransactions;
+    return dummyTransactions ;
 }
 
 BOOST_AUTO_TEST_CASE(test_Get)
@@ -321,7 +321,7 @@ BOOST_AUTO_TEST_CASE(test_Get)
     CBasicKeyStore keystore;
     TrivialCoinsView coinsDummy ;
     CCoinsViewCache coins( &coinsDummy ) ;
-    std::vector<CMutableTransaction> dummyTransactions = SetupDummyInputs(keystore, coins);
+    std::vector< CMutableTransaction > dummyTransactions = SetupDummyInputs( keystore, coins ) ;
 
     CMutableTransaction t1;
     t1.vin.resize(3);
@@ -335,11 +335,11 @@ BOOST_AUTO_TEST_CASE(test_Get)
     t1.vin[2].prevout.n = 1;
     t1.vin[2].scriptSig << std::vector<unsigned char>(65, 0) << std::vector<unsigned char>(33, 4);
     t1.vout.resize(2);
-    t1.vout[0].nValue = 90*CENT;
-    t1.vout[0].scriptPubKey << OP_1;
+    t1.vout[0].nValue = 90 * E6COIN ;
+    t1.vout[0].scriptPubKey << OP_1 ;
 
-    BOOST_CHECK(AreInputsStandard(t1, coins));
-    BOOST_CHECK_EQUAL(coins.GetValueIn(t1), (50+21+22)*CENT);
+    BOOST_CHECK( AreInputsStandard( t1, coins ) ) ;
+    BOOST_CHECK_EQUAL( coins.GetValueIn( t1 ), ( 50 + 21 + 22 ) * E6COIN ) ;
 }
 
 void CreateCreditAndSpend(const CKeyStore& keystore, const CScript& outscript, CTransactionRef& output, CMutableTransaction& input, bool success = true)
@@ -681,7 +681,7 @@ BOOST_AUTO_TEST_CASE(test_IsStandard)
     t.vin[0].prevout.n = 1;
     t.vin[0].scriptSig << std::vector<unsigned char>(65, 0);
     t.vout.resize(1);
-    t.vout[0].nValue = 90*CENT;
+    t.vout[0].nValue = 90 * E6COIN ;
     CKey key;
     key.MakeNewKey(true);
     t.vout[0].scriptPubKey = GetScriptForDestination(key.GetPubKey().GetID());

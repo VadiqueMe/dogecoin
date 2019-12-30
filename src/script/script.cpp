@@ -8,8 +8,6 @@
 #include "tinyformat.h"
 #include "utilstrencodings.h"
 
-using namespace std;
-
 const char* GetOpName(opcodetype opcode)
 {
     switch (opcode)
@@ -186,7 +184,7 @@ unsigned int CScript::GetSigOpCount(const CScript& scriptSig) const
     // get the last item that the scriptSig
     // pushes onto the stack:
     const_iterator pc = scriptSig.begin();
-    vector<unsigned char> data;
+    std::vector< unsigned char > data ;
     while (pc < scriptSig.end())
     {
         opcodetype opcode;
@@ -219,7 +217,7 @@ bool CScript::IsPayToWitnessScriptHash() const
 }
 
 // A witness program is any valid CScript that consists of a 1-byte push opcode
-// followed by a data push between 2 and 40 bytes.
+// followed by a data push between 2 and 40 bytes
 bool CScript::IsWitnessProgram(int& version, std::vector<unsigned char>& program) const
 {
     if (this->size() < 4 || this->size() > 42) {
@@ -246,7 +244,7 @@ bool CScript::IsPushOnly(const_iterator pc) const
         // Note that IsPushOnly() *does* consider OP_RESERVED to be a
         // push-type opcode, however execution of OP_RESERVED fails, so
         // it's not relevant to P2SH/BIP62 as the scriptSig would fail prior to
-        // the P2SH special validation code being executed.
+        // the P2SH special validation code being executed
         if (opcode > OP_16)
             return false;
     }
@@ -260,12 +258,10 @@ bool CScript::IsPushOnly() const
 
 std::string CScriptWitness::ToString() const
 {
-    std::string ret = "CScriptWitness(";
-    for (unsigned int i = 0; i < stack.size(); i++) {
-        if (i) {
-            ret += ", ";
-        }
-        ret += HexStr(stack[i]);
+    std::string ret = "CScriptWitness(" ;
+    for ( unsigned int i = 0 ; i < stack.size() ; i ++ ) {
+        if ( i > 0 ) ret += ", " ;
+        ret += HexStr( stack[ i ] ) ;
     }
-    return ret + ")";
+    return ret + ")" ;
 }

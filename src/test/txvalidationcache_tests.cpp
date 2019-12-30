@@ -30,7 +30,7 @@ BOOST_FIXTURE_TEST_CASE(tx_mempool_block_doublespend, TestChain240Setup)
 {
     // Make sure skipping validation of transctions that were
     // validated going into the memory pool does not allow
-    // double-spends in blocks to pass validation when they should not.
+    // double-spends in blocks to pass validation when they should not
 
     CScript scriptPubKey = CScript() <<  ToByteVector(coinbaseKey.GetPubKey()) << OP_CHECKSIG;
 
@@ -44,7 +44,7 @@ BOOST_FIXTURE_TEST_CASE(tx_mempool_block_doublespend, TestChain240Setup)
         spends[i].vin[0].prevout.hash = coinbaseTxns[0].GetTxHash() ;
         spends[i].vin[0].prevout.n = 0;
         spends[i].vout.resize(1);
-        spends[i].vout[0].nValue = 11*CENT;
+        spends[i].vout[0].nValue = 11000111 ;
         spends[i].vout[0].scriptPubKey = scriptPubKey;
 
         // Sign:

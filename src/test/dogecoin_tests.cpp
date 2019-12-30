@@ -14,23 +14,24 @@ BOOST_FIXTURE_TEST_SUITE(dogecoin_tests, TestingSetup)
 /**
  * the maximum block reward at a given height for a block without fees
  */
-uint64_t expectedMaxSubsidy(int height) {
-    if (height < 100000) {
-        return 1000000 * COIN;
-    } else if (height < 145000) {
-        return 500000 * COIN;
-    } else if (height < 200000) {
-        return 250000 * COIN;
-    } else if (height < 300000) {
-        return 125000 * COIN;
-    } else if (height < 400000) {
-        return  62500 * COIN;
-    } else if (height < 500000) {
-        return  31250 * COIN;
-    } else if (height < 600000) {
-        return  15625 * COIN;
+uint64_t expectedMaxSubsidy( int height )
+{
+    if ( height < 100000 ) {
+        return 100 * E12COIN ;
+    } else if ( height < 145000 ) {
+        return 50 * E12COIN ;
+    } else if ( height < 200000 ) {
+        return 25 * E12COIN ;
+    } else if ( height < 300000 ) {
+        return 125000 * E8COIN ;
+    } else if ( height < 400000 ) {
+        return 62500 * E8COIN ;
+    } else if ( height < 500000 ) {
+        return 31250 * E8COIN ;
+    } else if ( height < 600000 ) {
+        return 15625 * E8COIN ;
     } else {
-        return  10000 * COIN;
+        return 1 * E12COIN ;
     }
 }
 
@@ -38,23 +39,24 @@ uint64_t expectedMaxSubsidy(int height) {
  * the minimum possible value for the maximum block reward at a given height
  * for a block without fees
  */
-uint64_t expectedMinSubsidy(int height) {
-    if (height < 100000) {
-        return 0;
-    } else if (height < 145000) {
-        return 0;
-    } else if (height < 200000) {
-        return 250000 * COIN;
-    } else if (height < 300000) {
-        return 125000 * COIN;
-    } else if (height < 400000) {
-        return  62500 * COIN;
-    } else if (height < 500000) {
-        return  31250 * COIN;
-    } else if (height < 600000) {
-        return  15625 * COIN;
+uint64_t expectedMinSubsidy( int height )
+{
+    if ( height < 100000 ) {
+        return 0 ;
+    } else if ( height < 145000 ) {
+        return 0 ;
+    } else if ( height < 200000 ) {
+        return 25 * E12COIN ;
+    } else if ( height < 300000 ) {
+        return 125000 * E8COIN ;
+    } else if ( height < 400000 ) {
+        return 62500 * E8COIN ;
+    } else if ( height < 500000 ) {
+        return 31250 * E8COIN ;
+    } else if ( height < 600000 ) {
+        return 15625 * E8COIN ;
     } else {
-        return  10000 * COIN;
+        return 1 * E12COIN ;
     }
 }
 
@@ -70,20 +72,20 @@ BOOST_AUTO_TEST_CASE(subsidy_limit_test)
         const Consensus::Params& params = mainParams.GetConsensus(nHeight);
         CAmount nSubsidy = GetDogecoinBlockSubsidy(nHeight, params, prevHash);
         BOOST_CHECK(MoneyRange(nSubsidy));
-        BOOST_CHECK(nSubsidy <= 1000000 * COIN);
+        BOOST_CHECK( nSubsidy <= 100 * E12COIN ) ;
         nSum += nSubsidy * nStepSize;
     }
     for (; nHeight <= 145000; nHeight++) {
         const Consensus::Params& params = mainParams.GetConsensus(nHeight);
         CAmount nSubsidy = GetDogecoinBlockSubsidy(nHeight, params, prevHash);
         BOOST_CHECK(MoneyRange(nSubsidy));
-        BOOST_CHECK(nSubsidy <= 500000 * COIN);
+        BOOST_CHECK( nSubsidy <= 50 * E12COIN ) ;
         nSum += nSubsidy * nStepSize;
     }
     for (; nHeight < 600000; nHeight++) {
         const Consensus::Params& params = mainParams.GetConsensus(nHeight);
         CAmount nSubsidy = GetDogecoinBlockSubsidy(nHeight, params, prevHash);
-        CAmount nExpectedSubsidy = (500000 >> (nHeight / 100000)) * COIN;
+        CAmount nExpectedSubsidy = ( 500000 >> ( nHeight / 100000 ) ) * E8COIN ;
         BOOST_CHECK(MoneyRange(nSubsidy));
         BOOST_CHECK_EQUAL(nSubsidy, nExpectedSubsidy);
         nSum += nSubsidy * nStepSize;
@@ -97,12 +99,12 @@ BOOST_AUTO_TEST_CASE(subsidy_limit_test)
     BOOST_CHECK(nSum >= lowerlimit);
 
     // Test reward at 600k+ is constant
-    const Consensus::Params& params = mainParams.GetConsensus(nHeight);
-    CAmount nConstantSubsidy = GetDogecoinBlockSubsidy(nHeight, params, prevHash);
-    BOOST_CHECK_EQUAL(nConstantSubsidy, 10000 * COIN);
+    const Consensus::Params& params = mainParams.GetConsensus( nHeight ) ;
+    CAmount nConstantSubsidy = GetDogecoinBlockSubsidy( nHeight, params, prevHash ) ;
+    BOOST_CHECK_EQUAL( nConstantSubsidy, 1 * E12COIN ) ;
 
-    nConstantSubsidy = GetDogecoinBlockSubsidy(700000, params, prevHash);
-    BOOST_CHECK_EQUAL(nConstantSubsidy, 10000 * COIN);
+    nConstantSubsidy = GetDogecoinBlockSubsidy( 700000, params, prevHash ) ;
+    BOOST_CHECK_EQUAL( nConstantSubsidy, 1 * E12COIN ) ;
 }
 
 BOOST_AUTO_TEST_CASE(get_next_work_difficulty_limit)

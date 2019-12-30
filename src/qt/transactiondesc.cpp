@@ -276,7 +276,7 @@ QString TransactionDesc::toHTML( CWallet * wallet, CWalletTx & wtx, TransactionR
     // More details
     //
     {
-        strHTML += "<hr><br>" + QString( "More details" ) + "<br><br>" ;
+        strHTML += "<hr><br>" + QString( "<i>More details</i>" ) + "<br><br>" ;
 
         for ( const CTxIn & txin : wtx.tx->vin )
             if ( wallet->IsMine( txin ) )
@@ -285,46 +285,48 @@ QString TransactionDesc::toHTML( CWallet * wallet, CWalletTx & wtx, TransactionR
             if ( wallet->IsMine( txout ) )
                 strHTML += "<b>" + tr("Credit") + ":</b> " + UnitsOfCoin::formatHtmlWithUnit( unit, wallet->GetCredit( txout, ISMINE_ALL ) ) + "<br>" ;
 
-        strHTML += "<br><b>" + tr("Transaction") + ":</b><br>" ;
-        strHTML += GUIUtil::HtmlEscape( wtx.tx->ToString(), true ) ;
-
-        strHTML += "<br><b>" + tr("Inputs") + ":</b>" ;
-        strHTML += "<ul>" ;
+        bool coinsInInputs = false ;
+        QString inputsHtml = "<br><b>" + QString( "Coins in inputs" ) + ":</b>" ;
+        inputsHtml += "<ul>" ;
 
         for ( const CTxIn & txin : wtx.tx->vin )
         {
             COutPoint prevout = txin.prevout ;
-
             CCoins prev ;
             if ( pcoinsTip->GetCoins( prevout.hash, prev ) )
             {
                 if ( prevout.n < prev.vout.size() )
                 {
-                    strHTML += "<li>" ;
+                    inputsHtml += "<li>" ;
                     const CTxOut & vout = prev.vout[ prevout.n ] ;
                     CTxDestination address ;
                     if ( ExtractDestination( vout.scriptPubKey, address ) )
                     {
                         if ( wallet->mapAddressBook.count( address ) && ! wallet->mapAddressBook[ address ].name.empty() )
-                            strHTML += GUIUtil::HtmlEscape( wallet->mapAddressBook[ address ].name ) + " " ;
-                        strHTML += QString::fromStdString( CDogecoinAddress( address ).ToString() ) ;
+                            inputsHtml += GUIUtil::HtmlEscape( wallet->mapAddressBook[ address ].name ) + " " ;
+                        inputsHtml += QString::fromStdString( CDogecoinAddress( address ).ToString() ) ;
                     }
-                    strHTML = strHTML + " " + tr("Amount") + "=" + UnitsOfCoin::formatHtmlWithUnit( unit, vout.nValue ) ;
-                    strHTML = strHTML + " IsMine=" + ( wallet->IsMine( vout ) & ISMINE_SPENDABLE ? tr("true") : tr("false") ) ;
-                    strHTML = strHTML + " IsWatchOnly=" + ( wallet->IsMine( vout ) & ISMINE_WATCH_ONLY ? tr("true") : tr("false") ) ;
-                    strHTML += "</li>" ;
+                    inputsHtml += " " + tr("Amount") + "=" + UnitsOfCoin::formatHtmlWithUnit( unit, vout.nValue ) ;
+                    inputsHtml += " IsMine=" + ( wallet->IsMine( vout ) & ISMINE_SPENDABLE ? tr("true") : tr("false") ) ;
+                    inputsHtml += " IsWatchOnly=" + ( wallet->IsMine( vout ) & ISMINE_WATCH_ONLY ? tr("true") : tr("false") ) ;
+                    inputsHtml += "</li>" ;
+
+                    coinsInInputs = true ;
                 }
             }
         }
 
-        strHTML += "</ul>" ;
+        inputsHtml += "</ul>" ;
+        if ( coinsInInputs ) strHTML += inputsHtml ;
+
+        strHTML += "<br><b>" + tr("Transaction") + ":</b><br>" ;
+        strHTML += GUIUtil::HtmlEscape( wtx.tx->ToString(), true ) ;
     }
-    strHTML += "<br>" ;
 
     //
-    // Raw
+    // Raw hex
     //
-    strHTML += "<hr><br>" + QString( "Raw transaction" ) + "<br><br>" ;
+    strHTML += "<hr><br>" + QString( "<i>Raw hex</i>" ) + "<br><br>" ;
     strHTML += TransactionDesc::getTxHex( rec, wallet ) ;
 
     strHTML += "</font></html>" ;
