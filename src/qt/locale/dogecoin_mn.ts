@@ -362,10 +362,6 @@
         <translation>Харуул</translation>
     </message>
     <message>
-        <source>Remove the selected entries from the list</source>
-        <translation>Сонгогдсон ѳгѳгдлүүдийг устгах</translation>
-    </message>
-    <message>
         <source>Remove</source>
         <translation>Устгах</translation>
     </message>

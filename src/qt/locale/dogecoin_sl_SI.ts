@@ -1024,10 +1024,6 @@
         <translation>Pokaži</translation>
     </message>
     <message>
-        <source>Remove the selected entries from the list</source>
-        <translation>Odstrani označene vnose iz seznama</translation>
-    </message>
-    <message>
         <source>Remove</source>
         <translation>Odstrani</translation>
     </message>

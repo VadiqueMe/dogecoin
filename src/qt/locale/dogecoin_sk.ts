@@ -1657,10 +1657,6 @@
         <translation>Zobraziť</translation>
     </message>
     <message>
-        <source>Remove the selected entries from the list</source>
-        <translation>Odstrániť zvolené záznamy zo zoznamu</translation>
-    </message>
-    <message>
         <source>Remove</source>
         <translation>Odstrániť</translation>
     </message>

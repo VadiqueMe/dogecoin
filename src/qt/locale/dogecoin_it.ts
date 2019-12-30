@@ -1572,10 +1572,6 @@
         <translation>Mostra</translation>
     </message>
     <message>
-        <source>Remove the selected entries from the list</source>
-        <translation>Rimuovi le voci selezionate dalla lista</translation>
-    </message>
-    <message>
         <source>Remove</source>
         <translation>Rimuovi</translation>
     </message>

@@ -2395,7 +2395,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <location filename="../forms/receivecoinsdialog.ui" line="+119"/>
+        <location filename="../forms/receivecoinsdialog.ui" line="+117"/>
         <source>&amp;Amount:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2405,7 +2405,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">&amp;Label:</translation>
     </message>
     <message>
-        <location line="-28"/>
+        <location line="-26"/>
         <source>&amp;Message:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2415,7 +2415,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+35"/>
+        <location line="+33"/>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2425,27 +2425,17 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+65"/>
+        <location line="+71"/>
         <source>Requested payments history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-95"/>
+        <location line="-101"/>
         <source>&amp;Request payment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+133"/>
-        <source>Remove the selected entries from the list</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Remove</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+49"/>
+        <location line="+154"/>
         <source>QR Code</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2465,7 +2455,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../receivecoinsdialog.cpp" line="+328"/>
+        <location filename="../receivecoinsdialog.cpp" line="+59"/>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+261"/>
         <source>Request payment to %1</source>
         <translation type="unfinished"></translation>
     </message>

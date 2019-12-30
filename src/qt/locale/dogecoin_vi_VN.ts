@@ -684,10 +684,6 @@
         <translation>Hiển thị</translation>
     </message>
     <message>
-        <source>Remove the selected entries from the list</source>
-        <translation>Xóa khỏi danh sách</translation>
-    </message>
-    <message>
         <source>Remove</source>
         <translation>Xóa</translation>
     </message>

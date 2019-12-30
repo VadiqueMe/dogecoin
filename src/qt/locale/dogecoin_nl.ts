@@ -1676,10 +1676,6 @@
         <translation>Toon</translation>
     </message>
     <message>
-        <source>Remove the selected entries from the list</source>
-        <translation>Verwijder de geselecteerde items van de lijst</translation>
-    </message>
-    <message>
         <source>Remove</source>
         <translation>Verwijder</translation>
     </message>

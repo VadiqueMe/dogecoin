@@ -734,10 +734,6 @@
         <translation>ჩვენება</translation>
     </message>
     <message>
-        <source>Remove the selected entries from the list</source>
-        <translation>მონიშნული ჩანაწერების წაშლა სიიდან</translation>
-    </message>
-    <message>
         <source>Remove</source>
         <translation>წაშლა</translation>
     </message>

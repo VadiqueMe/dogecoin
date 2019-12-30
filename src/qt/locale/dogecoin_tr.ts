@@ -1676,10 +1676,6 @@
         <translation>Göster</translation>
     </message>
     <message>
-        <source>Remove the selected entries from the list</source>
-        <translation>Seçilen unsurları listeden kaldır</translation>
-    </message>
-    <message>
         <source>Remove</source>
         <translation>Kaldır</translation>
     </message>

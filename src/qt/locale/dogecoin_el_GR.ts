@@ -1028,10 +1028,6 @@
         <translation>Εμφάνιση</translation>
     </message>
     <message>
-        <source>Remove the selected entries from the list</source>
-        <translation>Αφαίρεση επιλεγμένων καταχωρίσεων από τη λίστα</translation>
-    </message>
-    <message>
         <source>Remove</source>
         <translation>Αφαίρεση</translation>
     </message>

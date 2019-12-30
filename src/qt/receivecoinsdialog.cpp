@@ -34,13 +34,11 @@ ReceiveCoinsDialog::ReceiveCoinsDialog( const PlatformStyle * style, QWidget * p
     ui->setupUi(this);
 
     if ( ! style->getImagesOnButtons() ) {
-        ui->clearButton->setIcon(QIcon());
-        ui->receiveButton->setIcon(QIcon());
-        ui->removeRequestButton->setIcon(QIcon());
+        ui->clearButton->setIcon( QIcon() ) ;
+        ui->receiveButton->setIcon( QIcon() ) ;
     } else {
-        ui->clearButton->setIcon(style->SingleColorIcon(":/icons/remove"));
-        ui->receiveButton->setIcon(style->SingleColorIcon(":/icons/receiving_addresses"));
-        ui->removeRequestButton->setIcon(style->SingleColorIcon(":/icons/remove"));
+        ui->clearButton->setIcon( style->SingleColorIcon( ":/icons/remove" ) ) ;
+        ui->receiveButton->setIcon( style->SingleColorIcon( ":/icons/receiving_addresses" ) ) ;
     }
 
     connect( ui->clearButton, SIGNAL( clicked() ), this, SLOT( clearForm() ) ) ;
@@ -58,7 +56,7 @@ ReceiveCoinsDialog::ReceiveCoinsDialog( const PlatformStyle * style, QWidget * p
     contextMenu->addAction( copyMessageAction ) ;
     contextMenu->addAction( copyAmountAction ) ;
 
-    QAction * removeAction = new QAction( "Remove", this ) ;
+    QAction * removeAction = new QAction( tr("Remove"), this ) ;
     QAction * clearHistoryAction = new QAction( "Clear History", this ) ;
 
     contextMenu->addSeparator() ;
@@ -73,8 +71,6 @@ ReceiveCoinsDialog::ReceiveCoinsDialog( const PlatformStyle * style, QWidget * p
     connect( copyAmountAction, SIGNAL( triggered() ), this, SLOT( copyAmount() ) ) ;
     connect( removeAction, SIGNAL( triggered() ), this, SLOT( removeSelection() ) ) ;
     connect( clearHistoryAction, SIGNAL( triggered() ), this, SLOT( clearAllHistory() ) ) ;
-
-    connect( ui->removeRequestButton, SIGNAL( clicked() ), this, SLOT( removeSelection() ) ) ;
 
 #ifndef USE_QRCODE
     ui->btnSaveAs->setVisible( false ) ;
@@ -192,10 +188,6 @@ void ReceiveCoinsDialog::on_receiveButton_clicked()
 void ReceiveCoinsDialog::recentRequestsView_selectionChanged( const QItemSelection & selected, const QItemSelection & deselected )
 {
     QModelIndexList chosen = ui->recentRequestsView->selectionModel()->selectedRows() ;
-
-    // enable Remove button only if anything is selected
-    bool isSelected = ! chosen.isEmpty() ;
-    ui->removeRequestButton->setEnabled( isSelected ) ;
 
     if ( chosen.count() == 1 )
     {

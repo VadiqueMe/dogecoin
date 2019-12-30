@@ -1676,10 +1676,6 @@
         <translation>表示</translation>
     </message>
     <message>
-        <source>Remove the selected entries from the list</source>
-        <translation>リストから選択項目を削除</translation>
-    </message>
-    <message>
         <source>Remove</source>
         <translation>削除</translation>
     </message>

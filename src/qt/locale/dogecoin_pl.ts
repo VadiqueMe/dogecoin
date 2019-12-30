@@ -1560,10 +1560,6 @@
         <translation>Pokaż</translation>
     </message>
     <message>
-        <source>Remove the selected entries from the list</source>
-        <translation>Usuń zaznaczone z listy</translation>
-    </message>
-    <message>
         <source>Remove</source>
         <translation>Usuń</translation>
     </message>

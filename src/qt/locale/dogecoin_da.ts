@@ -1676,10 +1676,6 @@
         <translation>Vis</translation>
     </message>
     <message>
-        <source>Remove the selected entries from the list</source>
-        <translation>Fjern de valgte indgange fra listen</translation>
-    </message>
-    <message>
         <source>Remove</source>
         <translation>Fjern</translation>
     </message>

@@ -1444,10 +1444,6 @@
         <translation>Mostrar</translation>
     </message>
     <message>
-        <source>Remove the selected entries from the list</source>
-        <translation>Remover as entradas seleccionadas da lista</translation>
-    </message>
-    <message>
         <source>Remove</source>
         <translation>Remover</translation>
     </message>

@@ -1154,10 +1154,6 @@
         <translation>Menunjukkan</translation>
     </message>
     <message>
-        <source>Remove the selected entries from the list</source>
-        <translation>Menghapus informasi terpilih dari daftar</translation>
-    </message>
-    <message>
         <source>Remove</source>
         <translation>Menghapus</translation>
     </message>

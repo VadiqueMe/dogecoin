@@ -722,10 +722,6 @@
         <translation>Rādīt</translation>
     </message>
     <message>
-        <source>Remove the selected entries from the list</source>
-        <translation>Noņemt atlasītos ierakstus no saraksta.</translation>
-    </message>
-    <message>
         <source>Remove</source>
         <translation>Noņemt</translation>
     </message>

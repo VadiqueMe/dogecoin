@@ -1164,10 +1164,6 @@
         <translation>نمایش</translation>
     </message>
     <message>
-        <source>Remove the selected entries from the list</source>
-        <translation>حذف ورودی های انتخاب‌شده از لیست</translation>
-    </message>
-    <message>
         <source>Remove</source>
         <translation>حذف کردن</translation>
     </message>

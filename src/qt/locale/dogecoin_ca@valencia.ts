@@ -1344,10 +1344,6 @@
         <translation>Mostra</translation>
     </message>
     <message>
-        <source>Remove the selected entries from the list</source>
-        <translation>Esborra les entrades seleccionades de la llista</translation>
-    </message>
-    <message>
         <source>Remove</source>
         <translation>Esborra</translation>
     </message>

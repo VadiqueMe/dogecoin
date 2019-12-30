@@ -1082,10 +1082,6 @@
         <translation>הצגה</translation>
     </message>
     <message>
-        <source>Remove the selected entries from the list</source>
-        <translation>הסרת הרשומות הנבחרות מהרשימה</translation>
-    </message>
-    <message>
         <source>Remove</source>
         <translation>הסרה</translation>
     </message>

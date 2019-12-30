@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>420</height>
+    <width>840</width>
+    <height>440</height>
    </rect>
   </property>
   <layout class="QHBoxLayout" name="receiveCoinsLayout">
@@ -86,12 +86,10 @@
             </widget>
            </item>
            <item row="4" column="2">
-            <widget class="QLineEdit" name="reqLabel">
-            </widget>
+            <widget class="QLineEdit" name="reqLabel"/>
            </item>
            <item row="6" column="2">
-            <widget class="QLineEdit" name="reqMessage">
-            </widget>
+            <widget class="QLineEdit" name="reqMessage"/>
            </item>
            <item row="2" column="2">
             <widget class="QLabel" name="label_5">
@@ -233,6 +231,12 @@
          <enum>QFrame::Plain</enum>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
          <item>
           <widget class="QLabel" name="paymentsHistoryLabel">
            <property name="font">
@@ -258,43 +262,6 @@
             <bool>true</bool>
            </property>
           </widget>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="recentViewButtons_horizontalLayout">
-           <item>
-            <spacer name="horizontalSpacer_2">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="QPushButton" name="removeRequestButton">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <property name="toolTip">
-              <string>Remove the selected entries from the list</string>
-             </property>
-             <property name="text">
-              <string>Remove</string>
-             </property>
-             <property name="icon">
-              <iconset resource="../dogecoin.qrc">
-               <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
-             </property>
-             <property name="autoDefault">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-          </layout>
          </item>
         </layout>
        </widget>

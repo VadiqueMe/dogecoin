@@ -1676,10 +1676,6 @@
         <translation>顯示</translation>
     </message>
     <message>
-        <source>Remove the selected entries from the list</source>
-        <translation>從列表中刪掉選擇的項目</translation>
-    </message>
-    <message>
         <source>Remove</source>
         <translation>刪掉</translation>
     </message>

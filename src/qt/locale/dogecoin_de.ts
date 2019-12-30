@@ -1672,10 +1672,6 @@
         <translation>Anzeigen</translation>
     </message>
     <message>
-        <source>Remove the selected entries from the list</source>
-        <translation>Ausgewählte Einträge aus der Liste entfernen</translation>
-    </message>
-    <message>
         <source>Remove</source>
         <translation>Entfernen</translation>
     </message>

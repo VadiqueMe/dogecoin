@@ -1676,10 +1676,6 @@
         <translation>보기</translation>
     </message>
     <message>
-        <source>Remove the selected entries from the list</source>
-        <translation>목록에서 삭제할 항목을 선택하시오</translation>
-    </message>
-    <message>
         <source>Remove</source>
         <translation>삭제</translation>
     </message>

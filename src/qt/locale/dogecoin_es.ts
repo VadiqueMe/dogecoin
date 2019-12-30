@@ -1676,10 +1676,6 @@
         <translation>Mostrar</translation>
     </message>
     <message>
-        <source>Remove the selected entries from the list</source>
-        <translation>Borrar de la lista las direcciónes actualmente seleccionadas</translation>
-    </message>
-    <message>
         <source>Remove</source>
         <translation>Eliminar</translation>
     </message>

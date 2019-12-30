@@ -1457,10 +1457,6 @@ Var vänlig och försök igen.</translation>
         <translation>Visa</translation>
     </message>
     <message>
-        <source>Remove the selected entries from the list</source>
-        <translation>Ta bort valda poster från listan</translation>
-    </message>
-    <message>
         <source>Remove</source>
         <translation>Ta bort</translation>
     </message>

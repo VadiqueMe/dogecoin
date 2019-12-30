@@ -1676,10 +1676,6 @@
         <translation>Показать</translation>
     </message>
     <message>
-        <source>Remove the selected entries from the list</source>
-        <translation>Удалить выбранные записи из списка</translation>
-    </message>
-    <message>
         <source>Remove</source>
         <translation>Удалить</translation>
     </message>
