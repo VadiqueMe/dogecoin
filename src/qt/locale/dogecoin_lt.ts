@@ -803,13 +803,6 @@
     <name>TransactionDesc</name>
     </context>
 <context>
-    <name>TransactionDescDialog</name>
-    <message>
-        <source>This pane shows a detailed description of the transaction</source>
-        <translation>Šis langas sandorio detalų aprašymą</translation>
-    </message>
-    </context>
-<context>
     <name>TransactionTableModel</name>
     </context>
 <context>

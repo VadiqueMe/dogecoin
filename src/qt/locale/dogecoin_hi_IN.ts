@@ -343,13 +343,6 @@
     <name>TransactionDesc</name>
     </context>
 <context>
-    <name>TransactionDescDialog</name>
-    <message>
-        <source>This pane shows a detailed description of the transaction</source>
-        <translation> ये खिड़की आपको लेन-देन का विस्तृत विवरण देगी !</translation>
-    </message>
-    </context>
-<context>
     <name>TransactionTableModel</name>
     </context>
 <context>

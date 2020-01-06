@@ -1878,13 +1878,6 @@ Var vänlig och försök igen.</translation>
     </message>
     </context>
 <context>
-    <name>TransactionDescDialog</name>
-    <message>
-        <source>This pane shows a detailed description of the transaction</source>
-        <translation>Den här panelen visar en detaljerad beskrivning av transaktionen</translation>
-    </message>
-    </context>
-<context>
     <name>TransactionTableModel</name>
     <message>
         <source>Date</source>

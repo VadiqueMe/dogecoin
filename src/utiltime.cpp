@@ -12,7 +12,7 @@
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/thread.hpp>
 
-static int64_t nMockTime = 0; //!< For unit testing
+static int64_t nMockTime = 0; // for unit testing
 
 int64_t GetTime()
 {
@@ -62,7 +62,7 @@ void MilliSleep(int64_t n)
 
 /**
  * Boost's sleep_for was uninterruptible when backed by nanosleep from 1.50
- * until fixed in 1.52. Use the deprecated sleep method for the broken case.
+ * until fixed in 1.52. Use the deprecated sleep method for the broken case
  * See: https://svn.boost.org/trac/boost/ticket/7238
  */
 #if defined(HAVE_WORKING_BOOST_SLEEP_FOR)
@@ -77,11 +77,11 @@ void MilliSleep(int64_t n)
 
 std::string DateTimeStrFormat( const char * pszFormat, int64_t nTime )
 {
-    static std::locale classic(std::locale::classic());
+    static std::locale classic( std::locale::classic() ) ;
     // std::locale takes ownership of the pointer
-    std::locale loc(classic, new boost::posix_time::time_facet(pszFormat));
-    std::stringstream ss;
-    ss.imbue(loc);
-    ss << boost::posix_time::from_time_t(nTime);
-    return ss.str();
+    std::locale loc( classic, new boost::posix_time::time_facet( pszFormat ) ) ;
+    std::stringstream ss ;
+    ss.imbue( loc ) ;
+    ss << boost::posix_time::from_time_t( nTime ) ;
+    return ss.str() ;
 }

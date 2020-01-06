@@ -44,7 +44,7 @@ uint256 CPureBlockHeader::GetLyra2Re2Hash() const
 std::string CPureBlockHeader::ToString() const
 {
     std::stringstream ss ;
-    ss << boost::format( "CPureBlockHeader(version=0x%x, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=%u, sha256_hash=%s, scrypt_hash=%s)" )
+    ss << boost::format( "CPureBlockHeader(version=0x%x, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=0x%08x, sha256_hash=%s, scrypt_hash=%s)" )
         % nVersion
         % hashPrevBlock.ToString()
         % hashMerkleRoot.ToString()

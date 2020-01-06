@@ -3341,35 +3341,41 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+77"/>
+        <location line="+172"/>
         <source>Transaction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-13"/>
+        <location line="-106"/>
+        <location line="+25"/>
+        <location line="+37"/>
+        <location line="+31"/>
         <source>Amount</source>
         <translation type="unfinished">Amount</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <location line="+1"/>
+        <location line="-91"/>
+        <location line="+2"/>
+        <location line="+60"/>
+        <location line="+2"/>
+        <location line="+29"/>
+        <location line="+2"/>
         <source>true</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-1"/>
-        <location line="+1"/>
+        <location line="-95"/>
+        <location line="+2"/>
+        <location line="+60"/>
+        <location line="+2"/>
+        <location line="+29"/>
+        <location line="+2"/>
         <source>false</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TransactionDescDialog</name>
-    <message>
-        <location filename="../forms/transactiondescdialog.ui" line="+20"/>
-        <source>This pane shows a detailed description of the transaction</source>
-        <translation>This pane shows a detailed description of the transaction</translation>
-    </message>
     <message>
         <location filename="../transactiondescdialog.cpp" line="+18"/>
         <source>Details for %1</source>
@@ -3706,7 +3712,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>WalletModel</name>
     <message>
-        <location filename="../walletmodel.cpp" line="+292"/>
+        <location filename="../walletmodel.cpp" line="+290"/>
         <source>Send Coins</source>
         <translation type="unfinished">Send Coins</translation>
     </message>

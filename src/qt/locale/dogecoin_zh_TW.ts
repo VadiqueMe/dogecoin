@@ -2407,10 +2407,6 @@
 <context>
     <name>TransactionDescDialog</name>
     <message>
-        <source>This pane shows a detailed description of the transaction</source>
-        <translation>這個版面顯示這次交易的詳細說明</translation>
-    </message>
-    <message>
         <source>Details for %1</source>
         <translation>交易 %1 的明細</translation>
     </message>

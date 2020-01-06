@@ -630,8 +630,8 @@ bool AddOrphanTx(const CTransactionRef& tx, NodeId peer) EXCLUSIVE_LOCKS_REQUIRE
 
     auto ret = mapOrphanTransactions.emplace(hash, COrphanTx{tx, peer, GetTime() + ORPHAN_TX_EXPIRE_TIME});
     assert(ret.second);
-    BOOST_FOREACH(const CTxIn& txin, tx->vin) {
-        mapOrphanTransactionsByPrev[txin.prevout].insert(ret.first);
+    for ( const CTxIn & txin : tx->vin ) {
+        mapOrphanTransactionsByPrev[ txin.prevout ].insert( ret.first ) ;
     }
 
     AddToCompactExtraTransactions(tx);
@@ -1206,7 +1206,7 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
                 }
                 LogPrint("net", "Reject %s\n", SanitizeString(ss.str()));
             } catch (const std::ios_base::failure&) {
-                // Avoid feedback loops by preventing reject messages from triggering a new reject message.
+                // Avoid feedback loops by preventing reject messages from triggering a new reject message
                 LogPrint("net", "Unparseable reject message received\n");
             }
         }
@@ -1223,22 +1223,14 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
             return false ;
         }
 
-        int64_t nTime;
-        CAddress addrMe;
-        CAddress addrFrom;
-        uint64_t nNonce = 1;
-        uint64_t nServiceInt;
-        ServiceFlags nServices;
-        int nVersion;
-        int nSendVersion;
-        std::string strSubVer;
-        std::string cleanSubVer;
-        int nStartingHeight = -1;
-        bool fRelay = true;
+        CAddress addrMe ;
+        int64_t nPeerTime ;
+        uint64_t nServiceInt ;
+        int nVersion ;
 
-        vRecv >> nVersion >> nServiceInt >> nTime >> addrMe;
-        nSendVersion = std::min(nVersion, PROTOCOL_VERSION);
-        nServices = ServiceFlags(nServiceInt);
+        vRecv >> nVersion >> nServiceInt >> nPeerTime >> addrMe ;
+        int nSendVersion = std::min( nVersion, PROTOCOL_VERSION ) ;
+        ServiceFlags nServices = ServiceFlags( nServiceInt ) ;
         if (!pfrom->fInbound)
         {
             connman.SetServices(pfrom->addr, nServices);
@@ -1269,19 +1261,26 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
             return false ;
         }
 
-        if (nVersion == 10300)
-            nVersion = 300;
-        if (!vRecv.empty())
-            vRecv >> addrFrom >> nNonce;
-        if (!vRecv.empty()) {
-            vRecv >> LIMITED_STRING(strSubVer, MAX_SUBVERSION_LENGTH);
-            cleanSubVer = SanitizeString(strSubVer);
+        if ( nVersion == 10300 ) nVersion = 300 ;
+
+        CAddress addrFrom ;
+        uint64_t nNonce = 1 ;
+        if ( ! vRecv.empty() )
+            vRecv >> addrFrom >> nNonce ;
+
+        std::string strSubVer ;
+        std::string cleanSubVer ;
+        if ( ! vRecv.empty() ) {
+            vRecv >> LIMITED_STRING( strSubVer, MAX_SUBVERSION_LENGTH ) ;
+            cleanSubVer = SanitizeString( strSubVer ) ;
         }
-        if (!vRecv.empty()) {
-            vRecv >> nStartingHeight;
-        }
-        if (!vRecv.empty())
-            vRecv >> fRelay;
+
+        int nStartingHeight = -1 ;
+        if ( ! vRecv.empty() ) vRecv >> nStartingHeight ;
+
+        bool fRelay = true ;
+        if ( ! vRecv.empty() ) vRecv >> fRelay ;
+
         // Disconnect if we connected to ourself
         if (pfrom->fInbound && !connman.CheckIncomingNonce(nNonce))
         {
@@ -1289,7 +1288,6 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
             pfrom->fDisconnect = true;
             return true;
         }
-
         if (pfrom->fInbound && addrMe.IsRoutable())
         {
             SeenLocal(addrMe);
@@ -1367,9 +1365,9 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
                    pfrom->nStartingHeight, addrMe.ToString(), pfrom->id,
                    remoteAddr ) ;
 
-        int64_t nTimeOffset = nTime - GetTime();
-        pfrom->nTimeOffset = nTimeOffset;
-        AddTimeData(pfrom->addr, nTimeOffset);
+        int64_t nTimeOffset = nPeerTime - GetTime() ;
+        pfrom->nTimeOffset = nTimeOffset ;
+        AddTimeData( pfrom->addr, nTimeOffset ) ;
 
         // Relay alerts
         {

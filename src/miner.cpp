@@ -55,8 +55,8 @@ public:
 
 int64_t UpdateTime(CBlockHeader* pblock, const Consensus::Params& consensusParams, const CBlockIndex* pindexPrev)
 {
-    int64_t nOldTime = pblock->nTime;
-    int64_t nNewTime = std::max(pindexPrev->GetMedianTimePast()+1, GetAdjustedTime());
+    int64_t nOldTime = pblock->nTime ;
+    int64_t nNewTime = std::max( pindexPrev->GetMedianTimePast() + 1, GetAdjustedTime() ) ;
 
     if (nOldTime < nNewTime)
         pblock->nTime = nNewTime;
@@ -154,19 +154,21 @@ std::unique_ptr< CBlockTemplate > BlockAssembler::CreateNewBlock( const CScript 
     if (chainparams.MineBlocksOnDemand())
         pblock->SetBaseVersion(GetArg("-blockversion", pblock->GetBaseVersion()), nChainId);
 
-    pblock->nTime = GetAdjustedTime();
-    const int64_t nMedianTimePast = pindexPrev->GetMedianTimePast();
+    pblock->nTime = GetAdjustedTime() ;
 
-    nLockTimeCutoff = (STANDARD_LOCKTIME_VERIFY_FLAGS & LOCKTIME_MEDIAN_TIME_PAST)
-                       ? nMedianTimePast
-                       : pblock->GetBlockTime();
+    //if ( false && NameOfChain() == "inu" )
+        //pblock->nTime = pindexPrev->nTime + /* 1 hour */ 60 * 60 ; // expected to fail TestBlockValidity
+
+    nLockTimeCutoff = ( NameOfChain() != "inu" && ( STANDARD_LOCKTIME_VERIFY_FLAGS & LOCKTIME_MEDIAN_TIME_PAST ) )
+                        ? pindexPrev->GetMedianTimePast()
+                        : pblock->GetBlockTime() ;
 
     // Decide whether to include witness transactions
     // This is only needed in case the witness softfork activation is reverted
     // (which would require a very deep reorganization) or when
     // -promiscuousmempoolflags is used.
     // TODO: replace this with a call to main to assess validity of a mempool
-    // transaction (which in most cases can be a no-op).
+    // transaction (which in most cases can be a no-op)
     fIncludeWitness = IsWitnessEnabled(pindexPrev, consensus) && fMineWitnessTx;
 
     addPriorityTxs();
@@ -194,11 +196,11 @@ std::unique_ptr< CBlockTemplate > BlockAssembler::CreateNewBlock( const CScript 
     pblocktemplate->vchCoinbaseCommitment = GenerateCoinbaseCommitment(*pblock, pindexPrev, consensus);
     pblocktemplate->vTxFees[ 0 ] = - nFees ;
 
-    uint64_t nSerializeSize = GetSerializeSize( *pblock, SER_NETWORK, PROTOCOL_VERSION ) ;
-    LogPrintf(
+    /* LogPrintf(
         "CreateNewBlock: size %u, block weight %u, txs %u, fees %.8f, sigops %d\n",
-        nSerializeSize, GetBlockWeight( *pblock ), nBlockTx, nFees / 100000000.0, nBlockSigOpsCost
-    ) ;
+            GetSerializeSize( *pblock, SER_NETWORK, PROTOCOL_VERSION ),
+            GetBlockWeight( *pblock ), nBlockTx, nFees / 100000000.0, nBlockSigOpsCost
+    ) ; */
 
     // Fill in header
     pblock->hashPrevBlock  = pindexPrev->GetBlockSha256Hash();
@@ -207,18 +209,22 @@ std::unique_ptr< CBlockTemplate > BlockAssembler::CreateNewBlock( const CScript 
     pblock->nNonce         = 0;
     pblocktemplate->vTxSigOpsCost[0] = WITNESS_SCALE_FACTOR * GetLegacySigOpCount(*pblock->vtx[0]);
 
-    CValidationState state;
-    if (!TestBlockValidity(state, chainparams, *pblock, pindexPrev, false, false)) {
-        throw std::runtime_error(strprintf("%s: TestBlockValidity failed: %s", __func__, FormatStateMessage(state)));
+    CValidationState state ;
+    if ( ! TestBlockValidity( state, chainparams, *pblock, pindexPrev, false, false ) ) {
+        if ( state.GetRejectReason() != "coinbase-only-block-delay" && state.GetRejectReason() != "block-delay" )
+            throw std::runtime_error( strprintf( "%s: TestBlockValidity failed: %s", __func__, FormatStateMessage( state ) ) ) ;
+        else return nullptr ;
     }
-    int64_t nTime2 = GetTimeMicros();
 
-    LogPrint("bench", "CreateNewBlock() packages: %.2fms (%d packages, %d updated descendants), validity: %.2fms (total %.2fms)\n", 0.001 * (nTime1 - nTimeStart), nPackagesSelected, nDescendantsUpdated, 0.001 * (nTime2 - nTime1), 0.001 * (nTime2 - nTimeStart));
+    int64_t nTime2 = GetTimeMicros() ;
+    LogPrint( "bench", "CreateNewBlock packages: %.3f ms (%d packages, %d updated descendants), validity: %.3f ms (total %.3f ms)\n",
+              0.001 * ( nTime1 - nTimeStart ), nPackagesSelected, nDescendantsUpdated,
+              0.001 * ( nTime2 - nTime1 ), 0.001 * ( nTime2 - nTimeStart ) ) ;
 
     return std::move( pblocktemplate ) ;
 }
 
-bool BlockAssembler::isStillDependent(CTxMemPool::txiter iter)
+bool BlockAssembler::isStillDependent( CTxMemPool::txiter iter )
 {
     for ( CTxMemPool::txiter parent : mempool.GetMemPoolParents( iter ) )
     {
@@ -240,6 +246,7 @@ void BlockAssembler::onlyUnconfirmed(CTxMemPool::setEntries& testSet)
         }
     }
 }
+
 
 bool BlockAssembler::TestPackage(uint64_t packageSize, int64_t packageSigOpsCost)
 {
@@ -716,8 +723,13 @@ void MiningThread::MineBlocks()
             unsigned int transactionsInMempool = mempool.GetTransactionsUpdated() ;
             CBlockIndex * pindexPrev = chainActive.Tip() ;
 
-            assembleNewBlockCandidate() ;
-            if ( currentCandidate == nullptr ) return ;
+            bool candidateOk = false ;
+            do {
+                candidateOk = assembleNewBlockCandidate() ;
+                if ( candidateOk && currentCandidate != nullptr ) break ;
+                std::this_thread::sleep_for( std::chrono::milliseconds( 1000 ) ) ;
+            } while ( ! finished ) ;
+            if ( finished ) break ;
 
             /* if ( NameOfChain() == "test" ) {
                 currentCandidate->block.nVersion &= 0xff ;
@@ -775,9 +787,18 @@ void MiningThread::MineBlocks()
 
                 if ( found ) // found a solution
                 {
-                    LogPrintf( "MiningThread (%d):\n", numberOfThread ) ;
-                    LogPrintf( "proof-of-work found with nonce 0x%x\n   scrypt hash %s\n   <= solution %s\n",
-                               currentBlock->nNonce, currentBlock->GetScryptHash().GetHex(), solutionHash.GetHex() ) ;
+                    std::string proofOfWorkFound = strprintf( "MiningThread (%d):\n", numberOfThread ) ;
+                    proofOfWorkFound += strprintf( "proof-of-work found with nonce 0x%x\n", currentBlock->nNonce ) ;
+                    proofOfWorkFound += strprintf( "   scrypt hash %s\n   <= solution %s\n",
+                                                    currentBlock->GetScryptHash().GetHex(), solutionHash.GetHex() ) ;
+                    if ( NameOfChain() == "inu" ) {
+                        proofOfWorkFound += strprintf( "   sha256 hash %s\n   <= solution %s\n",
+                                                        currentBlock->GetSha256Hash().GetHex(), ( solutionHash << 1 ).GetHex() ) ;
+                        proofOfWorkFound += strprintf( "   lyra2re2 hash %s\n    <=  solution %s\n",
+                                                        currentBlock->GetLyra2Re2Hash().GetHex(), solutionHash.GetHex() ) ;
+                    }
+
+                    LogPrintf( proofOfWorkFound ) ;
 
                     if ( ProcessBlockFound( currentBlock, chainparams ) ) {
                         howManyBlocksWereGeneratedByThisThread ++ ;
@@ -853,11 +874,12 @@ bool MiningThread::assembleNewBlockCandidate()
     if ( coinbaseScript == nullptr || coinbaseScript->reserveScript.empty() )
         return false ;
 
-    std::unique_ptr< BlockAssembler > assembler( new BlockAssembler( chainparams ) ) ;
-    currentCandidate = assembler->CreateNewBlock( coinbaseScript->reserveScript ) ;
-    if ( currentCandidate == nullptr )
-    {
-        LogPrintf( "BlockAssembler::CreateNewBlock couldn't create new block\n" ) ;
+    try {
+        std::unique_ptr< BlockAssembler > assembler( new BlockAssembler( chainparams ) ) ;
+        currentCandidate = assembler->CreateNewBlock( coinbaseScript->reserveScript ) ;
+        if ( currentCandidate == nullptr )
+            return false ;
+    } catch ( const std::runtime_error & e ) {
         return false ;
     }
 

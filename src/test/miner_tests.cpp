@@ -429,7 +429,9 @@ BOOST_AUTO_TEST_CASE(CreateNewBlock_validity)
     BOOST_CHECK( CheckFinalTx( tx, flags ) ) ; // Locktime passes
     BOOST_CHECK( ! TestSequenceLocks(tx, flags ) ) ; // Sequence locks fail
 
-    for ( int i = 0 ; i < CBlockIndex::nMedianTimeSpan ; i ++ )
+    static const int nMedianTimeSpan = 11 ;
+
+    for ( int i = 0 ; i < nMedianTimeSpan ; i ++ )
         chainActive.Tip()->GetAncestor( chainActive.Tip()->nHeight - i )->nTime += 512 ; // Trick the MedianTimePast
 
     {
@@ -439,7 +441,7 @@ BOOST_AUTO_TEST_CASE(CreateNewBlock_validity)
         BOOST_CHECK( SequenceLocks( tx, flags, &prevheights, blockIndex ) ) ; // Sequence locks pass 512 seconds later
     }
 
-    for ( int i = 0 ; i < CBlockIndex::nMedianTimeSpan ; i ++ )
+    for ( int i = 0 ; i < nMedianTimeSpan ; i ++ )
         chainActive.Tip()->GetAncestor( chainActive.Tip()->nHeight - i )->nTime -= 512 ; //undo tricked MedianTimePast
 
     // absolute height locked
@@ -486,7 +488,7 @@ BOOST_AUTO_TEST_CASE(CreateNewBlock_validity)
     // For now these will still generate a valid template until BIP68 soft fork
     BOOST_CHECK_EQUAL(pblocktemplate->block.vtx.size(), 3);
     // However if we advance height by 1 and time by 512, all of them should be mined
-    for (int i = 0; i < CBlockIndex::nMedianTimeSpan; i++)
+    for ( int i = 0 ; i < nMedianTimeSpan ; i ++ )
         chainActive.Tip()->GetAncestor(chainActive.Tip()->nHeight - i)->nTime += 512; //Trick the MedianTimePast
     chainActive.Tip()->nHeight++;
     // changed to 60 second block interval for consistency

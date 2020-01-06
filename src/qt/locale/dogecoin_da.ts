@@ -2407,10 +2407,6 @@
 <context>
     <name>TransactionDescDialog</name>
     <message>
-        <source>This pane shows a detailed description of the transaction</source>
-        <translation>Denne rude viser en detaljeret beskrivelse af transaktionen</translation>
-    </message>
-    <message>
         <source>Details for %1</source>
         <translation>Detaljer for %1</translation>
     </message>

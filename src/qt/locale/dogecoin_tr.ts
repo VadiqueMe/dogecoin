@@ -2403,10 +2403,6 @@
 <context>
     <name>TransactionDescDialog</name>
     <message>
-        <source>This pane shows a detailed description of the transaction</source>
-        <translation>Bu pano işlemin ayrıntılı açıklamasını gösterir</translation>
-    </message>
-    <message>
         <source>Details for %1</source>
         <translation>%1 için ayrıntılar</translation>
     </message>

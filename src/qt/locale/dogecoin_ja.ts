@@ -2411,10 +2411,6 @@
 <context>
     <name>TransactionDescDialog</name>
     <message>
-        <source>This pane shows a detailed description of the transaction</source>
-        <translation>ここでは取引の詳細を表示しています</translation>
-    </message>
-    <message>
         <source>Details for %1</source>
         <translation>%1 の詳細</translation>
     </message>

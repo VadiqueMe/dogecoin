@@ -867,13 +867,6 @@
     <name>TransactionDesc</name>
     </context>
 <context>
-    <name>TransactionDescDialog</name>
-    <message>
-        <source>This pane shows a detailed description of the transaction</source>
-        <translation>Este panel amosa unha descripción detallada da transacción</translation>
-    </message>
-    </context>
-<context>
     <name>TransactionTableModel</name>
     </context>
 <context>

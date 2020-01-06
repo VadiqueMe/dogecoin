@@ -9,6 +9,7 @@
 #include "hash.h"
 #include "tinyformat.h"
 #include "utilstrencodings.h"
+#include "utiltime.h"
 #include "crypto/common.h"
 
 void CBlockHeader::SetAuxpow ( CAuxPow * auxpow )
@@ -21,12 +22,13 @@ std::string CBlock::ToString() const
 {
     std::stringstream s ;
     s << strprintf(
-        "CBlock(scrypt_hash=%s, sha256_hash=%s, version=0x%x, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=%u, txs=%u)\n",
-        GetScryptHash().ToString(), GetSha256Hash().ToString(),
+        "CBlock(sha256_hash=%s, scrypt_hash=%s, version=0x%x, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u '%s', nBits=%08x, nNonce=0x%08x, txs=%u)\n",
+        GetSha256Hash().ToString(), GetScryptHash().ToString(),
         nVersion,
         hashPrevBlock.ToString(),
         hashMerkleRoot.ToString(),
-        nTime, nBits, nNonce,
+        nTime, DateTimeStrFormat( "%Y-%m-%d %H:%M:%S", nTime ),
+        nBits, nNonce,
         vtx.size()
     ) ;
     for ( unsigned int i = 0 ; i < vtx.size() ; i++ )

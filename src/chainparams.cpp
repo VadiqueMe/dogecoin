@@ -260,7 +260,7 @@ public:
         consensus.vDeployments[ Consensus::DEPLOYMENT_SEGWIT ].nTimeout = 0 ; // disabled
 
         // The best chain has at least this much work
-        consensus.nMinimumChainWork = uint256S( "0x0000000000000000000000000000000000000000000000000000000000000837" ) ;
+        consensus.nMinimumChainWork = uint256S( "0x00001f80" ) ;
 
         // By default assume that the signatures in ancestors of this block are valid
         consensus.defaultAssumeValid = uint256S( "0x00" ) ;
@@ -285,11 +285,14 @@ public:
 
         nPruneAfterHeight = 10000 ;
 
-        struct std::tm genesisTime ;
+/*      struct std::tm genesisTimeTm ;
         {
             std::istringstream ss( "2019-12-25 00:01:22" ) ;
-            ss >> std::get_time( &genesisTime, "%Y-%m-%d %H:%M:%S" ) ;
+            ss >> std::get_time( &genesisTimeTm, "%Y-%m-%d %H:%M:%S" ) ;
         }
+        printf( "genesis nTime=%u\n", mktime( &genesisTimeTm ) ) ; */
+
+        int32_t genesisTime = 1577221282 ; // 2019-12-25 00:01:22
 
 /*
         arith_uint256 maxScryptHashGenesis = UintToArith256( consensus.powLimit ) >> 3 ;
@@ -299,7 +302,7 @@ public:
         while ( nonce >= 0x2be )
         {
             genesis = CreateGenesisBlock(
-                mktime( &genesisTime ),
+                genesisTime,
                 nonce,
                 UintToArith256( consensus.powLimit ).GetCompact(), // bits
                 0x620004, // version
@@ -329,12 +332,18 @@ public:
         // genesis block's sha256 hash is 0x0068ddbf5d570f2589248a9b42ec8480e6fd40d681108a63729e563f0988a6ef
         // genesis block's lyra2re2 hash is 0x00299a9cc20dd3b9c7b5b57f267c9d35b467ca5aa5d182b11505c9a4e6284765
 
-        genesis = CreateGenesisBlock( mktime( &genesisTime ), genesisNonce, /* bits */ UintToArith256( consensus.powLimit ).GetCompact(), /* version */ 0x620004, 1 ) ;
+        genesis = CreateGenesisBlock( genesisTime , genesisNonce, /* bits */ UintToArith256( consensus.powLimit ).GetCompact(), /* version */ 0x620004, /* subsidy */ 1 ) ;
 
         consensus.hashGenesisBlock = genesis.GetSha256Hash() ;
 
         uint256 expectedSha256HashOfGenesis = uint256S( "0x0068ddbf5d570f2589248a9b42ec8480e6fd40d681108a63729e563f0988a6ef" ) ;
         uint256 expectedMerkleRootOfGenesis = uint256S( "0xcde1e3166a191d8e661382004982ade4892ade250dbf7190413ac7a26079b261" ) ;
+
+        if ( consensus.hashGenesisBlock != expectedSha256HashOfGenesis ) {
+            std::cout << "consensus.hashGenesisBlock = " << consensus.hashGenesisBlock.GetHex() << std::endl
+                       << "expectedSha256HashOfGenesis = " << expectedSha256HashOfGenesis.GetHex() << std::endl ;
+            std::cout << "genesis " << genesis.ToString() << std::endl ;
+        }
 
         assert( consensus.hashGenesisBlock == expectedSha256HashOfGenesis ) ;
         assert( genesis.hashMerkleRoot == expectedMerkleRootOfGenesis ) ;
@@ -385,7 +394,7 @@ public:
         vSeeds.clear() ;
         vFixedSeeds.clear() ;
 
-        fMiningRequiresPeers = false /* true */ ;
+        fMiningRequiresPeers = true ;
         fDefaultConsistencyChecks = false ;
         fRequireStandardTxs = true ;
         fMineBlocksOnDemand = false ;
@@ -393,18 +402,18 @@ public:
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
             (       0, uint256S( "0x0068ddbf5d570f2589248a9b42ec8480e6fd40d681108a63729e563f0988a6ef" ) )
-            (      22, uint256S( "0x032d5d139539953299e34a5035e5de2fb1c12424e6cc60c692bba5b4c4755e63" ) )
+            (     125, uint256S( "0x05878a2427b5201be66db0900cb47ab36fb85950771e35f70a1a3da6e34a4278" ) )
         } ;
 
         struct std::tm lastCheckpointTime ;
         {
-            std::istringstream ss( "2019-12-26 18:14:08" ) ;
+            std::istringstream ss( "2020-01-06 09:17:54" ) ;
             ss >> std::get_time( &lastCheckpointTime, "%Y-%m-%d %H:%M:%S" ) ;
         }
         chainTxData = ChainTxData {
-            // data for block 032d5d139539953299e34a5035e5de2fb1c12424e6cc60c692bba5b4c4755e63 at height 22
+            // data for block 05878a2427b5201be66db0900cb47ab36fb85950771e35f70a1a3da6e34a4278 at height 125
             mktime( &lastCheckpointTime ),
-            23, // number of all transactions in all blocks at last checkpoint
+            127, // number of all transactions in all blocks at last checkpoint
             0.01 // estimated number of transactions per second after checkpoint
         } ;
     }

@@ -2411,10 +2411,6 @@
 <context>
     <name>TransactionDescDialog</name>
     <message>
-        <source>This pane shows a detailed description of the transaction</source>
-        <translation>Ce panneau affiche une description détaillée de la transaction</translation>
-    </message>
-    <message>
         <source>Details for %1</source>
         <translation>Détails de %1</translation>
     </message>

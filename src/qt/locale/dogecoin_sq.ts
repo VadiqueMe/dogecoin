@@ -615,13 +615,6 @@
     </message>
     </context>
 <context>
-    <name>TransactionDescDialog</name>
-    <message>
-        <source>This pane shows a detailed description of the transaction</source>
-        <translation>Ky panel tregon një përshkrim të detajuar të transaksionit</translation>
-    </message>
-    </context>
-<context>
     <name>TransactionTableModel</name>
     <message>
         <source>Date</source>

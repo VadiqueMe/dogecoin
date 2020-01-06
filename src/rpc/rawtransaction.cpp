@@ -53,10 +53,10 @@ void ScriptPubKeyToJSON(const CScript& scriptPubKey, UniValue& out, bool fInclud
     out.push_back(Pair("reqSigs", nRequired));
     out.push_back(Pair("type", GetTxnOutputType(type)));
 
-    UniValue a(UniValue::VARR);
-    BOOST_FOREACH(const CTxDestination& addr, addresses)
+    UniValue a( UniValue::VARR ) ;
+    for ( const CTxDestination & addr : addresses )
         a.push_back( CDogecoinAddress( addr ).ToString() ) ;
-    out.push_back(Pair("addresses", a));
+    out.push_back( Pair( "addresses", a ) ) ;
 }
 
 void TxToJSON(const CTransaction& tx, const uint256 hashBlock, UniValue& entry)
@@ -123,10 +123,10 @@ void TxToJSON(const CTransaction& tx, const uint256 hashBlock, UniValue& entry)
     }
 }
 
-UniValue getrawtransaction(const JSONRPCRequest& request)
+UniValue getrawtransaction( const JSONRPCRequest & request )
 {
-    if (request.fHelp || request.params.size() < 1 || request.params.size() > 2)
-        throw runtime_error(
+    if ( request.fHelp || request.params.size() < 1 || request.params.size() > 2 )
+        throw std::runtime_error(
             "getrawtransaction \"txid\" ( verbose )\n"
 
             "\nNOTE: By default this function only works for mempool transactions. If the -txindex option is\n"
@@ -199,7 +199,7 @@ UniValue getrawtransaction(const JSONRPCRequest& request)
 
     uint256 hash = ParseHashV(request.params[0], "parameter 1");
 
-    // Accept either a bool (true) or a num (>=1) to indicate verbose output.
+    // Accept either a bool (true) or a num (>=1) to indicate verbose output
     bool fVerbose = false;
     if (request.params.size() > 1) {
         if (request.params[1].isNum()) {
@@ -438,27 +438,27 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
 
     std::set< CDogecoinAddress > setAddress ;
     std::vector< std::string > addrList = sendTo.getKeys() ;
-    BOOST_FOREACH( const string& name_, addrList )
+    for ( const string & name : addrList )
     {
-        if (name_ == "data") {
-            std::vector<unsigned char> data = ParseHexV(sendTo[name_].getValStr(),"Data");
+        if ( name == "data" ) {
+            std::vector< unsigned char > data = ParseHexV( sendTo[ name ].getValStr(), "Data" ) ;
 
             CTxOut out(0, CScript() << OP_RETURN << data);
             rawTx.vout.push_back(out);
         } else {
-            CDogecoinAddress address( name_ ) ;
+            CDogecoinAddress address( name ) ;
             if ( ! address.IsValid() )
-                throw JSONRPCError( RPC_INVALID_ADDRESS_OR_KEY, string( "Invalid Dogecoin address: " ) + name_ ) ;
+                throw JSONRPCError( RPC_INVALID_ADDRESS_OR_KEY, string( "Invalid Dogecoin address: " ) + name ) ;
 
             if ( setAddress.count( address ) )
-                throw JSONRPCError( RPC_INVALID_PARAMETER, string( "Invalid parameter, duplicated address: " ) + name_ ) ;
+                throw JSONRPCError( RPC_INVALID_PARAMETER, string( "Invalid parameter, duplicated address: " ) + name ) ;
             setAddress.insert( address ) ;
 
-            CScript scriptPubKey = GetScriptForDestination(address.Get());
-            CAmount nAmount = AmountFromValue(sendTo[name_]);
+            CScript scriptPubKey = GetScriptForDestination( address.Get() ) ;
+            CAmount nAmount = AmountFromValue( sendTo[ name ] ) ;
 
-            CTxOut out(nAmount, scriptPubKey);
-            rawTx.vout.push_back(out);
+            CTxOut out( nAmount, scriptPubKey ) ;
+            rawTx.vout.push_back( out ) ;
         }
     }
 
@@ -693,7 +693,7 @@ UniValue signrawtransaction(const JSONRPCRequest& request)
         CCoinsViewMemPool viewMempool(&viewChain, mempool);
         view.SetBackend(viewMempool); // temporarily switch cache backend to db+mempool view
 
-        BOOST_FOREACH(const CTxIn& txin, mergedTx.vin) {
+        for ( const CTxIn & txin : mergedTx.vin ) {
             const uint256& prevHash = txin.prevout.hash;
             CCoins coins;
             view.AccessCoins(prevHash); // this is certainly allowed to fail
@@ -836,7 +836,7 @@ UniValue signrawtransaction(const JSONRPCRequest& request)
             ProduceSignature(MutableTransactionSignatureCreator(&keystore, &mergedTx, i, amount, nHashType), prevPubKey, sigdata);
 
         // ... and merge in other signatures:
-        BOOST_FOREACH(const CMutableTransaction& txv, txVariants) {
+        for ( const CMutableTransaction & txv : txVariants ) {
             if (txv.vin.size() > i) {
                 sigdata = CombineSignatures(prevPubKey, TransactionSignatureChecker(&txConst, i, amount), sigdata, DataFromTransaction(txv, i));
             }

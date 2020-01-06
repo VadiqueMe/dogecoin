@@ -1485,13 +1485,6 @@
     <name>TransactionDesc</name>
     </context>
 <context>
-    <name>TransactionDescDialog</name>
-    <message>
-        <source>This pane shows a detailed description of the transaction</source>
-        <translation>این پانل شامل توصیف کاملی از جزئیات تراکنش است</translation>
-    </message>
-    </context>
-<context>
     <name>TransactionTableModel</name>
     <message>
         <source>Label</source>

@@ -1494,13 +1494,6 @@
     <name>TransactionDesc</name>
     </context>
 <context>
-    <name>TransactionDescDialog</name>
-    <message>
-        <source>This pane shows a detailed description of the transaction</source>
-        <translation>This pane shows a detailed description of the transaction</translation>
-    </message>
-    </context>
-<context>
     <name>TransactionView</name>
     <message>
         <source>Comma separated file (*.csv)</source>

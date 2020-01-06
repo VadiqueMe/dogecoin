@@ -2403,10 +2403,6 @@
 <context>
     <name>TransactionDescDialog</name>
     <message>
-        <source>This pane shows a detailed description of the transaction</source>
-        <translation>Dit venster laat een uitgebreide beschrijving van de transactie zien</translation>
-    </message>
-    <message>
         <source>Details for %1</source>
         <translation>Details voor %1</translation>
     </message>

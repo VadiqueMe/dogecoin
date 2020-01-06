@@ -276,7 +276,7 @@ QString TransactionDesc::toHTML( CWallet * wallet, CWalletTx & wtx, TransactionR
     // More details
     //
     {
-        strHTML += "<hr><br>" + QString( "<i>More details</i>" ) + "<br><br>" ;
+        strHTML += "<hr><br><i>" + QString( "More details" ) + "</i><br><br>" ;
 
         for ( const CTxIn & txin : wtx.tx->vin )
             if ( wallet->IsMine( txin ) )
@@ -285,20 +285,22 @@ QString TransactionDesc::toHTML( CWallet * wallet, CWalletTx & wtx, TransactionR
             if ( wallet->IsMine( txout ) )
                 strHTML += "<b>" + tr("Credit") + ":</b> " + UnitsOfCoin::formatHtmlWithUnit( unit, wallet->GetCredit( txout, ISMINE_ALL ) ) + "<br>" ;
 
-        bool coinsInInputs = false ;
-        QString inputsHtml = "<br><b>" + QString( "Coins in inputs" ) + ":</b>" ;
+        size_t nInputs = 0 ;
+        QString inputsHtml = "<br><b>" + QString( "Inputs" ) + ":</b>" ;
         inputsHtml += "<ul>" ;
 
         for ( const CTxIn & txin : wtx.tx->vin )
         {
-            COutPoint prevout = txin.prevout ;
-            CCoins prev ;
-            if ( pcoinsTip->GetCoins( prevout.hash, prev ) )
+            // using CWallet::GetDebit isn't enough here
+            std::map< uint256, CWalletTx >::const_iterator mi = wallet->mapWallet.find( txin.prevout.hash ) ;
+            if ( mi != wallet->mapWallet.end() )
             {
-                if ( prevout.n < prev.vout.size() )
+                CTransactionRef prevoutTx = ( *mi ).second.tx ;
+                if ( txin.prevout.n < prevoutTx->vout.size() )
                 {
                     inputsHtml += "<li>" ;
-                    const CTxOut & vout = prev.vout[ prevout.n ] ;
+
+                    const CTxOut & vout = prevoutTx->vout[ txin.prevout.n ] ;
                     CTxDestination address ;
                     if ( ExtractDestination( vout.scriptPubKey, address ) )
                     {
@@ -307,17 +309,110 @@ QString TransactionDesc::toHTML( CWallet * wallet, CWalletTx & wtx, TransactionR
                         inputsHtml += QString::fromStdString( CDogecoinAddress( address ).ToString() ) ;
                     }
                     inputsHtml += " " + tr("Amount") + "=" + UnitsOfCoin::formatHtmlWithUnit( unit, vout.nValue ) ;
-                    inputsHtml += " IsMine=" + ( wallet->IsMine( vout ) & ISMINE_SPENDABLE ? tr("true") : tr("false") ) ;
-                    inputsHtml += " IsWatchOnly=" + ( wallet->IsMine( vout ) & ISMINE_WATCH_ONLY ? tr("true") : tr("false") ) ;
-                    inputsHtml += "</li>" ;
+                    isminetype isMine = wallet->IsMine( vout ) ;
+                    inputsHtml += " isMine=" + ( isMine & ISMINE_SPENDABLE ? tr("true") : tr("false") ) ;
+                    if ( isMine & ISMINE_ALL )
+                        inputsHtml += " isWatchOnly=" + ( isMine & ISMINE_WATCH_ONLY ? tr("true") : tr("false") ) ;
 
-                    coinsInInputs = true ;
+                    inputsHtml += "</li>" ;
+                    nInputs ++ ;
+                }
+            }
+            else
+            {
+                CTransactionRef prevoutTx ;
+                uint256 blockSha256 ;
+                if ( GetTransaction( txin.prevout.hash, prevoutTx, Params().GetConsensus( 0 ), blockSha256, true ) ) {
+                    inputsHtml += "<li>" ;
+
+                    const CTxOut & vout = prevoutTx->vout[ txin.prevout.n ] ;
+                    CTxDestination address ;
+                    if ( ExtractDestination( vout.scriptPubKey, address ) )
+                    {
+                        if ( wallet->mapAddressBook.count( address ) && ! wallet->mapAddressBook[ address ].name.empty() )
+                            inputsHtml += GUIUtil::HtmlEscape( wallet->mapAddressBook[ address ].name ) + " " ;
+                        inputsHtml += QString::fromStdString( CDogecoinAddress( address ).ToString() ) ;
+                    }
+                    inputsHtml += " " + tr("Amount") + "=" + UnitsOfCoin::formatHtmlWithUnit( unit, vout.nValue ) ;
+
+                    inputsHtml += "</li>" ;
+                    nInputs ++ ;
                 }
             }
         }
 
         inputsHtml += "</ul>" ;
-        if ( coinsInInputs ) strHTML += inputsHtml ;
+        if ( nInputs > 0 ) strHTML += inputsHtml ;
+
+        bool unspentCoinsInInputs = false ;
+        QString unspentInputsHtml = "<br><b>" + QString( "Unspent coins in inputs" ) + ":</b>" ;
+        unspentInputsHtml += "<ul>" ;
+
+        for ( const CTxIn & txin : wtx.tx->vin )
+        {
+            // COutPoint txin.prevout is the location of the previous transaction's output that txin claims
+            CCoinsViewCache coinsView( pcoinsTip ) ;
+            const CCoins * coins = coinsView.AccessCoins( txin.prevout.hash ) ;
+            if ( coins != nullptr )
+            {
+                if ( txin.prevout.n < coins->vout.size() )
+                {
+                    // std::vector< CTxOut > vout of CCoins are unspent transaction outputs
+                    // spent outputs are .IsNull()
+                    const CTxOut & vout = coins->vout[ txin.prevout.n ] ;
+                    if ( ! vout.IsNull() )
+                    {
+                        unspentInputsHtml += "<li>" ;
+                        CTxDestination address ;
+                        if ( ExtractDestination( vout.scriptPubKey, address ) )
+                        {
+                            if ( wallet->mapAddressBook.count( address ) && ! wallet->mapAddressBook[ address ].name.empty() )
+                                unspentInputsHtml += GUIUtil::HtmlEscape( wallet->mapAddressBook[ address ].name ) + " " ;
+                            unspentInputsHtml += QString::fromStdString( CDogecoinAddress( address ).ToString() ) ;
+                        }
+                        unspentInputsHtml += " " + tr("Amount") + "=" + UnitsOfCoin::formatHtmlWithUnit( unit, vout.nValue ) ;
+                        isminetype isMine = wallet->IsMine( vout ) ;
+                        unspentInputsHtml += " isMine=" + ( isMine & ISMINE_SPENDABLE ? tr("true") : tr("false") ) ;
+                        if ( isMine & ISMINE_ALL )
+                            unspentInputsHtml += " isWatchOnly=" + ( isMine & ISMINE_WATCH_ONLY ? tr("true") : tr("false") ) ;
+                        unspentInputsHtml += "</li>" ;
+
+                        unspentCoinsInInputs = true ;
+                    }
+                }
+            }
+        }
+
+        unspentInputsHtml += "</ul>" ;
+        if ( unspentCoinsInInputs ) strHTML += unspentInputsHtml ;
+
+        size_t nOutputs = 0 ;
+        QString outputsHtml = "<br><b>" + QString( "Outputs" ) + ":</b>" ;
+        outputsHtml += "<ul>" ;
+
+        for ( const CTxOut & txout : wtx.tx->vout )
+        {
+            if ( ! txout.IsNull() ) {
+                outputsHtml += "<li>" ;
+                CTxDestination address ;
+                if ( ExtractDestination( txout.scriptPubKey, address ) )
+                {
+                    if ( wallet->mapAddressBook.count( address ) && ! wallet->mapAddressBook[ address ].name.empty() )
+                        outputsHtml += GUIUtil::HtmlEscape( wallet->mapAddressBook[ address ].name ) + " " ;
+                    outputsHtml += QString::fromStdString( CDogecoinAddress( address ).ToString() ) ;
+                }
+                outputsHtml += " " + tr("Amount") + "=" + UnitsOfCoin::formatHtmlWithUnit( unit, txout.nValue ) ;
+                isminetype isMine = wallet->IsMine( txout ) ;
+                outputsHtml += " isMine=" + ( isMine & ISMINE_SPENDABLE ? tr("true") : tr("false") ) ;
+                if ( isMine & ISMINE_ALL )
+                    outputsHtml += " isWatchOnly=" + ( isMine & ISMINE_WATCH_ONLY ? tr("true") : tr("false") ) ;
+                outputsHtml += "</li>" ;
+                nOutputs ++ ;
+            }
+        }
+
+        outputsHtml += "</ul>" ;
+        if ( nOutputs > 0 ) strHTML += outputsHtml ;
 
         strHTML += "<br><b>" + tr("Transaction") + ":</b><br>" ;
         strHTML += GUIUtil::HtmlEscape( wtx.tx->ToString(), true ) ;
@@ -326,7 +421,7 @@ QString TransactionDesc::toHTML( CWallet * wallet, CWalletTx & wtx, TransactionR
     //
     // Raw hex
     //
-    strHTML += "<hr><br>" + QString( "<i>Raw hex</i>" ) + "<br><br>" ;
+    strHTML += "<hr><br><i>" + QString( "Raw hex" ) + "</i><br><br>" ;
     strHTML += TransactionDesc::getTxHex( rec, wallet ) ;
 
     strHTML += "</font></html>" ;

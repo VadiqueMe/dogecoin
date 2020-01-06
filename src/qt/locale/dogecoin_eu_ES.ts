@@ -599,13 +599,6 @@
     </message>
     </context>
 <context>
-    <name>TransactionDescDialog</name>
-    <message>
-        <source>This pane shows a detailed description of the transaction</source>
-        <translation>Panel honek transakzioaren deskribapen xehea erakusten du</translation>
-    </message>
-    </context>
-<context>
     <name>TransactionTableModel</name>
     <message>
         <source>Date</source>

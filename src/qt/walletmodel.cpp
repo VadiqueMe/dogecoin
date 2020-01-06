@@ -29,8 +29,6 @@
 #include <QSet>
 #include <QTimer>
 
-#include <boost/foreach.hpp>
-
 WalletModel::WalletModel(const PlatformStyle *platformStyle, CWallet *_wallet, OptionsModel *_optionsModel, QObject *parent) :
     QObject(parent), wallet(_wallet), optionsModel(_optionsModel), addressTableModel(0),
     transactionTableModel(0),
@@ -66,9 +64,9 @@ CAmount WalletModel::getBalance(const CCoinControl *coinControl) const
         CAmount nBalance = 0;
         std::vector<COutput> vCoins;
         wallet->AvailableCoins(vCoins, true, coinControl);
-        BOOST_FOREACH(const COutput& out, vCoins)
-            if(out.fSpendable)
-                nBalance += out.tx->tx->vout[out.i].nValue;
+        for ( const COutput & out : vCoins )
+            if ( out.fSpendable )
+                nBalance += out.tx->tx->vout[ out.i ].nValue ;
 
         return nBalance;
     }
@@ -209,7 +207,7 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransact
     int nAddresses = 0;
 
     // Pre-check input data for validity
-    Q_FOREACH(const SendCoinsRecipient &rcp, recipients)
+    for ( const SendCoinsRecipient & rcp : recipients )
     {
         if (rcp.fSubtractFeeFromAmount)
             fSubtractFeeFromAmount = true;
@@ -312,7 +310,7 @@ WalletModel::SendCoinsReturn WalletModel::sendCoins(WalletModelTransaction &tran
         LOCK2(cs_main, wallet->cs_wallet);
         CWalletTx *newTx = transaction.getTransaction();
 
-        Q_FOREACH(const SendCoinsRecipient &rcp, transaction.getRecipients())
+        for ( const SendCoinsRecipient & rcp : transaction.getRecipients() )
         {
             if (rcp.paymentRequest.IsInitialized())
             {
@@ -343,7 +341,7 @@ WalletModel::SendCoinsReturn WalletModel::sendCoins(WalletModelTransaction &tran
 
     // Add addresses / update labels that we've sent to to the address book,
     // and emit coinsSent signal for each recipient
-    Q_FOREACH(const SendCoinsRecipient &rcp, transaction.getRecipients())
+    for ( const SendCoinsRecipient & rcp : transaction.getRecipients() )
     {
         // Don't touch the address book when we have a payment request
         if (!rcp.paymentRequest.IsInitialized())
@@ -573,16 +571,16 @@ bool WalletModel::getPrivKey(const CKeyID &address, CKey& vchPrivKeyOut) const
 }
 
 // returns a list of COutputs from COutPoints
-void WalletModel::getOutputs(const std::vector<COutPoint>& vOutpoints, std::vector<COutput>& vOutputs)
+void WalletModel::getOutputs( const std::vector< COutPoint > & vOutpoints, std::vector< COutput > & vOutputs )
 {
-    LOCK2(cs_main, wallet->cs_wallet);
-    BOOST_FOREACH(const COutPoint& outpoint, vOutpoints)
+    LOCK2( cs_main, wallet->cs_wallet ) ;
+    for ( const COutPoint & outpoint : vOutpoints )
     {
-        if (!wallet->mapWallet.count(outpoint.hash)) continue;
-        int nDepth = wallet->mapWallet[outpoint.hash].GetDepthInMainChain();
-        if (nDepth < 0) continue;
-        COutput out(&wallet->mapWallet[outpoint.hash], outpoint.n, nDepth, true, true);
-        vOutputs.push_back(out);
+        if ( ! wallet->mapWallet.count( outpoint.hash ) ) continue ;
+        int nDepth = wallet->mapWallet[ outpoint.hash ].GetDepthInMainChain() ;
+        if ( nDepth < 0 ) continue ;
+        COutput out( &wallet->mapWallet[ outpoint.hash ], outpoint.n, nDepth, true, true ) ;
+        vOutputs.push_back( out ) ;
     }
 }
 
@@ -603,7 +601,7 @@ void WalletModel::listCoins(std::map<QString, std::vector<COutput> >& mapCoins) 
     wallet->ListLockedCoins(vLockedCoins);
 
     // add locked coins
-    BOOST_FOREACH(const COutPoint& outpoint, vLockedCoins)
+    for ( const COutPoint & outpoint : vLockedCoins )
     {
         if (!wallet->mapWallet.count(outpoint.hash)) continue;
         int nDepth = wallet->mapWallet[outpoint.hash].GetDepthInMainChain();
@@ -613,7 +611,7 @@ void WalletModel::listCoins(std::map<QString, std::vector<COutput> >& mapCoins) 
             vCoins.push_back(out);
     }
 
-    BOOST_FOREACH(const COutput& out, vCoins)
+    for ( const COutput & out : vCoins )
     {
         COutput cout = out;
 
@@ -657,8 +655,8 @@ void WalletModel::listLockedCoins(std::vector<COutPoint>& vOutpts)
 void WalletModel::loadReceiveRequests(std::vector<std::string>& vReceiveRequests)
 {
     LOCK(wallet->cs_wallet);
-    BOOST_FOREACH(const PAIRTYPE(CTxDestination, CAddressBookData)& item, wallet->mapAddressBook)
-        BOOST_FOREACH(const PAIRTYPE(std::string, std::string)& item2, item.second.destdata)
+    for ( const PAIRTYPE( CTxDestination, CAddressBookData ) & item : wallet->mapAddressBook )
+        for ( const PAIRTYPE( std::string, std::string ) & item2 : item.second.destdata )
             if (item2.first.size() > 2 && item2.first.substr(0,2) == "rr") // receive request
                 vReceiveRequests.push_back(item2.second);
 }
