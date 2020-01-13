@@ -1682,8 +1682,8 @@
         <translation>seleccionat automàticament</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
-        <translation>Fons insuficients!</translation>
+        <source>Insufficient funds</source>
+        <translation>Fons insuficients</translation>
     </message>
     <message>
         <source>Quantity:</source>

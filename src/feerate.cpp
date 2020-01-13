@@ -1,4 +1,4 @@
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the WTFPLv2 software license http://www.wtfpl.net
 
 #include "feerate.h"
@@ -22,5 +22,5 @@ CAmount CFeeRate::GetFeePerBytes( size_t bytes ) const
 
 std::string CFeeRate::ToString() const
 {
-    return strprintf( "%d.%08d %s/kB", nCoinuPerK / E8COIN, nCoinuPerK % E8COIN, NAME_OF_CURRENCY ) ;
+    return strprintf( "%d.%08d %s/kB", nCoinuPerK / E8COIN, nCoinuPerK % E8COIN, NameOfE8Currency() ) ;
 }

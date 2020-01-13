@@ -1782,8 +1782,8 @@
         <translation>자동 선택</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
-        <translation>자금이 부족합니다!</translation>
+        <source>Insufficient funds</source>
+        <translation>자금이 부족합니다</translation>
     </message>
     <message>
         <source>Quantity:</source>

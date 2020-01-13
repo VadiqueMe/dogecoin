@@ -1210,8 +1210,8 @@
         <translation>вибираються автоматично</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
-        <translation>Недостатньо коштів!</translation>
+        <source>Insufficient funds</source>
+        <translation>Недостатньо коштів</translation>
     </message>
     <message>
         <source>Quantity:</source>

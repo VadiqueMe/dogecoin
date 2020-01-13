@@ -1222,8 +1222,8 @@
         <translation>به طور خودکار انتخاب شدند</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
-        <translation>بود جه نا کافی </translation>
+        <source>Insufficient funds</source>
+        <translation>بود جه نا کافی</translation>
     </message>
     <message>
         <source>Quantity:</source>

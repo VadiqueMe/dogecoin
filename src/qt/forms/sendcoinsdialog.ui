@@ -136,7 +136,7 @@
              <string notr="true">color:red;font-weight:bold;</string>
             </property>
             <property name="text">
-             <string>Insufficient funds!</string>
+             <string>Insufficient funds</string>
             </property>
             <property name="margin">
              <number>5</number>

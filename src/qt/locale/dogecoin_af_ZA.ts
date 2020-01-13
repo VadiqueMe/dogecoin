@@ -424,7 +424,7 @@
         <translation>Stuur Munstukke</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
+        <source>Insufficient funds</source>
         <translation>Onvoldoende fondse</translation>
     </message>
     <message>

@@ -648,7 +648,7 @@
         <translation>Siųsti monetas</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
+        <source>Insufficient funds</source>
         <translation>Nepakanka lėšų</translation>
     </message>
     <message>

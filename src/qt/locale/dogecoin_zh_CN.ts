@@ -1767,8 +1767,8 @@
         <translation>自动选择</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
-        <translation>存款不足！</translation>
+        <source>Insufficient funds</source>
+        <translation>存款不足</translation>
     </message>
     <message>
         <source>Quantity:</source>

@@ -1778,8 +1778,8 @@
         <translation>automaticamente selecionado</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
-        <translation>Saldo insuficiente!</translation>
+        <source>Insufficient funds</source>
+        <translation>Saldo insuficiente</translation>
     </message>
     <message>
         <source>Quantity:</source>

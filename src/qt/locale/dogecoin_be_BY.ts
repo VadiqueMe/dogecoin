@@ -774,7 +774,7 @@
         <translation>Даслаць Манеты</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
+        <source>Insufficient funds</source>
         <translation>Недастаткова сродкаў</translation>
     </message>
     <message>

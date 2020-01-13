@@ -348,7 +348,7 @@
         <translation>سکه های ارسالی</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
+        <source>Insufficient funds</source>
         <translation>وجوه ناکافی</translation>
     </message>
     <message>

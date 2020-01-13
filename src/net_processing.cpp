@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -621,11 +621,11 @@ bool AddOrphanTx(const CTransactionRef& tx, NodeId peer) EXCLUSIVE_LOCKS_REQUIRE
     // have been mined or received.
     // 100 orphans, each of which is at most 99,999 bytes big is
     // at most 10 megabytes of orphans and somewhat more byprev index (in the worst case):
-    unsigned int sz = GetTransactionWeight(*tx);
-    if (sz >= MAX_STANDARD_TX_WEIGHT)
+    unsigned int sz = GetTransactionWeight( *tx ) ;
+    if ( sz >= MAX_STANDARD_TX_WEIGHT )
     {
-        LogPrint("mempool", "ignoring large orphan tx (size: %u, hash: %s)\n", sz, hash.ToString());
-        return false;
+        LogPrint( "mempool", "ignoring large orphan tx (size: %u, hash: %s)\n", sz, hash.ToString() ) ;
+        return false ;
     }
 
     auto ret = mapOrphanTransactions.emplace(hash, COrphanTx{tx, peer, GetTime() + ORPHAN_TX_EXPIRE_TIME});

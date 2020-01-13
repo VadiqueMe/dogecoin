@@ -1220,8 +1220,8 @@
         <translation>Pemilihan otomatis</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
-        <translation>Saldo tidak mencukupi!</translation>
+        <source>Insufficient funds</source>
+        <translation>Saldo tidak mencukupi</translation>
     </message>
     <message>
         <source>Quantity:</source>

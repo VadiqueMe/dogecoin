@@ -1210,8 +1210,8 @@
         <translation>automaattisesti valitut</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
-        <translation>Lompakon saldo ei riitä!</translation>
+        <source>Insufficient funds</source>
+        <translation>Lompakon saldo ei riitä</translation>
     </message>
     <message>
         <source>Quantity:</source>

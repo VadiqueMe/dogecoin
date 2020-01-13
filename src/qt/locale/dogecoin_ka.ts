@@ -776,8 +776,8 @@
         <translation>არჩეულია ავტომატურად</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
-        <translation>არ არის საკმარისი თანხა!</translation>
+        <source>Insufficient funds</source>
+        <translation>არ არის საკმარისი თანხა</translation>
     </message>
     <message>
         <source>Quantity:</source>

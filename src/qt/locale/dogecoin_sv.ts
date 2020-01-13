@@ -1539,8 +1539,8 @@ Var vänlig och försök igen.</translation>
         <translation>automatiskt vald</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
-        <translation>Otillräckliga medel!</translation>
+        <source>Insufficient funds</source>
+        <translation>Otillräckliga medel</translation>
     </message>
     <message>
         <source>Quantity:</source>

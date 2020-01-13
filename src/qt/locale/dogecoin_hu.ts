@@ -970,8 +970,8 @@
         <translation>automatikusan kiválasztva</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
-        <translation>Fedezethiány!</translation>
+        <source>Insufficient funds</source>
+        <translation>Fedezethiány</translation>
     </message>
     <message>
         <source>Quantity:</source>

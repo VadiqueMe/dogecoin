@@ -676,7 +676,7 @@
         <translation>Moedas Enviadas</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
+        <source>Insufficient funds</source>
         <translation>Fondos insuficientes</translation>
     </message>
     <message>

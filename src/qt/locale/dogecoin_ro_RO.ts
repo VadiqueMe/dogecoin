@@ -1110,8 +1110,8 @@
         <translation>selecţie automată</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
-        <translation>Fonduri insuficiente!</translation>
+        <source>Insufficient funds</source>
+        <translation>Fonduri insuficiente</translation>
     </message>
     <message>
         <source>Quantity:</source>

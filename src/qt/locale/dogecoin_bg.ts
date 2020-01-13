@@ -1386,8 +1386,8 @@
         <translation>астоматично избран</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
-        <translation>Нямате достатъчно налични пари!</translation>
+        <source>Insufficient funds</source>
+        <translation>Нямате достатъчно налични пари</translation>
     </message>
     <message>
         <source>Quantity:</source>

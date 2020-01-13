@@ -1782,8 +1782,8 @@
         <translation>自動選擇</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
-        <translation>累計金額不足！</translation>
+        <source>Insufficient funds</source>
+        <translation>累計金額不足</translation>
     </message>
     <message>
         <source>Quantity:</source>

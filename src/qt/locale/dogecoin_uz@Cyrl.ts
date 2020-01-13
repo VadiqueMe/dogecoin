@@ -868,7 +868,7 @@
         <translation>автоматик тарзда танланган</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
+        <source>Insufficient funds</source>
         <translation>Кам миқдор</translation>
     </message>
     <message>

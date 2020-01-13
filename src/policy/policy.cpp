@@ -12,8 +12,6 @@
 #include "util.h"
 #include "utilstrencodings.h"
 
-#include <boost/foreach.hpp>
-
     /**
      * Check transaction inputs to mitigate two
      * potential denial-of-service attacks:
@@ -58,22 +56,22 @@ bool IsStandard(const CScript& scriptPubKey, txnouttype& whichType, const bool w
 
 bool IsStandardTx(const CTransaction& tx, std::string& reason, const bool witnessEnabled)
 {
-    if (tx.nVersion > CTransaction::MAX_STANDARD_VERSION || tx.nVersion < 1) {
-        reason = "version";
-        return false;
+    if ( tx.nVersion > CTransaction::MAX_STANDARD_VERSION || tx.nVersion < 1 ) {
+        reason = "version" ;
+        return false ;
     }
 
     // Extremely large transactions with lots of inputs can cost the network
     // almost as much to process as they cost the sender in fees, because
     // computing signature hashes is O(ninputs*txsize). Limiting transactions
-    // to MAX_STANDARD_TX_WEIGHT mitigates CPU exhaustion attacks.
-    unsigned int sz = GetTransactionWeight(tx);
-    if (sz >= MAX_STANDARD_TX_WEIGHT) {
-        reason = "tx-size";
-        return false;
+    // to MAX_STANDARD_TX_WEIGHT mitigates CPU exhaustion attacks
+    unsigned int sz = GetTransactionWeight( tx ) ;
+    if ( sz >= MAX_STANDARD_TX_WEIGHT ) {
+        reason = "tx-size" ;
+        return false ;
     }
 
-    BOOST_FOREACH(const CTxIn& txin, tx.vin)
+    for ( const CTxIn & txin : tx.vin )
     {
         // Biggest 'standard' txin is a 15-of-15 P2SH multisig with compressed
         // keys (remember the 520 byte limit on redeemScript size). That works
@@ -94,7 +92,7 @@ bool IsStandardTx(const CTransaction& tx, std::string& reason, const bool witnes
 
     unsigned int nDataOut = 0;
     txnouttype whichType;
-    BOOST_FOREACH(const CTxOut& txout, tx.vout) {
+    for ( const CTxOut & txout : tx.vout ) {
         if (!::IsStandard(txout.scriptPubKey, whichType, witnessEnabled)) {
             reason = "scriptpubkey";
             return false;

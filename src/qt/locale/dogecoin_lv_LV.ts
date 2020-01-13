@@ -764,8 +764,8 @@
         <translation>automātiski atlasīts</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
-        <translation>Nepietiekami līdzekļi!</translation>
+        <source>Insufficient funds</source>
+        <translation>Nepietiekami līdzekļi</translation>
     </message>
     <message>
         <source>Quantity:</source>

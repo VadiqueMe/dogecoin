@@ -1,4 +1,5 @@
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -417,7 +418,7 @@ UniValue getnetworkinfo(const JSONRPCRequest& request)
             "  }\n"
             "  ,...\n"
             "  ],\n"
-            "  \"relayfee\": x.xxxxxxxx,                (numeric) minimum relay fee for non-free transactions in " + NAME_OF_CURRENCY + "/kB\n"
+            "  \"relayfee\": x.xxxxxxxx,                (numeric) minimum relay fee for non-free transactions in " + NameOfE8Currency() + "/kB\n"
             "  \"localaddresses\": [                    (array) list of local addresses\n"
             "  {\n"
             "    \"address\": \"xxxx\",                 (string) network address\n"

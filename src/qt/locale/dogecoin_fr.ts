@@ -1782,8 +1782,8 @@
         <translation>choisi automatiquement</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
-        <translation>Fonds insuffisants !</translation>
+        <source>Insufficient funds</source>
+        <translation>Fonds insuffisants</translation>
     </message>
     <message>
         <source>Quantity:</source>

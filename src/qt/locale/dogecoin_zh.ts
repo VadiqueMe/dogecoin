@@ -88,7 +88,7 @@
 <context>
     <name>SendCoinsDialog</name>
     <message>
-        <source>Insufficient funds!</source>
+        <source>Insufficient funds</source>
         <translation>余额不足</translation>
     </message>
     <message>

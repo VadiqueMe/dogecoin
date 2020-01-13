@@ -1514,8 +1514,8 @@
         <translation>selecionadas automáticamente</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
-        <translation>Fundos insuficientes!</translation>
+        <source>Insufficient funds</source>
+        <translation>Fundos insuficientes</translation>
     </message>
     <message>
         <source>Quantity:</source>

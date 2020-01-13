@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -1208,7 +1208,7 @@ bool CWallet::IsChange(const CTxOut& txout) const
     // wallets that return change back into a multi-signature-protected address;
     // a better way of identifying which outputs are 'the send' and which are
     // 'the change' will need to be implemented (maybe extend CWalletTx to remember
-    // which output, if any, was change).
+    // which output, if any, was change)
     if (::IsMine(*this, txout.scriptPubKey))
     {
         CTxDestination address;
@@ -2344,37 +2344,37 @@ bool CWallet::CreateTransaction(const vector<CRecipient>& vecSend, CWalletTx& wt
     wtxNew.BindWallet(this);
     CMutableTransaction txNew;
 
-    // Discourage fee sniping.
+    // Discourage fee sniping
     //
     // For a large miner the value of the transactions in the best block and
     // the mempool can exceed the cost of deliberately attempting to mine two
     // blocks to orphan the current best block. By setting nLockTime such that
     // only the next block can include the transaction, we discourage this
     // practice as the height restricted and limited blocksize gives miners
-    // considering fee sniping fewer options for pulling off this attack.
+    // considering fee sniping fewer options for pulling off this attack
     //
     // A simple way to think about this is from the wallet's point of view we
     // always want the blockchain to move forward. By setting nLockTime this
     // way we're basically making the statement that we only want this
     // transaction to appear in the next block; we don't want to potentially
     // encourage reorgs by allowing transactions to appear at lower heights
-    // than the next block in forks of the best chain.
+    // than the next block in forks of the best chain
     //
     // Of course, the subsidy is high enough, and transaction volume low
     // enough, that fee sniping isn't a problem yet, but by implementing a fix
     // now we ensure code won't be written that makes assumptions about
-    // nLockTime that preclude a fix later.
-    txNew.nLockTime = chainActive.Height();
+    // nLockTime that preclude a fix later
+    txNew.nLockTime = chainActive.Height() ;
 
     // Secondly occasionally randomly pick a nLockTime even further back, so
     // that transactions that are delayed after signing for whatever reason,
     // e.g. high-latency mix networks and some CoinJoin implementations, have
-    // better privacy.
-    if (GetRandInt(10) == 0)
-        txNew.nLockTime = std::max(0, (int)txNew.nLockTime - GetRandInt(100));
+    // better privacy
+    if ( GetRandInt( 10 ) == 0 )
+        txNew.nLockTime = std::max( 0, static_cast< int >( txNew.nLockTime ) - GetRandInt( 100 ) ) ;
 
-    assert(txNew.nLockTime <= (unsigned int)chainActive.Height());
-    assert(txNew.nLockTime < LOCKTIME_THRESHOLD);
+    assert( txNew.nLockTime <= (unsigned int)chainActive.Height() ) ;
+    assert( txNew.nLockTime < LOCKTIME_THRESHOLD ) ;
 
     {
         set<pair<const CWalletTx*,unsigned int> > setCoins;
@@ -2587,14 +2587,14 @@ bool CWallet::CreateTransaction(const vector<CRecipient>& vecSend, CWalletTx& wt
             }
         }
 
-        // Embed the constructed transaction data in wtxNew.
-        wtxNew.SetTx(MakeTransactionRef(std::move(txNew)));
+        // Embed the constructed transaction data in wtxNew
+        wtxNew.SetTx( MakeTransactionRef( std::move( txNew ) ) ) ;
 
         // Limit size
-        if (GetTransactionWeight(wtxNew) >= MAX_STANDARD_TX_WEIGHT)
+        if ( GetTransactionWeight( wtxNew ) >= MAX_STANDARD_TX_WEIGHT )
         {
-            strFailReason = _("Transaction too large");
-            return false;
+            strFailReason = _( "Transaction too large" ) ;
+            return false ;
         }
     }
 
@@ -3389,7 +3389,7 @@ std::string CWallet::GetWalletHelpString(bool showDebug)
     std::string strUsage = HelpMessageGroup(_("Wallet options:"));
     strUsage += HelpMessageOpt("-disablewallet", _("Do not load the wallet and disable wallet RPC calls"));
     strUsage += HelpMessageOpt("-keypool=<n>", strprintf(_("Set key pool size to <n> (default: %u)"), DEFAULT_KEYPOOL_SIZE));
-    strUsage += HelpMessageOpt("-paytxfee=<amt>", strprintf(_("Fee (in %s/kB) to add to transactions you send (default: %s)"), NAME_OF_CURRENCY, FormatMoney( payTxFee.GetFeePerKiloByte() )));
+    strUsage += HelpMessageOpt("-paytxfee=<amt>", strprintf(_("Fee (in %s/kB) to add to transactions you send (default: %s)"), NameOfE8Currency(), FormatMoney( payTxFee.GetFeePerKiloByte() )));
     strUsage += HelpMessageOpt("-rescan", _("Rescan the block chain for missing wallet transactions on startup"));
     strUsage += HelpMessageOpt("-salvagewallet", _("Attempt to recover private keys from a corrupt wallet on startup"));
     if (showDebug)

@@ -1164,8 +1164,8 @@
         <translation>اختيار تلقائيا</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
-        <translation>الرصيد غير كافي!</translation>
+        <source>Insufficient funds</source>
+        <translation>الرصيد غير كافي</translation>
     </message>
     <message>
         <source>Quantity:</source>

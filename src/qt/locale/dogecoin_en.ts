@@ -2562,12 +2562,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+19"/>
-        <source>Insufficient funds!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+89"/>
+        <location line="+108"/>
         <source>Quantity:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2638,7 +2633,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+67"/>
+        <location line="-616"/>
+        <source>Insufficient funds</source>
+        <translation type="unfinished">Insufficient funds</translation>
+    </message>
+    <message>
+        <location line="+683"/>
         <source>total at least</source>
         <translation type="unfinished"></translation>
     </message>

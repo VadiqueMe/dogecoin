@@ -1,11 +1,11 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "unitsofcoin.h"
 
-#include "primitives/transaction.h"
+#include "chainparamsbase.h"
 
 #include <QStringList>
 
@@ -47,33 +47,35 @@ bool UnitsOfCoin::isOk( int unit )
 
 QString UnitsOfCoin::name( int unit )
 {
-    QString nameOfCurrency = QString::fromStdString( NAME_OF_CURRENCY ) ;
+    QString nameOfE8Currency = QString::fromStdString( NameOfE8Currency() ) ;
+    QString nameOfChain = QString::fromStdString( NameOfChain() ) ;
+
     switch ( unit )
     {
-    case MCoin : return QString( "M" ) + nameOfCurrency ;
-    case theCoin : return nameOfCurrency.replace( 0, 1, "Ð" ) ; // Unicode Character “Ð” (U+00D0)
-    case kCoin : return QString( "k" ) + nameOfCurrency ;
-    case oneCoin : return nameOfCurrency ;
-    case mCoin : return QString( "m" ) + nameOfCurrency ;
-    case uCoin : return QString::fromUtf8( "μ" ) + nameOfCurrency ;
-    case Cointoshi : return QString( "dogetoshi" ) ;
-    default: return QString( "some " ) + nameOfCurrency ;
+        case MCoin : return QString( nameOfChain != "inu" ? "M" : "Mega-" ) + nameOfE8Currency ;
+        case theCoin : return QString::fromStdString( NameOfE12Currency() ) ;
+        case kCoin : return QString( nameOfChain != "inu" ? "k" : "kilo-" ) + nameOfE8Currency ;
+        case oneCoin : return nameOfE8Currency ;
+        case mCoin : return QString( nameOfChain != "inu" ? "m" : "milli-" ) + nameOfE8Currency ;
+        case uCoin : return QString::fromUtf8( nameOfChain != "inu" ? "μ" : "micro-" ) + nameOfE8Currency ;
+        case Cointoshi : return QString( "dogetoshi" ) + ( nameOfChain == "main" ? "" : "::" + nameOfChain ) ;
+        default: return QString( "some " ) + nameOfE8Currency ;
     }
 }
 
 QString UnitsOfCoin::description( int unit )
 {
-    QString nameOfCurrency = UnitsOfCoin::name( oneCoin ) ;
+    QString nameOfE8Currency = QString::fromStdString( NameOfE8Currency() ) ;
     switch ( unit )
     {
-    case MCoin : return QString( "Mega-Dogecoins (1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000 " + nameOfCurrency + ")" ) ;
-    case theCoin : return QString( "Þe Ðogecoins (1" THIN_SP_UTF8 "0000 " + nameOfCurrency + ")" ) ;
-    case kCoin : return QString( "Kilo-Dogecoins (1" THIN_SP_UTF8 "000 " + nameOfCurrency + ")" ) ;
-    case oneCoin : return QString( "Dogecoins (1 / 1" THIN_SP_UTF8 "0000 " + UnitsOfCoin::name( theCoin ) + ")" ) ;
-    case mCoin : return QString( "Milli-Dogecoins (1 / 1" THIN_SP_UTF8 "000 " + nameOfCurrency + ")" ) ;
-    case uCoin : return QString( "Micro-Dogecoins (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000 " + nameOfCurrency + ")" ) ;
-    case Cointoshi : return QString( "Dogetoshis (1 / 1" THIN_SP_UTF8 "0000" THIN_SP_UTF8 "0000 " + nameOfCurrency + ")" ) ;
-    default: return QString( "Wow-Dogecoins (???)" ) ;
+        case MCoin : return QString( "Mega-Dogecoins (1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000 " + nameOfE8Currency + ")" ) ;
+        case theCoin : return QString( "Þe Ðogecoins (1" THIN_SP_UTF8 "0000 " + nameOfE8Currency + ")" ) ;
+        case kCoin : return QString( "Kilo-Dogecoins (1" THIN_SP_UTF8 "000 " + nameOfE8Currency + ")" ) ;
+        case oneCoin : return QString( "Dogecoins (1 / 1" THIN_SP_UTF8 "0000 " + UnitsOfCoin::name( theCoin ) + ")" ) ;
+        case mCoin : return QString( "Milli-Dogecoins (1 / 1" THIN_SP_UTF8 "000 " + nameOfE8Currency + ")" ) ;
+        case uCoin : return QString( "Micro-Dogecoins (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000 " + nameOfE8Currency + ")" ) ;
+        case Cointoshi : return QString( "Dogetoshis (1 / 1" THIN_SP_UTF8 "0000" THIN_SP_UTF8 "0000 " + nameOfE8Currency + ")" ) ;
+        default: return QString( "Wow-Some-Dogecoins" ) ;
     }
 }
 

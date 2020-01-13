@@ -496,7 +496,7 @@
         <translation>Magpadalang Barya</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
+        <source>Insufficient funds</source>
         <translation>Kulang a pondo</translation>
     </message>
     <message>

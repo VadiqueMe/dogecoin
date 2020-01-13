@@ -1654,8 +1654,8 @@
         <translation>zaznaczone automatycznie</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
-        <translation>Niewystarczające środki!</translation>
+        <source>Insufficient funds</source>
+        <translation>Niewystarczające środki</translation>
     </message>
     <message>
         <source>Quantity:</source>

@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -455,7 +455,7 @@ std::string HelpMessage( WhatHelpMessage what )
         strUsage += HelpMessageOpt( "-maxtipage=<n>", strprintf( "Maximum tip age in seconds to consider node in initial block download (default: %u)", DEFAULT_MAX_TIP_AGE ) ) ;
     }
     strUsage += HelpMessageOpt( "-maxtxfee=<amt>", strprintf(_("Maximum total fees (in %s) to use in a single wallet transaction or raw transaction; setting this too low may abort large transactions (default: %s)"),
-        NAME_OF_CURRENCY, FormatMoney( DEFAULT_TRANSACTION_MAXFEE )) ) ;
+        NameOfE8Currency(), FormatMoney( DEFAULT_TRANSACTION_MAXFEE )) ) ;
     strUsage += HelpMessageOpt("-printtoconsole", _("Send trace/debug info to console instead of debug log file"));
     if ( true /* showDebug */ )
     {
@@ -478,7 +478,7 @@ std::string HelpMessage( WhatHelpMessage what )
     strUsage += HelpMessageOpt("-blockmaxweight=<n>", strprintf(_("Set maximum BIP141 block weight (default: %d)"), DEFAULT_BLOCK_MAX_WEIGHT));
     strUsage += HelpMessageOpt("-blockmaxsize=<n>", strprintf(_("Set maximum block size in bytes (default: %d)"), DEFAULT_BLOCK_MAX_SIZE));
     strUsage += HelpMessageOpt( "-blockprioritysize=<n>", strprintf( _("Set maximum size of high-priority/low-fee transactions in bytes (default: %d)"), DEFAULT_BLOCK_PRIORITY_SIZE ) ) ;
-    strUsage += HelpMessageOpt( "-blockmintxfee=<amt>", strprintf( _("Set lowest fee rate (in %s/kB) for transactions to be included in block creation (default: %s)"), NAME_OF_CURRENCY, FormatMoney( 0 ) ) ) ;
+    strUsage += HelpMessageOpt( "-blockmintxfee=<amt>", strprintf( _("Set lowest fee rate (in %s/kB) for transactions to be included in block creation (default: %s)"), NameOfE8Currency(), FormatMoney( 0 ) ) ) ;
     if (showDebug)
         strUsage += HelpMessageOpt("-blockversion=<n>", "Override block version to test forking scenarios");
 

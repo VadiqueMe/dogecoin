@@ -926,8 +926,8 @@
         <translation>Enigoj...</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
-        <translation>Nesufiĉa mono!</translation>
+        <source>Insufficient funds</source>
+        <translation>Nesufiĉa mono</translation>
     </message>
     <message>
         <source>Quantity:</source>

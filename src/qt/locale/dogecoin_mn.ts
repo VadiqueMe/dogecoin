@@ -384,8 +384,8 @@
         <translation>автоматаар сонгогдсон</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
-        <translation>Таны дансны үлдэгдэл хүрэлцэхгүй байна!</translation>
+        <source>Insufficient funds</source>
+        <translation>Таны дансны үлдэгдэл хүрэлцэхгүй байна</translation>
     </message>
     <message>
         <source>Amount:</source>

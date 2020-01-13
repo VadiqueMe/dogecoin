@@ -758,7 +758,7 @@
         <translation>Slanje novca</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
+        <source>Insufficient funds</source>
         <translation>Nedovoljna sredstva</translation>
     </message>
     <message>

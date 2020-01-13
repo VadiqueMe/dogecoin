@@ -1782,8 +1782,8 @@
         <translation>otomatik seçilmiş</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
-        <translation>Yetersiz fon!</translation>
+        <source>Insufficient funds</source>
+        <translation>Yetersiz fon</translation>
     </message>
     <message>
         <source>Quantity:</source>

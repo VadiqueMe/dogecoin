@@ -172,7 +172,7 @@
 <context>
     <name>SendCoinsDialog</name>
     <message>
-        <source>Insufficient funds!</source>
+        <source>Insufficient funds</source>
         <translation>ناکافی فنڈز</translation>
     </message>
     <message>

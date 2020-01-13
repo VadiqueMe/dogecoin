@@ -488,7 +488,7 @@
         <translation>Dërgo Monedha</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
+        <source>Insufficient funds</source>
         <translation>Fonde te pamjaftueshme</translation>
     </message>
     <message>

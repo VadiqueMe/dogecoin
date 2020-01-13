@@ -1782,8 +1782,8 @@
         <translation>automaticky vybrané</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
-        <translation>Nedostatek prostředků!</translation>
+        <source>Insufficient funds</source>
+        <translation>Nedostatek prostředků</translation>
     </message>
     <message>
         <source>Quantity:</source>

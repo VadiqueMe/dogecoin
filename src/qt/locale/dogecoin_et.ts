@@ -1106,7 +1106,7 @@
         <translation>automaatselt valitud</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
+        <source>Insufficient funds</source>
         <translation>Liiga suur summa</translation>
     </message>
     <message>

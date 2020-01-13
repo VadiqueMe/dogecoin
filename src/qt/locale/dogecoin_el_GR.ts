@@ -1098,8 +1098,8 @@
         <translation>επιλεγμένο αυτόματα</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
-        <translation>Ανεπαρκές κεφάλαιο!</translation>
+        <source>Insufficient funds</source>
+        <translation>Ανεπαρκές κεφάλαιο</translation>
     </message>
     <message>
         <source>Quantity:</source>

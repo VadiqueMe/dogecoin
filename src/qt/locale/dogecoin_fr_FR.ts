@@ -1110,7 +1110,7 @@
         <translation>Automatiquement sélectionné </translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
+        <source>Insufficient funds</source>
         <translation>Fonds insuffisants</translation>
     </message>
     <message>

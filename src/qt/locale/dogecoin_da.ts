@@ -1782,8 +1782,8 @@
         <translation>valgt automatisk</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
-        <translation>Utilstrækkelige midler!</translation>
+        <source>Insufficient funds</source>
+        <translation>Utilstrækkelige midler</translation>
     </message>
     <message>
         <source>Quantity:</source>

@@ -1782,8 +1782,8 @@
         <translation>автоматически выбрано</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
-        <translation>Недостаточно средств!</translation>
+        <source>Insufficient funds</source>
+        <translation>Недостаточно средств</translation>
     </message>
     <message>
         <source>Quantity:</source>

@@ -132,7 +132,7 @@
 <context>
     <name>SendCoinsDialog</name>
     <message>
-        <source>Insufficient funds!</source>
+        <source>Insufficient funds</source>
         <translation>Κεφάλαια μη επαρκή</translation>
     </message>
     <message>

@@ -1782,8 +1782,8 @@
         <translation>automatisch geselecteerd</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
-        <translation>Onvoldoende fonds!</translation>
+        <source>Insufficient funds</source>
+        <translation>Onvoldoende fonds</translation>
     </message>
     <message>
         <source>Quantity:</source>

@@ -1,5 +1,6 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -168,7 +169,7 @@ UniValue getrawtransaction( const JSONRPCRequest & request )
             "  ],\n"
             "  \"vout\" : [              (array of json objects)\n"
             "     {\n"
-            "       \"value\" : x.xxx,            (numeric) The value in " + NAME_OF_CURRENCY + "\n"
+            "       \"value\" : x.xxx,            (numeric) The value in " + NameOfE8Currency() + "\n"
             "       \"n\" : n,                    (numeric) index\n"
             "       \"scriptPubKey\" : {          (json object)\n"
             "         \"asm\" : \"asm\",          (string) the asm\n"
@@ -375,7 +376,7 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
             "     ]\n"
             "2. \"outputs\"               (object, required) a json object with outputs\n"
             "    {\n"
-            "      \"address\": x.xxx,    (numeric or string, required) The key is the dogecoin address, the numeric value (can be string) is the " + NAME_OF_CURRENCY + " amount\n"
+            "      \"address\": x.xxx,    (numeric or string, required) The key is the dogecoin address, the numeric value (can be string) is the " + NameOfE8Currency() + " amount\n"
             "      \"data\": \"hex\"      (string, required) The key is \"data\", the value is hex encoded data\n"
             "      ,...\n"
             "    }\n"
@@ -498,7 +499,7 @@ UniValue decoderawtransaction(const JSONRPCRequest& request)
             "  ],\n"
             "  \"vout\" : [             (array of json objects)\n"
             "     {\n"
-            "       \"value\" : x.xxx,            (numeric) The value in " + NAME_OF_CURRENCY + "\n"
+            "       \"value\" : x.xxx,            (numeric) The value in " + NameOfE8Currency() + "\n"
             "       \"n\" : n,                    (numeric) index\n"
             "       \"scriptPubKey\" : {          (json object)\n"
             "         \"asm\" : \"asm\",          (string) the asm\n"

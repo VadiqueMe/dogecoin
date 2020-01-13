@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -107,7 +107,7 @@ unsigned int CTransaction::CalculateModifiedSize(unsigned int nTxSize) const
     // the constant overhead for each txin and up to 110 bytes of scriptSig (which
     // is enough to cover a compressed pubkey p2sh redemption) for priority.
     // Providing any more cleanup incentive than making additional inputs free would
-    // risk encouraging people to create junk outputs to redeem later.
+    // risk encouraging people to create junk outputs to redeem later
     if (nTxSize == 0)
         nTxSize = (GetTransactionWeight(*this) + WITNESS_SCALE_FACTOR - 1) / WITNESS_SCALE_FACTOR;
     for (std::vector<CTxIn>::const_iterator it(vin.begin()); it != vin.end(); ++it)

@@ -1066,8 +1066,8 @@
         <translation>samodejno izbrani</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
-        <translation>Premalo sredstev!</translation>
+        <source>Insufficient funds</source>
+        <translation>Premalo sredstev</translation>
     </message>
     <message>
         <source>Quantity:</source>

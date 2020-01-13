@@ -762,7 +762,7 @@
         <translation>Tự động chọn</translation>
     </message>
     <message>
-        <source>Insufficient funds!</source>
+        <source>Insufficient funds</source>
         <translation>Không đủ tiền</translation>
     </message>
     <message>
