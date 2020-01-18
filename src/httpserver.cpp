@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "httpserver.h"
 
@@ -20,6 +20,7 @@
 #include <sys/stat.h>
 #include <signal.h>
 #include <future>
+#include <deque>
 
 #include <event2/event.h>
 #include <event2/http.h>
@@ -297,7 +298,7 @@ static void http_request_cb(struct evhttp_request* req, void* arg)
     }
 }
 
-/** Callback to reject HTTP requests after shutdown. */
+/** Callback to reject HTTP requests after shutdown */
 static void http_reject_request_cb(struct evhttp_request* req, void*)
 {
     LogPrint("http", "Rejecting request while shutting down\n");
@@ -365,7 +366,7 @@ static void HTTPWorkQueueRun(WorkQueue<HTTPClosure>* queue)
 static void libevent_log_cb(int severity, const char *msg)
 {
 #ifndef EVENT_LOG_WARN
-// EVENT_LOG_WARN was added in 2.0.19; but before then _EVENT_LOG_WARN existed.
+// EVENT_LOG_WARN was added in 2.0.19; but before then _EVENT_LOG_WARN existed
 # define EVENT_LOG_WARN _EVENT_LOG_WARN
 #endif
     if (severity >= EVENT_LOG_WARN) // Log warn messages and higher without debug category
@@ -392,8 +393,8 @@ bool InitHTTPServer()
     // Redirect libevent's logging to our own log
     event_set_log_callback(&libevent_log_cb);
 #if LIBEVENT_VERSION_NUMBER >= 0x02010100
-    // If -debug=libevent, set full libevent debugging.
-    // Otherwise, disable all libevent debugging.
+    // If -debug=libevent, set full libevent debugging
+    // Otherwise, disable all libevent debugging
     if (LogAcceptCategory("libevent"))
         event_enable_debug_logging(EVENT_DBG_ALL);
     else
@@ -411,7 +412,7 @@ bool InitHTTPServer()
         return false;
     }
 
-    /* Create a new evhttp object to handle requests. */
+    /* Create a new evhttp object to handle requests */
     http = evhttp_new(base); // XXX RAII
     if (!http) {
         LogPrintf("couldn't create evhttp. Exiting.\n");
@@ -489,7 +490,7 @@ void StopHTTPServer()
         // Before this was solved with event_base_loopexit, but that didn't work as expected in
         // at least libevent 2.0.21 and always introduced a delay. In libevent
         // master that appears to be solved, so in the future that solution
-        // could be used again (if desirable).
+        // could be used again (if desirable)
         // (see discussion in https://github.com/bitcoin/bitcoin/pull/6990)
         if (threadResult.valid() && threadResult.wait_for(std::chrono::milliseconds(2000)) == std::future_status::timeout) {
             LogPrintf("HTTP event loop did not exit within allotted time, sending loopbreak\n");
@@ -550,7 +551,7 @@ HTTPRequest::~HTTPRequest()
         LogPrintf("%s: Unhandled request\n", __func__);
         WriteReply(HTTP_INTERNAL, "Unhandled request");
     }
-    // evhttpd cleans up the request, as long as a reply was sent.
+    // evhttpd cleans up the request, as long as a reply was sent
 }
 
 std::pair<bool, std::string> HTTPRequest::GetHeader(const std::string& hdr)
@@ -574,7 +575,7 @@ std::string HTTPRequest::ReadBody()
      * internal copying can be avoided in multi-segment buffers by using
      * evbuffer_peek and an awkward loop. Though in that case, it'd be even
      * better to not copy into an intermediate string but use a stream
-     * abstraction to consume the evbuffer on the fly in the parsing algorithm.
+     * abstraction to consume the evbuffer on the fly in the parsing algorithm
      */
     const char* data = (const char*)evbuffer_pullup(buf, size);
     if (!data) // returns NULL in case of empty buffer
@@ -591,10 +592,9 @@ void HTTPRequest::WriteHeader(const std::string& hdr, const std::string& value)
     evhttp_add_header(headers, hdr.c_str(), value.c_str());
 }
 
-/** Closure sent to main thread to request a reply to be sent to
- * a HTTP request.
+/** Closure sent to main thread to request a reply to be sent to a HTTP request
  * Replies must be sent in the main loop in the main http thread,
- * this cannot be done from worker threads.
+ * this cannot be done from worker threads
  */
 void HTTPRequest::WriteReply(int nStatus, const std::string& strReply)
 {

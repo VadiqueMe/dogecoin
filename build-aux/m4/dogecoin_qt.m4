@@ -27,12 +27,12 @@ AC_DEFUN([DOGECOIN_QT_CHECK],[
 ])
 
 dnl DOGECOIN_QT_PATH_PROGS([FOO], [foo foo2], [/path/to/search/first], [continue if missing])
-dnl Helper for finding the path of programs needed for Qt.
+dnl Helper for finding the path of programs needed for Qt
 dnl Inputs: $1: Variable to be set
 dnl Inputs: $2: List of programs to search for
 dnl Inputs: $3: Look for $2 here before $PATH
-dnl Inputs: $4: If "yes", don't fail if $2 is not found.
-dnl Output: $1 is set to the path of $2 if found. $2 are searched in order.
+dnl Inputs: $4: If "yes", don't fail if $2 is not found
+dnl Output: $1 is set to the path of $2 if found. $2 are searched in order
 AC_DEFUN([DOGECOIN_QT_PATH_PROGS],[
   DOGECOIN_QT_CHECK([
     if test "x$3" != "x"; then
@@ -46,10 +46,9 @@ AC_DEFUN([DOGECOIN_QT_PATH_PROGS],[
   ])
 ])
 
-dnl Initialize qt input.
-dnl This must be called before any other DOGECOIN_QT* macros to ensure that
-dnl input variables are set correctly.
-dnl CAUTION: Do not use this inside of a conditional.
+dnl Initialize qt input
+dnl Call it before any other DOGECOIN_QT* macros to ensure that input variables are set correctly
+dnl Do not use this inside of a conditional
 AC_DEFUN([DOGECOIN_QT_INIT],[
   dnl enable qt support
   AC_ARG_WITH([gui],
@@ -79,12 +78,11 @@ AC_DEFUN([DOGECOIN_QT_INIT],[
   AC_SUBST(QT_TRANSLATION_DIR,$qt_translation_path)
 ])
 
-dnl Find the appropriate version of Qt libraries and includes.
-dnl Inputs: $1: Whether or not pkg-config should be used. yes|no. Default: yes.
-dnl Inputs: $2: If $1 is "yes" and --with-gui=auto, which qt version should be
-dnl         tried first.
+dnl Find the appropriate version of Qt libraries and includes
+dnl Inputs: $1: Whether or not pkg-config should be used, yes|no, default: yes
+dnl Inputs: $2: If $1 is "yes" and --with-gui=auto, which qt version to try first
 dnl Outputs: See _DOGECOIN_QT_FIND_LIBS_*
-dnl Outputs: Sets variables for all qt-related tools.
+dnl Outputs: Sets variables for all qt-related tools
 dnl Outputs: dogecoin_enable_qt, dogecoin_enable_qt_dbus, dogecoin_enable_qt_test
 AC_DEFUN([DOGECOIN_QT_CONFIGURE],[
   use_pkgconfig=$1
@@ -107,7 +105,7 @@ AC_DEFUN([DOGECOIN_QT_CONFIGURE],[
   dnl plugin was added. Since we can't tell if Qt4 is static or not, it is
   dnl assumed for windows builds.
   dnl _DOGECOIN_QT_CHECK_STATIC_PLUGINS does a quick link-check and appends the
-  dnl results to QT_LIBS.
+  dnl results to QT_LIBS
   DOGECOIN_QT_CHECK([
   TEMP_CPPFLAGS=$CPPFLAGS
   TEMP_CXXFLAGS=$CXXFLAGS
@@ -266,8 +264,8 @@ dnl All macros below are internal and should _not_ be used from the main
 dnl configure.ac.
 dnl ----
 
-dnl Internal. Check if the included version of Qt is Qt5.
-dnl Requires: INCLUDES must be populated as necessary.
+dnl Internal. Check if the included version of Qt is Qt5
+dnl Requires: INCLUDES must be populated as necessary
 dnl Output: dogecoin_cv_qt5=yes|no
 AC_DEFUN([_DOGECOIN_QT_CHECK_QT5],[
   AC_CACHE_CHECK(for Qt 5, dogecoin_cv_qt5,[
@@ -284,11 +282,11 @@ AC_DEFUN([_DOGECOIN_QT_CHECK_QT5],[
     [dogecoin_cv_qt5=no])
 ])])
 
-dnl Internal. Check if the linked version of Qt was built as static libs.
-dnl Requires: Qt5. This check cannot determine if Qt4 is static.
-dnl Requires: INCLUDES and LIBS must be populated as necessary.
+dnl Internal. Check if the linked version of Qt was built as static libs
+dnl Requires: Qt5, this check cannot determine if Qt4 is static
+dnl Requires: INCLUDES and LIBS must be populated as necessary
 dnl Output: dogecoin_cv_static_qt=yes|no
-dnl Output: Defines QT_STATICPLUGIN if plugins are static.
+dnl Output: Defines QT_STATICPLUGIN if plugins are static
 AC_DEFUN([_DOGECOIN_QT_IS_STATIC],[
   AC_CACHE_CHECK(for static Qt, dogecoin_cv_static_qt,[
   AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
@@ -308,11 +306,11 @@ AC_DEFUN([_DOGECOIN_QT_IS_STATIC],[
   fi
 ])
 
-dnl Internal. Check if the link-requirements for static plugins are met.
-dnl Requires: INCLUDES and LIBS must be populated as necessary.
-dnl Inputs: $1: A series of Q_IMPORT_PLUGIN().
-dnl Inputs: $2: The libraries that resolve $1.
-dnl Output: QT_LIBS is prepended or configure exits.
+dnl Internal. Check if the link-requirements for static plugins are met
+dnl Requires: INCLUDES and LIBS must be populated as necessary
+dnl Inputs: $1: A series of Q_IMPORT_PLUGIN()
+dnl Inputs: $2: The libraries that resolve $1
+dnl Output: QT_LIBS is prepended or configure exits
 AC_DEFUN([_DOGECOIN_QT_CHECK_STATIC_PLUGINS],[
   AC_MSG_CHECKING(for static Qt plugins: $2)
   CHECK_STATIC_PLUGINS_TEMP_LIBS="$LIBS"
@@ -328,8 +326,8 @@ AC_DEFUN([_DOGECOIN_QT_CHECK_STATIC_PLUGINS],[
 ])
 
 dnl Internal. Find paths necessary for linking qt static plugins
-dnl Inputs: dogecoin_qt_got_major_vers. 4 or 5.
-dnl Inputs: qt_plugin_path. optional.
+dnl Inputs: dogecoin_qt_got_major_vers, 4 or 5
+dnl Inputs: qt_plugin_path, optional
 dnl Outputs: QT_LIBS is appended
 AC_DEFUN([_DOGECOIN_QT_FIND_STATIC_PLUGINS],[
   if test x$dogecoin_qt_got_major_vers = x5; then
@@ -429,12 +427,12 @@ AC_DEFUN([_DOGECOIN_QT_FIND_LIBS_WITH_PKGCONFIG],[
 ])
 
 dnl Internal. Find Qt libraries without using pkg-config. Version is deduced
-dnl from the discovered headers.
-dnl Inputs: dogecoin_qt_want_version (from --with-gui=). The version to use.
-dnl         If "auto", the version will be discovered by _DOGECOIN_QT_CHECK_QT5.
-dnl Outputs: All necessary QT_* variables are set.
-dnl Outputs: dogecoin_qt_got_major_vers is set to "4" or "5".
-dnl Outputs: have_qt_test and have_qt_dbus are set (if applicable) to yes|no.
+dnl from the discovered headers
+dnl Inputs: dogecoin_qt_want_version (from --with-gui=) The version to use
+dnl         If "auto", the version will be discovered by _DOGECOIN_QT_CHECK_QT5
+dnl Outputs: All necessary QT_* variables are set
+dnl Outputs: dogecoin_qt_got_major_vers is set to "4" or "5"
+dnl Outputs: have_qt_test and have_qt_dbus are set (if applicable) to yes|no
 AC_DEFUN([_DOGECOIN_QT_FIND_LIBS_WITHOUT_PKGCONFIG],[
   TEMP_CPPFLAGS="$CPPFLAGS"
   TEMP_CXXFLAGS="$CXXFLAGS"

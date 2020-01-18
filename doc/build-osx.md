@@ -1,7 +1,7 @@
 Mac OS X Build Instructions and Notes
 ====================================
 The commands in this guide should be executed in a Terminal application.
-The built-in one is located in `/Applications/Utilities/Terminal.app`.
+The built-in one is located in `/Applications/Utilities/Terminal.app`
 
 Preparation
 -----------
@@ -9,15 +9,15 @@ Install the OS X command line tools:
 
 `xcode-select --install`
 
-When the popup appears, click `Install`.
+When the popup appears, click `Install`
 
-Then install [Homebrew](https://brew.sh).
+Then install [Homebrew](https://brew.sh)
 
 Dependencies
 ----------------------
 
     brew install automake libtool boost --c++11 miniupnpc openssl pkg-config protobuf --c++11 qt5 libevent
-    brew install berkeley-db # You need to make sure you install a version >= 5.1.29, but as close to 5.1.29 as possible. Check the homebrew docs to find out how to install older versions.
+    brew install berkeley-db # You need to make sure you install a version >= 5.1.29. Check the homebrew docs to find out how to install other versions
 
 If you want to build the disk image with `make deploy` (.dmg / optional), you need RSVG
 

@@ -16,6 +16,7 @@
 
 #include <QDir>
 #include <QtGlobal>
+#include <QDebug>
 
 #include <boost/filesystem.hpp>
 

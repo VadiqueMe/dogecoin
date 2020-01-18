@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 //
 // Wraps dumb protocol buffer paymentRequest
@@ -92,8 +92,8 @@ bool PaymentRequestPlus::getMerchant(X509_STORE* certStore, QString& merchant) c
     const QDateTime currentTime = QDateTime::currentDateTime();
     for (int i = 0; i < certChain.certificate_size(); i++) {
         QByteArray certData(certChain.certificate(i).data(), certChain.certificate(i).size());
-        QSslCertificate qCert(certData, QSsl::Der);
-        if (currentTime < qCert.effectiveDate() || currentTime > qCert.expiryDate()) {
+        QSslCertificate qCert( certData, QSsl::Der ) ;
+        if ( currentTime < qCert.effectiveDate() || currentTime > qCert.expiryDate() ) {
             qWarning() << "PaymentRequestPlus::getMerchant: Payment request: certificate expired or not yet active: " << qCert;
             return false;
         }

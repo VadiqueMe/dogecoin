@@ -42,7 +42,7 @@ Optional dependencies:
  Library     | Purpose          | Description
  ------------|------------------|----------------------
  miniupnpc   | UPnP Support     | Firewall-jumping support
- libdb5.1    | Berkeley DB      | Wallet storage (only needed when wallet enabled)
+ libdb       | Berkeley DB      | Wallet storage (only needed when wallet enabled)
  qt          | GUI              | GUI toolkit (only needed when GUI enabled)
  protobuf    | Payments in GUI  | Data interchange format used for payment protocol (only needed when GUI enabled)
  libqrencode | QR codes in GUI  | Optional for generating QR codes (only needed when GUI enabled)
@@ -78,17 +78,9 @@ install necessary parts of boost:
 
         sudo apt-get install libboost-all-dev
 
-BerkeleyDB is required for the wallet.
+BerkeleyDB is required for the wallet
 
-    sudo apt-get install libdb5.1-dev libdb5.1++-dev
-
-       Note that if you have Berkeley DB 4.8 packages installed (i.e. for other
-       wallet software), they are incompatible with the packages for 5.1. You
-       will have to manually download 5.1 from
-       http://download.oracle.com/berkeley-db/db-5.1.29.NC.tar.gz and compile
-       it, install it to /usr/local where the configure script should locate it
-       automatically.
-
+    sudo apt-get install libdb-dev
 
 See the section "Disable-wallet mode" to build Dogecoin Core without wallet.
 
@@ -161,34 +153,9 @@ turned off by default.  See the configure options for upnp behavior desired:
 
 Berkeley DB
 -----------
-It is recommended to use Berkeley DB 5.1. If you have to build it yourself:
+It is recommended to use Berkeley DB 5.3 or 5.1
 
-```bash
-BITCOIN_ROOT=$(pwd)
-
-# Pick some path to install BDB to, here we create a directory within the dogecoin directory
-BDB_PREFIX="${BITCOIN_ROOT}/db5"
-mkdir -p $BDB_PREFIX
-
-# Fetch the source and verify that it is not tampered with
-wget 'http://download.oracle.com/berkeley-db/db-5.1.29.NC.tar.gz'
-echo '08238e59736d1aacdd47cfb8e68684c695516c37f4fbe1b8267dde58dc3a576c db-5.1.29.NC.tar.gz' | sha256sum -c
-# -> db-5.1.29.NC.tar.gz: OK
-tar -xzvf db-5.1.29.NC.tar.gz
-
-# Build the library and install to our prefix
-cd db-5.1.29.NC/build_unix/
-#  Note: Do a static build so that it can be embedded into the executable, instead of having to find a .so at runtime
-../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$BDB_PREFIX
-make install
-
-# Configure Dogecoin Core to use our own-built instance of BDB
-cd $BITCOIN_ROOT
-./autogen.sh
-./configure LDFLAGS="-L${BDB_PREFIX}/lib/" CPPFLAGS="-I${BDB_PREFIX}/include/" # (other args...)
-```
-
-**Note**: You only need Berkeley DB if the wallet is enabled (see the section *Disable-Wallet mode* below).
+**Note**: You only need Berkeley DB if the wallet is enabled (see the section *Disable-Wallet mode* below)
 
 Boost
 -----
@@ -255,7 +222,7 @@ disable-wallet mode with:
 
     ./configure --disable-wallet
 
-In this case there is no dependency on Berkeley DB 4.8.
+In this case there is no dependency on Berkeley DB
 
 Mining is also possible in disable-wallet mode, but only using the `getblocktemplate` RPC
 call, not `getwork`.
@@ -265,7 +232,6 @@ Additional Configure Flags
 A list of additional configure flags can be displayed with:
 
     ./configure --help
-
 
 Setup and Build Example: Arch Linux
 -----------------------------------
@@ -277,14 +243,6 @@ This example lists the steps necessary to setup and build a command line only, n
     ./autogen.sh
     ./configure --disable-wallet --without-gui --without-miniupnpc
     make check
-
-Note:
-Enabling wallet support requires either compiling against a Berkeley DB newer than 4.8 (package `db`) using `--with-incompatible-bdb`,
-or building and depending on a local version of Berkeley DB 4.8. The readily available Arch Linux packages are currently built using
-`--with-incompatible-bdb` according to the [PKGBUILD](https://projects.archlinux.org/svntogit/community.git/tree/bitcoin/trunk/PKGBUILD).
-As mentioned above, when maintaining portability of the wallet between the standard Dogecoin Core distributions and independently built
-node software is desired, Berkeley DB 4.8 must be used.
-
 
 ARM Cross-compilation
 -------------------
@@ -326,11 +284,6 @@ You need to use GNU make (`gmake`) instead of `make`.
 For the wallet (optional):
 
     pkg install db5
-
-This will give a warning "configure: WARNING: Found Berkeley DB other
-than 4.8; wallets opened by this build will not be portable!", but as FreeBSD never
-had a binary release, this may not matter. If backwards compatibility
-with 4.8-built Dogecoin Core is needed follow the steps under "Berkeley DB" above.
 
 Then build using:
 

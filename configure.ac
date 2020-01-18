@@ -24,20 +24,20 @@ AH_TOP([#ifndef DOGECOIN_CONFIG_H])
 AH_TOP([#define DOGECOIN_CONFIG_H])
 AH_BOTTOM([#endif])
 
-dnl faketime breaks configure and is only needed for make. Disable it here.
+dnl faketime breaks configure and is only needed for make. Disable it here
 unset FAKETIME
 
 dnl Automake init set-up and checks
 AM_INIT_AUTOMAKE([no-define subdir-objects foreign])
 
 dnl faketime messes with timestamps and causes configure to be re-run.
-dnl --disable-maintainer-mode can be used to bypass this.
+dnl --disable-maintainer-mode can be used to bypass this
 AM_MAINTAINER_MODE([enable])
 
 dnl make the compilation flags quiet unless V=1 is used
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
-dnl Compiler checks (here before libtool).
+dnl Compiler checks (here before libtool)
 if test "x${CXXFLAGS+set}" = "xset"; then
   CXXFLAGS_overridden=yes
 else
@@ -139,12 +139,6 @@ AC_ARG_ENABLE([hardening],
   [do not attempt to harden the resulting executables (default is to harden)])],
   [use_hardening=$enableval],
   [use_hardening=yes])
-
-AC_ARG_ENABLE([reduce-exports],
-  [AS_HELP_STRING([--enable-reduce-exports],
-  [attempt to reduce exported symbols in the resulting executables (default is no)])],
-  [use_reduce_exports=$enableval],
-  [use_reduce_exports=no])
 
 AC_ARG_ENABLE([ccache],
   [AS_HELP_STRING([--disable-ccache],
@@ -581,16 +575,8 @@ AC_LINK_IFELSE([AC_LANG_SOURCE([
   ],
   [
     AC_MSG_RESULT(no)
-    if test x$use_reduce_exports = xyes; then
-      AC_MSG_ERROR([Cannot find a working visibility attribute. Use --disable-reduce-exports.])
-    fi
   ]
 )
-
-if test x$use_reduce_exports = xyes; then
-  AX_CHECK_COMPILE_FLAG([-fvisibility=hidden],[RE_CXXFLAGS="-fvisibility=hidden"],
-  [AC_MSG_ERROR([Cannot set default symbol visibility. Use --disable-reduce-exports.])])
-fi
 
 LEVELDB_CPPFLAGS=
 LIBLEVELDB=
@@ -628,7 +614,7 @@ fi
 if test x$use_boost = xyes; then
 
 dnl Minimum required Boost version
-define(MINIMUM_REQUIRED_BOOST, 1.47.0)
+define(MINIMUM_REQUIRED_BOOST, 1.63.0)
 
 dnl Check for boost libs
 AX_BOOST_BASE([MINIMUM_REQUIRED_BOOST])
@@ -638,31 +624,6 @@ AX_BOOST_PROGRAM_OPTIONS
 AX_BOOST_THREAD
 AX_BOOST_CHRONO
 
-
-if test x$use_reduce_exports = xyes; then
-  AC_MSG_CHECKING([for working boost reduced exports])
-  TEMP_CPPFLAGS="$CPPFLAGS"
-  CPPFLAGS="$BOOST_CPPFLAGS $CPPFLAGS"
-  AC_PREPROC_IFELSE([AC_LANG_PROGRAM([[
-      @%:@include <boost/version.hpp>
-    ]], [[
-      #if BOOST_VERSION >= 104900
-      // Everything is okay
-      #else
-      #  error Boost version is too old
-      #endif
-    ]])],[
-      AC_MSG_RESULT(yes)
-    ],[
-    AC_MSG_ERROR([boost versions < 1.49 are known to be broken with reduced exports. Use --disable-reduce-exports.])
-  ])
-  CPPFLAGS="$TEMP_CPPFLAGS"
-fi
-fi
-
-if test x$use_reduce_exports = xyes; then
-    CXXFLAGS="$CXXFLAGS $RE_CXXFLAGS"
-    AX_CHECK_LINK_FLAG([[-Wl,--exclude-libs,ALL]], [RELDFLAGS="-Wl,--exclude-libs,ALL"])
 fi
 
 if test x$use_tests = xyes; then
@@ -700,93 +661,6 @@ fi
 if test x$use_boost = xyes; then
 
 BOOST_LIBS="$BOOST_LDFLAGS $BOOST_SYSTEM_LIB $BOOST_FILESYSTEM_LIB $BOOST_PROGRAM_OPTIONS_LIB $BOOST_THREAD_LIB $BOOST_CHRONO_LIB"
-
-
-dnl If boost (prior to 1.57) was built without c++11, it emulated scoped enums
-dnl using c++98 constructs. Unfortunately, this implementation detail leaked into
-dnl the abi. This was fixed in 1.57.
-
-dnl When building against that installed version using c++11, the headers pick up
-dnl on the native c++11 scoped enum support and enable it, however it will fail to
-dnl link. This can be worked around by disabling c++11 scoped enums if linking will
-dnl fail.
-dnl BOOST_NO_SCOPED_ENUMS was changed to BOOST_NO_CXX11_SCOPED_ENUMS in 1.51.
-
-TEMP_LIBS="$LIBS"
-LIBS="$BOOST_LIBS $LIBS"
-TEMP_CPPFLAGS="$CPPFLAGS"
-CPPFLAGS="$CPPFLAGS $BOOST_CPPFLAGS"
-AC_MSG_CHECKING([for mismatched boost c++11 scoped enums])
-AC_LINK_IFELSE([AC_LANG_PROGRAM([[
-  #include "boost/config.hpp"
-  #include "boost/version.hpp"
-  #if !defined(BOOST_NO_SCOPED_ENUMS) && !defined(BOOST_NO_CXX11_SCOPED_ENUMS) && BOOST_VERSION < 105700
-  #define BOOST_NO_SCOPED_ENUMS
-  #define BOOST_NO_CXX11_SCOPED_ENUMS
-  #define CHECK
-  #endif
-  #include "boost/filesystem.hpp"
-  ]],[[
-  #if defined(CHECK)
-    boost::filesystem::copy_file("foo", "bar");
-  #else
-    choke;
-  #endif
-  ]])],
-  [AC_MSG_RESULT(mismatched); BOOST_CPPFLAGS="$BOOST_CPPFLAGS -DBOOST_NO_SCOPED_ENUMS -DBOOST_NO_CXX11_SCOPED_ENUMS"], [AC_MSG_RESULT(ok)])
-LIBS="$TEMP_LIBS"
-CPPFLAGS="$TEMP_CPPFLAGS"
-
-dnl Boost >= 1.50 uses sleep_for rather than the now-deprecated sleep, however
-dnl it was broken from 1.50 to 1.52 when backed by nanosleep. Use sleep_for if
-dnl a working version is available, else fall back to sleep. sleep was removed
-dnl after 1.56.
-dnl If neither is available, abort.
-TEMP_LIBS="$LIBS"
-LIBS="$BOOST_LIBS $LIBS"
-TEMP_CPPFLAGS="$CPPFLAGS"
-CPPFLAGS="$CPPFLAGS $BOOST_CPPFLAGS"
-AC_LINK_IFELSE([AC_LANG_PROGRAM([[
-  #include <boost/thread/thread.hpp>
-  #include <boost/version.hpp>
-  ]],[[
-  #if BOOST_VERSION >= 105000 && (!defined(BOOST_HAS_NANOSLEEP) || BOOST_VERSION >= 105200)
-      boost::this_thread::sleep_for(boost::chrono::milliseconds(0));
-  #else
-   choke me
-  #endif
-  ]])],
-  [boost_sleep=yes;
-     AC_DEFINE(HAVE_WORKING_BOOST_SLEEP_FOR, 1, [Define this symbol if boost sleep_for works])],
-  [boost_sleep=no])
-LIBS="$TEMP_LIBS"
-CPPFLAGS="$TEMP_CPPFLAGS"
-
-if test x$boost_sleep != xyes; then
-TEMP_LIBS="$LIBS"
-LIBS="$BOOST_LIBS $LIBS"
-TEMP_CPPFLAGS="$CPPFLAGS"
-CPPFLAGS="$CPPFLAGS $BOOST_CPPFLAGS"
-AC_LINK_IFELSE([AC_LANG_PROGRAM([[
-  #include <boost/version.hpp>
-  #include <boost/thread.hpp>
-  #include <boost/date_time/posix_time/posix_time_types.hpp>
-  ]],[[
-  #if BOOST_VERSION <= 105600
-      boost::this_thread::sleep(boost::posix_time::milliseconds(0));
-  #else
-   choke me
-  #endif
-  ]])],
-  [boost_sleep=yes; AC_DEFINE(HAVE_WORKING_BOOST_SLEEP, 1, [Define this symbol if boost sleep works])],
-  [boost_sleep=no])
-LIBS="$TEMP_LIBS"
-CPPFLAGS="$TEMP_CPPFLAGS"
-fi
-
-if test x$boost_sleep != xyes; then
-  AC_MSG_ERROR(No working boost sleep implementation found.)
-fi
 
 fi
 
@@ -1056,13 +930,6 @@ else
   AC_MSG_RESULT(no)
 fi
 
-AC_MSG_CHECKING([whether to reduce exports])
-if test x$use_reduce_exports = xyes; then
-  AC_MSG_RESULT([yes])
-else
-  AC_MSG_RESULT([no])
-fi
-
 if test x$build_dogecoin_utils$build_dogecoin_libs$build_dogecoind$dogecoin_enable_qt$use_bench$use_tests = xnononononono; then
   AC_MSG_ERROR([No targets! Please specify at least one of: --with-utils --with-libs --with-daemon --with-gui --enable-bench or --enable-tests])
 fi
@@ -1133,7 +1000,7 @@ AC_CONFIG_LINKS([qa/pull-tester/rpc-tests.py:qa/pull-tester/rpc-tests.py])
 
 dnl boost's m4 checks do something really nasty: they export these vars. As a
 dnl result, they leak into secp256k1's configure and crazy things happen.
-dnl Until this is fixed upstream and we've synced, we'll just un-export them.
+dnl Until this is fixed upstream and we've synced, we'll just un-export them
 CPPFLAGS_TEMP="$CPPFLAGS"
 unset CPPFLAGS
 CPPFLAGS="$CPPFLAGS_TEMP"
