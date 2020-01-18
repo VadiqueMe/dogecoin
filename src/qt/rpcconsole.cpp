@@ -1235,7 +1235,7 @@ void RPCConsole::constructPeerDetailsWidget()
     if ( didOnce ) return ;
 
     Qt::TextInteractionFlags interactionWithLabel =
-            Qt::TextSelectableByMouse | Qt::TextSelectableByKeyboard /* | Qt::LinksAccessibleByMouse */ ;
+            Qt::TextSelectableByMouse /* | Qt::TextSelectableByKeyboard */ ;
 
     //
     // peerHeading
