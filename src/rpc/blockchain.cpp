@@ -88,16 +88,16 @@ UniValue blockheaderToJSON(const CBlockIndex* blockindex)
     // Only report confirmations if the block is on the main chain
     if (chainActive.Contains(blockindex))
         confirmations = chainActive.Height() - blockindex->nHeight + 1;
-    result.push_back(Pair("confirmations", confirmations));
-    result.push_back(Pair("height", blockindex->nHeight));
-    result.push_back(Pair("version", blockindex->nVersion));
-    result.push_back(Pair("versionHex", strprintf("%08x", blockindex->nVersion)));
-    result.push_back(Pair("merkleroot", blockindex->hashMerkleRoot.GetHex()));
-    result.push_back(Pair("time", (int64_t)blockindex->nTime));
-    result.push_back(Pair("mediantime", (int64_t)blockindex->GetMedianTimePast()));
-    result.push_back(Pair("nonce", (uint64_t)blockindex->nNonce));
-    result.push_back(Pair("bits", strprintf("%08x", blockindex->nBits)));
-    result.push_back(Pair("chainwork", blockindex->nChainWork.GetHex()));
+    result.push_back( Pair("confirmations", confirmations) ) ;
+    result.push_back( Pair("height", blockindex->nHeight) ) ;
+    result.push_back( Pair("version", blockindex->nVersion) ) ;
+    result.push_back( Pair("versionHex", strprintf( "%08x", blockindex->nVersion )) ) ;
+    result.push_back( Pair("merkleroot", blockindex->hashMerkleRoot.GetHex()) ) ;
+    result.push_back( Pair("time", (int64_t)blockindex->nTime) ) ;
+    result.push_back( Pair("mediantime", (int64_t)blockindex->GetMedianTimePast()) ) ;
+    result.push_back( Pair("nonce", (uint64_t)blockindex->nNonce) ) ;
+    result.push_back( Pair("bits", strprintf( "%08x", blockindex->nBits )) ) ;
+    result.push_back( Pair("chainwork", blockindex->nChainWorkHashes.GetHex()) ) ;
 
     if (blockindex->pprev)
         result.push_back(Pair("previousblockhash", blockindex->pprev->GetBlockSha256Hash().GetHex()));
@@ -140,7 +140,7 @@ UniValue blockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool tx
     result.push_back( Pair("mediantime", (int64_t)blockindex->GetMedianTimePast()) ) ;
     result.push_back( Pair("nonce", (uint64_t)block.nNonce) ) ;
     result.push_back( Pair("bits", strprintf( "%08x", block.nBits )) ) ;
-    result.push_back( Pair("chainwork", blockindex->nChainWork.GetHex()) ) ;
+    result.push_back( Pair("chainwork", blockindex->nChainWorkHashes.GetHex()) ) ;
 
     if (block.auxpow)
         result.push_back( Pair("auxpow", AuxpowToJSON( *block.auxpow )) ) ;
@@ -1131,7 +1131,7 @@ UniValue getblockchaininfo(const JSONRPCRequest& request)
     obj.push_back(Pair( "mediantime",            (int64_t)chainActive.Tip()->GetMedianTimePast() )) ;
     obj.push_back(Pair( "verificationprogress",  GuessVerificationProgress( Params().TxData(), chainActive.Tip() ) )) ;
     obj.push_back(Pair( "initialblockdownload",  IsInitialBlockDownload() )) ;
-    obj.push_back(Pair( "chainwork",             chainActive.Tip()->nChainWork.GetHex() )) ;
+    obj.push_back(Pair( "chainwork",             chainActive.Tip()->nChainWorkHashes.GetHex() )) ;
     obj.push_back(Pair( "pruned",                fPruneMode )) ;
 
     const Consensus::Params& consensusParams = Params().GetConsensus(0);

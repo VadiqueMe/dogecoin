@@ -63,12 +63,12 @@ UniValue GetNetworkHashPS(int lookup, int height) {
         maxTime = std::max(time, maxTime);
     }
 
-    // In case there's a situation where minTime == maxTime, we don't want a divide by zero exception.
+    // In case there's a situation where minTime == maxTime, we don't want a divide by zero exception
     if (minTime == maxTime)
         return 0;
 
-    arith_uint256 workDiff = pb->nChainWork - pb0->nChainWork;
-    int64_t timeDiff = maxTime - minTime;
+    arith_uint256 workDiff = pb->nChainWorkHashes - pb0->nChainWorkHashes ;
+    int64_t timeDiff = maxTime - minTime ;
 
     return workDiff.getdouble() / timeDiff;
 }

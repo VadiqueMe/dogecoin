@@ -185,8 +185,8 @@ public:
     //! Byte offset within rev?????.dat where this block's undo data is stored
     unsigned int nUndoPos ;
 
-    //! (memory only) Total amount of work (expected number of hashes) in the chain up to and including this block
-    arith_uint256 nChainWork ;
+    //! (memory only) Summary amount of work (expected number of hashes) in the chain up to and including this block
+    arith_uint256 nChainWorkHashes ;
 
     //! Number of transactions in this block.
     //! Note: in a potential headers-first mode, this number cannot be relied upon
@@ -223,7 +223,7 @@ public:
         nFile = 0;
         nDataPos = 0;
         nUndoPos = 0;
-        nChainWork = arith_uint256();
+        nChainWorkHashes = arith_uint256() ;
         nTx = 0;
         nChainTx = 0;
         nStatus = 0;
@@ -367,10 +367,10 @@ public:
     }
 };
 
-arith_uint256 GetBlockProof( const CBlockIndex & block ) ;
+arith_uint256 EstimateBlockProofMaxHashes( const CBlockIndex & block ) ;
 
-/** Return the time it would take to redo the work difference between from and to, assuming the current hashrate corresponds to the difficulty at tip, in seconds */
-int64_t GetBlockProofEquivalentTime(const CBlockIndex& to, const CBlockIndex& from, const CBlockIndex& tip, const Consensus::Params&);
+/** Return the time it would take to redo the work difference between from and to, assuming the current hashrate corresponds to the difficulty at tip */
+///int64_t EstimateBlockProofRedoTimeInSeconds( const CBlockIndex & to, const CBlockIndex & from, const CBlockIndex & tip, const Consensus::Params & ) ;
 
 /** Used to marshal pointers into hashes for db storage */
 class CDiskBlockIndex : public CBlockIndex

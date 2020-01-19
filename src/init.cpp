@@ -322,11 +322,6 @@ std::string HelpMessage( WhatHelpMessage what )
     strUsage += HelpMessageOpt("-blocknotify=<cmd>", _("Execute command when the best block changes (%s in cmd is replaced by block hash, %i is replaced by block number)"));
     if (showDebug)
         strUsage += HelpMessageOpt("-blocksonly", strprintf(_("Whether to operate in a blocks only mode (default: %u)"), DEFAULT_BLOCKSONLY));
-    strUsage += HelpMessageOpt("-assumevalid=<hex>",
-        strprintf(
-            "If this block is in the chain assume that it and its ancestors are valid and potentially skip their script verification (0 to verify all, default for chain \"%s\": %u)",
-            NameOfChain(), Params().GetConsensus( 0 ).defaultAssumeValid.GetHex()
-        ) ) ;
     strUsage += HelpMessageOpt("-conf=<file>", strprintf(_("Specify configuration file (default: %s)"), DOGECOIN_CONF_FILENAME));
     if ( what == HELP_MESSAGE_DOGECOIND )
     {
@@ -938,12 +933,6 @@ bool AppInitParameterInteraction()
     }
     fCheckBlockIndex = GetBoolArg("-checkblockindex", chainparams.DefaultConsistencyChecks());
     fCheckpointsEnabled = GetBoolArg("-checkpoints", DEFAULT_CHECKPOINTS_ENABLED);
-
-    hashAssumeValid = uint256S(GetArg("-assumevalid", chainparams.GetConsensus(0).defaultAssumeValid.GetHex()));
-    if (!hashAssumeValid.IsNull())
-        LogPrintf("Assuming ancestors of block %s have valid signatures.\n", hashAssumeValid.GetHex());
-    else
-        LogPrintf("Validating signatures for all blocks.\n");
 
     // mempool limits
     int64_t nMempoolSizeMax = GetArg("-maxmempool", DEFAULT_MAX_MEMPOOL_SIZE) * 1000000;

@@ -146,35 +146,35 @@ void CBlockIndex::BuildSkip()
         pskip = pprev->GetAncestor(GetSkipHeight(nHeight));
 }
 
-arith_uint256 GetBlockProof( const CBlockIndex & block )
+arith_uint256 EstimateBlockProofMaxHashes( const CBlockIndex & block )
 {
-    arith_uint256 bnTarget ;
+    arith_uint256 bitsExpanded ;
     bool fNegative ;
     bool fOverflow ;
-    bnTarget.SetCompact( block.nBits, &fNegative, &fOverflow ) ;
-    if ( fNegative || fOverflow || bnTarget == 0 )
+    bitsExpanded.SetCompact( block.nBits, &fNegative, &fOverflow ) ;
+    if ( fNegative || fOverflow || bitsExpanded == 0 )
         return 0 ;
 
-    // We need to compute 2**256 / ( bnTarget + 1 ), but we can't represent 2**256
-    // as it's too large for an arith_uint256. However, as 2**256 is at least as large
-    // as bnTarget+1, it is equal to ( ( 2**256 - bnTarget - 1 ) / ( bnTarget + 1 ) ) + 1,
-    // or ~bnTarget / ( bnTarget + 1 ) plus 1
-    return ( ~bnTarget / ( bnTarget + 1 ) ) + 1 ;
+    // We need to compute 2**256 / ( bitsExpanded + 1 ), but arith_uint256 can't represent 2**256
+    // as it's too large. However, as 2**256 is at least as large as bitsExpanded + 1,
+    // it is equal to ( ( 2**256 - bitsExpanded - 1 ) / ( bitsExpanded + 1 ) ) + 1,
+    // or ~bitsExpanded / ( bitsExpanded + 1 ) plus 1
+    return ( ~bitsExpanded / ( bitsExpanded + 1 ) ) + 1 ;
 }
 
-int64_t GetBlockProofEquivalentTime(const CBlockIndex& to, const CBlockIndex& from, const CBlockIndex& tip, const Consensus::Params& params)
+/* int64_t EstimateBlockProofRedoTimeInSeconds( const CBlockIndex & to, const CBlockIndex & from, const CBlockIndex & tip, const Consensus::Params & params )
 {
-    arith_uint256 r;
-    int sign = 1;
-    if (to.nChainWork > from.nChainWork) {
-        r = to.nChainWork - from.nChainWork;
+    arith_uint256 r ;
+    int sign = 1 ;
+    if ( to.nChainWorkHashes > from.nChainWorkHashes ) {
+        r = to.nChainWorkHashes - from.nChainWorkHashes ;
     } else {
-        r = from.nChainWork - to.nChainWork;
-        sign = -1;
+        r = from.nChainWorkHashes - to.nChainWorkHashes ;
+        sign = -1 ;
     }
-    r = r * arith_uint256(params.nPowTargetSpacing) / GetBlockProof(tip);
-    if (r.bits() > 63) {
-        return sign * std::numeric_limits<int64_t>::max();
+    r = arith_uint256( params.nPowTargetSpacing ) * r / EstimateBlockProofMaxHashes( tip ) ;
+    if ( r.bits() > 63 ) {
+        return sign * std::numeric_limits< int64_t >::max() ;
     }
-    return sign * r.GetLow64();
-}
+    return sign * r.GetLow64() ;
+} */

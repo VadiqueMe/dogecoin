@@ -368,36 +368,40 @@ bool MarkBlockAsInFlight(NodeId nodeid, const uint256& hash, const Consensus::Pa
     return true;
 }
 
-/** Check whether the last unknown block a peer advertised is not yet known. */
-void ProcessBlockAvailability(NodeId nodeid) {
-    CNodeState *state = State(nodeid);
-    assert(state != NULL);
+/** Check whether the last unknown block a peer advertised is not yet known */
+void ProcessBlockAvailability( NodeId nodeid )
+{
+    CNodeState * state = State( nodeid ) ;
+    assert( state != nullptr ) ;
 
-    if (!state->hashLastUnknownBlock.IsNull()) {
-        BlockMap::iterator itOld = mapBlockIndex.find(state->hashLastUnknownBlock);
-        if (itOld != mapBlockIndex.end() && itOld->second->nChainWork > 0) {
-            if (state->pindexBestKnownBlock == NULL || itOld->second->nChainWork >= state->pindexBestKnownBlock->nChainWork)
-                state->pindexBestKnownBlock = itOld->second;
-            state->hashLastUnknownBlock.SetNull();
+    if ( ! state->hashLastUnknownBlock.IsNull() ) {
+        BlockMap::iterator itOld = mapBlockIndex.find( state->hashLastUnknownBlock ) ;
+        if ( itOld != mapBlockIndex.end() && itOld->second->nChainWorkHashes > 0 ) {
+            if ( state->pindexBestKnownBlock == nullptr ||
+                    itOld->second->nChainWorkHashes >= state->pindexBestKnownBlock->nChainWorkHashes )
+                state->pindexBestKnownBlock = itOld->second ;
+            state->hashLastUnknownBlock.SetNull() ;
         }
     }
 }
 
-/** Update tracking information about which blocks a peer is assumed to have. */
-void UpdateBlockAvailability(NodeId nodeid, const uint256 &hash) {
-    CNodeState *state = State(nodeid);
-    assert(state != NULL);
+/** Update tracking information about which blocks a peer is assumed to have */
+void UpdateBlockAvailability( NodeId nodeid, const uint256 & hash )
+{
+    CNodeState * state = State( nodeid ) ;
+    assert( state != nullptr ) ;
 
-    ProcessBlockAvailability(nodeid);
+    ProcessBlockAvailability( nodeid ) ;
 
-    BlockMap::iterator it = mapBlockIndex.find(hash);
-    if (it != mapBlockIndex.end() && it->second->nChainWork > 0) {
-        // An actually better block was announced.
-        if (state->pindexBestKnownBlock == NULL || it->second->nChainWork >= state->pindexBestKnownBlock->nChainWork)
-            state->pindexBestKnownBlock = it->second;
+    BlockMap::iterator it = mapBlockIndex.find( hash ) ;
+    if ( it != mapBlockIndex.end() && it->second->nChainWorkHashes > 0 ) {
+        // An actually better block was announced
+        if ( state->pindexBestKnownBlock == nullptr ||
+                it->second->nChainWorkHashes >= state->pindexBestKnownBlock->nChainWorkHashes )
+            state->pindexBestKnownBlock = it->second ;
     } else {
-        // An unknown block was announced; just assume that the latest one is the best one.
-        state->hashLastUnknownBlock = hash;
+        // An unknown block was announced; just assume that the latest one is the best one
+        state->hashLastUnknownBlock = hash ;
     }
 }
 
@@ -472,7 +476,7 @@ const CBlockIndex* LastCommonAncestor(const CBlockIndex* pa, const CBlockIndex* 
 }
 
 /** Update pindexLastCommonBlock and add not-in-flight missing successors to vBlocks, until it has
- *  at most count entries. */
+ *  at most count entries */
 void FindNextBlocksToDownload(NodeId nodeid, unsigned int count, std::vector<const CBlockIndex*>& vBlocks, NodeId& nodeStaller, const Consensus::Params& consensusParams) {
     if (count == 0)
         return;
@@ -481,22 +485,23 @@ void FindNextBlocksToDownload(NodeId nodeid, unsigned int count, std::vector<con
     CNodeState *state = State(nodeid);
     assert(state != NULL);
 
-    // Make sure pindexBestKnownBlock is up to date, we'll need it.
+    // Make sure pindexBestKnownBlock is up to date, we'll need it
     ProcessBlockAvailability(nodeid);
 
-    if (state->pindexBestKnownBlock == NULL || state->pindexBestKnownBlock->nChainWork < chainActive.Tip()->nChainWork) {
-        // This peer has nothing interesting.
-        return;
+    if ( state->pindexBestKnownBlock == nullptr ||
+            state->pindexBestKnownBlock->nChainWorkHashes < chainActive.Tip()->nChainWorkHashes ) {
+        // This peer has nothing interesting
+        return ;
     }
 
     if (state->pindexLastCommonBlock == NULL) {
-        // Bootstrap quickly by guessing a parent of our best tip is the forking point.
-        // Guessing wrong in either direction is not a problem.
+        // Bootstrap quickly by guessing a parent of our best tip is the forking point
+        // Guessing wrong in either direction is not a problem
         state->pindexLastCommonBlock = chainActive[std::min(state->pindexBestKnownBlock->nHeight, chainActive.Height())];
     }
 
     // If the peer reorganized, our previous pindexLastCommonBlock may not be an ancestor
-    // of its current tip anymore. Go back enough to fix that.
+    // of its current tip anymore. Go back enough to fix that
     state->pindexLastCommonBlock = LastCommonAncestor(state->pindexLastCommonBlock, state->pindexBestKnownBlock);
     if (state->pindexLastCommonBlock == state->pindexBestKnownBlock)
         return;
@@ -982,39 +987,37 @@ void static ProcessGetData(CNode* pfrom, const Consensus::Params& consensusParam
 
             it++;
 
-            if (inv.type == MSG_BLOCK || inv.type == MSG_FILTERED_BLOCK || inv.type == MSG_CMPCT_BLOCK || inv.type == MSG_WITNESS_BLOCK)
+            if ( inv.type == MSG_BLOCK || inv.type == MSG_FILTERED_BLOCK || inv.type == MSG_CMPCT_BLOCK || inv.type == MSG_WITNESS_BLOCK )
             {
-                bool send = false;
-                BlockMap::iterator mi = mapBlockIndex.find(inv.hash);
-                if (mi != mapBlockIndex.end())
+                bool send = false ;
+                BlockMap::iterator mi = mapBlockIndex.find( inv.hash ) ;
+                if ( mi != mapBlockIndex.end() )
                 {
-                    if (mi->second->nChainTx && !mi->second->IsValid(BLOCK_VALID_SCRIPTS) &&
-                            mi->second->IsValid(BLOCK_VALID_TREE)) {
+                    if ( mi->second->nChainTx && ! mi->second->IsValid( BLOCK_VALID_SCRIPTS ) &&
+                            mi->second->IsValid( BLOCK_VALID_TREE ) ) {
                         // If we have the block and all of its parents, but have not yet validated it,
-                        // we might be in the middle of connecting it (ie in the unlock of cs_main
-                        // before ActivateBestChain but after AcceptBlock).
+                        // we might be in the middle of connecting it (in the unlock of cs_main
+                        // before ActivateBestChain but after AcceptBlock)
                         // In this case, we need to run ActivateBestChain prior to checking the relay
-                        // conditions below.
-                        std::shared_ptr<const CBlock> a_recent_block;
+                        // conditions below
+                        std::shared_ptr< const CBlock > a_recent_block ;
                         {
-                            LOCK(cs_most_recent_block);
-                            a_recent_block = most_recent_block;
+                            LOCK( cs_most_recent_block ) ;
+                            a_recent_block = most_recent_block ;
                         }
-                        CValidationState dummy;
-                        ActivateBestChain(dummy, Params(), a_recent_block);
+                        CValidationState dummy ;
+                        ActivateBestChain( dummy, Params(), a_recent_block ) ;
                     }
-                    if (chainActive.Contains(mi->second)) {
-                        send = true;
+                    if ( chainActive.Contains( mi->second ) ) {
+                        send = true ;
                     } else {
-                        static const int nOneMonth = 30 * 24 * 60 * 60;
-                        // To prevent fingerprinting attacks, only send blocks outside of the active
-                        // chain if they are valid, and no more than a month older (both in time, and in
-                        // best equivalent proof of work) than the best header chain we know about.
-                        send = mi->second->IsValid(BLOCK_VALID_SCRIPTS) && (pindexBestHeader != NULL) &&
-                            (pindexBestHeader->GetBlockTime() - mi->second->GetBlockTime() < nOneMonth) &&
-                            (GetBlockProofEquivalentTime(*pindexBestHeader, *mi->second, *pindexBestHeader, consensusParams) < nOneMonth);
-                        if (!send) {
-                            LogPrintf("%s: ignoring request from peer=%i for old block that isn't in the main chain\n", __func__, pfrom->GetId());
+                        static const int secondsInTwo30DayMonths = 2 * 30 * 24 * 60 * 60 ;
+                        // Only send blocks outside of the active chain if they are valid,
+                        // and no more than two 30-day months older than the best header chain we know about
+                        send = mi->second->IsValid( BLOCK_VALID_SCRIPTS ) && ( pindexBestHeader != nullptr ) &&
+                            ( pindexBestHeader->GetBlockTime() - mi->second->GetBlockTime() < secondsInTwo30DayMonths ) ;
+                        if ( ! send ) {
+                            LogPrintf( "%s: ignoring request from peer=%i for old block that isn't in the main chain\n", __func__, pfrom->GetId() ) ;
                         }
                     }
                 }
@@ -1030,7 +1033,7 @@ void static ProcessGetData(CNode* pfrom, const Consensus::Params& consensusParam
                     send = false;
                 }
                 // Pruned nodes may have deleted the block, so check whether
-                // it's available before trying to send.
+                // it's available before trying to send
                 if (send && (mi->second->nStatus & BLOCK_HAVE_DATA))
                 {
                     // Send block from disk
@@ -1072,7 +1075,7 @@ void static ProcessGetData(CNode* pfrom, const Consensus::Params& consensusParam
                         // If a peer is asking for old blocks, we're almost guaranteed
                         // they won't have a useful mempool to match against a compact block,
                         // and we don't feel like constructing the object for them, so
-                        // instead we respond with the full, non-compact block.
+                        // instead we respond with the full, non-compact block
                         bool fPeerWantsWitness = State(pfrom->GetId())->fWantsCmpctWitness;
                         int nSendFlags = fPeerWantsWitness ? 0 : SERIALIZE_TRANSACTION_NO_WITNESS;
                         if (CanDirectFetch(consensusParams) && mi->second->nHeight >= chainActive.Height() - MAX_CMPCTBLOCK_DEPTH) {
@@ -1087,7 +1090,7 @@ void static ProcessGetData(CNode* pfrom, const Consensus::Params& consensusParam
                     {
                         // Bypass PushInventory, this must send even if redundant,
                         // and we want it right after the last block so they don't
-                        // wait for other stuff first.
+                        // wait for other stuff first
                         std::vector<CInv> vInv;
                         vInv.push_back(CInv(MSG_BLOCK, chainActive.Tip()->GetBlockSha256Hash()));
                         connman.PushMessage(pfrom, msgMaker.Make(NetMsgType::INV, vInv));
@@ -1107,7 +1110,7 @@ void static ProcessGetData(CNode* pfrom, const Consensus::Params& consensusParam
                 } else if (pfrom->timeLastMempoolReq) {
                     auto txinfo = mempool.info(inv.hash);
                     // To protect privacy, do not answer getdata using the mempool when
-                    // that TX couldn't have been INVed in reply to a MEMPOOL request.
+                    // that TX couldn't have been INVed in reply to a MEMPOOL request
                     if (txinfo.tx && txinfo.nTime <= pfrom->timeLastMempoolReq) {
                         connman.PushMessage(pfrom, msgMaker.Make(nSendFlags, NetMsgType::TX, *txinfo.tx));
                         push = true;
@@ -1118,7 +1121,7 @@ void static ProcessGetData(CNode* pfrom, const Consensus::Params& consensusParam
                 }
             }
 
-            // Track requests for our stuff.
+            // Track requests for our stuff
             GetMainSignals().Inventory(inv.hash);
 
             if (inv.type == MSG_BLOCK || inv.type == MSG_FILTERED_BLOCK || inv.type == MSG_CMPCT_BLOCK || inv.type == MSG_WITNESS_BLOCK)
@@ -1135,7 +1138,7 @@ void static ProcessGetData(CNode* pfrom, const Consensus::Params& consensusParam
         // dependencies of relevant unconfirmed transactions. SPV clients want to
         // do that because they want to know about (and store and rebroadcast and
         // risk analyze) the dependencies of transactions relevant to them, without
-        // having to download the entire memory pool.
+        // having to download the entire memory pool
         connman.PushMessage(pfrom, msgMaker.Make(NetMsgType::NOTFOUND, vNotFound));
     }
 }
@@ -2021,10 +2024,10 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
         if (pindex->nStatus & BLOCK_HAVE_DATA) // Nothing to do here
             return true;
 
-        if (pindex->nChainWork <= chainActive.Tip()->nChainWork || // We know something better
-                pindex->nTx != 0) { // We had this block at some point, but pruned it
-            if (fAlreadyInFlight) {
-                // We requested this block for some reason, but our mempool will probably be useless
+        if ( pindex->nChainWorkHashes <= chainActive.Tip()->nChainWorkHashes || // we know something better
+                pindex->nTx != 0 ) { // we had this block at some point, but pruned it
+            if ( fAlreadyInFlight ) {
+                // we requested this block for some reason, but our mempool will probably be useless
                 // so we just grab the block via normal getdata
                 std::vector<CInv> vInv(1);
                 vInv[0] = CInv( MSG_BLOCK | GetFetchFlags( pfrom, pindex->pprev, chainparams.GetConsensus( pindex->pprev->nHeight ) ), cmpctblock.header.GetSha256Hash() ) ;
@@ -2323,16 +2326,17 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
 
         bool fCanDirectFetch = CanDirectFetch(chainparams.GetConsensus(0));
         // If this set of headers is valid and ends in a block with at least as
-        // much work as our tip, download as much as possible.
-        if (fCanDirectFetch && pindexLast->IsValid(BLOCK_VALID_TREE) && chainActive.Tip()->nChainWork <= pindexLast->nChainWork) {
+        // much work as our tip, download as much as possible
+        if ( fCanDirectFetch && pindexLast->IsValid( BLOCK_VALID_TREE ) &&
+                chainActive.Tip()->nChainWorkHashes <= pindexLast->nChainWorkHashes ) {
             std::vector<const CBlockIndex*> vToFetch;
             const CBlockIndex *pindexWalk = pindexLast;
-            // Calculate all the blocks we'd need to switch to pindexLast, up to a limit.
+            // Calculate all the blocks we'd need to switch to pindexLast, up to a limit
             while (pindexWalk && !chainActive.Contains(pindexWalk) && vToFetch.size() <= MAX_BLOCKS_IN_TRANSIT_PER_PEER) {
                 if (!(pindexWalk->nStatus & BLOCK_HAVE_DATA) &&
                         !mapBlocksInFlight.count(pindexWalk->GetBlockSha256Hash()) &&
                         (!IsWitnessEnabled(pindexWalk->pprev, chainparams.GetConsensus(pindexWalk->pprev->nHeight)) || State(pfrom->GetId())->fHaveWitness)) {
-                    // We don't have this block, and it's not yet in flight.
+                    // We don't have this block, and it's not yet in flight
                     vToFetch.push_back(pindexWalk);
                 }
                 pindexWalk = pindexWalk->pprev;
@@ -2340,14 +2344,14 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
             // If pindexWalk still isn't on our main chain, we're looking at a
             // very large reorg at a time we think we're close to caught up to
             // the main chain -- this shouldn't really happen.  Bail out on the
-            // direct fetch and rely on parallel download instead.
+            // direct fetch and rely on parallel download instead
             if (!chainActive.Contains(pindexWalk)) {
                 LogPrint("net", "Large reorg, won't direct fetch to %s (%d)\n",
                         pindexLast->GetBlockSha256Hash().ToString(),
                         pindexLast->nHeight);
             } else {
                 std::vector<CInv> vGetData;
-                // Download as much as possible, from earliest to latest.
+                // Download as much as possible, from earliest to latest
                 BOOST_REVERSE_FOREACH(const CBlockIndex *pindex, vToFetch) {
                     if (nodestate->nBlocksInFlight >= MAX_BLOCKS_IN_TRANSIT_PER_PEER) {
                         // Can't download any more from this peer

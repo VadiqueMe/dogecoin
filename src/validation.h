@@ -146,41 +146,38 @@ extern size_t nCoinCacheUsage;
 /** Absolute maximum transaction fee (in satoshis) used by wallet and mempool (rejects high fee in sendrawtransaction) */
 extern CAmount maxTxFee;
 extern bool fAlerts;
-/** If the tip is older than this (in seconds), the node is considered to be in initial block download. */
+/** If the tip is older than this (in seconds), the node is considered to be in initial block download */
 extern int64_t nMaxTipAge;
 extern bool fEnableReplacement;
 
-/** Block hash whose ancestors we will assume to have valid scripts without checking them. */
-extern uint256 hashAssumeValid;
-
-/** Best header we've seen so far (used for getheaders queries' starting points). */
+/** Best header we've seen so far (used for getheaders queries' starting points) */
 extern CBlockIndex *pindexBestHeader;
 
 /** Minimum disk space required - used in CheckDiskSpace() */
 static const uint64_t nMinDiskSpace = 52428800;
 
 /** Pruning-related variables and constants */
-/** True if any block files have ever been pruned. */
-extern bool fHavePruned;
-/** True if we're running in -prune mode. */
-extern bool fPruneMode;
-/** Number of MiB of block files that we're trying to stay below. */
-extern uint64_t nPruneTarget;
-/** Block files containing a block-height within MIN_BLOCKS_TO_KEEP of chainActive.Tip() will not be pruned. */
-static const unsigned int MIN_BLOCKS_TO_KEEP = 1440;
+/** True if any block files have ever been pruned */
+extern bool fHavePruned ;
+/** True if we're running in -prune mode */
+extern bool fPruneMode ;
+/** Number of MiB of block files that we're trying to stay below */
+extern uint64_t nPruneTarget ;
+/** Block files containing a block-height within MIN_BLOCKS_TO_KEEP of chainActive.Tip() will not be pruned */
+static const unsigned int MIN_BLOCKS_TO_KEEP = 1440 ;
 
-static const signed int DEFAULT_CHECKBLOCKS = 6;
-static const unsigned int DEFAULT_CHECKLEVEL = 3;
+static const signed int DEFAULT_CHECKBLOCKS = 6 ;
+static const unsigned int DEFAULT_CHECKLEVEL = 3 ;
 
 // Require that user allocate at least 22,00MB for block & undo files (blk???.dat and rev???.dat)
-// At 1MB per block, 1,440 blocks = 1,440MB.
+// At 1MB per block, 1,440 blocks = 1,440MB
 // Add 15% for Undo data = 1,656MB
 // Add 20% for Orphan block rate = 1,987MB
 // We want the low water mark after pruning to be at least 1987 MB and since we prune in
 // full block file chunks, we need the high water mark which triggers the prune to be
 // one 128MB block file + added 15% undo data = 147MB greater for a total of 2,134MB
-// Setting the target to > than 2200MB will make it likely we can respect the target.
-static const uint64_t MIN_DISK_SPACE_FOR_BLOCK_FILES = 2200ULL * 1024 * 1024;
+// Setting the target to > than 2200MB will make it likely we can respect the target
+static const uint64_t MIN_DISK_SPACE_FOR_BLOCK_FILES = 2200ULL * 1024 * 1024 ;
 
 /**
  * Process an incoming block. This only returns after the best known valid
