@@ -80,12 +80,12 @@ CTransaction::CTransaction( CMutableTransaction && tx ) : nVersion( tx.nVersion 
 CAmount CTransaction::GetValueOut() const
 {
     CAmount nValueOut = 0 ;
-    for ( std::vector< CTxOut >::const_iterator it( vout.begin() ) ; it != vout.end() ; ++ it )
+    for ( const CTxOut & txout : vout )
     {
-        if ( ! MoneyRange( it->nValue ) )
-            throw std::runtime_error( std::string(__func__) + ": " + strprintf( "it->nValue=%ld is out of range", it->nValue ) ) ;
+        if ( ! MoneyRange( txout.nValue ) )
+            throw std::runtime_error( std::string(__func__) + ": " + strprintf( "txout.nValue=%ld is out of range", txout.nValue ) ) ;
 
-        nValueOut += it->nValue ;
+        nValueOut += txout.nValue ;
 
         if ( ! MoneyRange( nValueOut ) )
             throw std::runtime_error( std::string(__func__) + ": " + strprintf( "nValueOut=%ld is out of range", nValueOut ) ) ;

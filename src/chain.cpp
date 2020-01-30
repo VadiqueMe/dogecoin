@@ -37,15 +37,15 @@ CBlockHeader CBlockIndex::GetBlockHeader( const Consensus::Params & consensusPar
 /**
  * CChain implementation
  */
-void CChain::SetTip(CBlockIndex *pindex) {
-    if (pindex == NULL) {
-        vChain.clear();
-        return;
+void CChain::SetTip( CBlockIndex * pindex ) {
+    if ( pindex == nullptr ) {
+        vChain.clear() ;
+        return ;
     }
-    vChain.resize(pindex->nHeight + 1);
-    while (pindex && vChain[pindex->nHeight] != pindex) {
-        vChain[pindex->nHeight] = pindex;
-        pindex = pindex->pprev;
+    vChain.resize( pindex->nHeight + 1 ) ;
+    while ( pindex && vChain[ pindex->nHeight ] != pindex ) {
+        vChain[ pindex->nHeight ] = pindex ;
+        pindex = pindex->pprev ;
     }
 }
 

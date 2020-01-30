@@ -1,4 +1,4 @@
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the WTFPLv2 software license http://www.wtfpl.net
 
 #include "generatecoinspage.h"
@@ -10,6 +10,7 @@
 #include "unitsofcoin.h"
 #include "util.h"
 #include "validation.h"
+#include "dogecoin.h"
 
 #include <QDateTime>
 
@@ -140,6 +141,8 @@ void GenerateCoinsPage::updateTipBlockInfo()
         ui->tipBlockNonceLabel->setVisible( false );
         ui->tipBlockHashSublayoutContainer->setVisible( false ) ;
         ui->tipBlockHashLabel->setVisible( false ) ;
+        ui->tipBlockGeneratedCoins->setVisible( false );
+        ui->tipBlockGeneratedCoinsLabel->setVisible( false );
 
         return ;
     }
@@ -188,16 +191,16 @@ void GenerateCoinsPage::updateTipBlockInfo()
     ) ;
 
     // get header of tip block
-    CBlockHeader tipBlock = chainActive.Tip()->GetBlockHeader( Params().GetConsensus( chainHeight ) ) ;
+    CBlockHeader tipBlockHeader = chainActive.Tip()->GetBlockHeader( Params().GetConsensus( chainHeight ) ) ;
 
     // version
 
     ui->tipBlockVersion->setVisible( true );
     ui->tipBlockVersionLabel->setVisible( true );
 
-    QString justHexVersion = QString::number( tipBlock.nVersion, 16 ) ;
-    QString versionString = ( tipBlock.nVersion < 10 ) ? justHexVersion : QString( "0x" ) + justHexVersion ;
-    if ( tipBlock.nVersion & CPureBlockHeader::VERSION_AUXPOW )
+    QString justHexVersion = QString::number( tipBlockHeader.nVersion, 16 ) ;
+    QString versionString = ( tipBlockHeader.nVersion < 10 ) ? justHexVersion : QString( "0x" ) + justHexVersion ;
+    if ( tipBlockHeader.nVersion & CPureBlockHeader::VERSION_AUXPOW )
         versionString += " (auxpow)" ;
     ui->tipBlockVersion->setText( versionString ) ;
 
@@ -206,24 +209,80 @@ void GenerateCoinsPage::updateTipBlockInfo()
     ui->tipBlockBits->setVisible( true );
     ui->tipBlockBitsLabel->setVisible( true );
 
-    arith_uint256 expandedBits = arith_uint256().SetCompact( tipBlock.nBits ) ;
-    ui->tipBlockBits->setText( QString::asprintf( "%08x = %s", tipBlock.nBits, expandedBits.GetHex().c_str() ) ) ;
+    arith_uint256 expandedBits = arith_uint256().SetCompact( tipBlockHeader.nBits ) ;
+    ui->tipBlockBits->setText( QString::asprintf( "%08x = %s", tipBlockHeader.nBits, expandedBits.GetHex().c_str() ) ) ;
 
     // nonce
 
     ui->tipBlockNonce->setVisible( true );
     ui->tipBlockNonceLabel->setVisible( true ) ;
 
-    ui->tipBlockNonce->setText( QString::asprintf( "0x%08x", tipBlock.nNonce ) + " = " + QString::number( tipBlock.nNonce ) ) ;
+    ui->tipBlockNonce->setText( QString::asprintf( "0x%08x", tipBlockHeader.nNonce ) + " = " + QString::number( tipBlockHeader.nNonce ) ) ;
 
     // hash
 
     ui->tipBlockHashSublayoutContainer->setVisible( true ) ;
     ui->tipBlockHashLabel->setVisible( true ) ;
 
-    ui->tipBlockHashSha256->setText( QString::fromStdString( tipBlock.GetSha256Hash().ToString() ) ) ;
-    ui->tipBlockHashScrypt->setText( QString::fromStdString( tipBlock.GetScryptHash().ToString() ) ) ;
-    ui->tipBlockHashLyra2Re2->setText( QString::fromStdString( tipBlock.GetLyra2Re2Hash().ToString() ) ) ;
+    ui->tipBlockHashSha256->setText( QString::fromStdString( tipBlockHeader.GetSha256Hash().ToString() ) ) ;
+    ui->tipBlockHashScrypt->setText( QString::fromStdString( tipBlockHeader.GetScryptHash().ToString() ) ) ;
+    ui->tipBlockHashLyra2Re2->setText( QString::fromStdString( tipBlockHeader.GetLyra2Re2Hash().ToString() ) ) ;
+
+    // new coins
+
+    ui->tipBlockGeneratedCoins->setVisible( true );
+    ui->tipBlockGeneratedCoinsLabel->setVisible( true );
+
+    int unit = UnitsOfCoin::oneCoin ;
+    if ( walletModel != nullptr && walletModel->getOptionsModel() != nullptr )
+        unit = walletModel->getOptionsModel()->getDisplayUnit() ;
+
+    CAmount tipBlockNewCoins = chainActive.Tip()->nBlockNewCoins ;
+    QString tipBlockNewCoinsText = UnitsOfCoin::formatWithUnit( unit, tipBlockNewCoins ) ;
+
+    uint256 hashPrevBlock = ( chainActive.Tip()->pprev == nullptr ) ? uint256()
+                                : chainActive.Tip()->pprev->GetBlockSha256Hash() ;
+    CAmount maxSubsidyForTipBlock = GetDogecoinBlockSubsidy(
+        chainActive.Tip()->nHeight,
+        Params().GetConsensus( chainActive.Tip()->nHeight ),
+        hashPrevBlock ) ;
+
+    if ( tipBlockNewCoins == maxSubsidyForTipBlock )
+        tipBlockNewCoinsText += " (maximum subsidy)" ;
+    else
+        tipBlockNewCoinsText += " (of maximum subsidy " + UnitsOfCoin::formatWithUnit( unit, maxSubsidyForTipBlock ) + ")" ;
+
+    CBlock tipBlock ;
+    bool blockReadOk = ReadBlockFromDisk( tipBlock, chainActive.Tip(), Params().GetConsensus( chainActive.Tip()->nHeight ) ) ;
+    CAmount tipBlockFees = 0 ;
+    if ( blockReadOk ) {
+        for ( unsigned int i = 0 ; i < tipBlock.vtx.size() ; i ++ )
+        {
+            const CTransaction & tx = *( tipBlock.vtx[ i ] ) ;
+            if ( ! tx.IsCoinBase() )
+            {
+                CAmount txValueIn = 0 ;
+                for ( const CTxIn & txin : tx.vin )
+                {
+                    CTransactionRef prevoutTx ;
+                    uint256 blockSha256 ;
+                    if ( GetTransaction( txin.prevout.hash, prevoutTx, Params().GetConsensus( 0 ), blockSha256, true ) ) {
+                        const CTxOut & vout = prevoutTx->vout[ txin.prevout.n ] ;
+                        txValueIn += vout.nValue ;
+                    }
+                }
+
+                tipBlockFees += txValueIn - tx.GetValueOut() ;
+            }
+        }
+    }
+
+    if ( tipBlockFees != 0 ) {
+        tipBlockNewCoinsText += " = " + UnitsOfCoin::format( unit, tipBlock.vtx[ 0 ]->vout[ 0 ].nValue ) ;
+        tipBlockNewCoinsText += " - " + UnitsOfCoin::formatWithUnit( unit, tipBlockFees ) + " in fees" ;
+    }
+
+    ui->tipBlockGeneratedCoins->setText( tipBlockNewCoinsText ) ;
 }
 
 void GenerateCoinsPage::rebuildThreadTabs()

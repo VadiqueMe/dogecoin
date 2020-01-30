@@ -165,7 +165,7 @@ void base_uint<BITS>::SetHex(const std::string& str)
 template <unsigned int BITS>
 std::string base_uint<BITS>::ToString() const
 {
-    return (GetHex());
+    return GetHex() ;
 }
 
 template <unsigned int BITS>

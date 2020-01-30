@@ -1008,7 +1008,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+109"/>
+        <location line="+24"/>
+        <source>maximum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+110"/>
         <source>Chain’s tip block</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1040,6 +1045,11 @@
     <message>
         <location line="+40"/>
         <source>hash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+202"/>
+        <source>new coins</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2820,13 +2830,13 @@ p, li { white-space: pre-wrap; }
     <name>SendCoinsEntry</name>
     <message>
         <location filename="../forms/sendcoinsentry.ui" line="+152"/>
-        <location line="+579"/>
-        <location line="+560"/>
+        <location line="+552"/>
+        <location line="+533"/>
         <source>A&amp;mount:</source>
         <translation>A&amp;mount:</translation>
     </message>
     <message>
-        <location line="-1252"/>
+        <location line="-1198"/>
         <source>Pay &amp;To:</source>
         <translation>Pay &amp;To:</translation>
     </message>
@@ -2862,13 +2872,13 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+7"/>
-        <location line="+588"/>
-        <location line="+560"/>
+        <location line="+561"/>
+        <location line="+533"/>
         <source>Remove this entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-1075"/>
+        <location line="-1021"/>
         <source>The fee will be deducted from the amount being sent. The recipient will receive less dogecoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2883,17 +2893,17 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+470"/>
+        <location line="+443"/>
         <source>This is an unauthenticated payment request.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+556"/>
+        <location line="+529"/>
         <source>This is an authenticated payment request.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-1076"/>
+        <location line="-1022"/>
         <source>Enter a label for this address to add it to the list of used addresses</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2903,14 +2913,14 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+475"/>
-        <location line="+556"/>
+        <location line="+448"/>
+        <location line="+529"/>
         <source>Pay To:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-522"/>
-        <location line="+560"/>
+        <location line="-495"/>
+        <location line="+533"/>
         <source>Memo:</source>
         <translation type="unfinished"></translation>
     </message>
