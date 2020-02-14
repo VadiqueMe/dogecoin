@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2015 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -27,13 +27,18 @@ class CoinAmountField: public QWidget
     Q_PROPERTY(qint64 value READ value WRITE setValue NOTIFY valueChanged USER true)
 
 public:
-    explicit CoinAmountField( QWidget * parent = 0 ) ;
+    explicit CoinAmountField( QWidget * parent = nullptr ) ;
 
-    CAmount value( bool * value = 0 ) const ;
+    CAmount value( bool * valueOk = nullptr ) const ;
 
     void setValue( const CAmount & value ) ;
 
-    /** Set single step in satoshis **/
+    /** Sets a maximum value **/
+    void setMaximumValue( const CAmount & max ) ;
+
+    CAmount getMaximumValue() const ;
+
+    /** Set single step in atomary coin units **/
     void setSingleStep( const CAmount & step ) ;
 
     /** Make read-only **/
@@ -58,7 +63,7 @@ public:
     QWidget * setupTabChain( QWidget * prev ) ;
 
 Q_SIGNALS:
-    void valueChanged() ;
+    void valueChanged( qint64 val ) ;
 
 protected:
     /** Intercept focus-in event and ',' key presses */
@@ -69,6 +74,7 @@ private:
     QValueComboBox * unit ;
 
 private Q_SLOTS:
+    void amountChanged() ;
     void unitChanged( int idx ) ;
 
 };

@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2015 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -15,82 +15,82 @@
 #include <QKeyEvent>
 #include <QLineEdit>
 
-/** QSpinBox that uses fixed-point numbers internally and uses our own
- * formatting/parsing functions.
+/* QSpinBox that uses fixed-point numbers internally with specific formatting/parsing stuff
  */
 class AmountSpinBox: public QAbstractSpinBox
 {
     Q_OBJECT
 
 public:
-    explicit AmountSpinBox( QWidget * parent ) :
-        QAbstractSpinBox( parent ),
-        currentUnit( UnitsOfCoin::oneCoin ),
-        singleStep( UnitsOfCoin::factor( currentUnit ) )
+    explicit AmountSpinBox( QWidget * parent ) : QAbstractSpinBox( parent )
+        , currentUnit( UnitsOfCoin::oneCoin )
+        , singleStep( UnitsOfCoin::factor( currentUnit ) )
+        , maximumValue( UnitsOfCoin::maxMoney() )
     {
-        setAlignment(Qt::AlignRight);
+        setAlignment( Qt::AlignRight ) ;
 
-        connect(lineEdit(), SIGNAL(textEdited(QString)), this, SIGNAL(valueChanged()));
+        connect( lineEdit(), SIGNAL( textEdited(QString) ), this, SIGNAL( textOfValueChanged() ) ) ;
     }
 
-    QValidator::State validate(QString &text, int &pos) const
+    QValidator::State validate( QString & text, int & pos ) const
     {
-        if(text.isEmpty())
-            return QValidator::Intermediate;
-        bool valid = false;
-        parse(text, &valid);
-        /* Make sure we return Intermediate so that fixup() is called on defocus */
-        return valid ? QValidator::Intermediate : QValidator::Invalid;
+        if ( text.isEmpty() )
+            return QValidator::Intermediate ;
+
+        bool ok = false;
+        parse( text, &ok ) ;
+
+        /* return Intermediate so that fixup() is called on defocus */
+        return ok ? QValidator::Intermediate : QValidator::Invalid ;
     }
 
-    void fixup(QString &input) const
+    void fixup( QString & input ) const
     {
-        bool valid = false;
-        CAmount val = parse(input, &valid);
-        if(valid)
+        bool ok = false ;
+        CAmount val = parse( input, &ok ) ;
+        if ( ok )
         {
             input = UnitsOfCoin::format( currentUnit, val, false, UnitsOfCoin::separatorAlways ) ;
-            lineEdit()->setText(input);
+            lineEdit()->setText( input ) ;
         }
     }
 
-    CAmount value(bool *valid_out=0) const
+    CAmount value( bool * valueOk = nullptr ) const
     {
-        return parse(text(), valid_out);
+        return parse( text(), valueOk ) ;
     }
 
-    void setValue(const CAmount& value)
+    void setValue( const CAmount& value )
     {
         lineEdit()->setText( UnitsOfCoin::format( currentUnit, value, false, UnitsOfCoin::separatorAlways ) ) ;
-        Q_EMIT valueChanged();
+        Q_EMIT textOfValueChanged() ;
     }
 
-    void stepBy(int steps)
+    CAmount getMaximumValue() const {  return maximumValue ;  }
+
+    void setMaximumValue( const CAmount & max ) {  maximumValue = max ;  }
+
+    void stepBy( int steps )
     {
-        bool valid = false;
-        CAmount val = value(&valid);
-        val = val + steps * singleStep;
-        val = qMin( qMax( val, CAmount(0) ), UnitsOfCoin::maxMoney() ) ;
-        setValue(val);
+        bool ok = false ;
+        CAmount val = value( &ok ) ;
+        val = val + steps * singleStep ;
+        val = qMin( qMax( val, CAmount(0) ), maximumValue ) ;
+        setValue( val ) ;
     }
 
     void setDisplayUnit(int unit)
     {
-        bool valid = false;
-        CAmount val = value(&valid);
+        bool ok = false ;
+        CAmount val = value( &ok ) ;
 
-        currentUnit = unit;
+        currentUnit = unit ;
 
-        if(valid)
-            setValue(val);
-        else
-            clear();
+        if ( ok ) setValue( val ) ;
+        else clear() ;
     }
 
-    void setSingleStep(const CAmount& step)
-    {
-        singleStep = step;
-    }
+    void setSingleStep( const CAmount & step ) {  singleStep = step ;  }
 
     QSize minimumSizeHint() const
     {
@@ -126,27 +126,29 @@ public:
     }
 
 private:
-    int currentUnit;
-    CAmount singleStep;
-    mutable QSize cachedMinimumSizeHint;
+    int currentUnit ;
+    CAmount singleStep ;
+    CAmount maximumValue ;
+
+    mutable QSize cachedMinimumSizeHint ;
 
     /**
-     * Parse a string into a number of base monetary units and
-     * return validity.
-     * @note Must return 0 if !valid.
+     * Parse a string into a number of base monetary units
+     * @note returns 0 if can't parse
      */
-    CAmount parse(const QString &text, bool *valid_out=0) const
+    CAmount parse( const QString & text, bool * parseOk = nullptr ) const
     {
-        CAmount val = 0;
-        bool valid = UnitsOfCoin::parse( currentUnit, text, &val ) ;
-        if(valid)
-        {
+        CAmount val = 0 ;
+        bool ok = UnitsOfCoin::parse( currentUnit, text, &val ) ;
+        if ( ok ) {
             if ( val < 0 || val > UnitsOfCoin::maxMoney() )
-                valid = false;
+                ok = false ;
+            else if ( val > maximumValue )
+                val = maximumValue ;
         }
-        if(valid_out)
-            *valid_out = valid;
-        return valid ? val : 0;
+
+        if ( parseOk != nullptr ) *parseOk = ok ;
+        return ok ? val : 0 ;
     }
 
 protected:
@@ -167,38 +169,36 @@ protected:
 
     StepEnabled stepEnabled() const
     {
-        if (isReadOnly()) // Disable steps when AmountSpinBox is read-only
-            return StepNone;
-        if (text().isEmpty()) // Allow step-up with empty field
-            return StepUpEnabled;
+        if ( isReadOnly() )
+            return StepNone ;
+        if ( text().isEmpty() ) // enable step-up with empty field
+            return StepUpEnabled ;
 
-        StepEnabled rv = 0;
-        bool valid = false;
-        CAmount val = value(&valid);
-        if(valid)
+        StepEnabled steps = 0 ;
+        bool ok = false ;
+        CAmount val = value( &ok ) ;
+        if ( ok )
         {
-            if(val > 0)
-                rv |= StepDownEnabled;
-            if ( val < UnitsOfCoin::maxMoney() )
-                rv |= StepUpEnabled;
+            if ( val > 0 )
+                steps |= StepDownEnabled ;
+            if ( val < maximumValue )
+                steps |= StepUpEnabled ;
         }
-        return rv;
+        return steps ;
     }
 
 Q_SIGNALS:
-    void valueChanged();
+    void textOfValueChanged() ;
 };
 
 #include "coinamountfield.moc"
 
-CoinAmountField::CoinAmountField(QWidget *parent) :
-    QWidget(parent),
-    amount(0)
+CoinAmountField::CoinAmountField( QWidget * parent ) : QWidget( parent )
 {
-    amount = new AmountSpinBox(this);
-    amount->setLocale(QLocale::c());
-    amount->installEventFilter(this);
-    amount->setMaximumWidth(170);
+    amount = new AmountSpinBox( this ) ;
+    amount->setLocale( QLocale::c() ) ;
+    amount->installEventFilter( this ) ;
+    amount->setMaximumWidth( 170 ) ;
 
     QHBoxLayout *layout = new QHBoxLayout( this ) ;
     layout->addWidget( amount ) ;
@@ -208,17 +208,17 @@ CoinAmountField::CoinAmountField(QWidget *parent) :
     layout->addStretch( 1 ) ;
     layout->setContentsMargins( 0, 0, 0, 0 ) ;
 
-    setLayout(layout);
+    setLayout( layout ) ;
 
     setFocusPolicy(Qt::TabFocus);
     setFocusProxy(amount);
 
     // If one if the widgets changes, the combined content changes as well
-    connect(amount, SIGNAL(valueChanged()), this, SIGNAL(valueChanged()));
-    connect(unit, SIGNAL(currentIndexChanged(int)), this, SLOT(unitChanged(int)));
+    connect( amount, SIGNAL( textOfValueChanged() ), this, SLOT( amountChanged() ) ) ;
+    connect( unit, SIGNAL( currentIndexChanged(int) ), this, SLOT( unitChanged(int) ) ) ;
 
     // Set default based on configuration
-    unitChanged(unit->currentIndex());
+    unitChanged( unit->currentIndex() ) ;
 }
 
 void CoinAmountField::clear()
@@ -266,14 +266,33 @@ QWidget *CoinAmountField::setupTabChain(QWidget *prev)
     return unit;
 }
 
-CAmount CoinAmountField::value(bool *valid_out) const
+CAmount CoinAmountField::value( bool * valueOk ) const
 {
-    return amount->value(valid_out);
+    return amount->value( valueOk ) ;
 }
 
-void CoinAmountField::setValue(const CAmount& value)
+void CoinAmountField::setValue( const CAmount & value )
 {
-    amount->setValue(value);
+    amount->setValue( ( value <= getMaximumValue() ) ? value : getMaximumValue() ) ;
+}
+
+void CoinAmountField::amountChanged()
+{
+    bool valueOk = false ;
+    CAmount val = value( &valueOk ) ;
+    if ( valueOk && val <= getMaximumValue() ) {
+        Q_EMIT valueChanged( val ) ;
+    }
+}
+
+CAmount CoinAmountField::getMaximumValue() const
+{
+    return amount->getMaximumValue() ;
+}
+
+void CoinAmountField::setMaximumValue( const CAmount & max )
+{
+    amount->setMaximumValue( max ) ;
 }
 
 void CoinAmountField::setReadOnly(bool fReadOnly)
