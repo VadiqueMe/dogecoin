@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -34,11 +34,11 @@ static const bool DEFAULT_LOGTIMEMICROS = false;
 static const bool DEFAULT_LOGIPS        = true ;
 static const bool DEFAULT_LOGTIMESTAMPS = true;
 
-/** Signals for translation. */
+/** Signals for translation */
 class CTranslationInterface
 {
 public:
-    /** Translate a message to the native language of the user. */
+    /** Translate a message to the native language of the user */
     boost::signals2::signal<std::string (const char* psz)> Translate;
 };
 
@@ -60,7 +60,7 @@ extern const char * const LOG_FILE_NAME ;
 
 /**
  * Translation function: Call Translate signal on UI interface, which returns a boost::optional result.
- * If no translation slot is registered, nothing is returned, and simply return the input.
+ * If no translation slot is registered, nothing is returned, and simply return the input
  */
 inline std::string _(const char* psz)
 {
@@ -237,8 +237,6 @@ template <typename Callable> void TraceThread(const char* name,  Callable func)
         throw;
     }
 }
-
-std::string toStringWithOrdinalSuffix( unsigned int number ) ;
 
 std::string CopyrightHolders( const std::string & strPrefix ) ;
 

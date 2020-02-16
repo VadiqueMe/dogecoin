@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -814,26 +814,6 @@ bool SetupNetworking()
 int GetNumCores()
 {
     return boost::thread::physical_concurrency() ;
-}
-
-std::string toStringWithOrdinalSuffix( unsigned int number )
-{
-    unsigned int mod10 = number % 10 ;
-    unsigned int mod100 = number % 100 ;
-
-    std::ostringstream result ;
-    result << number ;
-
-    if ( mod10 == 1 && mod100 != 11 )
-        result << "st";
-    else if ( mod10 == 2 && mod100 != 12 )
-        result << "nd";
-    else if ( mod10 == 3 && mod100 != 13 )
-        result << "rd" ;
-    else
-        result << "th" ;
-
-    return result.str() ;
 }
 
 std::string CopyrightHolders(const std::string& strPrefix)

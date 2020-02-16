@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>420</height>
+    <height>433</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -104,6 +104,22 @@
     </layout>
    </item>
    <item>
+    <spacer name="verticalSpacerAfterGenerateBeforeSubsidy">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>1</width>
+       <height>3</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
     <layout class="QHBoxLayout" name="newBlockSubsidyHLayout">
      <item>
       <widget class="QLabel" name="howManyCoinsPerBlockLabel">
@@ -132,7 +148,7 @@
       <widget class="QComboBox" name="listForChoosingHowManyCoinsToGenerate">
        <item>
         <property name="text">
-         <string>maximum</string>
+         <string notr="true">maximum</string>
         </property>
        </item>
       </widget>
@@ -162,6 +178,76 @@
         </size>
        </property>
       </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacerAfterSubsidy">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>4</width>
+         <height>1</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="newCoinsFirstLineEdit">
+       <property name="inputMethodHints">
+        <set>Qt::ImhFormattedNumbersOnly</set>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="newCoinsDivideLabel">
+       <property name="text">
+        <string notr="true">/</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="newCoinsSecondLineEdit">
+       <property name="inputMethodHints">
+        <set>Qt::ImhDigitsOnly</set>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="ofMaxSubsidyText">
+       <property name="text">
+        <string notr="true">of maximum subsidy</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="ofMaxSubsidyAmount">
+       <property name="text">
+        <string notr="true">many DOGE</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacerAfterMaxSubsidyAmount">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>5</width>
+         <height>1</height>
+        </size>
+       </property>
+      </spacer>
      </item>
     </layout>
    </item>

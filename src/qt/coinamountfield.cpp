@@ -29,7 +29,7 @@ public:
     {
         setAlignment( Qt::AlignRight ) ;
 
-        connect( lineEdit(), SIGNAL( textEdited(QString) ), this, SIGNAL( textOfValueChanged() ) ) ;
+        connect( lineEdit(), SIGNAL( textEdited(QString) ), this, SIGNAL( textOfValueEdited() ) ) ;
     }
 
     QValidator::State validate( QString & text, int & pos ) const
@@ -63,7 +63,7 @@ public:
     void setValue( const CAmount& value )
     {
         lineEdit()->setText( UnitsOfCoin::format( currentUnit, value, false, UnitsOfCoin::separatorAlways ) ) ;
-        Q_EMIT textOfValueChanged() ;
+        Q_EMIT valueSetByProgram() ;
     }
 
     CAmount getMaximumValue() const {  return maximumValue ;  }
@@ -77,6 +77,8 @@ public:
         val = val + steps * singleStep ;
         val = qMin( qMax( val, CAmount(0) ), maximumValue ) ;
         setValue( val ) ;
+
+        Q_EMIT valueStepped() ;
     }
 
     void setDisplayUnit(int unit)
@@ -188,7 +190,9 @@ protected:
     }
 
 Q_SIGNALS:
-    void textOfValueChanged() ;
+    void textOfValueEdited() ;
+    void valueStepped() ;
+    void valueSetByProgram() ;
 };
 
 #include "coinamountfield.moc"
@@ -214,7 +218,9 @@ CoinAmountField::CoinAmountField( QWidget * parent ) : QWidget( parent )
     setFocusProxy(amount);
 
     // If one if the widgets changes, the combined content changes as well
-    connect( amount, SIGNAL( textOfValueChanged() ), this, SLOT( amountChanged() ) ) ;
+    connect( amount, SIGNAL( textOfValueEdited() ), this, SLOT( amountEdited() ) ) ;
+    connect( amount, SIGNAL( valueStepped() ), this, SLOT( amountEdited() ) ) ;
+    connect( amount, SIGNAL( valueSetByProgram() ), this, SLOT( amountChanged() ) ) ;
     connect( unit, SIGNAL( currentIndexChanged(int) ), this, SLOT( unitChanged(int) ) ) ;
 
     // Set default based on configuration
@@ -274,6 +280,16 @@ CAmount CoinAmountField::value( bool * valueOk ) const
 void CoinAmountField::setValue( const CAmount & value )
 {
     amount->setValue( ( value <= getMaximumValue() ) ? value : getMaximumValue() ) ;
+}
+
+void CoinAmountField::amountEdited()
+{
+    bool valueOk = false ;
+    CAmount val = value( &valueOk ) ;
+    if ( valueOk && val <= getMaximumValue() ) {
+        Q_EMIT valueEdited( val ) ;
+        Q_EMIT valueChanged( val ) ;
+    }
 }
 
 void CoinAmountField::amountChanged()

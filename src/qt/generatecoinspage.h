@@ -65,13 +65,16 @@ public:
     QCheckBox & getGenerateBlocksCheckbox() ;
     QComboBox & getNumberOfThreadsList() ;
 
-    void refreshBlockSubsudy() ;
+    void refreshBlockSubsidy() ;
 
 public Q_SLOTS:
     void toggleGenerateBlocks( int qtCheckState ) ;
     void changeNumberOfThreads( const QString & threads ) ;
-    void updateThreadTabs() ;
+    void pickWayForAmountOfNewCoins( const QString & way ) ;
+    void newBlockCoinsEdited( qint64 amount ) ;
+    void partOfMaxCoinsEdited() ;
     void updateDisplayUnit() ;
+    void updateThreadTabs() ;
     void updateTipBlockInfo() ;
 
 private:
@@ -79,8 +82,15 @@ private:
     const PlatformStyle * platformStyle ;
     WalletModel * walletModel ;
 
+    int lastNumerator ;
+    int lastDenominator ;
+    double lastMultiplier ;
+    CAmount lastCustomAmount ;
+
     std::vector < MiningThreadTab * > miningTabs ;
 
+    void currentWayForAmountOfNewCoins() ;
+    void updateKindOfHowManyCoinsToGenerate() ;
     void rebuildThreadTabs() ;
 
 } ;

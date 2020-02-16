@@ -1003,17 +1003,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+24"/>
+        <location line="+40"/>
         <source>New block generates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+24"/>
-        <source>maximum</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+110"/>
+        <location line="+204"/>
         <source>Chain’s tip block</source>
         <translation type="unfinished"></translation>
     </message>

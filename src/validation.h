@@ -201,9 +201,9 @@ static const uint64_t MIN_DISK_SPACE_FOR_BLOCK_FILES = 2200ULL * 1024 * 1024 ;
 bool ProcessNewBlock(const CChainParams& chainparams, const std::shared_ptr<const CBlock> pblock, bool fForceProcessing, bool* fNewBlock);
 
 /**
- * Process incoming block headers.
+ * Process incoming block headers
  *
- * Call without cs_main held.
+ * Call without cs_main held
  *
  * @param[in]  block The block headers themselves
  * @param[out] state This may be set to an Error state if any error occurred processing them
@@ -498,14 +498,14 @@ bool InvalidateBlock(CValidationState& state, const CChainParams& chainparams, C
 /** Remove invalidity status from a block and its descendants */
 bool ResetBlockFailureFlags(CBlockIndex *pindex);
 
-/** The currently-connected chain of blocks (protected by cs_main). */
-extern CChain chainActive;
+/** The currently-connected chain of blocks (protected by cs_main) */
+extern CChain chainActive ;
 
-/** Global variable that points to the active CCoinsView (protected by cs_main) */
-extern CCoinsViewCache *pcoinsTip;
+/** Global variable that points to the active CCoinsView, the UTXO set for chainActive.Tip() (protected by cs_main) */
+extern CCoinsViewCache * pcoinsTip ;
 
 /** Global variable that points to the active block tree (protected by cs_main) */
-extern CBlockTreeDB *pblocktree;
+extern CBlockTreeDB * pblocktree ;
 
 /**
  * Return the spend height, which is one more than the inputs.GetBestBlock()

@@ -296,9 +296,9 @@ public:
     /** Construct a CTransaction that qualifies as IsNull() */
     CTransaction();
 
-    /** Convert a CMutableTransaction into a CTransaction. */
-    CTransaction(const CMutableTransaction &tx);
-    CTransaction(CMutableTransaction &&tx);
+    /** Convert a CMutableTransaction into a CTransaction */
+    CTransaction( const CMutableTransaction & tx ) ;
+    CTransaction( CMutableTransaction && tx ) ;
 
     template <typename Stream>
     inline void Serialize(Stream& s) const {
@@ -306,9 +306,9 @@ public:
     }
 
     /** This deserializing constructor is provided instead of an Unserialize method.
-     *  Unserialize is not possible, since it would require overwriting const fields. */
-    template <typename Stream>
-    CTransaction(deserialize_type, Stream& s) : CTransaction(CMutableTransaction(deserialize, s)) {}
+     *  Unserialize is not possible since it would require overwriting const fields */
+    template < typename Stream >
+    CTransaction( deserialize_type, Stream & s ) : CTransaction( CMutableTransaction( deserialize, s ) ) {}
 
     bool IsNull() const {
         return vin.empty() && vout.empty();
@@ -373,8 +373,8 @@ struct CMutableTransaction
     std::vector<CTxOut> vout;
     uint32_t nLockTime;
 
-    CMutableTransaction();
-    CMutableTransaction(const CTransaction& tx);
+    CMutableTransaction() ;
+    CMutableTransaction( const CTransaction & tx ) ;
 
     template <typename Stream>
     inline void Serialize(Stream& s) const {

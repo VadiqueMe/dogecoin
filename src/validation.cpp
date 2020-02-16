@@ -210,8 +210,8 @@ CBlockIndex* FindForkInGlobalIndex(const CChain& chain, const CBlockLocator& loc
     return chain.Genesis();
 }
 
-CCoinsViewCache *pcoinsTip = NULL;
-CBlockTreeDB *pblocktree = NULL;
+CCoinsViewCache * pcoinsTip = nullptr ;
+CBlockTreeDB * pblocktree = nullptr ;
 
 enum FlushStateMode {
     FLUSH_STATE_NONE,
@@ -1311,22 +1311,22 @@ bool CheckTxInputs(const CChainParams& params, const CTransaction& tx, CValidati
             }
 
             // Check for negative or overflow input values
-            nValueIn += coins->vout[prevout.n].nValue;
-            if (!MoneyRange(coins->vout[prevout.n].nValue) || !MoneyRange(nValueIn))
+            nValueIn += coins->vout[ prevout.n ].nValue ;
+            if ( ! MoneyRange( coins->vout[ prevout.n ].nValue ) || ! MoneyRange( nValueIn ) )
                 return state.DoS( 10, false, REJECT_INVALID, "bad-txns-inputvalues-outofrange" ) ;
 
         }
 
-        if (nValueIn < tx.GetValueOut())
+        if ( nValueIn < tx.GetValueOut() )
             return state.DoS( 10, false, REJECT_INVALID, "bad-txns-in-belowout", false,
                 strprintf("value in (%s) < value out (%s)", FormatMoney(nValueIn), FormatMoney(tx.GetValueOut())) ) ;
 
         // Tally transaction fees
-        CAmount nTxFee = nValueIn - tx.GetValueOut();
-        if (nTxFee < 0)
+        CAmount nTxFee = nValueIn - tx.GetValueOut() ;
+        if ( nTxFee < 0 )
             return state.DoS( 10, false, REJECT_INVALID, "bad-txns-fee-negative" ) ;
-        nFees += nTxFee;
-        if (!MoneyRange(nFees))
+        nFees += nTxFee ;
+        if ( ! MoneyRange( nFees ) )
             return state.DoS( 10, false, REJECT_INVALID, "bad-txns-fee-outofrange" ) ;
     return true;
 }
@@ -1848,6 +1848,11 @@ bool ConnectBlock( const CBlock & block, CValidationState & state, CBlockIndex *
                                       REJECT_INVALID, "bad-cb-amount" ) ;
     }
 
+    // update nBlockNewCoins
+    pindex->nBlockNewCoins = block.vtx[ 0 ]->GetValueOut() - nFees ;
+    // update nChainCoins
+    /* pindex->nChainCoins = ( pindex->pprev != nullptr ? pindex->pprev->nChainCoins : 0 ) + pindex->nBlockNewCoins ; */
+
     if (!control.Wait())
         return state.DoS( 50, false ) ;
     int64_t nTime4 = GetTimeMicros(); nTimeVerify += nTime4 - nTime2;
@@ -2017,23 +2022,32 @@ void PruneAndFlush() {
     FlushStateToDisk(state, FLUSH_STATE_NONE);
 }
 
-CAmount static CountBlockNewCoins( const CBlock & block, int blockHeight, const CChainParams & chainparams )
+/* CAmount static CountBlockNewCoins( const CBlock & block, unsigned int blockHeight, const CChainParams & chainparams )
 {
-    const CAmount blockReward = block.vtx[ 0 ]->vout[ 0 ].nValue ;
-
     CAmount blockFees = 0 ;
     for ( const CTransactionRef & tx : block.vtx )
     {
         if ( ! tx->IsCoinBase() )
         {
+            CCoinsViewCache view( pcoinsTip ) ;
             CAmount txValueIn = 0 ;
             for ( const CTxIn & txin : tx->vin )
             {
-                CTransactionRef prevoutTx ;
-                uint256 blockSha256 ;
-                if ( GetTransaction( txin.prevout.hash, prevoutTx, chainparams.GetConsensus( blockHeight ), blockSha256, true ) ) {
-                    const CTxOut & vout = prevoutTx->vout[ txin.prevout.n ] ;
+                const CCoins * coins = view.AccessCoins( txin.prevout.hash ) ;
+                if ( coins != nullptr && txin.prevout.n < coins->vout.size() ) {
+                    const CTxOut & vout = coins->vout[ txin.prevout.n ] ;
                     txValueIn += vout.nValue ;
+                } else {
+                    CTransactionRef prevoutTx ;
+                    uint256 blockSha256 ;
+                    if ( GetTransaction( txin.prevout.hash, prevoutTx, chainparams.GetConsensus( blockHeight ), blockSha256, true ) ) {
+                        const CTxOut & vout = prevoutTx->vout[ txin.prevout.n ] ;
+                        txValueIn += vout.nValue ;
+                    } // else {
+                      //     LogPrintf( "%s: can't get prevout for input %s of tx %s from block height=%u sha256_hash=%s\n", __func__,
+                      //         txin.ToString(), tx->GetTxHash().GetHex(), blockHeight, block.GetSha256Hash().GetHex(),
+                      //         fTxIndex ? "" : ", most probably due to txindex=0" ) ;
+                      // }
                 }
             }
 
@@ -2041,25 +2055,28 @@ CAmount static CountBlockNewCoins( const CBlock & block, int blockHeight, const 
             for ( const CTxOut & txout : tx->vout )
                 txValueOut += txout.nValue ;
 
-            blockFees += txValueIn - txValueOut ;
+            if ( txValueIn > txValueOut )
+                blockFees += txValueIn - txValueOut ;
         }
     }
 
-    CAmount newCoins = blockReward - blockFees ;
-    /* LogPrintf( "%s: block %u generated %ld new coins, with fees %ld full reward is %ld\n", __func__,
-                blockHeight, newCoins, blockFees, blockReward ) ; */
-    return newCoins ;
-}
+    const CAmount blockReward = block.vtx[ 0 ]->vout[ 0 ].nValue ;
 
-void static UpdateTipBlockNewCoins( const CChainParams & chainparams )
+    CAmount newCoins = blockReward - blockFees ;
+    // LogPrintf( "%s: block %u generated %ld new coins, with fees %ld full reward is %ld\n", __func__,
+    //            blockHeight, newCoins, blockFees, blockReward ) ;
+    return newCoins ;
+} */
+
+/* void static UpdateTipBlockNewCoins( const CChainParams & chainparams )
 {
+    CBlockIndex * chainTip = chainActive.Tip() ;
     CBlock tipBlock ;
-    if ( chainActive.Tip()->nBlockNewCoins == 0 &&
-            ReadBlockFromDisk( tipBlock, chainActive.Tip(), chainparams.GetConsensus( chainActive.Tip()->nHeight ) ) )
+    if ( ReadBlockFromDisk( tipBlock, chainTip, chainparams.GetConsensus( chainTip->nHeight ) ) )
     {
-        chainActive.Tip()->nBlockNewCoins = CountBlockNewCoins( tipBlock, chainActive.Tip()->nHeight, chainparams ) ;
+        chainTip->nBlockNewCoins = CountBlockNewCoins( tipBlock, chainTip->nHeight, chainparams ) ;
     }
-}
+} */
 
 /** Update chainActive and related internal data structures */
 void static UpdateTip( CBlockIndex * pindexNew, const CChainParams & chainParams )
@@ -2115,7 +2132,7 @@ void static UpdateTip( CBlockIndex * pindexNew, const CChainParams & chainParams
         }
     }
 
-    UpdateTipBlockNewCoins( chainParams ) ;
+    ////UpdateTipBlockNewCoins( chainParams ) ;
 
     CBlockHeader newBlock = chainActive.Tip()->GetBlockHeader( chainParams.GetConsensus( chainActive.Height() ) ) ;
     LogPrintf( "%s: new block sha256_hash=%s scrypt_hash=%s height=%d version=0x%x%s log2_work=%.8g newcoins=%lu txs=%lu date='%s' progress=%f cache=%.1fMiB(%u txs)\n", __func__,
@@ -2124,7 +2141,7 @@ void static UpdateTip( CBlockIndex * pindexNew, const CChainParams & chainParams
         chainActive.Height(),
         newBlock.nVersion, newBlock.IsAuxpowInVersion() ? "(auxpow)" : "",
         log( chainActive.Tip()->nChainWorkHashes.getdouble() ) / log( 2.0 ),
-        static_cast< unsigned long >( chainActive.Tip()->nBlockNewCoins ),
+        chainActive.Tip()->nBlockNewCoins,
         static_cast< unsigned long >( chainActive.Tip()->nChainTx ),
         DateTimeStrFormat( "%Y-%m-%d %H:%M:%S", chainActive.Tip()->GetBlockTime() ),
         GuessVerificationProgress( chainParams.TxData(), chainActive.Tip() ),
@@ -3268,12 +3285,6 @@ bool ProcessNewBlock( const CChainParams & chainparams, const std::shared_ptr< c
 
             // Store to disk
             ret = AcceptBlock( pblock, state, chainparams, &pindex, fForceProcessing, NULL, fNewBlock ) ;
-
-            if ( ret && pindex != nullptr ) {
-                pindex->nBlockNewCoins = CountBlockNewCoins( *pblock, pindex->nHeight, chainparams ) ;
-                // update nChainCoins
-                /* pindex->nChainCoins = ( pindex->pprev != nullptr ? pindex->pprev->nChainCoins : 0 ) + pindex->nBlockNewCoins ; */
-            }
         }
         CheckBlockIndex( chainparams.GetConsensus( chainActive.Height() ) ) ;
         if ( ! ret ) {
@@ -3635,7 +3646,7 @@ bool static LoadBlockIndexDB( const CChainParams & chainparams )
 
     chainActive.SetTip( it->second ) ;
 
-    UpdateTipBlockNewCoins( chainparams ) ;
+    ////UpdateTipBlockNewCoins( chainparams ) ;
 
     PruneBlockIndexCandidates() ;
 

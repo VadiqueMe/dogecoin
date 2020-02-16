@@ -231,7 +231,7 @@ public:
         nDataPos = 0;
         nUndoPos = 0;
 
-        nBlockNewCoins = 0 ;
+        nBlockNewCoins = -1 ;
         /* nChainCoins = arith_uint256() ; */
         nChainWorkHashes = arith_uint256() ;
 

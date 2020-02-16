@@ -1,3 +1,8 @@
+# Inu DOGE (iÐOGE) and Inutoshi
+================================
+
+Re**inu**enting Dogecoin
+
 # Dogecoin Core [DOGE, Ð]
 ==========================
 

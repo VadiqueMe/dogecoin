@@ -217,7 +217,9 @@ private:
 
 /** Modify the extra nonce in a block */
 void IncrementExtraNonce( CBlock * pblock, const CBlockIndex * pindexPrev, uint32_t & nExtraNonce ) ;
-int64_t UpdateTime(CBlockHeader* pblock, const Consensus::Params& consensusParams, const CBlockIndex* pindexPrev);
+
+/** Update block's time, returns current time minus previous time */
+int64_t UpdateTime( CBlockHeader * pblock, const Consensus::Params & consensusParams, const CBlockIndex * pindexPrev ) ;
 
 //
 // Internal miner
@@ -230,10 +232,11 @@ class MiningThread
 
 public:
 
-    MiningThread( size_t number, const CChainParams & params )
+    MiningThread( size_t number, const CChainParams & params, const std::string & manyNewCoinsKind = "maximum" )
         : theThread( &MiningThread::MineBlocks, this )
         , numberOfThread( number )
         , chainparams( params )
+        , kindOfHowManyCoinsToGenerate( manyNewCoinsKind )
         , coinbaseScript( nullptr )
         , howManyBlocksWereGeneratedByThisThread( 0 )
         , currentCandidate( nullptr )
@@ -246,6 +249,7 @@ public:
         , noncesScanned( 0 )
         , scanBeginsMillis( threadBeginsMillis )
         , verbose( false )
+        , recreateBlock( false )
         , finished( false )
     { }
 
@@ -270,6 +274,25 @@ public:
     size_t getNumberOfBlocksGeneratedByThisThread() const {  return howManyBlocksWereGeneratedByThisThread ;  }
 
     const CBlockTemplate * const getNewBlockCandidate() const {  return currentCandidate.get() ;  }
+
+    const std::string & getKindOfHowManyCoinsToGenerate() const {  return kindOfHowManyCoinsToGenerate ;  }
+
+    void setKindOfHowManyCoinsToGenerate( const std::string & manyNewCoinsKind )
+    {
+        kindOfHowManyCoinsToGenerate = manyNewCoinsKind ;
+        recreateBlock = true ;
+    }
+
+    // full reward includes fees from other transactions
+    CAmount getCurrentFullReward() const
+    {
+        return currentCandidate->block.vtx[ 0 ]->vout[ 0 ].nValue ;
+    }
+
+    CAmount getAmountOfCoinsBeingGenerated() const
+    {
+        return currentCandidate->block.vtx[ 0 ]->vout[ 0 ].nValue + /* <= 0 */ currentCandidate->vTxFees[ 0 ] ;
+    }
 
     const arith_uint256 & getSmallestScryptHashFoundForCurrentBlock() const {  return smallestScryptHashBlock ;  }
 
@@ -304,6 +327,8 @@ private:
 
     const CChainParams & chainparams ;
 
+    std::string kindOfHowManyCoinsToGenerate ;
+
     std::shared_ptr< CReserveScript > coinbaseScript ;
 
     size_t howManyBlocksWereGeneratedByThisThread ;
@@ -324,6 +349,8 @@ private:
 
     bool verbose ;
 
+    bool recreateBlock ;
+
     bool finished ;
 
 } ;
@@ -333,6 +360,8 @@ const MiningThread * const getMiningThreadByNumber( size_t number ) ;
 size_t HowManyMiningThreads() ;
 
 void GenerateCoins( bool generate, int nThreads, const CChainParams & chainparams ) ;
+
+void ChangeKindOfHowManyCoinsToGenerate( const std::string & kind ) ;
 
 CAmount GetCurrentNewBlockSubsidy() ;
 

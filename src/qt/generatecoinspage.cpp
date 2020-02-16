@@ -9,6 +9,7 @@
 #include "chainparams.h"
 #include "unitsofcoin.h"
 #include "util.h"
+#include "utilstr.h"
 #include "validation.h"
 #include "dogecoin.h"
 
@@ -18,6 +19,11 @@ GenerateCoinsPage::GenerateCoinsPage( const PlatformStyle * style, QWidget * par
     : QDialog( parent )
     , ui( new Ui::GenerateCoinsPage )
     , platformStyle( style )
+    , walletModel( nullptr )
+    , lastNumerator( 7 )
+    , lastDenominator( 8 )
+    , lastMultiplier( 0.88 )
+    , lastCustomAmount( -1 )
 {
     ui->setupUi( this ) ;
 
@@ -43,8 +49,31 @@ GenerateCoinsPage::GenerateCoinsPage( const PlatformStyle * style, QWidget * par
     connect( ui->numberOfThreadsList, SIGNAL( currentIndexChanged(const QString &) ),
                 this, SLOT( changeNumberOfThreads(const QString &) ) ) ;
 
-    ui->newBlockSubsidy->setValue( GetCurrentNewBlockSubsidy() ) ;
-    ui->newBlockSubsidy->setReadOnly( true ) ;
+    ui->listForChoosingHowManyCoinsToGenerate->clear() ;
+    ui->listForChoosingHowManyCoinsToGenerate->addItem( "maximum" ) ;
+    ui->listForChoosingHowManyCoinsToGenerate->addItem( "random" ) ;
+    ui->listForChoosingHowManyCoinsToGenerate->addItem( "piece" ) ;
+    ui->listForChoosingHowManyCoinsToGenerate->addItem( "multiplier" ) ;
+    ui->listForChoosingHowManyCoinsToGenerate->addItem( "custom" ) ;
+    ui->listForChoosingHowManyCoinsToGenerate->addItem( "zero" ) ;
+    ui->listForChoosingHowManyCoinsToGenerate->setCurrentIndex( 0 ) ;
+
+    ui->newCoinsFirstLineEdit->setText( "" ) ;
+    ui->newCoinsFirstLineEdit->setAlignment( Qt::AlignRight | Qt::AlignVCenter ) ;
+    ui->newCoinsFirstLineEdit->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Minimum ) ;
+    ui->newCoinsSecondLineEdit->setText( "" ) ;
+    ui->newCoinsSecondLineEdit->setAlignment( Qt::AlignLeft | Qt::AlignVCenter ) ;
+    ui->newCoinsSecondLineEdit->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Minimum ) ;
+
+    currentWayForAmountOfNewCoins() ;
+
+    connect( ui->listForChoosingHowManyCoinsToGenerate, SIGNAL( currentIndexChanged(const QString &) ),
+                this, SLOT( pickWayForAmountOfNewCoins(const QString &) ) ) ;
+
+    connect( ui->newBlockSubsidy, SIGNAL( valueEdited(qint64) ), this, SLOT( newBlockCoinsEdited(qint64) ) ) ;
+
+    connect( ui->newCoinsFirstLineEdit, SIGNAL( textEdited(const QString &) ), this, SLOT( partOfMaxCoinsEdited() ) ) ;
+    connect( ui->newCoinsSecondLineEdit, SIGNAL( textEdited(const QString &) ), this, SLOT( partOfMaxCoinsEdited() ) ) ;
 }
 
 GenerateCoinsPage::~GenerateCoinsPage()
@@ -73,9 +102,21 @@ QComboBox & GenerateCoinsPage::getNumberOfThreadsList()
     return *( ui->numberOfThreadsList ) ;
 }
 
-void GenerateCoinsPage::refreshBlockSubsudy()
+void GenerateCoinsPage::refreshBlockSubsidy()
 {
-    ui->newBlockSubsidy->setValue( GetCurrentNewBlockSubsidy() ) ;
+    CAmount currentMaxSubsidy = GetCurrentNewBlockSubsidy() ;
+
+    ui->newBlockSubsidy->setMaximumValue( currentMaxSubsidy ) ;
+
+    if ( ui->listForChoosingHowManyCoinsToGenerate->currentText() == "maximum" )
+        ui->newBlockSubsidy->setValue( currentMaxSubsidy ) ;
+    else if ( ui->listForChoosingHowManyCoinsToGenerate->currentText() == "zero" )
+        ui->newBlockSubsidy->setValue( 0 ) ;
+
+    int unit = UnitsOfCoin::oneCoin ;
+    if ( walletModel != nullptr && walletModel->getOptionsModel() != nullptr )
+        unit = walletModel->getOptionsModel()->getDisplayUnit() ;
+    ui->ofMaxSubsidyAmount->setText( UnitsOfCoin::formatHtmlWithUnit( unit, currentMaxSubsidy ) );
 }
 
 void GenerateCoinsPage::toggleGenerateBlocks( int qtCheckState )
@@ -115,6 +156,149 @@ void GenerateCoinsPage::changeNumberOfThreads( const QString & threads )
         GenerateCoins( generate, threads.toInt(), Params() ) ;
         rebuildThreadTabs() ;
     }
+}
+
+void GenerateCoinsPage::currentWayForAmountOfNewCoins()
+{
+    pickWayForAmountOfNewCoins( ui->listForChoosingHowManyCoinsToGenerate->currentText() ) ;
+}
+
+void GenerateCoinsPage::pickWayForAmountOfNewCoins( const QString & way )
+{
+    ui->newBlockSubsidy->setReadOnly( way != "custom" ) ;
+
+    if ( way == "maximum" )
+        ui->newBlockSubsidy->setValue( GetCurrentNewBlockSubsidy() ) ;
+    else if ( way == "zero" )
+        ui->newBlockSubsidy->setValue( 0 ) ;
+
+    if ( way == "random" || way == "piece" || way == "multiplier" ) {
+        ui->horizontalSpacerAfterSubsidy->changeSize( 0, 1, QSizePolicy::Fixed, QSizePolicy::Minimum ) ;
+        ui->newBlockSubsidy->setVisible( false ) ;
+    } else {
+        ui->horizontalSpacerAfterSubsidy->changeSize( 4, 1, QSizePolicy::Fixed, QSizePolicy::Minimum ) ;
+        ui->newBlockSubsidy->setVisible( true ) ;
+    }
+
+    ui->ofMaxSubsidyText->setVisible( way != "maximum" ) ;
+    ui->ofMaxSubsidyAmount->setVisible( way != "maximum" ) ;
+
+    ui->newCoinsFirstLineEdit->setVisible( way == "piece" || way == "multiplier" ) ;
+    ui->newCoinsDivideLabel->setVisible( way == "piece" ) ;
+    ui->newCoinsSecondLineEdit->setVisible( way == "piece" ) ;
+
+    if ( way == "piece" ) {
+        ui->newCoinsFirstLineEdit->setInputMethodHints( Qt::ImhDigitsOnly ) ;
+        ui->newCoinsSecondLineEdit->setInputMethodHints( Qt::ImhDigitsOnly ) ;
+
+        ui->newCoinsFirstLineEdit->setMaximumWidth( 40 ) ;
+        ui->newCoinsFirstLineEdit->setMinimumWidth( 40 ) ;
+        ui->newCoinsSecondLineEdit->setMaximumWidth( 40 ) ;
+        ui->newCoinsSecondLineEdit->setMinimumWidth( 40 ) ;
+
+        ui->newCoinsFirstLineEdit->setText( "@" ) ;
+        ui->newCoinsSecondLineEdit->setText( "@" ) ;
+        partOfMaxCoinsEdited() ;
+    }
+    else if ( way == "multiplier" ) {
+        ui->newCoinsFirstLineEdit->setInputMethodHints( Qt::ImhFormattedNumbersOnly ) ;
+
+        ui->newCoinsFirstLineEdit->setMaximumWidth( 100 ) ;
+        ui->newCoinsFirstLineEdit->setMinimumWidth( 100 ) ;
+
+        ui->newCoinsFirstLineEdit->setText( "@" ) ;
+        ui->newCoinsSecondLineEdit->setText( "@" ) ;
+        partOfMaxCoinsEdited() ;
+    }
+    else if ( way == "custom" ) {
+        newBlockCoinsEdited( lastCustomAmount ) ;
+    }
+    else {
+        updateKindOfHowManyCoinsToGenerate() ;
+    }
+}
+
+void GenerateCoinsPage::updateKindOfHowManyCoinsToGenerate()
+{
+    std::string kind = ui->listForChoosingHowManyCoinsToGenerate->currentText().toStdString() ;
+
+    if ( kind == "multiplier" ) {
+        kind += "(" + ui->newCoinsFirstLineEdit->text().toStdString() + ")" ;
+    } else if ( kind == "piece" ) {
+        kind += "(" + ui->newCoinsFirstLineEdit->text().toStdString() + ")" ;
+        kind += "[" + ui->newCoinsSecondLineEdit->text().toStdString() + "]" ;
+    } else if ( kind == "custom" ) {
+        kind += "(" + QString::number( ui->newBlockSubsidy->value() ).toStdString() + ")" ;
+    }
+
+    ChangeKindOfHowManyCoinsToGenerate( kind ) ;
+}
+
+void GenerateCoinsPage::newBlockCoinsEdited( qint64 amount )
+{
+    CAmount maxNewCoins = GetCurrentNewBlockSubsidy() ;
+    if ( amount > maxNewCoins || amount < 0 ) {
+        amount = maxNewCoins ;
+        ui->newBlockSubsidy->setValue( amount ) ;
+    }
+
+    lastCustomAmount = amount ;
+    updateKindOfHowManyCoinsToGenerate() ;
+}
+
+void GenerateCoinsPage::partOfMaxCoinsEdited()
+{
+    const QString & way = ui->listForChoosingHowManyCoinsToGenerate->currentText() ;
+
+    if ( way == "piece" )
+    {
+        if ( ui->newCoinsFirstLineEdit->text().isEmpty() || ui->newCoinsSecondLineEdit->text().isEmpty() )
+            return ;
+
+        bool denominatorOk = false ;
+        int denominator = ui->newCoinsSecondLineEdit->text().toInt( &denominatorOk ) ;
+
+        if ( ! denominatorOk || denominator < 2 )
+            denominator = lastDenominator ;
+        else
+            lastDenominator = denominator ;
+
+        ui->newCoinsSecondLineEdit->setText( QString::number( denominator ) ) ;
+
+        bool numeratorOk = false ;
+        int numerator = ui->newCoinsFirstLineEdit->text().toInt( &numeratorOk ) ;
+
+        if ( ! numeratorOk )
+            numerator = lastNumerator ;
+
+        if ( numerator > denominator )
+            numerator = denominator ;
+        else if ( numerator < 0 )
+            numerator = 0 ;
+
+        lastNumerator = numerator ;
+        ui->newCoinsFirstLineEdit->setText( QString::number( numerator ) ) ;
+    }
+    else if ( way == "multiplier" )
+    {
+        const QString & multiplierString = ui->newCoinsFirstLineEdit->text() ;
+
+        if ( multiplierString.isEmpty() )
+            return ;
+        if ( multiplierString.endsWith( "." ) && multiplierString.count( '.' ) == 1 )
+            return ; // let the user type the decimal point
+
+        bool doubleOk = false ;
+        double multiplier = multiplierString.toDouble( &doubleOk ) ;
+        if ( ! doubleOk || multiplier < 0 || multiplier > 1 )
+            multiplier = lastMultiplier ;
+        else
+            lastMultiplier = multiplier ;
+
+        ui->newCoinsFirstLineEdit->setText( QString::number( multiplier ) ) ;
+    }
+
+    updateKindOfHowManyCoinsToGenerate() ;
 }
 
 void GenerateCoinsPage::updateDisplayUnit()
@@ -230,9 +414,6 @@ void GenerateCoinsPage::updateTipBlockInfo()
 
     // new coins
 
-    ui->tipBlockGeneratedCoins->setVisible( true );
-    ui->tipBlockGeneratedCoinsLabel->setVisible( true );
-
     int unit = UnitsOfCoin::oneCoin ;
     if ( walletModel != nullptr && walletModel->getOptionsModel() != nullptr )
         unit = walletModel->getOptionsModel()->getDisplayUnit() ;
@@ -255,7 +436,10 @@ void GenerateCoinsPage::updateTipBlockInfo()
     CBlock tipBlock ;
     bool blockReadOk = ReadBlockFromDisk( tipBlock, chainActive.Tip(), Params().GetConsensus( chainActive.Tip()->nHeight ) ) ;
     CAmount tipBlockFees = 0 ;
+    bool feesOk = true ;
+
     if ( blockReadOk ) {
+        CCoinsViewCache coinsView( pcoinsTip ) ;
         for ( unsigned int i = 0 ; i < tipBlock.vtx.size() ; i ++ )
         {
             const CTransaction & tx = *( tipBlock.vtx[ i ] ) ;
@@ -269,20 +453,41 @@ void GenerateCoinsPage::updateTipBlockInfo()
                     if ( GetTransaction( txin.prevout.hash, prevoutTx, Params().GetConsensus( 0 ), blockSha256, true ) ) {
                         const CTxOut & vout = prevoutTx->vout[ txin.prevout.n ] ;
                         txValueIn += vout.nValue ;
+                    } else {
+                        const CCoins * unspentCoins = coinsView.AccessCoins( txin.prevout.hash ) ;
+                        if ( unspentCoins != nullptr && txin.prevout.n < unspentCoins->vout.size() ) {
+                            const CTxOut & vout = unspentCoins->vout[ txin.prevout.n ] ;
+                            txValueIn += vout.nValue ;
+                        } else {
+                            feesOk = false ; break ;
+                        }
                     }
                 }
 
-                tipBlockFees += txValueIn - tx.GetValueOut() ;
+                CAmount txValueOut = tx.GetValueOut() ;
+                if ( txValueIn >= txValueOut && feesOk )
+                    tipBlockFees += txValueIn - txValueOut ;
+                else {
+                    feesOk = false ;
+                    break ;
+                }
             }
         }
     }
 
-    if ( tipBlockFees != 0 ) {
+    if ( tipBlockFees != 0 && feesOk ) {
         tipBlockNewCoinsText += " = " + UnitsOfCoin::format( unit, tipBlock.vtx[ 0 ]->vout[ 0 ].nValue ) ;
-        tipBlockNewCoinsText += " - " + UnitsOfCoin::formatWithUnit( unit, tipBlockFees ) + " in fees" ;
+        tipBlockNewCoinsText += " - " ;
+        if ( feesOk )
+            tipBlockNewCoinsText += UnitsOfCoin::formatWithUnit( unit, tipBlockFees ) + " in fees" ;
+        else
+            tipBlockNewCoinsText += "fees" ;
     }
 
     ui->tipBlockGeneratedCoins->setText( tipBlockNewCoinsText ) ;
+
+    ui->tipBlockGeneratedCoins->setVisible( tipBlockNewCoins >= 0 );
+    ui->tipBlockGeneratedCoinsLabel->setVisible( tipBlockNewCoins >= 0 );
 }
 
 void GenerateCoinsPage::rebuildThreadTabs()
@@ -302,7 +507,7 @@ void GenerateCoinsPage::rebuildThreadTabs()
             if ( miner != nullptr ) {
                 MiningThreadTab * tab = new MiningThreadTab( /* thread */ miner, /* parent */ ui->detailsForThreads ) ;
                 ui->detailsForThreads->addTab( tab,
-                    QString::fromStdString( toStringWithOrdinalSuffix(tab->getThread()->getNumberOfThread()) ) + QString(" ") + "thread" ) ;
+                    QString::fromStdString( toStringWithOrdinalSuffix( tab->getThread()->getNumberOfThread() ) ) + QString(" ") + "thread" ) ;
                 miningTabs.push_back( tab ) ;
             }
         }
@@ -345,12 +550,13 @@ void GenerateCoinsPage::updateThreadTabs()
                 bigText += "\n\n" ;
 
                 if ( candidate->block.vtx[ 0 ] != nullptr ) {
+                    bigText += UnitsOfCoin::formatWithUnit( unit, tab->getThread()->getAmountOfCoinsBeingGenerated() ) ;
+                    bigText += " generated coins will go to" ;
                     const CScript & scriptPublicKey = candidate->block.vtx[ 0 ]->vout[ 0 ].scriptPubKey ;
                     CTxDestination destination ;
-                    bigText += "generated coins will go to " ;
                     if ( ExtractDestination( scriptPublicKey, destination ) )
-                        bigText += "address " + QString::fromStdString( CDogecoinAddress( destination ).ToString() ) ;
-                    else bigText += "unknown address" ;
+                        bigText += " address " + QString::fromStdString( CDogecoinAddress( destination ).ToString() ) ;
+                    else bigText += " unknown address" ;
                     bigText += "\n\n" ;
                 }
             }

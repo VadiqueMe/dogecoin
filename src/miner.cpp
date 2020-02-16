@@ -24,6 +24,7 @@
 #include "timedata.h"
 #include "txmempool.h"
 #include "util.h"
+#include "utilstr.h"
 #include "utilmoneystr.h"
 #include "validationinterface.h"
 #include "wallet/wallet.h"
@@ -53,19 +54,20 @@ public:
     }
 };
 
-int64_t UpdateTime(CBlockHeader* pblock, const Consensus::Params& consensusParams, const CBlockIndex* pindexPrev)
+int64_t UpdateTime( CBlockHeader * pblock, const Consensus::Params & consensusParams, const CBlockIndex * pindexPrev )
 {
     int64_t nOldTime = pblock->nTime ;
-    int64_t nNewTime = std::max( pindexPrev->GetMedianTimePast() + 1, GetAdjustedTime() ) ;
+    int64_t nNewTime = ( NameOfChain() == "inu" ) ?
+                            GetAdjustedTime() :
+                            std::max( pindexPrev->GetMedianTimePast() + 1, GetAdjustedTime() ) ;
 
-    if (nOldTime < nNewTime)
-        pblock->nTime = nNewTime;
+    if ( nNewTime > nOldTime )
+        pblock->nTime = nNewTime ;
 
-    // Updating time can change work required on testnet
-    if ( consensusParams.fPowAllowMinDifficultyBlocks )
-        pblock->nBits = GetNextWorkRequired( pindexPrev, pblock, consensusParams ) ;
+    // Updating time can change bits of work
+    pblock->nBits = GetNextWorkRequired( pindexPrev, pblock, consensusParams ) ;
 
-    return nNewTime - nOldTime;
+    return nNewTime - nOldTime ;
 }
 
 BlockAssembler::BlockAssembler( const CChainParams & _chainparams )
@@ -189,11 +191,10 @@ std::unique_ptr< CBlockTemplate > BlockAssembler::CreateNewBlock( const CScript 
     coinbaseTx.vout.resize(1);
     coinbaseTx.vout[0].scriptPubKey = scriptPubKeyIn;
     CAmount subsidy = GetDogecoinBlockSubsidy( nHeight, consensus, pindexPrev->GetBlockSha256Hash() ) ;
-    /* if ( NameOfChain() == "test" ) subsidy = 1 ; */
     coinbaseTx.vout[0].nValue = nFees + subsidy ;
-    coinbaseTx.vin[0].scriptSig = CScript() << nHeight << OP_0;
-    pblock->vtx[0] = MakeTransactionRef(std::move(coinbaseTx));
-    pblocktemplate->vchCoinbaseCommitment = GenerateCoinbaseCommitment(*pblock, pindexPrev, consensus);
+    coinbaseTx.vin[0].scriptSig = CScript() << nHeight << OP_0 ;
+    pblock->vtx[0] = MakeTransactionRef( std::move( coinbaseTx ) ) ;
+    pblocktemplate->vchCoinbaseCommitment = GenerateCoinbaseCommitment( *pblock, pindexPrev, consensus ) ;
     pblocktemplate->vTxFees[ 0 ] = - nFees ;
 
     /* LogPrintf(
@@ -203,8 +204,8 @@ std::unique_ptr< CBlockTemplate > BlockAssembler::CreateNewBlock( const CScript 
     ) ; */
 
     // Fill in header
-    pblock->hashPrevBlock  = pindexPrev->GetBlockSha256Hash();
-    UpdateTime(pblock, consensus, pindexPrev);
+    pblock->hashPrevBlock  = pindexPrev->GetBlockSha256Hash() ;
+    UpdateTime( pblock, consensus, pindexPrev ) ;
     pblock->nBits          = GetNextWorkRequired( pindexPrev, pblock, consensus ) ;
     pblock->nNonce         = 0;
     pblocktemplate->vTxSigOpsCost[0] = WITNESS_SCALE_FACTOR * GetLegacySigOpCount(*pblock->vtx[0]);
@@ -682,6 +683,77 @@ static bool ProcessBlockFound( const CBlock * const block, const CChainParams & 
     return true ;
 }
 
+static CAmount newCoinsByKind( CAmount maximumCoins, const std::string & kind, std::mt19937 & random )
+{
+    CAmount newCoins = maximumCoins ;
+    if ( kind == "zero" ) {
+        newCoins = 0 ;
+    }
+    else if ( kind.find( "custom" ) /* begins with */ == 0 ) {
+        // (amount)
+
+        std::string amountString = substringBetween( kind, "(", ")" ) ;
+        CAmount customAmount = -1 ;
+        if ( amountString != "" ) {
+            try {
+                customAmount = std::stoul( amountString ) ;
+            } catch ( const std::invalid_argument & ia ) {
+                customAmount = -1 ;
+            }
+        }
+
+        if ( customAmount < newCoins && customAmount > 0 )
+            newCoins = customAmount ;
+    }
+    else if ( kind == "random" ) {
+        std::uniform_int_distribution< long > distribution( 0, newCoins - 1 ) ;
+        newCoins = distribution( random ) + 1 ;
+    }
+    else if ( kind.find( "piece" ) /* begins with */ == 0 ) {
+        // (numerator)[denominator]
+        // piece is full 1 if numerator is absent, denominator is absent or is larger than numerator
+
+        std::string numeratorString = substringBetween( kind, "(", ")" ) ;
+        std::string denominatorString( "" ) ;
+        if ( numeratorString != "" )
+            denominatorString = substringBetween( kind, "[", "]" ) ;
+
+        unsigned long numerator = 1 ;
+        unsigned long denominator = 1 ;
+
+        if ( numeratorString != "" && denominatorString != "" ) {
+            try {
+                numerator = std::stoul( numeratorString ) ;
+                denominator = std::stoul( denominatorString ) ;
+            } catch ( const std::invalid_argument & ia ) {
+                numerator = 1 ;
+                denominator = 1 ;
+            }
+        }
+
+        if ( numerator < denominator )
+            newCoins = ( numerator * newCoins ) / denominator ;
+    }
+    else if ( kind.find( "multiplier" ) /* begins with */ == 0 ) {
+        // (multiplier), when larger than 1 it has the effect of 1
+
+        std::string multiplierString = substringBetween( kind, "(", ")" ) ;
+        double multiplier = 1 ;
+        if ( multiplierString != "" ) {
+            try {
+                multiplier = stringToDouble( multiplierString ) ;
+            } catch ( ... ) {
+                multiplier = 1 ;
+            }
+        }
+
+        if ( multiplier < 1 && multiplier > 0 )
+            newCoins = multiplier * newCoins ;
+    }
+
+    return newCoins ;
+}
+
 void MiningThread::MineBlocks()
 {
     if ( finished ) return ;
@@ -702,6 +774,8 @@ void MiningThread::MineBlocks()
 
         while ( ! finished )
         {
+            currentCandidate.reset() ;
+
             if ( chainparams.MiningRequiresPeers() ) {
                 // wait for the network to come online hence don't waste time mining
                 // on an obsolete chain
@@ -731,10 +805,22 @@ void MiningThread::MineBlocks()
             } while ( ! finished ) ;
             if ( finished ) break ;
 
-            /* if ( NameOfChain() == "test" ) {
-                currentCandidate->block.nVersion &= 0xff ;
-                currentCandidate->block.nVersion |= randomNumber() & 0xff0000 ;
-            } */
+            if ( recreateBlock ) recreateBlock = false ;
+
+            CAmount newCoins = newCoinsByKind( getAmountOfCoinsBeingGenerated(), kindOfHowManyCoinsToGenerate, randomNumber ) ;
+
+            if ( newCoins != getAmountOfCoinsBeingGenerated() ) {
+                CMutableTransaction coinbase( * currentCandidate->block.vtx[ 0 ] ) ;
+                coinbase.vout[ 0 ].nValue = newCoins - currentCandidate->vTxFees[ 0 ] ;
+                currentCandidate->block.vtx[ 0 ] = MakeTransactionRef( std::move( coinbase ) ) ;
+            }
+
+            const Consensus::Params & consensus = chainparams.GetConsensus( chainActive.Tip()->nHeight + 1 ) ;
+
+            //if ( ! consensus.fStrictChainId ) {
+                //currentCandidate->block.nVersion &= 0xff ;
+                //currentCandidate->block.nVersion |= randomNumber() & 0xff0000 ;
+            //}
 
             CBlock * currentBlock = &currentCandidate->block ;
             if ( currentBlock->IsAuxpowInVersion() ) currentBlock->SetAuxpow( nullptr ) ;
@@ -748,9 +834,9 @@ void MiningThread::MineBlocks()
             noncesScanned = 0 ;
             smallestScryptHashBlock = ~ arith_uint256() ;
 
-            arith_uint256 solutionHash = arith_uint256().SetCompact( currentBlock->nBits ) ;
+            uint32_t solutionBits = currentBlock->nBits ;
+            arith_uint256 solutionHash = arith_uint256().SetCompact( solutionBits ) ;
             currentBlock->nNonce = randomNumber() ;
-            const Consensus::Params & consensus = chainparams.GetConsensus( chainActive.Tip()->nHeight + 1 ) ;
 
             LogPrintf(
                 "Running MiningThread (%d) with %u transactions in block (%u bytes)%s%s\n",
@@ -772,7 +858,7 @@ void MiningThread::MineBlocks()
                     arith_uint256 arithPowHash = UintToArith256( currentBlock->GetScryptHash() ) ;
                     if ( arithPowHash < smallestScryptHashBlock ) smallestScryptHashBlock = arithPowHash ;
 
-                    if ( CheckProofOfWork( *currentBlock, currentBlock->nBits, consensus ) )
+                    if ( CheckProofOfWork( *currentBlock, solutionBits, consensus ) )
                     {   // found a solution
                         found = true ; break ;
                     }
@@ -780,6 +866,8 @@ void MiningThread::MineBlocks()
                     // not found after trying for a while
                     if ( ( currentBlock->nNonce & 0xfff ) == 0 )
                         break ;
+
+                    if ( finished || recreateBlock ) break ;
                 }
 
                 if ( smallestScryptHashBlock < smallestScryptHashAll )
@@ -815,29 +903,34 @@ void MiningThread::MineBlocks()
 
                 if ( finished ) break ;
 
-                // next nonce is random
-                currentBlock->nNonce = randomNumber() ;
+                if ( recreateBlock )
+                    break ;
 
                 // check if block candidate needs to be rebuilt
                 if ( pindexPrev != chainActive.Tip() )
                     break ; // new chain's tip
                 if ( mempool.GetTransactionsUpdated() != transactionsInMempool
-                           && GetTimeMillis() - scanBeginsMillis > 60999 )
+                           && GetTimeMillis() - scanBeginsMillis > 20999 )
                     break ; // new transactions
                 if ( GetTimeMillis() - scanBeginsMillis > 20 * 60000 )
                     break ; // too long
                 if ( ! g_connman->hasConnectedNodes() && chainparams.MiningRequiresPeers() )
                     break ; // no peers connected
 
-                // recreate the block if the clock has run backwards, to get the actual time
-                if ( UpdateTime( currentBlock, consensus, pindexPrev ) < 0 )
-                    break ;
+                // update block's time
+                int64_t deltaTime = UpdateTime( currentBlock, consensus, pindexPrev ) ;
 
-                if ( consensus.fPowAllowMinDifficultyBlocks )
-                {
-                    // changing currentBlock->nTime can change work required
-                    solutionHash.SetCompact( currentBlock->nBits ) ;
+                // recreate the block if the clock has run backwards, to get the actual time
+                if ( deltaTime < 0 ) break ;
+
+                // changing block's time can change proof-of-work bits
+                if ( solutionBits != currentBlock->nBits ) {
+                    solutionBits = currentBlock->nBits ;
+                    solutionHash.SetCompact( solutionBits ) ;
                 }
+
+                // next nonce is random
+                currentBlock->nNonce = randomNumber() ;
             }
 
             if ( verbose )
@@ -869,7 +962,7 @@ std::string MiningThread::threadMiningInfoString() const
 
 bool MiningThread::assembleNewBlockCandidate()
 {
-    currentCandidate.reset() ;
+    if ( currentCandidate != nullptr ) currentCandidate.reset() ;
 
     if ( coinbaseScript == nullptr || coinbaseScript->reserveScript.empty() )
         return false ;
@@ -888,6 +981,7 @@ bool MiningThread::assembleNewBlockCandidate()
 
 static std::vector < std::unique_ptr< MiningThread > > miningThreads ;
 static std::mutex miningThreads_mutex ;
+static std::string currentWayForNewCoins = "maximum" ;
 
 const MiningThread * const getMiningThreadByNumber( size_t number )
 {
@@ -936,9 +1030,25 @@ void GenerateCoins( bool generate, int nThreads, const CChainParams & chainparam
     if ( nThreads > sizeOfKeypool )
         nThreads = sizeOfKeypool ;
 
-    std::lock_guard < std::mutex > lock( miningThreads_mutex ) ;
-    for ( unsigned int i = 1 ; i <= nThreads ; i++ )
-        miningThreads.push_back( std::unique_ptr< MiningThread >( new MiningThread( i, chainparams ) ) ) ;
+    {
+        std::lock_guard < std::mutex > lock( miningThreads_mutex ) ;
+        for ( unsigned int i = 1 ; i <= nThreads ; i++ )
+            miningThreads.push_back( std::unique_ptr< MiningThread >( new MiningThread( i, chainparams ) ) ) ;
+    }
+
+    ChangeKindOfHowManyCoinsToGenerate( currentWayForNewCoins ) ;
+}
+
+void ChangeKindOfHowManyCoinsToGenerate( const std::string & kind )
+{
+    {
+        std::lock_guard < std::mutex > lock( miningThreads_mutex ) ;
+
+        for ( std::unique_ptr< MiningThread > & th : miningThreads )
+            th->setKindOfHowManyCoinsToGenerate( kind ) ;
+    }
+
+    currentWayForNewCoins = kind ;
 }
 
 CAmount GetCurrentNewBlockSubsidy()

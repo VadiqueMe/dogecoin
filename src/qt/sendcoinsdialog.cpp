@@ -148,15 +148,18 @@ void SendCoinsDialog::setWalletModel( WalletModel * model )
         ui->frameCoinControl->setVisible( ! model->getOptionsModel()->getHideCoinControlFeatures() );
         coinControlUpdateLabels();
 
-        // fee section
+        // fees
+        connect( ui->customFee, SIGNAL( valueChanged() ), this, SLOT( updateGlobalFeeVariables() ) ) ;
+        connect( ui->customFee, SIGNAL( valueChanged() ), this, SLOT( coinControlUpdateLabels() ) ) ;
+        ui->customFee->setSingleStep( 1 /* * ... */ ) ;
+
         connect(ui->groupFee, SIGNAL(buttonClicked(int)), this, SLOT(updateFeeSectionControls()));
         connect(ui->groupFee, SIGNAL(buttonClicked(int)), this, SLOT(updateGlobalFeeVariables()));
         connect(ui->groupFee, SIGNAL(buttonClicked(int)), this, SLOT(coinControlUpdateLabels()));
+
         connect(ui->groupCustomFee, SIGNAL(buttonClicked(int)), this, SLOT(updateGlobalFeeVariables()));
         connect(ui->groupCustomFee, SIGNAL(buttonClicked(int)), this, SLOT(coinControlUpdateLabels()));
-        connect(ui->customFee, SIGNAL(valueChanged()), this, SLOT(updateGlobalFeeVariables()));
-        connect(ui->customFee, SIGNAL(valueChanged()), this, SLOT(coinControlUpdateLabels()));
-        ui->customFee->setSingleStep( 1 /* * ... */ ) ;
+
         updateFeeSectionControls();
         updateSmartFeeLabel();
         updateGlobalFeeVariables();

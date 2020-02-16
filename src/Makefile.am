@@ -318,6 +318,8 @@ libdogecoin_consensus_a_SOURCES = \
   tinyformat.h \
   uint256.cpp \
   uint256.h \
+  utilstr.cpp \
+  utilstr.h \
   utilstrencodings.cpp \
   utilstrencodings.h \
   version.h
@@ -369,6 +371,7 @@ libdogecoin_util_a_SOURCES = \
   sync.cpp \
   threadinterrupt.cpp \
   util.cpp \
+  utilstr.cpp \
   utilmoneystr.cpp \
   utilstrencodings.cpp \
   utiltime.cpp \

@@ -1,13 +1,12 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_VALIDATIONINTERFACE_H
-#define BITCOIN_VALIDATIONINTERFACE_H
+#ifndef DOGECOIN_VALIDATIONINTERFACE_H
+#define DOGECOIN_VALIDATIONINTERFACE_H
 
 #include <boost/signals2/signal.hpp>
-#include <boost/shared_ptr.hpp>
 #include <memory>
 
 class CBlock;
@@ -52,22 +51,22 @@ struct CMainSignals {
     boost::signals2::signal<void (const CBlockIndex *, const CBlockIndex *, bool fInitialDownload)> UpdatedBlockTip;
     /** A posInBlock value for SyncTransaction calls for tranactions not
      * included in connected blocks such as transactions removed from mempool,
-     * accepted to mempool or appearing in disconnected blocks.*/
+     * accepted to mempool or appearing in disconnected blocks */
     static const int SYNC_TRANSACTION_NOT_IN_BLOCK = -1;
     /** Notifies listeners of updated transaction data (transaction, and
      * optionally the block it is found in). Called with block data when
      * transaction is included in a connected block, and without block data when
      * transaction was accepted to mempool, removed from mempool (only when
      * removal was due to conflict from connected block), or appeared in a
-     * disconnected block.*/
+     * disconnected block */
     boost::signals2::signal<void (const CTransaction &, const CBlockIndex *pindex, int posInBlock)> SyncTransaction;
-    /** Notifies listeners of an updated transaction without new data (for now: a coinbase potentially becoming visible). */
+    /** Notifies listeners of an updated transaction without new data (for now: a coinbase potentially becoming visible) */
     boost::signals2::signal<void (const uint256 &)> UpdatedTransaction;
-    /** Notifies listeners of a new active block chain. */
+    /** Notifies listeners of a new active block chain */
     boost::signals2::signal<void (const CBlockLocator &)> SetBestChain;
-    /** Notifies listeners about an inventory item being seen on the network. */
+    /** Notifies listeners about an inventory item being seen on the network */
     boost::signals2::signal<void (const uint256 &)> Inventory;
-    /** Tells listeners to broadcast their data. */
+    /** Tells listeners to broadcast their data */
     boost::signals2::signal<void (int64_t nBestBlockTime, CConnman* connman)> Broadcast;
     /** Notifies listeners of a block validation result */
     boost::signals2::signal<void (const CBlock&, const CValidationState&)> BlockChecked;
@@ -83,4 +82,4 @@ struct CMainSignals {
 
 CMainSignals& GetMainSignals();
 
-#endif // BITCOIN_VALIDATIONINTERFACE_H
+#endif

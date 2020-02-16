@@ -63,7 +63,8 @@ public:
     QWidget * setupTabChain( QWidget * prev ) ;
 
 Q_SIGNALS:
-    void valueChanged( qint64 val ) ;
+    void valueEdited( qint64 val ) ; // only when edited by the user
+    void valueChanged( qint64 val ) ; // edited by the user or set programmatically
 
 protected:
     /** Intercept focus-in event and ',' key presses */
@@ -74,6 +75,7 @@ private:
     QValueComboBox * unit ;
 
 private Q_SLOTS:
+    void amountEdited() ;
     void amountChanged() ;
     void unitChanged( int idx ) ;
 

@@ -218,7 +218,7 @@ void WalletView::updateDigPage()
         generateCoinsPage->getNumberOfThreadsList().addItem( qthrea ) ;
     generateCoinsPage->getNumberOfThreadsList().setCurrentText( qthrea ) ;
 
-    generateCoinsPage->refreshBlockSubsudy() ;
+    generateCoinsPage->refreshBlockSubsidy() ;
 
     generateCoinsPage->updateTipBlockInfo() ;
     generateCoinsPage->updateThreadTabs() ;
