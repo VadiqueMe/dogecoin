@@ -71,15 +71,25 @@ public:
 
 //
 // This function returns either one of EXIT_ codes when it's expected to stop the process or
-// CONTINUE_EXECUTION when it's expected to continue further.
+// CONTINUE_EXECUTION when it's expected to continue further
 //
 static int AppInitRPC(int argc, char* argv[])
 {
     //
     // Parameters
     //
-    ParseParameters(argc, argv);
-    if (argc<2 || IsArgSet("-?") || IsArgSet("-h") || IsArgSet("-help") || IsArgSet("-version")) {
+    ParseParameters( argc, argv ) ;
+
+    // Look for chain name parameter
+    // BaseParams() work only after this clause
+    try {
+        SelectBaseParams( ChainNameFromArguments() ) ;
+    } catch ( const std::exception & e ) {
+        fprintf( stderr, "Error: %s\n", e.what() ) ;
+        return EXIT_FAILURE ;
+    }
+
+    if ( argc < 2 || IsArgSet( "-?" ) || IsArgSet( "-h" ) || IsArgSet( "-help" ) || IsArgSet( "-version" ) ) {
         std::string strUsage = strprintf(_("%s RPC client version"), _(PACKAGE_NAME)) + " " + FormatFullVersion() + "\n";
         if (!IsArgSet("-version")) {
             strUsage += "\n" + _("Usage:") + "\n" +
@@ -98,30 +108,26 @@ static int AppInitRPC(int argc, char* argv[])
         }
         return EXIT_SUCCESS;
     }
+
     if (!boost::filesystem::is_directory(GetDataDir(false))) {
         fprintf(stderr, "Error: Specified data directory \"%s\" does not exist\n", GetArg("-datadir", "").c_str());
         return EXIT_FAILURE;
     }
+
     try {
         ReadConfigFile( GetArg( "-conf", DOGECOIN_CONF_FILENAME ) ) ;
     } catch (const std::exception& e) {
         fprintf(stderr,"Error reading configuration file: %s\n", e.what());
         return EXIT_FAILURE;
     }
-    // Look for chain name parameter
-    // BaseParams() work only after this clause
-    try {
-        SelectBaseParams( ChainNameFromArguments() ) ;
-    } catch ( const std::exception & e ) {
-        fprintf( stderr, "Error: %s\n", e.what() ) ;
-        return EXIT_FAILURE ;
-    }
+
     if (GetBoolArg("-rpcssl", false))
     {
         fprintf(stderr, "Error: SSL mode for RPC (-rpcssl) is no longer supported\n");
         return EXIT_FAILURE;
     }
-    return CONTINUE_EXECUTION;
+
+    return CONTINUE_EXECUTION ;
 }
 
 

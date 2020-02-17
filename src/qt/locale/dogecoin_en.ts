@@ -2022,7 +2022,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>QObject::QObject</name>
     <message>
-        <location line="-86"/>
+        <location line="-90"/>
         <source>Error: Specified data directory &quot;%1&quot; does not exist.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2547,7 +2547,7 @@ p, li { white-space: pre-wrap; }
     <name>SendCoinsDialog</name>
     <message>
         <location filename="../forms/sendcoinsdialog.ui" line="+14"/>
-        <location filename="../sendcoinsdialog.cpp" line="+529"/>
+        <location filename="../sendcoinsdialog.cpp" line="+532"/>
         <source>Send Coins</source>
         <translation>Send Coins</translation>
     </message>
@@ -2688,7 +2688,7 @@ p, li { white-space: pre-wrap; }
         <translation>S&amp;end</translation>
     </message>
     <message>
-        <location filename="../sendcoinsdialog.cpp" line="-460"/>
+        <location filename="../sendcoinsdialog.cpp" line="-463"/>
         <source>Copy quantity</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2718,7 +2718,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+181"/>
+        <location line="+184"/>
         <location line="+5"/>
         <location line="+5"/>
         <location line="+4"/>

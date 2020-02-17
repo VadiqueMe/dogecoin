@@ -72,10 +72,19 @@ bool AppInit(int argc, char* argv[])
     // Parameters
     //
     // If Qt is used, parameters/bitcoin.conf are parsed in qt/bitcoin.cpp's main()
-    ParseParameters(argc, argv);
+    ParseParameters( argc, argv ) ;
+
+    // Look for chain name parameter
+    // Params() work only after this clause
+    try {
+        SelectParams( ChainNameFromArguments() ) ;
+    } catch ( const std::exception & e ) {
+        fprintf( stderr, "Error: %s\n", e.what() ) ;
+        return false ;
+    }
 
     // Process help and version before taking care about datadir
-    if (IsArgSet("-?") || IsArgSet("-h") ||  IsArgSet("-help") || IsArgSet("-version"))
+    if ( IsArgSet( "-?" ) || IsArgSet( "-h" ) ||  IsArgSet( "-help" ) || IsArgSet( "-version" ) )
     {
         std::string strUsage = strprintf(_("%s Daemon"), _(PACKAGE_NAME)) + " " + _("version") + " " + FormatFullVersion() + "\n";
 
@@ -108,14 +117,6 @@ bool AppInit(int argc, char* argv[])
         } catch (const std::exception& e) {
             fprintf(stderr,"Error reading configuration file: %s\n", e.what());
             return false;
-        }
-        // Look for chain name parameter
-        // Params() work only after this clause
-        try {
-            SelectParams( ChainNameFromArguments() ) ;
-        } catch ( const std::exception & e ) {
-            fprintf( stderr, "Error: %s\n", e.what() ) ;
-            return false ;
         }
 
         // Command-line RPC

@@ -540,7 +540,7 @@ int main(int argc, char *argv[])
     SetupEnvironment();
 
     /// 1. Parse command-line options
-    ParseParameters(argc, argv);
+    ParseParameters( argc, argv ) ;
 
     // Do not refer to data directory yet, this can be overridden by Intro::pickDataDirectory
 
@@ -593,15 +593,6 @@ int main(int argc, char *argv[])
     initTranslations(qtTranslatorBase, qtTranslator, translatorBase, translator);
     translationInterface.Translate.connect(Translate);
 
-    // Show help message immediately after parsing command-line options (for "-lang") and setting locale,
-    // but before showing splash screen.
-    if (IsArgSet("-?") || IsArgSet("-h") || IsArgSet("-help") || IsArgSet("-version"))
-    {
-        HelpMessageDialog help(NULL, IsArgSet("-version"));
-        help.showOrPrint();
-        return EXIT_SUCCESS;
-    }
-
     /// 5. Now that settings and translations are available, ask user for data directory
     // User language is set up: pick a data directory
     if (!Intro::pickDataDirectory())
@@ -623,8 +614,8 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
-    /// 7. Determine network (and switch to network specific options)
-    // - Do not call Params() before this step
+    /// 7. Select network and switch to network specific options
+    // - Params() before this step will result in crash
     // - Do this after parsing the configuration file, as the network can be switched there
     // - QSettings() will use the new application name after this, resulting in network-specific settings
     // - Needs to be done before createOptionsModel
@@ -640,8 +631,17 @@ int main(int argc, char *argv[])
 
 #ifdef ENABLE_WALLET
     // Parse URIs on command line -- this can affect Params()
-    PaymentServer::ipcParseCommandLine(argc, argv);
+    PaymentServer::ipcParseCommandLine( argc, argv ) ;
 #endif
+
+    // Show help message after parsing command-line options (for "-lang") and setting locale,
+    // but before showing splash screen
+    if ( IsArgSet( "-?" ) || IsArgSet( "-h" ) || IsArgSet( "-help" ) || IsArgSet( "-version" ) )
+    {
+        HelpMessageDialog help( nullptr, IsArgSet( "-version" ) ) ;
+        help.showOrPrint() ;
+        return EXIT_SUCCESS ;
+    }
 
     QScopedPointer< const NetworkStyle > networkStyle( NetworkStyle::instantiate(
             QString::fromStdString( NameOfChain() ) )
