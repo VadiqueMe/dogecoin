@@ -2022,7 +2022,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>QObject::QObject</name>
     <message>
-        <location line="-90"/>
+        <location line="-95"/>
         <source>Error: Specified data directory &quot;%1&quot; does not exist.</source>
         <translation type="unfinished"></translation>
     </message>

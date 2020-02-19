@@ -195,9 +195,9 @@ public:
 CBlockIndex* FindForkInGlobalIndex(const CChain& chain, const CBlockLocator& locator)
 {
     // Find the first block the caller has in the main chain
-    BOOST_FOREACH(const uint256& hash, locator.vHave) {
-        BlockMap::iterator mi = mapBlockIndex.find(hash);
-        if (mi != mapBlockIndex.end())
+    for ( const uint256 & hash : locator.vHave ) {
+        BlockMap::iterator mi = mapBlockIndex.find( hash ) ;
+        if ( mi != mapBlockIndex.end() )
         {
             CBlockIndex* pindex = (*mi).second;
             if (chain.Contains(pindex))
@@ -237,7 +237,7 @@ bool IsFinalTx(const CTransaction &tx, int nBlockHeight, int64_t nBlockTime)
     return true;
 }
 
-bool CheckFinalTx(const CTransaction &tx, int flags)
+bool CheckFinalTx( const CTransaction & tx, int flags )
 {
     AssertLockHeld(cs_main);
 
@@ -259,7 +259,7 @@ bool CheckFinalTx(const CTransaction &tx, int flags)
     // When the next block is created its previous block will be the current
     // chain tip, so we use that to calculate the median time passed to
     // IsFinalTx() if LOCKTIME_MEDIAN_TIME_PAST is set
-    const int64_t nBlockTime = ( flags & LOCKTIME_MEDIAN_TIME_PAST )
+    const int64_t nBlockTime = ( NameOfChain() != "inu" && ( flags & LOCKTIME_MEDIAN_TIME_PAST ) )
                              ? chainActive.Tip()->GetMedianTimePast()
                              : GetAdjustedTime() ;
 
@@ -270,30 +270,32 @@ bool CheckFinalTx(const CTransaction &tx, int flags)
  * Calculates the block height and previous block's median time past at
  * which the transaction will be considered final in the context of BIP 68.
  * Also removes from the vector of input heights any entries which did not
- * correspond to sequence locked inputs as they do not affect the calculation.
+ * correspond to sequence locked inputs as they do not affect the calculation
  */
-static std::pair<int, int64_t> CalculateSequenceLocks(const CTransaction &tx, int flags, std::vector<int>* prevHeights, const CBlockIndex& block)
+static std::pair< int, int64_t > CalculateSequenceLocks( const CTransaction & tx, int flags, std::vector< int > * prevHeights, const CBlockIndex & block )
 {
-    assert(prevHeights->size() == tx.vin.size());
+    assert( prevHeights->size() == tx.vin.size() ) ;
 
     // Will be set to the equivalent height- and time-based nLockTime
     // values that would be necessary to satisfy all relative lock-
     // time constraints given our view of block chain history.
     // The semantics of nLockTime are the last invalid height/time, so
-    // use -1 to have the effect of any height or time being valid.
-    int nMinHeight = -1;
-    int64_t nMinTime = -1;
+    // use -1 to have the effect of any height or time being valid
+    int nMinHeight = -1 ;
+    int64_t nMinTime = -1 ;
 
-    // tx.nVersion is signed integer so requires cast to unsigned otherwise
-    // we would be doing a signed comparison and half the range of nVersion
-    // wouldn't support BIP 68.
-    bool fEnforceBIP68 = static_cast<uint32_t>(tx.nVersion) >= 2
-                      && flags & LOCKTIME_VERIFY_SEQUENCE;
+    bool fEnforceBIP68 = false ;
+    if ( NameOfChain() != "inu" ) {
+        // tx.nVersion is signed integer so requires cast to unsigned otherwise
+        // we would be doing a signed comparison and half the range of nVersion
+        // wouldn't support BIP 68
+        fEnforceBIP68 = static_cast< uint32_t >( tx.nVersion ) >= 2
+                              && ( flags & LOCKTIME_VERIFY_SEQUENCE ) ;
+    }
 
-    // Do not enforce sequence numbers as a relative lock time
-    // unless we have been instructed to
-    if (!fEnforceBIP68) {
-        return std::make_pair(nMinHeight, nMinTime);
+    // If sequence numbers as a relative lock time are not enforced, it is done
+    if ( ! fEnforceBIP68 ) {
+        return std::make_pair( nMinHeight, nMinTime ) ;
     }
 
     for (size_t txinIndex = 0; txinIndex < tx.vin.size(); txinIndex++) {
@@ -301,7 +303,7 @@ static std::pair<int, int64_t> CalculateSequenceLocks(const CTransaction &tx, in
 
         // Sequence numbers with the most significant bit set are not
         // treated as relative lock-times, nor are they given any
-        // consensus-enforced meaning at this point.
+        // consensus-enforced meaning at this point
         if (txin.nSequence & CTxIn::SEQUENCE_LOCKTIME_DISABLE_FLAG) {
             // The height of this input is not relevant for sequence locks
             (*prevHeights)[txinIndex] = 0;
@@ -334,19 +336,16 @@ static std::pair<int, int64_t> CalculateSequenceLocks(const CTransaction &tx, in
     return std::make_pair(nMinHeight, nMinTime);
 }
 
-static bool EvaluateSequenceLocks(const CBlockIndex& block, std::pair<int, int64_t> lockPair)
+static bool EvaluateSequenceLocks( const CBlockIndex & block, std::pair< int, int64_t > lockPair )
 {
-    assert(block.pprev);
-    int64_t nBlockTime = block.pprev->GetMedianTimePast();
-    if (lockPair.first >= block.nHeight || lockPair.second >= nBlockTime)
-        return false;
-
-    return true;
+    assert( block.pprev != nullptr ) ;
+    int64_t nBlockTime = ( NameOfChain() == "inu" ) ? block.pprev->GetBlockTime() : block.pprev->GetMedianTimePast() ;
+    return ( lockPair.first < block.nHeight && lockPair.second < nBlockTime ) ;
 }
 
-bool SequenceLocks(const CTransaction &tx, int flags, std::vector<int>* prevHeights, const CBlockIndex& block)
+bool SequenceLocks( const CTransaction & tx, int flags, std::vector< int > * prevHeights, const CBlockIndex & block )
 {
-    return EvaluateSequenceLocks(block, CalculateSequenceLocks(tx, flags, prevHeights, block));
+    return EvaluateSequenceLocks( block, CalculateSequenceLocks( tx, flags, prevHeights, block ) ) ;
 }
 
 bool TestLockPointValidity(const LockPoints* lp)
@@ -367,7 +366,7 @@ bool TestLockPointValidity(const LockPoints* lp)
     return true;
 }
 
-bool CheckSequenceLocks(const CTransaction &tx, int flags, LockPoints* lp, bool useExistingLockPoints)
+bool CheckSequenceLocks( const CTransaction & tx, int flags, LockPoints * lp, bool useExistingLockPoints )
 {
     AssertLockHeld(cs_main);
     AssertLockHeld(mempool.cs);
@@ -375,7 +374,7 @@ bool CheckSequenceLocks(const CTransaction &tx, int flags, LockPoints* lp, bool 
     CBlockIndex* tip = chainActive.Tip();
     CBlockIndex index;
     index.pprev = tip;
-    // CheckSequenceLocks() uses chainActive.Height()+1 to evaluate
+    // CheckSequenceLocks() uses chainActive.Height() + 1 to evaluate
     // height based locks because when SequenceLocks() is called within
     // ConnectBlock(), the height of the block *being*
     // evaluated is what is used.
@@ -407,7 +406,7 @@ bool CheckSequenceLocks(const CTransaction &tx, int flags, LockPoints* lp, bool 
                 prevheights[txinIndex] = coins.nHeight;
             }
         }
-        lockPair = CalculateSequenceLocks(tx, flags, &prevheights, index);
+        lockPair = CalculateSequenceLocks( tx, flags, &prevheights, index ) ;
         if (lp) {
             lp->height = lockPair.first;
             lp->time = lockPair.second;
@@ -425,7 +424,7 @@ bool CheckSequenceLocks(const CTransaction &tx, int flags, LockPoints* lp, bool 
             // lock on a mempool input, so we can use the return value of
             // CheckSequenceLocks to indicate the LockPoints validity
             int maxInputHeight = 0;
-            BOOST_FOREACH(int height, prevheights) {
+            for ( int height : prevheights ) {
                 // Can ignore mempool inputs since we'll fail if they had non-zero locks
                 if (height != tip->nHeight+1) {
                     maxInputHeight = std::max(maxInputHeight, height);
@@ -434,7 +433,7 @@ bool CheckSequenceLocks(const CTransaction &tx, int flags, LockPoints* lp, bool 
             lp->maxInputBlock = tip->GetAncestor(maxInputHeight);
         }
     }
-    return EvaluateSequenceLocks(index, lockPair);
+    return EvaluateSequenceLocks( index, lockPair ) ;
 }
 
 
@@ -647,8 +646,9 @@ bool AcceptToMemoryPoolWorker( CTxMemPool& pool, CValidationState& state, const 
 
         CAmount nValueIn = 0;
         LockPoints lp;
-        {
-        LOCK(pool.cs);
+    {
+        LOCK( pool.cs ) ;
+
         CCoinsViewMemPool viewMemPool(pcoinsTip, pool);
         view.SetBackend(viewMemPool);
 
@@ -681,17 +681,16 @@ bool AcceptToMemoryPoolWorker( CTxMemPool& pool, CValidationState& state, const 
 
         nValueIn = view.GetValueIn(tx);
 
-        // we have all inputs cached now, so switch back to dummy, so we don't need to keep lock on mempool
-        view.SetBackend(dummy);
+        // all inputs are cached now, thus switch back to dummy, so we don't need to keep lock on mempool
+        view.SetBackend( dummy ) ;
 
-        // Only accept BIP68 sequence locked transactions that can be mined in the next
-        // block; we don't want our mempool filled up with transactions that can't
-        // be mined yet.
-        // Must keep pool.cs for this unless we change CheckSequenceLocks to take a
-        // CoinsViewCache instead of create its own
-        if (!CheckSequenceLocks(tx, STANDARD_LOCKTIME_VERIFY_FLAGS, &lp))
+        // Accept BIP68 sequence locked transactions that can be included in the next block,
+        // don't fill up the mempool with transactions that can't be mined yet.
+        // Keep pool.cs for this unless we change CheckSequenceLocks to take a CoinsViewCache
+        // instead of creating its own
+        if ( ! CheckSequenceLocks( tx, STANDARD_LOCKTIME_VERIFY_FLAGS, &lp ) )
             return state.DoS( 0, false, REJECT_NONSTANDARD, "non-BIP68-final" ) ;
-        }
+    }
 
         // Check for non-standard pay-to-script-hash in inputs
         if ( ! acceptNonStandardTxs && ! AreInputsStandard( tx, view ) )
@@ -926,9 +925,9 @@ bool AcceptToMemoryPoolWithTime( CTxMemPool& pool, CValidationState &state, cons
 {
     std::vector<uint256> vHashTxToUncache;
     bool res = AcceptToMemoryPoolWorker( pool, state, tx, fLimitFree, pfMissingInputs, nAcceptTime, plTxnReplaced, vHashTxToUncache ) ;
-    if (!res) {
-        BOOST_FOREACH(const uint256& hashTx, vHashTxToUncache)
-            pcoinsTip->Uncache(hashTx);
+    if ( ! res ) {
+        for ( const uint256 & hashTx : vHashTxToUncache )
+            pcoinsTip->Uncache( hashTx ) ;
     }
     // After we've (potentially) uncached entries, ensure our coins cache is still within its size limits
     CValidationState stateDummy;
@@ -1277,11 +1276,14 @@ bool CScriptCheck::operator()() {
     return true;
 }
 
-int GetSpendHeight(const CCoinsViewCache& inputs)
+int GetSpendHeight( const CCoinsViewCache & inputs )
 {
-    LOCK(cs_main);
-    CBlockIndex* pindexPrev = mapBlockIndex.find( inputs.GetSha256OfBestBlock() )->second ;
-    return pindexPrev->nHeight + 1;
+    LOCK( cs_main ) ;
+    BlockMap::iterator mi = mapBlockIndex.find( inputs.GetSha256OfBestBlock() ) ;
+    assert( mi != mapBlockIndex.end() ) ;
+    CBlockIndex* pindexPrev = ( *mi ).second ;
+    assert( pindexPrev != nullptr ) ;
+    return pindexPrev->nHeight + 1 ;
 }
 
 namespace Consensus {
@@ -3031,8 +3033,9 @@ bool ContextualCheckBlock( const CBlock & block, CValidationState & state, const
     // Start enforcing BIP113 (Median Time Past) using versionbits logic
     // Dogecoin: We probably want to disable this
     int nLockTimeFlags = 0 ;
-    if ( VersionBitsState( pindexPrev, consensusParams, Consensus::DEPLOYMENT_CSV, versionbitscache ) == THRESHOLD_ACTIVE ) {
-        nLockTimeFlags |= LOCKTIME_MEDIAN_TIME_PAST ;
+    if ( NameOfChain() != "inu" ) {
+        if ( VersionBitsState( pindexPrev, consensusParams, Consensus::DEPLOYMENT_CSV, versionbitscache ) == THRESHOLD_ACTIVE )
+            nLockTimeFlags |= LOCKTIME_MEDIAN_TIME_PAST ;
     }
 
     int64_t nLockTimeCutoff = ( nLockTimeFlags & LOCKTIME_MEDIAN_TIME_PAST )

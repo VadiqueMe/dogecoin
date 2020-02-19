@@ -25,8 +25,6 @@
 
 #include <univalue.h>
 
-#include <boost/assign/list_of.hpp>
-
 void EnsureWalletIsUnlocked();
 bool EnsureWalletIsAvailable(bool avoidException);
 
@@ -49,7 +47,7 @@ int64_t static DecodeDumpTime(const std::string &str) {
 
 std::string static EncodeDumpString(const std::string &str) {
     std::stringstream ret;
-    BOOST_FOREACH(unsigned char c, str) {
+    for ( unsigned char c : str ) {
         if (c <= 32 || c >= 128 || c == '%') {
             ret << '%' << HexStr(&c, &c + 1);
         } else {
@@ -1012,7 +1010,7 @@ UniValue importmulti(const JSONRPCRequest& mainRequest)
         return NullUniValue;
     }
 
-    RPCTypeCheck(mainRequest.params, boost::assign::list_of(UniValue::VARR)(UniValue::VOBJ));
+    RPCTypeCheck( mainRequest.params, { UniValue::VARR, UniValue::VOBJ } ) ;
 
     const UniValue& requests = mainRequest.params[0];
 
@@ -1030,8 +1028,10 @@ UniValue importmulti(const JSONRPCRequest& mainRequest)
     LOCK2(cs_main, pwalletMain->cs_wallet);
     EnsureWalletIsUnlocked();
 
-    // Verify all timestamps are present before importing any keys.
-    const int64_t now = chainActive.Tip() ? chainActive.Tip()->GetMedianTimePast() : 0;
+    // Verify all timestamps are present before importing any keys
+    const int64_t now = chainActive.Tip() ? (
+                        ( NameOfChain() == "inu" ) ? chainActive.Tip()->GetBlockTime() : chainActive.Tip()->GetMedianTimePast()
+                    ) : 0 ;
     for (const UniValue& data : requests.getValues()) {
         GetImportTimestamp(data, now);
     }
@@ -1048,7 +1048,7 @@ UniValue importmulti(const JSONRPCRequest& mainRequest)
 
     UniValue response(UniValue::VARR);
 
-    BOOST_FOREACH (const UniValue& data, requests.getValues()) {
+    for ( const UniValue & data : requests.getValues() ) {
         const int64_t timestamp = std::max(GetImportTimestamp(data, now), minimumTimestamp);
         const UniValue result = ProcessImport(data, timestamp);
         response.push_back(result);

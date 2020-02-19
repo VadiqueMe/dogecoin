@@ -44,12 +44,12 @@ UniValue GetNetworkHashPS(int lookup, int height) {
     if (pb == NULL || !pb->nHeight)
         return 0;
 
-    // If lookup is -1, then use blocks since last difficulty change.
+    // If lookup is -1, then use blocks since last difficulty change
     if (lookup <= 0)
         lookup = pb->nHeight % Params().GetConsensus(pb->nHeight).DifficultyAdjustmentInterval() + 1;
     //
 
-    // If lookup is larger than chain, then set it to chain length.
+    // If lookup is larger than chain, then set it to chain length
     if (lookup > pb->nHeight)
         lookup = pb->nHeight;
 
@@ -458,7 +458,7 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
             "  \"coinbasevalue\" : n,              (numeric) maximum allowable input to coinbase transaction, including the generation award and transaction fees (in Satoshis)\n"
             "  \"coinbasetxn\" : { ... },          (json object) information for coinbase transaction\n"
             "  \"target\" : \"xxxx\",                (string) The hash target\n"
-            "  \"mintime\" : xxx,                  (numeric) The minimum timestamp appropriate for next block time in seconds since epoch (Jan 1 1970 GMT)\n"
+            "  \"mintime\" : xxx,                  (numeric) The minimum timestamp appropriate for next block time in seconds since Jan 1 1970 GMT\n"
             "  \"mutable\" : [                     (array of string) list of ways the block template may be changed \n"
             "     \"value\"                          (string) A way the block template may be changed, e.g. 'time', 'transactions', 'prevblock'\n"
             "     ,...\n"
@@ -761,7 +761,9 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
     result.push_back(Pair("coinbasevalue", (int64_t)pblock->vtx[0]->vout[0].nValue));
     result.push_back(Pair("longpollid", chainActive.Tip()->GetBlockSha256Hash().GetHex() + i64tostr(nTransactionsUpdatedLast)));
     result.push_back(Pair("target", hashTarget.GetHex()));
-    result.push_back(Pair("mintime", (int64_t)pindexPrev->GetMedianTimePast()+1));
+    result.push_back( Pair("mintime", ( NameOfChain() == "inu" ?
+                                            (int64_t)pindexPrev->GetBlockTime() + 1 :
+                                                (int64_t)pindexPrev->GetMedianTimePast() + 1 )) ) ;
     result.push_back(Pair("mutable", aMutable));
     result.push_back(Pair("noncerange", "00000000ffffffff"));
     int64_t nSigOpLimit = MAX_BLOCK_SIGOPS_COST;

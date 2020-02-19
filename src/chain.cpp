@@ -1,13 +1,13 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "chain.h"
+#include "chainparamsbase.h"
 #include "validation.h"
 
-/* Moved here from the header due to the need of auxpow and more involved logic */
 CBlockHeader CBlockIndex::GetBlockHeader( const Consensus::Params & consensusParams ) const
 {
     CBlockHeader block ;
@@ -32,6 +32,27 @@ CBlockHeader CBlockIndex::GetBlockHeader( const Consensus::Params & consensusPar
     block.nNonce         = nNonce ;
 
     return block ;
+}
+
+int64_t CBlockIndex::GetMedianTimePast() const
+{
+    ///assert( NameOfChain() != "inu" ) ;
+    if ( NameOfChain() == "inu" ) return GetBlockTime() ;
+
+    static const int nMedianTimeSpan = 11 ;
+
+    int64_t pmedian[ nMedianTimeSpan ] ;
+    int64_t* pend = &pmedian[ nMedianTimeSpan ] ;
+    int64_t* pbegin = pend ;
+
+    const CBlockIndex * pindex = this ;
+    for ( int i = 0 ; i < nMedianTimeSpan && pindex ; i++, pindex = pindex->pprev ) {
+        if ( pindex != nullptr )
+            *( -- pbegin ) = pindex->GetBlockTime() ;
+    }
+
+    std::sort( pbegin, pend ) ;
+    return pbegin[ ( pend - pbegin ) / 2 ] ;
 }
 
 /**

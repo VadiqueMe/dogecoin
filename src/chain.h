@@ -299,21 +299,7 @@ public:
         return (int64_t)nTimeMax;
     }
 
-    int64_t GetMedianTimePast() const
-    {
-        static const int nMedianTimeSpan = 11 ;
-
-        int64_t pmedian[ nMedianTimeSpan ] ;
-        int64_t* pend = &pmedian[ nMedianTimeSpan ] ;
-        int64_t* pbegin = pend ;
-
-        const CBlockIndex * pindex = this ;
-        for ( int i = 0 ; i < nMedianTimeSpan && pindex ; i++, pindex = pindex->pprev )
-            *( -- pbegin ) = pindex->GetBlockTime() ;
-
-        std::sort( pbegin, pend ) ;
-        return pbegin[ ( pend - pbegin ) / 2 ] ;
-    }
+    int64_t GetMedianTimePast() const ;
 
     std::string ToString() const
     {
