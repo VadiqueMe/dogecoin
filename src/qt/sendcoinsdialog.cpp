@@ -149,8 +149,8 @@ void SendCoinsDialog::setWalletModel( WalletModel * model )
         coinControlUpdateLabels();
 
         // fees
-        connect( ui->customFee, SIGNAL( valueChanged() ), this, SLOT( updateGlobalFeeVariables() ) ) ;
-        connect( ui->customFee, SIGNAL( valueChanged() ), this, SLOT( coinControlUpdateLabels() ) ) ;
+        connect( ui->customFee, SIGNAL( valueChanged(qint64) ), this, SLOT( updateGlobalFeeVariables() ) ) ;
+        connect( ui->customFee, SIGNAL( valueChanged(qint64) ), this, SLOT( coinControlUpdateLabels() ) ) ;
         ui->customFee->setSingleStep( 1 /* * ... */ ) ;
 
         connect(ui->groupFee, SIGNAL(buttonClicked(int)), this, SLOT(updateFeeSectionControls()));

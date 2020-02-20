@@ -42,7 +42,7 @@ SendCoinsEntry::SendCoinsEntry( const PlatformStyle * style, QWidget * parent ) 
     // just a label for showing address(es)
     ui->payTo_is->setFont( GUIUtil::fixedPitchFont() ) ;
 
-    connect( ui->payAmount, SIGNAL( valueChanged() ), this, SIGNAL( payAmountChanged() ) ) ;
+    connect( ui->payAmount, SIGNAL( valueChanged(qint64) ), this, SIGNAL( payAmountChanged() ) ) ;
     connect(ui->checkboxSubtractFeeFromAmount, SIGNAL(toggled(bool)), this, SIGNAL(subtractFeeFromAmountChanged()));
     connect(ui->deleteButton, SIGNAL(clicked()), this, SLOT(deleteClicked()));
     connect(ui->deleteButton_is, SIGNAL(clicked()), this, SLOT(deleteClicked()));
