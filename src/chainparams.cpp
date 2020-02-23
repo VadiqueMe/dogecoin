@@ -214,8 +214,8 @@ public:
         //printf( "powLimit = 0x%s\n", consensus.powLimit.GetHex().c_str() ) ;
         //printf( "compact powLimit for nBits = 0x%08x\n", UintToArith256( consensus.powLimit ).GetCompact() ) ;
 
-        consensus.nPowTargetTimespan = 60 ; // 1 minute
-        consensus.nPowTargetSpacing = 60 ; // 1 minute
+        consensus.nPowTargetTimespan = 60 ; // when proof-of-work bits change, in seconds
+        consensus.nPowTargetSpacing = 60 ; // expected time between blocks, in seconds
         consensus.nCoinbaseMaturity = 60 ; // number of blocks above before generated coins will be spendable
         consensus.fDigishieldDifficultyCalculation = true ;
         consensus.nSubsidyHalvingInterval = 1000000 ; // not used for inu chain

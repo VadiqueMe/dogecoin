@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2013 The Bitcoin developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -106,7 +106,7 @@ public:
      * @param nBaseVersion The base version
      * @param nChainId The auxpow chain ID
      */
-    void SetBaseVersion(int32_t nBaseVersion, int32_t nChainId);
+    void SetBaseVersion( int32_t nBaseVersion, int32_t nChainId ) ;
 
     /**
      * Extract the chain ID
@@ -114,17 +114,17 @@ public:
      */
     inline int32_t GetChainId() const
     {
-        return nVersion >> 16;
+        return nVersion >> 16 ;
     }
 
     /**
      * Set the chain ID.  This is used for the test suite
      * @param ch The chain ID to set
      */
-    inline void SetChainId(int32_t chainId)
+    inline void SetChainId( int32_t chainId )
     {
-        nVersion %= VERSION_CHAIN_START;
-        nVersion |= chainId * VERSION_CHAIN_START;
+        nVersion %= VERSION_CHAIN_START ;
+        nVersion |= chainId * VERSION_CHAIN_START ;
     }
 
     /**
@@ -133,7 +133,11 @@ public:
      */
     inline bool IsAuxpowInVersion() const
     {
-        return nVersion & VERSION_AUXPOW ;
+        return IsAuxpowInVersion( nVersion ) ;
+    }
+    static inline bool IsAuxpowInVersion( int32_t version )
+    {
+        return version & VERSION_AUXPOW ;
     }
 
     /**
@@ -154,8 +158,8 @@ public:
     inline bool IsLegacy() const
     {
         return nVersion == 1
-            // Dogecoin: We have a random v2 block with no AuxPoW, treat as legacy
-            || (nVersion == 2 && GetChainId() == 0);
+            // Dogecoin: a random v2 block with no AuxPoW here, treat it as legacy
+            || ( nVersion == 2 && GetChainId() == 0 ) ;
     }
 } ;
 

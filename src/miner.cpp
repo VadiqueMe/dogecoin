@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -663,22 +663,62 @@ void IncrementExtraNonce( CBlock * pblock, const CBlockIndex * pindexPrev, uint3
 
 static bool ProcessBlockFound( const CBlock * const block, const CChainParams & chainparams )
 {
-    // Found a solution
-    LogPrintf( "%s\n", block->ToString() ) ;
-    LogPrintf( "generated %s\n", FormatMoney( block->vtx[0]->vout[0].nValue ) ) ;
+    assert( block != nullptr ) ;
+    CBlockIndex* lastTip = chainActive.Tip() ; /* mapBlockIndex[ chainActive.Tip()->GetBlockSha256Hash() ] */
 
     {
         LOCK( cs_main );
-        if ( block->hashPrevBlock != chainActive.Tip()->GetBlockSha256Hash() )
-            return error( "ProcessBlockFound: generated block is stale" ) ;
+
+        if ( lastTip != nullptr &&
+                block->hashPrevBlock != lastTip->GetBlockSha256Hash() )
+        {   // the generated block isn't above the chain's current tip block
+            bool isLost = true ;
+
+            // is it above the previous block?
+            if ( lastTip->pprev != nullptr &&
+                    lastTip->pprev->GetBlockSha256Hash() == block->hashPrevBlock )
+            {
+                // and not too far in time?
+                uint32_t deltaTime = std::abs( block->nTime - lastTip->GetBlockTime() ) ;
+                if ( deltaTime <= ( chainparams.GetConsensus( lastTip->nHeight ).nPowTargetSpacing >> 2 ) )
+                {
+                    // then rewind the chain one block back to connect the generated block, replacing the tip
+                    CValidationState state ;
+                    InvalidateBlock( state, chainparams, lastTip ) ;
+                    if ( state.IsValid() ) // no && ActivateBestChain here, or previously replaced ones will reconnect
+                        isLost = false ;
+                }
+            }
+
+            if ( isLost ) {
+                if ( lastTip->nStatus & BLOCK_FAILED_MASK ) ResetBlockFailureFlags( lastTip ) ;
+                CValidationState state ;
+                ActivateBestChain( state, chainparams ) ;
+                return error( "%s: generated block with sha256_hash=%s is lost", __func__, block->GetSha256Hash().GetHex() ) ;
+            }
+        }
     }
+
+    // Found a solution
+    LogPrintf( block->ToString() ) ;
+    LogPrintf( "reward %s\n", FormatMoney( block->vtx[0]->vout[0].nValue ) ) ;
 
     // Say about the new block
     GetMainSignals().BlockFound( block->GetSha256Hash() ) ;
 
     // Process this block the same as if it were received from another node
-    if ( ! ProcessNewBlock( chainparams, std::make_shared< const CBlock >( *block ), true, nullptr ) )
-        return error( "ProcessBlockFound: ProcessNewBlock, block not accepted" ) ;
+    bool newBlockOk = ProcessNewBlock( chainparams, std::make_shared< const CBlock >( *block ), true, nullptr ) ;
+
+    if ( lastTip->nStatus & BLOCK_FAILED_MASK ) {
+        LOCK( cs_main );
+        ResetBlockFailureFlags( lastTip ) ; // it was just to rewind, not to mark as rejected forever
+    }
+
+    if ( ! newBlockOk ) {
+        CValidationState state ;
+        ActivateBestChain( state, chainparams ) ;
+        return error( "%s: ProcessNewBlock, block not accepted", __func__ ) ;
+    }
 
     return true ;
 }

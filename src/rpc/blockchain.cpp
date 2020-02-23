@@ -1383,8 +1383,8 @@ UniValue invalidateblock(const JSONRPCRequest& request)
         if (mapBlockIndex.count(hash) == 0)
             throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Block not found");
 
-        CBlockIndex* pblockindex = mapBlockIndex[hash];
-        InvalidateBlock(state, Params(), pblockindex);
+        CBlockIndex * pblockindex = mapBlockIndex[ hash ] ;
+        InvalidateBlock( state, Params(), pblockindex ) ;
     }
 
     if (state.IsValid()) {

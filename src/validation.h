@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -23,6 +23,7 @@
 #include <exception>
 #include <map>
 #include <set>
+#include <unordered_map>
 #include <stdint.h>
 #include <string>
 #include <utility>
@@ -30,7 +31,6 @@
 
 #include <atomic>
 
-#include <boost/unordered_map.hpp>
 #include <boost/filesystem/path.hpp>
 
 class CBlockIndex;
@@ -123,11 +123,15 @@ struct BlockHasher
     size_t operator()(const uint256& hash) const { return hash.GetCheapHash(); }
 };
 
-extern CScript COINBASE_FLAGS;
-extern CCriticalSection cs_main;
-extern CTxMemPool mempool;
-typedef boost::unordered_map<uint256, CBlockIndex*, BlockHasher> BlockMap;
-extern BlockMap mapBlockIndex;
+extern CScript COINBASE_FLAGS ;
+
+extern CCriticalSection cs_main ;
+
+extern CTxMemPool mempool ;
+
+typedef std::unordered_map< uint256, CBlockIndex*, BlockHasher > BlockMap ;
+extern BlockMap mapBlockIndex ;
+
 extern uint64_t nLastBlockTx;
 extern uint64_t nLastBlockSize;
 extern uint64_t nLastBlockWeight;
@@ -492,11 +496,11 @@ CBlockIndex* FindForkInGlobalIndex(const CChain& chain, const CBlockLocator& loc
 /** Mark a block as precious and reorganize */
 bool PreciousBlock(CValidationState& state, const CChainParams& params, CBlockIndex *pindex);
 
-/** Mark a block as invalid */
-bool InvalidateBlock(CValidationState& state, const CChainParams& chainparams, CBlockIndex *pindex);
+/** Mark a block as rejected */
+bool InvalidateBlock( CValidationState & state, const CChainParams & chainparams, CBlockIndex * pindex ) ;
 
-/** Remove invalidity status from a block and its descendants */
-bool ResetBlockFailureFlags(CBlockIndex *pindex);
+/** Remove rejected-mark from a block and its descendants */
+bool ResetBlockFailureFlags( CBlockIndex * pindex ) ;
 
 /** The currently-connected chain of blocks (protected by cs_main) */
 extern CChain chainActive ;
