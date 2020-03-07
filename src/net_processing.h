@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -83,7 +83,7 @@ void Misbehaving(NodeId nodeid, int howmuch);
 /** Process protocol messages received from a given node */
 bool ProcessMessages(CNode* pfrom, CConnman& connman, const std::atomic<bool>& interrupt);
 /**
- * Send queued protocol messages to be sent to a give node
+ * Send queued protocol messages to be sent to a given node
  *
  * @param[in]   pto             The node which we are sending messages to
  * @param[in]   connman         The connection manager for that node

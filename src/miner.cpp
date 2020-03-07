@@ -823,6 +823,8 @@ void MiningThread::MineBlocks()
                     if ( g_connman->hasConnectedNodes() && ! IsInitialBlockDownload() )
                         break ;
 
+                    if ( mempool.size() > 0 ) break ;
+
                     std::this_thread::sleep_for( std::chrono::milliseconds( 1000 ) ) ;
                 }
                 while ( ! finished ) ;

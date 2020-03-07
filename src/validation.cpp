@@ -947,31 +947,31 @@ bool GetTransaction(const uint256 &hash, CTransactionRef &txOut, const Consensus
     LOCK(cs_main);
 
     CTransactionRef ptx = mempool.get(hash);
-    if (ptx)
+    if ( ptx != nullptr )
     {
-        txOut = ptx;
-        return true;
+        txOut = ptx ;
+        return true ;
     }
 
-    if (fTxIndex) {
-        CDiskTxPos postx;
+    if ( fTxIndex ) {
+        CDiskTxPos postx ;
         if ( pblocktree->ReadTxIndex( hash, postx ) )
         {
             CAutoFile file( OpenBlockFile( postx, true ), SER_DISK, PEER_VERSION ) ;
-            if (file.IsNull())
-                return error("%s: OpenBlockFile failed", __func__);
-            CBlockHeader header;
+            if ( file.isNull() )
+                return error( "%s: OpenBlockFile failed", __func__ ) ;
+            CBlockHeader header ;
             try {
-                file >> header;
-                fseek(file.Get(), postx.nTxOffset, SEEK_CUR);
-                file >> txOut;
-            } catch (const std::exception& e) {
+                file >> header ;
+                fseek( file.get(), postx.nTxOffset, SEEK_CUR ) ;
+                file >> txOut ;
+            } catch ( const std::exception & e ) {
                 return error("%s: Deserialize or I/O error - %s", __func__, e.what());
             }
             hashBlock = header.GetSha256Hash() ;
             if ( txOut->GetTxHash() != hash )
                 return error( "%s: tx hash mismatch", __func__ ) ;
-            return true;
+            return true ;
         }
     }
 
@@ -1015,21 +1015,21 @@ bool WriteBlockToDisk(const CBlock& block, CDiskBlockPos& pos, const CMessageHea
 {
     // Open history file to append
     CAutoFile fileout( OpenBlockFile( pos ), SER_DISK, PEER_VERSION ) ;
-    if (fileout.IsNull())
-        return error("WriteBlockToDisk: OpenBlockFile failed");
+    if ( fileout.isNull() )
+        return error( "%s: OpenBlockFile failed", __func__ ) ;
 
     // Write index header
-    unsigned int nSize = GetSerializeSize(fileout, block);
-    fileout << FLATDATA(messageStart) << nSize;
+    unsigned int nSize = GetSerializeSize( fileout, block ) ;
+    fileout << FLATDATA(messageStart) << nSize ;
 
     // Write block
-    long fileOutPos = ftell(fileout.Get());
-    if (fileOutPos < 0)
-        return error("WriteBlockToDisk: ftell failed");
-    pos.nPos = (unsigned int)fileOutPos;
-    fileout << block;
+    long fileOutPos = ftell( fileout.get() ) ;
+    if ( fileOutPos < 0 )
+        return error( "%s: ftell failed", __func__ ) ;
+    pos.nPos = static_cast< unsigned int >( fileOutPos ) ;
+    fileout << block ;
 
-    return true;
+    return true ;
 }
 
 /* Generic implementation of block reading that can handle both a block and its header */
@@ -1037,11 +1037,11 @@ bool WriteBlockToDisk(const CBlock& block, CDiskBlockPos& pos, const CMessageHea
 template<typename T>
 static bool ReadBlockOrHeader(T& block, const CDiskBlockPos& pos, const Consensus::Params& consensusParams)
 {
-    block.SetNull();
+    block.SetNull() ;
 
     // Open history file to read
     CAutoFile filein( OpenBlockFile( pos, true ), SER_DISK, PEER_VERSION ) ;
-    if ( filein.IsNull() )
+    if ( filein.isNull() )
         return error( "%s: OpenBlockFile failed for %s", __func__, pos.ToString() ) ;
 
     // Read block
@@ -1055,7 +1055,7 @@ static bool ReadBlockOrHeader(T& block, const CDiskBlockPos& pos, const Consensu
     if ( ! CheckDogecoinProofOfWork( block, consensusParams ) )
         return error( "%s: Errors in block header at %s", __func__, pos.ToString() ) ;
 
-    return true;
+    return true ;
 }
 
 template<typename T>
@@ -1406,19 +1406,19 @@ bool UndoWriteToDisk(const CBlockUndo& blockundo, CDiskBlockPos& pos, const uint
 {
     // Open history file to append
     CAutoFile fileout( OpenUndoFile( pos ), SER_DISK, PEER_VERSION ) ;
-    if (fileout.IsNull())
-        return error("%s: OpenUndoFile failed", __func__);
+    if ( fileout.isNull() )
+        return error( "%s: OpenUndoFile failed", __func__ ) ;
 
     // Write index header
     unsigned int nSize = GetSerializeSize(fileout, blockundo);
     fileout << FLATDATA(messageStart) << nSize;
 
     // Write undo data
-    long fileOutPos = ftell(fileout.Get());
-    if (fileOutPos < 0)
-        return error("%s: ftell failed", __func__);
-    pos.nPos = (unsigned int)fileOutPos;
-    fileout << blockundo;
+    long fileOutPos = ftell( fileout.get() ) ;
+    if ( fileOutPos < 0 )
+        return error( "%s: ftell failed", __func__ ) ;
+    pos.nPos = static_cast< unsigned int >( fileOutPos ) ;
+    fileout << blockundo ;
 
     // calculate & write checksum
     CHashWriter hasher(SER_GETHASH, PROTOCOL_VERSION);
@@ -1433,8 +1433,8 @@ bool UndoReadFromDisk(CBlockUndo& blockundo, const CDiskBlockPos& pos, const uin
 {
     // Open history file to read
     CAutoFile filein( OpenUndoFile( pos, true ), SER_DISK, PEER_VERSION ) ;
-    if (filein.IsNull())
-        return error("%s: OpenUndoFile failed", __func__);
+    if ( filein.isNull() )
+        return error( "%s: OpenUndoFile failed", __func__ ) ;
 
     // Read block
     uint256 hashChecksum;
@@ -1870,18 +1870,18 @@ bool ConnectBlock( const CBlock & block, CValidationState & state, CBlockIndex *
     if ( justCheck ) return true ;
 
     // Write undo information to disk
-    if (pindex->GetUndoPos().IsNull() || !pindex->IsValid(BLOCK_VALID_SCRIPTS))
+    if ( pindex->GetUndoPos().IsNull() || ! pindex->IsValid( BLOCK_VALID_SCRIPTS ) )
     {
-        if (pindex->GetUndoPos().IsNull()) {
-            CDiskBlockPos _pos;
+        if ( pindex->GetUndoPos().IsNull() ) {
+            CDiskBlockPos _pos ;
             if ( ! FindUndoPos( state, pindex->nFile, _pos, ::GetSerializeSize( blockundo, SER_DISK, PEER_VERSION ) + 40 ) )
                 return error( "ConnectBlock(): FindUndoPos failed" ) ;
             if ( ! UndoWriteToDisk( blockundo, _pos, pindex->pprev->GetBlockSha256Hash(), chainparams.MessageStart() ) )
                 return AbortNode( state, "Failed to write undo data" ) ;
 
             // update nUndoPos in block index
-            pindex->nUndoPos = _pos.nPos;
-            pindex->nStatus |= BLOCK_HAVE_UNDO;
+            pindex->nUndoPos = _pos.nPos ;
+            pindex->nStatus |= BLOCK_UNDO_EXISTS ;
         }
 
         pindex->RaiseValidity( BLOCK_VALID_SCRIPTS ) ;
@@ -2144,7 +2144,7 @@ void static UpdateTip( CBlockIndex * pindexNew, const CChainParams & chainParams
     ////UpdateTipBlockNewCoins( chainParams ) ;
 
     CBlockHeader newBlock = chainActive.Tip()->GetBlockHeader( chainParams.GetConsensus( chainActive.Height() ) ) ;
-    LogPrintf( "%s: new block sha256_hash=%s scrypt_hash=%s height=%d version=0x%x%s log2_work=%.8g newcoins=%lu txs=%lu date='%s' progress=%f cache=%.1fMiB(%u txs)\n", __func__,
+    LogPrintf( "%s: tip block sha256_hash=%s scrypt_hash=%s height=%d version=0x%x%s log2_work=%.8g newcoins=%lu txs=%lu date='%s' progress=%f cache=%.1fMiB(%u txs)\n", __func__,
         /* chainActive.Tip()->GetBlockSha256Hash().ToString() */ newBlock.GetSha256Hash().ToString(),
         newBlock.GetScryptHash().ToString(),
         chainActive.Height(),
@@ -2317,9 +2317,9 @@ static CBlockIndex* FindMostWorkChain()
             // which block files have been deleted.  Remove those as candidates
             // for the most work chain if we come across them; we can't switch
             // to a chain unless we have all the non-active-chain parent blocks
-            bool fFailedChain = pindexTest->nStatus & BLOCK_FAILED_MASK;
-            bool fMissingData = !(pindexTest->nStatus & BLOCK_HAVE_DATA);
-            if (fFailedChain || fMissingData) {
+            bool fFailedChain = pindexTest->nStatus & BLOCK_FAILED_MASK ;
+            bool fMissingData = ! ( pindexTest->nStatus & BLOCK_DATA_EXISTS ) ;
+            if ( fFailedChain || fMissingData ) {
                 // Candidate chain is not usable (either invalid or missing data)
                 if ( fFailedChain && ( pindexBestInvalid == nullptr || pindexNew->nChainWorkHashes > pindexBestInvalid->nChainWorkHashes ) )
                     pindexBestInvalid = pindexNew ;
@@ -2702,7 +2702,7 @@ bool ReceivedBlockTransactions(const CBlock &block, CValidationState& state, CBl
     pindexNew->nFile = pos.nFile;
     pindexNew->nDataPos = pos.nPos;
     pindexNew->nUndoPos = 0;
-    pindexNew->nStatus |= BLOCK_HAVE_DATA;
+    pindexNew->nStatus |= BLOCK_DATA_EXISTS ;
     if (IsWitnessEnabled(pindexNew->pprev, Params().GetConsensus(pindexNew->nHeight))) {
         pindexNew->nStatus |= BLOCK_OPT_WITNESS;
     }
@@ -3217,7 +3217,7 @@ static bool AcceptBlock( const std::shared_ptr< const CBlock > & pblock, CValida
     // Try to process all requested blocks that we don't have, but only
     // process an unrequested block if it's new and has enough work to
     // advance our tip, and isn't too many blocks ahead
-    bool fAlreadyHave = pindex->nStatus & BLOCK_HAVE_DATA;
+    bool fAlreadyHave = pindex->nStatus & BLOCK_DATA_EXISTS ;
     bool fHasMoreHashes = ( chainActive.Tip() ? pindex->nChainWorkHashes > chainActive.Tip()->nChainWorkHashes : true ) ;
 
     // Blocks that are too out-of-order needlessly limit the effectiveness of
@@ -3369,14 +3369,14 @@ uint64_t CalculateCurrentUsage()
 /* Prune a block file (modify associated database entries)*/
 void PruneOneBlockFile(const int fileNumber)
 {
-    for (BlockMap::iterator it = mapBlockIndex.begin(); it != mapBlockIndex.end(); ++it) {
+    for ( BlockMap::iterator it = mapBlockIndex.begin() ; it != mapBlockIndex.end() ; ++ it ) {
         CBlockIndex* pindex = it->second;
-        if (pindex->nFile == fileNumber) {
-            pindex->nStatus &= ~BLOCK_HAVE_DATA;
-            pindex->nStatus &= ~BLOCK_HAVE_UNDO;
-            pindex->nFile = 0;
-            pindex->nDataPos = 0;
-            pindex->nUndoPos = 0;
+        if ( pindex->nFile == fileNumber ) {
+            pindex->nStatus &= ~BLOCK_DATA_EXISTS ;
+            pindex->nStatus &= ~BLOCK_UNDO_EXISTS ;
+            pindex->nFile = 0 ;
+            pindex->nDataPos = 0 ;
+            pindex->nUndoPos = 0 ;
             setOfDirtyBlockIndices.insert( pindex ) ;
 
             // Prune from mapBlocksUnlinked -- any block we prune would have
@@ -3626,19 +3626,19 @@ bool static LoadBlockIndexDB( const CChainParams & chainparams )
     }
 
     // Check presence of blk files
-    LogPrintf("Checking all blk files are present...\n");
-    std::set<int> setBlkDataFiles;
+    LogPrintf( "Checking all blk files are present...\n" ) ;
+    std::set< int > setBlkDataFiles ;
     for ( const PAIRTYPE( uint256, CBlockIndex* ) & item : mapBlockIndex )
     {
-        CBlockIndex* pindex = item.second;
-        if (pindex->nStatus & BLOCK_HAVE_DATA) {
-            setBlkDataFiles.insert(pindex->nFile);
+        CBlockIndex* pindex = item.second ;
+        if ( pindex->nStatus & BLOCK_DATA_EXISTS ) {
+            setBlkDataFiles.insert( pindex->nFile ) ;
         }
     }
-    for (std::set<int>::iterator it = setBlkDataFiles.begin(); it != setBlkDataFiles.end(); it++)
+    for ( std::set< int >::iterator it = setBlkDataFiles.begin() ; it != setBlkDataFiles.end() ; ++ it )
     {
-        CDiskBlockPos pos(*it, 0);
-        if ( CAutoFile( OpenBlockFile( pos, true ), SER_DISK, PEER_VERSION ).IsNull() )
+        CDiskBlockPos pos( *it, 0 ) ;
+        if ( CAutoFile( OpenBlockFile( pos, true ), SER_DISK, PEER_VERSION ).isNull() )
             return false ;
     }
 
@@ -3715,14 +3715,15 @@ bool CVerifyDB::VerifyDB( const CChainParams & chainparams, AbstractCoinsView * 
             reportDone = percentageDone/10;
         }
         uiInterface.ShowProgress(_("Verifying blocks..."), percentageDone);
-        if (pindex->nHeight < chainActive.Height()-nCheckDepth)
-            break;
-        if (fPruneMode && !(pindex->nStatus & BLOCK_HAVE_DATA)) {
-            // If pruning, only go back as far as we have data.
-            LogPrintf("VerifyDB(): block verification stopping at height %d (pruning, no data)\n", pindex->nHeight);
-            break;
+        if ( pindex->nHeight < chainActive.Height() - nCheckDepth )
+            break ;
+        if ( fPruneMode && ! ( pindex->nStatus & BLOCK_DATA_EXISTS ) ) {
+            // If pruning, only go back as far as we have data
+            LogPrintf( "VerifyDB(): block verification stopping at height %d (pruning, no data)\n", pindex->nHeight ) ;
+            break ;
         }
-        CBlock block;
+
+        CBlock block ;
         // check level 0: read from disk
         if (!ReadBlockFromDisk(block, pindex, chainparams.GetConsensus(pindex->nHeight)))
             return error("VerifyDB(): *** ReadBlockFromDisk failed at %d, hash=%s", pindex->nHeight, pindex->GetBlockSha256Hash().ToString());
@@ -3791,11 +3792,11 @@ bool RewindBlockIndex(const CChainParams& params)
     }
 
     // nHeight is now the height of the first insufficiently-validated block, or tipheight + 1
-    CValidationState state;
-    CBlockIndex* pindex = chainActive.Tip();
-    while (chainActive.Height() >= nHeight) {
-        if (fPruneMode && !(chainActive.Tip()->nStatus & BLOCK_HAVE_DATA)) {
-            // If pruning, don't try rewinding past the HAVE_DATA point;
+    CValidationState state ;
+    CBlockIndex* pindex = chainActive.Tip() ;
+    while ( chainActive.Height() >= nHeight ) {
+        if ( fPruneMode && ! ( chainActive.Tip()->nStatus & BLOCK_DATA_EXISTS ) ) {
+            // If pruning, don't try to rewind past "has data" point;
             // since older blocks can't be served anyway, there's
             // no need to walk further, and trying to DisconnectTip()
             // will fail (and require a needless reindex/redownload
@@ -3825,7 +3826,7 @@ bool RewindBlockIndex(const CChainParams& params)
             // Reduce validity
             pindexIter->nStatus = std::min<unsigned int>(pindexIter->nStatus & BLOCK_VALID_MASK, BLOCK_VALID_TREE) | (pindexIter->nStatus & ~BLOCK_VALID_MASK);
             // Remove have-data flags
-            pindexIter->nStatus &= ~ ( BLOCK_HAVE_DATA | BLOCK_HAVE_UNDO ) ;
+            pindexIter->nStatus &= ~ ( BLOCK_DATA_EXISTS | BLOCK_UNDO_EXISTS ) ;
             // Remove storage location
             pindexIter->nFile = 0;
             pindexIter->nDataPos = 0;
@@ -3999,7 +4000,8 @@ bool LoadExternalBlockFile(const CChainParams& chainparams, FILE* fileIn, CDiskB
                 }
 
                 // process in case the block isn't known yet
-                if (mapBlockIndex.count(hash) == 0 || (mapBlockIndex[hash]->nStatus & BLOCK_HAVE_DATA) == 0) {
+                if ( mapBlockIndex.count( hash ) == 0 ||
+                        ( mapBlockIndex[ hash ]->nStatus & BLOCK_DATA_EXISTS ) == 0 ) {
                     LOCK(cs_main);
                     CValidationState state;
                     if (AcceptBlock(pblock, state, chainparams, NULL, true, dbp, NULL))
@@ -4095,24 +4097,37 @@ void static CheckBlockIndex(const Consensus::Params& consensusParams)
     size_t nNodes = 0;
     int nHeight = 0;
     CBlockIndex* pindexFirstInvalid = nullptr ; // Oldest ancestor of pindex which is invalid
-    CBlockIndex* pindexFirstMissing = nullptr ; // Oldest ancestor of pindex which does not have BLOCK_HAVE_DATA
+    CBlockIndex* pindexFirstMissing = nullptr ; // Oldest ancestor of pindex which does not have BLOCK_DATA_EXISTS
     CBlockIndex* pindexFirstNeverProcessed = nullptr ; // Oldest ancestor of pindex for which nTx == 0
     CBlockIndex* pindexFirstNotTreeValid = nullptr ; // Oldest ancestor of pindex which does not have BLOCK_VALID_TREE (regardless of being valid or not)
     CBlockIndex* pindexFirstNotTransactionsValid = nullptr ; // Oldest ancestor of pindex which does not have BLOCK_VALID_TRANSACTIONS (regardless of being valid or not)
     CBlockIndex* pindexFirstNotChainValid = nullptr ; // Oldest ancestor of pindex which does not have BLOCK_VALID_CHAIN (regardless of being valid or not)
     CBlockIndex* pindexFirstNotScriptsValid = nullptr ; // Oldest ancestor of pindex which does not have BLOCK_VALID_SCRIPTS (regardless of being valid or not)
-    while (pindex != NULL) {
-        nNodes++;
-        if (pindexFirstInvalid == NULL && pindex->nStatus & BLOCK_FAILED_VALID) pindexFirstInvalid = pindex;
-        if (pindexFirstMissing == NULL && !(pindex->nStatus & BLOCK_HAVE_DATA)) pindexFirstMissing = pindex;
-        if (pindexFirstNeverProcessed == NULL && pindex->nTx == 0) pindexFirstNeverProcessed = pindex;
-        if (pindex->pprev != NULL && pindexFirstNotTreeValid == NULL && (pindex->nStatus & BLOCK_VALID_MASK) < BLOCK_VALID_TREE) pindexFirstNotTreeValid = pindex;
-        if (pindex->pprev != NULL && pindexFirstNotTransactionsValid == NULL && (pindex->nStatus & BLOCK_VALID_MASK) < BLOCK_VALID_TRANSACTIONS) pindexFirstNotTransactionsValid = pindex;
-        if (pindex->pprev != NULL && pindexFirstNotChainValid == NULL && (pindex->nStatus & BLOCK_VALID_MASK) < BLOCK_VALID_CHAIN) pindexFirstNotChainValid = pindex;
-        if (pindex->pprev != NULL && pindexFirstNotScriptsValid == NULL && (pindex->nStatus & BLOCK_VALID_MASK) < BLOCK_VALID_SCRIPTS) pindexFirstNotScriptsValid = pindex;
+    while ( pindex != nullptr )
+    {
+        nNodes ++ ;
+
+        if ( pindexFirstInvalid == nullptr && pindex->nStatus & BLOCK_FAILED_VALID )
+            pindexFirstInvalid = pindex ;
+        if ( pindexFirstMissing == nullptr && ! ( pindex->nStatus & BLOCK_DATA_EXISTS ) )
+            pindexFirstMissing = pindex ;
+        if ( pindexFirstNeverProcessed == nullptr && pindex->nTx == 0 )
+            pindexFirstNeverProcessed = pindex ;
+        if ( pindex->pprev != nullptr && pindexFirstNotTreeValid == nullptr &&
+                ( pindex->nStatus & BLOCK_VALID_MASK ) < BLOCK_VALID_TREE )
+            pindexFirstNotTreeValid = pindex ;
+        if ( pindex->pprev != nullptr && pindexFirstNotTransactionsValid == nullptr &&
+                ( pindex->nStatus & BLOCK_VALID_MASK ) < BLOCK_VALID_TRANSACTIONS )
+            pindexFirstNotTransactionsValid = pindex ;
+        if ( pindex->pprev != nullptr && pindexFirstNotChainValid == nullptr &&
+                ( pindex->nStatus & BLOCK_VALID_MASK ) < BLOCK_VALID_CHAIN )
+            pindexFirstNotChainValid = pindex ;
+        if ( pindex->pprev != nullptr && pindexFirstNotScriptsValid == nullptr &&
+                ( pindex->nStatus & BLOCK_VALID_MASK ) < BLOCK_VALID_SCRIPTS )
+            pindexFirstNotScriptsValid = pindex ;
 
         // Begin actual consistency checks
-        if (pindex->pprev == NULL) {
+        if ( pindex->pprev == nullptr ) {
             // Genesis block checks
             assert( pindex->GetBlockSha256Hash() == consensusParams.hashGenesisBlock ) ; // Genesis block's hash must match
             assert( pindex == chainActive.Genesis() ) ; // The current active chain's genesis block must be this block
@@ -4120,15 +4135,16 @@ void static CheckBlockIndex(const Consensus::Params& consensusParams)
         if (pindex->nChainTx == 0) assert(pindex->nSequenceId <= 0);  // nSequenceId can't be set positive for blocks that aren't linked (negative is used for preciousblock)
         // VALID_TRANSACTIONS is equivalent to nTx > 0 for all nodes (whether or not pruning has occurred)
         // HAVE_DATA is only equivalent to nTx > 0 (or VALID_TRANSACTIONS) if no pruning has occurred
-        if (!fHavePruned) {
+        if ( ! fHavePruned ) {
             // If we've never pruned, then HAVE_DATA should be equivalent to nTx > 0
-            assert(!(pindex->nStatus & BLOCK_HAVE_DATA) == (pindex->nTx == 0));
-            assert(pindexFirstMissing == pindexFirstNeverProcessed);
+            assert( ! ( pindex->nStatus & BLOCK_DATA_EXISTS ) == ( pindex->nTx == 0 ) ) ;
+            assert( pindexFirstMissing == pindexFirstNeverProcessed ) ;
         } else {
             // If we have pruned, then we can only say that HAVE_DATA implies nTx > 0
-            if (pindex->nStatus & BLOCK_HAVE_DATA) assert(pindex->nTx > 0);
+            if ( pindex->nStatus & BLOCK_DATA_EXISTS ) assert( pindex->nTx > 0 ) ;
         }
-        if (pindex->nStatus & BLOCK_HAVE_UNDO) assert(pindex->nStatus & BLOCK_HAVE_DATA);
+        if ( pindex->nStatus & BLOCK_UNDO_EXISTS ) assert( pindex->nStatus & BLOCK_DATA_EXISTS ) ;
+
         assert(((pindex->nStatus & BLOCK_VALID_MASK) >= BLOCK_VALID_TRANSACTIONS) == (pindex->nTx > 0)); // This is pruning-independent.
         // All parents having had data (at some point) is equivalent to all parents being VALID_TRANSACTIONS, which is equivalent to nChainTx being set
         assert((pindexFirstNeverProcessed != NULL) == (pindex->nChainTx == 0)); // nChainTx != 0 is used to signal that all parent blocks have been processed (but may have been pruned)
@@ -4137,6 +4153,7 @@ void static CheckBlockIndex(const Consensus::Params& consensusParams)
         assert( pindex->pprev == nullptr || pindex->nChainWorkHashes >= pindex->pprev->nChainWorkHashes ) ; // For every block except the genesis block, the chainwork must be larger than the parent's
         assert(nHeight < 2 || (pindex->pskip && (pindex->pskip->nHeight < nHeight))); // The pskip pointer must point back for all but the first 2 blocks
         assert(pindexFirstNotTreeValid == NULL); // All mapBlockIndex entries must at least be TREE valid
+
         if ((pindex->nStatus & BLOCK_VALID_MASK) >= BLOCK_VALID_TREE) assert(pindexFirstNotTreeValid == NULL); // TREE valid implies all parents are TREE valid
         if ((pindex->nStatus & BLOCK_VALID_MASK) >= BLOCK_VALID_CHAIN) assert(pindexFirstNotChainValid == NULL); // CHAIN valid implies all parents are CHAIN valid
         if ((pindex->nStatus & BLOCK_VALID_MASK) >= BLOCK_VALID_SCRIPTS) assert(pindexFirstNotScriptsValid == NULL); // SCRIPTS valid implies all parents are SCRIPTS valid
@@ -4144,13 +4161,13 @@ void static CheckBlockIndex(const Consensus::Params& consensusParams)
             // Checks for not-invalid blocks
             assert((pindex->nStatus & BLOCK_FAILED_MASK) == 0); // The failed mask cannot be set for blocks without invalid parents
         }
-        if (!CBlockIndexWorkComparator()(pindex, chainActive.Tip()) && pindexFirstNeverProcessed == NULL) {
-            if (pindexFirstInvalid == NULL) {
+        if ( ! CBlockIndexWorkComparator()( pindex, chainActive.Tip() ) && pindexFirstNeverProcessed == nullptr ) {
+            if ( pindexFirstInvalid == nullptr ) {
                 // If this block sorts at least as good as the current tip and
                 // is valid and we have all data for its parents, it must be in
                 // setOfBlockIndexCandidates.  chainActive.Tip() must also be there
                 // even if some data has been pruned
-                if ( pindexFirstMissing == NULL || pindex == chainActive.Tip() ) {
+                if ( pindexFirstMissing == nullptr || pindex == chainActive.Tip() ) {
                     assert( setOfBlockIndexCandidates.count( pindex ) ) ;
                 }
                 // If some parent is missing, then it could be that this block was in
@@ -4172,24 +4189,28 @@ void static CheckBlockIndex(const Consensus::Params& consensusParams)
             }
             rangeUnlinked.first++;
         }
-        if (pindex->pprev && (pindex->nStatus & BLOCK_HAVE_DATA) && pindexFirstNeverProcessed != NULL && pindexFirstInvalid == NULL) {
+        if ( pindex->pprev && ( pindex->nStatus & BLOCK_DATA_EXISTS ) &&
+                pindexFirstNeverProcessed != nullptr && pindexFirstInvalid == nullptr ) {
             // If this block has block data available, some parent was never received, and has no invalid parents, it must be in mapBlocksUnlinked
             assert(foundInUnlinked);
         }
-        if (!(pindex->nStatus & BLOCK_HAVE_DATA)) assert(!foundInUnlinked); // Can't be in mapBlocksUnlinked if we don't HAVE_DATA
-        if (pindexFirstMissing == NULL) assert(!foundInUnlinked); // We aren't missing data for any parent -- cannot be in mapBlocksUnlinked
-        if (pindex->pprev && (pindex->nStatus & BLOCK_HAVE_DATA) && pindexFirstNeverProcessed == NULL && pindexFirstMissing != NULL) {
-            // We HAVE_DATA for this block, have received data for all parents at some point, but we're currently missing data for some parent
-            assert(fHavePruned); // We must have pruned
+        if ( ! ( pindex->nStatus & BLOCK_DATA_EXISTS ) ) assert( ! foundInUnlinked ) ; // Can't be in mapBlocksUnlinked if we don't HAVE_DATA
+        if ( pindexFirstMissing == nullptr ) assert( ! foundInUnlinked ) ; // We aren't missing data for any parent -- cannot be in mapBlocksUnlinked
+        if ( pindex->pprev && ( pindex->nStatus & BLOCK_DATA_EXISTS ) &&
+                pindexFirstNeverProcessed == nullptr && pindexFirstMissing != nullptr ) {
+            // We have data for this block, have received data for all parents at some point,
+            // but we're currently missing data for some parent
+            assert( fHavePruned ) ; // We must have pruned
             // This block may have entered mapBlocksUnlinked if:
-            //  - it has a descendant that at some point had more work than the
-            //    tip, and
+            //  - it has a descendant that at some point had more work than
+            //    the tip, and
             //  - we tried switching to that descendant but were missing
-            //    data for some intermediate block between chainActive and the
-            //    tip.
-            // So if this block is itself better than chainActive.Tip() and it wasn't in
-            // setOfBlockIndexCandidates, then it must be in mapBlocksUnlinked
-            if ( ! CBlockIndexWorkComparator()( pindex, chainActive.Tip() ) && setOfBlockIndexCandidates.count( pindex ) == 0 ) {
+            //    data for some intermediate block between chainActive and
+            //    the tip
+            // So if this block is itself better than chainActive.Tip() and it wasn't
+            // in setOfBlockIndexCandidates, then it must be in mapBlocksUnlinked
+            if ( ! CBlockIndexWorkComparator()( pindex, chainActive.Tip() ) &&
+                    setOfBlockIndexCandidates.count( pindex ) == 0 ) {
                 if ( pindexFirstInvalid == nullptr ) {
                     assert( foundInUnlinked ) ;
                 }
@@ -4208,16 +4229,16 @@ void static CheckBlockIndex(const Consensus::Params& consensusParams)
         }
         // This is a leaf node
         // Move upwards until we reach a node of which we have not yet visited the last child
-        while (pindex) {
+        while ( pindex != nullptr ) {
             // We are going to either move to a parent or a sibling of pindex
             // If pindex was the first with a certain property, unset the corresponding variable
-            if (pindex == pindexFirstInvalid) pindexFirstInvalid = NULL;
-            if (pindex == pindexFirstMissing) pindexFirstMissing = NULL;
-            if (pindex == pindexFirstNeverProcessed) pindexFirstNeverProcessed = NULL;
-            if (pindex == pindexFirstNotTreeValid) pindexFirstNotTreeValid = NULL;
-            if (pindex == pindexFirstNotTransactionsValid) pindexFirstNotTransactionsValid = NULL;
-            if (pindex == pindexFirstNotChainValid) pindexFirstNotChainValid = NULL;
-            if (pindex == pindexFirstNotScriptsValid) pindexFirstNotScriptsValid = NULL;
+            if ( pindex == pindexFirstInvalid ) pindexFirstInvalid = nullptr ;
+            if ( pindex == pindexFirstMissing ) pindexFirstMissing = nullptr ;
+            if ( pindex == pindexFirstNeverProcessed ) pindexFirstNeverProcessed = nullptr ;
+            if ( pindex == pindexFirstNotTreeValid ) pindexFirstNotTreeValid = nullptr ;
+            if ( pindex == pindexFirstNotTransactionsValid ) pindexFirstNotTransactionsValid = nullptr ;
+            if ( pindex == pindexFirstNotChainValid ) pindexFirstNotChainValid = nullptr ;
+            if ( pindex == pindexFirstNotScriptsValid ) pindexFirstNotScriptsValid = nullptr ;
             // Find our parent
             CBlockIndex* pindexPar = pindex->pprev;
             // Find which child we just visited
@@ -4266,13 +4287,14 @@ static const uint64_t MEMPOOL_DUMP_VERSION = 1;
 
 bool LoadMempool(void)
 {
-    int64_t nExpiryTimeout = GetArg("-mempoolexpiry", DEFAULT_MEMPOOL_EXPIRY) * 60 * 60;
-    FILE* filestr = fopen((GetDataDir() / "mempool.dat").string().c_str(), "rb");
-    CAutoFile file( filestr, SER_DISK, PEER_VERSION ) ;
-    if ( file.IsNull() ) {
-        LogPrintf( "Failed to open mempool file from disk. Continuing anyway\n" ) ;
+    int64_t nExpiryTimeout = GetArg( "-mempoolexpiry", DEFAULT_MEMPOOL_EXPIRY ) * 60 * 60 ;
+    FILE* mempoolFile = fopen( ( GetDataDir() / "mempool.dat" ).string().c_str(), "rb" ) ;
+    if ( mempoolFile == nullptr ) {
+        LogPrintf( "Failed to open mempool file for reading from disk. Continuing anyway\n" ) ;
         return false ;
     }
+
+    CAutoFile file( mempoolFile, SER_DISK, PEER_VERSION ) ;
 
     int64_t count = 0;
     int64_t skipped = 0;
@@ -4321,9 +4343,9 @@ bool LoadMempool(void)
         for (const auto& i : mapDeltas) {
             mempool.PrioritiseTransaction(i.first, i.first.ToString(), prioritydummy, i.second);
         }
-    } catch (const std::exception& e) {
-        LogPrintf("Failed to deserialize mempool data on disk: %s. Continuing anyway.\n", e.what());
-        return false;
+    } catch ( const std::exception & e ) {
+        LogPrintf( "Failed to deserialize mempool data on disk: %s. Continuing anyway.\n", e.what() ) ;
+        return false ;
     }
 
     LogPrintf( "Imported mempool transactions from disk: %i okay, %i failed, %i expired\n", count, failed, skipped ) ;
@@ -4366,11 +4388,11 @@ void DumpMempool()
             mapDeltas.erase( i.tx->GetTxHash() ) ;
         }
 
-        file << mapDeltas;
-        FileCommit(file.Get());
-        file.fclose();
-        RenameOver(GetDataDir() / "mempool.dat.new", GetDataDir() / "mempool.dat");
-        int64_t last = GetTimeMicros();
+        file << mapDeltas ;
+        FileCommit( file.get() ) ;
+        file.fclose() ;
+        RenameOver( GetDataDir() / "mempool.dat.new", GetDataDir() / "mempool.dat" ) ;
+        int64_t last = GetTimeMicros() ;
         LogPrintf( "Dumped mempool: %g s to copy, %g s to dump\n", ( mid - start ) * 0.000001, ( last - mid ) * 0.000001 ) ;
     } catch ( const std::exception & e ) {
         LogPrintf( "Can't dump mempool: %s. Continuing anyway\n", e.what() ) ;

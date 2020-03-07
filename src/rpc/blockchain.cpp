@@ -745,7 +745,7 @@ UniValue getblock( const JSONRPCRequest & request )
     CBlock block ;
     CBlockIndex * pblockindex = mapBlockIndex[ hash ] ;
 
-    if ( fHavePruned && ! ( pblockindex->nStatus & BLOCK_HAVE_DATA ) && pblockindex->nTx > 0 )
+    if ( fHavePruned && ! ( pblockindex->nStatus & BLOCK_DATA_EXISTS ) && pblockindex->nTx > 0 )
         throw JSONRPCError( RPC_MISC_ERROR, "Block not available (pruned data)" ) ;
 
     if ( ! ReadBlockFromDisk( block, pblockindex, Params().GetConsensus( pblockindex->nHeight ) ) )
@@ -1165,11 +1165,11 @@ UniValue getblockchaininfo( const JSONRPCRequest & request )
 
     if (fPruneMode)
     {
-        CBlockIndex *block = chainActive.Tip();
-        while (block && block->pprev && (block->pprev->nStatus & BLOCK_HAVE_DATA))
-            block = block->pprev;
+        CBlockIndex * block = chainActive.Tip() ;
+        while ( block && block->pprev && ( block->pprev->nStatus & BLOCK_DATA_EXISTS ) )
+            block = block->pprev ;
 
-        obj.push_back(Pair("pruneheight",        block->nHeight));
+        obj.push_back( Pair("pruneheight",        block->nHeight) ) ;
     }
     return obj;
 }

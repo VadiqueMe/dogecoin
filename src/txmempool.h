@@ -581,25 +581,25 @@ public:
 
     /** Remove transactions from the mempool until its dynamic size is <= sizelimit.
       *  pvNoSpendsRemaining, if set, will be populated with the list of transactions
-      *  which are not in mempool which no longer have any spends in this mempool.
+      *  which are not in mempool which no longer have any spends in this mempool
       */
     void TrimToSize(size_t sizelimit, std::vector<uint256>* pvNoSpendsRemaining=NULL);
 
-    /** Expire all transaction (and their dependencies) in the mempool older than time. Return the number of removed transactions. */
+    /** Expire all transaction (and their dependencies) in the mempool older than time. Return the number of removed transactions */
     int Expire(int64_t time);
 
-    /** Returns false if the transaction is in the mempool and not within the chain limit specified. */
+    /** Returns false if the transaction is in the mempool and not within the chain limit specified */
     bool TransactionWithinChainLimit(const uint256& txid, size_t chainLimit) const;
 
     unsigned long size()
     {
-        LOCK(cs);
+        LOCK( cs ) ;
         return mapTx.size();
     }
 
     uint64_t GetTotalTxSize()
     {
-        LOCK(cs);
+        LOCK( cs ) ;
         return totalTxSize;
     }
 

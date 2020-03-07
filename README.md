@@ -1,10 +1,8 @@
 # Inu DOGE (iÐOGE) and Inutoshi
-================================
 
 Re**inu**enting Dogecoin
 
 # Dogecoin Core [DOGE, Ð]
-==========================
 
 ![Dogecoin](http://static.tumblr.com/ppdj5y9/Ae9mxmxtp/300coin.png)
 

@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -101,31 +101,31 @@ class QtRPCTimerBase: public QObject, public RPCTimerBase
 {
     Q_OBJECT
 public:
-    QtRPCTimerBase(boost::function<void(void)>& _func, int64_t millis):
-        func(_func)
+    QtRPCTimerBase( std::function< void( void ) > & f, int64_t millis ):
+        func( f )
     {
-        timer.setSingleShot(true);
-        connect(&timer, SIGNAL(timeout()), this, SLOT(timeout()));
-        timer.start(millis);
+        timer.setSingleShot( true ) ;
+        connect( &timer, SIGNAL( timeout() ), this, SLOT( timeout() ) ) ;
+        timer.start( millis ) ;
     }
     ~QtRPCTimerBase() {}
 private Q_SLOTS:
-    void timeout() { func(); }
+    void timeout() {  func() ;  }
 private:
     QTimer timer;
-    boost::function<void(void)> func;
+    std::function< void( void ) > func ;
 };
 
 class QtRPCTimerInterface: public RPCTimerInterface
 {
 public:
     ~QtRPCTimerInterface() {}
-    const char *Name() { return "Qt"; }
-    RPCTimerBase* NewTimer(boost::function<void(void)>& func, int64_t millis)
+    const char * Name() {  return "Qt" ;  }
+    RPCTimerBase * NewTimer( std::function< void( void ) > & func, int64_t millis )
     {
-        return new QtRPCTimerBase(func, millis);
+        return new QtRPCTimerBase( func, millis ) ;
     }
-};
+} ;
 
 
 /* Convert number of seconds into a QString like 6:07:54 */

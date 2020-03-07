@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -34,28 +35,27 @@
 #endif
 
 #include <boost/filesystem/path.hpp>
-#include <boost/foreach.hpp>
 #include <boost/signals2/signal.hpp>
 
 class CAddrMan;
 class CScheduler;
-class CNode;
+class CNode ;
 
 namespace boost {
-    class thread_group;
-} // namespace boost
+    class thread_group ;
+}
 
-/** Time between pings automatically sent out for latency probing and keepalive (in seconds). */
+/** Time between pings automatically sent out for latency probing and keepalive (in seconds) */
 static const int PING_INTERVAL = 2 * 60;
-/** Time after which to disconnect, after waiting for a ping response (or inactivity). */
+/** Time after which to disconnect, after waiting for a ping response (or inactivity) */
 static const int TIMEOUT_INTERVAL = 20 * 60;
-/** Run the feeler connection loop once every 2 minutes or 120 seconds. **/
+/** Run the feeler connection loop once every 2 minutes or 120 seconds **/
 static const int FEELER_INTERVAL = 120;
 /** The maximum number of entries in an 'inv' protocol message */
 static const unsigned int MAX_INV_SZ = 50000;
-/** The maximum number of new addresses to accumulate before announcing. */
+/** The maximum number of new addresses to accumulate before announcing */
 static const unsigned int MAX_ADDR_TO_SEND = 1000;
-/** Maximum length of incoming protocol messages (no message over 4 MB is currently acceptable). */
+/** Maximum length of incoming protocol messages (no message over 4 MB is currently acceptable) */
 static const unsigned int MAX_PROTOCOL_MESSAGE_LENGTH = 4 * 1000 * 1000;
 /** Maximum length of strSubVer in `version` message */
 static const unsigned int MAX_SUBVERSION_LENGTH = 256;
@@ -73,15 +73,15 @@ static const bool DEFAULT_UPNP = false;
 #endif
 /** The maximum number of entries in mapAskFor */
 static const size_t MAPASKFOR_MAX_SZ = MAX_INV_SZ;
-/** The maximum number of entries in setAskFor (larger due to getdata latency)*/
+/** The maximum number of entries in setAskFor (larger due to getdata latency) */
 static const size_t SETASKFOR_MAX_SZ = 2 * MAX_INV_SZ;
-/** The maximum number of peer connections to maintain. */
+/** The maximum number of peer connections to maintain */
 static const unsigned int DEFAULT_MAX_PEER_CONNECTIONS = 125;
 /** The default for -maxuploadtarget. 0 = Unlimited */
 static const uint64_t DEFAULT_MAX_UPLOAD_TARGET = 0;
-/** The default timeframe for -maxuploadtarget. 1 day. */
-static const uint64_t MAX_UPLOAD_TIMEFRAME = 60 * 60 * 24;
-/** Default for blocks only*/
+/** The default timeframe for -maxuploadtarget */
+static const uint64_t MAX_UPLOAD_TIMEFRAME = /* 1 day */ 60 * 60 * 24 ;
+/** Default for blocks only */
 static const bool DEFAULT_BLOCKSONLY = false;
 
 static const bool DEFAULT_FORCEDNSSEED = false;
@@ -90,10 +90,10 @@ static const size_t DEFAULT_MAXSENDBUFFER    = 1 * 1000;
 
 static const ServiceFlags REQUIRED_SERVICES = NODE_NETWORK;
 
-// NOTE: When adjusting this, update rpcnet:setban's help ("24h")
-static const unsigned int DEFAULT_MISBEHAVING_BANTIME = 60 * 60 * 24;  // Default 24-hour ban
+// NOTE: When adjusting this, update rpcnet:setban's help ("12h")
+static const unsigned int DEFAULT_MISBEHAVING_BANTIME = 60 * 60 * 12 ; // 12-hour ban by default
 
-typedef int64_t NodeId;
+typedef int64_t NodeId ;
 
 struct AddedNodeInfo
 {
@@ -109,16 +109,17 @@ class CClientUIInterface;
 
 struct CSerializedNetMsg
 {
-    CSerializedNetMsg() = default;
-    CSerializedNetMsg(CSerializedNetMsg&&) = default;
-    CSerializedNetMsg& operator=(CSerializedNetMsg&&) = default;
-    // No copying, only moves.
-    CSerializedNetMsg(const CSerializedNetMsg& msg) = delete;
-    CSerializedNetMsg& operator=(const CSerializedNetMsg&) = delete;
+    CSerializedNetMsg() = default ;
+    CSerializedNetMsg( CSerializedNetMsg && ) = default ;
+    CSerializedNetMsg& operator=( CSerializedNetMsg && ) = default ;
 
-    std::vector<unsigned char> data;
-    std::string command;
-};
+    // No copying, only moves
+    CSerializedNetMsg( const CSerializedNetMsg & ) = delete ;
+    CSerializedNetMsg& operator=( const CSerializedNetMsg & ) = delete ;
+
+    std::vector< unsigned char > data ;
+    std::string command ;
+} ;
 
 
 class CConnman
@@ -158,9 +159,9 @@ public:
     bool OpenNetworkConnection(const CAddress& addrConnect, bool fCountFailure, CSemaphoreGrant *grantOutbound = NULL, const char *strDest = NULL, bool fOneShot = false, bool fFeeler = false, bool fAddnode = false);
     bool CheckIncomingNonce(uint64_t nonce);
 
-    bool ForNode(NodeId id, std::function<bool(CNode* pnode)> func);
+    bool ForNode( NodeId id, std::function< bool( CNode* pnode ) > func ) ;
 
-    void PushMessage(CNode* pnode, CSerializedNetMsg&& msg);
+    void PushMessage( CNode* pnode, CSerializedNetMsg&& msg ) ;
 
     bool hasConnectedNodes()
     {
@@ -168,71 +169,70 @@ public:
         return ! vNodes.empty() ;
     }
 
-    template<typename Callable>
-    void ForEachNode(Callable&& func)
+    template< typename Callable >
+    void ForEachNode( Callable&& func )
     {
-        LOCK(cs_vNodes);
-        for (auto&& node : vNodes) {
-            if (NodeFullyConnected(node))
-                func(node);
+        LOCK( cs_vNodes ) ;
+        for ( auto&& node : vNodes ) {
+            if ( NodeFullyConnected( node ) )
+                func( node ) ;
         }
     };
 
-    template<typename Callable>
-    void ForEachNode(Callable&& func) const
+    template< typename Callable >
+    void ForEachNode( Callable&& func ) const
     {
-        LOCK(cs_vNodes);
-        for (auto&& node : vNodes) {
-            if (NodeFullyConnected(node))
-                func(node);
+        LOCK( cs_vNodes ) ;
+        for ( auto&& node : vNodes ) {
+            if ( NodeFullyConnected( node ) )
+                func( node ) ;
         }
     };
 
-    template<typename Callable, typename CallableAfter>
-    void ForEachNodeThen(Callable&& pre, CallableAfter&& post)
+    template< typename Callable, typename CallableAfter >
+    void ForEachNodeThen( Callable&& pre, CallableAfter&& post )
     {
-        LOCK(cs_vNodes);
-        for (auto&& node : vNodes) {
-            if (NodeFullyConnected(node))
-                pre(node);
+        LOCK( cs_vNodes ) ;
+        for ( auto&& node : vNodes ) {
+            if ( NodeFullyConnected( node ) )
+                pre( node ) ;
         }
-        post();
-    };
+        post() ;
+    } ;
 
-    template<typename Callable, typename CallableAfter>
-    void ForEachNodeThen(Callable&& pre, CallableAfter&& post) const
+    template< typename Callable, typename CallableAfter >
+    void ForEachNodeThen( Callable&& pre, CallableAfter&& post ) const
     {
-        LOCK(cs_vNodes);
-        for (auto&& node : vNodes) {
-            if (NodeFullyConnected(node))
-                pre(node);
+        LOCK( cs_vNodes ) ;
+        for ( auto&& node : vNodes ) {
+            if ( NodeFullyConnected( node ) )
+                pre( node ) ;
         }
-        post();
-    };
+        post() ;
+    } ;
 
     // Addrman functions
-    size_t GetAddressCount() const;
-    void SetServices(const CService &addr, ServiceFlags nServices);
-    void MarkAddressGood(const CAddress& addr);
-    void AddNewAddress(const CAddress& addr, const CAddress& addrFrom, int64_t nTimePenalty = 0);
-    void AddNewAddresses(const std::vector<CAddress>& vAddr, const CAddress& addrFrom, int64_t nTimePenalty = 0);
-    std::vector<CAddress> GetAddresses();
-    void AddressCurrentlyConnected(const CService& addr);
+    size_t GetAddressCount() const ;
+    void SetServices( const CService & addr, ServiceFlags nServices ) ;
+    void MarkAddressGood( const CAddress & addr ) ;
+    void AddNewAddress( const CAddress & addr, const CAddress & addrFrom, int64_t nTimePenalty = 0 ) ;
+    void AddNewAddresses( const std::vector< CAddress > & vAddr, const CAddress & addrFrom, int64_t nTimePenalty = 0 ) ;
+    std::vector< CAddress > GetAddresses() ;
+    void AddressCurrentlyConnected( const CService & addr ) ;
 
     // Denial-of-service detection/prevention
+    //
     // The idea is to detect peers that are behaving
-    // badly and disconnect/ban them, but do it in a
-    // one-coding-mistake-won't-shatter-the-entire-network
-    // way.
-    // IMPORTANT:  There should be nothing I can give a
-    // node that it will forward on that will make that
+    // badly and disconnect/ban them, but do it
+    // in a one-coding-mistake-won't-shatter-the-entire-network way
+    // IMPORTANT:  There should be nothing I can give
+    // a node that it will forward on that will make that
     // node's peers drop it. If there is, an attacker
     // can isolate a node and/or try to split the network.
     // Dropping a node for sending stuff that is invalid
     // now but might be valid in a later version is also
     // dangerous, because it can cause a network split
-    // between nodes running old code and nodes running
-    // new code.
+    // between nodes running old code and nodes running new code
     void Ban(const CNetAddr& netAddr, const BanReason& reason, int64_t bantimeoffset = 0, bool sinceUnixEpoch = false);
     void Ban(const CSubNet& subNet, const BanReason& reason, int64_t bantimeoffset = 0, bool sinceUnixEpoch = false);
     void ClearBanned(); // needed for unit testing
@@ -251,8 +251,15 @@ public:
 
     size_t GetNodeCount(NumConnections num);
     void GetNodeStats(std::vector<CNodeStats>& vstats);
-    bool DisconnectNode(const std::string& node);
-    bool DisconnectNode(NodeId id);
+
+    CNode* FindNode( NodeId id ) ;
+    CNode* FindNode( const std::string & addrName ) ;
+    CNode* FindNode( const CNetAddr & ip ) ;
+    CNode* FindNode( const CSubNet & subNet ) ;
+    CNode* FindNode( const CService & addr ) ;
+
+    bool DisconnectNode( const std::string & node ) ;
+    bool DisconnectNode( NodeId id ) ;
 
     unsigned int GetSendBufferSize() const;
 
@@ -313,18 +320,13 @@ private:
 
     uint64_t CalculateKeyedNetGroup(const CAddress& ad) const;
 
-    CNode* FindNode(const CNetAddr& ip);
-    CNode* FindNode(const CSubNet& subNet);
-    CNode* FindNode(const std::string& addrName);
-    CNode* FindNode(const CService& addr);
-
     bool AttemptToEvictConnection();
     CNode* ConnectNode(CAddress addrConnect, const char *pszDest, bool fCountFailure);
     bool IsWhitelistedRange(const CNetAddr &addr);
 
     void DeleteNode(CNode* pnode);
 
-    NodeId GetNewNodeId();
+    NodeId GetNewNodeId() ;
 
     size_t SocketSendData(CNode *pnode) const;
     //!check is the banlist has unwritten changes
@@ -342,7 +344,7 @@ private:
     void RecordBytesSent(uint64_t bytes);
 
     // Whether the node should be passed out in ForEach* callbacks
-    static bool NodeFullyConnected(const CNode* pnode);
+    static bool NodeFullyConnected( const CNode* pnode ) ;
 
     // Network usage totals
     CCriticalSection cs_totalBytesRecv;
@@ -378,7 +380,7 @@ private:
     std::vector<CNode*> vNodes;
     std::list<CNode*> vNodesDisconnected;
     mutable CCriticalSection cs_vNodes;
-    std::atomic<NodeId> nLastNodeId;
+    std::atomic< NodeId > nLastNodeId ;
 
     /** Services this instance offers */
     ServiceFlags nLocalServices;
@@ -490,19 +492,20 @@ struct LocalServiceInfo {
 
 extern CCriticalSection cs_mapLocalHost;
 extern std::map<CNetAddr, LocalServiceInfo> mapLocalHost;
-typedef std::map<std::string, uint64_t> mapMsgCmdSize; //command, total bytes
+
+typedef std::map< std::string, uint64_t > mapMsgCmdSize ;
 
 class CNodeStats
 {
 public:
-    NodeId nodeid;
+    NodeId nodeid ;
     ServiceFlags nServices;
     bool fRelayTxes;
     int64_t nLastSend;
     int64_t nLastRecv;
     int64_t nTimeConnected;
     int64_t nTimeOffset;
-    std::string addrName;
+    std::string addrName ;
     int nVersion;
     std::string cleanSubVer;
     bool fInbound;
@@ -603,11 +606,11 @@ public:
     // strSubVer is whatever byte array we read from the wire. However, this field is intended
     // to be printed out, displayed to humans in various forms and so on. So we sanitize it and
     // store the sanitized version in cleanSubVer. The original should be used when dealing with
-    // the network or wire types and the cleaned string used when displayed or logged.
+    // the network or wire types and the cleaned string used when displayed or logged
     std::string strSubVer, cleanSubVer;
     CCriticalSection cs_SubVer; // used for both cleanSubVer and strSubVer
-    bool fWhitelisted; // This peer can bypass DoS banning.
-    bool fFeeler; // If true this node is being used as a short lived feeler.
+    bool fWhitelisted; // This peer can bypass DoS banning
+    bool fFeeler; // If true this node is being used as a short lived feeler
     bool fOneShot;
     bool fAddnode;
     bool fClient;
@@ -617,14 +620,14 @@ public:
     // We use fRelayTxes for two purposes -
     // a) it allows us to not relay tx invs before receiving the peer's version message
     // b) the peer may tell us in its version message that we should not relay tx invs
-    //    unless it loads a bloom filter.
+    //    unless it loads a bloom filter
     bool fRelayTxes; //protected by cs_filter
     bool fSentAddr;
     CSemaphoreGrant grantOutbound;
     CCriticalSection cs_filter;
     CBloomFilter* pfilter;
     std::atomic<int> nRefCount;
-    const NodeId id;
+    const NodeId id ;
 
     const uint64_t nKeyedNetGroup;
     std::atomic_bool fPauseRecv;
@@ -665,29 +668,24 @@ public:
     // Used for BIP35 mempool sending, also protected by cs_inventory
     bool fSendMempool;
 
-    // Last time a "MEMPOOL" request was serviced.
-    std::atomic<int64_t> timeLastMempoolReq;
+    // Last time a "MEMPOOL" request was serviced
+    std::atomic< int64_t > timeLastMempoolReq ;
 
     // Block and TXN accept times
-    std::atomic<int64_t> nLastBlockTime;
-    std::atomic<int64_t> nLastTXTime;
+    std::atomic< int64_t > nLastBlockTime ;
+    std::atomic< int64_t > nLastTXTime ;
 
     // Ping time measurement:
-    // The pong reply we're expecting, or 0 if no pong expected.
+    // The pong reply we're expecting, or 0 if no pong expected
     std::atomic<uint64_t> nPingNonceSent;
-    // Time (in usec) the last ping was sent, or 0 if no ping was ever sent.
+    // Time (in usec) the last ping was sent, or 0 if no ping was ever sent
     std::atomic<int64_t> nPingUsecStart;
-    // Last measured round-trip time.
+    // Last measured round-trip time
     std::atomic<int64_t> nPingUsecTime;
-    // Best measured round-trip time.
+    // Best measured round-trip time
     std::atomic<int64_t> nMinPingUsecTime;
-    // Whether a ping is requested.
+    // Whether a ping is requested
     std::atomic<bool> fPingQueued;
-    // Minimum fee rate with which to filter inv's to this node
-    CAmount minFeeFilter;
-    CCriticalSection cs_feeFilter;
-    CAmount lastSentFeeFilter;
-    int64_t nextSendTimeFeeFilter;
 
     // Alert relay
     std::vector<CAlert> vAlertToSend;
@@ -715,15 +713,15 @@ private:
 public:
 
     NodeId GetId() const {
-      return id;
+        return id ;
     }
 
     uint64_t GetLocalNonce() const {
-      return nLocalHostNonce;
+        return nLocalHostNonce ;
     }
 
     int GetMyStartingHeight() const {
-      return nMyStartingHeight;
+        return nMyStartingHeight ;
     }
 
     int GetRefCount()
@@ -833,14 +831,14 @@ public:
         return nLocalServices;
     }
 
-    std::string GetAddrName() const;
+    std::string GetAddrName() const ;
+
     //! Sets the addrName only if it was not previously set
-    void MaybeSetAddrName(const std::string& addrNameIn);
-};
+    void MaybeSetAddrName( const std::string & addrNameIn ) ;
+} ;
 
 
-
-/** Return a timestamp in the future (in microseconds) for exponentially distributed events. */
+/** Return a timestamp in the future (in microseconds) for exponentially distributed events */
 int64_t PoissonNextSend(int64_t nNow, int average_interval_seconds);
 
 #endif

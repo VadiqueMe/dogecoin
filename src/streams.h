@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_STREAMS_H
-#define BITCOIN_STREAMS_H
+#ifndef DOGECOIN_STREAMS_H
+#define DOGECOIN_STREAMS_H
 
 #include "support/allocators/zeroafterfree.h"
 #include "serialize.h"
@@ -82,7 +82,7 @@ class CVectorWriter
  * @param[in]  nVersionIn Serialization Version (including any flags)
  * @param[in]  vchDataIn  Referenced byte vector to overwrite/append
  * @param[in]  nPosIn Starting position. Vector index where writes should start. The vector will initially
- *                    grow as necessary to  max(index, vec.size()). So to append, use vec.size().
+ *                    grow as necessary to  max(index, vec.size()). So to append, use vec.size()
 */
     CVectorWriter(int nTypeIn, int nVersionIn, std::vector<unsigned char>& vchDataIn, size_t nPosIn) : nType(nTypeIn), nVersion(nVersionIn), vchData(vchDataIn), nPos(nPosIn)
     {
@@ -91,7 +91,7 @@ class CVectorWriter
     }
 /*
  * (other params same as above)
- * @param[in]  args  A list of items to serialize starting at nPos.
+ * @param[in]  args  A list of items to serialize starting at nPos
 */
     template <typename... Args>
     CVectorWriter(int nTypeIn, int nVersionIn, std::vector<unsigned char>& vchDataIn, size_t nPosIn, Args&&... args) : CVectorWriter(nTypeIn, nVersionIn, vchDataIn, nPosIn)
@@ -138,10 +138,10 @@ private:
     size_t nPos;
 };
 
-/** Double ended buffer combining vector and stream-like interfaces.
+/** Double ended buffer combining vector and stream-like interfaces
  *
  * >> and << read and write unformatted data using the above serialization templates.
- * Fills with data in linear time; some stringstream implementations take N^2 time.
+ * Fills with data in linear time, some stringstream implementations take N^2 time
  */
 class CDataStream
 {
@@ -414,9 +414,9 @@ public:
     }
 
     /**
-     * XOR the contents of this stream with a certain key.
+     * XOR the contents of this stream with a certain key
      *
-     * @param[in] key    The key used to XOR the data in this stream.
+     * @param[in] key    The key used to XOR the data in this stream
      */
     void Xor(const std::vector<unsigned char>& key)
     {
@@ -430,7 +430,7 @@ public:
             // This potentially acts on very many bytes of data, so it's
             // important that we calculate `j`, i.e. the `key` index in this
             // way instead of doing a %, which would effectively be a division
-            // for each byte Xor'd -- much slower than need be.
+            // for each byte Xor'd -- much slower than need be
             if (j == key.size())
                 j = 0;
         }
@@ -448,56 +448,57 @@ public:
 
 /** Non-refcounted RAII wrapper for FILE*
  *
- * Will automatically close the file when it goes out of scope if not null.
- * If you're returning the file pointer, return file.release().
- * If you need to close the file early, use file.fclose() instead of fclose(file).
+ * Will automatically close the file when it goes out of scope if not null
+ * If you're returning the file pointer, return file.release()
+ * If you need to close the file early, use file.fclose() instead of fclose(file)
  */
 class CAutoFile
 {
 private:
-    // Disallow copies
-    CAutoFile(const CAutoFile&);
-    CAutoFile& operator=(const CAutoFile&);
+    // no copies
+    CAutoFile( const CAutoFile & ) ;
+    CAutoFile& operator= ( const CAutoFile & ) ;
 
-    const int nType;
-    const int nVersion;
+    const int nType ;
+    const int nVersion ;
 
-    FILE* file;	
+    FILE* file ;
 
 public:
-    CAutoFile(FILE* filenew, int nTypeIn, int nVersionIn) : nType(nTypeIn), nVersion(nVersionIn)
-    {
-        file = filenew;
-    }
+    CAutoFile( FILE* filenew, int nTypeIn, int nVersionIn )
+        : nType( nTypeIn )
+        , nVersion( nVersionIn )
+        , file( filenew )
+    {}
 
     ~CAutoFile()
     {
-        fclose();
+        fclose() ;
     }
 
     void fclose()
     {
-        if (file) {
-            ::fclose(file);
-            file = NULL;
+        if ( file != nullptr ) {
+            ::fclose( file ) ;
+            file = nullptr ;
         }
     }
 
-    /** Get wrapped FILE* with transfer of ownership.
-     * @note This will invalidate the CAutoFile object, and makes it the responsibility of the caller
-     * of this function to clean up the returned FILE*.
+    /** Get wrapped FILE* with transfer of ownership
+     * @note This will invalidate the CAutoFile object, and closing the returned FILE*
+     * goes to the caller of this function
      */
-    FILE* release()             { FILE* ret = file; file = NULL; return ret; }
+    FILE* release()             {  FILE* ret = file ; file = nullptr ; return ret ;  }
 
-    /** Get wrapped FILE* without transfer of ownership.
-     * @note Ownership of the FILE* will remain with this class. Use this only if the scope of the
-     * CAutoFile outlives use of the passed pointer.
+    /** Get wrapped FILE* without transfer of ownership
+     * @note Ownership of the FILE* will remain with this class. Use this only if the scope
+     * of the CAutoFile outlives use of the passed pointer
      */
-    FILE* Get() const           { return file; }
+    FILE* get() const           {  return file ;  }
 
-    /** Return true if the wrapped FILE* is NULL, false otherwise.
+    /** Return true if the wrapped FILE* is null pointer, false otherwise
      */
-    bool IsNull() const         { return (file == NULL); }
+    bool isNull() const         {  return ( file == nullptr ) ; }
 
     //
     // Stream subset
@@ -556,10 +557,10 @@ public:
 };
 
 /** Non-refcounted RAII wrapper around a FILE* that implements a ring buffer to
- *  deserialize from. It guarantees the ability to rewind a given number of bytes.
+ *  deserialize from. It guarantees the ability to rewind a given number of bytes
  *
  *  Will automatically close the file when it goes out of scope if not null.
- *  If you need to close the file early, use file.fclose() instead of fclose(file).
+ *  If you need to close the file early, use file.fclose() instead of fclose(file)
  */
 class CBufferedFile
 {
@@ -706,4 +707,4 @@ public:
     }
 };
 
-#endif // BITCOIN_STREAMS_H
+#endif

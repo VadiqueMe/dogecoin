@@ -20,8 +20,6 @@
 #include "utilstrencodings.h"
 #include "version.h"
 
-#include <boost/foreach.hpp>
-
 #include <univalue.h>
 
 UniValue getconnectioncount(const JSONRPCRequest& request)
@@ -452,7 +450,7 @@ UniValue getnetworkinfo(const JSONRPCRequest& request)
     UniValue localAddresses(UniValue::VARR);
     {
         LOCK(cs_mapLocalHost);
-        BOOST_FOREACH(const PAIRTYPE(CNetAddr, LocalServiceInfo) &item, mapLocalHost)
+        for ( const PAIRTYPE( CNetAddr, LocalServiceInfo ) & item : mapLocalHost )
         {
             UniValue rec(UniValue::VOBJ);
             rec.push_back(Pair("address", item.first.ToString()));
@@ -479,7 +477,7 @@ UniValue setban(const JSONRPCRequest& request)
                             "\nArguments:\n"
                             "1. \"subnet\"       (string, required) The IP/Subnet (see getpeerinfo for nodes ip) with a optional netmask (default is /32 = single ip)\n"
                             "2. \"command\"      (string, required) 'add' to add a IP/Subnet to the list, 'remove' to remove a IP/Subnet from the list\n"
-                            "3. \"bantime\"      (numeric, optional) time in seconds how long (or until when if [absolute] is set) the ip is banned (0 or empty means using the default time of 24h which can also be overwritten by the -bantime startup argument)\n"
+                            "3. \"bantime\"      (numeric, optional) time in seconds how long (or until when if [absolute] is set) the ip is banned (0 or empty means using the default time of 12h which can also be overwritten by the -bantime startup argument)\n"
                             "4. \"absolute\"     (boolean, optional) If set, the bantime must be a absolute timestamp in seconds since epoch (Jan 1 1970 GMT)\n"
                             "\nExamples:\n"
                             + HelpExampleCli("setban", "\"192.168.0.6\" \"add\" 86400")
@@ -599,21 +597,70 @@ UniValue setnetworkactive(const JSONRPCRequest& request)
     return g_connman->IsNetworkActive() ;
 }
 
+#include "netmessagemaker.h"
+
+UniValue sendtextmsg( const JSONRPCRequest & request )
+{
+    if ( request.fHelp || request.params.size() < 2 )
+        throw std::runtime_error(
+            "sendtextmsg peer message\n"
+            "\nArguments:\n"
+            "    peer, node id or ip:port\n"
+            "    message, the text to send\n"
+            "\nExamples:\n"
+            + HelpExampleCli( "sendtextmsg", "1 \"aloha dude\"" )
+            + HelpExampleCli( "sendtextmsg", "92.168.10.200:" + std::to_string( BaseParams().GetDefaultPort() ) + " sun is shining" )
+            + HelpExampleRpc( "sendtextmsg", "92.168.10.200:" + std::to_string( BaseParams().GetDefaultPort() ) + ", pong" )
+        );
+
+    if ( g_connman == nullptr )
+        throw JSONRPCError( RPC_CLIENT_P2P_DISABLED, "Error: Peer-to-peer functionality is absent" ) ;
+
+    std::string peerString = request.params[ 0 ].get_str() ;
+
+    std::string message = request.params[ 1 ].get_str() ;
+    for ( size_t j = 2 ; j < request.params.size() ; j ++ )
+        message += " " + request.params[ j ].get_str() ;
+
+    CNode* peer = g_connman->FindNode( peerString ) ;
+    if ( peer == nullptr ) {
+        NodeId id( -1 ) ;
+        try {
+            id = std::stoul( peerString ) ;
+        } catch ( const std::invalid_argument & ia ) {
+            id = -1 ;
+        }
+        if ( id != -1 )
+            peer = g_connman->FindNode( id ) ;
+    }
+    if ( peer == nullptr ) return false ;
+
+    LogPrintf( "%s: message \"%s\" to peer \"%s\" (nodeid=%i addrName=%s)\n", __func__,
+                message, peerString, peer->id, peer->GetAddrName() ) ;
+
+    g_connman->PushMessage( peer, CNetMsgMaker( PROTOCOL_VERSION ).Make(
+        NetMsgType::TEXTMESSAGE, message
+    ) ) ;
+
+    return true ;
+}
+
 static const CRPCCommand commands[] =
 { //  category              name                      actor (function)         okSafeMode
   //  --------------------- ------------------------  -----------------------  ----------
     { "network",            "getconnectioncount",     &getconnectioncount,     true,  {} },
     { "network",            "ping",                   &ping,                   true,  {} },
     { "network",            "getpeerinfo",            &getpeerinfo,            true,  {} },
-    { "network",            "addnode",                &addnode,                true,  {"node","command"} },
-    { "network",            "disconnectnode",         &disconnectnode,         true,  {"address"} },
-    { "network",            "getaddednodeinfo",       &getaddednodeinfo,       true,  {"node"} },
+    { "network",            "addnode",                &addnode,                true,  { "node","command" } },
+    { "network",            "disconnectnode",         &disconnectnode,         true,  { "address" } },
+    { "network",            "getaddednodeinfo",       &getaddednodeinfo,       true,  { "node" } },
     { "network",            "getnettotals",           &getnettotals,           true,  {} },
     { "network",            "getnetworkinfo",         &getnetworkinfo,         true,  {} },
-    { "network",            "setban",                 &setban,                 true,  {"subnet", "command", "bantime", "absolute"} },
+    { "network",            "setban",                 &setban,                 true,  { "subnet", "command", "bantime", "absolute" } },
     { "network",            "listbanned",             &listbanned,             true,  {} },
     { "network",            "clearbanned",            &clearbanned,            true,  {} },
-    { "network",            "setnetworkactive",       &setnetworkactive,       true,  {"state"} },
+    { "network",            "setnetworkactive",       &setnetworkactive,       true,  { "state" } },
+    { "network",            "sendtextmsg",            &sendtextmsg,            true,  { "peer", "message" } },
 };
 
 void RegisterNetRPCCommands(CRPCTable &t)

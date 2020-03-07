@@ -3544,9 +3544,10 @@ CWallet* CWallet::CreateWalletFromFile(const std::string walletFile)
         // or if he ran -disablewallet for a longer time, then decided to re-enable
         if (fPruneMode)
         {
-            CBlockIndex *block = chainActive.Tip();
-            while (block && block->pprev && (block->pprev->nStatus & BLOCK_HAVE_DATA) && block->pprev->nTx > 0 && pindexRescan != block)
-                block = block->pprev;
+            CBlockIndex * block = chainActive.Tip() ;
+            while ( block && block->pprev && ( block->pprev->nStatus & BLOCK_DATA_EXISTS )
+                    && block->pprev->nTx > 0 && pindexRescan != block )
+                block = block->pprev ;
 
             if (pindexRescan != block) {
                 InitError(_("Prune: last wallet synchronisation goes beyond pruned data. You need to -reindex (download the whole blockchain again in case of pruned node)"));

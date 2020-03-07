@@ -6,6 +6,8 @@
 
 #include <string>
 
+std::string trimSpaces( const std::string & s ) ;
+
 double stringToDouble( const std::string & s ) ;
 
 std::string substringBetween( const std::string & in, const std::string & begin, const std::string & end ) ;

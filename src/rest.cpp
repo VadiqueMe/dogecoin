@@ -218,9 +218,9 @@ static bool rest_block(HTTPRequest* req,
         if (mapBlockIndex.count(hash) == 0)
             return RESTERR(req, HTTP_NOT_FOUND, hashStr + " not found");
 
-        pblockindex = mapBlockIndex[hash];
-        if (fHavePruned && !(pblockindex->nStatus & BLOCK_HAVE_DATA) && pblockindex->nTx > 0)
-            return RESTERR(req, HTTP_NOT_FOUND, hashStr + " not available (pruned data)");
+        pblockindex = mapBlockIndex[ hash ] ;
+        if ( fHavePruned && ! ( pblockindex->nStatus & BLOCK_DATA_EXISTS ) && pblockindex->nTx > 0 )
+            return RESTERR( req, HTTP_NOT_FOUND, hashStr + " not available (pruned data)" ) ;
 
         if (!ReadBlockFromDisk(block, pblockindex, Params().GetConsensus(pblockindex->nHeight)))
             return RESTERR(req, HTTP_NOT_FOUND, hashStr + " not found");

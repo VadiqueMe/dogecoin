@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -40,7 +40,7 @@ bool CBanDB::WriteBanSet( const banmap_t & banSet )
     boost::filesystem::path pathTmp = GetDataDir() / tmpfn ;
     FILE *file = fopen( pathTmp.string().c_str(), "wb" ) ;
     CAutoFile fileout( file, SER_DISK, PEER_VERSION ) ;
-    if ( fileout.IsNull() ) {
+    if ( fileout.isNull() ) {
         LogPrintf( "%s: Can't open file %s\n", __func__, pathTmp.string() ) ;
         return false ;
     }
@@ -52,8 +52,8 @@ bool CBanDB::WriteBanSet( const banmap_t & banSet )
     catch (const std::exception& e) {
         return error("%s: Serialize or I/O error - %s", __func__, e.what());
     }
-    FileCommit(fileout.Get());
-    fileout.fclose();
+    FileCommit( fileout.get() ) ;
+    fileout.fclose() ;
 
     // replace existing banlist.dat, if any, with new banlist.dat.XXXX
     if (!RenameOver(pathTmp, pathBanlist))
@@ -67,7 +67,7 @@ bool CBanDB::ReadBanSet( banmap_t & banSet )
     // open input file, and associate with CAutoFile
     FILE *file = fopen(pathBanlist.string().c_str(), "rb");
     CAutoFile filein( file, SER_DISK, PEER_VERSION ) ;
-    if ( filein.IsNull() ) {
+    if ( filein.isNull() ) {
         LogPrintf( "%s: Can't open file %s\n", __func__, pathBanlist.string() ) ;
         return false ;
     }
@@ -141,8 +141,8 @@ bool CAddrDB::WriteListOfPeers( const CAddrMan & addr )
     boost::filesystem::path pathTmp = GetDataDir() / tmpfn;
     FILE *file = fopen(pathTmp.string().c_str(), "wb");
     CAutoFile fileout( file, SER_DISK, PEER_VERSION ) ;
-    if (fileout.IsNull())
-        return error("%s: Failed to open file %s", __func__, pathTmp.string());
+    if ( fileout.isNull() )
+        return error( "%s: Failed to open file %s", __func__, pathTmp.string() ) ;
 
     // Write and commit header, data
     try {
@@ -151,8 +151,8 @@ bool CAddrDB::WriteListOfPeers( const CAddrMan & addr )
     catch (const std::exception& e) {
         return error("%s: Serialize or I/O error - %s", __func__, e.what());
     }
-    FileCommit(fileout.Get());
-    fileout.fclose();
+    FileCommit( fileout.get() ) ;
+    fileout.fclose() ;
 
     // replace existing peers.dat, if any, with new peers.dat.XXXX
     if (!RenameOver(pathTmp, pathAddr))
@@ -166,7 +166,7 @@ bool CAddrDB::ReadListOfPeers( CAddrMan & addr )
     // open input file, and associate with CAutoFile
     FILE *file = fopen(pathAddr.string().c_str(), "rb");
     CAutoFile filein( file, SER_DISK, PEER_VERSION ) ;
-    if ( filein.IsNull() ) {
+    if ( filein.isNull() ) {
         LogPrintf( "%s: Can't open file %s\n", __func__, pathAddr.string() ) ;
         return false ;
     }

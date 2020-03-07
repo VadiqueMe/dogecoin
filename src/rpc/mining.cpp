@@ -396,11 +396,11 @@ std::string gbt_vb_name(const Consensus::DeploymentPos pos) {
     return s;
 }
 
-UniValue getblocktemplate(const JSONRPCRequest& request)
+UniValue getblocktemplate( const JSONRPCRequest & request )
 {
     // Dogecoin: Never mine witness tx
-    const bool fMineWitnessTx = false;
-    if (request.fHelp || request.params.size() > 1)
+    const bool fMineWitnessTx = false ;
+    if ( request.fHelp || request.params.size() > 1 )
         throw std::runtime_error(
             "getblocktemplate ( TemplateRequest )\n"
             "\nIf the request parameters include a 'mode' key, that is used to explicitly select between the default 'template' request or a 'proposal'.\n"
@@ -445,7 +445,7 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
             "             n                          (numeric) transactions before this one (by 1-based index in 'transactions' list) that must be present in the final block if this one is\n"
             "             ,...\n"
             "         ],\n"
-            "         \"fee\": n,                    (numeric) difference in value between transaction inputs and outputs (in Satoshis); for coinbase transactions, this is a negative Number of the total collected block fees (ie, not including the block subsidy); if key is not present, fee is unknown and clients MUST NOT assume there isn't one\n"
+            "         \"fee\": n,                    (numeric) difference in value between transaction inputs and outputs (in atomary coin units); for coinbase transactions, this is a negative number of the total collected block fees (not including the block subsidy); if key is not present, fee is unknown and clients MUST NOT assume there isn't one\n"
             "         \"sigops\" : n,                (numeric) total SigOps cost, as counted for purposes of block limits; if key is not present, sigop cost is unknown and clients MUST NOT assume it is zero\n"
             "         \"weight\" : n,                (numeric) total transaction weight, as counted for purposes of block limits\n"
             "         \"required\" : true|false      (boolean) if provided and true, this transaction must be in the final block\n"
@@ -604,23 +604,22 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
 
     const struct BIP9DeploymentInfo& segwit_info = VersionBitsDeploymentInfo[Consensus::DEPLOYMENT_SEGWIT];
     // If the caller is indicating segwit support, then allow CreateNewBlock()
-    // to select witness transactions, after segwit activates (otherwise
-    // don't).
+    // to select witness transactions, after segwit activates (otherwise don't)
     bool fSupportsSegwit = setClientRules.find(segwit_info.name) != setClientRules.end();
 
     // Update block
     static CBlockIndex* pindexPrev;
     static int64_t nStart;
-    static std::unique_ptr<CBlockTemplate> pblocktemplate;
+    static std::unique_ptr< CBlockTemplate > pblocktemplate ;
     // Cache whether the last invocation was with segwit support, to avoid returning
-    // a segwit-block to a non-segwit caller.
+    // a segwit-block to a non-segwit caller
     static bool fLastTemplateSupportsSegwit = true;
     if (pindexPrev != chainActive.Tip() ||
         (mempool.GetTransactionsUpdated() != nTransactionsUpdatedLast && GetTime() - nStart > 5) ||
         fLastTemplateSupportsSegwit != fSupportsSegwit)
     {
         // Clear pindexPrev so future calls make a new block, despite any failures from here on
-        pindexPrev = nullptr;
+        pindexPrev = nullptr ;
 
         // Store the pindexBest used before CreateNewBlock, to avoid races
         nTransactionsUpdatedLast = mempool.GetTransactionsUpdated();
@@ -629,13 +628,14 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
         fLastTemplateSupportsSegwit = fSupportsSegwit;
 
         // Create new block
-        CScript scriptDummy = CScript() << OP_TRUE;
-        pblocktemplate = BlockAssembler(Params()).CreateNewBlock(scriptDummy, fMineWitnessTx);
-        if (!pblocktemplate)
-            throw JSONRPCError(RPC_OUT_OF_MEMORY, "Out of memory");
+        CScript scriptDummy = CScript() << OP_TRUE ;
+        pblocktemplate = BlockAssembler( Params() ).CreateNewBlock( scriptDummy, fMineWitnessTx ) ;
+        if ( pblocktemplate == nullptr )
+            throw JSONRPCError( RPC_MISC_ERROR, "Can't create new block"
+                                    + std::string( ( NameOfChain() == "inu" ) ? " (not in time?)" : " (out of memory?)" ) ) ;
 
         // Need to update only after we know CreateNewBlock succeeded
-        pindexPrev = pindexPrevNew;
+        pindexPrev = pindexPrevNew ;
     }
     CBlock* pblock = &pblocktemplate->block; // pointer for convenience
     const Consensus::Params& consensusParams = Params().GetConsensus(pindexPrev->nHeight + 1);

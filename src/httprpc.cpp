@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "httprpc.h"
 
@@ -19,54 +19,55 @@
 #include "utilstrencodings.h"
 
 #include <boost/algorithm/string.hpp> // boost::trim
-#include <boost/foreach.hpp> //BOOST_FOREACH
 
 /** WWW-Authenticate to present with 401 Unauthorized response */
 static const char* WWW_AUTH_HEADER_DATA = "Basic realm=\"jsonrpc\"";
 
-/** Simple one-shot callback timer to be used by the RPC mechanism to e.g.
- * re-lock the wallet.
+/** Simple one-shot callback timer to be used by the RPC mechanism
+  * to e.g. re-lock the wallet
  */
 class HTTPRPCTimer : public RPCTimerBase
 {
 public:
-    HTTPRPCTimer(struct event_base* eventBase, boost::function<void(void)>& func, int64_t millis) :
-        ev(eventBase, false, func)
+    HTTPRPCTimer( struct event_base * eventBase, std::function< void( void ) > & func, int64_t millis ) :
+        event( eventBase, false, func )
     {
-        struct timeval tv;
-        tv.tv_sec = millis/1000;
-        tv.tv_usec = (millis%1000)*1000;
-        ev.trigger(&tv);
+        struct timeval tv ;
+        tv.tv_sec = millis / 1000 ;
+        tv.tv_usec = ( millis % 1000 ) * 1000 ;
+        event.trigger( &tv ) ;
     }
+
 private:
-    HTTPEvent ev;
-};
+    HTTPEvent event ;
+} ;
 
 class HTTPRPCTimerInterface : public RPCTimerInterface
 {
 public:
-    HTTPRPCTimerInterface(struct event_base* _base) : base(_base)
-    {
-    }
-    const char* Name()
+    HTTPRPCTimerInterface( struct event_base * eb ) : base( eb ) {}
+
+    const char * Name()
     {
         return "HTTP";
     }
-    RPCTimerBase* NewTimer(boost::function<void(void)>& func, int64_t millis)
+
+    RPCTimerBase * NewTimer( std::function< void( void ) > & func, int64_t millis )
     {
-        return new HTTPRPCTimer(base, func, millis);
+        return new HTTPRPCTimer( base, func, millis ) ;
     }
+
 private:
-    struct event_base* base;
-};
+    struct event_base * base ;
+} ;
 
 
 /* Pre-base64-encoded authentication token */
-static std::string strRPCUserColonPass;
+static std::string strRPCUserColonPass ;
 /* Stored RPC timer interface (for unregistration) */
-static HTTPRPCTimerInterface* httpRPCTimerInterface = 0;
+static HTTPRPCTimerInterface * httpRPCTimerInterface = 0 ;
 
-static void JSONErrorReply(HTTPRequest* req, const UniValue& objError, const UniValue& id)
+static void JSONErrorReply( HTTPRequest * req, const UniValue & objError, const UniValue & id )
 {
     // Send error reply from json-rpc error object
     int nStatus = HTTP_INTERNAL_SERVER_ERROR;
@@ -84,7 +85,7 @@ static void JSONErrorReply(HTTPRequest* req, const UniValue& objError, const Uni
 }
 
 //This function checks username and password against -rpcauth
-//entries from config file.
+//entries from config file
 static bool multiUserAuthorized(std::string strUserPass)
 {
     if (strUserPass.find(":") == std::string::npos) {
@@ -95,7 +96,7 @@ static bool multiUserAuthorized(std::string strUserPass)
 
     if (mapMultiArgs.count("-rpcauth") > 0) {
         //Search for multi-user login/pass "rpcauth" from config
-        BOOST_FOREACH(std::string strRPCAuth, mapMultiArgs.at("-rpcauth"))
+        for ( std::string strRPCAuth : mapMultiArgs.at( "-rpcauth" ) )
         {
             std::vector<std::string> vFields;
             boost::split(vFields, strRPCAuth, boost::is_any_of(":$"));
@@ -168,7 +169,7 @@ static bool HTTPReq_JSONRPC(HTTPRequest* req, const std::string &)
 
         /* Deter brute-forcing
            If this results in a DoS the user really
-           shouldn't have their RPC port exposed. */
+           shouldn't have their RPC port exposed */
         MilliSleep(250);
 
         req->WriteHeader("WWW-Authenticate", WWW_AUTH_HEADER_DATA);
@@ -233,7 +234,7 @@ static bool InitRPCAuthentication()
 
 bool StartHTTPRPC()
 {
-    LogPrint("rpc", "Starting HTTP RPC server\n");
+    LogPrintf( "Starting HTTP RPC server\n" ) ;
     if (!InitRPCAuthentication())
         return false;
 
@@ -247,12 +248,12 @@ bool StartHTTPRPC()
 
 void InterruptHTTPRPC()
 {
-    LogPrint("rpc", "Interrupting HTTP RPC server\n");
+    LogPrintf( "Interrupting HTTP RPC server\n" ) ;
 }
 
 void StopHTTPRPC()
 {
-    LogPrint("rpc", "Stopping HTTP RPC server\n");
+    LogPrintf( "Stopping HTTP RPC server\n" ) ;
     UnregisterHTTPHandler("/", true);
     if (httpRPCTimerInterface) {
         RPCUnsetTimerInterface(httpRPCTimerInterface);

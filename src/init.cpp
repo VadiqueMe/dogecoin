@@ -73,8 +73,8 @@ static const bool DEFAULT_REST_ENABLE = false;
 static const bool DEFAULT_DISABLE_SAFEMODE = false;
 static const bool DEFAULT_STOPAFTERBLOCKIMPORT = false;
 
-std::unique_ptr<CConnman> g_connman;
-std::unique_ptr<PeerLogicValidation> peerLogic;
+std::unique_ptr< CConnman > g_connman ;
+std::unique_ptr< PeerLogicValidation > peerLogic ;
 
 #if ENABLE_ZMQ
 static CZMQNotificationInterface* pzmqNotificationInterface = NULL;
@@ -176,8 +176,7 @@ void Interrupt(boost::thread_group& threadGroup)
     InterruptRPC();
     InterruptREST();
     InterruptTorControl();
-    if (g_connman)
-        g_connman->Interrupt();
+    if ( g_connman != nullptr ) g_connman->Interrupt() ;
     threadGroup.interrupt_all();
 }
 
@@ -210,8 +209,8 @@ void Shutdown()
 
     MapPort(false);
     UnregisterValidationInterface(peerLogic.get());
-    peerLogic.reset();
-    g_connman.reset();
+    peerLogic.reset() ;
+    g_connman.reset() ;
 
     StopTorControl();
     UnregisterNodeSignals(GetNodeSignals());
@@ -419,8 +418,6 @@ std::string HelpMessage( WhatHelpMessage what )
         strUsage += HelpMessageOpt("-checkpoints", strprintf("Disable expensive verification for known chain history (default: %u)", DEFAULT_CHECKPOINTS_ENABLED));
         strUsage += HelpMessageOpt("-disablesafemode", strprintf("Disable safemode, override a real safe mode event (default: %u)", DEFAULT_DISABLE_SAFEMODE));
         strUsage += HelpMessageOpt("-testsafemode", strprintf("Force safe mode (default: %u)", DEFAULT_TESTSAFEMODE));
-        strUsage += HelpMessageOpt("-dropmessagestest=<n>", "Randomly drop 1 of every <n> network messages");
-        strUsage += HelpMessageOpt("-fuzzmessagestest=<n>", "Randomly fuzz 1 of every <n> network messages");
         strUsage += HelpMessageOpt("-stopafterblockimport", strprintf("Stop running after importing blocks from disk (default: %u)", DEFAULT_STOPAFTERBLOCKIMPORT));
         strUsage += HelpMessageOpt("-limitancestorcount=<n>", strprintf("Do not accept transactions if number of in-mempool ancestors is <n> or more (default: %u)", DEFAULT_ANCESTOR_LIMIT));
         strUsage += HelpMessageOpt("-limitancestorsize=<n>", strprintf("Do not accept transactions whose size with all in-mempool ancestors exceeds <n> kilobytes (default: %u)", DEFAULT_ANCESTOR_SIZE_LIMIT));
@@ -1173,11 +1170,14 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
     // Note that we absolutely cannot open any actual connections
     // until the very end ("start node") as the UTXO/block state
     // is not yet setup and may end up being set up twice if we
-    // need to reindex later.
+    // need to reindex later
 
-    assert(!g_connman);
-    g_connman = std::unique_ptr<CConnman>(new CConnman(GetRand(std::numeric_limits<uint64_t>::max()), GetRand(std::numeric_limits<uint64_t>::max())));
-    CConnman& connman = *g_connman;
+    assert( g_connman == nullptr ) ;
+    g_connman = std::unique_ptr< CConnman >( new CConnman(
+                    GetRand( std::numeric_limits< uint64_t >::max() ),
+                    GetRand( std::numeric_limits< uint64_t >::max() )
+                ) ) ;
+    CConnman& connman = *g_connman ;
 
     peerLogic.reset(new PeerLogicValidation(&connman));
     RegisterValidationInterface(peerLogic.get());
