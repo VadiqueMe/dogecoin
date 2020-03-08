@@ -1,5 +1,5 @@
 # Copyright (c) 2013-2016 The Bitcoin Core developers
-# Copyright (c) 2019 vadique
+# Copyright (c) 2019-2020 vadique
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -144,6 +144,7 @@ DOGECOIN_CORE_H = \
   support/events.h \
   support/lockedpool.h \
   sync.h \
+  textmessages.h \
   threadsafety.h \
   threadinterrupt.h \
   timedata.h \
@@ -208,6 +209,7 @@ libdogecoin_server_a_SOURCES = \
   rpc/server.cpp \
   script/sigcache.cpp \
   script/ismine.cpp \
+  textmessages.cpp \
   timedata.cpp \
   torcontrol.cpp \
   txdb.cpp \

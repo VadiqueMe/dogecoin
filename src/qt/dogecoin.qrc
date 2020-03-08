@@ -60,6 +60,7 @@
         <file alias="wallet_bgcoin_reverse">res/icons/wallet_bgcoin_reverse.png</file>
         <file alias="paper_wallet">res/icons/paper_wallet.png</file>
         <file alias="print">res/icons/print.png</file>
+        <file alias="mail">res/icons/mail.png</file>
     </qresource>
     <qresource prefix="/movies">
         <file alias="spinner-000">res/movies/spinner-000.png</file>

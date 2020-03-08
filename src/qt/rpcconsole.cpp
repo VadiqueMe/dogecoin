@@ -652,31 +652,35 @@ void RPCConsole::setNetworkModel( NetworkModel * model )
         ui->peerWidget->horizontalHeader()->setStretchLastSection(true);
 
         // create peer table context menu actions
-        QAction* disconnectAction = new QAction(tr("&Disconnect"), this);
-        QAction* banAction1h      = new QAction(tr("Ban for") + " " + tr("1 hour"), this);
-        QAction* banAction24h     = new QAction(tr("Ban for") + " " + tr("1 day"), this);
-        QAction* banAction7d      = new QAction(tr("Ban for") + " " + tr("1 week"), this);
+        QAction* sendMessageAction = new QAction( tr("Send message") + "...", this ) ;
+        QAction* disconnectAction = new QAction( tr("&Disconnect"), this ) ;
+        QAction* banAction1h = new QAction( tr("Ban for") + " " + tr("1 hour"), this ) ;
+        QAction* banAction24h = new QAction( tr("Ban for") + " " + tr("1 day"), this ) ;
+        QAction* banAction7d = new QAction( tr("Ban for") + " " + tr("1 week"), this ) ;
 
         // create peer table context menu
-        peersTableContextMenu = new QMenu(this);
-        peersTableContextMenu->addAction(disconnectAction);
-        peersTableContextMenu->addAction(banAction1h);
-        peersTableContextMenu->addAction(banAction24h);
-        peersTableContextMenu->addAction(banAction7d);
+        peersTableContextMenu = new QMenu( this ) ;
+        peersTableContextMenu->addAction( sendMessageAction );
+        peersTableContextMenu->addAction( disconnectAction ) ;
+        peersTableContextMenu->addAction( banAction1h ) ;
+        peersTableContextMenu->addAction( banAction24h ) ;
+        peersTableContextMenu->addAction( banAction7d ) ;
 
         // add signal mapping for items of dynamic menu
-        QSignalMapper* signalMapper = new QSignalMapper(this);
-        signalMapper->setMapping(banAction1h, 60*60);
-        signalMapper->setMapping(banAction24h, 60*60*24);
-        signalMapper->setMapping(banAction7d, 60*60*24*7);
-        connect(banAction1h, SIGNAL(triggered()), signalMapper, SLOT(map()));
-        connect(banAction24h, SIGNAL(triggered()), signalMapper, SLOT(map()));
-        connect(banAction7d, SIGNAL(triggered()), signalMapper, SLOT(map()));
-        connect(signalMapper, SIGNAL(mapped(int)), this, SLOT(banSelectedNode(int)));
+        QSignalMapper* signalMapper = new QSignalMapper( this ) ;
+        signalMapper->setMapping( banAction1h, 60 * 60 ) ;
+        signalMapper->setMapping( banAction24h, 60 * 60 * 24 ) ;
+        signalMapper->setMapping( banAction7d, 60 * 60 * 24 * 7 ) ;
+        connect( banAction1h, SIGNAL( triggered() ), signalMapper, SLOT( map() ) ) ;
+        connect( banAction24h, SIGNAL( triggered() ), signalMapper, SLOT( map() ) ) ;
+        connect( banAction7d, SIGNAL( triggered() ), signalMapper, SLOT( map() ) ) ;
+        connect( signalMapper, SIGNAL( mapped(int) ), this, SLOT( banSelectedNode(int) ) ) ;
 
         // peer table context menu signals
-        connect(ui->peerWidget, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(showPeersTableContextMenu(const QPoint&)));
-        connect(disconnectAction, SIGNAL(triggered()), this, SLOT(disconnectSelectedNode()));
+        connect( ui->peerWidget, SIGNAL( customContextMenuRequested(const QPoint&) ),
+                 this, SLOT( showPeersTableContextMenu(const QPoint&) ) ) ;
+        connect( disconnectAction, SIGNAL( triggered() ), this, SLOT( disconnectSelectedNode() ) ) ;
+        connect( sendMessageAction, SIGNAL( triggered() ), this, SLOT( textMessageToSelectedNode() ) ) ;
 
         // peer table signal handling - update peer details when selecting new node
         connect( ui->peerWidget->selectionModel(), SIGNAL( selectionChanged(const QItemSelection &, const QItemSelection &) ),
@@ -701,18 +705,19 @@ void RPCConsole::setNetworkModel( NetworkModel * model )
         QAction* unbanAction = new QAction(tr("&Unban"), this);
 
         // create ban table context menu
-        banTableContextMenu = new QMenu(this);
-        banTableContextMenu->addAction(unbanAction);
+        banTableContextMenu = new QMenu( this ) ;
+        banTableContextMenu->addAction( unbanAction ) ;
 
         // ban table context menu signals
-        connect(ui->banlistWidget, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(showBanTableContextMenu(const QPoint&)));
-        connect(unbanAction, SIGNAL(triggered()), this, SLOT(unbanSelectedNode()));
+        connect( ui->banlistWidget, SIGNAL( customContextMenuRequested(const QPoint &) ),
+                 this, SLOT( showBanTableContextMenu(const QPoint &) ) ) ;
+        connect( unbanAction, SIGNAL( triggered() ), this, SLOT( unbanSelectedNode() ) ) ;
 
         // ban table signal handling - clear peer details when clicking a peer in the ban table
         connect( ui->banlistWidget, SIGNAL( clicked(const QModelIndex&) ), this, SLOT( clearSelectedNode() ) ) ;
         // ban table signal handling - ensure ban table is shown or hidden (if empty)
-        connect( model->getBanTableModel(), SIGNAL( layoutChanged() ), this, SLOT( showOrHideBanTableIfRequired() ) ) ;
-        showOrHideBanTableIfRequired() ;
+        connect( model->getBanTableModel(), SIGNAL( layoutChanged() ), this, SLOT( showOrHideBanTableIfNeeded() ) ) ;
+        showOrHideBanTableIfNeeded() ;
 
         // Provide initial values
         ui->versionOfThisPeer->setText( model->formatFullVersion() ) ;
@@ -721,20 +726,20 @@ void RPCConsole::setNetworkModel( NetworkModel * model )
         ui->startupTime->setText( model->formatPeerStartupTime() ) ;
         ui->networkName->setText( QString::fromStdString( NameOfChain() ) ) ;
 
-        //Setup autocomplete and attach it
-        QStringList wordList;
-        std::vector<std::string> commandList = tableRPC.listCommands();
-        for (size_t i = 0; i < commandList.size(); ++i)
-        {
-            wordList << commandList[i].c_str();
-        }
+        // Setup autocomplete and attach it
+        QStringList wordList ;
+        std::vector< std::string > listOfCommands = tableRPC.listCommands() ;
+        for ( const std::string & command : listOfCommands )
+            wordList << command.c_str() ;
 
-        autoCompleter = new QCompleter(wordList, this);
-        ui->lineEdit->setCompleter(autoCompleter);
-        autoCompleter->popup()->installEventFilter(this);
+        autoCompleter = new QCompleter( wordList, this ) ;
+        ui->lineEdit->setCompleter( autoCompleter ) ;
+        autoCompleter->popup()->installEventFilter( this ) ;
+
         // Start thread to execute RPC commands
         startPerformer() ;
     }
+
     if ( model == nullptr ) {
         // network model is being set to 0, this means shutdown() is about to be called
         // make sure to clean up the performer thread
@@ -1424,43 +1429,76 @@ void RPCConsole::showBanTableContextMenu(const QPoint& point)
         banTableContextMenu->exec(QCursor::pos());
 }
 
+#include <QInputDialog>
+#include "netmessagemaker.h"
+
+void RPCConsole::textMessageToSelectedNode()
+{
+    if ( g_connman == nullptr ) return ;
+
+    // Get picked peers
+    QList< QModelIndex > nodes = GUIUtil::getEntryData( ui->peerWidget, PeerTableModel::NetNodeId ) ;
+    for ( int i = 0 ; i < nodes.count() ; i ++ )
+    {
+        NodeId id = nodes.at( i ).data().toLongLong() ;
+        CNode* peer = g_connman->FindNode( id ) ;
+        if ( peer == nullptr ) continue ;
+
+        QInputDialog dialog( this ) ;
+        dialog.setInputMode( QInputDialog::TextInput ) ;
+        dialog.setWindowTitle( tr("Send text message to") + " "
+                                + tr("peer") + " " + QString::number( peer->id )
+                                + " (" + QString::fromStdString( peer->GetAddrName() ) + ")" ) ;
+        dialog.setLabelText( tr("Message") ) ;
+        dialog.setSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::Fixed ) ;
+        dialog.setMinimumSize( 555, dialog.height() ) ;
+        dialog.resize( dialog.minimumSize() ) ;
+        bool ok = dialog.exec() ; // show modal dialog
+        QString text = dialog.textValue() ;
+        if ( ok && ! text.isEmpty() )
+        {
+            LogPrintf( "%s: message \"%s\" to peer %i (%s)\n", __func__,
+                text.toStdString(), peer->id, peer->GetAddrName() ) ;
+
+            g_connman->PushMessage( peer, CNetMsgMaker( PROTOCOL_VERSION ).Make(
+                NetMsgType::TEXTMESSAGE, text.toStdString()
+            ) ) ;
+        }
+    }
+}
+
 void RPCConsole::disconnectSelectedNode()
 {
     if ( g_connman == nullptr ) return ;
 
-    // Get selected peer addresses
-    QList<QModelIndex> nodes = GUIUtil::getEntryData(ui->peerWidget, PeerTableModel::NetNodeId);
-    for(int i = 0; i < nodes.count(); i++)
+    // Get picked peers
+    QList< QModelIndex > nodes = GUIUtil::getEntryData( ui->peerWidget, PeerTableModel::NetNodeId ) ;
+    for ( int i = 0 ; i < nodes.count() ; i ++ )
     {
-        // Get currently selected peer address
-        NodeId id = nodes.at(i).data().toLongLong();
-        // Find the node, disconnect it and clear the selected node
+        NodeId id = nodes.at( i ).data().toLongLong() ;
         if ( g_connman->DisconnectNode( id ) )
             clearSelectedNode() ;
     }
 }
 
-void RPCConsole::banSelectedNode(int bantime)
+void RPCConsole::banSelectedNode( int banSeconds )
 {
     if ( ! networkModel || ! g_connman )
         return ;
 
-    // Get selected peer addresses
-    QList<QModelIndex> nodes = GUIUtil::getEntryData(ui->peerWidget, PeerTableModel::NetNodeId);
-    for(int i = 0; i < nodes.count(); i++)
+    // Get picked peers
+    QList< QModelIndex > nodes = GUIUtil::getEntryData( ui->peerWidget, PeerTableModel::NetNodeId ) ;
+    for ( int i = 0 ; i < nodes.count() ; i ++ )
     {
-        // Get currently selected peer address
-        NodeId id = nodes.at(i).data().toLongLong();
+        NodeId id = nodes.at( i ).data().toLongLong() ;
 
-	// Get currently selected peer address
 	int detailNodeRow = networkModel->getPeerTableModel()->getRowByNodeId( id ) ;
 	if ( detailNodeRow < 0 ) return ;
 
 	// Find possible nodes, ban it and clear the selected node
 	const CNodeCombinedStats * stats = networkModel->getPeerTableModel()->getNodeStats( detailNodeRow ) ;
-	if ( stats != nullptr ) {
-	    g_connman->Ban( stats->nodeStats.addr, BanReasonManuallyAdded, bantime ) ;
-	}
+	if ( stats != nullptr )
+	    g_connman->Ban( stats->nodeStats.addr, BanReasonManuallyAdded, banSeconds ) ;
     }
     clearSelectedNode() ;
     networkModel->getBanTableModel()->refresh() ;
@@ -1470,19 +1508,18 @@ void RPCConsole::unbanSelectedNode()
 {
     if ( networkModel == nullptr ) return ;
 
-    // Get selected ban addresses
-    QList<QModelIndex> nodes = GUIUtil::getEntryData(ui->banlistWidget, BanTableModel::Address);
-    for(int i = 0; i < nodes.count(); i++)
+    // Get picked entries
+    QList< QModelIndex > nodes = GUIUtil::getEntryData( ui->banlistWidget, BanTableModel::Address ) ;
+    for ( int i = 0 ; i < nodes.count() ; i ++ )
     {
-        // Get currently selected ban address
-        QString strNode = nodes.at(i).data().toString();
-        CSubNet possibleSubnet;
+        QString strNode = nodes.at( i ).data().toString() ;
+        CSubNet possibleSubnet ;
 
-        LookupSubNet(strNode.toStdString().c_str(), possibleSubnet);
-        if (possibleSubnet.IsValid() && g_connman)
+        LookupSubNet( strNode.toStdString().c_str(), possibleSubnet ) ;
+        if ( possibleSubnet.IsValid() && g_connman != nullptr )
         {
-            g_connman->Unban(possibleSubnet);
-            networkModel->getBanTableModel()->refresh();
+            g_connman->Unban( possibleSubnet ) ;
+            networkModel->getBanTableModel()->refresh() ;
         }
     }
 }
@@ -1495,13 +1532,13 @@ void RPCConsole::clearSelectedNode()
     peerHeading->setText( tr( "Select a peer to view detailed information" ) ) ;
 }
 
-void RPCConsole::showOrHideBanTableIfRequired()
+void RPCConsole::showOrHideBanTableIfNeeded()
 {
     if ( networkModel == nullptr ) return ;
 
-    bool visible = networkModel->getBanTableModel()->shouldShow() ;
-    ui->banlistWidget->setVisible(visible);
-    ui->banHeading->setVisible(visible);
+    bool visible = ! networkModel->getBanTableModel()->isEmpty() ;
+    ui->banlistWidget->setVisible( visible ) ;
+    ui->banHeading->setVisible( visible ) ;
 }
 
 void RPCConsole::switchToRPCConsoleTab()

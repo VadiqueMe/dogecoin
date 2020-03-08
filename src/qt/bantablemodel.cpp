@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -155,33 +156,30 @@ Qt::ItemFlags BanTableModel::flags(const QModelIndex &index) const
     return retval;
 }
 
-QModelIndex BanTableModel::index(int row, int column, const QModelIndex &parent) const
+QModelIndex BanTableModel::index( int row, int column, const QModelIndex & parent ) const
 {
-    Q_UNUSED(parent);
-    CCombinedBan *data = priv->index(row);
+    Q_UNUSED( parent ) ;
+    CCombinedBan * data = priv->index( row ) ;
+    if ( data != nullptr )
+        return createIndex( row, column, data ) ;
+    return QModelIndex() ;
+}
 
-    if (data)
-        return createIndex(row, column, data);
-    return QModelIndex();
+bool BanTableModel::isEmpty() const
+{
+    return ( priv->size() == 0 ) ;
 }
 
 void BanTableModel::refresh()
 {
-    Q_EMIT layoutAboutToBeChanged();
-    priv->refreshBanlist();
-    Q_EMIT layoutChanged();
+    Q_EMIT layoutAboutToBeChanged() ;
+    priv->refreshBanlist() ;
+    Q_EMIT layoutChanged() ;
 }
 
-void BanTableModel::sort(int column, Qt::SortOrder order)
+void BanTableModel::sort( int column, Qt::SortOrder order )
 {
-    priv->sortColumn = column;
-    priv->sortOrder = order;
-    refresh();
-}
-
-bool BanTableModel::shouldShow()
-{
-    if (priv->size() > 0)
-        return true;
-    return false;
+    priv->sortColumn = column ;
+    priv->sortOrder = order ;
+    refresh() ;
 }

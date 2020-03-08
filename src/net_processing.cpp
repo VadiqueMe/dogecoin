@@ -1166,6 +1166,8 @@ inline void static SendBlockTransactions(const CBlock& block, const BlockTransac
     connman.PushMessage(pfrom, msgMaker.Make(nSendFlags, NetMsgType::BLOCKTXN, resp));
 }
 
+#include "textmessages.h"
+
 bool static ProcessMessage( CNode * pfrom, const std::string & strCommand, CDataStream & vRecv, int64_t nTimeReceived, const CChainParams & chainparams, CConnman & connman, const std::atomic< bool > & interruptMsgProc )
 {
     LogPrint( "net", "%s: received %s (%u bytes) from peer=%d\n", __func__, SanitizeString( strCommand ), vRecv.size(), pfrom->id ) ;
@@ -2627,7 +2629,7 @@ bool static ProcessMessage( CNode * pfrom, const std::string & strCommand, CData
     else if ( strCommand == NetMsgType::TEXTMESSAGE ) { // peer-to-peer text message
         std::string message ;
         /* CDataStream */ vRecv >> message ;
-        LogPrintf( "%s: text message \"%s\" from peer=%d\n", __func__, message, pfrom->id ) ;
+        TextMessages::addMessage( TextMessages::Message( message, pfrom->id, nTimeReceived / 1000000 ) ) ;
     }
 
     else if ( strCommand == NetMsgType::NOTFOUND ) {
@@ -2712,7 +2714,8 @@ bool ProcessMessages( CNode* pfrom, CConnman& connman, const std::atomic< bool >
             pfrom->fPauseRecv = pfrom->nProcessQueueSize > connman.GetReceiveFloodSize();
             fMoreWork = !pfrom->vProcessMsg.empty();
         }
-        CNetMessage& msg(msgs.front());
+
+        CNetMessage & msg( msgs.front() ) ;
 
         msg.SetVersion(pfrom->GetRecvVersion());
         // Scan for message start

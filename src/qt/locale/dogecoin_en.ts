@@ -286,7 +286,7 @@
 <context>
     <name>BanTableModel</name>
     <message>
-        <location filename="../bantablemodel.cpp" line="+89"/>
+        <location filename="../bantablemodel.cpp" line="+90"/>
         <source>IP/Netmask</source>
         <translation type="unfinished"></translation>
     </message>
@@ -533,7 +533,7 @@
 <context>
     <name>DogecoinGUI</name>
     <message>
-        <location filename="../gui.cpp" line="+142"/>
+        <location filename="../gui.cpp" line="+143"/>
         <source>Wallet</source>
         <translation type="unfinished">Wallet</translation>
     </message>
@@ -543,7 +543,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+200"/>
+        <location line="+201"/>
         <source>Transactions</source>
         <translation type="unfinished"></translation>
     </message>
@@ -897,6 +897,21 @@
         <location line="+8"/>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;locked&lt;/b&gt;</source>
         <translation type="unfinished">Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;locked&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <location line="+34"/>
+        <source>from</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>peer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Text message</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2134,7 +2149,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+479"/>
-        <location filename="../rpcconsole.cpp" line="+1295"/>
+        <location filename="../rpcconsole.cpp" line="+1300"/>
         <source>Received</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2161,12 +2176,12 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../rpcconsole.cpp" line="-49"/>
-        <location line="+250"/>
+        <location line="+282"/>
         <source>Select a peer to view detailed information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-195"/>
+        <location line="-227"/>
         <source>Whitelisted</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2298,7 +2313,12 @@ p, li { white-space: pre-wrap; }
         <translation>Clear console</translation>
     </message>
     <message>
-        <location filename="../rpcconsole.cpp" line="-209"/>
+        <location filename="../rpcconsole.cpp" line="-214"/>
+        <source>Send message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>&amp;Disconnect</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2325,12 +2345,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+43"/>
+        <location line="+46"/>
         <source>&amp;Unban</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+126"/>
+        <location line="+127"/>
         <source>Welcome to the %1 RPC console.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2394,6 +2414,21 @@ p, li { white-space: pre-wrap; }
         <location line="+8"/>
         <location line="+6"/>
         <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+71"/>
+        <source>Send text message to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>peer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Message</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3701,7 +3736,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <location filename="../gui.cpp" line="+140"/>
+        <location filename="../gui.cpp" line="+130"/>
         <source>Unit to show amounts in. Click to choose another unit</source>
         <translation type="unfinished"></translation>
     </message>

@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -37,6 +37,7 @@
 #include "ui_interface.h"
 #include "util.h"
 #include "miner.h"
+#include "textmessages.h"
 
 #include <iostream>
 
@@ -247,6 +248,7 @@ DogecoinGUI::DogecoinGUI( const PlatformStyle * style, const NetworkStyle * netw
     frameBlocksLayout->addSpacing( 3 ) ;
 
     connect( everySecondTimer.get(), SIGNAL( timeout() ), this, SLOT( updateBottomBarShowsDigging() ) ) ;
+    connect( everySecondTimer.get(), SIGNAL( timeout() ), this, SLOT( showNewTextMessagesIfAny() ) ) ;
     everySecondTimer->start( 1000 /* ms */ ) ;
 
     // Progress bar and label for blocks download
@@ -1173,6 +1175,40 @@ void DogecoinGUI::updateBottomBarShowsDigging()
     ) ;
 
     if ( walletFrame != nullptr ) walletFrame->refreshDigPage() ;
+}
+
+void DogecoinGUI::showNewTextMessagesIfAny()
+{
+    while ( TextMessages::hasMoreMessages() )
+    {
+        const TextMessages::Message & msg = TextMessages::getNextMessage() ;
+        if ( msg.isNull() ) continue ;
+
+        NodeId fromid = msg.getFromNodeId() ;
+        CNode* fromNode = g_connman->FindNode( fromid ) ;
+
+        std::string showMe = msg.getText() ;
+        showMe += "<br><br>" ;
+        {
+            QString fromPeerText = tr("from") + " " + tr("peer") + " " + QString::number( fromid ) ;
+            if ( fromNode != nullptr )
+                fromPeerText += " (" + QString::fromStdString( fromNode->GetAddrName() ) + ")" ;
+            showMe += "<i>" + fromPeerText.toStdString() + "</i>" ;
+        }
+        showMe += "<br>" ;
+        showMe += "<i>" + DateTimeStrFormat( "%Y-%m-%d %H:%M:%S", msg.getTimeReceived() ) + "</i>" ;
+
+        QMessageBox msgBox(
+            QMessageBox::NoIcon,
+            tr("Text message"),
+            QString::fromStdString( showMe ),
+            QMessageBox::Ok,
+            this
+        ) ;
+        msgBox.setTextFormat( Qt::RichText ) ;
+        msgBox.setIconPixmap( platformStyle->SingleColorIcon( ":/icons/mail" ).pixmap( 32, 32 ) ) ;
+        msgBox.exec() ;
+    }
 }
 
 void DogecoinGUI::showNormalIfMinimized(bool fToggleHidden)

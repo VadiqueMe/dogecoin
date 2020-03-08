@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -58,16 +59,17 @@ public:
     QModelIndex index(int row, int column, const QModelIndex &parent) const;
     Qt::ItemFlags flags(const QModelIndex &index) const;
     void sort(int column, Qt::SortOrder order);
-    bool shouldShow();
     /*@}*/
 
+    bool isEmpty() const ;
+
 public Q_SLOTS:
-    void refresh();
+    void refresh() ;
 
 private:
     NetworkModel * networkModel ;
-    QStringList columns;
-    std::unique_ptr<BanTablePriv> priv;
+    QStringList columns ;
+    std::unique_ptr< BanTablePriv > priv ;
 };
 
 #endif

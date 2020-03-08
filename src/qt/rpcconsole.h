@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -79,7 +79,7 @@ private Q_SLOTS:
     /** Show custom context menu on Bans tab */
     void showBanTableContextMenu(const QPoint& point);
     /** Hides ban table if no bans are present */
-    void showOrHideBanTableIfRequired();
+    void showOrHideBanTableIfNeeded() ;
     /** clear the selected node */
     void clearSelectedNode();
 
@@ -108,12 +108,15 @@ public Q_SLOTS:
     void peerLayoutAboutToChange();
     /** Handle updated peer information */
     void peerLayoutChanged();
-    /** Disconnect a selected node on the Peers tab */
-    void disconnectSelectedNode();
-    /** Ban a selected node on the Peers tab */
-    void banSelectedNode(int bantime);
-    /** Unban a selected node on the Bans tab */
-    void unbanSelectedNode();
+
+    /** Show dialog to compose a message to peer */
+    void textMessageToSelectedNode() ;
+    /** Disconnect a selected node */
+    void disconnectSelectedNode() ;
+    /** Ban a selected node */
+    void banSelectedNode( int banSeconds ) ;
+    /** Unban a selected node */
+    void unbanSelectedNode() ;
 
     void switchToRPCConsoleTab() ;
 
