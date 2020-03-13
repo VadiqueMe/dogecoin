@@ -7,7 +7,7 @@
 #ifndef DOGECOIN_AMOUNT_H
 #define DOGECOIN_AMOUNT_H
 
-#include <stdlib.h>
+#include <stdint.h>
 #include <string>
 
 /** amount in atomary coin units, can be negative */
@@ -22,6 +22,7 @@ std::string NameOfE8Currency() ;
 std::string NameOfE12Currency() ;
 
 static const CAmount MAX_MONEY = 1000000 * E12COIN ; // max transaction 1 000 000 0000 0000 0000
+
 inline bool MoneyRange( const CAmount & nValue ) {  return ( nValue >= 0 && nValue <= MAX_MONEY ) ;  }
 
 #endif

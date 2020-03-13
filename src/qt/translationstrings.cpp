@@ -144,9 +144,6 @@ QT_TRANSLATE_NOOP("dogecoin-core", ""
 "Set the number of script verification threads (%u to %d, 0 = auto, <0 = "
 "leave that many cores free, default: %d)"),
 QT_TRANSLATE_NOOP("dogecoin-core", ""
-"Set the number of threads for coin generation if enabled (-1 = all cores, "
-"default: %d)"),
-QT_TRANSLATE_NOOP("dogecoin-core", ""
 "Sets the serialization of raw transaction or block hex returned in non-"
 "verbose mode, non-segwit(0) or segwit(1) (default: %d)"),
 QT_TRANSLATE_NOOP("dogecoin-core", ""
@@ -265,7 +262,6 @@ QT_TRANSLATE_NOOP("dogecoin-core", "Error: A fatal internal error occurred, see 
 QT_TRANSLATE_NOOP("dogecoin-core", "Error: Disk space is low!"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Failed to listen on any port. Use -listen=0 if you want this."),
 QT_TRANSLATE_NOOP("dogecoin-core", "Fee (in %s/kB) to add to transactions you send (default: %s)"),
-QT_TRANSLATE_NOOP("dogecoin-core", "Generate coins (default: %u)"),
 QT_TRANSLATE_NOOP("dogecoin-core", "How many blocks to check at startup (default: %u, 0 = all)"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Importing..."),
 QT_TRANSLATE_NOOP("dogecoin-core", "Imports blocks from external blk000??.dat file on startup"),

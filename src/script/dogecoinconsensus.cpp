@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -67,59 +68,63 @@ struct ECCryptoClosure
     ECCVerifyHandle handle;
 };
 
-ECCryptoClosure instance_of_eccryptoclosure;
+ECCryptoClosure instance_of_eccryptoclosure ;
 }
 
 /** Check that all specified flags are part of the libconsensus interface */
-static bool verify_flags(unsigned int flags)
+static bool verify_flags( unsigned int flags )
 {
-    return (flags & ~(dogecoinconsensus_SCRIPT_FLAGS_VERIFY_ALL)) == 0;
+    return ( flags & ~( dogecoinconsensus_SCRIPT_FLAGS_VERIFY_ALL ) ) == 0 ;
 }
 
-static int verify_script(const unsigned char *scriptPubKey, unsigned int scriptPubKeyLen, CAmount amount,
-                                    const unsigned char *txTo        , unsigned int txToLen,
-                                    unsigned int nIn, unsigned int flags, dogecoinconsensus_error* err)
+static int verify_script( const unsigned char * scriptPubKey, unsigned int scriptPubKeyLen, CAmount amount,
+                          const unsigned char * txTo, unsigned int txToLen,
+                          unsigned int nIn, unsigned int flags, dogecoinconsensus_error * err )
 {
-    if (!verify_flags(flags)) {
-        return dogecoinconsensus_ERR_INVALID_FLAGS;
-    }
+    if ( ! verify_flags( flags ) )
+        return dogecoinconsensus_ERR_INVALID_FLAGS ;
+
     try {
-        TxInputStream stream(SER_NETWORK, PROTOCOL_VERSION, txTo, txToLen);
-        CTransaction tx(deserialize, stream);
-        if (nIn >= tx.vin.size())
-            return set_error(err, dogecoinconsensus_ERR_TX_INDEX);
-        if (GetSerializeSize(tx, SER_NETWORK, PROTOCOL_VERSION) != txToLen)
-            return set_error(err, dogecoinconsensus_ERR_TX_SIZE_MISMATCH);
+        TxInputStream stream( SER_NETWORK, PROTOCOL_VERSION, txTo, txToLen ) ;
+        CTransaction tx( deserialize, stream ) ;
+        if ( nIn >= tx.vin.size() )
+            return set_error( err, dogecoinconsensus_ERR_TX_INDEX ) ;
+        if ( GetSerializeSize( tx, SER_NETWORK, PROTOCOL_VERSION ) != txToLen )
+            return set_error( err, dogecoinconsensus_ERR_TX_SIZE_MISMATCH ) ;
 
         // Regardless of the verification result, the tx did not error
-        set_error(err, dogecoinconsensus_ERR_OK);
+        set_error( err, dogecoinconsensus_ERR_OK ) ;
 
-        PrecomputedTransactionData txdata(tx);
-        return VerifyScript(tx.vin[nIn].scriptSig, CScript(scriptPubKey, scriptPubKey + scriptPubKeyLen), &tx.vin[nIn].scriptWitness, flags, TransactionSignatureChecker(&tx, nIn, amount, txdata), NULL);
-    } catch (const std::exception&) {
-        return set_error(err, dogecoinconsensus_ERR_TX_DESERIALIZE); // Error deserializing
+        PrecomputedTransactionData txdata( tx ) ;
+        return VerifyScript( tx.vin[ nIn ].scriptSig,
+                             CScript( scriptPubKey, scriptPubKey + scriptPubKeyLen ),
+                             &tx.vin[nIn].scriptWitness,
+                             flags,
+                             TransactionSignatureChecker( &tx, nIn, amount, txdata ),
+                             nullptr ) ;
+    } catch ( const std::exception & ) {
+        return set_error( err, dogecoinconsensus_ERR_TX_DESERIALIZE ) ; // Error deserializing
     }
 }
 
-int dogecoinconsensus_verify_script_with_amount(const unsigned char *scriptPubKey, unsigned int scriptPubKeyLen, int64_t amount,
-                                    const unsigned char *txTo        , unsigned int txToLen,
-                                    unsigned int nIn, unsigned int flags, dogecoinconsensus_error* err)
+int dogecoinconsensus_verify_script_with_amount( const unsigned char * scriptPubKey, unsigned int scriptPubKeyLen, CAmount amount,
+                                                 const unsigned char * txTo, unsigned int txToLen,
+                                                 unsigned int nIn, unsigned int flags, dogecoinconsensus_error * err )
 {
-    CAmount am(amount);
-    return ::verify_script(scriptPubKey, scriptPubKeyLen, am, txTo, txToLen, nIn, flags, err);
+    CAmount am( amount ) ;
+    return ::verify_script( scriptPubKey, scriptPubKeyLen, am, txTo, txToLen, nIn, flags, err ) ;
 }
 
-
-int dogecoinconsensus_verify_script(const unsigned char *scriptPubKey, unsigned int scriptPubKeyLen,
-                                   const unsigned char *txTo        , unsigned int txToLen,
-                                   unsigned int nIn, unsigned int flags, dogecoinconsensus_error* err)
+int dogecoinconsensus_verify_script( const unsigned char * scriptPubKey, unsigned int scriptPubKeyLen,
+                                     const unsigned char * txTo, unsigned int txToLen,
+                                     unsigned int nIn, unsigned int flags, dogecoinconsensus_error * err )
 {
-    if (flags & dogecoinconsensus_SCRIPT_FLAGS_VERIFY_WITNESS) {
-        return set_error(err, dogecoinconsensus_ERR_AMOUNT_REQUIRED);
+    if ( flags & dogecoinconsensus_SCRIPT_FLAGS_VERIFY_WITNESS ) {
+        return set_error( err, dogecoinconsensus_ERR_AMOUNT_REQUIRED ) ;
     }
 
-    CAmount am(0);
-    return ::verify_script(scriptPubKey, scriptPubKeyLen, am, txTo, txToLen, nIn, flags, err);
+    CAmount am( 0 ) ;
+    return ::verify_script( scriptPubKey, scriptPubKeyLen, am, txTo, txToLen, nIn, flags, err ) ;
 }
 
 unsigned int dogecoinconsensus_version()

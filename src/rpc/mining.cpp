@@ -1,5 +1,6 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -25,8 +26,6 @@
 #include <random>
 #include <memory>
 #include <stdint.h>
-
-#include <boost/assign/list_of.hpp>
 
 #include <univalue.h>
 
@@ -95,38 +94,38 @@ UniValue getnetworkhashps( const JSONRPCRequest& request )
     return GetNetworkHashPS(request.params.size() > 0 ? request.params[0].get_int() : 120, request.params.size() > 1 ? request.params[1].get_int() : -1);
 }
 
-UniValue getgenerate( const JSONRPCRequest& request )
+UniValue getgenerate( const JSONRPCRequest & request )
 {
     if ( request.fHelp || request.params.size() != 0 )
         throw std::runtime_error(
             "getgenerate\n"
-            "\nReturn if the server is set to generate coins or not.\n"
+            "\nReturn if the node is set to generate coins or not\n"
             "It is set with the command line argument -gen (or " + std::string( DOGECOIN_CONF_FILENAME ) + " setting gen)\n"
-            "It can also be set with the setgenerate call.\n"
+            "It can also be set with the setgenerate call\n"
             "\nResult\n"
-            "true|false      (boolean) If the server is set to generate coins or not\n"
+            "true|false      (boolean) If the node is set to generate coins or not\n"
             "\nExamples:\n"
-            + HelpExampleCli("getgenerate", "")
-            + HelpExampleRpc("getgenerate", "")
+            + HelpExampleCli( "getgenerate", "" )
+            + HelpExampleRpc( "getgenerate", "" )
         );
 
     LOCK( cs_main ) ;
     return HowManyMiningThreads() > 0 ;
 }
 
-UniValue setgenerate( const JSONRPCRequest& request )
+UniValue setgenerate( const JSONRPCRequest & request )
 {
     if ( request.fHelp || request.params.size() < 1 || request.params.size() > 2 )
         throw std::runtime_error(
-            "setgenerate generate ( genproclimit )\n"
-            "\nSet 'generate' true or false to turn generation on or off.\n"
-            "Generation is limited to 'genproclimit' processors, -1 is unlimited.\n"
-            "See the getgenerate call for the current setting.\n"
+            "setgenerate generate ( genthreads )\n"
+            "\nSet 'generate' true or false to turn generation of blocks on or off\n"
+            "Set 'genthreads' to the number of generating threads\n"
+            "Use getgenerate call to get the current setting\n"
             "\nArguments:\n"
-            "1. generate         (boolean, required) Set to true to turn on generation, off to turn off.\n"
-            "2. genproclimit     (numeric, optional) Set the processor limit for when generation is on. Can be -1 for unlimited.\n"
+            "1. generate   (boolean, required) Set to true to turn on generation, false to turn it off\n"
+            "2. genthreads (numeric, optional) Set the number of generating threads, -1 for the number of physical processors/cores\n"
             "\nExamples:\n"
-            "\nSet the generation on with a limit of one processor\n"
+            "\nSet the generation on using one thread\n"
             + HelpExampleCli( "setgenerate", "true 1" ) +
             "\nCheck the setting\n"
             + HelpExampleCli( "getgenerate", "" ) +
@@ -137,41 +136,41 @@ UniValue setgenerate( const JSONRPCRequest& request )
         );
 
     if ( Params().MineBlocksOnDemand() )
-        throw JSONRPCError( RPC_METHOD_NOT_FOUND, "Use the generate method instead of setgenerate on this network" ) ;
+        throw JSONRPCError( RPC_METHOD_NOT_FOUND, "Use 'generate' instead of 'setgenerate' for \"" + NameOfChain() + "\" network" ) ;
 
     bool fGenerate = true ;
     if ( request.params.size() > 0 )
-        fGenerate = request.params[0].get_bool() ;
+        fGenerate = request.params[ 0 ].get_bool() ;
 
-    int genProcLimit = GetArg( "-genproclimit", DEFAULT_GENERATE_THREADS ) ;
+    int generatingThreads = GetArg( "-genthreads", DEFAULT_GENERATE_THREADS ) ;
     if ( request.params.size() > 1 )
     {
-        genProcLimit = request.params[1].get_int() ;
-        if ( genProcLimit == 0 ) fGenerate = false ;
+        generatingThreads = request.params[ 1 ].get_int() ;
+        if ( generatingThreads == 0 ) fGenerate = false ;
     }
 
-    GenerateCoins( fGenerate, genProcLimit, Params() ) ;
+    GenerateCoins( fGenerate, generatingThreads, Params() ) ;
 
     return NullUniValue ;
 }
 
 UniValue generateBlocks( std::shared_ptr < CReserveScript > coinbaseScript, int nGenerate, uint64_t nMaxTries, bool keepScript )
 {
-    // Dogecoin: Never mine witness tx
-    const bool fMineWitnessTx = false;
-    static const int nInnerLoopCount = 0x10000;
-    int nHeightStart = 0;
-    int nHeightEnd = 0;
-    int nHeight = 0;
+    static const int nInnerLoopCount = 0x10000 ;
 
-    {   // Don't keep cs_main locked
-        LOCK(cs_main);
-        nHeightStart = chainActive.Height();
-        nHeight = nHeightStart;
-        nHeightEnd = nHeightStart+nGenerate;
+    // Dogecoin: Never mine witness tx
+    const bool fMineWitnessTx = false ;
+
+    int nHeightStart = 0 ;
+    {   // don't keep cs_main locked
+        LOCK( cs_main ) ;
+        nHeightStart = chainActive.Height() ;
     }
-    unsigned int nExtraNonce = 0;
-    UniValue blockHashes(UniValue::VARR);
+    int nHeight = nHeightStart ;
+    int nHeightEnd = nHeightStart + nGenerate ;
+
+    unsigned int nExtraNonce = 0 ;
+    UniValue blockHashes( UniValue::VARR ) ;
 
     std::random_device randomDevice ;
     std::mt19937 randomNumber( randomDevice() ) ;
@@ -181,8 +180,8 @@ UniValue generateBlocks( std::shared_ptr < CReserveScript > coinbaseScript, int 
         std::unique_ptr< CBlockTemplate > blockCandidate(
                 BlockAssembler( Params() ).CreateNewBlock( coinbaseScript->reserveScript, fMineWitnessTx )
         ) ;
-        if ( blockCandidate.get() == nullptr )
-            throw JSONRPCError( RPC_INTERNAL_ERROR, "Couldn't create new block" ) ;
+        if ( blockCandidate == nullptr )
+            throw JSONRPCError( RPC_INTERNAL_ERROR, strprintf( "%s: couldn't create new block", __func__ ) ) ;
 
         CBlock *pblock = &blockCandidate->block ;
         {
@@ -193,7 +192,7 @@ UniValue generateBlocks( std::shared_ptr < CReserveScript > coinbaseScript, int 
         pblock->nNonce = randomNumber() ;
 
         // Dogecoin: don't mine auxpow blocks here
-        //CAuxPow::initAuxPow(*pblock);
+        //CAuxPow::initAuxPow( *pblock ) ;
 
         bool found = false ;
         int loop = 0 ;
@@ -234,19 +233,22 @@ UniValue generate( const JSONRPCRequest& request )
             "generate nblocks ( maxtries )\n"
             "\nMine up to nblocks blocks immediately (before the RPC call returns)\n"
             "\nArguments:\n"
-            "1. nblocks      (numeric, required) How many blocks are generated immediately.\n"
-            "2. maxtries     (numeric, optional) How many iterations to try (default = 1000000).\n"
+            "1. nblocks    (numeric, required) How many blocks to generate\n"
+            "2. maxtries   (numeric, optional) How many iterations to try (default = 1000000)\n"
             "\nResult:\n"
-            "[ blockhashes ]     (array) hashes of blocks generated\n"
+            "[ blockhashes ]   (array) hashes of blocks generated\n"
             "\nExamples:\n"
             "\nGenerate 11 blocks\n"
-            + HelpExampleCli("generate", "11")
-        );
+            + HelpExampleCli( "generate", "11" )
+        ) ;
 
-    int nGenerate = request.params[0].get_int();
-    uint64_t nMaxTries = 1000000;
-    if (request.params.size() > 1) {
-        nMaxTries = request.params[1].get_int();
+    if ( NameOfChain() == "inu" )
+        throw JSONRPCError( RPC_MISC_ERROR, "Use 'setgenerate' instead of 'generate' for \"" + NameOfChain() + "\" network" ) ;
+
+    int nGenerate = request.params[ 0 ].get_int() ;
+    uint64_t nMaxTries = 1000000 ;
+    if ( request.params.size() > 1 ) {
+        nMaxTries = request.params[ 1 ].get_int() ;
     }
 
     std::shared_ptr< CReserveScript > coinbaseScript ;
@@ -259,40 +261,43 @@ UniValue generate( const JSONRPCRequest& request )
     if ( coinbaseScript->reserveScript.empty() ) // no script was provided
         throw JSONRPCError( RPC_INTERNAL_ERROR, "No coinbase script available (mining needs a wallet)" ) ;
 
-    return generateBlocks(coinbaseScript, nGenerate, nMaxTries, true);
+    return generateBlocks( coinbaseScript, nGenerate, nMaxTries, true ) ;
 }
 
-UniValue generatetoaddress(const JSONRPCRequest& request)
+UniValue generatetoaddress( const JSONRPCRequest & request )
 {
-    if (request.fHelp || request.params.size() < 2 || request.params.size() > 3)
+    if ( request.fHelp || request.params.size() < 2 || request.params.size() > 3 )
         throw std::runtime_error(
             "generatetoaddress nblocks address (maxtries)\n"
             "\nMine blocks immediately to a specified address (before the RPC call returns)\n"
             "\nArguments:\n"
-            "1. nblocks      (numeric, required) How many blocks are generated immediately.\n"
-            "2. address      (string, required) The address to send the newly generated dogecoin to.\n"
-            "3. maxtries     (numeric, optional) How many iterations to try (default = 1000000).\n"
+            "1. nblocks    (numeric, required) How many blocks to generate\n"
+            "2. address    (string, required) The address to send the newly generated dogecoin to\n"
+            "3. maxtries   (numeric, optional) How many iterations to try (default = 1000000)\n"
             "\nResult:\n"
-            "[ blockhashes ]     (array) hashes of blocks generated\n"
+            "[ blockhashes ]   (array) hashes of blocks generated\n"
             "\nExamples:\n"
-            "\nGenerate 11 blocks to myaddress\n"
-            + HelpExampleCli("generatetoaddress", "11 \"myaddress\"")
-        );
+            "\nGenerate 11 blocks to " + CDogecoinAddress::DummyDogecoinAddress( Params() ) + "\n"
+            + HelpExampleCli( "generatetoaddress", "11 \"" + CDogecoinAddress::DummyDogecoinAddress( Params() ) + "\"" )
+        ) ;
 
-    int nGenerate = request.params[0].get_int();
-    uint64_t nMaxTries = 1000000;
-    if (request.params.size() > 2) {
-        nMaxTries = request.params[2].get_int();
+    if ( NameOfChain() == "inu" )
+        throw JSONRPCError( RPC_MISC_ERROR, "Use 'setgenerate' instead of 'generatetoaddress' for \"" + NameOfChain() + "\" network" ) ;
+
+    int nGenerate = request.params[ 0 ].get_int() ;
+    uint64_t nMaxTries = 1000000 ;
+    if ( request.params.size() > 2 ) {
+        nMaxTries = request.params[ 2 ].get_int() ;
     }
 
     CDogecoinAddress address( request.params[ 1 ].get_str() ) ;
-    if (!address.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Error: Invalid address");
+    if ( ! address.IsValid() )
+        throw JSONRPCError( RPC_INVALID_ADDRESS_OR_KEY, "Error: Invalid address" ) ;
 
     std::shared_ptr< CReserveScript > coinbaseScript( new CReserveScript() ) ;
     coinbaseScript->reserveScript = GetScriptForDestination( address.Get() ) ;
 
-    return generateBlocks(coinbaseScript, nGenerate, nMaxTries, false);
+    return generateBlocks( coinbaseScript, nGenerate, nMaxTries, false ) ;
 }
 
 UniValue getmininginfo( const JSONRPCRequest& request )
@@ -300,7 +305,7 @@ UniValue getmininginfo( const JSONRPCRequest& request )
     if ( request.fHelp || request.params.size() != 0 )
         throw std::runtime_error(
             "getmininginfo\n"
-            "\nReturns a json object containing mining-related information."
+            "\nReturns a json object containing mining-related information"
             "\nResult:\n"
             "{\n"
             "  \"blocks\": nnn,             (numeric) The current block\n"
@@ -1070,7 +1075,7 @@ static const CRPCCommand commands[] =
     { "generating",         "generate",               &generate,               true,  {"nblocks","maxtries"} },
     { "generating",         "generatetoaddress",      &generatetoaddress,      true,  {"nblocks","address","maxtries"} },
     { "generating",         "getgenerate",            &getgenerate,            true,  {} },
-    { "generating",         "setgenerate",            &setgenerate,            true,  {"generate","genproclimit"} },
+    { "generating",         "setgenerate",            &setgenerate,            true,  {"generate","genthreads"} },
 };
 
 void RegisterMiningRPCCommands(CRPCTable &t)

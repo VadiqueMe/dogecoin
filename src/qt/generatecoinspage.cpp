@@ -38,7 +38,7 @@ GenerateCoinsPage::GenerateCoinsPage( const PlatformStyle * style, QWidget * par
     for ( int i = 1 ; i <= numcores ; ++ i )
         ui->numberOfThreadsList->addItem( QString::number( i ) ) ;
 
-    QString genthreads = QString::number( GetArg( "-genproclimit", DEFAULT_GENERATE_THREADS ) ) ;
+    QString genthreads = QString::number( GetArg( "-genthreads", DEFAULT_GENERATE_THREADS ) ) ;
     if ( ui->numberOfThreadsList->findText( genthreads, Qt::MatchExactly ) < 0 )
         ui->numberOfThreadsList->addItem( genthreads ) ;
 
@@ -135,7 +135,7 @@ void GenerateCoinsPage::toggleGenerateBlocks( int qtCheckState )
     {
         QString threads = ui->numberOfThreadsList->currentText() ;
         if ( threads == "0" ) {
-            threads = QString::number( GetArg( "-genproclimit", DEFAULT_GENERATE_THREADS ) ) ;
+            threads = QString::number( GetArg( "-genthreads", DEFAULT_GENERATE_THREADS ) ) ;
             ui->numberOfThreadsList->setCurrentText( threads ) ;
         }
 
