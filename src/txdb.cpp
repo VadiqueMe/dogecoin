@@ -25,7 +25,8 @@ static const char DB_REINDEX_FLAG = 'R';
 static const char DB_LAST_BLOCK = 'l';
 
 
-CCoinsViewDB::CCoinsViewDB(size_t nCacheSize, bool fMemory, bool fWipe) : db(GetDataDir() / "chainstate", nCacheSize, fMemory, fWipe, true) 
+CCoinsViewDB::CCoinsViewDB( size_t nCacheSize, bool fMemory, bool fWipe )
+    : db( GetDirForData() / "chainstate", nCacheSize, fMemory, fWipe, true )
 {
 }
 
@@ -68,7 +69,9 @@ bool CCoinsViewDB::BatchWrite(CCoinsMap &mapCoins, const uint256 &hashBlock) {
     return db.WriteBatch(batch);
 }
 
-CBlockTreeDB::CBlockTreeDB(size_t nCacheSize, bool fMemory, bool fWipe) : CDBWrapper(GetDataDir() / "blocks" / "index", nCacheSize, fMemory, fWipe) {
+CBlockTreeDB::CBlockTreeDB( size_t nCacheSize, bool fMemory, bool fWipe )
+    : CDBWrapper( GetDirForData() / "blocks" / "index", nCacheSize, fMemory, fWipe )
+{
 }
 
 bool CBlockTreeDB::ReadBlockFileInfo(int nFile, CBlockFileInfo &info) {

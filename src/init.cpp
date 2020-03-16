@@ -106,37 +106,38 @@ enum BindFlags {
 // Thread management and startup/shutdown:
 //
 // The network-processing threads are all part of a thread group
-// created by AppInit() or the Qt main() function.
+// created by AppInit() or the Qt main() function
 //
 // A clean exit happens when StartShutdown() or the SIGTERM
 // signal handler sets fRequestShutdown, which triggers
 // the DetectShutdownThread(), which interrupts the main thread group.
 // DetectShutdownThread() then exits, which causes AppInit() to
-// continue (it .joins the shutdown thread).
-// Shutdown() is then
-// called to clean up database connections, and stop other
-// threads that should only be stopped after the main network-processing
-// threads have exited.
+// continue (it .joins the shutdown thread)
+//
+// Shutdown() is then called to clean up database connections,
+// and stop other threads that should only be stopped after
+// the main network-processing threads have exited
 //
 // Note that if running -daemon the parent process returns from AppInit2
 // before adding any threads to the threadGroup, so .join_all() returns
-// immediately and the parent exits from main().
+// immediately and the parent exits from main()
 //
 // Shutdown for Qt is very similar, only it uses a QTimer to detect
 // fRequestShutdown getting set, and then does the normal Qt
-// shutdown thing.
+// shutdown thing
 //
 
-std::atomic<bool> fRequestShutdown(false);
-std::atomic<bool> fDumpMempoolLater(false);
+std::atomic < bool > fRequestShutdown( false ) ;
+std::atomic < bool > fDumpMempoolLater( false ) ;
 
 void StartShutdown()
 {
-    fRequestShutdown = true;
+    fRequestShutdown = true ;
 }
+
 bool ShutdownRequested()
 {
-    return fRequestShutdown;
+    return fRequestShutdown ;
 }
 
 /**
@@ -149,7 +150,8 @@ class CCoinsViewErrorCatcher : public CCoinsViewBacked
 public:
     CCoinsViewErrorCatcher( AbstractCoinsView * view ) : CCoinsViewBacked( view ) { }
 
-    virtual bool GetCoins( const uint256 & txhash, CCoins & coins ) const override {
+    virtual bool GetCoins( const uint256 & txhash, CCoins & coins ) const override
+    {
         try {
             return CCoinsViewBacked::GetCoins( txhash, coins ) ;
         } catch( const std::runtime_error & e ) {
@@ -178,6 +180,119 @@ void Interrupt(boost::thread_group& threadGroup)
     InterruptTorControl();
     if ( g_connman != nullptr ) g_connman->Interrupt() ;
     threadGroup.interrupt_all();
+}
+
+static const uint64_t MEMPOOL_DUMP_VERSION = 1 ;
+
+static bool LoadMempoolFromDump()
+{
+    int64_t nExpiryTimeout = GetArg( "-mempoolexpiry", DEFAULT_MEMPOOL_EXPIRY ) * 60 * 60 ;
+    FILE* mempoolFile = fopen( ( GetDirForData() / "mempool.dat" ).string().c_str(), "rb" ) ;
+    if ( mempoolFile == nullptr ) {
+        LogPrintf( "Failed to open mempool file for reading from disk. Continuing anyway\n" ) ;
+        return false ;
+    }
+
+    CAutoFile file( mempoolFile, SER_DISK, PEER_VERSION ) ;
+
+    int64_t count = 0 ;
+    int64_t skipped = 0 ;
+    int64_t failed = 0 ;
+    int64_t nNow = GetTime() ;
+
+    try {
+        uint64_t version ;
+        file >> version ;
+        if ( version != MEMPOOL_DUMP_VERSION ) return false ;
+
+        uint64_t num ;
+        file >> num ;
+        double prioritydummy = 0 ;
+        while ( num -- ) {
+            CTransactionRef tx ;
+            int64_t nTime ;
+            int64_t nFeeDelta ;
+            file >> tx ;
+            file >> nTime ;
+            file >> nFeeDelta ;
+
+            CAmount amountdelta = nFeeDelta ;
+            if ( amountdelta != 0 ) {
+                mempool.PrioritiseTransaction( tx->GetTxHash(), tx->GetTxHash().ToString(), prioritydummy, amountdelta ) ;
+            }
+            CValidationState state ;
+            if ( nTime + nExpiryTimeout > nNow ) {
+                LOCK( cs_main ) ;
+                AcceptToMemoryPoolWithTime( mempool, state, tx, true, NULL, nTime ) ;
+                if ( state.IsValid() ) {
+                    ++ count ;
+                } else {
+                    ++ failed ;
+                }
+            } else {
+                ++ skipped ;
+            }
+
+            if ( ShutdownRequested() ) return false;
+        }
+        std::map< uint256, CAmount > mapDeltas ;
+        file >> mapDeltas ;
+
+        for ( const auto & i : mapDeltas ) {
+            mempool.PrioritiseTransaction( i.first, i.first.ToString(), prioritydummy, i.second ) ;
+        }
+    } catch ( const std::exception & e ) {
+        LogPrintf( "Failed to deserialize mempool data from file: %s. Continuing anyway.\n", e.what() ) ;
+        return false ;
+    }
+
+    LogPrintf( "Imported mempool transactions from disk: %i okay, %i failed, %i expired\n", count, failed, skipped ) ;
+    return true ;
+}
+
+static void DumpMempoolToFile()
+{
+    int64_t start = GetTimeMicros() ;
+
+    std::map< uint256, CAmount > mapDeltas ;
+    std::vector< TxMempoolInfo > vinfo ;
+
+    {
+        LOCK( mempool.cs ) ;
+        for ( const auto & i : mempool.mapDeltas ) {
+            mapDeltas[ i.first ] = i.second.second ;
+        }
+        vinfo = mempool.infoAll() ;
+    }
+
+    int64_t mid = GetTimeMicros() ;
+
+    try {
+        FILE* filestr = fopen( ( GetDirForData() / "mempool.dat.new" ).string().c_str(), "wb" ) ;
+        if ( filestr == nullptr ) return ;
+
+        CAutoFile file( filestr, SER_DISK, PEER_VERSION ) ;
+
+        uint64_t version = MEMPOOL_DUMP_VERSION ;
+        file << version ;
+
+        file << static_cast< uint64_t >( vinfo.size() ) ;
+        for ( const auto & i : vinfo ) {
+            file << *( i.tx ) ;
+            file << static_cast< uint64_t >( i.nTime ) ;
+            file << static_cast< uint64_t >( i.nFeeDelta ) ;
+            mapDeltas.erase( i.tx->GetTxHash() ) ;
+        }
+
+        file << mapDeltas ;
+        FileCommit( file.get() ) ;
+        file.fclose() ;
+        RenameOver( GetDirForData() / "mempool.dat.new", GetDirForData() / "mempool.dat" ) ;
+        int64_t last = GetTimeMicros() ;
+        LogPrintf( "Dumped mempool: %g s to copy, %g s to dump\n", ( mid - start ) * 0.000001, ( last - mid ) * 0.000001 ) ;
+    } catch ( const std::exception & e ) {
+        LogPrintf( "Can't dump mempool: %s. Continuing anyway\n", e.what() ) ;
+    }
 }
 
 void Shutdown()
@@ -214,8 +329,8 @@ void Shutdown()
 
     StopTorControl();
     UnregisterNodeSignals(GetNodeSignals());
-    if (fDumpMempoolLater)
-        DumpMempool();
+    if ( fDumpMempoolLater )
+        DumpMempoolToFile() ;
 
     {
         LOCK(cs_main);
@@ -484,7 +599,7 @@ std::string HelpMessage( WhatHelpMessage what )
     strUsage += HelpMessageOpt("-rpcauth=<userpw>", _("Username and hashed password for JSON-RPC connections. The field <userpw> comes in the format: <USERNAME>:<SALT>$<HASH>. A canonical python script is included in share/rpcuser. The client then connects normally using the rpcuser=<USERNAME>/rpcpassword=<PASSWORD> pair of arguments. This option can be specified multiple times"));
     strUsage += HelpMessageOpt( "-rpcport=<port>",
                     strprintf( "Listen for JSON-RPC connections on <port> (default for chain \"%s\": %u)",
-                        NameOfChain(), BaseParams().RPCPort() )
+                        NameOfChain(), BaseParams().GetRPCPort() )
                   ) ;
     strUsage += HelpMessageOpt("-rpcallowip=<ip>", _("Allow JSON-RPC connections from specified source. Valid for <ip> are a single IP (e.g. 1.2.3.4), a network/netmask (e.g. 1.2.3.4/255.255.255.0) or a network/CIDR (e.g. 1.2.3.4/24). This option can be specified multiple times"));
     strUsage += HelpMessageOpt("-rpcthreads=<n>", strprintf(_("Set the number of threads to service RPC calls (default: %d)"), DEFAULT_HTTP_THREADS));
@@ -563,17 +678,17 @@ struct CImportingNow
 // is missing, do the same here to delete any later block files after a gap.  Also delete all
 // rev files since they'll be rewritten by the reindex anyway.  This ensures that vinfoBlockFile
 // is in sync with what's actually on disk by the time we start downloading, so that pruning
-// works correctly.
+// works correctly
 void CleanupBlockRevFiles()
 {
-    std::map<std::string, boost::filesystem::path> mapBlockFiles;
+    std::map< std::string, boost::filesystem::path > mapBlockFiles ;
 
     // Glob all blk?????.dat and rev?????.dat files from the blocks directory.
     // Remove the rev files immediately and insert the blk file paths into an
-    // ordered map keyed by block file index.
+    // ordered map keyed by block file index
     LogPrintf("Removing unusable blk?????.dat and rev?????.dat files for -reindex with -prune\n");
-    boost::filesystem::path blocksdir = GetDataDir() / "blocks";
-    for (boost::filesystem::directory_iterator it(blocksdir); it != boost::filesystem::directory_iterator(); it++) {
+    boost::filesystem::path blocksdir = GetDirForData() / "blocks" ;
+    for ( boost::filesystem::directory_iterator it( blocksdir ) ; it != boost::filesystem::directory_iterator() ; ++ it ) {
         if (is_regular_file(*it) &&
             it->path().filename().string().length() == 12 &&
             it->path().filename().string().substr(8,4) == ".dat")
@@ -588,14 +703,14 @@ void CleanupBlockRevFiles()
     // Remove all block files that aren't part of a contiguous set starting at
     // zero by walking the ordered map (keys are block file indices) by
     // keeping a separate counter.  Once we hit a gap (or if 0 doesn't exist)
-    // start removing block files.
-    int nContigCounter = 0;
-    BOOST_FOREACH(const PAIRTYPE(std::string, boost::filesystem::path)& item, mapBlockFiles) {
-        if (atoi(item.first) == nContigCounter) {
-            nContigCounter++;
-            continue;
+    // start removing block files
+    int nContigCounter = 0 ;
+    for ( const PAIRTYPE( std::string, boost::filesystem::path ) & item : mapBlockFiles ) {
+        if ( atoi( item.first ) == nContigCounter ) {
+            nContigCounter ++ ;
+            continue ;
         }
-        remove(item.second);
+        remove( item.second ) ;
     }
 }
 
@@ -629,11 +744,11 @@ void ThreadImport(std::vector<boost::filesystem::path> vImportFiles)
     }
 
     // hardcoded $DATADIR/bootstrap.dat
-    boost::filesystem::path pathBootstrap = GetDataDir() / "bootstrap.dat";
-    if (boost::filesystem::exists(pathBootstrap)) {
-        FILE *file = fopen(pathBootstrap.string().c_str(), "rb");
-        if (file) {
-            boost::filesystem::path pathBootstrapOld = GetDataDir() / "bootstrap.dat.old";
+    boost::filesystem::path pathBootstrap = GetDirForData() / "bootstrap.dat" ;
+    if ( boost::filesystem::exists( pathBootstrap ) ) {
+        FILE * file = fopen( pathBootstrap.string().c_str(), "rb" ) ;
+        if ( file != nullptr ) {
+            boost::filesystem::path pathBootstrapOld = GetDirForData() / "bootstrap.dat.old" ;
             LogPrintf("Importing bootstrap.dat...\n");
             LoadExternalBlockFile(chainparams, file);
             RenameOver(pathBootstrap, pathBootstrapOld);
@@ -643,7 +758,7 @@ void ThreadImport(std::vector<boost::filesystem::path> vImportFiles)
     }
 
     // -loadblock=
-    BOOST_FOREACH(const boost::filesystem::path& path, vImportFiles) {
+    for ( const boost::filesystem::path & path : vImportFiles ) {
         FILE *file = fopen(path.string().c_str(), "rb");
         if (file) {
             LogPrintf("Importing blocks file %s...\n", path.string());
@@ -665,13 +780,14 @@ void ThreadImport(std::vector<boost::filesystem::path> vImportFiles)
         StartShutdown();
     }
     } // End scope of CImportingNow
-    LoadMempool();
-    fDumpMempoolLater = !fRequestShutdown;
+
+    LoadMempoolFromDump() ;
+    fDumpMempoolLater = ! fRequestShutdown ;
 }
 
 /** Sanity checks
- *  Ensure that Bitcoin is running in a usable environment with all
- *  necessary library support.
+ *  Ensure that this node is running in a usable environment with all
+ *  necessary library support
  */
 bool InitSanityCheck(void)
 {
@@ -1061,11 +1177,11 @@ bool AppInitParameterInteraction()
 
 static bool LockDataDirectory(bool probeOnly)
 {
-    std::string strDataDir = GetDataDir().string();
+    std::string strDataDir = GetDirForData().string() ;
 
-    // Make sure only a single Bitcoin process is using the data directory.
-    boost::filesystem::path pathLockFile = GetDataDir() / ".lock";
-    FILE* file = fopen(pathLockFile.string().c_str(), "a"); // empty lock file; created if it doesn't exist.
+    // Make sure only a single Bitcoin process is using the data directory
+    boost::filesystem::path pathLockFile = GetDirForData() / ".lock" ;
+    FILE* file = fopen(pathLockFile.string().c_str(), "a"); // empty lock file; created if it doesn't exist
     if (file) fclose(file);
 
     try {
@@ -1105,7 +1221,7 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
     // ********************************************************* Step 4a: application initialization
     // After daemonization get the data directory lock again and hold on to it until exit
     // This creates a slight window for a race condition to happen, however this condition is harmless: it
-    // will at most make us exit without printing a message to console.
+    // will at most make us exit without printing a message to console
     if (!LockDataDirectory(false)) {
         // Detailed error printed inside LockDataDirectory
         return false;
@@ -1124,12 +1240,12 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
     if (fPrintToDebugLog)
         OpenDebugLog();
 
-    if (!fLogTimestamps)
-        LogPrintf("Startup time: %s\n", DateTimeStrFormat("%Y-%m-%d %H:%M:%S", GetTime()));
-    LogPrintf("Default data directory %s\n", GetDefaultDataDir().string());
-    LogPrintf("Using data directory %s\n", GetDataDir().string());
-    LogPrintf("Using config file %s\n", GetConfigFile(GetArg("-conf", DOGECOIN_CONF_FILENAME)).string());
-    LogPrintf("Using at most %i automatic connections (%i file descriptors available)\n", nMaxConnections, nFD);
+    if ( ! fLogTimestamps )
+        LogPrintf( "Startup time: %s\n", DateTimeStrFormat( "%Y-%m-%d %H:%M:%S", GetTime() ) ) ;
+    LogPrintf( "Default data directory %s\n", GetDefaultDataDir().string() ) ;
+    LogPrintf( "Using data directory %s\n", GetDirForData().string() ) ;
+    LogPrintf( "Using config file %s\n", GetConfigFile( GetArg( "-conf", DOGECOIN_CONF_FILENAME ) ).string() ) ;
+    LogPrintf( "Using at most %i automatic connections (%i file descriptors available)\n", nMaxConnections, nFD ) ;
 
     InitSignatureCache();
 
@@ -1146,7 +1262,7 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
     /* Start the RPC server already.  It will be started in "warmup" mode
      * and not really process calls already (but it will signify connections
      * that the server is there and will be ready later).  Warmup mode will
-     * be disabled when initialisation is finished.
+     * be disabled when initialisation is finished
      */
     if (GetBoolArg("-server", false))
     {
@@ -1186,7 +1302,7 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
     // sanitize comments per BIP-0014, format user agent and check total size
     std::vector<std::string> uacomments;
     if (mapMultiArgs.count("-uacomment")) {
-        BOOST_FOREACH(std::string cmt, mapMultiArgs.at("-uacomment"))
+        for ( std::string cmt : mapMultiArgs.at( "-uacomment" ) )
         {
             if (cmt != SanitizeString(cmt, SAFE_CHARS_UA_COMMENT))
                 return InitError(strprintf(_("User Agent comment (%s) contains unsafe characters."), cmt));
@@ -1201,7 +1317,7 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
 
     if (mapMultiArgs.count("-onlynet")) {
         std::set<enum Network> nets;
-        BOOST_FOREACH(const std::string& snet, mapMultiArgs.at("-onlynet")) {
+        for ( const std::string & snet : mapMultiArgs.at( "-onlynet") ) {
             enum Network net = ParseNetwork(snet);
             if (net == NET_UNROUTABLE)
                 return InitError(strprintf(_("Unknown network specified in -onlynet: '%s'"), snet));
@@ -1305,9 +1421,9 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
         }
     }
 
-    if (mapMultiArgs.count("-seednode")) {
-        BOOST_FOREACH(const std::string& strDest, mapMultiArgs.at("-seednode"))
-            connman.AddOneShot(strDest);
+    if ( mapMultiArgs.count( "-seednode" ) ) {
+        for ( const std::string & strDest : mapMultiArgs.at( "-seednode" ) )
+            connman.AddOneShot( strDest ) ;
     }
 
 #if ENABLE_ZMQ
@@ -1326,35 +1442,12 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
 
     // ********************************************************* Step 7: load block chain
 
-    fReindex = GetBoolArg("-reindex", false);
-    bool fReindexChainState = GetBoolArg("-reindex-chainstate", false);
+    fReindex = GetBoolArg( "-reindex", false ) ;
+    bool fReindexChainState = GetBoolArg( "-reindex-chainstate", false ) ;
 
-    // Upgrading to 0.8; hard-link the old blknnnn.dat files into /blocks/
-    boost::filesystem::path blocksDir = GetDataDir() / "blocks";
-    if (!boost::filesystem::exists(blocksDir))
-    {
-        boost::filesystem::create_directories(blocksDir);
-        bool linked = false;
-        for (unsigned int i = 1; i < 10000; i++) {
-            boost::filesystem::path source = GetDataDir() / strprintf("blk%04u.dat", i);
-            if (!boost::filesystem::exists(source)) break;
-            boost::filesystem::path dest = blocksDir / strprintf("blk%05u.dat", i-1);
-            try {
-                boost::filesystem::create_hard_link(source, dest);
-                LogPrintf("Hardlinked %s -> %s\n", source.string(), dest.string());
-                linked = true;
-            } catch (const boost::filesystem::filesystem_error& e) {
-                // Note: hardlink creation failing is not a disaster, it just means
-                // blocks will get re-downloaded from peers.
-                LogPrintf("Error hardlinking blk%04u.dat: %s\n", i, e.what());
-                break;
-            }
-        }
-        if (linked)
-        {
-            fReindex = true;
-        }
-    }
+    boost::filesystem::path blocksDir = GetDirForData() / "blocks" ;
+    if ( ! boost::filesystem::exists( blocksDir ) )
+        boost::filesystem::create_directories( blocksDir ) ;
 
     // cache size calculations
     int64_t nTotalCache = (GetArg("-dbcache", nDefaultDbCache) << 20);

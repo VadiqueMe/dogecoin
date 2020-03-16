@@ -19,7 +19,7 @@
 
 CBanDB::CBanDB()
 {
-    pathBanlist = GetDataDir() / "banlist.dat" ;
+    pathBanlist = GetDirForData() / "banlist.dat" ;
 }
 
 bool CBanDB::WriteBanSet( const banmap_t & banSet )
@@ -37,7 +37,7 @@ bool CBanDB::WriteBanSet( const banmap_t & banSet )
     ssBanlist << hash;
 
     // open temp output file, and associate with CAutoFile
-    boost::filesystem::path pathTmp = GetDataDir() / tmpfn ;
+    boost::filesystem::path pathTmp = GetDirForData() / tmpfn ;
     FILE *file = fopen( pathTmp.string().c_str(), "wb" ) ;
     CAutoFile fileout( file, SER_DISK, PEER_VERSION ) ;
     if ( fileout.isNull() ) {
@@ -120,7 +120,7 @@ bool CBanDB::ReadBanSet( banmap_t & banSet )
 
 CAddrDB::CAddrDB()
 {
-    pathAddr = GetDataDir() / "peers.dat" ;
+    pathAddr = GetDirForData() / "peers.dat" ;
 }
 
 bool CAddrDB::WriteListOfPeers( const CAddrMan & addr )
@@ -138,7 +138,7 @@ bool CAddrDB::WriteListOfPeers( const CAddrMan & addr )
     ssPeers << hash;
 
     // open temp output file, and associate with CAutoFile
-    boost::filesystem::path pathTmp = GetDataDir() / tmpfn;
+    boost::filesystem::path pathTmp = GetDirForData() / tmpfn;
     FILE *file = fopen(pathTmp.string().c_str(), "wb");
     CAutoFile fileout( file, SER_DISK, PEER_VERSION ) ;
     if ( fileout.isNull() )

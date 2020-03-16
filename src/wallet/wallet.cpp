@@ -440,51 +440,52 @@ bool CWallet::Verify()
     uiInterface.InitMessage(_("Verifying wallet..."));
 
     // Wallet file must be a plain filename without a directory
-    if (walletFile != boost::filesystem::basename(walletFile) + boost::filesystem::extension(walletFile))
-        return InitError(strprintf(_("Wallet %s resides outside data directory %s"), walletFile, GetDataDir().string()));
+    if ( walletFile != boost::filesystem::basename( walletFile ) + boost::filesystem::extension( walletFile ) )
+        return InitError( strprintf( _("Wallet %s resides outside data directory %s"),
+                                        walletFile, GetDirForData().string() ) ) ;
 
-    if (!bitdb.Open(GetDataDir()))
+    if ( ! bitdb.Open( GetDirForData() ) )
     {
         // try moving the database env out of the way
-        boost::filesystem::path pathDatabase = GetDataDir() / "database";
-        boost::filesystem::path pathDatabaseBak = GetDataDir() / strprintf("database.%d.bak", GetTime());
+        boost::filesystem::path pathDatabase = GetDirForData() / "database" ;
+        boost::filesystem::path pathDatabaseBak = GetDirForData() / strprintf( "database.%d.bak", GetTime() ) ;
         try {
-            boost::filesystem::rename(pathDatabase, pathDatabaseBak);
-            LogPrintf("Moved old %s to %s. Retrying.\n", pathDatabase.string(), pathDatabaseBak.string());
-        } catch (const boost::filesystem::filesystem_error&) {
+            boost::filesystem::rename( pathDatabase, pathDatabaseBak ) ;
+            LogPrintf( "Moved old %s to %s. Retrying...\n", pathDatabase.string(), pathDatabaseBak.string() ) ;
+        } catch ( const boost::filesystem::filesystem_error & ) {
             // failure is ok (well, not really, but it's not worse than what we started with)
         }
 
         // try again
-        if (!bitdb.Open(GetDataDir())) {
+        if ( ! bitdb.Open( GetDirForData() ) ) {
             // if it still fails, it probably means we can't even create the database env
-            return InitError(strprintf(_("Error initializing wallet database environment %s!"), GetDataDir()));
+            return InitError( strprintf( _("Error initializing wallet database environment %s!"), GetDirForData() ) ) ;
         }
     }
 
-    if (GetBoolArg("-salvagewallet", false))
+    if ( GetBoolArg("-salvagewallet", false ) )
     {
         // Recover readable keypairs:
-        if (!CWalletDB::Recover(bitdb, walletFile, true))
-            return false;
+        if ( ! CWalletDB::Recover( bitdb, walletFile, true ) )
+            return false ;
     }
 
-    if (boost::filesystem::exists(GetDataDir() / walletFile))
+    if ( boost::filesystem::exists( GetDirForData() / walletFile ) )
     {
-        CDBEnv::VerifyResult r = bitdb.Verify(walletFile, CWalletDB::Recover);
+        CDBEnv::VerifyResult r = bitdb.Verify( walletFile, CWalletDB::Recover ) ;
         if (r == CDBEnv::RECOVER_OK)
         {
-            InitWarning(strprintf(_("Warning: Wallet file corrupt, data salvaged!"
+            InitWarning( strprintf( _("Warning: Wallet file corrupt, data salvaged!"
                                          " Original %s saved as %s in %s; if"
                                          " your balance or transactions are incorrect you should"
                                          " restore from a backup."),
-                walletFile, "wallet.{timestamp}.bak", GetDataDir()));
+                walletFile, "{walletname}.backup.{timestamp}", GetDirForData() ) ) ;
         }
-        if (r == CDBEnv::RECOVER_FAIL)
-            return InitError(strprintf(_("%s corrupt, salvage failed"), walletFile));
+        if ( r == CDBEnv::RECOVER_FAIL )
+            return InitError( strprintf( _("%s corrupt, salvage failed"), walletFile ) ) ;
     }
 
-    return true;
+    return true ;
 }
 
 void CWallet::SyncMetaData(pair<TxSpends::iterator, TxSpends::iterator> range)
@@ -3704,10 +3705,10 @@ bool CWallet::BackupWallet(const std::string& strDest)
                 bitdb.mapFileUseCount.erase(strWalletFile);
 
                 // Copy wallet file
-                boost::filesystem::path pathSrc = GetDataDir() / strWalletFile;
-                boost::filesystem::path pathDest(strDest);
-                if (boost::filesystem::is_directory(pathDest))
-                    pathDest /= strWalletFile;
+                boost::filesystem::path pathSrc = GetDirForData() / strWalletFile ;
+                boost::filesystem::path pathDest( strDest ) ;
+                if ( boost::filesystem::is_directory( pathDest ) )
+                    pathDest /= strWalletFile ;
 
                 try {
                     if (boost::filesystem::equivalent(pathSrc, pathDest)) {

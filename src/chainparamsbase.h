@@ -1,5 +1,5 @@
 // Copyright (c) 2014-2015 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -17,16 +17,25 @@ class CBaseChainParams
 {
 
 public:
-    /** the name of network (main, inu, test, regtest) */
+    /** the name of chain and network (main, inu, test, regtest) */
     const std::string & NameOfNetwork() const {  return networkName ;  }
 
-    const std::string & DataDir() const {  return dataDir ;  }
+    const std::string & DirForData() const {  return dataDir ;  }
 
     int GetDefaultPort() const {  return nDefaultPort ;  }
 
-    int RPCPort() const {  return nRPCPort ;  }
+    int GetRPCPort() const {  return nRPCPort ;  }
 
 protected:
+
+    CBaseChainParams( const std::string & name, const std::string & dir, int port, int rpcPort )
+        : networkName( name )
+        , dataDir( dir )
+        , nDefaultPort( port )
+        , nRPCPort( rpcPort )
+    {}
+
+private:
 
     CBaseChainParams() {}
 

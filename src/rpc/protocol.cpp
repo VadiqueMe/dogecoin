@@ -1,7 +1,7 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "rpc/protocol.h"
 
@@ -70,9 +70,9 @@ static const std::string COOKIEAUTH_FILE = ".cookie";
 
 boost::filesystem::path GetAuthCookieFile()
 {
-    boost::filesystem::path path(GetArg("-rpccookiefile", COOKIEAUTH_FILE));
-    if (!path.is_complete()) path = GetDataDir() / path;
-    return path;
+    boost::filesystem::path path( GetArg( "-rpccookiefile", COOKIEAUTH_FILE ) ) ;
+    if ( ! path.is_complete() ) path = GetDirForData() / path ;
+    return path ;
 }
 
 bool GenerateAuthCookie(std::string *cookie_out)

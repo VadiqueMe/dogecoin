@@ -231,7 +231,7 @@ QString NetworkModel::formatPeerStartupTime() const
 
 QString NetworkModel::dataDir() const
 {
-    return GUIUtil::boostPathToQString(GetDataDir());
+    return GUIUtil::boostPathToQString( GetDirForData() ) ;
 }
 
 void NetworkModel::updateBanlist()

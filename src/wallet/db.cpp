@@ -251,8 +251,8 @@ CDB::CDB(const std::string& strFilename, const char* pszMode, bool fFlushOnClose
         nFlags |= DB_CREATE;
 
     {
-        LOCK(bitdb.cs_db);
-        if ( ! bitdb.Open( GetDataDir() ) )
+        LOCK( bitdb.cs_db ) ;
+        if ( ! bitdb.Open( GetDirForData() ) )
             throw std::runtime_error( "CDB: Failed to open database environment" ) ;
 
         strFile = strFilename;

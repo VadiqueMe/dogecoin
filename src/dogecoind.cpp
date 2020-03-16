@@ -106,24 +106,23 @@ bool AppInit(int argc, char* argv[])
 
     try
     {
-        if (!boost::filesystem::is_directory(GetDataDir(false)))
+        if ( ! boost::filesystem::is_directory( GetDirForData( false ) ) )
         {
-            fprintf(stderr, "Error: Specified data directory \"%s\" does not exist.\n", GetArg("-datadir", "").c_str());
-            return false;
+            fprintf( stderr, "Error: Specified data directory \"%s\" does not exist\n", GetArg( "-datadir", "" ).c_str() ) ;
+            return false ;
         }
-        try
-        {
-            ReadConfigFile(GetArg("-conf", DOGECOIN_CONF_FILENAME));
-        } catch (const std::exception& e) {
-            fprintf(stderr,"Error reading configuration file: %s\n", e.what());
-            return false;
+        try {
+            ReadConfigFile( GetArg( "-conf", DOGECOIN_CONF_FILENAME ) ) ;
+        } catch ( const std::exception & e ) {
+            fprintf( stderr, "Error reading configuration file: %s\n", e.what() ) ;
+            return false ;
         }
 
         // Command-line RPC
-        bool fCommandLine = false;
-        for (int i = 1; i < argc; i++)
-            if (!IsSwitchChar(argv[i][0]) && !boost::algorithm::istarts_with(argv[i], "dogecoin:"))
-                fCommandLine = true;
+        bool fCommandLine = false ;
+        for ( int i = 1 ; i < argc ; i ++ )
+            if ( ! IsSwitchChar( argv[ i ][ 0 ] ) && ! boost::algorithm::istarts_with( argv[ i ], "dogecoin:" ) )
+                fCommandLine = true ;
 
         if ( fCommandLine )
         {
@@ -131,26 +130,17 @@ bool AppInit(int argc, char* argv[])
             exit( EXIT_FAILURE ) ;
         }
         // -server defaults to true for bitcoind but not for the GUI so do this here
-        SoftSetBoolArg("-server", true);
+        SoftSetBoolArg( "-server", true ) ;
         // Set this early so that parameter interactions go to console
-        InitLogging();
-        InitParameterInteraction();
-        if (!AppInitBasicSetup())
+        InitLogging() ;
+        InitParameterInteraction() ;
+        if ( ! AppInitBasicSetup() || ! AppInitParameterInteraction() || ! AppInitSanityChecks() )
         {
             // InitError will have been called with detailed error, which ends up on console
-            exit(1);
+            exit( 1 ) ;
         }
-        if (!AppInitParameterInteraction())
-        {
-            // InitError will have been called with detailed error, which ends up on console
-            exit(1);
-        }
-        if (!AppInitSanityChecks())
-        {
-            // InitError will have been called with detailed error, which ends up on console
-            exit(1);
-        }
-        if (GetBoolArg("-daemon", false))
+
+        if ( GetBoolArg( "-daemon", false ) )
         {
 #if HAVE_DECL_DAEMON
             fprintf(stdout, "Dogecoin server starting\n");

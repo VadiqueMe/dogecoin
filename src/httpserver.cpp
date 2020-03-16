@@ -317,10 +317,10 @@ static bool ThreadHTTP(struct event_base* base, struct evhttp* http)
 }
 
 /** Bind HTTP server to specified addresses */
-static bool HTTPBindAddresses(struct evhttp* http)
+static bool HTTPBindAddresses( struct evhttp* http )
 {
-    int defaultPort = GetArg("-rpcport", BaseParams().RPCPort());
-    std::vector<std::pair<std::string, uint16_t> > endpoints;
+    int defaultPort = GetArg( "-rpcport", BaseParams().GetRPCPort() ) ;
+    std::vector< std::pair< std::string, uint16_t > > endpoints ;
 
     // Determine what addresses to bind to
     if (!IsArgSet("-rpcallowip")) { // Default to loopback if not allowing external IPs

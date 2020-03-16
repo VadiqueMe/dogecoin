@@ -2144,15 +2144,15 @@ void static UpdateTip( CBlockIndex * pindexNew, const CChainParams & chainParams
     ////UpdateTipBlockNewCoins( chainParams ) ;
 
     CBlockHeader newBlock = chainActive.Tip()->GetBlockHeader( chainParams.GetConsensus( chainActive.Height() ) ) ;
-    LogPrintf( "%s: tip block sha256_hash=%s scrypt_hash=%s height=%d version=0x%x%s log2_work=%.8g newcoins=%lu txs=%lu date='%s' progress=%f cache=%.1fMiB(%u txs)\n", __func__,
+    LogPrintf( "%s: tip block height=%d sha256_hash=%s scrypt_hash=%s version=0x%x%s log2_work=%.8g newcoins=%lu txs=%lu date='%s' progress=%f cache=%.1fMiB(%u txs)\n", __func__,
+        chainActive.Height(),
         /* chainActive.Tip()->GetBlockSha256Hash().ToString() */ newBlock.GetSha256Hash().ToString(),
         newBlock.GetScryptHash().ToString(),
-        chainActive.Height(),
         newBlock.nVersion, newBlock.IsAuxpowInVersion() ? "(auxpow)" : "",
         log( chainActive.Tip()->nChainWorkHashes.getdouble() ) / log( 2.0 ),
         chainActive.Tip()->nBlockNewCoins,
         static_cast< unsigned long >( chainActive.Tip()->nChainTx ),
-        DateTimeStrFormat( "%Y-%m-%d %H:%M:%S", chainActive.Tip()->GetBlockTime() ),
+        DateTimeStrFormat( "%Y-%m-%d %H:%M:%S", /* chainActive.Tip()->GetBlockTime() */ newBlock.nTime ),
         GuessVerificationProgress( chainParams.TxData(), chainActive.Tip() ),
         pcoinsTip->DynamicMemoryUsage() * ( 1.0 / ( 1 << 20 ) ), pcoinsTip->GetCacheSize() ) ;
 
@@ -2164,34 +2164,43 @@ void static UpdateTip( CBlockIndex * pindexNew, const CChainParams & chainParams
 bool static DisconnectTip( CValidationState & state, const CChainParams & chainparams, bool fBare = false )
 {
     CBlockIndex * pindexDelete = chainActive.Tip() ;
-    assert( pindexDelete ) ;
+    assert( pindexDelete != nullptr ) ;
+
     // Read block from disk
     CBlock block ;
     if ( ! ReadBlockFromDisk( block, pindexDelete, chainparams.GetConsensus( chainActive.Height() ) ) )
         return AbortNode( state, "Failed to read block" ) ;
+
+    LogPrintf( "%s: disconnect block height=%d sha256_hash=%s scrypt_hash=%s version=0x%x%s date='%s'\n", __func__,
+        pindexDelete->nHeight,
+        block.GetSha256Hash().ToString(), block.GetScryptHash().ToString(),
+        block.nVersion, block.IsAuxpowInVersion() ? "(auxpow)" : "",
+        DateTimeStrFormat( "%Y-%m-%d %H:%M:%S", pindexDelete->GetBlockTime() ) ) ;
+
     // Apply the block atomically to the chain state
-    int64_t nStart = GetTimeMicros();
+    int64_t benchTime = GetTimeMicros();
     {
         CCoinsViewCache view( pcoinsTip ) ;
-        if (!DisconnectBlock(block, state, pindexDelete, view))
-            return error("DisconnectTip(): DisconnectBlock %s failed", pindexDelete->GetBlockSha256Hash().ToString());
-        bool flushed = view.Flush();
-        assert(flushed);
+        if ( ! DisconnectBlock( block, state, pindexDelete, view ) )
+            return error( "%s: DisconnectBlock %s failed", __func__, pindexDelete->GetBlockSha256Hash().ToString() ) ;
+        bool flushed = view.Flush() ;
+        assert( flushed ) ;
     }
-    LogPrint("bench", "- Disconnect block: %.2fms\n", (GetTimeMicros() - nStart) * 0.001);
-    // Write the chain state to disk, if necessary
-    if (!FlushStateToDisk(state, FLUSH_STATE_IF_NEEDED))
-        return false;
+    LogPrint( "bench", "- Disconnect block: %.2fms\n", ( GetTimeMicros() - benchTime ) * 0.001 ) ;
 
-    if (!fBare) {
+    // Write the chain state to disk
+    if ( ! FlushStateToDisk( state, FLUSH_STATE_IF_NEEDED ) )
+        return false ;
+
+    if ( ! fBare ) {
         // Resurrect mempool transactions from the disconnected block
-        std::vector<uint256> vHashUpdate;
-        for (const auto& it : block.vtx) {
-            const CTransaction& tx = *it;
+        std::vector< uint256 > vHashUpdate ;
+        for ( const auto & it : block.vtx ) {
+            const CTransaction & tx = *it ;
             // ignore validation errors in resurrected transactions
-            CValidationState stateDummy;
+            CValidationState stateDummy ;
             if ( tx.IsCoinBase() || ! AcceptToMemoryPool( mempool, stateDummy, it, false, NULL, NULL ) ) {
-                mempool.removeRecursive(tx, MemPoolRemovalReason::REORG);
+                mempool.removeRecursive( tx, MemPoolRemovalReason::REORG ) ;
             } else if ( mempool.exists( tx.GetTxHash() ) ) {
                 vHashUpdate.push_back( tx.GetTxHash() ) ;
             }
@@ -2201,17 +2210,17 @@ bool static DisconnectTip( CValidationState & state, const CChainParams & chainp
         // previously-confirmed transactions back to the mempool.
         // UpdateTransactionsFromBlock finds descendants of any transactions in this
         // block that were added back and cleans up the mempool state
-        mempool.UpdateTransactionsFromBlock(vHashUpdate);
+        mempool.UpdateTransactionsFromBlock( vHashUpdate ) ;
     }
 
     // Update chainActive and related variables
     UpdateTip( pindexDelete->pprev, chainparams ) ;
-    // Let wallets know transactions went from 1-confirmed to
-    // 0-confirmed or conflicted:
-    for (const auto& tx : block.vtx) {
-        GetMainSignals().SyncTransaction(*tx, pindexDelete->pprev, CMainSignals::SYNC_TRANSACTION_NOT_IN_BLOCK);
+
+    // Let wallets know transactions went from 1-confirmed to 0-confirmed or conflicted
+    for ( const auto & tx : block.vtx ) {
+        GetMainSignals().SyncTransaction( *tx, pindexDelete->pprev, CMainSignals::SYNC_TRANSACTION_NOT_IN_BLOCK ) ;
     }
-    return true;
+    return true ;
 }
 
 static int64_t nTimeReadFromDisk = 0;
@@ -2372,11 +2381,11 @@ static bool ActivateBestChainStep(CValidationState& state, const CChainParams& c
     const CBlockIndex *pindexFork = chainActive.FindFork(pindexMostWork);
 
     // Disconnect active blocks which are no longer in the best chain
-    bool fBlocksDisconnected = false;
-    while (chainActive.Tip() && chainActive.Tip() != pindexFork) {
-        if (!DisconnectTip(state, chainparams))
-            return false;
-        fBlocksDisconnected = true;
+    bool fBlocksDisconnected = false ;
+    while ( chainActive.Tip() && chainActive.Tip() != pindexFork ) {
+        if ( ! DisconnectTip( state, chainparams ) )
+            return false ;
+        fBlocksDisconnected = true ;
     }
 
     // Build list of new blocks to connect
@@ -3486,13 +3495,12 @@ void FindFilesToPrune(std::set<int>& setFilesToPrune, uint64_t nPruneAfterHeight
            nLastBlockWeCanPrune, count);
 }
 
-bool CheckDiskSpace(uint64_t nAdditionalBytes)
+bool CheckDiskSpace( uint64_t nAdditionalBytes )
 {
-    uint64_t nFreeBytesAvailable = boost::filesystem::space(GetDataDir()).available;
+    uint64_t nFreeBytesAvailable = boost::filesystem::space( GetDirForData() ).available ;
 
-    // Check for nMinDiskSpace bytes (currently 50MB)
-    if (nFreeBytesAvailable < nMinDiskSpace + nAdditionalBytes)
-        return AbortNode("Disk space is low!", _("Error: Disk space is low!"));
+    if ( nFreeBytesAvailable < nMinDiskSpace + nAdditionalBytes )
+        return AbortNode( "Disk space is low!", _("Error: Disk space is low!") ) ;
 
     return true;
 }
@@ -3528,9 +3536,9 @@ FILE* OpenUndoFile(const CDiskBlockPos &pos, bool fReadOnly) {
     return OpenDiskFile(pos, "rev", fReadOnly);
 }
 
-boost::filesystem::path GetBlockPosFilename(const CDiskBlockPos &pos, const char *prefix)
+boost::filesystem::path GetBlockPosFilename( const CDiskBlockPos & pos, const char * prefix )
 {
-    return GetDataDir() / "blocks" / strprintf("%s%05u.dat", prefix, pos.nFile);
+    return GetDirForData() / "blocks" / strprintf( "%s%05u.dat", prefix, pos.nFile ) ;
 }
 
 CBlockIndex * InsertBlockIndex( uint256 hash )
@@ -4281,122 +4289,6 @@ int VersionBitsTipStateSinceHeight(const Consensus::Params& params, Consensus::D
 {
     LOCK(cs_main);
     return VersionBitsStateSinceHeight(chainActive.Tip(), params, pos, versionbitscache);
-}
-
-static const uint64_t MEMPOOL_DUMP_VERSION = 1;
-
-bool LoadMempool(void)
-{
-    int64_t nExpiryTimeout = GetArg( "-mempoolexpiry", DEFAULT_MEMPOOL_EXPIRY ) * 60 * 60 ;
-    FILE* mempoolFile = fopen( ( GetDataDir() / "mempool.dat" ).string().c_str(), "rb" ) ;
-    if ( mempoolFile == nullptr ) {
-        LogPrintf( "Failed to open mempool file for reading from disk. Continuing anyway\n" ) ;
-        return false ;
-    }
-
-    CAutoFile file( mempoolFile, SER_DISK, PEER_VERSION ) ;
-
-    int64_t count = 0;
-    int64_t skipped = 0;
-    int64_t failed = 0;
-    int64_t nNow = GetTime();
-
-    try {
-        uint64_t version;
-        file >> version;
-        if (version != MEMPOOL_DUMP_VERSION) {
-            return false;
-        }
-        uint64_t num;
-        file >> num;
-        double prioritydummy = 0;
-        while (num--) {
-            CTransactionRef tx;
-            int64_t nTime;
-            int64_t nFeeDelta;
-            file >> tx;
-            file >> nTime;
-            file >> nFeeDelta;
-
-            CAmount amountdelta = nFeeDelta ;
-            if ( amountdelta != 0 ) {
-                mempool.PrioritiseTransaction( tx->GetTxHash(), tx->GetTxHash().ToString(), prioritydummy, amountdelta ) ;
-            }
-            CValidationState state;
-            if (nTime + nExpiryTimeout > nNow) {
-                LOCK(cs_main);
-                AcceptToMemoryPoolWithTime(mempool, state, tx, true, NULL, nTime);
-                if (state.IsValid()) {
-                    ++count;
-                } else {
-                    ++failed;
-                }
-            } else {
-                ++skipped;
-            }
-            if (ShutdownRequested())
-                return false;
-        }
-        std::map<uint256, CAmount> mapDeltas;
-        file >> mapDeltas;
-
-        for (const auto& i : mapDeltas) {
-            mempool.PrioritiseTransaction(i.first, i.first.ToString(), prioritydummy, i.second);
-        }
-    } catch ( const std::exception & e ) {
-        LogPrintf( "Failed to deserialize mempool data on disk: %s. Continuing anyway.\n", e.what() ) ;
-        return false ;
-    }
-
-    LogPrintf( "Imported mempool transactions from disk: %i okay, %i failed, %i expired\n", count, failed, skipped ) ;
-    return true;
-}
-
-void DumpMempool()
-{
-    int64_t start = GetTimeMicros();
-
-    std::map<uint256, CAmount> mapDeltas;
-    std::vector<TxMempoolInfo> vinfo;
-
-    {
-        LOCK(mempool.cs);
-        for (const auto &i : mempool.mapDeltas) {
-            mapDeltas[i.first] = i.second.second;
-        }
-        vinfo = mempool.infoAll();
-    }
-
-    int64_t mid = GetTimeMicros();
-
-    try {
-        FILE* filestr = fopen((GetDataDir() / "mempool.dat.new").string().c_str(), "wb");
-        if (!filestr) {
-            return;
-        }
-
-        CAutoFile file( filestr, SER_DISK, PEER_VERSION ) ;
-
-        uint64_t version = MEMPOOL_DUMP_VERSION;
-        file << version;
-
-        file << (uint64_t)vinfo.size();
-        for (const auto& i : vinfo) {
-            file << *(i.tx);
-            file << (int64_t)i.nTime;
-            file << (int64_t)i.nFeeDelta;
-            mapDeltas.erase( i.tx->GetTxHash() ) ;
-        }
-
-        file << mapDeltas ;
-        FileCommit( file.get() ) ;
-        file.fclose() ;
-        RenameOver( GetDataDir() / "mempool.dat.new", GetDataDir() / "mempool.dat" ) ;
-        int64_t last = GetTimeMicros() ;
-        LogPrintf( "Dumped mempool: %g s to copy, %g s to dump\n", ( mid - start ) * 0.000001, ( last - mid ) * 0.000001 ) ;
-    } catch ( const std::exception & e ) {
-        LogPrintf( "Can't dump mempool: %s. Continuing anyway\n", e.what() ) ;
-    }
 }
 
 // Guess how far we are in the verification process at the given block index

@@ -39,7 +39,7 @@ std::string HelpMessageCli()
     strUsage += HelpMessageOpt("-named", strprintf(_("Pass named instead of positional arguments (default: %s)"), DEFAULT_NAMED));
     strUsage += HelpMessageOpt("-rpcconnect=<ip>", strprintf(_("Send commands to node running on <ip> (default: %s)"), DEFAULT_RPCCONNECT));
     strUsage += HelpMessageOpt( "-rpcport=<port>",
-                    strprintf( "Connect to JSON-RPC on <port> (default for chain \"%s\": %u)", NameOfChain(), BaseParams().RPCPort() )
+                    strprintf( "Connect to JSON-RPC on <port> (default for chain \"%s\": %u)", NameOfChain(), BaseParams().GetRPCPort() )
                   ) ;
     strUsage += HelpMessageOpt("-rpcwait", _("Wait for RPC server to start"));
     strUsage += HelpMessageOpt("-rpcuser=<user>", _("Username for JSON-RPC connections"));
@@ -109,9 +109,9 @@ static int AppInitRPC(int argc, char* argv[])
         return EXIT_SUCCESS;
     }
 
-    if (!boost::filesystem::is_directory(GetDataDir(false))) {
-        fprintf(stderr, "Error: Specified data directory \"%s\" does not exist\n", GetArg("-datadir", "").c_str());
-        return EXIT_FAILURE;
+    if ( ! boost::filesystem::is_directory( GetDirForData( false ) ) ) {
+        fprintf( stderr, "Error: Specified data directory \"%s\" does not exist\n", GetArg( "-datadir", "" ).c_str() ) ;
+        return EXIT_FAILURE ;
     }
 
     try {
@@ -196,10 +196,10 @@ static void http_error_cb(enum evhttp_request_error err, void *ctx)
 }
 #endif
 
-UniValue CallRPC(const std::string& strMethod, const UniValue& params)
+UniValue CallRPC( const std::string & strMethod, const UniValue & params )
 {
-    std::string host = GetArg("-rpcconnect", DEFAULT_RPCCONNECT);
-    int port = GetArg("-rpcport", BaseParams().RPCPort());
+    std::string host = GetArg( "-rpcconnect", DEFAULT_RPCCONNECT ) ;
+    int port = GetArg( "-rpcport", BaseParams().GetRPCPort() ) ;
 
     // Obtain event base
     raii_event_base base = obtain_event_base();

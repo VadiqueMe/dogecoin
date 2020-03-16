@@ -81,18 +81,15 @@ static QString ipcServerName()
     QString name("DogecoinQt");
 
     // Append a simple hash of the datadir
-    // Note that GetDataDir(true) returns a different path
-    // for -testnet versus main net
-    QString ddir(GUIUtil::boostPathToQString(GetDataDir(true)));
-    name.append(QString::number(qHash(ddir)));
+    QString ddir( GUIUtil::boostPathToQString( GetDirForData( true ) ) ) ;
+    name.append( QString::number(qHash( ddir )) ) ;
 
-    return name;
+    return name ;
 }
 
-//
 // We store payment URIs and requests received before
 // the main GUI window is up and ready to ask the user
-// to send payment.
+// to send payment
 
 static QList<QString> savedPaymentRequests;
 

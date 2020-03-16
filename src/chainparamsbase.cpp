@@ -1,6 +1,6 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -14,6 +14,7 @@
 void AppendParamsHelpMessages( std::string & strUsage, bool debugHelp )
 {
     strUsage += HelpMessageGroup( _("Chain selection options:") ) ;
+    strUsage += HelpMessageOpt( "-main", "Use the main chain" ) ;
     strUsage += HelpMessageOpt( "-inu", "Use the inu chain" ) ;
     strUsage += HelpMessageOpt( "-testnet", "Use the test chain" ) ;
     if ( debugHelp )
@@ -26,12 +27,7 @@ void AppendParamsHelpMessages( std::string & strUsage, bool debugHelp )
 class CBaseMainParams : public CBaseChainParams
 {
 public:
-    CBaseMainParams()
-    {
-        networkName = "main" ;
-        nDefaultPort = 22556 ;
-        nRPCPort = 22555 ;
-    }
+    CBaseMainParams() : CBaseChainParams( "main", "main", 22556, 22555 ) {}
 } ;
 static std::unique_ptr< CBaseMainParams > mainBaseParams ( nullptr ) ;
 
@@ -41,13 +37,7 @@ static std::unique_ptr< CBaseMainParams > mainBaseParams ( nullptr ) ;
 class CBaseInuParams : public CBaseChainParams
 {
 public:
-    CBaseInuParams()
-    {
-        networkName = "inu" ;
-        dataDir = "inuchain" ;
-        nDefaultPort = 55336 ;
-        nRPCPort = 55334 ;
-    }
+    CBaseInuParams() : CBaseChainParams( "inu", "inuchain", 55336, 55334 ) {}
 } ;
 static std::unique_ptr< CBaseInuParams > inuBaseParams ( nullptr ) ;
 
@@ -57,13 +47,7 @@ static std::unique_ptr< CBaseInuParams > inuBaseParams ( nullptr ) ;
 class CBaseTestNetParams : public CBaseChainParams
 {
 public:
-    CBaseTestNetParams()
-    {
-        networkName = "test" ;
-        dataDir = "testnet3" ;
-        nDefaultPort = 44556 ;
-        nRPCPort = 44555 ;
-    }
+    CBaseTestNetParams() : CBaseChainParams( "test", "testnet3", 44556, 44555 ) {}
 } ;
 static std::unique_ptr< CBaseTestNetParams > testNetBaseParams ( nullptr ) ;
 
@@ -73,13 +57,7 @@ static std::unique_ptr< CBaseTestNetParams > testNetBaseParams ( nullptr ) ;
 class CBaseRegTestParams : public CBaseChainParams
 {
 public:
-    CBaseRegTestParams()
-    {
-        networkName = "regtest" ;
-        dataDir = "regtest" ;
-        nDefaultPort = 18444 ;
-        nRPCPort = 18332 ;
-    }
+    CBaseRegTestParams() : CBaseChainParams( "regtest", "regtest", 18444, 18332 ) {}
 } ;
 static std::unique_ptr< CBaseRegTestParams > regTestBaseParams ( nullptr ) ;
 
@@ -121,22 +99,26 @@ const std::string & NameOfChain()
 
 std::string ChainNameFromArguments()
 {
+    bool mainChain = GetBoolArg( "-main", false ) ;
     bool inuChain = GetBoolArg( "-inu", false ) ;
     bool fTestNet = GetBoolArg( "-testnet", false ) ;
     bool fRegTest = GetBoolArg( "-regtest", false ) ;
 
     if ( fTestNet && fRegTest )
         throw std::runtime_error( "-regtest and -testnet together?" ) ;
+    if ( mainChain && inuChain )
+        throw std::runtime_error( "-inu and -main together?" ) ;
+    if ( mainChain && ( fTestNet || fRegTest ) )
+        throw std::runtime_error( "-main and -regtest/-testnet together?" ) ;
     if ( inuChain && ( fTestNet || fRegTest ) )
         throw std::runtime_error( "-inu and -regtest/-testnet together?" ) ;
 
     std::string chain = "main" ;
 
+    if ( mainChain ) chain = "main" ;
     if ( fRegTest ) chain = "regtest" ;
     if ( fTestNet ) chain = "test" ;
     if ( inuChain ) chain = "inu" ;
-
-    ///LogPrintf( "%s: \"%s\"\n", __func__, chain ) ;
 
     return chain ;
 }

@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -32,7 +32,7 @@
 class CAutoFile ;
 class CBlockIndex ;
 
-/** Fake height value used in CCoins to signify they are only in the memory pool (since 0.8) */
+/** Fake height value used in CCoins to signify they are only in the memory pool */
 static const unsigned int MEMPOOL_HEIGHT = 0x7FFFFFFF ;
 
 struct LockPoints
@@ -44,7 +44,7 @@ struct LockPoints
     int64_t time;
     // As long as the current chain descends from the highest height block
     // containing one of the inputs used in the calculation, then the cached
-    // values are still valid even after a reorg.
+    // values are still valid even after a reorg
     CBlockIndex* maxInputBlock;
 
     LockPoints() : height(0), time(0), maxInputBlock(NULL) { }
@@ -56,16 +56,16 @@ class CTxMemPool;
  *
  * CTxMemPoolEntry stores data about the corresponding transaction, as well
  * as data about all in-mempool transactions that depend on the transaction
- * ("descendant" transactions).
+ * ("descendant" transactions)
  *
  * When a new entry is added to the mempool, we update the descendant state
- * (nCountWithDescendants, nSizeWithDescendants, and nModFeesWithDescendants) for
- * all ancestors of the newly added transaction.
+ * (nCountWithDescendants, nSizeWithDescendants, and nModFeesWithDescendants)
+ * for all ancestors of the newly added transaction
  *
- * If updating the descendant state is skipped, we can mark the entry as
- * "dirty", and set nSizeWithDescendants/nModFeesWithDescendants to equal nTxSize/
- * nFee+feeDelta. (This can potentially happen during a reorg, where we limit the
- * amount of work we're willing to do to avoid consuming too much CPU.)
+ * If updating the descendant state is skipped, we can mark the entry as "dirty",
+ * and set nSizeWithDescendants/nModFeesWithDescendants to equal nTxSize/nFee + feeDelta
+ * (This can potentially happen during a reorg, where we limit the amount of work
+ * we're willing to do to avoid consuming too much CPU)
  *
  */
 
@@ -113,7 +113,7 @@ public:
     CTransactionRef GetSharedTx() const { return this->tx; }
     /**
      * Fast calculation of lower bound of current priority as update
-     * from entry priority. Only inputs that were originally in-chain will age.
+     * from entry priority. Only inputs that were originally in-chain will age
      */
     double GetPriority(unsigned int currentHeight) const;
     const CAmount& GetFee() const { return nFee; }
@@ -126,12 +126,11 @@ public:
     size_t DynamicMemoryUsage() const { return nUsageSize; }
     const LockPoints& GetLockPoints() const { return lockPoints; }
 
-    // Adjusts the descendant state, if this entry is not dirty.
+    // Adjusts the descendant state, if this entry is not dirty
     void UpdateDescendantState(int64_t modifySize, CAmount modifyFee, int64_t modifyCount);
     // Adjusts the ancestor state
     void UpdateAncestorState(int64_t modifySize, CAmount modifyFee, int64_t modifyCount, int modifySigOps);
-    // Updates the fee delta used for mining priority score, and the
-    // modified fees with descendants.
+    // Updates the fee delta used for mining priority score, and the modified fees with descendants
     void UpdateFeeDelta(int64_t feeDelta);
     // Update the LockPoints after a reorg
     void UpdateLockPoints(const LockPoints& lp);
@@ -150,7 +149,7 @@ public:
     mutable size_t vTxHashesIdx; //!< Index in mempool's vTxHashes
 };
 
-// Helpers for modifying CTxMemPool::mapTx, which is a boost multi_index.
+// Helpers for modifying CTxMemPool::mapTx, which is a boost multi_index
 struct update_descendant_state
 {
     update_descendant_state(int64_t _modifySize, CAmount _modifyFee, int64_t _modifyCount) :
@@ -214,7 +213,7 @@ struct mempoolentry_txid
 
 /** \class CompareTxMemPoolEntryByDescendantScore
  *
- *  Sort an entry by max(score/size of entry's tx, score/size with all descendants).
+ *  Sort an entry by max(score/size of entry's tx, score/size with all descendants)
  */
 class CompareTxMemPoolEntryByDescendantScore
 {
@@ -230,7 +229,7 @@ public:
         double bModFee = fUseBDescendants ? b.GetModFeesWithDescendants() : b.GetModifiedFee();
         double bSize = fUseBDescendants ? b.GetSizeWithDescendants() : b.GetTxSize();
 
-        // Avoid division by rewriting (a/b > c/d) as (a*d > c*b).
+        // Avoid division by rewriting (a/b > c/d) as (a*d > c*b)
         double f1 = aModFee * bSize;
         double f2 = aSize * bModFee;
 
@@ -240,7 +239,7 @@ public:
         return f1 < f2;
     }
 
-    // Calculate which score to use for an entry (avoiding division).
+    // Calculate which score to use for an entry (avoiding division)
     bool UseDescendantScore(const CTxMemPoolEntry &a) const
     {
         double f1 = (double)a.GetModifiedFee() * a.GetSizeWithDescendants();
@@ -324,7 +323,7 @@ struct TxMempoolInfo
 } ;
 
 /** Reason why a transaction was removed from the mempool,
- * this is passed to the notification signal.
+ * this is passed to the notification signal
  */
 enum class MemPoolRemovalReason {
     UNKNOWN = 0, //! Manually removed or unknown reason
@@ -353,16 +352,16 @@ enum class MemPoolRemovalReason {
  *
  * Note: the term "descendant" refers to in-mempool transactions that depend on
  * this one, while "ancestor" refers to in-mempool transactions that a given
- * transaction depends on.
+ * transaction depends on
  *
  * In order for the feerate sort to remain correct, we must update transactions
  * in the mempool when new descendants arrive.  To facilitate this, we track
- * the set of in-mempool direct parents and direct children in mapLinks.  Within
- * each CTxMemPoolEntry, we track the size and fees of all descendants.
+ * the set of in-mempool direct parents and direct children in mapLinks. Within
+ * each CTxMemPoolEntry, we track the size and fees of all descendants
  *
  * Usually when a new transaction is added to the mempool, it has no in-mempool
- * children (because any such children would be an orphan).  So in
- * addUnchecked(), we:
+ * children (because any such children would be an orphan)
+ * So in addUnchecked():
  * - update a new entry's setMemPoolParents to include all in-mempool parents
  * - update the new entry's direct parents to include the new tx as a child
  * - update all ancestors of the transaction to include the new tx's size/fee
@@ -372,11 +371,11 @@ enum class MemPoolRemovalReason {
  * - update all ancestors to not include the tx's size/fees in descendant state
  * - update all in-mempool children to not include it as a parent
  *
- * These happen in UpdateForRemoveFromMempool().  (Note that when removing a
- * transaction along with its descendants, we must calculate that set of
- * transactions to be removed before doing the removal, or else the mempool can
- * be in an inconsistent state where it's impossible to walk the ancestors of
- * a transaction.)
+ * These happen in UpdateForRemoveFromMempool()
+ * (Note that when removing a transaction along with its descendants, we must
+ * calculate that set of transactions to be removed before doing the removal,
+ * or else the mempool can be in an inconsistent state where it's impossible
+ * to walk the ancestors of a transaction)
  *
  * In the event of a reorg, the assumption that a newly added tx has no
  * in-mempool children is false.  In particular, the mempool is in an
@@ -392,14 +391,14 @@ enum class MemPoolRemovalReason {
  * until this is called, the mempool state is not consistent, and in particular
  * mapLinks may not be correct (and therefore functions like
  * CalculateMemPoolAncestors() and CalculateDescendants() that rely
- * on them to walk the mempool are not generally safe to use).
+ * on them to walk the mempool are not generally safe to use)
  *
  * Computational limits:
  *
  * Updating all in-mempool ancestors of a newly added transaction can be slow,
  * if no bound exists on how many in-mempool ancestors there may be.
  * CalculateMemPoolAncestors() takes configurable limits that are designed to
- * prevent these calculations from being too CPU intensive.
+ * prevent these calculations from being too CPU intensive
  *
  * Adding transactions from a disconnected block can be very time consuming,
  * because we don't have a way to limit the number of in-mempool descendants.
@@ -407,13 +406,13 @@ enum class MemPoolRemovalReason {
  * to properly update the descendant information for a tx being added from
  * a disconnected block.  If we would exceed the limit, then we instead mark
  * the entry as "dirty", and set the feerate for sorting purposes to be equal
- * the feerate of the transaction without any descendants.
+ * the feerate of the transaction without any descendants
  *
  */
 class CTxMemPool
 {
 private:
-    uint32_t nCheckFrequency; //!< Value n means that n times in 2^32 we check.
+    uint32_t nCheckFrequency; //!< Value n means that n times in 2^32 we check
     unsigned int nTransactionsUpdated; //!< Used by getblocktemplate to trigger CreateNewBlock() invocation
 
     uint64_t totalTxSize;      //!< sum of all mempool tx's virtual sizes. Differs from serialized tx size since witness data is discounted. Defined in BIP 141.
@@ -506,7 +505,7 @@ public:
      * If sanity-checking is turned on, check makes sure the pool is
      * consistent (does not contain two transactions that spend the same inputs,
      * all inputs are in the mapNextTx array). If sanity-checking is turned off,
-     * check does nothing.
+     * check does nothing
      */
     void check(const CCoinsViewCache *pcoins) const;
     void setSanityCheck(double dFrequency = 1.0) { nCheckFrequency = dFrequency * 4294967295.0; }
@@ -677,16 +676,16 @@ public:
 } ;
 
 // We want to sort transactions by coin age priority
-typedef std::pair<double, CTxMemPool::txiter> TxCoinAgePriority;
+typedef std::pair< double, CTxMemPool::txiter > TxCoinAgePriority ;
 
 struct TxCoinAgePriorityCompare
 {
-    bool operator()(const TxCoinAgePriority& a, const TxCoinAgePriority& b)
+    bool operator()( const TxCoinAgePriority & a, const TxCoinAgePriority & b )
     {
-        if (a.first == b.first)
-            return CompareTxMemPoolEntryByScore()(*(b.second), *(a.second)); //Reverse order to make sort less than
-        return a.first < b.first;
+        if ( a.first == b.first )
+            return CompareTxMemPoolEntryByScore()( *( b.second ), *( a.second ) ) ; // reverse order to make sort less than
+        return a.first < b.first ;
     }
-};
+} ;
 
-#endif // BITCOIN_TXMEMPOOL_H
+#endif

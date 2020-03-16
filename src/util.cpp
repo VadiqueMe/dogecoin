@@ -196,7 +196,7 @@ void OpenDebugLog()
     boost::mutex::scoped_lock scoped_lock( *mutexDebugLog ) ;
 
     assert( fileout == nullptr ) ;
-    boost::filesystem::path pathToDebugLog = GetDataDir() / LOG_FILE_NAME ;
+    boost::filesystem::path pathToDebugLog = GetDirForData() / LOG_FILE_NAME ;
     fileout.reset( fopen( pathToDebugLog.string().c_str (), "a" ) ) ;
     if ( fileout != nullptr ) {
         setbuf( fileout.get(), NULL ) ; // unbuffered
@@ -293,7 +293,7 @@ int LogPrintStr( const std::string & str )
         }
         else
         {
-            boost::filesystem::path pathToDebugLog = GetDataDir() / LOG_FILE_NAME ;
+            boost::filesystem::path pathToDebugLog = GetDirForData() / LOG_FILE_NAME ;
             if ( ! boost::filesystem::exists( pathToDebugLog ) ) // log file is absent
                 fReopenDebugLog = true ;
 
@@ -460,20 +460,19 @@ void PrintExceptionContinue(const std::exception* pex, const char* pszThread)
 
 boost::filesystem::path GetDefaultDataDir()
 {
-    namespace fs = boost::filesystem;
     // Windows: C:\Users\Username\AppData\Roaming\Dogecoin
     // Mac: ~/Library/Application Support/Dogecoin
     // Unix: ~/.dogecoin
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "Dogecoin";
+    return GetSpecialFolderPath( CSIDL_APPDATA ) / "Dogecoin" ;
 #else
-    fs::path pathRet;
-    char* pszHome = getenv("HOME");
-    if (pszHome == NULL || strlen(pszHome) == 0)
-        pathRet = fs::path("/");
+    boost::filesystem::path pathRet ;
+    char* pszHome = getenv( "HOME" ) ;
+    if ( pszHome == NULL || strlen( pszHome ) == 0 )
+        pathRet = boost::filesystem::path( "/" ) ;
     else
-        pathRet = fs::path(pszHome);
+        pathRet = boost::filesystem::path( pszHome ) ;
 #ifdef MAC_OSX
     // Mac
     return pathRet / "Library/Application Support/Dogecoin";
@@ -484,38 +483,36 @@ boost::filesystem::path GetDefaultDataDir()
 #endif
 }
 
-static boost::filesystem::path pathCached;
-static boost::filesystem::path pathCachedNetSpecific;
-static CCriticalSection csPathCached;
+static boost::filesystem::path pathCached ;
+static boost::filesystem::path pathCachedNetSpecific ;
+static CCriticalSection csPathCached ;
 
-const boost::filesystem::path &GetDataDir(bool fNetSpecific)
+const boost::filesystem::path & GetDirForData( bool fNetSpecific )
 {
-    namespace fs = boost::filesystem;
+    LOCK( csPathCached ) ;
 
-    LOCK(csPathCached);
-
-    fs::path &path = fNetSpecific ? pathCachedNetSpecific : pathCached;
+    boost::filesystem::path & path = fNetSpecific ? pathCachedNetSpecific : pathCached ;
 
     // This can be called during exceptions by LogPrintf(), so we cache the
-    // value so we don't have to do memory allocations after that.
-    if (!path.empty())
-        return path;
+    // value so we don't have to do memory allocations after that
+    if ( ! path.empty() )
+        return path ;
 
-    if (IsArgSet("-datadir")) {
-        path = fs::system_complete(GetArg("-datadir", ""));
-        if (!fs::is_directory(path)) {
-            path = "";
-            return path;
+    if ( IsArgSet( "-datadir" ) ) {
+        path = boost::filesystem::system_complete( GetArg( "-datadir", "" ) ) ;
+        if ( ! boost::filesystem::is_directory( path ) ) {
+            path = "" ;
+            return path ;
         }
     } else {
-        path = GetDefaultDataDir();
+        path = GetDefaultDataDir() ;
     }
-    if (fNetSpecific)
-        path /= BaseParams().DataDir();
+    if ( fNetSpecific )
+        path /= BaseParams().DirForData() ;
 
-    fs::create_directories(path);
+    boost::filesystem::create_directories( path ) ;
 
-    return path;
+    return path ;
 }
 
 void ClearDatadirCache()
@@ -526,13 +523,13 @@ void ClearDatadirCache()
     pathCachedNetSpecific = boost::filesystem::path();
 }
 
-boost::filesystem::path GetConfigFile(const std::string& confPath)
+boost::filesystem::path GetConfigFile( const std::string & confPath )
 {
-    boost::filesystem::path pathConfigFile(confPath);
-    if (!pathConfigFile.is_complete())
-        pathConfigFile = GetDataDir(false) / pathConfigFile;
+    boost::filesystem::path pathConfigFile( confPath ) ;
+    if ( ! pathConfigFile.is_complete() )
+        pathConfigFile = GetDirForData( false ) / pathConfigFile ;
 
-    return pathConfigFile;
+    return pathConfigFile ;
 }
 
 void ReadConfigFile( const std::string & confPath )
@@ -564,9 +561,9 @@ void ReadConfigFile( const std::string & confPath )
 #ifndef WIN32
 boost::filesystem::path GetPidFile()
 {
-    boost::filesystem::path pathPidFile(GetArg("-pid", BITCOIN_PID_FILENAME));
-    if (!pathPidFile.is_complete()) pathPidFile = GetDataDir() / pathPidFile;
-    return pathPidFile;
+    boost::filesystem::path pathPidFile( GetArg( "-pid", BITCOIN_PID_FILENAME ) ) ;
+    if ( ! pathPidFile.is_complete() ) pathPidFile = GetDirForData() / pathPidFile ;
+    return pathPidFile ;
 }
 
 void CreatePidFile(const boost::filesystem::path &path, pid_t pid)
@@ -709,7 +706,7 @@ void ShrinkLogFile()
     // Amount of log to save at end when shrinking
     constexpr size_t RECENT_DEBUG_HISTORY_SIZE = 10 * 1000000;
     // Scroll log if it's getting too big
-    boost::filesystem::path pathLog = GetDataDir() / LOG_FILE_NAME ;
+    boost::filesystem::path pathLog = GetDirForData() / LOG_FILE_NAME ;
     FILE* file = fopen(pathLog.string().c_str(), "r");
     // If log file is more than 10% bigger the RECENT_DEBUG_HISTORY_SIZE
     // trim it down by saving only the last RECENT_DEBUG_HISTORY_SIZE bytes
@@ -733,19 +730,14 @@ void ShrinkLogFile()
 }
 
 #ifdef WIN32
-boost::filesystem::path GetSpecialFolderPath(int nFolder, bool fCreate)
+boost::filesystem::path GetSpecialFolderPath( int nFolder, bool fCreate )
 {
-    namespace fs = boost::filesystem;
+    char pszPath[ MAX_PATH ] = "" ;
+    if ( SHGetSpecialFolderPathA( NULL, pszPath, nFolder, fCreate ) )
+        return boost::filesystem::path( pszPath ) ;
 
-    char pszPath[MAX_PATH] = "";
-
-    if(SHGetSpecialFolderPathA(NULL, pszPath, nFolder, fCreate))
-    {
-        return fs::path(pszPath);
-    }
-
-    LogPrintf("SHGetSpecialFolderPathA() failed, could not obtain requested path.\n");
-    return fs::path("");
+    LogPrintf( "%s: SHGetSpecialFolderPathA() failed, could not obtain requested path\n", __func__ ) ;
+    return boost::filesystem::path( "" ) ;
 }
 #endif
 

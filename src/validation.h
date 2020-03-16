@@ -538,10 +538,4 @@ static const unsigned int REJECT_CONFLICT = 0x102;
 /** Get block file info entry for one block file */
 CBlockFileInfo* GetBlockFileInfo(size_t n);
 
-/** Dump the mempool to disk. */
-void DumpMempool();
-
-/** Load the mempool from disk. */
-bool LoadMempool();
-
 #endif
