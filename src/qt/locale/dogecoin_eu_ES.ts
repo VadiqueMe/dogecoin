@@ -300,10 +300,6 @@
         <source>Copy label</source>
         <translation>Kopiatu etiketa</translation>
     </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(etiketarik ez)</translation>
-    </message>
     </context>
 <context>
     <name>EditAddressDialog</name>
@@ -312,12 +308,12 @@
         <translation>Editatu helbidea</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Etiketa</translation>
+        <source>Label</source>
+        <translation>Etiketa</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Helbidea</translation>
+        <source>Address</source>
+        <translation>Helbidea</translation>
     </message>
     <message>
         <source>New receiving address</source>
@@ -406,16 +402,16 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>Kopurua</translation>
+        <source>Amount:</source>
+        <translation>Kopurua:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Etiketa:</translation>
+        <source>Label:</source>
+        <translation>Etiketa:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>Mezua</translation>
+        <source>Message:</source>
+        <translation>Mezua:</translation>
     </message>
     <message>
         <source>Copy label</source>
@@ -472,24 +468,12 @@
         <translation>Kopurua</translation>
     </message>
     <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Bidali hainbat jasotzaileri batera</translation>
-    </message>
-    <message>
         <source>Balance:</source>
         <translation>Saldoa:</translation>
     </message>
     <message>
-        <source>Confirm the send action</source>
-        <translation>Berretsi bidaltzeko ekintza</translation>
-    </message>
-    <message>
         <source>Confirm send coins</source>
         <translation>Berretsi txanponak bidaltzea</translation>
-    </message>
-    <message>
-        <source>The amount to pay must be larger than 0.</source>
-        <translation>Ordaintzeko kopurua 0 baino handiagoa izan behar du.</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -499,28 +483,20 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>K&amp;opurua:</translation>
+        <source>Amount:</source>
+        <translation>Kopurua:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>Ordaindu &amp;honi:</translation>
+        <source>Pay To:</source>
+        <translation>Ordaindu honi:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Etiketa:</translation>
-    </message>
-    <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
+        <source>Label:</source>
+        <translation>Etiketa:</translation>
     </message>
     <message>
         <source>Paste address from clipboard</source>
         <translation>Itsatsi helbidea arbeletik</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Message:</source>
@@ -544,16 +520,8 @@
 <context>
     <name>SignVerifyMessageDialog</name>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Itsatsi helbidea arbeletik</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
 </context>
 <context>

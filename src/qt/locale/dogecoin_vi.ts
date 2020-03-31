@@ -48,11 +48,11 @@
 <context>
     <name>EditAddressDialog</name>
     <message>
-        <source>&amp;Label</source>
+        <source>Label</source>
         <translation>Nhãn dữ liệu</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
+        <source>Address</source>
         <translation>Địa chỉ</translation>
     </message>
     </context>

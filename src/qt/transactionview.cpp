@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -331,26 +331,22 @@ void TransactionView::chooseWatchonly(int idx)
         (TransactionFilterProxy::WatchOnlyFilter)watchOnlyWidget->itemData(idx).toInt());
 }
 
-void TransactionView::changedPrefix(const QString &prefix)
+void TransactionView::changedPrefix( const QString & prefix )
 {
-    if(!transactionProxyModel)
-        return;
-    transactionProxyModel->setAddressPrefix(prefix);
+    if ( transactionProxyModel == nullptr ) return ;
+
+    transactionProxyModel->setAddressPrefix( prefix ) ;
 }
 
-void TransactionView::changedAmount(const QString &amount)
+void TransactionView::changedAmount( const QString & amount )
 {
-    if(!transactionProxyModel)
-        return;
-    CAmount amount_parsed = 0;
-    if ( UnitsOfCoin::parse( walletModel->getOptionsModel()->getDisplayUnit(), amount, &amount_parsed ) )
-    {
-        transactionProxyModel->setMinAmount(amount_parsed);
-    }
+    if ( transactionProxyModel == nullptr ) return ;
+
+    CAmount amount_parsed = 0 ;
+    if ( UnitsOfCoin::parseString( walletModel->getOptionsModel()->getDisplayUnit(), amount, &amount_parsed ) )
+        transactionProxyModel->setMinAmount( amount_parsed ) ;
     else
-    {
-        transactionProxyModel->setMinAmount(0);
-    }
+        transactionProxyModel->setMinAmount( 0 ) ;
 }
 
 void TransactionView::exportClicked()

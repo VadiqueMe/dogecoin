@@ -128,10 +128,10 @@ void PaymentServerTests::paymentServerTests()
     QByteArray byteArray;
 
     // For the tests below we just need the payment request data from
-    // paymentrequestdata.h parsed + stored in r.paymentRequest.
+    // paymentrequestdata.h parsed + stored in r.paymentRequest
     //
     // These tests require us to bypass the following normal client execution flow
-    // shown below to be able to explicitly just trigger a certain condition!
+    // shown below to be able to explicitly just trigger a certain condition
     //
     // handleRequest()
     // -> PaymentServer::eventFilter()
@@ -139,12 +139,12 @@ void PaymentServerTests::paymentServerTests()
     //     -> PaymentServer::readPaymentRequestFromFile()
     //       -> PaymentServer::processPaymentRequest()
 
-    // Contains a testnet paytoaddress, so payment request network doesn't match client network:
+    // Contains a testnet paytoaddress, so payment request network doesn't match
     data = DecodeBase64(paymentrequest1_cert2_BASE64);
     byteArray = QByteArray((const char*)&data[0], data.size());
     r.paymentRequest.parse(byteArray);
     // Ensure the request is initialized, because network "main" is default, even for
-    // uninizialized payment requests and that will fail our test here.
+    // uninizialized payment requests and that will fail our test here
     QVERIFY(r.paymentRequest.IsInitialized());
     QCOMPARE(PaymentServer::verifyNetwork(r.paymentRequest.getDetails()), false);
 

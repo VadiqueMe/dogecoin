@@ -288,10 +288,6 @@
         <source>no</source>
         <translation>jo</translation>
     </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(pa etiketë)</translation>
-    </message>
     </context>
 <context>
     <name>EditAddressDialog</name>
@@ -300,12 +296,12 @@
         <translation>Ndrysho Adresën</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Etiketë</translation>
+        <source>Label</source>
+        <translation>Etiketë</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Adresa</translation>
+        <source>Address</source>
+        <translation>Adresa</translation>
     </message>
     <message>
         <source>New receiving address</source>
@@ -438,12 +434,12 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
+        <source>Amount:</source>
         <translation>Shuma:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Etiketë:</translation>
+        <source>Label:</source>
+        <translation>Etiketë:</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -496,24 +492,12 @@
         <translation>Shuma:</translation>
     </message>
     <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Dërgo marrësve të ndryshëm njëkohësisht</translation>
-    </message>
-    <message>
         <source>Balance:</source>
         <translation>Balanca:</translation>
     </message>
     <message>
-        <source>Confirm the send action</source>
-        <translation>Konfirmo veprimin e dërgimit</translation>
-    </message>
-    <message>
         <source>Confirm send coins</source>
         <translation>konfirmo dërgimin e monedhave</translation>
-    </message>
-    <message>
-        <source>The amount to pay must be larger than 0.</source>
-        <translation>Shuma e paguar duhet të jetë më e madhe se 0.</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -523,28 +507,20 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>Sh&amp;uma:</translation>
+        <source>Amount:</source>
+        <translation>Shuma:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>Paguaj &amp;drejt:</translation>
+        <source>Pay To:</source>
+        <translation>Paguaj drejt:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Etiketë:</translation>
-    </message>
-    <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
+        <source>Label:</source>
+        <translation>Etiketë:</translation>
     </message>
     <message>
         <source>Paste address from clipboard</source>
         <translation>Ngjit nga memorja e sistemit</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -564,16 +540,8 @@
 <context>
     <name>SignVerifyMessageDialog</name>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Ngjit nga memorja e sistemit</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
 </context>
 <context>

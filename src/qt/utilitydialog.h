@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -34,8 +35,7 @@ private:
     NetworkModel * networkModel ;
     WalletModel * walletModel ;
 
-    static const int PAPER_WALLET_READJUST_LIMIT = 20;
-    static const int PAPER_WALLET_PAGE_MARGIN = 50;
+    static const int PAPER_WALLET_PAGE_MARGIN = 50 ;
 
 private Q_SLOTS:
     void on_getNewAddress_clicked();

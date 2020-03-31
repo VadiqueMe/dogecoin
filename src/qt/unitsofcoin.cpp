@@ -171,43 +171,41 @@ QString UnitsOfCoin::formatHtmlWithUnit( int unit, const CAmount & amount, bool 
 }
 
 
-bool UnitsOfCoin::parse( int unit, const QString & value, CAmount * val_out )
+bool UnitsOfCoin::parseString( int unit, const QString & string, CAmount * out )
 {
-    if ( ! isOk( unit ) || value.isEmpty() )
+    if ( ! isOk( unit ) || string.isEmpty() )
         return false ; // don't parse unknown unit or empty string
 
     int num_decimals = decimals( unit ) ;
 
-    // Ignore separators when parsing
+    const QString & nameOfUnit = name( unit ) ;
+    QString value = string ;
+    if ( value.contains( nameOfUnit ) )
+        value = value.remove( nameOfUnit ) ; // value is the string without unit's name
+
     QStringList parts = removeSpaces( value ).remove( QChar( /* ’ */ 0x2019 ) ).split( "." ) ;
 
     if ( parts.size() > 2 )
         return false ; // more than one dot
 
-    QString whole = parts[0];
-    QString decimals;
+    QString whole = parts[ 0 ] ;
+    QString decimals ;
+    if ( parts.size() > 1 ) decimals = parts[ 1 ] ;
 
-    if(parts.size() > 1)
-    {
-        decimals = parts[1];
-    }
-    if(decimals.size() > num_decimals)
-    {
-        return false; // Exceeds max precision
-    }
-    bool ok = false;
-    QString str = whole + decimals.leftJustified(num_decimals, '0');
+    if ( decimals.size() > num_decimals )
+        return false ; // exceeds max precision
 
-    if(str.size() > 18)
-    {
-        return false; // Longer numbers will exceed 63 bits
-    }
-    CAmount retvalue(str.toLongLong(&ok));
-    if(val_out)
-    {
-        *val_out = retvalue;
-    }
-    return ok;
+    bool ok = false ;
+    QString str = whole + decimals.leftJustified( num_decimals, '0' ) ;
+
+    if ( str.size() > 18 )
+        return false ; // longer numbers will exceed 63 bits
+
+    CAmount retvalue( str.toLongLong( &ok ) ) ;
+
+    if ( out != nullptr ) *out = retvalue ;
+
+    return ok ;
 }
 
 int UnitsOfCoin::rowCount( const QModelIndex & parent ) const

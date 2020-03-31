@@ -161,7 +161,7 @@ bool PaymentRequestPlus::getMerchant(X509_STORE* certStore, QString& merchant) c
 
 #if HAVE_DECL_EVP_MD_CTX_NEW
         EVP_MD_CTX *ctx = EVP_MD_CTX_new();
-        if (!ctx) throw SSLVerifyError("Error allocating OpenSSL context.");
+        if (!ctx) throw SSLVerifyError( "Error allocating OpenSSL context" ) ;
 #else
         EVP_MD_CTX _ctx;
         EVP_MD_CTX *ctx;
@@ -172,20 +172,20 @@ bool PaymentRequestPlus::getMerchant(X509_STORE* certStore, QString& merchant) c
         if (!EVP_VerifyInit_ex(ctx, digestAlgorithm, NULL) ||
             !EVP_VerifyUpdate(ctx, data_to_verify.data(), data_to_verify.size()) ||
             !EVP_VerifyFinal(ctx, (const unsigned char*)paymentRequest.signature().data(), (unsigned int)paymentRequest.signature().size(), pubkey)) {
-            throw SSLVerifyError("Bad signature, invalid payment request.");
+            throw SSLVerifyError( "Bad signature, invalid payment request" ) ;
         }
 #if HAVE_DECL_EVP_MD_CTX_NEW
         EVP_MD_CTX_free(ctx);
 #endif
 
-        // OpenSSL API for getting human printable strings from certs is baroque.
+        // OpenSSL API for getting human printable strings from certs is baroque
         int textlen = X509_NAME_get_text_by_NID(certname, NID_commonName, NULL, 0);
         website = new char[textlen + 1];
         if (X509_NAME_get_text_by_NID(certname, NID_commonName, website, textlen + 1) == textlen && textlen > 0) {
             merchant = website;
         }
         else {
-            throw SSLVerifyError("Bad certificate, missing common name.");
+            throw SSLVerifyError( "Bad certificate, missing common name" ) ;
         }
         // TODO: detect EV certificates and set merchant = business name instead of unfriendly NID_commonName ?
     }

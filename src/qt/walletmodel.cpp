@@ -1,6 +1,7 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "walletmodel.h"
 
@@ -116,24 +117,22 @@ void WalletModel::pollBalanceChanged()
 {
     // Get required locks upfront. This avoids the GUI from getting stuck on
     // periodical polls if the core is holding the locks for a longer time -
-    // for example, during a wallet rescan.
-    TRY_LOCK(cs_main, lockMain);
-    if(!lockMain)
-        return;
-    TRY_LOCK(wallet->cs_wallet, lockWallet);
-    if(!lockWallet)
-        return;
+    // for example, during a wallet rescan
+    TRY_LOCK( cs_main, lockMain ) ;
+    if ( ! lockMain) return ;
+    TRY_LOCK( wallet->cs_wallet, lockWallet ) ;
+    if ( ! lockWallet ) return ;
 
-    if(fForceCheckBalanceChanged || chainActive.Height() != cachedNumBlocks)
+    if ( fForceCheckBalanceChanged || chainActive.Height() != cachedNumBlocks )
     {
-        fForceCheckBalanceChanged = false;
+        fForceCheckBalanceChanged = false ;
 
         // Balance and number of transactions might have changed
-        cachedNumBlocks = chainActive.Height();
+        cachedNumBlocks = chainActive.Height() ;
 
-        checkBalanceChanged();
-        if(transactionTableModel)
-            transactionTableModel->updateConfirmations();
+        checkBalanceChanged() ;
+        if ( transactionTableModel != nullptr )
+            transactionTableModel->updateConfirmations() ;
     }
 }
 
@@ -191,28 +190,26 @@ bool WalletModel::validateAddress(const QString &address)
     return addressParsed.IsValid() ;
 }
 
-WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransaction &transaction, const CCoinControl *coinControl)
+WalletModel::SendCoinsReturn WalletModel::prepareTransaction
+    ( WalletModelTransaction & transaction, const CCoinControl * coinControl )
 {
-    CAmount total = 0;
-    bool fSubtractFeeFromAmount = false;
-    QList<SendCoinsRecipient> recipients = transaction.getRecipients();
-    std::vector<CRecipient> vecSend;
+    CAmount total = 0 ;
+    bool fSubtractFeeFromAmount = false ;
+    QList< SendCoinsRecipient > recipients = transaction.getRecipients() ;
+    std::vector< CRecipient > vecSend ;
 
-    if(recipients.empty())
-    {
-        return OK;
-    }
+    if ( recipients.empty() ) return OK ;
 
-    QSet<QString> setAddress; // Used to detect duplicates
-    int nAddresses = 0;
+    QSet< QString > setAddress ; // Used to detect duplicates
+    int nAddresses = 0 ;
 
     // Pre-check input data for validity
     for ( const SendCoinsRecipient & rcp : recipients )
     {
-        if (rcp.fSubtractFeeFromAmount)
-            fSubtractFeeFromAmount = true;
+        if ( rcp.fSubtractFeeFromAmount )
+            fSubtractFeeFromAmount = true ;
 
-        if (rcp.paymentRequest.IsInitialized())
+        if ( rcp.paymentRequest.IsInitialized() )
         {   // PaymentRequest...
             CAmount subtotal = 0;
             const payments::PaymentDetails& details = rcp.paymentRequest.getDetails();
@@ -227,9 +224,9 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransact
                 CRecipient recipient = {scriptPubKey, nAmount, rcp.fSubtractFeeFromAmount};
                 vecSend.push_back(recipient);
             }
-            if (subtotal <= 0)
+            if ( subtotal <= 0 )
             {
-                return InvalidAmount;
+                return InvalidAmount ;
             }
             total += subtotal;
         }
@@ -239,94 +236,93 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransact
             {
                 return InvalidAddress ;
             }
-            if(rcp.amount <= 0)
+            if ( rcp.amount <= 0 )
             {
-                return InvalidAmount;
+                return InvalidAmount ;
             }
-            setAddress.insert(rcp.address);
-            ++nAddresses;
+
+            setAddress.insert( rcp.address ) ;
+            ++ nAddresses ;
 
             CScript scriptPubKey = GetScriptForDestination( CDogecoinAddress( rcp.address.toStdString() ).Get() ) ;
             CRecipient recipient = { scriptPubKey, rcp.amount, rcp.fSubtractFeeFromAmount } ;
             vecSend.push_back( recipient ) ;
 
-            total += rcp.amount;
+            total += rcp.amount ;
         }
     }
-    if(setAddress.size() != nAddresses)
-    {
-        return DuplicateAddress;
-    }
 
-    CAmount nBalance = getBalance(coinControl);
+    if ( setAddress.size() != nAddresses )
+        return DuplicateAddress ;
 
-    if(total > nBalance)
-    {
-        return AmountExceedsBalance;
-    }
+    CAmount nBalance = getBalance( coinControl ) ;
+
+    if ( total > nBalance )
+        return AmountExceedsBalance ;
 
     {
-        LOCK2(cs_main, wallet->cs_wallet);
+        LOCK2( cs_main, wallet->cs_wallet ) ;
 
-        transaction.newPossibleKeyChange(wallet);
+        transaction.newPossibleKeyChange( wallet ) ;
 
-        CAmount nFeeRequired = 0;
-        int nChangePosRet = -1;
-        std::string strFailReason;
+        CAmount nFee = 0 ;
+        int nChangePosRet = -1 ;
 
-        CWalletTx *newTx = transaction.getTransaction();
-        CReserveKey *keyChange = transaction.getPossibleKeyChange();
-        bool fCreated = wallet->CreateTransaction(vecSend, *newTx, *keyChange, nFeeRequired, nChangePosRet, strFailReason, coinControl);
-        transaction.setTransactionFee(nFeeRequired);
-        if (fSubtractFeeFromAmount && fCreated)
-            transaction.reassignAmounts(nChangePosRet);
+        CWalletTx * newTx = transaction.getTransaction() ;
+        CReserveKey * keyChange = transaction.getPossibleKeyChange() ;
+        std::string strFailReason ;
+        bool fCreated = wallet->CreateTransaction( vecSend, *newTx, *keyChange, nFee, nChangePosRet, strFailReason, coinControl ) ;
+        transaction.setTransactionFee( nFee ) ;
+        if ( fSubtractFeeFromAmount && fCreated )
+            transaction.reassignAmounts( nChangePosRet ) ;
 
-        if(!fCreated)
+        if ( ! fCreated )
         {
-            if(!fSubtractFeeFromAmount && (total + nFeeRequired) > nBalance)
-            {
-                return SendCoinsReturn(AmountWithFeeExceedsBalance);
-            }
-            Q_EMIT message(tr("Send Coins"), QString::fromStdString(strFailReason),
-                         CClientUIInterface::MSG_ERROR);
-            return TransactionCreationFailed;
+            if ( ! fSubtractFeeFromAmount && ( total + nFee ) > nBalance )
+                return SendCoinsReturn( AmountWithFeeExceedsBalance ) ;
+
+            Q_EMIT message( tr("Send Coins"), QString::fromStdString( strFailReason ),
+                            CClientUIInterface::MSG_ERROR ) ;
+            return TransactionCreationFailed ;
         }
 
-        // reject absurdly high fee. (This can never happen because the
-        // wallet caps the fee at maxTxFee. This merely serves as a
-        // belt-and-suspenders check)
-        if (nFeeRequired > maxTxFee)
-            return AbsurdFee;
+        // reject absurdly high fee (this can never happen because the wallet
+        // caps the fee at maxTxFee)
+        if ( nFee > maxTxFee ) return AbsurdFee ;
     }
 
-    return SendCoinsReturn(OK);
+    LogPrintf( "%s: tx amount=%i fee=%i\n", __func__,
+                transaction.getTotalTransactionAmount(),
+                transaction.getTransactionFee() ) ;
+
+    return SendCoinsReturn( OK ) ;
 }
 
-WalletModel::SendCoinsReturn WalletModel::sendCoins(WalletModelTransaction &transaction)
+WalletModel::SendCoinsReturn WalletModel::sendCoins( WalletModelTransaction & transaction )
 {
-    QByteArray transaction_array; /* store serialized transaction */
+    QByteArray transaction_array ; /* store serialized transaction */
 
     {
-        LOCK2(cs_main, wallet->cs_wallet);
-        CWalletTx *newTx = transaction.getTransaction();
+        LOCK2( cs_main, wallet->cs_wallet ) ;
+        CWalletTx * newTx = transaction.getTransaction() ;
 
         for ( const SendCoinsRecipient & rcp : transaction.getRecipients() )
         {
             if (rcp.paymentRequest.IsInitialized())
             {
-                // Make sure any payment requests involved are still valid.
+                // Make sure any payment requests involved are still valid
                 if (PaymentServer::verifyExpired(rcp.paymentRequest.getDetails())) {
                     return PaymentRequestExpired;
                 }
 
-                // Store PaymentRequests in wtx.vOrderForm in wallet.
+                // Store PaymentRequests in wtx.vOrderForm in wallet
                 std::string key("PaymentRequest");
                 std::string value;
                 rcp.paymentRequest.SerializeToString(&value);
                 newTx->vOrderForm.push_back(make_pair(key, value));
             }
-            else if (!rcp.message.isEmpty()) // Message from normal bitcoin:URI (bitcoin:123...?message=example)
-                newTx->vOrderForm.push_back(make_pair("Message", rcp.message.toStdString()));
+            else if ( ! rcp.message.isEmpty() ) // Message from dogecoin: URI (dogecoin:D123...?message=example)
+                newTx->vOrderForm.push_back( std::make_pair( "Message", rcp.message.toStdString() ) ) ;
         }
 
         CReserveKey *keyChange = transaction.getPossibleKeyChange();
@@ -369,71 +365,35 @@ WalletModel::SendCoinsReturn WalletModel::sendCoins(WalletModelTransaction &tran
     }
     checkBalanceChanged(); // update balance immediately, otherwise there could be a short noticeable delay until pollBalanceChanged hits
 
-    return SendCoinsReturn(OK);
-}
-
-OptionsModel *WalletModel::getOptionsModel()
-{
-    return optionsModel;
-}
-
-AddressTableModel *WalletModel::getAddressTableModel()
-{
-    return addressTableModel;
-}
-
-TransactionTableModel *WalletModel::getTransactionTableModel()
-{
-    return transactionTableModel;
-}
-
-RecentRequestsTableModel *WalletModel::getRecentRequestsTableModel()
-{
-    return recentRequestsTableModel;
+    return SendCoinsReturn( OK ) ;
 }
 
 WalletModel::EncryptionStatus WalletModel::getEncryptionStatus() const
 {
-    if(!wallet->IsCrypted())
+    if ( ! wallet->IsCrypted() ) return Unencrypted ;
+    return ( wallet->IsLocked() ) ? Locked : Unlocked ;
+}
+
+bool WalletModel::setWalletEncrypted( bool encrypted, const SecureString & passphrase )
+{
+    if ( encrypted )
     {
-        return Unencrypted;
-    }
-    else if(wallet->IsLocked())
-    {
-        return Locked;
+        // encrypt
+        return wallet->EncryptWallet( passphrase ) ;
     }
     else
     {
-        return Unlocked;
+        // decrypt -- TODO; not supported yet
+        return false ;
     }
 }
 
-bool WalletModel::setWalletEncrypted(bool encrypted, const SecureString &passphrase)
+bool WalletModel::setWalletLocked( bool locked, const SecureString & passPhrase )
 {
-    if(encrypted)
-    {
-        // Encrypt
-        return wallet->EncryptWallet(passphrase);
-    }
+    if ( locked )
+        return wallet->Lock() ; // lock
     else
-    {
-        // Decrypt -- TODO; not supported yet
-        return false;
-    }
-}
-
-bool WalletModel::setWalletLocked(bool locked, const SecureString &passPhrase)
-{
-    if(locked)
-    {
-        // Lock
-        return wallet->Lock();
-    }
-    else
-    {
-        // Unlock
-        return wallet->Unlock(passPhrase);
-    }
+        return wallet->Unlock( passPhrase ) ; // unlock
 }
 
 bool WalletModel::changePassphrase(const SecureString &oldPass, const SecureString &newPass)

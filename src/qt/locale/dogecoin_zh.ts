@@ -92,16 +92,8 @@
         <translation>余额不足</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>选择...</translation>
-    </message>
-    <message>
-        <source>The recipient address is not valid. Please recheck.</source>
-        <translation>收款人地址无效，请再次确认。</translation>
-    </message>
-    <message>
-        <source>Warning: Invalid Dogecoin address</source>
-        <translation>警告：比特币地址无效</translation>
+        <source>The recipient address is not valid, please recheck</source>
+        <translation>收款人地址无效，请再次确认</translation>
     </message>
     </context>
 <context>

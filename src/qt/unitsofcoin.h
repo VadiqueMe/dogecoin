@@ -89,7 +89,7 @@ public:
     //! Format as HTML string (with unit)
     static QString formatHtmlWithUnit(int unit, const CAmount& amount, bool plussign=false, SeparatorStyle separators=separatorStandard);
     //! Parse string to coin amount
-    static bool parse(int unit, const QString &value, CAmount *val_out);
+    static bool parseString( int unit, const QString & string, CAmount * out ) ;
 
     // list model for unit drop-down selection box
     enum RoleIndex {

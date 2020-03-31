@@ -539,14 +539,6 @@
         <translation>(不)全选</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>树状模式</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>列表模式</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>金额</translation>
     </message>
@@ -627,12 +619,8 @@
         <translation>否</translation>
     </message>
     <message>
-        <source>(no label)</source>
-        <translation>(无标签)</translation>
-    </message>
-    <message>
-        <source>change from %1 (%2)</source>
-        <translation>找零前是 %1 (%2)</translation>
+        <source>change from %1</source>
+        <translation>找零前是 %1</translation>
     </message>
     <message>
         <source>(change)</source>
@@ -646,12 +634,12 @@
         <translation>编辑地址</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>标签(&amp;L)</translation>
+        <source>Label</source>
+        <translation>标签</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>地址(&amp;A)</translation>
+        <source>Address</source>
+        <translation>地址</translation>
     </message>
     <message>
         <source>New receiving address</source>
@@ -952,10 +940,6 @@
         <translation>钱包(&amp;A)</translation>
     </message>
     <message>
-        <source>Hide coin &amp;control features</source>
-        <translation>隐藏硬币控制功能(&amp;C)</translation>
-    </message>
-    <message>
         <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
         <translation>如果禁用未确认的零钱，则零钱至少需要1个确认才能使用。同时账户余额计算会受到影响</translation>
     </message>
@@ -1195,56 +1179,56 @@
         <translation>无效的付款地址 %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid address or malformed URI parameters</source>
-        <translation>无法解析 URI 地址！可能是因为地址无效，或是 URI 参数格式错误</translation>
+        <source>URI cannot be parsed. This can be caused by an invalid address or malformed URI parameters</source>
+        <translation>无法解析 URI 地址。可能是因为地址无效，或是 URI 参数格式错误</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
         <translation>处理付款请求文件</translation>
     </message>
     <message>
-        <source>Payment request file cannot be read! This can be caused by an invalid payment request file.</source>
-        <translation>无法读取付款请求文件！可能是文件无效造成的。</translation>
+        <source>Payment request file cannot be read. This can be caused by an invalid payment request file</source>
+        <translation>无法读取付款请求文件。可能是文件无效造成的</translation>
     </message>
     <message>
         <source>Payment request rejected</source>
         <translation>付款请求已被拒绝</translation>
     </message>
     <message>
-        <source>Payment request network doesn't match client network.</source>
-        <translation>付款请求的网络类型跟客户端不符。</translation>
+        <source>Payment request network doesn't match the current network</source>
+        <translation>付款请求的网络与当前网络不匹配</translation>
     </message>
     <message>
-        <source>Payment request expired.</source>
-        <translation>付款请求已过期。</translation>
+        <source>Payment request expired</source>
+        <translation>付款请求已过期</translation>
     </message>
     <message>
-        <source>Payment request is not initialized.</source>
-        <translation>支付请求未成形。</translation>
+        <source>Payment request is not initialized</source>
+        <translation>支付请求未成形</translation>
     </message>
     <message>
-        <source>Unverified payment requests to custom payment scripts are unsupported.</source>
-        <translation>不支持到自定义付款脚本的未验证付款请求。</translation>
+        <source>Unverified payment requests to custom payment scripts are not supported</source>
+        <translation>不支持到自定义付款脚本的未验证付款请求</translation>
     </message>
     <message>
-        <source>Invalid payment request.</source>
-        <translation>无效的支付请求。</translation>
+        <source>Invalid payment request</source>
+        <translation>无效的支付请求</translation>
     </message>
     <message>
         <source>Refund from %1</source>
         <translation>退款来自 %1</translation>
     </message>
     <message>
-        <source>Payment request %1 is too large (%2 bytes, allowed %3 bytes).</source>
-        <translation>支付请求 %1 太大 (%2 字节。只允许 %3 字节)。</translation>
+        <source>Payment request %1 is too large (%2 bytes, allowed %3 bytes)</source>
+        <translation>支付请求 %1 太大 (%2 字节。只允许 %3 字节)</translation>
     </message>
     <message>
         <source>Error communicating with %1: %2</source>
         <translation>%1: %2 通讯出错</translation>
     </message>
     <message>
-        <source>Payment request cannot be parsed!</source>
-        <translation>无法解析 付款请求！</translation>
+        <source>Payment request cannot be parsed</source>
+        <translation>无法解析 付款请求</translation>
     </message>
     <message>
         <source>Bad response from server %1</source>
@@ -1621,19 +1605,19 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>总额(&amp;A)：</translation>
+        <source>Amount:</source>
+        <translation>总额：</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>标签(&amp;L)：</translation>
+        <source>Label:</source>
+        <translation>标签：</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>消息(&amp;M)：</translation>
+        <source>Message:</source>
+        <translation>消息：</translation>
     </message>
     <message>
-        <source>R&amp;euse an existing receiving address (not recommended)</source>
+        <source>Reuse an existing receiving address (not recommended)</source>
         <translation>重用现有的接收地址（不推荐）</translation>
     </message>
     <message>
@@ -1795,8 +1779,8 @@
         <translation>变更 : </translation>
     </message>
     <message>
-        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
-        <translation>如果激活该选项，但是零钱地址用光或者非法，将会新生成零钱地址，转入零钱。</translation>
+        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address</source>
+        <translation>如果激活该选项，但是零钱地址用光或者非法，将会新生成零钱地址，转入零钱</translation>
     </message>
     <message>
         <source>Custom change address</source>
@@ -1807,64 +1791,24 @@
         <translation>交易费用:</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>选择... </translation>
-    </message>
-    <message>
-        <source>collapse fee-settings</source>
-        <translation>收起  费用设置 </translation>
-    </message>
-    <message>
-        <source>per kilobyte</source>
-        <translation>每kb</translation>
-    </message>
-    <message>
-        <source>If the custom fee is set to 1000 koinu and the transaction is only 250 bytes, then "per kilobyte" only pays 250 koinu in fee, while "total at least" pays 1000 koinu. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation>如果自定义交易费设置为 1000聪而交易大小只有250字节，则“每千字节" 模式只支付250聪交易费， 而"最少"模式则支付1000聪。 大于1000字节的交易按每千字节付费。</translation>
+        <source>Show</source>
+        <translation>显示</translation>
     </message>
     <message>
         <source>Hide</source>
         <translation>隐藏</translation>
     </message>
     <message>
-        <source>total at least</source>
-        <translation>最小额 </translation>
-    </message>
-    <message>
-        <source>Recommended:</source>
-        <translation>推荐：</translation>
-    </message>
-    <message>
-        <source>Custom:</source>
-        <translation>自定义：</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>一般</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>快速</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>一次发送给多个接收者</translation>
-    </message>
-    <message>
         <source>Add &amp;Recipient</source>
         <translation>添加收款人(&amp;R)</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>清除所有(&amp;A)</translation>
+        <source>Clear All</source>
+        <translation>清除所有</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>余额：</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>确认发送货币</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -1919,40 +1863,36 @@
         <translation>确认发送货币</translation>
     </message>
     <message>
-        <source>The recipient address is not valid. Please recheck.</source>
-        <translation>接收人地址无效。请重新检查。</translation>
+        <source>The recipient address is not valid, please recheck</source>
+        <translation>接收人地址无效。请重新检查</translation>
     </message>
     <message>
-        <source>The amount to pay must be larger than 0.</source>
-        <translation>支付金额必须大于0。</translation>
+        <source>The amount exceeds your balance</source>
+        <translation>金额超出您的账上余额</translation>
     </message>
     <message>
-        <source>The amount exceeds your balance.</source>
-        <translation>金额超出您的账上余额。</translation>
+        <source>The total exceeds your balance when the transaction fee is included</source>
+        <translation>计入交易费后的金额超出您的账上余额</translation>
     </message>
     <message>
-        <source>The total exceeds your balance when the %1 transaction fee is included.</source>
-        <translation>计入 %1 交易费后的金额超出您的账上余额。</translation>
+        <source>Duplicate address found, can only send to each address once per transaction</source>
+        <translation>发现重复地址，每个地址应该只使用一次</translation>
     </message>
     <message>
-        <source>Duplicate address found: addresses should only be used once each.</source>
-        <translation>发现重复地址：每个地址应该只使用一次。</translation>
-    </message>
-    <message>
-        <source>Transaction creation failed!</source>
-        <translation>交易创建失败！</translation>
+        <source>Transaction creation failed</source>
+        <translation>交易创建失败</translation>
     </message>
     <message>
         <source>The transaction was rejected with the following reason: %1</source>
         <translation>交易因以下原因拒绝：%1</translation>
     </message>
     <message>
-        <source>A fee higher than %1 is considered an absurdly high fee.</source>
-        <translation>超过 %1 的交易费被认为是荒谬的高费率。</translation>
+        <source>A fee higher than %1 is considered an absurdly high fee</source>
+        <translation>超过 %1 的交易费被认为是荒谬的高费率</translation>
     </message>
     <message>
-        <source>Payment request expired.</source>
-        <translation>付款请求已过期。</translation>
+        <source>Payment request expired</source>
+        <translation>付款请求已过期</translation>
     </message>
     <message numerus="yes">
         <source>%n block(s)</source>
@@ -1963,35 +1903,23 @@
         <translation><numerusform>预计 %n 个数据块后被确认。</numerusform></translation>
     </message>
     <message>
-        <source>Warning: Invalid Dogecoin address</source>
-        <translation>警告: 比特币地址无效</translation>
-    </message>
-    <message>
-        <source>Warning: Unknown change address</source>
-        <translation>警告：未知的更改地址</translation>
-    </message>
-    <message>
         <source>The address you selected for change is not part of this wallet. Any or all funds in your wallet may be sent to this address. Are you sure?</source>
         <translation>你选择的找零地址未被包含在本钱包中，你钱包中的部分或全部金额将被发送至该地址。你确定要这样做吗？</translation>
-    </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(无标签)</translation>
     </message>
 </context>
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>金额(&amp;M)</translation>
+        <source>Amount:</source>
+        <translation>金额</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>付给(&amp;T)：</translation>
+        <source>Pay To:</source>
+        <translation>付给</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>标签(&amp;L)：</translation>
+        <source>Label:</source>
+        <translation>标签</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2002,48 +1930,36 @@
         <translation>付款目的地址</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>从剪贴板粘贴地址</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Remove this entry</source>
         <translation>移除此项</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less dogecoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation>交易费将从发送总额中扣除。接收人将收到比您在金额框中输入的更少的比特币。如果选中了多个收件人，交易费平分。</translation>
-    </message>
-    <message>
-        <source>S&amp;ubtract fee from amount</source>
-        <translation>从金额中减去交易费(&amp;U)</translation>
+        <source>Subtract fee from amount</source>
+        <translation>从金额中减去交易费</translation>
     </message>
     <message>
         <source>Message:</source>
         <translation>消息：</translation>
     </message>
     <message>
-        <source>This is an unauthenticated payment request.</source>
-        <translation>这是一个未经验证的支付请求。</translation>
+        <source>This is an unauthenticated payment request</source>
+        <translation>这是一个未经验证的支付请求</translation>
     </message>
     <message>
-        <source>This is an authenticated payment request.</source>
-        <translation>这是一个已经验证的支付请求。</translation>
+        <source>This is an authenticated payment request</source>
+        <translation>这是一个已经验证的支付请求</translation>
     </message>
     <message>
         <source>Enter a label for this address to add it to the list of used addresses</source>
         <translation>请为此地址输入一个标签以将它加入用过的地址列表</translation>
     </message>
     <message>
-        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Dogecoin network.</source>
-        <translation>dogecoin:URI 附带的备注信息，将会和交易一起存储，备查。 注意：该消息不会通过狗狗币网络传输。</translation>
+        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
+        <translation>dogecoin: URI 附带的备注信息，将会和交易一起存储。该消息不会通过狗狗币网络传输</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -2099,16 +2015,8 @@
         <translation>选择以前用过的地址</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>从剪贴板粘贴地址</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -2135,8 +2043,8 @@
         <translation>清空所有签名消息栏</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>清除所有(&amp;A)</translation>
+        <source>Clear All</source>
+        <translation>清除所有</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

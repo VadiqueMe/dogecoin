@@ -365,14 +365,6 @@
         <translation>ביטול/אישור הבחירה</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>מצב עץ</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>מצב רשימה</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>כמות</translation>
     </message>
@@ -396,10 +388,6 @@
         <source>Confirmed</source>
         <translation>מאושר</translation>
     </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(ללא תוית)</translation>
-    </message>
     </context>
 <context>
     <name>EditAddressDialog</name>
@@ -408,12 +396,12 @@
         <translation>עריכת כתובת</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>ת&amp;ווית</translation>
+        <source>Label</source>
+        <translation>תווית</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;כתובת</translation>
+        <source>Address</source>
+        <translation>כתובת</translation>
     </message>
     </context>
 <context>
@@ -604,10 +592,6 @@
     <message>
         <source>W&amp;allet</source>
         <translation>&amp;ארנק</translation>
-    </message>
-    <message>
-        <source>Hide coin &amp;control features</source>
-        <translation>הסתר תכונות בקרת מטבעות</translation>
     </message>
     <message>
         <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
@@ -1042,20 +1026,20 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;סכום:</translation>
+        <source>Amount:</source>
+        <translation>סכום:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>ת&amp;ווית:</translation>
+        <source>Label:</source>
+        <translation>תווית:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>הו&amp;דעה:</translation>
+        <source>Message:</source>
+        <translation>הודעה:</translation>
     </message>
     <message>
-        <source>R&amp;euse an existing receiving address (not recommended)</source>
-        <translation>ש&amp;ימוש &amp;חוזר בכתובת קבלה קיימת (לא מומלץ)</translation>
+        <source>Reuse an existing receiving address (not recommended)</source>
+        <translation>שימוש חוזר בכתובת קבלה קיימת (לא מומלץ)</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
@@ -1168,8 +1152,8 @@
         <translation>עודף:</translation>
     </message>
     <message>
-        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
-        <translation>אם אפשרות זו מופעלת אך כתובת העודף ריקה או שגויה, העודף יישלח לכתובת חדשה שתיווצר.</translation>
+        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address</source>
+        <translation>אם אפשרות זו מופעלת אך כתובת העודף ריקה או שגויה, העודף יישלח לכתובת חדשה שתיווצר</translation>
     </message>
     <message>
         <source>Custom change address</source>
@@ -1180,56 +1164,20 @@
         <translation>עמלת העברה:</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>בחר...</translation>
-    </message>
-    <message>
-        <source>per kilobyte</source>
-        <translation>עבור קילו-בית</translation>
-    </message>
-    <message>
         <source>Hide</source>
         <translation>הסתר</translation>
-    </message>
-    <message>
-        <source>total at least</source>
-        <translation>סה''כ לפחות</translation>
-    </message>
-    <message>
-        <source>Recommended:</source>
-        <translation>מומלץ:</translation>
-    </message>
-    <message>
-        <source>Custom:</source>
-        <translation>מותאם אישית:</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>רגיל</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>מהיר</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>שליחה למספר מוטבים בו־זמנית</translation>
     </message>
     <message>
         <source>Add &amp;Recipient</source>
         <translation>הוספת &amp;מוטב</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>&amp;ניקוי הכול</translation>
+        <source>Clear All</source>
+        <translation>ניקוי הכול</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>מאזן:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>אישור פעולת השליחה</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -1243,16 +1191,16 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>&amp;כמות:</translation>
+        <source>Amount:</source>
+        <translation>כמות</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>לשלם ל&amp;טובת:</translation>
+        <source>Pay To:</source>
+        <translation>לשלם לטובת</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>ת&amp;ווית:</translation>
+        <source>Label:</source>
+        <translation>תווית</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -1263,16 +1211,8 @@
         <translation>כתובת הביטקוין של המוטב</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>הדבקת כתובת מלוח הגזירים</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Remove this entry</source>
@@ -1283,16 +1223,16 @@
         <translation>הודעה:</translation>
     </message>
     <message>
-        <source>This is an authenticated payment request.</source>
-        <translation>זוהי בקשה מאומתת לתשלום.</translation>
+        <source>This is an authenticated payment request</source>
+        <translation>זוהי בקשה מאומתת לתשלום</translation>
     </message>
     <message>
         <source>Enter a label for this address to add it to the list of used addresses</source>
         <translation>יש להזין תווית עבור כתובת זו כדי להוסיף אותה לרשימת הכתובות בשימוש</translation>
     </message>
     <message>
-        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Dogecoin network.</source>
-        <translation>הודעה שצורפה לביטקוין: כתובת שתאוחסן בהעברה לצורך מעקב מצדך. לתשומת לבך: הודעה זו לא תישלח ברשת הביטקוין.</translation>
+        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
+        <translation>הודעה שצורפה dogecoin: URI כתובת שתאוחסן בהעברה. הודעה זו לא תישלח ברשת</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -1332,16 +1272,8 @@
         <translation>בחירת כתובת שהייתה בשימוש</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>הדבקת כתובת מלוח הגזירים</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -1368,8 +1300,8 @@
         <translation>איפוס כל שדות החתימה על הודעה</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>&amp;ניקוי הכול</translation>
+        <source>Clear All</source>
+        <translation>ניקוי הכול</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

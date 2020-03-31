@@ -100,12 +100,12 @@
 <context>
     <name>EditAddressDialog</name>
     <message>
-        <source>&amp;Label</source>
+        <source>Label</source>
         <translation>چٹ</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation> پتہ</translation>
+        <source>Address</source>
+        <translation>پتہ</translation>
     </message>
     </context>
 <context>

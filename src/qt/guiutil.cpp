@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -101,11 +101,11 @@ QFont fixedPitchFont()
     return font;
 }
 
-void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent)
+void setupAddressWidget( QValidatedLineEdit * widget, QWidget * parent )
 {
-    parent->setFocusProxy(widget);
+    parent->setFocusProxy( widget ) ;
 
-    widget->setFont(fixedPitchFont());
+    widget->setFont( fixedPitchFont() ) ;
 #if QT_VERSION >= 0x040700
     widget->setPlaceholderText( QObject::tr( "Enter a Dogecoin address (like %1)" ).arg(
         QString::fromStdString( CDogecoinAddress::DummyDogecoinAddress( Params() ) )
@@ -126,17 +126,17 @@ void setupAmountWidget(QLineEdit *widget, QWidget *parent)
 
 bool parseDogecoinURI( const QUrl & uri, SendCoinsRecipient * out )
 {
-    // return if URI is not valid or is no dogecoin: URI
+    // return if URI is not valid or is not dogecoin: URI
     if(!uri.isValid() || uri.scheme() != QString("dogecoin"))
         return false;
 
     SendCoinsRecipient rv;
     rv.address = uri.path();
-    // Trim any following forward slash which may have been added by the OS
-    if (rv.address.endsWith("/")) {
-        rv.address.truncate(rv.address.length() - 1);
+    // trim any following forward slash which may have been added by the OS
+    if ( rv.address.endsWith( "/" ) ) {
+        rv.address.truncate( rv.address.length() - 1 ) ;
     }
-    rv.amount = 0;
+    rv.amount = 0 ;
 
 #if QT_VERSION < 0x050000
     QList<QPair<QString, QString> > items = uri.queryItems();
@@ -144,7 +144,8 @@ bool parseDogecoinURI( const QUrl & uri, SendCoinsRecipient * out )
     QUrlQuery uriQuery(uri);
     QList<QPair<QString, QString> > items = uriQuery.queryItems();
 #endif
-    for (QList<QPair<QString, QString> >::iterator i = items.begin(); i != items.end(); i++)
+
+    for ( QList< QPair< QString, QString > >::iterator i = items.begin() ; i != items.end() ; i ++ )
     {
         bool fShouldReturnFalse = false;
         if (i->first.startsWith("req-"))
@@ -165,9 +166,9 @@ bool parseDogecoinURI( const QUrl & uri, SendCoinsRecipient * out )
         }
         else if (i->first == "amount")
         {
-            if(!i->second.isEmpty())
+            if( ! i->second.isEmpty() )
             {
-                if ( ! UnitsOfCoin::parse( UnitsOfCoin::oneCoin, i->second, &rv.amount ) )
+                if ( ! UnitsOfCoin::parseString( UnitsOfCoin::oneCoin, i->second, &rv.amount ) )
                 {
                     return false;
                 }
@@ -191,11 +192,10 @@ bool parseDogecoinURI( QString uri, SendCoinsRecipient * out )
     //
     //    Cannot handle this later, because dogecoin:// will cause Qt to see the part after // as host,
     //    which will lower-case it (and thus invalidate the address)
-    if(uri.startsWith("dogecoin://", Qt::CaseInsensitive))
-    {
-        uri.replace(0, 11, "dogecoin:");
-    }
-    QUrl uriInstance(uri);
+    if ( uri.startsWith( "dogecoin://", Qt::CaseInsensitive ) )
+        uri.replace( 0, 11, "dogecoin:" ) ;
+
+    QUrl uriInstance( uri ) ;
     return parseDogecoinURI( uriInstance, out ) ;
 }
 

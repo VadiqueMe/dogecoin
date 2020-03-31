@@ -192,12 +192,12 @@
         <translation>Измени адресу</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Етикета</translation>
+        <source>Label</source>
+        <translation>Етикета</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Адреса</translation>
+        <source>Address</source>
+        <translation>Адреса</translation>
     </message>
     </context>
 <context>
@@ -290,15 +290,15 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
+        <source>Amount:</source>
         <translation>Iznos:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Етикета</translation>
+        <source>Label:</source>
+        <translation>Етикета:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
+        <source>Message:</source>
         <translation>Poruka:</translation>
     </message>
     <message>
@@ -324,10 +324,6 @@
         <translation>Iznos:</translation>
     </message>
     <message>
-        <source>Confirm the send action</source>
-        <translation>Потврди акцију слања</translation>
-    </message>
-    <message>
         <source>S&amp;end</source>
         <translation>&amp;Пошаљи</translation>
     </message>
@@ -335,20 +331,12 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
+        <source>Amount:</source>
         <translation>Iznos:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Етикета</translation>
-    </message>
-    <message>
-        <source>Alt+A</source>
-        <translation>Alt+</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+П</translation>
+        <source>Label:</source>
+        <translation>Етикета:</translation>
     </message>
     <message>
         <source>Message:</source>
@@ -367,14 +355,6 @@
     </context>
 <context>
     <name>SignVerifyMessageDialog</name>
-    <message>
-        <source>Alt+A</source>
-        <translation>Alt+</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+П</translation>
-    </message>
 </context>
 <context>
     <name>TrafficGraphWidget</name>

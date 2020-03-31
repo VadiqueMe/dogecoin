@@ -254,12 +254,12 @@
         <translation>Izmeni Adresu</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Oznaka</translation>
+        <source>Label</source>
+        <translation>Oznaka</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Adresa</translation>
+        <source>Address</source>
+        <translation>Adresa</translation>
     </message>
     </context>
 <context>

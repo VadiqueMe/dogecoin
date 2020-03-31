@@ -269,14 +269,6 @@
         <translation>(des)selecciona todo</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>Modo árbore</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Modo lista</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Cantidade</translation>
     </message>
@@ -300,12 +292,12 @@
         <translation>Modificar Dirección</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Etiqueta</translation>
+        <source>Label</source>
+        <translation>Etiqueta</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Dirección</translation>
+        <source>Address</source>
+        <translation>Dirección</translation>
     </message>
     </context>
 <context>
@@ -626,20 +618,20 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;Cantidade:</translation>
+        <source>Amount:</source>
+        <translation>Cantidade:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Etiqueta:</translation>
+        <source>Label:</source>
+        <translation>Etiqueta:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;Mensaxe:</translation>
+        <source>Message:</source>
+        <translation>Mensaxe:</translation>
     </message>
     <message>
-        <source>R&amp;euse an existing receiving address (not recommended)</source>
-        <translation>R&amp;eutilizar unha dirección para recibir existente (non recomendado)</translation>
+        <source>Reuse an existing receiving address (not recommended)</source>
+        <translation>Reutilizar unha dirección para recibir existente (non recomendado)</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -704,24 +696,16 @@
         <translation>Tarifa de transacción:</translation>
     </message>
     <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Enviar a múltiples receptores á vez</translation>
-    </message>
-    <message>
         <source>Add &amp;Recipient</source>
         <translation>Engadir &amp;Receptor</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Limpar &amp;Todo</translation>
+        <source>Clear All</source>
+        <translation>Limpar Todo</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Balance:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Confirmar a acción de envío</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -731,32 +715,24 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>&amp;Cantidade:</translation>
+        <source>Amount:</source>
+        <translation>Cantidade:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>Pagar &amp;A:</translation>
+        <source>Pay To:</source>
+        <translation>Pagar A:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Etiqueta:</translation>
+        <source>Label:</source>
+        <translation>Etiqueta:</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
         <translation>Escoller dirección previamente empregada</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Pegar dirección dende portapapeis</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Remove this entry</source>
@@ -800,16 +776,8 @@
         <translation>Escoller dirección previamente empregada</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Pegar dirección dende portapapeis</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -836,8 +804,8 @@
         <translation>Restaurar todos os campos de sinatura de mensaxe</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Limpar &amp;Todo</translation>
+        <source>Clear All</source>
+        <translation>Limpar Todo</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

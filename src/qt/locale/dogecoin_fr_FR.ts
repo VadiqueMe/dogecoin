@@ -388,15 +388,7 @@
     </message>
     <message>
         <source>(un)select all</source>
-        <translation>(dé)sélectionné tout:</translation>
-    </message>
-    <message>
-        <source>Tree mode</source>
-        <translation>Mode arbre</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Mode list</translation>
+        <translation>(dé)sélectionné tout</translation>
     </message>
     <message>
         <source>Amount</source>
@@ -454,10 +446,6 @@
         <source>no</source>
         <translation>non</translation>
     </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(aucune étiquette)</translation>
-    </message>
     </context>
 <context>
     <name>EditAddressDialog</name>
@@ -466,12 +454,12 @@
         <translation>Éditer l'adresse</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Étiquette</translation>
+        <source>Label</source>
+        <translation>Étiquette</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Adresse</translation>
+        <source>Address</source>
+        <translation>Adresse</translation>
     </message>
     </context>
 <context>
@@ -1008,15 +996,15 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
+        <source>Amount:</source>
         <translation>Montant :</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Étiquette :</translation>
+        <source>Label:</source>
+        <translation>Étiquette :</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
+        <source>Message:</source>
         <translation>Message :</translation>
     </message>
     <message>
@@ -1142,48 +1130,20 @@
         <translation>Frais de transaction</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>Choisir...</translation>
-    </message>
-    <message>
-        <source>per kilobyte</source>
-        <translation>par kilo octet</translation>
+        <source>Show</source>
+        <translation>Montrer</translation>
     </message>
     <message>
         <source>Hide</source>
         <translation>Cacher</translation>
     </message>
     <message>
-        <source>total at least</source>
-        <translation>Au total au moins</translation>
-    </message>
-    <message>
-        <source>Recommended:</source>
-        <translation>Recommandé: </translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>normal</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>rapide</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Envoyer des pièces à plusieurs destinataires à la fois</translation>
-    </message>
-    <message>
-        <source>Clear &amp;All</source>
-        <translation>Nettoyer &amp;Tout</translation>
+        <source>Clear All</source>
+        <translation>Nettoyer Tout</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Solde :</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Confirmer l'action d'envoi</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -1213,32 +1173,24 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>&amp;Montant :</translation>
+        <source>Amount:</source>
+        <translation>Montant :</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>Payer &amp;à :</translation>
+        <source>Pay To:</source>
+        <translation>Payer à :</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Étiquette :</translation>
+        <source>Label:</source>
+        <translation>Étiquette :</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
         <translation>Choisir une adresse précédemment utilisée </translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Coller une adresse depuis le presse-papiers</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Remove this entry</source>
@@ -1274,16 +1226,8 @@
         <translation>Choisir une adresse précédemment utilisée </translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Coller une adresse depuis le presse-papiers</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -1302,8 +1246,8 @@
         <translation>&amp;Signer le message</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Nettoyer &amp;Tout</translation>
+        <source>Clear All</source>
+        <translation>Nettoyer Tout</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

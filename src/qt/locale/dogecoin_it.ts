@@ -515,14 +515,6 @@
         <translation>(de)seleziona tutto</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>Modalità Albero</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Modalità Lista</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Importo</translation>
     </message>
@@ -603,12 +595,8 @@
         <translation>no</translation>
     </message>
     <message>
-        <source>(no label)</source>
-        <translation>(nessuna etichetta)</translation>
-    </message>
-    <message>
-        <source>change from %1 (%2)</source>
-        <translation>cambio da %1 (%2)</translation>
+        <source>change from %1</source>
+        <translation>cambio da %1</translation>
     </message>
     <message>
         <source>(change)</source>
@@ -622,12 +610,12 @@
         <translation>Modifica l'indirizzo</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Etichetta</translation>
+        <source>Label</source>
+        <translation>Etichetta</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Indirizzo</translation>
+        <source>Address</source>
+        <translation>Indirizzo</translation>
     </message>
     <message>
         <source>New receiving address</source>
@@ -908,10 +896,6 @@
         <translation>Port&amp;amonete</translation>
     </message>
     <message>
-        <source>Hide coin &amp;control features</source>
-        <translation>Nascondi le funzionalità di coin &amp;control</translation>
-    </message>
-    <message>
         <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
         <translation>Disabilitando l'uso di resti non confermati, il resto di una transazione non potrà essere speso fino a quando non avrà ottenuto almeno una conferma. Questa impostazione influisce inoltre sul calcolo del saldo</translation>
     </message>
@@ -1150,39 +1134,39 @@
         <translation>Indirizzo di pagamento non valido %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid address or malformed URI parameters</source>
-        <translation>Impossibile interpretare l'URI! I parametri dell'URI o l'indirizzo potrebbero non essere corretti</translation>
+        <source>URI cannot be parsed. This can be caused by an invalid address or malformed URI parameters</source>
+        <translation>Impossibile interpretare l'URI. I parametri dell'URI o l'indirizzo potrebbero non essere corretti</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
         <translation>Gestione del file di richiesta del pagamento</translation>
     </message>
     <message>
-        <source>Payment request file cannot be read! This can be caused by an invalid payment request file.</source>
-        <translation>Impossibile leggere il file della richiesta di pagamento! Il file della richiesta di pagamento potrebbe non essere valido</translation>
+        <source>Payment request file cannot be read. This can be caused by an invalid payment request file</source>
+        <translation>Impossibile leggere il file della richiesta di pagamento. Il file della richiesta di pagamento potrebbe non essere valido</translation>
     </message>
     <message>
         <source>Payment request rejected</source>
         <translation>Richiesta di pagamento respinta</translation>
     </message>
     <message>
-        <source>Payment request network doesn't match client network.</source>
-        <translation>La rete della richiesta di pagamento non corrisponde alla rete del client.</translation>
+        <source>Payment request network doesn't match the current network</source>
+        <translation>La rete della richiesta di pagamento non corrisponde alla rete corrente</translation>
     </message>
     <message>
-        <source>Payment request expired.</source>
-        <translation>Richiesta di pagamento scaduta.</translation>
+        <source>Payment request expired</source>
+        <translation>Richiesta di pagamento scaduta</translation>
     </message>
     <message>
-        <source>Payment request is not initialized.</source>
-        <translation>La richiesta di pagamento non è stata inizializzata.</translation>
+        <source>Payment request is not initialized</source>
+        <translation>La richiesta di pagamento non è stata inizializzata</translation>
     </message>
     <message>
-        <source>Unverified payment requests to custom payment scripts are unsupported.</source>
-        <translation>Le richieste di pagamento non verificate verso script di pagamento personalizzati non sono supportate.</translation>
+        <source>Unverified payment requests to custom payment scripts are not supported</source>
+        <translation>Le richieste di pagamento non verificate verso script di pagamento personalizzati non sono supportate</translation>
     </message>
     <message>
-        <source>Invalid payment request.</source>
+        <source>Invalid payment request</source>
         <translation>Richiesta di pagamento invalida</translation>
     </message>
     <message>
@@ -1190,7 +1174,7 @@
         <translation>Rimborso da %1</translation>
     </message>
     <message>
-        <source>Payment request %1 is too large (%2 bytes, allowed %3 bytes).</source>
+        <source>Payment request %1 is too large (%2 bytes, allowed %3 bytes)</source>
         <translation>La richiesta di pagamento %1 è troppo grande (%2 bytes, consentiti %3 bytes)</translation>
     </message>
     <message>
@@ -1198,8 +1182,8 @@
         <translation>Errore di comunicazione con %1: %2</translation>
     </message>
     <message>
-        <source>Payment request cannot be parsed!</source>
-        <translation>La richiesta di pagamento non può essere processata!</translation>
+        <source>Payment request cannot be parsed</source>
+        <translation>La richiesta di pagamento non può essere processata</translation>
     </message>
     <message>
         <source>Payment acknowledged</source>
@@ -1532,20 +1516,20 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;Importo:</translation>
+        <source>Amount:</source>
+        <translation>Importo:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Etichetta:</translation>
+        <source>Label:</source>
+        <translation>Etichetta:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;Messaggio:</translation>
+        <source>Message:</source>
+        <translation>Messaggio:</translation>
     </message>
     <message>
-        <source>R&amp;euse an existing receiving address (not recommended)</source>
-        <translation>R&amp;iusa un indirizzo di ricezione (non raccomandato)</translation>
+        <source>Reuse an existing receiving address (not recommended)</source>
+        <translation>Riusa un indirizzo di ricezione (non raccomandato)</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
@@ -1698,8 +1682,8 @@
         <translation>Resto:</translation>
     </message>
     <message>
-        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
-        <translation>In caso di abilitazione con indirizzo vuoto o non valido, il resto sarà inviato ad un nuovo indirizzo generato appositamente.</translation>
+        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address</source>
+        <translation>In caso di abilitazione con indirizzo vuoto o non valido, il resto sarà inviato ad un nuovo indirizzo generato appositamente</translation>
     </message>
     <message>
         <source>Custom change address</source>
@@ -1710,64 +1694,20 @@
         <translation>Commissione di Transazione:</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>Scegli...</translation>
-    </message>
-    <message>
-        <source>collapse fee-settings</source>
-        <translation>minimizza le impostazioni di commissione</translation>
-    </message>
-    <message>
-        <source>per kilobyte</source>
-        <translation>per kilobyte</translation>
-    </message>
-    <message>
-        <source>If the custom fee is set to 1000 koinu and the transaction is only 250 bytes, then "per kilobyte" only pays 250 koinu in fee, while "total at least" pays 1000 koinu. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation>Se la commissione personalizzata è impostata su 1000 koinu e la transazione è di soli 250 byte, allora "per kilobyte" paga solo 250 koinu di commissione, mentre "somma almeno" paga 1000 koinu. Per transazioni più grandi di un kilobyte, entrambe le opzioni pagano al kilobyte.</translation>
-    </message>
-    <message>
         <source>Hide</source>
         <translation>Nascondi</translation>
-    </message>
-    <message>
-        <source>total at least</source>
-        <translation>somma almeno</translation>
-    </message>
-    <message>
-        <source>Recommended:</source>
-        <translation>Raccomandata:</translation>
-    </message>
-    <message>
-        <source>Custom:</source>
-        <translation>Personalizzata:</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>normale</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>veloce</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Invia simultaneamente a più beneficiari</translation>
     </message>
     <message>
         <source>Add &amp;Recipient</source>
         <translation>&amp;Aggiungi beneficiario</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Cancella &amp;tutto</translation>
+        <source>Clear All</source>
+        <translation>Cancella tutto</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Saldo:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Conferma l'azione di invio</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -1810,51 +1750,39 @@
         <translation>o</translation>
     </message>
     <message>
-        <source>The amount exceeds your balance.</source>
+        <source>The amount exceeds your balance</source>
         <translation>Non hai abbastanza fondi</translation>
     </message>
     <message>
-        <source>Transaction creation failed!</source>
-        <translation>Creazione della transazione fallita!</translation>
+        <source>Transaction creation failed</source>
+        <translation>Creazione della transazione fallita</translation>
     </message>
     <message>
         <source>The transaction was rejected with the following reason: %1</source>
         <translation>La transazione è stata respinta per il seguente motivo: %1</translation>
     </message>
     <message>
-        <source>Payment request expired.</source>
-        <translation>Richiesta di pagamento scaduta.</translation>
+        <source>Payment request expired</source>
+        <translation>Richiesta di pagamento scaduta</translation>
     </message>
     <message numerus="yes">
         <source>%n block(s)</source>
         <translation><numerusform>%n blocco</numerusform><numerusform>%n blocchi</numerusform></translation>
     </message>
-    <message>
-        <source>Warning: Invalid Dogecoin address</source>
-        <translation>Attenzione: Indirizzo Dogecoin non valido</translation>
-    </message>
-    <message>
-        <source>Warning: Unknown change address</source>
-        <translation>Attenzione: Indirizzo per il resto sconosciuto</translation>
-    </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(nessuna etichetta)</translation>
-    </message>
 </context>
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>&amp;Importo:</translation>
+        <source>Amount:</source>
+        <translation>Importo:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>Paga &amp;a:</translation>
+        <source>Pay To:</source>
+        <translation>Paga a:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Etichetta:</translation>
+        <source>Label:</source>
+        <translation>Etichetta:</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -1865,48 +1793,36 @@
         <translation>L'indirizzo Dogecoin a cui vuoi inviare il pagamento</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Incollare l'indirizzo dagli appunti</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Remove this entry</source>
         <translation>Rimuovi questa voce</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less dogecoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation>La commissione sarà sottratta dall'importo che si sta inviando. Il beneficiario riceverà un totale di dogecoin inferiore al valore digitato. Nel caso in cui siano stati selezionati più beneficiari la commissione sarà suddivisa in parti uguali.</translation>
-    </message>
-    <message>
-        <source>S&amp;ubtract fee from amount</source>
-        <translation>S&amp;ottrae la commissione dall'importo</translation>
+        <source>Subtract fee from amount</source>
+        <translation>Sottrae la commissione dall'importo</translation>
     </message>
     <message>
         <source>Message:</source>
         <translation>Messaggio:</translation>
     </message>
     <message>
-        <source>This is an unauthenticated payment request.</source>
-        <translation>Questa è una richiesta di pagamento non autenticata.</translation>
+        <source>This is an unauthenticated payment request</source>
+        <translation>Questa è una richiesta di pagamento non autenticata</translation>
     </message>
     <message>
-        <source>This is an authenticated payment request.</source>
-        <translation>Questa è una richiesta di pagamento autenticata.</translation>
+        <source>This is an authenticated payment request</source>
+        <translation>Questa è una richiesta di pagamento autenticata</translation>
     </message>
     <message>
         <source>Enter a label for this address to add it to the list of used addresses</source>
         <translation>Inserisci un'etichetta per questo indirizzo per aggiungerlo alla lista degli indirizzi utilizzati</translation>
     </message>
     <message>
-        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Dogecoin network.</source>
-        <translation>Messaggio incluso nel dogecoin URI e che sarà memorizzato con la transazione per vostro riferimento. Nota: Questo messaggio non sarà inviato attraverso la rete Dogecoin.</translation>
+        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
+        <translation>Messaggio incluso nel dogecoin: URI e che sarà memorizzato con la transazione. Questo messaggio non sarà inviato attraverso la rete</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -1958,16 +1874,8 @@
         <translation>Scegli un indirizzo usato precedentemente</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Incolla l'indirizzo dagli appunti</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -1994,8 +1902,8 @@
         <translation>Reimposta tutti i campi della firma messaggio</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Cancella &amp;Tutto</translation>
+        <source>Clear All</source>
+        <translation>Cancella Tutto</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

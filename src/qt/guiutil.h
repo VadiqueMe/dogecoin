@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -43,11 +43,11 @@ namespace GUIUtil
     QFont fixedPitchFont();
 
     // Set up widgets for address and amounts
-    void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent);
-    void setupAmountWidget(QLineEdit *widget, QWidget *parent);
+    void setupAddressWidget( QValidatedLineEdit * widget, QWidget * parent ) ;
+    void setupAmountWidget( QLineEdit * widget, QWidget * parent ) ;
 
     // Parse "dogecoin:" URI into recipient object, return true on successful parsing
-    bool parseDogecoinURI( const QUrl &uri, SendCoinsRecipient * out ) ;
+    bool parseDogecoinURI( const QUrl & uri, SendCoinsRecipient * out ) ;
     bool parseDogecoinURI( QString uri, SendCoinsRecipient * out ) ;
     QString formatDogecoinURI( const SendCoinsRecipient & info ) ;
 

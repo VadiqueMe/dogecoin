@@ -993,12 +993,18 @@ void MiningThread::MineBlocks()
     }
 }
 
-std::string MiningThread::threadMiningInfoString() const
+std::string MiningThread::threadMiningInfoString( bool withSmallestHashes ) const
 {
+    std::string aboutSmallestHashBlock ;
+    std::string aboutSmallestHashAll ;
+    if ( withSmallestHashes ) {
+        aboutSmallestHashBlock = " with smallest scrypt hash " + smallestScryptHashBlock.GetHex() ;
+        aboutSmallestHashAll = " smallest scrypt hash ever " + smallestScryptHashAll.GetHex() ;
+    }
     return strprintf (
-        "%d nonces for current block candidate (%.3f nonces/s) with smallest scrypt hash %s, %ld nonces overall (%.3f nonces/s) smallest scrypt hash ever %s",
-        howManyNoncesAreTriedForCurrentBlock(), getBlockNoncesPerSecond(), smallestScryptHashBlock.GetHex(),
-        howManyNoncesAreEverTriedByThisThread(), getAllNoncesPerSecond(), smallestScryptHashAll.GetHex()
+        "%d nonces for current block candidate (%.3f nonces/s)%s, %ld nonces overall (%.3f nonces/s)%s",
+        howManyNoncesAreTriedForCurrentBlock(), getBlockNoncesPerSecond(), aboutSmallestHashBlock,
+        howManyNoncesAreEverTriedByThisThread(), getAllNoncesPerSecond(), aboutSmallestHashAll
     ) ;
 }
 

@@ -204,12 +204,12 @@
         <translation>Golygu'r cyfeiriad</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Label</translation>
+        <source>Label</source>
+        <translation>Label</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Cyfeiriad</translation>
+        <source>Address</source>
+        <translation>Cyfeiriad</translation>
     </message>
     </context>
 <context>
@@ -334,10 +334,6 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Label:</translation>
-    </message>
-    <message>
         <source>Copy &amp;Address</source>
         <translation>&amp;Cyfeiriad Copi</translation>
     </message>
@@ -356,43 +352,27 @@
         <translation>Maint</translation>
     </message>
     <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Anfon at pobl lluosog ar yr un pryd</translation>
-    </message>
-    <message>
         <source>Balance:</source>
         <translation>Gweddill:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Cadarnhau'r gweithrediad anfon</translation>
     </message>
     </context>
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>&amp;Maint</translation>
+        <source>Amount:</source>
+        <translation>Maint:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Label:</translation>
-    </message>
-    <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
-        <source>Paste address from clipboard</source>
-        <translation>Gludo cyfeiriad o'r glipfwrdd</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
+        <source>Label:</source>
+        <translation>Label:</translation>
     </message>
     <message>
         <source>Message:</source>
         <translation>Neges:</translation>
+    </message>
+    <message>
+        <source>Paste address from clipboard</source>
+        <translation>Gludo cyfeiriad o'r glipfwrdd</translation>
     </message>
     </context>
 <context>
@@ -404,16 +384,8 @@
 <context>
     <name>SignVerifyMessageDialog</name>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Gludo cyfeiriad o'r glipfwrdd</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
 </context>
 <context>

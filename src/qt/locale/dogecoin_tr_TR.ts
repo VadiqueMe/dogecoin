@@ -60,11 +60,11 @@
 <context>
     <name>EditAddressDialog</name>
     <message>
-        <source>&amp;Label</source>
+        <source>Label</source>
         <translation>Etiket</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
+        <source>Address</source>
         <translation>Adres</translation>
     </message>
     </context>

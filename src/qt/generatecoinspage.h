@@ -1,4 +1,4 @@
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the WTFPLv2 software license http://www.wtfpl.net
 
 #ifndef DOGECOIN_QT_GENERATECOINSPAGE_H
@@ -25,25 +25,74 @@ public:
     explicit MiningThreadTab( const MiningThread * const thread, QWidget * parent = nullptr )
         : QWidget( parent )
         , miningThread( thread )
-        , bigLabel( new QLabel( "mining thread" ) )
+        , newBlockInfoLabel( new QLabel() )
+        , solutionLabel( new QLabel() )
+        , coinsToLabel( new QLabel() )
+        , miningInfoLabel( new QLabel() )
+        , resultLabel( new QLabel() )
     {
-        bigLabel->setWordWrap( true ) ;
+        labels = {
+            newBlockInfoLabel.get(),
+            solutionLabel.get(),
+            coinsToLabel.get(),
+            miningInfoLabel.get(),
+            resultLabel.get()
+        } ;
+        for ( QLabel * label : labels ) {
+            label->setWordWrap( true ) ;
+            label->setTextFormat( Qt::RichText ) ;
+            label->setTextInteractionFlags( Qt::TextSelectableByMouse ) ;
+            label->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Maximum ) ;
+        }
+
         QVBoxLayout * tabLayout = new QVBoxLayout() ;
-        tabLayout->addWidget( bigLabel.get() ) ;
+        tabLayout->setSpacing( 6 ) ;
+        tabLayout->addStretch() ;
+        for ( QLabel * label : labels )
+            tabLayout->addWidget( label ) ;
+        tabLayout->addStretch() ;
+        tabLayout->setSizeConstraint( QLayout::SetMinimumSize ) ;
         setLayout( tabLayout ) ;
     }
 
     const MiningThread * const getThread() const {  return miningThread ;  }
 
-    void setTextOfLabel( const std::string & string )
-        {  setTextOfLabel( QString::fromStdString( string ) ) ;  }
+    QLabel * const getNewBlockInfoLabel() const {  return newBlockInfoLabel.get() ;  }
+    QLabel * const getSolutionLabel() const {  return solutionLabel.get() ;  }
+    QLabel * const getCoinsToLabel() const {  return coinsToLabel.get() ;  }
+    QLabel * const getMiningInfoLabel() const {  return miningInfoLabel.get() ;  }
+    QLabel * const getResultLabel() const {  return resultLabel.get() ;  }
 
-    void setTextOfLabel( const QString & text ) {  bigLabel->setText( text ) ;  }
+    void setFont( const QFont & font )
+    {
+        QWidget::setFont( font ) ;
+
+        for ( QLabel * label : labels )
+            label->setFont( font ) ;
+    }
+
+    void resetLabels()
+    {
+        for ( QLabel * label : labels )
+            label->setText( QString() ) ;
+    }
+
+    void hideEmpties()
+    {
+        for ( QLabel * label : labels )
+            label->setVisible( ! label->text().isEmpty() ) ;
+    }
 
 private:
     const MiningThread * const miningThread ;
 
-    std::unique_ptr< QLabel > bigLabel ;
+    std::unique_ptr< QLabel > newBlockInfoLabel ;
+    std::unique_ptr< QLabel > solutionLabel ;
+    std::unique_ptr< QLabel > coinsToLabel ;
+    std::unique_ptr< QLabel > miningInfoLabel ;
+    std::unique_ptr< QLabel > resultLabel ;
+
+    std::vector< QLabel * > labels ;
 
 } ;
 

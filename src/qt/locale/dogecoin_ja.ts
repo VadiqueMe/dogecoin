@@ -551,14 +551,6 @@
         <translation>すべて選択/選択解除</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>ツリーモード</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>リストモード</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>総額</translation>
     </message>
@@ -639,12 +631,8 @@
         <translation>いいえ</translation>
     </message>
     <message>
-        <source>(no label)</source>
-        <translation>（ラベル無し）</translation>
-    </message>
-    <message>
-        <source>change from %1 (%2)</source>
-        <translation>%1 (%2) からのおつり</translation>
+        <source>change from %1</source>
+        <translation>%1 からのおつり</translation>
     </message>
     <message>
         <source>(change)</source>
@@ -658,12 +646,12 @@
         <translation>アドレスの編集</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>ラベル(&amp;L)</translation>
+        <source>Label</source>
+        <translation>ラベル</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>アドレス帳 (&amp;A)</translation>
+        <source>Address</source>
+        <translation>アドレス帳</translation>
     </message>
     <message>
         <source>New receiving address</source>
@@ -968,10 +956,6 @@
         <translation>ウォレット (&amp;A)</translation>
     </message>
     <message>
-        <source>Hide coin &amp;control features</source>
-        <translation>コインコントロール機能を隠す (&amp;C)</translation>
-    </message>
-    <message>
         <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
         <translation>未検証のおつりの使用を無効化すると、トランザクションが少なくとも1検証を獲得するまではそのトランザクションのおつりは利用できなくなります。これは残高の計算方法にも影響します</translation>
     </message>
@@ -1210,56 +1194,56 @@
         <translation>支払いのアドレス「%1」は無効です</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid address or malformed URI parameters</source>
-        <translation>URI を解析できません! これは無効な アドレスあるいや不正な形式の URI パラメーターによって引き起こされる場合があります</translation>
+        <source>URI cannot be parsed. This can be caused by an invalid address or malformed URI parameters</source>
+        <translation>URI を解析できません。これは無効な アドレスあるいや不正な形式の URI パラメーターによって引き起こされる場合があります</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
         <translation>支払いリクエストファイルを処理しています</translation>
     </message>
     <message>
-        <source>Payment request file cannot be read! This can be caused by an invalid payment request file.</source>
-        <translation>支払いリクエストファイルを読み込めませんでした！無効な支払いリクエストファイルにより引き起こされた可能性があります。</translation>
+        <source>Payment request file cannot be read. This can be caused by an invalid payment request file</source>
+        <translation>支払いリクエストファイルを読み込めませんでした。無効な支払いリクエストファイルにより引き起こされた可能性があります</translation>
     </message>
     <message>
         <source>Payment request rejected</source>
         <translation>支払い要求は拒否されました</translation>
     </message>
     <message>
-        <source>Payment request network doesn't match client network.</source>
-        <translation>支払いリクエストのネットワークは現在のクライアントのネットワークに一致しません。</translation>
+        <source>Payment request network doesn't match the current network</source>
+        <translation>支払い要求ネットワークは現在のネットワークに一致しません</translation>
     </message>
     <message>
-        <source>Payment request expired.</source>
-        <translation>支払いリクエストの期限が切れました。</translation>
+        <source>Payment request expired</source>
+        <translation>支払いリクエストの期限が切れました</translation>
     </message>
     <message>
-        <source>Payment request is not initialized.</source>
-        <translation>支払いリクエストは開始されていません。</translation>
+        <source>Payment request is not initialized</source>
+        <translation>支払いリクエストは開始されていません</translation>
     </message>
     <message>
-        <source>Unverified payment requests to custom payment scripts are unsupported.</source>
-        <translation>カスタム支払いスクリプトに対する、検証されていない支払いリクエストはサポートされていません。</translation>
+        <source>Unverified payment requests to custom payment scripts are not supported</source>
+        <translation>カスタム支払いスクリプトに対する、検証されていない支払いリクエストはサポートされていません</translation>
     </message>
     <message>
-        <source>Invalid payment request.</source>
-        <translation>無効な支払いリクエスト。</translation>
+        <source>Invalid payment request</source>
+        <translation>無効な支払いリクエスト</translation>
     </message>
     <message>
         <source>Refund from %1</source>
         <translation>%1 からの返金</translation>
     </message>
     <message>
-        <source>Payment request %1 is too large (%2 bytes, allowed %3 bytes).</source>
-        <translation>支払リクエスト %1 は大きすぎます（%2バイトですが、%3バイトまでが許されています）。</translation>
+        <source>Payment request %1 is too large (%2 bytes, allowed %3 bytes)</source>
+        <translation>支払リクエスト %1 は大きすぎます（%2バイトですが、%3バイトまでが許されています）</translation>
     </message>
     <message>
         <source>Error communicating with %1: %2</source>
         <translation>%1: %2とコミュニケーション・エラーです</translation>
     </message>
     <message>
-        <source>Payment request cannot be parsed!</source>
-        <translation>支払リクエストを読み込めませんでした！</translation>
+        <source>Payment request cannot be parsed</source>
+        <translation>支払リクエストを読み込めませんでした</translation>
     </message>
     <message>
         <source>Bad response from server %1</source>
@@ -1636,20 +1620,20 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>総額:(&amp;A)</translation>
+        <source>Amount:</source>
+        <translation>総額</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>ラベル(&amp;L):</translation>
+        <source>Label:</source>
+        <translation>ラベル</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>メッセージ (&amp;M):</translation>
+        <source>Message:</source>
+        <translation>メッセージ</translation>
     </message>
     <message>
-        <source>R&amp;euse an existing receiving address (not recommended)</source>
-        <translation>既存の受取用アドレスを再利用する (非推奨) (&amp;E)</translation>
+        <source>Reuse an existing receiving address (not recommended)</source>
+        <translation>既存の受取用アドレスを再利用する (非推奨)</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
@@ -1810,8 +1794,8 @@
         <translation>釣り銭:</translation>
     </message>
     <message>
-        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
-        <translation>これが有効にもかかわらずおつりアドレスが空欄であったり無効であった場合には、おつりは新しく生成されたアドレスへ送金されます。</translation>
+        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address</source>
+        <translation>これが有効にもかかわらずおつりアドレスが空欄であったり無効であった場合には、おつりは新しく生成されたアドレスへ送金されます</translation>
     </message>
     <message>
         <source>Custom change address</source>
@@ -1822,64 +1806,20 @@
         <translation>トランザクション手数料：</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>選択……</translation>
-    </message>
-    <message>
-        <source>collapse fee-settings</source>
-        <translation>手数料設定を折りたたむ</translation>
-    </message>
-    <message>
-        <source>per kilobyte</source>
-        <translation>1キロバイトあたり手数料</translation>
-    </message>
-    <message>
-        <source>If the custom fee is set to 1000 koinu and the transaction is only 250 bytes, then "per kilobyte" only pays 250 koinu in fee, while "total at least" pays 1000 koinu. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation>カスタム手数料が1000koinuに設定されている場合、トランザクションサイズが250バイトとすると、「1キロバイトあたり手数料」では250koinuの手数料のみを支払いますが、「最小手数料」では1000koinuを支払います。1キロバイトを超えるトランザクションの場合には、どちらの方法を選択したとしても1キロバイトあたりで支払われます。</translation>
-    </message>
-    <message>
         <source>Hide</source>
         <translation>隠す</translation>
-    </message>
-    <message>
-        <source>total at least</source>
-        <translation>最小手数料</translation>
-    </message>
-    <message>
-        <source>Recommended:</source>
-        <translation>推奨：</translation>
-    </message>
-    <message>
-        <source>Custom:</source>
-        <translation>カスタム：</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>普通</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>高速</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>一度に複数の人に送る</translation>
     </message>
     <message>
         <source>Add &amp;Recipient</source>
         <translation>受取人を追加 (&amp;R)</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>すべてクリア (&amp;A)</translation>
+        <source>Clear All</source>
+        <translation>すべてクリア</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>残高:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>送る操作を確認する</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -1934,40 +1874,36 @@
         <translation>コインを送る確認</translation>
     </message>
     <message>
-        <source>The recipient address is not valid. Please recheck.</source>
-        <translation>受取アドレスが不正です。再チェックしてください。</translation>
+        <source>The recipient address is not valid, please recheck</source>
+        <translation>受取アドレスが不正です。再チェックしてください</translation>
     </message>
     <message>
-        <source>The amount to pay must be larger than 0.</source>
-        <translation>支払額は0より大きくないといけません。</translation>
+        <source>The amount exceeds your balance</source>
+        <translation>額が残高を超えています</translation>
     </message>
     <message>
-        <source>The amount exceeds your balance.</source>
-        <translation>額が残高を超えています。</translation>
+        <source>The total exceeds your balance when the transaction fee is included</source>
+        <translation>取引手数料を含めると額が残高を超えています</translation>
     </message>
     <message>
-        <source>The total exceeds your balance when the %1 transaction fee is included.</source>
-        <translation>%1 の取引手数料を含めると額が残高を超えています。</translation>
+        <source>Duplicate address found, can only send to each address once per transaction</source>
+        <translation>重複したアドレスが見つかりました。アドレスはそれぞれ一度のみ使用することができます</translation>
     </message>
     <message>
-        <source>Duplicate address found: addresses should only be used once each.</source>
-        <translation>重複したアドレスが見つかりました: アドレスはそれぞれ一度のみ使用することができます。</translation>
-    </message>
-    <message>
-        <source>Transaction creation failed!</source>
-        <translation>トラザクションの作成に失敗しました!</translation>
+        <source>Transaction creation failed</source>
+        <translation>トラザクションの作成に失敗しました</translation>
     </message>
     <message>
         <source>The transaction was rejected with the following reason: %1</source>
         <translation>トランザクションは以下の理由により拒絶されました: %1</translation>
     </message>
     <message>
-        <source>A fee higher than %1 is considered an absurdly high fee.</source>
-        <translation>%1 よりも高い手数料の場合、手数料が高すぎると判断されます。</translation>
+        <source>A fee higher than %1 is considered an absurdly high fee</source>
+        <translation>%1 よりも高い手数料の場合、手数料が高すぎると判断されます</translation>
     </message>
     <message>
-        <source>Payment request expired.</source>
-        <translation>支払いリクエストの期限が切れました。</translation>
+        <source>Payment request expired</source>
+        <translation>支払いリクエストの期限が切れました</translation>
     </message>
     <message numerus="yes">
         <source>%n block(s)</source>
@@ -1978,14 +1914,6 @@
         <translation><numerusform>%n ブロック以内に検証が開始されると予想されます。</numerusform></translation>
     </message>
     <message>
-        <source>Warning: Invalid Dogecoin address</source>
-        <translation>警告：無効なDogecoinアドレスです</translation>
-    </message>
-    <message>
-        <source>Warning: Unknown change address</source>
-        <translation>警告：未知のおつりアドレスです</translation>
-    </message>
-    <message>
         <source>Confirm custom change address</source>
         <translation>カスタムおつりアドレスを確認</translation>
     </message>
@@ -1993,24 +1921,20 @@
         <source>The address you selected for change is not part of this wallet. Any or all funds in your wallet may be sent to this address. Are you sure?</source>
         <translation>おつりとして指定されたアドレスはこのウォレットに属さないもののようです。このウォレットの一部またはすべての資産がこのアドレスへ送金されます。よろしいですか？</translation>
     </message>
-    <message>
-        <source>(no label)</source>
-        <translation>（ラベル無し）</translation>
-    </message>
 </context>
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>金額(&amp;A):</translation>
+        <source>Amount:</source>
+        <translation>金額:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>送り先(&amp;T):</translation>
+        <source>Pay To:</source>
+        <translation>送り先:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>ラベル(&amp;L):</translation>
+        <source>Label:</source>
+        <translation>ラベル:</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2021,48 +1945,36 @@
         <translation>支払の送金先Dogecoinアドレス</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>クリップボードからアドレスを貼付ける</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Remove this entry</source>
         <translation>この項目を削除する</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less dogecoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation>送金する金額から手数料が差し引かれます。受取人は数量フィールドで指定した量よりも少ないドージコインを受け取ります。受取人が複数いる場合には、手数料は均等割されます。</translation>
-    </message>
-    <message>
-        <source>S&amp;ubtract fee from amount</source>
-        <translation>送金額から手数料を差し引く (&amp;U)</translation>
+        <source>Subtract fee from amount</source>
+        <translation>送金額から手数料を差し引く</translation>
     </message>
     <message>
         <source>Message:</source>
         <translation>メッセージ:</translation>
     </message>
     <message>
-        <source>This is an unauthenticated payment request.</source>
-        <translation>これは未認証の支払いリクエストです。</translation>
+        <source>This is an unauthenticated payment request</source>
+        <translation>これは未認証の支払いリクエストです</translation>
     </message>
     <message>
-        <source>This is an authenticated payment request.</source>
-        <translation>これは認証済みの支払いリクエストです。</translation>
+        <source>This is an authenticated payment request</source>
+        <translation>これは認証済みの支払いリクエストです</translation>
     </message>
     <message>
         <source>Enter a label for this address to add it to the list of used addresses</source>
         <translation>このアドレスに対するラベルを入力することで、使用済みアドレスの一覧に追加することができます</translation>
     </message>
     <message>
-        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Dogecoin network.</source>
-        <translation>dogecoin: URIに添付されていたメッセージです。これは参照用としてトランザクションとともに保存されます。注意：このメッセージはDogecoinネットワークを通して送信されるわけではありません。</translation>
+        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
+        <translation>dogecoin: URIに添付されていたメッセージです。これはとしてトランザクションとともに保存されます。このメッセージはネットワークを通して送信されるわけではありません</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -2118,16 +2030,8 @@
         <translation>前に使用したアドレスを選ぶ</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>クリップボードからアドレスを貼付ける</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -2154,8 +2058,8 @@
         <translation>入力項目の内容をすべて消去します</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>すべてクリア (&amp;A)</translation>
+        <source>Clear All</source>
+        <translation>すべてクリア</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

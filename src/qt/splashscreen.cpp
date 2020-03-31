@@ -49,8 +49,8 @@ SplashScreen::SplashScreen(Qt::WindowFlags f, const NetworkStyle *networkStyle) 
     QString font            = "Comic Sans MS";
 
     // create a bitmap according to device pixelratio
-    QSize splashSize(480*devicePixelRatio,320*devicePixelRatio);
-    pixmap = QPixmap(splashSize);
+    QSize splashSize( 480 * devicePixelRatio, 320 * devicePixelRatio ) ;
+    pixmap = QPixmap( splashSize ) ;
 
 #if QT_VERSION > 0x050100
     // change to HiDPI if it makes sense
@@ -83,29 +83,33 @@ SplashScreen::SplashScreen(Qt::WindowFlags f, const NetworkStyle *networkStyle) 
         fontFactor = fontFactor * 176 / titleTextWidth;
     }
 
-    pixPaint.setFont(QFont(font, 33*fontFactor));
+    pixPaint.setFont(QFont( font, 33 * fontFactor ) ) ;
     fm = pixPaint.fontMetrics();
     titleTextWidth  = fm.width(titleText);
     pixPaint.drawText(pixmap.width()/devicePixelRatio-titleTextWidth-paddingRight,paddingTop,titleText);
 
-    pixPaint.setFont(QFont(font, 15*fontFactor));
+    pixPaint.setFont( QFont( font, 15 * fontFactor ) ) ;
 
     // if the version string is to long, reduce size
-    fm = pixPaint.fontMetrics();
-    int versionTextWidth  = fm.width(versionText);
-    if(versionTextWidth > titleTextWidth+paddingRight-10) {
-        pixPaint.setFont(QFont(font, 10*fontFactor));
-        titleVersionVSpace -= 5;
+    fm = pixPaint.fontMetrics() ;
+    int versionTextWidth  = fm.width( versionText ) ;
+    if ( versionTextWidth > titleTextWidth + paddingRight - 10 ) {
+        pixPaint.setFont( QFont( font, 12 * fontFactor ) ) ;
+        titleVersionVSpace -= 3 ;
     }
-    pixPaint.drawText(pixmap.width()/devicePixelRatio-titleTextWidth-paddingRight+2,paddingTop+titleVersionVSpace,versionText);
+    pixPaint.drawText(
+        pixmap.width() / devicePixelRatio - titleTextWidth - paddingRight + 2,
+        paddingTop + titleVersionVSpace,
+        versionText
+    ) ;
 
     // draw copyright stuff
     {
-        pixPaint.setFont(QFont(font, 10*fontFactor));
-        const int x = pixmap.width()/devicePixelRatio-titleTextWidth-paddingRight;
-        const int y = paddingTop+titleCopyrightVSpace;
-        QRect copyrightRect(x, y, pixmap.width() - x - paddingRight, pixmap.height() - y);
-        pixPaint.drawText(copyrightRect, Qt::AlignLeft | Qt::AlignTop | Qt::TextWordWrap, copyrightText);
+        pixPaint.setFont( QFont( font, 13 * fontFactor ) ) ;
+        const int x = pixmap.width() / devicePixelRatio - titleTextWidth - paddingRight + 2 ;
+        const int y = paddingTop + titleCopyrightVSpace ;
+        QRect copyrightRect( x, y, pixmap.width() - x - paddingRight, pixmap.height() - y ) ;
+        pixPaint.drawText( copyrightRect, Qt::AlignLeft | Qt::AlignTop | Qt::TextWordWrap, copyrightText ) ;
     }
 
     // draw additional text if not main chain

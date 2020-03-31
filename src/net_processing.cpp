@@ -1686,16 +1686,16 @@ bool static ProcessMessage( CNode * pfrom, const std::string & strCommand, CData
             return true ;
         }
 
-        if (it->second->nHeight < chainActive.Height() - MAX_BLOCKTXN_DEPTH) {
+        if ( it->second->nHeight < chainActive.Height() - MAX_BLOCKTXN_DEPTH ) {
             // If an older block is requested (should never happen in practice,
             // but can happen in tests) send a block response instead of a
             // blocktxn response. Sending a full block response instead of a
             // small blocktxn response is preferable in the case where a peer
             // might maliciously send lots of getblocktxn requests to trigger
             // expensive disk reads, because it will require the peer to
-            // actually receive all the data read from disk over the network.
-            LogPrint("net", "Peer %d sent us a getblocktxn for a block > %i deep", pfrom->id, MAX_BLOCKTXN_DEPTH);
-            CInv inv;
+            // actually receive all the data read from disk over the network
+            LogPrint( "net", "Peer %d sent us a getblocktxn for a block > %i deep", pfrom->id, MAX_BLOCKTXN_DEPTH ) ;
+            CInv inv ;
             inv.type = State(pfrom->GetId())->fWantsCmpctWitness ? MSG_WITNESS_BLOCK : MSG_BLOCK;
             inv.hash = req.blockhash;
             pfrom->vRecvGetData.push_back(inv);

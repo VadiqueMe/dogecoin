@@ -119,7 +119,6 @@ void WalletView::setNetworkModel( NetworkModel * model )
     this->networkModel = model ;
 
     overviewPage->setNetworkModel( model ) ;
-    sendCoinsPage->setNetworkModel( model ) ;
 }
 
 void WalletView::setWalletModel( WalletModel * model )

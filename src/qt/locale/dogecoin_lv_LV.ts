@@ -273,14 +273,6 @@
         <translation>iezīmēt visus</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>Koka režīms</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Saraksta režīms</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Daudzums</translation>
     </message>
@@ -304,12 +296,12 @@
         <translation>Mainīt adrese</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Nosaukums</translation>
+        <source>Label</source>
+        <translation>Nosaukums</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Adrese</translation>
+        <source>Address</source>
+        <translation>Adrese</translation>
     </message>
     </context>
 <context>
@@ -460,10 +452,6 @@
     <message>
         <source>W&amp;allet</source>
         <translation>&amp;Maciņš</translation>
-    </message>
-    <message>
-        <source>Hide coin &amp;control features</source>
-        <translation>Slēpt dogecoin &amp;kontroles funkcijas</translation>
     </message>
     <message>
         <source>&amp;Spend unconfirmed change</source>
@@ -686,20 +674,20 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;Daudzums:</translation>
+        <source>Amount:</source>
+        <translation>Daudzums:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Nosaukums:</translation>
+        <source>Label:</source>
+        <translation>Nosaukums:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;Ziņojums:</translation>
+        <source>Message:</source>
+        <translation>Ziņojums:</translation>
     </message>
     <message>
-        <source>R&amp;euse an existing receiving address (not recommended)</source>
-        <translation>&amp;Atkārtoti izmantot esošo saņemšanas adresi (nav ieteicams)</translation>
+        <source>Reuse an existing receiving address (not recommended)</source>
+        <translation>Atkārtoti izmantot esošo saņemšanas adresi (nav ieteicams)</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -800,24 +788,16 @@
         <translation>Transakcijas maksa:</translation>
     </message>
     <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Sūtīt vairākiem saņēmējiem uzreiz</translation>
-    </message>
-    <message>
         <source>Add &amp;Recipient</source>
         <translation>&amp;Pievienot Saņēmēju</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>&amp;Notīrīt visu</translation>
+        <source>Clear All</source>
+        <translation>Notīrīt visu</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Bilance:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Apstiprināt nosūtīšanu</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -827,32 +807,24 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>Apjo&amp;ms</translation>
+        <source>Amount:</source>
+        <translation>Apjoms:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>&amp;Saņēmējs:</translation>
+        <source>Pay To:</source>
+        <translation>Saņēmējs:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Nosaukums:</translation>
+        <source>Label:</source>
+        <translation>Nosaukums:</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
         <translation>Izvēlies iepriekš izmantoto adresi</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>ielīmēt adresi no starpliktuves</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Remove this entry</source>
@@ -896,16 +868,8 @@
         <translation>Izvēlies iepriekš izmantoto adresi</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>ielīmēt adresi no starpliktuves</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -932,8 +896,8 @@
         <translation>Atiestatīt visus laukus</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>&amp;Notīrīt visu</translation>
+        <source>Clear All</source>
+        <translation>Notīrīt visu</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

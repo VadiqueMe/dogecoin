@@ -228,12 +228,12 @@
         <translation>Alilan ing Address</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Label</translation>
+        <source>Label</source>
+        <translation>Label</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Address</translation>
+        <source>Address</source>
+        <translation>Address</translation>
     </message>
     </context>
 <context>
@@ -478,10 +478,6 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Label:</translation>
-    </message>
-    <message>
         <source>Copy &amp;Address</source>
         <translation>&amp;Kopyan ing address</translation>
     </message>
@@ -508,24 +504,16 @@
         <translation>Bayad king Transaksion:</translation>
     </message>
     <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Misanang magpadala kareng alialiuang tumanggap</translation>
-    </message>
-    <message>
         <source>Add &amp;Recipient</source>
         <translation>Maglage &amp;Tumanggap</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>I-Clear &amp;Eganagana</translation>
+        <source>Clear All</source>
+        <translation>I-Clear Eganagana</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Balanse:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Kumpirman ing aksion king pamagpadala</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -535,28 +523,20 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>A&amp;laga:</translation>
+        <source>Amount:</source>
+        <translation>Alaga:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>Ibayad &amp;kang:</translation>
+        <source>Pay To:</source>
+        <translation>Ibayad kang:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Label:</translation>
-    </message>
-    <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
+        <source>Label:</source>
+        <translation>Label:</translation>
     </message>
     <message>
         <source>Paste address from clipboard</source>
         <translation>Idikit ing address menibat king clipboard</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Message:</source>
@@ -584,16 +564,8 @@
         <translation>&amp;Pirman ing Mensayi</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Idikit ing address menibat king clipboard</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -620,8 +592,8 @@
         <translation>Ibalik keng dati reng ngan fields keng pamamirmang mensayi</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>I-Clear &amp;Eganagana</translation>
+        <source>Clear All</source>
+        <translation>I-Clear Eganagana</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

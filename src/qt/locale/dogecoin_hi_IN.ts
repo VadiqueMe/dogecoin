@@ -148,12 +148,12 @@
         <translation>पता एडिट करना</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;लेबल</translation>
+        <source>Label</source>
+        <translation>लेबल</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;पता</translation>
+        <source>Address</source>
+        <translation>पता</translation>
     </message>
     </context>
 <context>
@@ -242,11 +242,11 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>राशि :</translation>
+        <source>Amount:</source>
+        <translation>राशि:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
+        <source>Label:</source>
         <translation>लेबल:</translation>
     </message>
     <message>
@@ -265,50 +265,30 @@
     </message>
     <message>
         <source>Amount:</source>
-        <translation>राशि :</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>एक साथ कई प्राप्तकर्ताओं को भेजें</translation>
+        <translation>राशि:</translation>
     </message>
     <message>
         <source>Balance:</source>
-        <translation>बाकी रकम :</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>भेजने की पुष्टि करें</translation>
+        <translation>बाकी रकम:</translation>
     </message>
     </context>
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
+        <source>Amount:</source>
         <translation>अमाउंट:</translation>
-    </message>
-    <message>
-        <source>Pay &amp;To:</source>
-        <translation>प्राप्तकर्ता:</translation>
-    </message>
-    <message>
-        <source>&amp;Label:</source>
-        <translation>लेबल:</translation>
-    </message>
-    <message>
-        <source>Alt+A</source>
-        <translation>Alt-A</translation>
-    </message>
-    <message>
-        <source>Paste address from clipboard</source>
-        <translation>Clipboard से एड्रेस paste करें</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt-P</translation>
     </message>
     <message>
         <source>Pay To:</source>
         <translation>प्राप्तकर्ता:</translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation>लेबल:</translation>
+    </message>
+    <message>
+        <source>Paste address from clipboard</source>
+        <translation>Clipboard से एड्रेस paste करें</translation>
     </message>
     </context>
 <context>
@@ -320,16 +300,8 @@
 <context>
     <name>SignVerifyMessageDialog</name>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt-A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Clipboard से एड्रेस paste करें</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt-P</translation>
     </message>
     <message>
         <source>Signature</source>

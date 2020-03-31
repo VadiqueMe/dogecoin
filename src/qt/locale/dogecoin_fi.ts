@@ -359,14 +359,6 @@
         <translation>(epä)valitse kaikki</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>Puurakenne</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Listarakenne</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Määrä</translation>
     </message>
@@ -398,12 +390,12 @@
         <translation>Muokkaa osoitetta</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Nimi</translation>
+        <source>Label</source>
+        <translation>Nimi</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Osoite</translation>
+        <source>Address</source>
+        <translation>Osoite</translation>
     </message>
     </context>
 <context>
@@ -638,10 +630,6 @@
     <message>
         <source>W&amp;allet</source>
         <translation>&amp;Lompakko</translation>
-    </message>
-    <message>
-        <source>Hide coin &amp;control features</source>
-        <translation>Piilota &amp;Kolikkokontrolli-ominaisuudet</translation>
     </message>
     <message>
         <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
@@ -1124,20 +1112,20 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;Määrä</translation>
+        <source>Amount:</source>
+        <translation>Määrä:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Nimi:</translation>
+        <source>Label:</source>
+        <translation>Nimi:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;Viesti:</translation>
+        <source>Message:</source>
+        <translation>Viesti:</translation>
     </message>
     <message>
-        <source>R&amp;euse an existing receiving address (not recommended)</source>
-        <translation>&amp;Uudelleenkäytä vastaanotto-osoitetta (ei suositella)</translation>
+        <source>Reuse an existing receiving address (not recommended)</source>
+        <translation>Uudelleenkäytä vastaanotto-osoitetta (ei suositella)</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
@@ -1238,8 +1226,8 @@
         <translation>Vaihtoraha:</translation>
     </message>
     <message>
-        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
-        <translation>Jos tämä aktivoidaan mutta vaihtorahan osoite on tyhjä tai virheellinen, vaihtoraha tullaan lähettämään uuteen luotuun osoitteeseen.</translation>
+        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address</source>
+        <translation>Jos tämä aktivoidaan mutta vaihtorahan osoite on tyhjä tai virheellinen, vaihtoraha tullaan lähettämään uuteen luotuun osoitteeseen</translation>
     </message>
     <message>
         <source>Custom change address</source>
@@ -1250,60 +1238,20 @@
         <translation>Rahansiirtokulu:</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>Valitse...</translation>
-    </message>
-    <message>
-        <source>collapse fee-settings</source>
-        <translation>pudota kulujen asetukset</translation>
-    </message>
-    <message>
-        <source>per kilobyte</source>
-        <translation>per kilotavu</translation>
-    </message>
-    <message>
         <source>Hide</source>
         <translation>Piilota</translation>
-    </message>
-    <message>
-        <source>total at least</source>
-        <translation>yhteensä ainakin</translation>
-    </message>
-    <message>
-        <source>Recommended:</source>
-        <translation>Suositeltu:</translation>
-    </message>
-    <message>
-        <source>Custom:</source>
-        <translation>Muokattu:</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>normaali</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>nopea</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Lähetä usealla vastaanottajalle samanaikaisesti</translation>
     </message>
     <message>
         <source>Add &amp;Recipient</source>
         <translation>Lisää &amp;Vastaanottaja</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>&amp;Tyhjennnä Kaikki</translation>
+        <source>Clear All</source>
+        <translation>Tyhjennnä Kaikki</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Balanssi:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Vahvista lähetys</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -1313,16 +1261,16 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>M&amp;äärä:</translation>
+        <source>Amount:</source>
+        <translation>Määrä:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
+        <source>Pay To:</source>
         <translation>Maksun saaja:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Nimi:</translation>
+        <source>Label:</source>
+        <translation>Nimi:</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -1333,48 +1281,36 @@
         <translation>Dogecoin-osoite johon maksu lähetetään</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Liitä osoite leikepöydältä</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Remove this entry</source>
         <translation>Poista tämä alkio</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less dogecoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation>Kulu vähennetään lähetettävästä määrästä. Saaja vastaanottaa vähemmän dogecoineja kuin merkitset Määrä-kenttään. Jos saajia on monia, kulu jaetaan tasan.</translation>
-    </message>
-    <message>
-        <source>S&amp;ubtract fee from amount</source>
-        <translation>V&amp;ähennä maksukulu määrästä</translation>
+        <source>Subtract fee from amount</source>
+        <translation>Vähennä maksukulu määrästä</translation>
     </message>
     <message>
         <source>Message:</source>
         <translation>Viesti:</translation>
     </message>
     <message>
-        <source>This is an unauthenticated payment request.</source>
-        <translation>Tämä on todentamaton maksupyyntö.</translation>
+        <source>This is an unauthenticated payment request</source>
+        <translation>Tämä on todentamaton maksupyyntö</translation>
     </message>
     <message>
-        <source>This is an authenticated payment request.</source>
-        <translation>Tämä on todennettu maksupyyntö.</translation>
+        <source>This is an authenticated payment request</source>
+        <translation>Tämä on todennettu maksupyyntö</translation>
     </message>
     <message>
         <source>Enter a label for this address to add it to the list of used addresses</source>
         <translation>Aseta nimi tälle osoitteelle lisätäksesi sen käytettyjen osoitteiden listalle.</translation>
     </message>
     <message>
-        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Dogecoin network.</source>
-        <translation>Viesti joka liitettiin dogecoin: URI:iin tallennetaan rahansiirtoon viitteeksi. Tätä viestiä ei lähetetä Dogecoin-verkkoon.</translation>
+        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
+        <translation>Viesti joka liitettiin dogecoin: URI:iin tallennetaan rahansiirtoon viitteeksi. Tätä viestiä ei lähetetä verkkoon</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -1418,16 +1354,8 @@
         <translation>Valitse aikaisemmin käytetty osoite</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Liitä osoite leikepöydältä</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -1454,8 +1382,8 @@
         <translation>Tyhjennä kaikki allekirjoita-viesti-kentät</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>&amp;Tyhjennä Kaikki</translation>
+        <source>Clear All</source>
+        <translation>Tyhjennä Kaikki</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

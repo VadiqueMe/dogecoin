@@ -289,14 +289,6 @@
         <translation>барчасини танаш (бекор қилиш)</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>Дарахт усулида</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Рўйхат усулида</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Миқдори</translation>
     </message>
@@ -320,12 +312,12 @@
         <translation>Манзилларни таҳрирлаш</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Ёрлик</translation>
+        <source>Label</source>
+        <translation>Ёрлик</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Манзил</translation>
+        <source>Address</source>
+        <translation>Манзил</translation>
     </message>
     </context>
 <context>
@@ -798,16 +790,16 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;Миқдор:</translation>
+        <source>Amount:</source>
+        <translation>Миқдор:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Ёрлиқ:</translation>
+        <source>Label:</source>
+        <translation>Ёрлиқ:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;Хабар:</translation>
+        <source>Message:</source>
+        <translation>Хабар:</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
@@ -896,8 +888,8 @@
         <translation>Ўзгартириш:</translation>
     </message>
     <message>
-        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
-        <translation>Агар бу фаоллаштирилса, аммо ўзгартирилган манзил бўл ёки нотўғри бўлса, ўзгариш янги яратилган манзилга жўнатилади.</translation>
+        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address</source>
+        <translation>Агар бу фаоллаштирилса, аммо ўзгартирилган манзил бўл ёки нотўғри бўлса, ўзгариш янги яратилган манзилга жўнатилади</translation>
     </message>
     <message>
         <source>Custom change address</source>
@@ -905,43 +897,15 @@
     </message>
     <message>
         <source>Transaction Fee:</source>
-        <translation>Ўтказма тўлови</translation>
+        <translation>Ўтказма тўлови:</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>Танлов</translation>
-    </message>
-    <message>
-        <source>per kilobyte</source>
-        <translation>Хар килобайтига</translation>
-    </message>
-    <message>
-        <source>Recommended:</source>
-        <translation>Тавсия этилган</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>Нормал</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>Тезкор</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Бирданига бир нечта қабул қилувчиларга жўнатиш</translation>
-    </message>
-    <message>
-        <source>Clear &amp;All</source>
-        <translation>Барчасини &amp; Тозалаш</translation>
+        <source>Clear All</source>
+        <translation>Барчасини Тозалаш</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Баланс</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Жўнатиш амалини тасдиқлаш</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -951,32 +915,24 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>&amp;Миқдори:</translation>
+        <source>Amount:</source>
+        <translation>Миқдори:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>&amp;Тўлов олувчи:</translation>
+        <source>Pay To:</source>
+        <translation>Тўлов олувчи:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Ёрлиқ:</translation>
+        <source>Label:</source>
+        <translation>Ёрлиқ:</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
         <translation>Олдин фойдаланилган манзилни танла</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Клипбоарддан манзилни қўйиш</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Message:</source>
@@ -1000,24 +956,16 @@
         <translation>Олдин фойдаланилган манзилни танла</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Клипбоарддан манзилни қўйиш</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Signature</source>
         <translation>Имзо</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Барчасини &amp; Тозалаш</translation>
+        <source>Clear All</source>
+        <translation>Барчасини Тозалаш</translation>
     </message>
 </context>
 <context>

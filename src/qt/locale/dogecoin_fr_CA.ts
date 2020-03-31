@@ -48,11 +48,11 @@
 <context>
     <name>EditAddressDialog</name>
     <message>
-        <source>&amp;Label</source>
+        <source>Label</source>
         <translation>Record</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
+        <source>Address</source>
         <translation>Addresse</translation>
     </message>
     </context>

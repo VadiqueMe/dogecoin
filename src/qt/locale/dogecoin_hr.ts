@@ -382,12 +382,12 @@
         <translation>Uredi adresu</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Oznaka</translation>
+        <source>Label</source>
+        <translation>Oznaka</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Adresa</translation>
+        <source>Address</source>
+        <translation>Adresa</translation>
     </message>
     </context>
 <context>
@@ -712,16 +712,16 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;Iznos:</translation>
+        <source>Amount:</source>
+        <translation>Iznos:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Oznaka:</translation>
+        <source>Label:</source>
+        <translation>Oznaka:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;Poruka:</translation>
+        <source>Message:</source>
+        <translation>Poruka:</translation>
     </message>
     <message>
         <source>&amp;Request payment</source>
@@ -786,24 +786,16 @@
         <translation>Naknada za transakciju:</translation>
     </message>
     <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Pošalji novce većem broju primatelja u jednoj transakciji</translation>
-    </message>
-    <message>
         <source>Add &amp;Recipient</source>
         <translation>&amp;Dodaj primatelja</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Obriši &amp;sve</translation>
+        <source>Clear All</source>
+        <translation>Obriši sve</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Stanje:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Potvrdi akciju slanja</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -813,28 +805,20 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>&amp;Iznos:</translation>
+        <source>Amount:</source>
+        <translation>Iznos:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>&amp;Primatelj plaćanja:</translation>
+        <source>Pay To:</source>
+        <translation>Primatelj plaćanja:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Oznaka:</translation>
-    </message>
-    <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
+        <source>Label:</source>
+        <translation>Oznaka:</translation>
     </message>
     <message>
         <source>Paste address from clipboard</source>
         <translation>Zalijepi adresu iz međuspremnika</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Message:</source>
@@ -858,16 +842,8 @@
         <translation>&amp;Potpišite poruku</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Zalijepi adresu iz međuspremnika</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -882,8 +858,8 @@
         <translation>&amp;Potpišite poruku</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Obriši &amp;sve</translation>
+        <source>Clear All</source>
+        <translation>Obriši sve</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

@@ -467,14 +467,6 @@
         <translation>Vahetusraha:</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>Puu režiim</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Loetelu režiim</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Kogus</translation>
     </message>
@@ -558,12 +550,12 @@
         <translation>Muuda aadressi</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Märgis</translation>
+        <source>Label</source>
+        <translation>Märgis</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Aadress</translation>
+        <source>Address</source>
+        <translation>Aadress</translation>
     </message>
     <message>
         <source>New receiving address</source>
@@ -834,12 +826,12 @@
         <translation>Maksepäring tagasi lükatud</translation>
     </message>
     <message>
-        <source>Payment request expired.</source>
-        <translation>Maksepäring aegunud.</translation>
+        <source>Payment request expired</source>
+        <translation>Maksepäring aegunud</translation>
     </message>
     <message>
-        <source>Unverified payment requests to custom payment scripts are unsupported.</source>
-        <translation>Kinnitamata maksepäringud kohandatud makse scriptidele ei ole toetatud.</translation>
+        <source>Unverified payment requests to custom payment scripts are not supported</source>
+        <translation>Kinnitamata maksepäringud kohandatud makse scriptidele ei ole toetatud</translation>
     </message>
     </context>
 <context>
@@ -1004,16 +996,16 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;Summa:</translation>
+        <source>Amount:</source>
+        <translation>Summa:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Märgis</translation>
+        <source>Label:</source>
+        <translation>Märgis:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;Sõnum:</translation>
+        <source>Message:</source>
+        <translation>Sõnum:</translation>
     </message>
     <message>
         <source>Show</source>
@@ -1057,7 +1049,7 @@
     </message>
     <message>
         <source>Label</source>
-        <translation>Silt</translation>
+        <translation>Märgis</translation>
     </message>
     <message>
         <source>Message</source>
@@ -1138,48 +1130,20 @@
         <translation>Tehingu tasu:</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>Vali...</translation>
-    </message>
-    <message>
-        <source>per kilobyte</source>
-        <translation>kilobaidi kohta</translation>
-    </message>
-    <message>
         <source>Hide</source>
         <translation>Peida</translation>
-    </message>
-    <message>
-        <source>Recommended:</source>
-        <translation>Soovitatud:</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>normaalne</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>kiire</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Saatmine mitmele korraga</translation>
     </message>
     <message>
         <source>Add &amp;Recipient</source>
         <translation>Lisa &amp;Saaja</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Puhasta &amp;Kõik</translation>
+        <source>Clear All</source>
+        <translation>Puhasta Kõik</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Jääk:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Saatmise kinnitamine</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -1218,55 +1182,39 @@
         <translation>või</translation>
     </message>
     <message>
-        <source>The recipient address is not valid. Please recheck.</source>
-        <translation>Saaja aadress ei ole korrektne. Palun kontrolli üle.</translation>
+        <source>The recipient address is not valid, please recheck</source>
+        <translation>Saaja aadress ei ole korrektne, palun kontrolli üle</translation>
     </message>
     <message>
-        <source>Payment request expired.</source>
-        <translation>Maksepäring aegunud.</translation>
-    </message>
-    <message>
-        <source>Warning: Invalid Dogecoin address</source>
-        <translation>Hoiatus: Ebakorrektne Dogecoin aadress</translation>
-    </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(märgis puudub)</translation>
+        <source>Payment request expired</source>
+        <translation>Maksepäring aegunud</translation>
     </message>
 </context>
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>S&amp;umma:</translation>
+        <source>Amount:</source>
+        <translation>Summa:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>Maksa &amp;:</translation>
+        <source>Pay To:</source>
+        <translation>Maksa:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Märgis</translation>
+        <source>Label:</source>
+        <translation>Märgis:</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
         <translation>Vali eelnevalt kasutatud aadress</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Kleebi aadress vahemälust</translation>
     </message>
     <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
-    </message>
-    <message>
-        <source>S&amp;ubtract fee from amount</source>
-        <translation>L&amp;ahuta tehingutasu summast</translation>
+        <source>Subtract fee from amount</source>
+        <translation>Lahuta tehingutasu summast</translation>
     </message>
     <message>
         <source>Message:</source>
@@ -1314,16 +1262,8 @@
         <translation>Vali eelnevalt kasutatud aadress</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Kleebi aadress vahemälust</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -1350,8 +1290,8 @@
         <translation>Tühjenda kõik sõnumi allkirjastamise väljad</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Puhasta &amp;Kõik</translation>
+        <source>Clear All</source>
+        <translation>Puhasta Kõik</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

@@ -285,14 +285,6 @@
         <translation>Schimbă:</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>Mod arbore</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Mod listă</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Cantitate</translation>
     </message>
@@ -320,8 +312,8 @@
         <translation>Modifică adresa</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Adresa</translation>
+        <source>Address</source>
+        <translation>Adresa</translation>
     </message>
     </context>
 <context>
@@ -594,8 +586,8 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;Mesaj:</translation>
+        <source>Message:</source>
+        <translation>Mesaj:</translation>
     </message>
     <message>
         <source>Show</source>

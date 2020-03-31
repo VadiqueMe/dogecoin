@@ -548,15 +548,7 @@
     </message>
     <message>
         <source>(un)select all</source>
-        <translation>Отменить выбор всего</translation>
-    </message>
-    <message>
-        <source>Tree mode</source>
-        <translation>Режим дерева</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Режим списка</translation>
+        <translation>выбрать/снять всё</translation>
     </message>
     <message>
         <source>Amount</source>
@@ -639,12 +631,8 @@
         <translation>нет</translation>
     </message>
     <message>
-        <source>(no label)</source>
-        <translation>(нет метки)</translation>
-    </message>
-    <message>
-        <source>change from %1 (%2)</source>
-        <translation>сдача с %1 (%2)</translation>
+        <source>change from %1</source>
+        <translation>сдача с %1</translation>
     </message>
     <message>
         <source>(change)</source>
@@ -658,12 +646,12 @@
         <translation>Изменить адрес</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Метка</translation>
+        <source>Label</source>
+        <translation>Метка</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Адрес</translation>
+        <source>Address</source>
+        <translation>Адрес</translation>
     </message>
     <message>
         <source>New receiving address</source>
@@ -968,10 +956,6 @@
         <translation>Б&amp;умажник</translation>
     </message>
     <message>
-        <source>Hide coin &amp;control features</source>
-        <translation>Спрятать выбор источников монет</translation>
-    </message>
-    <message>
         <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
         <translation>При отключении траты неподтверждённой сдачи, сдача от транзакции не может быть использована до тех пор пока у этой транзакции не будет хотя бы одно подтверждение. Это также влияет на расчёт баланса</translation>
     </message>
@@ -1210,56 +1194,56 @@
         <translation>Неверный адрес платежа %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid address or malformed URI parameters</source>
-        <translation>Не удалось обработать URI! Это может быть связано с неверным адресом или неправильными параметрами URI</translation>
+        <source>URI cannot be parsed. This can be caused by an invalid address or malformed URI parameters</source>
+        <translation>Не получается разобрать URI. Это может быть связано с неверным адресом или неправильными параметрами URI</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
         <translation>Обработка файла запроса платежа</translation>
     </message>
     <message>
-        <source>Payment request file cannot be read! This can be caused by an invalid payment request file.</source>
-        <translation>Файл запроса платежа не может быть прочитан! Обычно это происходит из-за неверного файла запроса платежа.</translation>
+        <source>Payment request file cannot be read. This can be caused by an invalid payment request file</source>
+        <translation>Файл запроса платежа не может быть прочитан. Такое может случиться из-за неверного файла запроса платежа</translation>
     </message>
     <message>
         <source>Payment request rejected</source>
         <translation>Запрос платежа отклонён</translation>
     </message>
     <message>
-        <source>Payment request network doesn't match client network.</source>
-        <translation>Сеть запроса платежа не совпадает с сетью клиента.</translation>
+        <source>Payment request network doesn't match the current network</source>
+        <translation>Сеть запроса платежа не совпадает с текущей сетью</translation>
     </message>
     <message>
-        <source>Payment request expired.</source>
-        <translation>Запрос платежа просрочен.</translation>
+        <source>Payment request expired</source>
+        <translation>Запрос платежа просрочен</translation>
     </message>
     <message>
-        <source>Payment request is not initialized.</source>
-        <translation>Запрос платежа не инициализирован.</translation>
+        <source>Payment request is not initialized</source>
+        <translation>Запрос платежа не инициализирован</translation>
     </message>
     <message>
-        <source>Unverified payment requests to custom payment scripts are unsupported.</source>
-        <translation>Непроверенные запросы платежей с нестандартными платёжными сценариями не поддерживаются.</translation>
+        <source>Unverified payment requests to custom payment scripts are not supported</source>
+        <translation>Непроверенные запросы платежей на кастомные платёжные скрипты не поддерживаются</translation>
     </message>
     <message>
-        <source>Invalid payment request.</source>
-        <translation>Неверный запрос платежа.</translation>
+        <source>Invalid payment request</source>
+        <translation>Неверный запрос платежа</translation>
     </message>
     <message>
         <source>Refund from %1</source>
         <translation>Возврат от %1</translation>
     </message>
     <message>
-        <source>Payment request %1 is too large (%2 bytes, allowed %3 bytes).</source>
-        <translation>Запрос платежа %1 слишком большой (%2 байтов, разрешено %3 байтов).</translation>
+        <source>Payment request %1 is too large (%2 bytes, allowed %3 bytes)</source>
+        <translation>Запрос платежа %1 слишком большой (%2 байт, разрешено %3 байт)</translation>
     </message>
     <message>
         <source>Error communicating with %1: %2</source>
         <translation>Ошибка связи с %1: %2</translation>
     </message>
     <message>
-        <source>Payment request cannot be parsed!</source>
-        <translation>Запрос платежа не может быть разобран!</translation>
+        <source>Payment request cannot be parsed</source>
+        <translation>Запрос платежа невозможно разобрать</translation>
     </message>
     <message>
         <source>Bad response from server %1</source>
@@ -1359,11 +1343,11 @@
     <name>QRImageWidget</name>
     <message>
         <source>&amp;Save Image...</source>
-        <translation>&amp;Сохранить изображение...</translation>
+        <translation>&amp;Сохранить картинку...</translation>
     </message>
     <message>
         <source>&amp;Copy Image</source>
-        <translation>Копировать &amp;изображение</translation>
+        <translation>Копировать &amp;картинку</translation>
     </message>
     <message>
         <source>Save QR Code</source>
@@ -1636,20 +1620,20 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;Сумма:</translation>
+        <source>Amount:</source>
+        <translation>Сумма:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Метка:</translation>
+        <source>Label:</source>
+        <translation>Метка:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;Сообщение</translation>
+        <source>Message:</source>
+        <translation>Сообщение:</translation>
     </message>
     <message>
-        <source>R&amp;euse an existing receiving address (not recommended)</source>
-        <translation>&amp;Использовать уже существующий адрес (не рекомендуется)</translation>
+        <source>Reuse an existing receiving address (not recommended)</source>
+        <translation>Использовать уже существующий адрес (не рекомендуется)</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
@@ -1693,7 +1677,7 @@
     </message>
     <message>
         <source>&amp;Save Image...</source>
-        <translation>&amp;Сохранить изображение...</translation>
+        <translation>&amp;Сохранить картинку...</translation>
     </message>
     <message>
         <source>Request payment to %1</source>
@@ -1701,7 +1685,7 @@
     </message>
     <message>
         <source>Payment information</source>
-        <translation>Информация платежа</translation>
+        <translation>Информация о платеже</translation>
     </message>
     <message>
         <source>URI</source>
@@ -1807,11 +1791,11 @@
     </message>
     <message>
         <source>Change:</source>
-        <translation>Размен:</translation>
+        <translation>Сдача:</translation>
     </message>
     <message>
-        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
-        <translation>Если это выбрано, но адрес сдачи пустой или неверный, сдача будет отправлена на новый сгенерированный адрес.</translation>
+        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address</source>
+        <translation>Если это выбрано, но адрес сдачи пустой или неверный, сдача будет отправлена на новый сгенерированный адрес</translation>
     </message>
     <message>
         <source>Custom change address</source>
@@ -1819,67 +1803,27 @@
     </message>
     <message>
         <source>Transaction Fee:</source>
-        <translation>Комиссия</translation>
+        <translation>Комиссия:</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>Выберите...</translation>
-    </message>
-    <message>
-        <source>collapse fee-settings</source>
-        <translation>Свернуть настройки комиссии</translation>
-    </message>
-    <message>
-        <source>per kilobyte</source>
-        <translation>за килобайт</translation>
-    </message>
-    <message>
-        <source>If the custom fee is set to 1000 koinu and the transaction is only 250 bytes, then "per kilobyte" only pays 250 koinu in fee, while "total at least" pays 1000 koinu. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation>Если комиссия установлена в 1000 сатоши, а транзакция составляет лишь 250 байт, тогда комиссия "на килобайт" составит 250 сатоши, а "всего как минимум" — 1000 сатоши. Для транзакций крупнее килобайта в обоих случаях будет использоваться платёж "на килобайт".</translation>
+        <source>Show</source>
+        <translation>Показать</translation>
     </message>
     <message>
         <source>Hide</source>
         <translation>Скрыть</translation>
     </message>
     <message>
-        <source>total at least</source>
-        <translation>Итого как минимум</translation>
-    </message>
-    <message>
-        <source>Recommended:</source>
-        <translation>Рекомендовано:</translation>
-    </message>
-    <message>
-        <source>Custom:</source>
-        <translation>Выборочно:</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>обычный</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>ускоренный</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Отправить нескольким получателям одновременно</translation>
-    </message>
-    <message>
         <source>Add &amp;Recipient</source>
         <translation>&amp;Добавить получателя</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Очистить &amp;всё</translation>
+        <source>Clear All</source>
+        <translation>Очистить всё</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Баланс:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Подтвердить отправку</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -1934,40 +1878,36 @@
         <translation>Подтвердите отправку монет</translation>
     </message>
     <message>
-        <source>The recipient address is not valid. Please recheck.</source>
-        <translation>Адрес получателя неверный. Пожалуйста, перепроверьте.</translation>
+        <source>The recipient address is not valid, please recheck</source>
+        <translation>Адрес получателя не валиден. Пожалуйста, перепроверьте</translation>
     </message>
     <message>
-        <source>The amount to pay must be larger than 0.</source>
-        <translation>Сумма для отправки должна быть больше 0.</translation>
+        <source>The amount exceeds your balance</source>
+        <translation>Сумма превышает ваш баланс</translation>
     </message>
     <message>
-        <source>The amount exceeds your balance.</source>
-        <translation>Сумма превышает ваш баланс.</translation>
+        <source>The total exceeds your balance when the transaction fee is included</source>
+        <translation>Сумма с учётом комиссии превышает ваш баланс</translation>
     </message>
     <message>
-        <source>The total exceeds your balance when the %1 transaction fee is included.</source>
-        <translation>Сумма с учётом комиссии %1 превысит ваш баланс.</translation>
+        <source>Duplicate address found, can only send to each address once per transaction</source>
+        <translation>Найден повторяющийся адрес, возможна лишь одна отправка на каждый адрес в одной транзакции</translation>
     </message>
     <message>
-        <source>Duplicate address found: addresses should only be used once each.</source>
-        <translation>Обнаружен дублирующийся адрес: используйте каждый адрес только один раз.</translation>
-    </message>
-    <message>
-        <source>Transaction creation failed!</source>
-        <translation>Не удалось создать транзакцию!</translation>
+        <source>Transaction creation failed</source>
+        <translation>Не удалось создать транзакцию</translation>
     </message>
     <message>
         <source>The transaction was rejected with the following reason: %1</source>
         <translation>Транзакция была отвергнута по следующей причине: %1</translation>
     </message>
     <message>
-        <source>A fee higher than %1 is considered an absurdly high fee.</source>
-        <translation>Комиссия больше чем %1 считается невероятно большой.</translation>
+        <source>A fee higher than %1 is considered an absurdly high fee</source>
+        <translation>Комиссия больше %1 считается абсурдно высокой</translation>
     </message>
     <message>
-        <source>Payment request expired.</source>
-        <translation>Запрос платежа просрочен.</translation>
+        <source>Payment request expired</source>
+        <translation>Запрос платежа просрочен</translation>
     </message>
     <message numerus="yes">
         <source>%n block(s)</source>
@@ -1978,39 +1918,27 @@
         <translation><numerusform>Начало подтверждения ожидается через %n блок.</numerusform><numerusform>Начало подтверждения ожидается через %n блока.</numerusform><numerusform>Начало подтверждения ожидается через %n блоков.</numerusform><numerusform>Начало подтверждения ожидается через %n блоков.</numerusform></translation>
     </message>
     <message>
-        <source>Warning: Invalid Dogecoin address</source>
-        <translation>Внимание: неверный адрес Dogecoin</translation>
-    </message>
-    <message>
-        <source>Warning: Unknown change address</source>
-        <translation>Внимание: неизвестный адрес для сдачи</translation>
-    </message>
-    <message>
         <source>Confirm custom change address</source>
-        <translation>Подтвердите свой адрес для сдачи</translation>
+        <translation>Подтвердите кастомный адрес для сдачи</translation>
     </message>
     <message>
         <source>The address you selected for change is not part of this wallet. Any or all funds in your wallet may be sent to this address. Are you sure?</source>
         <translation>Выбранный вами адрес для сдачи не принадлежит этому кошельку. Часть или все средства могут быть отправлены на этот адрес. Вы уверены?</translation>
     </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(нет метки)</translation>
-    </message>
 </context>
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>Ко&amp;личество:</translation>
+        <source>Amount:</source>
+        <translation>Сумма:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>Полу&amp;чатель:</translation>
+        <source>Pay To:</source>
+        <translation>Куда:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Метка:</translation>
+        <source>Label:</source>
+        <translation>Метка:</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2021,27 +1949,15 @@
         <translation>Адрес Dogecoin, на который отправить платёж</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Вставить адрес из буфера обмена</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Remove this entry</source>
         <translation>Удалить эту запись</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less dogecoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation>С отправляемой суммы будет удержана комиссия. Получателю придёт меньше биткоинов, чем вы вводите в поле количества. Если выбрано несколько получателей, комиссия распределяется поровну.</translation>
-    </message>
-    <message>
-        <source>S&amp;ubtract fee from amount</source>
+        <source>Subtract fee from amount</source>
         <translation>Вычесть комиссию из суммы</translation>
     </message>
     <message>
@@ -2049,24 +1965,24 @@
         <translation>Сообщение:</translation>
     </message>
     <message>
-        <source>This is an unauthenticated payment request.</source>
-        <translation>Это неавторизованный запрос платежа.</translation>
+        <source>This is an unauthenticated payment request</source>
+        <translation>Это неавторизованный запрос платежа</translation>
     </message>
     <message>
-        <source>This is an authenticated payment request.</source>
-        <translation>Это авторизованный запрос платежа.</translation>
+        <source>This is an authenticated payment request</source>
+        <translation>Это авторизованный запрос платежа</translation>
     </message>
     <message>
         <source>Enter a label for this address to add it to the list of used addresses</source>
         <translation>Введите метку для этого адреса, чтобы добавить его в список использованных</translation>
     </message>
     <message>
-        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Dogecoin network.</source>
-        <translation>К dogecoin: URI было прикреплено сообщение, которое будет сохранено вместе с транзакцией для вашего сведения. Заметьте: сообщение не будет отправлено через сеть Dogecoin.</translation>
+        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
+        <translation>К dogecoin: URI было прикреплено сообщение, которое будет сохранено вместе с транзакцией. Это сообщение не передаётся по сети</translation>
     </message>
     <message>
         <source>Pay To:</source>
-        <translation>Получатель:</translation>
+        <translation>Куда:</translation>
     </message>
     <message>
         <source>Memo:</source>
@@ -2118,16 +2034,8 @@
         <translation>Выберите ранее использованный адрес</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Вставить адрес из буфера обмена</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -2154,8 +2062,8 @@
         <translation>Сбросить значения всех полей подписывания сообщений</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Очистить &amp;всё</translation>
+        <source>Clear All</source>
+        <translation>Очистить всё</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

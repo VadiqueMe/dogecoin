@@ -14,6 +14,7 @@
 #include "dogecoin.h"
 
 #include <QDateTime>
+#include <QSettings>
 
 GenerateCoinsPage::GenerateCoinsPage( const PlatformStyle * style, QWidget * parent )
     : QDialog( parent )
@@ -27,7 +28,8 @@ GenerateCoinsPage::GenerateCoinsPage( const PlatformStyle * style, QWidget * par
 {
     ui->setupUi( this ) ;
 
-    ui->generateBlocksYesNo->setChecked( GetBoolArg( "-gen", DEFAULT_GENERATE ) ) ;
+    bool genArg = GetBoolArg( "-gen", DEFAULT_GENERATE ) ;
+    ui->generateBlocksYesNo->setChecked( genArg ) ;
 
     // clear number of threads list before filling it
     while ( ui->numberOfThreadsList->count() > 0 )
@@ -38,16 +40,25 @@ GenerateCoinsPage::GenerateCoinsPage( const PlatformStyle * style, QWidget * par
     for ( int i = 1 ; i <= numcores ; ++ i )
         ui->numberOfThreadsList->addItem( QString::number( i ) ) ;
 
-    QString genthreads = QString::number( GetArg( "-genthreads", DEFAULT_GENERATE_THREADS ) ) ;
-    if ( ui->numberOfThreadsList->findText( genthreads, Qt::MatchExactly ) < 0 )
-        ui->numberOfThreadsList->addItem( genthreads ) ;
-
-    ui->numberOfThreadsList->setCurrentText( ui->generateBlocksYesNo->isChecked() ? genthreads : "0" ) ;
-
     connect( ui->generateBlocksYesNo, SIGNAL( stateChanged(int) ),
                 this, SLOT( toggleGenerateBlocks(int) ) ) ;
     connect( ui->numberOfThreadsList, SIGNAL( currentIndexChanged(const QString &) ),
                 this, SLOT( changeNumberOfThreads(const QString &) ) ) ;
+
+    bool hasGenthreadsArg = ! GetArg( "-genthreads", "" ).empty() ;
+    QString genthreadsArg = QString::number( GetArg( "-genthreads", DEFAULT_GENERATE_THREADS ) ) ;
+    if ( ui->numberOfThreadsList->findText( genthreadsArg, Qt::MatchExactly ) < 0 )
+        ui->numberOfThreadsList->addItem( genthreadsArg ) ;
+
+    QSettings settings ;
+    if ( ! settings.contains( "nGenerationThreads" ) )
+        settings.setValue( "nGenerationThreads", ( genArg ? genthreadsArg : QString( "0" ) ) ) ;
+
+    QString threadsFromSettings = settings.value( "nGenerationThreads" ).toString() ;
+    if ( ui->numberOfThreadsList->findText( threadsFromSettings, Qt::MatchExactly ) < 0 )
+        ui->numberOfThreadsList->addItem( threadsFromSettings ) ;
+
+    changeNumberOfThreads( ( genArg && hasGenthreadsArg ) ? genthreadsArg : threadsFromSettings ) ;
 
     ui->listForChoosingHowManyCoinsToGenerate->clear() ;
     ui->listForChoosingHowManyCoinsToGenerate->addItem( "maximum" ) ;
@@ -74,10 +85,17 @@ GenerateCoinsPage::GenerateCoinsPage( const PlatformStyle * style, QWidget * par
 
     connect( ui->newCoinsFirstLineEdit, SIGNAL( textEdited(const QString &) ), this, SLOT( partOfMaxCoinsEdited() ) ) ;
     connect( ui->newCoinsSecondLineEdit, SIGNAL( textEdited(const QString &) ), this, SLOT( partOfMaxCoinsEdited() ) ) ;
+
+    QFont tabBarFont = ui->detailsForThreads->font() ;
+    tabBarFont.setPointSize( tabBarFont.pointSize() - 1 ) ;
+    ui->detailsForThreads->setFont( tabBarFont ) ;
 }
 
 GenerateCoinsPage::~GenerateCoinsPage()
 {
+    QSettings settings ;
+    settings.setValue( "nGenerationThreads", ui->numberOfThreadsList->currentText() ) ;
+
     delete ui ;
 }
 
@@ -506,13 +524,14 @@ void GenerateCoinsPage::rebuildThreadTabs()
             const MiningThread * const miner = getMiningThreadByNumber( thread + 1 ) ;
             if ( miner != nullptr ) {
                 MiningThreadTab * tab = new MiningThreadTab( /* thread */ miner, /* parent */ ui->detailsForThreads ) ;
+                tab->setFont( ui->detailsForThreads->font() ) ;
                 ui->detailsForThreads->addTab( tab,
                     QString::fromStdString( toStringWithOrdinalSuffix( tab->getThread()->getNumberOfThread() ) ) + QString(" ") + "thread" ) ;
                 miningTabs.push_back( tab ) ;
             }
         }
 
-        ui->spacerAfterThreadTabs->changeSize( 1, 10, QSizePolicy::Fixed, QSizePolicy::Fixed ) ;
+        ui->spacerAfterThreadTabs->changeSize( 3, 6, QSizePolicy::Fixed, QSizePolicy::Fixed ) ;
         ui->detailsForThreads->setUsesScrollButtons( true ) ;
         ui->detailsForThreads->setVisible( true ) ;
     }
@@ -524,54 +543,84 @@ void GenerateCoinsPage::updateThreadTabs()
         rebuildThreadTabs() ;
 
     for ( MiningThreadTab * tab : miningTabs )
-        if ( tab != nullptr && tab->getThread() != nullptr ) {
-            QString bigText ;
+    {
+        if ( tab == nullptr ) continue ;
+
+        tab->resetLabels() ;
+
+        if ( tab->getThread() != nullptr )
+        {
+            QString beginParagraph = "<p>" ;
+            QString endParagraph = "</p>\n" ;
+            QString lessThanOrEqualTo = "&nbsp;≤&nbsp;" ;
+
+            QFont font = ui->detailsForThreads->font() ;
+            QFont smallerFont = font ;
+            QFont biggerFont = font ;
+            biggerFont.setPointSize( font.pointSize() + 1 ) ;
+
+            /* QString beginBiggerFont = "<span style='font-size: " + QString::number( font.pointSize() + 1 ) + "pt ;'>" ;
+            QString beginSmallerFont = "<span style='font-size: " + QString::number( font.pointSize() ) + "pt ;'>" ;
+            QString endFont = "</span>" ; */
 
             const CBlockTemplate * const candidate = tab->getThread()->getNewBlockCandidate() ;
-            if ( candidate != nullptr ) {
-                bigText += "new block candidate: " ;
-                bigText += "version 0x" + QString::number( candidate->block.nVersion, 16 ) ;
-                bigText += ", " ;
-                bigText += "transactions " + QString::number( candidate->block.vtx.size() ) ;
-                bigText += ", " ;
+            if ( candidate != nullptr )
+            {
+                QString newBlockInfoText = "new block candidate: " ;
+                newBlockInfoText += "version 0x" + QString::number( candidate->block.nVersion, 16 ) ;
+                newBlockInfoText += ", " ;
+                newBlockInfoText += "transactions " + QString::number( candidate->block.vtx.size() ) ;
+                newBlockInfoText += ", " ;
                 int unit = UnitsOfCoin::oneCoin ;
                 if ( walletModel != nullptr && walletModel->getOptionsModel() != nullptr )
                     unit = walletModel->getOptionsModel()->getDisplayUnit() ;
-                bigText += "fees " + UnitsOfCoin::formatWithUnit( unit, - candidate->vTxFees[ 0 ] ) ;
-                bigText += "\n\n" ;
+                newBlockInfoText += "fees " + UnitsOfCoin::formatWithUnit( unit, - candidate->vTxFees[ 0 ] ) ;
+                tab->getNewBlockInfoLabel()->setText( newBlockInfoText ) ;
+                tab->getNewBlockInfoLabel()->setFont( biggerFont ) ;
 
+                QString solutionText ;
                 arith_uint256 bitsUint256 = arith_uint256().SetCompact( candidate->block.nBits ) ;
-                bigText += "solution is " ;
-                bigText += "scrypt hash <= " + QString::fromStdString( ( bitsUint256 ).GetHex() ) ;
+                solutionText += "solution is " ;
+                solutionText += "scrypt&nbsp;hash" + lessThanOrEqualTo + QString::fromStdString( ( bitsUint256 ).GetHex() ) ;
                 if ( NameOfChain() == "inu" ) {
-                    bigText += " and lyra2re2 hash <= " + QString::fromStdString( ( bitsUint256 ).GetHex() ) ;
-                    bigText += " and sha256 hash <= " + QString::fromStdString( ( bitsUint256 << 1 ).GetHex() ) ;
+                    solutionText += " <i>and</i> " ;
+                    solutionText += "lyra2re2&nbsp;hash" + lessThanOrEqualTo + QString::fromStdString( ( bitsUint256 ).GetHex() ) ;
+                    solutionText += " <i>and</i> " ;
+                    solutionText += "sha256&nbsp;hash" + lessThanOrEqualTo + QString::fromStdString( ( bitsUint256 << 1 ).GetHex() ) ;
                 }
-                bigText += "\n\n" ;
+                tab->getSolutionLabel()->setText( solutionText ) ;
+                tab->getSolutionLabel()->setFont( smallerFont ) ;
 
                 if ( candidate->block.vtx[ 0 ] != nullptr ) {
-                    bigText += UnitsOfCoin::formatWithUnit( unit, tab->getThread()->getAmountOfCoinsBeingGenerated() ) ;
-                    bigText += " generated coins will go to" ;
+                    QString coinsToText = UnitsOfCoin::formatWithUnit( unit, tab->getThread()->getAmountOfCoinsBeingGenerated() ) ;
+                    coinsToText += " generated coins will go to" ;
                     const CScript & scriptPublicKey = candidate->block.vtx[ 0 ]->vout[ 0 ].scriptPubKey ;
                     CTxDestination destination ;
                     if ( ExtractDestination( scriptPublicKey, destination ) )
-                        bigText += " address " + QString::fromStdString( CDogecoinAddress( destination ).ToString() ) ;
-                    else bigText += " unknown address" ;
-                    bigText += "\n\n" ;
+                        coinsToText += " address " + QString::fromStdString( CDogecoinAddress( destination ).ToString() ) ;
+                    else coinsToText += " unknown address" ;
+                    tab->getCoinsToLabel()->setText( coinsToText ) ;
+                    tab->getCoinsToLabel()->setFont( biggerFont ) ;
                 }
             }
 
-            bigText += QString::fromStdString( tab->getThread()->threadMiningInfoString() ) ;
-            bigText += "\n\n" ;
+            std::string miningInfoText = tab->getThread()->threadMiningInfoString( NameOfChain() != "inu" ) ;
+            tab->getMiningInfoLabel()->setText( QString::fromStdString( miningInfoText ) ) ;
+            tab->getMiningInfoLabel()->setFont( smallerFont ) ;
 
+            QString resultText ;
             size_t blocksGenerated = tab->getThread()->getNumberOfBlocksGeneratedByThisThread() ;
             if ( blocksGenerated == 0 )
-                bigText += "no blocks were generated by this thread yet" ;
+                resultText += "no blocks were generated by this thread yet" ;
             else
-                bigText += "this thread has generated " + QString::number( blocksGenerated )
-                                + " block" + ( blocksGenerated > 1 ? "s" : "" )
-                                + " for now" ;
-
-            tab->setTextOfLabel( bigText ) ;
+                resultText += "this thread has generated "
+                                + QString( "<b>" ) + QString::number( blocksGenerated )
+                                + " block" + QString( blocksGenerated > 1 ? "s" : "" )
+                                + QString( "</b>" ) + " for now" ;
+            tab->getResultLabel()->setText( resultText ) ;
+            tab->getResultLabel()->setFont( biggerFont ) ;
         }
+
+        tab->hideEmpties() ;
+    }
 }

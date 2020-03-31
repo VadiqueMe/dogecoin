@@ -321,10 +321,6 @@ Alihkan fail data ke dalam tab semasa</translation>
     </context>
 <context>
     <name>CoinControlDialog</name>
-    <message>
-        <source>(no label)</source>
-        <translation>(tiada label)</translation>
-    </message>
     </context>
 <context>
     <name>EditAddressDialog</name>
@@ -333,7 +329,7 @@ Alihkan fail data ke dalam tab semasa</translation>
         <translation>Alamat</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
+        <source>Address</source>
         <translation>Alamat</translation>
     </message>
     </context>

@@ -15,13 +15,13 @@
     <number>0</number>
    </property>
    <property name="leftMargin">
-    <number>0</number>
+    <number>10</number>
    </property>
    <property name="topMargin">
     <number>0</number>
    </property>
    <property name="rightMargin">
-    <number>0</number>
+    <number>10</number>
    </property>
    <property name="bottomMargin">
     <number>0</number>
@@ -41,6 +41,18 @@
       <enum>QFrame::Plain</enum>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,1">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>10</number>
+      </property>
+      <property name="rightMargin">
+       <number>10</number>
+      </property>
+      <property name="bottomMargin">
+       <number>10</number>
+      </property>
       <item>
        <widget class="QFrame" name="requestPaymentsForm">
         <property name="sizePolicy">
@@ -59,23 +71,16 @@
          <item>
           <layout class="QGridLayout" name="gridLayout">
            <item row="7" column="2">
-            <widget class="QCheckBox" name="reuseAddress">
+            <widget class="QCheckBox" name="reuseAddressCheckbox">
              <property name="text">
-              <string>R&amp;euse an existing receiving address (not recommended)</string>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="0">
-            <widget class="QLabel" name="label_4">
-             <property name="text">
-              <string/>
+              <string>Reuse an existing receiving address (not recommended)</string>
              </property>
             </widget>
            </item>
            <item row="6" column="0">
-            <widget class="QLabel" name="label_3">
+            <widget class="QLabel" name="labelForMessage">
              <property name="text">
-              <string>&amp;Message:</string>
+              <string>Message:</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -92,16 +97,16 @@
             <widget class="QLineEdit" name="reqMessage"/>
            </item>
            <item row="2" column="2">
-            <widget class="QLabel" name="label_5">
+            <widget class="QLabel" name="aboveCommentLabel">
              <property name="text">
               <string>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</string>
              </property>
             </widget>
            </item>
            <item row="4" column="0">
-            <widget class="QLabel" name="label_2">
+            <widget class="QLabel" name="labelForLabel">
              <property name="text">
-              <string>&amp;Label:</string>
+              <string>Label:</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -112,9 +117,9 @@
             </widget>
            </item>
            <item row="5" column="0">
-            <widget class="QLabel" name="label">
+            <widget class="QLabel" name="labelForAmount">
              <property name="text">
-              <string>&amp;Amount:</string>
+              <string>Amount:</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -188,20 +193,13 @@
              </item>
             </layout>
            </item>
-           <item row="8" column="0">
-            <widget class="QLabel" name="label_7">
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
           </layout>
          </item>
         </layout>
        </widget>
       </item>
       <item>
-       <spacer name="verticalSpacer_2">
+       <spacer name="verticalSpacerBeforeHistory">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
         </property>

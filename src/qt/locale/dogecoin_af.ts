@@ -476,10 +476,6 @@
         <source>Confirmed</source>
         <translation>Bevestig</translation>
     </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(geen etiket)</translation>
-    </message>
     </context>
 <context>
     <name>EditAddressDialog</name>
@@ -752,20 +748,12 @@
         <translation>Transaksiefooi:</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>Kies...</translation>
-    </message>
-    <message>
-        <source>per kilobyte</source>
-        <translation>per kilogreep</translation>
+        <source>Show</source>
+        <translation>Wys</translation>
     </message>
     <message>
         <source>Hide</source>
         <translation>Versteek</translation>
-    </message>
-    <message>
-        <source>total at least</source>
-        <translation>totaal ten minste</translation>
     </message>
     <message>
         <source>Balance:</source>

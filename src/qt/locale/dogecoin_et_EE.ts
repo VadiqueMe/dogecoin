@@ -216,16 +216,12 @@
         <source>no</source>
         <translation>ei</translation>
     </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(silt puudub)</translation>
-    </message>
     </context>
 <context>
     <name>EditAddressDialog</name>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Aadress</translation>
+        <source>Address</source>
+        <translation>Aadress</translation>
     </message>
     <message>
         <source>New key generation failed.</source>
@@ -434,12 +430,16 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;Kogus:</translation>
+        <source>Amount:</source>
+        <translation>Kogus:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;Sõnum:</translation>
+        <source>Label:</source>
+        <translation>Silt:</translation>
+    </message>
+    <message>
+        <source>Message:</source>
+        <translation>Sõnum:</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -504,18 +504,6 @@
         <translation>Kogus</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>Vali...</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>normaalne</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>kiire</translation>
-    </message>
-    <message>
         <source>Copy amount</source>
         <translation>Kopeeri kogus</translation>
     </message>
@@ -526,14 +514,6 @@
 </context>
 <context>
     <name>SendCoinsEntry</name>
-    <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
-    </message>
     </context>
 <context>
     <name>SendConfirmationDialog</name>
@@ -547,14 +527,6 @@
     </context>
 <context>
     <name>SignVerifyMessageDialog</name>
-    <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
-    </message>
     <message>
         <source>Signature</source>
         <translation>Allkiri</translation>

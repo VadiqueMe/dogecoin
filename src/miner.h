@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -23,7 +23,7 @@ class CReserveKey;
 class CScript;
 class CWallet;
 
-namespace Consensus { struct Params ; }
+namespace Consensus {  struct Params ;  }
 
 static const bool DEFAULT_GENERATE = false ;
 static const int DEFAULT_GENERATE_THREADS = 1 ;
@@ -265,7 +265,7 @@ public:
 
     void MineBlocks() ;
 
-    std::string threadMiningInfoString() const ;
+    std::string threadMiningInfoString( bool withSmallestHashes = true ) const ;
 
     size_t getNumberOfThread() const {  return numberOfThread ;  }
 

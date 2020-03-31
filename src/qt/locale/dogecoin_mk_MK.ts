@@ -238,12 +238,12 @@
         <translation>Измени Адреса</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Етикета</translation>
+        <source>Label</source>
+        <translation>Етикета</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Адреса</translation>
+        <source>Address</source>
+        <translation>Адреса</translation>
     </message>
     </context>
 <context>
@@ -384,16 +384,16 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;Сума:</translation>
+        <source>Amount:</source>
+        <translation>Сума:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Етикета:</translation>
+        <source>Label:</source>
+        <translation>Етикета:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;Порака:</translation>
+        <source>Message:</source>
+        <translation>Порака:</translation>
     </message>
     <message>
         <source>Show</source>
@@ -445,12 +445,12 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
+        <source>Amount:</source>
         <translation>Сума:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Етикета:</translation>
+        <source>Label:</source>
+        <translation>Етикета:</translation>
     </message>
     <message>
         <source>Message:</source>

@@ -371,14 +371,6 @@
         <translation>(ไม่)เลือกทั้งหมด</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>โหมดแบบต้นไม้</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>โหมดแบบรายการ</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>จำนวน</translation>
     </message>
@@ -410,12 +402,12 @@
         <translation>แก้ไขที่อยู่</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;ป้ายชื่อ</translation>
+        <source>Label</source>
+        <translation>ป้ายชื่อ</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;ที่เก็บ</translation>
+        <source>Address</source>
+        <translation>ที่เก็บ</translation>
     </message>
     </context>
 <context>
@@ -644,10 +636,6 @@
         <translation>กระเ&amp;ป๋าเงิน</translation>
     </message>
     <message>
-        <source>Hide coin &amp;control features</source>
-        <translation>ซ่อน dogecoin รูปแบบการ ควบคุม</translation>
-    </message>
-    <message>
         <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
         <translation>หากท่านไม่เปิดใช้ การใช้เงินทอนที่ยังไม่ยืนยัน เงินทอนจากการทำรายการจะไม่สามารถใช้ได้ จนกว่ารายการที่ทำการ จะได้รับการยืนยันหนึ่งครั้ง และจะกระทบการคำนวณยอดคงเหลือของท่านด้วย</translation>
     </message>
@@ -764,8 +752,8 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;ชื่อ:</translation>
+        <source>Label:</source>
+        <translation>ชื่อ:</translation>
     </message>
     </context>
 <context>
@@ -805,8 +793,8 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;ชื่อ:</translation>
+        <source>Label:</source>
+        <translation>ชื่อ:</translation>
     </message>
     </context>
 <context>

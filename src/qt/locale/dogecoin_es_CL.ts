@@ -245,12 +245,12 @@
         <translation>Editar dirección</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Etiqueta</translation>
+        <source>Label</source>
+        <translation>Etiqueta</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Dirección</translation>
+        <source>Address</source>
+        <translation>Dirección</translation>
     </message>
     </context>
 <context>
@@ -468,16 +468,16 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
+        <source>Amount:</source>
         <translation>Cantidad:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Etiqueta:</translation>
+        <source>Label:</source>
+        <translation>Etiqueta:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;mensaje</translation>
+        <source>Message:</source>
+        <translation>Mensaje:</translation>
     </message>
     <message>
         <source>QR Code</source>
@@ -511,40 +511,23 @@
     </message>
     <message>
         <source>Fee:</source>
-        <translation>comisión:
-</translation>
+        <translation>Comisión:</translation>
     </message>
     <message>
         <source>Transaction Fee:</source>
         <translation>Comisión transacción:</translation>
     </message>
     <message>
-        <source>normal</source>
-        <translation>normal</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>rapido</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Enviar a múltiples destinatarios</translation>
-    </message>
-    <message>
         <source>Add &amp;Recipient</source>
         <translation>&amp;Agrega destinatario</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>&amp;Borra todos</translation>
+        <source>Clear All</source>
+        <translation>Borra todos</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Balance:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Confirma el envio</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -554,28 +537,20 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
+        <source>Amount:</source>
         <translation>Cantidad:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>&amp;Pagar a:</translation>
+        <source>Pay To:</source>
+        <translation>Pagar a:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Etiqueta:</translation>
-    </message>
-    <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
+        <source>Label:</source>
+        <translation>Etiqueta:</translation>
     </message>
     <message>
         <source>Paste address from clipboard</source>
         <translation>Pega dirección desde portapapeles</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Message:</source>
@@ -599,16 +574,8 @@
         <translation>&amp;Firmar Mensaje</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Pega dirección desde portapapeles</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -627,8 +594,8 @@
         <translation>Firmar Mensaje</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>&amp;Borra todos</translation>
+        <source>Clear All</source>
+        <translation>Borra todos</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

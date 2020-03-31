@@ -52,11 +52,11 @@
 <context>
     <name>EditAddressDialog</name>
     <message>
-        <source>&amp;Label</source>
+        <source>Label</source>
         <translation>Ετικέτα</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
+        <source>Address</source>
         <translation>Διεύθυνση</translation>
     </message>
     </context>
@@ -134,10 +134,6 @@
     <message>
         <source>Insufficient funds</source>
         <translation>Κεφάλαια μη επαρκή</translation>
-    </message>
-    <message>
-        <source>Recommended:</source>
-        <translation>Συνίσταται:</translation>
     </message>
     </context>
 <context>

@@ -339,14 +339,6 @@
         <translation>mindent kiválaszt/elvet</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>Fa nézet</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Lista nézet</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Összeg</translation>
     </message>
@@ -378,12 +370,12 @@
         <translation>Cím szerkesztése</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>Cím&amp;ke</translation>
+        <source>Label</source>
+        <translation>Címke</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Cím</translation>
+        <source>Address</source>
+        <translation>Cím</translation>
     </message>
     </context>
 <context>
@@ -904,16 +896,16 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;Összeg:</translation>
+        <source>Amount:</source>
+        <translation>Összeg:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
+        <source>Label:</source>
         <translation>Címke:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;Üzenet:</translation>
+        <source>Message:</source>
+        <translation>Üzenet:</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -1002,52 +994,20 @@
         <translation>Tranzakciós díj</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>Válassz...</translation>
-    </message>
-    <message>
-        <source>per kilobyte</source>
-        <translation>kilobájtonként</translation>
-    </message>
-    <message>
         <source>Hide</source>
         <translation>Elrejtés</translation>
-    </message>
-    <message>
-        <source>Recommended:</source>
-        <translation>Ajánlott:</translation>
-    </message>
-    <message>
-        <source>Custom:</source>
-        <translation>Egyéni:</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>normál</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>gyors</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Küldés több címzettnek egyszerre</translation>
     </message>
     <message>
         <source>Add &amp;Recipient</source>
         <translation>&amp;Címzett hozzáadása</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Mindent &amp;töröl</translation>
+        <source>Clear All</source>
+        <translation>Mindent töröl</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Egyenleg:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Küldés megerősítése</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -1057,15 +1017,15 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
+        <source>Amount:</source>
         <translation>Összeg:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
+        <source>Pay To:</source>
         <translation>Címzett:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
+        <source>Label:</source>
         <translation>Címke:</translation>
     </message>
     <message>
@@ -1073,16 +1033,8 @@
         <translation>Válassz egy korábban már használt címet</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Cím beillesztése a vágólapról</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Remove this entry</source>
@@ -1126,16 +1078,8 @@
         <translation>Válassz egy korábban már használt címet</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Cím beillesztése a vágólapról</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -1158,8 +1102,8 @@
         <translation>Üzenet &amp;aláírása</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Mindent &amp;töröl</translation>
+        <source>Clear All</source>
+        <translation>Mindent töröl</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

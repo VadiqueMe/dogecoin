@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -82,10 +82,6 @@ void OptionsModel::Init(bool resetSettings)
                     : ""
         ) ;
     thirdPartyTxUrls = settings.value( "thirdPartyTxUrls", "" ).toString() ;
-
-    if ( ! settings.contains( "fCoinControlFeatures" ) )
-        settings.setValue( "fCoinControlFeatures", true );
-    fHideCoinControlFeatures = ! settings.value( "fCoinControlFeatures", true ).toBool();
 
     // These are shared with the core or have a command-line parameter
     // and we want command-line parameters to overwrite the GUI settings
@@ -245,8 +241,6 @@ QVariant OptionsModel::data(const QModelIndex & index, int role) const
             return thirdPartyTxUrls ;
         case Language:
             return settings.value( "language" ) ;
-        case HideCoinControlFeatures:
-            return fHideCoinControlFeatures ;
         case DatabaseCache:
             return settings.value( "nDatabaseCache" ) ;
         case ThreadsScriptVerif:
@@ -377,11 +371,6 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
                 settings.setValue("language", value);
                 setRestartRequired(true);
             }
-            break;
-        case HideCoinControlFeatures:
-            fHideCoinControlFeatures = value.toBool();
-            settings.setValue( "fCoinControlFeatures", ! fHideCoinControlFeatures );
-            Q_EMIT hideCoinControlFeaturesChanged( fHideCoinControlFeatures );
             break;
         case DatabaseCache:
             if (settings.value("nDatabaseCache") != value) {

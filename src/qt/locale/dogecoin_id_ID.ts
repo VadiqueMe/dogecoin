@@ -532,15 +532,7 @@
     </message>
     <message>
         <source>(un)select all</source>
-        <translation>(Tidak)memilih semua</translation>
-    </message>
-    <message>
-        <source>Tree mode</source>
-        <translation>Tree mode</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Mode daftar</translation>
+        <translation>(tidak)memilih semua</translation>
     </message>
     <message>
         <source>Amount</source>
@@ -578,10 +570,6 @@
         <source>Copy fee</source>
         <translation>Salin biaya</translation>
     </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(tidak ada label)</translation>
-    </message>
     </context>
 <context>
     <name>EditAddressDialog</name>
@@ -590,12 +578,12 @@
         <translation>Ubah Alamat</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Label</translation>
+        <source>Label</source>
+        <translation>Label</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Alamat</translation>
+        <source>Address</source>
+        <translation>Alamat</translation>
     </message>
     </context>
 <context>
@@ -798,10 +786,6 @@
     <message>
         <source>W&amp;allet</source>
         <translation>D&amp;ompet</translation>
-    </message>
-    <message>
-        <source>Hide coin &amp;control features</source>
-        <translation>Sembunyikan fitur &amp;pengaturan koin</translation>
     </message>
     <message>
         <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
@@ -1114,19 +1098,19 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;Nilai:</translation>
+        <source>Amount:</source>
+        <translation>Nilai:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Label:</translation>
+        <source>Label:</source>
+        <translation>Label:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;Pesan:</translation>
+        <source>Message:</source>
+        <translation>Pesan:</translation>
     </message>
     <message>
-        <source>R&amp;euse an existing receiving address (not recommended)</source>
+        <source>Reuse an existing receiving address (not recommended)</source>
         <translation>Gunakan lagi alamat penerima yang ada (tidak disarankan)</translation>
     </message>
     <message>
@@ -1248,8 +1232,8 @@
         <translation>Uang Kembali:</translation>
     </message>
     <message>
-        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
-        <translation>Jiki ini dipilih, tetapi alamat pengembalian uang kosong atau salah, uang kembali akan dikirim ke alamat yang baru dibuat.</translation>
+        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address</source>
+        <translation>Jiki ini dipilih, tetapi alamat pengembalian uang kosong atau salah, uang kembali akan dikirim ke alamat yang baru dibuat</translation>
     </message>
     <message>
         <source>Custom change address</source>
@@ -1260,36 +1244,16 @@
         <translation>Biaya Transaksi:</translation>
     </message>
     <message>
-        <source>Recommended:</source>
-        <translation>Disarankan</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>normal</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>cepat</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Kirim ke beberapa penerima sekaligus</translation>
-    </message>
-    <message>
         <source>Add &amp;Recipient</source>
         <translation>Tambahlah &amp;Penerima</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Hapus &amp;Semua</translation>
+        <source>Clear All</source>
+        <translation>Hapus Semua</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Saldo:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Konfirmasi aksi pengiriman</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -1307,32 +1271,24 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>J&amp;umlah:</translation>
+        <source>Amount:</source>
+        <translation>Jumlah:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>Kirim &amp;Ke:</translation>
+        <source>Pay To:</source>
+        <translation>Kirim Ke:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Label:</translation>
+        <source>Label:</source>
+        <translation>Label:</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
         <translation>Pilih alamat yang telah digunakan sebelumnya</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+J</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Tempel alamat dari salinan</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+B</translation>
     </message>
     <message>
         <source>Remove this entry</source>
@@ -1380,16 +1336,8 @@
         <translation>Pilih alamat yang telah digunakan sebelumnya</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Tempel alamat dari salinan</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+B</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -1416,8 +1364,8 @@
         <translation>Hapus semua bidang penanda pesan</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Hapus &amp;Semua</translation>
+        <source>Clear All</source>
+        <translation>Hapus Semua</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

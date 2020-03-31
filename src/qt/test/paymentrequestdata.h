@@ -339,7 +339,7 @@ XYh860/Q4wvc7lfiTe+dXBzPKAKhMy91yETY\
 ";
 
 //
-// Contains a testnet paytoaddress, so payment request network doesn't match client network
+// Contains a testnet paytoaddress, so payment request network doesn't match
 //
 const char* paymentrequest1_cert2_BASE64 =
 "\
@@ -433,4 +433,3 @@ dGluZyB0ZXN0bmV0ISqAAXSQG8+GFA18VaKarlYrOz293rNMIub0swKGcQm8jAGX\
 HSLaRgHfUDeEPr4hydy4dtfu59KNwe2xsHOHu/SpO4L8SrA4Dm9A7SlNBVWdcLbw\
 d2hj739GDLz0b5KuJ2SG6VknMRQM976w/m2qlq0ccVGaaZ2zMIGfpzL3p6adwx/5\
 ";
-

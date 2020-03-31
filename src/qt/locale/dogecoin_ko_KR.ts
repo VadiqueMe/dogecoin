@@ -551,14 +551,6 @@
         <translation>모두 선택(하지 않음)</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>트리 모드</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>리스트 모드</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>거래액</translation>
     </message>
@@ -639,12 +631,8 @@
         <translation>아니요</translation>
     </message>
     <message>
-        <source>(no label)</source>
-        <translation>(라벨 없음)</translation>
-    </message>
-    <message>
-        <source>change from %1 (%2)</source>
-        <translation>%1로부터 변경 (%2)</translation>
+        <source>change from %1</source>
+        <translation>%1 로부터 변경</translation>
     </message>
     <message>
         <source>(change)</source>
@@ -658,12 +646,12 @@
         <translation>주소 편집</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>라벨(&amp;L)</translation>
+        <source>Label</source>
+        <translation>라벨</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>주소(&amp;A)</translation>
+        <source>Address</source>
+        <translation>주소</translation>
     </message>
     <message>
         <source>New receiving address</source>
@@ -968,10 +956,6 @@
         <translation>지갑(&amp;A)</translation>
     </message>
     <message>
-        <source>Hide coin &amp;control features</source>
-        <translation>코인 상세 제어 기능을 감추다 (&amp;C)</translation>
-    </message>
-    <message>
         <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
         <translation>검증되지 않은 잔돈 쓰기를 비활성화하면 거래가 적어도 1회 이상 검증되기 전까지 그 거래의 거스름돈은 사용할 수 없습니다. 이는 잔액 계산 방법에도 영향을 미칩니다</translation>
     </message>
@@ -1210,7 +1194,7 @@
         <translation>잘못된 지불 주소입니다 %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid address or malformed URI parameters</source>
+        <source>URI cannot be parsed. This can be caused by an invalid address or malformed URI parameters</source>
         <translation>URI의 파싱에 문제가 발생했습니다. 잘못된 주소나 URI 파라미터 구성에 오류가 존재할 수 있습니다</translation>
     </message>
     <message>
@@ -1218,48 +1202,48 @@
         <translation>지불이 파일 처리를 요청합니다</translation>
     </message>
     <message>
-        <source>Payment request file cannot be read! This can be caused by an invalid payment request file.</source>
-        <translation>지불 요청 파일을 읽을 수 없습니다. 이것은 잘못된 지불 요청 파일에 의해 발생하는 오류일 수 있습니다.</translation>
+        <source>Payment request file cannot be read. This can be caused by an invalid payment request file</source>
+        <translation>지불 요청 파일을 읽을 수 없습니다. 이것은 잘못된 지불 요청 파일에 의해 발생하는 오류일 수 있습니다</translation>
     </message>
     <message>
         <source>Payment request rejected</source>
         <translation>지불 요청이 거부됨</translation>
     </message>
     <message>
-        <source>Payment request network doesn't match client network.</source>
-        <translation>지급 요청 네트워크가 클라이언트 네트워크와 일치되지 않습니다.</translation>
+        <source>Payment request network doesn't match the current network</source>
+        <translation>결제 요청 네트워크가 현재 네트워크와 일치하지 않습니다</translation>
     </message>
     <message>
-        <source>Payment request expired.</source>
-        <translation>지불 요청이 만료됨.</translation>
+        <source>Payment request expired</source>
+        <translation>지불 요청이 만료됨</translation>
     </message>
     <message>
-        <source>Payment request is not initialized.</source>
-        <translation>지불 요청이 초기화 되지 않았습니다.</translation>
+        <source>Payment request is not initialized</source>
+        <translation>지불 요청이 초기화 되지 않았습니다</translation>
     </message>
     <message>
-        <source>Unverified payment requests to custom payment scripts are unsupported.</source>
-        <translation>임의로 변경한 결제 스크립트 기반의 지불 요청 양식은 검증되기 전까지는 지원되지 않습니다.</translation>
+        <source>Unverified payment requests to custom payment scripts are not supported</source>
+        <translation>임의로 변경한 결제 스크립트 기반의 지불 요청 양식은 검증되기 전까지는 지원되지 않습니다</translation>
     </message>
     <message>
-        <source>Invalid payment request.</source>
-        <translation>잘못된 지불 요청.</translation>
+        <source>Invalid payment request</source>
+        <translation>잘못된 지불 요청</translation>
     </message>
     <message>
         <source>Refund from %1</source>
         <translation>%1 으로부터의 환불</translation>
     </message>
     <message>
-        <source>Payment request %1 is too large (%2 bytes, allowed %3 bytes).</source>
-        <translation>지불 요청 %1은 너무 큽니다 (%2 바이트, %3 바이트까지 허용됩니다).</translation>
+        <source>Payment request %1 is too large (%2 bytes, allowed %3 bytes)</source>
+        <translation>지불 요청 %1은 너무 큽니다 (%2 바이트, %3 바이트까지 허용됩니다)</translation>
     </message>
     <message>
         <source>Error communicating with %1: %2</source>
         <translation>%1과 소통하는데 에러: %2</translation>
     </message>
     <message>
-        <source>Payment request cannot be parsed!</source>
-        <translation>지불요청을 파싱할 수 없습니다.</translation>
+        <source>Payment request cannot be parsed</source>
+        <translation>지불요청을 파싱할 수 없습니다</translation>
     </message>
     <message>
         <source>Bad response from server %1</source>
@@ -1636,20 +1620,20 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>거래액(&amp;A):</translation>
+        <source>Amount:</source>
+        <translation>거래액</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>라벨(&amp;L):</translation>
+        <source>Label:</source>
+        <translation>라벨</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>메시지(&amp;M):</translation>
+        <source>Message:</source>
+        <translation>메시지</translation>
     </message>
     <message>
-        <source>R&amp;euse an existing receiving address (not recommended)</source>
-        <translation>현재의 수취용 주소를 재사용하기(&amp;E) (권장하지 않습니다)</translation>
+        <source>Reuse an existing receiving address (not recommended)</source>
+        <translation>현재의 수취용 주소를 재사용하기 (권장하지 않습니다)</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
@@ -1810,8 +1794,8 @@
         <translation>잔돈:</translation>
     </message>
     <message>
-        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
-        <translation>이 기능이 활성화되면 거스름돈 주소가 공란이거나 무효인 경우, 거스름돈은 새롭게 생성된 주소로 송금됩니다.</translation>
+        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address</source>
+        <translation>이 기능이 활성화되면 거스름돈 주소가 공란이거나 무효인 경우, 거스름돈은 새롭게 생성된 주소로 송금됩니다</translation>
     </message>
     <message>
         <source>Custom change address</source>
@@ -1822,64 +1806,20 @@
         <translation>거래 수수료:</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>선택 하기...</translation>
-    </message>
-    <message>
-        <source>collapse fee-settings</source>
-        <translation>수수료 설정 접기</translation>
-    </message>
-    <message>
-        <source>per kilobyte</source>
-        <translation>킬로바이트 당</translation>
-    </message>
-    <message>
-        <source>If the custom fee is set to 1000 koinu and the transaction is only 250 bytes, then "per kilobyte" only pays 250 koinu in fee, while "total at least" pays 1000 koinu. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation>사용자 정의 수수료가 1000사토시로 지정된 경우 거래의 크기가 250바이트 일 경우 1킬로바이트당 250사토시만 지불되지만 "최소 수수료"에선 1000사토시가 지불됩니다. 1킬로바이트가 넘는 거래인 경우 어떠한 경우에든 1킬로바이트 기준으로 지불됩니다.</translation>
-    </message>
-    <message>
         <source>Hide</source>
         <translation>숨기기</translation>
-    </message>
-    <message>
-        <source>total at least</source>
-        <translation>최소 수수료</translation>
-    </message>
-    <message>
-        <source>Recommended:</source>
-        <translation>권장:</translation>
-    </message>
-    <message>
-        <source>Custom:</source>
-        <translation>사용자 정의:</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>일반</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>빠름</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>다수의 수령인들에게 한번에 보내기</translation>
     </message>
     <message>
         <source>Add &amp;Recipient</source>
         <translation>수령인 추가하기(&amp;R)</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>모두 지우기(&amp;A)</translation>
+        <source>Clear All</source>
+        <translation>모두 지우기</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>잔액:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>전송 기능 확인</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -1934,40 +1874,36 @@
         <translation>코인 전송을 확인</translation>
     </message>
     <message>
-        <source>The recipient address is not valid. Please recheck.</source>
-        <translation>수령인 주소가 정확하지 않습니다. 재확인 바랍니다</translation>
+        <source>The recipient address is not valid, please recheck</source>
+        <translation>수령인 주소가 정확하지 않습니다, 재확인 바랍니다</translation>
     </message>
     <message>
-        <source>The amount to pay must be larger than 0.</source>
-        <translation>지불하는 금액은 0 보다 커야 합니다.</translation>
+        <source>The amount exceeds your balance</source>
+        <translation>잔고를 초과하였습니다</translation>
     </message>
     <message>
-        <source>The amount exceeds your balance.</source>
-        <translation>잔고를 초과하였습니다.</translation>
+        <source>The total exceeds your balance when the transaction fee is included</source>
+        <translation>거래수수료를 포함하면 잔고를 초과합니다</translation>
     </message>
     <message>
-        <source>The total exceeds your balance when the %1 transaction fee is included.</source>
-        <translation>%1 의 거래수수료를 포함하면 잔고를 초과합니다.</translation>
+        <source>Duplicate address found, can only send to each address once per transaction</source>
+        <translation>중복된 주소 발견, 한번에 하나의 주소에만 작업할 수 있습니다</translation>
     </message>
     <message>
-        <source>Duplicate address found: addresses should only be used once each.</source>
-        <translation>중복된 주소 발견: 한번에 하나의 주소에만 작업할 수 있습니다.</translation>
-    </message>
-    <message>
-        <source>Transaction creation failed!</source>
-        <translation>거래를 생성하는 것을 실패하였습니다!</translation>
+        <source>Transaction creation failed</source>
+        <translation>거래를 생성하는 것을 실패하였습니다</translation>
     </message>
     <message>
         <source>The transaction was rejected with the following reason: %1</source>
         <translation>거래가 다음과 같은 이유로 거부되었습니다: %1</translation>
     </message>
     <message>
-        <source>A fee higher than %1 is considered an absurdly high fee.</source>
-        <translation>%1 보다 높은 수수료는 너무 높은 수수료 입니다.</translation>
+        <source>A fee higher than %1 is considered an absurdly high fee</source>
+        <translation>%1 보다 높은 수수료는 너무 높은 수수료 입니다</translation>
     </message>
     <message>
-        <source>Payment request expired.</source>
-        <translation>지불 요청이 만료됨.</translation>
+        <source>Payment request expired</source>
+        <translation>지불 요청이 만료됨</translation>
     </message>
     <message numerus="yes">
         <source>%n block(s)</source>
@@ -1978,14 +1914,6 @@
         <translation><numerusform>%n 블록 안에 승인이 시작될 것으로 추정됩니다.</numerusform></translation>
     </message>
     <message>
-        <source>Warning: Invalid address</source>
-        <translation>경고: 잘못된 주소</translation>
-    </message>
-    <message>
-        <source>Warning: Unknown change address</source>
-        <translation>경고: 알려지지 않은 주소변경입니다</translation>
-    </message>
-    <message>
         <source>Confirm custom change address</source>
         <translation>맞춤 주소 변경 확인</translation>
     </message>
@@ -1993,24 +1921,20 @@
         <source>The address you selected for change is not part of this wallet. Any or all funds in your wallet may be sent to this address. Are you sure?</source>
         <translation>변경하기 위해 선택한 주소는 이 지갑의 일부가 아닙니다. 지갑에 있는 일부 또는 모든 금액을 이 주소로 보낼 수 있습니다. 확실합니까?</translation>
     </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(라벨 없음)</translation>
-    </message>
 </context>
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>금액(&amp;M):</translation>
+        <source>Amount:</source>
+        <translation>금액:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>송금할 대상(&amp;T):</translation>
+        <source>Pay To:</source>
+        <translation>송금할 대상:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>라벨(&amp;L):</translation>
+        <source>Label:</source>
+        <translation>라벨:</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2021,48 +1945,36 @@
         <translation>이 비트코인 주소로 송금됩니다</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>클립보드로 부터 주소 붙여넣기</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Remove this entry</source>
         <translation>항목을 지웁니다</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less dogecoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation>수수료가 송금되는 금액에서 공제됩니다. 수령자는 금액 필드에서 입력한 금액보다 적은 금액을 전송받게 됩니다. 받는 사람이 여러 명인 경우 수수료는 균등하게 나누어집니다.</translation>
-    </message>
-    <message>
-        <source>S&amp;ubtract fee from amount</source>
-        <translation>송금액에서 수수료 공제(&amp;U)</translation>
+        <source>Subtract fee from amount</source>
+        <translation>송금액에서 수수료 공제</translation>
     </message>
     <message>
         <source>Message:</source>
         <translation>메시지:</translation>
     </message>
     <message>
-        <source>This is an unauthenticated payment request.</source>
-        <translation>인증 되지 않은 지급 요청입니다.</translation>
+        <source>This is an unauthenticated payment request</source>
+        <translation>인증 되지 않은 지급 요청입니다</translation>
     </message>
     <message>
-        <source>This is an authenticated payment request.</source>
-        <translation>인증 된 지급 요청 입니다.</translation>
+        <source>This is an authenticated payment request</source>
+        <translation>인증 된 지급 요청 입니다</translation>
     </message>
     <message>
         <source>Enter a label for this address to add it to the list of used addresses</source>
-        <translation>사용된 주소 목록에 새 주소를 추가하기 위해 라벨 이름을 입력해 주세요. </translation>
+        <translation>사용된 주소 목록에 새 주소를 추가하기 위해 라벨 이름을 입력해 주세요</translation>
     </message>
     <message>
-        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Dogecoin network.</source>
-        <translation>도지코인 URI에 첨부된 메시지는 사용자 참고를 위해 거래기록과 함께 보관될 것입니다. 참고: 이 메시지는 도지코인 네트워크를 통해 보내지 않을 것입니다.</translation>
+        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
+        <translation>도지코인 URI 에 첨부된 메시지는 거래기록과 함께 보관될 것입니다. 이 메시지는 네트워크를 통해 보내지 않을 것입니다</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -2118,16 +2030,8 @@
         <translation>이전에 사용한 주소를 선택하십시오</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>클립보드로 부터 주소를 복사하기</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -2154,8 +2058,8 @@
         <translation>메시지 필드의 모든 서명 재설정</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>모두 지우기(&amp;A)</translation>
+        <source>Clear All</source>
+        <translation>모두 지우기</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

@@ -551,14 +551,6 @@
         <translation>(af)vælg alle</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>Trætilstand</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Listetilstand</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Beløb</translation>
     </message>
@@ -639,12 +631,8 @@
         <translation>nej</translation>
     </message>
     <message>
-        <source>(no label)</source>
-        <translation>(ingen mærkat)</translation>
-    </message>
-    <message>
-        <source>change from %1 (%2)</source>
-        <translation>byttepenge fra %1 (%2)</translation>
+        <source>change from %1</source>
+        <translation>byttepenge fra %1</translation>
     </message>
     <message>
         <source>(change)</source>
@@ -658,12 +646,12 @@
         <translation>Redigér adresse</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Mærkat</translation>
+        <source>Label</source>
+        <translation>Mærkat</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Adresse</translation>
+        <source>Address</source>
+        <translation>Adresse</translation>
     </message>
     <message>
         <source>New receiving address</source>
@@ -968,10 +956,6 @@
         <translation>&amp;Tegnebog</translation>
     </message>
     <message>
-        <source>Hide coin &amp;control features</source>
-        <translation>Skjul egenskaber for &amp;coin-styring</translation>
-    </message>
-    <message>
         <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
         <translation>Hvis du deaktiverer brug af ubekræftede byttepenge, kan byttepengene fra en transaktion ikke bruges, før pågældende transaktion har mindst én bekræftelse. Dette påvirker også måden hvorpå din saldo beregnes</translation>
     </message>
@@ -1210,56 +1194,56 @@
         <translation>Ugyldig betalingsadresse %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid address or malformed URI parameters</source>
-        <translation>URI kan ikke tolkes! Dette kan skyldes en ugyldig adresse eller forkert udformede URL-parametre</translation>
+        <source>URI cannot be parsed. This can be caused by an invalid address or malformed URI parameters</source>
+        <translation>URI kan ikke tolkes. Dette kan skyldes en ugyldig adresse eller forkert udformede URL-parametre</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
         <translation>Filhåndtering for betalingsanmodninger</translation>
     </message>
     <message>
-        <source>Payment request file cannot be read! This can be caused by an invalid payment request file.</source>
-        <translation>Fil for betalingsanmodning kan ikke læses! Dette kan skyldes en ugyldig fil for betalingsanmodning.</translation>
+        <source>Payment request file cannot be read. This can be caused by an invalid payment request file</source>
+        <translation>Fil for betalingsanmodning kan ikke læses. Dette kan skyldes en ugyldig fil for betalingsanmodning</translation>
     </message>
     <message>
         <source>Payment request rejected</source>
         <translation>Betalingsanmodning afvist</translation>
     </message>
     <message>
-        <source>Payment request network doesn't match client network.</source>
-        <translation>Netværk for betalingsanmodning stemmer ikke overens med klientens netværk.</translation>
+        <source>Payment request network doesn't match the current network</source>
+        <translation>Netværk for betalingsanmodning stemmer ikke overens med det aktuelle netværk</translation>
     </message>
     <message>
-        <source>Payment request expired.</source>
-        <translation>Betalingsanmodning er udløbet.</translation>
+        <source>Payment request expired</source>
+        <translation>Betalingsanmodning er udløbet</translation>
     </message>
     <message>
-        <source>Payment request is not initialized.</source>
-        <translation>Betalingsanmodning er ikke klargjort.</translation>
+        <source>Payment request is not initialized</source>
+        <translation>Betalingsanmodning er ikke klargjort</translation>
     </message>
     <message>
-        <source>Unverified payment requests to custom payment scripts are unsupported.</source>
-        <translation>Ikke-verificerede betalingsanmodninger for tilpassede betalings-scripts understøttes ikke.</translation>
+        <source>Unverified payment requests to custom payment scripts are not supported</source>
+        <translation>Ikke-verificerede betalingsanmodninger for tilpassede betalings-scripts understøttes ikke</translation>
     </message>
     <message>
-        <source>Invalid payment request.</source>
-        <translation>Ugyldig betalingsanmodning.</translation>
+        <source>Invalid payment request</source>
+        <translation>Ugyldig betalingsanmodning</translation>
     </message>
     <message>
         <source>Refund from %1</source>
         <translation>Tilbagebetaling fra %1</translation>
     </message>
     <message>
-        <source>Payment request %1 is too large (%2 bytes, allowed %3 bytes).</source>
-        <translation>Betalingsanmodning %1 er for stor (%2 byte; %3 byte tilladt).</translation>
+        <source>Payment request %1 is too large (%2 bytes, allowed %3 bytes)</source>
+        <translation>Betalingsanmodning %1 er for stor (%2 byte; %3 byte tilladt)</translation>
     </message>
     <message>
         <source>Error communicating with %1: %2</source>
         <translation>Fejl under kommunikation med %1: %2</translation>
     </message>
     <message>
-        <source>Payment request cannot be parsed!</source>
-        <translation>Betalingsanmodning kan ikke tolkes!</translation>
+        <source>Payment request cannot be parsed</source>
+        <translation>Betalingsanmodning kan ikke tolkes</translation>
     </message>
     <message>
         <source>Bad response from server %1</source>
@@ -1636,20 +1620,20 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;Beløb:</translation>
+        <source>Amount:</source>
+        <translation>Beløb:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Mærkat:</translation>
+        <source>Label:</source>
+        <translation>Mærkat:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;Besked:</translation>
+        <source>Message:</source>
+        <translation>Besked:</translation>
     </message>
     <message>
-        <source>R&amp;euse an existing receiving address (not recommended)</source>
-        <translation>&amp;Genbrug en eksisterende modtagelsesadresse (anbefales ikke)</translation>
+        <source>Reuse an existing receiving address (not recommended)</source>
+        <translation>Genbrug en eksisterende modtagelsesadresse (anbefales ikke)</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
@@ -1810,8 +1794,8 @@
         <translation>Byttepenge:</translation>
     </message>
     <message>
-        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
-        <translation>Hvis dette aktiveres, men byttepengeadressen er tom eller ugyldig, vil byttepenge blive sendt til en nygenereret adresse.</translation>
+        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address</source>
+        <translation>Hvis dette aktiveres, men byttepengeadressen er tom eller ugyldig, vil byttepenge blive sendt til en nygenereret adresse</translation>
     </message>
     <message>
         <source>Custom change address</source>
@@ -1822,64 +1806,20 @@
         <translation>Transaktionsgebyr:</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>Vælg…</translation>
-    </message>
-    <message>
-        <source>collapse fee-settings</source>
-        <translation>sammenfold gebyropsætning</translation>
-    </message>
-    <message>
-        <source>per kilobyte</source>
-        <translation>pr. kilobyte</translation>
-    </message>
-    <message>
-        <source>If the custom fee is set to 1000 koinu and the transaction is only 250 bytes, then "per kilobyte" only pays 250 koinu in fee, while "total at least" pays 1000 koinu. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation>Hvis det brugertilpassede gebyr er sat til 1000 koinu, og transaktionen kun fylder 250 byte, betaler “pr. kilobyte” kun 250 koinu i gebyr, mens “total mindst” betaler 1000 koinu. For transaktioner større end en kilobyte betaler begge pr. kilobyte.</translation>
-    </message>
-    <message>
         <source>Hide</source>
         <translation>Skjul</translation>
-    </message>
-    <message>
-        <source>total at least</source>
-        <translation>total mindst</translation>
-    </message>
-    <message>
-        <source>Recommended:</source>
-        <translation>Anbefalet:</translation>
-    </message>
-    <message>
-        <source>Custom:</source>
-        <translation>Brugertilpasset:</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>normal</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>hurtig</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Send til flere modtagere på en gang</translation>
     </message>
     <message>
         <source>Add &amp;Recipient</source>
         <translation>Tilføj &amp;modtager</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Ryd &amp;alle</translation>
+        <source>Clear All</source>
+        <translation>Ryd alle</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Saldo:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Bekræft afsendelsen</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -1934,40 +1874,36 @@
         <translation>Bekræft afsendelse af dogecoins</translation>
     </message>
     <message>
-        <source>The recipient address is not valid. Please recheck.</source>
-        <translation>Modtageradressen er ikke gyldig. Tjek venligst igen.</translation>
+        <source>The recipient address is not valid, please recheck</source>
+        <translation>Modtageradressen er ikke gyldig, tjek venligst igen</translation>
     </message>
     <message>
-        <source>The amount to pay must be larger than 0.</source>
-        <translation>Beløbet til betaling skal være større end 0.</translation>
+        <source>The amount exceeds your balance</source>
+        <translation>Beløbet overstiger din saldo</translation>
     </message>
     <message>
-        <source>The amount exceeds your balance.</source>
-        <translation>Beløbet overstiger din saldo.</translation>
+        <source>The total exceeds your balance when the transaction fee is included</source>
+        <translation>Totalen overstiger din saldo, når transaktionsgebyret er inkluderet</translation>
     </message>
     <message>
-        <source>The total exceeds your balance when the %1 transaction fee is included.</source>
-        <translation>Totalen overstiger din saldo, når transaktionsgebyret på %1 er inkluderet.</translation>
+        <source>Duplicate address found, can only send to each address once per transaction</source>
+        <translation>Adressegenganger fundet. Adresser bør kun bruges én gang hver</translation>
     </message>
     <message>
-        <source>Duplicate address found: addresses should only be used once each.</source>
-        <translation>Adressegenganger fundet. Adresser bør kun bruges én gang hver.</translation>
-    </message>
-    <message>
-        <source>Transaction creation failed!</source>
-        <translation>Oprettelse af transaktion mislykkedes!</translation>
+        <source>Transaction creation failed</source>
+        <translation>Oprettelse af transaktion mislykkedes</translation>
     </message>
     <message>
         <source>The transaction was rejected with the following reason: %1</source>
         <translation>Transaktionen blev afvist med følgende begrundelse: %1</translation>
     </message>
     <message>
-        <source>A fee higher than %1 is considered an absurdly high fee.</source>
-        <translation>Et gebyr højere end %1 opfattes som et absurd højt gebyr.</translation>
+        <source>A fee higher than %1 is considered an absurdly high fee</source>
+        <translation>Et gebyr højere end %1 opfattes som et absurd højt gebyr</translation>
     </message>
     <message>
-        <source>Payment request expired.</source>
-        <translation>Betalingsanmodning er udløbet.</translation>
+        <source>Payment request expired</source>
+        <translation>Betalingsanmodning er udløbet</translation>
     </message>
     <message numerus="yes">
         <source>%n block(s)</source>
@@ -1978,14 +1914,6 @@
         <translation><numerusform>Bekræftelse estimeret til at begynde om %n blok.</numerusform><numerusform>Bekræftelse estimeret til at begynde om %n blokke.</numerusform></translation>
     </message>
     <message>
-        <source>Warning: Invalid Dogecoin address</source>
-        <translation>Advarsel: Ugyldig Dogecoin-adresse</translation>
-    </message>
-    <message>
-        <source>Warning: Unknown change address</source>
-        <translation>Advarsel: Ukendt byttepengeadresse</translation>
-    </message>
-    <message>
         <source>Confirm custom change address</source>
         <translation>Bekræft tilpasset byttepengeadresse</translation>
     </message>
@@ -1993,24 +1921,20 @@
         <source>The address you selected for change is not part of this wallet. Any or all funds in your wallet may be sent to this address. Are you sure?</source>
         <translation>Den adresse, du har valgt til byttepenge, er ikke en del af denne tegnebog. Nogle af eller alle penge i din tegnebog kan blive sendt til denne adresse. Er du sikker?</translation>
     </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(ingen mærkat)</translation>
-    </message>
 </context>
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>&amp;Beløb:</translation>
+        <source>Amount:</source>
+        <translation>Beløb:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>Betal &amp;til:</translation>
+        <source>Pay To:</source>
+        <translation>Betal til:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Mærkat:</translation>
+        <source>Label:</source>
+        <translation>Mærkat:</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2021,48 +1945,36 @@
         <translation>Dogecoin-adresse, som betalingen skal sendes til</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Indsæt adresse fra udklipsholderen</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Remove this entry</source>
         <translation>Fjern denne indgang</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less dogecoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation>Gebyret vil blive trukket fra det sendte beløb. Modtageren vil modtage færre dogecoin, end du indtaster i beløbfeltet. Hvis flere modtagere vælges, vil gebyret deles ligeligt.</translation>
-    </message>
-    <message>
-        <source>S&amp;ubtract fee from amount</source>
-        <translation>&amp;Træk gebyr fra beløb</translation>
+        <source>Subtract fee from amount</source>
+        <translation>Træk gebyr fra beløb</translation>
     </message>
     <message>
         <source>Message:</source>
         <translation>Besked:</translation>
     </message>
     <message>
-        <source>This is an unauthenticated payment request.</source>
-        <translation>Dette er en uautentificeret betalingsanmodning.</translation>
+        <source>This is an unauthenticated payment request</source>
+        <translation>Dette er en uautentificeret betalingsanmodning</translation>
     </message>
     <message>
-        <source>This is an authenticated payment request.</source>
-        <translation>Dette er en autentificeret betalingsanmodning.</translation>
+        <source>This is an authenticated payment request</source>
+        <translation>Dette er en autentificeret betalingsanmodning</translation>
     </message>
     <message>
         <source>Enter a label for this address to add it to the list of used addresses</source>
         <translation>Indtast et mærkat for denne adresse for at føje den til listen over brugte adresser</translation>
     </message>
     <message>
-        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Dogecoin network.</source>
-        <translation>En besked, som blev føjet til “bitcon:”-URI'en, som vil gemmes med transaktionen til din reference. Bemærk: Denne besked vil ikke blive sendt over Dogecoin-netværket.</translation>
+        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
+        <translation>En besked, som blev føjet til “dogecoin:”-URI'en, som vil gemmes med transaktionen. Denne besked vil ikke blive sendt over netværket</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -2118,16 +2030,8 @@
         <translation>Vælg tidligere brugt adresse</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Indsæt adresse fra udklipsholderen</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -2154,8 +2058,8 @@
         <translation>Nulstil alle “signér besked”-felter</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Ryd &amp;alle</translation>
+        <source>Clear All</source>
+        <translation>Ryd alle</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

@@ -544,14 +544,6 @@ Var vänlig och försök igen.</translation>
         <translation>(av)markera allt</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>Trädvy</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Listvy</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Mängd</translation>
     </message>
@@ -599,10 +591,6 @@ Var vänlig och försök igen.</translation>
         <source>no</source>
         <translation>nej</translation>
     </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(Ingen etikett)</translation>
-    </message>
     </context>
 <context>
     <name>EditAddressDialog</name>
@@ -611,12 +599,12 @@ Var vänlig och försök igen.</translation>
         <translation>Redigera adress</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Etikett</translation>
+        <source>Label</source>
+        <translation>Etikett</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Adress</translation>
+        <source>Address</source>
+        <translation>Adress</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -875,10 +863,6 @@ Var vänlig och försök igen.</translation>
     <message>
         <source>W&amp;allet</source>
         <translation>&amp;Plånbok</translation>
-    </message>
-    <message>
-        <source>Hide coin &amp;control features</source>
-        <translation>Dölj mynt&amp;kontrollfunktioner</translation>
     </message>
     <message>
         <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
@@ -1417,20 +1401,20 @@ Var vänlig och försök igen.</translation>
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;Belopp:</translation>
+        <source>Amount:</source>
+        <translation>Belopp:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Etikett:</translation>
+        <source>Label:</source>
+        <translation>Etikett:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;Meddelande:</translation>
+        <source>Message:</source>
+        <translation>Meddelande:</translation>
     </message>
     <message>
-        <source>R&amp;euse an existing receiving address (not recommended)</source>
-        <translation>Åt&amp;eranvänd en existerande mottagningsadress (rekommenderas inte)</translation>
+        <source>Reuse an existing receiving address (not recommended)</source>
+        <translation>Återanvänd en existerande mottagningsadress (rekommenderas inte)</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
@@ -1567,8 +1551,8 @@ Var vänlig och försök igen.</translation>
         <translation>Växel:</translation>
     </message>
     <message>
-        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
-        <translation>Om denna är aktiverad men växeladressen är tom eller felaktig kommer växeln att sändas till en nygenererad adress.</translation>
+        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address</source>
+        <translation>Om denna är aktiverad men växeladressen är tom eller felaktig kommer växeln att sändas till en nygenererad adress</translation>
     </message>
     <message>
         <source>Custom change address</source>
@@ -1579,64 +1563,20 @@ Var vänlig och försök igen.</translation>
         <translation>Transaktionsavgift:</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>Välj...</translation>
-    </message>
-    <message>
-        <source>collapse fee-settings</source>
-        <translation>Fäll ihop avgiftsinställningarna</translation>
-    </message>
-    <message>
-        <source>per kilobyte</source>
-        <translation>per kilobyte</translation>
-    </message>
-    <message>
-        <source>If the custom fee is set to 1000 koinu and the transaction is only 250 bytes, then "per kilobyte" only pays 250 koinu in fee, while "total at least" pays 1000 koinu. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation>Om den anpassad avgiften är satt till 1000 koinu och transaktionen bara är 250 byte, betalar "per kilobyte" bara 250 koinu i avgift, medans "totalt minst" betalar 1000 koinu. För transaktioner större än en kilobyte betalar både per kilobyte.</translation>
-    </message>
-    <message>
         <source>Hide</source>
         <translation>Göm</translation>
-    </message>
-    <message>
-        <source>total at least</source>
-        <translation>totalt minst</translation>
-    </message>
-    <message>
-        <source>Recommended:</source>
-        <translation>Rekommenderad:</translation>
-    </message>
-    <message>
-        <source>Custom:</source>
-        <translation>Anpassad:</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>normal</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>snabb</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Skicka till flera mottagare samtidigt</translation>
     </message>
     <message>
         <source>Add &amp;Recipient</source>
         <translation>Lägg till &amp;mottagare</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Rensa &amp;alla</translation>
+        <source>Clear All</source>
+        <translation>Rensa alla</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Balans:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Bekräfta sändordern</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -1666,16 +1606,16 @@ Var vänlig och försök igen.</translation>
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>&amp;Belopp:</translation>
+        <source>Amount:</source>
+        <translation>Belopp:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>Betala &amp;Till:</translation>
+        <source>Pay To:</source>
+        <translation>Betala Till:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Etikett:</translation>
+        <source>Label:</source>
+        <translation>Etikett:</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -1686,48 +1626,36 @@ Var vänlig och försök igen.</translation>
         <translation>Dogecoinadress att sända betalning till</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Klistra in adress från Urklipp</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Remove this entry</source>
         <translation>Radera denna post</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less dogecoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation>Avgiften dras från beloppet som skickas. Mottagaren kommer att få mindre dogecoins än du angivit i belopp-fältet. Om flera mottagare valts kommer avgiften delas jämt.</translation>
-    </message>
-    <message>
-        <source>S&amp;ubtract fee from amount</source>
-        <translation>S&amp;ubtrahera avgiften från beloppet</translation>
+        <source>Subtract fee from amount</source>
+        <translation>Subtrahera avgiften från beloppet</translation>
     </message>
     <message>
         <source>Message:</source>
         <translation>Meddelande:</translation>
     </message>
     <message>
-        <source>This is an unauthenticated payment request.</source>
-        <translation>Detta är en oautentiserad betalningsbegäran.</translation>
+        <source>This is an unauthenticated payment request</source>
+        <translation>Detta är en oautentiserad betalningsbegäran</translation>
     </message>
     <message>
-        <source>This is an authenticated payment request.</source>
-        <translation>Detta är en autentiserad betalningsbegäran.</translation>
+        <source>This is an authenticated payment request</source>
+        <translation>Detta är en autentiserad betalningsbegäran</translation>
     </message>
     <message>
         <source>Enter a label for this address to add it to the list of used addresses</source>
         <translation>Ange en etikett för denna adress att adderas till listan över använda adresser</translation>
     </message>
     <message>
-        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Dogecoin network.</source>
-        <translation>Ett meddelande som bifogades dogecoin-URI, vilket lagras med transaktionen som referens. NB: Meddelandet kommer inte att sändas över Dogecoinnätverket.</translation>
+        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
+        <translation>Ett meddelande som bifogades dogecoin: URI, vilket lagras med transaktionen. Meddelandet kommer inte att sändas över nätverket</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -1779,16 +1707,8 @@ Var vänlig och försök igen.</translation>
         <translation>Välj tidigare använda adresser</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Klistra in adress från Urklipp</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -1815,8 +1735,8 @@ Var vänlig och försök igen.</translation>
         <translation>Rensa alla fält</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Rensa &amp;alla</translation>
+        <source>Clear All</source>
+        <translation>Rensa alla</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

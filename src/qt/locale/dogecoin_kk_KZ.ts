@@ -136,11 +136,11 @@
 <context>
     <name>EditAddressDialog</name>
     <message>
-        <source>&amp;Label</source>
-        <translation>таңба</translation>
+        <source>Label</source>
+        <translation>Таңба</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
+        <source>Address</source>
         <translation>Адрес</translation>
     </message>
     </context>
@@ -206,7 +206,7 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
+        <source>Amount:</source>
         <translation>Саны</translation>
     </message>
     </context>
@@ -231,7 +231,7 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
+        <source>Amount:</source>
         <translation>Саны</translation>
     </message>
     </context>

@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -199,16 +200,16 @@ PaperWalletDialog::PaperWalletDialog(QWidget *parent) :
 
     ui->buttonBox->addButton(tr("Close"), QDialogButtonBox::RejectRole);
 
-    // Begin with a small bold monospace font for the textual version of the key and address.
-    QFont font("Monospace");
-    font.setBold(true);
-    font.setStyleHint(QFont::TypeWriter);
-    font.setPixelSize(1);
-    ui->addressText->setFont(font);
-    ui->privateKeyText->setFont(font);
-    ui->addressText->setAlignment(Qt::AlignJustify);
-    ui->privateKeyText->setAlignment(Qt::AlignJustify);
-    setFixedSize(size());
+    // begin with a small bold monospace font for texts of the key and the address
+    QFont font( "Monospace" ) ;
+    font.setBold( true ) ;
+    font.setStyleHint( QFont::TypeWriter ) ;
+    font.setPixelSize( 6 );
+    ui->addressText->setFont( font ) ;
+    ui->privateKeyText->setFont( font ) ;
+    ui->addressText->setAlignment( Qt::AlignJustify ) ;
+    ui->privateKeyText->setAlignment( Qt::AlignJustify ) ;
+    setFixedSize( size() ) ;
 }
 
 void PaperWalletDialog::setNetworkModel( NetworkModel * network )
@@ -287,56 +288,47 @@ void PaperWalletDialog::on_getNewAddress_clicked()
     }
     QRcode_free(code);
 
-    // Populate the QR Codes
-    ui->addressQRCode->setPixmap(QPixmap::fromImage(myImage).scaled(ui->addressQRCode->width(), ui->addressQRCode->height()));
-    ui->privateKeyQRCode->setPixmap(QPixmap::fromImage(myImagePriv).scaled(ui->privateKeyQRCode->width(), ui->privateKeyQRCode->height()));
+    // Populate QR codes
+    ui->addressQRCode->setPixmap( QPixmap::fromImage( myImage ).scaled( ui->addressQRCode->width(), ui->addressQRCode->height() ) ) ;
+    ui->privateKeyQRCode->setPixmap( QPixmap::fromImage( myImagePriv ).scaled( ui->privateKeyQRCode->width(), ui->privateKeyQRCode->height() ) ) ;
 #endif
 
-    // Populate the Texts
-    ui->addressText->setText(myAddress.c_str());
-    ui->privateKeyText->setText(tr(myPrivKey.c_str()));
+    // Populate texts
+    ui->addressText->setText( myAddress.c_str() ) ;
+    ui->privateKeyText->setText( myPrivKey.c_str() ) ;
+    ui->publicKey->setText( myPubKey.c_str() ) ;
 
-    ui->publicKey->setHtml(myPubKey.c_str());
+    // Update the fonts to fit the height of the wallet
+    // This should only really trigger the first time since the font size persists
+    double paperHeight = static_cast< double >( ui->paperTemplate->height() ) ;
+    const double maxTextWidth = paperHeight * 0.96 ;
+    const double minTextWidth = paperHeight * 0.88 ;
+    const int pixelSizeStep = 1 ;
 
-    // Update the fonts to fit the height of the wallet.
-    // This should only really trigger the first time since the font size persists.
-    double paperHeight = (double)ui->paperTemplate->height();
-    double maxTextWidth = paperHeight * 0.99;
-    double minTextWidth = paperHeight * 0.95;
-    int pixelSizeStep = 1;
-
-    int addressTextLength = ui->addressText->fontMetrics().boundingRect(ui->addressText->text()).width();
-    QFont font = ui->addressText->font();
-    for (int i = 0; i < PAPER_WALLET_READJUST_LIMIT; i++) {
-        if (addressTextLength < minTextWidth) {
-            font.setPixelSize(font.pixelSize() + pixelSizeStep);
-            ui->addressText->setFont(font);
-            addressTextLength = ui->addressText->fontMetrics().boundingRect(ui->addressText->text()).width();
-        } else {
-            break;
-        }
+    int addressTextLength = ui->addressText->fontMetrics().boundingRect( ui->addressText->text() ).width() ;
+    QFont font = ui->addressText->font() ;
+    while ( addressTextLength < minTextWidth ) {
+        font.setPixelSize( font.pixelSize() + pixelSizeStep ) ;
+        ui->addressText->setFont( font ) ;
+        addressTextLength = ui->addressText->fontMetrics().boundingRect( ui->addressText->text() ).width() ;
     }
-    if (addressTextLength > maxTextWidth) {
-        font.setPixelSize(font.pixelSize() - pixelSizeStep);
-        ui->addressText->setFont(font);
-        addressTextLength = ui->addressText->fontMetrics().boundingRect(ui->addressText->text()).width();
+    while ( addressTextLength > maxTextWidth && font.pixelSize() > 6 ) {
+        font.setPixelSize( font.pixelSize() - pixelSizeStep ) ;
+        ui->addressText->setFont( font ) ;
+        addressTextLength = ui->addressText->fontMetrics().boundingRect( ui->addressText->text() ).width() ;
     }
 
-    int privateKeyTextLength = ui->privateKeyText->fontMetrics().boundingRect(ui->privateKeyText->text()).width();
-    font = ui->privateKeyText->font();
-    for (int i = 0; i < PAPER_WALLET_READJUST_LIMIT; i++) {
-        if (privateKeyTextLength < minTextWidth) {
-            font.setPixelSize(font.pixelSize() + pixelSizeStep);
-            ui->privateKeyText->setFont(font);
-            privateKeyTextLength = ui->privateKeyText->fontMetrics().boundingRect(ui->privateKeyText->text()).width();
-        } else {
-            break;
-        }
+    int privateKeyTextLength = ui->privateKeyText->fontMetrics().boundingRect( ui->privateKeyText->text() ).width() ;
+    font = ui->privateKeyText->font() ;
+    while ( privateKeyTextLength < minTextWidth ) {
+        font.setPixelSize( font.pixelSize() + pixelSizeStep ) ;
+        ui->privateKeyText->setFont( font ) ;
+        privateKeyTextLength = ui->privateKeyText->fontMetrics().boundingRect( ui->privateKeyText->text() ).width() ;
     }
-    if (privateKeyTextLength > maxTextWidth) {
-        font.setPixelSize(font.pixelSize() - pixelSizeStep);
-        ui->privateKeyText->setFont(font);
-        privateKeyTextLength = ui->privateKeyText->fontMetrics().boundingRect(ui->privateKeyText->text()).width();
+    while ( privateKeyTextLength > maxTextWidth && font.pixelSize() > 6 ) {
+        font.setPixelSize( font.pixelSize() - pixelSizeStep ) ;
+        ui->privateKeyText->setFont( font ) ;
+        privateKeyTextLength = ui->privateKeyText->fontMetrics().boundingRect( ui->privateKeyText->text() ).width() ;
     }
 }
 
@@ -418,29 +410,26 @@ void PaperWalletDialog::on_printButton_clicked()
 
         tx = new WalletModelTransaction(recipients);
 
-        WalletModel::SendCoinsReturn prepareStatus;
-        if ( ! walletModel->getOptionsModel()->getHideCoinControlFeatures() )
-            prepareStatus = walletModel->prepareTransaction( *tx, CoinControlDialog::coinControl );
-        else
-            prepareStatus = walletModel->prepareTransaction( *tx ) ;
+        WalletModel::SendCoinsReturn prepareStatus = walletModel->prepareTransaction( *tx, CoinControlDialog::coinControl );
+        /* prepareStatus = walletModel->prepareTransaction( *tx ) ; */
 
-        if (prepareStatus.status == WalletModel::InvalidAddress) {
-            QMessageBox::critical(this, tr("Send Coins"), tr("The recipient address is not valid, please recheck."), QMessageBox::Ok, QMessageBox::Ok);
-        } else if (prepareStatus.status == WalletModel::InvalidAmount) {
-            QMessageBox::critical(this, tr("Send Coins"), tr("The amount to pay must be larger than 0"), QMessageBox::Ok, QMessageBox::Ok);
-        } else if (prepareStatus.status == WalletModel::AmountExceedsBalance) {
-            QMessageBox::critical(this, tr("Send Coins"), tr("The amount exceeds your balance."), QMessageBox::Ok, QMessageBox::Ok);
-        } else if (prepareStatus.status == WalletModel::AmountWithFeeExceedsBalance) {
-            QMessageBox::critical(this, tr("Send Coins"), tr("The total exceeds your balance when the transaction fee is included"), QMessageBox::Ok, QMessageBox::Ok);
-        } else if (prepareStatus.status == WalletModel::DuplicateAddress) {
-            QMessageBox::critical(this, tr("Send Coins"), tr("Duplicate address found, can only send to each address once per send operation."), QMessageBox::Ok, QMessageBox::Ok);
-        } else if (prepareStatus.status == WalletModel::TransactionCreationFailed) {
-            QMessageBox::critical(this, tr("Send Coins"), tr("Transaction creation failed!"), QMessageBox::Ok, QMessageBox::Ok);
-        } else if (prepareStatus.status == WalletModel::OK) {
-            break;
+        if ( prepareStatus.status == WalletModel::InvalidAmount ) {
+            QMessageBox::critical( this, tr("Send Coins"), "Amount ≤ 0", QMessageBox::Ok, QMessageBox::Ok ) ;
+        } else if ( prepareStatus.status == WalletModel::InvalidAddress ) {
+            QMessageBox::critical( this, tr("Send Coins"), tr("The recipient address is not valid, please recheck"), QMessageBox::Ok, QMessageBox::Ok ) ;
+        } else if ( prepareStatus.status == WalletModel::AmountExceedsBalance ) {
+            QMessageBox::critical( this, tr("Send Coins"), tr("The amount exceeds your balance"), QMessageBox::Ok, QMessageBox::Ok ) ;
+        } else if ( prepareStatus.status == WalletModel::AmountWithFeeExceedsBalance ) {
+            QMessageBox::critical( this, tr("Send Coins"), tr("The total exceeds your balance when the transaction fee is included"), QMessageBox::Ok, QMessageBox::Ok ) ;
+        } else if ( prepareStatus.status == WalletModel::DuplicateAddress ) {
+            QMessageBox::critical( this, tr("Send Coins"), tr("Duplicate address found, can only send to each address once per transaction"), QMessageBox::Ok, QMessageBox::Ok ) ;
+        } else if ( prepareStatus.status == WalletModel::TransactionCreationFailed ) {
+            QMessageBox::critical( this, tr("Send Coins"), tr("Transaction creation failed"), QMessageBox::Ok, QMessageBox::Ok ) ;
+        } else if ( prepareStatus.status == WalletModel::OK ) {
+            break ;
         } else {
-            delete tx;
-            return;
+            delete tx ;
+            return ;
         }
     }
 

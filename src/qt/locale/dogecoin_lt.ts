@@ -265,14 +265,6 @@
         <translation>(ne)pasirinkti viską</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>Medžio režimas</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Sąrašo režimas</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Suma</translation>
     </message>
@@ -296,12 +288,12 @@
         <translation>Keisti adresą</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>Ž&amp;ymė</translation>
+        <source>Label</source>
+        <translation>Žymė</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Adresas</translation>
+        <source>Address</source>
+        <translation>Adresas</translation>
     </message>
     </context>
 <context>
@@ -614,15 +606,15 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
+        <source>Amount:</source>
         <translation>Suma:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>Ž&amp;ymė:</translation>
+        <source>Label:</source>
+        <translation>Žymė:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
+        <source>Message:</source>
         <translation>Žinutė:</translation>
     </message>
     <message>
@@ -680,24 +672,16 @@
         <translation>Sandorio mokestis:</translation>
     </message>
     <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Siųsti keliems gavėjams vienu metu</translation>
-    </message>
-    <message>
         <source>Add &amp;Recipient</source>
         <translation>&amp;A Pridėti gavėją</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Išvalyti &amp;viską</translation>
+        <source>Clear All</source>
+        <translation>Išvalyti viską</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Balansas:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Patvirtinti siuntimo veiksmą</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -707,28 +691,20 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>Su&amp;ma:</translation>
+        <source>Amount:</source>
+        <translation>Suma:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>Mokėti &amp;gavėjui:</translation>
+        <source>Pay To:</source>
+        <translation>Mokėti gavėjui:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>Ž&amp;ymė:</translation>
-    </message>
-    <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
+        <source>Label:</source>
+        <translation>Žymė:</translation>
     </message>
     <message>
         <source>Paste address from clipboard</source>
         <translation>Įvesti adresą iš mainų atminties</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Message:</source>
@@ -752,16 +728,8 @@
         <translation>&amp;Pasirašyti žinutę</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Įvesti adresą iš mainų atminties</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -776,8 +744,8 @@
         <translation>Registruoti praneši&amp;mą</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Išvalyti &amp;viską</translation>
+        <source>Clear All</source>
+        <translation>Išvalyti viską</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

@@ -362,10 +362,6 @@
     </context>
 <context>
     <name>CoinControlDialog</name>
-    <message>
-        <source>(no label)</source>
-        <translation>(無標記)</translation>
-    </message>
     </context>
 <context>
     <name>EditAddressDialog</name>

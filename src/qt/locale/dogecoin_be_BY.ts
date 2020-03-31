@@ -463,14 +463,6 @@
         <translation>(не)выбраць ўсё</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>Рэжым дрэва</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Рэжым спіса</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Колькасць</translation>
     </message>
@@ -542,10 +534,6 @@
         <source>no</source>
         <translation>не</translation>
     </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(непазначаны)</translation>
-    </message>
     </context>
 <context>
     <name>EditAddressDialog</name>
@@ -554,11 +542,11 @@
         <translation>Рэдагаваць Адрас</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
+        <source>Label</source>
         <translation>Метка</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
+        <source>Address</source>
         <translation>Адрас</translation>
     </message>
     <message>
@@ -712,11 +700,11 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;Колькасць:</translation>
+        <source>Amount:</source>
+        <translation>Колькасць:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
+        <source>Label:</source>
         <translation>Метка:</translation>
     </message>
     <message>
@@ -798,16 +786,8 @@
         <translation>Пасля камісіі:</translation>
     </message>
     <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Даслаць адразу некалькім атрымальнікам</translation>
-    </message>
-    <message>
         <source>Balance:</source>
         <translation>Баланс:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Пацвердзіць дасыланне</translation>
     </message>
     <message>
         <source>Copy quantity</source>
@@ -834,10 +814,6 @@
         <translation>Пацвердзіць дасыланне манет</translation>
     </message>
     <message>
-        <source>The amount to pay must be larger than 0.</source>
-        <translation>Велічыня плацяжу мае быць больш за 0.</translation>
-    </message>
-    <message>
         <source>(no label)</source>
         <translation>(непазначаны)</translation>
     </message>
@@ -845,28 +821,20 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
+        <source>Amount:</source>
         <translation>Колькасць:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
+        <source>Pay To:</source>
         <translation>Заплаціць да:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
+        <source>Label:</source>
         <translation>Метка:</translation>
-    </message>
-    <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
     </message>
     <message>
         <source>Paste address from clipboard</source>
         <translation>Уставіць адрас з буферу абмена</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Message:</source>
@@ -894,16 +862,8 @@
 <context>
     <name>SignVerifyMessageDialog</name>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Уставіць адрас з буферу абмена</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
 </context>
 <context>

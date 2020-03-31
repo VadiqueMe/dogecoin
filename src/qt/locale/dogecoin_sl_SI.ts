@@ -343,14 +343,6 @@
         <translation>izberi vse/nič</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>Drevesni prikaz</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Seznam</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Znesek</translation>
     </message>
@@ -382,12 +374,12 @@
         <translation>Uredi naslov</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Oznaka</translation>
+        <source>Label</source>
+        <translation>Oznaka</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Naslov</translation>
+        <source>Address</source>
+        <translation>Naslov</translation>
     </message>
     </context>
 <context>
@@ -590,10 +582,6 @@
     <message>
         <source>W&amp;allet</source>
         <translation>&amp;Denarnica</translation>
-    </message>
-    <message>
-        <source>Hide coin &amp;control features</source>
-        <translation>Skrivanje upravljanje kovancev</translation>
     </message>
     <message>
         <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
@@ -984,20 +972,20 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;Znesek:</translation>
+        <source>Amount:</source>
+        <translation>Znesek:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Oznaka:</translation>
+        <source>Label:</source>
+        <translation>Oznaka:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;Sporočilo:</translation>
+        <source>Message:</source>
+        <translation>Sporočilo:</translation>
     </message>
     <message>
-        <source>R&amp;euse an existing receiving address (not recommended)</source>
-        <translation>P&amp;onovno uporabite obstoječ naslov za prejemanje. (Ni priporočeno.)</translation>
+        <source>Reuse an existing receiving address (not recommended)</source>
+        <translation>Ponovno uporabite obstoječ naslov za prejemanje. (Ni priporočeno.)</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
@@ -1094,8 +1082,8 @@
         <translation>Vračilo:</translation>
     </message>
     <message>
-        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
-        <translation>Če to vključite, nato pa vnesete neveljaven naslov, ali pa pustite polje prazno, bo vrnjen drobiž poslan na novo ustvarjen naslov.</translation>
+        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address</source>
+        <translation>Če to vključite, nato pa vnesete neveljaven naslov, ali pa pustite polje prazno, bo vrnjen drobiž poslan na novo ustvarjen naslov</translation>
     </message>
     <message>
         <source>Custom change address</source>
@@ -1106,64 +1094,24 @@
         <translation>Provizija:</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>Izberi ...</translation>
-    </message>
-    <message>
-        <source>collapse fee-settings</source>
-        <translation>Skrije nastavitve provizije</translation>
-    </message>
-    <message>
-        <source>per kilobyte</source>
-        <translation>na KiB</translation>
-    </message>
-    <message>
-        <source>If the custom fee is set to 1000 koinu and the transaction is only 250 bytes, then "per kilobyte" only pays 250 koinu in fee, while "total at least" pays 1000 koinu. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation>Če je nastavitev zneska provizije po meri enaka 1000 koinujev, transakcija pa je velika samo 250 bajtov, je obračunani znesek provizije pri nastavitvi "za KiB" samo 250 koinujev, medtem ko je pri nastavitvi "skupno vsaj" ta znesek 1000 koinujev. Za transakcije, večje od 1 KiB, se končni znesek pri obeh nastavitvah obračuna na KiB.</translation>
+        <source>Show</source>
+        <translation>Prikaži</translation>
     </message>
     <message>
         <source>Hide</source>
         <translation>Skrij</translation>
     </message>
     <message>
-        <source>total at least</source>
-        <translation>skupno vsaj</translation>
-    </message>
-    <message>
-        <source>Recommended:</source>
-        <translation>Priporočena:</translation>
-    </message>
-    <message>
-        <source>Custom:</source>
-        <translation>Po meri:</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>navadno</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>hitro</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Pošlji več prejemnikom hkrati</translation>
-    </message>
-    <message>
         <source>Add &amp;Recipient</source>
         <translation>Dodaj &amp;prejemnika</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Počisti &amp;vse </translation>
+        <source>Clear All</source>
+        <translation>Počisti vse</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Stanje:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Potrdi pošiljanje</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -1173,16 +1121,16 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>&amp;Znesek:</translation>
+        <source>Amount:</source>
+        <translation>Znesek:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>Prejemnik &amp;plačila:</translation>
+        <source>Pay To:</source>
+        <translation>Prejemnik plačila:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Oznaka:</translation>
+        <source>Label:</source>
+        <translation>Oznaka:</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -1193,48 +1141,36 @@
         <translation>Naslov Dogecoin, na katerega bo plačilo poslano</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Prilepite naslov iz odložišča</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Remove this entry</source>
         <translation>Izpraznite vsebino polja</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less dogecoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation>Znesek plačila bo zmanjšan za znesek provizije. Prejemnik bo prejel manjše število kovancev, kot je bil vnešeni znesek. Če je prejemnikov več, bo provizija med njih enakomerno porazdeljena.</translation>
-    </message>
-    <message>
-        <source>S&amp;ubtract fee from amount</source>
-        <translation>O&amp;dštej provizijo od zneska</translation>
+        <source>Subtract fee from amount</source>
+        <translation>Odštej provizijo od zneska</translation>
     </message>
     <message>
         <source>Message:</source>
         <translation>Sporočilo:</translation>
     </message>
     <message>
-        <source>This is an unauthenticated payment request.</source>
-        <translation>Zahtevek za plačilo je neoverjen.</translation>
+        <source>This is an unauthenticated payment request</source>
+        <translation>Zahtevek za plačilo je neoverjen</translation>
     </message>
     <message>
-        <source>This is an authenticated payment request.</source>
-        <translation>Zahtevek za plačilo je overjen.</translation>
+        <source>This is an authenticated payment request</source>
+        <translation>Zahtevek za plačilo je overjen</translation>
     </message>
     <message>
         <source>Enter a label for this address to add it to the list of used addresses</source>
         <translation>Če vnesete oznako za zgornji naslov, se bo skupaj z naslovom shranila v imenk že uporabljenih naslovov</translation>
     </message>
     <message>
-        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Dogecoin network.</source>
-        <translation>Sporočilo, ki ste ga pripeli na URI tipa dogecoin:. Shranjeno bo skupaj s podatki o transakciji. Opomba: Sporočilo ne bo poslano preko omrežja Dogecoin.</translation>
+        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
+        <translation>Sporočilo, ki ste ga pripeli na dogecoin: URI. Shranjeno bo skupaj s podatki o transakciji. Sporočilo ne bo poslano preko omrežja</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -1278,16 +1214,8 @@
         <translation>Izberite enega od že uporabljenih naslovov</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Prilepite naslov iz odložišča</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -1314,8 +1242,8 @@
         <translation>Počisti vsa polja za vnos v oknu za podpisovanje</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Počisti &amp;vse </translation>
+        <source>Clear All</source>
+        <translation>Počisti vse</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

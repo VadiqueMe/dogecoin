@@ -191,7 +191,7 @@
     </message>
     <message>
         <source>&amp;Show / Hide</source>
-        <translation>Ẩn / H&amp;iện</translation>
+        <translation>H&amp;iện / Ẩn</translation>
     </message>
     <message>
         <source>Show or hide the main Window</source>
@@ -351,14 +351,6 @@
         <translation>(bỏ)chọn tất cả</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>Chế độ cây</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Chế độ danh sách</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Lượng</translation>
     </message>
@@ -382,11 +374,11 @@
         <translation>Thay đổi địa chỉ</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
+        <source>Label</source>
         <translation>Nhãn</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
+        <source>Address</source>
         <translation>Địa chỉ</translation>
     </message>
     </context>
@@ -652,16 +644,16 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
+        <source>Amount:</source>
         <translation>Lượng:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Nhãn</translation>
+        <source>Label:</source>
+        <translation>Nhãn:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;Tin nhắn:</translation>
+        <source>Message:</source>
+        <translation>Tin nhắn:</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
@@ -794,52 +786,24 @@
         <translation>Phí giao dịch</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>Chọn...</translation>
-    </message>
-    <message>
-        <source>collapse fee-settings</source>
-        <translation>Thu gọn fee-settings</translation>
-    </message>
-    <message>
-        <source>per kilobyte</source>
-        <translation>trên KB</translation>
+        <source>Show</source>
+        <translation>Hiển</translation>
     </message>
     <message>
         <source>Hide</source>
         <translation>Ẩn</translation>
     </message>
     <message>
-        <source>total at least</source>
-        <translation>Tổng cộng ít nhất</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>Bình thường</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>Nhanh</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Gửi đến nhiều người nhận trong một lần</translation>
-    </message>
-    <message>
         <source>Add &amp;Recipient</source>
         <translation>Thêm &amp;Người nhận</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Xóa &amp;Tất cả</translation>
+        <source>Clear All</source>
+        <translation>Xóa Tất cả</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Tài khoản</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Xác nhận sự gửi</translation>
     </message>
     <message>
         <source>%1 to %2</source>
@@ -861,12 +825,12 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
+        <source>Amount:</source>
         <translation>Lượng:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Nhãn</translation>
+        <source>Label:</source>
+        <translation>Nhãn:</translation>
     </message>
     </context>
 <context>
@@ -882,8 +846,8 @@
 <context>
     <name>SignVerifyMessageDialog</name>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Xóa &amp;Tất cả</translation>
+        <source>Clear All</source>
+        <translation>Xóa Tất cả</translation>
     </message>
     </context>
 <context>

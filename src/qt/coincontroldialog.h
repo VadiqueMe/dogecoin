@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -44,8 +45,8 @@ class CoinControlDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit CoinControlDialog(const PlatformStyle *platformStyle, QWidget *parent = 0);
-    ~CoinControlDialog();
+    explicit CoinControlDialog( const PlatformStyle * style, QWidget * parent = nullptr ) ;
+    ~CoinControlDialog() ;
 
     void setWalletModel( WalletModel * model ) ;
 
@@ -57,7 +58,7 @@ public:
     static bool fSubtractFeeFromAmount;
 
 private:
-    Ui::CoinControlDialog *ui;
+    Ui::CoinControlDialog * ui ;
     WalletModel * walletModel ;
     int sortColumn;
     Qt::SortOrder sortOrder;
@@ -77,8 +78,8 @@ private:
     {
         COLUMN_CHECKBOX = 0,
         COLUMN_AMOUNT,
-        COLUMN_LABEL,
         COLUMN_ADDRESS,
+        COLUMN_LABEL,
         COLUMN_DATE,
         COLUMN_CONFIRMATIONS,
         COLUMN_TXHASH,
@@ -100,13 +101,13 @@ private Q_SLOTS:
     void clipboardAfterFee();
     void clipboardBytes();
     void clipboardChange();
-    void radioTreeMode(bool);
-    void radioListMode(bool);
+    void toTreeView( bool ) ;
+    void toListView( bool ) ;
     void viewItemChanged(QTreeWidgetItem*, int);
     void headerSectionClicked(int);
     void buttonBoxClicked(QAbstractButton*);
-    void buttonSelectAllClicked();
-    void updateLabelLocked();
+    void selectAllClicked() ;
+    void updateLockedLabel() ;
 };
 
 #endif

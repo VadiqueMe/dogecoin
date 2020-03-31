@@ -551,14 +551,6 @@
         <translation>(de)selecteer alles</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>Boom modus</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Lijst modus</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Bedrag</translation>
     </message>
@@ -639,12 +631,8 @@
         <translation>nee</translation>
     </message>
     <message>
-        <source>(no label)</source>
-        <translation>(geen label)</translation>
-    </message>
-    <message>
-        <source>change from %1 (%2)</source>
-        <translation>wijzig van %1 (%2)</translation>
+        <source>change from %1</source>
+        <translation>wijzig van %1</translation>
     </message>
     <message>
         <source>(change)</source>
@@ -658,12 +646,12 @@
         <translation>Bewerk Adres</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Label</translation>
+        <source>Label</source>
+        <translation>Label</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Adres</translation>
+        <source>Address</source>
+        <translation>Adres</translation>
     </message>
     <message>
         <source>New receiving address</source>
@@ -968,10 +956,6 @@
         <translation>W&amp;allet</translation>
     </message>
     <message>
-        <source>Hide coin &amp;control features</source>
-        <translation>Coin &amp;control verbergen</translation>
-    </message>
-    <message>
         <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
         <translation>Indien het uitgeven van onbevestigd wisselgeld uitgeschakeld wordt dan kan het wisselgeld van een transactie niet worden gebruikt totdat de transactie ten minste een bevestiging heeft. Dit heeft ook invloed op de manier waarop uw saldo wordt berekend</translation>
     </message>
@@ -1210,56 +1194,56 @@
         <translation>Ongeldig betalingsadres %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid address or malformed URI parameters</source>
-        <translation>URI kan niet verwerkt worden! Dit kan het gevolg zijn van een ongeldig adres of misvormde URI parameters</translation>
+        <source>URI cannot be parsed. This can be caused by an invalid address or malformed URI parameters</source>
+        <translation>URI kan niet verwerkt worden. Dit kan het gevolg zijn van een ongeldig adres of misvormde URI parameters</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
         <translation>Betalingsverzoek bestandsafhandeling</translation>
     </message>
     <message>
-        <source>Payment request file cannot be read! This can be caused by an invalid payment request file.</source>
-        <translation>Betalingsverzoekbestand kan niet gelezen of verwerkt worden! Dit kan veroorzaakt worden door een ongeldig betalingsverzoekbestand.</translation>
+        <source>Payment request file cannot be read. This can be caused by an invalid payment request file</source>
+        <translation>Betalingsverzoekbestand kan niet gelezen of verwerkt worden. Dit kan veroorzaakt worden door een ongeldig betalingsverzoekbestand</translation>
     </message>
     <message>
         <source>Payment request rejected</source>
         <translation>Betalingsverzoek geweigerd</translation>
     </message>
     <message>
-        <source>Payment request network doesn't match client network.</source>
-        <translation>Betalingsaanvraagnetwerk komt niet overeen met klantennetwerk.</translation>
+        <source>Payment request network doesn't match the current network</source>
+        <translation>Betalingsaanvraagnetwerk komt niet overeen met het huidige netwerk</translation>
     </message>
     <message>
-        <source>Payment request expired.</source>
-        <translation>Betalingsverzoek verlopen.</translation>
+        <source>Payment request expired</source>
+        <translation>Betalingsverzoek verlopen</translation>
     </message>
     <message>
-        <source>Payment request is not initialized.</source>
-        <translation>Betalingsaanvraag is niet geïnitialiseerd.</translation>
+        <source>Payment request is not initialized</source>
+        <translation>Betalingsaanvraag is niet geïnitialiseerd</translation>
     </message>
     <message>
-        <source>Unverified payment requests to custom payment scripts are unsupported.</source>
-        <translation>Niet-geverifieerde betalingsverzoeken naar aangepaste betalingsscripts worden niet ondersteund.</translation>
+        <source>Unverified payment requests to custom payment scripts are not supported</source>
+        <translation>Niet-geverifieerde betalingsverzoeken naar aangepaste betalingsscripts worden niet ondersteund</translation>
     </message>
     <message>
-        <source>Invalid payment request.</source>
-        <translation>Ongeldig betalingsverzoek.</translation>
+        <source>Invalid payment request</source>
+        <translation>Ongeldig betalingsverzoek</translation>
     </message>
     <message>
         <source>Refund from %1</source>
         <translation>Restitutie van %1</translation>
     </message>
     <message>
-        <source>Payment request %1 is too large (%2 bytes, allowed %3 bytes).</source>
-        <translation>Betalingsverzoek %1 is te groot (%2 bytes, toegestaan ​​%3 bytes).</translation>
+        <source>Payment request %1 is too large (%2 bytes, allowed %3 bytes)</source>
+        <translation>Betalingsverzoek %1 is te groot (%2 bytes, toegestaan ​​%3 bytes)</translation>
     </message>
     <message>
         <source>Error communicating with %1: %2</source>
         <translation>Fout bij communiceren met %1: %2</translation>
     </message>
     <message>
-        <source>Payment request cannot be parsed!</source>
-        <translation>Betalingsverzoek kan niet worden verwerkt!</translation>
+        <source>Payment request cannot be parsed</source>
+        <translation>Betalingsverzoek kan niet worden verwerkt</translation>
     </message>
     <message>
         <source>Bad response from server %1</source>
@@ -1636,20 +1620,20 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;Bedrag</translation>
+        <source>Amount:</source>
+        <translation>Bedrag:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Label:</translation>
+        <source>Label:</source>
+        <translation>Label:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;Bericht</translation>
+        <source>Message:</source>
+        <translation>Bericht:</translation>
     </message>
     <message>
-        <source>R&amp;euse an existing receiving address (not recommended)</source>
-        <translation>H&amp;ergebruik en bestaand ontvangstadres (niet aanbevolen)</translation>
+        <source>Reuse an existing receiving address (not recommended)</source>
+        <translation>Hergebruik en bestaand ontvangstadres (niet aanbevolen)</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
@@ -1810,8 +1794,8 @@
         <translation>Wisselgeld:</translation>
     </message>
     <message>
-        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
-        <translation>Als dit is geactiveerd, maar het wisselgeldadres is leeg of ongeldig, dan wordt het wisselgeld verstuurd naar een nieuw gegenereerd adres.</translation>
+        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address</source>
+        <translation>Als dit is geactiveerd, maar het wisselgeldadres is leeg of ongeldig, dan wordt het wisselgeld verstuurd naar een nieuw gegenereerd adres</translation>
     </message>
     <message>
         <source>Custom change address</source>
@@ -1822,64 +1806,20 @@
         <translation>Transactiekosten:</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>Kies...</translation>
-    </message>
-    <message>
-        <source>collapse fee-settings</source>
-        <translation>verberg kosteninstellingen</translation>
-    </message>
-    <message>
-        <source>per kilobyte</source>
-        <translation>per kilobyte</translation>
-    </message>
-    <message>
-        <source>If the custom fee is set to 1000 koinu and the transaction is only 250 bytes, then "per kilobyte" only pays 250 koinu in fee, while "total at least" pays 1000 koinu. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation>Als de aangepaste toeslag is ingesteld op 1000 koinu en de transactie is maar 250 bytes, dan wordt bij "per kilobyte" 250 koinu aan toeslag berekend, terwijl er bij "totaal tenminste" 1000 koinu worden berekend. Voor transacties die groter zijn dan een kilobyte, wordt in beide gevallen per kilobyte de toeslag berekend.</translation>
-    </message>
-    <message>
         <source>Hide</source>
         <translation>Verbergen</translation>
-    </message>
-    <message>
-        <source>total at least</source>
-        <translation>totaal ten minste</translation>
-    </message>
-    <message>
-        <source>Recommended:</source>
-        <translation>Aanbevolen:</translation>
-    </message>
-    <message>
-        <source>Custom:</source>
-        <translation>Handmatig:</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>normaal</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>snel</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Verstuur in een keer aan verschillende ontvangers</translation>
     </message>
     <message>
         <source>Add &amp;Recipient</source>
         <translation>Voeg &amp;Ontvanger Toe</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Verwijder &amp;Alles</translation>
+        <source>Clear All</source>
+        <translation>Verwijder Alles</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Saldo:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Bevestig de verstuuractie</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -1934,27 +1874,23 @@
         <translation>Bevestig versturen munten</translation>
     </message>
     <message>
-        <source>The recipient address is not valid. Please recheck.</source>
-        <translation>Het adres van de ontvanger is niet geldig. Gelieve opnieuw te controleren.</translation>
+        <source>The recipient address is not valid, please recheck</source>
+        <translation>Het adres van de ontvanger is niet geldig, gelieve opnieuw te controleren</translation>
     </message>
     <message>
-        <source>The amount to pay must be larger than 0.</source>
-        <translation>Het ingevoerde bedrag moet groter zijn dan 0.</translation>
+        <source>The amount exceeds your balance</source>
+        <translation>Het bedrag is hoger dan uw huidige saldo</translation>
     </message>
     <message>
-        <source>The amount exceeds your balance.</source>
-        <translation>Het bedrag is hoger dan uw huidige saldo.</translation>
+        <source>The total exceeds your balance when the transaction fee is included</source>
+        <translation>Het totaal overschrijdt uw huidige saldo wanneer transactiekosten worden meegerekend</translation>
     </message>
     <message>
-        <source>The total exceeds your balance when the %1 transaction fee is included.</source>
-        <translation>Het totaal overschrijdt uw huidige saldo wanneer de %1 transactiekosten worden meegerekend.</translation>
+        <source>Duplicate address found, can only send to each address once per transaction</source>
+        <translation>Dubbel adres gevonden, adressen mogen maar één keer worden gebruikt worden</translation>
     </message>
     <message>
-        <source>Duplicate address found: addresses should only be used once each.</source>
-        <translation>Dubbel adres gevonden: adressen mogen maar één keer worden gebruikt worden.</translation>
-    </message>
-    <message>
-        <source>Transaction creation failed!</source>
+        <source>Transaction creation failed</source>
         <translation>Transactiecreatie mislukt</translation>
     </message>
     <message>
@@ -1962,12 +1898,12 @@
         <translation>De transactie werd afgewezen om de volgende reden: %1</translation>
     </message>
     <message>
-        <source>A fee higher than %1 is considered an absurdly high fee.</source>
-        <translation>Een vergoeding van meer dan %1 wordt beschouwd als een absurd hoge vergoeding.</translation>
+        <source>A fee higher than %1 is considered an absurdly high fee</source>
+        <translation>Een vergoeding van meer dan %1 wordt beschouwd als een absurd hoge vergoeding</translation>
     </message>
     <message>
-        <source>Payment request expired.</source>
-        <translation>Betalingsverzoek verlopen.</translation>
+        <source>Payment request expired</source>
+        <translation>Betalingsverzoek verlopen</translation>
     </message>
     <message numerus="yes">
         <source>%n block(s)</source>
@@ -1978,14 +1914,6 @@
         <translation><numerusform>Schatting is dat bevestiging begint over %n blok.</numerusform><numerusform>Schatting is dat bevestiging begint over %n blokken.</numerusform></translation>
     </message>
     <message>
-        <source>Warning: Invalid Dogecoin address</source>
-        <translation>Waarschuwing: Ongeldig Dogecoinadres</translation>
-    </message>
-    <message>
-        <source>Warning: Unknown change address</source>
-        <translation>Waarschuwing: Onbekend wisselgeldadres</translation>
-    </message>
-    <message>
         <source>Confirm custom change address</source>
         <translation>Bevestig aangepast wisselgeldadres</translation>
     </message>
@@ -1993,24 +1921,20 @@
         <source>The address you selected for change is not part of this wallet. Any or all funds in your wallet may be sent to this address. Are you sure?</source>
         <translation>Het wisselgeldadres dat u heeft geselecteerd maakt geen deel uit van deze portemonnee. Een deel of zelfs alle geld in uw portemonnee kan mogelijk naar dit adres worden verzonden. Weet je het zeker?</translation>
     </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(geen label)</translation>
-    </message>
 </context>
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>B&amp;edrag:</translation>
+        <source>Amount:</source>
+        <translation>Bedrag:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>Betaal &amp;Aan:</translation>
+        <source>Pay To:</source>
+        <translation>Betaal Aan:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Label:</translation>
+        <source>Label:</source>
+        <translation>Label:</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2021,48 +1945,36 @@
         <translation>Het Dogecoinadres om betaling aan te versturen</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Plak adres vanuit klembord</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Remove this entry</source>
         <translation>Verwijder deze toevoeging</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less dogecoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation>De transactiekosten zal worden afgetrokken van het bedrag dat verstuurd wordt. De ontvangers zullen minder dogecoins ontvangen dan ingevoerd is in het hoeveelheidsveld. Als er meerdere ontvangers geselecteerd zijn, dan worden de transactiekosten gelijk verdeeld.</translation>
-    </message>
-    <message>
-        <source>S&amp;ubtract fee from amount</source>
-        <translation>Trek de transactiekosten a&amp;f van het bedrag.</translation>
+        <source>Subtract fee from amount</source>
+        <translation>Trek de transactiekosten af van het bedrag</translation>
     </message>
     <message>
         <source>Message:</source>
         <translation>Bericht:</translation>
     </message>
     <message>
-        <source>This is an unauthenticated payment request.</source>
-        <translation>Dit is een niet-geverifieerd betalingsverzoek.</translation>
+        <source>This is an unauthenticated payment request</source>
+        <translation>Dit is een niet-geverifieerd betalingsverzoek</translation>
     </message>
     <message>
-        <source>This is an authenticated payment request.</source>
-        <translation>Dit is een geverifieerd betalingsverzoek.</translation>
+        <source>This is an authenticated payment request</source>
+        <translation>Dit is een geverifieerd betalingsverzoek</translation>
     </message>
     <message>
         <source>Enter a label for this address to add it to the list of used addresses</source>
         <translation>Vul een label voor dit adres in om het aan de lijst met gebruikte adressen toe te voegen</translation>
     </message>
     <message>
-        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Dogecoin network.</source>
-        <translation>Een bericht dat werd toegevoegd aan de dogecoin: URI welke wordt opgeslagen met de transactie ter referentie. Opmerking: Dit bericht zal niet worden verzonden over het Dogecoinnetwerk.</translation>
+        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
+        <translation>Een bericht dat werd toegevoegd aan de dogecoin: URI welke wordt opgeslagen met de transactie. Dit bericht zal niet worden verzonden over het netwerk</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -2118,16 +2030,8 @@
         <translation>Kies een eerder gebruikt adres</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Plak adres vanuit klembord</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -2154,8 +2058,8 @@
         <translation>Verwijder alles in de invulvelden</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Verwijder &amp;Alles</translation>
+        <source>Clear All</source>
+        <translation>Verwijder Alles</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

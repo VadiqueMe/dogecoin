@@ -219,7 +219,7 @@
     </message>
     <message>
         <source>&amp;Show / Hide</source>
-        <translation>&amp;Εμφάνισε/Κρύψε</translation>
+        <translation>&amp;Εμφάνισε / Κρύψε</translation>
     </message>
     <message>
         <source>Show or hide the main Window</source>
@@ -383,14 +383,6 @@
         <translation>(από)επιλογή όλων</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>Εμφάνιση τύπου δέντρο</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Λίστα εντολών</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Ποσό</translation>
     </message>
@@ -430,10 +422,6 @@
         <source>Copy transaction hash</source>
         <translation>Αντιγραφή ταυτότητας συναλλαγής</translation>
     </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(χωρίς ετικέτα)</translation>
-    </message>
     </context>
 <context>
     <name>EditAddressDialog</name>
@@ -442,12 +430,12 @@
         <translation>Επεξεργασία Διεύθυνσης</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Επιγραφή</translation>
+        <source>Label</source>
+        <translation>Επιγραφή</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Διεύθυνση</translation>
+        <source>Address</source>
+        <translation>Διεύθυνση</translation>
     </message>
     <message>
         <source>New receiving address</source>
@@ -642,10 +630,6 @@
     <message>
         <source>W&amp;allet</source>
         <translation>Π&amp;ορτοφόλι</translation>
-    </message>
-    <message>
-        <source>Hide coin &amp;control features</source>
-        <translation>Απόκρυψη επιλογών ελέγχου κερμάτων</translation>
     </message>
     <message>
         <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
@@ -1000,20 +984,20 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;Ποσό:</translation>
+        <source>Amount:</source>
+        <translation>Ποσό:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Επιγραφή</translation>
+        <source>Label:</source>
+        <translation>Επιγραφή:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;Μήνυμα:</translation>
+        <source>Message:</source>
+        <translation>Μήνυμα:</translation>
     </message>
     <message>
-        <source>R&amp;euse an existing receiving address (not recommended)</source>
-        <translation>Ε&amp;παναχρησιμοποίηση υπάρχουσας διεύθυνσης λήψης (δεν συνιστάται)</translation>
+        <source>Reuse an existing receiving address (not recommended)</source>
+        <translation>Επαναχρησιμοποίηση υπάρχουσας διεύθυνσης λήψης (δεν συνιστάται)</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -1126,8 +1110,8 @@
         <translation>Ρέστα:</translation>
     </message>
     <message>
-        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
-        <translation>Όταν ενεργό, αλλά η διεύθυνση ρέστων είναι κενή ή άκυρη, τα ρέστα θα σταλούν σε μία πρόσφατα δημιουργημένη διεύθυνση.</translation>
+        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address</source>
+        <translation>Όταν ενεργό, αλλά η διεύθυνση ρέστων είναι κενή ή άκυρη, τα ρέστα θα σταλούν σε μία πρόσφατα δημιουργημένη διεύθυνση</translation>
     </message>
     <message>
         <source>Custom change address</source>
@@ -1138,56 +1122,24 @@
         <translation>Τέλος συναλλαγής:</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>Επιλογή...</translation>
-    </message>
-    <message>
-        <source>per kilobyte</source>
-        <translation>ανά kilobyte</translation>
+        <source>Show</source>
+        <translation>Εμφάνίζω</translation>
     </message>
     <message>
         <source>Hide</source>
         <translation>Απόκρυψη</translation>
     </message>
     <message>
-        <source>total at least</source>
-        <translation>συνολικά τουλάχιστον</translation>
-    </message>
-    <message>
-        <source>Recommended:</source>
-        <translation>Προτεινόμενο: </translation>
-    </message>
-    <message>
-        <source>Custom:</source>
-        <translation>Προσαρμογή:</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>κανονικό</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>Γρήγορο</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Αποστολή σε πολλούς αποδέκτες ταυτόχρονα</translation>
-    </message>
-    <message>
         <source>Add &amp;Recipient</source>
         <translation>&amp;Προσθήκη αποδέκτη</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Καθαρισμός &amp;Όλων</translation>
+        <source>Clear All</source>
+        <translation>Καθαρισμός Όλων</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Υπόλοιπο:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Επιβεβαίωση αποστολής</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -1205,16 +1157,16 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>&amp;Ποσό:</translation>
+        <source>Amount:</source>
+        <translation>Ποσό:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>Πληρωμή &amp;σε:</translation>
+        <source>Pay To:</source>
+        <translation>Πληρωμή σε:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Επιγραφή</translation>
+        <source>Label:</source>
+        <translation>Επιγραφή</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -1225,16 +1177,8 @@
         <translation>Η διεύθυνση Dogecoin που θα σταλεί η πληρωμή</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Επικόλληση διεύθυνσης από το βιβλίο διευθύνσεων</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Remove this entry</source>
@@ -1286,16 +1230,8 @@
         <translation>Επιλογή διεύθυνσης που έχει ήδη χρησιμοποιηθεί</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Επικόλληση διεύθυνσης από το βιβλίο διευθύνσεων</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -1322,8 +1258,8 @@
         <translation>Επαναφορά όλων των πεδίων μήνυματος</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Καθαρισμός &amp;Όλων</translation>
+        <source>Clear All</source>
+        <translation>Καθαρισμός Όλων</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

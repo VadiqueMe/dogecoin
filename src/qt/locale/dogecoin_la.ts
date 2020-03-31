@@ -240,12 +240,12 @@
         <translation>Muta Inscriptionem</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Titulus</translation>
+        <source>Label</source>
+        <translation>Titulus</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Inscriptio</translation>
+        <source>Address</source>
+        <translation>Inscriptio</translation>
     </message>
     </context>
 <context>
@@ -486,15 +486,15 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
+        <source>Amount:</source>
         <translation>Quantitas:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Titulus:</translation>
+        <source>Label:</source>
+        <translation>Titulus:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
+        <source>Message:</source>
         <translation>Nuntius:</translation>
     </message>
     <message>
@@ -524,24 +524,16 @@
         <translation>Transactionis merces:</translation>
     </message>
     <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Mitte pluribus accipientibus simul</translation>
-    </message>
-    <message>
         <source>Add &amp;Recipient</source>
         <translation>Adde &amp;Accipientem</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Vacuefac &amp;Omnia</translation>
+        <source>Clear All</source>
+        <translation>Vacuefac Omnia</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Pendendum:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Confirma actionem mittendi</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -551,28 +543,20 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>&amp;Quantitas:</translation>
+        <source>Amount:</source>
+        <translation>Quantitas:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>Pensa &amp;Ad:</translation>
+        <source>Pay To:</source>
+        <translation>Pensa Ad:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Titulus:</translation>
-    </message>
-    <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
+        <source>Label:</source>
+        <translation>Titulus:</translation>
     </message>
     <message>
         <source>Paste address from clipboard</source>
         <translation>Glutina inscriptionem ex latibulo</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Message:</source>
@@ -600,16 +584,8 @@
         <translation>&amp;Signa Nuntium</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Glutina inscriptionem ex latibulo</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -636,8 +612,8 @@
         <translation>Reconstitue omnes campos signandi nuntii</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Vacuefac &amp;Omnia</translation>
+        <source>Clear All</source>
+        <translation>Vacuefac Omnia</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

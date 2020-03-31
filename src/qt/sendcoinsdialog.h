@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -15,11 +16,12 @@
 class NetworkModel ;
 class OptionsModel ;
 class PlatformStyle;
-class SendCoinsEntry;
-class SendCoinsRecipient;
+class QButtonGroup ;
+class SendCoinsEntry ;
+class SendCoinsRecipient ;
 
 namespace Ui {
-    class SendCoinsDialog;
+    class SendCoinsDialog ;
 }
 
 QT_BEGIN_NAMESPACE
@@ -32,71 +34,68 @@ class SendCoinsDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit SendCoinsDialog(const PlatformStyle *platformStyle, QWidget *parent = 0);
-    ~SendCoinsDialog();
+    explicit SendCoinsDialog( const PlatformStyle * style, QWidget * parent = nullptr ) ;
+    ~SendCoinsDialog() ;
 
-    void setNetworkModel( NetworkModel * model ) ;
     void setWalletModel( WalletModel * model ) ;
 
-    /** Set up the tab chain manually, as Qt messes up the tab chain by default in some cases (issue https://bugreports.qt-project.org/browse/QTBUG-10907).
-     */
-    QWidget *setupTabChain(QWidget *prev);
+    /* Set up the tab chain manually, as Qt messes up the tab chain by default in some cases
+       ( issue https://bugreports.qt-project.org/browse/QTBUG-10907 ) */
+    QWidget * setupTabChain( QWidget * prev ) ;
 
-    void setAddress(const QString &address);
-    void pasteEntry(const SendCoinsRecipient &rv);
-    bool handlePaymentRequest(const SendCoinsRecipient &recipient);
+    void setAddress( const QString & address ) ;
+    void pasteEntry( const SendCoinsRecipient & rv ) ;
+    bool handlePaymentRequest( const SendCoinsRecipient & recipient ) ;
 
 public Q_SLOTS:
-    void clear();
-    void reject();
-    void accept();
-    SendCoinsEntry *addEntry();
-    void updateTabsAndLabels();
+    void clear() ;
+    void reject() ;
+    void accept() ;
+    SendCoinsEntry * addEntry() ;
+    void updateListOfEntries() ;
+    void updateTabsAndLabels() ;
     void setBalance(const CAmount& balance, const CAmount& unconfirmedBalance, const CAmount& immatureBalance,
                     const CAmount& watchOnlyBalance, const CAmount& watchUnconfBalance, const CAmount& watchImmatureBalance);
 
 private:
     Ui::SendCoinsDialog * ui ;
-    NetworkModel * networkModel ;
     WalletModel * walletModel ;
-    bool fNewRecipientAllowed;
-    bool fFeeMinimized;
-    const PlatformStyle *platformStyle;
+    const PlatformStyle * platformStyle ;
+    QButtonGroup * whichFeeChoice ;
+
+    bool fNewRecipientAllowed ;
 
     // Process WalletModel::SendCoinsReturn and generate a pair consisting
-    // of a message and message flags for use in Q_EMIT message().
-    // Additional parameter msgArg can be used via .arg(msgArg).
-    void processSendCoinsReturn(const WalletModel::SendCoinsReturn &sendCoinsReturn, const QString &msgArg = QString());
-    void minimizeFeeSection(bool fMinimize);
-    void updateFeeMinimizedLabel();
+    // of a message and message flags for use in Q_EMIT message()
+    void processSendCoinsReturn( const WalletModel::SendCoinsReturn & sendCoinsReturn ) ;
+
+    void minimizeCoinControl( bool fMinimize ) ;
 
 private Q_SLOTS:
     void on_sendButton_clicked();
-    void on_buttonChooseFee_clicked();
-    void on_buttonMinimizeFee_clicked();
-    void removeEntry(SendCoinsEntry* entry);
-    void updateDisplayUnit();
-    void coinControlFeatureChanged(bool);
-    void coinControlButtonClicked();
-    void coinControlChangeChecked(int);
-    void coinControlChangeEdited(const QString &);
-    void coinControlUpdateLabels();
-    void coinControlClipboardQuantity();
-    void coinControlClipboardAmount();
-    void coinControlClipboardFee();
-    void coinControlClipboardAfterFee();
-    void coinControlClipboardBytes();
-    void coinControlClipboardChange();
-    void setMinimumFee();
-    void updateFeeSectionControls();
-    void updateSmartFeeLabel();
-    void updateGlobalFeeVariables();
+    void showCoinControlClicked() ;
+    void hideCoinControlClicked() ;
+    void removeEntry( SendCoinsEntry * entry ) ;
+    void updateDisplayUnit() ;
+    void coinControlButtonClicked() ;
+    void coinControlChangeChecked( int ) ;
+    void coinControlChangeEdited( const QString & ) ;
+    void coinControlUpdateLabels() ;
+
+    void coinControlQuantityToClipboard() ;
+    void coinControlAmountToClipboard() ;
+    void coinControlFeeToClipboard() ;
+    void coinControlAfterFeeToClipboard() ;
+    void coinControlBytesToClipboard() ;
+    void coinControlChangeToClipboard() ;
+
+    void updateFeeSection();
+    void updateGlobalFeeVariable() ;
 
 Q_SIGNALS:
-    // Fired when a message should be reported to the user
-    void message(const QString &title, const QString &message, unsigned int style);
-};
-
+    // fired when there's a message to the user
+    void message( const QString & title, const QString & message, unsigned int style ) ;
+} ;
 
 
 class SendConfirmationDialog : public QMessageBox

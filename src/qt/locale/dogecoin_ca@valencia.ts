@@ -475,14 +475,6 @@
         <translation>(des)selecciona-ho tot</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>Mode arbre</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Mode llista</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Import</translation>
     </message>
@@ -563,12 +555,8 @@
         <translation>no</translation>
     </message>
     <message>
-        <source>(no label)</source>
-        <translation>(sense etiqueta)</translation>
-    </message>
-    <message>
-        <source>change from %1 (%2)</source>
-        <translation>canvia de %1 (%2)</translation>
+        <source>change from %1</source>
+        <translation>canvia de %1</translation>
     </message>
     <message>
         <source>(change)</source>
@@ -582,12 +570,12 @@
         <translation>Edita l'adreça</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Etiqueta</translation>
+        <source>Label</source>
+        <translation>Etiqueta</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Adreça</translation>
+        <source>Address</source>
+        <translation>Adreça</translation>
     </message>
     <message>
         <source>New receiving address</source>
@@ -812,10 +800,6 @@
         <translation>&amp;Moneder</translation>
     </message>
     <message>
-        <source>Hide coin &amp;control features</source>
-        <translation>Amagueu les funcions de &amp;control de les monedes</translation>
-    </message>
-    <message>
         <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
         <translation>Si inhabiliteu la despesa d'un canvi sense confirmar, el canvi d'una transacció no pot ser utilitzat fins que la transacció no tinga com a mínim una confirmació. Això també afecta com es calcula el vostre balanç</translation>
     </message>
@@ -1018,56 +1002,52 @@
         <translation>Adreça de pagament no vàlida %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid address or malformed URI parameters</source>
-        <translation>L'URI no pot ser analitzat! Això pot ser a causa d'una adreça de no vàlida o per paràmetres URI amb mal format</translation>
+        <source>URI cannot be parsed. This can be caused by an invalid address or malformed URI parameters</source>
+        <translation>L'URI no pot ser analitzat. Això pot ser a causa d'una adreça de no vàlida o per paràmetres URI amb mal format</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
         <translation>Gestió de fitxers de les sol·licituds de pagament</translation>
     </message>
     <message>
-        <source>Payment request file cannot be read! This can be caused by an invalid payment request file.</source>
-        <translation>No es pot llegir el fitxer de la sol·licitud de pagament. Això pot ser causat per un fitxer de sol·licitud de pagament no vàlid.</translation>
+        <source>Payment request file cannot be read. This can be caused by an invalid payment request file</source>
+        <translation>No es pot llegir el fitxer de la sol·licitud de pagament. Això pot ser causat per un fitxer de sol·licitud de pagament no vàlid</translation>
     </message>
     <message>
         <source>Payment request rejected</source>
         <translation>La sol·licitud de pagament s'ha rebutjat</translation>
     </message>
     <message>
-        <source>Payment request network doesn't match client network.</source>
-        <translation>La xarxa de la sol·licitud de pagament no coincideix amb la xarxa del client.</translation>
+        <source>Payment request network doesn't match the current network</source>
+        <translation>La xarxa de la sol·licitud de pagament no coincideix amb la xarxa actual</translation>
     </message>
     <message>
-        <source>Payment request expired.</source>
-        <translation>La sol·licitud de pagament ha vençut.</translation>
+        <source>Payment request expired</source>
+        <translation>La sol·licitud de pagament ha vençut</translation>
     </message>
     <message>
-        <source>Payment request is not initialized.</source>
-        <translation>La sol·licitud de pagament no està inicialitzada.</translation>
+        <source>Payment request is not initialized</source>
+        <translation>La sol·licitud de pagament no està inicialitzada</translation>
     </message>
     <message>
-        <source>Unverified payment requests to custom payment scripts are unsupported.</source>
-        <translation>No s'accepten sol·licituds de pagament no verificades a scripts de pagament personalitzats.</translation>
-    </message>
-    <message>
-        <source>Invalid payment request.</source>
-        <translation>Sol·licitud de pagament no vàlida.</translation>
+        <source>Invalid payment request</source>
+        <translation>Sol·licitud de pagament no vàlida</translation>
     </message>
     <message>
         <source>Refund from %1</source>
         <translation>Reemborsament de %1</translation>
     </message>
     <message>
-        <source>Payment request %1 is too large (%2 bytes, allowed %3 bytes).</source>
-        <translation>La sol·licitud de pagament %1 és massa gran (%2 bytes, permés %3 bytes).</translation>
+        <source>Payment request %1 is too large (%2 bytes, allowed %3 bytes)</source>
+        <translation>La sol·licitud de pagament %1 és massa gran (%2 bytes, permés %3 bytes)</translation>
     </message>
     <message>
         <source>Error communicating with %1: %2</source>
         <translation>Error en comunicar amb %1: %2</translation>
     </message>
     <message>
-        <source>Payment request cannot be parsed!</source>
-        <translation>No es pot analitzar la sol·licitud de pagament!</translation>
+        <source>Payment request cannot be parsed</source>
+        <translation>No es pot analitzar la sol·licitud de pagament</translation>
     </message>
     <message>
         <source>Bad response from server %1</source>
@@ -1304,20 +1284,20 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>Im&amp;port:</translation>
+        <source>Amount:</source>
+        <translation>Import:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Etiqueta:</translation>
+        <source>Label:</source>
+        <translation>Etiqueta:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;Missatge:</translation>
+        <source>Message:</source>
+        <translation>Missatge:</translation>
     </message>
     <message>
-        <source>R&amp;euse an existing receiving address (not recommended)</source>
-        <translation>R&amp;eutilitza una adreça de recepció anterior (no recomanat)</translation>
+        <source>Reuse an existing receiving address (not recommended)</source>
+        <translation>Reutilitza una adreça de recepció anterior (no recomanat)</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
@@ -1482,8 +1462,8 @@
         <translation>Canvi:</translation>
     </message>
     <message>
-        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
-        <translation>Si s'activa això, però l'adreça de canvi està buida o bé no és vàlida, el canvi s'enviarà a una adreça generada de nou.</translation>
+        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address</source>
+        <translation>Si s'activa això, però l'adreça de canvi està buida o bé no és vàlida, el canvi s'enviarà a una adreça generada de nou</translation>
     </message>
     <message>
         <source>Custom change address</source>
@@ -1494,64 +1474,20 @@
         <translation>Comissió de transacció</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>Tria...</translation>
-    </message>
-    <message>
-        <source>collapse fee-settings</source>
-        <translation>redueix els paràmetres de comissió</translation>
-    </message>
-    <message>
-        <source>per kilobyte</source>
-        <translation>per kilobyte</translation>
-    </message>
-    <message>
-        <source>If the custom fee is set to 1000 koinu and the transaction is only 250 bytes, then "per kilobyte" only pays 250 koinu in fee, while "total at least" pays 1000 koinu. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation>Si la comissió personalitzada es defineix a 1000 koinu i la transacció és de només 250 bytes, llavors «per kilobyte» només es paguen 250 koinu en una comissió, mentre que amb la de «total com a mínim» es pagarien 1000 koinu. Per a transaccions superiors al kilobyte, en tots dos casos es paga per kilobyte.</translation>
-    </message>
-    <message>
         <source>Hide</source>
         <translation>Amaga</translation>
-    </message>
-    <message>
-        <source>total at least</source>
-        <translation>total com a mínim</translation>
-    </message>
-    <message>
-        <source>Recommended:</source>
-        <translation>Recomanada:</translation>
-    </message>
-    <message>
-        <source>Custom:</source>
-        <translation>Personalitzada:</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>normal</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>ràpid</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Envia a múltiples destinataris al mateix temps</translation>
     </message>
     <message>
         <source>Add &amp;Recipient</source>
         <translation>Afig &amp;destinatari</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Neteja-ho &amp;tot</translation>
+        <source>Clear All</source>
+        <translation>Neteja-ho tot</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Balanç:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Confirma l'acció d'enviament</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -1602,63 +1538,47 @@
         <translation>Confirma l'enviament de monedes</translation>
     </message>
     <message>
-        <source>The recipient address is not valid. Please recheck.</source>
-        <translation>L'adreça de destinatari no és vàlida. Torneu-la a comprovar.</translation>
+        <source>The recipient address is not valid, please recheck</source>
+        <translation>L'adreça de destinatari no és vàlida, torneu-la a comprovar</translation>
     </message>
     <message>
-        <source>The amount to pay must be larger than 0.</source>
-        <translation>L'import a pagar ha de ser major que 0.</translation>
+        <source>The amount exceeds your balance</source>
+        <translation>L'import supera el vostre balanç</translation>
     </message>
     <message>
-        <source>The amount exceeds your balance.</source>
-        <translation>L'import supera el vostre balanç.</translation>
+        <source>The total exceeds your balance when the transaction fee is included</source>
+        <translation>El total excedeix el teu balanç quan s'afig la comissió a la transacció</translation>
     </message>
     <message>
-        <source>The total exceeds your balance when the %1 transaction fee is included.</source>
-        <translation>El total excedeix el teu balanç quan s'afig la comissió a la transacció %1.</translation>
+        <source>Duplicate address found, can only send to each address once per transaction</source>
+        <translation>S'ha trobat una adreça duplicada, cal utilitzar les adreces només un cop cada vegada</translation>
     </message>
     <message>
-        <source>Duplicate address found: addresses should only be used once each.</source>
-        <translation>S'ha trobat una adreça duplicada: cal utilitzar les adreces només un cop cada vegada.</translation>
+        <source>Transaction creation failed</source>
+        <translation>Ha fallat la creació de la transacció</translation>
     </message>
     <message>
-        <source>Transaction creation failed!</source>
-        <translation>Ha fallat la creació de la transacció!</translation>
+        <source>A fee higher than %1 is considered an absurdly high fee</source>
+        <translation>Una comissió superior a %1 es considera una comissió absurdament alta</translation>
     </message>
     <message>
-        <source>A fee higher than %1 is considered an absurdly high fee.</source>
-        <translation>Una comissió superior a %1 es considera una comissió absurdament alta.</translation>
-    </message>
-    <message>
-        <source>Payment request expired.</source>
-        <translation>La sol·licitud de pagament ha vençut.</translation>
-    </message>
-    <message>
-        <source>Warning: Invalid Dogecoin address</source>
-        <translation>Avís: adreça Dogecoin no vàlida</translation>
-    </message>
-    <message>
-        <source>Warning: Unknown change address</source>
-        <translation>Avís: adreça de canvi desconeguda</translation>
-    </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(sense etiqueta)</translation>
+        <source>Payment request expired</source>
+        <translation>La sol·licitud de pagament ha vençut</translation>
     </message>
 </context>
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>Q&amp;uantitat:</translation>
+        <source>Amount:</source>
+        <translation>Quantitat:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>Paga &amp;a:</translation>
+        <source>Pay To:</source>
+        <translation>Paga a:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Etiqueta:</translation>
+        <source>Label:</source>
+        <translation>Etiqueta:</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -1669,48 +1589,36 @@
         <translation>L'adreça Dogecoin on enviar el pagament</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Apega l'adreça del porta-retalls</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Remove this entry</source>
         <translation>Elimina esta entrada</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less dogecoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation>La comissió es deduirà de l'import que s'enviarà. El destinatari rebrà menys dogecoins que les que introduïu al camp d'import. Si se seleccionen múltiples destinataris, la comissió es dividirà per igual.</translation>
-    </message>
-    <message>
-        <source>S&amp;ubtract fee from amount</source>
-        <translation>S&amp;ubstreu la comissió de l'import</translation>
+        <source>Subtract fee from amount</source>
+        <translation>Substreu la comissió de l'import</translation>
     </message>
     <message>
         <source>Message:</source>
         <translation>Missatge:</translation>
     </message>
     <message>
-        <source>This is an unauthenticated payment request.</source>
-        <translation>Esta és una sol·licitud de pagament no autenticada.</translation>
+        <source>This is an unauthenticated payment request</source>
+        <translation>Esta és una sol·licitud de pagament no autenticada</translation>
     </message>
     <message>
-        <source>This is an authenticated payment request.</source>
-        <translation>Esta és una sol·licitud de pagament autenticada.</translation>
+        <source>This is an authenticated payment request</source>
+        <translation>Esta és una sol·licitud de pagament autenticada</translation>
     </message>
     <message>
         <source>Enter a label for this address to add it to the list of used addresses</source>
         <translation>Introduïu una etiqueta per a esta adreça per afegir-la a la llista d'adreces utilitzades</translation>
     </message>
     <message>
-        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Dogecoin network.</source>
-        <translation>Un missatge que s'ha adjuntat al dogecoin: URI que s'emmagatzemarà amb la transacció per a la vostra referència. Nota: el missatge no s'enviarà a través de la xarxa Dogecoin.</translation>
+        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
+        <translation>Un missatge que s'ha adjuntat al dogecoin: URI que s'emmagatzemarà amb la transacció. El missatge no s'enviarà a través de la xarxa</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -1762,16 +1670,8 @@
         <translation>Tria les adreces fetes servir amb anterioritat</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Apega l'adreça del porta-retalls</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -1798,8 +1698,8 @@
         <translation>Neteja tots els camps de clau</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Neteja-ho &amp;tot</translation>
+        <source>Clear All</source>
+        <translation>Neteja-ho tot</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

@@ -64,9 +64,6 @@
             <iconset resource="../dogecoin.qrc">
              <normaloff>:/icons/address-book</normaloff>:/icons/address-book</iconset>
            </property>
-           <property name="shortcut">
-            <string>Alt+A</string>
-           </property>
            <property name="autoDefault">
             <bool>false</bool>
            </property>
@@ -83,9 +80,6 @@
            <property name="icon">
             <iconset resource="../dogecoin.qrc">
              <normaloff>:/icons/editpaste</normaloff>:/icons/editpaste</iconset>
-           </property>
-           <property name="shortcut">
-            <string>Alt+P</string>
            </property>
            <property name="autoDefault">
             <bool>false</bool>
@@ -172,7 +166,7 @@
             <string>Reset all sign message fields</string>
            </property>
            <property name="text">
-            <string>Clear &amp;All</string>
+            <string>Clear All</string>
            </property>
            <property name="icon">
             <iconset resource="../dogecoin.qrc">
@@ -274,9 +268,6 @@
             <iconset resource="../dogecoin.qrc">
              <normaloff>:/icons/address-book</normaloff>:/icons/address-book</iconset>
            </property>
-           <property name="shortcut">
-            <string>Alt+A</string>
-           </property>
            <property name="autoDefault">
             <bool>false</bool>
            </property>
@@ -315,7 +306,7 @@
             <string>Reset all verify message fields</string>
            </property>
            <property name="text">
-            <string>Clear &amp;All</string>
+            <string>Clear All</string>
            </property>
            <property name="icon">
             <iconset resource="../dogecoin.qrc">

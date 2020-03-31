@@ -285,14 +285,6 @@
         <translation>ყველას მონიშვნა/(მოხსნა)</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>განტოტვილი</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>სია</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>თანხა</translation>
     </message>
@@ -316,12 +308,12 @@
         <translation>მისამართის შეცვლა</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>ნიშნუ&amp;ლი</translation>
+        <source>Label</source>
+        <translation>ნიშნული</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>მის&amp;ამართი</translation>
+        <source>Address</source>
+        <translation>მისამართი</translation>
     </message>
     </context>
 <context>
@@ -694,20 +686,20 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>თ&amp;ანხა:</translation>
+        <source>Amount:</source>
+        <translation>თანხა:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>ნიშნუ&amp;ლი:</translation>
+        <source>Label:</source>
+        <translation>ნიშნული:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;მესიჯი:</translation>
+        <source>Message:</source>
+        <translation>მესიჯი:</translation>
     </message>
     <message>
-        <source>R&amp;euse an existing receiving address (not recommended)</source>
-        <translation>ად&amp;რე გამოყენებული მიღების მისამართის გამოყენება (არ არის რეკომენდებული)</translation>
+        <source>Reuse an existing receiving address (not recommended)</source>
+        <translation>ადრე გამოყენებული მიღების მისამართის გამოყენება (არ არის რეკომენდებული)</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
@@ -804,8 +796,8 @@
         <translation>ხურდა:</translation>
     </message>
     <message>
-        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
-        <translation>ამის გააქტიურებისას თუ ხურდის მისამართი ცარიელია ან არასწორია, ხურდა გაიგზავნება ახლად გენერირებულ მისამართებზე.</translation>
+        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address</source>
+        <translation>ამის გააქტიურებისას თუ ხურდის მისამართი ცარიელია ან არასწორია, ხურდა გაიგზავნება ახლად გენერირებულ მისამართებზე</translation>
     </message>
     <message>
         <source>Custom change address</source>
@@ -816,24 +808,16 @@
         <translation>ტრანსაქციის საფასური - საკომისიო:</translation>
     </message>
     <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>გაგზავნა რამდენიმე რეციპიენტთან ერთდროულად</translation>
-    </message>
-    <message>
         <source>Add &amp;Recipient</source>
         <translation>&amp;რეციპიენტის დამატება</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>გ&amp;ასუფთავება</translation>
+        <source>Clear All</source>
+        <translation>გასუფთავება</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>ბალანსი:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>გაგზავნის დადასტურება</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -843,32 +827,24 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>&amp;რაოდენობა</translation>
+        <source>Amount:</source>
+        <translation>რაოდენობა</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>ადრესა&amp;ტი:</translation>
+        <source>Pay To:</source>
+        <translation>ადრესატი:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>ნიშნუ&amp;ლი:</translation>
+        <source>Label:</source>
+        <translation>ნიშნული:</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
         <translation>აირჩიეთ ადრე გამოყენებული მისამართი</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>მისამართის ჩასმა კლიპბორდიდან</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Remove this entry</source>
@@ -883,8 +859,8 @@
         <translation>შეიყვანეთ ამ მისამართის ნიშნული გამოყენებული მისამართების სიაში დასამატებლად</translation>
     </message>
     <message>
-        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Dogecoin network.</source>
-        <translation>მესიჯი, რომელიც თან ერთვის მონეტებს:  URI, რომელიც შეინახება ტრანსაქციასთან ერთად თქვენთვის. შენიშვნა: მესიჯი არ გაყვება გადახდას ბითქოინის ქსელში.</translation>
+        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
+        <translation>მესიჯი, რომელიც თან ერთვის dogecoin: URI, რომელიც შეინახება ტრანსაქციასთან ერთად. გზავნილი არ გაიგზავნება ქსელში</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -920,16 +896,8 @@
         <translation>აირჩიეთ ადრე გამოყენებული მისამართი</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>მისამართის ჩასმა კლიპბორდიდან</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -956,8 +924,8 @@
         <translation>ხელმოწერის ყველა ველის წაშლა</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>გ&amp;ასუფთავება</translation>
+        <source>Clear All</source>
+        <translation>გასუფთავება</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

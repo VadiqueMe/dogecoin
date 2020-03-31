@@ -260,20 +260,16 @@
         <source>Copy amount</source>
         <translation>Kopieer bedrag</translation>
     </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(geen etiket)</translation>
-    </message>
     </context>
 <context>
     <name>EditAddressDialog</name>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Etiket</translation>
+        <source>Label</source>
+        <translation>Etiket</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Adres</translation>
+        <source>Address</source>
+        <translation>Adres</translation>
     </message>
     <message>
         <source>New receiving address</source>
@@ -370,12 +366,12 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;Bedrag:</translation>
+        <source>Amount:</source>
+        <translation>Bedrag:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;Boodskap:</translation>
+        <source>Message:</source>
+        <translation>Boodskap:</translation>
     </message>
     <message>
         <source>Copy amount</source>
@@ -436,10 +432,6 @@
         <translation>Transaksie fooi:</translation>
     </message>
     <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Stuur aan vele ontvangers op eens</translation>
-    </message>
-    <message>
         <source>Balance:</source>
         <translation>Balans:</translation>
     </message>
@@ -467,8 +459,8 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>&amp;Bedrag:</translation>
+        <source>Amount:</source>
+        <translation>Bedrag:</translation>
     </message>
     <message>
         <source>Message:</source>

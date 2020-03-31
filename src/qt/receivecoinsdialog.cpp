@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -25,9 +25,9 @@
 #include <QPainter>
 
 ReceiveCoinsDialog::ReceiveCoinsDialog( const PlatformStyle * style, QWidget * parent ) :
-    QDialog(parent),
-    ui(new Ui::ReceiveCoinsDialog),
-    columnResizingFixer(0),
+    QDialog( parent ),
+    ui( new Ui::ReceiveCoinsDialog ),
+    columnResizingFixer( nullptr ),
     walletModel( nullptr ),
     platformStyle( style )
 {
@@ -122,11 +122,11 @@ ReceiveCoinsDialog::~ReceiveCoinsDialog()
 
 void ReceiveCoinsDialog::clearForm()
 {
-    ui->reqAmount->clear();
-    ui->reqLabel->setText("");
-    ui->reqMessage->setText("");
-    ui->reuseAddress->setChecked(false);
-    updateDisplayUnit();
+    ui->reqAmount->clear() ;
+    ui->reqLabel->setText( "" ) ;
+    ui->reqMessage->setText( "" ) ;
+    ui->reuseAddressCheckbox->setChecked( false ) ;
+    updateDisplayUnit() ;
 }
 
 void ReceiveCoinsDialog::reject()
@@ -153,25 +153,25 @@ void ReceiveCoinsDialog::on_receiveButton_clicked()
             ! walletModel->getAddressTableModel() || ! walletModel->getRecentRequestsTableModel() )
         return ;
 
-    QString address;
-    QString label = ui->reqLabel->text();
-    if(ui->reuseAddress->isChecked())
+    QString address ;
+    QString label = ui->reqLabel->text() ;
+    if ( ui->reuseAddressCheckbox->isChecked() )
     {
-        /* Choose existing receiving address */
-        AddressBookPage dlg(platformStyle, AddressBookPage::ForSelection, AddressBookPage::ReceivingTab, this);
+        /* choose existing receiving address */
+        AddressBookPage dlg( platformStyle, AddressBookPage::ForSelection, AddressBookPage::ReceivingTab, this ) ;
         dlg.setAddressTableModel( walletModel->getAddressTableModel() ) ;
-        if(dlg.exec())
+        if ( dlg.exec() )
         {
-            address = dlg.getReturnValue();
+            address = dlg.getReturnValue() ;
             if ( label.isEmpty() ) /* when no label provided, use the previously used label */
             {
                 label = walletModel->getAddressTableModel()->labelForAddress( address ) ;
             }
         } else {
-            return;
+            return ;
         }
     } else {
-        /* Generate new receiving address */
+        /* generate new receiving address */
         address = walletModel->getAddressTableModel()->addRow( AddressTableModel::Receive, label, "" ) ;
     }
 

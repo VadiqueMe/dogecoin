@@ -458,16 +458,16 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;தொகை:</translation>
+        <source>Amount:</source>
+        <translation>தொகை:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;சிட்டை:</translation>
+        <source>Label:</source>
+        <translation>சிட்டை:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;செய்தி:</translation>
+        <source>Message:</source>
+        <translation>செய்தி:</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -528,20 +528,8 @@
         <translation>மாற்று:</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>தேர்ந்தெடு...</translation>
-    </message>
-    <message>
         <source>Hide</source>
         <translation>மறை</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>இயல்பான</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>வேகமாக</translation>
     </message>
     <message>
         <source>Balance:</source>
@@ -555,20 +543,12 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>&amp;தொகை:</translation>
+        <source>Amount:</source>
+        <translation>தொகை:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;சிட்டை:</translation>
-    </message>
-    <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
+        <source>Label:</source>
+        <translation>சிட்டை:</translation>
     </message>
     <message>
         <source>Message:</source>
@@ -583,14 +563,6 @@
     </context>
 <context>
     <name>SignVerifyMessageDialog</name>
-    <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
-    </message>
     <message>
         <source>Signature</source>
         <translation>கையொப்பம்</translation>

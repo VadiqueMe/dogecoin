@@ -230,12 +230,12 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;سەرجەم:</translation>
+        <source>Amount:</source>
+        <translation>سەرجەم:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;پەیام:</translation>
+        <source>Message:</source>
+        <translation>پەیام:</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -274,10 +274,6 @@
     <message>
         <source>Fee:</source>
         <translation>تێچوون:</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>خێرا</translation>
     </message>
     </context>
 <context>

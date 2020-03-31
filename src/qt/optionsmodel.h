@@ -1,9 +1,10 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_QT_OPTIONSMODEL_H
-#define BITCOIN_QT_OPTIONSMODEL_H
+#ifndef DOGECOIN_QT_OPTIONSMODEL_H
+#define DOGECOIN_QT_OPTIONSMODEL_H
 
 #include "amount.h"
 
@@ -42,7 +43,6 @@ public:
         DisplayUnit,            // UnitsOfCoin::Unit
         ThirdPartyTxUrls,       // QString
         Language,               // QString
-        HideCoinControlFeatures,// bool
         ThreadsScriptVerif,     // int
         DatabaseCache,          // int
         SpendZeroConfChange,    // bool
@@ -65,8 +65,7 @@ public:
     bool getMinimizeOnClose() { return fMinimizeOnClose; }
     int getDisplayUnit() { return nDisplayUnit; }
     QString getThirdPartyTxUrls() {  return thirdPartyTxUrls ;  }
-    bool getProxySettings(QNetworkProxy& proxy) const;
-    bool getHideCoinControlFeatures() { return fHideCoinControlFeatures ; }
+    bool getProxySettings( QNetworkProxy & proxy ) const ;
     const QString& getOverriddenByCommandLine() { return strOverriddenByCommandLine; }
 
     /* Restart flag helper */
@@ -81,7 +80,6 @@ private:
     QString language;
     int nDisplayUnit;
     QString thirdPartyTxUrls ;
-    bool fHideCoinControlFeatures ;
     /* settings that were overridden by command-line */
     QString strOverriddenByCommandLine;
 
@@ -92,8 +90,7 @@ private:
     void checkAndMigrate();
 Q_SIGNALS:
     void displayUnitChanged(int unit);
-    void hideCoinControlFeaturesChanged(bool);
     void hideTrayIconChanged(bool);
 };
 
-#endif // BITCOIN_QT_OPTIONSMODEL_H
+#endif

@@ -1898,7 +1898,7 @@ UniValue backupwallet(const JSONRPCRequest& request)
 
     std::string strDest = request.params[0].get_str() ;
     if ( ! pwalletMain->BackupWallet( strDest ) )
-        throw JSONRPCError( RPC_WALLET_ERROR, "Error: Wallet backup failed!" ) ;
+        throw JSONRPCError( RPC_WALLET_ERROR, "Error: Wallet backup failed" ) ;
 
     return NullUniValue;
 }

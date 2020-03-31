@@ -388,15 +388,7 @@
     </message>
     <message>
         <source>(un)select all</source>
-        <translation>Вибрати/зняти всі</translation>
-    </message>
-    <message>
-        <source>Tree mode</source>
-        <translation>Деревом</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Списком</translation>
+        <translation>вибрати/зняти всі</translation>
     </message>
     <message>
         <source>Amount</source>
@@ -422,10 +414,6 @@
         <source>Confirmed</source>
         <translation>Підтверджені</translation>
     </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(немає мітки)</translation>
-    </message>
     </context>
 <context>
     <name>EditAddressDialog</name>
@@ -434,12 +422,12 @@
         <translation>Редагувати адресу</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Мітка</translation>
+        <source>Label</source>
+        <translation>Мітка</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Адреса</translation>
+        <source>Address</source>
+        <translation>Адреса</translation>
     </message>
     </context>
 <context>
@@ -646,10 +634,6 @@
     <message>
         <source>W&amp;allet</source>
         <translation>Г&amp;аманець</translation>
-    </message>
-    <message>
-        <source>Hide coin &amp;control features</source>
-        <translation>Сховати вибір джерел монет</translation>
     </message>
     <message>
         <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
@@ -1116,20 +1100,20 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;Кількість:</translation>
+        <source>Amount:</source>
+        <translation>Кількість:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Мітка:</translation>
+        <source>Label:</source>
+        <translation>Мітка:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;Повідомлення:</translation>
+        <source>Message:</source>
+        <translation>Повідомлення:</translation>
     </message>
     <message>
-        <source>R&amp;euse an existing receiving address (not recommended)</source>
-        <translation>По&amp;вторно використати адресу для отримання (не рекомендується)</translation>
+        <source>Reuse an existing receiving address (not recommended)</source>
+        <translation>Повторно використати адресу для отримання (не рекомендується)</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
@@ -1238,8 +1222,8 @@
         <translation>Решта:</translation>
     </message>
     <message>
-        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
-        <translation>Якщо це поле активовано, але адреса для решти відсутня або некоректна, то решта буде відправлена на новостворену адресу.</translation>
+        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address</source>
+        <translation>Якщо це поле активовано, але адреса для решти відсутня або некоректна, то решта буде відправлена на новостворену адресу</translation>
     </message>
     <message>
         <source>Custom change address</source>
@@ -1250,64 +1234,24 @@
         <translation>Комісія за передачу:</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>Виберіть...</translation>
-    </message>
-    <message>
-        <source>collapse fee-settings</source>
-        <translation>згорнути налаштування оплат</translation>
-    </message>
-    <message>
-        <source>per kilobyte</source>
-        <translation>за кілобайт</translation>
-    </message>
-    <message>
-        <source>If the custom fee is set to 1000 koinu and the transaction is only 250 bytes, then "per kilobyte" only pays 250 koinu in fee, while "total at least" pays 1000 koinu. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation>Якщо комісія встановлюється в 1000 сатоші і розмір транзакції лише 250 байтів, то опція "за кілобайт" встановлює комісію в 250 сатоші, в той час, як "всього щонайменше" - в 1000 сатоші. Для транзакцій більших за кілобайт в обох випадках буде знято комісію за кілобайт.</translation>
+        <source>Show</source>
+        <translation>Показати</translation>
     </message>
     <message>
         <source>Hide</source>
         <translation>Приховати</translation>
     </message>
     <message>
-        <source>total at least</source>
-        <translation>всього щонайменше</translation>
-    </message>
-    <message>
-        <source>Recommended:</source>
-        <translation>Рекомендовано:</translation>
-    </message>
-    <message>
-        <source>Custom:</source>
-        <translation>Змінено:</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>звичайний</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>швидкий</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Відправити на декілька адрес</translation>
-    </message>
-    <message>
         <source>Add &amp;Recipient</source>
         <translation>Дод&amp;ати одержувача</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Очистити &amp;все</translation>
+        <source>Clear All</source>
+        <translation>Очистити все</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Баланс:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Підтвердити відправлення</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -1321,16 +1265,16 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>&amp;Кількість:</translation>
+        <source>Amount:</source>
+        <translation>Кількість:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>&amp;Отримувач:</translation>
+        <source>Pay To:</source>
+        <translation>Отримувач:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Мітка:</translation>
+        <source>Label:</source>
+        <translation>Мітка:</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -1341,48 +1285,36 @@
         <translation>Адреса Dogecoin для відправлення платежу</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Вставити адресу</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Remove this entry</source>
         <translation>Видалити цей запис</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less dogecoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation>Комісію буде знято зі вказаної суми. До отримувача надійде менше біткоінів, ніж було вказано в полі кількості. Якщо ж отримувачів декілька - комісію буде розподілено між ними.</translation>
-    </message>
-    <message>
-        <source>S&amp;ubtract fee from amount</source>
-        <translation>В&amp;ідняти комісію від суми</translation>
+        <source>Subtract fee from amount</source>
+        <translation>Відняти комісію від суми</translation>
     </message>
     <message>
         <source>Message:</source>
         <translation>Повідомлення:</translation>
     </message>
     <message>
-        <source>This is an unauthenticated payment request.</source>
-        <translation>Цей запит платежу не є автентифікованим.</translation>
+        <source>This is an unauthenticated payment request</source>
+        <translation>Цей запит платежу не є автентифікованим</translation>
     </message>
     <message>
-        <source>This is an authenticated payment request.</source>
-        <translation>Цей запит платежу є автентифікованим.</translation>
+        <source>This is an authenticated payment request</source>
+        <translation>Цей запит платежу є автентифікованим</translation>
     </message>
     <message>
         <source>Enter a label for this address to add it to the list of used addresses</source>
         <translation>Введіть мітку для цієї адреси для додавання її в список використаних адрес</translation>
     </message>
     <message>
-        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Dogecoin network.</source>
-        <translation>Повідомлення, що було додане до dogecoin:URI та буде збережено разом з транзакцією для довідки. Примітка: Це повідомлення не буде відправлено в мережу Dogecoin.</translation>
+        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
+        <translation>Повідомлення, що було додане до dogecoin: URI та буде збережено разом з транзакцією. Це повідомлення не буде відправлено в мережу</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -1426,16 +1358,8 @@
         <translation>Обрати ранiш використовувану адресу</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Вставити адресу</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -1462,8 +1386,8 @@
         <translation>Скинути всі поля підпису повідомлення</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Очистити &amp;все</translation>
+        <source>Clear All</source>
+        <translation>Очистити все</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

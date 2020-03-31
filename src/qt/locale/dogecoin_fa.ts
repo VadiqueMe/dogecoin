@@ -487,14 +487,6 @@
         <translation>(لغو)انتخاب همه</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>مدل درختی</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>مدل لیست</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>مبلغ</translation>
     </message>
@@ -571,10 +563,6 @@
         <translation>خیر</translation>
     </message>
     <message>
-        <source>(no label)</source>
-        <translation>(بدون برچسب)</translation>
-    </message>
-    <message>
         <source>(change)</source>
         <translation>(تغییر)</translation>
     </message>
@@ -586,12 +574,12 @@
         <translation>ویرایش نشانی</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;برچسب</translation>
+        <source>Label</source>
+        <translation>برچسب</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;نشانی</translation>
+        <source>Address</source>
+        <translation>نشانی</translation>
     </message>
     <message>
         <source>New receiving address</source>
@@ -958,8 +946,8 @@
 <context>
     <name>PaymentServer</name>
     <message>
-        <source>Invalid payment request.</source>
-        <translation>درخواست پرداخت نامعتبر.</translation>
+        <source>Invalid payment request</source>
+        <translation>درخواست پرداخت نامعتبر</translation>
     </message>
     </context>
 <context>
@@ -1140,15 +1128,15 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
+        <source>Amount:</source>
         <translation>مبلغ:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;برچسب:</translation>
+        <source>Label:</source>
+        <translation>برچسب:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
+        <source>Message:</source>
         <translation>پیام:</translation>
     </message>
     <message>
@@ -1254,56 +1242,20 @@
         <translation>هزینهٔ تراکنش:</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>انتخاب...</translation>
-    </message>
-    <message>
-        <source>per kilobyte</source>
-        <translation>در هر کیلوبایت</translation>
-    </message>
-    <message>
         <source>Hide</source>
         <translation>پنهان کردن</translation>
-    </message>
-    <message>
-        <source>total at least</source>
-        <translation>در مجموع حداقل</translation>
-    </message>
-    <message>
-        <source>Recommended:</source>
-        <translation>توصیه شده:</translation>
-    </message>
-    <message>
-        <source>Custom:</source>
-        <translation>سفارشی:</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>نرمال</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>سریع</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>ارسال به چند دریافت‌کنندهٔ به‌طور همزمان</translation>
     </message>
     <message>
         <source>Add &amp;Recipient</source>
         <translation>&amp;دریافت‌کنندهٔ جدید</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>پاکسازی &amp;همه</translation>
+        <source>Clear All</source>
+        <translation>پاکسازی همه</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>تزار:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>عملیات ارسال را تأیید کنید</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -1337,16 +1289,16 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>A&amp;مبلغ :</translation>
+        <source>Amount:</source>
+        <translation>مبلغ</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>پرداخ&amp;ت به:</translation>
+        <source>Pay To:</source>
+        <translation>پرداخت به</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;برچسب:</translation>
+        <source>Label:</source>
+        <translation>برچسب</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -1357,16 +1309,8 @@
         <translation>نشانی بیت‌کوین برای ارسال پرداخت به آن</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>چسباندن نشانی از حافظهٔ سیستم</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Remove this entry</source>
@@ -1414,16 +1358,8 @@
         <translation>انتخاب نشانی پیشتر استفاده شده</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>چسباندن نشانی از حافظهٔ سیستم</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -1450,8 +1386,8 @@
         <translation>بازنشانی تمام فیلدهای پیام</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>پاک &amp;کردن همه</translation>
+        <source>Clear All</source>
+        <translation>پاک کردن همه</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

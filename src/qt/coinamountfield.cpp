@@ -141,7 +141,7 @@ private:
     CAmount parse( const QString & text, bool * parseOk = nullptr ) const
     {
         CAmount val = 0 ;
-        bool ok = UnitsOfCoin::parse( currentUnit, text, &val ) ;
+        bool ok = UnitsOfCoin::parseString( currentUnit, text, &val ) ;
         if ( ok ) {
             if ( val < 0 || val > UnitsOfCoin::maxMoney() )
                 ok = false ;

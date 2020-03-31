@@ -486,7 +486,7 @@
     </message>
     <message>
         <source>Bytes:</source>
-        <translation>بايت</translation>
+        <translation>بايت :</translation>
     </message>
     <message>
         <source>Amount:</source>
@@ -507,14 +507,6 @@
     <message>
         <source>(un)select all</source>
         <translation>عدم اختيار الجميع</translation>
-    </message>
-    <message>
-        <source>Tree mode</source>
-        <translation>صيغة الشجرة</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>صيغة القائمة</translation>
     </message>
     <message>
         <source>Amount</source>
@@ -581,10 +573,6 @@
         <translation>لا</translation>
     </message>
     <message>
-        <source>(no label)</source>
-        <translation>(لا وصف)</translation>
-    </message>
-    <message>
         <source>(change)</source>
         <translation>(تغير)</translation>
     </message>
@@ -596,12 +584,12 @@
         <translation>عدل العنوان</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;وصف</translation>
+        <source>Label</source>
+        <translation>وصف</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;العنوان</translation>
+        <source>Address</source>
+        <translation>العنوان</translation>
     </message>
     <message>
         <source>New receiving address</source>
@@ -1050,16 +1038,16 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;القيمة</translation>
+        <source>Amount:</source>
+        <translation>القيمة</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;وصف :</translation>
+        <source>Label:</source>
+        <translation>وصف</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;رسالة:</translation>
+        <source>Message:</source>
+        <translation>رسالة</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -1193,39 +1181,27 @@
     </message>
     <message>
         <source>Transaction Fee:</source>
-        <translation>رسوم المعاملة:</translation>
+        <translation>رسوم المعاملة :</translation>
+    </message>
+    <message>
+        <source>Show</source>
+        <translation>عرض</translation>
     </message>
     <message>
         <source>Hide</source>
         <translation>إخفاء</translation>
     </message>
     <message>
-        <source>normal</source>
-        <translation>طبيعي</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>سريع</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>إرسال إلى عدة مستلمين في وقت واحد</translation>
-    </message>
-    <message>
         <source>Add &amp;Recipient</source>
         <translation>أضافة &amp;مستلم</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
+        <source>Clear All</source>
         <translation>مسح الكل</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>الرصيد:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>تأكيد الإرسال</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -1264,16 +1240,12 @@
         <translation>تأكيد الإرسال Coins</translation>
     </message>
     <message>
-        <source>The amount to pay must be larger than 0.</source>
-        <translation>المبلغ المدفوع يجب ان يكون اكبر من 0</translation>
-    </message>
-    <message>
-        <source>The amount exceeds your balance.</source>
+        <source>The amount exceeds your balance</source>
         <translation>القيمة تتجاوز رصيدك</translation>
     </message>
     <message>
-        <source>The total exceeds your balance when the %1 transaction fee is included.</source>
-        <translation>المجموع يتجاوز رصيدك عندما يتم اضافة %1 رسوم العملية</translation>
+        <source>The total exceeds your balance when the transaction fee is included</source>
+        <translation>المجموع يتجاوز رصيدك عندما يتم اضافة رسوم العملية</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -1283,16 +1255,16 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>&amp;القيمة</translation>
+        <source>Amount:</source>
+        <translation>القيمة</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>ادفع &amp;الى :</translation>
+        <source>Pay To:</source>
+        <translation>ادفع الى</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;وصف :</translation>
+        <source>Label:</source>
+        <translation>وصف</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -1303,16 +1275,8 @@
         <translation>عنوان البت كوين المرسل اليه الدفع</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>انسخ العنوان من لوحة المفاتيح</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Remove this entry</source>
@@ -1356,16 +1320,8 @@
         <translation>اختر عنوانا مستخدم سابقا</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>انسخ العنوان من لوحة المفاتيح</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -1384,7 +1340,7 @@
         <translation>توقيع $الرسالة</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
+        <source>Clear All</source>
         <translation>مسح الكل</translation>
     </message>
     <message>

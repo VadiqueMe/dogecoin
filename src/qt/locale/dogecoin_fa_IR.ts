@@ -200,12 +200,12 @@
         <translation>ویرایش حساب</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
+        <source>Label</source>
         <translation>و برچسب</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>حساب&amp;</translation>
+        <source>Address</source>
+        <translation>حساب</translation>
     </message>
     </context>
 <context>
@@ -322,15 +322,15 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
+        <source>Amount:</source>
         <translation>میزان وجه:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>و برچسب</translation>
+        <source>Label:</source>
+        <translation>و برچسب:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
+        <source>Message:</source>
         <translation>پیام:</translation>
     </message>
     <message>
@@ -356,16 +356,8 @@
         <translation>میزان وجه:</translation>
     </message>
     <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>ارسال همزمان به گیرنده های متعدد</translation>
-    </message>
-    <message>
         <source>Balance:</source>
         <translation>مانده حساب:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>تایید عملیات ارسال </translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -375,28 +367,20 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
+        <source>Amount:</source>
         <translation>و میزان وجه</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
+        <source>Pay To:</source>
         <translation>پرداخت و به چه کسی</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
+        <source>Label:</source>
         <translation>و برچسب</translation>
-    </message>
-    <message>
-        <source>Alt+A</source>
-        <translation>Alt و A</translation>
     </message>
     <message>
         <source>Paste address from clipboard</source>
         <translation>آدرس را بر کلیپ بورد کپی کنید</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt و P</translation>
     </message>
     <message>
         <source>Message:</source>
@@ -428,16 +412,8 @@
         <translation>و امضای پیام </translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt و A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>آدرس را بر کلیپ بورد کپی کنید</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt و P</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>

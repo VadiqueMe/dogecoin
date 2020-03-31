@@ -383,14 +383,6 @@
         <translation>(mal)elekti ĉion</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>Arboreĝimo</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Listreĝimo</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Sumo</translation>
     </message>
@@ -414,10 +406,6 @@
         <source>Confirmed</source>
         <translation>Konfirmita</translation>
     </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(neniu etikedo)</translation>
-    </message>
     </context>
 <context>
     <name>EditAddressDialog</name>
@@ -426,12 +414,12 @@
         <translation>Redakti Adreson</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Etikedo</translation>
+        <source>Label</source>
+        <translation>Etikedo</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Adreso</translation>
+        <source>Address</source>
+        <translation>Adreso</translation>
     </message>
     </context>
 <context>
@@ -844,20 +832,20 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;Kvanto:</translation>
+        <source>Amount:</source>
+        <translation>Kvanto:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Etikedo:</translation>
+        <source>Label:</source>
+        <translation>Etikedo:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;Mesaĝo:</translation>
+        <source>Message:</source>
+        <translation>Mesaĝo:</translation>
     </message>
     <message>
-        <source>R&amp;euse an existing receiving address (not recommended)</source>
-        <translation>R&amp;euzi ekzistantan ricevan adreson (malrekomendinda)</translation>
+        <source>Reuse an existing receiving address (not recommended)</source>
+        <translation>Reuzi ekzistantan ricevan adreson (malrekomendinda)</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -958,24 +946,16 @@
         <translation>Krompago:</translation>
     </message>
     <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Sendi samtempe al pluraj ricevantoj</translation>
-    </message>
-    <message>
         <source>Add &amp;Recipient</source>
         <translation>Aldoni &amp;Ricevonton</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>&amp;Forigi Ĉion</translation>
+        <source>Clear All</source>
+        <translation>Forigi Ĉion</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Saldo:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Konfirmi la sendon</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -989,32 +969,24 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>&amp;Sumo:</translation>
+        <source>Amount:</source>
+        <translation>Sumo:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>&amp;Ricevonto:</translation>
+        <source>Pay To:</source>
+        <translation>Ricevonto:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Etikedo:</translation>
+        <source>Label:</source>
+        <translation>Etikedo:</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
         <translation>Elektu la jam uzitan adreson</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Alglui adreson de tondejo</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Remove this entry</source>
@@ -1062,16 +1034,8 @@
         <translation>Elektu la jam uzitan adreson</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Alglui adreson de tondejo</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -1098,8 +1062,8 @@
         <translation>Reagordigi ĉiujn prisubskribajn kampojn</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>&amp;Forigi Ĉion</translation>
+        <source>Clear All</source>
+        <translation>Forigi Ĉion</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

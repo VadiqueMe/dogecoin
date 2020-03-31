@@ -435,14 +435,6 @@
         <translation>velg (fjern) alle</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>Trevisning</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Listevisning</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Beløp</translation>
     </message>
@@ -466,10 +458,6 @@
         <source>Confirmed</source>
         <translation>Bekreftet</translation>
     </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(ingen merkelapp)</translation>
-    </message>
     </context>
 <context>
     <name>EditAddressDialog</name>
@@ -478,12 +466,12 @@
         <translation>Rediger adresse</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Merkelapp</translation>
+        <source>Label</source>
+        <translation>Merkelapp</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Adresse</translation>
+        <source>Address</source>
+        <translation>Adresse</translation>
     </message>
     </context>
 <context>
@@ -698,10 +686,6 @@
     <message>
         <source>W&amp;allet</source>
         <translation>L&amp;ommebok</translation>
-    </message>
-    <message>
-        <source>Hide coin &amp;control features</source>
-        <translation>Skjul &amp;myntkontroll funksjoner</translation>
     </message>
     <message>
         <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
@@ -1180,20 +1164,20 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;Beløp:</translation>
+        <source>Amount:</source>
+        <translation>Beløp:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Merkelapp:</translation>
+        <source>Label:</source>
+        <translation>Merkelapp:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;Melding:</translation>
+        <source>Message:</source>
+        <translation>Melding:</translation>
     </message>
     <message>
-        <source>R&amp;euse an existing receiving address (not recommended)</source>
-        <translation>Gj&amp;enbruk en eksisterende mottaksadresse (ikke anbefalt)</translation>
+        <source>Reuse an existing receiving address (not recommended)</source>
+        <translation>Gjenbruk en eksisterende mottaksadresse (ikke anbefalt)</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
@@ -1306,8 +1290,8 @@
         <translation>Veksel:</translation>
     </message>
     <message>
-        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
-        <translation>Hvis dette er aktivert, men adressen for veksel er tom eller ugyldig, vil veksel bli sendt til en nylig generert adresse.</translation>
+        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address</source>
+        <translation>Hvis dette er aktivert, men adressen for veksel er tom eller ugyldig, vil veksel bli sendt til en nylig generert adresse</translation>
     </message>
     <message>
         <source>Custom change address</source>
@@ -1318,64 +1302,20 @@
         <translation>Transaksjonsgebyr:</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>Velg...</translation>
-    </message>
-    <message>
-        <source>collapse fee-settings</source>
-        <translation>Legg ned gebyrinnstillinger</translation>
-    </message>
-    <message>
-        <source>per kilobyte</source>
-        <translation>per kilobyte</translation>
-    </message>
-    <message>
-        <source>If the custom fee is set to 1000 koinu and the transaction is only 250 bytes, then "per kilobyte" only pays 250 koinu in fee, while "total at least" pays 1000 koinu. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation>Hvis den egendefinerte avgiften er satt til 1000 koinu og transaksjonen bare er 250 bytes, da vil "per kilobyte" bare betale 250 koinu i gebyr, mens "minstebeløp" betaler 1000 koinu. For transaksjoner større enn en kilobyte vil begge betale for antall kilobyte.</translation>
-    </message>
-    <message>
         <source>Hide</source>
         <translation>Skjul</translation>
-    </message>
-    <message>
-        <source>total at least</source>
-        <translation>minstebeløp</translation>
-    </message>
-    <message>
-        <source>Recommended:</source>
-        <translation>Anbefalt:</translation>
-    </message>
-    <message>
-        <source>Custom:</source>
-        <translation>Egendefinert:</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>normal</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>rask</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Send til flere enn en mottaker</translation>
     </message>
     <message>
         <source>Add &amp;Recipient</source>
         <translation>Legg til &amp;Mottaker</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Fjern &amp;Alt</translation>
+        <source>Clear All</source>
+        <translation>Fjern Alt</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Saldo:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Bekreft sending</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -1389,16 +1329,16 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>&amp;Beløp:</translation>
+        <source>Amount:</source>
+        <translation>Beløp:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>Betal &amp;Til:</translation>
+        <source>Pay To:</source>
+        <translation>Betal Til:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Merkelapp:</translation>
+        <source>Label:</source>
+        <translation>Merkelapp:</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -1409,48 +1349,36 @@
         <translation>Dogecoin-adressen betalingen skal sendes til</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Lim inn adresse fra utklippstavlen</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Remove this entry</source>
         <translation>Fjern denne oppføringen</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less dogecoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation>Gebyret vil bli trukket fra beløpet som blir sendt. Mottakeren vil motta mindre dogecoins enn det du skriver inn i beløpsfeltet. Hvis det er valgt flere mottakere, deles gebyret likt.</translation>
-    </message>
-    <message>
-        <source>S&amp;ubtract fee from amount</source>
-        <translation>T&amp;rekk fra gebyr fra beløp</translation>
+        <source>Subtract fee from amount</source>
+        <translation>Trekk fra gebyr fra beløp</translation>
     </message>
     <message>
         <source>Message:</source>
         <translation>Melding:</translation>
     </message>
     <message>
-        <source>This is an unauthenticated payment request.</source>
-        <translation>Dette er en uautorisert betalingsetterspørring.</translation>
+        <source>This is an unauthenticated payment request</source>
+        <translation>Dette er en uautorisert betalingsetterspørring</translation>
     </message>
     <message>
-        <source>This is an authenticated payment request.</source>
-        <translation>Dette er en autorisert betalingsetterspørring.</translation>
+        <source>This is an authenticated payment request</source>
+        <translation>Dette er en autorisert betalingsetterspørring</translation>
     </message>
     <message>
         <source>Enter a label for this address to add it to the list of used addresses</source>
         <translation>Skriv inn en merkelapp for denne adressen for å legge den til listen av brukte adresser</translation>
     </message>
     <message>
-        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Dogecoin network.</source>
-        <translation>En melding som var tilknyttet dogecoinen: URI vil bli lagret med transaksjonen for din oversikt. Denne meldingen vil ikke bli sendt over Dogecoin-nettverket.</translation>
+        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
+        <translation>En melding som var tilknyttet dogecoinen: URI vil bli lagret med transaksjonen. Denne meldingen vil ikke bli sendt over nettverket</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -1494,16 +1422,8 @@
         <translation>Velg tidligere brukt adresse</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Lim inn adresse fra utklippstavlen</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -1530,8 +1450,8 @@
         <translation>Tilbakestill alle felter for meldingssignering</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Fjern &amp;Alt</translation>
+        <source>Clear All</source>
+        <translation>Fjern Alt</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

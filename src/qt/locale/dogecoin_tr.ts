@@ -551,14 +551,6 @@
         <translation>tümünü seç(me)</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>Ağaç kipi</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Liste kipi</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Tutar</translation>
     </message>
@@ -639,12 +631,8 @@
         <translation>hayır</translation>
     </message>
     <message>
-        <source>(no label)</source>
-        <translation>(etiket yok)</translation>
-    </message>
-    <message>
-        <source>change from %1 (%2)</source>
-        <translation>%1 ögesinden para üstü (%2)</translation>
+        <source>change from %1</source>
+        <translation>%1 ögesinden para üstü</translation>
     </message>
     <message>
         <source>(change)</source>
@@ -658,12 +646,12 @@
         <translation>Adresi düzenle</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Etiket</translation>
+        <source>Label</source>
+        <translation>Etiket</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Adres</translation>
+        <source>Address</source>
+        <translation>Adres</translation>
     </message>
     <message>
         <source>New receiving address</source>
@@ -968,10 +956,6 @@
         <translation>&amp;Cüzdan</translation>
     </message>
     <message>
-        <source>Hide coin &amp;control features</source>
-        <translation>Para &amp;kontrolü özelliklerini gizle</translation>
-    </message>
-    <message>
         <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
         <translation>Doğrulanmamış para üstünü harcamayı devre dışı bırakırsanız, bir işlemin para üstü bu işlem için en az bir doğrulama olana dek harcanamaz. Bu, aynı zamanda bakiyenizin nasıl hesaplandığını da etkiler</translation>
     </message>
@@ -1210,56 +1194,56 @@
         <translation>%1 ödeme adresi geçersizdir</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid address or malformed URI parameters</source>
-        <translation>URI ayrıştırılamıyor! Bunun nedeni geçersiz bir adresi veya hatalı biçimlendirilmiş URI değişkenleri olabilir</translation>
+        <source>URI cannot be parsed. This can be caused by an invalid address or malformed URI parameters</source>
+        <translation>URI ayrıştırılamıyor. Bunun nedeni geçersiz bir adresi veya hatalı biçimlendirilmiş URI değişkenleri olabilir</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
         <translation>Ödeme talebi dosyası yönetimi</translation>
     </message>
     <message>
-        <source>Payment request file cannot be read! This can be caused by an invalid payment request file.</source>
-        <translation>Ödeme talebi dosyası okunamıyor! Bunun nedeni geçersiz bir ödeme talebi dosyası olabilir.</translation>
+        <source>Payment request file cannot be read. This can be caused by an invalid payment request file</source>
+        <translation>Ödeme talebi dosyası okunamıyor. Bunun nedeni geçersiz bir ödeme talebi dosyası olabilir</translation>
     </message>
     <message>
         <source>Payment request rejected</source>
         <translation>Ödeme talebi reddedildi</translation>
     </message>
     <message>
-        <source>Payment request network doesn't match client network.</source>
-        <translation>Ödeme talebi ağı, istemci ağıyla eşleşmiyor.</translation>
+        <source>Payment request network doesn't match the current network</source>
+        <translation>Ödeme isteği ağı mevcut ağla eşleşmiyor</translation>
     </message>
     <message>
-        <source>Payment request expired.</source>
-        <translation>Ödeme talebinin geçerlilik süresi bitti.</translation>
+        <source>Payment request expired</source>
+        <translation>Ödeme talebinin geçerlilik süresi bitti</translation>
     </message>
     <message>
-        <source>Payment request is not initialized.</source>
-        <translation>Ödeme talebi başlatılmadı.</translation>
+        <source>Payment request is not initialized</source>
+        <translation>Ödeme talebi başlatılmadı</translation>
     </message>
     <message>
-        <source>Unverified payment requests to custom payment scripts are unsupported.</source>
-        <translation>Özel ödeme betiklerine, doğrulanmamış ödeme talepleri desteklenmez.</translation>
+        <source>Unverified payment requests to custom payment scripts are not supported</source>
+        <translation>Özel ödeme betiklerine, doğrulanmamış ödeme talepleri desteklenmez</translation>
     </message>
     <message>
-        <source>Invalid payment request.</source>
-        <translation>Geçersiz ödeme talebi.</translation>
+        <source>Invalid payment request</source>
+        <translation>Geçersiz ödeme talebi</translation>
     </message>
     <message>
         <source>Refund from %1</source>
         <translation>%1 adresinden geri ödeme</translation>
     </message>
     <message>
-        <source>Payment request %1 is too large (%2 bytes, allowed %3 bytes).</source>
-        <translation>%1 ödeme talebi çok büyük (%2 bayt, üst sınır %3 bayt).</translation>
+        <source>Payment request %1 is too large (%2 bytes, allowed %3 bytes)</source>
+        <translation>%1 ödeme talebi çok büyük (%2 bayt, üst sınır %3 bayt)</translation>
     </message>
     <message>
         <source>Error communicating with %1: %2</source>
         <translation>%1 ile iletişimde hata: %2</translation>
     </message>
     <message>
-        <source>Payment request cannot be parsed!</source>
-        <translation>Ödeme talebi ayrıştırılamaz!</translation>
+        <source>Payment request cannot be parsed</source>
+        <translation>Ödeme talebi ayrıştırılamaz</translation>
     </message>
     <message>
         <source>Bad response from server %1</source>
@@ -1636,20 +1620,20 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;Tutar:</translation>
+        <source>Amount:</source>
+        <translation>Tutar:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Etiket:</translation>
+        <source>Label:</source>
+        <translation>Etiket:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;İleti:</translation>
+        <source>Message:</source>
+        <translation>İleti:</translation>
     </message>
     <message>
-        <source>R&amp;euse an existing receiving address (not recommended)</source>
-        <translation>&amp;Hâlihazırda bulunan bir alım adresini kullan (önerilmez)</translation>
+        <source>Reuse an existing receiving address (not recommended)</source>
+        <translation>Hâlihazırda bulunan bir alım adresini kullan (önerilmez)</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
@@ -1810,8 +1794,8 @@
         <translation>Para üstü:</translation>
     </message>
     <message>
-        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
-        <translation>Bu etkinleştirildiyse fakat para üstü adresi boş ya da geçersizse para üstü yeni oluşturulan bir adrese gönderilecektir.</translation>
+        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address</source>
+        <translation>Bu etkinleştirildiyse fakat para üstü adresi boş ya da geçersizse para üstü yeni oluşturulan bir adrese gönderilecektir</translation>
     </message>
     <message>
         <source>Custom change address</source>
@@ -1822,64 +1806,20 @@
         <translation>İşlem ücreti:</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>Seç...</translation>
-    </message>
-    <message>
-        <source>collapse fee-settings</source>
-        <translation>ücret-ayarlarını-küçült</translation>
-    </message>
-    <message>
-        <source>per kilobyte</source>
-        <translation>kilobayt başı</translation>
-    </message>
-    <message>
-        <source>If the custom fee is set to 1000 koinu and the transaction is only 250 bytes, then "per kilobyte" only pays 250 koinu in fee, while "total at least" pays 1000 koinu. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation>Eğer özel ücret 1000 satoşi olarak ayarlandıysa ve işlem sadece 250 baytsa, "kilobayt başı" ücret olarak sadece 250 satoşi öder ve "toplam asgari" 1000 satoşi öder. Bir kilobayttan yüksek işlemler için ikisi de kilobayt başı ödeme yapar.</translation>
-    </message>
-    <message>
         <source>Hide</source>
         <translation>Gizle</translation>
-    </message>
-    <message>
-        <source>total at least</source>
-        <translation>toplam asgari</translation>
-    </message>
-    <message>
-        <source>Recommended:</source>
-        <translation>Tavsiye edilen:</translation>
-    </message>
-    <message>
-        <source>Custom:</source>
-        <translation>Özel:</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>normal</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>çabuk</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Birçok alıcıya aynı anda gönder</translation>
     </message>
     <message>
         <source>Add &amp;Recipient</source>
         <translation>&amp;Alıcı ekle</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Tümünü &amp;temizle</translation>
+        <source>Clear All</source>
+        <translation>Tümünü temizle</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Bakiye:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Yollama etkinliğini teyit ediniz</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -1934,52 +1874,40 @@
         <translation>Dogecoin gönderimini onaylayın</translation>
     </message>
     <message>
-        <source>The recipient address is not valid. Please recheck.</source>
-        <translation>Alıcı adresi geçerli değildir. Lütfen tekrar kontrol ediniz.</translation>
+        <source>The recipient address is not valid, please recheck</source>
+        <translation>Alıcı adresi geçerli değildir, lütfen tekrar kontrol ediniz</translation>
     </message>
     <message>
-        <source>The amount to pay must be larger than 0.</source>
-        <translation>Ödeyeceğiniz tutarın 0'dan yüksek olması gerekir.</translation>
+        <source>The amount exceeds your balance</source>
+        <translation>Tutar bakiyenizden yüksektir</translation>
     </message>
     <message>
-        <source>The amount exceeds your balance.</source>
-        <translation>Tutar bakiyenizden yüksektir.</translation>
+        <source>The total exceeds your balance when the transaction fee is included</source>
+        <translation>Toplam, işlem ücreti eklendiğinde bakiyenizi geçmektedir</translation>
     </message>
     <message>
-        <source>The total exceeds your balance when the %1 transaction fee is included.</source>
-        <translation>Toplam, %1 işlem ücreti eklendiğinde bakiyenizi geçmektedir.</translation>
+        <source>Duplicate address found, can only send to each address once per transaction</source>
+        <translation>Tekrarlayan adres bulundu, adresler sadece bir kez kullanılmalıdır</translation>
     </message>
     <message>
-        <source>Duplicate address found: addresses should only be used once each.</source>
-        <translation>Tekrarlayan adres bulundu: adresler sadece bir kez kullanılmalıdır.</translation>
-    </message>
-    <message>
-        <source>Transaction creation failed!</source>
-        <translation>İşlem oluşturma başarısız!</translation>
+        <source>Transaction creation failed</source>
+        <translation>İşlem oluşturma başarısız</translation>
     </message>
     <message>
         <source>The transaction was rejected with the following reason: %1</source>
         <translation>İşlem şu nedenden dolayı reddedildi: %1</translation>
     </message>
     <message>
-        <source>A fee higher than %1 is considered an absurdly high fee.</source>
-        <translation>%1 tutarından yüksek bir ücret saçma derecede yüksek bir ücret olarak kabul edilir.</translation>
+        <source>A fee higher than %1 is considered an absurdly high fee</source>
+        <translation>%1 tutarından yüksek bir ücret saçma derecede yüksek bir ücret olarak kabul edilir</translation>
     </message>
     <message>
-        <source>Payment request expired.</source>
-        <translation>Ödeme talebinin geçerlilik süresi bitti.</translation>
+        <source>Payment request expired</source>
+        <translation>Ödeme talebinin geçerlilik süresi bitti</translation>
     </message>
     <message numerus="yes">
         <source>%n block(s)</source>
         <translation><numerusform>%n blok</numerusform><numerusform>%n blok</numerusform></translation>
-    </message>
-    <message>
-        <source>Warning: Invalid Dogecoin address</source>
-        <translation>Uyarı: geçersiz Dogecoin adresi</translation>
-    </message>
-    <message>
-        <source>Warning: Unknown change address</source>
-        <translation>Uyarı: Bilinmeyen para üstü adresi</translation>
     </message>
     <message>
         <source>Confirm custom change address</source>
@@ -1989,24 +1917,20 @@
         <source>The address you selected for change is not part of this wallet. Any or all funds in your wallet may be sent to this address. Are you sure?</source>
         <translation>Para üstü için seçtiğiniz adres bu cüzdanın bir parçası değil. Cüzdanınızdaki bir miktar veya tüm para bu adrese gönderilebilir. Emin misiniz?</translation>
     </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(etiket yok)</translation>
-    </message>
 </context>
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>T&amp;utar:</translation>
+        <source>Amount:</source>
+        <translation>Tutar:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>&amp;Şu adrese öde:</translation>
+        <source>Pay To:</source>
+        <translation>Şu adrese öde:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Etiket:</translation>
+        <source>Label:</source>
+        <translation>Etiket:</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2017,27 +1941,15 @@
         <translation>Ödemenin yollanacağı Dogecoin adresi</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Panodan adres yapıştır</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Remove this entry</source>
         <translation>Bu ögeyi kaldır</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less dogecoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation>Ücret yollanan tutardan alınacaktır. Alıcı tutar alanına girdiğinizden daha az dogecoin alacaktır. Eğer birden çok alıcı seçiliyse ücret eşit olarak bölünecektir.</translation>
-    </message>
-    <message>
-        <source>S&amp;ubtract fee from amount</source>
+        <source>Subtract fee from amount</source>
         <translation>Ücreti tutardan düş</translation>
     </message>
     <message>
@@ -2045,20 +1957,20 @@
         <translation>İleti:</translation>
     </message>
     <message>
-        <source>This is an unauthenticated payment request.</source>
-        <translation>Bu, kimliği doğrulanmamış bir ödeme talebidir.</translation>
+        <source>This is an unauthenticated payment request</source>
+        <translation>Bu, kimliği doğrulanmamış bir ödeme talebidir</translation>
     </message>
     <message>
-        <source>This is an authenticated payment request.</source>
-        <translation>Bu, kimliği doğrulanmış bir ödeme talebidir.</translation>
+        <source>This is an authenticated payment request</source>
+        <translation>Bu, kimliği doğrulanmış bir ödeme talebidir</translation>
     </message>
     <message>
         <source>Enter a label for this address to add it to the list of used addresses</source>
         <translation>Kullanılmış adres listesine eklemek için bu adrese bir etiket girin</translation>
     </message>
     <message>
-        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Dogecoin network.</source>
-        <translation>Referans için dogecoin: URI'siyle iliştirilmiş işlemle birlikte depolanacak bir ileti. Not: Bu mesaj Dogecoin ağı üzerinden gönderilmeyecektir.</translation>
+        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
+        <translation>dogecoin: URI 'siyle iliştirilmiş işlemle birlikte depolanacak bir ileti. Bu mesaj ağı üzerinden gönderilmeyecektir</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -2114,16 +2026,8 @@
         <translation>Önceden kullanılmış adres seç</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Panodan adres yapıştır</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -2150,8 +2054,8 @@
         <translation>Tüm ileti alanlarını sıfırla</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Tümünü &amp;temizle</translation>
+        <source>Clear All</source>
+        <translation>Tümünü temizle</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

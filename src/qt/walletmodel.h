@@ -1,9 +1,10 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_QT_WALLETMODEL_H
-#define BITCOIN_QT_WALLETMODEL_H
+#ifndef DOGECOIN_QT_WALLETMODEL_H
+#define DOGECOIN_QT_WALLETMODEL_H
 
 #include "paymentrequestplus.h"
 #include "walletmodeltransaction.h"
@@ -42,9 +43,9 @@ public:
         address(addr), label(_label), amount(_amount), message(_message), fSubtractFeeFromAmount(false), nVersion(SendCoinsRecipient::CURRENT_VERSION) {}
 
     // If from an unauthenticated payment request, this is used for storing
-    // the addresses, e.g. address-A<br />address-B<br />address-C.
+    // the addresses, e.g. address-A, address-B, address-C
     // Info: As we don't need to process addresses in here when using
-    // payment requests, we can abuse it for displaying an address list.
+    // payment requests, we can abuse it for displaying an address list
     // Todo: This is a hack, should be replaced with a cleaner solution!
     QString address;
     QString label;
@@ -94,7 +95,7 @@ public:
     }
 };
 
-/** Interface to Bitcoin wallet from Qt view code. */
+/** Interface to the wallet from Qt code */
 class WalletModel : public QObject
 {
     Q_OBJECT
@@ -119,15 +120,15 @@ public:
 
     enum EncryptionStatus
     {
-        Unencrypted,  // !wallet->IsCrypted()
+        Unencrypted,  // ! wallet->IsCrypted()
         Locked,       // wallet->IsCrypted() && wallet->IsLocked()
-        Unlocked      // wallet->IsCrypted() && !wallet->IsLocked()
-    };
+        Unlocked      // wallet->IsCrypted() && ! wallet->IsLocked()
+    } ;
 
-    OptionsModel *getOptionsModel();
-    AddressTableModel *getAddressTableModel();
-    TransactionTableModel *getTransactionTableModel();
-    RecentRequestsTableModel *getRecentRequestsTableModel();
+    OptionsModel * getOptionsModel() {  return optionsModel ;  }
+    AddressTableModel * getAddressTableModel() {  return addressTableModel ;  }
+    TransactionTableModel * getTransactionTableModel() {  return transactionTableModel ;  }
+    RecentRequestsTableModel * getRecentRequestsTableModel() {  return recentRequestsTableModel ;  }
 
     CAmount getBalance(const CCoinControl *coinControl = NULL) const;
     CAmount getUnconfirmedBalance() const;
@@ -154,7 +155,7 @@ public:
     };
 
     // prepare transaction for getting txfee before sending coins
-    SendCoinsReturn prepareTransaction(WalletModelTransaction &transaction, const CCoinControl *coinControl = NULL);
+    SendCoinsReturn prepareTransaction( WalletModelTransaction & transaction, const CCoinControl * coinControl = nullptr ) ;
 
     // Send coins to a list of recipients
     SendCoinsReturn sendCoins( WalletModelTransaction & transaction ) ;
@@ -214,13 +215,13 @@ public:
     int getDefaultConfirmTarget() const;
 
 private:
-    CWallet *wallet;
-    bool fHaveWatchOnly;
-    bool fForceCheckBalanceChanged;
+    CWallet * wallet ;
+
+    bool fHaveWatchOnly ;
+    bool fForceCheckBalanceChanged ;
 
     // Wallet has an options model for wallet-specific options
-    // (transaction fee, for example)
-    OptionsModel *optionsModel;
+    OptionsModel * optionsModel ;
 
     AddressTableModel *addressTableModel;
     TransactionTableModel *transactionTableModel;
@@ -252,7 +253,7 @@ Q_SIGNALS:
 
     // Signal emitted when wallet needs to be unlocked
     // It is valid behaviour for listeners to keep the wallet locked after this signal;
-    // this means that the unlocking failed or was cancelled.
+    // this means that the unlocking failed or was cancelled
     void requireUnlock();
 
     // Fired when a message should be reported to the user
@@ -280,4 +281,4 @@ public Q_SLOTS:
     void pollBalanceChanged();
 };
 
-#endif // BITCOIN_QT_WALLETMODEL_H
+#endif

@@ -200,12 +200,12 @@
         <translation>Хаягийг ѳѳрчлѳх</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Шошго</translation>
+        <source>Label</source>
+        <translation>Шошго</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Хаяг</translation>
+        <source>Address</source>
+        <translation>Хаяг</translation>
     </message>
     </context>
 <context>
@@ -346,15 +346,15 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
+        <source>Amount:</source>
         <translation>Хэмжээ:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Шошго:</translation>
+        <source>Label:</source>
+        <translation>Шошго:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
+        <source>Message:</source>
         <translation>Зурвас:</translation>
     </message>
     <message>
@@ -396,24 +396,16 @@
         <translation>Тѳлбѳр:</translation>
     </message>
     <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Нэгэн зэрэг олон хүлээн авагчруу явуулах</translation>
-    </message>
-    <message>
         <source>Add &amp;Recipient</source>
         <translation>&amp;Хүлээн авагчийг Нэмэх</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>&amp;Бүгдийг Цэвэрлэ</translation>
+        <source>Clear All</source>
+        <translation>Бүгдийг Цэвэрлэ</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Баланс:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Явуулах үйлдлийг баталгаажуулна уу</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -423,28 +415,20 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
+        <source>Amount:</source>
         <translation>Дүн:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>Тѳлѳх &amp;хаяг:</translation>
+        <source>Pay To:</source>
+        <translation>Тѳлѳх хаяг:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Шошго:</translation>
-    </message>
-    <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
+        <source>Label:</source>
+        <translation>Шошго:</translation>
     </message>
     <message>
         <source>Paste address from clipboard</source>
         <translation>Копидсон хаягийг буулгах</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Message:</source>
@@ -468,20 +452,12 @@
 <context>
     <name>SignVerifyMessageDialog</name>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Копидсон хаягийг буулгах</translation>
     </message>
     <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
-    </message>
-    <message>
-        <source>Clear &amp;All</source>
-        <translation>&amp;Бүгдийг Цэвэрлэ</translation>
+        <source>Clear All</source>
+        <translation>Бүгдийг Цэвэрлэ</translation>
     </message>
     </context>
 <context>

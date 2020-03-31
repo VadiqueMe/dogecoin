@@ -551,14 +551,6 @@
         <translation>(od)označit všechny</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>Zobrazit jako strom</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Vypsat jako seznam</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Částka</translation>
     </message>
@@ -639,12 +631,8 @@
         <translation>ne</translation>
     </message>
     <message>
-        <source>(no label)</source>
-        <translation>(bez označení)</translation>
-    </message>
-    <message>
-        <source>change from %1 (%2)</source>
-        <translation>drobné z %1 (%2)</translation>
+        <source>change from %1</source>
+        <translation>drobné z %1</translation>
     </message>
     <message>
         <source>(change)</source>
@@ -658,12 +646,12 @@
         <translation>Uprav adresu</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Označení</translation>
+        <source>Label</source>
+        <translation>Označení</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Adresa</translation>
+        <source>Address</source>
+        <translation>Adresa</translation>
     </message>
     <message>
         <source>New receiving address</source>
@@ -968,10 +956,6 @@
         <translation>P&amp;eněženka</translation>
     </message>
     <message>
-        <source>Hide coin &amp;control features</source>
-        <translation>Skrýt ruční správu &amp;mincí</translation>
-    </message>
-    <message>
         <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
         <translation>Pokud zakážeš utrácení ještě nepotvrzených drobných, nepůjde použít drobné z transakce, dokud nebude mít alespoň jedno potvrzení. Ovlivní to také výpočet stavu účtu</translation>
     </message>
@@ -1210,56 +1194,56 @@
         <translation>Neplatná platební adresa %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid address or malformed URI parameters</source>
-        <translation>Nepodařilo se analyzovat URI! Důvodem může být neplatná adresa nebo poškozené parametry URI</translation>
+        <source>URI cannot be parsed. This can be caused by an invalid address or malformed URI parameters</source>
+        <translation>Nepodařilo se analyzovat URI. Důvodem může být neplatná adresa nebo poškozené parametry URI</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
         <translation>Zpracování souboru platebního požadavku</translation>
     </message>
     <message>
-        <source>Payment request file cannot be read! This can be caused by an invalid payment request file.</source>
-        <translation>Soubor platebního požadavku nejde přečíst nebo zpracovat! Příčinou může být špatný soubor platebního požadavku.</translation>
+        <source>Payment request file cannot be read. This can be caused by an invalid payment request file</source>
+        <translation>Soubor platebního požadavku nejde přečíst nebo zpracovat. Příčinou může být špatný soubor platebního požadavku</translation>
     </message>
     <message>
         <source>Payment request rejected</source>
         <translation>Platební požadavek byl odmítnut</translation>
     </message>
     <message>
-        <source>Payment request network doesn't match client network.</source>
-        <translation>Síť platebního požadavku neodpovídá síti klienta.</translation>
+        <source>Payment request network doesn't match the current network</source>
+        <translation>Síť platebního požadavku neodpovídá aktuální síti</translation>
     </message>
     <message>
-        <source>Payment request expired.</source>
-        <translation>Platební požadavek vypršel.</translation>
+        <source>Payment request expired</source>
+        <translation>Platební požadavek vypršel</translation>
     </message>
     <message>
-        <source>Payment request is not initialized.</source>
-        <translation>Platební požadavek není zahájený.</translation>
+        <source>Payment request is not initialized</source>
+        <translation>Platební požadavek není zahájený</translation>
     </message>
     <message>
-        <source>Unverified payment requests to custom payment scripts are unsupported.</source>
-        <translation>Neověřené platební požadavky k uživatelským platebním skriptům nejsou podporované.</translation>
+        <source>Unverified payment requests to custom payment scripts are not supported</source>
+        <translation>Neověřené platební požadavky k uživatelským platebním skriptům nejsou podporované</translation>
     </message>
     <message>
-        <source>Invalid payment request.</source>
-        <translation>Neplatný platební požadavek.</translation>
+        <source>Invalid payment request</source>
+        <translation>Neplatný platební požadavek</translation>
     </message>
     <message>
         <source>Refund from %1</source>
         <translation>Vrácení peněz od %1</translation>
     </message>
     <message>
-        <source>Payment request %1 is too large (%2 bytes, allowed %3 bytes).</source>
-        <translation>Platební požadavek %1 je moc velký (%2 bajtů, povoleno %3 bajtů).</translation>
+        <source>Payment request %1 is too large (%2 bytes, allowed %3 bytes)</source>
+        <translation>Platební požadavek %1 je moc velký (%2 bajtů, povoleno %3 bajtů)</translation>
     </message>
     <message>
         <source>Error communicating with %1: %2</source>
         <translation>Chyba při komunikaci s %1: %2</translation>
     </message>
     <message>
-        <source>Payment request cannot be parsed!</source>
-        <translation>Platební požadavek je nečitelný!</translation>
+        <source>Payment request cannot be parsed</source>
+        <translation>Platební požadavek je nečitelný</translation>
     </message>
     <message>
         <source>Bad response from server %1</source>
@@ -1636,20 +1620,20 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>Čás&amp;tka:</translation>
+        <source>Amount:</source>
+        <translation>Částka:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Označení:</translation>
+        <source>Label:</source>
+        <translation>Označení:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;Zpráva:</translation>
+        <source>Message:</source>
+        <translation>Zpráva:</translation>
     </message>
     <message>
-        <source>R&amp;euse an existing receiving address (not recommended)</source>
-        <translation>&amp;Recyklovat již existující adresy (nedoporučeno)</translation>
+        <source>Reuse an existing receiving address (not recommended)</source>
+        <translation>Recyklovat již existující adresy (nedoporučeno)</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
@@ -1810,8 +1794,8 @@
         <translation>Drobné:</translation>
     </message>
     <message>
-        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
-        <translation>Pokud aktivováno, ale adresa pro drobné je prázdná nebo neplatná, tak se drobné pošlou na nově vygenerovanou adresu.</translation>
+        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address</source>
+        <translation>Pokud aktivováno, ale adresa pro drobné je prázdná nebo neplatná, tak se drobné pošlou na nově vygenerovanou adresu</translation>
     </message>
     <message>
         <source>Custom change address</source>
@@ -1822,64 +1806,20 @@
         <translation>Transakční poplatek:</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>Zvol...</translation>
-    </message>
-    <message>
-        <source>collapse fee-settings</source>
-        <translation>sbal nastavení poplatků</translation>
-    </message>
-    <message>
-        <source>per kilobyte</source>
-        <translation>za kilobajt</translation>
-    </message>
-    <message>
-        <source>If the custom fee is set to 1000 koinu and the transaction is only 250 bytes, then "per kilobyte" only pays 250 koinu in fee, while "total at least" pays 1000 koinu. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation>Pokud je vlastní poplatek nastavený na 1000 koinu a transakce má pouze 250 bajtů, tak „za kilobajt“ zaplatí poplatek jen 250 koinu, zatímco „přinejmenším“ zaplatí 1000 koinu. Pro transakce větší než kilobajt obě možnosti platí za kilobajt.</translation>
-    </message>
-    <message>
         <source>Hide</source>
         <translation>Skryj</translation>
-    </message>
-    <message>
-        <source>total at least</source>
-        <translation>přinejmenším</translation>
-    </message>
-    <message>
-        <source>Recommended:</source>
-        <translation>Doporučený:</translation>
-    </message>
-    <message>
-        <source>Custom:</source>
-        <translation>Vlastní:</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>normální</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>rychlá</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Pošli více příjemcům naráz</translation>
     </message>
     <message>
         <source>Add &amp;Recipient</source>
         <translation>Při&amp;dej příjemce</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Všechno s&amp;maž</translation>
+        <source>Clear All</source>
+        <translation>Všechno smaž</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Stav účtu:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Potvrď odeslání</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -1934,40 +1874,36 @@
         <translation>Potvrď odeslání mincí</translation>
     </message>
     <message>
-        <source>The recipient address is not valid. Please recheck.</source>
-        <translation>Adresa příjemce je neplatná – překontroluj ji prosím.</translation>
+        <source>The recipient address is not valid, please recheck</source>
+        <translation>Adresa příjemce je neplatná – překontroluj ji prosím</translation>
     </message>
     <message>
-        <source>The amount to pay must be larger than 0.</source>
-        <translation>Odesílaná částka musí být větší než 0.</translation>
+        <source>The amount exceeds your balance</source>
+        <translation>Částka překračuje stav účtu</translation>
     </message>
     <message>
-        <source>The amount exceeds your balance.</source>
-        <translation>Částka překračuje stav účtu.</translation>
+        <source>The total exceeds your balance when the transaction fee is included</source>
+        <translation>Celková částka při připočítání poplatku překročí stav účtu</translation>
     </message>
     <message>
-        <source>The total exceeds your balance when the %1 transaction fee is included.</source>
-        <translation>Celková částka při připočítání poplatku %1 překročí stav účtu.</translation>
+        <source>Duplicate address found, can only send to each address once per transaction</source>
+        <translation>Zaznamenána duplicitní adresa, každá adresa by ale měla být použita vždy jen jednou</translation>
     </message>
     <message>
-        <source>Duplicate address found: addresses should only be used once each.</source>
-        <translation>Zaznamenána duplicitní adresa: každá adresa by ale měla být použita vždy jen jednou.</translation>
-    </message>
-    <message>
-        <source>Transaction creation failed!</source>
-        <translation>Vytvoření transakce selhalo!</translation>
+        <source>Transaction creation failed</source>
+        <translation>Vytvoření transakce selhalo</translation>
     </message>
     <message>
         <source>The transaction was rejected with the following reason: %1</source>
         <translation>Transakce byla zamítnuta s tímto odůvodněním: %1</translation>
     </message>
     <message>
-        <source>A fee higher than %1 is considered an absurdly high fee.</source>
-        <translation>Poplatek vyšší než %1 je považován za absurdně vysoký.</translation>
+        <source>A fee higher than %1 is considered an absurdly high fee</source>
+        <translation>Poplatek vyšší než %1 je považován za absurdně vysoký</translation>
     </message>
     <message>
-        <source>Payment request expired.</source>
-        <translation>Platební požadavek vypršel.</translation>
+        <source>Payment request expired</source>
+        <translation>Platební požadavek vypršel</translation>
     </message>
     <message numerus="yes">
         <source>%n block(s)</source>
@@ -1978,14 +1914,6 @@
         <translation><numerusform>Potvrzování by podle odhadu mělo začít během %n bloku.</numerusform><numerusform>Potvrzování by podle odhadu mělo začít během %n bloků.</numerusform><numerusform>Potvrzování by podle odhadu mělo začít během %n bloků.</numerusform></translation>
     </message>
     <message>
-        <source>Warning: Invalid Dogecoin address</source>
-        <translation>Upozornění: Neplatná dogecoinová adresa</translation>
-    </message>
-    <message>
-        <source>Warning: Unknown change address</source>
-        <translation>Upozornění: Neznámá adresa pro drobné</translation>
-    </message>
-    <message>
         <source>Confirm custom change address</source>
         <translation>Potvrď vlastní adresu pro drobné</translation>
     </message>
@@ -1993,24 +1921,20 @@
         <source>The address you selected for change is not part of this wallet. Any or all funds in your wallet may be sent to this address. Are you sure?</source>
         <translation>Adresa, kterou jsi zvolil pro drobné, není součástí této peněženky. Potenciálně všechny prostředky z tvé peněženky mohou být na tuto adresu odeslány. Souhlasíš, aby se tak stalo?</translation>
     </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(bez označení)</translation>
-    </message>
 </context>
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>Čás&amp;tka:</translation>
+        <source>Amount:</source>
+        <translation>Částka:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>&amp;Komu:</translation>
+        <source>Pay To:</source>
+        <translation>Kam:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>O&amp;značení:</translation>
+        <source>Label:</source>
+        <translation>Označení:</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2021,48 +1945,36 @@
         <translation>Dogecoinová adresa příjemce</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Vlož adresu ze schránky</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Remove this entry</source>
         <translation>Smaž tento záznam</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less dogecoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation>Poplatek se odečte od posílané částky. Příjemce tak dostane méně dogecoinů, než zadáš do pole Částka. Pokud vybereš více příjemců, tak se poplatek rovnoměrně rozloží.</translation>
-    </message>
-    <message>
-        <source>S&amp;ubtract fee from amount</source>
-        <translation>Od&amp;ečíst poplatek od částky</translation>
+        <source>Subtract fee from amount</source>
+        <translation>Odečíst poplatek od částky</translation>
     </message>
     <message>
         <source>Message:</source>
         <translation>Zpráva:</translation>
     </message>
     <message>
-        <source>This is an unauthenticated payment request.</source>
-        <translation>Tohle je neověřený platební požadavek.</translation>
+        <source>This is an unauthenticated payment request</source>
+        <translation>Tohle je neověřený platební požadavek</translation>
     </message>
     <message>
-        <source>This is an authenticated payment request.</source>
-        <translation>Tohle je ověřený platební požadavek.</translation>
+        <source>This is an authenticated payment request</source>
+        <translation>Tohle je ověřený platební požadavek</translation>
     </message>
     <message>
         <source>Enter a label for this address to add it to the list of used addresses</source>
         <translation>Zadej označení této adresy; obojí se ti pak uloží do adresáře</translation>
     </message>
     <message>
-        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Dogecoin network.</source>
-        <translation>Zpráva, která byla připojena k dogecoin: URI a která se ti pro přehled uloží k transakci. Poznámka: Tahle zpráva se neposílá s platbou po dogecoinové síti.</translation>
+        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
+        <translation>Zpráva, která byla připojena k dogecoin: URI a která se ti pro přehled uloží k transakci. Tahle zpráva se neposílá s platbou po síti</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -2118,16 +2030,8 @@
         <translation>Vyber již použitou adresu</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Vlož adresu ze schránky</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -2154,8 +2058,8 @@
         <translation>Vymaž všechna pole formuláře pro podepsání zrávy</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Všechno &amp;smaž</translation>
+        <source>Clear All</source>
+        <translation>Všechno smaž</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

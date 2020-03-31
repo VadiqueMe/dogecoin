@@ -335,14 +335,6 @@
         <translation>(de)selectare tot</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>Mod arbore</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Mod listă</translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Sumă</translation>
     </message>
@@ -374,12 +366,12 @@
         <translation>Editează adresa</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Etichetă</translation>
+        <source>Label</source>
+        <translation>Etichetă</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Adresă</translation>
+        <source>Address</source>
+        <translation>Adresă</translation>
     </message>
     </context>
 <context>
@@ -590,10 +582,6 @@
     <message>
         <source>W&amp;allet</source>
         <translation>Portofel</translation>
-    </message>
-    <message>
-        <source>Hide coin &amp;control features</source>
-        <translation>Ascundeți funcțiile de control ale monedei</translation>
     </message>
     <message>
         <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed</source>
@@ -1024,20 +1012,20 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>Sum&amp;a:</translation>
+        <source>Amount:</source>
+        <translation>Suma:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Etichetă:</translation>
+        <source>Label:</source>
+        <translation>Etichetă:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;Mesaj:</translation>
+        <source>Message:</source>
+        <translation>Mesaj:</translation>
     </message>
     <message>
-        <source>R&amp;euse an existing receiving address (not recommended)</source>
-        <translation>R&amp;efoloseşte o adresă de primire (nu este recomandat)</translation>
+        <source>Reuse an existing receiving address (not recommended)</source>
+        <translation>Refoloseşte o adresă de primire (nu este recomandat)</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
@@ -1138,8 +1126,8 @@
         <translation>Rest:</translation>
     </message>
     <message>
-        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
-        <translation>Dacă este activat, dar adresa de rest este goală sau nevalidă, restul va fi trimis la o adresă nou generată.</translation>
+        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address</source>
+        <translation>Dacă este activat, dar adresa de rest este goală sau nevalidă, restul va fi trimis la o adresă nou generată</translation>
     </message>
     <message>
         <source>Custom change address</source>
@@ -1150,56 +1138,20 @@
         <translation>Taxă tranzacţie:</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>Alegeţi...</translation>
-    </message>
-    <message>
-        <source>per kilobyte</source>
-        <translation>per kilooctet</translation>
-    </message>
-    <message>
         <source>Hide</source>
         <translation>Ascunde</translation>
-    </message>
-    <message>
-        <source>total at least</source>
-        <translation>total cel puţin</translation>
-    </message>
-    <message>
-        <source>Recommended:</source>
-        <translation>Recomandat:</translation>
-    </message>
-    <message>
-        <source>Custom:</source>
-        <translation>Personalizat:</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>normal</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>rapid</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Trimite simultan către mai mulţi destinatari</translation>
     </message>
     <message>
         <source>Add &amp;Recipient</source>
         <translation>Adaugă destinata&amp;r</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Curăţă to&amp;ate</translation>
+        <source>Clear All</source>
+        <translation>Curăţă toate</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Balanţă:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Confirmă operaţiunea de trimitere</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -1209,16 +1161,16 @@
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>Su&amp;mă:</translation>
+        <source>Amount:</source>
+        <translation>Sumă:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>Plăteşte că&amp;tre:</translation>
+        <source>Pay To:</source>
+        <translation>Plăteşte către:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Etichetă:</translation>
+        <source>Label:</source>
+        <translation>Etichetă:</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -1229,16 +1181,8 @@
         <translation>Adresa dogecoin către care se face plata</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Lipeşte adresa din clipboard</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Remove this entry</source>
@@ -1253,8 +1197,8 @@
         <translation>Introduceţi eticheta pentru ca această adresa să fie introdusă în lista de adrese folosite</translation>
     </message>
     <message>
-        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Dogecoin network.</source>
-        <translation>un mesaj a fost ataşat la dogecoin: URI care va fi stocat cu tranzacţia pentru referinţa dvs. Notă: Acest mesaj nu va fi trimis către reţeaua dogecoin.</translation>
+        <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
+        <translation>Un mesaj a fost ataşat la dogecoin: URI care va fi stocat cu tranzacţia. Acest mesaj nu va fi trimis către reţeaua</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -1298,16 +1242,8 @@
         <translation>Alegeţi adrese folosite anterior</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Lipeşte adresa copiată din clipboard</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -1334,8 +1270,8 @@
         <translation>Resetează toate cîmpurile mesajelor semnate</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>Curăţă to&amp;ate</translation>
+        <source>Clear All</source>
+        <translation>Curăţă toate</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

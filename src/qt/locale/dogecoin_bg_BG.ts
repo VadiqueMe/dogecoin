@@ -248,10 +248,6 @@
     </context>
 <context>
     <name>CoinControlDialog</name>
-    <message>
-        <source>(no label)</source>
-        <translation>(без етикет)</translation>
-    </message>
     </context>
 <context>
     <name>EditAddressDialog</name>

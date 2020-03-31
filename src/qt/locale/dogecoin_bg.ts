@@ -504,15 +504,7 @@
     </message>
     <message>
         <source>(un)select all</source>
-        <translation>(Пре)махни всички</translation>
-    </message>
-    <message>
-        <source>Tree mode</source>
-        <translation>Дървовиден режим</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Списъчен режим</translation>
+        <translation>(пре)махни всички</translation>
     </message>
     <message>
         <source>Amount</source>
@@ -564,23 +556,23 @@
     </message>
     <message>
         <source>Copy quantity</source>
-        <translation>Копиране на количеството</translation>
+        <translation>Копиране количеството</translation>
     </message>
     <message>
         <source>Copy fee</source>
-        <translation>Копиране на данък добавена стойност</translation>
+        <translation>Копиране такса</translation>
     </message>
     <message>
         <source>Copy after fee</source>
-        <translation>Копиране след прилагане на данък добавена стойност</translation>
+        <translation>Копиране след такса</translation>
     </message>
     <message>
         <source>Copy bytes</source>
-        <translation>Копиране на байтовете</translation>
+        <translation>Копиране байтовете</translation>
     </message>
     <message>
         <source>Copy change</source>
-        <translation>Копирай рестото</translation>
+        <translation>Копиране рестото</translation>
     </message>
     <message>
         <source>(%1 locked)</source>
@@ -595,12 +587,8 @@
         <translation>не</translation>
     </message>
     <message>
-        <source>(no label)</source>
-        <translation>(без име)</translation>
-    </message>
-    <message>
-        <source>change from %1 (%2)</source>
-        <translation>ресто от %1 (%2)</translation>
+        <source>change from %1</source>
+        <translation>ресто от %1</translation>
     </message>
     <message>
         <source>(change)</source>
@@ -614,12 +602,12 @@
         <translation>Редактиране на адрес</translation>
     </message>
     <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Име</translation>
+        <source>Label</source>
+        <translation>Име</translation>
     </message>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Адрес</translation>
+        <source>Address</source>
+        <translation>Адрес</translation>
     </message>
     <message>
         <source>New receiving address</source>
@@ -836,10 +824,6 @@
         <translation>По&amp;ртфейл</translation>
     </message>
     <message>
-        <source>Hide coin &amp;control features</source>
-        <translation>Скриване на функциите за контрол на монетите</translation>
-    </message>
-    <message>
         <source>&amp;Spend unconfirmed change</source>
         <translation>&amp;Похарчете непотвърденото ресто</translation>
     </message>
@@ -995,7 +979,7 @@
     </message>
     <message>
         <source>Cannot start dogecoin: click-to-pay handler</source>
-        <translation>Биткойн не можe да се стартира: click-to-pay handler</translation>
+        <translation>Dogecoin не можe да се стартира: click-to-pay handler</translation>
     </message>
     <message>
         <source>URI handling</source>
@@ -1014,24 +998,24 @@
         <translation>Заявката за плащане беше отхвърлена</translation>
     </message>
     <message>
-        <source>Payment request network doesn't match client network.</source>
-        <translation>Мрежата от която се извършва заявката за плащане не съвпада с мрежата на клиента.</translation>
+        <source>Payment request network doesn't match the current network</source>
+        <translation>Мрежата, от която се извършва заявката за плащане, не съвпада с текущата мрежа</translation>
     </message>
     <message>
-        <source>Payment request expired.</source>
-        <translation>Заявката за плащане е изтекла.</translation>
+        <source>Payment request expired</source>
+        <translation>Заявката за плащане е изтекла</translation>
     </message>
     <message>
-        <source>Invalid payment request.</source>
-        <translation>Невалидна заявка за плащане.</translation>
+        <source>Invalid payment request</source>
+        <translation>Невалидна заявка за плащане</translation>
     </message>
     <message>
         <source>Refund from %1</source>
         <translation>Възстановяване на сума от %1</translation>
     </message>
     <message>
-        <source>Payment request %1 is too large (%2 bytes, allowed %3 bytes).</source>
-        <translation>Заявката за плащане %1 е твърде голям (%2 байта, позволени %3 байта).</translation>
+        <source>Payment request %1 is too large (%2 bytes, allowed %3 bytes)</source>
+        <translation>Заявката за плащане %1 е твърде голям (%2 байта, позволени %3 байта)</translation>
     </message>
     <message>
         <source>Error communicating with %1: %2</source>
@@ -1054,7 +1038,7 @@
     <name>PeerTableModel</name>
     <message>
         <source>User Agent</source>
-        <translation>Клиент на потребителя</translation>
+        <translation>Агент</translation>
     </message>
     </context>
 <context>
@@ -1256,16 +1240,16 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;Сума</translation>
+        <source>Amount:</source>
+        <translation>Сума:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Име:</translation>
+        <source>Label:</source>
+        <translation>Име:</translation>
     </message>
     <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;Съобщение:</translation>
+        <source>Message:</source>
+        <translation>Съобщение:</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;</source>
@@ -1407,71 +1391,39 @@
     </message>
     <message>
         <source>After Fee:</source>
-        <translation>След прилагане на ДДС</translation>
+        <translation>След такса:</translation>
     </message>
     <message>
         <source>Change:</source>
-        <translation>Ресто</translation>
+        <translation>Ресто:</translation>
     </message>
     <message>
-        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
-        <translation>Ако тази опция е активирана,но адресът на промяна е празен или невалиден,промяната ще бъде изпратена на новосъздаден адрес.</translation>
+        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address</source>
+        <translation>Ако тази опция е активирана,но адресът на промяна е празен или невалиден,промяната ще бъде изпратена на новосъздаден адрес</translation>
     </message>
     <message>
         <source>Transaction Fee:</source>
         <translation>Такса за транзакцията:</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>Избери...</translation>
-    </message>
-    <message>
-        <source>per kilobyte</source>
-        <translation>за килобайт</translation>
+        <source>Show</source>
+        <translation>Покажи</translation>
     </message>
     <message>
         <source>Hide</source>
         <translation>Скрий</translation>
     </message>
     <message>
-        <source>total at least</source>
-        <translation>Крайна сума поне</translation>
-    </message>
-    <message>
-        <source>Recommended:</source>
-        <translation>Препоръчителна:</translation>
-    </message>
-    <message>
-        <source>Custom:</source>
-        <translation>По избор:</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>нормален</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>бърз</translation>
-    </message>
-    <message>
-        <source>Send to multiple recipients at once</source>
-        <translation>Изпращане към повече от един получател</translation>
-    </message>
-    <message>
         <source>Add &amp;Recipient</source>
         <translation>Добави &amp;получател</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>&amp;Изчисти</translation>
+        <source>Clear All</source>
+        <translation>Изчисти</translation>
     </message>
     <message>
         <source>Balance:</source>
         <translation>Баланс:</translation>
-    </message>
-    <message>
-        <source>Confirm the send action</source>
-        <translation>Потвърдете изпращането</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -1479,27 +1431,27 @@
     </message>
     <message>
         <source>Copy quantity</source>
-        <translation>Копиране на количеството</translation>
+        <translation>Копиране количеството</translation>
     </message>
     <message>
         <source>Copy amount</source>
-        <translation>Копирай сума</translation>
+        <translation>Копиране сума</translation>
     </message>
     <message>
         <source>Copy fee</source>
-        <translation>Копиране на данък добавена стойност</translation>
+        <translation>Копиране такса</translation>
     </message>
     <message>
         <source>Copy after fee</source>
-        <translation>Копиране след прилагане на данък добавена стойност</translation>
+        <translation>Копиране след такса</translation>
     </message>
     <message>
         <source>Copy bytes</source>
-        <translation>Копиране на байтовете</translation>
+        <translation>Копиране байтовете</translation>
     </message>
     <message>
         <source>Copy change</source>
-        <translation>Копирай рестото</translation>
+        <translation>Копиране рестото</translation>
     </message>
     <message>
         <source>Are you sure you want to send?</source>
@@ -1518,67 +1470,43 @@
         <translation>Потвърждаване</translation>
     </message>
     <message>
-        <source>The amount to pay must be larger than 0.</source>
-        <translation>Сумата трябва да е по-голяма от 0.</translation>
-    </message>
-    <message>
-        <source>The amount exceeds your balance.</source>
+        <source>The amount exceeds your balance</source>
         <translation>Сумата надвишава текущия баланс</translation>
     </message>
     <message>
-        <source>The total exceeds your balance when the %1 transaction fee is included.</source>
-        <translation>Сумата при добавяне на данък добавена стойност по %1 транзакцията надвишава сумата по вашата сметка.</translation>
+        <source>The total exceeds your balance when the transaction fee is included</source>
+        <translation>Сумата при добавяне на данък добавена стойност по транзакцията надвишава сумата по вашата сметка</translation>
     </message>
     <message>
-        <source>Transaction creation failed!</source>
-        <translation>Грешка при създаването на транзакция!</translation>
+        <source>Transaction creation failed</source>
+        <translation>Грешка при създаването на транзакция</translation>
     </message>
     <message>
-        <source>Payment request expired.</source>
-        <translation>Заявката за плащане е изтекла.</translation>
-    </message>
-    <message>
-        <source>Warning: Invalid Dogecoin address</source>
-        <translation>Внимание: Невалиден Биткойн адрес</translation>
-    </message>
-    <message>
-        <source>Warning: Unknown change address</source>
-        <translation>Внимание:Неизвестен адрес за промяна</translation>
-    </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(без име)</translation>
+        <source>Payment request expired</source>
+        <translation>Заявката за плащане е изтекла</translation>
     </message>
 </context>
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>С&amp;ума:</translation>
+        <source>Amount:</source>
+        <translation>Сума:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>Плати &amp;На:</translation>
+        <source>Pay To:</source>
+        <translation>Плати На:</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Име:</translation>
+        <source>Label:</source>
+        <translation>Име:</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
         <translation>Изберете използван преди адрес</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Вмъкни от клипборда</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Remove this entry</source>
@@ -1630,16 +1558,8 @@
         <translation>Изберете използван преди адрес</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
         <source>Paste address from clipboard</source>
         <translation>Вмъкни от клипборда</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -1662,8 +1582,8 @@
         <translation>Подпиши &amp;съобщение</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>&amp;Изчисти</translation>
+        <source>Clear All</source>
+        <translation>Изчисти</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

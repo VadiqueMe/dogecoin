@@ -72,16 +72,12 @@
         <source>Date</source>
         <translation>Дата</translation>
     </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(аты жок)</translation>
-    </message>
     </context>
 <context>
     <name>EditAddressDialog</name>
     <message>
-        <source>&amp;Address</source>
-        <translation>&amp;Дарек</translation>
+        <source>Address</source>
+        <translation>Дарек</translation>
     </message>
     </context>
 <context>
@@ -194,7 +190,7 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>&amp;Message:</source>
+        <source>Message:</source>
         <translation>Билдирүү:</translation>
     </message>
     <message>
@@ -224,8 +220,8 @@
 <context>
     <name>SendCoinsDialog</name>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>&amp;Бардыгын тазалоо</translation>
+        <source>Clear All</source>
+        <translation>Бардыгын тазалоо</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -260,8 +256,8 @@
         <translation>Даректи алмашуу буферинен коюу</translation>
     </message>
     <message>
-        <source>Clear &amp;All</source>
-        <translation>&amp;Бардыгын тазалоо</translation>
+        <source>Clear All</source>
+        <translation>Бардыгын тазалоо</translation>
     </message>
     </context>
 <context>
