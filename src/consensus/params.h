@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -22,7 +23,7 @@ enum DeploymentPos
 };
 
 /**
- * Struct for each individual consensus rule change using BIP9.
+ * Struct for each individual consensus rule change using BIP9
  */
 struct BIP9Deployment {
     /** Bit position to select the particular bit in nVersion */
@@ -34,9 +35,10 @@ struct BIP9Deployment {
 };
 
 /**
- * Parameters that influence chain consensus.
+ * Parameters that influence chain consensus
  */
-struct Params {
+struct Params
+{
     uint256 hashGenesisBlock;
     int nSubsidyHalvingInterval;
     /** Used to check majorities for block version upgrade */
@@ -52,37 +54,39 @@ struct Params {
     int BIP66Height;
     /**
      * Minimum blocks including miner confirmation of the total of 2016 blocks in a retargeting period,
-     * (nPowTargetTimespan / nPowTargetSpacing) which is also used for BIP9 deployments.
+     * (nPowTargetTimespan / nPowTargetSpacing) which is also used for BIP9 deployments
      * Examples: 1916 for 95%, 1512 for testchains
      */
-    uint32_t nRuleChangeActivationThreshold;
-    uint32_t nMinerConfirmationWindow;
-    BIP9Deployment vDeployments[MAX_VERSION_BITS_DEPLOYMENTS];
-    uint32_t nCoinbaseMaturity;
+    uint32_t nRuleChangeActivationThreshold ;
+    uint32_t nMinerConfirmationWindow ;
+    BIP9Deployment vDeployments[ MAX_VERSION_BITS_DEPLOYMENTS ] ;
+    uint32_t nCoinbaseMaturity ;
+
     /** Proof of work parameters */
-    uint256 powLimit;
-    bool fPowAllowMinDifficultyBlocks;
-    bool fPowNoRetargeting;
-    int64_t nPowTargetSpacing;
-    int64_t nPowTargetTimespan;
-    int64_t DifficultyAdjustmentInterval() const { return nPowTargetTimespan / nPowTargetSpacing; }
+    uint256 powLimit ;
+    bool fPowAllowMinDifficultyBlocks ;
+    int64_t nMinDifficultyTimespan ; // how many seconds before the proof-of-work limit difficulty is accepted
+    bool fPowNoRetargeting ;
+    int64_t nPowTargetSpacing ;
+    int64_t nPowTargetTimespan ;
+    int64_t DifficultyAdjustmentInterval() const {  return nPowTargetTimespan / nPowTargetSpacing ;  }
 
     /** Dogecoin-specific parameters */
-    bool fDigishieldDifficultyCalculation;
+    bool fDigishieldDifficultyCalculation ;
     bool fSimplifiedRewards ; // Use block height derived rewards rather than previous block hash derived
 
-    uint256 nMinimumChainWork ;
+    uint256 nMinimumChainWorkHashes ;
 
     /** Auxpow parameters */
-    int32_t nAuxpowChainId;
-    bool fStrictChainId;
-    bool fAllowLegacyBlocks;
+    int32_t nAuxpowChainId ;
+    bool fStrictChainId ;
+    bool fAllowLegacyBlocks ;
 
     /** Height-aware consensus parameters */
-    uint32_t nHeightEffective; // When these parameters come into use
-    struct Params *pLeft = nullptr;      // Left hand branch
-    struct Params *pRight = nullptr;     // Right hand branch
-    const Consensus::Params *GetConsensus(uint32_t nTargetHeight) const;
+    uint32_t nHeightEffective ; // When these parameters come into use
+    struct Params * pLeft = nullptr ;  // left hand branch
+    struct Params * pRight = nullptr ; // right hand branch
+    const Consensus::Params * GetConsensus( uint32_t nTargetHeight ) const ;
 };
 } // namespace Consensus
 

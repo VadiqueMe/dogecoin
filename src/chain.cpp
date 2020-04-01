@@ -5,7 +5,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "chain.h"
-#include "chainparamsbase.h"
+#include "chainparams.h"
 #include "validation.h"
 
 CBlockHeader CBlockIndex::GetBlockHeader( const Consensus::Params & consensusParams ) const
@@ -36,8 +36,7 @@ CBlockHeader CBlockIndex::GetBlockHeader( const Consensus::Params & consensusPar
 
 int64_t CBlockIndex::GetMedianTimePast() const
 {
-    ///assert( NameOfChain() != "inu" ) ;
-    if ( NameOfChain() == "inu" ) return GetBlockTime() ;
+    if ( ! Params().UseMedianTimePast() ) return GetBlockTime() ;
 
     static const int nMedianTimeSpan = 11 ;
 

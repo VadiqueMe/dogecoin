@@ -1,6 +1,6 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -86,7 +86,8 @@ public:
         consensus.fDigishieldDifficultyCalculation = false;
         consensus.nCoinbaseMaturity = 30 ;
         consensus.fSimplifiedRewards = false ;
-        consensus.fPowAllowMinDifficultyBlocks = false;
+        consensus.fPowAllowMinDifficultyBlocks = false ;
+        consensus.nMinDifficultyTimespan = consensus.nPowTargetSpacing * 60 * 24 * 100 ;
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 9576; // 95% of 10,080
         consensus.nMinerConfirmationWindow = 10080; // 60 * 24 * 7 = 10,080 blocks, or one week
@@ -94,7 +95,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
 
-        // Deployment of BIP68, BIP112, and BIP113.
+        // Deployment of BIP68, BIP112, and BIP113
         // XXX: BIP heights and hashes all need to be updated to Dogecoin values
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 1462060800; // May 1st, 2016
@@ -106,7 +107,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 0; // Disabled
 
         // The best chain has at least this much work
-        consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000141a39e783aad4f660f");
+        consensus.nMinimumChainWorkHashes = uint256S( "0x000000000000000000000000000000000000000000000141a39e783aad4f660f" ) ;
 
         consensus.nAuxpowChainId = 0x0062 ; // 98 - Josh Wise!
         consensus.fStrictChainId = true ;
@@ -170,6 +171,8 @@ public:
         fRequireStandardTxs = true ;
         fMineBlocksOnDemand = false ;
 
+        fUseMedianTimePast = true ;
+
         checkpointData = {
            {
               {       0, uint256S("0x1a91e3dace36e2be3bf030a65679fe821aa1d6ef92e7c9902eb318182c355691") } ,
@@ -221,6 +224,7 @@ public:
         consensus.nSubsidyHalvingInterval = 1000000 ; // not used for inu chain
         consensus.fSimplifiedRewards = false ; // not used for inu chain
         consensus.fPowAllowMinDifficultyBlocks = false ; // not used for inu chain
+        consensus.nMinDifficultyTimespan = consensus.nPowTargetSpacing * 20 ; // 20 minutes before bits = pow limit
         consensus.fPowNoRetargeting = false ;
 
         consensus.nRuleChangeActivationThreshold = 9576 ; // 95% of 10 080
@@ -256,7 +260,7 @@ public:
         consensus.vDeployments[ Consensus::DEPLOYMENT_SEGWIT ].nTimeout = 0 ; // disabled
 
         // The best chain has at least this much work
-        consensus.nMinimumChainWork = uint256S( "0x00001f80" ) ;
+        consensus.nMinimumChainWorkHashes = uint256S( "0x00020375" ) ;
 
         consensus.nAuxpowChainId = 0x62 ; // 98 Josh Wise
         consensus.fStrictChainId = false ;
@@ -392,23 +396,26 @@ public:
         fRequireStandardTxs = true ;
         fMineBlocksOnDemand = false ;
 
+        fUseMedianTimePast = false ; // no median time past for inu chain
+
         checkpointData = {
            {
-              {    0, uint256S( "0x0068ddbf5d570f2589248a9b42ec8480e6fd40d681108a63729e563f0988a6ef" ) } ,
-              {  125, uint256S( "0x05878a2427b5201be66db0900cb47ab36fb85950771e35f70a1a3da6e34a4278" ) }
+              {     0, uint256S( "0x0068ddbf5d570f2589248a9b42ec8480e6fd40d681108a63729e563f0988a6ef" ) } ,
+              {   125, uint256S( "0x05878a2427b5201be66db0900cb47ab36fb85950771e35f70a1a3da6e34a4278" ) } ,
+              {  2020, uint256S( "0x035cb74f441558fd6720ff39840f4746a717435617417f4ceedcfe68f3fdbebe" ) }
            }
         } ;
 
         struct std::tm lastCheckpointTime ;
         {
-            std::istringstream ss( "2020-01-06 09:17:54" ) ;
+            std::istringstream ss( "2020-04-01 14:36:09" ) ;
             ss >> std::get_time( &lastCheckpointTime, "%Y-%m-%d %H:%M:%S" ) ;
         }
         chainTxData = ChainTxData {
-            // data for block 05878a2427b5201be66db0900cb47ab36fb85950771e35f70a1a3da6e34a4278 at height 125
+            // data for block at height 2020
             mktime( &lastCheckpointTime ),
-            127, // number of all transactions in all blocks at last checkpoint
-            0.01 // estimated number of transactions per second after checkpoint
+            2108, // number of all transactions in all blocks at last checkpoint
+            0.02 // estimated number of transactions per second after checkpoint
         } ;
     }
 } ;
@@ -434,6 +441,7 @@ public:
         consensus.nCoinbaseMaturity = 30 ;
         consensus.fSimplifiedRewards = false ;
         consensus.fPowAllowMinDifficultyBlocks = true ;
+        consensus.nMinDifficultyTimespan = consensus.nPowTargetSpacing * 2 ; // 2 minutes before bits = pow limit
         consensus.nSubsidyHalvingInterval = 100000;
         consensus.nMajorityEnforceBlockUpgrade = 501;
         consensus.nMajorityRejectBlockOutdated = 750;
@@ -465,7 +473,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 0; // Disabled
 
         // The best chain has at least this much work
-        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000000000001030d1382ade");
+        consensus.nMinimumChainWorkHashes = uint256S( "0x00000000000000000000000000000000000000000000000000001030d1382ade" ) ;
 
         consensus.nAuxpowChainId = 0x0062 ; // 98 - Josh Wise!
         consensus.fStrictChainId = false ;
@@ -478,13 +486,13 @@ public:
         digishieldConsensus.nPowTargetTimespan = 60; // post-digishield: 1 minute
         digishieldConsensus.fDigishieldDifficultyCalculation = true;
         digishieldConsensus.fSimplifiedRewards = true;
-        digishieldConsensus.fPowAllowMinDifficultyBlocks = false;
+        digishieldConsensus.fPowAllowMinDifficultyBlocks = false ;
         digishieldConsensus.nCoinbaseMaturity = 240;
 
         // Blocks 157500 - 158099 are Digishield with minimum difficulty on all blocks
         minDifficultyConsensus = digishieldConsensus;
         minDifficultyConsensus.nHeightEffective = 157500;
-        minDifficultyConsensus.fPowAllowMinDifficultyBlocks = true;
+        minDifficultyConsensus.fPowAllowMinDifficultyBlocks = true ;
 
         // Enable AuxPoW at 158100
         auxpowConsensus = minDifficultyConsensus;
@@ -530,6 +538,8 @@ public:
         fDefaultConsistencyChecks = false ;
         fRequireStandardTxs = false ;
         fMineBlocksOnDemand = false ;
+
+        fUseMedianTimePast = true ;
 
         checkpointData = {
            {
@@ -578,7 +588,8 @@ public:
         consensus.nPowTargetTimespan = 4 * 60 * 60; // pre-digishield: 4 hours
         consensus.nPowTargetSpacing = 1; // regtest: 1 second blocks
         consensus.fDigishieldDifficultyCalculation = false;
-        consensus.fPowAllowMinDifficultyBlocks = true;
+        consensus.fPowAllowMinDifficultyBlocks = true ;
+        consensus.nMinDifficultyTimespan = consensus.nPowTargetSpacing * 2 ;
         consensus.fPowNoRetargeting = true;
         consensus.nRuleChangeActivationThreshold = 540; // 75% for testchains
         consensus.nMinerConfirmationWindow = 720; // Faster than normal for regtest (2,520 instead of 10,080)
@@ -593,7 +604,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 999999999999ULL;
 
         // The best chain has at least this much work
-        consensus.nMinimumChainWork = uint256S( "0x00" ) ;
+        consensus.nMinimumChainWorkHashes = uint256S( "0x00" ) ;
 
         consensus.nAuxpowChainId = 0x0062 ; // 98 - Josh Wise!
         consensus.fStrictChainId = true ;
@@ -637,6 +648,8 @@ public:
         fDefaultConsistencyChecks = true ;
         fRequireStandardTxs = false ;
         fMineBlocksOnDemand = true ;
+
+        fUseMedianTimePast = true ;
 
         checkpointData = {
             {

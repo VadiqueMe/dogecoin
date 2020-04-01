@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -53,8 +53,8 @@ public:
         MAX_BASE58_TYPES
     };
 
-    const Consensus::Params& GetConsensus(uint32_t nTargetHeight) const {
-        return *(pConsensusRoot -> GetConsensus(nTargetHeight));
+    const Consensus::Params & GetConsensus( uint32_t nTargetHeight ) const {
+        return *( pConsensusRoot -> GetConsensus( nTargetHeight ) ) ;
     }
 
     const CMessageHeader::MessageStartChars& MessageStart() const { return pchMessageStart; }
@@ -70,11 +70,11 @@ public:
     /** Filter transactions that do not match well-defined patterns */
     bool OnlyStandardTransactions() const {  return fRequireStandardTxs ;  }
     uint64_t PruneAfterHeight() const { return nPruneAfterHeight; }
-    /** Make miner stop after a block is found. In RPC, don't return until nGenProcLimit blocks are generated */
     bool MineBlocksOnDemand() const { return fMineBlocksOnDemand; }
-    const std::vector<CDNSSeedData>& DNSSeeds() const { return vSeeds; }
-    const std::vector<unsigned char>& Base58Prefix(Base58Type type) const { return base58Prefixes[type]; }
-    const std::vector<SeedSpec6>& FixedSeeds() const { return vFixedSeeds; }
+    const std::vector< unsigned char > & Base58Prefix( Base58Type type ) const {  return base58Prefixes[ type ] ;  }
+    const std::vector< CDNSSeedData > & DNSSeeds() const {  return vSeeds ;  }
+    const std::vector< SeedSpec6 > & FixedSeeds() const {  return vFixedSeeds ;  }
+    bool UseMedianTimePast() const {  return fUseMedianTimePast ;  }
     const CCheckpointData& getCheckpoints() const { return checkpointData ; }
     const ChainTxData& TxData() const { return chainTxData ; }
 
@@ -84,16 +84,17 @@ protected:
     Consensus::Params consensus ;
     Consensus::Params * pConsensusRoot ; // binary search tree root
     CMessageHeader::MessageStartChars pchMessageStart ;
-    std::vector<unsigned char> vAlertPubKey ; // raw pub key bytes for the broadcast alert signing key
+    std::vector< unsigned char > vAlertPubKey ; // raw pub key bytes for the broadcast alert signing key
     uint64_t nPruneAfterHeight ;
-    std::vector< CDNSSeedData > vSeeds ;
-    std::vector< unsigned char > base58Prefixes[ MAX_BASE58_TYPES ] ;
     CBlock genesis ;
+    std::vector< unsigned char > base58Prefixes[ MAX_BASE58_TYPES ] ;
+    std::vector< CDNSSeedData > vSeeds ;
     std::vector< SeedSpec6 > vFixedSeeds ;
     bool fMiningRequiresPeers ;
     bool fDefaultConsistencyChecks ;
     bool fRequireStandardTxs ;
-    bool fMineBlocksOnDemand ;
+    bool fMineBlocksOnDemand ; // miner stops when a block is generated
+    bool fUseMedianTimePast ; // true for the median time of last 11 blocks, false for just the time of a block
     CCheckpointData checkpointData ;
     ChainTxData chainTxData ;
 } ;

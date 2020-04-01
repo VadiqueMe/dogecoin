@@ -37,7 +37,7 @@
 // Unconfirmed transactions in the memory pool often depend on other
 // transactions in the memory pool. When we select transactions from the
 // pool, we select by highest priority or fee rate, so we might consider
-// transactions that depend on transactions that aren't yet in the block.
+// transactions that depend on transactions that aren't yet in the block
 
 uint64_t nLastBlockTx = 0;
 uint64_t nLastBlockSize = 0;
@@ -48,16 +48,16 @@ class ScoreCompare
 public:
     ScoreCompare() {}
 
-    bool operator()(const CTxMemPool::txiter a, const CTxMemPool::txiter b)
+    bool operator()( const CTxMemPool::txiter a, const CTxMemPool::txiter b )
     {
-        return CompareTxMemPoolEntryByScore()(*b,*a); // Convert to less than
+        return CompareTxMemPoolEntryByScore()( *b, *a ) ; // convert to less than
     }
-};
+} ;
 
 int64_t UpdateTime( CBlockHeader * pblock, const Consensus::Params & consensusParams, const CBlockIndex * pindexPrev )
 {
     int64_t nOldTime = pblock->nTime ;
-    int64_t nNewTime = ( NameOfChain() == "inu" ) ?
+    int64_t nNewTime = ( ! Params().UseMedianTimePast() ) ?
                             GetAdjustedTime() :
                             std::max( pindexPrev->GetMedianTimePast() + 1, GetAdjustedTime() ) ;
 
@@ -143,25 +143,25 @@ std::unique_ptr< CBlockTemplate > BlockAssembler::CreateNewBlock( const CScript 
     pblocktemplate->vTxFees.push_back( -1 ) ; // will be changed at the end
     pblocktemplate->vTxSigOpsCost.push_back(-1); // updated at end
 
-    LOCK2(cs_main, mempool.cs);
-    CBlockIndex* pindexPrev = chainActive.Tip();
-    nHeight = pindexPrev->nHeight + 1;
+    LOCK2( cs_main, mempool.cs ) ;
+    CBlockIndex* pindexPrev = chainActive.Tip() ;
+    nHeight = pindexPrev->nHeight + 1 ;
 
     const Consensus::Params & consensus = chainparams.GetConsensus( nHeight ) ;
     const int32_t nChainId = consensus.nAuxpowChainId ;
     const int32_t nVersion = VERSIONBITS_LAST_OLD_BLOCK_VERSION ; // ComputeBlockVersion( pindexPrev, consensus )
-    pblock->SetBaseVersion(nVersion, nChainId);
+    pblock->SetBaseVersion( nVersion, nChainId ) ;
     // regtest only: allow overriding block.nVersion with
     // -blockversion=N to test forking scenarios
-    if (chainparams.MineBlocksOnDemand())
-        pblock->SetBaseVersion(GetArg("-blockversion", pblock->GetBaseVersion()), nChainId);
+    if ( chainparams.MineBlocksOnDemand() )
+        pblock->SetBaseVersion( GetArg( "-blockversion", pblock->GetBaseVersion() ), nChainId ) ;
 
     pblock->nTime = GetAdjustedTime() ;
 
     //if ( false && NameOfChain() == "inu" )
         //pblock->nTime = pindexPrev->nTime + /* 1 hour */ 60 * 60 ; // expected to fail TestBlockValidity
 
-    nLockTimeCutoff = ( NameOfChain() != "inu" && ( STANDARD_LOCKTIME_VERIFY_FLAGS & LOCKTIME_MEDIAN_TIME_PAST ) )
+    nLockTimeCutoff = ( chainparams.UseMedianTimePast() && ( STANDARD_LOCKTIME_VERIFY_FLAGS & LOCKTIME_MEDIAN_TIME_PAST ) )
                         ? pindexPrev->GetMedianTimePast()
                         : pblock->GetBlockTime() ;
 
@@ -816,7 +816,7 @@ void MiningThread::MineBlocks()
         {
             currentCandidate.reset() ;
 
-            if ( chainparams.MiningRequiresPeers() ) {
+            if ( /* false && */ chainparams.MiningRequiresPeers() ) {
                 // wait for the network to come online hence don't waste time mining
                 // on an obsolete chain
                 do {

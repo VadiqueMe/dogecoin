@@ -644,15 +644,15 @@ UniValue ProcessImport(const UniValue& data, const int64_t timestamp)
     try {
         bool success = false;
 
-        // Required fields.
+        // Required fields
         const UniValue& scriptPubKey = data["scriptPubKey"];
 
-        // Should have script or JSON with "address".
+        // Should have script or JSON with "address"
         if (!(scriptPubKey.getType() == UniValue::VOBJ && scriptPubKey.exists("address")) && !(scriptPubKey.getType() == UniValue::VSTR)) {
             throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid scriptPubKey");
         }
 
-        // Optional fields.
+        // Optional fields
         const std::string& strRedeemScript = data.exists("redeemscript") ? data["redeemscript"].get_str() : "" ;
         const UniValue& pubKeys = data.exists("pubkeys") ? data["pubkeys"].get_array() : UniValue();
         const UniValue& keys = data.exists("keys") ? data["keys"].get_array() : UniValue();
@@ -698,7 +698,7 @@ UniValue ProcessImport(const UniValue& data, const int64_t timestamp)
             throw JSONRPCError(RPC_INVALID_PARAMETER, "Internal must be set for hex scriptPubKey");
         }
 
-        // Keys / PubKeys size check.
+        // Keys / PubKeys size check
         if (!isP2SH && (keys.size() > 1 || pubKeys.size() > 1)) { // Address / scriptPubKey
             throw JSONRPCError(RPC_INVALID_PARAMETER, "More than private key given for one address");
         }
@@ -708,11 +708,11 @@ UniValue ProcessImport(const UniValue& data, const int64_t timestamp)
             throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid redeem script");
         }
 
-        // Process. //
+        // Process
 
         // P2SH
         if (isP2SH) {
-            // Import redeem script.
+            // Import redeem script
             std::vector<unsigned char> vData(ParseHex(strRedeemScript));
             CScript redeemScript = CScript(vData.begin(), vData.end());
 
@@ -749,7 +749,7 @@ UniValue ProcessImport(const UniValue& data, const int64_t timestamp)
                 pwalletMain->SetAddressBook(address.Get(), label, "receive");
             }
 
-            // Import private keys.
+            // Import private keys
             if (keys.size()) {
                 for (size_t i = 0; i < keys.size(); i++) {
                     const std::string& privkey = keys[i].get_str() ;
@@ -790,7 +790,7 @@ UniValue ProcessImport(const UniValue& data, const int64_t timestamp)
 
             success = true;
         } else {
-            // Import public keys.
+            // Import public keys
             if (pubKeys.size() && keys.size() == 0) {
                 const std::string& strPubKey = pubKeys[0].get_str() ;
 
@@ -913,7 +913,7 @@ UniValue ProcessImport(const UniValue& data, const int64_t timestamp)
                 success = true;
             }
 
-            // Import scriptPubKey only.
+            // Import scriptPubKey only
             if (pubKeys.size() == 0 && keys.size() == 0) {
                 if (::IsMine(*pwalletMain, script) == ISMINE_SPENDABLE) {
                     throw JSONRPCError(RPC_WALLET_ERROR, "The wallet already contains the private key for this address or script");
@@ -966,9 +966,8 @@ int64_t GetImportTimestamp(const UniValue& data, int64_t now)
     throw JSONRPCError(RPC_TYPE_ERROR, "Missing required timestamp field for key");
 }
 
-UniValue importmulti(const JSONRPCRequest& mainRequest)
+UniValue importmulti( const JSONRPCRequest & mainRequest )
 {
-    // clang-format off
     if ( mainRequest.fHelp || mainRequest.params.size() < 1 || mainRequest.params.size() > 2 )
         throw std::runtime_error(
             "importmulti \"requests\" \"options\"\n\n"
@@ -1025,13 +1024,14 @@ UniValue importmulti(const JSONRPCRequest& mainRequest)
         }
     }
 
-    LOCK2(cs_main, pwalletMain->cs_wallet);
-    EnsureWalletIsUnlocked();
+    LOCK2( cs_main, pwalletMain->cs_wallet ) ;
+    EnsureWalletIsUnlocked() ;
 
     // Verify all timestamps are present before importing any keys
-    const int64_t now = chainActive.Tip() ? (
-                        ( NameOfChain() == "inu" ) ? chainActive.Tip()->GetBlockTime() : chainActive.Tip()->GetMedianTimePast()
-                    ) : 0 ;
+    const int64_t now = ( chainActive.Tip() != nullptr ) ? (
+                            ( ! Params().UseMedianTimePast() ) ?
+                                chainActive.Tip()->GetBlockTime() : chainActive.Tip()->GetMedianTimePast()
+                        ) : 0 ;
     for (const UniValue& data : requests.getValues()) {
         GetImportTimestamp(data, now);
     }

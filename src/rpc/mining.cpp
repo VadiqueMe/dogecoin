@@ -766,7 +766,7 @@ UniValue getblocktemplate( const JSONRPCRequest & request )
     result.push_back(Pair("coinbasevalue", (int64_t)pblock->vtx[0]->vout[0].nValue));
     result.push_back(Pair("longpollid", chainActive.Tip()->GetBlockSha256Hash().GetHex() + i64tostr(nTransactionsUpdatedLast)));
     result.push_back(Pair("target", hashTarget.GetHex()));
-    result.push_back( Pair("mintime", ( NameOfChain() == "inu" ?
+    result.push_back( Pair("mintime", ( ! Params().UseMedianTimePast() ?
                                             (int64_t)pindexPrev->GetBlockTime() + 1 :
                                                 (int64_t)pindexPrev->GetMedianTimePast() + 1 )) ) ;
     result.push_back(Pair("mutable", aMutable));

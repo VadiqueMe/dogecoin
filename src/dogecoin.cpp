@@ -28,7 +28,7 @@ int static generateMTRandom(unsigned int s, int range)
 bool AcceptDigishieldMinDifficultyForBlock( const CBlockIndex * pindexLast, const CBlockHeader * pblock, const Consensus::Params & params )
 {
     if ( NameOfChain() == "inu" )
-        return ( pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing * 20 ) ;
+        return ( pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nMinDifficultyTimespan ) ;
 
     // check if the chain allows minimum difficulty blocks
     if ( ! params.fPowAllowMinDifficultyBlocks )
@@ -37,8 +37,8 @@ bool AcceptDigishieldMinDifficultyForBlock( const CBlockIndex * pindexLast, cons
     if ( pindexLast->nHeight < 157500 ) // Dogecoin: Magic block-height number
         return false ;
 
-    // accept a minimal proof of work if the elapsed time > 2 * nPowTargetSpacing
-    return ( pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing * 2 ) ;
+    // accept a minimal proof of work if the elapsed time > nMinDifficultyTimespan
+    return ( pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nMinDifficultyTimespan ) ;
 }
 
 unsigned int CalculateDogecoinNextWorkRequired( const CBlockIndex * pindexLast, int64_t nFirstBlockTime, const Consensus::Params & params )

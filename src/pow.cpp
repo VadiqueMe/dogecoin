@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -22,12 +22,10 @@ unsigned int GetNextWorkRequired( const CBlockIndex * pindexLast, const CBlockHe
     if ( pindexLast == nullptr )
         return nProofOfWorkLimit ;
 
-    // Dogecoin: Special rules for minimum difficulty blocks with Digishield
     if ( AcceptDigishieldMinDifficultyForBlock( pindexLast, pblock, params ) )
     {
-        // If the new block's timestamp is more than 2 * nPowTargetSpacing minutes for testnet
-        // or more than 20 * nPowTargetSpacing minutes for inu chain
-        // then allow mining of a min-difficulty block
+        // If the new block's time is more than nMinDifficultyTimespan behind the last block's time
+        // then accept a min-difficulty block
         return nProofOfWorkLimit ;
     }
 
@@ -40,14 +38,12 @@ unsigned int GetNextWorkRequired( const CBlockIndex * pindexLast, const CBlockHe
     {
         if ( params.fPowAllowMinDifficultyBlocks )
         {
-            // Special difficulty rule with fPowAllowMinDifficultyBlocks:
-            // If the new block's timestamp is more than 2 * nPowTargetSpacing minutes
-            // then allow mining of a min-difficulty block
-            if ( pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing * 2 )
+            // If the new block's time is more than nMinDifficultyTimespan behind the last block's time
+            // then accept a min-difficulty block
+            if ( pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nMinDifficultyTimespan )
                 return nProofOfWorkLimit ;
             else
             {
-                // Return the last non-special-min-difficulty-rules-block
                 const CBlockIndex * pindex = pindexLast ;
                 while ( pindex->pprev && pindex->nHeight % difficultyAdjustmentInterval != 0 && pindex->nBits == nProofOfWorkLimit )
                     pindex = pindex->pprev ;

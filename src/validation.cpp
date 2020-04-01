@@ -259,7 +259,7 @@ bool CheckFinalTx( const CTransaction & tx, int flags )
     // When the next block is created its previous block will be the current
     // chain tip, so we use that to calculate the median time passed to
     // IsFinalTx() if LOCKTIME_MEDIAN_TIME_PAST is set
-    const int64_t nBlockTime = ( NameOfChain() != "inu" && ( flags & LOCKTIME_MEDIAN_TIME_PAST ) )
+    const int64_t nBlockTime = ( Params().UseMedianTimePast() && ( flags & LOCKTIME_MEDIAN_TIME_PAST ) )
                              ? chainActive.Tip()->GetMedianTimePast()
                              : GetAdjustedTime() ;
 
@@ -339,7 +339,7 @@ static std::pair< int, int64_t > CalculateSequenceLocks( const CTransaction & tx
 static bool EvaluateSequenceLocks( const CBlockIndex & block, std::pair< int, int64_t > lockPair )
 {
     assert( block.pprev != nullptr ) ;
-    int64_t nBlockTime = ( NameOfChain() == "inu" ) ? block.pprev->GetBlockTime() : block.pprev->GetMedianTimePast() ;
+    int64_t nBlockTime = ( ! Params().UseMedianTimePast() ) ? block.pprev->GetBlockTime() : block.pprev->GetMedianTimePast() ;
     return ( lockPair.first < block.nHeight && lockPair.second < nBlockTime ) ;
 }
 
@@ -1114,7 +1114,7 @@ bool IsInitialBlockDownload()
         return true ;
     if ( chainActive.Tip() == nullptr )
         return true ;
-    if ( chainActive.Tip()->nChainWorkHashes < UintToArith256( chainParams.GetConsensus( chainActive.Height() ).nMinimumChainWork ) )
+    if ( chainActive.Tip()->nChainWorkHashes < UintToArith256( chainParams.GetConsensus( chainActive.Height() ).nMinimumChainWorkHashes ) )
         return true ;
     if ( chainActive.Tip()->GetBlockTime() < ( GetTime() - nMaxTipAge ) )
         return true ;
@@ -3010,11 +3010,12 @@ bool ContextualCheckBlockHeader( const CBlockHeader & block, CValidationState & 
                           REJECT_INVALID, "early-auxpow-block" ) ;
 
     // Check proof of work
+    // The comparison is exact, thus smaller values of bits ("higher difficulty") aren't accepted as well as bigger ones
     if ( block.nBits != GetNextWorkRequired( pindexPrev, &block, consensusParams ) )
-        return state.DoS( 20, false, REJECT_INVALID, "bad-diffbits", false, "incorrect proof of work bits" ) ;
+        return state.DoS( 12, false, REJECT_INVALID, "bad-diffbits", false, "incorrect proof of work bits" ) ;
 
     // Check timestamp
-    uint64_t timeLimitInPast = ( NameOfChain() == "inu" ) ? pindexPrev->nTime : pindexPrev->GetMedianTimePast() ;
+    uint64_t timeLimitInPast = ( ! Params().UseMedianTimePast() ) ? pindexPrev->nTime : pindexPrev->GetMedianTimePast() ;
     uint64_t timeLimitInFuture = nAdjustedTime + ( NameOfChain() == "inu" ? 0 : 2 * 60 * 60 ) ;
 
     if ( block.GetBlockTime() <= timeLimitInPast )
@@ -3051,7 +3052,7 @@ bool ContextualCheckBlock( const CBlock & block, CValidationState & state, const
     // Start enforcing BIP113 (Median Time Past) using versionbits logic
     // Dogecoin: We probably want to disable this
     int nLockTimeFlags = 0 ;
-    if ( NameOfChain() != "inu" ) {
+    if ( Params().UseMedianTimePast() ) {
         if ( VersionBitsState( pindexPrev, consensusParams, Consensus::DEPLOYMENT_CSV, versionbitscache ) == THRESHOLD_ACTIVE )
             nLockTimeFlags |= LOCKTIME_MEDIAN_TIME_PAST ;
     }
