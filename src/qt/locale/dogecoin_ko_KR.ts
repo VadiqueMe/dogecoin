@@ -2772,14 +2772,6 @@
         <translation>지갑은 mempool chain limit (기본값: %u) 을 위반하는 거래를 생성하지 않습니다.</translation>
     </message>
     <message>
-        <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
-        <translation>경고 : 모든 네트워크가 동의해야 하나, 일부 채굴자들에게 문제가 있는 것으로 보입니다. </translation>
-    </message>
-    <message>
-        <source>Warning: We do not appear to fully agree with our peers! You may need to upgrade, or other nodes may need to upgrade.</source>
-        <translation>경고: 현재 비트코인 버전이 다른 네트워크 참여자들과 동일하지 않은 것 같습니다. 당신 또는 다른 참여자들이 동일한 비트코인 버전으로 업그레이드 할 필요가 있습니다.</translation>
-    </message>
-    <message>
         <source>You need to rebuild the database using -reindex-chainstate to change -txindex</source>
         <translation>-txindex를 바꾸기 위해서는 -reindex-chainstate 를 사용해서 데이터베이스를 재구성해야 합니다. </translation>
     </message>

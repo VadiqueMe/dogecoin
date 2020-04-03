@@ -170,9 +170,6 @@ extern uint64_t nPruneTarget ;
 /** Block files containing a block-height within MIN_BLOCKS_TO_KEEP of chainActive.Tip() will not be pruned */
 static const unsigned int MIN_BLOCKS_TO_KEEP = 1440 ;
 
-static const signed int DEFAULT_CHECKBLOCKS = 6 ;
-static const unsigned int DEFAULT_CHECKLEVEL = 3 ;
-
 // Require that user allocate at least 22,00MB for block & undo files (blk???.dat and rev???.dat)
 // At 1MB per block, 1,440 blocks = 1,440MB
 // Add 15% for Undo data = 1,656MB
@@ -271,23 +268,23 @@ double GuessVerificationProgress( const ChainTxData & data, const CBlockIndex * 
 void FindFilesToPrune(std::set<int>& setFilesToPrune, uint64_t nPruneAfterHeight);
 
 /**
- *  Mark one block file as pruned.
+ *  Mark one block file as pruned
  */
-void PruneOneBlockFile(const int fileNumber);
+void PruneOneBlockFile( const int fileNumber ) ;
 
 /**
  *  Actually unlink the specified files
  */
-void UnlinkPrunedFiles(const std::set<int>& setFilesToPrune);
+void UnlinkPrunedFiles( const std::set< int > & setFilesToPrune ) ;
 
 /** Create a new block index entry for a given block hash */
-CBlockIndex * InsertBlockIndex(uint256 hash);
-/** Flush all state, indexes and buffers to disk. */
-void FlushStateToDisk();
-/** Prune block files and flush state to disk. */
-void PruneAndFlush();
+CBlockIndex * InsertBlockIndex( uint256 hash ) ;
+/** Flush all state, indexes and buffers to disk */
+void FlushStateToDisk() ;
+/** Prune block files and flush state to disk */
+void PruneAndFlush() ;
 /** Prune block files up to a given height */
-void PruneBlockFilesManual(int nPruneUpToHeight);
+void PruneBlockFilesManual( int nPruneUpToHeight ) ;
 
 /** (try to) add transaction to memory pool
  * plTxnReplaced will be appended to with all transactions replaced from mempool **/
@@ -352,8 +349,8 @@ namespace Consensus {
 
 /**
  * Check whether all inputs of this transaction are valid (no double spends and amounts)
- * This does not modify the UTXO set. This does not check scripts and sigs.
- * Preconditions: tx.IsCoinBase() is false.
+ * This does not modify the UTXO set. This does not check scripts and sigs
+ * Preconditions: tx.IsCoinBase() is false
  */
 bool CheckTxInputs(const CChainParams& params, const CTransaction& tx, CValidationState& state, const CCoinsViewCache& inputs, int nSpendHeight);
 
@@ -361,16 +358,16 @@ bool CheckTxInputs(const CChainParams& params, const CTransaction& tx, CValidati
 
 /**
  * Check if transaction is final and can be included in a block with the
- * specified height and time. Consensus critical.
+ * specified height and time. Consensus critical
  */
 bool IsFinalTx(const CTransaction &tx, int nBlockHeight, int64_t nBlockTime);
 
 /**
- * Check if transaction will be final in the next block to be created.
+ * Check if transaction will be final in the next block to be created
  *
- * Calls IsFinalTx() with current block height and appropriate block time.
+ * Calls IsFinalTx() with current block height and appropriate block time
  *
- * See consensus/consensus.h for flag definitions.
+ * See consensus/consensus.h for flag definitions
  */
 bool CheckFinalTx(const CTransaction &tx, int flags = -1);
 
@@ -386,15 +383,15 @@ bool TestLockPointValidity(const LockPoints* lp);
 bool SequenceLocks(const CTransaction &tx, int flags, std::vector<int>* prevHeights, const CBlockIndex& block);
 
 /**
- * Check if transaction will be BIP 68 final in the next block to be created.
+ * Check if transaction will be BIP 68 final in the next block to be created
  *
  * Simulates calling SequenceLocks() with data from the tip of the current active chain.
  * Optionally stores in LockPoints the resulting height and time calculated and the hash
  * of the block needed for calculation or skips the calculation and uses the LockPoints
  * passed in for evaluation.
- * The LockPoints should not be considered valid if CheckSequenceLocks returns false.
+ * The LockPoints should not be considered valid if CheckSequenceLocks returns false
  *
- * See consensus/consensus.h for flag definitions.
+ * See consensus/consensus.h for flag definitions
  */
 bool CheckSequenceLocks(const CTransaction &tx, int flags, LockPoints* lp = NULL, bool useExistingLockPoints = false);
 
@@ -482,6 +479,9 @@ void UpdateUncommittedBlockStructures(CBlock& block, const CBlockIndex* pindexPr
 /** Produce the necessary coinbase commitment for a block (modifies the hash, don't call for mined blocks) */
 std::vector<unsigned char> GenerateCoinbaseCommitment(CBlock& block, const CBlockIndex* pindexPrev, const Consensus::Params& consensusParams);
 
+static const signed int DEFAULT_CHECKBLOCKS = 30 ;
+static const unsigned int DEFAULT_CHECKLEVEL = 3 ;
+
 /** RAII wrapper for VerifyDB: Verify consistency of the block and coin databases */
 class CVerifyDB {
 public:
@@ -491,10 +491,10 @@ public:
 } ;
 
 /** Find the last common block between the parameter chain and a locator */
-CBlockIndex* FindForkInGlobalIndex(const CChain& chain, const CBlockLocator& locator);
+CBlockIndex* FindForkInGlobalIndex( const CChain & chain, const CBlockLocator & locator ) ;
 
 /** Mark a block as precious and reorganize */
-bool PreciousBlock(CValidationState& state, const CChainParams& params, CBlockIndex *pindex);
+bool PreciousBlock( CValidationState & state, const CChainParams & params, CBlockIndex * pindex ) ;
 
 /** Mark a block as rejected */
 bool InvalidateBlock( CValidationState & state, const CChainParams & chainparams, CBlockIndex * pindex ) ;
@@ -516,7 +516,7 @@ extern CBlockTreeDB * pblocktree ;
  * While checking, GetBestBlock() refers to the parent block (protected by cs_main)
  * This is also true for mempool checks
  */
-int GetSpendHeight(const CCoinsViewCache& inputs);
+int GetSpendHeight( const CCoinsViewCache & inputs ) ;
 
 extern VersionBitsCache versionbitscache;
 
@@ -527,7 +527,7 @@ int32_t ComputeBlockVersion(const CBlockIndex* pindexPrev, const Consensus::Para
 
 /** Reject codes greater or equal to this can be returned by AcceptToMemPool
  * for transactions, to signal internal conditions. They cannot and should not
- * be sent over the P2P network.
+ * be sent over the P2P network
  */
 static const unsigned int REJECT_INTERNAL = 0x100;
 /** Transaction is already known (either in mempool or blockchain) */

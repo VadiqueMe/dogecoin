@@ -2768,14 +2768,6 @@
         <translation>Cüzdan, zincir bellek alanı limitlerini ihlal eden işlem oluşturmayacak. (varsayılan: %u)</translation>
     </message>
     <message>
-        <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
-        <translation>Uyarı: Ağ üyeleri aralarında tamamen anlaşmış gibi gözükmüyor! Bazı madenciler sorun yaşıyor gibi görünmektedir.</translation>
-    </message>
-    <message>
-        <source>Warning: We do not appear to fully agree with our peers! You may need to upgrade, or other nodes may need to upgrade.</source>
-        <translation>Uyarı: Ağ eşlerimizle tamamen anlaşamamışız gibi görünüyor! Güncelleme yapmanız gerekebilir ya da diğer düğümlerin güncelleme yapmaları gerekebilir.</translation>
-    </message>
-    <message>
         <source>You need to rebuild the database using -reindex-chainstate to change -txindex</source>
         <translation>-txindex'i değiştirmek için veritabanını -reindex-chainstate kullanarak tekrar inşa etmeniz gerekmektedir</translation>
     </message>

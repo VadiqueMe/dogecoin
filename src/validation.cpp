@@ -84,7 +84,7 @@ CAmount maxTxFee = DEFAULT_TRANSACTION_MAXFEE ;
 
 CTxMemPool mempool ;
 
-static void CheckBlockIndex(const Consensus::Params& consensusParams);
+static void CheckBlockIndex( const Consensus::Params & consensusParams ) ;
 
 /** Constant stuff for coinbase transactions we create */
 CScript COINBASE_FLAGS ;
@@ -94,13 +94,13 @@ const std::string strMessageMagic = "Dogecoin Signed Message:\n";
 // Internal stuff
 namespace {
 
-    struct CBlockIndexWorkComparator
+    struct CBlockIndexComparator
     {
         bool operator()( CBlockIndex * pa, CBlockIndex * pb ) const
         {
-            // First sort by most total work, ...
-            if ( pa->nChainWorkHashes > pb->nChainWorkHashes ) return false ;
-            if ( pa->nChainWorkHashes < pb->nChainWorkHashes ) return true ;
+            // First sort by most height, ...
+            if ( pa->nHeight > pb->nHeight ) return false ;
+            if ( pa->nHeight < pb->nHeight ) return true ;
 
             // ... then by earliest time received, ...
             if ( pa->nSequenceId < pb->nSequenceId ) return false ;
@@ -123,7 +123,7 @@ namespace {
      * as good as our current tip or better. Entries may be failed, though, and pruning nodes may be
      * missing the data for the block
      */
-    std::set< CBlockIndex*, CBlockIndexWorkComparator > setOfBlockIndexCandidates ;
+    std::set< CBlockIndex*, CBlockIndexComparator > setOfBlockIndexCandidates ;
 
     /** All pairs A->B, where A (or one of its ancestors) misses transactions, but B has transactions.
      * Pruned nodes may have entries where B is missing data
@@ -149,8 +149,8 @@ namespace {
     int32_t nBlockSequenceId = 1 ;
     /** Decreasing counter (used by subsequent preciousblock calls) */
     int32_t nBlockReverseSequenceId = -1 ;
-    /** chainwork for the last block that preciousblock has been applied to */
-    arith_uint256 nLastPreciousChainwork = 0 ;
+    /** height for the last block that preciousblock has been applied to */
+    int nLastPreciousHeight = -1 ;
 
     /** Dirty block index entries */
     std::set< CBlockIndex* > setOfDirtyBlockIndices ;
@@ -930,9 +930,9 @@ bool AcceptToMemoryPoolWithTime( CTxMemPool& pool, CValidationState &state, cons
             pcoinsTip->Uncache( hashTx ) ;
     }
     // After we've (potentially) uncached entries, ensure our coins cache is still within its size limits
-    CValidationState stateDummy;
-    FlushStateToDisk(stateDummy, FLUSH_STATE_PERIODIC);
-    return res;
+    CValidationState dummyState ;
+    FlushStateToDisk( dummyState, FLUSH_STATE_PERIODIC ) ;
+    return res ;
 }
 
 bool AcceptToMemoryPool( CTxMemPool& pool, CValidationState &state, const CTransactionRef &tx, bool fLimitFree,
@@ -1114,8 +1114,6 @@ bool IsInitialBlockDownload()
         return true ;
     if ( chainActive.Tip() == nullptr )
         return true ;
-    if ( chainActive.Tip()->nChainWorkHashes < UintToArith256( chainParams.GetConsensus( chainActive.Height() ).nMinimumChainWorkHashes ) )
-        return true ;
     if ( chainActive.Tip()->GetBlockTime() < ( GetTime() - nMaxTipAge ) )
         return true ;
 
@@ -1133,99 +1131,99 @@ static void AlertNotify(const std::string& strMessage)
 
 void CheckForkWarningConditions()
 {
-    AssertLockHeld(cs_main);
+    AssertLockHeld( cs_main ) ;
+
     // Before we get past initial download, we cannot reliably alert about forks
-    // (we assume we don't get stuck on a fork before finishing our initial sync)
-    if (IsInitialBlockDownload())
-        return;
+    // (we assume we don't get stuck on a fork before finishing the sync)
+    if ( IsInitialBlockDownload() )
+        return ;
 
     // If our best fork is no longer within 360 blocks (+/- 6 hours if no one mines it)
     // of our head, drop it
-    if (pindexBestForkTip && chainActive.Height() - pindexBestForkTip->nHeight >= 360)
-        pindexBestForkTip = NULL;
+    const int blocks_above_limit = 360 ;
+    if ( pindexBestForkTip != nullptr && chainActive.Height() - pindexBestForkTip->nHeight >= blocks_above_limit )
+        pindexBestForkTip = nullptr ;
 
-    if ( pindexBestForkTip ||
-            ( pindexBestInvalid &&
-                pindexBestInvalid->nChainWorkHashes > chainActive.Tip()->nChainWorkHashes + ( EstimateBlockProofMaxHashes( *chainActive.Tip() ) * 30 )
-            ) )
+    const int blocks_above = 30 ;
+    if ( pindexBestForkTip != nullptr ||
+            ( pindexBestInvalid != nullptr &&
+                pindexBestInvalid->nHeight > chainActive.Tip()->nHeight + blocks_above ) )
     {
-        if (!GetfLargeWorkForkFound() && pindexBestForkBase)
+        if ( ! GetHighForkFound() && pindexBestForkBase != nullptr )
         {
-            std::string warning = std::string( "'Warning: Large-work fork detected, forking after block " ) +
+            std::string warning = std::string( "'Warning: Higher fork found, forking after block " ) +
                 pindexBestForkBase->GetBlockSha256Hash().ToString() + std::string( "'" ) ;
-            AlertNotify(warning);
+            AlertNotify( warning ) ;
         }
-        if (pindexBestForkTip && pindexBestForkBase)
+        if ( pindexBestForkTip != nullptr && pindexBestForkBase != nullptr )
         {
-            LogPrintf( "%s: Warning: Large valid fork found\n  forking the chain at height %d (%s)\n  lasting to height %d (%s)\n(chain state database corruption likely)\n", __func__,
+            LogPrintf( "%s: Warning: Higher valid fork found\n  forking the chain at height %d (%s)\n  lasting to height %d (%s)\n(chain state database corruption likely)\n", __func__,
                    pindexBestForkBase->nHeight, pindexBestForkBase->GetBlockSha256Hash().ToString(),
                    pindexBestForkTip->nHeight, pindexBestForkTip->GetBlockSha256Hash().ToString() ) ;
-            SetfLargeWorkForkFound(true);
+            SetHighForkFound( true ) ;
         }
         else
         {
-            LogPrintf("%s: Warning: Found invalid chain at least ~6 blocks longer than our best chain\n(chain state database corruption likely)\n", __func__);
-            SetfLargeWorkInvalidChainFound(true);
+            LogPrintf( "%s: Warning: Found invalid chain at least ~%i blocks higher than the best chain\n(chain state database corruption likely)\n", __func__, blocks_above ) ;
+            SetHighInvalidChainFound( true ) ;
         }
     }
     else
     {
-        SetfLargeWorkForkFound(false);
-        SetfLargeWorkInvalidChainFound(false);
+        SetHighForkFound( false ) ;
+        SetHighInvalidChainFound( false ) ;
     }
 }
 
-void CheckForkWarningConditionsOnNewFork(CBlockIndex* pindexNewForkTip)
+//
+// If we are on a fork that is sufficiently large, set a warning flag
+//
+void CheckForkWarningConditionsOnNewFork( CBlockIndex * pindexNewForkTip )
 {
-    AssertLockHeld(cs_main);
-    // If we are on a fork that is sufficiently large, set a warning flag
-    CBlockIndex* pfork = pindexNewForkTip;
-    CBlockIndex* plonger = chainActive.Tip();
-    while (pfork && pfork != plonger)
+    AssertLockHeld( cs_main ) ;
+
+    CBlockIndex * pfork = pindexNewForkTip ;
+    CBlockIndex * plonger = chainActive.Tip() ;
+    while ( pfork && pfork != plonger )
     {
-        while (plonger && plonger->nHeight > pfork->nHeight)
-            plonger = plonger->pprev;
-        if (pfork == plonger)
-            break;
-        pfork = pfork->pprev;
+        while ( plonger && plonger->nHeight > pfork->nHeight )
+            plonger = plonger->pprev ;
+        if ( pfork == plonger )
+            break ;
+        pfork = pfork->pprev ;
     }
 
-    // We define a condition where we should warn the user about as a fork of at least 7 blocks
-    // with a tip within 72 blocks (+/- 12 hours if no one mines it) of ours
-    // We use 7 blocks rather arbitrarily as it represents just under 10% of sustained network
-    // hash rate operating on the fork.
-    // or a chain that is entirely longer than ours and invalid (note that this should be detected by both)
-    // We define it this way because it allows us to only store the highest fork tip (+ base) which meets
-    // the 7-block condition and from this always have the most-likely-to-cause-warning fork
+    // We define a condition where we should warn the user about as a fork of at least 30 blocks
+    // with a tip within 360 blocks (+/- 6 hours if no one mines it) of ours
+    const int blocks_above = 30 ;
+    const int blocks_above_limit = 360 ;
     if ( pfork && ( ! pindexBestForkTip || ( pindexBestForkTip && pindexNewForkTip->nHeight > pindexBestForkTip->nHeight ) ) &&
-            pindexNewForkTip->nChainWorkHashes - pfork->nChainWorkHashes > ( EstimateBlockProofMaxHashes( *pfork ) * 7 ) &&
-            chainActive.Height() - pindexNewForkTip->nHeight < 72 )
+            pindexNewForkTip->nHeight - pfork->nHeight > blocks_above &&
+            chainActive.Height() - pindexNewForkTip->nHeight < blocks_above_limit )
     {
-        pindexBestForkTip = pindexNewForkTip;
-        pindexBestForkBase = pfork;
+        pindexBestForkTip = pindexNewForkTip ;
+        pindexBestForkBase = pfork ;
     }
 
-    CheckForkWarningConditions();
+    CheckForkWarningConditions() ;
 }
 
 void static SayAboutRejectedChain( CBlockIndex* pindexNew )
 {
-    if ( pindexBestInvalid == nullptr || pindexNew->nChainWorkHashes > pindexBestInvalid->nChainWorkHashes )
+    if ( pindexBestInvalid == nullptr || pindexNew->nHeight > pindexBestInvalid->nHeight )
         pindexBestInvalid = pindexNew ;
 
-    LogPrintf( "%s: rejected block height=%d sha256_hash=%s version=0x%x%s log2_work=%.8g date=%s\n", __func__,
+    LogPrintf( "%s: rejected block height=%d sha256_hash=%s version=0x%x%s date=%s\n", __func__,
         pindexNew->nHeight, pindexNew->GetBlockSha256Hash().ToString(),
         pindexNew->nVersion, CPureBlockHeader::IsAuxpowInVersion( pindexNew->nVersion ) ? "(auxpow)" : "",
-        log( pindexNew->nChainWorkHashes.getdouble() ) / log( 2.0 ),
         DateTimeStrFormat( "%Y-%m-%d %H:%M:%S", pindexNew->GetBlockTime() ) ) ;
 
     CBlockIndex *tip = chainActive.Tip() ;
     assert ( tip != nullptr ) ;
 
-    LogPrintf( "%s: current tip height=%d sha256_hash=%s version=0x%x%s log2_work=%.8g date=%s\n", __func__,
+    LogPrintf( "%s: current tip height=%d sha256_hash=%s version=0x%x%s date=%s\n", __func__,
         chainActive.Height(), tip->GetBlockSha256Hash().ToString(),
         tip->nVersion, CPureBlockHeader::IsAuxpowInVersion( tip->nVersion ) ? "(auxpow)" : "",
-        log( tip->nChainWorkHashes.getdouble() ) / log( 2.0 ),
         DateTimeStrFormat( "%Y-%m-%d %H:%M:%S", tip->GetBlockTime() ) ) ;
 
     CheckForkWarningConditions() ;
@@ -1534,7 +1532,7 @@ bool DisconnectBlock(const CBlock& block, CValidationState& state, const CBlockI
         uint256 hash = tx.GetTxHash() ;
 
         // Check that all outputs are available and match the outputs in the block itself
-        // exactly.
+        // exactly
         {
         CCoinsModifier outs = view.ModifyCoins(hash);
         outs->ClearUnspendable();
@@ -1542,7 +1540,7 @@ bool DisconnectBlock(const CBlock& block, CValidationState& state, const CBlockI
         CCoins outsBlock(tx, pindex->nHeight);
         // The CCoins serialization does not serialize negative numbers.
         // No network rules currently depend on the version here, so an inconsistency is harmless
-        // but it must be corrected before txout nversion ever influences a network rule.
+        // but it must be corrected before txout nversion ever influences a network rule
         if (outsBlock.nVersion < 0)
             outs->nVersion = outsBlock.nVersion;
         if (*outs != outsBlock)
@@ -2144,12 +2142,11 @@ void static UpdateTip( CBlockIndex * pindexNew, const CChainParams & chainParams
     ////UpdateTipBlockNewCoins( chainParams ) ;
 
     CBlockHeader newBlock = chainActive.Tip()->GetBlockHeader( chainParams.GetConsensus( chainActive.Height() ) ) ;
-    LogPrintf( "%s: tip block height=%d sha256_hash=%s scrypt_hash=%s version=0x%x%s log2_work=%.8g newcoins=%lu txs=%lu date='%s' progress=%f cache=%.1fMiB(%u txs)\n", __func__,
+    LogPrintf( "%s: tip block height=%d sha256_hash=%s scrypt_hash=%s version=0x%x%s newcoins=%lu txs=%lu date='%s' progress=%f cache=%.1fMiB(%u txs)\n", __func__,
         chainActive.Height(),
         /* chainActive.Tip()->GetBlockSha256Hash().ToString() */ newBlock.GetSha256Hash().ToString(),
         newBlock.GetScryptHash().ToString(),
         newBlock.nVersion, newBlock.IsAuxpowInVersion() ? "(auxpow)" : "",
-        log( chainActive.Tip()->nChainWorkHashes.getdouble() ) / log( 2.0 ),
         chainActive.Tip()->nBlockNewCoins,
         static_cast< unsigned long >( chainActive.Tip()->nChainTx ),
         DateTimeStrFormat( "%Y-%m-%d %H:%M:%S", /* chainActive.Tip()->GetBlockTime() */ newBlock.nTime ),
@@ -2299,17 +2296,17 @@ bool static ConnectTip( CValidationState & state, const CChainParams & chainpara
 }
 
 /**
- * Return the tip of the chain with the most work in it, that isn't
- * known to be invalid (it's however far from certain to be valid)
+ * Return the tip of the highest chain that isn't known to be invalid
+ * (it's however far from certain to be valid)
  */
-static CBlockIndex* FindMostWorkChain()
+static CBlockIndex* FindHighestChain()
 {
     do {
         CBlockIndex * pindexNew = nullptr ;
 
         // Find the best candidate header
         {
-            std::set< CBlockIndex*, CBlockIndexWorkComparator >::reverse_iterator it = setOfBlockIndexCandidates.rbegin() ;
+            std::set< CBlockIndex*, CBlockIndexComparator >::reverse_iterator it = setOfBlockIndexCandidates.rbegin() ;
             if ( it == setOfBlockIndexCandidates.rend() )
                 return nullptr ;
             pindexNew = *it ;
@@ -2330,7 +2327,7 @@ static CBlockIndex* FindMostWorkChain()
             bool fMissingData = ! ( pindexTest->nStatus & BLOCK_DATA_EXISTS ) ;
             if ( fFailedChain || fMissingData ) {
                 // Candidate chain is not usable (either invalid or missing data)
-                if ( fFailedChain && ( pindexBestInvalid == nullptr || pindexNew->nChainWorkHashes > pindexBestInvalid->nChainWorkHashes ) )
+                if ( fFailedChain && ( pindexBestInvalid == nullptr || pindexNew->nHeight > pindexBestInvalid->nHeight ) )
                     pindexBestInvalid = pindexNew ;
                 CBlockIndex * pindexFailed = pindexNew ;
                 // Remove the entire chain from the set
@@ -2362,7 +2359,7 @@ static void PruneBlockIndexCandidates()
 {
     // Note that we can't delete the current block itself, as we may need to return to it later
     // when reorganization to a better block fails
-    std::set< CBlockIndex*, CBlockIndexWorkComparator >::iterator it = setOfBlockIndexCandidates.begin() ;
+    std::set< CBlockIndex*, CBlockIndexComparator >::iterator it = setOfBlockIndexCandidates.begin() ;
     while ( it != setOfBlockIndexCandidates.end() && setOfBlockIndexCandidates.value_comp()( *it, chainActive.Tip() ) ) {
         setOfBlockIndexCandidates.erase( it ++ ) ;
     }
@@ -2371,14 +2368,15 @@ static void PruneBlockIndexCandidates()
 }
 
 /**
- * Try to make some progress towards making pindexMostWork the active block,
- * pblock is either NULL or a pointer to a most-work block
+ * Try to make some progress towards making pindexHighest the active block,
+ * pblock is either NULL or a pointer to a highest block
  */
-static bool ActivateBestChainStep(CValidationState& state, const CChainParams& chainparams, CBlockIndex* pindexMostWork, const std::shared_ptr<const CBlock>& pblock, bool& fInvalidFound, ConnectTrace& connectTrace)
+static bool ActivateBestChainStep( CValidationState & state, const CChainParams & chainparams, CBlockIndex * pindexHighest, const std::shared_ptr< const CBlock > & pblock, bool & fInvalidFound, ConnectTrace & connectTrace )
 {
-    AssertLockHeld(cs_main);
-    const CBlockIndex *pindexOldTip = chainActive.Tip();
-    const CBlockIndex *pindexFork = chainActive.FindFork(pindexMostWork);
+    AssertLockHeld( cs_main ) ;
+
+    const CBlockIndex * pindexOldTip = chainActive.Tip() ;
+    const CBlockIndex * pindexFork = chainActive.FindFork( pindexHighest ) ;
 
     // Disconnect active blocks which are no longer in the best chain
     bool fBlocksDisconnected = false ;
@@ -2389,25 +2387,25 @@ static bool ActivateBestChainStep(CValidationState& state, const CChainParams& c
     }
 
     // Build list of new blocks to connect
-    std::vector<CBlockIndex*> vpindexToConnect;
-    bool fContinue = true;
-    int nHeight = pindexFork ? pindexFork->nHeight : -1;
-    while (fContinue && nHeight != pindexMostWork->nHeight) {
+    std::vector< CBlockIndex * > vpindexToConnect ;
+    bool fContinue = true ;
+    int nHeight = pindexFork ? pindexFork->nHeight : -1 ;
+    while ( fContinue && nHeight != pindexHighest->nHeight ) {
         // Don't iterate the entire list of potential improvements toward the best tip, as we likely only need
         // a few blocks along the way
-        int nTargetHeight = std::min(nHeight + 32, pindexMostWork->nHeight);
-        vpindexToConnect.clear();
-        vpindexToConnect.reserve(nTargetHeight - nHeight);
-        CBlockIndex *pindexIter = pindexMostWork->GetAncestor(nTargetHeight);
-        while (pindexIter && pindexIter->nHeight != nHeight) {
-            vpindexToConnect.push_back(pindexIter);
-            pindexIter = pindexIter->pprev;
+        int nTargetHeight = std::min( nHeight + 32, pindexHighest->nHeight ) ;
+        vpindexToConnect.clear() ;
+        vpindexToConnect.reserve( nTargetHeight - nHeight ) ;
+        CBlockIndex * pindexIter = pindexHighest->GetAncestor( nTargetHeight ) ;
+        while ( pindexIter && pindexIter->nHeight != nHeight ) {
+            vpindexToConnect.push_back( pindexIter ) ;
+            pindexIter = pindexIter->pprev ;
         }
-        nHeight = nTargetHeight;
+        nHeight = nTargetHeight ;
 
         // Connect new blocks
         BOOST_REVERSE_FOREACH(CBlockIndex *pindexConnect, vpindexToConnect) {
-            if (!ConnectTip(state, chainparams, pindexConnect, pindexConnect == pindexMostWork ? pblock : std::shared_ptr<const CBlock>(), connectTrace)) {
+            if ( ! ConnectTip( state, chainparams, pindexConnect, pindexConnect == pindexHighest ? pblock : std::shared_ptr< const CBlock >(), connectTrace ) ) {
                 if ( state.IsInvalid() ) {
                     // The block violates a consensus rule
                     if ( ! state.CorruptionPossible() )
@@ -2420,11 +2418,11 @@ static bool ActivateBestChainStep(CValidationState& state, const CChainParams& c
                     break ;
                 } else {
                     // A system error occurred (disk space, database error, ...)
-                    return false;
+                    return false ;
                 }
             } else {
                 PruneBlockIndexCandidates() ;
-                if ( ! pindexOldTip || chainActive.Tip()->nChainWorkHashes > pindexOldTip->nChainWorkHashes ) {
+                if ( pindexOldTip == nullptr || chainActive.Tip()->nHeight > pindexOldTip->nHeight ) {
                     // We're in a better position than we were. Return temporarily to release the lock
                     fContinue = false ;
                     break ;
@@ -2479,7 +2477,7 @@ bool ActivateBestChain( CValidationState & state, const CChainParams & chainpara
     // far from a guarantee. Things in the P2P/RPC will often end up calling
     // us in the middle of ProcessNewBlock - do not assume pblock is set sanely
 
-    CBlockIndex * pindexMostWork = nullptr ;
+    CBlockIndex * pindexHighest = nullptr ;
     CBlockIndex * pindexNewTip = nullptr ;
     do {
         boost::this_thread::interruption_point();
@@ -2498,28 +2496,28 @@ bool ActivateBestChain( CValidationState & state, const CChainParams & chainpara
               // notification of a connected conflict might cause an outside process
               // to abandon a transaction and then have it inadvertantly cleared by
               // the notification that the conflicted transaction was evicted
-            MemPoolConflictRemovalTracker mrt(mempool);
-            CBlockIndex *pindexOldTip = chainActive.Tip();
-            if (pindexMostWork == NULL) {
-                pindexMostWork = FindMostWorkChain();
+            MemPoolConflictRemovalTracker mrt( mempool ) ;
+            CBlockIndex * pindexOldTip = chainActive.Tip() ;
+            if ( pindexHighest == nullptr ) {
+                pindexHighest = FindHighestChain() ;
             }
 
             // Whether we have anything to do at all
-            if (pindexMostWork == NULL || pindexMostWork == chainActive.Tip())
-                return true;
+            if ( pindexHighest == nullptr || pindexHighest == chainActive.Tip() )
+                return true ;
 
-            bool fInvalidFound = false;
-            std::shared_ptr<const CBlock> nullBlockPtr;
-            if (!ActivateBestChainStep(state, chainparams, pindexMostWork, pblock && pblock->GetSha256Hash() == pindexMostWork->GetBlockSha256Hash() ? pblock : nullBlockPtr, fInvalidFound, connectTrace))
-                return false;
+            bool fInvalidFound = false ;
+            std::shared_ptr< const CBlock > nullBlockPtr ;
+            if ( ! ActivateBestChainStep( state, chainparams, pindexHighest, pblock && pblock->GetSha256Hash() == pindexHighest->GetBlockSha256Hash() ? pblock : nullBlockPtr, fInvalidFound, connectTrace ) )
+                return false ;
 
-            if (fInvalidFound) {
+            if ( fInvalidFound ) {
                 // Wipe cache, we may need another branch now
-                pindexMostWork = NULL;
+                pindexHighest = nullptr ;
             }
-            pindexNewTip = chainActive.Tip();
-            pindexFork = chainActive.FindFork(pindexOldTip);
-            fInitialDownload = IsInitialBlockDownload();
+            pindexNewTip = chainActive.Tip() ;
+            pindexFork = chainActive.FindFork( pindexOldTip ) ;
+            fInitialDownload = IsInitialBlockDownload() ;
 
             // throw all transactions though the signal-interface
 
@@ -2544,7 +2542,7 @@ bool ActivateBestChain( CValidationState & state, const CChainParams & chainpara
         if (pindexFork != pindexNewTip) {
             uiInterface.NotifyBlockTip(fInitialDownload, pindexNewTip);
         }
-    } while ( pindexNewTip != pindexMostWork ) ;
+    } while ( pindexNewTip != pindexHighest ) ;
 
     CheckBlockIndex( chainparams.GetConsensus( pindexNewTip->nHeight ) ) ;
 
@@ -2557,19 +2555,19 @@ bool ActivateBestChain( CValidationState & state, const CChainParams & chainpara
 }
 
 
-bool PreciousBlock(CValidationState& state, const CChainParams& params, CBlockIndex *pindex)
+bool PreciousBlock( CValidationState & state, const CChainParams & params, CBlockIndex * pindex )
 {
     {
-        LOCK(cs_main);
-        if ( pindex->nChainWorkHashes < chainActive.Tip()->nChainWorkHashes ) {
+        LOCK( cs_main ) ;
+        if ( pindex->nHeight < chainActive.Tip()->nHeight ) {
             // Nothing to do, this block is not at the tip
             return true ;
         }
-        if ( chainActive.Tip()->nChainWorkHashes > nLastPreciousChainwork ) {
+        if ( chainActive.Tip()->nHeight > nLastPreciousHeight ) {
             // The chain has been extended since the last call, reset the counter
             nBlockReverseSequenceId = -1 ;
         }
-        nLastPreciousChainwork = chainActive.Tip()->nChainWorkHashes ;
+        nLastPreciousHeight = chainActive.Tip()->nHeight ;
         setOfBlockIndexCandidates.erase( pindex ) ;
         pindex->nSequenceId = nBlockReverseSequenceId ;
         if ( nBlockReverseSequenceId > std::numeric_limits< int32_t >::min() ) {
@@ -2693,9 +2691,8 @@ CBlockIndex* AddToBlockIndex( const CBlockHeader & block )
         pindexNew->BuildSkip() ;
     }
     pindexNew->nTimeMax = ( pindexNew->pprev ? std::max( pindexNew->pprev->nTimeMax, pindexNew->nTime ) : pindexNew->nTime ) ;
-    pindexNew->nChainWorkHashes = ( pindexNew->pprev ? pindexNew->pprev->nChainWorkHashes : 0 ) + EstimateBlockProofMaxHashes( *pindexNew ) ;
     pindexNew->RaiseValidity( BLOCK_VALID_TREE ) ;
-    if ( pindexBestHeader == nullptr || pindexBestHeader->nChainWorkHashes < pindexNew->nChainWorkHashes )
+    if ( pindexBestHeader == nullptr || pindexBestHeader->nHeight < pindexNew->nHeight )
         pindexBestHeader = pindexNew ;
 
     setOfDirtyBlockIndices.insert( pindexNew ) ;
@@ -3225,17 +3222,17 @@ static bool AcceptBlock( const std::shared_ptr< const CBlock > & pblock, CValida
         return false;
 
     // Try to process all requested blocks that we don't have, but only
-    // process an unrequested block if it's new and has enough work to
-    // advance our tip, and isn't too many blocks ahead
+    // process an unrequested block if it's new, is higher than the tip
+    // and isn't too many blocks ahead
     bool fAlreadyHave = pindex->nStatus & BLOCK_DATA_EXISTS ;
-    bool fHasMoreHashes = ( chainActive.Tip() ? pindex->nChainWorkHashes > chainActive.Tip()->nChainWorkHashes : true ) ;
+    bool isHigher = ( chainActive.Tip() ? pindex->nHeight > chainActive.Tip()->nHeight : true ) ;
 
     // Blocks that are too out-of-order needlessly limit the effectiveness of
     // pruning, because pruning will not delete block files that contain any
     // blocks which are too close in height to the tip.  Apply this test
     // regardless of whether pruning is enabled; it should generally be safe to
     // not process unrequested blocks
-    bool fTooFarAhead = (pindex->nHeight > int(chainActive.Height() + MIN_BLOCKS_TO_KEEP));
+    bool fTooFarAhead = ( pindex->nHeight > int(chainActive.Height() + MIN_BLOCKS_TO_KEEP) ) ;
 
     // TODO: Decouple this function from the block download logic by removing fRequested
     // This requires some new chain datastructure to efficiently look up if a
@@ -3246,9 +3243,9 @@ static bool AcceptBlock( const std::shared_ptr< const CBlock > & pblock, CValida
     // and unrequested blocks
     if ( fAlreadyHave ) return true ;
     if ( ! fRequested ) {  // If we didn't ask for it:
-        if ( pindex->nTx != 0 ) return true ;  // This is a previously-processed block that was pruned
-        if ( ! fHasMoreHashes ) return true ;  // Don't process less-work chains
-        if ( fTooFarAhead ) return true ;      // Block height is too high
+        if ( pindex->nTx != 0 ) return true ;  // this is a previously-processed block that was pruned
+        if ( ! isHigher ) return true ;  // don't process shorter chains
+        if ( fTooFarAhead ) return true ;  // block is too high
     }
 
     if ( fNewBlock ) *fNewBlock = true ;
@@ -3581,9 +3578,6 @@ bool static LoadBlockIndexDB( const CChainParams & chainparams )
     {
         CBlockIndex * pindex = item.second ;
 
-        // calculate nChainWorkHashes, the maximum possible number of hashes to produce the chain up to and including this block
-        pindex->nChainWorkHashes = ( pindex->pprev ? pindex->pprev->nChainWorkHashes : 0 ) + EstimateBlockProofMaxHashes( *pindex ) ;
-
         // calculate nChainCoins, the summary number of coins generated in the chain up to and including this block
         /* CBlock block ;
         if ( ReadBlockFromDisk( block, pindex, chainparams.GetConsensus( pindex->nHeight ) ) ) {
@@ -3594,27 +3588,28 @@ bool static LoadBlockIndexDB( const CChainParams & chainparams )
         pindex->nTimeMax = ( pindex->pprev ? std::max( pindex->pprev->nTimeMax, pindex->nTime ) : pindex->nTime ) ;
         // We can link the chain of blocks for which we've received transactions at some point
         // Pruned nodes may have deleted the block
-        if (pindex->nTx > 0) {
-            if (pindex->pprev) {
-                if (pindex->pprev->nChainTx) {
-                    pindex->nChainTx = pindex->pprev->nChainTx + pindex->nTx;
+        if ( pindex->nTx > 0 ) {
+            if ( pindex->pprev != nullptr ) {
+                if ( pindex->pprev->nChainTx > 0 ) {
+                    pindex->nChainTx = pindex->pprev->nChainTx + pindex->nTx ;
                 } else {
-                    pindex->nChainTx = 0;
-                    mapBlocksUnlinked.insert(std::make_pair(pindex->pprev, pindex));
+                    pindex->nChainTx = 0 ;
+                    mapBlocksUnlinked.insert( std::make_pair( pindex->pprev, pindex ) ) ;
                 }
             } else {
-                pindex->nChainTx = pindex->nTx;
+                pindex->nChainTx = pindex->nTx ;
             }
         }
         if ( pindex->IsValid( BLOCK_VALID_TRANSACTIONS ) && ( pindex->nChainTx > 0 || pindex->pprev == nullptr ) )
             setOfBlockIndexCandidates.insert( pindex ) ;
         if ( pindex->nStatus & BLOCK_FAILED_MASK &&
-                ( ! pindexBestInvalid || pindex->nChainWorkHashes > pindexBestInvalid->nChainWorkHashes ) )
+                ( ! pindexBestInvalid || pindex->nHeight > pindexBestInvalid->nHeight ) )
             pindexBestInvalid = pindex ;
-        if (pindex->pprev)
-            pindex->BuildSkip();
-        if (pindex->IsValid(BLOCK_VALID_TREE) && (pindexBestHeader == NULL || CBlockIndexWorkComparator()(pindexBestHeader, pindex)))
-            pindexBestHeader = pindex;
+        if ( pindex->pprev != nullptr )
+            pindex->BuildSkip() ;
+        if ( pindex->IsValid( BLOCK_VALID_TREE )
+                && ( pindexBestHeader == nullptr || CBlockIndexComparator()( pindexBestHeader, pindex ) ) )
+            pindexBestHeader = pindex ;
     }
 
     // Load block file info
@@ -3676,8 +3671,8 @@ bool static LoadBlockIndexDB( const CChainParams & chainparams )
 
     PruneBlockIndexCandidates() ;
 
-    LogPrintf( "%s: chain's tip sha256_hash=%s height=%d date=%s progress=%f\n", __func__,
-        chainActive.Tip()->GetBlockSha256Hash().ToString(), chainActive.Height(),
+    LogPrintf( "%s: chain's tip height=%d sha256_hash=%s date=%s progress=%f\n", __func__,
+        chainActive.Height(), chainActive.Tip()->GetBlockSha256Hash().ToString(),
         DateTimeStrFormat( "%Y-%m-%d %H:%M:%S", chainActive.Tip()->GetBlockTime() ),
         GuessVerificationProgress( chainparams.TxData(), chainActive.Tip() ) ) ;
 
@@ -3696,96 +3691,109 @@ CVerifyDB::~CVerifyDB()
 
 bool CVerifyDB::VerifyDB( const CChainParams & chainparams, AbstractCoinsView * coinsview, int nCheckLevel, int nCheckDepth )
 {
-    LOCK(cs_main);
-    if (chainActive.Tip() == NULL || chainActive.Tip()->pprev == NULL)
-        return true;
+    LOCK( cs_main ) ;
+    if ( chainActive.Tip() == nullptr || chainActive.Tip()->pprev == nullptr )
+        return true ;
 
     // Verify blocks in the best chain
-    if (nCheckDepth <= 0)
-        nCheckDepth = 1000000000; // suffices until the year 19000
-    if (nCheckDepth > chainActive.Height())
-        nCheckDepth = chainActive.Height();
-    nCheckLevel = std::max(0, std::min(4, nCheckLevel));
-    LogPrintf("Verifying last %i blocks at level %i\n", nCheckDepth, nCheckLevel);
-    CCoinsViewCache coins(coinsview);
-    CBlockIndex* pindexState = chainActive.Tip();
-    CBlockIndex* pindexFailure = NULL;
-    int nGoodTransactions = 0;
-    CValidationState state;
-    int reportDone = 0;
-    LogPrintf("[0%%]...");
-    for (CBlockIndex* pindex = chainActive.Tip(); pindex && pindex->pprev; pindex = pindex->pprev)
+    if ( nCheckDepth <= 0 ) nCheckDepth = 1000000000 ;
+    if ( nCheckDepth > chainActive.Height() )
+        nCheckDepth = chainActive.Height() ;
+    nCheckLevel = std::max( 0, std::min( 4, nCheckLevel ) ) ;
+    LogPrintf( "Verifying last %i blocks at level %i\n", nCheckDepth, nCheckLevel ) ;
+
+    CCoinsViewCache coins( coinsview ) ;
+    CBlockIndex* pindexState = chainActive.Tip() ;
+    CBlockIndex* pindexFailure = nullptr ;
+    int nGoodTransactions = 0 ;
+    CValidationState state ;
+
+    int reportDone = 0 ;
+    LogPrintf( "[0%%]..." ) ;
+
+    for ( CBlockIndex* pindex = chainActive.Tip() ; pindex && pindex->pprev ; pindex = pindex->pprev )
     {
         boost::this_thread::interruption_point();
         int percentageDone = std::max(1, std::min(99, (int)(((double)(chainActive.Height() - pindex->nHeight)) / (double)nCheckDepth * (nCheckLevel >= 4 ? 50 : 100))));
-        if (reportDone < percentageDone/10) {
+        if ( reportDone < percentageDone / 10 ) {
             // report every 10% step
-            LogPrintf("[%d%%]...", percentageDone);
-            reportDone = percentageDone/10;
+            LogPrintf( "[%d%%]...", percentageDone ) ;
+            reportDone = percentageDone / 10 ;
         }
-        uiInterface.ShowProgress(_("Verifying blocks..."), percentageDone);
+        uiInterface.ShowProgress( _("Verifying blocks..."), percentageDone ) ;
         if ( pindex->nHeight < chainActive.Height() - nCheckDepth )
             break ;
         if ( fPruneMode && ! ( pindex->nStatus & BLOCK_DATA_EXISTS ) ) {
             // If pruning, only go back as far as we have data
-            LogPrintf( "VerifyDB(): block verification stopping at height %d (pruning, no data)\n", pindex->nHeight ) ;
+            LogPrintf( "%s: block verification stopping at height %d (pruning, no data)\n", __func__, pindex->nHeight ) ;
             break ;
         }
 
         CBlock block ;
         // check level 0: read from disk
-        if (!ReadBlockFromDisk(block, pindex, chainparams.GetConsensus(pindex->nHeight)))
-            return error("VerifyDB(): *** ReadBlockFromDisk failed at %d, hash=%s", pindex->nHeight, pindex->GetBlockSha256Hash().ToString());
+        if ( ! ReadBlockFromDisk( block, pindex, chainparams.GetConsensus( pindex->nHeight ) ) )
+            return error( "%s: *** ReadBlockFromDisk failed at height %d, sha256_hash=%s", __func__,
+                            pindex->nHeight, pindex->GetBlockSha256Hash().ToString() ) ;
+
         // check level 1: verify block validity
-        if (nCheckLevel >= 1 && !CheckBlock(block, state))
-            return error("%s: *** found bad block at %d, hash=%s (%s)\n", __func__,
-                         pindex->nHeight, pindex->GetBlockSha256Hash().ToString(), FormatStateMessage(state));
+        if ( nCheckLevel >= 1 && ! CheckBlock( block, state ) )
+            return error( "%s: *** found bad block at height %d, sha256_hash=%s (%s)\n", __func__,
+                          pindex->nHeight, pindex->GetBlockSha256Hash().ToString(), FormatStateMessage( state ) ) ;
+
         // check level 2: verify undo validity
-        if (nCheckLevel >= 2 && pindex) {
-            CBlockUndo undo;
-            CDiskBlockPos pos = pindex->GetUndoPos();
-            if (!pos.IsNull()) {
-                if (!UndoReadFromDisk(undo, pos, pindex->pprev->GetBlockSha256Hash()))
-                    return error("VerifyDB(): *** found bad undo data at %d, hash=%s\n", pindex->nHeight, pindex->GetBlockSha256Hash().ToString());
+        if ( nCheckLevel >= 2 && pindex != nullptr ) {
+            CBlockUndo undo ;
+            CDiskBlockPos pos = pindex->GetUndoPos() ;
+            if ( ! pos.IsNull() ) {
+                if ( ! UndoReadFromDisk( undo, pos, pindex->pprev->GetBlockSha256Hash() ) )
+                    return error( "%s: *** found bad undo data at height %d, sha256_hash=%s\n", __func__,
+                                    pindex->nHeight, pindex->GetBlockSha256Hash().ToString() ) ;
             }
         }
+
         // check level 3: check for inconsistencies during memory-only disconnect of tip blocks
-        if (nCheckLevel >= 3 && pindex == pindexState && (coins.DynamicMemoryUsage() + pcoinsTip->DynamicMemoryUsage()) <= nCoinCacheUsage) {
-            bool fClean = true;
-            if (!DisconnectBlock(block, state, pindex, coins, &fClean))
-                return error("VerifyDB(): *** irrecoverable inconsistency in block data at %d, hash=%s", pindex->nHeight, pindex->GetBlockSha256Hash().ToString());
-            pindexState = pindex->pprev;
-            if (!fClean) {
-                nGoodTransactions = 0;
-                pindexFailure = pindex;
+        if ( nCheckLevel >= 3 && pindex == pindexState &&
+                ( coins.DynamicMemoryUsage() + pcoinsTip->DynamicMemoryUsage() ) <= nCoinCacheUsage ) {
+            bool fClean = true ;
+            if ( ! DisconnectBlock( block, state, pindex, coins, &fClean ) )
+                return error( "%s: *** irrecoverable inconsistency in block data at height %d, sha256_hash=%s", __func__,
+                                pindex->nHeight, pindex->GetBlockSha256Hash().ToString() ) ;
+            pindexState = pindex->pprev ;
+            if ( ! fClean ) {
+                nGoodTransactions = 0 ;
+                pindexFailure = pindex ;
             } else
-                nGoodTransactions += block.vtx.size();
+                nGoodTransactions += block.vtx.size() ;
         }
-        if (ShutdownRequested())
-            return true;
+
+        if ( ShutdownRequested() ) return true ;
     }
-    if (pindexFailure)
-        return error("VerifyDB(): *** coin database inconsistencies found (last %i blocks, %i good transactions before that)\n", chainActive.Height() - pindexFailure->nHeight + 1, nGoodTransactions);
+    if ( pindexFailure != nullptr )
+        return error( "%s: *** coin database inconsistencies found (last %i blocks, %i good transactions before that)\n", __func__,
+                        chainActive.Height() - pindexFailure->nHeight + 1, nGoodTransactions ) ;
 
     // check level 4: try reconnecting blocks
-    if (nCheckLevel >= 4) {
-        CBlockIndex *pindex = pindexState;
-        while (pindex != chainActive.Tip()) {
+    if ( nCheckLevel >= 4 ) {
+        CBlockIndex * pindex = pindexState ;
+        while ( pindex != chainActive.Tip() ) {
             boost::this_thread::interruption_point();
-            uiInterface.ShowProgress(_("Verifying blocks..."), std::max(1, std::min(99, 100 - (int)(((double)(chainActive.Height() - pindex->nHeight)) / (double)nCheckDepth * 50))));
-            pindex = chainActive.Next(pindex);
-            CBlock block;
-            if (!ReadBlockFromDisk(block, pindex, chainparams.GetConsensus(pindex->nHeight)))
-                return error("VerifyDB(): *** ReadBlockFromDisk failed at %d, hash=%s", pindex->nHeight, pindex->GetBlockSha256Hash().ToString());
-            if (!ConnectBlock(block, state, pindex, coins, chainparams))
-                return error("VerifyDB(): *** found unconnectable block at %d, hash=%s", pindex->nHeight, pindex->GetBlockSha256Hash().ToString());
+            uiInterface.ShowProgress( _("Verifying blocks..."), std::max(1, std::min(99, 100 - (int)(((double)(chainActive.Height() - pindex->nHeight)) / (double)nCheckDepth * 50))) ) ;
+            pindex = chainActive.Next( pindex ) ;
+            CBlock block ;
+            if ( ! ReadBlockFromDisk( block, pindex, chainparams.GetConsensus( pindex->nHeight ) ) )
+                return error( "%s: *** ReadBlockFromDisk failed at height %d, sha256_hash=%s", __func__,
+                                pindex->nHeight, pindex->GetBlockSha256Hash().ToString() ) ;
+            if ( ! ConnectBlock( block, state, pindex, coins, chainparams ) )
+                return error( "%s: *** found unconnectable block at height %d, sha256_hash=%s", __func__,
+                                pindex->nHeight, pindex->GetBlockSha256Hash().ToString() ) ;
         }
     }
 
     LogPrintf( "[DONE]\n" ) ;
-    LogPrintf( "No coin database inconsistencies in last %i blocks (%i transactions)\n", chainActive.Height() - pindexState->nHeight, nGoodTransactions ) ;
+    LogPrintf( "%s: no coin database inconsistencies in last %i blocks (%i transactions)\n", __func__,
+                chainActive.Height() - pindexState->nHeight, nGoodTransactions ) ;
 
-    return true;
+    return true ;
 }
 
 bool RewindBlockIndex(const CChainParams& params)
@@ -3810,14 +3818,14 @@ bool RewindBlockIndex(const CChainParams& params)
             // no need to walk further, and trying to DisconnectTip()
             // will fail (and require a needless reindex/redownload
             // of the blockchain)
-            break;
+            break ;
         }
-        if (!DisconnectTip(state, params, true)) {
-            return error("RewindBlockIndex: unable to disconnect block at height %i", pindex->nHeight);
+        if ( ! DisconnectTip( state, params, true ) ) {
+            return error( "%s: unable to disconnect block at height %i", __func__, pindex->nHeight ) ;
         }
-        // Occasionally flush state to disk.
-        if (!FlushStateToDisk(state, FLUSH_STATE_PERIODIC))
-            return false;
+        // Occasionally flush state to disk
+        if ( ! FlushStateToDisk( state, FLUSH_STATE_PERIODIC ) )
+            return false ;
     }
 
     // Reduce validity flag and have-data flags.
@@ -3865,7 +3873,7 @@ bool RewindBlockIndex(const CChainParams& params)
 
     PruneBlockIndexCandidates();
 
-    CheckBlockIndex(params.GetConsensus(chainActive.Height()));
+    CheckBlockIndex( params.GetConsensus( chainActive.Height() ) ) ;
 
     if (!FlushStateToDisk(state, FLUSH_STATE_ALWAYS)) {
         return false;
@@ -4159,7 +4167,7 @@ void static CheckBlockIndex(const Consensus::Params& consensusParams)
         assert((pindexFirstNeverProcessed != NULL) == (pindex->nChainTx == 0)); // nChainTx != 0 is used to signal that all parent blocks have been processed (but may have been pruned)
         assert((pindexFirstNotTransactionsValid != NULL) == (pindex->nChainTx == 0));
         assert( pindex->nHeight == nHeight ) ; // nHeight must be consistent
-        assert( pindex->pprev == nullptr || pindex->nChainWorkHashes >= pindex->pprev->nChainWorkHashes ) ; // For every block except the genesis block, the chainwork must be larger than the parent's
+        assert( pindex->pprev == nullptr || pindex->nHeight > pindex->pprev->nHeight ) ; // For every block except the genesis block, the height must be larger than the parent's
         assert(nHeight < 2 || (pindex->pskip && (pindex->pskip->nHeight < nHeight))); // The pskip pointer must point back for all but the first 2 blocks
         assert(pindexFirstNotTreeValid == NULL); // All mapBlockIndex entries must at least be TREE valid
 
@@ -4170,7 +4178,7 @@ void static CheckBlockIndex(const Consensus::Params& consensusParams)
             // Checks for not-invalid blocks
             assert((pindex->nStatus & BLOCK_FAILED_MASK) == 0); // The failed mask cannot be set for blocks without invalid parents
         }
-        if ( ! CBlockIndexWorkComparator()( pindex, chainActive.Tip() ) && pindexFirstNeverProcessed == nullptr ) {
+        if ( ! CBlockIndexComparator()( pindex, chainActive.Tip() ) && pindexFirstNeverProcessed == nullptr ) {
             if ( pindexFirstInvalid == nullptr ) {
                 // If this block sorts at least as good as the current tip and
                 // is valid and we have all data for its parents, it must be in
@@ -4211,14 +4219,12 @@ void static CheckBlockIndex(const Consensus::Params& consensusParams)
             // but we're currently missing data for some parent
             assert( fHavePruned ) ; // We must have pruned
             // This block may have entered mapBlocksUnlinked if:
-            //  - it has a descendant that at some point had more work than
-            //    the tip, and
-            //  - we tried switching to that descendant but were missing
-            //    data for some intermediate block between chainActive and
-            //    the tip
+            //  - it has a descendant that at some point was higher than the tip, and
+            //  - we tried switching to that descendant but were missing data
+            //    for some intermediate block between chainActive and the tip
             // So if this block is itself better than chainActive.Tip() and it wasn't
             // in setOfBlockIndexCandidates, then it must be in mapBlocksUnlinked
-            if ( ! CBlockIndexWorkComparator()( pindex, chainActive.Tip() ) &&
+            if ( ! CBlockIndexComparator()( pindex, chainActive.Tip() ) &&
                     setOfBlockIndexCandidates.count( pindex ) == 0 ) {
                 if ( pindexFirstInvalid == nullptr ) {
                     assert( foundInUnlinked ) ;

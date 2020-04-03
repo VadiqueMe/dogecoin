@@ -191,18 +191,12 @@ QT_TRANSLATE_NOOP("dogecoin-core", ""
 "Wallet will not create transactions that violate mempool chain limits "
 "(default: %u)"),
 QT_TRANSLATE_NOOP("dogecoin-core", ""
-"Warning: The network does not appear to fully agree! Some miners appear to "
-"be experiencing issues."),
-QT_TRANSLATE_NOOP("dogecoin-core", ""
 "Warning: Unknown block versions being mined! It's possible unknown rules are "
 "in effect"),
 QT_TRANSLATE_NOOP("dogecoin-core", ""
 "Warning: Wallet file corrupt, data salvaged! Original %s saved as %s in %s; "
 "if your balance or transactions are incorrect you should restore from a "
 "backup."),
-QT_TRANSLATE_NOOP("dogecoin-core", ""
-"Warning: We do not appear to fully agree with our peers! You may need to "
-"upgrade, or other nodes may need to upgrade."),
 QT_TRANSLATE_NOOP("dogecoin-core", ""
 "Whitelist peers connecting from the given IP address (e.g. 1.2.3.4) or CIDR "
 "notated network (e.g. 1.2.3.0/24). Can be specified multiple times."),

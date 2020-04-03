@@ -2781,14 +2781,6 @@
         <translation>錢包軟體不會產生違反記憶池交易鏈限制的交易(預設值: %u)</translation>
     </message>
     <message>
-        <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
-        <translation>警告: 位元幣網路對於區塊鏈結的決定目前有分歧！有些礦工看來會有問題。</translation>
-    </message>
-    <message>
-        <source>Warning: We do not appear to fully agree with our peers! You may need to upgrade, or other nodes may need to upgrade.</source>
-        <translation>警告: 我們和某些連線的節點對於區塊鏈結的決定不同！你可能需要升級，或是需要等其它的節點升級。</translation>
-    </message>
-    <message>
         <source>You need to rebuild the database using -reindex-chainstate to change -txindex</source>
         <translation>改變 -txindex 參數後，必須要用 -reindex-chainstate 參數來重建資料庫</translation>
     </message>

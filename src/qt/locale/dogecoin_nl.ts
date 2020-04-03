@@ -2768,14 +2768,6 @@
         <translation>Portemonnee creëert geen transacties die mempool-ketenlimieten schenden (standaard: %u)</translation>
     </message>
     <message>
-        <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
-        <translation>Waarschuwing: Het lijkt erop dat het netwerk geen consensus kan vinden! Sommige delvers lijken problemen te ondervinden.</translation>
-    </message>
-    <message>
-        <source>Warning: We do not appear to fully agree with our peers! You may need to upgrade, or other nodes may need to upgrade.</source>
-        <translation>Waarschuwing: Het lijkt erop dat we geen consensus kunnen vinden met onze peers! Mogelijk dient u te upgraden, of andere nodes moeten wellicht upgraden.</translation>
-    </message>
-    <message>
         <source>You need to rebuild the database using -reindex-chainstate to change -txindex</source>
         <translation>Om -txindex te kunnen veranderen dient u de database opnieuw te bouwen met gebruik van -reindex-chainstate.</translation>
     </message>

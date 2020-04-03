@@ -75,8 +75,6 @@ struct Params
     bool fDigishieldDifficultyCalculation ;
     bool fSimplifiedRewards ; // Use block height derived rewards rather than previous block hash derived
 
-    uint256 nMinimumChainWorkHashes ;
-
     /** Auxpow parameters */
     int32_t nAuxpowChainId ;
     bool fStrictChainId ;

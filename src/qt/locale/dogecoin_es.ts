@@ -2779,14 +2779,6 @@
         <translation>El monedero no creará transacciones que violen los límites de la cadena mempool (predeterminado: %u)</translation>
     </message>
     <message>
-        <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
-        <translation>Advertencia: ¡La red no parece coincidir del todo! Algunos mineros parecen estar experimentando problemas.</translation>
-    </message>
-    <message>
-        <source>Warning: We do not appear to fully agree with our peers! You may need to upgrade, or other nodes may need to upgrade.</source>
-        <translation>Advertencia: ¡No parecemos estar del todo con nuestros pares! Puede que necesite actualizarse, o puede que otros nodos necesiten actualizarse.</translation>
-    </message>
-    <message>
         <source>You need to rebuild the database using -reindex-chainstate to change -txindex</source>
         <translation>Necesita reconstruir la base de datos usando -reindex-chainstate para cambiar -txindex</translation>
     </message>

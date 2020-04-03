@@ -106,9 +106,6 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1479168000; // November 15th, 2016
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 0; // Disabled
 
-        // The best chain has at least this much work
-        consensus.nMinimumChainWorkHashes = uint256S( "0x000000000000000000000000000000000000000000000141a39e783aad4f660f" ) ;
-
         consensus.nAuxpowChainId = 0x0062 ; // 98 - Josh Wise!
         consensus.fStrictChainId = true ;
         consensus.fAllowLegacyBlocks = true ;
@@ -258,9 +255,6 @@ public:
         consensus.vDeployments[ Consensus::DEPLOYMENT_SEGWIT ].bit = 1 ;
         consensus.vDeployments[ Consensus::DEPLOYMENT_SEGWIT ].nStartTime = mktime( &startTime ) ;
         consensus.vDeployments[ Consensus::DEPLOYMENT_SEGWIT ].nTimeout = 0 ; // disabled
-
-        // The best chain has at least this much work
-        consensus.nMinimumChainWorkHashes = uint256S( "0x00020375" ) ;
 
         consensus.nAuxpowChainId = 0x62 ; // 98 Josh Wise
         consensus.fStrictChainId = false ;
@@ -472,9 +466,6 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1462060800; // May 1st 2016
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 0; // Disabled
 
-        // The best chain has at least this much work
-        consensus.nMinimumChainWorkHashes = uint256S( "0x00000000000000000000000000000000000000000000000000001030d1382ade" ) ;
-
         consensus.nAuxpowChainId = 0x0062 ; // 98 - Josh Wise!
         consensus.fStrictChainId = false ;
         consensus.nHeightEffective = 0 ;
@@ -602,9 +593,6 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].bit = 1;
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 0;
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 999999999999ULL;
-
-        // The best chain has at least this much work
-        consensus.nMinimumChainWorkHashes = uint256S( "0x00" ) ;
 
         consensus.nAuxpowChainId = 0x0062 ; // 98 - Josh Wise!
         consensus.fStrictChainId = true ;

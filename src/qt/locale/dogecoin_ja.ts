@@ -2772,14 +2772,6 @@
         <translation>ウォレットがmempoolチェーン制限数を超えてトランザクションを作らないようにする (初期値: %u)</translation>
     </message>
     <message>
-        <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
-        <translation>警告: ネットワークは完全に合意が取れていないようです。幾人かのマイナーに何らかの障害が発生しているようです。</translation>
-    </message>
-    <message>
-        <source>Warning: We do not appear to fully agree with our peers! You may need to upgrade, or other nodes may need to upgrade.</source>
-        <translation>警告: ピアと完全に合意が取れていないようです！このノードまたは他のノードのアップグレードが必要なようです。</translation>
-    </message>
-    <message>
         <source>You need to rebuild the database using -reindex-chainstate to change -txindex</source>
         <translation>-txindex を変更するには -reindex-chainstate を使用してデータベースを再構築する必要があります</translation>
     </message>

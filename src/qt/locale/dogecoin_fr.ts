@@ -2776,14 +2776,6 @@
         <translation>Un porte-monnaie ne créera aucune transaction qui enfreint les limites de chaîne de la réserve de mémoire (par défaut : %u)</translation>
     </message>
     <message>
-        <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
-        <translation>Avertissement : le réseau ne semble pas totalement d'accord ! Certains mineurs semblent éprouver des problèmes.</translation>
-    </message>
-    <message>
-        <source>Warning: We do not appear to fully agree with our peers! You may need to upgrade, or other nodes may need to upgrade.</source>
-        <translation>Avertissement : nous ne semblons pas être en accord complet avec nos pairs ! Une mise à niveau pourrait être nécessaire pour vous ou pour d'autres nœuds du réseau.</translation>
-    </message>
-    <message>
         <source>You need to rebuild the database using -reindex-chainstate to change -txindex</source>
         <translation>Vous devez reconstruire la base de données avec -reindex-chainstate pour changer -txindex</translation>
     </message>

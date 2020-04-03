@@ -376,10 +376,11 @@ void ProcessBlockAvailability( NodeId nodeid )
 
     if ( ! state->hashLastUnknownBlock.IsNull() ) {
         BlockMap::iterator itOld = mapBlockIndex.find( state->hashLastUnknownBlock ) ;
-        if ( itOld != mapBlockIndex.end() && itOld->second->nChainWorkHashes > 0 ) {
+        if ( itOld != mapBlockIndex.end() ) {
             if ( state->pindexBestKnownBlock == nullptr ||
-                    itOld->second->nChainWorkHashes >= state->pindexBestKnownBlock->nChainWorkHashes )
+                    itOld->second->nHeight >= state->pindexBestKnownBlock->nHeight ) {
                 state->pindexBestKnownBlock = itOld->second ;
+            }
             state->hashLastUnknownBlock.SetNull() ;
         }
     }
@@ -394,10 +395,10 @@ void UpdateBlockAvailability( NodeId nodeid, const uint256 & hash )
     ProcessBlockAvailability( nodeid ) ;
 
     BlockMap::iterator it = mapBlockIndex.find( hash ) ;
-    if ( it != mapBlockIndex.end() && it->second->nChainWorkHashes > 0 ) {
+    if ( it != mapBlockIndex.end() ) {
         // An actually better block was announced
         if ( state->pindexBestKnownBlock == nullptr ||
-                it->second->nChainWorkHashes >= state->pindexBestKnownBlock->nChainWorkHashes )
+                it->second->nHeight >= state->pindexBestKnownBlock->nHeight )
             state->pindexBestKnownBlock = it->second ;
     } else {
         // An unknown block was announced; just assume that the latest one is the best one
@@ -476,19 +477,20 @@ const CBlockIndex* LastCommonAncestor(const CBlockIndex* pa, const CBlockIndex* 
 
 /** Update pindexLastCommonBlock and add not-in-flight missing successors to vBlocks, until it has
  *  at most count entries */
-void FindNextBlocksToDownload(NodeId nodeid, unsigned int count, std::vector<const CBlockIndex*>& vBlocks, NodeId& nodeStaller, const Consensus::Params& consensusParams) {
-    if (count == 0)
-        return;
+void FindNextBlocksToDownload( NodeId nodeid, unsigned int count, std::vector< const CBlockIndex* > & vBlocks, NodeId & nodeStaller, const Consensus::Params & consensusParams )
+{
+    if ( count == 0 ) return ;
 
-    vBlocks.reserve(vBlocks.size() + count);
-    CNodeState *state = State(nodeid);
-    assert(state != NULL);
+    vBlocks.reserve( vBlocks.size() + count ) ;
+
+    CNodeState * state = State( nodeid ) ;
+    assert( state != nullptr ) ;
 
     // Make sure pindexBestKnownBlock is up to date, we'll need it
-    ProcessBlockAvailability(nodeid);
+    ProcessBlockAvailability( nodeid ) ;
 
     if ( state->pindexBestKnownBlock == nullptr ||
-            state->pindexBestKnownBlock->nChainWorkHashes < chainActive.Tip()->nChainWorkHashes ) {
+            state->pindexBestKnownBlock->nHeight < chainActive.Tip()->nHeight ) {
         // This peer has nothing interesting
         return ;
     }
@@ -539,7 +541,7 @@ void FindNextBlocksToDownload(NodeId nodeid, unsigned int count, std::vector<con
                 return ;
             }
             if ( pindex->nStatus & BLOCK_DATA_EXISTS || chainActive.Contains( pindex ) ) {
-                if ( pindex->nChainTx )
+                if ( pindex->nChainTx > 0 )
                     state->pindexLastCommonBlock = pindex ;
             } else if (mapBlocksInFlight.count(pindex->GetBlockSha256Hash()) == 0) {
                 // The block is not already downloaded, and not yet in flight
@@ -991,7 +993,7 @@ void static ProcessGetData(CNode* pfrom, const Consensus::Params& consensusParam
                 BlockMap::iterator mi = mapBlockIndex.find( inv.hash ) ;
                 if ( mi != mapBlockIndex.end() )
                 {
-                    if ( mi->second->nChainTx && ! mi->second->IsValid( BLOCK_VALID_SCRIPTS ) &&
+                    if ( mi->second->nChainTx > 0 && ! mi->second->IsValid( BLOCK_VALID_SCRIPTS ) &&
                             mi->second->IsValid( BLOCK_VALID_TREE ) ) {
                         // If we have the block and all of its parents, but have not yet validated it,
                         // we might be in the middle of connecting it (in the unlock of cs_main
@@ -2018,7 +2020,7 @@ bool static ProcessMessage( CNode * pfrom, const std::string & strCommand, CData
         if (pindex->nStatus & BLOCK_DATA_EXISTS) // Nothing to do here
             return true;
 
-        if ( pindex->nChainWorkHashes <= chainActive.Tip()->nChainWorkHashes || // we know something better
+        if ( pindex->nHeight <= chainActive.Tip()->nHeight || // we know something better
                 pindex->nTx != 0 ) { // we had this block at some point, but pruned it
             if ( fAlreadyInFlight ) {
                 // we requested this block for some reason, but our mempool will probably be useless
@@ -2322,7 +2324,7 @@ bool static ProcessMessage( CNode * pfrom, const std::string & strCommand, CData
         // If this set of headers is valid and ends in a block with at least as
         // much work as our tip, download as much as possible
         if ( fCanDirectFetch && pindexLast->IsValid( BLOCK_VALID_TREE ) &&
-                chainActive.Tip()->nChainWorkHashes <= pindexLast->nChainWorkHashes ) {
+                chainActive.Tip()->nHeight <= pindexLast->nHeight ) {
             std::vector<const CBlockIndex*> vToFetch;
             const CBlockIndex *pindexWalk = pindexLast;
             // Calculate all the blocks we'd need to switch to pindexLast, up to a limit

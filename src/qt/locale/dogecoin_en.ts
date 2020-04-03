@@ -2794,25 +2794,25 @@
     </message>
     <message>
         <location line="+14"/>
-        <location line="+518"/>
-        <location line="+560"/>
+        <location line="+491"/>
+        <location line="+533"/>
         <source>Remove this entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-1214"/>
+        <location line="-1160"/>
         <source>Label:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+23"/>
-        <location line="+664"/>
-        <location line="+560"/>
+        <location line="+637"/>
+        <location line="+533"/>
         <source>Amount:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-1193"/>
+        <location line="-1139"/>
         <source>Subtract fee from amount</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2822,12 +2822,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1164"/>
+        <location line="+1110"/>
         <source>This is an authenticated payment request</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-1088"/>
+        <location line="-1034"/>
         <source>Enter a label for this address to add it to the list of used addresses</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2837,20 +2837,20 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+469"/>
+        <location line="+442"/>
         <source>This is an unauthenticated payment request</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-545"/>
-        <location line="+560"/>
-        <location line="+556"/>
+        <location line="-518"/>
+        <location line="+533"/>
+        <location line="+529"/>
         <source>Pay To:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-522"/>
-        <location line="+560"/>
+        <location line="-495"/>
+        <location line="+533"/>
         <source>Memo:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3998,11 +3998,6 @@
     </message>
     <message>
         <location line="+3"/>
-        <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
         <source>Warning: Unknown block versions being mined! It&apos;s possible unknown rules are in effect</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4013,11 +4008,6 @@
     </message>
     <message>
         <location line="+4"/>
-        <source>Warning: We do not appear to fully agree with our peers! You may need to upgrade, or other nodes may need to upgrade.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
         <source>Whitelist peers connecting from the given IP address (e.g. 1.2.3.4) or CIDR notated network (e.g. 1.2.3.0/24). Can be specified multiple times.</source>
         <translation type="unfinished"></translation>
     </message>

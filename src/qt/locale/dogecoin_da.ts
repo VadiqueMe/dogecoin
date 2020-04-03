@@ -2768,14 +2768,6 @@
         <translation>Tegnebogen vil ikke oprette transaktioner, som overtræder begrænsningen for hukommelsespuljekæden (standard: %u)</translation>
     </message>
     <message>
-        <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
-        <translation>Advarsel: Netværket ser ikke ud til at være fuldt ud enige! Enkelte minere ser ud til at opleve problemer.</translation>
-    </message>
-    <message>
-        <source>Warning: We do not appear to fully agree with our peers! You may need to upgrade, or other nodes may need to upgrade.</source>
-        <translation>Advarsel: Vi ser ikke ud til at være fuldt ud enige med andre knuder! Du kan være nødt til at opgradere, eller andre knuder kan være nødt til at opgradere.</translation>
-    </message>
-    <message>
         <source>You need to rebuild the database using -reindex-chainstate to change -txindex</source>
         <translation>Du er nødt til at genopbygge databasen ved hjælp af -reindex-chainstate for at ændre -txindex</translation>
     </message>

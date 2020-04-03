@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -10,42 +11,43 @@
 #include "utilstrencodings.h"
 #include "warnings.h"
 
-CCriticalSection cs_warnings;
-std::string strMiscWarning;
-bool fLargeWorkForkFound = false;
-bool fLargeWorkInvalidChainFound = false;
+CCriticalSection cs_warnings ;
+std::string strMiscWarning ;
 
-void SetMiscWarning(const std::string& strWarning)
+bool fHighForkFound = false ;
+bool fHighInvalidChainFound = false ;
+
+void SetMiscWarning( const std::string & warning )
 {
-    LOCK(cs_warnings);
-    strMiscWarning = strWarning;
+    LOCK( cs_warnings ) ;
+    strMiscWarning = warning ;
 }
 
-void SetfLargeWorkForkFound(bool flag)
+void SetHighForkFound( bool f )
 {
-    LOCK(cs_warnings);
-    fLargeWorkForkFound = flag;
+    LOCK( cs_warnings ) ;
+    fHighForkFound = f ;
 }
 
-bool GetfLargeWorkForkFound()
+bool GetHighForkFound()
 {
-    LOCK(cs_warnings);
-    return fLargeWorkForkFound;
+    LOCK( cs_warnings ) ;
+    return fHighForkFound ;
 }
 
-void SetfLargeWorkInvalidChainFound(bool flag)
+void SetHighInvalidChainFound( bool f )
 {
-    LOCK(cs_warnings);
-    fLargeWorkInvalidChainFound = flag;
+    LOCK( cs_warnings ) ;
+    fHighInvalidChainFound = f ;
 }
 
-bool GetfLargeWorkInvalidChainFound()
+bool GetHighInvalidChainFound()
 {
-    LOCK(cs_warnings);
-    return fLargeWorkInvalidChainFound;
+    LOCK( cs_warnings ) ;
+    return fHighInvalidChainFound ;
 }
 
-std::string GetWarnings(const std::string& strFor)
+std::string GetWarnings( const std::string & strFor )
 {
     int nPriority = 0;
     std::string strStatusBar;
@@ -58,25 +60,25 @@ std::string GetWarnings(const std::string& strFor)
     if (GetBoolArg("-testsafemode", DEFAULT_TESTSAFEMODE))
         strStatusBar = strRPC = strGUI = "testsafemode enabled";
 
-    // Misc warnings like out of disk space and clock is wrong
-    if (strMiscWarning != "")
+    // warnings like out of disk space or wrong clock
+    if ( strMiscWarning.size() > 0 )
     {
-        nPriority = 1000;
-        strStatusBar = strMiscWarning;
-        strGUI += (strGUI.empty() ? "" : uiAlertSeperator) + strMiscWarning;
+        nPriority = 1000 ;
+        strStatusBar = strMiscWarning ;
+        strGUI += ( strGUI.empty() ? "" : uiAlertSeperator ) + strMiscWarning ;
     }
 
-    if (fLargeWorkForkFound)
+    if ( fHighForkFound )
     {
-        nPriority = 2000;
-        strStatusBar = strRPC = "Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.";
-        strGUI += (strGUI.empty() ? "" : uiAlertSeperator) + _("Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.");
+        nPriority = 2000 ;
+        strStatusBar = strRPC = "Warning: The network does not appear to fully agree. Some miners appear to be experiencing issues";
+        strGUI += ( strGUI.empty() ? "" : uiAlertSeperator ) + strRPC ;
     }
-    else if (fLargeWorkInvalidChainFound)
+    else if ( fHighInvalidChainFound )
     {
-        nPriority = 2000;
-        strStatusBar = strRPC = "Warning: We do not appear to fully agree with our peers! You may need to upgrade, or other nodes may need to upgrade.";
-        strGUI += (strGUI.empty() ? "" : uiAlertSeperator) + _("Warning: We do not appear to fully agree with our peers! You may need to upgrade, or other nodes may need to upgrade.");
+        nPriority = 2000 ;
+        strStatusBar = strRPC = "Warning: We do not appear to fully agree with other peers. You may need to upgrade, or other nodes may need to upgrade";
+        strGUI += ( strGUI.empty() ? "" : uiAlertSeperator ) + strRPC ;
     }
 
     // Alerts
@@ -99,6 +101,7 @@ std::string GetWarnings(const std::string& strFor)
         return strStatusBar;
     else if (strFor == "rpc")
         return strRPC;
+
     assert(!"GetWarnings(): invalid parameter");
     return "error";
 }

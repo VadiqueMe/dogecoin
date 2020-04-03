@@ -2772,14 +2772,6 @@
         <translation>Peněženka nebude vytvářet transakce, které by porušovaly limity transakčního zásobníku na řetězce (výchozí: %u)</translation>
     </message>
     <message>
-        <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
-        <translation>Upozornění: Síť podle všeho není v konzistentním stavu. Někteří těžaři jsou zřejmě v potížích.</translation>
-    </message>
-    <message>
-        <source>Warning: We do not appear to fully agree with our peers! You may need to upgrade, or other nodes may need to upgrade.</source>
-        <translation>Upozornění: Nesouhlasím zcela se svými protějšky! Možná potřebuji aktualizovat nebo ostatní uzly potřebují aktualizovat.</translation>
-    </message>
-    <message>
         <source>You need to rebuild the database using -reindex-chainstate to change -txindex</source>
         <translation>Je třeba přestavět databázi použitím -reindex-chainstate, aby bylo možné změnit -txindex</translation>
     </message>

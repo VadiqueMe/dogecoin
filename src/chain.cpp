@@ -166,7 +166,7 @@ void CBlockIndex::BuildSkip()
         pskip = pprev->GetAncestor(GetSkipHeight(nHeight));
 }
 
-arith_uint256 EstimateBlockProofMaxHashes( const CBlockIndex & block )
+/* arith_uint256 EstimateBlockProofMaxHashes( const CBlockIndex & block )
 {
     arith_uint256 bitsExpanded ;
     bool fNegative ;
@@ -180,21 +180,4 @@ arith_uint256 EstimateBlockProofMaxHashes( const CBlockIndex & block )
     // it is equal to ( ( 2**256 - bitsExpanded - 1 ) / ( bitsExpanded + 1 ) ) + 1,
     // or ~bitsExpanded / ( bitsExpanded + 1 ) plus 1
     return ( ~bitsExpanded / ( bitsExpanded + 1 ) ) + 1 ;
-}
-
-/* int64_t EstimateBlockProofRedoTimeInSeconds( const CBlockIndex & to, const CBlockIndex & from, const CBlockIndex & tip, const Consensus::Params & params )
-{
-    arith_uint256 r ;
-    int sign = 1 ;
-    if ( to.nChainWorkHashes > from.nChainWorkHashes ) {
-        r = to.nChainWorkHashes - from.nChainWorkHashes ;
-    } else {
-        r = from.nChainWorkHashes - to.nChainWorkHashes ;
-        sign = -1 ;
-    }
-    r = arith_uint256( params.nPowTargetSpacing ) * r / EstimateBlockProofMaxHashes( tip ) ;
-    if ( r.bits() > 63 ) {
-        return sign * std::numeric_limits< int64_t >::max() ;
-    }
-    return sign * r.GetLow64() ;
 } */
