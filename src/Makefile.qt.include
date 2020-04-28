@@ -489,4 +489,4 @@ moc_%.cpp: %.h
 %.qm: %.ts
 	@test -f $(LRELEASE)
 	@$(MKDIR_P) $(@D)
-	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LRELEASE) -silent $< -qm $@
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LRELEASE) -verbose $< -qm $@

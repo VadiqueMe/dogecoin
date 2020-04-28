@@ -848,10 +848,6 @@
     </context>
 <context>
     <name>ShutdownWindow</name>
-    <message>
-        <source>Do not shut down the computer until this window disappears</source>
-        <translation>Neizslēdziet datoru kamēr šis logs nepazūd</translation>
-    </message>
 </context>
 <context>
     <name>SignVerifyMessageDialog</name>

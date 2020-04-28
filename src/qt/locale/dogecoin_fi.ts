@@ -1330,10 +1330,6 @@
         <source>%1 is shutting down...</source>
         <translation>%1 sulkeutuu...</translation>
     </message>
-    <message>
-        <source>Do not shut down the computer until this window disappears</source>
-        <translation>Älä sammuta tietokonetta ennenkuin tämä ikkuna katoaa</translation>
-    </message>
 </context>
 <context>
     <name>SignVerifyMessageDialog</name>

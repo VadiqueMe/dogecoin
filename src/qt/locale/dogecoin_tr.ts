@@ -1998,10 +1998,6 @@
         <source>%1 is shutting down...</source>
         <translation>%1 kapanıyor...</translation>
     </message>
-    <message>
-        <source>Do not shut down the computer until this window disappears</source>
-        <translation>Bu pencere kalkıncaya dek bilgisayarı kapatmayınız</translation>
-    </message>
 </context>
 <context>
     <name>SignVerifyMessageDialog</name>
@@ -3262,10 +3258,6 @@
     <message>
         <source>Query for peer addresses via DNS lookup, if low on addresses (default: 1 unless -connect/-noconnect)</source>
         <translation>Adres sayısı azaldıysa DNS sorgulamasıyla eş adresleri ara (varsayılan: 1  -connect/-noconnect kullanılmadıysa)</translation>
-    </message>
-    <message>
-        <source>Sets the serialization of raw transaction or block hex returned in non-verbose mode, non-segwit(0) or segwit(1) (default: %d)</source>
-        <translation>Ham işlemin serileştirilmesini ayarlar veya blok non-verbose, non-segwit(0) veya segwit(1) kipinde onaltılık değeri döndürür (default: %d)</translation>
     </message>
     <message>
         <source>Support filtering of blocks and transaction with bloom filters (default: %u)</source>

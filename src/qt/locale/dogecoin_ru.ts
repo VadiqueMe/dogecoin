@@ -2006,10 +2006,6 @@
         <source>%1 is shutting down...</source>
         <translation>%1 выключается...</translation>
     </message>
-    <message>
-        <source>Do not shut down the computer until this window disappears</source>
-        <translation>Не выключайте компьютер, пока это окно не исчезнет</translation>
-    </message>
 </context>
 <context>
     <name>SignVerifyMessageDialog</name>
@@ -3274,10 +3270,6 @@
     <message>
         <source>Query for peer addresses via DNS lookup, if low on addresses (default: 1 unless -connect/-noconnect)</source>
         <translation>Запрашивать адреса участников с помощью DNS, если адресов мало (по умолчанию: 1, если не указан -connect/-noconnect)</translation>
-    </message>
-    <message>
-        <source>Sets the serialization of raw transaction or block hex returned in non-verbose mode, non-segwit(0) or segwit(1) (default: %d)</source>
-        <translation>Задаёт сериализацию сырой транзакции или хекса блока, возвращённого в не подробном режиме, non-segwit(0) или segwit(1) (по умолчанию: %d)</translation>
     </message>
     <message>
         <source>Support filtering of blocks and transaction with bloom filters (default: %u)</source>

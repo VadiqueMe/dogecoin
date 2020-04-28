@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -15,10 +16,10 @@
 #include <QList>
 #include <QTimer>
 
-bool NodeLessThan::operator()(const CNodeCombinedStats &left, const CNodeCombinedStats &right) const
+bool NodeLessThan::operator()( const CNodeCombinedStats & left, const CNodeCombinedStats & right ) const
 {
-    const CNodeStats *pLeft = &(left.nodeStats);
-    const CNodeStats *pRight = &(right.nodeStats);
+    const CNodeStats * pLeft = &( left.nodeStats ) ;
+    const CNodeStats * pRight = &( right.nodeStats ) ;
 
     if (order == Qt::DescendingOrder)
         std::swap(pLeft, pRight);
@@ -62,25 +63,25 @@ public:
 #if QT_VERSION >= 0x040700
             cachedNodeStats.reserve(vstats.size());
 #endif
-            Q_FOREACH (const CNodeStats& nodestats, vstats)
+            for ( const CNodeStats & nodestats : vstats )
             {
-                CNodeCombinedStats stats;
-                stats.nodeStateStats.nMisbehavior = 0;
-                stats.nodeStateStats.nSyncHeight = -1;
-                stats.nodeStateStats.nCommonHeight = -1;
-                stats.fNodeStateStatsAvailable = false;
-                stats.nodeStats = nodestats;
-                cachedNodeStats.append(stats);
+                CNodeCombinedStats stats ;
+                stats.nodeInfoStats.nMisbehavior = 0 ;
+                stats.nodeInfoStats.nSyncHeight = -1 ;
+                stats.nodeInfoStats.nCommonHeight = -1 ;
+                stats.fNodeInfoStatsAvailable = false ;
+                stats.nodeStats = nodestats ;
+                cachedNodeStats.append( stats ) ;
             }
         }
 
-        // Try to retrieve the CNodeStateStats for each node.
+        // Try to retrieve the CNodeInfoStats for each node
         {
-            TRY_LOCK(cs_main, lockMain);
-            if (lockMain)
+            TRY_LOCK( cs_main, lockMain ) ;
+            if ( lockMain )
             {
-                BOOST_FOREACH(CNodeCombinedStats &stats, cachedNodeStats)
-                    stats.fNodeStateStatsAvailable = GetNodeStateStats(stats.nodeStats.nodeid, stats.nodeStateStats);
+                for ( CNodeCombinedStats & stats : cachedNodeStats )
+                    stats.fNodeInfoStatsAvailable = GetNodeInfoStats( stats.nodeStats.nodeid, stats.nodeInfoStats ) ;
             }
         }
 
@@ -91,8 +92,8 @@ public:
         // build index map
         mapNodeRows.clear();
         int row = 0;
-        Q_FOREACH (const CNodeCombinedStats& stats, cachedNodeStats)
-            mapNodeRows.insert(std::pair<NodeId, int>(stats.nodeStats.nodeid, row++));
+        for ( const CNodeCombinedStats & stats : cachedNodeStats )
+            mapNodeRows.insert( std::pair< NodeId, int >( stats.nodeStats.nodeid, row ++ ) ) ;
     }
 
     int size() const

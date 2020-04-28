@@ -18,6 +18,8 @@
 #include "utiltime.h"
 #include "version.h"
 
+#include <boost/foreach.hpp> // for BOOST_REVERSE_FOREACH
+
 CTxMemPoolEntry::CTxMemPoolEntry(const CTransactionRef& _tx, const CAmount& _nFee,
                                  int64_t _nTime, double _entryPriority, unsigned int _entryHeight,
                                  CAmount _inChainInputValue,

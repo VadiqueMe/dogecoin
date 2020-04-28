@@ -1679,10 +1679,6 @@ Var vänlig och försök igen.</translation>
         <source>%1 is shutting down...</source>
         <translation>%1 stängs av...</translation>
     </message>
-    <message>
-        <source>Do not shut down the computer until this window disappears</source>
-        <translation>Stäng inte av datorn förrän denna ruta försvinner</translation>
-    </message>
 </context>
 <context>
     <name>SignVerifyMessageDialog</name>

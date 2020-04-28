@@ -1998,10 +1998,6 @@
         <source>%1 is shutting down...</source>
         <translation>%1 está desligando...</translation>
     </message>
-    <message>
-        <source>Do not shut down the computer until this window disappears</source>
-        <translation>Não desligue o computador até que esta janela desapareça</translation>
-    </message>
 </context>
 <context>
     <name>SignVerifyMessageDialog</name>
@@ -3258,10 +3254,6 @@
     <message>
         <source>Query for peer addresses via DNS lookup, if low on addresses (default: 1 unless -connect/-noconnect)</source>
         <translation>Buscar por endereços de peers via DNS, se estiver baixo em endereços (padrão: 1 a não ser que -connect/-noconnect)</translation>
-    </message>
-    <message>
-        <source>Sets the serialization of raw transaction or block hex returned in non-verbose mode, non-segwit(0) or segwit(1) (default: %d)</source>
-        <translation>Define a criação do raw da transação ou bloco em modo não verbal, não segwit (0) ou segwit (1) (padrão: %d)</translation>
     </message>
     <message>
         <source>Support filtering of blocks and transaction with bloom filters (default: %u)</source>

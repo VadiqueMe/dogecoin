@@ -1227,10 +1227,6 @@
         <source>%1 is shutting down...</source>
         <translation>%1 is shutting down...</translation>
     </message>
-    <message>
-        <source>Do not shut down the computer until this window disappears</source>
-        <translation>Do not shut down the computer until this window disappears</translation>
-    </message>
 </context>
 <context>
     <name>SignVerifyMessageDialog</name>

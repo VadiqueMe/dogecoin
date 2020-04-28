@@ -69,7 +69,7 @@ HelpMessageDialog::HelpMessageDialog(QWidget *parent, bool about) :
 {
     ui->setupUi(this);
 
-    QString version = tr(PACKAGE_NAME) + " " + tr("version") + " " + QString::fromStdString( FormatFullVersion() ) ;
+    QString version = QString( PACKAGE_NAME ) + " " + tr("version") + " " + QString::fromStdString( FormatFullVersion() ) ;
     /* On x86 add a bit specifier to the version so that users can distinguish between
      * 32 and 64 bit builds. On other architectures, 32/64 bit may be more ambiguous
      */
@@ -79,26 +79,26 @@ HelpMessageDialog::HelpMessageDialog(QWidget *parent, bool about) :
     version += " " + tr("(%1-bit)").arg(32);
 #endif
 
-    if (about)
+    if ( about )
     {
-        setWindowTitle(tr("About %1").arg(tr(PACKAGE_NAME)));
+        setWindowTitle( tr("About %1").arg( PACKAGE_NAME ) ) ;
 
         /// HTML-format the license message from the core
-        QString licenseInfo = QString::fromStdString(LicenseInfo());
+        QString licenseInfo = QString::fromStdString( LicenseInfo() ) ;
         QString licenseInfoHTML = licenseInfo;
         // Make URLs clickable
         QRegExp uri("<(.*)>", Qt::CaseSensitive, QRegExp::RegExp2);
         uri.setMinimal(true); // use non-greedy matching
         licenseInfoHTML.replace(uri, "<a href=\"\\1\">\\1</a>");
         // Replace newlines with HTML breaks
-        licenseInfoHTML.replace("\n", "<br>");
+        licenseInfoHTML.replace( "\n", "<br>" ) ;
 
-        ui->aboutMessage->setTextFormat(Qt::RichText);
-        ui->scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-        text = version + "\n" + licenseInfo;
-        ui->aboutMessage->setText(version + "<br><br>" + licenseInfoHTML);
-        ui->aboutMessage->setWordWrap(true);
-        ui->helpMessage->setVisible(false);
+        ui->aboutMessage->setTextFormat( Qt::RichText ) ;
+        ui->scrollArea->setVerticalScrollBarPolicy( Qt::ScrollBarAsNeeded ) ;
+        text = version + "\n" + licenseInfo ;
+        ui->aboutMessage->setText( "<b>" + version + "</b><br><br>" + licenseInfoHTML ) ;
+        ui->aboutMessage->setWordWrap( true ) ;
+        ui->helpMessage->setVisible( false ) ;
     } else {
         setWindowTitle(tr("Command-line options"));
         QString header = tr("Usage:") + "\n" +
@@ -254,39 +254,38 @@ void PaperWalletDialog::on_getNewAddress_clicked()
 
 #ifdef USE_QRCODE
     // Generate the address QR code
-    QRcode *code = QRcode_encodeString(myAddress.c_str(), 0, QR_ECLEVEL_M, QR_MODE_8, 1);
-    if (!code) {
-        ui->addressQRCode->setText(tr("Error encoding Address into QR Code."));
-        return;
+    QRcode * code = QRcode_encodeString( myAddress.c_str(), 0, QR_ECLEVEL_M, QR_MODE_8, 1 ) ;
+    if ( code == nullptr ) {
+        ui->addressQRCode->setText( "can't encode the address into QR code" ) ;
+        return ;
     }
-    QImage myImage = QImage(code->width, code->width, QImage::Format_ARGB32);
-    myImage.fill(QColor(0, 0, 0, 0));
-    unsigned char* p = code->data;
-    for (int y = 0; y < code->width; y++) {
-        for (int x = 0; x < code->width; x++) {
-            myImage.setPixel(x, y, ((*p & 1) ? 0xff000000 : 0x0));
-            p++;
+    QImage myImage = QImage( code->width, code->width, QImage::Format_ARGB32 ) ;
+    myImage.fill( QColor( 0, 0, 0, 0 ) ) ;
+    unsigned char * p = code->data ;
+    for ( int y = 0; y < code->width; y ++ ) {
+        for ( int x = 0; x < code->width; x ++ ) {
+            myImage.setPixel( x, y, ( ( *p & 1 ) ? 0xff000000 : 0x0 ) ) ;
+            p ++ ;
         }
     }
-    QRcode_free(code);
-
+    QRcode_free( code ) ;
 
     // Generate the private key QR code
-    code = QRcode_encodeString(myPrivKey.c_str(), 0, QR_ECLEVEL_M, QR_MODE_8, 1);
-    if (!code) {
-        ui->privateKeyQRCode->setText(tr("Error encoding private key into QR Code."));
-        return;
+    code = QRcode_encodeString( myPrivKey.c_str(), 0, QR_ECLEVEL_M, QR_MODE_8, 1 ) ;
+    if ( code == nullptr ) {
+        ui->privateKeyQRCode->setText( "can't encode the private key into QR code" ) ;
+        return ;
     }
-    QImage myImagePriv = QImage(code->width, code->width, QImage::Format_ARGB32);
-    myImagePriv.fill(QColor(0, 0, 0, 0));
-    p = code->data;
-    for (int y = 0; y < code->width; y++) {
-        for (int x = 0; x < code->width; x++) {
-            myImagePriv.setPixel(x, y, ((*p & 1) ? 0xff000000 : 0x0));
-            p++;
+    QImage myImagePriv = QImage( code->width, code->width, QImage::Format_ARGB32 ) ;
+    myImagePriv.fill( QColor( 0, 0, 0, 0 ) ) ;
+    p = code->data ;
+    for ( int y = 0; y < code->width; y ++ ) {
+        for ( int x = 0; x < code->width; x ++ ) {
+            myImagePriv.setPixel( x, y, ( ( *p & 1 ) ? 0xff000000 : 0x0 ) ) ;
+            p ++ ;
         }
     }
-    QRcode_free(code);
+    QRcode_free( code ) ;
 
     // Populate QR codes
     ui->addressQRCode->setPixmap( QPixmap::fromImage( myImage ).scaled( ui->addressQRCode->width(), ui->addressQRCode->height() ) ) ;
@@ -481,10 +480,11 @@ ShutdownWindow::ShutdownWindow( QWidget *parent, Qt::WindowFlags f ) :
     QWidget( parent, f )
 {
     QVBoxLayout * layout = new QVBoxLayout() ;
+    layout->addStretch() ;
     layout->addWidget( new QLabel(
-        tr( "%1 is shutting down..." ).arg( tr( PACKAGE_NAME ) ) + "<br /><br />" +
-        tr( "Do not shut down the computer until this window disappears" )
+        tr( "%1 is shutting down..." ).arg( PACKAGE_NAME )
     ) ) ;
+    layout->addStretch() ;
     setLayout( layout ) ;
 }
 
@@ -494,7 +494,7 @@ QWidget * ShutdownWindow::showShutdownWindow( DogecoinGUI * window )
 
     // Show a simple window indicating shutdown status
     QWidget * shutdownWindow = new ShutdownWindow() ;
-    shutdownWindow->setWindowTitle( tr(PACKAGE_NAME) ) ;
+    shutdownWindow->setWindowTitle( PACKAGE_NAME ) ;
 
     // Center shutdown window at where main window was
     const QPoint global = window->mapToGlobal( window->rect().center() ) ;

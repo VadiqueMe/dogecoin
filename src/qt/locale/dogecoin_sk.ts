@@ -1983,10 +1983,6 @@
         <source>%1 is shutting down...</source>
         <translation>%1 sa vypína...</translation>
     </message>
-    <message>
-        <source>Do not shut down the computer until this window disappears</source>
-        <translation>Nevypínajte počítač kým toto okno nezmizne</translation>
-    </message>
 </context>
 <context>
     <name>SignVerifyMessageDialog</name>

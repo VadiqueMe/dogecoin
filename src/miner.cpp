@@ -64,19 +64,19 @@ int64_t UpdateTime( CBlockHeader * pblock, const Consensus::Params & consensusPa
     if ( nNewTime > nOldTime )
         pblock->nTime = nNewTime ;
 
-    // Updating time can change bits of work
+    // new time new bits of work
     pblock->nBits = GetNextWorkRequired( pindexPrev, pblock, consensusParams ) ;
 
     return nNewTime - nOldTime ;
 }
 
-BlockAssembler::BlockAssembler( const CChainParams & _chainparams )
-    : chainparams( _chainparams )
+BlockAssembler::BlockAssembler( const CChainParams & params )
+    : chainparams( params )
 {
     // Block resource limits
     // If neither -blockmaxsize or -blockmaxweight is given, limit to DEFAULT_BLOCK_MAX_*
-    // If only one is given, only restrict the specified resource.
-    // If both are given, restrict both.
+    // If only one is given, only restrict the specified resource
+    // If both are given, restrict both
     nBlockMaxWeight = DEFAULT_BLOCK_MAX_WEIGHT;
     nBlockMaxSize = DEFAULT_BLOCK_MAX_SIZE;
     bool fWeightSet = false;
@@ -204,11 +204,10 @@ std::unique_ptr< CBlockTemplate > BlockAssembler::CreateNewBlock( const CScript 
     ) ; */
 
     // Fill in header
-    pblock->hashPrevBlock  = pindexPrev->GetBlockSha256Hash() ;
-    UpdateTime( pblock, consensus, pindexPrev ) ;
-    pblock->nBits          = GetNextWorkRequired( pindexPrev, pblock, consensus ) ;
-    pblock->nNonce         = 0;
-    pblocktemplate->vTxSigOpsCost[0] = WITNESS_SCALE_FACTOR * GetLegacySigOpCount(*pblock->vtx[0]);
+    pblock->hashPrevBlock = pindexPrev->GetBlockSha256Hash() ;
+    UpdateTime( pblock, consensus, pindexPrev ) ; // sets nTime and nBits too
+    pblock->nNonce = 0;
+    pblocktemplate->vTxSigOpsCost[0] = WITNESS_SCALE_FACTOR * GetLegacySigOpCount( *pblock->vtx[0] ) ;
 
     CValidationState state ;
     if ( ! TestBlockValidity( state, chainparams, *pblock, pindexPrev, false, false ) ) {
@@ -864,8 +863,10 @@ void MiningThread::MineBlocks()
                 //currentCandidate->block.nVersion |= randomNumber() & 0xff0000 ;
             //}
 
+            if ( currentCandidate->block.IsAuxpowInVersion() )
+                currentCandidate->block.SetAuxpow( nullptr ) ;
+
             CBlock * currentBlock = &currentCandidate->block ;
-            if ( currentBlock->IsAuxpowInVersion() ) currentBlock->SetAuxpow( nullptr ) ;
             IncrementExtraNonce( currentBlock, pindexPrev, nExtraNonce ) ;
 
             //

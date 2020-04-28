@@ -68,17 +68,17 @@ public:
     virtual void NewPoWValidBlock(const CBlockIndex *pindex, const std::shared_ptr<const CBlock>& pblock);
 };
 
-struct CNodeStateStats {
-    int nMisbehavior;
-    int nSyncHeight;
-    int nCommonHeight;
-    std::vector<int> vHeightInFlight;
-};
+struct CNodeInfoStats {
+    int nMisbehavior ;
+    int nSyncHeight ;
+    int nCommonHeight ;
+    std::vector< int > vHeightInFlight ;
+} ;
 
-/** Get statistics from node state */
-bool GetNodeStateStats(NodeId nodeid, CNodeStateStats &stats);
+/** Get statistics from node info */
+bool GetNodeInfoStats( NodeId nodeid, CNodeInfoStats & stats ) ;
 /** Increase a node's misbehavior score */
-void Misbehaving(NodeId nodeid, int howmuch);
+void Misbehaving( NodeId nodeid, int howmuch ) ;
 
 /** Process protocol messages received from a given node */
 bool ProcessMessages(CNode* pfrom, CConnman& connman, const std::atomic<bool>& interrupt);

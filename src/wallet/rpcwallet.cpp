@@ -1837,10 +1837,10 @@ UniValue gettransaction(const JSONRPCRequest& request)
     ListTransactions(wtx, "*", 0, false, details, filter);
     entry.push_back(Pair("details", details));
 
-    std::string strHex = EncodeHexTx( static_cast< CTransaction >( wtx ), RPCSerializationFlags() ) ;
-    entry.push_back(Pair("hex", strHex));
+    std::string strHex = EncodeHexTx( static_cast< CTransaction >( wtx ) ) ;
+    entry.push_back( Pair("hex", strHex) ) ;
 
-    return entry;
+    return entry ;
 }
 
 UniValue abandontransaction(const JSONRPCRequest& request)

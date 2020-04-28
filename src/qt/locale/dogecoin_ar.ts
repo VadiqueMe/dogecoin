@@ -1304,10 +1304,6 @@
 </context>
 <context>
     <name>ShutdownWindow</name>
-    <message>
-        <source>Do not shut down the computer until this window disappears</source>
-        <translation>لا توقف عمل الكمبيوتر حتى تختفي هذه النافذة</translation>
-    </message>
 </context>
 <context>
     <name>SignVerifyMessageDialog</name>

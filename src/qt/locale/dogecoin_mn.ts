@@ -444,10 +444,6 @@
     </context>
 <context>
     <name>ShutdownWindow</name>
-    <message>
-        <source>Do not shut down the computer until this window disappears</source>
-        <translation>Энэ цонхыг хаагдтал компьютерээ бүү унтраагаарай</translation>
-    </message>
 </context>
 <context>
     <name>SignVerifyMessageDialog</name>

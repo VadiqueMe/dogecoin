@@ -829,13 +829,13 @@ void RPCConsole::clearConsole( bool clearHistory )
             ).arg(fixedFontInfo.family(), QString("%1pt").arg(consoleFontSize))
         );
 
-    message(CMD_REPLY, (tr("Welcome to the %1 RPC console.").arg(tr(PACKAGE_NAME)) + "<br>" +
-                        tr("Use up and down arrows to navigate history, and <b>Ctrl-L</b> to clear screen.") + "<br>" +
-                        tr("Type <b>help</b> for an overview of available commands.")) +
+    message( CMD_REPLY, ( tr("Welcome to the %1 RPC console.").arg( PACKAGE_NAME ) + "<br>" +
+                          tr("Use up and down arrows to navigate history, and <b>Ctrl-L</b> to clear screen.") + "<br>" +
+                          tr("Type <b>help</b> for an overview of available commands.") ) +
                         "<br><span class=\"secwarning\">" +
                         tr("WARNING: Scammers have been active, telling users to type commands here, stealing their wallet contents. Do not use this console without fully understanding the ramification of a command.") +
                         "</span>",
-                        true);
+                    true ) ;
 }
 
 void RPCConsole::keyPressEvent(QKeyEvent *event)
@@ -1160,7 +1160,7 @@ void RPCConsole::peerSelected( const QItemSelection & selected, const QItemSelec
         if ( networkModel && networkModel->getPeerTableModel() )
             networkModel->getPeerTableModel()->getNodeStats( selected.indexes().first().row() ) ;
         if ( stats != nullptr )
-            updateNodeDetail( stats ) ;
+            updateNodeDetails( stats ) ;
     } else {
         clearSelectedNode() ;
     }
@@ -1231,7 +1231,7 @@ void RPCConsole::peerLayoutChanged()
     }
 
     if ( stats != nullptr )
-        updateNodeDetail( stats ) ;
+        updateNodeDetails( stats ) ;
 }
 
 void RPCConsole::constructPeerDetailsWidget()
@@ -1334,7 +1334,7 @@ void RPCConsole::constructPeerDetailsWidget()
     didOnce = true ;
 }
 
-void RPCConsole::updateNodeDetail( const CNodeCombinedStats * stats )
+void RPCConsole::updateNodeDetails( const CNodeCombinedStats * stats )
 {
     QString peerAddrDetails( QString::fromStdString( stats->nodeStats.addrName ) + " " ) ;
     peerAddrDetails += tr( "(node id: %1)" ).arg( QString::number( stats->nodeStats.nodeid ) ) ;
@@ -1363,22 +1363,22 @@ void RPCConsole::updateNodeDetail( const CNodeCombinedStats * stats )
     peerHeight->setText( QString::number( stats->nodeStats.nStartingHeight ) ) ;
     peerWhitelisted->setText( stats->nodeStats.fWhitelisted ? tr("Yes") : tr("No") ) ;
 
-    // This check fails for example if the lock was busy and nodeStateStats couldn't be fetched
-    if ( stats->fNodeStateStatsAvailable ) {
+    // This check fails for example if the lock was busy and nodeInfoStats couldn't be fetched
+    if ( stats->fNodeInfoStatsAvailable ) {
         // Sync height is init to -1
-        if ( stats->nodeStateStats.nSyncHeight > -1 )
-            peerSyncHeight->setText( QString( "%1" ).arg( stats->nodeStateStats.nSyncHeight ) ) ;
+        if ( stats->nodeInfoStats.nSyncHeight > -1 )
+            peerSyncHeight->setText( QString( "%1" ).arg( stats->nodeInfoStats.nSyncHeight ) ) ;
         else
             peerSyncHeight->setText( tr("Unknown") ) ;
 
         // Common height is init to -1
-        if ( stats->nodeStateStats.nCommonHeight > -1 )
-            peerCommonHeight->setText( QString( "%1" ).arg( stats->nodeStateStats.nCommonHeight ) ) ;
+        if ( stats->nodeInfoStats.nCommonHeight > -1 )
+            peerCommonHeight->setText( QString( "%1" ).arg( stats->nodeInfoStats.nCommonHeight ) ) ;
         else
             peerCommonHeight->setText( tr("Unknown") ) ;
 
         // Ban score is init to 0
-        int banScore = stats->nodeStateStats.nMisbehavior ;
+        int banScore = stats->nodeInfoStats.nMisbehavior ;
         peerBanScore->setText( QString::number( banScore ) ) ;
         peerBanScore->setVisible( banScore > 0 ) ;
         if ( peerBanScore->buddy() != nullptr )

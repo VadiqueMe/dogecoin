@@ -6,7 +6,7 @@
 
 bool SignalsOptInRBF(const CTransaction &tx)
 {
-    BOOST_FOREACH(const CTxIn &txin, tx.vin) {
+    for ( const CTxIn & txin : tx.vin ) {
         if (txin.nSequence < std::numeric_limits<unsigned int>::max()-1) {
             return true;
         }

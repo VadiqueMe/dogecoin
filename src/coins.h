@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -18,7 +18,7 @@
 #include <assert.h>
 #include <stdint.h>
 
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 
 /**
  * Pruned version of CTransaction: only retains metadata and unspent transaction outputs
@@ -282,7 +282,7 @@ struct CCoinsCacheEntry
     CCoinsCacheEntry() : coins(), flags(0) {}
 };
 
-typedef boost::unordered_map< uint256, CCoinsCacheEntry, SaltedTxHasher > CCoinsMap ;
+typedef std::unordered_map< uint256, CCoinsCacheEntry, SaltedTxHasher > CCoinsMap ;
 
 /** Cursor for iterating over CoinsView state */
 class CCoinsViewCursor

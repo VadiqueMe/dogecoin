@@ -131,8 +131,7 @@ private:
     void startPerformer() ;
     void setTrafficGraphRange( int mins ) ;
     void constructPeerDetailsWidget() ;
-    /** show detailed information about selected node */
-    void updateNodeDetail( const CNodeCombinedStats * stats ) ;
+    void updateNodeDetails( const CNodeCombinedStats * stats ) ;
 
     enum ColumnWidths
     {

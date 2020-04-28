@@ -1218,10 +1218,6 @@
         <source>%1 is shutting down...</source>
         <translation>%1 se închide</translation>
     </message>
-    <message>
-        <source>Do not shut down the computer until this window disappears</source>
-        <translation>Nu închide calculatorul pînă ce această fereastră nu dispare</translation>
-    </message>
 </context>
 <context>
     <name>SignVerifyMessageDialog</name>

@@ -117,7 +117,7 @@ UniValue getpeerinfo(const JSONRPCRequest& request)
         );
 
     if ( g_connman == nullptr )
-        throw JSONRPCError( RPC_CLIENT_P2P_DISABLED, "Error: Peer-to-peer functionality is absent" ) ;
+        throw JSONRPCError( RPC_CLIENT_P2P_DISABLED, "Error: peer-to-peer functionality is absent" ) ;
 
     std::vector< CNodeStats > vstats ;
     g_connman->GetNodeStats(vstats);
@@ -126,9 +126,9 @@ UniValue getpeerinfo(const JSONRPCRequest& request)
 
     for ( const CNodeStats & stats : vstats )
     {
-        UniValue obj(UniValue::VOBJ);
-        CNodeStateStats statestats;
-        bool fStateStats = GetNodeStateStats(stats.nodeid, statestats);
+        UniValue obj( UniValue::VOBJ ) ;
+        CNodeInfoStats infostats ;
+        bool gotInfoStats = GetNodeInfoStats( stats.nodeid, infostats ) ;
         obj.push_back(Pair("id", stats.nodeid));
         obj.push_back(Pair("addr", stats.addrName));
         if (!(stats.addrLocal.empty()))
@@ -150,22 +150,22 @@ UniValue getpeerinfo(const JSONRPCRequest& request)
         obj.push_back(Pair("version", stats.nVersion));
         // Use the sanitized form of subver here, to avoid tricksy remote peers from
         // corrupting or modifying the JSON output by putting special characters in
-        // their ver message.
+        // their ver message
         obj.push_back(Pair("subver", stats.cleanSubVer));
         obj.push_back(Pair("inbound", stats.fInbound));
         obj.push_back(Pair("addnode", stats.fAddnode));
         obj.push_back(Pair("startingheight", stats.nStartingHeight));
-        if (fStateStats) {
-            obj.push_back(Pair("banscore", statestats.nMisbehavior));
-            obj.push_back(Pair("synced_headers", statestats.nSyncHeight));
-            obj.push_back(Pair("synced_blocks", statestats.nCommonHeight));
-            UniValue heights(UniValue::VARR);
-            for ( int height : statestats.vHeightInFlight ) {
-                heights.push_back(height);
+        if ( gotInfoStats ) {
+            obj.push_back( Pair("banscore", infostats.nMisbehavior) ) ;
+            obj.push_back( Pair("synced_headers", infostats.nSyncHeight) ) ;
+            obj.push_back( Pair("synced_blocks", infostats.nCommonHeight) ) ;
+            UniValue heights( UniValue::VARR ) ;
+            for ( int height : infostats.vHeightInFlight ) {
+                heights.push_back( height ) ;
             }
-            obj.push_back(Pair("inflight", heights));
+            obj.push_back( Pair("inflight", heights) ) ;
         }
-        obj.push_back(Pair("whitelisted", stats.fWhitelisted));
+        obj.push_back( Pair("whitelisted", stats.fWhitelisted) ) ;
 
         UniValue sendPerMsgCmd(UniValue::VOBJ);
         for ( const mapMsgCmdSize::value_type & i : stats.mapSendBytesPerMsgCmd ) {
@@ -390,12 +390,12 @@ static UniValue GetNetworksInfo()
     return networks ;
 }
 
-UniValue getnetworkinfo(const JSONRPCRequest& request)
+UniValue getnetworkinfo( const JSONRPCRequest & request )
 {
-    if (request.fHelp || request.params.size() != 0)
+    if ( request.fHelp || request.params.size() != 0 )
         throw std::runtime_error(
             "getnetworkinfo\n"
-            "Returns an object containing various state info regarding P2P networking.\n"
+            "Returns an object containing various info regarding peer-to-peer networking\n"
             "\nResult:\n"
             "{\n"
             "  \"version\": xxxxx,                      (numeric) the server version\n"
@@ -439,13 +439,13 @@ UniValue getnetworkinfo(const JSONRPCRequest& request)
     obj.push_back( Pair( "protocolversion", PROTOCOL_VERSION ) ) ;
     if ( g_connman != nullptr )
         obj.push_back(Pair("localservices", strprintf("%016x", g_connman->GetLocalServices())));
-    obj.push_back(Pair("localrelay",     fRelayTxes));
-    obj.push_back(Pair("timeoffset",    GetTimeOffset()));
+    obj.push_back( Pair("localrelay", fRelayTxes) ) ;
+    obj.push_back( Pair("timeoffset", GetTimeOffset()) ) ;
     if ( g_connman != nullptr ) {
         obj.push_back( Pair( "networkactive", g_connman->IsNetworkActive() ) ) ;
         obj.push_back( Pair( "connections", (int)g_connman->GetNodeCount( CConnman::CONNECTIONS_ALL ) ) ) ;
     }
-    obj.push_back(Pair("networks",      GetNetworksInfo()));
+    obj.push_back( Pair( "networks", GetNetworksInfo() ) ) ;
     obj.push_back( Pair( "relayfee", ValueFromAmount( 0 ) ) ) ;
     UniValue localAddresses(UniValue::VARR);
     {

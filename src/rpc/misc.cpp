@@ -21,8 +21,6 @@
 
 #include <stdint.h>
 
-#include <boost/assign/list_of.hpp>
-
 #include <univalue.h>
 
 /**
@@ -129,7 +127,7 @@ public:
             obj.push_back(Pair("script", GetTxnOutputType(whichType)));
             obj.push_back(Pair("hex", HexStr(subscript.begin(), subscript.end())));
             UniValue a(UniValue::VARR);
-            BOOST_FOREACH( const CTxDestination & addr, addresses )
+            for ( const CTxDestination & addr : addresses )
                 a.push_back( CDogecoinAddress( addr ).ToString() ) ;
             obj.push_back(Pair("addresses", a));
             if (whichType == TX_MULTISIG)
@@ -422,29 +420,28 @@ UniValue signmessagewithprivkey(const JSONRPCRequest& request)
 
 UniValue setmocktime(const JSONRPCRequest& request)
 {
-    if (request.fHelp || request.params.size() != 1)
+    if ( request.fHelp || request.params.size() != 1 )
         throw std::runtime_error(
             "setmocktime timestamp\n"
             "\nSet the local time to given timestamp (-regtest only)\n"
             "\nArguments:\n"
-            "1. timestamp  (integer, required) Unix seconds-since-epoch timestamp\n"
-            "   Pass 0 to go back to using the system time."
+            "timestamp (integer) Unix seconds-since-epoch, use 0 to go back to the system time"
         );
 
-    if (!Params().MineBlocksOnDemand())
-        throw std::runtime_error( "setmocktime for regression testing (-regtest mode) only" ) ;
+    if ( NameOfChain() != "regtest" )
+        throw std::runtime_error( "setmocktime is for regression testing (-regtest) only" ) ;
 
     // For now, don't change mocktime if we're in the middle of validation, as
     // this could have an effect on mempool time-based eviction, as well as
     // IsInitialBlockDownload()
     // TODO: figure out the right way to synchronize around mocktime, and
     // ensure all callsites of GetTime() are accessing this safely
-    LOCK(cs_main);
+    LOCK( cs_main ) ;
 
-    RPCTypeCheck(request.params, boost::assign::list_of(UniValue::VNUM));
-    SetMockTime(request.params[0].get_int64());
+    RPCTypeCheck( request.params, { UniValue::VNUM } ) ;
+    SetMockTime( request.params[0].get_int64() ) ;
 
-    return NullUniValue;
+    return NullUniValue ;
 }
 
 static UniValue RPCLockedMemoryInfo()

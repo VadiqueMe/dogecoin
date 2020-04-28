@@ -1,6 +1,7 @@
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "core_io.h"
 
@@ -18,7 +19,6 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/algorithm/string/split.hpp>
-#include <boost/assign/list_of.hpp>
 
 CScript ParseScript(const std::string& s)
 {
@@ -88,27 +88,26 @@ CScript ParseScript(const std::string& s)
     return result;
 }
 
-bool DecodeHexTx(CMutableTransaction& tx, const std::string& strHexTx, bool fTryNoWitness)
+bool DecodeHexTx( CMutableTransaction & tx, const std::string & txHex, bool fTryNoWitness )
 {
-    if (!IsHex(strHexTx))
-        return false;
+    if ( ! IsHex( txHex ) ) return false ;
 
-    std::vector<unsigned char> txData(ParseHex(strHexTx));
+    std::vector< unsigned char > txData( ParseHex( txHex ) ) ;
 
-    if (fTryNoWitness) {
-        CDataStream ssData(txData, SER_NETWORK, PROTOCOL_VERSION | SERIALIZE_TRANSACTION_NO_WITNESS);
+    if ( fTryNoWitness ) {
+        CDataStream ssData( txData, SER_NETWORK, PROTOCOL_VERSION | SERIALIZE_TRANSACTION_NO_WITNESS ) ;
         try {
             ssData >> tx;
             if (ssData.eof()) {
                 return true;
             }
         }
-        catch (const std::exception&) {
-            // Fall through.
+        catch ( const std::exception & ) {
+            // fall through
         }
     }
 
-    CDataStream ssData(txData, SER_NETWORK, PROTOCOL_VERSION);
+    CDataStream ssData( txData, SER_NETWORK, PROTOCOL_VERSION ) ;
     try {
         ssData >> tx;
         if (!ssData.empty())

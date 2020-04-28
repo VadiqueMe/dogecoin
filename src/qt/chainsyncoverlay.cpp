@@ -119,12 +119,10 @@ void ChainSyncOverlay::tipUpdate(int count, const QDateTime& blockDate, double n
     ui->newestBlockDate->setText(blockDate.toString());
 
     // show the percentage done according to nVerificationProgress
-    ui->percentageProgress->setText(QString::number(nVerificationProgress*100, 'f', 2)+"%");
-    ui->progressBar->setValue(nVerificationProgress*100);
+    ui->percentageProgress->setText( QString::number( nVerificationProgress * 100, 'f', 2 ) + "%" ) ;
+    ui->syncProgress->setValue( nVerificationProgress * 100 ) ;
 
-    if (!bestHeaderDate.isValid())
-        // not syncing
-        return;
+    if ( ! bestHeaderDate.isValid() ) return ; // not syncing
 
     // estimate the number of headers left based on nPowTargetSpacing
     // and check if the gui is not aware of the the best header (happens rarely)

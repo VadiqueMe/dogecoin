@@ -24,7 +24,6 @@
 #include <stdio.h>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/assign/list_of.hpp>
 
 static bool fCreateBlank;
 static std::map<std::string,UniValue> registers;
@@ -55,7 +54,7 @@ static int AppInitRawTx(int argc, char* argv[])
     if (argc<2 || IsArgSet("-?") || IsArgSet("-h") || IsArgSet("-help"))
     {
         // First part of help message is specific to this utility
-        std::string strUsage = strprintf(_("%s dogecoin-tx utility version"), _(PACKAGE_NAME)) + " " + FormatFullVersion() + "\n\n" +
+        std::string strUsage = strprintf( _("%s dogecoin-tx utility version"), PACKAGE_NAME ) + " " + FormatFullVersion() + "\n\n" +
             _("Usage:") + "\n" +
               "  dogecoin-tx [options] <hex-tx> [commands]  " + _("Update hex-encoded dogecoin transaction") + "\n" +
               "  dogecoin-tx [options] -create [commands]   " + _("Create hex-encoded dogecoin transaction") + "\n" +
@@ -563,7 +562,11 @@ static void MutateTxSign(CMutableTransaction& tx, const std::string& flagStr)
             if (!prevOut.isObject())
                 throw std::runtime_error("expected prevtxs internal object");
 
-            std::map<std::string,UniValue::VType> types = boost::assign::map_list_of("txid", UniValue::VSTR)("vout",UniValue::VNUM)("scriptPubKey",UniValue::VSTR);
+            std::map< std::string, UniValue::VType > types = {
+                { "txid", UniValue::VSTR },
+                { "vout", UniValue::VNUM },
+                { "scriptPubKey", UniValue::VSTR }
+            } ;
             if (!prevOut.checkObject(types))
                 throw std::runtime_error("prevtxs internal object typecheck fail");
 
@@ -626,7 +629,7 @@ static void MutateTxSign(CMutableTransaction& tx, const std::string& flagStr)
             ProduceSignature(MutableTransactionSignatureCreator(&keystore, &mergedTx, i, amount, nHashType), prevPubKey, sigdata);
 
         // ... and merge in other signatures:
-        BOOST_FOREACH(const CTransaction& txv, txVariants)
+        for ( const CTransaction & txv : txVariants )
             sigdata = CombineSignatures(prevPubKey, MutableTransactionSignatureChecker(&mergedTx, i, amount), sigdata, DataFromTransaction(txv, i));
         UpdateTransaction(mergedTx, i, sigdata);
 
@@ -776,8 +779,8 @@ static int CommandLineRawTx(int argc, char* argv[])
             if (strHexTx == "-")                 // "-" implies standard input
                 strHexTx = readStdin();
 
-            if (!DecodeHexTx(tx, strHexTx, true))
-                throw std::runtime_error("invalid transaction encoding");
+            if ( ! DecodeHexTx( tx, strHexTx ) )
+                throw std::runtime_error( "invalid transaction encoding" ) ;
 
             startArg = 2;
         } else

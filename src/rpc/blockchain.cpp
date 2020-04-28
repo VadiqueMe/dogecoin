@@ -753,12 +753,12 @@ UniValue getblock( const JSONRPCRequest & request )
         // to our index, but don't accept the block)
         throw JSONRPCError( RPC_MISC_ERROR, "Block not found on disk" ) ;
 
-    if (!fVerbose)
+    if ( ! fVerbose )
     {
-        CDataStream ssBlock(SER_NETWORK, PROTOCOL_VERSION | RPCSerializationFlags());
-        ssBlock << block;
-        std::string strHex = HexStr(ssBlock.begin(), ssBlock.end());
-        return strHex;
+        CDataStream ssBlock( SER_NETWORK, PROTOCOL_VERSION ) ;
+        ssBlock << block ;
+        std::string strHex = HexStr( ssBlock.begin(), ssBlock.end() ) ;
+        return strHex ;
     }
 
     return blockToJSON( block, pblockindex ) ;

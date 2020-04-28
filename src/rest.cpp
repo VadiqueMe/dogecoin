@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -161,7 +162,7 @@ static bool rest_headers(HTTPRequest* req,
 
     CDataStream ssHeader(SER_NETWORK, PROTOCOL_VERSION);
     const CChainParams& chainparams = Params();
-    BOOST_FOREACH(const CBlockIndex *pindex, headers) {
+    for ( const CBlockIndex * pindex : headers ) {
         ssHeader << pindex->GetBlockHeader(chainparams.GetConsensus(pindex->nHeight));
     }
 
@@ -181,8 +182,8 @@ static bool rest_headers(HTTPRequest* req,
     }
     case RF_JSON: {
         UniValue jsonHeaders(UniValue::VARR);
-        BOOST_FOREACH(const CBlockIndex *pindex, headers) {
-            jsonHeaders.push_back(blockheaderToJSON(pindex));
+        for ( const CBlockIndex * pindex : headers ) {
+            jsonHeaders.push_back( blockheaderToJSON( pindex ) ) ;
         }
         std::string strJSON = jsonHeaders.write() + "\n";
         req->WriteHeader("Content-Type", "application/json");
@@ -226,8 +227,8 @@ static bool rest_block(HTTPRequest* req,
             return RESTERR(req, HTTP_NOT_FOUND, hashStr + " not found");
     }
 
-    CDataStream ssBlock(SER_NETWORK, PROTOCOL_VERSION | RPCSerializationFlags());
-    ssBlock << block;
+    CDataStream ssBlock( SER_NETWORK, PROTOCOL_VERSION ) ;
+    ssBlock << block ;
 
     switch (rf) {
     case RF_BINARY: {
@@ -366,8 +367,8 @@ static bool rest_tx(HTTPRequest* req, const std::string& strURIPart)
     if (!GetTransaction(hash, tx, Params().GetConsensus(0), hashBlock, true))
         return RESTERR(req, HTTP_NOT_FOUND, hashStr + " not found");
 
-    CDataStream ssTx(SER_NETWORK, PROTOCOL_VERSION | RPCSerializationFlags());
-    ssTx << tx;
+    CDataStream ssTx( SER_NETWORK, PROTOCOL_VERSION ) ;
+    ssTx << tx ;
 
     switch (rf) {
     case RF_BINARY: {
@@ -572,7 +573,7 @@ static bool rest_getutxos(HTTPRequest* req, const std::string& strURIPart)
         objGetUTXOResponse.push_back(Pair("bitmap", bitmapStringRepresentation));
 
         UniValue utxos(UniValue::VARR);
-        BOOST_FOREACH (const CCoin& coin, outs) {
+        for ( const CCoin & coin : outs ) {
             UniValue utxo(UniValue::VOBJ);
             utxo.push_back(Pair("txvers", (int32_t)coin.nTxVer));
             utxo.push_back(Pair("height", (int32_t)coin.nHeight));

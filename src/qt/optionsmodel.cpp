@@ -75,12 +75,15 @@ void OptionsModel::Init(bool resetSettings)
         settings.setValue( "nDisplayUnit", UnitsOfCoin::oneCoin ) ;
     nDisplayUnit = settings.value( "nDisplayUnit" ).toInt() ;
 
-    if ( ! settings.contains( "thirdPartyTxUrls" ) )
-        settings.setValue( "thirdPartyTxUrls",
-                ( NameOfChain() == "main" )
-                    ? "https://dogechain.info/tx/%s|https://chain.so/tx/DOGE/%s"
-                    : ""
-        ) ;
+    if ( ! settings.contains( "thirdPartyTxUrls" ) ) {
+        QString txUrls( "" ) ;
+        if ( NameOfChain() == "main" )
+            txUrls = "https://dogechain.info/tx/%s|https://sochain.com/tx/DOGE/%s|https://blockchair.com/dogecoin/transaction/%s" ;
+        else if ( NameOfChain() == "test" )
+            txUrls = "https://sochain.com/tx/DOGETEST/%s" ;
+
+        settings.setValue( "thirdPartyTxUrls", txUrls ) ;
+    }
     thirdPartyTxUrls = settings.value( "thirdPartyTxUrls", "" ).toString() ;
 
     // These are shared with the core or have a command-line parameter

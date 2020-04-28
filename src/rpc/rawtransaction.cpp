@@ -30,22 +30,18 @@
 
 #include <stdint.h>
 
-#include <boost/assign/list_of.hpp>
-
 #include <univalue.h>
-
-using namespace std;
 
 void ScriptPubKeyToJSON(const CScript& scriptPubKey, UniValue& out, bool fIncludeHex)
 {
-    txnouttype type;
-    vector<CTxDestination> addresses;
-    int nRequired;
+    txnouttype type ;
+    std::vector< CTxDestination > addresses ;
 
     out.push_back(Pair("asm", ScriptToAsmStr(scriptPubKey)));
     if (fIncludeHex)
         out.push_back(Pair("hex", HexStr(scriptPubKey.begin(), scriptPubKey.end())));
 
+    int nRequired ;
     if (!ExtractDestinations(scriptPubKey, type, addresses, nRequired)) {
         out.push_back(Pair("type", GetTxnOutputType(type)));
         return;
@@ -222,14 +218,14 @@ UniValue getrawtransaction( const JSONRPCRequest & request )
     uint256 hashBlock;
     // Dogecoin: Is this the best value for consensus height?
     if (!GetTransaction(hash, tx, Params().GetConsensus(0), hashBlock, true))
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string(fTxIndex ? "No such mempool or blockchain transaction"
-            : "No such mempool transaction. Use -txindex to enable blockchain transaction queries") +
-            ". Use gettransaction for wallet transactions.");
+        throw JSONRPCError( RPC_INVALID_ADDRESS_OR_KEY, std::string( fTxIndex ? "No such mempool or blockchain transaction"
+            : "No such mempool transaction. Use -txindex to enable blockchain transaction queries" ) +
+            ". Use gettransaction for wallet transactions" ) ;
 
-    string strHex = EncodeHexTx(*tx, RPCSerializationFlags());
+    std::string strHex = EncodeHexTx( *tx ) ;
 
-    if (!fVerbose)
-        return strHex;
+    if ( ! fVerbose )
+        return strHex ;
 
     UniValue result(UniValue::VOBJ);
     result.push_back(Pair("hex", strHex));
@@ -240,7 +236,7 @@ UniValue getrawtransaction( const JSONRPCRequest & request )
 UniValue gettxoutproof(const JSONRPCRequest& request)
 {
     if (request.fHelp || (request.params.size() != 1 && request.params.size() != 2))
-        throw runtime_error(
+        throw std::runtime_error(
             "gettxoutproof [\"txid\",...] ( blockhash )\n"
             "\nReturns a hex-encoded proof that \"txid\" was included in a block.\n"
             "\nNOTE: By default this function only works sometimes. This is when there is an\n"
@@ -258,25 +254,25 @@ UniValue gettxoutproof(const JSONRPCRequest& request)
             "\"data\"           (string) A string that is a serialized, hex-encoded data for the proof.\n"
         );
 
-    set<uint256> setTxids;
-    uint256 oneTxid;
-    UniValue txids = request.params[0].get_array();
-    for (unsigned int idx = 0; idx < txids.size(); idx++) {
-        const UniValue& txid = txids[idx];
-        if (txid.get_str().length() != 64 || !IsHex(txid.get_str()))
-            throw JSONRPCError(RPC_INVALID_PARAMETER, string("Invalid txid ")+txid.get_str());
-        uint256 hash(uint256S(txid.get_str()));
-        if (setTxids.count(hash))
-            throw JSONRPCError(RPC_INVALID_PARAMETER, string("Invalid parameter, duplicated txid: ")+txid.get_str());
-       setTxids.insert(hash);
-       oneTxid = hash;
+    std::set< uint256 > setTxHashes ;
+    uint256 oneTxHash ;
+    UniValue txhashes = request.params[0].get_array() ;
+    for ( unsigned int idx = 0 ; idx < txhashes.size() ; idx ++ ) {
+        const UniValue & txhash = txhashes[ idx ] ;
+        if ( txhash.get_str().length() != 64 || ! IsHex( txhash.get_str() ) )
+            throw JSONRPCError( RPC_INVALID_PARAMETER, std::string("Invalid tx hash ") + txhash.get_str() ) ;
+        uint256 hash( uint256S( txhash.get_str() ) ) ;
+        if ( setTxHashes.count( hash ) > 0 )
+            throw JSONRPCError( RPC_INVALID_PARAMETER, std::string("Duplicated tx hash ") + txhash.get_str() ) ;
+       setTxHashes.insert( hash ) ;
+       oneTxHash = hash ;
     }
 
     LOCK(cs_main);
 
     CBlockIndex* pblockindex = NULL;
 
-    uint256 hashBlock;
+    uint256 hashBlock ;
     if (request.params.size() > 1)
     {
         hashBlock = uint256S(request.params[1].get_str());
@@ -284,34 +280,34 @@ UniValue gettxoutproof(const JSONRPCRequest& request)
             throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Block not found");
         pblockindex = mapBlockIndex[hashBlock];
     } else {
-        CCoins coins;
-        if (pcoinsTip->GetCoins(oneTxid, coins) && coins.nHeight > 0 && coins.nHeight <= chainActive.Height())
-            pblockindex = chainActive[coins.nHeight];
+        CCoins coins ;
+        if ( pcoinsTip->GetCoins( oneTxHash, coins ) && coins.nHeight > 0 && coins.nHeight <= chainActive.Height() )
+            pblockindex = chainActive[ coins.nHeight ] ;
     }
 
     if (pblockindex == NULL)
     {
-        CTransactionRef tx;
-        if (!GetTransaction(oneTxid, tx, Params().GetConsensus(0), hashBlock, false) || hashBlock.IsNull())
-            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Transaction not yet in block");
-        if (!mapBlockIndex.count(hashBlock))
-            throw JSONRPCError(RPC_INTERNAL_ERROR, "Transaction index corrupt");
-        pblockindex = mapBlockIndex[hashBlock];
+        CTransactionRef tx ;
+        if ( ! GetTransaction( oneTxHash, tx, Params().GetConsensus(0), hashBlock, false ) || hashBlock.IsNull() )
+            throw JSONRPCError( RPC_INVALID_ADDRESS_OR_KEY, "Transaction not yet in block" ) ;
+        if ( mapBlockIndex.count( hashBlock ) == 0 )
+            throw JSONRPCError( RPC_INTERNAL_ERROR, "Transaction index corrupt" ) ;
+        pblockindex = mapBlockIndex[ hashBlock ] ;
     }
 
-    CBlock block;
-    if(!ReadBlockFromDisk(block, pblockindex, Params().GetConsensus(pblockindex->nHeight)))
-        throw JSONRPCError(RPC_INTERNAL_ERROR, "Can't read block from disk");
+    CBlock block ;
+    if( ! ReadBlockFromDisk( block, pblockindex, Params().GetConsensus( pblockindex->nHeight ) ) )
+        throw JSONRPCError( RPC_INTERNAL_ERROR, "Can't read block from disk" ) ;
 
     unsigned int ntxFound = 0 ;
     for ( const auto & tx : block.vtx )
-        if ( setTxids.count( tx->GetTxHash() ) > 0 )
+        if ( setTxHashes.count( tx->GetTxHash() ) > 0 )
             ntxFound ++ ;
-    if (ntxFound != setTxids.size())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "(Not all) transactions not found in specified block");
+    if ( ntxFound != setTxHashes.size() )
+        throw JSONRPCError( RPC_INVALID_ADDRESS_OR_KEY, "(Not all) transactions not found in specified block" ) ;
 
-    CDataStream ssMB(SER_NETWORK, PROTOCOL_VERSION | SERIALIZE_TRANSACTION_NO_WITNESS);
-    CMerkleBlock mb(block, setTxids);
+    CDataStream ssMB( SER_NETWORK, PROTOCOL_VERSION | SERIALIZE_TRANSACTION_NO_WITNESS ) ;
+    CMerkleBlock mb( block, setTxHashes ) ;
     ssMB << mb;
     std::string strHex = HexStr(ssMB.begin(), ssMB.end());
     return strHex;
@@ -320,7 +316,7 @@ UniValue gettxoutproof(const JSONRPCRequest& request)
 UniValue verifytxoutproof(const JSONRPCRequest& request)
 {
     if (request.fHelp || request.params.size() != 1)
-        throw runtime_error(
+        throw std::runtime_error(
             "verifytxoutproof \"proof\"\n"
             "\nVerifies that a proof points to a transaction in a block, returning the transaction it commits to\n"
             "and throwing an RPC error if the block is not in our best chain\n"
@@ -336,8 +332,8 @@ UniValue verifytxoutproof(const JSONRPCRequest& request)
 
     UniValue res(UniValue::VARR);
 
-    vector<uint256> vMatch;
-    vector<unsigned int> vIndex;
+    std::vector< uint256 > vMatch ;
+    std::vector< unsigned int > vIndex ;
     if (merkleBlock.txn.ExtractMatches(vMatch, vIndex) != merkleBlock.header.hashMerkleRoot)
         return res;
 
@@ -356,7 +352,7 @@ UniValue verifytxoutproof(const JSONRPCRequest& request)
 UniValue createrawtransaction(const JSONRPCRequest& request)
 {
     if (request.fHelp || request.params.size() < 2 || request.params.size() > 3)
-        throw runtime_error(
+        throw std::runtime_error(
             "createrawtransaction [{\"txid\":\"id\",\"vout\":n},...] {\"address\":amount,\"data\":\"hex\",...} ( locktime )\n"
             "\nCreate a transaction spending the given inputs and creating new outputs.\n"
             "Outputs can be addresses or data.\n"
@@ -391,7 +387,8 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
             + HelpExampleRpc("createrawtransaction", "\"[{\\\"txid\\\":\\\"myid\\\",\\\"vout\\\":0}]\", \"{\\\"data\\\":\\\"00010203\\\"}\"")
         );
 
-    RPCTypeCheck(request.params, boost::assign::list_of(UniValue::VARR)(UniValue::VOBJ)(UniValue::VNUM), true);
+    RPCTypeCheck( request.params, { UniValue::VARR, UniValue::VOBJ, UniValue::VNUM }, true ) ;
+
     if (request.params[0].isNull() || request.params[1].isNull())
         throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, arguments 1 and 2 must be non-null");
 
@@ -439,7 +436,7 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
 
     std::set< CDogecoinAddress > setAddress ;
     std::vector< std::string > addrList = sendTo.getKeys() ;
-    for ( const string & name : addrList )
+    for ( const std::string & name : addrList )
     {
         if ( name == "data" ) {
             std::vector< unsigned char > data = ParseHexV( sendTo[ name ].getValStr(), "Data" ) ;
@@ -449,10 +446,10 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
         } else {
             CDogecoinAddress address( name ) ;
             if ( ! address.IsValid() )
-                throw JSONRPCError( RPC_INVALID_ADDRESS_OR_KEY, string( "Invalid Dogecoin address: " ) + name ) ;
+                throw JSONRPCError( RPC_INVALID_ADDRESS_OR_KEY, std::string( "Invalid Dogecoin address: " ) + name ) ;
 
             if ( setAddress.count( address ) )
-                throw JSONRPCError( RPC_INVALID_PARAMETER, string( "Invalid parameter, duplicated address: " ) + name ) ;
+                throw JSONRPCError( RPC_INVALID_PARAMETER, std::string( "Invalid parameter, duplicated address: " ) + name ) ;
             setAddress.insert( address ) ;
 
             CScript scriptPubKey = GetScriptForDestination( address.Get() ) ;
@@ -469,7 +466,7 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
 UniValue decoderawtransaction(const JSONRPCRequest& request)
 {
     if (request.fHelp || request.params.size() != 1)
-        throw runtime_error(
+        throw std::runtime_error(
             "decoderawtransaction \"hexstring\"\n"
             "\nReturn a JSON object representing the serialized, hex-encoded transaction.\n"
 
@@ -522,7 +519,7 @@ UniValue decoderawtransaction(const JSONRPCRequest& request)
         );
 
     LOCK(cs_main);
-    RPCTypeCheck(request.params, boost::assign::list_of(UniValue::VSTR));
+    RPCTypeCheck( request.params, { UniValue::VSTR } ) ;
 
     CMutableTransaction mtx;
 
@@ -538,7 +535,7 @@ UniValue decoderawtransaction(const JSONRPCRequest& request)
 UniValue decodescript(const JSONRPCRequest& request)
 {
     if (request.fHelp || request.params.size() != 1)
-        throw runtime_error(
+        throw std::runtime_error(
             "decodescript \"hexstring\"\n"
             "\nDecode a hex-encoded script.\n"
             "\nArguments:\n"
@@ -560,15 +557,15 @@ UniValue decodescript(const JSONRPCRequest& request)
             + HelpExampleRpc("decodescript", "\"hexstring\"")
         );
 
-    RPCTypeCheck(request.params, boost::assign::list_of(UniValue::VSTR));
+    RPCTypeCheck( request.params, { UniValue::VSTR } ) ;
 
     UniValue r(UniValue::VOBJ);
     CScript script;
     if (request.params[0].get_str().size() > 0){
-        vector<unsigned char> scriptData(ParseHexV(request.params[0], "argument"));
-        script = CScript(scriptData.begin(), scriptData.end());
+        std::vector< unsigned char > scriptData( ParseHexV( request.params[0], "argument" ) ) ;
+        script = CScript( scriptData.begin(), scriptData.end() ) ;
     } else {
-        // Empty scripts are valid
+        // empty scripts are ok
     }
     ScriptPubKeyToJSON(script, r, false);
 
@@ -599,7 +596,7 @@ static void TxInErrorToJSON(const CTxIn& txin, UniValue& vErrorsRet, const std::
 UniValue signrawtransaction(const JSONRPCRequest& request)
 {
     if (request.fHelp || request.params.size() < 1 || request.params.size() > 4)
-        throw runtime_error(
+        throw std::runtime_error(
             "signrawtransaction \"hexstring\" ( [{\"txid\":\"id\",\"vout\":n,\"scriptPubKey\":\"hex\",\"redeemScript\":\"hex\"},...] [\"privatekey1\",...] sighashtype )\n"
             "\nSign inputs for raw transaction (serialized, hex-encoded).\n"
             "The second optional argument (may be null) is an array of previous transaction outputs that\n"
@@ -662,12 +659,12 @@ UniValue signrawtransaction(const JSONRPCRequest& request)
 #else
     LOCK(cs_main);
 #endif
-    RPCTypeCheck(request.params, boost::assign::list_of(UniValue::VSTR)(UniValue::VARR)(UniValue::VARR)(UniValue::VSTR), true);
+    RPCTypeCheck( request.params, { UniValue::VSTR, UniValue::VARR, UniValue::VARR, UniValue::VSTR }, true ) ;
 
-    vector<unsigned char> txData(ParseHexV(request.params[0], "argument 1"));
-    CDataStream ssData(txData, SER_NETWORK, PROTOCOL_VERSION);
-    vector<CMutableTransaction> txVariants;
-    while (!ssData.empty()) {
+    std::vector< unsigned char > txData( ParseHexV( request.params[0], "argument 1" ) ) ;
+    CDataStream ssData( txData, SER_NETWORK, PROTOCOL_VERSION ) ;
+    std::vector< CMutableTransaction > txVariants ;
+    while ( ! ssData.empty() ) {
         try {
             CMutableTransaction tx;
             ssData >> tx;
@@ -748,13 +745,13 @@ UniValue signrawtransaction(const JSONRPCRequest& request)
             if (nOut < 0)
                 throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "vout must be positive");
 
-            vector<unsigned char> pkData(ParseHexO(prevOut, "scriptPubKey"));
-            CScript scriptPubKey(pkData.begin(), pkData.end());
+            std::vector< unsigned char > pkData( ParseHexO( prevOut, "scriptPubKey" ) ) ;
+            CScript scriptPubKey( pkData.begin(), pkData.end() ) ;
 
             {
                 CCoinsModifier coins = view.ModifyCoins(txid);
                 if (coins->IsAvailable(nOut) && coins->vout[nOut].scriptPubKey != scriptPubKey) {
-                    string err("Previous output scriptPubKey mismatch:\n");
+                    std::string err( "Previous output scriptPubKey mismatch:\n" ) ;
                     err = err + ScriptToAsmStr(coins->vout[nOut].scriptPubKey) + "\nvs:\n"+
                         ScriptToAsmStr(scriptPubKey);
                     throw JSONRPCError(RPC_DESERIALIZATION_ERROR, err);
@@ -779,10 +776,10 @@ UniValue signrawtransaction(const JSONRPCRequest& request)
                         {"redeemScript", UniValueType(UniValue::VSTR)},
                     });
                 UniValue v = find_value(prevOut, "redeemScript");
-                if (!v.isNull()) {
-                    vector<unsigned char> rsData(ParseHexV(v, "redeemScript"));
-                    CScript redeemScript(rsData.begin(), rsData.end());
-                    tempKeystore.AddCScript(redeemScript);
+                if ( ! v.isNull() ) {
+                    std::vector< unsigned char > rsData( ParseHexV( v, "redeemScript" ) ) ;
+                    CScript redeemScript( rsData.begin(), rsData.end() ) ;
+                    tempKeystore.AddCScript( redeemScript ) ;
                 }
             }
         }
@@ -796,20 +793,19 @@ UniValue signrawtransaction(const JSONRPCRequest& request)
 
     int nHashType = SIGHASH_ALL;
     if (request.params.size() > 3 && !request.params[3].isNull()) {
-        static map<string, int> mapSigHashValues =
-            boost::assign::map_list_of
-            (string("ALL"), int(SIGHASH_ALL))
-            (string("ALL|ANYONECANPAY"), int(SIGHASH_ALL|SIGHASH_ANYONECANPAY))
-            (string("NONE"), int(SIGHASH_NONE))
-            (string("NONE|ANYONECANPAY"), int(SIGHASH_NONE|SIGHASH_ANYONECANPAY))
-            (string("SINGLE"), int(SIGHASH_SINGLE))
-            (string("SINGLE|ANYONECANPAY"), int(SIGHASH_SINGLE|SIGHASH_ANYONECANPAY))
-            ;
-        string strHashType = request.params[3].get_str();
-        if (mapSigHashValues.count(strHashType))
-            nHashType = mapSigHashValues[strHashType];
+        static std::map< std::string, int > mapSigHashValues = {
+            { std::string( "ALL" ), int(SIGHASH_ALL) },
+            { std::string( "ALL|ANYONECANPAY" ), int(SIGHASH_ALL|SIGHASH_ANYONECANPAY) },
+            { std::string( "NONE" ), int(SIGHASH_NONE) },
+            { std::string( "NONE|ANYONECANPAY" ), int(SIGHASH_NONE|SIGHASH_ANYONECANPAY) },
+            { std::string( "SINGLE" ), int(SIGHASH_SINGLE) },
+            { std::string( "SINGLE|ANYONECANPAY" ), int(SIGHASH_SINGLE|SIGHASH_ANYONECANPAY) }
+        } ;
+        std::string strHashType = request.params[3].get_str() ;
+        if ( mapSigHashValues.count( strHashType ) > 0 )
+            nHashType = mapSigHashValues[ strHashType ] ;
         else
-            throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid sighash param");
+            throw JSONRPCError( RPC_INVALID_PARAMETER, "Invalid sighash param" ) ;
     }
 
     bool fHashSingle = ((nHashType & ~SIGHASH_ANYONECANPAY) == SIGHASH_SINGLE);
@@ -865,7 +861,7 @@ UniValue signrawtransaction(const JSONRPCRequest& request)
 UniValue sendrawtransaction(const JSONRPCRequest& request)
 {
     if (request.fHelp || request.params.size() < 1 || request.params.size() > 2)
-        throw runtime_error(
+        throw std::runtime_error(
             "sendrawtransaction \"hexstring\" ( allowhighfees )\n"
             "\nSubmits raw transaction (serialized, hex-encoded) to local node and network.\n"
             "\nAlso see createrawtransaction and signrawtransaction calls.\n"
@@ -886,7 +882,7 @@ UniValue sendrawtransaction(const JSONRPCRequest& request)
         );
 
     LOCK(cs_main);
-    RPCTypeCheck(request.params, boost::assign::list_of(UniValue::VSTR)(UniValue::VBOOL));
+    RPCTypeCheck( request.params, { UniValue::VSTR, UniValue::VBOOL } ) ;
 
     // parse hex string from parameter
     CMutableTransaction mtx;

@@ -1058,10 +1058,6 @@
     </context>
 <context>
     <name>ShutdownWindow</name>
-    <message>
-        <source>Do not shut down the computer until this window disappears</source>
-        <translation>Ne állítsd le a számítógépet amíg ez az ablak el nem tűnik</translation>
-    </message>
 </context>
 <context>
     <name>SignVerifyMessageDialog</name>

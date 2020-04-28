@@ -1248,10 +1248,6 @@
     </context>
 <context>
     <name>ShutdownWindow</name>
-    <message>
-        <source>Do not shut down the computer until this window disappears</source>
-        <translation>אין לכבות את המחשב עד שחלון זה נעלם</translation>
-    </message>
 </context>
 <context>
     <name>SignVerifyMessageDialog</name>

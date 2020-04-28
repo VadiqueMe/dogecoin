@@ -37,7 +37,7 @@ extern bool fPrintToConsole;
 extern void noui_connect();
 
 /** Coinbase transaction outputs can only be spent after this number of new blocks (network rule) */
-static const int COINBASE_MATURITY = 60*4; // 4 hours of blocks
+static const int COINBASE_MATURITY = 60 * 4 ; // 4 hours of blocks
 
 BasicTestingSetup::BasicTestingSetup(const std::string& chainName)
 {
@@ -62,7 +62,7 @@ TestingSetup::TestingSetup(const std::string& chainName) : BasicTestingSetup(cha
 {
     const CChainParams& chainparams = Params();
         // Ideally we'd move all the RPC tests to the functional testing framework
-        // instead of unit tests, but for now we need these here.
+        // instead of unit tests, but for now we need these here
 
         RegisterAllCoreRPCCommands(tableRPC);
         ClearDatadirCache();
@@ -82,7 +82,7 @@ TestingSetup::TestingSetup(const std::string& chainName) : BasicTestingSetup(cha
         nScriptCheckThreads = 3;
         for (int i=0; i < nScriptCheckThreads-1; i++)
             threadGroup.create_thread(&ThreadScriptCheck);
-        g_connman = std::unique_ptr<CConnman>(new CConnman(0x1337, 0x1337)); // Deterministic randomness for tests.
+        g_connman = std::unique_ptr<CConnman>(new CConnman(0x1337, 0x1337)); // Deterministic randomness for tests
         connman = g_connman.get();
         RegisterNodeSignals(GetNodeSignals());
 }
@@ -114,19 +114,19 @@ TestChain240Setup::TestChain240Setup() : TestingSetup( "regtest" )
 
 //
 // Create a new block with just given transactions, coinbase paying to
-// scriptPubKey, and try to add it to the current chain.
+// scriptPubKey, and try to add it to the current chain
 //
 CBlock
-TestChain240Setup::CreateAndProcessBlock(const std::vector<CMutableTransaction>& txns, const CScript& scriptPubKey)
+TestChain240Setup::CreateAndProcessBlock( const std::vector< CMutableTransaction > & txns, const CScript & scriptPubKey )
 {
-    const CChainParams& chainparams = Params();
-    std::unique_ptr<CBlockTemplate> pblocktemplate = BlockAssembler(chainparams).CreateNewBlock(scriptPubKey, true);
-    CBlock& block = pblocktemplate->block;
+    const CChainParams & chainparams = Params() ;
+    std::unique_ptr< CBlockTemplate > pblocktemplate = BlockAssembler( chainparams ).CreateNewBlock( scriptPubKey ) ;
+    CBlock & block = pblocktemplate->block ;
 
     // Replace mempool-selected txns with just coinbase plus passed-in txns:
     block.vtx.resize(1);
-    BOOST_FOREACH(const CMutableTransaction& tx, txns)
-        block.vtx.push_back(MakeTransactionRef(tx));
+    for ( const CMutableTransaction & tx : txns )
+        block.vtx.push_back( MakeTransactionRef( tx ) ) ;
     // IncrementExtraNonce creates a valid coinbase and merkleRoot
     unsigned int extraNonce = 0;
     IncrementExtraNonce(&block, chainActive.Tip(), extraNonce);

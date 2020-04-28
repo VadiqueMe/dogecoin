@@ -400,10 +400,6 @@
     </context>
 <context>
     <name>ShutdownWindow</name>
-    <message>
-        <source>Do not shut down the computer until this window disappears</source>
-        <translation>تا پیش از بسته شدن این پنجره کامپیوتر خود را خاموش نکنید</translation>
-    </message>
 </context>
 <context>
     <name>SignVerifyMessageDialog</name>

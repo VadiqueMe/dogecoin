@@ -1,4 +1,5 @@
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -14,9 +15,6 @@
 #include "util.h"
 #include "utilmoneystr.h"
 #include "utilstrencodings.h"
-
-#include <boost/assign/list_of.hpp>
-#include <boost/foreach.hpp>
 
 std::string FormatScript(const CScript& script)
 {
@@ -53,22 +51,21 @@ std::string FormatScript(const CScript& script)
     return ret.substr(0, ret.size() - 1);
 }
 
-const std::map<unsigned char, std::string> mapSigHashTypes =
-    boost::assign::map_list_of
-    (static_cast<unsigned char>(SIGHASH_ALL), std::string("ALL"))
-    (static_cast<unsigned char>(SIGHASH_ALL|SIGHASH_ANYONECANPAY), std::string("ALL|ANYONECANPAY"))
-    (static_cast<unsigned char>(SIGHASH_NONE), std::string("NONE"))
-    (static_cast<unsigned char>(SIGHASH_NONE|SIGHASH_ANYONECANPAY), std::string("NONE|ANYONECANPAY"))
-    (static_cast<unsigned char>(SIGHASH_SINGLE), std::string("SINGLE"))
-    (static_cast<unsigned char>(SIGHASH_SINGLE|SIGHASH_ANYONECANPAY), std::string("SINGLE|ANYONECANPAY"))
-    ;
+const std::map< unsigned char, std::string > mapSigHashTypes = {
+    { static_cast< unsigned char >( SIGHASH_ALL ), std::string( "ALL" ) },
+    { static_cast< unsigned char >( SIGHASH_ALL | SIGHASH_ANYONECANPAY ), std::string( "ALL|ANYONECANPAY" ) },
+    { static_cast< unsigned char >( SIGHASH_NONE ), std::string( "NONE" ) },
+    { static_cast< unsigned char >( SIGHASH_NONE | SIGHASH_ANYONECANPAY ), std::string( "NONE|ANYONECANPAY" ) },
+    { static_cast< unsigned char >( SIGHASH_SINGLE ), std::string( "SINGLE" ) },
+    { static_cast< unsigned char >( SIGHASH_SINGLE | SIGHASH_ANYONECANPAY ), std::string( "SINGLE|ANYONECANPAY" ) }
+} ;
 
 /**
- * Create the assembly string representation of a CScript object.
- * @param[in] script    CScript object to convert into the asm string representation.
+ * Create the assembly string representation of a CScript object
+ * @param[in] script    CScript object to convert into the asm string representation
  * @param[in] fAttemptSighashDecode    Whether to attempt to decode sighash types on data within the script that matches the format
  *                                     of a signature. Only pass true for scripts you believe could contain signatures. For example,
- *                                     pass false, or omit the this argument (defaults to false), for scriptPubKeys.
+ *                                     pass false, or omit the this argument (defaults to false), for scriptPubKeys
  */
 std::string ScriptToAsmStr(const CScript& script, const bool fAttemptSighashDecode)
 {
@@ -91,15 +88,15 @@ std::string ScriptToAsmStr(const CScript& script, const bool fAttemptSighashDeco
                 // the IsUnspendable check makes sure not to try to decode OP_RETURN data that may match the format of a signature
                 if (fAttemptSighashDecode && !script.IsUnspendable()) {
                     std::string strSigHashDecode;
-                    // goal: only attempt to decode a defined sighash type from data that looks like a signature within a scriptSig.
+                    // goal: only attempt to decode a defined sighash type from data that looks like a signature within a scriptSig
                     // this won't decode correctly formatted public keys in Pubkey or Multisig scripts due to
                     // the restrictions on the pubkey formats (see IsCompressedOrUncompressedPubKey) being incongruous with the
-                    // checks in CheckSignatureEncoding.
+                    // checks in CheckSignatureEncoding
                     if (CheckSignatureEncoding(vch, SCRIPT_VERIFY_STRICTENC, NULL)) {
                         const unsigned char chSigHashType = vch.back();
                         if (mapSigHashTypes.count(chSigHashType)) {
                             strSigHashDecode = "[" + mapSigHashTypes.find(chSigHashType)->second + "]";
-                            vch.pop_back(); // remove the sighash type byte. it will be replaced by the decode.
+                            vch.pop_back(); // remove the sighash type byte, it will be replaced by the decode
                         }
                     }
                     str += HexStr(vch) + strSigHashDecode;
@@ -114,11 +111,11 @@ std::string ScriptToAsmStr(const CScript& script, const bool fAttemptSighashDeco
     return str;
 }
 
-std::string EncodeHexTx(const CTransaction& tx, const int serialFlags)
+std::string EncodeHexTx( const CTransaction & tx, const int serialFlags )
 {
-    CDataStream ssTx(SER_NETWORK, PROTOCOL_VERSION | serialFlags);
-    ssTx << tx;
-    return HexStr(ssTx.begin(), ssTx.end());
+    CDataStream ssTx( SER_NETWORK, PROTOCOL_VERSION | serialFlags ) ;
+    ssTx << tx ;
+    return HexStr( ssTx.begin(), ssTx.end() ) ;
 }
 
 void ScriptPubKeyToUniv(const CScript& scriptPubKey,
@@ -141,7 +138,7 @@ void ScriptPubKeyToUniv(const CScript& scriptPubKey,
     out.pushKV("type", GetTxnOutputType(type));
 
     UniValue a( UniValue::VARR ) ;
-    BOOST_FOREACH( const CTxDestination & addr, addresses )
+    for ( const CTxDestination & addr : addresses )
         a.push_back( CDogecoinAddress( addr ).ToString() ) ;
     out.pushKV( "addresses", a ) ;
 }

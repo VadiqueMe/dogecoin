@@ -468,10 +468,6 @@
     </context>
 <context>
     <name>ShutdownWindow</name>
-    <message>
-        <source>Do not shut down the computer until this window disappears</source>
-        <translation>No apague su computadora hasta que esta ventana desaparesca</translation>
-    </message>
 </context>
 <context>
     <name>SignVerifyMessageDialog</name>

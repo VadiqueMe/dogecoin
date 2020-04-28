@@ -330,7 +330,13 @@ QLabel { color: rgb(40,40,40);  }</string>
               </spacer>
              </item>
              <item>
-              <widget class="QProgressBar" name="progressBar">
+              <widget class="QProgressBar" name="syncProgress">
+               <property name="minimumSize">
+                <size>
+                 <width>200</width>
+                 <height>10</height>
+                </size>
+               </property>
                <property name="value">
                 <number>24</number>
                </property>

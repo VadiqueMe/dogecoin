@@ -1,11 +1,12 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #ifndef DOGECOIN_QT_PEERTABLEMODEL_H
 #define DOGECOIN_QT_PEERTABLEMODEL_H
 
-#include "net_processing.h" // For CNodeStateStats
+#include "net_processing.h" // For CNodeInfoStats
 #include "net.h"
 
 #include <QAbstractTableModel>
@@ -19,10 +20,10 @@ class QTimer;
 QT_END_NAMESPACE
 
 struct CNodeCombinedStats {
-    CNodeStats nodeStats;
-    CNodeStateStats nodeStateStats;
-    bool fNodeStateStatsAvailable;
-};
+    CNodeStats nodeStats ;
+    CNodeInfoStats nodeInfoStats ;
+    bool fNodeInfoStatsAvailable ;
+} ;
 
 class NodeLessThan
 {
@@ -48,10 +49,10 @@ public:
     explicit PeerTableModel( NetworkModel * parent = nullptr ) ;
     ~PeerTableModel() ;
 
-    const CNodeCombinedStats *getNodeStats(int idx);
-    int getRowByNodeId(NodeId nodeid);
-    void startAutoRefresh();
-    void stopAutoRefresh();
+    const CNodeCombinedStats * getNodeStats( int idx ) ;
+    int getRowByNodeId( NodeId nodeid ) ;
+    void startAutoRefresh() ;
+    void stopAutoRefresh() ;
 
     enum ColumnIndex {
         NetNodeId = 0,

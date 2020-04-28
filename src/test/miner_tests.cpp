@@ -33,15 +33,14 @@ struct {
     unsigned char extranonce ;
     unsigned int nonce ;
 } blockinfo [] = {
-    { 4, 0x125c4cb0 }, { 2, 0x334af826 }, { 1, 0x3338e803 }, { 3, 0x6accf95f },
-    { 2, 0x16c63e11 }, { 3, 0xa388397e }, { 1, 0xdd1cf9bd }, { 8, 0x72184e1c },
-    { 5, 0x6e783ce1 }, { 1, 0x43e51633 }, { 1, 0x04bda0ae }, { 2, 0x1c4853bd },
-    { 1, 0x7495d5ec }, { 1, 0x6043b5dd }, { 1, 0x1b8489a0 }, { 2, 0x68b37c03 },
-    { 2, 0x441d1cbb }, { 1, 0x122e2d0e }, { 2, 0x833620ca }, { 2, 0xf2050b82 },
-    { 7, 0xdcc2e490 }, { 3, 0xcee0d38f }, { 6, 0x9849c0eb }, { 4, 0x4434b570 },
-    { 2, 0xeb8befbd }, { 1, 0x553bec3d }, { 3, 0x21e6b23d }, { 0, 0xaa6b60e7 },
-    { 9, 0xde9fb220 }, { 7, 0x773ef3da }, { 11, 0x10efa5d9 }, { 6, 0x677e6319 },
-    { 10, 0xfdc40ff }
+    {  4, 0x1253bc4a }, { 2, 0x433d4eb3 }, {  1, 0x3329023f }, { 3, 0x6ac5e20d },
+    { 12, 0x46c34dfa }, { 3, 0xa3595375 }, {  1, 0xdd1ab7cc }, { 8, 0x720a7881 },
+    {  5, 0x6e5851fc }, { 1, 0x43b2b0a7 }, {  1, 0x04bd7616 }, { 2, 0x1c3a7e9c },
+    {  1, 0x74807759 }, { 1, 0x603e6778 }, {  1, 0x1b720f1c }, { 2, 0x68b1aee9 },
+    {  2, 0x44045037 }, { 1, 0x122d6d85 }, {  4, 0x8330631f }, { 2, 0xf201eee6 },
+    {  7, 0xdcc0589f }, { 3, 0xced6e03b }, {  6, 0x983ba5a6 }, { 4, 0x442f4222 },
+    {  2, 0xeb7fa33a }, { 1, 0x54e181c2 }, {  3, 0x21e4f3e4 }, { 0, 0xaa55581f },
+    {  9, 0xde8f3ace }, { 7, 0x77236ce0 }, { 11, 0x10ead4c2 }, { 6, 0x677dd05f },
 } ;
 
 bool TestSequenceLocks(const CTransaction &tx, int flags)
@@ -182,16 +181,18 @@ BOOST_AUTO_TEST_CASE(CreateNewBlock_validity)
     // Therefore, make some blocks :)
     int baseheight = 0 ;
     std::vector< CTransactionRef > txFirst ;
-    size_t number_of_blocks_to_premine = chainparams.GetConsensus( 0 ).nCoinbaseMaturity + 3 /* sizeof( blockinfo ) / sizeof( *blockinfo ) */ ;
+    const int64_t firstBlockTime = 1588015800 /* chainActive.Tip()->GetBlockTime() + 8800 */ /* GetSystemTimeInSeconds() */ ;
+    ///LogPrintf( "miner_tests: first block's time = %i\n", firstBlockTime ) ;
+    const size_t number_of_blocks_to_premine = chainparams.GetConsensus( 0 ).nCoinbaseMaturity + 2 ;
     for ( unsigned int i = 0 ; i < number_of_blocks_to_premine ; ++ i )
     {
         // create new block candidate for each block
         // it is needed because each new block's subsidy is random derived from previous block's hash
         BOOST_CHECK( pblocktemplate = BlockAssembler( chainparams ).CreateNewBlock( scriptPubKey, true ) ) ;
 
-        CBlock *pblock = &pblocktemplate->block ; // pointer for convenience
+        CBlock * pblock = &pblocktemplate->block ; // pointer for convenience
         pblock->nVersion = 1;
-        pblock->nTime = chainActive.Tip()->GetBlockTime() + /* 1 minute and 5 seconds */ 65 ;
+        pblock->nTime = std::max( chainActive.Tip()->GetBlockTime(), firstBlockTime ) + 88 ;
         CMutableTransaction txCoinbase( *pblock->vtx[0] ) ;
         txCoinbase.nVersion = 1 ;
         txCoinbase.vin[0].scriptSig = CScript() ;
@@ -208,13 +209,16 @@ BOOST_AUTO_TEST_CASE(CreateNewBlock_validity)
 
         pblock->hashMerkleRoot = BlockMerkleRoot( *pblock ) ;
         pblock->nNonce = blockinfo[ i ].nonce ;
-        /* while ( ! CheckProofOfWork( *pblock, pblock->nBits, chainparams.GetConsensus( 0 ) ) ) {
-            pblock->nNonce -- ;
-            if ( pblock->nNonce == 0 ) pblock->nNonce = 0xfffffffe ;
-        }
-        LogPrintf( "miner_tests: blockinfo[ %d ].nonce = 0x%x, extraNonce = %d\n", i, pblock->nNonce, blockinfo[ i ].extranonce ) ; */
+        /* {
+            while ( ! CheckProofOfWork( *pblock, pblock->nBits, chainparams.GetConsensus( 0 ) ) ) {
+                pblock->nNonce -- ;
+                if ( pblock->nNonce == 0 ) pblock->nNonce = 0xfffffffe ;
+            }
+            LogPrintf( "miner_tests: blockinfo[ %u ].nonce = 0x%08x, extraNonce = %u, nTime = %i\n",
+                        i, pblock->nNonce, blockinfo[ i ].extranonce, pblock->nTime ) ;
+        } */
         std::shared_ptr< const CBlock > shared_pblock = std::make_shared< const CBlock >( *pblock ) ;
-        BOOST_CHECK( ProcessNewBlock( chainparams, shared_pblock, true, NULL ) ) ;
+        BOOST_CHECK( ProcessNewBlock( chainparams, shared_pblock, true, nullptr ) ) ;
         //* pblock->hashPrevBlock = pblock->GetSha256Hash() ; // not needed when the new block candidate is created on every iteration
     }
 

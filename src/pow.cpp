@@ -14,26 +14,26 @@
 #include "uint256.h"
 #include "util.h"
 
-unsigned int GetNextWorkRequired( const CBlockIndex * pindexLast, const CBlockHeader * pblock, const Consensus::Params & params )
+uint32_t GetNextWorkRequired( const CBlockIndex * pindexLast, const CBlockHeader * pblock, const Consensus::Params & params, bool talkative )
 {
-    unsigned int nProofOfWorkLimit = UintToArith256( params.powLimit ).GetCompact() ;
+    uint32_t bitsUpperLimit = UintToArith256( params.powLimit ).GetCompact() ;
 
     // Genesis block
-    if ( pindexLast == nullptr )
-        return nProofOfWorkLimit ;
+    if ( pindexLast == nullptr || pindexLast->nHeight == 0 )
+        return bitsUpperLimit ;
 
     if ( AcceptDigishieldMinDifficultyForBlock( pindexLast, pblock, params ) )
     {
         // If the new block's time is more than nMinDifficultyTimespan behind the last block's time
         // then accept a min-difficulty block
-        return nProofOfWorkLimit ;
+        return bitsUpperLimit ;
     }
 
     // Only change once per difficulty adjustment interval
     bool fNewDifficultyProtocol = ( pindexLast->nHeight >= 145000 ) || ( NameOfChain() == "inu" ) ;
     const int64_t difficultyAdjustmentInterval = fNewDifficultyProtocol
-                                                 ? 1
-                                                 : params.DifficultyAdjustmentInterval() ;
+                                                     ? 1
+                                                     : params.DifficultyAdjustmentInterval() ;
     if ( ( pindexLast->nHeight + 1 ) % difficultyAdjustmentInterval != 0 )
     {
         if ( params.fPowAllowMinDifficultyBlocks )
@@ -41,11 +41,11 @@ unsigned int GetNextWorkRequired( const CBlockIndex * pindexLast, const CBlockHe
             // If the new block's time is more than nMinDifficultyTimespan behind the last block's time
             // then accept a min-difficulty block
             if ( pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nMinDifficultyTimespan )
-                return nProofOfWorkLimit ;
+                return bitsUpperLimit ;
             else
             {
                 const CBlockIndex * pindex = pindexLast ;
-                while ( pindex->pprev && pindex->nHeight % difficultyAdjustmentInterval != 0 && pindex->nBits == nProofOfWorkLimit )
+                while ( pindex->pprev && pindex->nHeight % difficultyAdjustmentInterval != 0 && pindex->nBits == bitsUpperLimit )
                     pindex = pindex->pprev ;
                 return pindex->nBits ;
             }
@@ -59,16 +59,16 @@ unsigned int GetNextWorkRequired( const CBlockIndex * pindexLast, const CBlockHe
     if ( ( pindexLast->nHeight + 1 ) != difficultyAdjustmentInterval )
         blockstogoback = difficultyAdjustmentInterval ;
 
-    // Go back by what we want to be 14 days worth of blocks
-    int nHeightFirst = pindexLast->nHeight - blockstogoback;
-    assert(nHeightFirst >= 0);
-    const CBlockIndex* pindexFirst = pindexLast->GetAncestor(nHeightFirst);
-    assert(pindexFirst);
+    // Go back
+    int nHeightFirst = pindexLast->nHeight - blockstogoback ;
+    assert( nHeightFirst >= 0 ) ;
+    const CBlockIndex* pindexFirst = pindexLast->GetAncestor( nHeightFirst ) ;
+    assert( pindexFirst != nullptr ) ;
 
-    return CalculateDogecoinNextWorkRequired( pindexLast, pindexFirst->GetBlockTime(), params ) ;
+    return CalculateDogecoinNextWorkRequired( pindexLast, pindexFirst->GetBlockTime(), params, talkative ) ;
 }
 
-/* unsigned int CalculateNextWorkRequired( const CBlockIndex * pindexLast, int64_t nFirstBlockTime, const Consensus::Params & params )
+/* uint32_t CalculateNextWorkRequired( const CBlockIndex * pindexLast, int64_t nFirstBlockTime, const Consensus::Params & params )
 {
     if (params.fPowNoRetargeting)
         return pindexLast->nBits;

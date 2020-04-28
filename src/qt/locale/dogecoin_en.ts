@@ -321,7 +321,7 @@
     <message>
         <location line="+13"/>
         <location line="+26"/>
-        <location filename="../chainsyncoverlay.cpp" line="+139"/>
+        <location filename="../chainsyncoverlay.cpp" line="+137"/>
         <source>Unknown...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -336,7 +336,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+50"/>
+        <location line="+56"/>
         <source>Progress increase per hour</source>
         <translation type="unfinished"></translation>
     </message>
@@ -390,7 +390,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+45"/>
+        <location line="+29"/>
         <source>After Fee:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1683,17 +1683,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+38"/>
-        <source>Error encoding Address into QR Code.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+18"/>
-        <source>Error encoding private key into QR Code.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+78"/>
+        <location line="+133"/>
         <source>failed to open file, is it writable?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1902,7 +1892,7 @@
 <context>
     <name>PeerTableModel</name>
     <message>
-        <location filename="../peertablemodel.cpp" line="+116"/>
+        <location filename="../peertablemodel.cpp" line="+117"/>
         <source>User Agent</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2587,7 +2577,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+51"/>
+        <location line="+32"/>
         <source>Fee:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2622,7 +2612,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-787"/>
+        <location line="-768"/>
         <source>Hide</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2632,7 +2622,7 @@
         <translation type="unfinished">Insufficient funds</translation>
     </message>
     <message>
-        <location line="+543"/>
+        <location line="+524"/>
         <source>Add &amp;Recipient</source>
         <translation>Add &amp;Recipient</translation>
     </message>
@@ -2872,13 +2862,8 @@
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <location filename="../utilitydialog.cpp" line="+23"/>
+        <location filename="../utilitydialog.cpp" line="+24"/>
         <source>%1 is shutting down...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Do not shut down the computer until this window disappears</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3924,11 +3909,6 @@
     <message>
         <location line="+2"/>
         <source>Set the number of script verification threads (%u to %d, 0 = auto, &lt;0 = leave that many cores free, default: %d)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Sets the serialization of raw transaction or block hex returned in non-verbose mode, non-segwit(0) or segwit(1) (default: %d)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

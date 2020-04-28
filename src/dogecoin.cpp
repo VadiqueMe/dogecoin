@@ -1,5 +1,5 @@
 // Copyright (c) 2015 The Dogecoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -27,64 +27,101 @@ int static generateMTRandom(unsigned int s, int range)
 // a retarget, so we need to handle minimum difficulty on all blocks
 bool AcceptDigishieldMinDifficultyForBlock( const CBlockIndex * pindexLast, const CBlockHeader * pblock, const Consensus::Params & params )
 {
-    if ( NameOfChain() == "inu" )
-        return ( pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nMinDifficultyTimespan ) ;
+    bool prereq = ( NameOfChain() == "inu" ||
+                        ( params.fPowAllowMinDifficultyBlocks && ( pindexLast->nHeight >= HEIGHT_OF_FIRST_DigiShield_BLOCK ) ) ) ;
 
-    // check if the chain allows minimum difficulty blocks
-    if ( ! params.fPowAllowMinDifficultyBlocks )
-        return false ;
-
-    if ( pindexLast->nHeight < 157500 ) // Dogecoin: Magic block-height number
-        return false ;
+    if ( ! prereq ) return false ;
 
     // accept a minimal proof of work if the elapsed time > nMinDifficultyTimespan
     return ( pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nMinDifficultyTimespan ) ;
 }
 
-unsigned int CalculateDogecoinNextWorkRequired( const CBlockIndex * pindexLast, int64_t nFirstBlockTime, const Consensus::Params & params )
+uint32_t CalculateDogecoinNextWorkRequired( const CBlockIndex * pindexLast,
+                                            int64_t nFirstBlockTime,
+                                            const Consensus::Params & params,
+                                            bool talkative )
 {
-    int nHeight = pindexLast->nHeight + 1;
-    const int64_t retargetTimespan = params.nPowTargetTimespan;
-    const int64_t nActualTimespan = pindexLast->GetBlockTime() - nFirstBlockTime;
-    int64_t nModulatedTimespan = nActualTimespan;
-    int64_t nMaxTimespan;
-    int64_t nMinTimespan;
+    const arith_uint256 upperLimit = UintToArith256( params.powLimit ) ;
 
-    if (params.fDigishieldDifficultyCalculation) //DigiShield implementation - thanks to RealSolid & WDC for this code
+    // Genesis block
+    if ( pindexLast == nullptr || pindexLast->nHeight == 0 )
+        return upperLimit.GetCompact() ;
+
+    int nextHeight = pindexLast->nHeight + 1 ;
+    const int64_t retargetTimespan = params.nPowTargetTimespan ;
+    const int64_t nActualTimespan = pindexLast->GetBlockTime() - nFirstBlockTime ;
+
+    int64_t nModulatedTimespan = nActualTimespan ;
+    int64_t nMaxTimespan ;
+    int64_t nMinTimespan ;
+
+    if ( params.fDigishieldDifficultyCalculation ) // DigiShield implementation - thanks to RealSolid & WDC for this code
     {
         // amplitude filter - thanks to daft27 for this code
-        nModulatedTimespan = retargetTimespan + (nModulatedTimespan - retargetTimespan) / 8;
+        nModulatedTimespan = retargetTimespan + ( nModulatedTimespan - retargetTimespan ) / 8 ;
 
-        nMinTimespan = retargetTimespan - (retargetTimespan / 4);
-        nMaxTimespan = retargetTimespan + (retargetTimespan / 2);
-    } else if (nHeight > 10000) {
-        nMinTimespan = retargetTimespan / 4;
-        nMaxTimespan = retargetTimespan * 4;
-    } else if (nHeight > 5000) {
-        nMinTimespan = retargetTimespan / 8;
-        nMaxTimespan = retargetTimespan * 4;
+        nMinTimespan = retargetTimespan - ( retargetTimespan / 4 ) ;
+        nMaxTimespan = retargetTimespan + ( retargetTimespan / 2 ) ;
+    } else if ( nextHeight > 10000 ) {
+        nMinTimespan = retargetTimespan / 4 ;
+        nMaxTimespan = retargetTimespan * 4 ;
+    } else if ( nextHeight > 5000 ) {
+        nMinTimespan = retargetTimespan / 8 ;
+        nMaxTimespan = retargetTimespan * 4 ;
     } else {
-        nMinTimespan = retargetTimespan / 16;
-        nMaxTimespan = retargetTimespan * 4;
+        nMinTimespan = retargetTimespan / 16 ;
+        nMaxTimespan = retargetTimespan * 4 ;
     }
 
     // Limit adjustment step
-    if (nModulatedTimespan < nMinTimespan)
-        nModulatedTimespan = nMinTimespan;
-    else if (nModulatedTimespan > nMaxTimespan)
-        nModulatedTimespan = nMaxTimespan;
+    if ( nModulatedTimespan < nMinTimespan )
+        nModulatedTimespan = nMinTimespan ;
+    else if ( nModulatedTimespan > nMaxTimespan )
+        nModulatedTimespan = nMaxTimespan ;
 
     // Retarget
+
     arith_uint256 bnOld ;
     bnOld.SetCompact( pindexLast->nBits ) ;
+
     arith_uint256 bnNew = bnOld ;
-    bnNew *= nModulatedTimespan ;
-    bnNew /= retargetTimespan ;
+    if ( nModulatedTimespan != retargetTimespan ) {
+        bnNew *= nModulatedTimespan ;
+        bnNew /= retargetTimespan ;
+    }
 
-    const arith_uint256 lowerPowLimit = UintToArith256( params.powLimit ) ;
-    if ( bnNew > lowerPowLimit ) bnNew = lowerPowLimit ;
+    // check for possible overflow on *= nModulatedTimespan
+    arith_uint256 bnNewToo = bnOld ;
+    bool overflow = false ;
+    std::string overflowMessage( "" ) ;
+    if ( nModulatedTimespan != retargetTimespan ) {
+        bnNewToo /= retargetTimespan ;
+        bnNewToo *= nModulatedTimespan ;
+        overflow = ( bnNew.GetCompact() >> 4 != bnNewToo.GetCompact() >> 4 ) ;
+        if ( overflow ) overflowMessage = " @overflow@" ;
+    }
 
-    return bnNew.GetCompact() ;
+    // check for upper limit
+    bool aboveLimit = ( bnNew > upperLimit ) ;
+    if ( aboveLimit )
+        bnNew = upperLimit ;
+
+    uint32_t nextBits = bnNew.GetCompact() ;
+
+    if ( talkative ) {
+        if ( ! aboveLimit )
+            LogPrintf( "%s: height %u old bits (%08x) %s * %i%s / %i = new bits %s (%08x) for height %u\n", __func__,
+                    pindexLast->nHeight, pindexLast->nBits, bnOld.GetHex(),
+                    nModulatedTimespan, overflowMessage, retargetTimespan,
+                    bnNew.GetHex(), nextBits, nextHeight ) ;
+        else
+            LogPrintf( "%s: height %u old bits (%08x) %s * %i%s / %i > %s, new bits for height %u = upper limit (%08x)\n", __func__,
+                    pindexLast->nHeight, pindexLast->nBits, bnOld.GetHex(),
+                    nModulatedTimespan, overflowMessage, retargetTimespan, upperLimit.GetHex(),
+                    nextHeight, nextBits ) ;
+    }
+
+    return nextBits ;
 }
 
 bool CheckDogecoinProofOfWork( const CBlockHeader & block, const Consensus::Params & params )
@@ -183,4 +220,3 @@ CAmount GetDogecoinMinRelayFee( const CTransaction & tx, unsigned int nBytes )
 
     return 0 ;
 }
-

@@ -3007,9 +3007,15 @@ bool ContextualCheckBlockHeader( const CBlockHeader & block, CValidationState & 
                           REJECT_INVALID, "early-auxpow-block" ) ;
 
     // Check proof of work
-    // The comparison is exact, thus smaller values of bits ("higher difficulty") aren't accepted as well as bigger ones
-    if ( block.nBits != GetNextWorkRequired( pindexPrev, &block, consensusParams ) )
-        return state.DoS( 12, false, REJECT_INVALID, "bad-diffbits", false, "incorrect proof of work bits" ) ;
+    // Smaller values of bits ("higher difficulty") aren't accepted as well as bigger ones
+    uint32_t bitsRequired = GetNextWorkRequired( pindexPrev, &block, consensusParams, /* talkative */ true ) ;
+    if ( block.nBits != bitsRequired ) {
+        LogPrintf( "%s: inexact proof-of-work bits: 0x%08x != 0x%08x for block sha256_hash=%s scrypt_hash=%s\n", __func__,
+                   block.nBits, bitsRequired, block.GetSha256Hash().ToString(), block.GetScryptHash().ToString() ) ;
+        if ( block.nBits >> 4 != bitsRequired >> 4 )
+            return state.DoS( 12, false, REJECT_INVALID, "bad-diffbits", false,
+                        strprintf( "proof-of-work bits are too inexact: 0x%07x0 != 0x%07x0", block.nBits >> 4, bitsRequired >> 4 ) ) ;
+    }
 
     // Check timestamp
     uint64_t timeLimitInPast = ( ! Params().UseMedianTimePast() ) ? pindexPrev->nTime : pindexPrev->GetMedianTimePast() ;
