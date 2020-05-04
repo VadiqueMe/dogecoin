@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -17,8 +18,6 @@
 
 #include <atomic>
 
-#include <boost/version.hpp>
-#include <boost/filesystem.hpp>
 #include <boost/thread.hpp>
 
 static uint64_t nAccountingEntryNumber = 0;
@@ -806,13 +805,13 @@ void ThreadFlushWalletDB()
 
         if (nLastFlushed != CWalletDB::GetUpdateCounter() && GetTime() - nLastWalletUpdate >= 2)
         {
-            TRY_LOCK(bitdb.cs_db,lockDb);
-            if (lockDb)
+            TRY_LOCK( walletdb.cs_db,lockDb ) ;
+            if ( lockDb )
             {
                 // Don't do this if any databases are in use
                 int nRefCount = 0 ;
-                std::map< std::string, int >::iterator mit = bitdb.mapFileUseCount.begin() ;
-                while ( mit != bitdb.mapFileUseCount.end() )
+                std::map< std::string, int >::iterator mit = walletdb.mapFileUseCount.begin() ;
+                while ( mit != walletdb.mapFileUseCount.end() )
                 {
                     nRefCount += ( *mit ).second ;
                     mit ++ ;
@@ -822,18 +821,18 @@ void ThreadFlushWalletDB()
                 {
                     boost::this_thread::interruption_point();
                     const std::string & walletFile = pwalletMain->strWalletFile ;
-                    std::map< std::string, int >::iterator mi = bitdb.mapFileUseCount.find( walletFile ) ;
-                    if ( mi != bitdb.mapFileUseCount.end() )
+                    std::map< std::string, int >::iterator mi = walletdb.mapFileUseCount.find( walletFile ) ;
+                    if ( mi != walletdb.mapFileUseCount.end() )
                     {
                         LogPrintf( "%s: flushing %s\n", __func__, walletFile ) ;
                         nLastFlushed = CWalletDB::GetUpdateCounter() ;
                         int64_t nStart = GetTimeMillis() ;
 
                         // Flush wallet file so it's self contained
-                        bitdb.CloseDb( walletFile ) ;
-                        bitdb.CheckpointLSN( walletFile ) ;
+                        walletdb.CloseDb( walletFile ) ;
+                        walletdb.CheckpointLSN( walletFile ) ;
 
-                        bitdb.mapFileUseCount.erase( mi++ ) ;
+                        walletdb.mapFileUseCount.erase( mi ++ ) ;
                         LogPrintf( "Flushed %s in %.3f s\n", walletFile, 0.001 * ( GetTimeMillis() - nStart ) ) ;
                     }
                 }
@@ -864,7 +863,7 @@ bool CWalletDB::Recover( CDBEnv & dbenv, const std::string & filename, bool fOnl
         return false ;
     }
 
-    std::vector< CDBEnv::KeyValPair > salvagedData ;
+    std::vector< CDBEnv::KeyValuePair > salvagedData ;
     bool fSuccess = dbenv.Salvage( newFilename, salvagedData, /* aggressive */ true ) ;
     if ( salvagedData.empty() )
     {
@@ -890,7 +889,7 @@ bool CWalletDB::Recover( CDBEnv & dbenv, const std::string & filename, bool fOnl
     CWalletScanState wss ;
 
     DbTxn* ptxn = dbenv.TxnBegin();
-    for ( CDBEnv::KeyValPair & row : salvagedData )
+    for ( CDBEnv::KeyValuePair & row : salvagedData )
     {
         if ( fOnlyKeys )
         {

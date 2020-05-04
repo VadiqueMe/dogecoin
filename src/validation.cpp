@@ -575,9 +575,9 @@ bool AcceptToMemoryPoolWorker( CTxMemPool& pool, CValidationState& state, const 
     if ( tx.IsCoinBase() )
         return state.DoS( 50, false, REJECT_INVALID, "coinbase" ) ;
 
-    // Reject transactions with witness before segregated witness activates (override with -prematurewitness)
+    // Reject transactions with witness before segregated witness activates
     bool witnessEnabled = IsWitnessEnabled( chainActive.Tip(), Params().GetConsensus( chainActive.Height() ) ) ;
-    if ( ! GetBoolArg( "-prematurewitness", false ) && tx.HasWitness() && ! witnessEnabled ) {
+    if ( tx.HasWitness() && ! witnessEnabled ) {
         return state.Invalid( false, REJECT_NONSTANDARD, "no-witness-yet" ) ;
     }
 

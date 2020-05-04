@@ -26,43 +26,43 @@ static const bool DEFAULT_WALLET_PRIVDB = true;
 class CDBEnv
 {
 private:
-    bool fDbEnvInit;
-    bool fMockDb;
+    bool fDbEnvInit ;
+    bool isMockDb ;
     // Don't change into boost::filesystem::path, as that can result in
-    // shutdown problems/crashes caused by a static initialized internal pointer.
-    std::string strPath;
+    // shutdown problems/crashes caused by a static-initialized internal pointer
+    std::string strPath ;
 
-    void EnvShutdown();
+    void EnvShutdown() ;
 
 public:
-    mutable CCriticalSection cs_db;
-    DbEnv *dbenv;
-    std::map<std::string, int> mapFileUseCount;
-    std::map<std::string, Db*> mapDb;
+    mutable CCriticalSection cs_db ;
+    DbEnv * dbenv ;
+    std::map< std::string, int > mapFileUseCount ;
+    std::map< std::string, Db * > mapDb ;
 
-    CDBEnv();
-    ~CDBEnv();
-    void Reset();
+    CDBEnv() ;
+    ~CDBEnv() ;
+    void Reset() ;
 
-    void MakeMock();
-    bool IsMock() { return fMockDb; }
+    void MakeMockDB() ;
+    bool IsMockDB() {  return isMockDb ;  }
 
     /**
-     * Verify that database file strFile is OK. If it is not, call the callback
-     * to try to recover. Call this BEFORE strFile is opened. Returns true if strFile is OK
+     * Verify that database file dbFile is okay. If it is not, do the callback
+     * to try to recover. Call this BEFORE strFile is opened. Returns true if dbFile is okay
      */
     enum VerifyResult { VERIFY_OK,
                         RECOVER_OK,
                         RECOVER_FAIL } ;
-    VerifyResult Verify( const std::string & strFile, bool ( *recoverFunc )( CDBEnv & dbenv, const std::string & strFile ) ) ;
+    VerifyResult Verify( const std::string & dbFile, bool ( *recoverFunc )( CDBEnv & dbenv, const std::string & strFile ) ) ;
     /**
      * Salvage data from a file that Verify says is bad
      * fAggressive sets the DB_AGGRESSIVE flag (see berkeley DB->verify() method documentation)
      * Appends binary key/value pairs to vResult, returns true on success
      * NOTE: reads the entire database into memory, so cannot be used for huge databases
      */
-    typedef std::pair<std::vector<unsigned char>, std::vector<unsigned char> > KeyValPair;
-    bool Salvage( const std::string & strFile, std::vector< KeyValPair > & vResult, bool fAggressive ) ;
+    typedef std::pair< std::vector< unsigned char >, std::vector< unsigned char > > KeyValuePair ;
+    bool Salvage( const std::string & strFile, std::vector< KeyValuePair > & vResult, bool fAggressive ) ;
 
     bool Open(const boost::filesystem::path& path);
     void Close();
@@ -82,21 +82,21 @@ public:
     }
 };
 
-extern CDBEnv bitdb;
+extern CDBEnv walletdb ;
 
 
 /** RAII class that provides access to a Berkeley database */
 class CDB
 {
 protected:
-    Db* pdb;
-    std::string strFile;
-    DbTxn* activeTxn;
-    bool fReadOnly;
-    bool fFlushOnClose;
+    Db* pdb ;
+    std::string strFile ;
+    DbTxn* activeTxn ;
+    bool fReadOnly ;
+    bool fFlushOnClose ;
 
-    explicit CDB(const std::string& strFilename, const char* pszMode = "r+", bool fFlushOnCloseIn=true);
-    ~CDB() { Close(); }
+    explicit CDB( const std::string & strFilename, const char * mode = "r+", bool flushOnClose = true ) ;
+    ~CDB() {  Close() ;  }
 
 public:
     void Flush();
@@ -152,15 +152,15 @@ protected:
 
         // Key
         CDataStream ssKey( SER_DISK, PEER_VERSION ) ;
-        ssKey.reserve(1000);
-        ssKey << key;
-        Dbt datKey(ssKey.data(), ssKey.size());
+        ssKey.reserve( 1000 ) ;
+        ssKey << key ;
+        Dbt datKey( ssKey.data(), ssKey.size() ) ;
 
         // Value
         CDataStream ssValue( SER_DISK, PEER_VERSION ) ;
-        ssValue.reserve(10000);
-        ssValue << value;
-        Dbt datValue(ssValue.data(), ssValue.size());
+        ssValue.reserve( 10000 ) ;
+        ssValue << value ;
+        Dbt datValue( ssValue.data(), ssValue.size() ) ;
 
         // Write
         int ret = pdb->put(activeTxn, &datKey, &datValue, (fOverwrite ? 0 : DB_NOOVERWRITE));
@@ -264,11 +264,10 @@ public:
     {
         if (!pdb || activeTxn)
             return false;
-        DbTxn* ptxn = bitdb.TxnBegin();
-        if (!ptxn)
-            return false;
-        activeTxn = ptxn;
-        return true;
+        DbTxn* ptxn = walletdb.TxnBegin() ;
+        if ( ptxn == nullptr ) return false;
+        activeTxn = ptxn ;
+        return true ;
     }
 
     bool TxnCommit()
@@ -300,7 +299,7 @@ public:
         return Write(std::string("version"), nVersion);
     }
 
-    bool static Rewrite(const std::string& strFile, const char* pszSkip = NULL);
+    bool static Rewrite( const std::string & strFile, CDBEnv & dbenv, const char * pszSkip = nullptr ) ;
 };
 
 #endif

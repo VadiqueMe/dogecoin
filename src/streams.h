@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -339,7 +340,7 @@ public:
     void SetVersion(int n)       { nVersion = n; }
     int GetVersion() const       { return nVersion; }
 
-    void read(char* pch, size_t nSize)
+    void read( char* pch, size_t nSize )
     {
         if (nSize == 0) return;
 
@@ -349,7 +350,7 @@ public:
         {
             if (nReadPosNext > vch.size())
             {
-                throw std::ios_base::failure("CDataStream::read(): end of data");
+                throw std::ios_base::failure( "CDataStream::read: end of data" ) ;
             }
             memcpy(pch, &vch[nReadPos], nSize);
             nReadPos = 0;
@@ -360,22 +361,22 @@ public:
         nReadPos = nReadPosNext;
     }
 
-    void ignore(int nSize)
+    void skip( int nSize )
     {
-        // Ignore from the beginning of the buffer
-        if (nSize < 0) {
-            throw std::ios_base::failure("CDataStream::ignore(): nSize negative");
+        // Skip from the beginning of the buffer
+        if ( nSize < 0 ) {
+            throw std::ios_base::failure( "CDataStream::skip: negative nSize" ) ;
         }
-        unsigned int nReadPosNext = nReadPos + nSize;
-        if (nReadPosNext >= vch.size())
+        unsigned int nReadPosNext = nReadPos + nSize ;
+        if ( nReadPosNext >= vch.size() )
         {
-            if (nReadPosNext > vch.size())
-                throw std::ios_base::failure("CDataStream::ignore(): end of data");
-            nReadPos = 0;
-            vch.clear();
-            return;
+            if ( nReadPosNext > vch.size() )
+                throw std::ios_base::failure( "CDataStream::skip: end of data" ) ;
+            nReadPos = 0 ;
+            vch.clear() ;
+            return ;
         }
-        nReadPos = nReadPosNext;
+        nReadPos = nReadPosNext ;
     }
 
     void write(const char* pch, size_t nSize)
@@ -440,12 +441,6 @@ public:
 
 
 
-
-
-
-
-
-
 /** Non-refcounted RAII wrapper for FILE*
  *
  * Will automatically close the file when it goes out of scope if not null
@@ -498,7 +493,7 @@ public:
 
     /** Return true if the wrapped FILE* is null pointer, false otherwise
      */
-    bool isNull() const         {  return ( file == nullptr ) ; }
+    bool isNull() const         {  return ( file == nullptr ) ;  }
 
     //
     // Stream subset
@@ -506,55 +501,55 @@ public:
     int GetType() const          { return nType; }
     int GetVersion() const       { return nVersion; }
 
-    void read(char* pch, size_t nSize)
+    void read( char* pch, size_t nSize )
     {
-        if (!file)
-            throw std::ios_base::failure("CAutoFile::read: file handle is NULL");
-        if (fread(pch, 1, nSize, file) != nSize)
-            throw std::ios_base::failure(feof(file) ? "CAutoFile::read: end of file" : "CAutoFile::read: fread failed");
+        if ( isNull() )
+            throw std::ios_base::failure( "CAutoFile::read: file handle is null pointer" ) ;
+        if ( fread( pch, 1, nSize, file ) != nSize )
+            throw std::ios_base::failure( feof( file ) ? "CAutoFile::read: end of file" : "CAutoFile::read: fread failed" ) ;
     }
 
-    void ignore(size_t nSize)
+    void skip( size_t nSize )
     {
-        if (!file)
-            throw std::ios_base::failure("CAutoFile::ignore: file handle is NULL");
-        unsigned char data[4096];
-        while (nSize > 0) {
-            size_t nNow = std::min<size_t>(nSize, sizeof(data));
-            if (fread(data, 1, nNow, file) != nNow)
-                throw std::ios_base::failure(feof(file) ? "CAutoFile::ignore: end of file" : "CAutoFile::read: fread failed");
-            nSize -= nNow;
+        if ( isNull() )
+            throw std::ios_base::failure( "CAutoFile::skip: file handle is null pointer" ) ;
+        unsigned char data[ 4096 ] ;
+        while ( nSize > 0 ) {
+            size_t nNow = std::min< size_t >( nSize, sizeof( data ) ) ;
+            if ( fread( data, 1, nNow, file ) != nNow )
+                throw std::ios_base::failure( feof( file ) ? "CAutoFile::skip: end of file" : "CAutoFile::read: fread failed" ) ;
+            nSize -= nNow ;
         }
     }
 
-    void write(const char* pch, size_t nSize)
+    void write( const char* pch, size_t nSize )
     {
-        if (!file)
-            throw std::ios_base::failure("CAutoFile::write: file handle is NULL");
-        if (fwrite(pch, 1, nSize, file) != nSize)
-            throw std::ios_base::failure("CAutoFile::write: write failed");
+        if ( isNull() )
+            throw std::ios_base::failure( "CAutoFile::write: file handle is null pointer" ) ;
+        if ( fwrite( pch, 1, nSize, file ) != nSize )
+            throw std::ios_base::failure( "CAutoFile::write: fwrite failed" ) ;
     }
 
-    template<typename T>
-    CAutoFile& operator<<(const T& obj)
+    template< typename T >
+    CAutoFile & operator<< ( const T & obj )
     {
         // Serialize to this stream
-        if (!file)
-            throw std::ios_base::failure("CAutoFile::operator<<: file handle is NULL");
-        ::Serialize(*this, obj);
-        return (*this);
+        if ( isNull() )
+            throw std::ios_base::failure( "CAutoFile::operator<<: file handle is null pointer" ) ;
+        ::Serialize( *this, obj ) ;
+        return *this ;
     }
 
-    template<typename T>
-    CAutoFile& operator>>(T& obj)
+    template< typename T >
+    CAutoFile & operator>> ( T & obj )
     {
         // Unserialize from this stream
-        if (!file)
-            throw std::ios_base::failure("CAutoFile::operator>>: file handle is NULL");
-        ::Unserialize(*this, obj);
-        return (*this);
+        if ( isNull() )
+            throw std::ios_base::failure( "CAutoFile::operator>>: file handle is null pointer" ) ;
+        ::Unserialize( *this, obj ) ;
+        return *this ;
     }
-};
+} ;
 
 /** Non-refcounted RAII wrapper around a FILE* that implements a ring buffer to
  *  deserialize from. It guarantees the ability to rewind a given number of bytes

@@ -423,9 +423,9 @@ bool CWallet::HasWalletSpend( const uint256 & txid ) const
     return (iter != mapTxSpends.end() && iter->first.hash == txid);
 }
 
-void CWallet::Flush(bool shutdown)
+void CWallet::Flush( bool shutdown )
 {
-    bitdb.Flush(shutdown);
+    walletdb.Flush( shutdown ) ;
 }
 
 bool CWallet::Verify()
@@ -444,7 +444,7 @@ bool CWallet::Verify()
         return InitError( strprintf( _("Wallet %s resides outside data directory %s"),
                                         walletFile, GetDirForData().string() ) ) ;
 
-    if ( ! bitdb.Open( GetDirForData() ) )
+    if ( ! walletdb.Open( GetDirForData() ) )
     {
         // try moving the database env out of the way
         boost::filesystem::path pathDatabase = GetDirForData() / "database" ;
@@ -457,22 +457,22 @@ bool CWallet::Verify()
         }
 
         // try again
-        if ( ! bitdb.Open( GetDirForData() ) ) {
+        if ( ! walletdb.Open( GetDirForData() ) ) {
             // if it still fails, it probably means we can't even create the database env
             return InitError( strprintf( _("Error initializing wallet database environment %s!"), GetDirForData() ) ) ;
         }
     }
 
-    if ( GetBoolArg("-salvagewallet", false ) )
+    if ( GetBoolArg( "-salvagewallet", false ) )
     {
         // Recover readable keypairs:
-        if ( ! CWalletDB::Recover( bitdb, walletFile, true ) )
+        if ( ! CWalletDB::Recover( walletdb, walletFile, true ) )
             return false ;
     }
 
     if ( boost::filesystem::exists( GetDirForData() / walletFile ) )
     {
-        CDBEnv::VerifyResult r = bitdb.Verify( walletFile, CWalletDB::Recover ) ;
+        CDBEnv::VerifyResult r = walletdb.Verify( walletFile, CWalletDB::Recover ) ;
         if (r == CDBEnv::RECOVER_OK)
         {
             InitWarning( strprintf( _("Warning: Wallet file corrupt, data salvaged!"
@@ -655,9 +655,9 @@ bool CWallet::EncryptWallet( const SecureString & strWalletPassphrase )
         NewKeyPool();
         Lock();
 
-        // Need to completely rewrite the wallet file; if we don't, bdb might keep
-        // bits of the unencrypted private key in slack space in the database file.
-        CDB::Rewrite(strWalletFile);
+        // Need to completely rewrite the wallet file; if we don't, Berkeley DB can leave
+        // bits of the unencrypted private key in slack space in the database file
+        CDB::Rewrite( strWalletFile, walletdb ) ;
 
     }
     NotifyStatusChanged(this);
@@ -2702,80 +2702,78 @@ bool CWallet::AddAccountingEntry(const CAccountingEntry& acentry, CWalletDB *pwa
 }
 
 
-DBErrors CWallet::LoadWallet(bool& fFirstRunRet)
+DBErrors CWallet::LoadWallet( bool & fFirstRunRet )
 {
-    if (!fFileBacked)
-        return DB_LOAD_OK;
-    fFirstRunRet = false;
-    DBErrors nLoadWalletRet = CWalletDB(strWalletFile,"cr+").LoadWallet(this);
-    if (nLoadWalletRet == DB_NEED_REWRITE)
+    if ( ! fFileBacked ) return DB_LOAD_OK ;
+
+    fFirstRunRet = false ;
+    DBErrors nLoadWalletRet = CWalletDB( strWalletFile, "cr+" ).LoadWallet( this ) ;
+    if ( nLoadWalletRet == DB_NEED_REWRITE )
     {
-        if (CDB::Rewrite(strWalletFile, "\x04pool"))
+        if ( CDB::Rewrite( strWalletFile, walletdb, "\x04pool" ) )
         {
-            LOCK(cs_wallet);
-            setKeyPool.clear();
+            LOCK( cs_wallet ) ;
+            setKeyPool.clear() ;
             // Note: can't top-up keypool here, because wallet is locked.
-            // User will be prompted to unlock wallet the next operation
-            // that requires a new key.
+            // User will be asked to unlock wallet the next operation
+            // that requires a new key
         }
     }
 
-    if (nLoadWalletRet != DB_LOAD_OK)
-        return nLoadWalletRet;
-    fFirstRunRet = !vchDefaultKey.IsValid();
+    if ( nLoadWalletRet != DB_LOAD_OK ) return nLoadWalletRet ;
 
-    uiInterface.LoadWallet(this);
+    fFirstRunRet = ! vchDefaultKey.IsValid() ;
 
-    return DB_LOAD_OK;
+    uiInterface.LoadWallet( this ) ;
+
+    return DB_LOAD_OK ;
 }
 
 DBErrors CWallet::ZapSelectTx( std::vector< uint256 > & vHashIn, std::vector< uint256 > & vHashOut )
 {
-    if (!fFileBacked)
-        return DB_LOAD_OK;
-    DBErrors nZapSelectTxRet = CWalletDB(strWalletFile,"cr+").ZapSelectTx(this, vHashIn, vHashOut);
-    if (nZapSelectTxRet == DB_NEED_REWRITE)
+    if ( ! fFileBacked ) return DB_LOAD_OK ;
+
+    DBErrors nZapSelectTxRet = CWalletDB( strWalletFile, "cr+" ).ZapSelectTx( this, vHashIn, vHashOut ) ;
+    if ( nZapSelectTxRet == DB_NEED_REWRITE )
     {
-        if (CDB::Rewrite(strWalletFile, "\x04pool"))
+        if ( CDB::Rewrite( strWalletFile, walletdb, "\x04pool" ) )
         {
-            LOCK(cs_wallet);
-            setKeyPool.clear();
+            LOCK( cs_wallet ) ;
+            setKeyPool.clear() ;
             // Note: can't top-up keypool here, because wallet is locked.
-            // User will be prompted to unlock wallet the next operation
-            // that requires a new key.
+            // User will be asked to unlock wallet the next operation
+            // that requires a new key
         }
     }
 
-    if (nZapSelectTxRet != DB_LOAD_OK)
-        return nZapSelectTxRet;
+    if ( nZapSelectTxRet != DB_LOAD_OK )
+        return nZapSelectTxRet ;
 
-    MarkDirty();
+    MarkDirty() ;
 
-    return DB_LOAD_OK;
-
+    return DB_LOAD_OK ;
 }
 
 DBErrors CWallet::ZapWalletTx( std::vector< CWalletTx > & vWtx )
 {
-    if (!fFileBacked)
-        return DB_LOAD_OK;
-    DBErrors nZapWalletTxRet = CWalletDB(strWalletFile,"cr+").ZapWalletTx(this, vWtx);
-    if (nZapWalletTxRet == DB_NEED_REWRITE)
+    if ( ! fFileBacked ) return DB_LOAD_OK ;
+
+    DBErrors nZapWalletTxRet = CWalletDB( strWalletFile, "cr+" ).ZapWalletTx( this, vWtx ) ;
+    if ( nZapWalletTxRet == DB_NEED_REWRITE )
     {
-        if (CDB::Rewrite(strWalletFile, "\x04pool"))
+        if ( CDB::Rewrite( strWalletFile, walletdb, "\x04pool" ) )
         {
-            LOCK(cs_wallet);
-            setKeyPool.clear();
+            LOCK( cs_wallet ) ;
+            setKeyPool.clear() ;
             // Note: can't top-up keypool here, because wallet is locked.
-            // User will be prompted to unlock wallet the next operation
-            // that requires a new key.
+            // User will be asked to unlock wallet the next operation
+            // that requires a new key
         }
     }
 
-    if (nZapWalletTxRet != DB_LOAD_OK)
-        return nZapWalletTxRet;
+    if ( nZapWalletTxRet != DB_LOAD_OK ) return nZapWalletTxRet ;
 
-    return DB_LOAD_OK;
+    return DB_LOAD_OK ;
 }
 
 
@@ -3582,15 +3580,15 @@ CWallet* CWallet::CreateWalletFromFile(const std::string walletFile)
         CWalletDB::IncrementUpdateCounter();
 
         // Restore wallet transaction metadata after -zapwallettxes=1
-        if (GetBoolArg("-zapwallettxes", false) && GetArg("-zapwallettxes", "1") != "2")
+        if ( GetBoolArg( "-zapwallettxes", false ) && GetArg( "-zapwallettxes", "1" ) != "2" )
         {
-            CWalletDB walletdb(walletFile);
+            CWalletDB walletdb( walletFile ) ;
 
             for ( const CWalletTx & wtxOld : vWtx )
             {
                 uint256 hash = wtxOld.GetTxHash() ;
-                std::map<uint256, CWalletTx>::iterator mi = walletInstance->mapWallet.find(hash);
-                if (mi != walletInstance->mapWallet.end())
+                std::map< uint256, CWalletTx >::iterator mi = walletInstance->mapWallet.find( hash ) ;
+                if ( mi != walletInstance->mapWallet.end() )
                 {
                     const CWalletTx* copyFrom = &wtxOld;
                     CWalletTx* copyTo = &mi->second;
@@ -3713,13 +3711,13 @@ bool CWallet::BackupWallet(const std::string& strDest)
     while (true)
     {
         {
-            LOCK(bitdb.cs_db);
-            if (!bitdb.mapFileUseCount.count(strWalletFile) || bitdb.mapFileUseCount[strWalletFile] == 0)
+            LOCK( walletdb.cs_db ) ;
+            if ( walletdb.mapFileUseCount.count( strWalletFile ) == 0 || walletdb.mapFileUseCount[ strWalletFile ] == 0 )
             {
                 // Flush log data to the dat file
-                bitdb.CloseDb(strWalletFile);
-                bitdb.CheckpointLSN(strWalletFile);
-                bitdb.mapFileUseCount.erase(strWalletFile);
+                walletdb.CloseDb( strWalletFile ) ;
+                walletdb.CheckpointLSN( strWalletFile ) ;
+                walletdb.mapFileUseCount.erase( strWalletFile ) ;
 
                 // Copy wallet file
                 boost::filesystem::path pathSrc = GetDirForData() / strWalletFile ;

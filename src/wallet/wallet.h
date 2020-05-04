@@ -821,15 +821,15 @@ public:
     //! Check if a given transaction has any of its outputs spent by another transaction in the wallet
     bool HasWalletSpend(const uint256& txid) const;
 
-    //! Flush wallet (bitdb flush)
-    void Flush(bool shutdown=false);
+    //! Flush wallet
+    void Flush( bool shutdown = false ) ;
 
     //! Verify the wallet database and perform salvage if required
-    static bool Verify();
+    static bool Verify() ;
 
     /**
-     * Address book entry changed.
-     * @note called with lock cs_wallet held.
+     * Address book entry changed
+     * @note called with lock cs_wallet held
      */
     boost::signals2::signal<void (CWallet *wallet, const CTxDestination
             &address, const std::string &label, bool isMine,
@@ -837,8 +837,8 @@ public:
             ChangeType status)> NotifyAddressBookChanged;
 
     /**
-     * Wallet transaction added, removed or updated.
-     * @note called with lock cs_wallet held.
+     * Wallet transaction added, removed or updated
+     * @note called with lock cs_wallet held
      */
     boost::signals2::signal<void (CWallet *wallet, const uint256 &hashTx,
             ChangeType status)> NotifyTransactionChanged;
@@ -849,9 +849,9 @@ public:
     /** Watch-only address added */
     boost::signals2::signal<void (bool fHaveWatchOnly)> NotifyWatchonlyChanged;
 
-    /** Inquire whether this wallet broadcasts transactions. */
+    /** Inquire whether this wallet broadcasts transactions */
     bool GetBroadcastTransactions() const { return fBroadcastTransactions; }
-    /** Set whether this wallet broadcasts transactions. */
+    /** Set whether this wallet broadcasts transactions */
     void SetBroadcastTransactions(bool broadcast) { fBroadcastTransactions = broadcast; }
 
     /* Mark a transaction (and its in-wallet descendants) as abandoned so its inputs may be respent */
@@ -916,8 +916,8 @@ public:
 
 
 /**
- * Account information.
- * Stored in wallet with key "acc"+string account name.
+ * Account information
+ * Stored in wallet with key "acc"+string account name
  */
 class CAccount
 {
@@ -947,26 +947,25 @@ public:
 
 // Helper for producing a bunch of max-sized low-S signatures (eg 72 bytes)
 // ContainerType is meant to hold pair<CWalletTx *, int>, and be iterable
-// so that each entry corresponds to each vIn, in order.
-template <typename ContainerType>
-bool CWallet::DummySignTx(CMutableTransaction &txNew, const ContainerType &coins)
+// so that each entry corresponds to each vIn, in order
+template < typename ContainerType >
+bool CWallet::DummySignTx( CMutableTransaction & txNew, const ContainerType & coins )
 {
-    // Fill in dummy signatures for fee calculation.
-    int nIn = 0;
-    for (const auto& coin : coins)
+    // Fill in dummy signatures for fee calculation
+    int nIn = 0 ;
+    for ( const auto & coin : coins )
     {
-        const CScript& scriptPubKey = coin.first->tx->vout[coin.second].scriptPubKey;
-        SignatureData sigdata;
+        const CScript & scriptPubKey = coin.first->tx->vout[ coin.second ].scriptPubKey ;
+        SignatureData sigdata ;
 
-        if (!ProduceSignature(DummySignatureCreator(this), scriptPubKey, sigdata))
-        {
-            return false;
+        if ( ! ProduceSignature( DummySignatureCreator( this ), scriptPubKey, sigdata ) ) {
+            return false ;
         } else {
-            UpdateTransaction(txNew, nIn, sigdata);
+            UpdateTransaction( txNew, nIn, sigdata ) ;
         }
 
-        nIn++;
+        nIn ++ ;
     }
-    return true;
+    return true ;
 }
 #endif

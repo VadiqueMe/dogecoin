@@ -41,12 +41,12 @@ SplashScreen::SplashScreen(Qt::WindowFlags f, const NetworkStyle *networkStyle) 
 #endif
 
     // define text to place
-    QString titleText       = tr(PACKAGE_NAME) ;
-    QString versionText     = QString("Version %1").arg(QString::fromStdString(FormatFullVersion()));
-    QString copyrightText   = QString::fromUtf8(CopyrightHolders(strprintf("\xc2\xA9 %u-%u ", 2009, COPYRIGHT_YEAR)).c_str());
-    QString textToAppend    = networkStyle->getTextToAppendToTitle() ;
+    QString titleText     = PACKAGE_NAME ;
+    QString versionText   = QString::fromStdString( FormatFullVersion() ) ;
+    QString copyrightText = QString::fromUtf8( CopyrightHolders( strprintf( "\xc2\xA9 %u-%u ", 2009, COPYRIGHT_YEAR ) ).c_str () ) ;
+    QString textToAppend  = networkStyle->getTextToAppendToTitle() ;
 
-    QString font            = "Comic Sans MS";
+    QString font          = "Comic Sans MS" ;
 
     // create a bitmap according to device pixelratio
     QSize splashSize( 480 * devicePixelRatio, 320 * devicePixelRatio ) ;

@@ -827,7 +827,8 @@ void PeerLogicValidation::NewPoWValidBlock(const CBlockIndex *pindex, const std:
     });
 }
 
-void PeerLogicValidation::UpdatedBlockTip(const CBlockIndex *pindexNew, const CBlockIndex *pindexFork, bool fInitialDownload) {
+void PeerLogicValidation::UpdatedBlockTip( const CBlockIndex * pindexNew, const CBlockIndex * pindexFork, bool fInitialDownload )
+{
     const int nNewHeight = pindexNew->nHeight;
     connman->SetBestHeight(nNewHeight);
 
@@ -2625,20 +2626,20 @@ bool static ProcessMessage( CNode * pfrom, const std::string & strCommand, CData
     }
 
     else if ( strCommand == NetMsgType::NOTFOUND ) {
-        // We do not care about the NOTFOUND message, but logging "unknown command"
-        // message would be undesirable as we transmit it ourselves
+        // We do not care about the NOTFOUND message, but logging it as "unknown"
+        // is undesirable as we transmit it ourselves
     }
 
     else {
-        // Ignore unknown commands for extensibility
-        LogPrintf( "%s: unknown command \"%s\" from peer=%d\n", __func__, SanitizeString( strCommand ), pfrom->id ) ;
+        // Ignore unknown messages for extensibility
+        LogPrintf( "%s: ignored unknown message \"%s\" from peer=%d\n", __func__, SanitizeString( strCommand ), pfrom->id ) ;
     }
 
 
     return true;
 }
 
-static bool SendRejectsAndCheckIfBanned(CNode* pnode, CConnman& connman)
+static bool SendRejectsAndCheckIfBanned( CNode * pnode, CConnman & connman )
 {
     AssertLockHeld( cs_main ) ;
     CNodeInfo & info = *GetNodeInfo( pnode->GetId() ) ;
@@ -3214,10 +3215,10 @@ bool SendMessages(CNode* pto, CConnman& connman, const std::atomic<bool>& interr
         // Message: getdata (blocks)
         //
         std::vector<CInv> vGetData;
-        if (!pto->fClient && (fFetch || !IsInitialBlockDownload()) && info.nBlocksInFlight < MAX_BLOCKS_IN_TRANSIT_PER_PEER) {
-            std::vector<const CBlockIndex*> vToDownload;
-            NodeId staller = -1;
-            FindNextBlocksToDownload(pto->GetId(), MAX_BLOCKS_IN_TRANSIT_PER_PEER - info.nBlocksInFlight, vToDownload, staller, consensusParams);
+        if ( ! pto->fClient && ( fFetch || ! IsInitialBlockDownload() ) && info.nBlocksInFlight < MAX_BLOCKS_IN_TRANSIT_PER_PEER ) {
+            std::vector< const CBlockIndex* > vToDownload ;
+            NodeId staller = -1 ;
+            FindNextBlocksToDownload( pto->GetId(), MAX_BLOCKS_IN_TRANSIT_PER_PEER - info.nBlocksInFlight, vToDownload, staller, consensusParams ) ;
             for ( const CBlockIndex * pindex : vToDownload ) {
                 uint32_t nFetchFlags = GetFetchFlags(pto, pindex->pprev, consensusParams);
                 vGetData.push_back(CInv(MSG_BLOCK | nFetchFlags, pindex->GetBlockSha256Hash()));

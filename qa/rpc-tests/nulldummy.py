@@ -46,7 +46,7 @@ class NULLDUMMYTest(DogecoinTestFramework):
     def setup_network(self):
         # Must set the blockversion for this test
         self.nodes = start_nodes(self.num_nodes, self.options.tmpdir,
-                                 extra_args=[['-debug', '-whitelist=127.0.0.1', '-walletprematurewitness']])
+                                 extra_args=[['-debug', '-whitelist=127.0.0.1']])
 
     def run_test(self):
         self.address = self.nodes[0].getnewaddress()

@@ -1095,7 +1095,7 @@ UniValue addwitnessaddress(const JSONRPCRequest& request)
     {
         std::string msg = "addwitnessaddress \"address\"\n"
             "\nAdd a witness address for a script (with pubkey or redeemscript known).\n"
-            "It returns the witness script.\n"
+            "It returns the witness script\n"
 
             "\nArguments:\n"
             "1. \"address\"       (string, required) An address known to the wallet\n"
@@ -1108,9 +1108,9 @@ UniValue addwitnessaddress(const JSONRPCRequest& request)
     }
 
     {
-        LOCK(cs_main);
-        if (!IsWitnessEnabled(chainActive.Tip(), Params().GetConsensus(chainActive.Height())) && !GetBoolArg("-walletprematurewitness", false)) {
-            throw JSONRPCError(RPC_WALLET_ERROR, "Segregated witness not enabled on network");
+        LOCK( cs_main ) ;
+        if ( ! IsWitnessEnabled( chainActive.Tip(), Params().GetConsensus( chainActive.Height() ) ) ) {
+            throw JSONRPCError( RPC_WALLET_ERROR, "Segregated witness is not enabled" ) ;
         }
     }
 
@@ -1837,8 +1837,8 @@ UniValue gettransaction(const JSONRPCRequest& request)
     ListTransactions(wtx, "*", 0, false, details, filter);
     entry.push_back(Pair("details", details));
 
-    std::string strHex = EncodeHexTx( static_cast< CTransaction >( wtx ) ) ;
-    entry.push_back( Pair("hex", strHex) ) ;
+    std::string txHex = EncodeHexTx( static_cast< CTransaction >( wtx ) ) ;
+    entry.push_back( Pair("hex", txHex) ) ;
 
     return entry ;
 }
@@ -2633,9 +2633,9 @@ UniValue fundrawtransaction(const JSONRPCRequest& request)
     }
 
     // parse hex string from parameter
-    CMutableTransaction tx;
-    if (!DecodeHexTx(tx, request.params[0].get_str(), true))
-        throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "TX decode failed");
+    CMutableTransaction tx ;
+    if ( ! DecodeHexTx( tx, request.params[ 0 ].get_str() ) )
+        throw JSONRPCError( RPC_DESERIALIZATION_ERROR, "TX decode failed" ) ;
 
     if (tx.vout.size() == 0)
         throw JSONRPCError(RPC_INVALID_PARAMETER, "TX must have at least one output");
