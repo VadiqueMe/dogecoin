@@ -3,6 +3,8 @@
 
 #include "utilstr.h"
 
+CTranslationInterface translationInterface ;
+
 std::string trimSpaces( const std::string & s )
 {
     auto start = s.begin() ;

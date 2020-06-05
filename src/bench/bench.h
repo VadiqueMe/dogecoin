@@ -1,14 +1,15 @@
 // Copyright (c) 2015-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_BENCH_BENCH_H
-#define BITCOIN_BENCH_BENCH_H
+#ifndef DOGECOIN_BENCH_BENCH_H
+#define DOGECOIN_BENCH_BENCH_H
 
+#include <functional>
+#include <limits>
 #include <map>
 #include <string>
 
-#include <boost/function.hpp>
 #include <boost/preprocessor/cat.hpp>
 #include <boost/preprocessor/stringize.hpp>
 
@@ -49,17 +50,17 @@ namespace benchmark {
         uint64_t maxCycles;
     public:
         State(std::string _name, double _maxElapsed) : name(_name), maxElapsed(_maxElapsed), count(0) {
-            minTime = std::numeric_limits<double>::max();
-            maxTime = std::numeric_limits<double>::min();
-            minCycles = std::numeric_limits<uint64_t>::max();
-            maxCycles = std::numeric_limits<uint64_t>::min();
+            minTime = std::numeric_limits< double >::max() ;
+            maxTime = std::numeric_limits< double >::min() ;
+            minCycles = std::numeric_limits< uint64_t >::max() ;
+            maxCycles = std::numeric_limits< uint64_t >::min() ;
             countMask = 1;
             countMaskInv = 1./(countMask + 1);
         }
         bool KeepRunning();
     };
 
-    typedef boost::function<void(State&)> BenchFunction;
+    typedef std::function< void( State & ) > BenchFunction ;
 
     class BenchRunner
     {
@@ -77,4 +78,4 @@ namespace benchmark {
 #define BENCHMARK(n) \
     benchmark::BenchRunner BOOST_PP_CAT(bench_, BOOST_PP_CAT(__LINE__, n))(BOOST_PP_STRINGIZE(n), n);
 
-#endif // BITCOIN_BENCH_BENCH_H
+#endif

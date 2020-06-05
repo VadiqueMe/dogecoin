@@ -1,6 +1,6 @@
 // Copyright (c) 2012-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "dbwrapper.h"
 
@@ -49,8 +49,8 @@ CDBWrapper::CDBWrapper( const boost::filesystem::path & path, size_t nCacheSize,
             leveldb::Status result = leveldb::DestroyDB(path.string(), options);
             dbwrapper_private::HandleError(result);
         }
-        TryCreateDirectory(path);
-        LogPrintf("Opening LevelDB in %s\n", path.string());
+        TryToCreateDirectory( path ) ;
+        LogPrintf( "Opening LevelDB in %s\n", path.string() ) ;
     }
     leveldb::Status status = leveldb::DB::Open(options, path.string(), &pdb);
     dbwrapper_private::HandleError(status);

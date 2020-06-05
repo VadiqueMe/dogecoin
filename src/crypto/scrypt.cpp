@@ -29,7 +29,7 @@
 
 #include "crypto/scrypt.h"
 #include "crypto/hmac_sha256.h"
-#include "util.h" // LogPrintf
+#include "utillog.h" // LogPrintf
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>

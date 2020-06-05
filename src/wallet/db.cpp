@@ -10,6 +10,7 @@
 #include "hash.h"
 #include "protocol.h"
 #include "util.h"
+#include "utiltime.h"
 #include "utilstrencodings.h"
 
 #include <stdint.h>
@@ -19,7 +20,6 @@
 #endif
 
 #include <boost/filesystem.hpp>
-#include <boost/thread.hpp>
 
 
 //
@@ -30,10 +30,9 @@ CDBEnv walletdb ;
 
 void CDBEnv::EnvShutdown()
 {
-    if (!fDbEnvInit)
-        return;
+    if ( ! fDbEnvInitOnce ) return ;
 
-    fDbEnvInit = false;
+    fDbEnvInitOnce = false ;
     int ret = dbenv->close(0);
     if (ret != 0)
         LogPrintf("CDBEnv::EnvShutdown: Error %d shutting down database environment: %s\n", ret, DbEnv::strerror(ret));
@@ -45,7 +44,8 @@ void CDBEnv::Reset()
 {
     delete dbenv ;
     dbenv = new DbEnv( DB_CXX_NO_EXCEPTIONS ) ;
-    fDbEnvInit = false ;
+    fDbEnvInitOnce = false ;
+    fDbEnvFinished = false ;
     isMockDb = false ;
 }
 
@@ -68,13 +68,16 @@ void CDBEnv::Close()
 
 bool CDBEnv::Open( const boost::filesystem::path & pathIn )
 {
-    if ( fDbEnvInit ) return true ;
+    if ( fDbEnvInitOnce ) return true ;
 
-    boost::this_thread::interruption_point() ;
+    if ( fDbEnvFinished ) {
+        LogPrintf( "CDBEnv::%s( \"%s\" ): stopping\n", __func__, pathIn.string() ) ;
+        throw new std::string( "stopthread" ) ;
+    }
 
     strPath = pathIn.string() ;
     boost::filesystem::path pathToLogDir = pathIn / "database" ;
-    TryCreateDirectory( pathToLogDir ) ;
+    TryToCreateDirectory( pathToLogDir ) ;
     boost::filesystem::path pathToErrorFile = pathIn / "db.errfile" ;
     LogPrintf( "%s: LogDir=%s ErrorFile=%s\n", __func__, pathToLogDir.string(), pathToErrorFile.string() ) ;
 
@@ -105,19 +108,22 @@ bool CDBEnv::Open( const boost::filesystem::path & pathIn )
     if ( ret != 0 )
         return error( "%s: Error %d opening database environment: %s\n", __func__, ret, DbEnv::strerror( ret ) ) ;
 
-    fDbEnvInit = true ;
+    fDbEnvInitOnce = true ;
     isMockDb = false ;
     return true ;
 }
 
 void CDBEnv::MakeMockDB()
 {
-    if ( fDbEnvInit )
-        throw std::runtime_error( "CDBEnv::MakeMock: Already initialized" ) ;
+    if ( fDbEnvInitOnce )
+        throw std::runtime_error( strprintf( "%s: this CDBEnv is already initialized", __func__ ) ) ;
 
-    boost::this_thread::interruption_point() ;
+    if ( fDbEnvFinished ) {
+        LogPrintf( "CDBEnv::%s(): stopping\n", __func__ ) ;
+        throw new std::string( "stopthread" ) ;
+    }
 
-    LogPrintf( "CDBEnv::MakeMock\n" ) ;
+    LogPrintf( strprintf( "CDBEnv::%s\n", __func__ ) ) ;
 
     dbenv->set_cachesize(1, 0, 1);
     dbenv->set_lg_bsize(10485760 * 4);
@@ -138,7 +144,7 @@ void CDBEnv::MakeMockDB()
     if ( ret > 0 )
         throw std::runtime_error( strprintf( "%s: Error %d opening database environment", __func__, ret ) ) ;
 
-    fDbEnvInit = true ;
+    fDbEnvInitOnce = true ;
     isMockDb = true ;
 }
 
@@ -439,8 +445,8 @@ void CDBEnv::Flush( bool fShutdown )
 {
     int64_t nStart = GetTimeMillis();
     // Flush log data to the actual data file on all files that are not in use
-    LogPrint( "db", "CDBEnv::Flush( %s )%s\n", fShutdown ? "true" : "false", fDbEnvInit ? "" : " database not started" ) ;
-    if ( ! fDbEnvInit ) return ;
+    LogPrint( "db", "CDBEnv::Flush( %s )%s\n", fShutdown ? "true" : "false", fDbEnvInitOnce ? "" : " database not started" ) ;
+    if ( ! fDbEnvInitOnce ) return ;
 
     {
         LOCK( cs_db ) ;

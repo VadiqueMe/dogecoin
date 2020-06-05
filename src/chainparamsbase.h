@@ -7,7 +7,6 @@
 #define DOGECOIN_CHAINPARAMSBASE_H
 
 #include <string>
-#include <vector>
 
 /**
  * Defines the base parameters of a given instance of the Dogecoin system
@@ -46,11 +45,6 @@ private:
 
 } ;
 
-/**
- * Append the help messages for the chainparams options to the parameter string
- */
-void AppendParamsHelpMessages( std::string & strUsage, bool debugHelp = true ) ;
-
 /** Return the name of the current chain (main, inu, test, regtest) */
 const std::string & NameOfChain() ;
 
@@ -64,8 +58,5 @@ CBaseChainParams & BaseParamsFor( const std::string & chain ) ;
 
 /** Sets the params returned by Params() to those for the given network */
 void SelectBaseParams( const std::string & chain ) ;
-
-// returns "main" by default
-std::string ChainNameFromArguments() ;
 
 #endif

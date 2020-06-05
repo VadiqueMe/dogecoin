@@ -8,17 +8,16 @@
 
 #include "base58.h"
 #include "consensus/validation.h"
-#include "validation.h" // For CheckTransaction
+#include "validation.h" // for CheckTransaction
 #include "protocol.h"
 #include "serialize.h"
 #include "sync.h"
 #include "util.h"
+#include "utilthread.h"
 #include "utiltime.h"
 #include "wallet/wallet.h"
 
 #include <atomic>
-
-#include <boost/thread.hpp>
 
 static uint64_t nAccountingEntryNumber = 0;
 
@@ -610,11 +609,12 @@ DBErrors CWalletDB::LoadWallet(CWallet* pwallet)
         }
         pcursor->close();
     }
-    catch (const boost::thread_interrupted&) {
-        throw;
+    catch ( const std::string & s ) {
+        if ( s == "stopthread" ) throw ; // thread is just going to stop
+        else result = DB_CORRUPT ;
     }
-    catch (...) {
-        result = DB_CORRUPT;
+    catch ( ... ) {
+        result = DB_CORRUPT ;
     }
 
     if (fNoncriticalErrors && result == DB_LOAD_OK)
@@ -709,11 +709,12 @@ DBErrors CWalletDB::FindWalletTx( CWallet * pwallet, std::vector< uint256 > & vT
         }
         pcursor->close();
     }
-    catch (const boost::thread_interrupted&) {
-        throw;
+    catch ( const std::string & s ) {
+        if ( s == "stopthread" ) throw ; // thread is just going to stop
+        else result = DB_CORRUPT ;
     }
-    catch (...) {
-        result = DB_CORRUPT;
+    catch ( ... ) {
+        result = DB_CORRUPT ;
     }
 
     if (fNoncriticalErrors && result == DB_LOAD_OK)
@@ -780,12 +781,11 @@ DBErrors CWalletDB::ZapWalletTx( CWallet * pwallet, std::vector< CWalletTx > & v
 
 void ThreadFlushWalletDB()
 {
-    // Make this thread recognisable as the wallet flushing thread
     RenameThread( "wallet-flush" ) ;
 
-    static bool fOneThread = false ;
-    if ( fOneThread ) return ;
-    fOneThread = true ;
+    static bool singleRun = false ;
+    if ( singleRun ) return ;
+    singleRun = true ;
 
     if ( ! GetBoolArg( "-flushwallet", DEFAULT_FLUSHWALLET ) )
         return ;
@@ -793,9 +793,10 @@ void ThreadFlushWalletDB()
     unsigned int nLastSeen = CWalletDB::GetUpdateCounter();
     unsigned int nLastFlushed = CWalletDB::GetUpdateCounter();
     int64_t nLastWalletUpdate = GetTime();
-    while (true)
+    while ( true )
     {
-        MilliSleep(500);
+        if ( ShutdownRequested() ) return ;
+        MilliSleep( 500 ) ;
 
         if (nLastSeen != CWalletDB::GetUpdateCounter())
         {
@@ -805,21 +806,21 @@ void ThreadFlushWalletDB()
 
         if (nLastFlushed != CWalletDB::GetUpdateCounter() && GetTime() - nLastWalletUpdate >= 2)
         {
-            TRY_LOCK( walletdb.cs_db,lockDb ) ;
+            TRY_LOCK( walletdb.cs_db, lockDb ) ;
             if ( lockDb )
             {
                 // Don't do this if any databases are in use
                 int nRefCount = 0 ;
                 std::map< std::string, int >::iterator mit = walletdb.mapFileUseCount.begin() ;
-                while ( mit != walletdb.mapFileUseCount.end() )
-                {
+                while ( mit != walletdb.mapFileUseCount.end() ) {
                     nRefCount += ( *mit ).second ;
                     mit ++ ;
                 }
 
                 if ( nRefCount == 0 )
                 {
-                    boost::this_thread::interruption_point();
+                    if ( ShutdownRequested() ) return ;
+
                     const std::string & walletFile = pwalletMain->strWalletFile ;
                     std::map< std::string, int >::iterator mi = walletdb.mapFileUseCount.find( walletFile ) ;
                     if ( mi != walletdb.mapFileUseCount.end() )

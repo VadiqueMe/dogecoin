@@ -802,7 +802,7 @@
         <translation>近期交易可能尚未显示，因此当前余额可能不准确。以上信息将在与 dogecoin 网络完全同步后更正。详情如下</translation>
     </message>
     <message>
-        <source>Attempting to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network</source>
+        <source>Trying to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network</source>
         <translation>尝试使用受未可见交易影响的余额将不被网络接受</translation>
     </message>
     <message>
@@ -2893,10 +2893,6 @@
     <message>
         <source>Execute command when a relevant alert is received or we see a really long fork (%s in cmd is replaced by message)</source>
         <translation>当收到相关提醒或者我们看到一个长分叉时执行命令（%s 将替换为消息）</translation>
-    </message>
-    <message>
-        <source>If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</source>
-        <translation>如果未设置交易费用，自动添加足够的交易费以确保交易在平均n个数据块内被确认 (默认: %u) </translation>
     </message>
     <message>
         <source>Invalid amount for -maxtxfee=&lt;amount&gt;: '%s' (must be at least the minrelay fee of %s to prevent stuck transactions)</source>

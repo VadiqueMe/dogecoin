@@ -1,14 +1,13 @@
 // Copyright (c) 2012-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "dbwrapper.h"
 #include "uint256.h"
 #include "random.h"
 #include "test/test_dogecoin.h"
 
-#include <boost/assign/std/vector.hpp> // for 'operator+=()'
-#include <boost/assert.hpp>
+#include <boost/filesystem.hpp>
 #include <boost/test/unit_test.hpp>
 
 // Test if a string consists entirely of null characters
@@ -25,7 +24,7 @@ BOOST_FIXTURE_TEST_SUITE(dbwrapper_tests, BasicTestingSetup)
                        
 BOOST_AUTO_TEST_CASE(dbwrapper)
 {
-    // Perform tests both obfuscated and non-obfuscated.
+    // Perform tests both obfuscated and non-obfuscated
     for (int i = 0; i < 2; i++) {
         bool obfuscate = (bool)i;
         boost::filesystem::path ph = boost::filesystem::temp_directory_path() / boost::filesystem::unique_path();

@@ -1,13 +1,14 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
+
+#ifndef DOGECOIN_UTILSTRENCODINGS_H
+#define DOGECOIN_UTILSTRENCODINGS_H
 
 /**
- * Utilities for converting data from/to strings.
+ * Utilities for converting data from/to strings
  */
-#ifndef BITCOIN_UTILSTRENCODINGS_H
-#define BITCOIN_UTILSTRENCODINGS_H
 
 #include <stdint.h>
 #include <string>
@@ -57,37 +58,37 @@ int64_t atoi64(const std::string& str);
 int atoi(const std::string& str);
 
 /**
- * Convert string to signed 32-bit integer with strict parse error feedback.
+ * Convert string to signed 32-bit integer with strict parse error feedback
  * @returns true if the entire string could be parsed as valid integer,
- *   false if not the entire string could be parsed or when overflow or underflow occurred.
+ *   false if not the entire string could be parsed or when overflow or underflow occurred
  */
 bool ParseInt32(const std::string& str, int32_t *out);
 
 /**
- * Convert string to signed 64-bit integer with strict parse error feedback.
+ * Convert string to signed 64-bit integer with strict parse error feedback
  * @returns true if the entire string could be parsed as valid integer,
- *   false if not the entire string could be parsed or when overflow or underflow occurred.
+ *   false if not the entire string could be parsed or when overflow or underflow occurred
  */
 bool ParseInt64(const std::string& str, int64_t *out);
 
 /**
- * Convert decimal string to unsigned 32-bit integer with strict parse error feedback.
+ * Convert decimal string to unsigned 32-bit integer with strict parse error feedback
  * @returns true if the entire string could be parsed as valid integer,
- *   false if not the entire string could be parsed or when overflow or underflow occurred.
+ *   false if not the entire string could be parsed or when overflow or underflow occurred
  */
 bool ParseUInt32(const std::string& str, uint32_t *out);
 
 /**
- * Convert decimal string to unsigned 64-bit integer with strict parse error feedback.
+ * Convert decimal string to unsigned 64-bit integer with strict parse error feedback
  * @returns true if the entire string could be parsed as valid integer,
- *   false if not the entire string could be parsed or when overflow or underflow occurred.
+ *   false if not the entire string could be parsed or when overflow or underflow occurred
  */
 bool ParseUInt64(const std::string& str, uint64_t *out);
 
 /**
- * Convert string to double with strict parse error feedback.
+ * Convert string to double with strict parse error feedback
  * @returns true if the entire string could be parsed as valid double,
- *   false if not the entire string could be parsed or when overflow or underflow occurred.
+ *   false if not the entire string could be parsed or when overflow or underflow occurred
  */
 bool ParseDouble(const std::string& str, double *out);
 
@@ -118,14 +119,13 @@ inline std::string HexStr(const T& vch, bool fSpaces=false)
 
 /**
  * Format a paragraph of text to a fixed width, adding spaces for
- * indentation to any added line.
+ * indentation to any added line
  */
 std::string FormatParagraph(const std::string& in, size_t width = 79, size_t indent = 0);
 
 /**
  * Timing-attack-resistant comparison.
- * Takes time proportional to length
- * of first argument.
+ * Takes time proportional to length of first argument
  */
 template <typename T>
 bool TimingResistantEqual(const T& a, const T& b)
@@ -137,11 +137,10 @@ bool TimingResistantEqual(const T& a, const T& b)
     return accumulator == 0;
 }
 
-/** Parse number as fixed point according to JSON number syntax.
- * See http://json.org/number.gif
- * @returns true on success, false on error.
- * @note The result must be in the range (-10^18,10^18), otherwise an overflow error will trigger.
+/** Parse number as fixed point according to JSON number syntax. See http://json.org/number.gif
+ * @returns true on success, false on error
+ * @note The result must be in the range (-10^18,10^18), otherwise an overflow error will trigger
  */
 bool ParseFixedPoint(const std::string &val, int decimals, int64_t *amount_out);
 
-#endif // BITCOIN_UTILSTRENCODINGS_H
+#endif

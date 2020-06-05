@@ -12,7 +12,7 @@
 
 std::string COutPoint::ToString() const
 {
-    return "COutPoint(" + ( IsNull() ? "0" : hash.ToString() ) + ", " + ( ( n < 10 ) ? strprintf( "%u", n ) : strprintf( "0x%x", n ) ) + ")" ;
+    return "COutPoint(" + ( IsNull() ? "0" : hash.ToString() ) + ", " + strprintf( "%u", n ) + ")" ;
 }
 
 CTxIn::CTxIn(COutPoint prevoutIn, CScript scriptSigIn, uint32_t nSequenceIn)

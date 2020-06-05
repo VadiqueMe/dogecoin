@@ -12,6 +12,7 @@
 
 #include "init.h"
 #include "util.h"
+#include "utilthread.h"
 #include "ui_interface.h"
 #include "version.h"
 
@@ -216,6 +217,6 @@ void SplashScreen::paintEvent(QPaintEvent *event)
 
 void SplashScreen::closeEvent(QCloseEvent *event)
 {
-    StartShutdown(); // allows an "emergency" shutdown during startup
-    event->ignore();
+    RequestShutdown() ;
+    event->ignore() ;
 }

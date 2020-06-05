@@ -33,7 +33,9 @@
 #include "ui_interface.h"
 #include "undo.h"
 #include "util.h"
+#include "utilthread.h"
 #include "utilmoneystr.h"
+#include "utilstr.h"
 #include "utilstrencodings.h"
 #include "validationinterface.h"
 #include "versionbits.h"
@@ -46,8 +48,8 @@
 #include <boost/algorithm/string/join.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
-#include <boost/math/distributions/poisson.hpp>
-#include <boost/thread.hpp>
+#include <boost/foreach.hpp> // BOOST_REVERSE_FOREACH
+///#include <boost/math/distributions/poisson.hpp>
 
 #if defined(NDEBUG)
 # error "Dogecoin cannot be compiled without assertions"
@@ -63,7 +65,7 @@ BlockMap mapBlockIndex ;
 CChain chainActive;
 CBlockIndex *pindexBestHeader = NULL;
 CWaitableCriticalSection csBestBlock;
-CConditionVariable cvBlockChange;
+std::condition_variable cvBlockChange ;
 int nScriptCheckThreads = 0;
 std::atomic_bool fImporting(false);
 bool fReindex = false;
@@ -220,8 +222,9 @@ enum FlushStateMode {
     FLUSH_STATE_ALWAYS
 };
 
-// See definition for documentation
-bool static FlushStateToDisk(CValidationState &state, FlushStateMode mode, int nManualPruneHeight=0);
+// see definition for documentation
+bool static FlushStateToDisk( CValidationState & state, FlushStateMode mode, int nManualPruneHeight = 0 ) ;
+
 void FindFilesToPruneManual(std::set<int>& setFilesToPrune, int nManualPruneHeight);
 
 bool IsFinalTx(const CTransaction &tx, int nBlockHeight, int64_t nBlockTime)
@@ -437,56 +440,50 @@ bool CheckSequenceLocks( const CTransaction & tx, int flags, LockPoints * lp, bo
 }
 
 
-unsigned int GetLegacySigOpCount(const CTransaction& tx)
+unsigned int GetLegacySigOpCount( const CTransaction & tx )
 {
-    unsigned int nSigOps = 0;
-    for (const auto& txin : tx.vin)
-    {
-        nSigOps += txin.scriptSig.GetSigOpCount(false);
+    unsigned int nSigOps = 0 ;
+    for ( const auto & txin : tx.vin ) {
+        nSigOps += txin.scriptSig.GetSigOpCount( false ) ;
     }
-    for (const auto& txout : tx.vout)
-    {
-        nSigOps += txout.scriptPubKey.GetSigOpCount(false);
+    for ( const auto & txout : tx.vout ) {
+        nSigOps += txout.scriptPubKey.GetSigOpCount( false ) ;
     }
-    return nSigOps;
+    return nSigOps ;
 }
 
-unsigned int GetP2SHSigOpCount(const CTransaction& tx, const CCoinsViewCache& inputs)
+unsigned int GetP2SHSigOpCount( const CTransaction & tx, const CCoinsViewCache & inputs )
 {
-    if (tx.IsCoinBase())
-        return 0;
+    if ( tx.IsCoinBase() ) return 0 ;
 
-    unsigned int nSigOps = 0;
-    for (unsigned int i = 0; i < tx.vin.size(); i++)
-    {
-        const CTxOut &prevout = inputs.GetOutputFor(tx.vin[i]);
-        if (prevout.scriptPubKey.IsPayToScriptHash())
-            nSigOps += prevout.scriptPubKey.GetSigOpCount(tx.vin[i].scriptSig);
+    unsigned int nSigOps = 0 ;
+    for ( const CTxIn & txin : tx.vin ) {
+        const CTxOut & prevout = inputs.GetOutputFor( txin ) ;
+        if ( prevout.scriptPubKey.IsPayToScriptHash() )
+            nSigOps += prevout.scriptPubKey.GetSigOpCount( txin.scriptSig ) ;
     }
-    return nSigOps;
+    return nSigOps ;
 }
 
-int64_t GetTransactionSigOpCost(const CTransaction& tx, const CCoinsViewCache& inputs, int flags)
+size_t GetTransactionSigOpCost( const CTransaction & tx, const CCoinsViewCache & inputs, int flags )
 {
-    int64_t nSigOps = GetLegacySigOpCount(tx) * WITNESS_SCALE_FACTOR;
+    size_t nSigOps = GetLegacySigOpCount( tx ) * WITNESS_SCALE_FACTOR ;
 
-    if (tx.IsCoinBase())
-        return nSigOps;
+    if ( tx.IsCoinBase() ) return nSigOps ;
 
-    if (flags & SCRIPT_VERIFY_P2SH) {
-        nSigOps += GetP2SHSigOpCount(tx, inputs) * WITNESS_SCALE_FACTOR;
+    if ( flags & SCRIPT_VERIFY_P2SH ) {
+        nSigOps += GetP2SHSigOpCount( tx, inputs ) * WITNESS_SCALE_FACTOR ;
     }
 
-    for (unsigned int i = 0; i < tx.vin.size(); i++)
-    {
-        const CTxOut &prevout = inputs.GetOutputFor(tx.vin[i]);
-        nSigOps += CountWitnessSigOps(tx.vin[i].scriptSig, prevout.scriptPubKey, &tx.vin[i].scriptWitness, flags);
+    size_t nSegWitSigOps = 0 ;
+    for ( const CTxIn & txin : tx.vin ) {
+        const CTxOut & prevout = inputs.GetOutputFor( txin ) ;
+        nSegWitSigOps += CountSegregatedWitnessSigOps( txin.scriptSig, prevout.scriptPubKey, &txin.scriptWitness, flags ) ;
     }
-    return nSigOps;
+    nSigOps += nSegWitSigOps ;
+
+    return nSigOps ;
 }
-
-
-
 
 
 bool CheckTransaction(const CTransaction& tx, CValidationState &state, bool fCheckDuplicateInputs)
@@ -700,7 +697,7 @@ bool AcceptToMemoryPoolWorker( CTxMemPool& pool, CValidationState& state, const 
         if ( tx.HasWitness() && ! acceptNonStandardTxs && ! IsWitnessStandard( tx, view ) )
             return state.DoS( 0, false, REJECT_NONSTANDARD, "bad-witness-nonstandard", true ) ;
 
-        int64_t nSigOpsCost = GetTransactionSigOpCost(tx, view, STANDARD_SCRIPT_VERIFY_FLAGS);
+        int64_t nSigOpsCost = GetTransactionSigOpCost( tx, view, STANDARD_SCRIPT_VERIFY_FLAGS ) ;
 
         CAmount nValueOut = tx.GetValueOut() ;
         CAmount nFees = nValueIn - nValueOut ;
@@ -1462,7 +1459,7 @@ bool AbortNode(const std::string& strMessage, const std::string& userMessage="")
     uiInterface.ThreadSafeMessageBox(
         userMessage.empty() ? _("Error: A fatal internal error occurred, see debug log for details") : userMessage,
         "", CClientUIInterface::MSG_ERROR);
-    StartShutdown();
+    RequestShutdown() ;
     return false;
 }
 
@@ -1600,11 +1597,18 @@ void static FlushBlockFile(bool fFinalize = false)
 
 bool FindUndoPos(CValidationState &state, int nFile, CDiskBlockPos &pos, unsigned int nAddSize);
 
-static CCheckQueue<CScriptCheck> scriptcheckqueue(128);
+static CCheckQueue< CScriptCheck > scriptcheckqueue( 128 ) ;
 
-void ThreadScriptCheck() {
-    RenameThread("dogecoin-scriptch");
-    scriptcheckqueue.Thread();
+void ThreadScriptCheck()
+{
+    RenameThread( "scriptcheck" ) ;
+    scriptcheckqueue.Loop() ;
+}
+
+void StopScriptChecking()
+{
+    LogPrintf( "%s()\n", __func__ ) ;
+    scriptcheckqueue.Quit() ;
 }
 
 // Protected by cs_main
@@ -1816,8 +1820,8 @@ bool ConnectBlock( const CBlock & block, CValidationState & state, CBlockIndex *
         // * legacy (always)
         // * p2sh (when P2SH enabled in flags and excludes coinbase)
         // * witness (when witness enabled in flags and excludes coinbase)
-        nSigOpsCost += GetTransactionSigOpCost(tx, view, flags);
-        if (nSigOpsCost > MAX_BLOCK_SIGOPS_COST)
+        nSigOpsCost += GetTransactionSigOpCost( tx, view, flags ) ;
+        if ( nSigOpsCost > MAX_BLOCK_SIGOPS_COST )
             return state.DoS( 10, error("ConnectBlock(): too many signature check operations"),
                               REJECT_INVALID, "bad-blk-sigops" ) ;
 
@@ -1908,18 +1912,25 @@ bool ConnectBlock( const CBlock & block, CValidationState & state, CBlockIndex *
 }
 
 /**
- * Update the on-disk chain state.
+ * Update the on-disk chain state
+ *
  * The caches and indexes are flushed depending on the mode we're called with
  * if they're too large, if it's been a while since the last write,
- * or always and in all cases if we're in prune mode and are deleting files
+ * or always and in all cases if we're pruning and are deleting files
  */
-bool static FlushStateToDisk(CValidationState &state, FlushStateMode mode, int nManualPruneHeight) {
-    int64_t nMempoolUsage = mempool.DynamicMemoryUsage();
-    const CChainParams& chainparams = Params();
-    LOCK2(cs_main, cs_LastBlockFile);
-    static int64_t nLastWrite = 0;
-    static int64_t nLastFlush = 0;
-    static int64_t nLastSetChain = 0;
+bool static FlushStateToDisk( CValidationState & state, FlushStateMode mode, int nManualPruneHeight )
+{
+    int64_t beginMicros = GetTimeMicros() ;
+
+    int64_t nMempoolUsage = mempool.DynamicMemoryUsage() ;
+    const CChainParams & chainparams = Params() ;
+
+    static int64_t nLastWrite = 0 ;
+    static int64_t nLastFlush = 0 ;
+    static int64_t nLastSetChain = 0 ;
+
+    LOCK2( cs_main, cs_LastBlockFile ) ;
+
     std::set<int> setFilesToPrune;
     bool fFlushForPrune = false;
     try {
@@ -1939,7 +1950,7 @@ bool static FlushStateToDisk(CValidationState &state, FlushStateMode mode, int n
         }
     }
     int64_t nNow = GetTimeMicros();
-    // Avoid writing/flushing immediately after startup.
+    // Avoid writing/flushing immediately after startup
     if (nLastWrite == 0) {
         nLastWrite = nNow;
     }
@@ -1953,8 +1964,11 @@ bool static FlushStateToDisk(CValidationState &state, FlushStateMode mode, int n
     int64_t cacheSize = pcoinsTip->DynamicMemoryUsage() * DB_PEAK_USAGE_FACTOR;
     int64_t nTotalSpace = nCoinCacheUsage + std::max<int64_t>(nMempoolSizeMax - nMempoolUsage, 0);
     // The cache is large and we're within 10% and 200 MiB or 50% and 50MiB of the limit, but we have time now (not in the middle of a block processing)
-    bool fCacheLarge = mode == FLUSH_STATE_PERIODIC && cacheSize > std::min(std::max(nTotalSpace / 2, nTotalSpace - MIN_BLOCK_COINSDB_USAGE * 1024 * 1024),
-                                                                            std::max((9 * nTotalSpace) / 10, nTotalSpace - MAX_BLOCK_COINSDB_USAGE * 1024 * 1024));
+    bool fCacheLarge = ( mode == FLUSH_STATE_PERIODIC &&
+                            cacheSize > std::min(
+                                    std::max( nTotalSpace / 2, nTotalSpace - MIN_BLOCK_COINSDB_USAGE * 1024 * 1024 ),
+                                    std::max( ( 9 * nTotalSpace ) / 10, nTotalSpace - MAX_BLOCK_COINSDB_USAGE * 1024 * 1024 )
+                            ) ) ;
     // The cache is over the limit, we have to write now
     bool fCacheCritical = mode == FLUSH_STATE_IF_NEEDED && cacheSize > nTotalSpace;
     // It's been a while since we wrote the block index to disk. Do this frequently, so we don't need to redownload after a crash
@@ -2015,18 +2029,20 @@ bool static FlushStateToDisk(CValidationState &state, FlushStateMode mode, int n
     } catch (const std::runtime_error& e) {
         return AbortNode(state, std::string("System error while flushing: ") + e.what());
     }
-    return true;
+
+    LogPrint( "bench", "%s finished in %.6f s\n", __func__, 0.000001 * ( GetTimeMicros() - beginMicros ) ) ;
+    return true ;
 }
 
 void FlushStateToDisk() {
     CValidationState state;
-    FlushStateToDisk(state, FLUSH_STATE_ALWAYS);
+    FlushStateToDisk( state, FLUSH_STATE_ALWAYS ) ;
 }
 
 void PruneAndFlush() {
     CValidationState state;
     fCheckForPruning = true;
-    FlushStateToDisk(state, FLUSH_STATE_NONE);
+    FlushStateToDisk( state, FLUSH_STATE_NONE ) ;
 }
 
 /* CAmount static CountBlockNewCoins( const CBlock & block, unsigned int blockHeight, const CChainParams & chainparams )
@@ -2228,7 +2244,7 @@ static int64_t nTimePostConnect = 0;
 
 /**
  * Used to track blocks whose transactions were applied to the UTXO state as a
- * part of a single ActivateBestChainStep call.
+ * part of a single ActivateBestChainStep call
  */
 struct ConnectTrace {
     std::vector<std::pair<CBlockIndex*, std::shared_ptr<const CBlock> > > blocksConnected;
@@ -2278,8 +2294,8 @@ bool static ConnectTip( CValidationState & state, const CChainParams & chainpara
     int64_t nTime4 = GetTimeMicros(); nTimeFlush += nTime4 - nTime3;
     LogPrint("bench", "  - Flush: %.2fms [%.2fs]\n", (nTime4 - nTime3) * 0.001, nTimeFlush * 0.000001);
     // Write the chain state to disk, if necessary
-    if (!FlushStateToDisk(state, FLUSH_STATE_IF_NEEDED))
-        return false;
+    if ( ! FlushStateToDisk( state, FLUSH_STATE_IF_NEEDED ) )
+        return false ;
     int64_t nTime5 = GetTimeMicros(); nTimeChainState += nTime5 - nTime4;
     LogPrint("bench", "  - Writing chainstate: %.2fms [%.2fs]\n", (nTime5 - nTime4) * 0.001, nTimeChainState * 0.000001);
 
@@ -2470,9 +2486,10 @@ static void NotifyHeaderTip() {
 /**
  * Make the best chain active, in multiple steps. The result is either failure
  * or an activated best chain. pblock is either NULL or a pointer to a block
- * that is already loaded (to avoid loading it again from disk)
+ * that is already loaded to avoid loading it again from disk
  */
-bool ActivateBestChain( CValidationState & state, const CChainParams & chainparams, std::shared_ptr< const CBlock > pblock ) {
+bool ActivateBestChain( CValidationState & state, const CChainParams & chainparams, std::shared_ptr< const CBlock > pblock )
+{
     // Note that while we're often called here from ProcessNewBlock, this is
     // far from a guarantee. Things in the P2P/RPC will often end up calling
     // us in the middle of ProcessNewBlock - do not assume pblock is set sanely
@@ -2480,15 +2497,13 @@ bool ActivateBestChain( CValidationState & state, const CChainParams & chainpara
     CBlockIndex * pindexHighest = nullptr ;
     CBlockIndex * pindexNewTip = nullptr ;
     do {
-        boost::this_thread::interruption_point();
-        if (ShutdownRequested())
-            break;
+        if ( ShutdownRequested() ) break ;
 
         const CBlockIndex * pindexFork ;
         ConnectTrace connectTrace;
         bool fInitialDownload;
         {
-            LOCK(cs_main);
+          LOCK( cs_main ) ;
           {   // TODO: Temporarily ensure that mempool removals are notified before
               // connected transactions.  This shouldn't matter, but the abandoned
               // state of transactions in our wallet is currently cleared when we
@@ -3008,7 +3023,7 @@ bool ContextualCheckBlockHeader( const CBlockHeader & block, CValidationState & 
 
     // Check proof of work
     // Smaller values of bits ("higher difficulty") aren't accepted as well as bigger ones
-    uint32_t bitsRequired = GetNextWorkRequired( pindexPrev, &block, consensusParams, /* talkative */ true ) ;
+    uint32_t bitsRequired = GetNextWorkRequired( pindexPrev, &block, consensusParams, /* talkative */ fDebug ) ;
     if ( block.nBits != bitsRequired ) {
         LogPrintf( "%s: inexact proof-of-work bits: 0x%08x != 0x%08x for block sha256_hash=%s scrypt_hash=%s\n", __func__,
                    block.nBits, bitsRequired, block.GetSha256Hash().ToString(), block.GetScryptHash().ToString() ) ;
@@ -3290,7 +3305,7 @@ static bool AcceptBlock( const std::shared_ptr< const CBlock > & pblock, CValida
     }
 
     if (fCheckForPruning)
-        FlushStateToDisk(state, FLUSH_STATE_NONE); // we just allocated more disk space for block files
+        FlushStateToDisk( state, FLUSH_STATE_NONE ) ; // just allocate more disk space for block files
 
     return true;
 }
@@ -3448,7 +3463,7 @@ void FindFilesToPruneManual(std::set<int>& setFilesToPrune, int nManualPruneHeig
 void PruneBlockFilesManual(int nManualPruneHeight)
 {
     CValidationState state;
-    FlushStateToDisk(state, FLUSH_STATE_NONE, nManualPruneHeight);
+    FlushStateToDisk( state, FLUSH_STATE_NONE, nManualPruneHeight ) ;
 }
 
 /* Calculate the block/rev files that should be deleted to remain under target*/
@@ -3564,12 +3579,18 @@ CBlockIndex * InsertBlockIndex( uint256 hash )
     return pindexNew ;
 }
 
+static std::atomic< bool > loadingBlockIndexDB( false ) ;
+
 bool static LoadBlockIndexDB( const CChainParams & chainparams )
 {
-    if (!pblocktree->LoadBlockIndexGuts(InsertBlockIndex))
-        return false;
+    loadingBlockIndexDB = true ;
+    if ( ! pblocktree->LoadBlockIndexGuts( InsertBlockIndex, loadingBlockIndexDB ) )
+        return false ;
 
-    boost::this_thread::interruption_point();
+    if ( ! loadingBlockIndexDB || ShutdownRequested() ) {
+        LogPrintf( "%s: stopping\n", __func__ ) ;
+        throw std::string( "stopthread" ) ;
+    }
 
     // sort blocks in chain by height
     std::vector< std::pair< int, CBlockIndex* > > vSortedByHeight ;
@@ -3685,18 +3706,20 @@ bool static LoadBlockIndexDB( const CChainParams & chainparams )
     return true;
 }
 
-CVerifyDB::CVerifyDB()
+WVerifyDB::WVerifyDB()
 {
     uiInterface.ShowProgress( _("Verifying blocks..."), 0 ) ;
 }
 
-CVerifyDB::~CVerifyDB()
+WVerifyDB::~WVerifyDB()
 {
     uiInterface.ShowProgress( "", 100 ) ;
 }
 
-bool CVerifyDB::VerifyDB( const CChainParams & chainparams, AbstractCoinsView * coinsview, int nCheckLevel, int nCheckDepth )
+bool WVerifyDB::VerifyDB( const CChainParams & chainparams, AbstractCoinsView * coinsview, int nCheckLevel, int nCheckDepth )
 {
+    verifying = true ;
+
     LOCK( cs_main ) ;
     if ( chainActive.Tip() == nullptr || chainActive.Tip()->pprev == nullptr )
         return true ;
@@ -3719,7 +3742,11 @@ bool CVerifyDB::VerifyDB( const CChainParams & chainparams, AbstractCoinsView * 
 
     for ( CBlockIndex* pindex = chainActive.Tip() ; pindex && pindex->pprev ; pindex = pindex->pprev )
     {
-        boost::this_thread::interruption_point();
+        if ( ! verifying || ShutdownRequested() ) {
+            LogPrintf( "%s: stopping\n", __func__ ) ;
+            throw std::string( "stopthread" ) ;
+        }
+
         int percentageDone = std::max(1, std::min(99, (int)(((double)(chainActive.Height() - pindex->nHeight)) / (double)nCheckDepth * (nCheckLevel >= 4 ? 50 : 100))));
         if ( reportDone < percentageDone / 10 ) {
             // report every 10% step
@@ -3781,8 +3808,13 @@ bool CVerifyDB::VerifyDB( const CChainParams & chainparams, AbstractCoinsView * 
     // check level 4: try reconnecting blocks
     if ( nCheckLevel >= 4 ) {
         CBlockIndex * pindex = pindexState ;
-        while ( pindex != chainActive.Tip() ) {
-            boost::this_thread::interruption_point();
+        while ( pindex != chainActive.Tip() )
+        {
+            if ( ! verifying || ShutdownRequested() ) {
+                LogPrintf( "%s: stopping\n", __func__ ) ;
+                throw std::string( "stopthread" ) ;
+            }
+
             uiInterface.ShowProgress( _("Verifying blocks..."), std::max(1, std::min(99, 100 - (int)(((double)(chainActive.Height() - pindex->nHeight)) / (double)nCheckDepth * 50))) ) ;
             pindex = chainActive.Next( pindex ) ;
             CBlock block ;
@@ -3799,6 +3831,7 @@ bool CVerifyDB::VerifyDB( const CChainParams & chainparams, AbstractCoinsView * 
     LogPrintf( "%s: no coin database inconsistencies in last %i blocks (%i transactions)\n", __func__,
                 chainActive.Height() - pindexState->nHeight, nGoodTransactions ) ;
 
+    verifying = false ;
     return true ;
 }
 
@@ -3881,11 +3914,10 @@ bool RewindBlockIndex(const CChainParams& params)
 
     CheckBlockIndex( params.GetConsensus( chainActive.Height() ) ) ;
 
-    if (!FlushStateToDisk(state, FLUSH_STATE_ALWAYS)) {
-        return false;
-    }
+    if ( ! FlushStateToDisk( state, FLUSH_STATE_ALWAYS ) )
+        return false ;
 
-    return true;
+    return true ;
 }
 
 // May NOT be used after any connections are up as much
@@ -3955,7 +3987,7 @@ bool InitBlockIndex(const CChainParams& chainparams)
             if (!ReceivedBlockTransactions(block, state, pindex, blockPos))
                 return error("LoadBlockIndex(): genesis block not accepted");
             // Force a chainstate write so that when we VerifyDB in a moment, it doesn't check stale data
-            return FlushStateToDisk(state, FLUSH_STATE_ALWAYS);
+            return FlushStateToDisk( state, FLUSH_STATE_ALWAYS ) ;
         } catch (const std::runtime_error& e) {
             return error("LoadBlockIndex(): failed to initialize block database: %s", e.what());
         }
@@ -3975,8 +4007,9 @@ bool LoadExternalBlockFile(const CChainParams& chainparams, FILE* fileIn, CDiskB
         // This takes over fileIn and calls fclose() on it in the CBufferedFile destructor
         CBufferedFile blkdat( fileIn, 2 * MAX_BLOCK_SERIALIZED_SIZE, MAX_BLOCK_SERIALIZED_SIZE + 8, SER_DISK, PEER_VERSION ) ;
         uint64_t nRewind = blkdat.GetPos();
-        while (!blkdat.eof()) {
-            boost::this_thread::interruption_point();
+        while ( ! blkdat.eof() )
+        {
+            if ( ShutdownRequested() ) break ;
 
             blkdat.SetPos(nRewind);
             nRewind++; // start one byte further next time, in case of failure

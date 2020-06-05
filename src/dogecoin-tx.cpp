@@ -1,4 +1,5 @@
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -17,8 +18,12 @@
 #include "script/script.h"
 #include "script/sign.h"
 #include <univalue.h>
+#include "chainparamsutil.h"
 #include "util.h"
+#include "utillog.h"
+#include "utilhelp.h"
 #include "utilmoneystr.h"
+#include "utilstr.h"
 #include "utilstrencodings.h"
 
 #include <stdio.h>
@@ -67,7 +72,8 @@ static int AppInitRawTx(int argc, char* argv[])
         strUsage += HelpMessageOpt("-create", _("Create new, empty TX."));
         strUsage += HelpMessageOpt("-json", _("Select JSON output"));
         strUsage += HelpMessageOpt("-txid", _("Output only the hex-encoded transaction hash of the resultant transaction")) ;
-        AppendParamsHelpMessages(strUsage);
+
+        AppendChainParamsHelp( strUsage ) ;
 
         fprintf(stdout, "%s", strUsage.c_str());
 
@@ -204,8 +210,8 @@ static void MutateTxLocktime(CMutableTransaction& tx, const std::string& cmdVal)
 
 static void MutateTxAddInput(CMutableTransaction& tx, const std::string& strInput)
 {
-    std::vector<std::string> vStrInputParts;
-    boost::split(vStrInputParts, strInput, boost::is_any_of(":"));
+    std::vector< std::string > vStrInputParts ;
+    boost::split( vStrInputParts, strInput, boost::is_any_of( ":" ) ) ;
 
     // separate TXID:VOUT in string
     if (vStrInputParts.size()<2)
@@ -239,8 +245,8 @@ static void MutateTxAddInput(CMutableTransaction& tx, const std::string& strInpu
 static void MutateTxAddOutAddr(CMutableTransaction& tx, const std::string& strInput)
 {
     // Separate into VALUE:ADDRESS
-    std::vector<std::string> vStrInputParts;
-    boost::split(vStrInputParts, strInput, boost::is_any_of(":"));
+    std::vector< std::string > vStrInputParts ;
+    boost::split( vStrInputParts, strInput, boost::is_any_of( ":" ) ) ;
 
     if (vStrInputParts.size() != 2)
         throw std::runtime_error("TX output missing or too many separators");
@@ -264,8 +270,8 @@ static void MutateTxAddOutAddr(CMutableTransaction& tx, const std::string& strIn
 static void MutateTxAddOutPubKey(CMutableTransaction& tx, const std::string& strInput)
 {
     // Separate into VALUE:PUBKEY[:FLAGS]
-    std::vector<std::string> vStrInputParts;
-    boost::split(vStrInputParts, strInput, boost::is_any_of(":"));
+    std::vector< std::string > vStrInputParts ;
+    boost::split( vStrInputParts, strInput, boost::is_any_of( ":" ) ) ;
 
     if (vStrInputParts.size() < 2 || vStrInputParts.size() > 3)
         throw std::runtime_error("TX output missing or too many separators");
@@ -308,8 +314,8 @@ static void MutateTxAddOutPubKey(CMutableTransaction& tx, const std::string& str
 static void MutateTxAddOutMultiSig(CMutableTransaction& tx, const std::string& strInput)
 {
     // Separate into VALUE:REQUIRED:NUMKEYS:PUBKEY1:PUBKEY2:....[:FLAGS]
-    std::vector<std::string> vStrInputParts;
-    boost::split(vStrInputParts, strInput, boost::is_any_of(":"));
+    std::vector< std::string > vStrInputParts ;
+    boost::split( vStrInputParts, strInput, boost::is_any_of( ":" ) ) ;
 
     // Check that there are enough parameters
     if (vStrInputParts.size()<3)
@@ -402,8 +408,8 @@ static void MutateTxAddOutData(CMutableTransaction& tx, const std::string& strIn
 static void MutateTxAddOutScript(CMutableTransaction& tx, const std::string& strInput)
 {
     // separate VALUE:SCRIPT[:FLAGS]
-    std::vector<std::string> vStrInputParts;
-    boost::split(vStrInputParts, strInput, boost::is_any_of(":"));
+    std::vector< std::string > vStrInputParts ;
+    boost::split( vStrInputParts, strInput, boost::is_any_of( ":" ) ) ;
     if (vStrInputParts.size() < 2)
         throw std::runtime_error("TX output missing separator");
 
@@ -749,7 +755,7 @@ static std::string readStdin()
     if (ferror(stdin))
         throw std::runtime_error("error reading stdin");
 
-    boost::algorithm::trim_right(ret);
+    boost::algorithm::trim_right( ret ) ;
 
     return ret;
 }
@@ -802,17 +808,17 @@ static int CommandLineRawTx(int argc, char* argv[])
 
         OutputTx(tx);
     }
-
-    catch (const boost::thread_interrupted&) {
-        throw;
+    catch ( const std::string & s ) {
+        if ( s == "stopthread" ) throw ;
+        else strPrint = std::string( "unknown message: " ) + s ;
     }
-    catch (const std::exception& e) {
-        strPrint = std::string("error: ") + e.what();
-        nRet = EXIT_FAILURE;
+    catch ( const std::exception & e ) {
+        strPrint = std::string( "error: " ) + e.what() ;
+        nRet = EXIT_FAILURE ;
     }
-    catch (...) {
-        PrintExceptionContinue(NULL, "CommandLineRawTx()");
-        throw;
+    catch ( ... ) {
+        PrintExceptionContinue( NULL, "CommandLineRawTx()" ) ;
+        throw ;
     }
 
     if (strPrint != "") {

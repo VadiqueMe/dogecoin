@@ -9,7 +9,6 @@
 #include "chain.h"
 #include "consensus/validation.h"
 #include "core_io.h"
-#include "init.h"
 #include "validation.h"
 #include "net.h"
 #include "policy/policy.h"
@@ -19,12 +18,11 @@
 #include "timedata.h"
 #include "util.h"
 #include "utilmoneystr.h"
+#include "utilthread.h"
 #include "wallet.h"
 #include "walletdb.h"
 
 #include <stdint.h>
-
-#include <boost/assign/list_of.hpp>
 
 #include <univalue.h>
 
@@ -1995,14 +1993,14 @@ UniValue walletpassphrase(const JSONRPCRequest& request)
     else
         throw std::runtime_error(
             "walletpassphrase <passphrase> <timeout>\n"
-            "Stores the wallet decryption key in memory for <timeout> seconds." ) ;
+            "Stores the wallet decryption key in memory for <timeout> seconds" ) ;
 
     pwalletMain->TopUpKeyPool();
 
-    int64_t nSleepTime = request.params[1].get_int64();
-    LOCK(cs_nWalletUnlockTime);
-    nWalletUnlockTime = GetTime() + nSleepTime;
-    RPCRunLater("lockwallet", boost::bind(LockWallet, pwalletMain), nSleepTime);
+    int64_t nSleepTime = request.params[ 1 ].get_int64() ;
+    LOCK( cs_nWalletUnlockTime ) ;
+    nWalletUnlockTime = GetTime() + nSleepTime ;
+    RPCRunLater( "lockwallet", std::bind( LockWallet, pwalletMain ), nSleepTime ) ;
 
     return NullUniValue;
 }
@@ -2122,15 +2120,15 @@ UniValue encryptwallet(const JSONRPCRequest& request)
             + HelpExampleRpc("encryptwallet", "\"my pass phrase\"")
         );
 
-    LOCK2(cs_main, pwalletMain->cs_wallet);
+    LOCK2( cs_main, pwalletMain->cs_wallet ) ;
 
-    if (request.fHelp)
-        return true;
-    if (pwalletMain->IsCrypted())
-        throw JSONRPCError(RPC_WALLET_WRONG_ENC_STATE, "Error: running with an encrypted wallet, but encryptwallet was called.");
+    if ( request.fHelp )
+        return true ;
+    if ( pwalletMain->IsCrypted() )
+        throw JSONRPCError( RPC_WALLET_WRONG_ENC_STATE, "Error: running with an encrypted wallet, but encryptwallet was called" ) ;
 
     // TODO: get rid of this .c_str() by implementing SecureString::operator=(std::string)
-    // Alternately, find a way to make request.params[0] mlock()'d to begin with.
+    // Alternately, find a way to make request.params[0] mlock()'d to begin with
     SecureString strWalletPass;
     strWalletPass.reserve(100);
     strWalletPass = request.params[0].get_str().c_str();
@@ -2138,16 +2136,16 @@ UniValue encryptwallet(const JSONRPCRequest& request)
     if ( strWalletPass.length() < 1 )
         throw std::runtime_error(
             "encryptwallet <passphrase>\n"
-            "Encrypts the wallet with <passphrase>." ) ;
+            "Encrypts the wallet with <passphrase>" ) ;
 
-    if (!pwalletMain->EncryptWallet(strWalletPass))
-        throw JSONRPCError(RPC_WALLET_ENCRYPTION_FAILED, "Error: Failed to encrypt the wallet.");
+    if ( ! pwalletMain->EncryptWallet( strWalletPass ) )
+        throw JSONRPCError( RPC_WALLET_ENCRYPTION_FAILED, "Error: Failed to encrypt the wallet" ) ;
 
     // BDB seems to have a bad habit of writing old data into
     // slack space in .dat files; that is bad if the old data is
     // unencrypted private keys. So:
-    StartShutdown();
-    return "wallet encrypted; Dogecoin server stopping, restart to run with encrypted wallet. The keypool has been flushed and a new HD seed was generated (if you are using HD). You need to make a new backup.";
+    RequestShutdown() ;
+    return "wallet encrypted; Dogecoin server stopping, restart to run with encrypted wallet. The keypool has been flushed and a new HD seed was generated (if you are using HD). You need to make a new backup." ;
 }
 
 UniValue lockunspent(const JSONRPCRequest& request)
@@ -2194,10 +2192,10 @@ UniValue lockunspent(const JSONRPCRequest& request)
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
-    if (request.params.size() == 1)
-        RPCTypeCheck(request.params, boost::assign::list_of(UniValue::VBOOL));
+    if ( request.params.size() == 1 )
+        RPCTypeCheck( request.params, { UniValue::VBOOL } ) ;
     else
-        RPCTypeCheck(request.params, boost::assign::list_of(UniValue::VBOOL)(UniValue::VARR));
+        RPCTypeCheck( request.params, { UniValue::VBOOL, UniValue::VARR } ) ;
 
     bool fUnlock = request.params[0].get_bool();
 
@@ -2566,7 +2564,7 @@ UniValue fundrawtransaction(const JSONRPCRequest& request)
                             + HelpExampleCli("sendrawtransaction", "\"signedtransactionhex\"")
                             );
 
-    RPCTypeCheck(request.params, boost::assign::list_of(UniValue::VSTR));
+    RPCTypeCheck( request.params, { UniValue::VSTR } ) ;
 
     CTxDestination changeAddress = CNoDestination();
     int changePosition = -1;
@@ -2584,7 +2582,7 @@ UniValue fundrawtransaction(const JSONRPCRequest& request)
         includeWatching = request.params[1].get_bool();
       }
       else {
-        RPCTypeCheck(request.params, boost::assign::list_of(UniValue::VSTR)(UniValue::VOBJ));
+        RPCTypeCheck( request.params, { UniValue::VSTR, UniValue::VOBJ } ) ;
 
         UniValue options = request.params[1];
 

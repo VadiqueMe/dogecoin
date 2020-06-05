@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -18,44 +19,38 @@
 #include "txdb.h"
 #include "txmempool.h"
 #include "ui_interface.h"
+#include "util.h"
+#include "utilthread.h"
 #include "rpc/server.h"
 #include "rpc/register.h"
 #include "script/sigcache.h"
-
 #include "test/testutil.h"
 
 #include <memory>
 
-#include <boost/filesystem.hpp>
 #include <boost/test/unit_test.hpp>
-#include <boost/thread.hpp>
 
-std::unique_ptr<CConnman> g_connman;
-FastRandomContext insecure_rand_ctx(true);
+std::unique_ptr< CConnman > g_connman ;
+FastRandomContext insecure_rand_ctx( true ) ;
 
-extern bool fPrintToConsole;
-extern void noui_connect();
+extern void noui_connect() ;
 
-/** Coinbase transaction outputs can only be spent after this number of new blocks (network rule) */
-static const int COINBASE_MATURITY = 60 * 4 ; // 4 hours of blocks
-
-BasicTestingSetup::BasicTestingSetup(const std::string& chainName)
+BasicTestingSetup::BasicTestingSetup( const std::string & chainName )
 {
-        ECC_Start();
-        SetupEnvironment();
-        SetupNetworking();
-        InitSignatureCache();
-        fPrintToDebugLog = false ; // don't want to write to debug log file
-        fPrintToConsole = true ;
-        fCheckBlockIndex = true;
-        SelectParams(chainName);
-        noui_connect();
+        ECC_Start() ;
+        SetupEnvironment() ;
+        SetupNetworking() ;
+        InitSignatureCache() ;
+        PickPrintToConsole() ; // don't want to write to debug log file
+        fCheckBlockIndex = true ;
+        SelectParams( chainName ) ;
+        noui_connect() ;
 }
 
 BasicTestingSetup::~BasicTestingSetup()
 {
-        ECC_Stop();
-        g_connman.reset();
+        ECC_Stop() ;
+        g_connman.reset() ;
 }
 
 TestingSetup::TestingSetup(const std::string& chainName) : BasicTestingSetup(chainName)
@@ -79,9 +74,9 @@ TestingSetup::TestingSetup(const std::string& chainName) : BasicTestingSetup(cha
             bool ok = ActivateBestChain(state, chainparams);
             BOOST_CHECK(ok);
         }
-        nScriptCheckThreads = 3;
-        for (int i=0; i < nScriptCheckThreads-1; i++)
-            threadGroup.create_thread(&ThreadScriptCheck);
+        nScriptCheckThreads = 3 ;
+        for ( int i = 0 ; i < nScriptCheckThreads - 1 ; i ++ )
+            scriptcheckThreads.push_back( std::thread( &ThreadScriptCheck ) ) ;
         g_connman = std::unique_ptr<CConnman>(new CConnman(0x1337, 0x1337)); // Deterministic randomness for tests
         connman = g_connman.get();
         RegisterNodeSignals(GetNodeSignals());
@@ -89,14 +84,16 @@ TestingSetup::TestingSetup(const std::string& chainName) : BasicTestingSetup(cha
 
 TestingSetup::~TestingSetup()
 {
-        UnregisterNodeSignals(GetNodeSignals());
-        threadGroup.interrupt_all();
-        threadGroup.join_all();
-        UnloadBlockIndex();
-        delete pcoinsTip;
-        delete pcoinsdbview;
-        delete pblocktree;
-        boost::filesystem::remove_all(pathTemp);
+    UnregisterNodeSignals( GetNodeSignals() ) ;
+
+    StopScriptChecking() ;
+    JoinAll( scriptcheckThreads ) ;
+
+    UnloadBlockIndex() ;
+    delete pcoinsTip ;
+    delete pcoinsdbview ;
+    delete pblocktree ;
+    boost::filesystem::remove_all( pathTemp ) ;
 }
 
 TestChain240Setup::TestChain240Setup() : TestingSetup( "regtest" )
@@ -104,7 +101,8 @@ TestChain240Setup::TestChain240Setup() : TestingSetup( "regtest" )
     // Generate a 240-block chain:
     coinbaseKey.MakeNewKey(true);
     CScript scriptPubKey = CScript() <<  ToByteVector(coinbaseKey.GetPubKey()) << OP_CHECKSIG;
-    for (int i = 0; i < COINBASE_MATURITY; i++)
+    const int manyBlocks = 60 * 4 ; // 4 hours of blocks
+    for ( int i = 0; i < manyBlocks; i ++ )
     {
         std::vector<CMutableTransaction> noTxns;
         CBlock b = CreateAndProcessBlock(noTxns, scriptPubKey);
@@ -127,6 +125,7 @@ TestChain240Setup::CreateAndProcessBlock( const std::vector< CMutableTransaction
     block.vtx.resize(1);
     for ( const CMutableTransaction & tx : txns )
         block.vtx.push_back( MakeTransactionRef( tx ) ) ;
+
     // IncrementExtraNonce creates a valid coinbase and merkleRoot
     unsigned int extraNonce = 0;
     IncrementExtraNonce(&block, chainActive.Tip(), extraNonce);
@@ -158,17 +157,7 @@ CTxMemPoolEntry TestMemPoolEntryHelper::FromTx(const CTransaction &txn, CTxMemPo
                            inChainValue, spendsCoinbase, sigOpCost, lp);
 }
 
-void Shutdown(void* parg)
+void Shutdown( void* arg )
 {
-  exit(0);
-}
-
-void StartShutdown()
-{
-  exit(0);
-}
-
-bool ShutdownRequested()
-{
-  return false;
+    exit( EXIT_SUCCESS ) ;
 }

@@ -137,7 +137,7 @@ extern uint64_t nLastBlockSize;
 extern uint64_t nLastBlockWeight;
 extern const std::string strMessageMagic;
 extern CWaitableCriticalSection csBestBlock;
-extern CConditionVariable cvBlockChange;
+extern std::condition_variable cvBlockChange ;
 extern std::atomic_bool fImporting;
 extern bool fReindex;
 extern int nScriptCheckThreads;
@@ -229,22 +229,30 @@ bool InitBlockIndex(const CChainParams& chainparams);
 bool LoadBlockIndex(const CChainParams& chainparams);
 /** Unload database information */
 void UnloadBlockIndex();
+
 /** Run an instance of the script checking thread */
-void ThreadScriptCheck();
+void ThreadScriptCheck() ;
+void StopScriptChecking() ;
+
 /** Check whether we are doing an initial block download (synchronizing from disk or network) */
-bool IsInitialBlockDownload();
-/** Format a string that describes several potential problems detected by the core.
+bool IsInitialBlockDownload() ;
+
+/** Format a string that describes several potential problems detected by the core
+ *
  * strFor can have three values:
  * - "rpc": get critical warnings, which should put the client in safe mode if non-empty
  * - "statusbar": get all warnings
  * - "gui": get all warnings, translated (where possible) for GUI
- * This function only returns the highest priority warning of the set selected by strFor.
+ *
+ * This function only returns the highest priority warning of the set selected by strFor
  */
-std::string GetWarnings(const std::string& strFor);
+std::string GetWarnings( const std::string & strFor ) ;
+
 /** Retrieve a transaction (from memory pool, or from disk, if possible) */
-bool GetTransaction(const uint256 &hash, CTransactionRef &tx, const Consensus::Params& params, uint256 &hashBlock, bool fAllowSlow = false);
+bool GetTransaction( const uint256 & hash, CTransactionRef & tx, const Consensus::Params & params, uint256 & hashBlock, bool fAllowSlow = false ) ;
+
 /** Find the best known block, and make it the tip of the block chain */
-bool ActivateBestChain(CValidationState& state, const CChainParams& chainparams, std::shared_ptr<const CBlock> pblock = std::shared_ptr<const CBlock>());
+bool ActivateBestChain( CValidationState & state, const CChainParams & chainparams, std::shared_ptr< const CBlock > pblock = std::shared_ptr< const CBlock >() ) ;
 /* CAmount GetBitcoinBlockSubsidy( int nHeight, const Consensus::Params & consensusParams ) ; */
 
 /** Guess verification progress as a number between 0.0=genesis and 1.0=current tip */
@@ -309,7 +317,7 @@ int VersionBitsTipStateSinceHeight(const Consensus::Params& params, Consensus::D
  * @return number of sigops this transaction's outputs will produce when spent
  * @see CTransaction::FetchInputs
  */
-unsigned int GetLegacySigOpCount(const CTransaction& tx);
+unsigned int GetLegacySigOpCount( const CTransaction & tx ) ;
 
 /**
  * Count ECDSA signature operations in pay-to-script-hash inputs.
@@ -318,7 +326,7 @@ unsigned int GetLegacySigOpCount(const CTransaction& tx);
  * @return maximum number of sigops required to validate this transaction's inputs
  * @see CTransaction::FetchInputs
  */
-unsigned int GetP2SHSigOpCount(const CTransaction& tx, const CCoinsViewCache& mapInputs);
+unsigned int GetP2SHSigOpCount( const CTransaction & tx, const CCoinsViewCache & mapInputs ) ;
 
 /**
  * Compute total signature operation cost of a transaction.
@@ -327,7 +335,7 @@ unsigned int GetP2SHSigOpCount(const CTransaction& tx, const CCoinsViewCache& ma
  * @param[out] flags Script verification flags
  * @return Total signature operation cost of tx
  */
-int64_t GetTransactionSigOpCost(const CTransaction& tx, const CCoinsViewCache& inputs, int flags);
+size_t GetTransactionSigOpCost( const CTransaction & tx, const CCoinsViewCache & inputs, int flags ) ;
 
 /**
  * Check whether all inputs of this transaction are valid (no double spends, scripts & sigs, amounts)
@@ -477,17 +485,25 @@ bool RewindBlockIndex(const CChainParams& params);
 void UpdateUncommittedBlockStructures(CBlock& block, const CBlockIndex* pindexPrev, const Consensus::Params& consensusParams);
 
 /** Produce the necessary coinbase commitment for a block (modifies the hash, don't call for mined blocks) */
-std::vector<unsigned char> GenerateCoinbaseCommitment(CBlock& block, const CBlockIndex* pindexPrev, const Consensus::Params& consensusParams);
+std::vector< unsigned char > GenerateCoinbaseCommitment( CBlock & block, const CBlockIndex * pindexPrev, const Consensus::Params & consensusParams ) ;
 
 static const signed int DEFAULT_CHECKBLOCKS = 30 ;
 static const unsigned int DEFAULT_CHECKLEVEL = 3 ;
 
-/** RAII wrapper for VerifyDB: Verify consistency of the block and coin databases */
-class CVerifyDB {
+/** Wrapper for VerifyDB */
+class WVerifyDB
+{
 public:
-    CVerifyDB() ;
-    ~CVerifyDB() ;
+    WVerifyDB() ;
+    ~WVerifyDB() ;
+
+    // Verify consistency of the block and coin databases
     bool VerifyDB( const CChainParams & chainparams, AbstractCoinsView * coinsview, int nCheckLevel, int nCheckDepth ) ;
+
+    void stopVerify() {  if ( verifying ) verifying = false ;  }
+
+private:
+    bool verifying{ false } ;
 } ;
 
 /** Find the last common block between the parameter chain and a locator */

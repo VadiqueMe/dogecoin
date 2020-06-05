@@ -1,14 +1,16 @@
 // Copyright (c) 2015 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "bench.h"
 #include "util.h"
+#include "utilthread.h"
 #include "validation.h"
 #include "checkqueue.h"
 #include "prevector.h"
+#include <thread>
 #include <vector>
-#include <boost/thread/thread.hpp>
 #include "random.h"
 
 
@@ -20,7 +22,8 @@ static const size_t BATCHES = 101;
 static const size_t BATCH_SIZE = 30;
 static const int PREVECTOR_SIZE = 28;
 static const int QUEUE_BATCH_SIZE = 128;
-static void CCheckQueueSpeed(benchmark::State& state)
+
+static void CCheckQueueSpeed( benchmark::State & state )
 {
     struct FakeJobNoWork {
         bool operator()()
@@ -29,16 +32,16 @@ static void CCheckQueueSpeed(benchmark::State& state)
         }
         void swap(FakeJobNoWork& x){};
     };
-    CCheckQueue<FakeJobNoWork> queue {QUEUE_BATCH_SIZE};
-    boost::thread_group tg;
+    CCheckQueue< FakeJobNoWork > queue { QUEUE_BATCH_SIZE } ;
+    std::vector< std::thread > tg ;
     for (auto x = 0; x < std::max(MIN_CORES, GetNumCores()); ++x) {
-       tg.create_thread([&]{queue.Thread();});
+       tg.push_back( std::thread( [&]{ queue.Loop() ; } ) ) ;
     }
     while (state.KeepRunning()) {
         CCheckQueueControl<FakeJobNoWork> control(&queue);
 
         // We call Add a number of times to simulate the behavior of adding
-        // a block of transactions at once.
+        // a block of transactions at once
 
         std::vector<std::vector<FakeJobNoWork>> vBatches(BATCHES);
         for (auto& vChecks : vBatches) {
@@ -54,8 +57,8 @@ static void CCheckQueueSpeed(benchmark::State& state)
         // it is done explicitly here for clarity
         control.Wait();
     }
-    tg.interrupt_all();
-    tg.join_all();
+    queue.Quit() ;
+    JoinAll( tg ) ;
 }
 
 // This Benchmark tests the CheckQueue with a slightly realistic workload,
@@ -76,13 +79,13 @@ static void CCheckQueueSpeedPrevectorJob(benchmark::State& state)
         }
         void swap(PrevectorJob& x){p.swap(x.p);};
     };
-    CCheckQueue<PrevectorJob> queue {QUEUE_BATCH_SIZE};
-    boost::thread_group tg;
+    CCheckQueue< PrevectorJob > queue { QUEUE_BATCH_SIZE } ;
+    std::vector< std::thread > tg ;
     for (auto x = 0; x < std::max(MIN_CORES, GetNumCores()); ++x) {
-       tg.create_thread([&]{queue.Thread();});
+        tg.push_back( std::thread( [&]{ queue.Loop() ; } ) ) ;
     }
     while (state.KeepRunning()) {
-        // Make insecure_rand here so that each iteration is identical.
+        // Make insecure_rand here so that each iteration is identical
         FastRandomContext insecure_rand(true);
         CCheckQueueControl<PrevectorJob> control(&queue);
         std::vector<std::vector<PrevectorJob>> vBatches(BATCHES);
@@ -96,8 +99,8 @@ static void CCheckQueueSpeedPrevectorJob(benchmark::State& state)
         // it is done explicitly here for clarity
         control.Wait();
     }
-    tg.interrupt_all();
-    tg.join_all();
+    queue.Quit() ;
+    JoinAll( tg ) ;
 }
 BENCHMARK(CCheckQueueSpeed);
 BENCHMARK(CCheckQueueSpeedPrevectorJob);

@@ -27,11 +27,11 @@
 #include "txmempool.h"
 #include "ui_interface.h"
 #include "util.h"
+#include "utillog.h"
 #include "utilmoneystr.h"
 #include "utilstrencodings.h"
 #include "validationinterface.h"
 
-#include <boost/thread.hpp>
 #include <boost/foreach.hpp> // for BOOST_REVERSE_FOREACH
 
 #if defined(NDEBUG)

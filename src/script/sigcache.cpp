@@ -1,7 +1,8 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "sigcache.h"
 
@@ -10,19 +11,21 @@
 #include "random.h"
 #include "uint256.h"
 #include "util.h"
+#include "utillog.h"
 
 #include "cuckoocache.h"
-#include <boost/thread.hpp>
+
+#include <mutex>
 
 namespace {
 
 /**
  * We're hashing a nonce into the entries themselves, so we don't need extra
- * blinding in the set hash computation.
+ * blinding in the set hash computation
  *
  * This may exhibit platform endian dependent behavior but because these are
  * nonced hashes (random) and this state is only ever used locally it is safe.
- * All that matters is local consistency.
+ * All that matters is local consistency
  */
 class SignatureCacheHasher
 {
@@ -49,7 +52,7 @@ private:
     uint256 nonce;
     typedef CuckooCache::cache<uint256, SignatureCacheHasher> map_type;
     map_type setValid;
-    boost::shared_mutex cs_sigcache;
+    std::mutex cs_sigcache ;
 
 public:
     CSignatureCache()
@@ -64,17 +67,18 @@ public:
     }
 
     bool
-    Get(const uint256& entry, const bool erase)
+    Get( const uint256 & entry, const bool erase )
     {
-        boost::shared_lock<boost::shared_mutex> lock(cs_sigcache);
-        return setValid.contains(entry, erase);
+        std::unique_lock< std::mutex > lock( cs_sigcache ) ;
+        return setValid.contains( entry, erase ) ;
     }
 
-    void Set(uint256& entry)
+    void Set( uint256 & entry )
     {
-        boost::unique_lock<boost::shared_mutex> lock(cs_sigcache);
-        setValid.insert(entry);
+        std::unique_lock< std::mutex > lock( cs_sigcache ) ;
+        setValid.insert( entry ) ;
     }
+
     uint32_t setup_bytes(size_t n)
     {
         return setValid.setup_bytes(n);
@@ -85,7 +89,7 @@ public:
  * in CachingTransactionSignatureChecker::VerifySignature.  We initialize
  * signatureCache outside of VerifySignature to avoid the atomic operation per
  * call overhead associated with local static variables even though
- * signatureCache could be made local to VerifySignature.
+ * signatureCache could be made local to VerifySignature
 */
 static CSignatureCache signatureCache;
 }

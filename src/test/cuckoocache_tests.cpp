@@ -1,13 +1,12 @@
 // Copyright (c) 2012-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
+
 #include <boost/test/unit_test.hpp>
 #include "cuckoocache.h"
 #include "test/test_dogecoin.h"
 #include "random.h"
 #include <thread>
-#include <boost/thread.hpp>
-
 
 /** Test Suite for CuckooCache
  *
@@ -19,7 +18,7 @@
  *  change significantly from what was expected. This can be OK, depending on
  *  the nature of the change, but requires updating the tests to reflect the new
  *  expected behavior. For example improving the hit rate may cause some tests
- *  using BOOST_CHECK_CLOSE to fail.
+ *  using BOOST_CHECK_CLOSE to fail
  *
  */
 FastRandomContext insecure_rand(true);
@@ -90,9 +89,8 @@ double test_cache(size_t megabytes, double load)
         for (uint8_t j = 0; j < 8; ++j)
             *(ptr++) = insecure_rand.rand32();
     }
-    /** We make a copy of the hashes because future optimizations of the
-     * cuckoocache may overwrite the inserted element, so the test is
-     * "future proofed".
+    /** Make a copy of hashes because future optimizations of the cuckoocache
+     *  may overwrite the inserted element, so the test is "future proofed"
      */
     std::vector<uint256> hashes_insert_copy = hashes;
     /** Do the insert */
@@ -161,9 +159,8 @@ void test_cache_erase(size_t megabytes)
         for (uint8_t j = 0; j < 8; ++j)
             *(ptr++) = insecure_rand.rand32();
     }
-    /** We make a copy of the hashes because future optimizations of the
-     * cuckoocache may overwrite the inserted element, so the test is
-     * "future proofed".
+    /** Make a copy of hashes because future optimizations of the cuckoocache
+     *  may overwrite the inserted element, so the test is future proofed"
      */
     std::vector<uint256> hashes_insert_copy = hashes;
 
@@ -224,22 +221,21 @@ void test_cache_erase_parallel(size_t megabytes)
         for (uint8_t j = 0; j < 8; ++j)
             *(ptr++) = insecure_rand.rand32();
     }
-    /** We make a copy of the hashes because future optimizations of the
-     * cuckoocache may overwrite the inserted element, so the test is
-     * "future proofed".
+    /** Make a copy of hashes because future optimizations of the cuckoocache
+     *  may overwrite the inserted element, so the test is "future proofed"
      */
-    std::vector<uint256> hashes_insert_copy = hashes;
-    boost::shared_mutex mtx;
+    std::vector< uint256 > hashes_insert_copy = hashes ;
+    std::mutex mtx ;
 
     {
         /** Grab lock to make sure we release inserts */
-        boost::unique_lock<boost::shared_mutex> l(mtx);
+        std::unique_lock< std::mutex > l( mtx ) ;
         /** Insert the first half */
         for (uint32_t i = 0; i < (n_insert / 2); ++i)
             set.insert(hashes_insert_copy[i]);
     }
 
-    /** Spin up 3 threads to run contains with erase.
+    /** Spin up 3 threads to run contains with erase
      */
     std::vector<std::thread> threads;
     /** Erase the first quarter */
@@ -247,7 +243,7 @@ void test_cache_erase_parallel(size_t megabytes)
         /** Each thread is emplaced with x copy-by-value
         */
         threads.emplace_back([&, x] {
-            boost::shared_lock<boost::shared_mutex> l(mtx);
+            std::unique_lock< std::mutex > l( mtx ) ;
             size_t ntodo = (n_insert/4)/3;
             size_t start = ntodo*x;
             size_t end = ntodo*(x+1);
@@ -255,12 +251,11 @@ void test_cache_erase_parallel(size_t megabytes)
                 set.contains(hashes[i], true);
         });
 
-    /** Wait for all threads to finish
-     */
     for (std::thread& t : threads)
         t.join();
+
     /** Grab lock to make sure we observe erases */
-    boost::unique_lock<boost::shared_mutex> l(mtx);
+    std::unique_lock< std::mutex > l( mtx ) ;
     /** Insert the second half */
     for (uint32_t i = (n_insert / 2); i < n_insert; ++i)
         set.insert(hashes_insert_copy[i]);
@@ -360,8 +355,8 @@ void test_cache_generations()
     uint32_t out_of_tight_tolerance = 0;
     uint32_t total = n_insert / BLOCK_SIZE;
     // we use the deque last_few to model a sliding window of blocks. at each
-    // step, each of the last WINDOW_SIZE block_activities checks the cache for
-    // POP_AMOUNT of the hashes that they inserted, and marks these erased.
+    // step, each of the last WINDOW_SIZE block_activities checks the cache
+    // for POP_AMOUNT of the hashes that they inserted, and marks these erased
     for (uint32_t i = 0; i < total; ++i) {
         if (last_few.size() == WINDOW_SIZE)
             last_few.pop_front();
@@ -374,7 +369,7 @@ void test_cache_generations()
             }
         // We use last_few.size() rather than WINDOW_SIZE for the correct
         // behavior on the first WINDOW_SIZE iterations where the deque is not
-        // full yet.
+        // full yet
         double hit = (double(count)) / (last_few.size() * POP_AMOUNT);
         // Loose Check that hit rate is above min_hit_rate
         BOOST_CHECK(hit > min_hit_rate);

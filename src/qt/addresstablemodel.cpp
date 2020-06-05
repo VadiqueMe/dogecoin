@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "addresstablemodel.h"
 
@@ -9,8 +9,6 @@
 
 #include "base58.h"
 #include "wallet/wallet.h"
-
-#include <boost/foreach.hpp>
 
 #include <QFont>
 #include <QDebug>
@@ -55,7 +53,7 @@ struct AddressTableEntryLessThan
 static AddressTableEntry::Type translateTransactionType(const QString &strPurpose, bool isMine)
 {
     AddressTableEntry::Type addressType = AddressTableEntry::Hidden;
-    // "refund" addresses aren't shown, and change addresses aren't in mapAddressBook at all.
+    // "refund" addresses aren't shown, and change addresses aren't in mapAddressBook at all
     if (strPurpose == "send")
         addressType = AddressTableEntry::Sending;
     else if (strPurpose == "receive")
@@ -81,7 +79,7 @@ public:
         cachedAddressTable.clear();
         {
             LOCK(wallet->cs_wallet);
-            BOOST_FOREACH(const PAIRTYPE(CTxDestination, CAddressBookData)& item, wallet->mapAddressBook)
+            for ( const PAIRTYPE( CTxDestination, CAddressBookData ) & item : wallet->mapAddressBook )
             {
                 const CDogecoinAddress & address = item.first ;
                 bool fMine = IsMine(*wallet, address.Get());
@@ -95,7 +93,7 @@ public:
         }
         // qLowerBound() and qUpperBound() require our cachedAddressTable list to be sorted in asc order
         // Even though the map is already sorted this re-sorting step is needed because the originating map
-        // is sorted by binary address, not by base58() address.
+        // is sorted by binary address, not by base58() address
         qSort(cachedAddressTable.begin(), cachedAddressTable.end(), AddressTableEntryLessThan());
     }
 

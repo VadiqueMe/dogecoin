@@ -210,9 +210,7 @@ public:
 
     static bool isWalletEnabled();
 
-    bool hdEnabled() const;
-
-    int getDefaultConfirmTarget() const;
+    bool hdEnabled() const ;
 
 private:
     CWallet * wallet ;

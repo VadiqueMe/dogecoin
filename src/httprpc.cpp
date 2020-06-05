@@ -1,4 +1,5 @@
 // Copyright (c) 2015-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -12,13 +13,16 @@
 #include "random.h"
 #include "sync.h"
 #include "util.h"
+#include "utillog.h"
+#include "utilstr.h"
 #include "utilstrencodings.h"
+#include "utiltime.h"
 #include "ui_interface.h"
 #include "crypto/hmac_sha256.h"
 #include <stdio.h>
 #include "utilstrencodings.h"
 
-#include <boost/algorithm/string.hpp> // boost::trim
+#include <boost/algorithm/string.hpp>
 
 /** WWW-Authenticate to present with 401 Unauthorized response */
 static const char* WWW_AUTH_HEADER_DATA = "Basic realm=\"jsonrpc\"";
@@ -98,9 +102,9 @@ static bool multiUserAuthorized(std::string strUserPass)
         //Search for multi-user login/pass "rpcauth" from config
         for ( std::string strRPCAuth : mapMultiArgs.at( "-rpcauth" ) )
         {
-            std::vector<std::string> vFields;
-            boost::split(vFields, strRPCAuth, boost::is_any_of(":$"));
-            if (vFields.size() != 3) {
+            std::vector< std::string > vFields ;
+            boost::split( vFields, strRPCAuth, boost::is_any_of( ":$" ) ) ;
+            if ( vFields.size() != 3 ) {
                 //Incorrect formatting in config file
                 continue;
             }
@@ -134,9 +138,8 @@ static bool RPCAuthorized(const std::string& strAuth, std::string& strAuthUserna
         return false;
     if (strAuth.substr(0, 6) != "Basic ")
         return false;
-    std::string strUserPass64 = strAuth.substr(6);
-    boost::trim(strUserPass64);
-    std::string strUserPass = DecodeBase64(strUserPass64);
+    std::string strUserPass64 = trimSpaces( strAuth.substr( 6 ) ) ;
+    std::string strUserPass = DecodeBase64( strUserPass64 ) ;
 
     if (strUserPass.find(":") != std::string::npos)
         strAuthUsernameOut = strUserPass.substr(0, strUserPass.find(":"));
@@ -244,11 +247,6 @@ bool StartHTTPRPC()
     httpRPCTimerInterface = new HTTPRPCTimerInterface(EventBase());
     RPCSetTimerInterface(httpRPCTimerInterface);
     return true;
-}
-
-void InterruptHTTPRPC()
-{
-    LogPrintf( "Interrupting HTTP RPC server\n" ) ;
 }
 
 void StopHTTPRPC()

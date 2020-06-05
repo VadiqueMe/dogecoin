@@ -26,8 +26,11 @@ static const bool DEFAULT_WALLET_PRIVDB = true;
 class CDBEnv
 {
 private:
-    bool fDbEnvInit ;
+    bool fDbEnvInitOnce ;
+    bool fDbEnvFinished ;
+
     bool isMockDb ;
+
     // Don't change into boost::filesystem::path, as that can result in
     // shutdown problems/crashes caused by a static-initialized internal pointer
     std::string strPath ;
@@ -55,6 +58,7 @@ public:
                         RECOVER_OK,
                         RECOVER_FAIL } ;
     VerifyResult Verify( const std::string & dbFile, bool ( *recoverFunc )( CDBEnv & dbenv, const std::string & strFile ) ) ;
+
     /**
      * Salvage data from a file that Verify says is bad
      * fAggressive sets the DB_AGGRESSIVE flag (see berkeley DB->verify() method documentation)
@@ -80,7 +84,9 @@ public:
             return NULL;
         return ptxn;
     }
-};
+
+    void stopThread() {  fDbEnvFinished = true ;  }
+} ;
 
 extern CDBEnv walletdb ;
 

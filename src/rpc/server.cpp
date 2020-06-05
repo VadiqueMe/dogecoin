@@ -11,27 +11,27 @@
 #include "random.h"
 #include "sync.h"
 #include "ui_interface.h"
-#include "util.h"
+#include "utillog.h"
 #include "utilstrencodings.h"
+#include "utilthread.h"
 
 #include <univalue.h>
 
 #include <boost/filesystem.hpp>
 #include <boost/signals2/signal.hpp>
-#include <boost/thread.hpp>
 #include <boost/algorithm/string/case_conv.hpp> // for to_upper()
 
-#include <memory> // for unique_ptr
+#include <memory>
 #include <unordered_map>
 
 using namespace RPCServer ;
 
-static bool fRPCRunning = false;
-static bool fRPCInWarmup = true;
-static std::string rpcWarmupStatus("RPC server started");
-static CCriticalSection cs_rpcWarmup;
+static std::atomic< bool > fRPCRunning( false ) ;
+static bool fRPCInWarmup = true ;
+static std::string rpcWarmupStatus( "RPC server started" ) ;
+static CCriticalSection cs_rpcWarmup ;
 /* Timer-creating functions */
-static RPCTimerInterface* timerInterface = NULL;
+static RPCTimerInterface* timerInterface = nullptr ;
 /* Map of name to timer */
 static std::map< std::string, std::unique_ptr< RPCTimerBase > > deadlineTimers ;
 
@@ -266,7 +266,7 @@ UniValue stop( const JSONRPCRequest & jsonRequest )
             "\nStop Dogecoin server." ) ;
     // Event loop will exit after current HTTP requests have been handled, so
     // this reply will get back to the client
-    StartShutdown() ;
+    RequestShutdown() ;
     return "Dogecoin server stopping" ;
 }
 
@@ -322,16 +322,10 @@ bool StartRPC()
     return true ;
 }
 
-void InterruptRPC()
-{
-    LogPrintf( "Interrupting RPC\n" ) ;
-    // Interrupt e.g. running longpolls
-    fRPCRunning = false ;
-}
-
 void StopRPC()
 {
     LogPrintf( "Stopping RPC\n" ) ;
+    fRPCRunning = false ;
     deadlineTimers.clear() ;
     DeleteAuthCookie() ;
     g_rpcSignals.Stopped() ;

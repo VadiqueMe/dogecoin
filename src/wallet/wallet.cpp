@@ -24,22 +24,23 @@
 #include "script/sign.h"
 #include "timedata.h"
 #include "txmempool.h"
-#include "util.h"
 #include "ui_interface.h"
+#include "util.h"
+#include "utilstr.h"
 #include "utilmoneystr.h"
+#include "utilhelp.h"
+#include "utilthread.h"
 
 #include <assert.h>
 
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/filesystem.hpp>
-#include <boost/thread.hpp>
 
 CWallet * pwalletMain = nullptr ;
 
 /** Transaction fee set by the user */
 CFeeRate payTxFee( DEFAULT_TRANSACTION_FEE ) ;
 
-unsigned int nTxConfirmTarget = DEFAULT_TX_CONFIRMATIONS ;
 bool bSpendZeroConfChange = DEFAULT_SPEND_ZEROCONF_CHANGE ;
 bool fSendFreeTransactions = DEFAULT_SEND_FREE_TRANSACTIONS ;
 bool fWalletRbf = DEFAULT_WALLET_RBF ;
@@ -423,15 +424,16 @@ bool CWallet::HasWalletSpend( const uint256 & txid ) const
     return (iter != mapTxSpends.end() && iter->first.hash == txid);
 }
 
-void CWallet::Flush( bool shutdown )
+void CWallet::FlushWallet( bool shutdown )
 {
+    LogPrintf( "CWallet::%s( shutdown=%s )\n", __func__, ( shutdown ? "true" : "false" ) ) ;
     walletdb.Flush( shutdown ) ;
 }
 
 bool CWallet::Verify()
 {
-    if (GetBoolArg("-disablewallet", DEFAULT_DISABLE_WALLET))
-        return true;
+    if ( GetBoolArg( "-disablewallet", false ) )
+        return true ;
 
     LogPrintf("Using BerkeleyDB version %s\n", DbEnv::version(0, 0, 0));
     std::string walletFile = GetArg( "-wallet", DEFAULT_WALLET_FILE ) ;
@@ -940,12 +942,11 @@ bool CWallet::AddToWallet( const CWalletTx& wtxIn, bool fFlushOnClose )
     NotifyTransactionChanged( this, hash, fInsertedNew ? CT_NEW : CT_UPDATED ) ;
 
     // notify an external script when a wallet transaction comes in or is updated
-    std::string strCmd = GetArg("-walletnotify", "");
-
-    if ( !strCmd.empty())
+    std::string strCmd = GetArg( "-walletnotify", "" ) ;
+    if ( ! strCmd.empty() )
     {
         boost::replace_all( strCmd, "%s", wtxIn.GetTxHash().GetHex() ) ;
-        boost::thread t(runCommand, strCmd); // thread runs free
+        std::thread t( runCommand, strCmd ) ; // thread runs free
     }
 
     return true ;
@@ -2541,11 +2542,6 @@ bool CWallet::CreateTransaction( const std::vector< CRecipient > & vecSend,
                     vin.scriptWitness.SetNull();
                 }
 
-                // Allow to override the default confirmation target over the CoinControl instance
-                int currentConfirmationTarget = nTxConfirmTarget ;
-                if (coinControl && coinControl->nConfirmTarget > 0)
-                    currentConfirmationTarget = coinControl->nConfirmTarget;
-
                 // Can we complete this as a free transaction?
                 if ( fSendFreeTransactions && nBytes <= MAX_FREE_TRANSACTION_CREATE_SIZE )
                     break ;
@@ -2641,7 +2637,7 @@ bool CWallet::CommitTransaction( CWalletTx& wtxNew, CReserveKey& reservekey, CCo
 {
     {
         LOCK2( cs_main, cs_wallet ) ;
-        LogPrintf( "CWallet::CommitTransaction\n%s", wtxNew.tx->ToString() ) ;
+        LogPrintf( "CWallet::%s\n%s", __func__, wtxNew.tx->ToString() ) ;
         {
             // Take key pair from key pool so it won't be used again
             reservekey.KeepKey();
@@ -2894,7 +2890,7 @@ bool CWallet::TopUpKeyPool( unsigned int kpSize )
     return true;
 }
 
-void CWallet::ReserveKeyFromKeyPool( int64_t& nIndex, CKeyPool& keypool )
+void CWallet::ReserveKeyFromKeyPool( int64_t & nIndex, CKeyPool & keypool )
 {
     nIndex = -1;
     keypool.vchPubKey = CPubKey();
@@ -2920,7 +2916,7 @@ void CWallet::ReserveKeyFromKeyPool( int64_t& nIndex, CKeyPool& keypool )
         assert( keypool.vchPubKey.IsValid() ) ;
     }
 
-    LogPrintf( "CWallet::ReserveKeyFromKeyPool keypool reserve %d\n", nIndex ) ;
+    LogPrintf( "CWallet::%s keypool reserve %d\n", __func__, nIndex ) ;
 }
 
 void CWallet::KeepKey( int64_t nIndex )
@@ -3169,9 +3165,8 @@ bool CReserveKey::GetReservedKey(CPubKey& pubkey)
         pwallet->ReserveKeyFromKeyPool(nIndex, keypool);
         if (nIndex != -1)
             vchPubKey = keypool.vchPubKey;
-        else {
+        else
             return false;
-        }
     }
     assert(vchPubKey.IsValid());
     pubkey = vchPubKey;
@@ -3400,7 +3395,7 @@ bool CWallet::GetDestData(const CTxDestination &dest, const std::string &key, st
     return false;
 }
 
-std::string CWallet::GetWalletHelpString(bool showDebug)
+std::string CWallet::GetWalletHelpString( bool showDebug )
 {
     std::string strUsage = HelpMessageGroup(_("Wallet options:"));
     strUsage += HelpMessageOpt("-disablewallet", _("Do not load the wallet and disable wallet RPC calls"));
@@ -3408,18 +3403,18 @@ std::string CWallet::GetWalletHelpString(bool showDebug)
     strUsage += HelpMessageOpt( "-paytxfee=<amt>", strprintf(_("Fee (in %s/kB) to add to transactions you send (default: %s)"), NameOfE8Currency(), FormatMoney( payTxFee.GetFeePerKiloByte() )) ) ;
     strUsage += HelpMessageOpt("-rescan", _("Rescan the block chain for missing wallet transactions on startup"));
     strUsage += HelpMessageOpt("-salvagewallet", _("Attempt to recover private keys from a corrupt wallet on startup"));
-    if (showDebug)
-        strUsage += HelpMessageOpt("-sendfreetransactions", strprintf(_("Send transactions as zero-fee transactions if possible (default: %u)"), DEFAULT_SEND_FREE_TRANSACTIONS));
+    strUsage += HelpMessageOpt("-sendfreetransactions", strprintf(_("Send transactions as zero-fee transactions if possible (default: %u)"), DEFAULT_SEND_FREE_TRANSACTIONS));
     strUsage += HelpMessageOpt("-spendzeroconfchange", strprintf(_("Spend unconfirmed change when sending transactions (default: %u)"), DEFAULT_SPEND_ZEROCONF_CHANGE));
-    strUsage += HelpMessageOpt("-txconfirmtarget=<n>", strprintf(_( "If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)" ), DEFAULT_TX_CONFIRMATIONS ));
+    strUsage += HelpMessageOpt( "-txconfirmblocks=<n>", strprintf( _( "Number of blocks (one with the transaction plus more subsequent blocks above it) to count the transaction as confirmed (default: %u)" ), DEFAULT_BLOCKS_TO_CONFIRM_TX ) ) ;
     strUsage += HelpMessageOpt("-usehd", _("Use hierarchical deterministic key generation (HD) after BIP32. Only has effect during wallet creation/first start") + " " + strprintf(_("(default: %u)"), DEFAULT_USE_HD_WALLET));
     strUsage += HelpMessageOpt("-walletrbf", strprintf(_("Send transactions with full-RBF opt-in enabled (default: %u)"), DEFAULT_WALLET_RBF));
     strUsage += HelpMessageOpt("-upgradewallet", _("Upgrade wallet to latest format on startup"));
     strUsage += HelpMessageOpt("-wallet=<file>", _("Specify wallet file (within data directory)") + " " + strprintf(_("(default: %s)"), DEFAULT_WALLET_FILE)) ;
     strUsage += HelpMessageOpt("-walletbroadcast", _("Make the wallet broadcast transactions") + " " + strprintf(_("(default: %u)"), DEFAULT_WALLETBROADCAST));
     strUsage += HelpMessageOpt("-walletnotify=<cmd>", _("Execute command when a wallet transaction changes (%s in cmd is replaced by TxID)"));
-    strUsage += HelpMessageOpt("-zapwallettxes=<mode>", _("Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup") +
-                               " " + _("(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)"));
+    strUsage += HelpMessageOpt( "-zapwallettxes=<mode>",
+                    _("Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup") +
+                    " " + _("(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)") ) ;
 
     if (showDebug)
     {
@@ -3434,7 +3429,7 @@ std::string CWallet::GetWalletHelpString(bool showDebug)
     return strUsage;
 }
 
-CWallet* CWallet::CreateWalletFromFile(const std::string walletFile)
+CWallet* CWallet::CreateWalletFromFile( const std::string & walletFile )
 {
     // needed to restore wallet transaction meta data after -zapwallettxes
     std::vector<CWalletTx> vWtx;
@@ -3442,7 +3437,7 @@ CWallet* CWallet::CreateWalletFromFile(const std::string walletFile)
     if (GetBoolArg("-zapwallettxes", false)) {
         uiInterface.InitMessage(_("Zapping all transactions from wallet..."));
 
-        CWallet *tempWallet = new CWallet(walletFile);
+        CWallet * tempWallet = new CWallet( walletFile ) ;
         DBErrors nZapWalletRet = tempWallet->ZapWalletTx(vWtx);
         if (nZapWalletRet != DB_LOAD_OK) {
             InitError(strprintf(_("Error loading %s: Wallet corrupted"), walletFile));
@@ -3455,10 +3450,11 @@ CWallet* CWallet::CreateWalletFromFile(const std::string walletFile)
 
     uiInterface.InitMessage(_("Loading wallet..."));
 
-    int64_t nStart = GetTimeMillis();
-    bool fFirstRun = true;
-    CWallet *walletInstance = new CWallet(walletFile);
-    DBErrors nLoadWalletRet = walletInstance->LoadWallet(fFirstRun);
+    int64_t nStart = GetTimeMillis() ;
+    CWallet * walletInstance = new CWallet( walletFile ) ;
+
+    bool fFirstRun = true ;
+    DBErrors nLoadWalletRet = walletInstance->LoadWallet( fFirstRun ) ;
     if (nLoadWalletRet != DB_LOAD_OK)
     {
         if (nLoadWalletRet == DB_CORRUPT) {
@@ -3541,8 +3537,8 @@ CWallet* CWallet::CreateWalletFromFile(const std::string walletFile)
 
     RegisterValidationInterface(walletInstance);
 
-    CBlockIndex *pindexRescan = chainActive.Tip();
-    if (GetBoolArg("-rescan", false))
+    CBlockIndex * pindexRescan = chainActive.Tip() ;
+    if ( GetBoolArg( "-rescan", false ) )
         pindexRescan = chainActive.Genesis();
     else
     {
@@ -3618,41 +3614,25 @@ CWallet* CWallet::CreateWalletFromFile(const std::string walletFile)
 
 bool CWallet::InitLoadWallet()
 {
-    if (GetBoolArg("-disablewallet", DEFAULT_DISABLE_WALLET)) {
-        pwalletMain = NULL;
-        LogPrintf("Wallet disabled!\n");
-        return true;
+    if ( GetBoolArg( "-disablewallet", false ) ) {
+        pwalletMain = nullptr ;
+        LogPrintf( "Wallet is disabled by user |:\n" ) ;
+        return true ;
     }
 
     std::string walletFile = GetArg( "-wallet", DEFAULT_WALLET_FILE ) ;
 
     CWallet * const pwallet = CreateWalletFromFile(walletFile);
-    if (!pwallet) {
-        return false;
-    }
-    pwalletMain = pwallet;
+    if ( pwallet == nullptr ) return false ;
+    pwalletMain = pwallet ;
 
-    return true;
+    return true ;
 }
 
-std::atomic<bool> CWallet::fFlushThreadRunning(false);
-
-void CWallet::postInitProcess(boost::thread_group& threadGroup)
+bool CWallet::ParseParameters()
 {
-    // Add wallet transactions that aren't already in a block to mempool
-    // Do this here as mempool requires genesis block to be loaded
-    ReacceptWalletTransactions();
-
-    // Run a thread to flush wallet periodically
-    if (!CWallet::fFlushThreadRunning.exchange(true)) {
-        threadGroup.create_thread(ThreadFlushWalletDB);
-    }
-}
-
-bool CWallet::ParameterInteraction()
-{
-    if (GetBoolArg("-disablewallet", DEFAULT_DISABLE_WALLET))
-        return true;
+    if ( GetBoolArg( "-disablewallet", false ) )
+        return true ;
 
     if (GetBoolArg("-blocksonly", DEFAULT_BLOCKSONLY) && SoftSetBoolArg("-walletbroadcast", false)) {
         LogPrintf("%s: parameter interaction: -blocksonly=1 -> setting -walletbroadcast=0\n", __func__);
@@ -3693,10 +3673,10 @@ bool CWallet::ParameterInteraction()
             InitWarning(_("-maxtxfee is set very high! Fees this large could be paid on a single transaction."));
         maxTxFee = nMaxFee ;
     }
-    nTxConfirmTarget = GetArg( "-txconfirmtarget", DEFAULT_TX_CONFIRMATIONS );
-    bSpendZeroConfChange = GetBoolArg("-spendzeroconfchange", DEFAULT_SPEND_ZEROCONF_CHANGE);
-    fSendFreeTransactions = GetBoolArg("-sendfreetransactions", DEFAULT_SEND_FREE_TRANSACTIONS);
-    fWalletRbf = GetBoolArg("-walletrbf", DEFAULT_WALLET_RBF);
+
+    bSpendZeroConfChange = GetBoolArg( "-spendzeroconfchange", DEFAULT_SPEND_ZEROCONF_CHANGE ) ;
+    fSendFreeTransactions = GetBoolArg( "-sendfreetransactions", DEFAULT_SEND_FREE_TRANSACTIONS ) ;
+    fWalletRbf = GetBoolArg( "-walletrbf", DEFAULT_WALLET_RBF ) ;
 
     if ( fSendFreeTransactions && GetArg("-limitfreerelay", DEFAULT_LIMITFREERELAY) <= 0 )
         return InitError( "Creation of free transactions without their relay is not such nice, bye" );
@@ -3704,10 +3684,25 @@ bool CWallet::ParameterInteraction()
     return true;
 }
 
-bool CWallet::BackupWallet(const std::string& strDest)
+std::atomic< bool > CWallet::fFlushThreadRunning( false ) ;
+
+void CWallet::postInitProcess( std::vector< std::thread > & threads )
 {
-    if (!fFileBacked)
-        return false;
+    // Add wallet transactions that aren't already in a block to mempool
+    // Do this here as mempool requires genesis block to be loaded
+    ReacceptWalletTransactions() ;
+
+    // Run a thread to flush wallet periodically
+    if ( ! CWallet::fFlushThreadRunning.exchange( true ) )
+        threads.push_back( std::thread(
+                std::bind( &TraceThread< std::function< void() > >, "wallet-flush", &ThreadFlushWalletDB )
+          ) ) ;
+}
+
+bool CWallet::BackupWallet( const std::string & strDest )
+{
+    if ( ! fFileBacked ) return false ;
+
     while (true)
     {
         {

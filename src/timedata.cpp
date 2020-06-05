@@ -12,11 +12,14 @@
 #include "sync.h"
 #include "ui_interface.h"
 #include "util.h"
+#include "utillog.h"
+#include "utilstr.h"
 #include "utilstrencodings.h"
+#include "utiltime.h"
 #include "warnings.h"
 
-static CCriticalSection cs_nTimeOffset;
-static int64_t nTimeOffset = 0;
+static CCriticalSection cs_nTimeOffset ;
+static int64_t nTimeOffset = 0 ;
 
 /**
  * "Never go to sea with two chronometers; take one or three."

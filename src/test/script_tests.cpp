@@ -1,8 +1,7 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
-
-#include "data/script_tests.json.h"
 
 #include "core_io.h"
 #include "key.h"
@@ -24,18 +23,19 @@
 #include <string>
 #include <vector>
 
-#include <boost/foreach.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <univalue.h>
 
-// Uncomment if you want to output updated JSON tests.
-// #define UPDATE_JSON_TESTS
+#include "data/script_tests.json.h"
 
-static const unsigned int flags = SCRIPT_VERIFY_P2SH | SCRIPT_VERIFY_STRICTENC;
+// (comment)uncomment if you (don't) want to output updated JSON tests
+#define UPDATE_JSON_TESTS
 
-unsigned int ParseScriptFlags(std::string strFlags);
-std::string FormatScriptFlags(unsigned int flags);
+static const unsigned int flags = SCRIPT_VERIFY_P2SH | SCRIPT_VERIFY_STRICTENC ;
+
+unsigned int ParseScriptFlags( const std::string & strFlags ) ; // from transaction_tests.cpp
+std::string FormatScriptFlags( unsigned int flags ) ;
 
 UniValue
 read_json(const std::string& jsondata)
@@ -932,9 +932,9 @@ BOOST_AUTO_TEST_CASE(script_build)
 
     std::string strGen;
 
-    BOOST_FOREACH(TestBuilder& test, tests) {
-        test.Test();
-        std::string str = JSONPrettyPrint(test.GetJSON());
+    for ( TestBuilder & test : tests ) {
+        test.Test() ;
+        std::string str = JSONPrettyPrint( test.GetJSON() ) ;
 #ifndef UPDATE_JSON_TESTS
         if (tests_set.count(str) == 0) {
             BOOST_CHECK_MESSAGE(false, "Missing auto script_valid test: " + test.GetComment());
@@ -1038,7 +1038,7 @@ sign_multisig(CScript scriptPubKey, std::vector<CKey> keys, CTransaction transac
     // and vice-versa)
     //
     result << OP_0;
-    BOOST_FOREACH(const CKey &key, keys)
+    for ( const CKey & key : keys )
     {
         std::vector<unsigned char> vchSig;
         BOOST_CHECK(key.Sign(hash, vchSig));

@@ -12,7 +12,7 @@
 #include "arith_uint256.h"
 #include "dogecoin.h"
 #include "txmempool.h"
-#include "util.h"
+#include "utillog.h"
 #include "validation.h"
 
 int static generateMTRandom(unsigned int s, int range)

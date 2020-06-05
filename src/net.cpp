@@ -21,7 +21,11 @@
 #include "netbase.h"
 #include "scheduler.h"
 #include "ui_interface.h"
+#include "util.h"
+#include "utilstr.h"
 #include "utilstrencodings.h"
+#include "utilthread.h"
+#include "utiltime.h"
 
 #ifdef WIN32
 #include <string.h>
@@ -35,7 +39,6 @@
 #include <miniupnpc/upnpcommands.h>
 #include <miniupnpc/upnperrors.h>
 #endif
-
 
 #include <math.h>
 
@@ -67,7 +70,7 @@ static const uint64_t RANDOMIZER_ID_LOCALHOSTNONCE = 0xd93e69e2bbfa5735ULL; // S
 //
 // Global state variables
 //
-bool fDiscover = true;
+bool fDiscoverIP = true ;
 bool fListen = true;
 bool fRelayTxes = true;
 CCriticalSection cs_mapLocalHost;
@@ -141,7 +144,7 @@ static std::vector<CAddress> convertSeed6(const std::vector<SeedSpec6> &vSeedsIn
 // get best local address for a particular peer as a CAddress
 // Otherwise, return the unroutable 0.0.0.0 but filled in with
 // the normal parameters, since the IP may be changed to a useful
-// one by discovery.
+// one by discovery
 CAddress GetLocalAddress(const CNetAddr *paddrPeer, ServiceFlags nLocalServices)
 {
     CAddress ret(CService(CNetAddr(),GetListenPort()), nLocalServices);
@@ -166,7 +169,7 @@ int GetnScore(const CService& addr)
 bool IsPeerAddrLocalGood(CNode *pnode)
 {
     CService addrLocal = pnode->GetAddrLocal();
-    return fDiscover && pnode->addr.IsRoutable() && addrLocal.IsRoutable() &&
+    return fDiscoverIP && pnode->addr.IsRoutable() && addrLocal.IsRoutable() &&
            !IsLimited(addrLocal.GetNetwork());
 }
 
@@ -178,7 +181,7 @@ void AdvertiseLocal(CNode *pnode)
         CAddress addrLocal = GetLocalAddress(&pnode->addr, pnode->GetLocalServices());
         // If discovery is enabled, sometimes give our peer the address it
         // tells us that it sees us as in case it has a better idea of our
-        // address than we do.
+        // address than we do
         if (IsPeerAddrLocalGood(pnode) && (!addrLocal.IsRoutable() ||
              GetRand((GetnScore(addrLocal) > LOCAL_MANUAL) ? 8:2) == 0))
         {
@@ -196,14 +199,14 @@ void AdvertiseLocal(CNode *pnode)
 // learn a new local address
 bool AddLocal(const CService& addr, int nScore)
 {
-    if (!addr.IsRoutable())
-        return false;
+    if ( ! addr.IsRoutable() )
+        return false ;
 
-    if (!fDiscover && nScore < LOCAL_MANUAL)
-        return false;
+    if ( ! fDiscoverIP && nScore < LOCAL_MANUAL )
+        return false ;
 
-    if (IsLimited(addr))
-        return false;
+    if ( IsLimited( addr ) )
+        return false ;
 
     LogPrintf("AddLocal(%s,%i)\n", addr.ToString(), nScore);
 
@@ -1458,7 +1461,7 @@ void ThreadMapPort()
     r = UPNP_GetValidIGD(devlist, &urls, &data, lanaddr, sizeof(lanaddr));
     if (r == 1)
     {
-        if (fDiscover) {
+        if ( fDiscoverIP ) {
             char externalIPAddress[40];
             r = UPNP_GetExternalIPAddress(urls.controlURL, data.first.servicetype, externalIPAddress);
             if(r != UPNPCOMMAND_SUCCESS)
@@ -1492,56 +1495,54 @@ void ThreadMapPort()
                                     port.c_str(), port.c_str(), lanaddr, strDesc.c_str(), "TCP", 0, "0");
 #endif
 
-                if(r!=UPNPCOMMAND_SUCCESS)
-                    LogPrintf("AddPortMapping(%s, %s, %s) failed with code %d (%s)\n",
-                        port, port, lanaddr, r, strupnperror(r));
+                if ( r != UPNPCOMMAND_SUCCESS )
+                    LogPrintf( "%s: AddPortMapping(%s, %s, %s) failed with code %d (%s)\n", __func__,
+                                port, port, lanaddr, r, strupnperror( r ) ) ;
                 else
-                    LogPrintf("UPnP Port Mapping successful.\n");
+                    LogPrintf( "%s: UPnP Port Mapping successful\n", __func__ ) ;
 
-                MilliSleep(20*60*1000); // Refresh every 20 minutes
+                MilliSleep( 12 * 60 * 1000 ) ; // refresh every 12 minutes
             }
         }
-        catch (const boost::thread_interrupted&)
-        {
-            r = UPNP_DeletePortMapping(urls.controlURL, data.first.servicetype, port.c_str(), "TCP", 0);
-            LogPrintf("UPNP_DeletePortMapping() returned: %d\n", r);
-            freeUPNPDevlist(devlist); devlist = 0;
-            FreeUPNPUrls(&urls);
-            throw;
+        catch ( const std::string & s ) {
+            if ( s == "stopthread" ) {
+                r = UPNP_DeletePortMapping( urls.controlURL, data.first.servicetype, port.c_str(), "TCP", 0 ) ;
+                LogPrintf( "UPNP_DeletePortMapping() returned %d (%s)\n", r, strupnperror( r ) ) ;
+                freeUPNPDevlist( devlist ) ; devlist = nullptr ;
+                FreeUPNPUrls( &urls ) ;
+            }
+            throw ;
         }
     } else {
-        LogPrintf("No valid UPnP IGDs found\n");
-        freeUPNPDevlist(devlist); devlist = 0;
-        if (r != 0)
-            FreeUPNPUrls(&urls);
+        LogPrintf( "%s: No valid UPnP IGDs found\n", __func__ ) ;
+        freeUPNPDevlist( devlist ); devlist = nullptr ;
+        if ( r != 0 ) FreeUPNPUrls( &urls ) ;
     }
 }
 
 void MapPort(bool fUseUPnP)
 {
-    static boost::thread* upnp_thread = NULL;
+    static std::thread * upnp_thread = nullptr ;
 
-    if (fUseUPnP)
+    if ( fUseUPnP )
     {
-        if (upnp_thread) {
-            upnp_thread->interrupt();
-            upnp_thread->join();
-            delete upnp_thread;
+        if ( upnp_thread != nullptr ) {
+            upnp_thread->join() ;
+            delete upnp_thread ;
         }
-        upnp_thread = new boost::thread(boost::bind(&TraceThread<void (*)()>, "upnp", &ThreadMapPort));
+        upnp_thread = new std::thread( std::bind( &TraceThread< std::function< void() > >, "upnp", &ThreadMapPort ) ) ;
     }
-    else if (upnp_thread) {
-        upnp_thread->interrupt();
-        upnp_thread->join();
-        delete upnp_thread;
-        upnp_thread = NULL;
+    else if ( upnp_thread != nullptr ) {
+        upnp_thread->join() ;
+        delete upnp_thread ;
+        upnp_thread = nullptr ;
     }
 }
 
 #else
 void MapPort(bool)
 {
-    // Intentionally left blank.
+    // Intentionally left blank
 }
 #endif
 
@@ -2114,19 +2115,17 @@ bool CConnman::BindListenPort(const CService &addrBind, std::string& strError, b
 
     vhListenSocket.push_back(ListenSocket(hListenSocket, fWhitelisted));
 
-    if (addrBind.IsRoutable() && fDiscover && !fWhitelisted)
-        AddLocal(addrBind, LOCAL_BIND);
+    if ( addrBind.IsRoutable() && fDiscoverIP && ! fWhitelisted )
+        AddLocal( addrBind, LOCAL_BIND ) ;
 
     return true;
 }
 
-void Discover(boost::thread_group& threadGroup)
+void DiscoverLocalhostIP()
 {
-    if (!fDiscover)
-        return;
+    if ( ! fDiscoverIP ) return;
 
 #ifdef WIN32
-    // Get local host IP
     char pszHostName[256] = "";
     if (gethostname(pszHostName, sizeof(pszHostName)) != SOCKET_ERROR)
     {
@@ -2141,7 +2140,6 @@ void Discover(boost::thread_group& threadGroup)
         }
     }
 #else
-    // Get local host ip
     struct ifaddrs* myaddrs;
     if (getifaddrs(&myaddrs) == 0)
     {
@@ -2297,7 +2295,11 @@ bool CConnman::Start(CScheduler& scheduler, std::string& strNodeError, Options c
     }
 
     // Send and receive from sockets, accept connections
-    threadSocketHandler = std::thread(&TraceThread<std::function<void()> >, "net", std::function<void()>(std::bind(&CConnman::ThreadSocketHandler, this)));
+    threadSocketHandler = std::thread(
+                                &TraceThread< std::function< void() > >,
+                                "net",
+                                std::function< void() >( std::bind( &CConnman::ThreadSocketHandler, this ) )
+                          ) ;
 
     if (!GetBoolArg("-dnsseed", true))
         LogPrintf("DNS seeding disabled\n");
@@ -2315,7 +2317,7 @@ bool CConnman::Start(CScheduler& scheduler, std::string& strNodeError, Options c
     threadMessageHandler = std::thread(&TraceThread<std::function<void()> >, "msghand", std::function<void()>(std::bind(&CConnman::ThreadMessageHandler, this)));
 
     // Dump network addresses
-    scheduler.scheduleEvery(boost::bind(&CConnman::DumpData, this), DUMP_ADDRESSES_INTERVAL);
+    scheduler.scheduleEvery( std::bind( &CConnman::DumpData, this ), DUMP_ADDRESSES_INTERVAL ) ;
 
     return true;
 }

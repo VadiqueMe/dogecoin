@@ -72,11 +72,11 @@ Options when installing required Boost library files:
 individual boost development packages, so the following can be used to only
 install necessary parts of boost:
 
-        sudo apt-get install libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
+    sudo apt-get install libboost-system-dev libboost-filesystem-dev libboost-program-options-dev libboost-test-dev
 
 2. If that doesn't work, you can install all boost development packages with:
 
-        sudo apt-get install libboost-all-dev
+    sudo apt-get install libboost-all-dev
 
 BerkeleyDB is required for the wallet
 

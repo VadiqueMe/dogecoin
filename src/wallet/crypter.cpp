@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "crypter.h"
 
@@ -8,18 +8,17 @@
 #include "crypto/sha512.h"
 #include "script/script.h"
 #include "script/standard.h"
-#include "util.h"
+#include "utillog.h"
 
 #include <string>
 #include <vector>
-#include <boost/foreach.hpp>
 
 int CCrypter::BytesToKeySHA512AES(const std::vector<unsigned char>& chSalt, const SecureString& strKeyData, int count, unsigned char *key,unsigned char *iv) const
 {
     // This mimics the behavior of openssl's EVP_BytesToKey with an aes256cbc
     // cipher and sha512 message digest. Because sha512's output size (64b) is
     // greater than the aes256 block size (16b) + aes256 key size (32b),
-    // there's no need to process more than once (D_0).
+    // there's no need to process more than once (D_0)
 
     if(!count || !key || !iv)
         return 0;
@@ -194,7 +193,7 @@ bool CCryptoKeyStore::Unlock(const CKeyingMaterial& vMasterKeyIn)
         }
         if (keyPass && keyFail)
         {
-            LogPrintf("The wallet is probably corrupted: Some keys decrypt but not all.\n");
+            LogPrintf( "The wallet is probably corrupted: Some keys decrypt but not all\n" ) ;
             assert(false);
         }
         if (keyFail || !keyPass)
@@ -285,7 +284,7 @@ bool CCryptoKeyStore::EncryptKeys(CKeyingMaterial& vMasterKeyIn)
             return false;
 
         fUseCrypto = true;
-        BOOST_FOREACH(KeyMap::value_type& mKey, mapKeys)
+        for ( KeyMap::value_type & mKey : mapKeys )
         {
             const CKey &key = mKey.second;
             CPubKey vchPubKey = key.GetPubKey();

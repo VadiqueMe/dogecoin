@@ -19,14 +19,13 @@
 #include "sync.h"
 #include "txmempool.h"
 #include "util.h"
+#include "utillog.h"
 #include "utilstrencodings.h"
 #include "hash.h"
 
 #include <stdint.h>
 
 #include <univalue.h>
-
-#include <boost/thread/thread.hpp> // boost::thread::interrupt
 
 #include <mutex>
 #include <condition_variable>
@@ -775,7 +774,7 @@ struct CCoinsStats
     arith_uint256 nTotalAmount;
 
     CCoinsStats() : nHeight(0), nTransactions(0), nTransactionOutputs(0), nSerializedSize(0), nTotalAmount(0) {}
-};
+} ;
 
 // Calculate statistics about the unspent transaction output set
 static bool GetUTXOStats( AbstractCoinsView * view, CCoinsStats & stats )
@@ -790,11 +789,11 @@ static bool GetUTXOStats( AbstractCoinsView * view, CCoinsStats & stats )
     }
     ss << stats.hashBlock;
     arith_uint256 nTotalAmount = 0;
-    while (pcursor->Valid()) {
-        boost::this_thread::interruption_point();
-        uint256 key;
-        CCoins coins;
-        if (pcursor->GetKey(key) && pcursor->GetValue(coins)) {
+    while ( pcursor->Valid() ) {
+        if ( ! IsRPCRunning() ) return false ;
+        uint256 key ;
+        CCoins coins ;
+        if ( pcursor->GetKey( key ) && pcursor->GetValue( coins ) ) {
             stats.nTransactions++;
             ss << key;
             for (unsigned int i=0; i<coins.vout.size(); i++) {
@@ -893,7 +892,7 @@ UniValue gettxoutsetinfo(const JSONRPCRequest& request)
 
     CCoinsStats stats;
     FlushStateToDisk();
-    if (GetUTXOStats(pcoinsTip, stats)) {
+    if ( GetUTXOStats( pcoinsTip, stats ) ) {
         ret.push_back(Pair("height", (int64_t)stats.nHeight));
         ret.push_back(Pair("bestblock", stats.hashBlock.GetHex()));
         ret.push_back(Pair("transactions", (int64_t)stats.nTransactions));
@@ -1012,7 +1011,7 @@ UniValue verifychain(const JSONRPCRequest& request)
     if (request.params.size() > 1)
         nCheckDepth = request.params[1].get_int();
 
-    return CVerifyDB().VerifyDB(Params(), pcoinsTip, nCheckLevel, nCheckDepth);
+    return WVerifyDB().VerifyDB( Params(), pcoinsTip, nCheckLevel, nCheckDepth ) ;
 }
 
 /** Implementation of IsSuperMajority with better feedback */

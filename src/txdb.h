@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -10,12 +11,12 @@
 #include "dbwrapper.h"
 #include "chain.h"
 
+#include <atomic>
+#include <functional>
 #include <map>
 #include <string>
 #include <utility>
 #include <vector>
-
-#include <boost/function.hpp>
 
 class CBlockIndex;
 class CCoinsViewDBCursor;
@@ -123,7 +124,7 @@ public:
     bool WriteTxIndex(const std::vector<std::pair<uint256, CDiskTxPos> > &list);
     bool WriteFlag(const std::string &name, bool fValue);
     bool ReadFlag(const std::string &name, bool &fValue);
-    bool LoadBlockIndexGuts(boost::function<CBlockIndex*(const uint256&)> insertBlockIndex);
+    bool LoadBlockIndexGuts( std::function< CBlockIndex*( const uint256 & ) > insertBlockIndex, const std::atomic< bool > & running ) ;
 };
 
 #endif

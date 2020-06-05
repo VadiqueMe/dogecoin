@@ -11,6 +11,7 @@
 
 #include "unitsofcoin.h"
 #include "guiutil.h"
+#include "util.h"
 
 #include "amount.h"
 #include "init.h"

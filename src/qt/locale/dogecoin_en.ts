@@ -122,7 +122,7 @@
 <context>
     <name>AddressTableModel</name>
     <message>
-        <location filename="../addresstablemodel.cpp" line="+170"/>
+        <location filename="../addresstablemodel.cpp" line="+168"/>
         <source>Label</source>
         <translation type="unfinished"></translation>
     </message>
@@ -310,49 +310,49 @@
     </message>
     <message>
         <location line="+26"/>
-        <source>Attempting to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network</source>
+        <source>Trying to spend dogecoins that are affected by not-yet-displayed transactions will not be accepted by the network</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+79"/>
+        <location line="+76"/>
         <source>Number of blocks left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+13"/>
-        <location line="+26"/>
+        <location line="+16"/>
+        <location line="+29"/>
         <location filename="../chainsyncoverlay.cpp" line="+137"/>
         <source>Unknown...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-13"/>
+        <location line="-16"/>
         <source>Last block time</source>
         <translation type="unfinished">Last block time</translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="+29"/>
         <source>Progress</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+56"/>
+        <location line="+75"/>
         <source>Progress increase per hour</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+13"/>
-        <location line="+26"/>
+        <location line="+16"/>
+        <location line="+29"/>
         <source>calculating...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-13"/>
+        <location line="-16"/>
         <source>Estimated time left until synced</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+43"/>
+        <location line="+46"/>
         <source>Hide</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1050,7 +1050,7 @@
 <context>
     <name>HelpMessageDialog</name>
     <message>
-        <location filename="../utilitydialog.cpp" line="+72"/>
+        <location filename="../utilitydialog.cpp" line="+73"/>
         <source>version</source>
         <translation type="unfinished">version</translation>
     </message>
@@ -1455,7 +1455,7 @@
         <translation>&amp;Cancel</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.cpp" line="+84"/>
+        <location filename="../optionsdialog.cpp" line="+83"/>
         <source>default</source>
         <translation>default</translation>
     </message>
@@ -1772,7 +1772,7 @@
 <context>
     <name>PaymentServer</name>
     <message>
-        <location filename="../paymentserver.cpp" line="+317"/>
+        <location filename="../paymentserver.cpp" line="+318"/>
         <location line="+212"/>
         <location line="+148"/>
         <location line="+14"/>
@@ -1915,7 +1915,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../guiutil.cpp" line="+232"/>
+        <location filename="../guiutil.cpp" line="+234"/>
         <source>Amount</source>
         <translation type="unfinished">Amount</translation>
     </message>
@@ -2104,7 +2104,7 @@
     </message>
     <message>
         <location line="+479"/>
-        <location filename="../rpcconsole.cpp" line="+1300"/>
+        <location filename="../rpcconsole.cpp" line="+1301"/>
         <source>Received</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2537,7 +2537,7 @@
     <name>SendCoinsDialog</name>
     <message>
         <location filename="../forms/sendcoinsdialog.ui" line="+14"/>
-        <location filename="../sendcoinsdialog.cpp" line="+520"/>
+        <location filename="../sendcoinsdialog.cpp" line="+519"/>
         <source>Send Coins</source>
         <translation>Send Coins</translation>
     </message>
@@ -2652,7 +2652,7 @@
         <translation>S&amp;end</translation>
     </message>
     <message>
-        <location filename="../sendcoinsdialog.cpp" line="-451"/>
+        <location filename="../sendcoinsdialog.cpp" line="-450"/>
         <source>Copy quantity</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2682,7 +2682,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+162"/>
+        <location line="+161"/>
         <location line="+5"/>
         <location line="+5"/>
         <location line="+4"/>
@@ -3610,7 +3610,7 @@
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <location filename="../gui.cpp" line="+130"/>
+        <location filename="../gui.cpp" line="+128"/>
         <source>Unit to show amounts in. Click to choose another unit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3823,11 +3823,6 @@
     </message>
     <message>
         <location line="+3"/>
-        <source>If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
         <source>Maintain a full transaction index, used by the getrawtransaction rpc call (default: %u)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3844,6 +3839,11 @@
     <message>
         <location line="+3"/>
         <source>Maximum total fees (in %s) to use in a single wallet transaction or raw transaction; setting this too low may abort large transactions (default: %s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Number of blocks (one with the transaction plus more subsequent blocks above it) to count the transaction as confirmed (default: %u)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

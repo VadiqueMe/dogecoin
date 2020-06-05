@@ -8,7 +8,6 @@
 #include "consensus/merkle.h"
 
 #include "tinyformat.h"
-#include "util.h"
 #include "utilstrencodings.h"
 #include "arith_uint256.h"
 #include "base58.h"

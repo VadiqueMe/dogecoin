@@ -1,55 +1,48 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_SYNC_H
-#define BITCOIN_SYNC_H
+#ifndef DOGECOIN_SYNC_H
+#define DOGECOIN_SYNC_H
 
 #include "threadsafety.h"
 
-#include <boost/thread/condition_variable.hpp>
-#include <boost/thread/locks.hpp>
-#include <boost/thread/mutex.hpp>
-#include <boost/thread/recursive_mutex.hpp>
+#include <mutex>
+#include <condition_variable>
 
-
-////////////////////////////////////////////////
-//                                            //
-// THE SIMPLE DEFINITION, EXCLUDING DEBUG CODE //
-//                                            //
-////////////////////////////////////////////////
+//
+// THE SIMPLE DEFINITION, EXCLUDING DEBUG CODE
+//
 
 /*
-CCriticalSection mutex;
-    boost::recursive_mutex mutex;
+CCriticalSection mutex ;
+    std::recursive_mutex mutex ;
 
-LOCK(mutex);
-    boost::unique_lock<boost::recursive_mutex> criticalblock(mutex);
+LOCK( mutex ) ;
+    std::unique_lock< std::recursive_mutex > criticalblock( mutex ) ;
 
-LOCK2(mutex1, mutex2);
-    boost::unique_lock<boost::recursive_mutex> criticalblock1(mutex1);
-    boost::unique_lock<boost::recursive_mutex> criticalblock2(mutex2);
+LOCK2( mutex1, mutex2 ) ;
+    std::unique_lock< std::recursive_mutex > criticalblock1( mutex1 ) ;
+    std::unique_lock< std::recursive_mutex > criticalblock2( mutex2 ) ;
 
-TRY_LOCK(mutex, name);
-    boost::unique_lock<boost::recursive_mutex> name(mutex, boost::try_to_lock_t);
+TRY_LOCK( mutex, name ) ;
+    std::unique_lock< std::recursive_mutex > name( mutex, std::try_to_lock_t ) ;
 
-ENTER_CRITICAL_SECTION(mutex); // no RAII
-    mutex.lock();
+ENTER_CRITICAL_SECTION( mutex ) ; // no RAII
+    mutex.lock() ;
 
-LEAVE_CRITICAL_SECTION(mutex); // no RAII
-    mutex.unlock();
+LEAVE_CRITICAL_SECTION( mutex ) ; // no RAII
+    mutex.unlock() ;
  */
 
-///////////////////////////////
-//                           //
-// THE ACTUAL IMPLEMENTATION //
-//                           //
-///////////////////////////////
+//
+// THE ACTUAL IMPLEMENTATION
+//
 
 /**
  * Template mixin that adds -Wthread-safety locking
- * annotations to a subset of the mutex API.
+ * annotations to a subset of the mutex API
  */
 template <typename PARENT>
 class LOCKABLE AnnotatedMixin : public PARENT
@@ -86,10 +79,10 @@ void static inline DeleteLock(void* cs) {}
 #define AssertLockHeld(cs) AssertLockHeldInternal(#cs, __FILE__, __LINE__, &cs)
 
 /**
- * Wrapped boost mutex: supports recursive locking, but no waiting
- * TODO: We should move away from using the recursive lock by default.
+ * Wrapped mutex: supports recursive locking, but no waiting
+ * TODO: We should move away from using the recursive lock by default
  */
-class CCriticalSection : public AnnotatedMixin<boost::recursive_mutex>
+class CCriticalSection : public AnnotatedMixin< std::recursive_mutex >
 {
 public:
     ~CCriticalSection() {
@@ -97,23 +90,21 @@ public:
     }
 };
 
-typedef CCriticalSection CDynamicCriticalSection;
-/** Wrapped boost mutex: supports waiting but not recursive locking */
-typedef AnnotatedMixin<boost::mutex> CWaitableCriticalSection;
+typedef CCriticalSection CDynamicCriticalSection ;
 
-/** Just a typedef for boost::condition_variable, can be wrapped later if desired */
-typedef boost::condition_variable CConditionVariable;
+/** Wrapped mutex: supports waiting but not recursive locking */
+typedef AnnotatedMixin< std::mutex > CWaitableCriticalSection ;
 
 #ifdef DEBUG_LOCKCONTENTION
 void PrintLockContention(const char* pszName, const char* pszFile, int nLine);
 #endif
 
-/** Wrapper around boost::unique_lock<Mutex> */
-template <typename Mutex>
+/** Wrapper around std::unique_lock< Mutex > */
+template < typename Mutex >
 class SCOPED_LOCKABLE CMutexLock
 {
 private:
-    boost::unique_lock<Mutex> lock;
+    std::unique_lock< Mutex > lock ;
 
     void Enter(const char* pszName, const char* pszFile, int nLine)
     {
@@ -138,7 +129,8 @@ private:
     }
 
 public:
-    CMutexLock(Mutex& mutexIn, const char* pszName, const char* pszFile, int nLine, bool fTry = false) EXCLUSIVE_LOCK_FUNCTION(mutexIn) : lock(mutexIn, boost::defer_lock)
+    CMutexLock( Mutex & mutexIn, const char* pszName, const char* pszFile, int nLine, bool fTry = false )
+        EXCLUSIVE_LOCK_FUNCTION( mutexIn ) : lock( mutexIn, std::defer_lock )
     {
         if (fTry)
             TryEnter(pszName, pszFile, nLine);
@@ -150,7 +142,7 @@ public:
     {
         if (!pmutexIn) return;
 
-        lock = boost::unique_lock<Mutex>(*pmutexIn, boost::defer_lock);
+        lock = std::unique_lock< Mutex >( *pmutexIn, std::defer_lock ) ;
         if (fTry)
             TryEnter(pszName, pszFile, nLine);
         else
@@ -169,7 +161,7 @@ public:
     }
 };
 
-typedef CMutexLock<CCriticalSection> CCriticalBlock;
+typedef CMutexLock< CCriticalSection > CCriticalBlock ;
 
 #define PASTE(x, y) x ## y
 #define PASTE2(x, y) PASTE(x, y)
@@ -193,36 +185,35 @@ typedef CMutexLock<CCriticalSection> CCriticalBlock;
 class CSemaphore
 {
 private:
-    boost::condition_variable condition;
-    boost::mutex mutex;
-    int value;
+    std::condition_variable condition ;
+    std::mutex mutex ;
+    int value ;
 
 public:
     CSemaphore(int init) : value(init) {}
 
     void wait()
     {
-        boost::unique_lock<boost::mutex> lock(mutex);
-        while (value < 1) {
-            condition.wait(lock);
+        std::unique_lock< std::mutex > lock( mutex ) ;
+        while ( value < 1 ) {
+            condition.wait( lock ) ;
         }
-        value--;
+        value -- ;
     }
 
     bool try_wait()
     {
-        boost::unique_lock<boost::mutex> lock(mutex);
-        if (value < 1)
-            return false;
-        value--;
-        return true;
+        std::unique_lock< std::mutex > lock( mutex ) ;
+        if ( value < 1 ) return false ;
+        value -- ;
+        return true ;
     }
 
     void post()
     {
         {
-            boost::unique_lock<boost::mutex> lock(mutex);
-            value++;
+            std::unique_lock< std::mutex > lock( mutex ) ;
+            value ++ ;
         }
         condition.notify_one();
     }
@@ -288,4 +279,4 @@ public:
     }
 };
 
-#endif // BITCOIN_SYNC_H
+#endif

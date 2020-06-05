@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -8,24 +8,17 @@
 #define DOGECOIN_INIT_H
 
 #include <string>
+#include <thread>
+#include <vector>
 
-class CScheduler;
-class CWallet;
+class CScheduler ;
+class CWallet ;
 
-namespace boost
-{
-class thread_group;
-} // namespace boost
-
-void StartShutdown();
-bool ShutdownRequested();
-/** Interrupt threads */
-void Interrupt(boost::thread_group& threadGroup);
-void Shutdown();
-//!Initialize the logging infrastructure
-void InitLogging();
-//!Parameter interaction: change current parameters depending on various rules
-void InitParameterInteraction();
+void StopAndJoinThreads( std::vector< std::thread > & threads ) ;
+void Shutdown() ;
+void InitLogging() ;
+//!Parameter interaction: change parameters depending on other parameters
+void InitParameterInteraction() ;
 
 /** Initialize bitcoin core: Basic context setup
  *  @note This can be done before daemonization
@@ -45,11 +38,11 @@ bool AppInitParameterInteraction();
  */
 bool AppInitSanityChecks();
 /**
- * Bitcoin core main initialization
+ * Main initialization
  * @note This should only be done after daemonization
  * @pre Parameters should be parsed and config file should be read, AppInitSanityChecks should have been called
  */
-bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler);
+bool AppInitMain( std::vector< std::thread > & threads, CScheduler & scheduler ) ;
 
 /** Determines what help message to show */
 enum WhatHelpMessage {
@@ -59,7 +52,7 @@ enum WhatHelpMessage {
 
 /** Help for options shared between UI and daemon (for -help) */
 std::string HelpMessage( WhatHelpMessage what ) ;
-/** Returns licensing information (for -version) */
-std::string LicenseInfo();
+/** Returns licensing information */
+std::string LicenseInfo() ;
 
 #endif

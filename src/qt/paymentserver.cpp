@@ -14,6 +14,7 @@
 #include "policy/policy.h"
 #include "ui_interface.h"
 #include "util.h"
+#include "utiltime.h"
 #include "wallet/wallet.h"
 
 #include <cstdlib>
@@ -106,10 +107,10 @@ static void ReportInvalidCertificate(const QSslCertificate& cert)
 //
 // Load OpenSSL's list of root certificate authorities
 //
-void PaymentServer::LoadRootCAs(X509_STORE* _store)
+void PaymentServer::LoadRootCAs( X509_STORE* _store )
 {
     // Unit tests mostly use this, to pass in fake root CAs:
-    if (_store)
+    if ( _store != nullptr )
     {
         certStore.reset(_store);
         return;
@@ -123,15 +124,15 @@ void PaymentServer::LoadRootCAs(X509_STORE* _store)
     QString certFile = QString::fromStdString(GetArg("-rootcertificates", "-system-"));
 
     // Empty store
-    if (certFile.isEmpty()) {
-        qDebug() << QString("PaymentServer::%1: Payment request authentication via X.509 certificates disabled.").arg(__func__);
-        return;
+    if ( certFile.isEmpty() ) {
+        qDebug() << QString( "PaymentServer::%1: Payment request authentication via X.509 certificates disabled" ).arg(__func__ ) ;
+        return ;
     }
 
     QList<QSslCertificate> certList;
 
-    if (certFile != "-system-") {
-            qDebug() << QString("PaymentServer::%1: Using \"%2\" as trusted root certificate.").arg(__func__).arg(certFile);
+    if ( certFile != "-system-" ) {
+            qDebug() << QString( "PaymentServer::%1: Using \"%2\" as trusted root certificate" ).arg( __func__ ).arg( certFile ) ;
 
         certList = QSslCertificate::fromPath(certFile);
         // Use those certificates when fetching payment requests, too:

@@ -1,4 +1,5 @@
 // Copyright (c) 2015-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -7,6 +8,8 @@
 #include "chainparamsbase.h"
 #include "compat.h"
 #include "util.h"
+#include "utillog.h"
+#include "utilthread.h"
 #include "netbase.h"
 #include "rpc/protocol.h" // For HTTP status codes
 #include "sync.h"
@@ -395,7 +398,7 @@ bool InitHTTPServer()
 #if LIBEVENT_VERSION_NUMBER >= 0x02010100
     // If -debug=libevent, set full libevent debugging
     // Otherwise, disable all libevent debugging
-    if (LogAcceptCategory("libevent"))
+    if ( LogAcceptsCategory( "libevent" ) )
         event_enable_debug_logging(EVENT_DBG_ALL);
     else
         event_enable_debug_logging(EVENT_DBG_NONE);

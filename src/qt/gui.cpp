@@ -35,7 +35,7 @@
 #include "chainparams.h"
 #include "init.h"
 #include "ui_interface.h"
-#include "util.h"
+#include "utilthread.h"
 #include "miner.h"
 #include "textmessages.h"
 
@@ -1240,11 +1240,9 @@ void DogecoinGUI::toggleHidden()
 
 void DogecoinGUI::detectShutdown()
 {
-    if (ShutdownRequested())
-    {
-        if(rpcConsole)
-            rpcConsole->hide();
-        qApp->quit();
+    if ( ShutdownRequested() ) {
+        if ( rpcConsole != nullptr ) rpcConsole->hide() ;
+        qApp->quit() ;
     }
 }
 

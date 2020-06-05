@@ -50,8 +50,6 @@ src/qt/test/moc*.cpp
 .*.swp
 *.*~*
 *.bak
-*.rej
-*.orig
 *.pyc
 *.o
 *.o-*

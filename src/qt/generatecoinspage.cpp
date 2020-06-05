@@ -10,6 +10,7 @@
 #include "unitsofcoin.h"
 #include "util.h"
 #include "utilstr.h"
+#include "utilthread.h"
 #include "validation.h"
 #include "dogecoin.h"
 

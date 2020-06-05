@@ -41,10 +41,6 @@ class CAddrMan;
 class CScheduler;
 class CNode ;
 
-namespace boost {
-    class thread_group ;
-}
-
 /** Time between pings automatically sent out for latency probing and keepalive (in seconds) */
 static const int PING_INTERVAL = 2 * 60;
 /** Time after which to disconnect, after waiting for a ping response (or inactivity) */
@@ -415,8 +411,10 @@ private:
     std::thread threadOpenConnections;
     std::thread threadMessageHandler;
 };
-extern std::unique_ptr<CConnman> g_connman;
-void Discover(boost::thread_group& threadGroup);
+
+extern std::unique_ptr< CConnman > g_connman ;
+
+void DiscoverLocalhostIP() ;
 void MapPort(bool fUseUPnP);
 unsigned short GetListenPort();
 bool BindListenPort(const CService &bindAddr, std::string& strError, bool fWhitelisted = false);
@@ -475,10 +473,9 @@ bool IsReachable(enum Network net);
 bool IsReachable(const CNetAddr &addr);
 CAddress GetLocalAddress(const CNetAddr *paddrPeer, ServiceFlags nLocalServices);
 
-
-extern bool fDiscover;
-extern bool fListen;
-extern bool fRelayTxes;
+extern bool fDiscoverIP ;
+extern bool fListen ;
+extern bool fRelayTxes ;
 
 extern limitedmap<uint256, int64_t> mapAlreadyAskedFor;
 

@@ -1,10 +1,10 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_ALERT_H
-#define BITCOIN_ALERT_H
+#ifndef DOGECOIN_ALERT_H
+#define DOGECOIN_ALERT_H
 
 #include "serialize.h"
 #include "sync.h"
@@ -25,13 +25,13 @@ extern CCriticalSection cs_mapAlerts;
  * need to upgrade.  The message is displayed in the status bar.
  * Alert messages are broadcast as a vector of signed data.  Unserializing may
  * not read the entire buffer if the alert is for a newer version, but older
- * versions can still relay the original data.
+ * versions can still relay the original data
  */
 class CUnsignedAlert
 {
 public:
     int nVersion;
-    int64_t nRelayUntil;      // when newer nodes stop relaying to newer nodes
+    int64_t nRelayUntil;    // when newer nodes stop relaying to newer nodes
     int64_t nExpiration;
     int nID;
     int nCancel;
@@ -69,10 +69,10 @@ public:
 
     void SetNull();
 
-    std::string ToString() const;
+    std::string toString() const ;
 };
 
-/** An alert is a combination of a serialized CUnsignedAlert and a signature. */
+/** An alert is a combination of a serialized CUnsignedAlert and a signature */
 class CAlert : public CUnsignedAlert
 {
 public:
@@ -97,16 +97,16 @@ public:
     uint256 GetHash() const;
     bool IsInEffect() const;
     bool Cancels(const CAlert& alert) const;
-    bool AppliesTo(int nVersion, const std::string& strSubVerIn) const;
-    bool AppliesToMe() const;
-    bool CheckSignature(const std::vector<unsigned char>& alertKey) const;
-    bool ProcessAlert(const std::vector<unsigned char>& alertKey, bool fThread = true);
-    static void Notify(const std::string& strMessage, bool fThread = true);
+    bool AppliesTo( int nVersion, const std::string & strSubVerIn ) const ;
+    bool AppliesToMe() const ;
+    bool CheckSignature( const std::vector< unsigned char > & alertKey) const ;
+    bool ProcessAlert( const std::vector< unsigned char > & alertKey, bool useThread = true ) ;
+    static void Notify( const std::string & strMessage, bool useThread = true ) ;
 
     /*
-     * Get copy of (active) alert object by hash. Returns a null alert if it is not found.
+     * Get copy of (active) alert object by hash. Returns a null alert if it is not found
      */
     static CAlert getAlertByHash(const uint256 &hash);
 };
 
-#endif // BITCOIN_ALERT_H
+#endif

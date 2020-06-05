@@ -87,9 +87,6 @@ QT_TRANSLATE_NOOP("dogecoin-core", ""
 "If <category> is not supplied or if <category> = 1, output all debugging "
 "information."),
 QT_TRANSLATE_NOOP("dogecoin-core", ""
-"If paytxfee is not set, include enough fee so transactions begin "
-"confirmation on average within n blocks (default: %u)"),
-QT_TRANSLATE_NOOP("dogecoin-core", ""
 "Maintain a full transaction index, used by the getrawtransaction rpc call "
 "(default: %u)"),
 QT_TRANSLATE_NOOP("dogecoin-core", ""
@@ -102,6 +99,9 @@ QT_TRANSLATE_NOOP("dogecoin-core", ""
 QT_TRANSLATE_NOOP("dogecoin-core", ""
 "Maximum total fees (in %s) to use in a single wallet transaction or raw "
 "transaction; setting this too low may abort large transactions (default: %s)"),
+QT_TRANSLATE_NOOP("dogecoin-core", ""
+"Number of blocks (one with the transaction plus more subsequent blocks above "
+"it) to count the transaction as confirmed (default: %u)"),
 QT_TRANSLATE_NOOP("dogecoin-core", ""
 "Number of seconds to keep misbehaving peers from reconnecting (default: %u)"),
 QT_TRANSLATE_NOOP("dogecoin-core", ""

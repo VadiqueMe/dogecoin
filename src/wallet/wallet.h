@@ -11,7 +11,7 @@
 #include "feerate.h"
 #include "auxpow.h"
 #include "streams.h"
-#include "tinyformat.h"
+#include "tinyformat.h" // strprintf
 #include "ui_interface.h"
 #include "utilstrencodings.h"
 #include "validationinterface.h"
@@ -28,10 +28,9 @@
 #include <stdexcept>
 #include <stdint.h>
 #include <string>
+#include <thread>
 #include <utility>
 #include <vector>
-
-#include <boost/thread.hpp>
 
 extern CWallet* pwalletMain;
 
@@ -39,7 +38,6 @@ extern CWallet* pwalletMain;
  * Settings
  */
 extern CFeeRate payTxFee ;
-extern unsigned int nTxConfirmTarget;
 extern bool bSpendZeroConfChange;
 extern bool fSendFreeTransactions;
 extern bool fWalletRbf;
@@ -53,14 +51,13 @@ static const bool DEFAULT_SPEND_ZEROCONF_CHANGE = true;
 static const bool DEFAULT_SEND_FREE_TRANSACTIONS = true;
 //! Default for -walletrejectlongchains
 static const bool DEFAULT_WALLET_REJECT_LONG_CHAINS = false;
-//! -txconfirmtarget default
-static const unsigned int DEFAULT_TX_CONFIRMATIONS = 6 ;
+//! -txconfirmblocks default
+static const unsigned int DEFAULT_BLOCKS_TO_CONFIRM_TX = 6 ;
 //! -walletrbf default
 static const bool DEFAULT_WALLET_RBF = false;
 //! Largest (in bytes) free transaction we're willing to create
 static const unsigned int MAX_FREE_TRANSACTION_CREATE_SIZE = 223556;
 static const bool DEFAULT_WALLETBROADCAST = true;
-static const bool DEFAULT_DISABLE_WALLET = false;
 //! if set, all keys will be derived by using BIP32
 static const bool DEFAULT_USE_HD_WALLET = true;
 
@@ -487,7 +484,7 @@ private:
 
     /**
      * Select a set of coins such that nValueRet >= nTargetValue and at least
-     * all coins from coinControl are selected; Never select unconfirmed coins
+     * all coins from coinControl are selected, never select unconfirmed coins
      * if they are not ours
      */
     bool SelectCoins(const std::vector<COutput>& vAvailableCoins, const CAmount& nTargetValue, std::set<std::pair<const CWalletTx*,unsigned int> >& setCoinsRet, CAmount& nValueRet, const CCoinControl *coinControl = NULL) const;
@@ -576,7 +573,7 @@ public:
         SetNull();
     }
 
-    CWallet(const std::string& strWalletFileIn) : strWalletFile(strWalletFileIn)
+    CWallet( const std::string & walletFile ) : strWalletFile( walletFile )
     {
         SetNull();
         fFileBacked = true;
@@ -821,8 +818,7 @@ public:
     //! Check if a given transaction has any of its outputs spent by another transaction in the wallet
     bool HasWalletSpend(const uint256& txid) const;
 
-    //! Flush wallet
-    void Flush( bool shutdown = false ) ;
+    void FlushWallet( bool shutdown = false ) ;
 
     //! Verify the wallet database and perform salvage if required
     static bool Verify() ;
@@ -861,17 +857,16 @@ public:
     static std::string GetWalletHelpString(bool showDebug);
 
     /* Initializes the wallet, returns a new CWallet instance or a null pointer in case of an error */
-    static CWallet* CreateWalletFromFile(const std::string walletFile);
+    static CWallet* CreateWalletFromFile( const std::string & walletFile ) ;
     static bool InitLoadWallet();
+
+    static bool ParseParameters() ;
 
     /**
      * Wallet post-init setup
      * Gives the wallet a chance to register repetitive tasks and complete post-init tasks
      */
-    void postInitProcess(boost::thread_group& threadGroup);
-
-    /* Wallets parameter interaction */
-    static bool ParameterInteraction();
+    void postInitProcess( std::vector< std::thread > & threads ) ;
 
     bool BackupWallet(const std::string& strDest);
 
@@ -889,7 +884,7 @@ public:
     bool SetHDMasterKey(const CPubKey& key);
 };
 
-/** A key allocated from the key pool. */
+/** A key allocated from the key pool */
 class CReserveKey : public CReserveScript
 {
 protected:

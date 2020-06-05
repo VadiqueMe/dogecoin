@@ -549,10 +549,6 @@
         <translation>सान्दर्भिक चेतावनी प्राप्त गर्दा आदेश कार्यान्वयन गर्नुहोस् नभए धेरै लामो फोर्क देखा पर्न सक्छ । (cmd को %s लाई सन्देशले प्रतिस्थापन गर्छ)</translation>
     </message>
     <message>
-        <source>If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</source>
-        <translation>paytxfee सेट गरिएको छैन भने, औसतमा n ब्लक भित्र कारोबार पुष्टिकरण सुरु होस् भन्नका लागि पर्याप्त शुल्क समावेश गर्नुहोस् (डिफल्ट: %u)</translation>
-    </message>
-    <message>
         <source>Invalid amount for -maxtxfee=&lt;amount&gt;: '%s' (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
         <translation>maxtxfee=&amp;lt;रकम&amp;gt;: का लागि अमान्य रकम &amp;apos;%s&amp;apos; (कारोबारलाई अड्कन नदिन अनिवार्य रूपमा कम्तिमा %s को न्यूनतम रिले शुल्क हुनु पर्छ)</translation>
     </message>

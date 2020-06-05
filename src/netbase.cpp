@@ -13,8 +13,9 @@
 #include "sync.h"
 #include "uint256.h"
 #include "random.h"
-#include "util.h"
+#include "utillog.h"
 #include "utilstrencodings.h"
+#include "utiltime.h"
 
 #include <atomic>
 
@@ -23,7 +24,7 @@
 #endif
 
 #include <boost/algorithm/string/case_conv.hpp> // for to_lower()
-#include <boost/algorithm/string/predicate.hpp> // for startswith() and endswith()
+#include <boost/algorithm/string/predicate.hpp> // for starts_with() and ends_with()
 
 #if !defined(HAVE_MSG_NOSIGNAL) && !defined(MSG_NOSIGNAL)
 #define MSG_NOSIGNAL 0
@@ -41,7 +42,7 @@ static const int SOCKS5_RECV_TIMEOUT = 20 * 1000;
 static std::atomic<bool> interruptSocks5Recv(false);
 
 enum Network ParseNetwork(std::string net) {
-    boost::to_lower(net);
+    boost::to_lower( net ) ;
     if (net == "ipv4") return NET_IPV4;
     if (net == "ipv6") return NET_IPV6;
     if (net == "tor" || net == "onion")  return NET_TOR;
@@ -131,12 +132,11 @@ bool static LookupIntern(const char *pszName, std::vector<CNetAddr>& vIP, unsign
 
 bool LookupHost(const char *pszName, std::vector<CNetAddr>& vIP, unsigned int nMaxSolutions, bool fAllowLookup)
 {
-    std::string strHost(pszName);
-    if (strHost.empty())
-        return false;
-    if (boost::algorithm::starts_with(strHost, "[") && boost::algorithm::ends_with(strHost, "]"))
-    {
-        strHost = strHost.substr(1, strHost.size() - 2);
+    std::string strHost( pszName ) ;
+    if ( strHost.empty() ) return false ;
+
+    if ( boost::algorithm::starts_with( strHost, "[" ) && boost::algorithm::ends_with( strHost, "]" ) ) {
+        strHost = strHost.substr( 1, strHost.size() - 2 ) ;
     }
 
     return LookupIntern(strHost.c_str(), vIP, nMaxSolutions, fAllowLookup);
@@ -184,7 +184,7 @@ CService LookupNumeric(const char *pszName, int portDefault)
 {
     CService addr;
     // "1.2:345" will fail to resolve the ip, but will still set the port.
-    // If the ip fails to resolve, re-init the result.
+    // If the ip fails to resolve, re-init the result
     if(!Lookup(pszName, addr, portDefault, false))
         addr = CService();
     return addr;
@@ -207,14 +207,14 @@ struct timeval MillisToTimeval(int64_t nTimeout)
  * @param len  Length of data to receive
  * @param timeout  Timeout in milliseconds for receive operation
  *
- * @note This function requires that hSocket is in non-blocking mode.
+ * @note This function requires that hSocket is in non-blocking mode
  */
 bool static InterruptibleRecv(char* data, size_t len, int timeout, SOCKET& hSocket)
 {
     int64_t curTime = GetTimeMillis();
     int64_t endTime = curTime + timeout;
     // Maximum time to wait in one select call. It will take up until this time (in millis)
-    // to break off in case of an interruption.
+    // to break off in case of an interruption
     const int64_t maxWait = 1000;
     while (len > 0 && curTime < endTime) {
         ssize_t ret = recv(hSocket, data, len, 0); // Optimistically try the recv first

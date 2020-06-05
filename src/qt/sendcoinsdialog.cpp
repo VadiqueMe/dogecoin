@@ -203,7 +203,6 @@ void SendCoinsDialog::on_sendButton_clicked()
 
     // use a CCoinControl instance
     CCoinControl ctrl = *CoinControlDialog::coinControl ;
-    ctrl.nConfirmTarget = 0 ;
 
     prepareStatus = walletModel->prepareTransaction( currentTransaction, &ctrl ) ;
 

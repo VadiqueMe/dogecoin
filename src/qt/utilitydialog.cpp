@@ -33,6 +33,7 @@
 #include "net.h"
 #include "peerversion.h"
 #include "utilstrencodings.h"
+#include "utilhelp.h"
 
 #include <stdio.h>
 

@@ -10,6 +10,7 @@
 #include "gui.h"
 
 #include "chainparams.h"
+#include "chainparamsutil.h"
 #include "networkmodel.h"
 #include "guiconstants.h"
 #include "guiutil.h"
@@ -31,6 +32,9 @@
 #include "scheduler.h"
 #include "ui_interface.h"
 #include "util.h"
+#include "utillog.h"
+#include "utilstr.h"
+#include "utilthread.h"
 #include "warnings.h"
 
 #ifdef ENABLE_WALLET
@@ -40,7 +44,6 @@
 #include <stdint.h>
 
 #include <boost/filesystem/operations.hpp>
-#include <boost/thread.hpp>
 
 #include <QApplication>
 #include <QDebug>
@@ -153,17 +156,17 @@ static void initTranslations(QTranslator &qtTranslatorBase, QTranslator &qtTrans
 
 /* qDebug() message handler --> debug log */
 #if QT_VERSION < 0x050000
-void DebugMessageHandler(QtMsgType type, const char *msg)
+void DebugMessageHandler( QtMsgType type, const char * msg )
 {
-    const char *category = (type == QtDebugMsg) ? "qt" : NULL;
-    LogPrint(category, "GUI: %s\n", msg);
+    std::string category = ( type == QtDebugMsg ) ? "qt" : "" ;
+    LogPrint( category, "Qt: %s\n", msg ) ;
 }
 #else
-void DebugMessageHandler(QtMsgType type, const QMessageLogContext& context, const QString &msg)
+void DebugMessageHandler( QtMsgType type, const QMessageLogContext & context, const QString & msg )
 {
-    Q_UNUSED(context);
-    const char *category = (type == QtDebugMsg) ? "qt" : NULL;
-    LogPrint(category, "GUI: %s\n", msg.toStdString());
+    Q_UNUSED( context ) ;
+    std::string category = ( type == QtDebugMsg ) ? "qt" : "" ;
+    LogPrint( category, "Qt: %s\n", msg.toStdString() ) ;
 }
 #endif
 
@@ -187,8 +190,8 @@ Q_SIGNALS:
     void runawayException(const QString &message);
 
 private:
-    boost::thread_group threadGroup;
-    CScheduler scheduler;
+    std::vector< std::thread > threadGroup ;
+    CScheduler scheduler ;
 
     /// Pass fatal exception message to UI thread
     void handleRunawayException(const std::exception *e);
@@ -288,12 +291,13 @@ void DogecoinCore::initialize()
             Q_EMIT initializeResult(false);
             return;
         }
-        int rv = AppInitMain(threadGroup, scheduler);
-        Q_EMIT initializeResult(rv);
-    } catch (const std::exception& e) {
-        handleRunawayException(&e);
-    } catch (...) {
-        handleRunawayException(NULL);
+
+        int rv = AppInitMain( threadGroup, scheduler ) ;
+        Q_EMIT initializeResult( rv ) ;
+    } catch ( const std::exception & e ) {
+        handleRunawayException( &e ) ;
+    } catch ( ... ) {
+        handleRunawayException( nullptr ) ;
     }
 }
 
@@ -302,9 +306,8 @@ void DogecoinCore::shutdown()
     try
     {
         qDebug() << __func__ << ": Running Shutdown in thread";
-        Interrupt(threadGroup);
-        threadGroup.join_all();
-        Shutdown();
+        StopAndJoinThreads( threadGroup ) ;
+        Shutdown() ;
         qDebug() << __func__ << ": Shutdown finished";
         Q_EMIT shutdownResult(1);
     } catch (const std::exception& e) {
@@ -454,7 +457,7 @@ void DogecoinApplication::requestShutdown()
     delete networkModel ;
     networkModel = nullptr ;
 
-    StartShutdown();
+    RequestShutdown() ;
 
     // Request shutdown from core thread
     Q_EMIT requestedShutdown();
@@ -462,16 +465,14 @@ void DogecoinApplication::requestShutdown()
 
 void DogecoinApplication::initializeResult( int retval )
 {
-    qDebug() << __func__ << ": Initialization result: " << retval;
-    // Set exit result: 0 if successful, 1 if failure
-    returnValue = retval ? 0 : 1;
-    if(retval)
+    returnValue = ( retval != 0 ) ? 0 : 1 ;
+    if ( retval != 0 )
     {
         // Log this only after AppInit2 finishes, as then logging setup is guaranteed complete
-        qWarning() << "Platform customization:" << platformStyle->getName();
+        LogPrintf( "Qt platform customization: %s\n", platformStyle->getName().toStdString() ) ;
 #ifdef ENABLE_WALLET
-        PaymentServer::LoadRootCAs();
-        paymentServer->setOptionsModel(optionsModel);
+        PaymentServer::LoadRootCAs() ;
+        paymentServer->setOptionsModel( optionsModel ) ;
 #endif
 
         networkModel = new NetworkModel( /* parent */ nullptr, true ) ;
@@ -480,7 +481,7 @@ void DogecoinApplication::initializeResult( int retval )
         guiWindow->setOptionsModel( optionsModel ) ;
 
 #ifdef ENABLE_WALLET
-        if(pwalletMain)
+        if ( pwalletMain != nullptr )
         {
             walletModel = new WalletModel( platformStyle, pwalletMain, optionsModel ) ;
 
@@ -511,14 +512,13 @@ void DogecoinApplication::initializeResult( int retval )
         QTimer::singleShot( 100, paymentServer, SLOT( uiReady() ) ) ;
 #endif
     } else {
-        quit(); // Exit main loop
+        quit() ; // exit main loop
     }
 }
 
 void DogecoinApplication::shutdownResult( int retval )
 {
-    qDebug() << __func__ << ": Shutdown result: " << retval;
-    quit(); // Exit main loop after shutdown finished
+    quit() ; // exit main loop after shutdown finished
 }
 
 void DogecoinApplication::handleRunawayException( const QString & message )
@@ -676,10 +676,10 @@ int main(int argc, char *argv[])
     // Install qDebug() message handler to route to debug log
     qInstallMsgHandler( DebugMessageHandler ) ;
 #else
-#if defined(Q_OS_WIN)
+# if defined(Q_OS_WIN)
     // Install global event filter for processing Windows session related Windows messages (WM_QUERYENDSESSION and WM_ENDSESSION)
     qApp->installNativeEventFilter(new WinShutdownMonitor());
-#endif
+# endif
     // Install qDebug() message handler to route to debug log
     qInstallMessageHandler( DebugMessageHandler ) ;
 #endif

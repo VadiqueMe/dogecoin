@@ -661,15 +661,10 @@ bool WalletModel::abandonTransaction( uint256 hash ) const
 
 bool WalletModel::isWalletEnabled()
 {
-   return !GetBoolArg("-disablewallet", DEFAULT_DISABLE_WALLET);
+   return ! GetBoolArg( "-disablewallet", false ) ;
 }
 
 bool WalletModel::hdEnabled() const
 {
     return wallet->IsHDEnabled();
-}
-
-int WalletModel::getDefaultConfirmTarget() const
-{
-    return nTxConfirmTarget;
 }

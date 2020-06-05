@@ -1,77 +1,52 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
+
+#include "chainparams.h"
+#include "chainparamsutil.h"
+#include "compat.h"
+#include "peerversion.h"
+#include "init.h"
+#include "noui.h"
+#include "scheduler.h"
+#include "util.h"
+#include "utilstr.h"
+#include "utillog.h"
+#include "utilthread.h"
+#include "utiltime.h"
+#include "utilstrencodings.h"
+#include "httpserver.h"
+#include "httprpc.h"
+#include "rpc/server.h"
+
+#include <boost/algorithm/string/predicate.hpp>
+#include <boost/filesystem.hpp>
+
+#include <stdio.h>
 
 #if defined(HAVE_CONFIG_H)
 #include "config/dogecoin-config.h"
 #endif
 
-#include "peerversion.h"
-#include "chainparams.h"
-#include "compat.h"
-#include "rpc/server.h"
-#include "init.h"
-#include "noui.h"
-#include "scheduler.h"
-#include "util.h"
-#include "httpserver.h"
-#include "httprpc.h"
-#include "utilstrencodings.h"
-
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/filesystem.hpp>
-#include <boost/thread.hpp>
-
-#include <stdio.h>
-
-/* Introduction text for doxygen: */
-
-/*! \mainpage Developer documentation
- *
- * \section intro_sec Introduction
- *
- * This is the developer documentation of the peer for an experimental new digital currency called Bitcoin (https://www.bitcoin.org/),
- * which enables instant payments to anyone, anywhere in the world. Bitcoin uses peer-to-peer technology to operate
- * with no central authority: managing transactions and issuing money are carried out collectively by the network.
- *
- * The software is a community-driven open source project, released under the MIT license.
- *
- * \section Navigation
- * Use the buttons <code>Namespaces</code>, <code>Classes</code> or <code>Files</code> at the top of the page to start navigating the code.
- */
-
-void WaitForShutdown(boost::thread_group* threadGroup)
+void WaitForShutdown( std::vector< std::thread > * threadGroup )
 {
-    bool fShutdown = ShutdownRequested();
-    // Tell the main threads to shutdown.
-    while (!fShutdown)
-    {
-        MilliSleep(200);
-        fShutdown = ShutdownRequested();
-    }
-    if (threadGroup)
-    {
-        Interrupt(*threadGroup);
-        threadGroup->join_all();
-    }
+    while ( ! ShutdownRequested() )
+        MilliSleep( 200 ) ;
+
+    if ( threadGroup != nullptr )
+        StopAndJoinThreads( *threadGroup ) ;
 }
 
-//////////////////////////////////////////////////////////////////////////////
 //
-// Start
+// Begin
 //
 bool AppInit(int argc, char* argv[])
 {
-    boost::thread_group threadGroup;
-    CScheduler scheduler;
-
-    bool fRet = false;
-
     //
     // Parameters
     //
-    // If Qt is used, parameters/bitcoin.conf are parsed in qt/bitcoin.cpp's main()
     ParseParameters( argc, argv ) ;
 
     // Look for chain name parameter
@@ -103,6 +78,9 @@ bool AppInit(int argc, char* argv[])
         fprintf(stdout, "%s", strUsage.c_str());
         return true;
     }
+
+    std::vector< std::thread > threadGroup ;
+    bool initOk = false ;
 
     try
     {
@@ -156,26 +134,23 @@ bool AppInit(int argc, char* argv[])
 #endif // HAVE_DECL_DAEMON
         }
 
-        fRet = AppInitMain(threadGroup, scheduler);
+        CScheduler scheduler ;
+        initOk = AppInitMain( threadGroup, scheduler ) ;
     }
-    catch (const std::exception& e) {
-        PrintExceptionContinue(&e, "AppInit()");
-    } catch (...) {
-        PrintExceptionContinue(NULL, "AppInit()");
+    catch ( const std::exception & e ) {
+        PrintExceptionContinue( &e, "AppInit()" ) ;
+    } catch ( ... ) {
+        PrintExceptionContinue( nullptr, "AppInit()" ) ;
     }
 
-    if (!fRet)
-    {
-        Interrupt(threadGroup);
-        // threadGroup.join_all(); was left out intentionally here, because we didn't re-test all of
-        // the startup-failure cases to make sure they don't result in a hang due to some
-        // thread-blocking-waiting-for-another-thread-during-startup case
+    if ( ! initOk ) {
+        StopAndJoinThreads( threadGroup ) ;
     } else {
-        WaitForShutdown(&threadGroup);
+        WaitForShutdown( &threadGroup ) ;
     }
-    Shutdown();
+    Shutdown() ;
 
-    return fRet;
+    return initOk ;
 }
 
 int main(int argc, char* argv[])

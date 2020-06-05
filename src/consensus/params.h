@@ -60,7 +60,7 @@ struct Params
     uint32_t nRuleChangeActivationThreshold ;
     uint32_t nMinerConfirmationWindow ;
     BIP9Deployment vDeployments[ MAX_VERSION_BITS_DEPLOYMENTS ] ;
-    uint32_t nCoinbaseMaturity ;
+    uint32_t nCoinbaseMaturity ; // coinbase transaction outputs can only be spent after this number of new blocks
 
     /** Proof of work parameters */
     uint256 powLimit ;

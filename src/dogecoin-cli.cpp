@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -8,14 +9,21 @@
 #endif
 
 #include "chainparamsbase.h"
+#include "chainparamsutil.h"
 #include "peerversion.h"
 #include "rpc/client.h"
 #include "rpc/protocol.h"
+
 #include "util.h"
+#include "utilhelp.h"
+#include "utillog.h"
+#include "utilstr.h"
 #include "utilstrencodings.h"
+#include "utiltime.h"
+
+#include <stdio.h>
 
 #include <boost/filesystem/operations.hpp>
-#include <stdio.h>
 
 #include <event2/buffer.h>
 #include <event2/keyvalq_struct.h>
@@ -35,7 +43,9 @@ std::string HelpMessageCli()
     strUsage += HelpMessageOpt("-?", _("This help message"));
     strUsage += HelpMessageOpt( "-conf=<file>", strprintf( _("Specify configuration file (default: %s)"), DOGECOIN_CONF_FILENAME ) ) ;
     strUsage += HelpMessageOpt("-datadir=<dir>", _("Specify data directory"));
-    AppendParamsHelpMessages(strUsage);
+
+    AppendChainParamsHelp( strUsage ) ;
+
     strUsage += HelpMessageOpt("-named", strprintf(_("Pass named instead of positional arguments (default: %s)"), DEFAULT_NAMED));
     strUsage += HelpMessageOpt("-rpcconnect=<ip>", strprintf(_("Send commands to node running on <ip> (default: %s)"), DEFAULT_RPCCONNECT));
     strUsage += HelpMessageOpt( "-rpcport=<port>",
@@ -50,14 +60,9 @@ std::string HelpMessageCli()
     return strUsage;
 }
 
-//////////////////////////////////////////////////////////////////////////////
-//
-// Start
-//
-
 //
 // Exception thrown on connection error.  This error is used to determine
-// when to wait if -rpcwait is given.
+// when to wait if -rpcwait is given
 //
 class CConnectionFailed : public std::runtime_error
 {
@@ -334,7 +339,7 @@ int CommandLineRPC(int argc, char *argv[])
                     else
                         strPrint = result.write(2);
                 }
-                // Connection succeeded, no need to retry.
+                // Connection succeeded, no need to retry
                 break;
             }
             catch (const CConnectionFailed&) {
@@ -345,22 +350,23 @@ int CommandLineRPC(int argc, char *argv[])
             }
         } while (fWait);
     }
-    catch (const boost::thread_interrupted&) {
-        throw;
+    catch ( const std::string & s ) {
+        if ( s == "stopthread" ) throw ;
+        else strPrint = std::string( "unknown message: " ) + s ;
     }
-    catch (const std::exception& e) {
-        strPrint = std::string("error: ") + e.what();
-        nRet = EXIT_FAILURE;
+    catch ( const std::exception & e ) {
+        strPrint = std::string( "error: " ) + e.what() ;
+        nRet = EXIT_FAILURE ;
     }
-    catch (...) {
-        PrintExceptionContinue(NULL, "CommandLineRPC()");
-        throw;
+    catch ( ... ) {
+        PrintExceptionContinue( nullptr, "CommandLineRPC()" ) ;
+        throw ;
     }
 
-    if (strPrint != "") {
-        fprintf((nRet == 0 ? stdout : stderr), "%s\n", strPrint.c_str());
+    if ( ! strPrint.empty() ) {
+        fprintf( ( nRet == 0 ? stdout : stderr ), "%s\n", strPrint.c_str() ) ;
     }
-    return nRet;
+    return nRet ;
 }
 
 int main(int argc, char* argv[])

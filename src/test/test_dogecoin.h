@@ -1,4 +1,5 @@
 // Copyright (c) 2015-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -11,8 +12,10 @@
 #include "txdb.h"
 #include "txmempool.h"
 
-#include <boost/filesystem.hpp>
-#include <boost/thread.hpp>
+#include <vector>
+#include <thread>
+
+#include <boost/filesystem/path.hpp>
 
 /** Basic testing setup. This just configures logging and chain parameters */
 struct BasicTestingSetup {
@@ -26,10 +29,10 @@ struct BasicTestingSetup {
  *  Included are data directory, coins database, script check threads setup */
 class CConnman ;
 struct TestingSetup: public BasicTestingSetup {
-    CCoinsViewDB *pcoinsdbview;
-    boost::filesystem::path pathTemp;
-    boost::thread_group threadGroup;
-    CConnman* connman;
+    CCoinsViewDB * pcoinsdbview ;
+    boost::filesystem::path pathTemp ;
+    std::vector< std::thread > scriptcheckThreads ;
+    CConnman * connman ;
 
     TestingSetup( const std::string & chainName = "main" ) ;
     ~TestingSetup() ;
@@ -40,14 +43,13 @@ struct CMutableTransaction;
 class CScript;
 
 //
-// Testing fixture that pre-creates a
-// 100-block REGTEST-mode block chain
+// Testing fixture that pre-creates a 100-block regtest chain
 //
 struct TestChain240Setup : public TestingSetup {
     TestChain240Setup();
 
     // Create a new block with just given transactions, coinbase paying to
-    // scriptPubKey, and try to add it to the current chain.
+    // scriptPubKey, and try to add it to the current chain
     CBlock CreateAndProcessBlock(const std::vector<CMutableTransaction>& txns,
                                  const CScript& scriptPubKey);
 

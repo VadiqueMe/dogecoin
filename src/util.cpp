@@ -4,25 +4,16 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#if defined(HAVE_CONFIG_H)
-#include "config/dogecoin-config.h"
-#endif
-
 #include "util.h"
 
 #include "chainparamsbase.h"
 #include "random.h"
 #include "serialize.h"
 #include "sync.h"
+
+#include "utillog.h"
+#include "utilstr.h"
 #include "utilstrencodings.h"
-#include "utiltime.h"
-
-#include <stdarg.h>
-
-#if (defined(__FreeBSD__) || defined(__OpenBSD__) || defined(__DragonFly__))
-#include <pthread.h>
-#include <pthread_np.h>
-#endif
 
 #ifndef WIN32
 // for posix_fallocate
@@ -37,6 +28,7 @@
 #endif // __linux__
 
 #include <algorithm>
+#include <mutex>
 #include <fcntl.h>
 #include <sys/resource.h>
 #include <sys/stat.h>
@@ -69,8 +61,8 @@
 #include <shlobj.h>
 #endif
 
-#ifdef HAVE_SYS_PRCTL_H
-#include <sys/prctl.h>
+#if defined(HAVE_CONFIG_H)
+#include "config/dogecoin-config.h"
 #endif
 
 #ifdef HAVE_MALLOPT_ARENA_MAX
@@ -79,12 +71,11 @@
 
 #include <boost/algorithm/string/case_conv.hpp> // for to_lower()
 #include <boost/algorithm/string/join.hpp>
-#include <boost/algorithm/string/predicate.hpp> // for startswith() and endswith()
+#include <boost/algorithm/string/predicate.hpp> // for starts_with() and ends_with()
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
-#include <boost/foreach.hpp>
 #include <boost/program_options/detail/config_file.hpp>
-#include <boost/thread.hpp>
+
 #include <openssl/crypto.h>
 #include <openssl/rand.h>
 #include <openssl/conf.h>
@@ -101,25 +92,15 @@ std::string FormatBytes( uint64_t bytes )
     return std::to_string( bytes / 1024 / 1024 / 1024 ) + " GiB" ;
 }
 
-const char * const DOGECOIN_CONF_FILENAME = "dogecoin.conf";
-const char * const BITCOIN_PID_FILENAME = "dogecoind.pid";
-
-const char * const LOG_FILE_NAME = "debug.log" ;
+const std::string DOGECOIN_CONF_FILENAME = "dogecoin.conf" ;
+const std::string BITCOIN_PID_FILENAME = "dogecoind.pid" ;
 
 CCriticalSection cs_args ;
 std::map< std::string, std::string > mapArgs ;
 static std::map< std::string, std::vector< std::string > > _mapMultiArgs ;
 const std::map< std::string, std::vector< std::string > > & mapMultiArgs = _mapMultiArgs ;
 
-bool fDebug = false;
-bool fPrintToConsole = false;
-bool fPrintToDebugLog = true;
-
-bool fLogTimestamps = DEFAULT_LOGTIMESTAMPS;
-bool fLogTimeMicros = DEFAULT_LOGTIMEMICROS;
-bool fLogIPs = DEFAULT_LOGIPS ;
-std::atomic < bool > fReopenDebugLog( false ) ;
-CTranslationInterface translationInterface;
+bool fDebug = false ;
 
 /** Init OpenSSL library multithreading support */
 static CCriticalSection** ppmutexOpenSSL;
@@ -170,154 +151,13 @@ public:
         OPENSSL_free(ppmutexOpenSSL);
     }
 }
-instance_of_cinit;
-
-static boost::once_flag debugPrintInitFlag = BOOST_ONCE_INIT ;
-
-static std::unique_ptr< FILE > fileout( nullptr ) ;
-static std::unique_ptr< boost::mutex > mutexDebugLog( nullptr );
-
-static std::list< std::string > messagesBeforeOpenLog ;
-
-static int FileWriteStr( const std::string & str, const std::unique_ptr< FILE > & fp )
-{
-    return fwrite( str.data(), 1, str.size(), fp.get() ) ;
-}
-
-static void DebugPrintInit()
-{
-    if ( mutexDebugLog == nullptr )
-        mutexDebugLog.reset( new boost::mutex() ) ;
-}
-
-void OpenDebugLog()
-{
-    boost::call_once( &DebugPrintInit, debugPrintInitFlag ) ;
-    boost::mutex::scoped_lock scoped_lock( *mutexDebugLog ) ;
-
-    assert( fileout == nullptr ) ;
-    boost::filesystem::path pathToDebugLog = GetDirForData() / LOG_FILE_NAME ;
-    fileout.reset( fopen( pathToDebugLog.string().c_str (), "a" ) ) ;
-    if ( fileout != nullptr ) {
-        setbuf( fileout.get(), NULL ) ; // unbuffered
-        // dump buffered messages from before we opened the log
-        while ( ! messagesBeforeOpenLog.empty() ) {
-            FileWriteStr( messagesBeforeOpenLog.front(), fileout ) ;
-            messagesBeforeOpenLog.pop_front() ;
-        }
-    }
-}
-
-bool LogAcceptCategory( const char * category )
-{
-    if ( category != nullptr ) // if ( false )
-    {
-        if (!fDebug)
-            return false;
-
-        // Give each thread quick access to -debug settings.
-        // This helps prevent issues debugging global destructors,
-        // where mapMultiArgs might be deleted before another
-        // global destructor calls LogPrint()
-        static boost::thread_specific_ptr< std::set< std::string > > ptrCategory ;
-        if (ptrCategory.get() == NULL)
-        {
-            if ( mapMultiArgs.count( "-debug" ) ) {
-                const std::vector< std::string > & categories = mapMultiArgs.at( "-debug" ) ;
-                ptrCategory.reset( new std::set< std::string >( categories.begin(), categories.end() ) ) ;
-                // thread_specific_ptr automatically deletes the set when the thread ends
-            } else
-                ptrCategory.reset( new std::set< std::string >() ) ;
-        }
-        const std::set< std::string > & setCategories = *ptrCategory.get() ;
-
-        // if not debugging everything and not debugging specific category, LogPrint does nothing
-        if (setCategories.count( std::string("") ) == 0 &&
-            setCategories.count( std::string("1") ) == 0 &&
-            setCategories.count( std::string( category ) ) == 0)
-            return false;
-    }
-    return true;
-}
-
-/**
- * fStartedNewLine is a state variable held by the calling context that will
- * suppress printing of the timestamp when multiple calls are made that don't
- * end in a newline. Initialize it to true, and hold it, in the calling context
- */
-static std::string LogTimestampStr( const std::string & str, std::atomic_bool * fStartedNewLine )
-{
-    std::string strStamped ;
-
-    if (!fLogTimestamps)
-        return str;
-
-    if (*fStartedNewLine) {
-        int64_t nTimeMicros = GetLogTimeMicros();
-        strStamped = DateTimeStrFormat("%Y-%m-%d %H:%M:%S", nTimeMicros/1000000);
-        if (fLogTimeMicros)
-            strStamped += strprintf(".%06d", nTimeMicros%1000000);
-        strStamped += ' ' + str;
-    } else
-        strStamped = str;
-
-    if (!str.empty() && str[str.size()-1] == '\n')
-        *fStartedNewLine = true;
-    else
-        *fStartedNewLine = false;
-
-    return strStamped;
-}
-
-int LogPrintStr( const std::string & str )
-{
-    int ret = 0 ; // number of characters written
-    static std::atomic_bool fStartedNewLine( true ) ;
-
-    std::string strTimestamped = LogTimestampStr( str, &fStartedNewLine ) ;
-
-    if ( fPrintToConsole )
-    {
-        ret = fwrite( strTimestamped.data(), 1, strTimestamped.size(), stdout ) ;
-        fflush( stdout ) ;
-    }
-    else if ( fPrintToDebugLog )
-    {
-        boost::call_once( &DebugPrintInit, debugPrintInitFlag ) ;
-        boost::mutex::scoped_lock scoped_lock( *mutexDebugLog ) ;
-
-        // buffer if we haven't opened the log yet
-        if ( fileout == nullptr ) {
-            ret = strTimestamped.length() ;
-            messagesBeforeOpenLog.push_back( strTimestamped ) ;
-        }
-        else
-        {
-            boost::filesystem::path pathToDebugLog = GetDirForData() / LOG_FILE_NAME ;
-            if ( ! boost::filesystem::exists( pathToDebugLog ) ) // log file is absent
-                fReopenDebugLog = true ;
-
-            if ( fReopenDebugLog ) {
-                fReopenDebugLog = false ;
-                FILE * outfile = freopen( pathToDebugLog.string().c_str (), "a", fileout.release() ) ;
-                if ( outfile != nullptr ) {
-                    setbuf( outfile, NULL ) ; // unbuffered
-                    fileout.reset( outfile );
-                }
-            }
-
-            ret = FileWriteStr( strTimestamped, fileout ) ;
-        }
-    }
-    return ret ;
-}
+instance_of_cinit ;
 
 /** Interpret string as boolean, for argument parsing */
-static bool InterpretBool(const std::string& strValue)
+static bool InterpretBool( const std::string & boolStr )
 {
-    if (strValue.empty())
-        return true;
-    return (atoi(strValue) != 0);
+    if ( boolStr.empty() ) return true ;
+    return atoi( boolStr ) != 0 ;
 }
 
 /** Turn -noX into -X=0 */
@@ -355,8 +195,8 @@ void ParseParameters(int argc, const char* const argv[])
         if (str[0] != '-')
             break;
 
-        // Interpret --foo as -foo.
-        // If both --foo and -foo are set, the last takes effect.
+        // Interpret --foo as -foo
+        // If both --foo and -foo are set, the last takes effect
         if (str.length() > 1 && str[1] == '-')
             str = str.substr(1);
         InterpretNegativeSetting(str, strValue);
@@ -419,44 +259,6 @@ void ForceSetArg(const std::string& strArg, const std::string& strValue)
 }
 
 
-
-static const int screenWidth = 79;
-static const int optIndent = 2;
-static const int msgIndent = 7;
-
-std::string HelpMessageGroup(const std::string &message) {
-    return std::string(message) + std::string("\n\n");
-}
-
-std::string HelpMessageOpt(const std::string &option, const std::string &message) {
-    return std::string(optIndent,' ') + std::string(option) +
-           std::string("\n") + std::string(msgIndent,' ') +
-           FormatParagraph(message, screenWidth - msgIndent, msgIndent) +
-           std::string("\n\n");
-}
-
-static std::string FormatException(const std::exception* pex, const char* pszThread)
-{
-#ifdef WIN32
-    char pszModule[MAX_PATH] = "";
-    GetModuleFileNameA(NULL, pszModule, sizeof(pszModule));
-#else
-    const char* pszModule = "dogecoin";
-#endif
-    if (pex)
-        return strprintf(
-            "EXCEPTION: %s       \n%s       \n%s in %s       \n", typeid(*pex).name(), pex->what(), pszModule, pszThread);
-    else
-        return strprintf(
-            "UNKNOWN EXCEPTION       \n%s in %s       \n", pszModule, pszThread);
-}
-
-void PrintExceptionContinue(const std::exception* pex, const char* pszThread)
-{
-    std::string message = FormatException(pex, pszThread);
-    LogPrintf("\n\n************************\n%s\n", message);
-    fprintf(stderr, "\n\n************************\n%s\n", message.c_str());
-}
 
 boost::filesystem::path GetDefaultDataDir()
 {
@@ -577,7 +379,7 @@ void CreatePidFile(const boost::filesystem::path &path, pid_t pid)
 }
 #endif
 
-bool RenameOver(boost::filesystem::path src, boost::filesystem::path dest)
+bool RenameOver( const boost::filesystem::path & src, const boost::filesystem::path & dest )
 {
 #ifdef WIN32
     return MoveFileExA(src.string().c_str(), dest.string().c_str(),
@@ -585,26 +387,20 @@ bool RenameOver(boost::filesystem::path src, boost::filesystem::path dest)
 #else
     int rc = std::rename(src.string().c_str(), dest.string().c_str());
     return (rc == 0);
-#endif /* WIN32 */
+#endif
 }
 
-/**
- * Ignores exceptions thrown by Boost's create_directory if the requested directory exists.
- * Specifically handles case where path p exists, but it wasn't possible for the user to
- * write to the parent directory.
- */
-bool TryCreateDirectory(const boost::filesystem::path& p)
+bool TryToCreateDirectory( const boost::filesystem::path & p )
 {
-    try
-    {
-        return boost::filesystem::create_directory(p);
-    } catch (const boost::filesystem::filesystem_error&) {
-        if (!boost::filesystem::exists(p) || !boost::filesystem::is_directory(p))
-            throw;
+    try {
+        return boost::filesystem::create_directory( p ) ;
+    } catch ( const boost::filesystem::filesystem_error & ) {
+        if ( ! boost::filesystem::exists( p ) || ! boost::filesystem::is_directory( p ) )
+            throw ;
     }
 
     // create_directory didn't create the directory, it had to have existed already
-    return false;
+    return false ;
 }
 
 void FileCommit(FILE *file)
@@ -701,34 +497,6 @@ void AllocateFileRange(FILE *file, unsigned int offset, unsigned int length) {
 #endif
 }
 
-void ShrinkLogFile()
-{
-    // Amount of log to save at end when shrinking
-    constexpr size_t RECENT_DEBUG_HISTORY_SIZE = 10 * 1000000;
-    // Scroll log if it's getting too big
-    boost::filesystem::path pathLog = GetDirForData() / LOG_FILE_NAME ;
-    FILE* file = fopen(pathLog.string().c_str(), "r");
-    // If log file is more than 10% bigger the RECENT_DEBUG_HISTORY_SIZE
-    // trim it down by saving only the last RECENT_DEBUG_HISTORY_SIZE bytes
-    if (file && boost::filesystem::file_size(pathLog) > 11 * (RECENT_DEBUG_HISTORY_SIZE / 10))
-    {
-        // Restart the file with some of the end
-        std::vector<char> vch(RECENT_DEBUG_HISTORY_SIZE, 0);
-        fseek(file, -((long)vch.size()), SEEK_END);
-        int nBytes = fread(vch.data(), 1, vch.size(), file);
-        fclose(file);
-
-        file = fopen(pathLog.string().c_str(), "w");
-        if (file)
-        {
-            fwrite(vch.data(), 1, nBytes, file);
-            fclose(file);
-        }
-    }
-    else if (file != NULL)
-        fclose(file);
-}
-
 #ifdef WIN32
 boost::filesystem::path GetSpecialFolderPath( int nFolder, bool fCreate )
 {
@@ -741,25 +509,11 @@ boost::filesystem::path GetSpecialFolderPath( int nFolder, bool fCreate )
 }
 #endif
 
-void runCommand(const std::string& strCommand)
+void runCommand( const std::string & strCommand )
 {
-    int nErr = ::system(strCommand.c_str());
-    if (nErr)
-        LogPrintf("runCommand error: system(%s) returned %d\n", strCommand, nErr);
-}
-
-void RenameThread( const std::string & name )
-{
-#if defined(PR_SET_NAME)
-    // Only the first 15 characters are used (16 - NUL terminator)
-    ::prctl( PR_SET_NAME, name.c_str(), 0, 0, 0 ) ;
-#elif (defined(__FreeBSD__) || defined(__OpenBSD__) || defined(__DragonFly__))
-    pthread_set_name_np( pthread_self(), name.c_str() ) ;
-#elif defined(MAC_OSX)
-    pthread_setname_np( name.c_str() ) ;
-#else
-    ( void ) name ; // not used
-#endif
+    int nErr = ::system( strCommand.c_str() ) ;
+    if ( nErr != 0 )
+        LogPrintf( "runCommand error: system( %s ) returned %d\n", strCommand, nErr ) ;
 }
 
 void SetupEnvironment()
@@ -768,27 +522,27 @@ void SetupEnvironment()
     // glibc-specific: On 32-bit systems set the number of arenas to 1.
     // By default, since glibc 2.10, the C library will create up to two heap
     // arenas per core. This is known to cause excessive virtual address space
-    // usage in our usage. Work around it by setting the maximum number of
-    // arenas to 1.
-    if (sizeof(void*) == 4) {
-        mallopt(M_ARENA_MAX, 1);
+    // usage in our case. Work around it by setting the maximum number of
+    // arenas to 1
+    if ( sizeof( void* ) == 4 ) {
+        mallopt( M_ARENA_MAX, 1 ) ;
     }
 #endif
     // On most POSIX systems (e.g. Linux, but not BSD) the environment's locale
-    // may be invalid, in which case the "C" locale is used as fallback.
+    // may be invalid, in which case the "C" locale is used as fallback
 #if !defined(WIN32) && !defined(MAC_OSX) && !defined(__FreeBSD__) && !defined(__OpenBSD__)
     try {
-        std::locale(""); // Raises a runtime error if current locale is invalid
-    } catch (const std::runtime_error&) {
-        setenv("LC_ALL", "C", 1);
+        std::locale( "" ); // Raises a runtime error if current locale is invalid
+    } catch ( const std::runtime_error & ) {
+        setenv( "LC_ALL", "C", 1 ) ;
     }
 #endif
     // The path locale is lazy initialized and to avoid deinitialization errors
     // in multithreading environments, it is set explicitly by the main thread.
     // A dummy locale is used to extract the internal default locale, used by
-    // boost::filesystem::path, which is then used to explicitly imbue the path.
-    std::locale loc = boost::filesystem::path::imbue(std::locale::classic());
-    boost::filesystem::path::imbue(loc);
+    // boost::filesystem::path, which is then used to explicitly imbue the path
+    std::locale loc = boost::filesystem::path::imbue( std::locale::classic() ) ;
+    boost::filesystem::path::imbue( loc ) ;
 }
 
 bool SetupNetworking()
@@ -803,20 +557,15 @@ bool SetupNetworking()
     return true;
 }
 
-int GetNumCores()
+std::string CopyrightHolders( const std::string & prefix )
 {
-    return boost::thread::physical_concurrency() ;
-}
-
-std::string CopyrightHolders(const std::string& strPrefix)
-{
-    std::string strCopyrightHolders = strPrefix + strprintf(_(COPYRIGHT_HOLDERS), _(COPYRIGHT_HOLDERS_SUBSTITUTION));
+    std::string copyrightHolders = prefix + strprintf( _(COPYRIGHT_HOLDERS), _(COPYRIGHT_HOLDERS_SUBSTITUTION) ) ;
 
     // look for untranslated substitution to make sure Bitcoin Core & Dogecoin Core copyright is not removed by accident
-    if ( strprintf(COPYRIGHT_HOLDERS, COPYRIGHT_HOLDERS_SUBSTITUTION).find("Bitcoin Core") == std::string::npos
-            || strprintf(COPYRIGHT_HOLDERS, COPYRIGHT_HOLDERS_SUBSTITUTION).find("Dogecoin Core") == std::string::npos ) {
-        strCopyrightHolders += "\n" + strPrefix + "The Bitcoin Core and Dogecoin Core developers";
+    if ( strprintf( COPYRIGHT_HOLDERS, COPYRIGHT_HOLDERS_SUBSTITUTION ).find( "Bitcoin Core" ) == std::string::npos
+            || strprintf( COPYRIGHT_HOLDERS, COPYRIGHT_HOLDERS_SUBSTITUTION ).find( "Dogecoin Core" ) == std::string::npos ) {
+        copyrightHolders += "\n" + prefix + "The Bitcoin Core and Dogecoin Core developers" ;
     }
 
-    return strCopyrightHolders;
+    return copyrightHolders ;
 }

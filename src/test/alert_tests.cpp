@@ -19,7 +19,6 @@
 #include <fstream>
 
 #include <boost/filesystem/operations.hpp>
-#include <boost/foreach.hpp>
 #include <boost/test/unit_test.hpp>
 
 extern std::map<std::string, std::string> mapArgs;
@@ -34,8 +33,8 @@ extern std::map<std::string, std::string> mapArgs;
     alert.nRelayUntil   = 60;
     alert.nExpiration   = 24 * 60 * 60;
     alert.nID           = 1;
-    alert.nCancel       = 0;   // cancels previous messages up to this ID number
-    alert.nMinVer       = 0;  // These versions are protocol versions
+    alert.nCancel       = 0;  // cancels previous messages up to this ID number
+    alert.nMinVer       = 0;  // these versions are protocol versions
     alert.nMaxVer       = 999001;
     alert.nPriority     = 1;
     alert.strComment    = "Alert comment";
@@ -88,15 +87,16 @@ struct ReadAlerts : public TestingSetup
         std::vector<unsigned char> vch(alertTests, alertTests + sizeof(alertTests));
         CDataStream stream( vch, SER_DISK, PEER_VERSION ) ;
         try {
-            while (!stream.eof())
+            while ( ! stream.eof() )
             {
-                CAlert alert;
-                stream >> alert;
-                alerts.push_back(alert);
+                CAlert alert ;
+                stream >> alert ;
+                alerts.push_back( alert ) ;
             }
         }
-        catch (const std::exception&) { }
+        catch ( const std::exception & ) { }
     }
+
     ~ReadAlerts() { }
 
     static std::vector<std::string> read_lines(boost::filesystem::path filepath)
@@ -111,8 +111,8 @@ struct ReadAlerts : public TestingSetup
         return result;
     }
 
-    std::vector<CAlert> alerts;
-};
+    std::vector< CAlert > alerts ;
+} ;
 
 BOOST_FIXTURE_TEST_SUITE(Alert_tests, ReadAlerts)
 
@@ -122,12 +122,12 @@ BOOST_AUTO_TEST_CASE(AlertApplies)
     SetMockTime(11);
     const std::vector< unsigned char > & alertKey = ParamsFor( "main" ).AlertKey() ;
 
-    BOOST_FOREACH(const CAlert& alert, alerts)
-    {
-        BOOST_CHECK(alert.CheckSignature(alertKey));
-    }
+    BOOST_CHECK( alerts.size() >= 3 ) ;
 
-    BOOST_CHECK(alerts.size() >= 3);
+    for ( const CAlert & alert : alerts ) {
+        BOOST_CHECK( alert.CheckSignature( alertKey ) ) ;
+        LogPrintf( "alert_tests.cpp: AlertApplies: here is %s\n", alert.toString() ) ;
+    }
 
     // Matches:
     BOOST_CHECK(alerts[0].AppliesTo(1, ""));
@@ -168,8 +168,8 @@ BOOST_AUTO_TEST_CASE(AlertNotify)
 
     mapArgs["-alertnotify"] = std::string("echo %s >> ") + temp.string();
 
-    BOOST_FOREACH(CAlert alert, alerts)
-        alert.ProcessAlert(alertKey, false);
+    for ( CAlert & alert : alerts )
+        alert.ProcessAlert( alertKey, false ) ;
 
     std::vector<std::string> r = read_lines(temp);
     BOOST_CHECK_EQUAL(r.size(), 4u);

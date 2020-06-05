@@ -200,9 +200,8 @@ extern std::string HelpExampleRpc(const std::string& methodname, const std::stri
 
 extern void EnsureWalletIsUnlocked();
 
-bool StartRPC();
-void InterruptRPC();
-void StopRPC();
+bool StartRPC() ;
+void StopRPC() ;
 std::string JSONRPCExecBatch(const UniValue& vReq);
 void RPCNotifyBlockChange(bool ibd, const CBlockIndex *);
 

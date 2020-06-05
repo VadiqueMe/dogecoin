@@ -87,6 +87,7 @@ DOGECOIN_CORE_H = \
   chain.h \
   chainparams.h \
   chainparamsbase.h \
+  chainparamsutil.h \
   checkpoints.h \
   checkqueue.h \
   peerversion.h \
@@ -153,6 +154,9 @@ DOGECOIN_CORE_H = \
   ui_interface.h \
   undo.h \
   util.h \
+  utillog.h \
+  utilhelp.h \
+  utilthread.h \
   utilmoneystr.h \
   utiltime.h \
   validation.h \
@@ -362,6 +366,7 @@ libdogecoin_util_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libdogecoin_util_a_SOURCES = \
   support/lockedpool.cpp \
   chainparamsbase.cpp \
+  chainparamsutil.cpp \
   peerversion.cpp \
   compat/glibc_sanity.cpp \
   compat/glibcxx_sanity.cpp \
@@ -372,6 +377,9 @@ libdogecoin_util_a_SOURCES = \
   sync.cpp \
   threadinterrupt.cpp \
   util.cpp \
+  utillog.cpp \
+  utilhelp.cpp \
+  utilthread.cpp \
   utilstr.cpp \
   utilmoneystr.cpp \
   utilstrencodings.cpp \

@@ -199,11 +199,11 @@ bool Intro::pickDataDirectory()
             }
             dataDir = intro.getDataDirectory();
             try {
-                TryCreateDirectory(GUIUtil::qstringToBoostPath(dataDir));
-                break;
-            } catch (const fs::filesystem_error&) {
-                QMessageBox::critical(0, tr(PACKAGE_NAME),
-                    tr("Error: Specified data directory \"%1\" cannot be created.").arg(dataDir));
+                TryToCreateDirectory( GUIUtil::qstringToBoostPath( dataDir ) ) ;
+                break ;
+            } catch ( const fs::filesystem_error & ) {
+                QMessageBox::critical( 0, PACKAGE_NAME,
+                    tr( "Error: Specified data directory \"%1\" cannot be created." ).arg( dataDir ) ) ;
                 /* fall through, back to choosing screen */
             }
         }

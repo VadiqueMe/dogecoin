@@ -13,6 +13,7 @@
 #include "amount.h"
 #include "chain.h"
 #include "chainparams.h"
+#include "chainparamsutil.h"
 #include "checkpoints.h"
 #include "compat/sanity.h"
 #include "consensus/validation.h"
@@ -36,6 +37,9 @@
 #include "torcontrol.h"
 #include "ui_interface.h"
 #include "util.h"
+#include "utilstr.h"
+#include "utilhelp.h"
+#include "utilthread.h"
 #include "utilmoneystr.h"
 #include "validationinterface.h"
 #ifdef ENABLE_WALLET
@@ -56,12 +60,10 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/algorithm/string/split.hpp>
-#include <boost/bind.hpp>
 #include <boost/filesystem.hpp>
-#include <boost/function.hpp>
 #include <boost/interprocess/sync/file_lock.hpp>
 #include <boost/lexical_cast.hpp>
-#include <boost/thread.hpp>
+
 #include <openssl/crypto.h>
 
 #if ENABLE_ZMQ
@@ -97,48 +99,6 @@ enum BindFlags {
     BF_WHITELIST    = (1U << 2),
 };
 
-//////////////////////////////////////////////////////////////////////////////
-//
-// Shutdown
-//
-
-//
-// Thread management and startup/shutdown:
-//
-// The network-processing threads are all part of a thread group
-// created by AppInit() or the Qt main() function
-//
-// A clean exit happens when StartShutdown() or the SIGTERM
-// signal handler sets fRequestShutdown, which triggers
-// the DetectShutdownThread(), which interrupts the main thread group.
-// DetectShutdownThread() then exits, which causes AppInit() to
-// continue (it .joins the shutdown thread)
-//
-// Shutdown() is then called to clean up database connections,
-// and stop other threads that should only be stopped after
-// the main network-processing threads have exited
-//
-// Note that if running -daemon the parent process returns from AppInit2
-// before adding any threads to the threadGroup, so .join_all() returns
-// immediately and the parent exits from main()
-//
-// Shutdown for Qt is very similar, only it uses a QTimer to detect
-// fRequestShutdown getting set, and then does the normal Qt
-// shutdown thing
-//
-
-std::atomic < bool > fRequestShutdown( false ) ;
-std::atomic < bool > fDumpMempoolLater( false ) ;
-
-void StartShutdown()
-{
-    fRequestShutdown = true ;
-}
-
-bool ShutdownRequested()
-{
-    return fRequestShutdown ;
-}
 
 /**
  * This is a minimally invasive approach to shutdown on LevelDB read errors from the
@@ -171,15 +131,25 @@ static CCoinsViewDB * pcoinsdbview = nullptr ;
 static CCoinsViewErrorCatcher * pcoinscatcher = nullptr ;
 static std::unique_ptr< ECCVerifyHandle > globalVerifyHandle ;
 
-void Interrupt(boost::thread_group& threadGroup)
+static CScheduler * theScheduler = nullptr ;
+static std::thread * schedulerThread = nullptr ;
+
+void StopAndJoinThreads( std::vector< std::thread > & threads )
 {
-    InterruptHTTPServer();
-    InterruptHTTPRPC();
-    InterruptRPC();
-    InterruptREST();
-    InterruptTorControl();
+    InterruptHTTPServer() ;
+    InterruptREST() ;
+    InterruptTorControl() ;
     if ( g_connman != nullptr ) g_connman->Interrupt() ;
-    threadGroup.interrupt_all();
+    if ( theScheduler != nullptr ) theScheduler->stop() ;
+    StopScriptChecking() ;
+
+    JoinAll( threads ) ;
+
+    if ( schedulerThread != nullptr ) {
+        schedulerThread->join() ;
+        delete schedulerThread ;
+        schedulerThread = nullptr ;
+    }
 }
 
 static const uint64_t MEMPOOL_DUMP_VERSION = 1 ;
@@ -233,7 +203,7 @@ static bool LoadMempoolFromDump()
                 ++ skipped ;
             }
 
-            if ( ShutdownRequested() ) return false;
+            if ( ShutdownRequested() ) return false ;
         }
         std::map< uint256, CAmount > mapDeltas ;
         file >> mapDeltas ;
@@ -289,37 +259,34 @@ static void DumpMempoolToFile()
         file.fclose() ;
         RenameOver( GetDirForData() / "mempool.dat.new", GetDirForData() / "mempool.dat" ) ;
         int64_t last = GetTimeMicros() ;
-        LogPrintf( "Dumped mempool: %g s to copy, %g s to dump\n", ( mid - start ) * 0.000001, ( last - mid ) * 0.000001 ) ;
+        LogPrintf( "Dumped mempool: %.6f s to copy, %.6f s to dump\n", ( mid - start ) * 0.000001, ( last - mid ) * 0.000001 ) ;
     } catch ( const std::exception & e ) {
         LogPrintf( "Can't dump mempool: %s. Continuing anyway\n", e.what() ) ;
     }
 }
 
+std::atomic < bool > fDumpMempoolLater( false ) ;
+
 void Shutdown()
 {
-    LogPrintf("%s: In progress...\n", __func__);
-    static CCriticalSection cs_Shutdown;
-    TRY_LOCK(cs_Shutdown, lockShutdown);
-    if (!lockShutdown)
-        return;
+    LogPrintf( "%s: In progress...\n", __func__ ) ;
+    static CCriticalSection cs_Shutdown ;
+    TRY_LOCK( cs_Shutdown, lockShutdown ) ;
+    if ( ! lockShutdown ) return ;
 
-    /// Note: Shutdown() must be able to handle cases in which AppInit2() failed part of the way,
-    /// for example if the data directory was found to be locked.
-    /// Be sure that anything that writes files or flushes caches only does this if the respective
-    /// module was initialized.
-    RenameThread("dogecoin-shutoff");
-    mempool.AddTransactionsUpdated(1);
+    RenameThread( "dogecoin-shutoff" ) ;
+    mempool.AddTransactionsUpdated( 1 ) ;
 
     GenerateCoins( false, 0, Params() ) ;
 
     StopHTTPRPC();
     StopREST();
-    StopRPC();
+    StopRPC() ;
     StopHTTPServer();
+
 #ifdef ENABLE_WALLET
-    // Dogecoin 1.14 TODO: ShutdownRPCMining();
-    if (pwalletMain)
-        pwalletMain->Flush(false);
+    if ( pwalletMain != nullptr )
+        pwalletMain->FlushWallet( false ) ;
 #endif
 
     MapPort(false);
@@ -332,30 +299,27 @@ void Shutdown()
     if ( fDumpMempoolLater )
         DumpMempoolToFile() ;
 
+    if ( pcoinsTip != nullptr )
+        FlushStateToDisk() ;
+
     {
-        LOCK(cs_main);
-        if (pcoinsTip != NULL) {
-            FlushStateToDisk();
-        }
-        delete pcoinsTip;
-        pcoinsTip = NULL;
-        delete pcoinscatcher;
-        pcoinscatcher = NULL;
-        delete pcoinsdbview;
-        pcoinsdbview = NULL;
-        delete pblocktree;
-        pblocktree = NULL;
+        LOCK( cs_main ) ;
+
+        delete pcoinsTip ;
+        pcoinsTip = nullptr ;
+        delete pcoinscatcher ;
+        pcoinscatcher = nullptr ;
+        delete pcoinsdbview ;
+        pcoinsdbview = nullptr ;
+        delete pblocktree ;
+        pblocktree = nullptr ;
     }
-#ifdef ENABLE_WALLET
-    if (pwalletMain)
-        pwalletMain->Flush(true);
-#endif
 
 #if ENABLE_ZMQ
-    if (pzmqNotificationInterface) {
-        UnregisterValidationInterface(pzmqNotificationInterface);
-        delete pzmqNotificationInterface;
-        pzmqNotificationInterface = NULL;
+    if ( pzmqNotificationInterface != nullptr ) {
+        UnregisterValidationInterface( pzmqNotificationInterface ) ;
+        delete pzmqNotificationInterface ;
+        pzmqNotificationInterface = nullptr ;
     }
 #endif
 
@@ -366,11 +330,17 @@ void Shutdown()
         LogPrintf("%s: Unable to remove pidfile: %s\n", __func__, e.what());
     }
 #endif
-    UnregisterAllValidationInterfaces();
+
+    UnregisterAllValidationInterfaces() ;
+
 #ifdef ENABLE_WALLET
-    delete pwalletMain;
-    pwalletMain = NULL;
+    if ( pwalletMain != nullptr )
+        pwalletMain->FlushWallet( true ) ;
+
+    delete pwalletMain ;
+    pwalletMain = nullptr ;
 #endif
+
     globalVerifyHandle.reset();
     ECC_Stop();
     LogPrintf("%s: done\n", __func__);
@@ -379,14 +349,14 @@ void Shutdown()
 /**
  * Signal handlers are very limited in what they are allowed to do, so:
  */
-void HandleSIGTERM(int)
+void HandleSIGTERM( int )
 {
-    fRequestShutdown = true;
+    RequestShutdown() ;
 }
 
-void HandleSIGHUP(int)
+void HandleSIGHUP( int )
 {
-    fReopenDebugLog = true;
+    fReopenDebugLog = true ;
 }
 
 bool static Bind(CConnman& connman, const CService &addr, unsigned int flags) {
@@ -410,7 +380,7 @@ void OnRPCStopped()
     uiInterface.NotifyBlockTip.disconnect(&RPCNotifyBlockChange);
     RPCNotifyBlockChange(false, nullptr);
     cvBlockChange.notify_all();
-    LogPrint("rpc", "RPC stopped.\n");
+    LogPrint( "rpc", "RPC stopped\n" ) ;
 }
 
 void OnRPCPreCommand(const CRPCCommand& cmd)
@@ -437,8 +407,7 @@ std::string HelpMessage( WhatHelpMessage what )
     if (showDebug)
         strUsage += HelpMessageOpt("-blocksonly", strprintf(_("Whether to operate in a blocks only mode (default: %u)"), DEFAULT_BLOCKSONLY));
     strUsage += HelpMessageOpt("-conf=<file>", strprintf(_("Specify configuration file (default: %s)"), DOGECOIN_CONF_FILENAME));
-    if ( what == HELP_MESSAGE_DOGECOIND )
-    {
+    if ( what == HELP_MESSAGE_DOGECOIND ) {
 #if HAVE_DECL_DAEMON
         strUsage += HelpMessageOpt("-daemon", _("Run in the background as a daemon and accept commands"));
 #endif
@@ -450,8 +419,8 @@ std::string HelpMessage( WhatHelpMessage what )
     strUsage += HelpMessageOpt("-maxmempool=<n>", strprintf(_("Keep the transaction memory pool below <n> megabytes (default: %u)"), DEFAULT_MAX_MEMPOOL_SIZE));
     strUsage += HelpMessageOpt("-mempoolexpiry=<n>", strprintf(_("Do not keep transactions in the mempool longer than <n> hours (default: %u)"), DEFAULT_MEMPOOL_EXPIRY));
     strUsage += HelpMessageOpt("-blockreconstructionextratxn=<n>", strprintf(_("Extra transactions to keep in memory for compact block reconstructions (default: %u)"), DEFAULT_BLOCK_RECONSTRUCTION_EXTRA_TXN));
-    strUsage += HelpMessageOpt("-par=<n>", strprintf(_("Set the number of script verification threads (%u to %d, 0 = auto, <0 = leave that many cores free, default: %d)"),
-        -GetNumCores(), MAX_SCRIPTCHECK_THREADS, DEFAULT_SCRIPTCHECK_THREADS));
+    strUsage += HelpMessageOpt( "-par=<n>", strprintf( _("Set the number of script verification threads (%u to %d, 0 = auto, <0 = leave that many cores free, default: %d)"),
+        - GetNumCores(), MAX_SCRIPTCHECK_THREADS, DEFAULT_SCRIPTCHECK_THREADS ) ) ;
 #ifndef WIN32
     strUsage += HelpMessageOpt("-pid=<file>", strprintf(_("Specify pid file (default: %s)"), BITCOIN_PID_FILENAME));
 #endif
@@ -569,7 +538,7 @@ std::string HelpMessage( WhatHelpMessage what )
     }
     strUsage += HelpMessageOpt( "-shrinkdebugfile", "Shrink debug log file on startup (default: 1 when no -debug)" ) ;
 
-    AppendParamsHelpMessages(strUsage, showDebug);
+    AppendChainParamsHelp( strUsage, showDebug ) ;
 
     strUsage += HelpMessageGroup(_("Node relay options:"));
     if ( showDebug ) {
@@ -640,21 +609,21 @@ static void BlockNotifyCallback(bool initialSync, const CBlockIndex *pBlockIndex
 
     boost::replace_all(strCmd, "%s", pBlockIndex->GetBlockSha256Hash().GetHex());
     boost::replace_all(strCmd, "%i", boost::lexical_cast<std::string>(pBlockIndex->nHeight));
-    boost::thread t(runCommand, strCmd); // thread runs free
+    std::thread t( runCommand, strCmd ) ; // thread runs free
 }
 
-static bool fHaveGenesis = false;
-static boost::mutex cs_GenesisWait;
-static CConditionVariable condvar_GenesisWait;
+static bool fHaveGenesis = false ;
+static std::mutex cs_GenesisWait ;
+static std::condition_variable genesisWaitCondVar ;
 
-static void BlockNotifyGenesisWait(bool, const CBlockIndex *pBlockIndex)
+static void BlockNotifyGenesisWait( bool, const CBlockIndex * pBlockIndex )
 {
-    if (pBlockIndex != NULL) {
+    if ( pBlockIndex != nullptr ) {
         {
-            boost::unique_lock<boost::mutex> lock_GenesisWait(cs_GenesisWait);
-            fHaveGenesis = true;
+            std::unique_lock< std::mutex > lockGenesisWait( cs_GenesisWait ) ;
+            fHaveGenesis = true ;
         }
-        condvar_GenesisWait.notify_all();
+        genesisWaitCondVar.notify_all() ;
     }
 }
 
@@ -713,16 +682,16 @@ void CleanupBlockRevFiles()
     }
 }
 
-void ThreadImport(std::vector<boost::filesystem::path> vImportFiles)
+void ThreadImportBlockFiles( std::vector< boost::filesystem::path > vImportFiles )
 {
-    const CChainParams& chainparams = Params();
-    RenameThread("dogecoin-loadblk");
+    RenameThread( "loadblk" ) ;
+    const CChainParams & chainparams = Params() ;
 
     {
-    CImportingNow imp;
+    CImportingNow imp ;
 
     // -reindex
-    if (fReindex) {
+    if ( fReindex ) {
         int nFile = 0;
         while (true) {
             CDiskBlockPos pos(nFile, 0);
@@ -762,26 +731,25 @@ void ThreadImport(std::vector<boost::filesystem::path> vImportFiles)
         if (file) {
             LogPrintf("Importing blocks file %s...\n", path.string());
             LoadExternalBlockFile(chainparams, file);
-        } else {
-            LogPrintf("Warning: Could not open blocks file %s\n", path.string());
-        }
+        } else
+            LogPrintf( "): could not open blocks file %s\n", path.string() ) ;
     }
 
-    // scan for better chains in the block chain database, that are not yet connected in the active best chain
+    // scan for better chains that are not yet connected to the active best chain
     CValidationState state;
     if (!ActivateBestChain(state, chainparams)) {
         LogPrintf("Failed to connect best block");
-        StartShutdown();
+        RequestShutdown() ;
     }
 
     if (GetBoolArg("-stopafterblockimport", DEFAULT_STOPAFTERBLOCKIMPORT)) {
         LogPrintf("Stopping after block import\n");
-        StartShutdown();
+        RequestShutdown() ;
     }
-    } // End scope of CImportingNow
+    } // scope of CImportingNow
 
     LoadMempoolFromDump() ;
-    fDumpMempoolLater = ! fRequestShutdown ;
+    fDumpMempoolLater = ! ShutdownRequested() ;
 }
 
 /** Sanity checks
@@ -800,7 +768,7 @@ bool InitSanityCheck(void)
     return true;
 }
 
-bool AppInitServers(boost::thread_group& threadGroup)
+static bool AppInitServers()
 {
     RPCServer::OnStarted(&OnRPCStarted);
     RPCServer::OnStopped(&OnRPCStopped);
@@ -889,13 +857,15 @@ static std::string ResolveErrMsg(const char * const optname, const std::string& 
 
 void InitLogging()
 {
-    fPrintToConsole = GetBoolArg("-printtoconsole", false);
-    fLogTimestamps = GetBoolArg("-logtimestamps", DEFAULT_LOGTIMESTAMPS);
-    fLogTimeMicros = GetBoolArg("-logtimemicros", DEFAULT_LOGTIMEMICROS);
+    if ( GetBoolArg( "-printtoconsole", false ) )
+        PickPrintToConsole() ;
+
+    fLogTimestamps = GetBoolArg( "-logtimestamps", DEFAULT_LOGTIMESTAMPS ) ;
+    fLogTimeMicros = GetBoolArg( "-logtimemicros", DEFAULT_LOGTIMEMICROS ) ;
     fLogIPs = GetBoolArg( "-logips", DEFAULT_LOGIPS ) ;
 
-    LogPrintf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    LogPrintf("Dogecoin version %s\n", FormatFullVersion());
+    LogPrintf( "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" ) ;
+    LogPrintf( "Dogecoin version %s\n", FormatFullVersion() ) ;
 }
 
 namespace { // Variables internal to initialization process only
@@ -1011,12 +981,12 @@ bool AppInitParameterInteraction()
 
     // ********************************************************* Step 3: parameter-to-internal-flags
 
-    fDebug = mapMultiArgs.count("-debug");
-    // Special-case: if -debug=0/-nodebug is set, turn off debugging messages
-    if (fDebug) {
-        const std::vector<std::string>& categories = mapMultiArgs.at("-debug");
-        if (GetBoolArg("-nodebug", false) || find(categories.begin(), categories.end(), std::string("0")) != categories.end())
-            fDebug = false;
+    fDebug = mapMultiArgs.count( "-debug" ) ;
+    if ( fDebug ) {
+        const std::vector< std::string > & categories = mapMultiArgs.at( "-debug" ) ;
+        // if -debug=0 or -nodebug is set, turn off debugging messages
+        if ( GetBoolArg( "-nodebug", false ) || std::find( categories.begin(), categories.end(), std::string("0") ) != categories.end() )
+            fDebug = false ;
     }
 
     // Check for -debugnet
@@ -1104,8 +1074,8 @@ bool AppInitParameterInteraction()
     nBytesPerSigOp = GetArg( "-bytespersigop", nBytesPerSigOp ) ;
 
 #ifdef ENABLE_WALLET
-    if (!CWallet::ParameterInteraction())
-        return false;
+    if ( ! CWallet::ParseParameters() )
+        return false ;
 #endif
 
     fIsBareMultisigStd = GetBoolArg("-permitbaremultisig", DEFAULT_PERMIT_BAREMULTISIG);
@@ -1207,7 +1177,7 @@ bool AppInitSanityChecks()
     return LockDataDirectory(true);
 }
 
-bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
+bool AppInitMain( std::vector< std::thread > & threads, CScheduler & scheduler )
 {
     const CChainParams & chainparams = Params() ;
 
@@ -1230,27 +1200,27 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
         ShrinkLogFile() ;
     }
 
-    if (fPrintToDebugLog)
-        OpenDebugLog();
+    OpenDebugLog() ;
 
-    if ( ! fLogTimestamps )
-        LogPrintf( "Startup time: %s\n", DateTimeStrFormat( "%Y-%m-%d %H:%M:%S", GetTime() ) ) ;
+    LogPrintf( "Startup time: %s\n", DateTimeStrFormat( "%Y-%m-%d %H:%M:%S", GetTime() ) ) ;
     LogPrintf( "Default data directory %s\n", GetDefaultDataDir().string() ) ;
     LogPrintf( "Using data directory %s\n", GetDirForData().string() ) ;
     LogPrintf( "Using config file %s\n", GetConfigFile( GetArg( "-conf", DOGECOIN_CONF_FILENAME ) ).string() ) ;
     LogPrintf( "Using at most %i automatic connections (%i file descriptors available)\n", nMaxConnections, nFD ) ;
 
-    InitSignatureCache();
+    InitSignatureCache() ;
 
-    LogPrintf("Using %u threads for script verification\n", nScriptCheckThreads);
-    if (nScriptCheckThreads) {
-        for (int i=0; i<nScriptCheckThreads-1; i++)
-            threadGroup.create_thread(&ThreadScriptCheck);
+    LogPrintf( "Using %u threads for script verification\n", nScriptCheckThreads ) ;
+    if ( nScriptCheckThreads > 1 ) {
+        for ( int i = 0 ; i < nScriptCheckThreads - 1 ; i ++ )
+            threads.push_back( std::thread( &ThreadScriptCheck ) ) ;
     }
 
-    // Start the lightweight task scheduler thread
-    CScheduler::Function serviceLoop = boost::bind(&CScheduler::serviceQueue, &scheduler);
-    threadGroup.create_thread(boost::bind(&TraceThread<CScheduler::Function>, "scheduler", serviceLoop));
+    // Start the scheduler thread
+    assert( schedulerThread == nullptr ) ;
+    CScheduler::Function serviceLoop = std::bind( &CScheduler::serviceQueue, &scheduler ) ;
+    schedulerThread = new std::thread( std::bind( &TraceThread< CScheduler::Function >, "scheduler", serviceLoop ) ) ;
+    theScheduler = &scheduler ;
 
     /* Start the RPC server already.  It will be started in "warmup" mode
      * and not really process calls already (but it will signify connections
@@ -1260,7 +1230,7 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
     if (GetBoolArg("-server", false))
     {
         uiInterface.InitMessage.connect(SetRPCWarmupStatus);
-        if (!AppInitServers(threadGroup))
+        if ( ! AppInitServers() )
             return InitError(_("Unable to start HTTP server. See debug log for details."));
     }
 
@@ -1370,7 +1340,7 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
 
     // see Step 2: parameter interactions for more information about these
     fListen = GetBoolArg("-listen", DEFAULT_LISTEN);
-    fDiscover = GetBoolArg("-discover", true);
+    fDiscoverIP = GetBoolArg( "-discover", true ) ;
     fNameLookup = GetBoolArg("-dns", DEFAULT_NAME_LOOKUP);
     fRelayTxes = !GetBoolArg("-blocksonly", DEFAULT_BLOCKSONLY);
 
@@ -1542,8 +1512,11 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
                     }
                 }
 
-                if (!CVerifyDB().VerifyDB(chainparams, pcoinsdbview, GetArg("-checklevel", DEFAULT_CHECKLEVEL),
-                              GetArg("-checkblocks", DEFAULT_CHECKBLOCKS))) {
+                if ( ! WVerifyDB().VerifyDB(
+                          chainparams, pcoinsdbview,
+                          GetArg( "-checklevel", DEFAULT_CHECKLEVEL ),
+                          GetArg( "-checkblocks", DEFAULT_CHECKBLOCKS )
+                ) ) {
                     strLoadError = _("Corrupted block database detected");
                     break;
                 }
@@ -1563,9 +1536,9 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
                     strLoadError + ".\n\n" + _("Do you want to rebuild the block database now?"),
                     strLoadError + ".\nPlease restart with -reindex or -reindex-chainstate to recover.",
                     "", CClientUIInterface::MSG_ERROR | CClientUIInterface::BTN_ABORT);
-                if (fRet) {
-                    fReindex = true;
-                    fRequestShutdown = false;
+                if ( fRet ) {
+                    fReindex = true ;
+                    RejectShutdown() ;
                 } else {
                     LogPrintf("Aborted block database rebuild. Exiting.\n");
                     return false;
@@ -1578,27 +1551,27 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
 
     // As LoadBlockIndex can take several minutes, it's possible the user
     // requested to kill the GUI during the last operation. If so, exit.
-    // As the program has not fully started yet, Shutdown() is possibly overkill
-    if (fRequestShutdown)
+    // As the program has not fully started yet, Shutdown() is excessive
+    if ( ShutdownRequested() )
     {
-        LogPrintf("Shutdown requested. Exiting.\n");
-        return false;
+        LogPrintf( "Shutdown requested. Exiting\n" ) ;
+        return false ;
     }
 
     LogPrintf( " block index  %.3f s\n", ( GetTimeMillis() - nStart ) * 0.001 ) ;
 
     // ********************************************************* Step 8: load wallet
 #ifdef ENABLE_WALLET
-    if (!CWallet::InitLoadWallet())
-        return false;
+    if ( ! CWallet::InitLoadWallet() )
+        return false ;
 #else
-    LogPrintf("No wallet support compiled in!\n");
+    LogPrintf( "No wallet support compiled in :/\n" ) ;
 #endif
 
     // ********************************************************* Step 9: data directory maintenance
 
     // if pruning, unset the service bit and perform the initial blockstore prune
-    // after any wallet rescanning has taken place.
+    // after any wallet rescanning has taken place
     if (fPruneMode) {
         LogPrintf("Unsetting NODE_NETWORK on prune mode\n");
         nLocalServices = ServiceFlags(nLocalServices & ~NODE_NETWORK);
@@ -1636,22 +1609,26 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
     if ( IsArgSet( "-blocknotify" ) )
         uiInterface.NotifyBlockTip.connect( BlockNotifyCallback ) ;
 
-    std::vector< boost::filesystem::path > vImportFiles ;
-    if ( mapMultiArgs.count( "-loadblock" ) )
     {
-        for ( const std::string & strFile : mapMultiArgs.at( "-loadblock" ) )
-            vImportFiles.push_back( strFile ) ;
-    }
+        std::vector< boost::filesystem::path > vImportFiles ;
+        if ( mapMultiArgs.count( "-loadblock" ) )
+            for ( const std::string & strFile : mapMultiArgs.at( "-loadblock" ) )
+                vImportFiles.push_back( strFile ) ;
 
-    threadGroup.create_thread(boost::bind(&ThreadImport, vImportFiles));
+        std::thread importBlkThread( std::bind(
+                &TraceThread< std::function< void() > >,
+                "loadblk",
+                std::function< void() >( std::bind( &ThreadImportBlockFiles, vImportFiles ) )
+        ) ) ;
+        threads.push_back( std::move( importBlkThread ) ) ; // for joining on shutdown
+    }
 
     // Wait for genesis block to be processed
     {
-        boost::unique_lock<boost::mutex> lock(cs_GenesisWait);
-        while (!fHaveGenesis) {
-            condvar_GenesisWait.wait(lock);
-        }
-        uiInterface.NotifyBlockTip.disconnect(BlockNotifyGenesisWait);
+        std::unique_lock< std::mutex > lock( cs_GenesisWait ) ;
+        while ( ! fHaveGenesis )
+            genesisWaitCondVar.wait( lock ) ;
+        uiInterface.NotifyBlockTip.disconnect( BlockNotifyGenesisWait ) ;
     }
 
     // ********************************************************* Step 11: start node
@@ -1660,13 +1637,13 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
     LogPrintf( "mapBlockIndex.size() = %u\n", mapBlockIndex.size() ) ;
     LogPrintf( "nBestHeight = %d\n", chainActive.Height() ) ;
 
-    if (GetBoolArg("-listenonion", DEFAULT_LISTEN_ONION))
-        StartTorControl(threadGroup, scheduler);
+    if ( GetBoolArg( "-listenonion", DEFAULT_LISTEN_ONION ) )
+        StartTorControl() ;
 
-    Discover(threadGroup);
+    DiscoverLocalhostIP() ;
 
     // Map ports with UPnP
-    MapPort(GetBoolArg("-upnp", DEFAULT_UPNP));
+    MapPort( GetBoolArg( "-upnp", DEFAULT_UPNP ) ) ;
 
     std::string strNodeError;
     CConnman::Options connOptions;
@@ -1684,22 +1661,20 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
     connOptions.nMaxOutboundTimeframe = nMaxOutboundTimeframe;
     connOptions.nMaxOutboundLimit = nMaxOutboundLimit;
 
-    if (!connman.Start(scheduler, strNodeError, connOptions))
-        return InitError(strNodeError);
+    if ( ! connman.Start( scheduler, strNodeError, connOptions ) )
+        return InitError( strNodeError ) ;
 
     GenerateCoins( GetBoolArg( "-gen", DEFAULT_GENERATE ), GetArg( "-genthreads", DEFAULT_GENERATE_THREADS ), chainparams ) ;
 
     // ********************************************************* Step 12: finished
 
-    // Dogecoin: Do we need to do any RPC mining init here?
-
     SetRPCWarmupFinished();
-    uiInterface.InitMessage(_("Done loading"));
+    uiInterface.InitMessage( _("Done loading") ) ;
 
 #ifdef ENABLE_WALLET
-    if (pwalletMain)
-        pwalletMain->postInitProcess(threadGroup);
+    if ( pwalletMain != nullptr )
+        pwalletMain->postInitProcess( threads ) ;
 #endif
 
-    return !fRequestShutdown;
+    return ! ShutdownRequested() ;
 }

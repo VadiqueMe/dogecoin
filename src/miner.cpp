@@ -24,6 +24,7 @@
 #include "timedata.h"
 #include "txmempool.h"
 #include "util.h"
+#include "utilthread.h"
 #include "utilstr.h"
 #include "utilmoneystr.h"
 #include "validationinterface.h"
@@ -939,7 +940,7 @@ void MiningThread::MineBlocks()
 
                     // for regression testing, stop mining after a block is found
                     if ( chainparams.MineBlocksOnDemand() )
-                        throw std::string( "stop" ) ;
+                        throw std::string( "stopthread" ) ;
 
                     break ;
                 }
@@ -983,7 +984,7 @@ void MiningThread::MineBlocks()
             noncesScanned = 0 ;
         }
     } catch ( const std::string & s ) {
-        if ( s == "stop" ) {
+        if ( s == "stopthread" ) {
             endOfThread() ;
             return ;
         } else throw ;

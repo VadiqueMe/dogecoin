@@ -10,15 +10,14 @@
 #include "optionsdialog.h"
 #include "ui_optionsdialog.h"
 
-#include "unitsofcoin.h"
 #include "guiutil.h"
 #include "optionsmodel.h"
+#include "unitsofcoin.h"
+#include "utilthread.h"
 
 #include "validation.h" // for DEFAULT_SCRIPTCHECK_THREADS and MAX_SCRIPTCHECK_THREADS
 #include "netbase.h"
 #include "txdb.h" // for -dbcache defaults
-
-#include <boost/thread.hpp>
 
 #include <QDataWidgetMapper>
 #include <QDir>
@@ -39,8 +38,8 @@ OptionsDialog::OptionsDialog( QWidget * parent, bool enableWallet, bool showUrls
     /* Main elements init */
     ui->databaseCache->setMinimum(nMinDbCache);
     ui->databaseCache->setMaximum(nMaxDbCache);
-    ui->threadsScriptVerif->setMinimum(-GetNumCores());
-    ui->threadsScriptVerif->setMaximum(MAX_SCRIPTCHECK_THREADS);
+    ui->threadsScriptVerif->setMinimum( - GetNumCores() ) ;
+    ui->threadsScriptVerif->setMaximum( MAX_SCRIPTCHECK_THREADS ) ;
 
     /* Network elements init */
 #ifndef USE_UPNP

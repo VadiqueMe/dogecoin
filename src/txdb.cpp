@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -9,10 +10,9 @@
 #include "hash.h"
 #include "pow.h"
 #include "uint256.h"
+#include "util.h"
 
 #include <stdint.h>
-
-#include <boost/thread.hpp>
 
 static const char DB_COINS = 'c';
 static const char DB_BLOCK_FILES = 'f';
@@ -177,21 +177,25 @@ bool CBlockTreeDB::ReadFlag(const std::string &name, bool &fValue) {
     return true;
 }
 
-bool CBlockTreeDB::LoadBlockIndexGuts(boost::function<CBlockIndex*(const uint256&)> insertBlockIndex)
+bool CBlockTreeDB::LoadBlockIndexGuts( std::function< CBlockIndex*( const uint256 & ) > insertBlockIndex,
+                                        const std::atomic< bool > & running )
 {
-    std::unique_ptr<CDBIterator> pcursor(NewIterator());
+    std::unique_ptr< CDBIterator > pcursor( NewIterator() ) ;
 
     pcursor->Seek(std::make_pair(DB_BLOCK_INDEX, uint256()));
 
     // Load mapBlockIndex
-    while (pcursor->Valid()) {
-        boost::this_thread::interruption_point();
+    while ( pcursor->Valid() ) {
+        if ( ! running ) {
+            LogPrintf( "%s: stopping\n", __func__ ) ;
+            throw std::string( "stopthread" ) ;
+        }
         std::pair<char, uint256> key;
         if (pcursor->GetKey(key) && key.first == DB_BLOCK_INDEX) {
             CDiskBlockIndex diskindex;
             if (pcursor->GetValue(diskindex)) {
                 // Construct block index object
-                CBlockIndex* pindexNew = insertBlockIndex(diskindex.GetBlockSha256Hash());
+                CBlockIndex* pindexNew = insertBlockIndex( diskindex.GetBlockSha256Hash() ) ;
                 pindexNew->pprev          = insertBlockIndex( diskindex.sha256HashPrev ) ;
                 pindexNew->nHeight        = diskindex.nHeight;
                 pindexNew->nFile          = diskindex.nFile;
