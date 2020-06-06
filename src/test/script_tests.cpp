@@ -15,7 +15,7 @@
 #include "rpc/server.h"
 
 #if defined(HAVE_CONSENSUS_LIB)
-#include "script/dogecoinconsensus.h"
+#include "script/consensuslib.h"
 #endif
 
 #include <fstream>
@@ -168,15 +168,24 @@ void DoTest(const CScript& scriptPubKey, const CScript& scriptSig, const CScript
     BOOST_CHECK_MESSAGE(VerifyScript(scriptSig, scriptPubKey, &scriptWitness, flags, MutableTransactionSignatureChecker(&tx, 0, txCredit.vout[0].nValue), &err) == expect, message);
     BOOST_CHECK_MESSAGE(err == scriptError, std::string(FormatScriptError(err)) + " where " + std::string(FormatScriptError((ScriptError_t)scriptError)) + " expected: " + message);
 #if defined(HAVE_CONSENSUS_LIB)
-    CDataStream stream(SER_NETWORK, PROTOCOL_VERSION);
-    stream << tx2;
-    int libconsensus_flags = flags & dogecoinconsensus_SCRIPT_FLAGS_VERIFY_ALL;
-    if (libconsensus_flags == flags) {
-        if (flags & dogecoinconsensus_SCRIPT_FLAGS_VERIFY_WITNESS) {
-            BOOST_CHECK_MESSAGE(dogecoinconsensus_verify_script_with_amount(scriptPubKey.data(), scriptPubKey.size(), txCredit.vout[0].nValue, (const unsigned char*)&stream[0], stream.size(), 0, libconsensus_flags, NULL) == expect, message);
+    CDataStream stream( SER_NETWORK, PROTOCOL_VERSION ) ;
+    stream << tx2 ;
+    int libconsensus_flags = flags & consensus_SCRIPT_FLAGS_VERIFY_ALL ;
+    if ( libconsensus_flags == flags ) {
+        if ( flags & consensus_segwit_SCRIPT_FLAGS_VERIFY_WITNESS ) {
+            BOOST_CHECK_MESSAGE( dogecoinconsensus_verify_script_with_amount(
+                    scriptPubKey.data(), scriptPubKey.size(), txCredit.vout[0].nValue,
+                    (const unsigned char*)&stream[0], stream.size(), 0, libconsensus_flags, nullptr
+                ) == expect, message ) ;
         } else {
-            BOOST_CHECK_MESSAGE(dogecoinconsensus_verify_script_with_amount(scriptPubKey.data(), scriptPubKey.size(), 0, (const unsigned char*)&stream[0], stream.size(), 0, libconsensus_flags, NULL) == expect, message);
-            BOOST_CHECK_MESSAGE(dogecoinconsensus_verify_script(scriptPubKey.data(), scriptPubKey.size(), (const unsigned char*)&stream[0], stream.size(), 0, libconsensus_flags, NULL) == expect,message);
+            BOOST_CHECK_MESSAGE( dogecoinconsensus_verify_script_with_amount(
+                    scriptPubKey.data(), scriptPubKey.size(), 0,
+                    (const unsigned char*)&stream[0], stream.size(), 0, libconsensus_flags, nullptr
+                ) == expect, message ) ;
+            BOOST_CHECK_MESSAGE( dogecoinconsensus_verify_script(
+                    scriptPubKey.data(), scriptPubKey.size(),
+                    (const unsigned char*)&stream[0], stream.size(), 0, libconsensus_flags, nullptr
+                ) == expect, message ) ;
         }
     }
 #endif

@@ -1069,11 +1069,10 @@ void static ProcessGetData(CNode* pfrom, const Consensus::Params& consensusParam
                             // CMerkleBlock just contains hashes, so also push any transactions in the block the client did not see
                             // This avoids hurting performance by pointlessly requiring a round-trip
                             // Note that there is currently no way for a node to request any single transactions we didn't send here -
-                            // they must either disconnect and retry or request the full block.
+                            //   they must either disconnect and retry or request the full block
                             // Thus, the protocol spec specified allows for us to provide duplicate txn here,
-                            // however we MUST always provide at least what the remote peer needs
-                            typedef std::pair<unsigned int, uint256> PairType;
-                            for ( PairType & pair : merkleBlock.vMatchedTxn )
+                            //   however we must always provide at least what the remote peer needs
+                            for ( std::pair< unsigned int, uint256 > & pair : merkleBlock.vMatchedTxn )
                                 connman.PushMessage( pfrom, msgMaker.Make(
                                                         SERIALIZE_TRANSACTION_NO_WITNESS, NetMsgType::TX, *block.vtx[ pair.first ] ) ) ;
                         }
@@ -1378,7 +1377,7 @@ bool static ProcessMessage( CNode * pfrom, const std::string & strCommand, CData
         // Relay alerts
         {
             LOCK( cs_mapAlerts ) ;
-            for ( PAIRTYPE( const uint256, CAlert ) & item : mapAlerts )
+            for ( std::pair< const uint256, CAlert > & item : mapAlerts )
                  pfrom->PushAlert( item.second ) ;
         }
 

@@ -4,7 +4,7 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#include "dogecoinconsensus.h"
+#include "consensuslib.h"
 
 #include "primitives/transaction.h"
 #include "pubkey.h"
@@ -56,11 +56,11 @@ private:
     size_t m_remaining;
 };
 
-inline int set_error(dogecoinconsensus_error* ret, dogecoinconsensus_error serror)
+inline int set_error( consensus_script_error* ret, consensus_script_error serror)
 {
-    if (ret)
-        *ret = serror;
-    return 0;
+    if ( ret != nullptr )
+        *ret = serror ;
+    return 0 ;
 }
 
 struct ECCryptoClosure
@@ -74,26 +74,26 @@ ECCryptoClosure instance_of_eccryptoclosure ;
 /** Check that all specified flags are part of the libconsensus interface */
 static bool verify_flags( unsigned int flags )
 {
-    return ( flags & ~( dogecoinconsensus_SCRIPT_FLAGS_VERIFY_ALL ) ) == 0 ;
+    return ( flags & ~( consensus_SCRIPT_FLAGS_VERIFY_ALL ) ) == 0 ;
 }
 
 static int verify_script( const unsigned char * scriptPubKey, unsigned int scriptPubKeyLen, CAmount amount,
                           const unsigned char * txTo, unsigned int txToLen,
-                          unsigned int nIn, unsigned int flags, dogecoinconsensus_error * err )
+                          unsigned int nIn, unsigned int flags, consensus_script_error * err )
 {
     if ( ! verify_flags( flags ) )
-        return dogecoinconsensus_ERR_INVALID_FLAGS ;
+        return consensus_SCRIPT_ERR_INVALID_FLAGS ;
 
     try {
         TxInputStream stream( SER_NETWORK, PROTOCOL_VERSION, txTo, txToLen ) ;
         CTransaction tx( deserialize, stream ) ;
         if ( nIn >= tx.vin.size() )
-            return set_error( err, dogecoinconsensus_ERR_TX_INDEX ) ;
+            return set_error( err, consensus_SCRIPT_ERR_TX_INDEX ) ;
         if ( GetSerializeSize( tx, SER_NETWORK, PROTOCOL_VERSION ) != txToLen )
-            return set_error( err, dogecoinconsensus_ERR_TX_SIZE_MISMATCH ) ;
+            return set_error( err, consensus_SCRIPT_ERR_TX_SIZE_MISMATCH ) ;
 
         // Regardless of the verification result, the tx did not error
-        set_error( err, dogecoinconsensus_ERR_OK ) ;
+        set_error( err, consensus_SCRIPT_ERR_OK ) ;
 
         PrecomputedTransactionData txdata( tx ) ;
         return VerifyScript( tx.vin[ nIn ].scriptSig,
@@ -103,13 +103,13 @@ static int verify_script( const unsigned char * scriptPubKey, unsigned int scrip
                              TransactionSignatureChecker( &tx, nIn, amount, txdata ),
                              nullptr ) ;
     } catch ( const std::exception & ) {
-        return set_error( err, dogecoinconsensus_ERR_TX_DESERIALIZE ) ; // Error deserializing
+        return set_error( err, consensus_SCRIPT_ERR_TX_DESERIALIZE ) ; // can't deserialize
     }
 }
 
 int dogecoinconsensus_verify_script_with_amount( const unsigned char * scriptPubKey, unsigned int scriptPubKeyLen, CAmount amount,
                                                  const unsigned char * txTo, unsigned int txToLen,
-                                                 unsigned int nIn, unsigned int flags, dogecoinconsensus_error * err )
+                                                 unsigned int nIn, unsigned int flags, consensus_script_error * err )
 {
     CAmount am( amount ) ;
     return ::verify_script( scriptPubKey, scriptPubKeyLen, am, txTo, txToLen, nIn, flags, err ) ;
@@ -117,11 +117,11 @@ int dogecoinconsensus_verify_script_with_amount( const unsigned char * scriptPub
 
 int dogecoinconsensus_verify_script( const unsigned char * scriptPubKey, unsigned int scriptPubKeyLen,
                                      const unsigned char * txTo, unsigned int txToLen,
-                                     unsigned int nIn, unsigned int flags, dogecoinconsensus_error * err )
+                                     unsigned int nIn, unsigned int flags, consensus_script_error * err )
 {
-    if ( flags & dogecoinconsensus_SCRIPT_FLAGS_VERIFY_WITNESS ) {
-        return set_error( err, dogecoinconsensus_ERR_AMOUNT_REQUIRED ) ;
-    }
+    // for segwit scripts use ..verify_script_with_amount
+    if ( flags & consensus_segwit_SCRIPT_FLAGS_VERIFY_WITNESS )
+        return set_error( err, consensus_segwit_SCRIPT_ERR_AMOUNT_REQUIRED ) ;
 
     CAmount am( 0 ) ;
     return ::verify_script( scriptPubKey, scriptPubKeyLen, am, txTo, txToLen, nIn, flags, err ) ;

@@ -312,7 +312,7 @@ libdogecoin_consensus_a_SOURCES = \
   primitives/transaction.h \
   pubkey.cpp \
   pubkey.h \
-  script/dogecoinconsensus.cpp \
+  script/consensuslib.cpp \
   script/interpreter.cpp \
   script/interpreter.h \
   script/script.cpp \
@@ -467,7 +467,7 @@ dogecoin_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
 
 # dogecoinconsensus library #
 if BUILD_DOGECOIN_LIBS
-include_HEADERS = script/dogecoinconsensus.h
+include_HEADERS = script/consensuslib.h
 libdogecoinconsensus_la_SOURCES = $(crypto_libdogecoin_crypto_a_SOURCES) $(libdogecoin_consensus_a_SOURCES)
 
 if GLIBC_BACK_COMPAT

@@ -1570,7 +1570,7 @@ void CWallet::ReacceptWalletTransactions()
     }
 
     // Try to add wallet transactions to memory pool
-    for ( PAIRTYPE( const int64_t, CWalletTx* ) & item : mapSorted )
+    for ( std::pair< const int64_t, CWalletTx* > & item : mapSorted )
     {
         CWalletTx& wtx = *(item.second);
 
@@ -1833,7 +1833,7 @@ std::vector< uint256 > CWallet::ResendWalletTransactionsBefore( int64_t nTime, C
         if ( wtx.nTimeReceived > nTime ) continue ; // don't rebroadcast if newer than nTime
         mapSorted.insert( std::make_pair( wtx.nTimeReceived, &wtx ) ) ;
     }
-    for ( PAIRTYPE( const unsigned int, CWalletTx* ) & item : mapSorted )
+    for ( std::pair< const unsigned int, CWalletTx* > & item : mapSorted )
     {
         CWalletTx& wtx = *item.second ;
         if ( wtx.RelayWalletTransaction( connman ) )
@@ -2803,7 +2803,7 @@ bool CWallet::DelAddressBook(const CTxDestination& address)
         {
             // Delete destdata tuples associated with address
             std::string strAddress = CDogecoinAddress( address ).ToString() ;
-            for ( const PAIRTYPE( std::string, std::string ) & item : mapAddressBook[ address ].destdata )
+            for ( const std::pair< std::string, std::string > & item : mapAddressBook[ address ].destdata )
             {
                 CWalletDB( strWalletFile ).EraseDestData( strAddress, item.first ) ;
             }
@@ -3147,7 +3147,7 @@ std::set< CTxDestination > CWallet::GetAccountAddresses( const std::string & str
 {
     LOCK( cs_wallet ) ;
     std::set< CTxDestination > result ;
-    for ( const PAIRTYPE( CTxDestination, CAddressBookData ) & item : mapAddressBook )
+    for ( const std::pair< CTxDestination, CAddressBookData > & item : mapAddressBook )
     {
         const CTxDestination & address = item.first ;
         const std::string & strName = item.second.name ;

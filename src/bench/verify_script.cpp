@@ -5,7 +5,7 @@
 #include "bench.h"
 #include "key.h"
 #if defined(HAVE_CONSENSUS_LIB)
-#include "script/dogecoinconsensus.h"
+#include "script/consensuslib.h"
 #endif
 #include "script/script.h"
 #include "script/sign.h"
@@ -93,7 +93,7 @@ static void VerifyScriptBench(benchmark::State& state)
             txCredit.vout[0].scriptPubKey.data(),
             txCredit.vout[0].scriptPubKey.size(),
             txCredit.vout[0].nValue,
-            (const unsigned char*)stream.data(), stream.size(), 0, flags, nullptr);
+            (const unsigned char*)stream.data(), stream.size(), 0, flags, nullptr ) ;
         assert(csuccess == 1);
 #endif
     }

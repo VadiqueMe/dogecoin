@@ -84,7 +84,7 @@ std::string GetWarnings( const std::string & strFor )
     // Alerts
     {
         LOCK(cs_mapAlerts);
-        for ( PAIRTYPE( const uint256, CAlert ) & item : mapAlerts )
+        for ( std::pair< const uint256, CAlert > & item : mapAlerts )
         {
             const CAlert& alert = item.second;
             if (alert.AppliesToMe() && alert.nPriority > nPriority)

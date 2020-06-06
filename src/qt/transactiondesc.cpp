@@ -247,15 +247,14 @@ QString TransactionDesc::toHTML( CWallet * wallet, CWalletTx & wtx, TransactionR
     strHTML += "<b>" + tr("Output index of subtransaction") + ":</b> " + QString::number( rec->getSubtransactionIndex() ) + "<br>" ;
 
     // Message from dogecoin: URI like dogecoin:D123...?message=example
-    Q_FOREACH (const PAIRTYPE(std::string, std::string)& r, wtx.vOrderForm)
+    for ( const std::pair< std::string, std::string > & r : wtx.vOrderForm )
         if (r.first == "Message")
             strHTML += "<br><b>" + tr("Message") + ":</b><br>" + GUIUtil::HtmlEscape(r.second, true) + "<br>";
 
     //
     // PaymentRequest info:
     //
-    Q_FOREACH (const PAIRTYPE(std::string, std::string)& r, wtx.vOrderForm)
-    {
+    for ( const std::pair< std::string, std::string > & r : wtx.vOrderForm ) {
         if (r.first == "PaymentRequest")
         {
             PaymentRequestPlus req;
