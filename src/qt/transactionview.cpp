@@ -375,11 +375,11 @@ void TransactionView::exportClicked()
 
     if ( ! writer.write() ) {
         Q_EMIT message( tr("Exporting Failed"), tr("There was an error trying to save the transaction history to %1").arg( filename ),
-            CClientUIInterface::MSG_ERROR ) ;
+            CClientUserInterface::MSG_ERROR ) ;
     }
     else {
         Q_EMIT message( tr("Exporting Successful"), tr("The transaction history was successfully saved to %1").arg( filename ),
-            CClientUIInterface::MSG_INFORMATION ) ;
+            CClientUserInterface::MSG_INFORMATION ) ;
     }
 }
 

@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -32,14 +32,12 @@ static const int64_t nPeerStartupTime = GetTime() ;
 static int64_t nLastHeaderTipUpdateNotification = 0;
 static int64_t nLastBlockTipUpdateNotification = 0;
 
-NetworkModel::NetworkModel( QObject * parent, bool sureDoIt ) :
+NetworkModel::NetworkModel( QObject * parent ) :
     QObject( parent ),
     peerTableModel( nullptr ),
     banTableModel( nullptr ),
     pollTimer( 0 )
 {
-    assert ( sureDoIt ) ;
-
     cachedBestHeaderHeight = -1;
     cachedBestHeaderTime = -1;
     peerTableModel = new PeerTableModel(this);
@@ -54,22 +52,6 @@ NetworkModel::NetworkModel( QObject * parent, bool sureDoIt ) :
 NetworkModel::~NetworkModel()
 {
     unsubscribeFromCoreSignals() ;
-}
-
-int NetworkModel::getNumConnections( unsigned int flags ) const
-{
-    CConnman::NumConnections connections = CConnman::CONNECTIONS_NONE;
-
-    if(flags == CONNECTIONS_IN)
-        connections = CConnman::CONNECTIONS_IN;
-    else if (flags == CONNECTIONS_OUT)
-        connections = CConnman::CONNECTIONS_OUT;
-    else if (flags == CONNECTIONS_ALL)
-        connections = CConnman::CONNECTIONS_ALL;
-
-    if(g_connman)
-         return g_connman->GetNodeCount(connections);
-    return 0;
 }
 
 int NetworkModel::getNumBlocks() const
@@ -160,17 +142,21 @@ void NetworkModel::updateNetworkActive( bool networkActive )
     Q_EMIT networkActiveChanged( networkActive ) ;
 }
 
+void NetworkModel::addrLocalSetForNode()
+{
+    Q_EMIT numConnectionsChanged( ( g_connman != nullptr ) ? g_connman->CountConnectedNodes() : 0 ) ;
+}
+
 void NetworkModel::updateAlert( const QString & hash, int status )
 {
     // Show error message notification for new alert
-    if(status == CT_NEW)
+    if ( status == CT_NEW )
     {
         uint256 hash_256;
         hash_256.SetHex(hash.toStdString());
         CAlert alert = CAlert::getAlertByHash(hash_256);
-        if(!alert.IsNull())
-        {
-            Q_EMIT message(tr("Network Alert"), QString::fromStdString(alert.strStatusBar), CClientUIInterface::ICON_ERROR);
+        if ( ! alert.IsNull() ) {
+            Q_EMIT message( tr("Network Alert"), QString::fromStdString( alert.strStatusBar ), CClientUserInterface::ICON_ERROR ) ;
         }
     }
 
@@ -184,14 +170,14 @@ bool NetworkModel::inInitialBlockDownload() const
 
 enum BlockSource NetworkModel::getBlockSource() const
 {
-    if (fReindex)
-        return BLOCK_SOURCE_REINDEX;
-    else if (fImporting)
-        return BLOCK_SOURCE_DISK;
-    else if (getNumConnections() > 0)
-        return BLOCK_SOURCE_NETWORK;
+    if ( fReindex )
+        return BLOCK_SOURCE_REINDEX ;
+    else if ( fImporting )
+        return BLOCK_SOURCE_DISK ;
+    else if ( g_connman != nullptr && g_connman->CountConnectedNodes() > 0 )
+        return BLOCK_SOURCE_NETWORK ;
 
-    return BLOCK_SOURCE_NONE;
+    return BLOCK_SOURCE_NONE ;
 }
 
 void NetworkModel::setNetworkActive( bool active )
@@ -261,6 +247,11 @@ static void NotifyNetworkActiveChanged( NetworkModel * netmodel, bool networkAct
                               Q_ARG(bool, networkActive));
 }
 
+static void NotifyNodeAddrLocalSet( NetworkModel * netmodel )
+{
+    QMetaObject::invokeMethod( netmodel, "addrLocalSetForNode", Qt::QueuedConnection ) ;
+}
+
 static void NotifyAlertChanged( NetworkModel * netmodel, const uint256 & hash, ChangeType status )
 {
     qDebug() << "NotifyAlertChanged: " + QString::fromStdString(hash.GetHex()) + " status=" + QString::number(status);
@@ -305,22 +296,24 @@ static void BlockTipChanged( NetworkModel * netmodel, bool initialSync, const CB
 
 void NetworkModel::subscribeToCoreSignals()
 {
-    uiInterface.ShowProgress.connect(boost::bind(ShowProgress, this, _1, _2));
-    uiInterface.NotifyNumConnectionsChanged.connect(boost::bind(NotifyNumConnectionsChanged, this, _1));
-    uiInterface.NotifyNetworkActiveChanged.connect(boost::bind(NotifyNetworkActiveChanged, this, _1));
-    uiInterface.NotifyAlertChanged.connect(boost::bind(NotifyAlertChanged, this, _1, _2));
-    uiInterface.BannedListChanged.connect(boost::bind(BannedListChanged, this));
-    uiInterface.NotifyBlockTip.connect(boost::bind(BlockTipChanged, this, _1, _2, false));
-    uiInterface.NotifyHeaderTip.connect(boost::bind(BlockTipChanged, this, _1, _2, true));
+    uiInterface.ShowProgress.connect( boost::bind( ShowProgress, this, _1, _2 ) ) ;
+    uiInterface.NotifyNumConnectionsChanged.connect( boost::bind( NotifyNumConnectionsChanged, this, _1 ) ) ;
+    uiInterface.NotifyNetworkActiveChanged.connect( boost::bind( NotifyNetworkActiveChanged, this, _1 ) ) ;
+    uiInterface.NotifyNodeAddrLocalSet.connect( boost::bind( NotifyNodeAddrLocalSet, this ) ) ;
+    uiInterface.NotifyAlertChanged.connect( boost::bind( NotifyAlertChanged, this, _1, _2 ) ) ;
+    uiInterface.BannedListChanged.connect( boost::bind( BannedListChanged, this ) ) ;
+    uiInterface.NotifyBlockTip.connect( boost::bind( BlockTipChanged, this, _1, _2, false ) ) ;
+    uiInterface.NotifyHeaderTip.connect( boost::bind( BlockTipChanged, this, _1, _2, true ) ) ;
 }
 
 void NetworkModel::unsubscribeFromCoreSignals()
 {
-    uiInterface.ShowProgress.disconnect(boost::bind(ShowProgress, this, _1, _2));
-    uiInterface.NotifyNumConnectionsChanged.disconnect(boost::bind(NotifyNumConnectionsChanged, this, _1));
-    uiInterface.NotifyNetworkActiveChanged.disconnect(boost::bind(NotifyNetworkActiveChanged, this, _1));
-    uiInterface.NotifyAlertChanged.disconnect(boost::bind(NotifyAlertChanged, this, _1, _2));
-    uiInterface.BannedListChanged.disconnect(boost::bind(BannedListChanged, this));
-    uiInterface.NotifyBlockTip.disconnect(boost::bind(BlockTipChanged, this, _1, _2, false));
-    uiInterface.NotifyHeaderTip.disconnect(boost::bind(BlockTipChanged, this, _1, _2, true));
+    uiInterface.ShowProgress.disconnect( boost::bind( ShowProgress, this, _1, _2 ) ) ;
+    uiInterface.NotifyNumConnectionsChanged.disconnect( boost::bind( NotifyNumConnectionsChanged, this, _1 ) ) ;
+    uiInterface.NotifyNetworkActiveChanged.disconnect( boost::bind( NotifyNetworkActiveChanged, this, _1 ) ) ;
+    uiInterface.NotifyNodeAddrLocalSet.disconnect( boost::bind( NotifyNodeAddrLocalSet, this ) ) ;
+    uiInterface.NotifyAlertChanged.disconnect( boost::bind( NotifyAlertChanged, this, _1, _2 ) ) ;
+    uiInterface.BannedListChanged.disconnect( boost::bind( BannedListChanged, this ) ) ;
+    uiInterface.NotifyBlockTip.disconnect( boost::bind( BlockTipChanged, this, _1, _2, false ) ) ;
+    uiInterface.NotifyHeaderTip.disconnect( boost::bind( BlockTipChanged, this, _1, _2, true ) ) ;
 }

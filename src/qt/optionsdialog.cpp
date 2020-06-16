@@ -3,10 +3,6 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#if defined(HAVE_CONFIG_H)
-#include "config/dogecoin-config.h"
-#endif
-
 #include "optionsdialog.h"
 #include "ui_optionsdialog.h"
 
@@ -308,24 +304,26 @@ void OptionsDialog::updateProxyValidationState()
 
 void OptionsDialog::updateDefaultProxyNets()
 {
-    proxyType proxy;
-    std::string strProxy;
-    QString strDefaultProxyGUI;
+    proxyType proxy ;
 
-    GetProxy(NET_IPV4, proxy);
-    strProxy = proxy.proxy.ToStringIP() + ":" + proxy.proxy.ToStringPort();
-    strDefaultProxyGUI = ui->proxyIp->text() + ":" + ui->proxyPort->text();
-    (strProxy == strDefaultProxyGUI.toStdString()) ? ui->proxyReachIPv4->setChecked(true) : ui->proxyReachIPv4->setChecked(false);
-
-    GetProxy(NET_IPV6, proxy);
-    strProxy = proxy.proxy.ToStringIP() + ":" + proxy.proxy.ToStringPort();
-    strDefaultProxyGUI = ui->proxyIp->text() + ":" + ui->proxyPort->text();
-    (strProxy == strDefaultProxyGUI.toStdString()) ? ui->proxyReachIPv6->setChecked(true) : ui->proxyReachIPv6->setChecked(false);
-
-    GetProxy(NET_TOR, proxy);
-    strProxy = proxy.proxy.ToStringIP() + ":" + proxy.proxy.ToStringPort();
-    strDefaultProxyGUI = ui->proxyIp->text() + ":" + ui->proxyPort->text();
-    (strProxy == strDefaultProxyGUI.toStdString()) ? ui->proxyReachTor->setChecked(true) : ui->proxyReachTor->setChecked(false);
+    {
+        GetProxy( NET_IPV4, proxy ) ;
+        std::string strProxy = proxy.proxy.ToString() ;
+        QString strDefaultProxyGUI = ui->proxyIp->text() + ":" + ui->proxyPort->text() ;
+        ui->proxyReachIPv4->setChecked( strProxy == strDefaultProxyGUI.toStdString() ) ;
+    }
+    {
+        GetProxy( NET_IPV6, proxy ) ;
+        std::string strProxy = proxy.proxy.ToString() ;
+        QString strDefaultProxyGUI = "[" + ui->proxyIp->text() + "]:" + ui->proxyPort->text() ;
+        ui->proxyReachIPv6->setChecked( strProxy == strDefaultProxyGUI.toStdString() ) ;
+    }
+    {
+        GetProxy( NET_TOR, proxy ) ;
+        std::string strProxy = proxy.proxy.ToString() ;
+        QString strDefaultProxyGUI = ui->proxyIp->text() + ":" + ui->proxyPort->text() ;
+        ui->proxyReachTor->setChecked( strProxy == strDefaultProxyGUI.toStdString() ) ;
+    }
 }
 
 ProxyAddressValidator::ProxyAddressValidator(QObject *parent) :

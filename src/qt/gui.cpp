@@ -3,10 +3,6 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#if defined(HAVE_CONFIG_H)
-#include "config/dogecoin-config.h"
-#endif
-
 #include "gui.h"
 
 #include "unitsofcoin.h"
@@ -22,15 +18,6 @@
 #include "platformstyle.h"
 #include "rpcconsole.h"
 #include "utilitydialog.h"
-
-#ifdef ENABLE_WALLET
-#include "walletframe.h"
-#include "walletmodel.h"
-#endif
-
-#ifdef Q_OS_MAC
-#include "macdockiconhandler.h"
-#endif
 
 #include "chainparams.h"
 #include "init.h"
@@ -69,6 +56,10 @@
 #include <QUrlQuery>
 #endif
 
+#ifdef Q_OS_MAC
+#include "macdockiconhandler.h"
+#endif
+
 const std::string DogecoinGUI::DEFAULT_UIPLATFORM =
 #if defined(Q_OS_MAC)
         "macosx"
@@ -78,6 +69,15 @@ const std::string DogecoinGUI::DEFAULT_UIPLATFORM =
         "other"
 #endif
         ;
+
+#if defined(HAVE_CONFIG_H)
+#include "config/dogecoin-config.h" // for ENABLE_WALLET
+#endif
+
+#ifdef ENABLE_WALLET
+#include "walletframe.h"
+#include "walletmodel.h"
+#endif
 
 /** Display name for default wallet name. Uses tilde to avoid name
  * collisions in the future with additional wallets */
@@ -92,7 +92,8 @@ DogecoinGUI::DogecoinGUI( const PlatformStyle * style, const NetworkStyle * netw
     unitDisplayControl(0),
     labelWalletEncryptionIcon(0),
     labelWalletHDStatusIcon(0),
-    connectionsControl(0),
+    connectionsControl( nullptr ),
+    onionIcon( nullptr ),
     labelBlocksIcon(0),
     generatingLabel( nullptr ),
     progressBarLabel(0),
@@ -221,7 +222,11 @@ DogecoinGUI::DogecoinGUI( const PlatformStyle * style, const NetworkStyle * netw
     unitDisplayControl = new UnitDisplayStatusBarControl( platformStyle ) ;
     labelWalletEncryptionIcon = new QLabel();
     labelWalletHDStatusIcon = new QLabel();
-    connectionsControl = new GUIUtil::ClickableLabel();
+    connectionsControl = new GUIUtil::ClickableLabel() ;
+
+    onionIcon = new QLabel() ;
+    onionIcon->setPixmap( platformStyle->SingleColorIcon( ":/icons/onion" ).pixmap( BOTTOMBAR_ICONSIZE, BOTTOMBAR_ICONSIZE ) ) ;
+
     labelBlocksIcon = new GUIUtil::ClickableLabel();
     generatingLabel = new QLabel() ;
     if ( enableWallet )
@@ -232,8 +237,10 @@ DogecoinGUI::DogecoinGUI( const PlatformStyle * style, const NetworkStyle * netw
         frameBlocksLayout->addWidget(labelWalletEncryptionIcon);
         frameBlocksLayout->addWidget(labelWalletHDStatusIcon);
     }
-    frameBlocksLayout->addStretch();
-    frameBlocksLayout->addWidget(connectionsControl);
+    frameBlocksLayout->addStretch() ;
+    frameBlocksLayout->addWidget( connectionsControl ) ;
+    frameBlocksLayout->addStretch() ;
+    frameBlocksLayout->addWidget( onionIcon ) ;
     frameBlocksLayout->addStretch();
     frameBlocksLayout->addWidget(labelBlocksIcon);
     frameBlocksLayout->addStretch();
@@ -278,7 +285,7 @@ DogecoinGUI::DogecoinGUI( const PlatformStyle * style, const NetworkStyle * netw
     // Subscribe to notifications from core
     subscribeToCoreSignals();
 
-    connect(connectionsControl, SIGNAL(clicked(QPoint)), this, SLOT(toggleNetworkActive()));
+    connect( connectionsControl, SIGNAL( clicked(QPoint) ), this, SLOT( toggleNetworkActive() ) ) ;
 
 #ifdef ENABLE_WALLET
     if ( enableWallet ) {
@@ -530,10 +537,10 @@ void DogecoinGUI::setNetworkModel( NetworkModel * model )
         // while the peer has not yet fully loaded
         createTrayIconMenu();
 
-        // Keep up to date with the peer
-        updateNetworkState() ;
-        connect( model, SIGNAL( numConnectionsChanged(int) ), this, SLOT( setNumConnections(int) ) ) ;
-        connect( model, SIGNAL( networkActiveChanged(bool) ), this, SLOT( setNetworkActive(bool) ) ) ;
+        // Keep network info up to date
+        updateNetworkInfo() ;
+        connect( model, SIGNAL( numConnectionsChanged(int) ), this, SLOT( updateNetworkInfo() ) ) ;
+        connect( model, SIGNAL( networkActiveChanged(bool) ), this, SLOT( updateNetworkInfo() ) ) ;
 
         if ( chainsyncOverlay == nullptr ) chainsyncOverlay.reset( new ChainSyncOverlay( this->centralWidget() ) ) ;
         chainsyncOverlay->setKnownBestHeight( model->getHeaderTipHeight(), QDateTime::fromTime_t( model->getHeaderTipTime() ) ) ;
@@ -782,9 +789,9 @@ void DogecoinGUI::gotoVerifyMessageTab(QString addr)
 }
 #endif // ENABLE_WALLET
 
-void DogecoinGUI::updateNetworkState()
+void DogecoinGUI::updateNetworkInfo()
 {
-    int count = networkModel->getNumConnections() ;
+    size_t count = ( g_connman != nullptr ) ? g_connman->CountConnectedNodes() : 0 ;
     QString icon ;
     switch ( count )
     {
@@ -809,16 +816,15 @@ void DogecoinGUI::updateNetworkState()
     connectionsControl->setToolTip( tooltip ) ;
 
     connectionsControl->setPixmap( platformStyle->SingleColorIcon( icon ).pixmap( BOTTOMBAR_ICONSIZE, BOTTOMBAR_ICONSIZE ) ) ;
-}
 
-void DogecoinGUI::setNumConnections(int count)
-{
-    updateNetworkState();
-}
-
-void DogecoinGUI::setNetworkActive(bool networkActive)
-{
-    updateNetworkState();
+    QString onionTooltip = QString( "No" ) + " connections via Tor" ;
+    size_t torConnections = ( g_connman != nullptr ) ? g_connman->CountConnectedNodes( "onion" ) : 0 ;
+    if ( torConnections > 0 )
+        onionTooltip = QString::number( torConnections ) + QString( " " )
+                            + QString( torConnections > 1 ? "connections" : "connection" ) + " via Tor" ;
+    onionTooltip = QString( "<nobr>" ) + onionTooltip + QString( "</nobr>" ) ;
+    onionIcon->setToolTip( onionTooltip ) ;
+    onionIcon->setVisible( torConnections > 0 ) ;
 }
 
 void DogecoinGUI::updateHeadersSyncProgressLabel()
@@ -957,13 +963,13 @@ void DogecoinGUI::message( const QString & title, const QString & message, unsig
     }
     else {
         switch (style) {
-        case CClientUIInterface::MSG_ERROR:
+        case CClientUserInterface::MSG_ERROR:
             msgType = tr("Error");
             break;
-        case CClientUIInterface::MSG_WARNING:
+        case CClientUserInterface::MSG_WARNING:
             msgType = tr("Warning");
             break;
-        case CClientUIInterface::MSG_INFORMATION:
+        case CClientUserInterface::MSG_INFORMATION:
             msgType = tr("Information");
             break;
         default:
@@ -975,20 +981,20 @@ void DogecoinGUI::message( const QString & title, const QString & message, unsig
         strTitle += " - " + msgType;
 
     // Check for error/warning icon
-    if (style & CClientUIInterface::ICON_ERROR) {
+    if ( style & CClientUserInterface::ICON_ERROR ) {
         nMBoxIcon = QMessageBox::Critical;
         nNotifyIcon = Notificator::Critical;
     }
-    else if (style & CClientUIInterface::ICON_WARNING) {
+    else if ( style & CClientUserInterface::ICON_WARNING ) {
         nMBoxIcon = QMessageBox::Warning;
         nNotifyIcon = Notificator::Warning;
     }
 
     // Display message
-    if (style & CClientUIInterface::MODAL) {
+    if ( style & CClientUserInterface::MODAL ) {
         // Check for buttons, use OK as default, if none was supplied
         QMessageBox::StandardButton buttons;
-        if (!(buttons = (QMessageBox::StandardButton)(style & CClientUIInterface::BTN_MASK)))
+        if (!(buttons = (QMessageBox::StandardButton)(style & CClientUserInterface::BTN_MASK)))
             buttons = QMessageBox::Ok;
 
         showNormalIfMinimized();
@@ -1076,7 +1082,7 @@ void DogecoinGUI::incomingTransaction(const QString& date, int unit, const CAmou
     else if (!address.isEmpty())
         msg += tr("Address: %1\n").arg(address);
     message((amount)<0 ? tr("Sent transaction") : tr("Incoming transaction"),
-             msg, CClientUIInterface::MSG_INFORMATION);
+             msg, CClientUserInterface::MSG_INFORMATION);
 }
 #endif
 
@@ -1288,10 +1294,10 @@ void DogecoinGUI::showChainsyncOverlay()
 
 static bool ThreadSafeMessageBox( DogecoinGUI * gui, const std::string & message, const std::string & caption, unsigned int style )
 {
-    bool modal = (style & CClientUIInterface::MODAL);
-    // The SECURE flag has no effect in the Qt GUI.
-    // bool secure = (style & CClientUIInterface::SECURE);
-    style &= ~CClientUIInterface::SECURE;
+    bool modal = ( style & CClientUserInterface::MODAL ) ;
+    // The SECURE flag has no effect in the Qt GUI
+    // bool secure = (style & CClientUserInterface::SECURE);
+    style &= ~CClientUserInterface::SECURE ;
     bool ret = false;
     // In case of modal message, use blocking connection to wait for user to click a button
     QMetaObject::invokeMethod(gui, "message",

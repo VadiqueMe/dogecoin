@@ -16,7 +16,7 @@ class CWallet ;
 
 void StopAndJoinThreads( std::vector< std::thread > & threads ) ;
 void Shutdown() ;
-void InitLogging() ;
+void BeginLogging() ;
 //!Parameter interaction: change parameters depending on other parameters
 void InitParameterInteraction() ;
 

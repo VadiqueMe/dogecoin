@@ -470,9 +470,9 @@ void SendCoinsDialog::updateDisplayUnit()
 
 void SendCoinsDialog::processSendCoinsReturn( const WalletModel::SendCoinsReturn & sendCoinsReturn )
 {
-    QPair< QString, CClientUIInterface::MessageBoxFlags > msgParams ;
+    QPair< QString, CClientUserInterface::MessageBoxFlags > msgParams ;
     // Default to a warning message, override if error message is needed
-    msgParams.second = CClientUIInterface::MSG_WARNING ;
+    msgParams.second = CClientUserInterface::MSG_WARNING ;
 
     // This comment is specific to SendCoinsDialog usage of WalletModel::SendCoinsReturn
     // WalletModel::TransactionCommitFailed is used only in WalletModel::sendCoins()
@@ -496,18 +496,18 @@ void SendCoinsDialog::processSendCoinsReturn( const WalletModel::SendCoinsReturn
         break ;
     case WalletModel::TransactionCreationFailed:
         msgParams.first = tr("Transaction creation failed") ;
-        msgParams.second = CClientUIInterface::MSG_ERROR ;
+        msgParams.second = CClientUserInterface::MSG_ERROR ;
         break;
     case WalletModel::TransactionCommitFailed:
         msgParams.first = tr("The transaction was rejected with the following reason: %1").arg( sendCoinsReturn.reasonCommitFailed ) ;
-        msgParams.second = CClientUIInterface::MSG_ERROR ;
+        msgParams.second = CClientUserInterface::MSG_ERROR ;
         break;
     case WalletModel::AbsurdFee:
         msgParams.first = tr("A fee higher than %1 is considered an absurdly high fee").arg( UnitsOfCoin::formatWithUnit( walletModel->getOptionsModel()->getDisplayUnit(), maxTxFee ) ) ;
         break;
     case WalletModel::PaymentRequestExpired:
         msgParams.first = tr("Payment request expired") ;
-        msgParams.second = CClientUIInterface::MSG_ERROR ;
+        msgParams.second = CClientUserInterface::MSG_ERROR ;
         break;
     case WalletModel::OK: // included to avoid a compiler warning
         return ;

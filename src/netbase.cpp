@@ -1,11 +1,8 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
-
-#ifdef HAVE_CONFIG_H
-#include "config/dogecoin-config.h"
-#endif
 
 #include "netbase.h"
 
@@ -14,6 +11,7 @@
 #include "uint256.h"
 #include "random.h"
 #include "utillog.h"
+#include "utilstr.h"
 #include "utilstrencodings.h"
 #include "utiltime.h"
 
@@ -23,8 +21,11 @@
 #include <fcntl.h>
 #endif
 
-#include <boost/algorithm/string/case_conv.hpp> // for to_lower()
 #include <boost/algorithm/string/predicate.hpp> // for starts_with() and ends_with()
+
+#ifdef HAVE_CONFIG_H
+#include "config/dogecoin-config.h"
+#endif
 
 #if !defined(HAVE_MSG_NOSIGNAL) && !defined(MSG_NOSIGNAL)
 #define MSG_NOSIGNAL 0
@@ -37,25 +38,25 @@ static CCriticalSection cs_proxyInfos;
 int nConnectTimeout = DEFAULT_CONNECT_TIMEOUT;
 bool fNameLookup = DEFAULT_NAME_LOOKUP;
 
-// Need ample time for negotiation for very slow proxies such as Tor (milliseconds)
-static const int SOCKS5_RECV_TIMEOUT = 20 * 1000;
-static std::atomic<bool> interruptSocks5Recv(false);
+// ample time for negotiation for slow proxies such as Tor (milliseconds)
+static const int SOCKS5_RECV_TIMEOUT = 20 * 1000 ;
+static std::atomic< bool > interruptSocks5Recv( false ) ;
 
-enum Network ParseNetwork(std::string net) {
-    boost::to_lower( net ) ;
-    if (net == "ipv4") return NET_IPV4;
-    if (net == "ipv6") return NET_IPV6;
-    if (net == "tor" || net == "onion")  return NET_TOR;
-    return NET_UNROUTABLE;
+enum Network ParseKindOfNetwork( const std::string & netIn ) {
+    std::string net = toLower( netIn ) ;
+    if ( net == "ipv4" ) return NET_IPV4 ;
+    if ( net == "ipv6" ) return NET_IPV6 ;
+    if ( net == "tor" || net == "onion" ) return NET_TOR ;
+    return NET_UNROUTABLE ;
 }
 
-std::string GetNetworkName(enum Network net) {
-    switch(net)
+std::string GetNameOfNetwork( enum Network net ) {
+    switch( net )
     {
-    case NET_IPV4: return "ipv4";
-    case NET_IPV6: return "ipv6";
-    case NET_TOR: return "onion";
-    default: return "";
+    case NET_IPV4: return "ipv4" ;
+    case NET_IPV6: return "ipv6" ;
+    case NET_TOR: return "onion" ;
+    default: return "" ;
     }
 }
 
@@ -83,10 +84,10 @@ bool static LookupIntern(const char *pszName, std::vector<CNetAddr>& vIP, unsign
     vIP.clear();
 
     {
-        CNetAddr addr;
-        if (addr.SetSpecial(std::string(pszName))) {
-            vIP.push_back(addr);
-            return true;
+        CNetAddr addr ;
+        if ( addr.SetOnion( std::string( pszName ) ) ) {
+            vIP.push_back( addr ) ;
+            return true ;
         }
     }
 
@@ -254,18 +255,18 @@ struct ProxyCredentials
     std::string password;
 };
 
-std::string Socks5ErrorString(int err)
+std::string Socks5ErrorString( int err )
 {
-    switch(err) {
-        case 0x01: return "general failure";
-        case 0x02: return "connection not allowed";
-        case 0x03: return "network unreachable";
-        case 0x04: return "host unreachable";
-        case 0x05: return "connection refused";
-        case 0x06: return "TTL expired";
-        case 0x07: return "protocol error";
-        case 0x08: return "address type not supported";
-        default:   return "unknown";
+    switch ( err ) {
+        case 1:  return "general SOCKS server failure " ;
+        case 2:  return "connection not allowed by the rule set defined at SOCKS server" ;
+        case 3:  return "destination network is unreachable" ;
+        case 4:  return "destination host is unreachable" ;
+        case 5:  return "connection refused by the remote host" ;
+        case 6:  return "TTL expired (the remote host is too far away)" ;
+        case 7:  return "command not supported (protocol error)" ;
+        case 8:  return "address type not supported (protocol error)" ;
+        default: return "unknown #" + std::to_string( err ) ;
     }
 }
 
@@ -294,10 +295,10 @@ static bool Socks5(const std::string& strDest, int port, const ProxyCredentials 
         return error("Error sending to proxy");
     }
     char pchRet1[2];
-    if (!InterruptibleRecv(pchRet1, 2, SOCKS5_RECV_TIMEOUT, hSocket)) {
-        CloseSocket(hSocket);
-        LogPrintf("Socks5() connect to %s:%d failed: InterruptibleRecv() timeout or other failure\n", strDest, port);
-        return false;
+    if ( ! InterruptibleRecv( pchRet1, 2, SOCKS5_RECV_TIMEOUT, hSocket ) ) {
+        CloseSocket( hSocket ) ;
+        LogPrintf( "Socks5() connect to %s:%d failed: InterruptibleRecv() timeout or other failure\n", strDest, port ) ;
+        return false ;
     }
     if (pchRet1[0] != 0x05) {
         CloseSocket(hSocket);
@@ -563,14 +564,13 @@ static bool ConnectThroughProxy(const proxyType &proxy, const std::string& strDe
 
 bool ConnectSocket(const CService &addrDest, SOCKET& hSocketRet, int nTimeout, bool *outProxyConnectionFailed)
 {
-    proxyType proxy;
-    if (outProxyConnectionFailed)
-        *outProxyConnectionFailed = false;
-
-    if (GetProxy(addrDest.GetNetwork(), proxy))
-        return ConnectThroughProxy(proxy, addrDest.ToStringIP(), addrDest.GetPort(), hSocketRet, nTimeout, outProxyConnectionFailed);
+    if ( outProxyConnectionFailed != nullptr )
+        *outProxyConnectionFailed = false ;
+    proxyType proxy ;
+    if ( GetProxy( addrDest.GetNetwork(), proxy ) )
+        return ConnectThroughProxy( proxy, addrDest.ToStringAddr(), addrDest.GetPort(), hSocketRet, nTimeout, outProxyConnectionFailed ) ;
     else // no proxy needed (none set for target network)
-        return ConnectSocketDirectly(addrDest, hSocketRet, nTimeout);
+        return ConnectSocketDirectly( addrDest, hSocketRet, nTimeout ) ;
 }
 
 bool ConnectSocketByName(CService &addr, SOCKET& hSocketRet, const char *pszDest, int portDefault, int nTimeout, bool *outProxyConnectionFailed)

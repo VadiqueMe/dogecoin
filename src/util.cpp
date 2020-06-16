@@ -69,12 +69,10 @@
 #include <malloc.h>
 #endif
 
-#include <boost/algorithm/string/case_conv.hpp> // for to_lower()
 #include <boost/algorithm/string/join.hpp>
 #include <boost/algorithm/string/predicate.hpp> // for starts_with() and ends_with()
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
-#include <boost/program_options/detail/config_file.hpp>
 
 #include <openssl/crypto.h>
 #include <openssl/rand.h>
@@ -129,8 +127,8 @@ public:
         // We don't use them so we don't require the config. However some of our libs may call functions
         // which attempt to load the config file, possibly resulting in an exit() or crash if it is missing
         // or corrupt. Explicitly tell OpenSSL not to try to load the file. The result for our libs will be
-        // that the config appears to have been loaded and there are no modules/engines available.
-        OPENSSL_no_config();
+        // that the config appears to have been loaded and there are no modules/engines available
+        OPENSSL_no_config() ;
 
 #ifdef WIN32
         // Seed OpenSSL PRNG with current contents of the screen
@@ -187,7 +185,7 @@ void ParseParameters(int argc, const char* const argv[])
             str = str.substr(0, is_index);
         }
 #ifdef WIN32
-        boost::to_lower(str);
+        str = toLower( str ) ;
         if (boost::algorithm::starts_with(str, "/"))
             str = "-" + str.substr(1);
 #endif
@@ -319,45 +317,80 @@ const boost::filesystem::path & GetDirForData( bool fNetSpecific )
 
 void ClearDatadirCache()
 {
-    LOCK(csPathCached);
+    LOCK( csPathCached ) ;
 
-    pathCached = boost::filesystem::path();
-    pathCachedNetSpecific = boost::filesystem::path();
+    pathCached = boost::filesystem::path() ;
+    pathCachedNetSpecific = boost::filesystem::path() ;
 }
 
-boost::filesystem::path GetConfigFile( const std::string & confPath )
+std::string GetPathToConfigFile( const std::string & fileString )
 {
-    boost::filesystem::path pathConfigFile( confPath ) ;
+    boost::filesystem::path pathConfigFile( fileString ) ;
     if ( ! pathConfigFile.is_complete() )
+        // config file is global for all networks
         pathConfigFile = GetDirForData( false ) / pathConfigFile ;
+    // TODO configs specific to each network
 
-    return pathConfigFile ;
+    return pathConfigFile.string() ;
 }
 
-void ReadConfigFile( const std::string & confPath )
+static std::vector< std::pair< std::string, std::string > > ParseConfigStream( std::istream & stream )
 {
-    boost::filesystem::ifstream streamConfig( GetConfigFile( confPath ) ) ;
-    if ( ! streamConfig.good() )
-        return ; // no dogecoin.conf file
+    std::vector< std::pair< std::string, std::string > > options ;
 
+    std::string line ;
+    std::string prefix ;
+
+    while ( std::getline( stream, line ) )
     {
-        LOCK(cs_args);
-        std::set< std::string > setOptions ;
-        setOptions.insert("*");
+        std::string::size_type pos ;
+        if ( ( pos = line.find( '#' ) ) != std::string::npos )
+            line = line.substr( 0, pos ) ;
 
-        for ( boost::program_options::detail::config_file_iterator it( streamConfig, setOptions ), end ; it != end ; ++ it )
-        {
-            // Don't overwrite existing settings so command line settings override dogecoin.conf
-            std::string strKey = std::string( "-" ) + it->string_key ;
-            std::string strValue = it->value[ 0 ] ;
-            InterpretNegativeSetting(strKey, strValue);
-            if (mapArgs.count(strKey) == 0)
-                mapArgs[strKey] = strValue;
-            _mapMultiArgs[strKey].push_back(strValue);
+        line = trimSpaces( line ) ;
+        if ( ! line.empty() ) {
+            if ( *line.begin() == '[' && *line.rbegin() == ']' ) {
+                prefix = line.substr( 1, line.size() - 2 ) + '.' ;
+            } else if ( ( pos = line.find( '=' ) ) != std::string::npos ) {
+                std::string name = prefix + trimSpaces( line.substr( 0, pos ) ) ;
+                std::string value = trimSpaces( line.substr( pos + 1 ) ) ;
+                options.emplace_back( name, value ) ;
+            }
         }
     }
-    // If datadir is changed in .conf file:
-    ClearDatadirCache();
+
+    return options ;
+}
+
+void ReadConfigFile( const std::string & fileString )
+{
+    std::string confPath = GetPathToConfigFile( fileString ) ;
+    std::ifstream streamConfig( confPath ) ;
+    if ( ! streamConfig.good() ) {
+        LogPrintf( "%s: no %s config file\n", __func__, confPath ) ;
+        return ;
+    }
+
+    LogPrintf( "%s: reading config file %s\n", __func__, confPath ) ;
+    {
+        LOCK( cs_args ) ;
+
+        for ( const std::pair< std::string, std::string > & option : ParseConfigStream( streamConfig ) )
+        {
+            LogPrintf( "%s: %s = %s\n",
+                        boost::filesystem::path( confPath ).filename().string(),
+                        option.first, option.second ) ;
+            // don't overwrite existing settings so command line settings override dogecoin.conf
+            std::string key = std::string( "-" ) + option.first ;
+            std::string value = option.second ;
+            InterpretNegativeSetting( key, value ) ;
+            if ( mapArgs.count( key ) == 0 )
+                mapArgs[ key ] = value ;
+            _mapMultiArgs[ key ].push_back( value ) ;
+        }
+    }
+    // if datadir is changed in .conf file
+    ClearDatadirCache() ;
 }
 
 #ifndef WIN32

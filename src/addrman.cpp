@@ -1,5 +1,6 @@
 // Copyright (c) 2012 Pieter Wuille
 // Copyright (c) 2012-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -8,6 +9,7 @@
 #include "hash.h"
 #include "serialize.h"
 #include "streams.h"
+#include "utilstr.h"
 
 #include <cmath>
 
@@ -128,7 +130,7 @@ void CAddrMan::Delete(int nId)
 
 void CAddrMan::ClearNew(int nUBucket, int nUBucketPos)
 {
-    // if there is an entry in the specified bucket, delete it.
+    // if there is an entry in the specified bucket, delete it
     if (vvNew[nUBucket][nUBucketPos] != -1) {
         int nIdDelete = vvNew[nUBucket][nUBucketPos];
         CAddrInfo& infoDelete = mapInfo[nIdDelete];
@@ -159,14 +161,14 @@ void CAddrMan::MakeTried(CAddrInfo& info, int nId)
     int nKBucket = info.GetTriedBucket(nKey);
     int nKBucketPos = info.GetBucketPosition(nKey, false, nKBucket);
 
-    // first make space to add it (the existing tried entry there is moved to new, deleting whatever is there).
+    // first make space to add it (the existing tried entry there is moved to new, deleting whatever is there)
     if (vvTried[nKBucket][nKBucketPos] != -1) {
         // find an item to evict
         int nIdEvict = vvTried[nKBucket][nKBucketPos];
         assert(mapInfo.count(nIdEvict) == 1);
         CAddrInfo& infoOld = mapInfo[nIdEvict];
 
-        // Remove the to-be-evicted item from the tried set.
+        // Remove the to-be-evicted item from the tried set
         infoOld.fInTried = false;
         vvTried[nKBucket][nKBucketPos] = -1;
         nTried--;
@@ -177,7 +179,7 @@ void CAddrMan::MakeTried(CAddrInfo& info, int nId)
         ClearNew(nUBucket, nUBucketPos);
         assert(vvNew[nUBucket][nUBucketPos] == -1);
 
-        // Enter it into the new set again.
+        // Enter it into the new set again
         infoOld.nRefCount = 1;
         vvNew[nUBucket][nUBucketPos] = nIdEvict;
         nNew++;
@@ -187,6 +189,47 @@ void CAddrMan::MakeTried(CAddrInfo& info, int nId)
     vvTried[nKBucket][nKBucketPos] = nId;
     nTried++;
     info.fInTried = true;
+}
+
+// Add a single address
+bool CAddrMan::AddOne( const CAddress & addr, const CNetAddr & source, int64_t nTimePenalty )
+{
+        LOCK( cs ) ;
+        bool fRet = false ;
+        Check() ;
+        fRet |= Add_( addr, source, nTimePenalty ) ;
+        Check() ;
+        if ( fRet )
+            LogPrintf( "CAddrMan::%s: added %s from %s: %i tried, %i new\n", __func__,
+                        addr.ToStringAddrPort(), source.ToString(), nTried, nNew ) ;
+        return fRet ;
+}
+
+// Add multiple addresses
+bool CAddrMan::AddMany( const std::vector< CAddress > & vAddr, const CNetAddr & source, int64_t nTimePenalty )
+{
+    if ( vAddr.empty() ) return false ;
+    if ( vAddr.size() == 1 )
+        AddOne( vAddr[0], source, nTimePenalty ) ;
+
+    {
+        LOCK( cs ) ;
+        int nAdd = 0 ;
+        Check() ;
+        std::string listOfAddresses ;
+        for ( std::vector< CAddress >::const_iterator it = vAddr.begin() ; it != vAddr.end() ; it ++ ) {
+            if ( Add_( *it, source, nTimePenalty ) ) {
+                nAdd ++ ;
+                listOfAddresses += " " + it->ToStringAddrPort() ;
+            }
+        }
+        listOfAddresses = trimSpaces( listOfAddresses ) ;
+        Check() ;
+        if ( nAdd )
+            LogPrintf( "CAddrMan::%s: added %i addresses (%s) from %s: %i tried, %i new\n", __func__,
+                        nAdd, listOfAddresses, source.ToString(), nTried, nNew ) ;
+        return nAdd > 0 ;
+    }
 }
 
 void CAddrMan::Good_(const CService& addr, int64_t nTime)
@@ -344,7 +387,7 @@ CAddrInfo CAddrMan::Select_(bool newOnly)
     if (newOnly && nNew == 0)
         return CAddrInfo();
 
-    // Use a 50% chance for choosing between tried and new table entries.
+    // Use a 50% chance for choosing between tried and new table entries
     if (!newOnly &&
        (nTried > 0 && (nNew == 0 || RandomInt(2) == 0))) { 
         // use a tried node

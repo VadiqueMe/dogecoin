@@ -228,7 +228,8 @@ UniValue CallRPC( const std::string & strMethod, const UniValue & params )
         if (!GetAuthCookie(&strRPCUserColonPass)) {
             throw std::runtime_error( strprintf(
                 _("Could not locate RPC credentials. No authentication cookie could be found, and no rpcpassword is set in the configuration file (%s)"),
-                    GetConfigFile( GetArg( "-conf", DOGECOIN_CONF_FILENAME ) ).string().c_str()) ) ;
+                    GetPathToConfigFile( GetArg( "-conf", DOGECOIN_CONF_FILENAME ) )
+            ) ) ;
 
         }
     } else {

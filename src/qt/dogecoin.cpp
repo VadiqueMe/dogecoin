@@ -209,8 +209,7 @@ public:
     /// Create payment server
     void createPaymentServer();
 #endif
-    /// parameter interaction/setup based on rules
-    void parameterSetup();
+
     /// Create options model
     void createOptionsModel(bool resetSettings);
     /// Create main window
@@ -422,12 +421,6 @@ void DogecoinApplication::startThread()
     coreThread->start() ;
 }
 
-void DogecoinApplication::parameterSetup()
-{
-    InitLogging();
-    InitParameterInteraction();
-}
-
 void DogecoinApplication::requestInitialize()
 {
     qDebug() << __func__ << ": Requesting initialize";
@@ -475,7 +468,7 @@ void DogecoinApplication::initializeResult( int retval )
         paymentServer->setOptionsModel( optionsModel ) ;
 #endif
 
-        networkModel = new NetworkModel( /* parent */ nullptr, true ) ;
+        networkModel = new NetworkModel( /* parent */ nullptr ) ;
 
         guiWindow->setNetworkModel( networkModel ) ;
         guiWindow->setOptionsModel( optionsModel ) ;
@@ -607,8 +600,12 @@ int main(int argc, char *argv[])
                              ) ;
         return EXIT_FAILURE ;
     }
+
+    // do this early
+    BeginLogging() ;
+
     try {
-        ReadConfigFile(GetArg("-conf", DOGECOIN_CONF_FILENAME));
+        ReadConfigFile( GetArg( "-conf", DOGECOIN_CONF_FILENAME ) ) ;
     } catch (const std::exception& e) {
         QMessageBox::critical(0, QObject::tr(PACKAGE_NAME),
                               QObject::tr("Error: Cannot parse configuration file: %1. Only use key=value syntax.").arg(e.what()));
@@ -658,9 +655,8 @@ int main(int argc, char *argv[])
     /// 8. URI IPC sending
     // - Do this early as we don't want to bother initializing if we are just calling IPC
     // - Do this *after* setting up the data directory, as the data directory hash is used in the name
-    // of the server.
-    // - Do this after creating app and setting up translations, so errors are
-    // translated properly.
+    // of the server
+    // - Do this after creating app and setting up translations, so error messages are translated too
     if (PaymentServer::ipcSendCommandLine())
         exit(EXIT_SUCCESS);
 
@@ -683,8 +679,9 @@ int main(int argc, char *argv[])
     // Install qDebug() message handler to route to debug log
     qInstallMessageHandler( DebugMessageHandler ) ;
 #endif
-    // Allow parameter interaction before we create the options model
-    app.parameterSetup();
+    // init parameter interaction before creating the options model
+    InitParameterInteraction() ;
+
     // Load GUI settings from QSettings
     app.createOptionsModel(IsArgSet("-resetguisettings"));
 

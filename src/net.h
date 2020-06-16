@@ -99,9 +99,9 @@ struct AddedNodeInfo
     bool fInbound;
 };
 
-class CTransaction;
-class CNodeStats;
-class CClientUIInterface;
+class CTransaction ;
+class CNodeStats ;
+class CClientUserInterface ;
 
 struct CSerializedNetMsg
 {
@@ -122,12 +122,12 @@ class CConnman
 {
 public:
 
-    enum NumConnections {
+    enum WhichConnections {
         CONNECTIONS_NONE = 0,
-        CONNECTIONS_IN = (1U << 0),
-        CONNECTIONS_OUT = (1U << 1),
-        CONNECTIONS_ALL = (CONNECTIONS_IN | CONNECTIONS_OUT),
-    };
+        CONNECTIONS_IN = ( 1U << 0 ),
+        CONNECTIONS_OUT = ( 1U << 1 ),
+        CONNECTIONS_ALL = ( CONNECTIONS_IN | CONNECTIONS_OUT ),
+    } ;
 
     struct Options
     {
@@ -138,7 +138,7 @@ public:
         int nMaxAddnode = 0;
         int nMaxFeeler = 0;
         int nBestHeight = 0;
-        CClientUIInterface* uiInterface = nullptr;
+        CClientUserInterface * uiInterface = nullptr ;
         unsigned int nSendBufferMaxSize = 0;
         unsigned int nReceiveFloodSize = 0;
         uint64_t nMaxOutboundTimeframe = 0;
@@ -245,8 +245,11 @@ public:
     bool RemoveAddedNode(const std::string& node);
     std::vector<AddedNodeInfo> GetAddedNodeInfo();
 
-    size_t GetNodeCount(NumConnections num);
-    void GetNodeStats(std::vector<CNodeStats>& vstats);
+    // net can be "ipv4", "ipv6", "tor" or "all" for all of them
+    // inOut can be "in", "out" or "all" for both
+    size_t CountConnectedNodes( const std::string & net = "all", const std::string & inOut = "all" ) ;
+
+    void GetNodeStats( std::vector< CNodeStats > & vstats ) ;
 
     CNode* FindNode( NodeId id ) ;
     CNode* FindNode( const std::string & addrName ) ;
@@ -324,6 +327,8 @@ private:
 
     NodeId GetNewNodeId() ;
 
+    size_t GetNodeCount( WhichConnections filter, enum Network net ) ;
+
     size_t SocketSendData(CNode *pnode) const;
     //!check is the banlist has unwritten changes
     bool BannedSetIsDirty();
@@ -391,12 +396,13 @@ private:
     int nMaxAddnode;
     int nMaxFeeler;
     std::atomic<int> nBestHeight;
-    CClientUIInterface* clientInterface;
+
+    CClientUserInterface * clientInterface ;
 
     /** SipHasher seeds for deterministic randomness */
     const uint64_t nSeed0, nSeed1;
 
-    /** flag for waking the message processor. */
+    /** flag for waking the message processor */
     bool fMsgProcWake;
 
     std::condition_variable condMsgProc;
@@ -444,7 +450,7 @@ struct CNodeSignals
 };
 
 
-CNodeSignals& GetNodeSignals();
+CNodeSignals & GetNodeSignals() ;
 
 
 enum
@@ -740,9 +746,9 @@ public:
     void SetSendVersion(int nVersionIn);
     int GetSendVersion() const;
 
-    CService GetAddrLocal() const;
+    CService GetAddrLocal() const ;
     //! May not be called more than once
-    void SetAddrLocal(const CService& addrLocalIn);
+    void SetAddrLocal( const CService & addrLocalIn ) ;
 
     CNode* AddRef()
     {
@@ -754,8 +760,6 @@ public:
     {
         nRefCount--;
     }
-
-
 
     void AddAddressKnown(const CAddress& _addr)
     {
@@ -821,7 +825,7 @@ public:
 
     void CloseSocketDisconnect();
 
-    void copyStats(CNodeStats &stats);
+    void copyStats( CNodeStats & stats ) ;
 
     ServiceFlags GetLocalServices() const
     {

@@ -91,7 +91,8 @@ private:
     UnitDisplayStatusBarControl *unitDisplayControl;
     QLabel *labelWalletEncryptionIcon;
     QLabel *labelWalletHDStatusIcon;
-    QLabel *connectionsControl;
+    QLabel * connectionsControl ;
+    QLabel * onionIcon ;
     QLabel *labelBlocksIcon;
     QLabel * generatingLabel ;
     QLabel *progressBarLabel;
@@ -158,9 +159,6 @@ private:
     /** Disconnect core signals from GUI */
     void unsubscribeFromCoreSignals() ;
 
-    /** Update UI with latest network info from model */
-    void updateNetworkState();
-
     void updateHeadersSyncProgressLabel();
 
 Q_SIGNALS:
@@ -168,18 +166,17 @@ Q_SIGNALS:
     void receivedURI(const QString &uri);
 
 public Q_SLOTS:
-    /** Set number of connections shown in the UI */
-    void setNumConnections(int count);
-    /** Set network state shown in the UI */
-    void setNetworkActive(bool networkActive);
+    /** update user interface with the latest network info from the model */
+    void updateNetworkInfo() ;
+
     /** Set number of blocks and last block date shown in the UI */
     void setNumBlocks( int count, const QDateTime & blockDate, double progress, bool headers ) ;
 
-    /** Notify the user of an event from the core network or transaction handling code.
+    /** Notify the user of an event from the core network or transaction handling code
        @param[in] title     the message box / notification title
        @param[in] message   the displayed text
        @param[in] style     modality and style definitions (icon and used buttons - buttons only for message boxes)
-                            @see CClientUIInterface::MessageBoxFlags
+                            @see CClientUserInterface::MessageBoxFlags
        @param[in] ret       pointer to a bool that will be modified to whether Ok was clicked (modal only)
     */
     void message(const QString &title, const QString &message, unsigned int style, bool *ret = NULL);

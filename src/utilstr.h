@@ -28,7 +28,11 @@ inline std::string _( const char * text )
     return translated ? ( *translated ) : text ;
 }
 
+std::string toLower( const std::string & in ) ;
+
 std::string trimSpaces( const std::string & s ) ;
+
+std::string trimChars( const std::string & s, const std::string & chars ) ;
 
 double stringToDouble( const std::string & s ) ;
 

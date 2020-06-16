@@ -103,15 +103,15 @@ void AddTimeData(const CNetAddr& ip, int64_t nOffsetSample)
                     fDone = true;
                     std::string strMessage = strprintf(_("Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly."), _(PACKAGE_NAME));
                     SetMiscWarning(strMessage);
-                    uiInterface.ThreadSafeMessageBox(strMessage, "", CClientUIInterface::MSG_WARNING);
+                    uiInterface.ThreadSafeMessageBox( strMessage, "", CClientUserInterface::MSG_WARNING ) ;
                 }
             }
         }
-        
+
         for ( int64_t n : vSorted )
             LogPrint("net", "%+d  ", n);
         LogPrint("net", "|  ");
-        
+
         LogPrint("net", "nTimeOffset = %+d  (%+d minutes)\n", nTimeOffset, nTimeOffset/60);
     }
 }

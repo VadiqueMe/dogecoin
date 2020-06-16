@@ -7,17 +7,17 @@
 #include "tinyformat.h"
 #include "utilstr.h"
 
-CClientUIInterface uiInterface ;
+CClientUserInterface uiInterface ;
 
-bool InitError(const std::string& str)
+bool InitError( const std::string & str )
 {
-    uiInterface.ThreadSafeMessageBox(str, "", CClientUIInterface::MSG_ERROR);
-    return false;
+    uiInterface.ThreadSafeMessageBox( str, "", CClientUserInterface::MSG_ERROR ) ;
+    return false ;
 }
 
-void InitWarning(const std::string& str)
+void InitWarning( const std::string & str )
 {
-    uiInterface.ThreadSafeMessageBox(str, "", CClientUIInterface::MSG_WARNING);
+    uiInterface.ThreadSafeMessageBox( str, "", CClientUserInterface::MSG_WARNING ) ;
 }
 
 std::string AmountHighWarn(const std::string& optname)

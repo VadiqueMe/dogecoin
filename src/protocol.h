@@ -63,8 +63,8 @@ public:
 };
 
 /**
- * Bitcoin protocol message types. When adding new message types, don't forget
- * to update allNetMessageTypes in protocol.cpp
+ * Dogecoin & Bitcoin protocol message types. When adding new message types,
+ * don't forget to update allNetMessageTypes in protocol.cpp
  */
 namespace NetMsgType {
 
@@ -81,8 +81,8 @@ extern const char *VERSION;
  */
 extern const char *VERACK;
 /**
- * The addr (IP address) message relays connection information for peers on the
- * network
+ * The addr (IP address) message relays connection information for peers on
+ * the network
  * @see https://bitcoin.org/en/developer-reference#addr
  */
 extern const char *ADDR;
@@ -283,7 +283,7 @@ enum ServiceFlags : uint64_t {
     // unauthenticated advertisements, so your code must be robust against
     // collisions and other cases where nodes may be advertising a service they
     // do not actually support. Other service bits should be allocated via the
-    // BIP process.
+    // BIP process
 };
 
 /** A CService with information about it as peer */

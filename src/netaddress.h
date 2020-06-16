@@ -1,13 +1,10 @@
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_NETADDRESS_H
-#define BITCOIN_NETADDRESS_H
-
-#if defined(HAVE_CONFIG_H)
-#include "config/dogecoin-config.h"
-#endif
+#ifndef DOGECOIN_NETADDRESS_H
+#define DOGECOIN_NETADDRESS_H
 
 #include "compat.h"
 #include "serialize.h"
@@ -24,9 +21,9 @@ enum Network
     NET_TOR,
 
     NET_MAX,
-};
+} ;
 
-/** IP address (IPv6, or IPv4 using mapped IPv6 range (::FFFF:0:0/96)) */
+/** Network address (IPv6, IPv4 using mapped IPv6 range ::FFFF:0:0/96 or Tor .onion) */
 class CNetAddr
 {
     protected:
@@ -41,11 +38,12 @@ class CNetAddr
 
         /**
          * Set raw IPv4 or IPv6 address (in network byte order)
-         * @note Only NET_IPV4 and NET_IPV6 are allowed for network.
+         * @note Only NET_IPV4 and NET_IPV6 are accepted for network
          */
         void SetRaw(Network network, const uint8_t *data);
 
-        bool SetSpecial(const std::string &strName); // for Tor addresses
+        bool SetOnion( const std::string & strName ) ; // for Tor addresses
+
         bool IsIPv4() const;    // IPv4 mapped address (::FFFF:0:0/96, 0.0.0.0/0)
         bool IsIPv6() const;    // IPv6 address (not mapped IPv4, not Tor)
         bool IsRFC1918() const; // IPv4 private networks (10.0.0.0/8, 192.168.0.0/16, 172.16.0.0/12)
@@ -61,14 +59,13 @@ class CNetAddr
         bool IsRFC4862() const; // IPv6 autoconfig (FE80::/64)
         bool IsRFC6052() const; // IPv6 well-known prefix (64:FF9B::/96)
         bool IsRFC6145() const; // IPv6 IPv4-translated address (::FFFF:0:0:0/96)
-        bool IsTor() const;
+        bool IsTor() const ;
         bool IsLocal() const;
         bool IsRoutable() const;
         bool IsValid() const;
         bool IsMulticast() const;
         enum Network GetNetwork() const;
-        std::string ToString() const;
-        std::string ToStringIP() const;
+        std::string ToString() const ;
         unsigned int GetByte(int n) const;
         uint64_t GetHash() const;
         bool GetInAddr(struct in_addr* pipv4Addr) const;
@@ -149,9 +146,11 @@ class CService : public CNetAddr
         friend bool operator!=(const CService& a, const CService& b);
         friend bool operator<(const CService& a, const CService& b);
         std::vector<unsigned char> GetKey() const;
-        std::string ToString() const;
-        std::string ToStringPort() const;
-        std::string ToStringIPPort() const;
+
+        std::string ToStringAddr() const {  return CNetAddr::ToString() ;  }
+        std::string ToStringPort() const ;
+        std::string ToStringAddrPort() const ;
+        std::string ToString() const {  return ToStringAddrPort() ;  }
 
         CService(const struct in6_addr& ipv6Addr, unsigned short port);
         CService(const struct sockaddr_in6& addr);
@@ -168,4 +167,4 @@ class CService : public CNetAddr
         }
 };
 
-#endif // BITCOIN_NETADDRESS_H
+#endif

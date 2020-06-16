@@ -286,6 +286,7 @@ RES_ICONS = \
   qt/res/icons/magnifier.png \
   qt/res/icons/mail.png \
   qt/res/icons/network_disabled.png \
+  qt/res/icons/onion.png \
   qt/res/icons/open.png \
   qt/res/icons/overview.png \
   qt/res/icons/paper_wallet.png \

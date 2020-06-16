@@ -3,7 +3,17 @@
 
 #include "utilstr.h"
 
+#include <sstream>
+
 CTranslationInterface translationInterface ;
+
+std::string toLower( const std::string & in )
+{
+    std::ostringstream out ;
+    for( const auto & c : in )
+        out << static_cast< char >( std::tolower( c ) ) ;
+    return out.str() ;
+}
 
 std::string trimSpaces( const std::string & s )
 {
@@ -17,6 +27,14 @@ std::string trimSpaces( const std::string & s )
     } while ( std::distance( start, end ) > 0 && std::isspace( *end ) ) ;
 
     return std::string( start, end + 1 ) ;
+}
+
+std::string trimChars( const std::string & s, const std::string & chars )
+{
+    std::string::size_type first = s.find_first_not_of( chars ) ;
+    if ( first == std::string::npos ) return std::string() ;
+    std::string::size_type last = s.find_last_not_of( chars ) ;
+    return s.substr( first, last - first + 1 ) ;
 }
 
 double stringToDouble( const std::string & s )
@@ -61,8 +79,6 @@ std::string substringBetween( const std::string & in, const std::string & begin,
 
     return out ;
 }
-
-#include <sstream>
 
 std::string toStringWithOrdinalSuffix( unsigned int number )
 {

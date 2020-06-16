@@ -487,8 +487,8 @@ UniValue getblocktemplate( const JSONRPCRequest & request )
     if ( ! g_connman )
         throw JSONRPCError( RPC_CLIENT_P2P_DISABLED, "Peer-to-peer functionality is absent" ) ;
 
-    if ( g_connman->GetNodeCount( CConnman::CONNECTIONS_ALL ) == 0 )
-        throw JSONRPCError( RPC_CLIENT_NOT_CONNECTED, "Dogecoin is not connected!" ) ;
+    if ( g_connman->CountConnectedNodes() == 0 )
+        throw JSONRPCError( RPC_CLIENT_NOT_CONNECTED, "Dogecoin is not connected" ) ;
 
     if ( IsInitialBlockDownload() )
         throw JSONRPCError( RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Dogecoin is downloading blocks..." ) ;
@@ -859,7 +859,7 @@ UniValue getauxblockbip22(const JSONRPCRequest& request)
         throw JSONRPCError( RPC_INTERNAL_ERROR, "No coinbase script available (mining requires a wallet)" ) ;
 
     if ( ! g_connman )
-        throw JSONRPCError( RPC_CLIENT_P2P_DISABLED, "Peer-to-peer functionality is missing or disabled" ) ;
+        throw JSONRPCError( RPC_CLIENT_P2P_DISABLED, "Peer-to-peer functionality is absent" ) ;
 
     if ( ! g_connman->hasConnectedNodes() && ! Params().MineBlocksOnDemand() )
         throw JSONRPCError( RPC_CLIENT_NOT_CONNECTED, "Dogecoin is not connected!" ) ;

@@ -81,8 +81,8 @@ std::string strSubVersion;
 limitedmap<uint256, int64_t> mapAlreadyAskedFor(MAX_INV_SZ);
 
 // Signals for message handling
-static CNodeSignals g_signals;
-CNodeSignals& GetNodeSignals() { return g_signals; }
+static CNodeSignals g_signals ;
+CNodeSignals& GetNodeSignals() {  return g_signals ;  }
 
 void CConnman::AddOneShot(const std::string& strDest)
 {
@@ -197,7 +197,7 @@ void AdvertiseLocal(CNode *pnode)
 }
 
 // learn a new local address
-bool AddLocal(const CService& addr, int nScore)
+bool AddLocal( const CService & addr, int nScore )
 {
     if ( ! addr.IsRoutable() )
         return false ;
@@ -208,7 +208,7 @@ bool AddLocal(const CService& addr, int nScore)
     if ( IsLimited( addr ) )
         return false ;
 
-    LogPrintf("AddLocal(%s,%i)\n", addr.ToString(), nScore);
+    LogPrintf( "%s( addr=%s, score=%i )\n", __func__, addr.ToString(), nScore ) ;
 
     {
         LOCK(cs_mapLocalHost);
@@ -223,17 +223,17 @@ bool AddLocal(const CService& addr, int nScore)
     return true;
 }
 
-bool AddLocal(const CNetAddr &addr, int nScore)
+bool AddLocal( const CNetAddr & addr, int nScore )
 {
-    return AddLocal(CService(addr, GetListenPort()), nScore);
+    return AddLocal( CService( addr, GetListenPort() ), nScore ) ;
 }
 
-bool RemoveLocal(const CService& addr)
+bool RemoveLocal( const CService & addr )
 {
-    LOCK(cs_mapLocalHost);
-    LogPrintf("RemoveLocal(%s)\n", addr.ToString());
-    mapLocalHost.erase(addr);
-    return true;
+    LOCK( cs_mapLocalHost ) ;
+    LogPrintf( "%s( addr=%s )\n", __func__, addr.ToString() ) ;
+    mapLocalHost.erase( addr ) ;
+    return true ;
 }
 
 /** Make a particular network entirely off-limits (no automatic connects to it) */
@@ -617,24 +617,26 @@ std::string CNode::GetAddrName() const {
     return addrName ;
 }
 
-void CNode::MaybeSetAddrName(const std::string& addrNameIn) {
-    LOCK(cs_addrName);
-    if (addrName.empty()) {
-        addrName = addrNameIn;
-    }
+void CNode::MaybeSetAddrName( const std::string & addrNameIn ) {
+    LOCK( cs_addrName ) ;
+    if ( addrName.empty() )
+        addrName = addrNameIn ;
 }
 
 CService CNode::GetAddrLocal() const {
-    LOCK(cs_addrLocal);
-    return addrLocal;
+    LOCK( cs_addrLocal ) ;
+    return addrLocal ;
 }
 
-void CNode::SetAddrLocal(const CService& addrLocalIn) {
-    LOCK(cs_addrLocal);
-    if (addrLocal.IsValid()) {
-        error("Addr local already set for node: %i. Refusing to change from %s to %s", id, addrLocal.ToString(), addrLocalIn.ToString());
+void CNode::SetAddrLocal( const CService & addrLocalIn )
+{
+    LOCK( cs_addrLocal ) ;
+    if ( addrLocal.IsValid() ) {
+        error( "Addr local already set for node: %i. Refusing to change from %s to %s",
+                id, addrLocal.ToString(), addrLocalIn.ToString() ) ;
     } else {
-        addrLocal = addrLocalIn;
+        addrLocal = addrLocalIn ;
+        uiInterface.NotifyNodeAddrLocalSet() ;
     }
 }
 
@@ -1179,8 +1181,8 @@ void CConnman::ThreadSocketHandler()
             LOCK(cs_vNodes);
             vNodesSize = vNodes.size();
         }
-        if(vNodesSize != nPrevNodeCount) {
-            nPrevNodeCount = vNodesSize;
+        if ( vNodesSize != nPrevNodeCount ) {
+            nPrevNodeCount = vNodesSize ;
             if ( clientInterface != nullptr )
                 clientInterface->NotifyNumConnectionsChanged( nPrevNodeCount ) ;
         }
@@ -1465,19 +1467,19 @@ void ThreadMapPort()
             char externalIPAddress[40];
             r = UPNP_GetExternalIPAddress(urls.controlURL, data.first.servicetype, externalIPAddress);
             if(r != UPNPCOMMAND_SUCCESS)
-                LogPrintf("UPnP: GetExternalIPAddress() returned %d\n", r);
+                LogPrintf( "UPnP: GetExternalIPAddress() returned %d\n", r ) ;
             else
             {
                 if(externalIPAddress[0])
                 {
-                    CNetAddr resolved;
-                    if(LookupHost(externalIPAddress, resolved, false)) {
-                        LogPrintf("UPnP: ExternalIPAddress = %s\n", resolved.ToString().c_str());
-                        AddLocal(resolved, LOCAL_UPNP);
+                    CNetAddr resolved ;
+                    if ( LookupHost( externalIPAddress, resolved, false ) ) {
+                        LogPrintf( "UPnP: external IP address = %s\n", resolved.ToString().c_str() ) ;
+                        AddLocal( resolved, LOCAL_UPNP ) ;
                     }
                 }
                 else
-                    LogPrintf("UPnP: GetExternalIPAddress failed.\n");
+                    LogPrintf( "UPnP: GetExternalIPAddress failed\n" ) ;
             }
         }
 
@@ -1514,7 +1516,7 @@ void ThreadMapPort()
             throw ;
         }
     } else {
-        LogPrintf( "%s: No valid UPnP IGDs found\n", __func__ ) ;
+        LogPrintf( "%s: no valid UPnP Internet Gateway Devices (IGDs) found\n", __func__ ) ;
         freeUPNPDevlist( devlist ); devlist = nullptr ;
         if ( r != 0 ) FreeUPNPUrls( &urls ) ;
     }
@@ -1607,27 +1609,28 @@ void CConnman::ThreadDNSAddressSeed()
                 {
                     int oneDaySeconds = 24 * 60 * 60 ;
                     CAddress addr = CAddress( CService( ip, BaseParams().GetDefaultPort() ), requiredServiceBits ) ;
-                    addr.nTime = GetTime() - 3 * oneDaySeconds - GetRand( 4 * oneDaySeconds ) ; // use a random age between 3 and 7 days old
+                    // use a random age between 3 and 7 days old
+                    addr.nTime = GetTime() - 3 * oneDaySeconds - GetRand( 4 * oneDaySeconds ) ;
                     vAdd.push_back(addr);
                     found++;
                 }
             }
-            if (interruptNet) {
-                return;
-            }
+
+            if ( interruptNet ) return ;
+
             // TODO: The seed name resolve may fail, yielding an IP of [::], which results in
             // addrman assigning the same source to results from different seeds.
             // This should switch to a hard-coded stable dummy IP for each seed name, so that the
-            // resolve is not required at all.
+            // resolve is not required at all
             if (!vIPs.empty()) {
                 CService seedSource;
                 Lookup(seed.name.c_str(), seedSource, 0, true);
-                addrman.Add(vAdd, seedSource);
+                addrman.AddMany( vAdd, seedSource ) ;
             }
         }
     }
 
-    LogPrintf("%d addresses found from DNS seeds\n", found);
+    LogPrintf( "%d addresses found from DNS seeds\n", found ) ;
 }
 
 
@@ -1711,14 +1714,14 @@ void CConnman::ThreadOpenConnections()
         if ( interruptNet ) return ;
 
         // Add seed nodes if DNS seeds are all down (an infrastructure attack?)
-        if (addrman.size() == 0 && (GetTime() - nStart > 60)) {
+        if ( addrman.size() == 0 && ( GetTime() - nStart > 60 ) ) {
             static bool done = false;
             if ( ! done ) {
                 LogPrintf( "Adding fixed seed nodes as DNS doesn't seem to be available\n" ) ;
-                CNetAddr local;
-                LookupHost("127.0.0.1", local, false);
-                addrman.Add(convertSeed6(Params().FixedSeeds()), local);
-                done = true;
+                CNetAddr local ;
+                LookupHost( "127.0.0.1", local, false ) ;
+                addrman.AddMany( convertSeed6( Params().FixedSeeds() ), local ) ;
+                done = true ;
             }
         }
 
@@ -1938,24 +1941,20 @@ bool CConnman::OpenNetworkConnection(const CAddress& addrConnect, bool fCountFai
     //
     // Initiate outbound network connection
     //
-    if (interruptNet) {
-        return false;
-    }
-    if (!fNetworkActive) {
-        return false;
-    }
-    if (!pszDest) {
-        if (IsLocal(addrConnect) ||
-            FindNode((CNetAddr)addrConnect) || IsBanned(addrConnect) ||
-            FindNode(addrConnect.ToStringIPPort()))
-            return false;
-    } else if (FindNode(std::string(pszDest)))
-        return false;
+    if ( interruptNet ) return false ;
+    if ( ! fNetworkActive ) return false ;
 
-    CNode* pnode = ConnectNode(addrConnect, pszDest, fCountFailure);
+    if ( pszDest == nullptr ) {
+        if ( IsLocal( addrConnect ) ||
+                FindNode( (CNetAddr)addrConnect ) || IsBanned( addrConnect ) ||
+                    FindNode( addrConnect.ToStringAddrPort() ) )
+            return false ;
+    } else if ( FindNode( std::string( pszDest ) ) )
+        return false ;
 
-    if (!pnode)
-        return false;
+    CNode * pnode = ConnectNode( addrConnect, pszDest, fCountFailure ) ;
+    if ( pnode == nullptr ) return false ;
+
     if (grantOutbound)
         grantOutbound->MoveTo(pnode->grantOutbound);
     if (fOneShot)
@@ -2076,8 +2075,8 @@ bool CConnman::BindListenPort(const CService &addrBind, std::string& strError, b
     }
 
     // some systems don't have IPV6_V6ONLY but are always v6only; others do have the option
-    // and enable it by default or not. Try to enable it, if possible.
-    if (addrBind.IsIPv6()) {
+    // and enable it by default or not. Try to enable it, if possible
+    if ( addrBind.IsIPv6() ) {
 #ifdef IPV6_V6ONLY
 #ifdef WIN32
         setsockopt(hListenSocket, IPPROTO_IPV6, IPV6_V6ONLY, (const char*)&nOne, sizeof(int));
@@ -2113,7 +2112,7 @@ bool CConnman::BindListenPort(const CService &addrBind, std::string& strError, b
         return false;
     }
 
-    vhListenSocket.push_back(ListenSocket(hListenSocket, fWhitelisted));
+    vhListenSocket.push_back( ListenSocket( hListenSocket, fWhitelisted ) ) ;
 
     if ( addrBind.IsRoutable() && fDiscoverIP && ! fWhitelisted )
         AddLocal( addrBind, LOCAL_BIND ) ;
@@ -2435,14 +2434,14 @@ void CConnman::MarkAddressGood(const CAddress& addr)
     addrman.Good(addr);
 }
 
-void CConnman::AddNewAddress(const CAddress& addr, const CAddress& addrFrom, int64_t nTimePenalty)
+void CConnman::AddNewAddress( const CAddress & addr, const CAddress & addrFrom, int64_t nTimePenalty )
 {
-    addrman.Add(addr, addrFrom, nTimePenalty);
+    addrman.AddOne( addr, addrFrom, nTimePenalty ) ;
 }
 
-void CConnman::AddNewAddresses(const std::vector<CAddress>& vAddr, const CAddress& addrFrom, int64_t nTimePenalty)
+void CConnman::AddNewAddresses( const std::vector< CAddress > & vAddr, const CAddress & addrFrom, int64_t nTimePenalty )
 {
-    addrman.Add(vAddr, addrFrom, nTimePenalty);
+    addrman.AddMany( vAddr, addrFrom, nTimePenalty ) ;
 }
 
 std::vector<CAddress> CConnman::GetAddresses()
@@ -2474,29 +2473,54 @@ bool CConnman::RemoveAddedNode(const std::string& strNode)
     return false;
 }
 
-size_t CConnman::GetNodeCount(NumConnections flags)
+size_t CConnman::GetNodeCount( WhichConnections filter, enum Network net )
 {
-    LOCK(cs_vNodes);
-    if (flags == CConnman::CONNECTIONS_ALL) // Shortcut if we want total
-        return vNodes.size();
+    if ( net == NET_UNROUTABLE ) return 0 ;
 
-    int nNum = 0;
-    for(std::vector<CNode*>::const_iterator it = vNodes.begin(); it != vNodes.end(); ++it)
-        if (flags & ((*it)->fInbound ? CONNECTIONS_IN : CONNECTIONS_OUT))
-            nNum++;
+    LOCK( cs_vNodes ) ;
+    if ( filter == CConnman::CONNECTIONS_ALL && net == NET_MAX ) // shortcut if we want all
+        return vNodes.size() ;
 
-    return nNum;
+    size_t nodeCount = 0 ;
+    for ( const CNode * node : vNodes )
+        if ( filter == CONNECTIONS_ALL || ( filter & ( node->fInbound ? CONNECTIONS_IN : CONNECTIONS_OUT ) ) )
+            if ( ( net == NET_MAX ) ||
+                    ( net == NET_IPV4 && node->addr.IsIPv4() && ! node->GetAddrLocal().IsTor() ) ||
+                    ( net == NET_IPV6 && node->addr.IsIPv6() && ! node->GetAddrLocal().IsTor() ) ||
+                    ( net == NET_TOR && ( node->addr.IsTor() || node->GetAddrLocal().IsTor() ) ) )
+                nodeCount ++ ;
+
+    return nodeCount ;
 }
 
-void CConnman::GetNodeStats(std::vector<CNodeStats>& vstats)
+size_t CConnman::CountConnectedNodes( const std::string & net, const std::string & inOut )
+{
+    WhichConnections filter = CConnman::CONNECTIONS_NONE ;
+
+    if ( inOut == "in" )
+        filter = CConnman::CONNECTIONS_IN ;
+    else if ( inOut == "out" )
+        filter = CConnman::CONNECTIONS_OUT ;
+    else if ( inOut == "all" || inOut.empty() )
+        filter = CConnman::CONNECTIONS_ALL ;
+
+    enum Network netKind = NET_UNROUTABLE ;
+    if ( net == "all" || net.empty() )
+        netKind = NET_MAX ;
+    else
+        netKind = ParseKindOfNetwork( net ) ;
+
+    return GetNodeCount( filter, netKind ) ;
+}
+
+void CConnman::GetNodeStats( std::vector< CNodeStats > & vstats )
 {
     vstats.clear();
     LOCK(cs_vNodes);
     vstats.reserve(vNodes.size());
-    for(std::vector<CNode*>::iterator it = vNodes.begin(); it != vNodes.end(); ++it) {
-        CNode* pnode = *it;
-        vstats.emplace_back();
-        pnode->copyStats(vstats.back());
+    for ( CNode * pnode : vNodes ) {
+        vstats.emplace_back() ;
+        pnode->copyStats( vstats.back() ) ;
     }
 }
 
@@ -2668,7 +2692,7 @@ CNode::CNode(NodeId idIn, ServiceFlags nLocalServicesIn, int nMyStartingHeightIn
     nSendBytes = 0;
     nRecvBytes = 0;
     nTimeOffset = 0;
-    addrName = addrNameIn == "" ? addr.ToStringIPPort() : addrNameIn;
+    addrName = ( addrNameIn == "" ) ? addr.ToStringAddrPort() : addrNameIn ;
     nVersion = 0;
     strSubVer = "";
     fWhitelisted = false;

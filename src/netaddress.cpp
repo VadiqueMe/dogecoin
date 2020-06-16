@@ -1,19 +1,16 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
-
-#ifdef HAVE_CONFIG_H
-#include "config/dogecoin-config.h"
-#endif
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "netaddress.h"
 #include "hash.h"
 #include "utilstrencodings.h"
 #include "tinyformat.h"
 
-static const unsigned char pchIPv4[12] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xff, 0xff };
-static const unsigned char pchOnionCat[] = {0xFD,0x87,0xD8,0x7E,0xEB,0x43};
+static const unsigned char pchIPv4[12] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xff, 0xff } ;
+static const unsigned char onionCat[] = { 0xFD, 0x87, 0xD8, 0x7E, 0xEB, 0x43 } ;
 
 void CNetAddr::Init()
 {
@@ -42,18 +39,18 @@ void CNetAddr::SetRaw(Network network, const uint8_t *ip_in)
     }
 }
 
-bool CNetAddr::SetSpecial(const std::string &strName)
+bool CNetAddr::SetOnion( const std::string & strName )
 {
-    if (strName.size()>6 && strName.substr(strName.size() - 6, 6) == ".onion") {
-        std::vector<unsigned char> vchAddr = DecodeBase32(strName.substr(0, strName.size() - 6).c_str());
-        if (vchAddr.size() != 16-sizeof(pchOnionCat))
-            return false;
-        memcpy(ip, pchOnionCat, sizeof(pchOnionCat));
-        for (unsigned int i=0; i<16-sizeof(pchOnionCat); i++)
-            ip[i + sizeof(pchOnionCat)] = vchAddr[i];
-        return true;
+    if ( strName.size() > 6 && strName.substr( strName.size() - 6, 6 ) == ".onion" ) {
+        std::vector< unsigned char > vchAddr = DecodeBase32( strName.substr( 0, strName.size() - 6 ).c_str() ) ;
+        if ( vchAddr.size() != 16 - sizeof( onionCat ) )
+            return false ;
+        memcpy( ip, onionCat, sizeof( onionCat ) ) ;
+        for ( unsigned int i = 0 ; i < 16 - sizeof( onionCat ) ; i ++ )
+            ip[ i + sizeof( onionCat ) ] = vchAddr[ i ] ;
+        return true ;
     }
-    return false;
+    return false ;
 }
 
 CNetAddr::CNetAddr()
@@ -162,7 +159,7 @@ bool CNetAddr::IsRFC4843() const
 
 bool CNetAddr::IsTor() const
 {
-    return (memcmp(ip, pchOnionCat, sizeof(pchOnionCat)) == 0);
+    return ( memcmp( ip, onionCat, sizeof( onionCat ) ) == 0 ) ;
 }
 
 bool CNetAddr::IsLocal() const
@@ -192,7 +189,7 @@ bool CNetAddr::IsValid() const
     // Two consecutive addr messages look like this:
     // header20 vectorlen3 addr26 addr26 addr26 header20 vectorlen3 addr26 addr26 addr26...
     // so if the first length field is garbled, it reads the second batch
-    // of addr misaligned by 3 bytes.
+    // of addr misaligned by 3 bytes
     if (memcmp(ip, pchIPv4+3, sizeof(pchIPv4)-3) == 0)
         return false;
 
@@ -240,10 +237,11 @@ enum Network CNetAddr::GetNetwork() const
     return NET_IPV6;
 }
 
-std::string CNetAddr::ToStringIP() const
+std::string CNetAddr::ToString() const
 {
-    if (IsTor())
-        return EncodeBase32(&ip[6], 10) + ".onion";
+    if ( IsTor() )
+        return EncodeBase32( &ip[6], 10 ) + ".onion" ;
+
     CService serv(*this, 0);
     struct sockaddr_storage sockaddr;
     socklen_t socklen = sizeof(sockaddr);
@@ -252,6 +250,7 @@ std::string CNetAddr::ToStringIP() const
         if (!getnameinfo((const struct sockaddr*)&sockaddr, socklen, name, sizeof(name), NULL, 0, NI_NUMERICHOST))
             return std::string(name);
     }
+
     if (IsIPv4())
         return strprintf("%u.%u.%u.%u", GetByte(3), GetByte(2), GetByte(1), GetByte(0));
     else
@@ -260,11 +259,6 @@ std::string CNetAddr::ToStringIP() const
                          GetByte(11) << 8 | GetByte(10), GetByte(9) << 8 | GetByte(8),
                          GetByte(7) << 8 | GetByte(6), GetByte(5) << 8 | GetByte(4),
                          GetByte(3) << 8 | GetByte(2), GetByte(1) << 8 | GetByte(0));
-}
-
-std::string CNetAddr::ToString() const
-{
-    return ToStringIP();
 }
 
 bool operator==(const CNetAddr& a, const CNetAddr& b)
@@ -553,21 +547,16 @@ std::vector<unsigned char> CService::GetKey() const
 
 std::string CService::ToStringPort() const
 {
-    return strprintf("%u", port);
+    return strprintf( "%u", port ) ;
 }
 
-std::string CService::ToStringIPPort() const
+std::string CService::ToStringAddrPort() const
 {
-    if (IsIPv4() || IsTor()) {
-        return ToStringIP() + ":" + ToStringPort();
+    if ( IsIPv4() || IsTor() ) {
+        return CNetAddr::ToString() + ":" + ToStringPort() ;
     } else {
-        return "[" + ToStringIP() + "]:" + ToStringPort();
+        return "[" + CNetAddr::ToString() + "]:" + ToStringPort() ;
     }
-}
-
-std::string CService::ToString() const
-{
-    return ToStringIPPort();
 }
 
 void CService::SetPort(unsigned short portIn)
@@ -575,8 +564,8 @@ void CService::SetPort(unsigned short portIn)
     port = portIn;
 }
 
-CSubNet::CSubNet():
-    valid(false)
+CSubNet::CSubNet() :
+    valid( false )
 {
     memset(netmask, 0, sizeof(netmask));
 }

@@ -48,7 +48,7 @@ mkdir -p $BOOST_PREFIX
 # Build with minimum configuration necessary for Dogecoin
 echo 'using gcc : : eg++ : <cxxflags>"-fvisibility=hidden -fPIC" <linkflags>"" <archiver>"ar" <striper>"strip"  <ranlib>"ranlib" <rc>"" : ;' > user-config.jam
 config_opts="runtime-link=shared threadapi=pthread threading=multi link=static variant=release --layout=tagged --build-type=complete --user-config=user-config.jam -sNO_BZIP2=1"
-./bootstrap.sh --without-icu --with-libraries=filesystem,program_options,system,test
+./bootstrap.sh --without-icu --with-libraries=filesystem,system,test
 ./b2 -d2 -j2 -d1 ${config_opts} --prefix=${BOOST_PREFIX} stage
 ./b2 -d0 -j4 ${config_opts} --prefix=${BOOST_PREFIX} install
 ```

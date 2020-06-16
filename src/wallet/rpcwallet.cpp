@@ -347,8 +347,8 @@ static void SendMoney(const CTxDestination &address, CAmount nValue, bool fSubtr
     if (nValue > curBalance)
         throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, "Insufficient funds");
 
-    if (pwalletMain->GetBroadcastTransactions() && !g_connman)
-        throw JSONRPCError(RPC_CLIENT_P2P_DISABLED, "Error: Peer-to-peer functionality missing or disabled");
+    if ( pwalletMain->GetBroadcastTransactions() && g_connman == nullptr )
+        throw JSONRPCError( RPC_CLIENT_P2P_DISABLED, "Error: Peer-to-peer functionality is absent" ) ;
 
     // Parse Dogecoin address
     CScript scriptPubKey = GetScriptForDestination( address ) ;
@@ -914,8 +914,8 @@ UniValue sendmany(const JSONRPCRequest& request)
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
-    if (pwalletMain->GetBroadcastTransactions() && !g_connman)
-        throw JSONRPCError(RPC_CLIENT_P2P_DISABLED, "Error: Peer-to-peer functionality missing or disabled");
+    if ( pwalletMain->GetBroadcastTransactions() && g_connman == nullptr )
+        throw JSONRPCError( RPC_CLIENT_P2P_DISABLED, "Error: Peer-to-peer functionality is absent" ) ;
 
     std::string strAccount = AccountFromValue( request.params[0] ) ;
     UniValue sendTo = request.params[1].get_obj();
@@ -2373,8 +2373,8 @@ UniValue resendwallettransactions(const JSONRPCRequest& request)
             "Returns array of transaction ids that were re-broadcast.\n"
             );
 
-    if (!g_connman)
-        throw JSONRPCError(RPC_CLIENT_P2P_DISABLED, "Error: Peer-to-peer functionality missing or disabled");
+    if ( g_connman == nullptr )
+        throw JSONRPCError( RPC_CLIENT_P2P_DISABLED, "Error: Peer-to-peer functionality is absent" ) ;
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 

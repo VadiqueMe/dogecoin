@@ -47,7 +47,7 @@ AC_PROG_CXX
 
 dnl By default, libtool for mingw refuses to link static libs into a dll for
 dnl fear of mixing pic/non-pic objects, and import/export complications. Since
-dnl we have those under control, re-enable that functionality.
+dnl we have those under control, re-enable that functionality
 case $host in
   *mingw*)
      lt_cv_deplibs_check_method="pass_all"
@@ -59,7 +59,7 @@ dnl Check if -latomic is required for <std::atomic>
 CHECK_ATOMIC
 
 dnl Unless the user specified OBJCXX, force it to be the same as CXX. This ensures
-dnl that we get the same -std flags for both.
+dnl that we get the same -std flags for both
 m4_ifdef([AC_PROG_OBJCXX],[
 if test "x${OBJCXX+set}" = "x"; then
   OBJCXX="${CXX}"
@@ -67,10 +67,10 @@ fi
 AC_PROG_OBJCXX
 ])
 
-dnl Libtool init checks.
+dnl Libtool init checks
 LT_INIT([pic-only])
 
-dnl Check/return PATH for base programs.
+dnl Check/return PATH for base programs
 AC_PATH_TOOL(AR, ar)
 AC_PATH_TOOL(RANLIB, ranlib)
 AC_PATH_TOOL(STRIP, strip)
@@ -229,7 +229,7 @@ if test "x$CXXFLAGS_overridden" = "xno"; then
 
   ## Some compilers (gcc) ignore unknown -Wno-* options, but warn about all
   ## unknown options if any other warning is produced. Test the -Wfoo case, and
-  ## set the -Wno-foo case if it works.
+  ## set the -Wno-foo case if it works
   AX_CHECK_COMPILE_FLAG([-Wunused-parameter],[CXXFLAGS="$CXXFLAGS -Wno-unused-parameter"],,[[$CXXFLAG_WERROR]])
   AX_CHECK_COMPILE_FLAG([-Wself-assign],[CXXFLAGS="$CXXFLAGS -Wno-self-assign"],,[[$CXXFLAG_WERROR]])
   AX_CHECK_COMPILE_FLAG([-Wunused-local-typedef],[CXXFLAGS="$CXXFLAGS -Wno-unused-local-typedef"],,[[$CXXFLAG_WERROR]])
@@ -283,8 +283,8 @@ case $host in
      AC_CHECK_LIB([iphlpapi],      [main],, AC_MSG_ERROR(lib missing))
      AC_CHECK_LIB([crypt32],      [main],, AC_MSG_ERROR(lib missing))
 
-     # -static is interpreted by libtool, where it has a different meaning.
-     # In libtool-speak, it's -all-static.
+     # -static is interpreted by libtool, where it has a different meaning
+     # in libtool-speak, it's -all-static
      AX_CHECK_LINK_FLAG([[-static]],[LIBTOOL_APP_LDFLAGS="$LIBTOOL_APP_LDFLAGS -all-static"])
 
      AC_PATH_PROG([MAKENSIS], [makensis], none)
@@ -340,7 +340,7 @@ case $host in
          dnl in expected paths because they may conflict with system files. Ask
          dnl Homebrew where each one is located, then adjust paths accordingly.
          dnl It's safe to add these paths even if the functionality is disabled by
-         dnl the user (--without-wallet or --without-gui for example).
+         dnl the user (--without-wallet or --without-gui for example)
 
          openssl_prefix=`$BREW --prefix openssl 2>/dev/null`
          bdb_prefix=`$BREW --prefix berkeley-db 2>/dev/null`
@@ -619,7 +619,6 @@ dnl Check for boost libs
 AX_BOOST_BASE([MINIMUM_REQUIRED_BOOST])
 AX_BOOST_SYSTEM
 AX_BOOST_FILESYSTEM
-AX_BOOST_PROGRAM_OPTIONS
 
 fi
 
@@ -657,7 +656,7 @@ fi
 
 if test x$use_boost = xyes; then
 
-BOOST_LIBS="$BOOST_LDFLAGS $BOOST_SYSTEM_LIB $BOOST_FILESYSTEM_LIB $BOOST_PROGRAM_OPTIONS_LIB"
+BOOST_LIBS="$BOOST_LDFLAGS $BOOST_SYSTEM_LIB $BOOST_FILESYSTEM_LIB"
 
 fi
 

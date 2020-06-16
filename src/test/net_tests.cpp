@@ -78,19 +78,20 @@ BOOST_AUTO_TEST_CASE(caddrdb_read)
     CAddrManUncorrupted addrmanUncorrupted;
     addrmanUncorrupted.MakeDeterministic();
 
-    CService addr1, addr2, addr3;
-    Lookup("250.7.1.1", addr1, 22556, false);
-    Lookup("250.7.2.2", addr2, 9999, false);
-    Lookup("250.7.3.3", addr3, 9999, false);
+    CService addr1, addr2, addr3 ;
+    Lookup( "250.7.1.1", addr1, 22556, false ) ;
+    Lookup( "250.7.2.2", addr2, 18888, false ) ;
+    Lookup( "250.7.3.3", addr3, 59999, false ) ;
 
-    // Add three addresses to new table.
-    CService source;
-    Lookup("252.5.1.1", source, 22556, false);
-    addrmanUncorrupted.Add(CAddress(addr1, NODE_NONE), source);
-    addrmanUncorrupted.Add(CAddress(addr2, NODE_NONE), source);
-    addrmanUncorrupted.Add(CAddress(addr3, NODE_NONE), source);
+    // Add three addresses to new table
+    CService source ;
+    Lookup( "252.5.1.1", source, 22556, false ) ;
+    std::vector< CAddress > manyAddresses = {
+        CAddress( addr1, NODE_NONE ), CAddress( addr2, NODE_NONE ), CAddress( addr3, NODE_NONE )
+    } ;
+    addrmanUncorrupted.AddMany( manyAddresses, source ) ;
 
-    // Test that the de-serialization does not throw an exception.
+    // Test that the de-serialization does not throw an exception
     CDataStream ssPeers1 = AddrmanToStream(addrmanUncorrupted);
     bool exceptionThrown = false;
     CAddrMan addrman1;

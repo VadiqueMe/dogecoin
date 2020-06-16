@@ -42,12 +42,12 @@ bool TryToCreateDirectory( const boost::filesystem::path & p ) ;
 boost::filesystem::path GetDefaultDataDir() ;
 const boost::filesystem::path & GetDirForData( bool fNetSpecific = true ) ;
 void ClearDatadirCache();
-boost::filesystem::path GetConfigFile(const std::string& confPath);
+std::string GetPathToConfigFile( const std::string & fileString ) ;
 #ifndef WIN32
 boost::filesystem::path GetPidFile();
 void CreatePidFile(const boost::filesystem::path &path, pid_t pid);
 #endif
-void ReadConfigFile(const std::string& confPath);
+void ReadConfigFile( const std::string & fileString ) ;
 #ifdef WIN32
 boost::filesystem::path GetSpecialFolderPath(int nFolder, bool fCreate = true);
 #endif

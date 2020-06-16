@@ -89,6 +89,10 @@ bool AppInit(int argc, char* argv[])
             fprintf( stderr, "Error: Specified data directory \"%s\" does not exist\n", GetArg( "-datadir", "" ).c_str() ) ;
             return false ;
         }
+
+        // do this early
+        BeginLogging() ;
+
         try {
             ReadConfigFile( GetArg( "-conf", DOGECOIN_CONF_FILENAME ) ) ;
         } catch ( const std::exception & e ) {
@@ -109,8 +113,7 @@ bool AppInit(int argc, char* argv[])
         }
         // -server defaults to true for bitcoind but not for the GUI so do this here
         SoftSetBoolArg( "-server", true ) ;
-        // Set this early so that parameter interactions go to console
-        InitLogging() ;
+
         InitParameterInteraction() ;
         if ( ! AppInitBasicSetup() || ! AppInitParameterInteraction() || ! AppInitSanityChecks() )
         {

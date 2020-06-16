@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -16,8 +16,8 @@ class BanTableModel;
 class PeerTableModel;
 class TransactionTableModel;
 
-class CWallet;
-class CBlockIndex;
+class CWallet ;
+class CBlockIndex ;
 
 QT_BEGIN_NAMESPACE
 class QTimer;
@@ -30,13 +30,6 @@ enum BlockSource {
     BLOCK_SOURCE_NETWORK
 };
 
-enum NumConnections {
-    CONNECTIONS_NONE = 0,
-    CONNECTIONS_IN   = (1U << 0),
-    CONNECTIONS_OUT  = (1U << 1),
-    CONNECTIONS_ALL  = (CONNECTIONS_IN | CONNECTIONS_OUT),
-};
-
 /** Model for the peer of the Dogecoin network */
 
 class NetworkModel : public QObject
@@ -44,14 +37,12 @@ class NetworkModel : public QObject
     Q_OBJECT
 
 public:
-    explicit NetworkModel( QObject * parent, bool sureDoIt ) ;
+    explicit NetworkModel( QObject * parent ) ;
     ~NetworkModel() ;
 
     PeerTableModel * getPeerTableModel() {  return peerTableModel ;  }
     BanTableModel * getBanTableModel() {  return banTableModel ;  }
 
-    //! Return number of connections, default is in- and outbound (total)
-    int getNumConnections(unsigned int flags = CONNECTIONS_ALL) const;
     int getNumBlocks() const;
     int getHeaderTipHeight() const;
     int64_t getHeaderTipTime() const;
@@ -96,7 +87,7 @@ private:
     void unsubscribeFromCoreSignals();
 
 Q_SIGNALS:
-    void numConnectionsChanged(int count);
+    void numConnectionsChanged( int count ) ;
     void numBlocksChanged(int count, const QDateTime& blockDate, double nVerificationProgress, bool header);
     void mempoolSizeChanged(long count, size_t mempoolSizeInBytes);
     void networkActiveChanged(bool networkActive);
@@ -111,8 +102,9 @@ Q_SIGNALS:
 
 public Q_SLOTS:
     void updateTimer();
-    void updateNumConnections(int numConnections);
-    void updateNetworkActive(bool networkActive);
+    void updateNumConnections( int numConnections ) ;
+    void updateNetworkActive( bool networkActive ) ;
+    void addrLocalSetForNode() ;
     void updateAlert(const QString &hash, int status);
     void updateBanlist();
 

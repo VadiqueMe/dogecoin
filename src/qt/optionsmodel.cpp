@@ -3,10 +3,6 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#if defined(HAVE_CONFIG_H)
-#include "config/dogecoin-config.h"
-#endif
-
 #include "optionsmodel.h"
 
 #include "unitsofcoin.h"
@@ -416,22 +412,21 @@ void OptionsModel::setDisplayUnit(const QVariant &value)
     }
 }
 
-bool OptionsModel::getProxySettings(QNetworkProxy& proxy) const
+bool OptionsModel::getProxySettings( QNetworkProxy & proxy ) const
 {
-    // Directly query current base proxy, because
-    // GUI settings can be overridden with -proxy.
-    proxyType curProxy;
-    if (GetProxy(NET_IPV4, curProxy)) {
-        proxy.setType(QNetworkProxy::Socks5Proxy);
-        proxy.setHostName(QString::fromStdString(curProxy.proxy.ToStringIP()));
-        proxy.setPort(curProxy.proxy.GetPort());
+    // query the current proxy, because GUI settings can be overridden with -proxy
+    proxyType curProxy ;
+    if ( GetProxy( NET_IPV4, curProxy ) ) {
+        proxy.setType( QNetworkProxy::Socks5Proxy ) ;
+        proxy.setHostName( QString::fromStdString( curProxy.proxy.ToStringAddr() ) ) ;
+        proxy.setPort( curProxy.proxy.GetPort() ) ;
 
-        return true;
+        return true ;
     }
     else
-        proxy.setType(QNetworkProxy::NoProxy);
+        proxy.setType( QNetworkProxy::NoProxy ) ;
 
-    return false;
+    return false ;
 }
 
 void OptionsModel::setRestartRequired( bool fRequired )

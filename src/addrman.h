@@ -1,5 +1,6 @@
 // Copyright (c) 2012 Pieter Wuille
 // Copyright (c) 2012-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -17,6 +18,32 @@
 #include <set>
 #include <stdint.h>
 #include <vector>
+
+/** Stochastic address manager
+ *
+ * Design goals:
+ *  * Keep the address tables in-memory, and asynchronously dump the entire table to peers.dat
+ *  * Make sure no (localized) attacker can fill the entire table with his nodes/addresses
+ *
+ * To that end:
+ *  * Addresses are organized into buckets
+ *    * Addresses that have not yet been tried go into 1024 "new" buckets
+ *      * Based on the address range (/16 for IPv4) of the source of information, 64 buckets are selected at random
+ *      * The actual bucket is chosen from one of these, based on the range in which the address itself is located
+ *      * One single address can occur in up to 8 different buckets to increase selection chances for addresses that
+ *        are seen frequently. The chance for increasing this multiplicity decreases exponentially
+ *      * When adding a new address to a full bucket, a randomly chosen entry (with a bias favoring less recently seen
+ *        ones) is removed from it first
+ *    * Addresses of nodes that are known to be accessible go into 256 "tried" buckets
+ *      * Each address range selects at random 8 of these buckets
+ *      * The actual bucket is chosen from one of these, based on the full address
+ *      * When adding a new good address to a full bucket, a randomly chosen entry (with a bias favoring less recently
+ *        tried ones) is evicted from it, back to the "new" buckets
+ *    * Bucket selection is based on cryptographic hashing, using a randomly-generated 256-bit key, which should not
+ *      be observable by adversaries
+ *    * Several indexes are kept for high performance. Defining DEBUG_ADDRMAN will introduce frequent (and expensive)
+ *      consistency checks for the entire data structure
+ */
 
 /**
  * Extended statistics about a CAddress
@@ -98,7 +125,7 @@ public:
         return GetNewBucket(nKey, source);
     }
 
-    //! Calculate in which position of a bucket to store this entry.
+    //! Calculate in which position of a bucket to store this entry
     int GetBucketPosition(const uint256 &nKey, bool fNew, int nBucket) const;
 
     //! Determine whether the statistics about this entry are bad enough so that it can just be deleted
@@ -108,32 +135,6 @@ public:
     double GetChance(int64_t nNow = GetAdjustedTime()) const;
 
 };
-
-/** Stochastic address manager
- *
- * Design goals:
- *  * Keep the address tables in-memory, and asynchronously dump the entire table to peers.dat.
- *  * Make sure no (localized) attacker can fill the entire table with his nodes/addresses.
- *
- * To that end:
- *  * Addresses are organized into buckets.
- *    * Addresses that have not yet been tried go into 1024 "new" buckets.
- *      * Based on the address range (/16 for IPv4) of the source of information, 64 buckets are selected at random.
- *      * The actual bucket is chosen from one of these, based on the range in which the address itself is located.
- *      * One single address can occur in up to 8 different buckets to increase selection chances for addresses that
- *        are seen frequently. The chance for increasing this multiplicity decreases exponentially.
- *      * When adding a new address to a full bucket, a randomly chosen entry (with a bias favoring less recently seen
- *        ones) is removed from it first.
- *    * Addresses of nodes that are known to be accessible go into 256 "tried" buckets.
- *      * Each address range selects at random 8 of these buckets.
- *      * The actual bucket is chosen from one of these, based on the full address.
- *      * When adding a new good address to a full bucket, a randomly chosen entry (with a bias favoring less recently
- *        tried ones) is evicted from it, back to the "new" buckets.
- *    * Bucket selection is based on cryptographic hashing, using a randomly-generated 256-bit key, which should not
- *      be observable by adversaries.
- *    * Several indexes are kept for high performance. Defining DEBUG_ADDRMAN will introduce frequent (and expensive)
- *      consistency checks for the entire data structure.
- */
 
 //! total number of buckets for tried addresses
 #define ADDRMAN_TRIED_BUCKET_COUNT 256
@@ -166,13 +167,13 @@ public:
 #define ADDRMAN_MIN_FAIL_DAYS 7
 
 //! the maximum percentage of nodes to return in a getaddr call
-#define ADDRMAN_GETADDR_MAX_PCT 23
+#define ADDRMAN_GETADDR_MAX_PCT 33
 
 //! the maximum number of nodes to return in a getaddr call
-#define ADDRMAN_GETADDR_MAX 2500
+#define ADDRMAN_GETADDR_MAX 2000
 
 /** 
- * Stochastical (IP) address manager 
+ * Stochastical address manager
  */
 class CAddrMan
 {
@@ -214,21 +215,11 @@ protected:
     //! Source of random numbers for randomization in inner loops
     FastRandomContext insecure_rand;
 
-    //! Find an entry.
-    CAddrInfo* Find(const CNetAddr& addr, int *pnId = NULL);
-
-    //! find an entry, creating it if necessary
-    //! nTime and nServices of the found node are updated, if necessary
-    CAddrInfo* Create(const CAddress &addr, const CNetAddr &addrSource, int *pnId = NULL);
-
     //! Swap two elements in vRandom
     void SwapRandom(unsigned int nRandomPos1, unsigned int nRandomPos2);
 
     //! Move an entry from the "new" table(s) to the "tried" table
     void MakeTried(CAddrInfo& info, int nId);
-
-    //! Delete an entry. It must not be in tried, and have refcount 0
-    void Delete(int nId);
 
     //! Clear a position in a "new" table. This is the only place where entries are actually deleted
     void ClearNew(int nUBucket, int nUBucketPos);
@@ -263,6 +254,16 @@ protected:
     void SetServices_(const CService &addr, ServiceFlags nServices);
 
 public:
+    //! find an entry
+    CAddrInfo* Find( const CNetAddr & addr, int * pnId = nullptr ) ;
+
+    //! find an entry, creating it when necessary
+    //! nTime and nServices of the found node are updated, if needed
+    CAddrInfo* Create( const CAddress & addr, const CNetAddr & addrSource, int * pnId = nullptr ) ;
+
+    //! Delete an entry. It must not be in tried, and have refcount 0
+    void Delete( int nId ) ;
+
     /**
      * serialized format:
      * * version byte (currently 1)
@@ -500,31 +501,10 @@ public:
     }
 
     //! Add a single address
-    bool Add(const CAddress &addr, const CNetAddr& source, int64_t nTimePenalty = 0)
-    {
-        LOCK(cs);
-        bool fRet = false;
-        Check();
-        fRet |= Add_(addr, source, nTimePenalty);
-        Check();
-        if (fRet)
-            LogPrint("addrman", "Added %s from %s: %i tried, %i new\n", addr.ToStringIPPort(), source.ToString(), nTried, nNew);
-        return fRet;
-    }
+    bool AddOne( const CAddress & addr, const CNetAddr & source, int64_t nTimePenalty = 0 ) ;
 
     //! Add multiple addresses
-    bool Add(const std::vector<CAddress> &vAddr, const CNetAddr& source, int64_t nTimePenalty = 0)
-    {
-        LOCK(cs);
-        int nAdd = 0;
-        Check();
-        for (std::vector<CAddress>::const_iterator it = vAddr.begin(); it != vAddr.end(); it++)
-            nAdd += Add_(*it, source, nTimePenalty) ? 1 : 0;
-        Check();
-        if (nAdd)
-            LogPrint("addrman", "Added %i addresses from %s: %i tried, %i new\n", nAdd, source.ToString(), nTried, nNew);
-        return nAdd > 0;
-    }
+    bool AddMany( const std::vector< CAddress > & vAddr, const CNetAddr & source, int64_t nTimePenalty = 0 ) ;
 
     //! Mark an entry as accessible
     void Good(const CService &addr, int64_t nTime = GetAdjustedTime())

@@ -1,5 +1,6 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2012-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -12,10 +13,10 @@
 #include <boost/signals2/last_value.hpp>
 #include <boost/signals2/signal.hpp>
 
-class CBasicKeyStore;
-class CWallet;
-class uint256;
-class CBlockIndex;
+class CBasicKeyStore ;
+class CWallet ;
+class uint256 ;
+class CBlockIndex ;
 
 /** General change type (added, updated, removed) */
 enum ChangeType
@@ -25,18 +26,18 @@ enum ChangeType
     CT_DELETED
 };
 
-/** Signals for UI communication */
-class CClientUIInterface
+/** Signals for communication with user interface */
+class CClientUserInterface
 {
 public:
-    /** Flags for CClientUIInterface::ThreadSafeMessageBox */
+    /** Flags for CClientUserInterface::ThreadSafeMessageBox */
     enum MessageBoxFlags
     {
         ICON_INFORMATION    = 0,
         ICON_WARNING        = (1U << 0),
         ICON_ERROR          = (1U << 1),
         /**
-         * Mask of all available icons in CClientUIInterface::MessageBoxFlags
+         * Mask of all available icons in CClientUserInterface::MessageBoxFlags
          * This needs to be updated, when icons are changed there!
          */
         ICON_MASK = (ICON_INFORMATION | ICON_WARNING | ICON_ERROR),
@@ -55,8 +56,8 @@ public:
         BTN_APPLY   = 0x02000000U, // QMessageBox::Apply
         BTN_RESET   = 0x04000000U, // QMessageBox::Reset
         /**
-         * Mask of all available buttons in CClientUIInterface::MessageBoxFlags
-         * This needs to be updated, when buttons are changed there!
+         * Mask of all available buttons in CClientUserInterface::MessageBoxFlags
+         * This needs to be updated, when buttons are changed there
          */
         BTN_MASK = (BTN_OK | BTN_YES | BTN_NO | BTN_ABORT | BTN_RETRY | BTN_IGNORE |
                     BTN_CLOSE | BTN_CANCEL | BTN_DISCARD | BTN_HELP | BTN_APPLY | BTN_RESET),
@@ -73,28 +74,30 @@ public:
         MSG_ERROR = (ICON_ERROR | BTN_OK | MODAL)
     };
 
-    /** Show message box. */
+    /** Show message box */
     boost::signals2::signal<bool (const std::string& message, const std::string& caption, unsigned int style), boost::signals2::last_value<bool> > ThreadSafeMessageBox;
 
-    /** If possible, ask the user a question. If not, falls back to ThreadSafeMessageBox(noninteractive_message, caption, style) and returns false. */
+    /** If possible, ask the user a question. If not, falls back to ThreadSafeMessageBox(noninteractive_message, caption, style) and returns false */
     boost::signals2::signal<bool (const std::string& message, const std::string& noninteractive_message, const std::string& caption, unsigned int style), boost::signals2::last_value<bool> > ThreadSafeQuestion;
 
-    /** Progress message during initialization. */
+    /** Progress message during initialization */
     boost::signals2::signal<void (const std::string &message)> InitMessage;
 
-    /** Number of network connections changed. */
-    boost::signals2::signal<void (int newNumConnections)> NotifyNumConnectionsChanged;
+    /** Number of network connections changed */
+    boost::signals2::signal<void (int newNumConnections)> NotifyNumConnectionsChanged ;
 
-    /** Network activity state changed. */
-    boost::signals2::signal<void (bool networkActive)> NotifyNetworkActiveChanged;
+    /** Network activity state changed */
+    boost::signals2::signal<void (bool networkActive)> NotifyNetworkActiveChanged ;
+
+    boost::signals2::signal<void ()> NotifyNodeAddrLocalSet ;
 
     /**
-     * New, updated or cancelled alert.
-     * @note called with lock cs_mapAlerts held.
+     * New, updated or cancelled alert
+     * @note called with lock cs_mapAlerts held
      */
     boost::signals2::signal<void (const uint256 &hash, ChangeType status)> NotifyAlertChanged;
 
-    /** A wallet has been loaded. */
+    /** A wallet has been loaded */
     boost::signals2::signal<void (CWallet* wallet)> LoadWallet;
 
     /** Show progress e.g. for verifychain */
@@ -106,7 +109,7 @@ public:
     /** Best header has changed */
     boost::signals2::signal<void (bool, const CBlockIndex *)> NotifyHeaderTip;
 
-    /** Banlist did change. */
+    /** Banlist did change */
     boost::signals2::signal<void (void)> BannedListChanged;
 };
 
@@ -120,6 +123,6 @@ std::string AmountHighWarn(const std::string& optname);
 
 std::string AmountErrMsg(const char* const optname, const std::string& strValue);
 
-extern CClientUIInterface uiInterface;
+extern CClientUserInterface uiInterface ;
 
 #endif

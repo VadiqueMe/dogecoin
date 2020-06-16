@@ -13,9 +13,21 @@
 #include <map>
 #include <boost/filesystem/path.hpp>
 
-class CSubNet;
-class CAddrMan;
-class CDataStream;
+class CSubNet ;
+class CAddrMan ;
+class CDataStream ;
+
+/** Access to the database of peer addresses (peers.dat) */
+class CAddrDB
+{
+private:
+    boost::filesystem::path pathAddr ;
+public:
+    CAddrDB() ;
+    bool WriteListOfPeers( const CAddrMan & addr ) ;
+    bool ReadListOfPeers( CAddrMan & addr ) ;
+    bool ReadListOfPeersFrom( CAddrMan & addr, CDataStream & ssPeers ) ;
+} ;
 
 typedef enum BanReason
 {
@@ -27,7 +39,8 @@ typedef enum BanReason
 class CBanEntry
 {
 public:
-    static const int CURRENT_VERSION=1;
+    static const int CURRENT_VERSION = 1 ;
+
     int nVersion;
     int64_t nCreateTime;
     int64_t nBanUntil;
@@ -75,19 +88,7 @@ public:
     }
 };
 
-typedef std::map<CSubNet, CBanEntry> banmap_t;
-
-/** Access to the database of peer addresses (peers.dat) */
-class CAddrDB
-{
-private:
-    boost::filesystem::path pathAddr ;
-public:
-    CAddrDB() ;
-    bool WriteListOfPeers( const CAddrMan & addr ) ;
-    bool ReadListOfPeers( CAddrMan & addr ) ;
-    bool ReadListOfPeersFrom( CAddrMan & addr, CDataStream & ssPeers ) ;
-};
+typedef std::map< CSubNet, CBanEntry > banmap_t ;
 
 /** Access to the banlist database */
 class CBanDB
@@ -98,6 +99,6 @@ public:
     CBanDB() ;
     bool WriteBanSet( const banmap_t & banSet ) ;
     bool ReadBanSet( banmap_t & banSet ) ;
-};
+} ;
 
 #endif

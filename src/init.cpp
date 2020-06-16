@@ -115,7 +115,7 @@ public:
         try {
             return CCoinsViewBacked::GetCoins( txhash, coins ) ;
         } catch( const std::runtime_error & e ) {
-            uiInterface.ThreadSafeMessageBox( _("Error reading from database, shutting down."), "", CClientUIInterface::MSG_ERROR ) ;
+            uiInterface.ThreadSafeMessageBox( _("Error reading from database, shutting down."), "", CClientUserInterface::MSG_ERROR ) ;
             LogPrintf( "Error reading from database: %s\n", e.what() ) ;
             // Starting the shutdown sequence and returning false to the caller would be
             // interpreted as 'entry not found' (as opposed to unable to read data), and
@@ -855,20 +855,18 @@ static std::string ResolveErrMsg(const char * const optname, const std::string& 
     return strprintf(_("Cannot resolve -%s address: '%s'"), optname, strBind);
 }
 
-void InitLogging()
+void BeginLogging()
 {
-    if ( GetBoolArg( "-printtoconsole", false ) )
-        PickPrintToConsole() ;
-
     fLogTimestamps = GetBoolArg( "-logtimestamps", DEFAULT_LOGTIMESTAMPS ) ;
     fLogTimeMicros = GetBoolArg( "-logtimemicros", DEFAULT_LOGTIMEMICROS ) ;
     fLogIPs = GetBoolArg( "-logips", DEFAULT_LOGIPS ) ;
 
     LogPrintf( "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" ) ;
     LogPrintf( "Dogecoin version %s\n", FormatFullVersion() ) ;
+    LogPrintf( "Startup time: %s\n", DateTimeStrFormat( "%Y-%m-%d %H:%M:%S", GetTime() ) ) ;
 }
 
-namespace { // Variables internal to initialization process only
+namespace { // variables internal to initialization process only
 
 ServiceFlags nRelevantServices = NODE_NETWORK;
 int nMaxConnections;
@@ -881,14 +879,12 @@ ServiceFlags nLocalServices = NODE_NETWORK;
 [[noreturn]] static void new_handler_terminate()
 {
     // Rather than throwing std::bad-alloc if allocation fails, terminate
-    // immediately to (try to) avoid chain corruption.
+    //   immediately to (try to) avoid chain corruption
     // Since LogPrintf may itself allocate memory, set the handler directly
-    // to terminate first.
-    std::set_new_handler(std::terminate);
-    LogPrintf("Error: Out of memory. Terminating.\n");
-
-    // The log was successful, terminate now.
-    std::terminate();
+    //   to terminate first
+    std::set_new_handler( std::terminate ) ;
+    LogPrintf( "Error: Out of memory. Terminating\n" ) ;
+    std::terminate() ;
 };
 
 bool AppInitBasicSetup()
@@ -981,7 +977,7 @@ bool AppInitParameterInteraction()
 
     // ********************************************************* Step 3: parameter-to-internal-flags
 
-    fDebug = mapMultiArgs.count( "-debug" ) ;
+    fDebug = ( mapMultiArgs.count( "-debug" ) > 0 ) ;
     if ( fDebug ) {
         const std::vector< std::string > & categories = mapMultiArgs.at( "-debug" ) ;
         // if -debug=0 or -nodebug is set, turn off debugging messages
@@ -1142,7 +1138,7 @@ static bool LockDataDirectory(bool probeOnly)
 {
     std::string strDataDir = GetDirForData().string() ;
 
-    // Make sure only a single Bitcoin process is using the data directory
+    // Make sure only a single Dogecoin process is using the data directory
     boost::filesystem::path pathLockFile = GetDirForData() / ".lock" ;
     FILE* file = fopen(pathLockFile.string().c_str(), "a"); // empty lock file; created if it doesn't exist
     if (file) fclose(file);
@@ -1181,6 +1177,9 @@ bool AppInitMain( std::vector< std::thread > & threads, CScheduler & scheduler )
 {
     const CChainParams & chainparams = Params() ;
 
+    if ( GetBoolArg( "-printtoconsole", false ) )
+        PickPrintToConsole() ; // do it before OpenDebugLog
+
     // ********************************************************* Step 4a: application initialization
     // After daemonization get the data directory lock again and hold on to it until exit
     // This creates a slight window for a race condition to happen, however this condition is harmless: it
@@ -1202,10 +1201,9 @@ bool AppInitMain( std::vector< std::thread > & threads, CScheduler & scheduler )
 
     OpenDebugLog() ;
 
-    LogPrintf( "Startup time: %s\n", DateTimeStrFormat( "%Y-%m-%d %H:%M:%S", GetTime() ) ) ;
     LogPrintf( "Default data directory %s\n", GetDefaultDataDir().string() ) ;
     LogPrintf( "Using data directory %s\n", GetDirForData().string() ) ;
-    LogPrintf( "Using config file %s\n", GetConfigFile( GetArg( "-conf", DOGECOIN_CONF_FILENAME ) ).string() ) ;
+    LogPrintf( "Using config file %s\n", GetPathToConfigFile( GetArg( "-conf", DOGECOIN_CONF_FILENAME ) ) ) ;
     LogPrintf( "Using at most %i automatic connections (%i file descriptors available)\n", nMaxConnections, nFD ) ;
 
     InitSignatureCache() ;
@@ -1278,18 +1276,18 @@ bool AppInitMain( std::vector< std::thread > & threads, CScheduler & scheduler )
             strSubVersion.size(), MAX_SUBVERSION_LENGTH));
     }
 
-    if (mapMultiArgs.count("-onlynet")) {
-        std::set<enum Network> nets;
-        for ( const std::string & snet : mapMultiArgs.at( "-onlynet") ) {
-            enum Network net = ParseNetwork(snet);
-            if (net == NET_UNROUTABLE)
-                return InitError(strprintf(_("Unknown network specified in -onlynet: '%s'"), snet));
-            nets.insert(net);
+    if ( mapMultiArgs.count( "-onlynet" ) ) {
+        std::set< enum Network > nets ;
+        for ( const std::string & snet : mapMultiArgs.at( "-onlynet" ) ) {
+            enum Network net = ParseKindOfNetwork( snet ) ;
+            if ( net == NET_UNROUTABLE )
+                return InitError( strprintf( _("Unknown network specified in -onlynet: '%s'"), snet ) ) ;
+            nets.insert( net ) ;
         }
-        for (int n = 0; n < NET_MAX; n++) {
-            enum Network net = (enum Network)n;
-            if (!nets.count(net))
-                SetLimited(net);
+        for ( int n = 0 ; n < NET_MAX ; n ++ ) {
+            enum Network net = (enum Network)n ;
+            if ( nets.count( net ) == 0 )
+                SetLimited( net ) ;
         }
     }
 
@@ -1480,7 +1478,7 @@ bool AppInitMain( std::vector< std::thread > & threads, CScheduler & scheduler )
                 }
 
                 // Check for changed -prune state.  What we are concerned about is a user who has pruned blocks
-                // in the past, but is now trying to run unpruned.
+                // in the past, but is now trying to run unpruned
                 if (fHavePruned && !fPruneMode) {
                     strLoadError = _("You need to rebuild the database using -reindex to go back to unpruned mode.  This will redownload the entire blockchain");
                     break;
@@ -1535,13 +1533,13 @@ bool AppInitMain( std::vector< std::thread > & threads, CScheduler & scheduler )
                 bool fRet = uiInterface.ThreadSafeQuestion(
                     strLoadError + ".\n\n" + _("Do you want to rebuild the block database now?"),
                     strLoadError + ".\nPlease restart with -reindex or -reindex-chainstate to recover.",
-                    "", CClientUIInterface::MSG_ERROR | CClientUIInterface::BTN_ABORT);
+                    "", CClientUserInterface::MSG_ERROR | CClientUserInterface::BTN_ABORT ) ;
                 if ( fRet ) {
                     fReindex = true ;
                     RejectShutdown() ;
                 } else {
-                    LogPrintf("Aborted block database rebuild. Exiting.\n");
-                    return false;
+                    LogPrintf( "Aborted block database rebuild. Exiting\n" ) ;
+                    return false ;
                 }
             } else {
                 return InitError(strLoadError);

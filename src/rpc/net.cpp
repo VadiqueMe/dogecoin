@@ -27,7 +27,7 @@ UniValue getconnectioncount(const JSONRPCRequest& request)
     if (request.fHelp || request.params.size() != 0)
         throw std::runtime_error(
             "getconnectioncount\n"
-            "\nReturns the number of connections to other nodes.\n"
+            "\nReturns the number of connections to other nodes\n"
             "\nResult:\n"
             "n          (numeric) The connection count\n"
             "\nExamples:\n"
@@ -38,7 +38,7 @@ UniValue getconnectioncount(const JSONRPCRequest& request)
     if ( g_connman == nullptr )
         throw JSONRPCError( RPC_CLIENT_P2P_DISABLED, "Error: Peer-to-peer functionality is absent" ) ;
 
-    return (int)g_connman->GetNodeCount(CConnman::CONNECTIONS_ALL);
+    return (int)g_connman->CountConnectedNodes() ;
 }
 
 UniValue ping(const JSONRPCRequest& request)
@@ -196,14 +196,13 @@ UniValue addnode(const JSONRPCRequest& request)
         (strCommand != "onetry" && strCommand != "add" && strCommand != "remove"))
         throw std::runtime_error(
             "addnode \"node\" \"add|remove|onetry\"\n"
-            "\nAttempts add or remove a node from the addnode list.\n"
-            "Or try a connection to a node once.\n"
+            "\nAdd or remove a node from the addnode list or try to connect to a node once\n"
             "\nArguments:\n"
             "1. \"node\"     (string, required) The node (see getpeerinfo for nodes)\n"
             "2. \"command\"  (string, required) 'add' to add a node to the list, 'remove' to remove a node from the list, 'onetry' to try a connection to the node once\n"
             "\nExamples:\n"
-            + HelpExampleCli("addnode", "\"192.168.0.6:22556\" \"onetry\"")
-            + HelpExampleRpc("addnode", "\"192.168.0.6:22556\", \"onetry\"")
+            + HelpExampleCli( "addnode", "\"192.168.0.6:" + std::to_string( BaseParams().GetDefaultPort() ) + "\" \"onetry\"" )
+            + HelpExampleRpc( "addnode", "\"192.168.0.6:" + std::to_string( BaseParams().GetDefaultPort() ) + "\", \"onetry\"" )
         );
 
     if ( g_connman == nullptr )
@@ -237,12 +236,12 @@ UniValue disconnectnode(const JSONRPCRequest& request)
     if (request.fHelp || request.params.size() != 1)
         throw std::runtime_error(
             "disconnectnode \"address\" \n"
-            "\nImmediately disconnects from the specified node.\n"
+            "\nDisconnects from the specified node\n"
             "\nArguments:\n"
             "1. \"address\"     (string, required) The IP address/port of the node\n"
             "\nExamples:\n"
-            + HelpExampleCli("disconnectnode", "\"192.168.0.6:22556\"")
-            + HelpExampleRpc("disconnectnode", "\"192.168.0.6:22556\"")
+            + HelpExampleCli( "disconnectnode", "\"192.168.0.6:" + std::to_string( BaseParams().GetDefaultPort() ) + "\"" )
+            + HelpExampleRpc( "disconnectnode", "\"192.168.0.6:" + std::to_string( BaseParams().GetDefaultPort() ) + "\"" )
         );
 
     if ( g_connman == nullptr )
@@ -380,11 +379,14 @@ static UniValue GetNetworksInfo()
         proxyType proxy ;
         UniValue obj( UniValue::VOBJ ) ;
         GetProxy( network, proxy ) ;
-        obj.push_back( Pair( "name", GetNetworkName( network ) ) ) ;
+        std::string netName = GetNameOfNetwork( network ) ;
+        obj.push_back( Pair( "name", netName ) ) ;
         obj.push_back( Pair( "limited", IsLimited( network ) ) ) ;
         obj.push_back( Pair( "reachable", IsReachable( network ) ) ) ;
-        obj.push_back( Pair( "proxy", proxy.IsValid() ? proxy.proxy.ToStringIPPort() : std::string() ) ) ;
+        obj.push_back( Pair( "proxy", proxy.IsValid() ? proxy.proxy.ToStringAddrPort() : std::string() ) ) ;
         obj.push_back( Pair( "proxy_randomize_credentials", proxy.randomize_credentials ) ) ;
+        obj.push_back( Pair( "connections",
+                                ( g_connman != nullptr ) ? g_connman->CountConnectedNodes( netName ) : 0 ) ) ;
         networks.push_back( obj ) ;
     }
     return networks ;
@@ -395,13 +397,13 @@ UniValue getnetworkinfo( const JSONRPCRequest & request )
     if ( request.fHelp || request.params.size() != 0 )
         throw std::runtime_error(
             "getnetworkinfo\n"
-            "Returns an object containing various info regarding peer-to-peer networking\n"
+            "Returns an object containing various info about peer-to-peer networking\n"
             "\nResult:\n"
             "{\n"
-            "  \"version\": xxxxx,                      (numeric) the server version\n"
-            "  \"subversion\": \"/Satoshi:x.x.x/\",     (string) the server subversion string\n"
+            "  \"version\": xxxxx,                      (numeric) the version of this peer\n"
+            "  \"subversion\": \"/Inutoshi:x.x.x/\",    (string) the subversion string of this peer\n"
             "  \"protocolversion\": xxxxx,              (numeric) the protocol version\n"
-            "  \"localservices\": \"xxxxxxxxxxxxxxxx\", (string) the services we offer to the network\n"
+            "  \"localservices\": \"xxxxxxxxxxxxxxxx\", (string) services this peer offers to the network\n"
             "  \"localrelay\": true|false,              (bool) true if transaction relay is requested from peers\n"
             "  \"timeoffset\": xxxxx,                   (numeric) the time offset\n"
             "  \"connections\": xxxxx,                  (numeric) the number of connections\n"
@@ -413,6 +415,7 @@ UniValue getnetworkinfo( const JSONRPCRequest & request )
             "    \"reachable\": true|false,             (boolean) is the network reachable?\n"
             "    \"proxy\": \"host:port\"               (string) the proxy that is used for this network, or empty if none\n"
             "    \"proxy_randomize_credentials\": true|false,  (string) Whether randomized credentials are used\n"
+            "    \"connections\": xxxxx,                (numeric) the number of peers connected via this network\n"
             "  }\n"
             "  ,...\n"
             "  ],\n"
@@ -443,7 +446,7 @@ UniValue getnetworkinfo( const JSONRPCRequest & request )
     obj.push_back( Pair("timeoffset", GetTimeOffset()) ) ;
     if ( g_connman != nullptr ) {
         obj.push_back( Pair( "networkactive", g_connman->IsNetworkActive() ) ) ;
-        obj.push_back( Pair( "connections", (int)g_connman->GetNodeCount( CConnman::CONNECTIONS_ALL ) ) ) ;
+        obj.push_back( Pair( "connections", (int)g_connman->CountConnectedNodes() ) ) ;
     }
     obj.push_back( Pair( "networks", GetNetworksInfo() ) ) ;
     obj.push_back( Pair( "relayfee", ValueFromAmount( 0 ) ) ) ;

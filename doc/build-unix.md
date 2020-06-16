@@ -34,7 +34,7 @@ These dependencies are required:
  Library     | Purpose          | Description
  ------------|------------------|----------------------
  libssl      | Crypto           | Random Number Generation, Elliptic Curve Cryptography
- libboost    | Utility          | Library for threading, data structures, etc
+ libboost    | Utility          | File system, unit tests, and more
  libevent    | Networking       | OS independent asynchronous networking
 
 Optional dependencies:
@@ -72,7 +72,7 @@ Options when installing required Boost library files:
 individual boost development packages, so the following can be used to only
 install necessary parts of boost:
 
-    sudo apt-get install libboost-system-dev libboost-filesystem-dev libboost-program-options-dev libboost-test-dev
+    sudo apt-get install libboost-system-dev libboost-filesystem-dev libboost-test-dev
 
 2. If that doesn't work, you can install all boost development packages with:
 

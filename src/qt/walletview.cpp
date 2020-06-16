@@ -284,11 +284,11 @@ void WalletView::backupWallet()
 
     if ( walletModel->backupWallet( filename ) ) {
         Q_EMIT message( tr("Backup Successful"), tr("The wallet data was successfully saved to %1").arg( filename ),
-            CClientUIInterface::MSG_INFORMATION ) ;
+            CClientUserInterface::MSG_INFORMATION ) ;
     }
     else {
         Q_EMIT message( tr("Backup Failed"), tr("There was an error trying to save the wallet data to %1").arg( filename ),
-            CClientUIInterface::MSG_ERROR ) ;
+            CClientUserInterface::MSG_ERROR ) ;
     }
 }
 

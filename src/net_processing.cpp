@@ -1306,8 +1306,8 @@ bool static ProcessMessage( CNode * pfrom, const std::string & strCommand, CData
 
         connman.PushMessage(pfrom, CNetMsgMaker(INIT_PROTO_VERSION).Make(NetMsgType::VERACK));
 
-        pfrom->nServices = nServices;
-        pfrom->SetAddrLocal(addrMe);
+        pfrom->nServices = nServices ;
+        pfrom->SetAddrLocal( addrMe ) ;
         {
             LOCK(pfrom->cs_SubVer);
             pfrom->strSubVer = strSubVer;
@@ -1725,7 +1725,7 @@ bool static ProcessMessage( CNode * pfrom, const std::string & strCommand, CData
 
         LOCK( cs_main ) ;
         if ( IsInitialBlockDownload() && ! pfrom->fWhitelisted ) {
-            LogPrintf( "ignoring getheaders from peer=%d because node is in initial block download\n", pfrom->id ) ;
+            LogPrintf( "ignoring getheaders from peer=%d because this node is in initial block download\n", pfrom->id ) ;
             return true ;
         }
 

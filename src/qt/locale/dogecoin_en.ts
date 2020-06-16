@@ -509,7 +509,7 @@
 <context>
     <name>DogecoinApplication</name>
     <message>
-        <location filename="../dogecoin.cpp" line="+526"/>
+        <location filename="../dogecoin.cpp" line="+519"/>
         <source>A fatal error occurred. Dogecoin can no longer continue safely and will quit.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -517,7 +517,7 @@
 <context>
     <name>DogecoinGUI</name>
     <message>
-        <location filename="../gui.cpp" line="+143"/>
+        <location filename="../gui.cpp" line="+144"/>
         <source>Wallet</source>
         <translation type="unfinished">Wallet</translation>
     </message>
@@ -527,7 +527,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+199"/>
+        <location line="+205"/>
         <source>Transactions</source>
         <translation type="unfinished"></translation>
     </message>
@@ -735,7 +735,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+27"/>
+        <location line="+26"/>
         <source>Syncing Headers (%1%)...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1178,7 +1178,7 @@
 <context>
     <name>NetworkModel</name>
     <message>
-        <location filename="../networkmodel.cpp" line="+173"/>
+        <location filename="../networkmodel.cpp" line="+159"/>
         <source>Network Alert</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1455,7 +1455,7 @@
         <translation>&amp;Cancel</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.cpp" line="+83"/>
+        <location filename="../optionsdialog.cpp" line="+79"/>
         <source>default</source>
         <translation>default</translation>
     </message>
@@ -1984,7 +1984,7 @@
         </translation>
     </message>
     <message>
-        <location filename="../dogecoin.cpp" line="+176"/>
+        <location filename="../dogecoin.cpp" line="+180"/>
         <source>%1 didn&apos;t yet exit safely...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1992,12 +1992,12 @@
 <context>
     <name>QObject::QObject</name>
     <message>
-        <location line="-96"/>
+        <location line="-100"/>
         <source>Error: Specified data directory &quot;%1&quot; does not exist.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+12"/>
         <source>Error: Cannot parse configuration file: %1. Only use key=value syntax.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2104,7 +2104,7 @@
     </message>
     <message>
         <location line="+479"/>
-        <location filename="../rpcconsole.cpp" line="+1301"/>
+        <location filename="../rpcconsole.cpp" line="+1347"/>
         <source>Received</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2253,12 +2253,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../rpcconsole.cpp" line="-436"/>
+        <location filename="../rpcconsole.cpp" line="-474"/>
         <source>In:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+21"/>
         <source>Out:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2268,7 +2268,7 @@
         <translation>Clear console</translation>
     </message>
     <message>
-        <location filename="../rpcconsole.cpp" line="-214"/>
+        <location filename="../rpcconsole.cpp" line="-242"/>
         <source>Send message</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2325,12 +2325,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+36"/>
+        <location line="+85"/>
         <source>Network activity is off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+468"/>
+        <location line="+465"/>
         <source>(node id: %1)</source>
         <translation type="unfinished"></translation>
     </message>
