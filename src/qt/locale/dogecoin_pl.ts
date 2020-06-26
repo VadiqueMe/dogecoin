@@ -2498,10 +2498,6 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
         <translation>Informacja</translation>
     </message>
     <message>
-        <source>Invalid amount for -paytxfee=&lt;amount&gt;: '%s' (must be at least %s)</source>
-        <translation>Nieprawidłowa kwota dla -paytxfee=&lt;amount&gt;: '%s' (musi być co najmniej %s)</translation>
-    </message>
-    <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
         <translation>Nieprawidłowa maska sieci określona w -whitelist: '%s'</translation>
     </message>
@@ -2532,10 +2528,6 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
     <message>
         <source>Send trace/debug info to console instead of debug log file</source>
         <translation>Wyślij informację/raport do konsoli zamiast do pliku debug log.</translation>
-    </message>
-    <message>
-        <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
-        <translation>Wyślij bez opłaty jeżeli to możliwe (domyślnie: %u)</translation>
     </message>
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>

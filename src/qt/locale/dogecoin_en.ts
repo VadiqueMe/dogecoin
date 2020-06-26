@@ -496,7 +496,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+244"/>
+        <location line="+245"/>
         <source>change from %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2104,7 +2104,7 @@
     </message>
     <message>
         <location line="+479"/>
-        <location filename="../rpcconsole.cpp" line="+1347"/>
+        <location filename="../rpcconsole.cpp" line="+1373"/>
         <source>Received</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2253,7 +2253,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../rpcconsole.cpp" line="-474"/>
+        <location filename="../rpcconsole.cpp" line="-545"/>
         <source>In:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2330,7 +2330,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+465"/>
+        <location line="+536"/>
         <source>(node id: %1)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4480,11 +4480,6 @@
         <location line="+1"/>
         <source>Send trace/debug info to console instead of debug log file</source>
         <translation type="unfinished">Send trace/debug info to console instead of debug log file</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>

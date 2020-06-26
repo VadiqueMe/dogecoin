@@ -1555,10 +1555,6 @@
         <translation>מידע</translation>
     </message>
     <message>
-        <source>Invalid amount for -paytxfee=&lt;amount&gt;: '%s' (must be at least %s)</source>
-        <translation>כמות לא תקינה עבור ‎-paytxfee=&lt;amount&gt;‎:‏ '%s' (חייבת להיות לפחות %s)</translation>
-    </message>
-    <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
         <translation>מסכת הרשת שצוינה עם ‎-whitelist שגויה: '%s'</translation>
     </message>

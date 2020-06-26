@@ -467,10 +467,6 @@
         <translation>ارسال اطلاعات پیگیری/خطایابی به کنسول به جای ارسال به فایل debug log</translation>
     </message>
     <message>
-        <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
-        <translation>ارسال تراکنش ها به صورت بدون کارمزد در صورت امکان (پیش فرض: %u)</translation>
-    </message>
-    <message>
         <source>Username for JSON-RPC connections</source>
         <translation>شناسه کاربری برای ارتباطاتِ JSON-RPC</translation>
     </message>

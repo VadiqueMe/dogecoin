@@ -3108,10 +3108,6 @@
         <translation>Informace</translation>
     </message>
     <message>
-        <source>Invalid amount for -paytxfee=&lt;amount&gt;: '%s' (must be at least %s)</source>
-        <translation>Neplatná částka pro -paytxfee=&lt;částka&gt;: '%s' (musí být alespoň %s)</translation>
-    </message>
-    <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
         <translation>Ve -whitelist byla zadána neplatná podsíť: '%s'</translation>
     </message>
@@ -3142,10 +3138,6 @@
     <message>
         <source>Send trace/debug info to console instead of debug log file</source>
         <translation>Posílat stopovací/ladicí informace do konzole místo do souboru debug log</translation>
-    </message>
-    <message>
-        <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
-        <translation>Posílat transakce pokud možno bez poplatků (výchozí: %u)</translation>
     </message>
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>

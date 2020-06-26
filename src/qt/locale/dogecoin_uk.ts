@@ -1785,10 +1785,6 @@
         <translation>Інформація</translation>
     </message>
     <message>
-        <source>Invalid amount for -paytxfee=&lt;amount&gt;: '%s' (must be at least %s)</source>
-        <translation>Вказано некоректну суму для параметру -paytxfee: «%s» (повинно бути щонайменше %s)</translation>
-    </message>
-    <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
         <translation>Вказано неправильну маску підмережі для -whitelist: «%s»</translation>
     </message>
@@ -1819,10 +1815,6 @@
     <message>
         <source>Send trace/debug info to console instead of debug log file</source>
         <translation>Відсилати налагоджувальну інформацію на консоль, а не у файл debug log</translation>
-    </message>
-    <message>
-        <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
-        <translation>Не сплачувати комісію за надсилання транзакцій, якщо це можливо (типово: %u)</translation>
     </message>
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>

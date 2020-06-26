@@ -38,17 +38,14 @@ extern CWallet* pwalletMain;
  * Settings
  */
 extern CFeeRate payTxFee ;
-extern bool bSpendZeroConfChange;
-extern bool fSendFreeTransactions;
-extern bool fWalletRbf;
+extern bool bSpendZeroConfChange ;
+extern bool fWalletRbf ;
 
 static const unsigned int DEFAULT_KEYPOOL_SIZE = 200 ;
 // -paytxfee default
 static const CAmount DEFAULT_TRANSACTION_FEE = 0 ;
 //! Default for -spendzeroconfchange
 static const bool DEFAULT_SPEND_ZEROCONF_CHANGE = true;
-//! Default for -sendfreetransactions
-static const bool DEFAULT_SEND_FREE_TRANSACTIONS = true;
 //! Default for -walletrejectlongchains
 static const bool DEFAULT_WALLET_REJECT_LONG_CHAINS = false;
 //! -txconfirmblocks default

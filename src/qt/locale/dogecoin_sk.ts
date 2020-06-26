@@ -2941,10 +2941,6 @@
         <translation>Informácia</translation>
     </message>
     <message>
-        <source>Invalid amount for -paytxfee=&lt;amount&gt;: '%s' (must be at least %s)</source>
-        <translation>Neplatná suma pre -paytxfee=&lt;amount&gt;: '%s' (musí byť aspoň %s)</translation>
-    </message>
-    <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
         <translation>Nadaná neplatná netmask vo -whitelist: '%s'</translation>
     </message>
@@ -2971,10 +2967,6 @@
     <message>
         <source>Send trace/debug info to console instead of debug log file</source>
         <translation>Odoslať trace/debug informácie na konzolu namiesto debug log žurnálu</translation>
-    </message>
-    <message>
-        <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
-        <translation>Poslať ako transakcie bez poplatku, ak je to možné (predvolené: %u)</translation>
     </message>
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>

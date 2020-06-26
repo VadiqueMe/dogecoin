@@ -1785,10 +1785,6 @@
         <translation>Tietoa</translation>
     </message>
     <message>
-        <source>Invalid amount for -paytxfee=&lt;amount&gt;: '%s' (must be at least %s)</source>
-        <translation>Kelvoton määrä argumentille -paytxfee=&lt;amount&gt;: '%s' (pitää olla vähintään %s)</translation>
-    </message>
-    <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
         <translation>Kelvoton verkkopeite määritelty argumentissa -whitelist: '%s'</translation>
     </message>

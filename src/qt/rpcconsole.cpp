@@ -43,6 +43,7 @@
 #include <QStringList>
 #include <QPainter>
 #include <QTextStream>
+#include <QColorDialog>
 
 #if QT_VERSION < 0x050000
 #include <QUrl>
@@ -490,80 +491,34 @@ RPCConsole::RPCConsole( const PlatformStyle * style, QWidget * parent )
     ui->label_berkeleyDBVersion->hide();
     ui->berkeleyDBVersion->hide();
 #endif
-    // Register RPC timer interface
-    rpcTimerInterface = new QtRPCTimerInterface();
-    // avoid accidentally overwriting an existing, non QTThread
-    // based timer interface
-    RPCSetTimerInterfaceIfUnset(rpcTimerInterface);
 
-    QColor colorForSent( "yellow" ) ;
-    QColor colorForReceived( "cyan" ) ;
+    rpcTimerInterface = new QtRPCTimerInterface() ;
+    // don't accidentally overwrite an existing, non QThread based timer interface
+    RPCSetTimerInterfaceIfUnset( rpcTimerInterface ) ;
+
+    connect( ui->colorForReceivedButton, SIGNAL( clicked() ), this, SLOT( pickColorForReceived() ) ) ;
+    connect( ui->colorForSentButton, SIGNAL( clicked() ), this, SLOT( pickColorForSent() ) ) ;
+
+    setTrafficGraphRange( INITIAL_TRAFFIC_GRAPH_MINUTES ) ;
+    ui->trafficGraph->setColorForReceived( QColor( "cyan" ) ) ;
+    ui->trafficGraph->setColorForSent( QColor( "yellow" ) ) ;
 
     {
         ui->colorForReceivedButton->setText( "" ) ;
-        int button_height = 3 * ( ui->colorForReceivedButton->height() >> 2 ) ;
-        ui->colorForReceivedButton->setFixedHeight( button_height ) ;
-        ui->colorForReceivedButton->setFixedWidth( button_height ) ;
-
-        int button_width = ui->colorForReceivedButton->width() ;
-        QPixmap pixmap( button_width, button_height ) ;
-        QColor transparent( "white" ) ;
-        transparent.setAlpha( 255 ) ;
-        pixmap.fill( transparent ) ;
-
-        QPainter painter( &pixmap ) ;
-        painter.setPen( QPen( colorForReceived ) ) ;
-        static const int spacing = 4 ;
-        static const int hshift = -1 ;
-        static const int vshift = -2 ;
-        for ( int p = 1 ; p < 3 ; ++ p ) {
-            painter.drawLine( QLine( QPoint( spacing + hshift, ( button_height >> 1 ) + p + vshift ),
-                                     QPoint( button_width - spacing + hshift, ( button_height >> 1 ) + p + vshift ) ) ) ;
-            painter.drawLine( QLine( QPoint( spacing + hshift, ( button_height >> 1 ) - p + vshift + 1 ),
-                                     QPoint( button_width - spacing + hshift, ( button_height >> 1 ) - p + vshift + 1 ) ) ) ;
-        }
-
-        QIcon icon( pixmap ) ;
-        ui->colorForReceivedButton->setIcon( icon ) ;
-        ui->colorForReceivedButton->setIconSize( pixmap.rect().size() ) ;
+        const int buttonSize = 3 * ( ui->colorForReceivedButton->height() >> 2 ) ;
+        ui->colorForReceivedButton->setFixedHeight( buttonSize ) ;
+        ui->colorForReceivedButton->setFixedWidth( buttonSize ) ;
     }
-
     {
         ui->colorForSentButton->setText( "" ) ;
-        int button_height = 3 * ( ui->colorForSentButton->height() >> 2 ) ;
-        ui->colorForSentButton->setFixedHeight( button_height ) ;
-        ui->colorForSentButton->setFixedWidth( button_height ) ;
-
-        int button_width = ui->colorForSentButton->width() ;
-        QPixmap pixmap( button_width, button_height ) ;
-        QColor transparent( "white" ) ;
-        transparent.setAlpha( 255 ) ;
-        pixmap.fill( transparent ) ;
-
-        QPainter painter( &pixmap ) ;
-        painter.setPen( QPen( colorForSent ) ) ;
-        static const int spacing = 4 ;
-        static const int hshift = -1 ;
-        static const int vshift = -3 ;
-        for ( int p = 1 ; p < 3 ; ++ p ) {
-            painter.drawLine( QLine( QPoint( spacing + hshift, ( button_height >> 1 ) + p + vshift ),
-                                     QPoint( button_width - spacing + hshift, ( button_height >> 1 ) + p + vshift ) ) ) ;
-            painter.drawLine( QLine( QPoint( spacing + hshift, ( button_height >> 1 ) - p + vshift + 1 ),
-                                     QPoint( button_width - spacing + hshift, ( button_height >> 1 ) - p + vshift + 1 ) ) ) ;
-        }
-
-        QIcon icon( pixmap ) ;
-        ui->colorForSentButton->setIcon( icon ) ;
-        ui->colorForSentButton->setIconSize( pixmap.rect().size() ) ;
+        const int buttonSize = 3 * ( ui->colorForSentButton->height() >> 2 ) ;
+        ui->colorForSentButton->setFixedHeight( buttonSize ) ;
+        ui->colorForSentButton->setFixedWidth( buttonSize ) ;
     }
+    repaintTrafficColorButtons() ;
 
-    ui->trafficGraph->setReceivedColor( colorForReceived ) ;
-    ui->trafficGraph->setSentColor( colorForSent ) ;
-
-    setTrafficGraphRange( INITIAL_TRAFFIC_GRAPH_MINUTES ) ;
-
-    QSettings settings;
-    consoleFontSize = settings.value(fontSizeSettingsKey, QFontInfo(QFont()).pointSize()).toInt();
+    QSettings settings ;
+    consoleFontSize = settings.value( fontSizeSettingsKey, QFontInfo( QFont() ).pointSize() ).toInt() ;
     clearConsole() ;
 }
 
@@ -1196,6 +1151,77 @@ void RPCConsole::resetTrafficValues()
     resetBytesRecv = networkModel->getTotalBytesRecv() ;
     resetBytesSent = networkModel->getTotalBytesSent() ;
     updateTrafficStats() ;
+}
+
+void RPCConsole::pickColorForReceived()
+{
+    QColor chosenColor = QColorDialog::getColor( ui->trafficGraph->getColorForReceived(), this );
+    if ( chosenColor.isValid() ) {
+        ui->trafficGraph->setColorForReceived( chosenColor ) ;
+        repaintTrafficColorButtons() ;
+    }
+}
+
+void RPCConsole::pickColorForSent()
+{
+    QColor chosenColor = QColorDialog::getColor( ui->trafficGraph->getColorForSent(), this );
+    if ( chosenColor.isValid() ) {
+        ui->trafficGraph->setColorForSent( chosenColor ) ;
+        repaintTrafficColorButtons() ;
+    }
+}
+
+void RPCConsole::repaintTrafficColorButtons()
+{
+    {
+        QPixmap pixmap( ui->colorForReceivedButton->width(), ui->colorForReceivedButton->height() ) ;
+        QColor transparent( "white" ) ;
+        transparent.setAlpha( 255 ) ;
+        pixmap.fill( transparent ) ;
+
+        QPainter painter( &pixmap ) ;
+        painter.setPen( QPen( ui->trafficGraph->getColorForReceived() ) ) ;
+        static const int spacing = 4 ;
+        static const int hshift = -1 ;
+        static const int vshift = -2 ;
+        const int buttonWidth = ui->colorForReceivedButton->width() ;
+        const int halfButtonHeight = ui->colorForReceivedButton->height() >> 1 ;
+        for ( int p = 1 ; p < 3 ; ++ p ) {
+            painter.drawLine( QLine( QPoint( spacing + hshift, halfButtonHeight + p + vshift ),
+                                     QPoint( buttonWidth - spacing + hshift, halfButtonHeight + p + vshift ) ) ) ;
+            painter.drawLine( QLine( QPoint( spacing + hshift, halfButtonHeight - p + vshift + 1 ),
+                                     QPoint( buttonWidth - spacing + hshift, halfButtonHeight - p + vshift + 1 ) ) ) ;
+        }
+
+        QIcon icon( pixmap ) ;
+        ui->colorForReceivedButton->setIcon( icon ) ;
+        ui->colorForReceivedButton->setIconSize( pixmap.rect().size() ) ;
+    }
+
+    {
+        QPixmap pixmap( ui->colorForSentButton->width(), ui->colorForSentButton->height() ) ;
+        QColor transparent( "white" ) ;
+        transparent.setAlpha( 255 ) ;
+        pixmap.fill( transparent ) ;
+
+        QPainter painter( &pixmap ) ;
+        painter.setPen( QPen( ui->trafficGraph->getColorForSent() ) ) ;
+        static const int spacing = 4 ;
+        static const int hshift = -1 ;
+        static const int vshift = -3 ;
+        const int buttonWidth = ui->colorForSentButton->width() ;
+        const int halfButtonHeight = ui->colorForSentButton->height() >> 1 ;
+        for ( int p = 1 ; p < 3 ; ++ p ) {
+            painter.drawLine( QLine( QPoint( spacing + hshift, halfButtonHeight + p + vshift ),
+                                     QPoint( buttonWidth - spacing + hshift, halfButtonHeight + p + vshift ) ) ) ;
+            painter.drawLine( QLine( QPoint( spacing + hshift, halfButtonHeight - p + vshift + 1 ),
+                                     QPoint( buttonWidth - spacing + hshift, halfButtonHeight - p + vshift + 1 ) ) ) ;
+        }
+
+        QIcon icon( pixmap ) ;
+        ui->colorForSentButton->setIcon( icon ) ;
+        ui->colorForSentButton->setIconSize( pixmap.rect().size() ) ;
+    }
 }
 
 void RPCConsole::peerSelected( const QItemSelection & selected, const QItemSelection & deselected )

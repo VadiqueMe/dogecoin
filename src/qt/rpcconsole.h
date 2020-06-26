@@ -71,6 +71,9 @@ private Q_SLOTS:
     void updateTrafficStats( quint64 totalBytesIn, quint64 totalBytesOut ) ;
     void updateTrafficStats() ;
     void resetTrafficValues() ;
+    void pickColorForReceived() ;
+    void pickColorForSent() ;
+    void repaintTrafficColorButtons() ;
     void resizeEvent(QResizeEvent *event);
     void showEvent(QShowEvent *event);
     void hideEvent(QHideEvent *event);

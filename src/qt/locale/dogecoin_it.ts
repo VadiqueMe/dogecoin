@@ -2833,10 +2833,6 @@
         <translation>Informazioni</translation>
     </message>
     <message>
-        <source>Invalid amount for -paytxfee=&lt;amount&gt;: '%s' (must be at least %s)</source>
-        <translation>Importo non valido per -paytxfee=&lt;amount&gt;: '%s' (deve essere almeno %s)</translation>
-    </message>
-    <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
         <translation>Netmask non valida specificata in -whitelist: '%s'</translation>
     </message>
@@ -2867,10 +2863,6 @@
     <message>
         <source>Send trace/debug info to console instead of debug log file</source>
         <translation>Invia le informazioni di trace/debug alla console invece che al file debug log</translation>
-    </message>
-    <message>
-        <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
-        <translation>Invia transazioni a zero commissioni se possibile (predefinito: %u)</translation>
     </message>
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>

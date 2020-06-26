@@ -2947,10 +2947,6 @@
         <translation>信息</translation>
     </message>
     <message>
-        <source>Invalid amount for -paytxfee=&lt;amount&gt;: '%s' (must be at least %s)</source>
-        <translation>无效的金额 -paytxfee=&lt;amount&gt;: '%s' (必须至少为 %s)</translation>
-    </message>
-    <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
         <translation>-whitelist: '%s' 指定的网络掩码无效</translation>
     </message>
@@ -2981,10 +2977,6 @@
     <message>
         <source>Send trace/debug info to console instead of debug log file</source>
         <translation>跟踪/调试信息输出到控制台，不输出到 debug log 文件</translation>
-    </message>
-    <message>
-        <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
-        <translation>发送时尽可能 不支付交易费用 (默认: %u) </translation>
     </message>
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>

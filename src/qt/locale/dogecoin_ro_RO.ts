@@ -1509,10 +1509,6 @@
         <translation>Informaţie</translation>
     </message>
     <message>
-        <source>Invalid amount for -paytxfee=&lt;amount&gt;: '%s' (must be at least %s)</source>
-        <translation>Sumă nevalidă pentru -paytxfee=&lt;suma&gt;: '%s' (trebuie să fie cel puţin %s)</translation>
-    </message>
-    <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
         <translation>Mască reţea nevalidă specificată în -whitelist: '%s'</translation>
     </message>
@@ -1527,10 +1523,6 @@
     <message>
         <source>Send trace/debug info to console instead of debug log file</source>
         <translation>Trimite informaţiile trace/debug la consolă în locul fişierului debug log</translation>
-    </message>
-    <message>
-        <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
-        <translation>Trimitere tranzacţii ca tranzacţii taxă-zero dacă este posibil (implicit: %u)</translation>
     </message>
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>

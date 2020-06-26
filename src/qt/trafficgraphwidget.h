@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2015 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -26,8 +26,11 @@ public:
     void setNetworkModel( NetworkModel * model ) ;
     int getGraphRangeMinutes() const ;
 
-    void setSentColor( const QColor & color ) {  colorForSent = color ;  }
-    void setReceivedColor( const QColor & color ) {  colorForReceived = color ;  }
+    QColor getColorForSent() const {  return colorForSent ;  }
+    QColor getColorForReceived() {  return colorForReceived ;  }
+
+    void setColorForSent( const QColor & color ) {  colorForSent = color ;  }
+    void setColorForReceived( const QColor & color ) {  colorForReceived = color ;  }
 
 protected:
     void paintEvent( QPaintEvent * ) ;

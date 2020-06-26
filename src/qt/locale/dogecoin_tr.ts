@@ -3104,10 +3104,6 @@
         <translation>Bilgi</translation>
     </message>
     <message>
-        <source>Invalid amount for -paytxfee=&lt;amount&gt;: '%s' (must be at least %s)</source>
-        <translation>-paytxfee=&lt;tutar&gt;:'%s' unsurunda geçersiz tutar (asgari %s olması lazımdır)</translation>
-    </message>
-    <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
         <translation>-whitelist: '%s' unsurunda geçersiz bir ağ maskesi belirtildi</translation>
     </message>
@@ -3138,10 +3134,6 @@
     <message>
         <source>Send trace/debug info to console instead of debug log file</source>
         <translation>İzleme/hata ayıklama verilerini debug log dosyası yerine konsola gönder</translation>
-    </message>
-    <message>
-        <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
-        <translation>İşlemleri mümkünse ücretsiz olarak gönder (varsayılan: %u)</translation>
     </message>
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>

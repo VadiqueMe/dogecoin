@@ -3117,10 +3117,6 @@
         <translation>資訊</translation>
     </message>
     <message>
-        <source>Invalid amount for -paytxfee=&lt;amount&gt;: '%s' (must be at least %s)</source>
-        <translation>設定 -paytxfee=&lt;金額&gt; 的金額無效: '%s' (至少要有 %s)</translation>
-    </message>
-    <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
         <translation>指定在 -whitelist 的網段無效: '%s'</translation>
     </message>
@@ -3151,10 +3147,6 @@
     <message>
         <source>Send trace/debug info to console instead of debug log file</source>
         <translation>在終端機顯示追蹤或除錯資訊，而不是寫到檔案 debug log 中</translation>
-    </message>
-    <message>
-        <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
-        <translation>盡可能送出不用付手續費的交易(預設值: %u)</translation>
     </message>
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>

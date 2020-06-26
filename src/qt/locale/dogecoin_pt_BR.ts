@@ -3100,10 +3100,6 @@
         <translation>Informação</translation>
     </message>
     <message>
-        <source>Invalid amount for -paytxfee=&lt;amount&gt;: '%s' (must be at least %s)</source>
-        <translation>Valor inválido para -paytxfee=&lt;amount&gt;: '%s' (precisa ser no mínimo %s)</translation>
-    </message>
-    <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
         <translation>Máscara de rede especificada em -whitelist: '%s' é inválida</translation>
     </message>
@@ -3134,10 +3130,6 @@
     <message>
         <source>Send trace/debug info to console instead of debug log file</source>
         <translation>Mandar informação de trace/debug para o console em vez de para o arquivo debug log</translation>
-    </message>
-    <message>
-        <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
-        <translation>Enviar transação sem taxa, se possível (padrão: %u)</translation>
     </message>
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>

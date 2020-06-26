@@ -2338,10 +2338,6 @@ Var vänlig och försök igen.</translation>
         <translation>Information</translation>
     </message>
     <message>
-        <source>Invalid amount for -paytxfee=&lt;amount&gt;: '%s' (must be at least %s)</source>
-        <translation>Ogiltigt belopp för -paytxfee=&lt;belopp&gt;:'%s' (måste vara minst %s)</translation>
-    </message>
-    <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
         <translation>Ogiltig nätmask angiven i -whitelist: '%s'</translation>
     </message>
@@ -2372,10 +2368,6 @@ Var vänlig och försök igen.</translation>
     <message>
         <source>Send trace/debug info to console instead of debug log file</source>
         <translation>Skicka trace-/debuginformation till terminalen istället för till debug log</translation>
-    </message>
-    <message>
-        <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
-        <translation>Sänd transaktioner som nollavgiftstransaktioner om möjligt (förvalt: %u)</translation>
     </message>
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>

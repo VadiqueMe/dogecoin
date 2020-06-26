@@ -3108,10 +3108,6 @@
         <translation>정보</translation>
     </message>
     <message>
-        <source>Invalid amount for -paytxfee=&lt;amount&gt;: '%s' (must be at least %s)</source>
-        <translation>유효하지 않은 금액 -paytxfee=&lt;amount&gt;: "%s" (최소 %s 이상이어야 됨)</translation>
-    </message>
-    <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
         <translation>유효하지 않은 넷마스크가 -whitelist: '%s" 를 통해 지정됨</translation>
     </message>
@@ -3142,10 +3138,6 @@
     <message>
         <source>Send trace/debug info to console instead of debug log file</source>
         <translation>추적오류 정보를 degug.log 자료로 보내는 대신 콘솔로 보내기</translation>
-    </message>
-    <message>
-        <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
-        <translation>가능한 경우 수수료 없이 거래 보내기 (기본값: %u)</translation>
     </message>
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>

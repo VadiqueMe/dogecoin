@@ -3104,10 +3104,6 @@
         <translation>Hinweis</translation>
     </message>
     <message>
-        <source>Invalid amount for -paytxfee=&lt;amount&gt;: '%s' (must be at least %s)</source>
-        <translation>Ungültiger Betrag für -paytxfee=&lt;amount&gt;: '%s' (muss mindestens %s sein)</translation>
-    </message>
-    <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
         <translation>Ungültige Netzmaske angegeben in -whitelist: '%s'</translation>
     </message>
@@ -3138,10 +3134,6 @@
     <message>
         <source>Send trace/debug info to console instead of debug log file</source>
         <translation>Rückverfolgungs- und Debuginformationen an die Konsole senden, anstatt sie in debug log zu schreiben</translation>
-    </message>
-    <message>
-        <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
-        <translation>Transaktionen, wenn möglich, als gebührenfreie Transaktion senden (Standard: %u)</translation>
     </message>
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>

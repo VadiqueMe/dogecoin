@@ -3116,10 +3116,6 @@
         <translation>Информация</translation>
     </message>
     <message>
-        <source>Invalid amount for -paytxfee=&lt;amount&gt;: '%s' (must be at least %s)</source>
-        <translation>Неверное количество в параметре -paytxfee=&lt;кол-во&gt;: '%s' (должно быть как минимум %s)</translation>
-    </message>
-    <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
         <translation>Указана неверная сетевая маска в -whitelist: '%s'</translation>
     </message>
@@ -3150,10 +3146,6 @@
     <message>
         <source>Send trace/debug info to console instead of debug log file</source>
         <translation>Выводить информацию трассировки/отладки на консоль вместо файла debug log</translation>
-    </message>
-    <message>
-        <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
-        <translation>Осуществить транзакцию бесплатно, если возможно (по умолчанию: %u)</translation>
     </message>
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>

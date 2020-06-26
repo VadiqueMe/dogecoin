@@ -42,7 +42,6 @@ CWallet * pwalletMain = nullptr ;
 CFeeRate payTxFee( DEFAULT_TRANSACTION_FEE ) ;
 
 bool bSpendZeroConfChange = DEFAULT_SPEND_ZEROCONF_CHANGE ;
-bool fSendFreeTransactions = DEFAULT_SEND_FREE_TRANSACTIONS ;
 bool fWalletRbf = DEFAULT_WALLET_RBF ;
 
 const char * const DEFAULT_WALLET_FILE = "much.wow" ;
@@ -2543,7 +2542,7 @@ bool CWallet::CreateTransaction( const std::vector< CRecipient > & vecSend,
                 }
 
                 // Can we complete this as a free transaction?
-                if ( fSendFreeTransactions && nBytes <= MAX_FREE_TRANSACTION_CREATE_SIZE )
+                if ( nBytes <= MAX_FREE_TRANSACTION_CREATE_SIZE )
                     break ;
 
                 CAmount nFeeNeeded( 0 );
@@ -3403,7 +3402,6 @@ std::string CWallet::GetWalletHelpString( bool showDebug )
     strUsage += HelpMessageOpt( "-paytxfee=<amt>", strprintf(_("Fee (in %s/kB) to add to transactions you send (default: %s)"), NameOfE8Currency(), FormatMoney( payTxFee.GetFeePerKiloByte() )) ) ;
     strUsage += HelpMessageOpt("-rescan", _("Rescan the block chain for missing wallet transactions on startup"));
     strUsage += HelpMessageOpt("-salvagewallet", _("Attempt to recover private keys from a corrupt wallet on startup"));
-    strUsage += HelpMessageOpt("-sendfreetransactions", strprintf(_("Send transactions as zero-fee transactions if possible (default: %u)"), DEFAULT_SEND_FREE_TRANSACTIONS));
     strUsage += HelpMessageOpt("-spendzeroconfchange", strprintf(_("Spend unconfirmed change when sending transactions (default: %u)"), DEFAULT_SPEND_ZEROCONF_CHANGE));
     strUsage += HelpMessageOpt( "-txconfirmblocks=<n>", strprintf( _( "Number of blocks (one with the transaction plus more subsequent blocks above it) to count the transaction as confirmed (default: %u)" ), DEFAULT_BLOCKS_TO_CONFIRM_TX ) ) ;
     strUsage += HelpMessageOpt("-usehd", _("Use hierarchical deterministic key generation (HD) after BIP32. Only has effect during wallet creation/first start") + " " + strprintf(_("(default: %u)"), DEFAULT_USE_HD_WALLET));
@@ -3675,13 +3673,12 @@ bool CWallet::ParseParameters()
     }
 
     bSpendZeroConfChange = GetBoolArg( "-spendzeroconfchange", DEFAULT_SPEND_ZEROCONF_CHANGE ) ;
-    fSendFreeTransactions = GetBoolArg( "-sendfreetransactions", DEFAULT_SEND_FREE_TRANSACTIONS ) ;
     fWalletRbf = GetBoolArg( "-walletrbf", DEFAULT_WALLET_RBF ) ;
 
-    if ( fSendFreeTransactions && GetArg("-limitfreerelay", DEFAULT_LIMITFREERELAY) <= 0 )
-        return InitError( "Creation of free transactions without their relay is not such nice, bye" );
+    if ( GetArg( "-limitfreerelay", DEFAULT_LIMITFREERELAY ) <= 0 )
+        return InitError( "Creation of free transactions without their limited relay (-limitfreerelay) is not such nice, bye" );
 
-    return true;
+    return true ;
 }
 
 std::atomic< bool > CWallet::fFlushThreadRunning( false ) ;

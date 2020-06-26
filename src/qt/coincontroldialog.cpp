@@ -500,22 +500,27 @@ void CoinControlDialog::updateLabels( WalletModel * model, QDialog * dialog )
     }
 
     // calculation
-    if (nQuantity > 0)
+    if ( nQuantity > 0 )
     {
         // Bytes
         nBytes = nBytesInputs + ((CoinControlDialog::payAmounts.size() > 0 ? CoinControlDialog::payAmounts.size() + 1 : 2) * 34) + 10; // always assume +1 output for change here
         if ( fWitness )
         {
-            // there is some fudging in these numbers related to the actual virtual transaction size calculation that will keep this estimate from being exact
-            // usually, the result will be an overestimate within a couple of satoshis so that the confirmation dialog ends up displaying a slightly smaller fee
+            // there is some fudging in these numbers related to the actual virtual
+            // transaction size calculation that will keep this estimate from being exact
+            //
+            // usually, the result will be an overestimate within a couple of satoshis
+            // so that the confirmation dialog ends up displaying a slightly smaller fee
+            //
             // also, the witness stack size value value is a variable sized integer
             // usually, the number of stack items will be well under the single byte var int limit
+
             nBytes += 2 ; // account for the serialized marker and flag bytes
             nBytes += nQuantity ; // account for the witness byte that holds the number of stack items for each input
         }
 
         // in the subtract fee from amount case, we can tell if zero change already
-        // and subtract the bytes, so that fee calculation afterwards is accurate
+        // and subtract the bytes
         if ( CoinControlDialog::fSubtractFeeFromAmount )
             if ( nAmount - nPayAmount == 0 )
                 nBytes -= 34 ;
@@ -523,21 +528,17 @@ void CoinControlDialog::updateLabels( WalletModel * model, QDialog * dialog )
         // Fee
         nPayFee = 0 ;
 
-        // Allow free?
-        bool fAllowFree = true ;
+        if ( nBytes <= MAX_FREE_TRANSACTION_CREATE_SIZE )
+            nPayFee = 0 ;
 
-        if ( fSendFreeTransactions )
-            if ( fAllowFree && nBytes <= MAX_FREE_TRANSACTION_CREATE_SIZE )
-                nPayFee = 0 ;
-
-        if (nPayAmount > 0)
+        if ( nPayAmount > 0 )
         {
-            nChange = nAmount - nPayAmount;
-            if (!CoinControlDialog::fSubtractFeeFromAmount)
-                nChange -= nPayFee;
+            nChange = nAmount - nPayAmount ;
+            if ( ! CoinControlDialog::fSubtractFeeFromAmount )
+                nChange -= nPayFee ;
 
             if ( nChange == 0 && ! CoinControlDialog::fSubtractFeeFromAmount )
-                nBytes -= 34;
+                nBytes -= 34 ;
         }
 
         // after fee

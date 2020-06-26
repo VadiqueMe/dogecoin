@@ -1800,10 +1800,6 @@
         <translation>Information</translation>
     </message>
     <message>
-        <source>Invalid amount for -paytxfee=&lt;amount&gt;: '%s' (must be at least %s)</source>
-        <translation>Invalid amount for -paytxfee=&lt;amount&gt;: '%s' (must be at least %s)</translation>
-    </message>
-    <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
         <translation>Invalid netmask specified in -whitelist: '%s'</translation>
     </message>
@@ -1834,10 +1830,6 @@
     <message>
         <source>Send trace/debug info to console instead of debug log file</source>
         <translation>Send trace/debug info to console instead of debug log file</translation>
-    </message>
-    <message>
-        <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
-        <translation>Send transactions as zero-fee transactions if possible (default: %u)</translation>
     </message>
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>

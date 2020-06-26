@@ -2421,10 +2421,6 @@
         <translation>Informació</translation>
     </message>
     <message>
-        <source>Invalid amount for -paytxfee=&lt;amount&gt;: '%s' (must be at least %s)</source>
-        <translation>Import no vàlid per a -paytxfee=&lt;amount&gt;: «%s» (ha de ser com a mínim %s)</translation>
-    </message>
-    <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
         <translation>S'ha especificat una màscara de xarxa no vàlida a -whitelist: «%s»</translation>
     </message>
@@ -2447,10 +2443,6 @@
     <message>
         <source>Send trace/debug info to console instead of debug log file</source>
         <translation>Envia informació de traça/depuració a la consola en comptes del fitxer debug log</translation>
-    </message>
-    <message>
-        <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
-        <translation>Envia les transaccions com a transaccions de comissió zero sempre que siga possible (per defecte: %u) </translation>
     </message>
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>

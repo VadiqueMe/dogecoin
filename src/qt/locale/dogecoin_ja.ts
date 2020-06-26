@@ -3109,10 +3109,6 @@
         <translation>情報</translation>
     </message>
     <message>
-        <source>Invalid amount for -paytxfee=&lt;amount&gt;: '%s' (must be at least %s)</source>
-        <translation>-paytxfee=&lt;amount&gt; に対する無効な数量です: '%s' (少なくとも %s でなければいけません)</translation>
-    </message>
-    <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
         <translation>-whitelist に対する無効なネットマスクです: '%s'</translation>
     </message>
@@ -3143,10 +3139,6 @@
     <message>
         <source>Send trace/debug info to console instead of debug log file</source>
         <translation>トレース/デバッグ情報を debug log ファイルの代わりにコンソールへ送る</translation>
-    </message>
-    <message>
-        <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
-        <translation>可能な場合には手数料ゼロのトランザクションとしてトランザクションを送信する (初期値: %u)</translation>
     </message>
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
