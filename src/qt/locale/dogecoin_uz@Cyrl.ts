@@ -94,10 +94,6 @@
         <translation>&amp;Qt ҳақида</translation>
     </message>
     <message>
-        <source>Show information about Qt</source>
-        <translation>Qt ҳақидаги маълумотларни кўрсатиш</translation>
-    </message>
-    <message>
         <source>&amp;Options...</source>
         <translation>&amp;Мосламалар...</translation>
     </message>

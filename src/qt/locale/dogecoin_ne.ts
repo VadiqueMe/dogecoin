@@ -119,16 +119,8 @@
         <translation>&amp;amp;बारेमा %1</translation>
     </message>
     <message>
-        <source>Show information about %1</source>
-        <translation>%1 को बारेमा सूचना देखाउनुहोस्</translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation>&amp;amp;Qt</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation>Qt को बारेमा सूचना देखाउनुहोस्</translation>
     </message>
     <message>
         <source>&amp;Options...</source>

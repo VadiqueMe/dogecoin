@@ -102,10 +102,6 @@
         <translation>Apie &amp;Qt</translation>
     </message>
     <message>
-        <source>Show information about Qt</source>
-        <translation>Rodyti informaciją apie Qt</translation>
-    </message>
-    <message>
         <source>&amp;Options...</source>
         <translation>&amp;Parinktys...</translation>
     </message>

@@ -263,16 +263,8 @@ Var vänlig och försök igen.</translation>
         <translation>&amp;Om %1</translation>
     </message>
     <message>
-        <source>Show information about %1</source>
-        <translation>Visa information om %1</translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation>Om &amp;Qt</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation>Visa information om Qt</translation>
     </message>
     <message>
         <source>&amp;Options...</source>
@@ -445,10 +437,6 @@ Var vänlig och försök igen.</translation>
     <message>
         <source>Up to date</source>
         <translation>Uppdaterad</translation>
-    </message>
-    <message>
-        <source>Show the %1 help message to get a list with possible Dogecoin command-line options</source>
-        <translation>Visa %1 hjälpmeddelande för att få en lista med möjliga Dogecoin kommandoradsalternativ.</translation>
     </message>
     <message>
         <source>Connecting to peers...</source>

@@ -102,10 +102,6 @@
         <translation>O &amp;Qt</translation>
     </message>
     <message>
-        <source>Show information about Qt</source>
-        <translation>Oglejte si informacije o Qt</translation>
-    </message>
-    <message>
         <source>&amp;Options...</source>
         <translation>&amp;Možnosti ...</translation>
     </message>

@@ -258,16 +258,8 @@
         <translation>&amp;Oor %1</translation>
     </message>
     <message>
-        <source>Show information about %1</source>
-        <translation>Wys inligting oor %1</translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation>Oor &amp;Qt</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation>Wys inligting oor Qt</translation>
     </message>
     <message>
         <source>&amp;Options...</source>

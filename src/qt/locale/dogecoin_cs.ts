@@ -262,16 +262,8 @@
         <translation>O &amp;%1</translation>
     </message>
     <message>
-        <source>Show information about %1</source>
-        <translation>Zobraz informace o %1</translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation>O &amp;Qt</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation>Zobraz informace o Qt</translation>
     </message>
     <message>
         <source>&amp;Options...</source>
@@ -444,10 +436,6 @@
     <message>
         <source>Up to date</source>
         <translation>Aktuální</translation>
-    </message>
-    <message>
-        <source>Show the %1 help message to get a list with possible Dogecoin command-line options</source>
-        <translation>Seznam argumentů Dogecoinu pro příkazovou řádku získáš v nápovědě %1</translation>
     </message>
     <message>
         <source>Connecting to peers...</source>

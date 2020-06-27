@@ -158,16 +158,8 @@
         <translation>&amp;About %1</translation>
     </message>
     <message>
-        <source>Show information about %1</source>
-        <translation>Show information about %1</translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation>About &amp;Qt</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation>Show information about Qt</translation>
     </message>
     <message>
         <source>&amp;Options...</source>
@@ -308,10 +300,6 @@
     <message>
         <source>Up to date</source>
         <translation>Up to date</translation>
-    </message>
-    <message>
-        <source>Show the %1 help message to get a list with possible Dogecoin command-line options</source>
-        <translation>Show the %1 help message to get a list with possible Dogecoin command-line options</translation>
     </message>
     <message>
         <source>Catching up...</source>

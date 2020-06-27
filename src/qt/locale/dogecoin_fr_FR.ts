@@ -154,16 +154,8 @@
         <translation>&amp;À propos de %1</translation>
     </message>
     <message>
-        <source>Show information about %1</source>
-        <translation>Afficher les informations sur %1</translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation>À propos de &amp;Qt</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation>Afficher des informations sur Qt</translation>
     </message>
     <message>
         <source>&amp;Options...</source>

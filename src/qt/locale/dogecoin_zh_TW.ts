@@ -262,16 +262,8 @@
         <translation>關於%1</translation>
     </message>
     <message>
-        <source>Show information about %1</source>
-        <translation>顯示 %1 的相關資訊</translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation>關於 &amp;Qt</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation>顯示 Qt 相關資訊</translation>
     </message>
     <message>
         <source>&amp;Options...</source>
@@ -444,10 +436,6 @@
     <message>
         <source>Up to date</source>
         <translation>最新狀態</translation>
-    </message>
-    <message>
-        <source>Show the %1 help message to get a list with possible Dogecoin command-line options</source>
-        <translation>顯示 %1 的說明訊息，來取得可用命令列選項的列表</translation>
     </message>
     <message>
         <source>Connecting to peers...</source>

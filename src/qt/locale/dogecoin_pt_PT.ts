@@ -238,16 +238,8 @@
         <translation>&amp;Sobre o %1</translation>
     </message>
     <message>
-        <source>Show information about %1</source>
-        <translation>Mostrar informação sobre o %1</translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation>Sobre o &amp;Qt</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation>Mostrar informação sobre o Qt</translation>
     </message>
     <message>
         <source>&amp;Options...</source>

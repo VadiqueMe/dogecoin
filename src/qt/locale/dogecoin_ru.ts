@@ -262,16 +262,8 @@
         <translation>&amp;О %1</translation>
     </message>
     <message>
-        <source>Show information about %1</source>
-        <translation>Показать информацию о %1</translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation>О &amp;Qt</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation>Показать информацию о Qt</translation>
     </message>
     <message>
         <source>&amp;Options...</source>
@@ -444,10 +436,6 @@
     <message>
         <source>Up to date</source>
         <translation>Синхронизировано</translation>
-    </message>
-    <message>
-        <source>Show the %1 help message to get a list with possible Dogecoin command-line options</source>
-        <translation>Показать помощь по %1, чтобы получить список доступных параметров командной строки</translation>
     </message>
     <message>
         <source>Connecting to peers...</source>

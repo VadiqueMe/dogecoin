@@ -17,8 +17,7 @@
  *  3) Results should be treated as a regression test, i.e., did the behavior
  *  change significantly from what was expected. This can be OK, depending on
  *  the nature of the change, but requires updating the tests to reflect the new
- *  expected behavior. For example improving the hit rate may cause some tests
- *  using BOOST_CHECK_CLOSE to fail
+ *  expected behavior
  *
  */
 FastRandomContext insecure_rand(true);
@@ -43,7 +42,7 @@ public:
     template <uint8_t hash_select>
     uint32_t operator()(const uint256& key) const
     {
-        static_assert(hash_select <8, "SignatureCacheHasher only has 8 hashes available.");
+        static_assert( hash_select < 8, "SignatureCacheHasher has only 8 hashes available" ) ;
         uint32_t u;
         std::memcpy(&u, key.begin() + 4 * hash_select, 4);
         return u;
@@ -51,7 +50,7 @@ public:
 };
 
 
-/* Test that no values not inserted into the cache are read out of it.
+/* Test that no values not inserted into the cache are read out of it
  *
  * There are no repeats in the first 200000 insecure_GetRandHash calls
  */
@@ -104,22 +103,22 @@ double test_cache(size_t megabytes, double load)
     return hit_rate;
 }
 
-/** The normalized hit rate for a given load.
+/** The normalized hit rate for a given load
  *
  * The semantics are a little confusing, so please see the below
- * explanation.
+ * explanation
  *
  * Examples:
  *
- * 1) at load 0.5, we expect a perfect hit rate, so we multiply by
- * 1.0
+ * 1) at load 0.5, we expect a perfect hit rate, so we multiply by 1.0
+ *
  * 2) at load 2.0, we expect to see half the entries, so a perfect hit rate
  * would be 0.5. Therefore, if we see a hit rate of 0.4, 0.4*2.0 = 0.8 is the
- * normalized hit rate.
+ * normalized hit rate
  *
  * This is basically the right semantics, but has a bit of a glitch depending on
  * how you measure around load 1.0 as after load 1.0 your normalized hit rate
- * becomes effectively perfect, ignoring freshness.
+ * becomes effectively perfect, ignoring freshness
  */
 double normalize_hit_rate(double hits, double load)
 {
@@ -130,7 +129,7 @@ double normalize_hit_rate(double hits, double load)
 BOOST_AUTO_TEST_CASE(cuckoocache_hit_rate_ok)
 {
     /** Arbitrarily selected Hit Rate threshold that happens to work for this test
-     * as a lower bound on performance.
+     * as a lower bound on performance
      */
     double HitRateThresh = 0.98;
     size_t megabytes = 32;
@@ -142,7 +141,7 @@ BOOST_AUTO_TEST_CASE(cuckoocache_hit_rate_ok)
 
 
 /** This helper checks that erased elements are preferentially inserted onto and
- * that the hit rate of "fresher" keys is reasonable*/
+ *  that the hit rate of "fresher" keys is reasonable */
 template <typename Cache>
 void test_cache_erase(size_t megabytes)
 {
@@ -195,7 +194,7 @@ void test_cache_erase(size_t megabytes)
     // Check that our hit_rate_fresh is perfect
     BOOST_CHECK_EQUAL(hit_rate_fresh, 1.0);
     // Check that we have a more than 2x better hit rate on stale elements than
-    // erased elements.
+    // erased elements
     BOOST_CHECK(hit_rate_stale > 2 * hit_rate_erased_but_contained);
 }
 
@@ -281,7 +280,7 @@ void test_cache_erase_parallel(size_t megabytes)
     // Check that our hit_rate_fresh is perfect
     BOOST_CHECK_EQUAL(hit_rate_fresh, 1.0);
     // Check that we have a more than 2x better hit rate on stale elements than
-    // erased elements.
+    // erased elements
     BOOST_CHECK(hit_rate_stale > 2 * hit_rate_erased_but_contained);
 }
 BOOST_AUTO_TEST_CASE(cuckoocache_erase_parallel_ok)
@@ -296,26 +295,26 @@ void test_cache_generations()
 {
     // This test checks that for a simulation of network activity, the fresh hit
     // rate is never below 99%, and the number of times that it is worse than
-    // 99.9% are less than 1% of the time.
+    // 99.9% are less than 1% of the time
     double min_hit_rate = 0.99;
     double tight_hit_rate = 0.999;
     double max_rate_less_than_tight_hit_rate = 0.01;
     // A cache that meets this specification is therefore shown to have a hit
     // rate of at least tight_hit_rate * (1 - max_rate_less_than_tight_hit_rate) +
     // min_hit_rate*max_rate_less_than_tight_hit_rate = 0.999*99%+0.99*1% == 99.89%
-    // hit rate with low variance.
+    // hit rate with low variance
 
     // We use deterministic values, but this test has also passed on many
     // iterations with non-deterministic values, so it isn't "overfit" to the
     // specific entropy in FastRandomContext(true) and implementation of the
-    // cache.
+    // cache
     insecure_rand = FastRandomContext(true);
 
     // block_activity models a chunk of network activity. n_insert elements are
     // adde to the cache. The first and last n/4 are stored for removal later
     // and the middle n/2 are not stored. This models a network which uses half
     // the signatures of recently (since the last block) added transactions
-    // immediately and never uses the other half.
+    // immediately and never uses the other half
     struct block_activity {
         std::vector<uint256> reads;
         block_activity(uint32_t n_insert, Cache& c) : reads()
@@ -339,7 +338,7 @@ void test_cache_generations()
 
     const uint32_t BLOCK_SIZE = 10000;
     // We expect window size 60 to perform reasonably given that each epoch
-    // stores 45% of the cache size (~472k).
+    // stores 45% of the cache size (~472k)
     const uint32_t WINDOW_SIZE = 60;
     const uint32_t POP_AMOUNT = (BLOCK_SIZE / WINDOW_SIZE) / 2;
     const double load = 10;

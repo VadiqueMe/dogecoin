@@ -262,16 +262,8 @@
         <translation>&amp;Acerca de %1</translation>
     </message>
     <message>
-        <source>Show information about %1</source>
-        <translation>Mostrar información acerca de %1</translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation>Acerca de &amp;Qt</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation>Mostrar información acerca de Qt</translation>
     </message>
     <message>
         <source>&amp;Options...</source>
@@ -444,10 +436,6 @@
     <message>
         <source>Up to date</source>
         <translation>Actualizado</translation>
-    </message>
-    <message>
-        <source>Show the %1 help message to get a list with possible Dogecoin command-line options</source>
-        <translation>Mostrar el mensaje de ayuda %1 para obtener una lista de los posibles comandos de linea de comandos de Dogecoin</translation>
     </message>
     <message>
         <source>Connecting to peers...</source>

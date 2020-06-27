@@ -158,10 +158,6 @@
         <translation>Σχετικά με &amp;Qt</translation>
     </message>
     <message>
-        <source>Show information about Qt</source>
-        <translation>Εμφάνισε πληροφορίες σχετικά με Qt</translation>
-    </message>
-    <message>
         <source>&amp;Options...</source>
         <translation>&amp;Επιλογές...</translation>
     </message>

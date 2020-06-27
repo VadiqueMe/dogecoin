@@ -190,16 +190,8 @@
         <translation> &amp;Om %1</translation>
     </message>
     <message>
-        <source>Show information about %1</source>
-        <translation>Vis informasjon om %1</translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation>Om &amp;Qt</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation>Vis informasjon om Qt</translation>
     </message>
     <message>
         <source>&amp;Options...</source>

@@ -94,10 +94,6 @@
         <translation>Par &amp;Qt</translation>
     </message>
     <message>
-        <source>Show information about Qt</source>
-        <translation>Parādīt informāciju par Qt</translation>
-    </message>
-    <message>
         <source>&amp;Options...</source>
         <translation>&amp;Iespējas...</translation>
     </message>

@@ -102,16 +102,8 @@
         <translation>&amp;Tietoja %1</translation>
     </message>
     <message>
-        <source>Show information about %1</source>
-        <translation>Näytä tietoa aiheesta %1</translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation>Tietoja &amp;Qt</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation>Näytä tietoja Qt:ta</translation>
     </message>
     <message>
         <source>&amp;Options...</source>
@@ -268,10 +260,6 @@
     <message>
         <source>Up to date</source>
         <translation>Rahansiirtohistoria on ajan tasalla</translation>
-    </message>
-    <message>
-        <source>Show the %1 help message to get a list with possible Dogecoin command-line options</source>
-        <translation>Näytä %1 ohjeet saadaksesi listan mahdollisista Dogecoinin komentorivivalinnoista</translation>
     </message>
     <message>
         <source>Catching up...</source>

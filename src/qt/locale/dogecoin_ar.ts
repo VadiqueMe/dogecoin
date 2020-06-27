@@ -258,16 +258,8 @@
         <translation>حوالي %1</translation>
     </message>
     <message>
-        <source>Show information about %1</source>
-        <translation>أظهر المعلومات حولة %1</translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation>عن &amp;Qt</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation>اظهر المعلومات</translation>
     </message>
     <message>
         <source>&amp;Options...</source>
@@ -418,10 +410,6 @@
         <translation>محدث</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible Dogecoin command-line options</source>
-        <translation>بين اشارة المساعدة %1 للحصول على قائمة من خيارات اوامر البت كوين المحتملة </translation>
-    </message>
-    <message>
         <source>Catching up...</source>
         <translation>اللحاق بالركب ...</translation>
     </message>
@@ -429,8 +417,6 @@
         <source>Date: %1
 </source>
         <translation>التاريخ %1
-
-
 </translation>
     </message>
     <message>

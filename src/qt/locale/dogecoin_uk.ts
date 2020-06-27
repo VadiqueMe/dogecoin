@@ -158,10 +158,6 @@
         <translation>&amp;Про Qt</translation>
     </message>
     <message>
-        <source>Show information about Qt</source>
-        <translation>Показати інформацію про Qt</translation>
-    </message>
-    <message>
         <source>&amp;Options...</source>
         <translation>&amp;Параметри...</translation>
     </message>

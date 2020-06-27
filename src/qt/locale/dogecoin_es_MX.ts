@@ -98,10 +98,6 @@
         <translation>Acerca de &amp;Qt</translation>
     </message>
     <message>
-        <source>Show information about Qt</source>
-        <translation>Mostrar información acerca de Qt</translation>
-    </message>
-    <message>
         <source>&amp;Options...</source>
         <translation>&amp;Opciones</translation>
     </message>

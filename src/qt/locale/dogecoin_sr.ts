@@ -94,10 +94,6 @@
         <translation>О &amp;Qt-у</translation>
     </message>
     <message>
-        <source>Show information about Qt</source>
-        <translation>Прегледајте информације о Qt-у</translation>
-    </message>
-    <message>
         <source>&amp;Options...</source>
         <translation>П&amp;оставке...</translation>
     </message>

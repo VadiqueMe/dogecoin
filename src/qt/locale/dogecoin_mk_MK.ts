@@ -90,10 +90,6 @@
         <translation>За &amp;Qt</translation>
     </message>
     <message>
-        <source>Show information about Qt</source>
-        <translation>Прикажи информации за Qt</translation>
-    </message>
-    <message>
         <source>&amp;Options...</source>
         <translation>&amp;Опции...</translation>
     </message>

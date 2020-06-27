@@ -82,10 +82,6 @@
         <translation>Tungkul &amp;Qt</translation>
     </message>
     <message>
-        <source>Show information about Qt</source>
-        <translation>Magpakit impormasion tungkul king Qt</translation>
-    </message>
-    <message>
         <source>&amp;Options...</source>
         <translation>&amp;Pipamilian...</translation>
     </message>

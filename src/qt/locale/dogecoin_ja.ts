@@ -262,16 +262,8 @@
         <translation>%1 について (&amp;A)</translation>
     </message>
     <message>
-        <source>Show information about %1</source>
-        <translation>%1 の情報を表示</translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation>Qt について(&amp;Q)</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation>Qt の情報を表示</translation>
     </message>
     <message>
         <source>&amp;Options...</source>
@@ -444,10 +436,6 @@
     <message>
         <source>Up to date</source>
         <translation>バージョンは最新です</translation>
-    </message>
-    <message>
-        <source>Show the %1 help message to get a list with possible Dogecoin command-line options</source>
-        <translation>有効な Dogecoin のコマンドライン オプションを見るために %1 のヘルプメッセージを表示します。</translation>
     </message>
     <message>
         <source>Connecting to peers...</source>

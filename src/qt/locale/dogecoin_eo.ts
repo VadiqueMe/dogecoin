@@ -162,10 +162,6 @@
         <translation>Pri &amp;Qt</translation>
     </message>
     <message>
-        <source>Show information about Qt</source>
-        <translation>Vidigi informojn pri Qt</translation>
-    </message>
-    <message>
         <source>&amp;Options...</source>
         <translation>&amp;Agordoj...</translation>
     </message>

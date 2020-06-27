@@ -267,16 +267,8 @@ Alihkan fail data ke dalam tab semasa</translation>
         <translation>&amp;Mengenai%1</translation>
     </message>
     <message>
-        <source>Show information about %1</source>
-        <translation>Menunjuk informasi mengenai%1</translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation>Mengenai &amp;Qt</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation>Menunjuk informasi megenai Qt</translation>
     </message>
     <message>
         <source>&amp;Options...</source>

@@ -102,10 +102,6 @@
         <translation>Despre &amp;Qt</translation>
     </message>
     <message>
-        <source>Show information about Qt</source>
-        <translation>Arată informaţii despre Qt</translation>
-    </message>
-    <message>
         <source>&amp;Options...</source>
         <translation>&amp;Opţiuni...</translation>
     </message>

@@ -262,16 +262,8 @@
         <translation>%1 정보(&amp;A)</translation>
     </message>
     <message>
-        <source>Show information about %1</source>
-        <translation>%1 정보를 표시합니다</translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation>&amp;Qt 정보</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation>Qt 정보를 표시합니다</translation>
     </message>
     <message>
         <source>&amp;Options...</source>
@@ -444,10 +436,6 @@
     <message>
         <source>Up to date</source>
         <translation>현재까지</translation>
-    </message>
-    <message>
-        <source>Show the %1 help message to get a list with possible Dogecoin command-line options</source>
-        <translation>사용할 수 있는 비트코인 명령줄 옵션 목록을 가져오기 위해 %1 도움말 메시지를 표시합니다.</translation>
     </message>
     <message>
         <source>Connecting to peers...</source>

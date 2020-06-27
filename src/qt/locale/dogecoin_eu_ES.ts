@@ -222,10 +222,6 @@
         <translation>&amp;Qt-ari buruz</translation>
     </message>
     <message>
-        <source>Show information about Qt</source>
-        <translation>Erakutsi Dogecoin-i buruzko informazioa</translation>
-    </message>
-    <message>
         <source>&amp;Options...</source>
         <translation>&amp;Aukerak...</translation>
     </message>

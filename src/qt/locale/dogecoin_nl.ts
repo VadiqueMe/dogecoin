@@ -262,16 +262,8 @@
         <translation>&amp;Over %1</translation>
     </message>
     <message>
-        <source>Show information about %1</source>
-        <translation>Toon informatie over %1</translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation>Over &amp;Qt</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation>Toon informatie over Qt</translation>
     </message>
     <message>
         <source>&amp;Options...</source>
@@ -444,10 +436,6 @@
     <message>
         <source>Up to date</source>
         <translation>Bijgewerkt</translation>
-    </message>
-    <message>
-        <source>Show the %1 help message to get a list with possible Dogecoin command-line options</source>
-        <translation>Toon het %1 hulpbericht om een lijst te krijgen met mogelijke Dogecoin commandoregelopties</translation>
     </message>
     <message>
         <source>Connecting to peers...</source>

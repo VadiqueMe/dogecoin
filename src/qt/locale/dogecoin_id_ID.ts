@@ -258,16 +258,8 @@
         <translation>&amp;Tentang%1</translation>
     </message>
     <message>
-        <source>Show information about %1</source>
-        <translation>Tampilkan informasi perihal %1</translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation>Mengenai &amp;Qt</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation>Tampilkan informasi mengenai Qt</translation>
     </message>
     <message>
         <source>&amp;Options...</source>
@@ -440,10 +432,6 @@
     <message>
         <source>Up to date</source>
         <translation>Terbaru</translation>
-    </message>
-    <message>
-        <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
-        <translation>Tampilkan %1 pesan bantuan untuk mendapatkan daftar opsi baris perintah Bitcoin yang memungkinkan</translation>
     </message>
     <message>
         <source>Connecting to peers...</source>

@@ -198,16 +198,8 @@
         <translation>За %1</translation>
     </message>
     <message>
-        <source>Show information about %1</source>
-        <translation>Покажи информация за %1</translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation>Относно Qt</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation>Покажи информация отностно Qt</translation>
     </message>
     <message>
         <source>&amp;Options...</source>

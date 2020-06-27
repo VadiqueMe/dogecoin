@@ -16,7 +16,7 @@
 #include "utilmoneystr.h"
 #include "utilstrencodings.h"
 
-std::string FormatScript(const CScript& script)
+std::string FormatScript( const CScript & script )
 {
     std::string ret;
     CScript::const_iterator it = script.begin();
@@ -67,7 +67,7 @@ const std::map< unsigned char, std::string > mapSigHashTypes = {
  *                                     of a signature. Only pass true for scripts you believe could contain signatures. For example,
  *                                     pass false, or omit the this argument (defaults to false), for scriptPubKeys
  */
-std::string ScriptToAsmStr(const CScript& script, const bool fAttemptSighashDecode)
+std::string ScriptToAsmStr( const CScript & script, const bool fAttemptSighashDecode )
 {
     std::string str;
     opcodetype opcode;
@@ -88,7 +88,7 @@ std::string ScriptToAsmStr(const CScript& script, const bool fAttemptSighashDeco
                 // the IsUnspendable check makes sure not to try to decode OP_RETURN data that may match the format of a signature
                 if (fAttemptSighashDecode && !script.IsUnspendable()) {
                     std::string strSigHashDecode;
-                    // goal: only attempt to decode a defined sighash type from data that looks like a signature within a scriptSig
+                    // only try to decode a defined sighash type from data that looks like a signature within a scriptSig
                     // this won't decode correctly formatted public keys in Pubkey or Multisig scripts due to
                     // the restrictions on the pubkey formats (see IsCompressedOrUncompressedPubKey) being incongruous with the
                     // checks in CheckSignatureEncoding
@@ -196,5 +196,5 @@ void TxToUniv(const CTransaction& tx, const uint256& hashBlock, UniValue& entry)
     if (!hashBlock.IsNull())
         entry.pushKV("blockhash", hashBlock.GetHex());
 
-    entry.pushKV("hex", EncodeHexTx(tx)); // the hex-encoded transaction. used the name "hex" to be consistent with the verbose output of "getrawtransaction".
+    entry.pushKV( "hex", EncodeHexTx( tx ) ) ; // the hex-encoded transaction. used the name "hex" to be consistent with the verbose output of "getrawtransaction"
 }

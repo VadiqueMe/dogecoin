@@ -106,10 +106,6 @@
         <translation>A &amp;Qt-ról</translation>
     </message>
     <message>
-        <source>Show information about Qt</source>
-        <translation>Információk a Qt-ról</translation>
-    </message>
-    <message>
         <source>&amp;Options...</source>
         <translation>&amp;Opciók...</translation>
     </message>

@@ -90,10 +90,6 @@
         <translation>&amp;Клиентийн тухай</translation>
     </message>
     <message>
-        <source>Show information about Qt</source>
-        <translation>Клиентийн тухай мэдээллийг харуул</translation>
-    </message>
-    <message>
         <source>&amp;Options...</source>
         <translation>&amp;Сонголтууд...</translation>
     </message>

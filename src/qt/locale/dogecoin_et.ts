@@ -250,10 +250,6 @@
         <translation>Teave &amp;Qt kohta</translation>
     </message>
     <message>
-        <source>Show information about Qt</source>
-        <translation>Kuva Qt kohta käiv info</translation>
-    </message>
-    <message>
         <source>&amp;Options...</source>
         <translation>&amp;Valikud...</translation>
     </message>

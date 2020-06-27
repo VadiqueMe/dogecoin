@@ -210,7 +210,7 @@ bool CAddrMan::AddMany( const std::vector< CAddress > & vAddr, const CNetAddr & 
 {
     if ( vAddr.empty() ) return false ;
     if ( vAddr.size() == 1 )
-        AddOne( vAddr[0], source, nTimePenalty ) ;
+        return AddOne( vAddr[0], source, nTimePenalty ) ;
 
     {
         LOCK( cs ) ;

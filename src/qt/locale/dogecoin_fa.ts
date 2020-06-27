@@ -226,16 +226,8 @@
         <translation>&amp;حدود%1</translation>
     </message>
     <message>
-        <source>Show information about %1</source>
-        <translation>نمایش اطلاعات دربارهٔ %1</translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation>دربارهٔ &amp;کیوت</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation>نمایش اطلاعات دربارهٔ کیوت</translation>
     </message>
     <message>
         <source>&amp;Options...</source>

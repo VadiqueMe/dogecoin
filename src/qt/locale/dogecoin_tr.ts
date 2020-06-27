@@ -262,16 +262,8 @@
         <translation>%1 &amp;Hakkında</translation>
     </message>
     <message>
-        <source>Show information about %1</source>
-        <translation>%1 hakkında bilgi göster</translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation>&amp;Qt Hakkında</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation>Qt hakkında bilgi göster</translation>
     </message>
     <message>
         <source>&amp;Options...</source>
@@ -444,10 +436,6 @@
     <message>
         <source>Up to date</source>
         <translation>Güncel</translation>
-    </message>
-    <message>
-        <source>Show the %1 help message to get a list with possible Dogecoin command-line options</source>
-        <translation>Olası Dogecoin komut satırı seçeneklerinin listesini görmek için %1 yardım mesajını göster</translation>
     </message>
     <message>
         <source>Connecting to peers...</source>

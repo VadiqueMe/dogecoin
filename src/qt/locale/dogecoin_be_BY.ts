@@ -250,10 +250,6 @@
         <translation>Аб Qt</translation>
     </message>
     <message>
-        <source>Show information about Qt</source>
-        <translation>Паказаць інфармацыю аб Qt</translation>
-    </message>
-    <message>
         <source>&amp;Options...</source>
         <translation>Опцыі...</translation>
     </message>

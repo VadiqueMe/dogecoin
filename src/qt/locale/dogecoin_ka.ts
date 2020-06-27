@@ -94,10 +94,6 @@
         <translation>&amp;Qt-ს შესახებ</translation>
     </message>
     <message>
-        <source>Show information about Qt</source>
-        <translation>ინფორმაცია Qt-ს შესახებ</translation>
-    </message>
-    <message>
         <source>&amp;Options...</source>
         <translation>&amp;ოპციები</translation>
     </message>

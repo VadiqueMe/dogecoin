@@ -70,10 +70,6 @@
         <translation>Salir de la aplicacion </translation>
     </message>
     <message>
-        <source>Show information about Qt</source>
-        <translation>Mostrar informacioón sobre</translation>
-    </message>
-    <message>
         <source>&amp;Options...</source>
         <translation>&amp;Opciones...</translation>
     </message>

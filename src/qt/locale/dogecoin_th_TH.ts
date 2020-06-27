@@ -114,16 +114,8 @@
         <translation>&amp;เกี่ยวกับ %1</translation>
     </message>
     <message>
-        <source>Show information about %1</source>
-        <translation>แสดงข้อมูล เกี่ยวกับ %1</translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation>เกี่ยวกับ &amp;Qt</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation>แสดงข้อมูล เกี่ยวกับ Qt</translation>
     </message>
     <message>
         <source>&amp;Options...</source>
@@ -280,10 +272,6 @@
     <message>
         <source>Up to date</source>
         <translation>ทันสมัย</translation>
-    </message>
-    <message>
-        <source>Show the %1 help message to get a list with possible Dogecoin command-line options</source>
-        <translation>แสดง %1 ข้อความช่วยเหลือ เพื่อแสดงรายการ ตัวเลือกที่เป็นไปได้สำหรับ Dogecoin command-line</translation>
     </message>
     <message>
         <source>Catching up...</source>

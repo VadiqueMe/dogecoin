@@ -90,10 +90,6 @@
         <translation>درباره و Qt</translation>
     </message>
     <message>
-        <source>Show information about Qt</source>
-        <translation>نمایش اطلاعات درباره Qt</translation>
-    </message>
-    <message>
         <source>&amp;Options...</source>
         <translation>و انتخابها</translation>
     </message>

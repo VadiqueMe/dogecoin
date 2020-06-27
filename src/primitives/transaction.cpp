@@ -10,9 +10,13 @@
 #include "tinyformat.h"
 #include "utilstrencodings.h"
 
+#include "core_io.h" // ScriptToAsmStr
+#include "base58.h" // CDogecoinAddress
+#include "script/standard.h" // ExtractDestination
+
 std::string COutPoint::ToString() const
 {
-    return "COutPoint(" + ( IsNull() ? "0" : hash.ToString() ) + ", " + strprintf( "%u", n ) + ")" ;
+    return "COutPoint(" + ( IsNull() ? "0" : hash.ToString() ) + ", " + strprintf( ( n < 0x80000000 ) ? "%u" : "0x%x", n ) + ")" ;
 }
 
 CTxIn::CTxIn(COutPoint prevoutIn, CScript scriptSigIn, uint32_t nSequenceIn)
@@ -33,7 +37,8 @@ std::string CTxIn::ToString() const
 {
     std::string str = "CTxIn(" ;
     str += prevout.ToString() + ", " ;
-    str += ( prevout.IsNull() ? "coinbase " : "scriptSig=" ) + HexStr( scriptSig ) ;
+    str += ( prevout.IsNull() ? "coinbase " : "scriptSig=" ) +
+                strprintf( "%s \"%s\"", HexStr( scriptSig ), ScriptToAsmStr( scriptSig, true ) ) ;
     if ( nSequence != SEQUENCE_FINAL )
         str += ", " + strprintf( "nSequence=0x%x", nSequence ) ;
     str += ")" ;
@@ -48,7 +53,19 @@ CTxOut::CTxOut(const CAmount& nValueIn, CScript scriptPubKeyIn)
 
 std::string CTxOut::ToString() const
 {
-    return strprintf( "CTxOut(nValue=%ld, scriptPubKey=%s)", nValue, HexStr( scriptPubKey ) ) ;
+    std::string outAddress ;
+    {
+        CTxDestination destination ;
+        if ( ExtractDestination( scriptPubKey, destination ) )
+            outAddress = CDogecoinAddress( destination ).ToString() ;
+    }
+
+    return strprintf( "CTxOut(nValue=%ld, scriptPubKey=%s \"%s\"%s)",
+                        nValue,
+                        HexStr( scriptPubKey ),
+                        ScriptToAsmStr( scriptPubKey ),
+                        ( outAddress.empty() ? "" : ( std::string( " address=" ) + outAddress ) )
+                    ) ;
 }
 
 CMutableTransaction::CMutableTransaction() : nVersion(CTransaction::CURRENT_VERSION), nLockTime(0) {}

@@ -194,10 +194,6 @@
         <translation>Sluit af</translation>
     </message>
     <message>
-        <source>Show information about Qt</source>
-        <translation>Wys inligting oor Qt</translation>
-    </message>
-    <message>
         <source>&amp;Options...</source>
         <translation>&amp;Opsies</translation>
     </message>

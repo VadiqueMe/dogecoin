@@ -158,16 +158,8 @@
         <translation>&amp;אודות %1</translation>
     </message>
     <message>
-        <source>Show information about %1</source>
-        <translation>הצג מידע על %1</translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation>על אודות Qt</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation>הצגת מידע על Qt</translation>
     </message>
     <message>
         <source>&amp;Options...</source>

@@ -122,16 +122,8 @@
         <translation>&amp;Thông tin về %1</translation>
     </message>
     <message>
-        <source>Show information about %1</source>
-        <translation>Hiện thông tin về %1</translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation>Về &amp;Qt</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation>Xem thông tin về Qt</translation>
     </message>
     <message>
         <source>&amp;Options...</source>

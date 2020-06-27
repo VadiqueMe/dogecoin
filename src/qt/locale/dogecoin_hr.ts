@@ -126,10 +126,6 @@
         <translation>Više o &amp;Qt</translation>
     </message>
     <message>
-        <source>Show information about Qt</source>
-        <translation>Prikaži informacije o Qt</translation>
-    </message>
-    <message>
         <source>&amp;Options...</source>
         <translation>Pos&amp;tavke...</translation>
     </message>

@@ -184,9 +184,9 @@ test_test_dogecoin_fuzzy_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 test_test_dogecoin_fuzzy_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 test_test_dogecoin_fuzzy_LDADD = \
-  $(LIBUNIVALUE) \
   $(LIBDOGECOIN_SERVER) \
   $(LIBDOGECOIN_COMMON) \
+  $(LIBUNIVALUE) \
   $(LIBDOGECOIN_UTIL) \
   $(LIBDOGECOIN_CONSENSUS) \
   $(LIBDOGECOIN_CRYPTO) \

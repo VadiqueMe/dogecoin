@@ -542,27 +542,17 @@
         <translation type="unfinished">Quit application</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+4"/>
         <source>&amp;About %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Show information about %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
+        <location line="+4"/>
         <source>About &amp;Qt</source>
         <translation type="unfinished">About &amp;Qt</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Show information about Qt</source>
-        <translation type="unfinished">Show information about Qt</translation>
-    </message>
-    <message>
-        <location line="+2"/>
+        <location line="+3"/>
         <source>&amp;Options...</source>
         <translation type="unfinished">&amp;Options...</translation>
     </message>
@@ -572,7 +562,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+4"/>
         <source>&amp;Show / Hide</source>
         <translation type="unfinished">&amp;Show / Hide</translation>
     </message>
@@ -687,12 +677,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Show the %1 help message to get a list with possible Dogecoin command-line options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+42"/>
+        <location line="+43"/>
         <source>&amp;File</source>
         <translation type="unfinished">&amp;File</translation>
     </message>

@@ -246,16 +246,8 @@
         <translation>關於 %1 &amp;A</translation>
     </message>
     <message>
-        <source>Show information about %1</source>
-        <translation>顯示 %1 的相關資訊</translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation>關於 Qt &amp;Q</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation>顯示 Qt 相關資訊</translation>
     </message>
     <message>
         <source>&amp;Options...</source>

@@ -250,10 +250,6 @@
         <translation>Quant a &amp;Qt</translation>
     </message>
     <message>
-        <source>Show information about Qt</source>
-        <translation>Mostra informació sobre Qt</translation>
-    </message>
-    <message>
         <source>&amp;Options...</source>
         <translation>&amp;Opcions...</translation>
     </message>
