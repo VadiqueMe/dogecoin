@@ -27,7 +27,7 @@ enum
     SIGHASH_ALL = 1, // signs the entire transaction (all inputs and all outputs) except any signature scripts
     SIGHASH_NONE = 2, // signs only inputs, allowing anyone to change outputs ("I don't care where my coins go")
     SIGHASH_SINGLE = 3, // signs one input and its output (the one with the same index)
-    SIGHASH_ANYONECANPAY = 0x80, // signs only the current input (and all outputs), others can add more inputs
+    SIGHASH_ANYONECANPAY = 0x80, // modifier to sign only the current input, so anyone can add more inputs
 } ;
 
 /** Script verification flags */

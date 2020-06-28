@@ -3240,34 +3240,34 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+171"/>
+        <location line="+183"/>
         <source>Transaction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-106"/>
-        <location line="+25"/>
-        <location line="+37"/>
-        <location line="+31"/>
+        <location line="-115"/>
+        <location line="+28"/>
+        <location line="+40"/>
+        <location line="+34"/>
         <source>Amount</source>
         <translation type="unfinished">Amount</translation>
     </message>
     <message>
-        <location line="-91"/>
+        <location line="-100"/>
         <location line="+2"/>
-        <location line="+60"/>
+        <location line="+66"/>
         <location line="+2"/>
-        <location line="+29"/>
+        <location line="+32"/>
         <location line="+2"/>
         <source>true</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-95"/>
+        <location line="-104"/>
         <location line="+2"/>
-        <location line="+60"/>
+        <location line="+66"/>
         <location line="+2"/>
-        <location line="+29"/>
+        <location line="+32"/>
         <location line="+2"/>
         <source>false</source>
         <translation type="unfinished"></translation>
@@ -3373,27 +3373,27 @@
     </message>
     <message>
         <location line="+2"/>
-        <location line="+44"/>
+        <location line="+38"/>
         <source>To self</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-42"/>
+        <location line="-36"/>
         <source>Mined</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+28"/>
+        <location line="+44"/>
         <source>watch-only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="-6"/>
         <source>(n/a)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+210"/>
+        <location line="+220"/>
         <source>(no label)</source>
         <translation type="unfinished"></translation>
     </message>

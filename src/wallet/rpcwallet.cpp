@@ -29,11 +29,11 @@
 int64_t nWalletUnlockTime;
 static CCriticalSection cs_nWalletUnlockTime;
 
-std::string HelpRequiringPassphrase()
+std::string HelpRequiringPassphraseWithNewline()
 {
-    return pwalletMain && pwalletMain->IsCrypted()
-        ? "\nRequires wallet passphrase to be set with walletpassphrase call."
-        : "";
+    return pwalletMain != nullptr && pwalletMain->IsCrypted()
+        ? "\nRequires wallet passphrase to be entered using walletpassphrase call\n\n"
+        : "\n" ;
 }
 
 bool EnsureWalletIsAvailable(bool avoidException)
@@ -381,9 +381,9 @@ UniValue sendtoaddress(const JSONRPCRequest& request)
     if ( request.fHelp || request.params.size() < 2 || request.params.size() > 5 )
         throw std::runtime_error(
             "sendtoaddress \"address\" amount ( \"comment\" \"comment_to\" subtractfeefromamount )\n"
-            "\nSend an amount to a given address.\n"
-            + HelpRequiringPassphrase() +
-            "\nArguments:\n"
+            "\nSend an amount to a given address\n"
+            + HelpRequiringPassphraseWithNewline() +
+            "Arguments:\n"
             "1. \"address\"            (string, required) The dogecoin address to send to.\n"
             "2. \"amount\"             (numeric or string, required) The amount in " + NameOfE8Currency() + " to send. eg 0.1\n"
             "3. \"comment\"            (string, optional) A comment used to store what the transaction is for. \n"
@@ -491,10 +491,10 @@ UniValue signmessage(const JSONRPCRequest& request)
         throw std::runtime_error(
             "signmessage \"address\" \"message\"\n"
             "\nSign a message with the private key of an address"
-            + HelpRequiringPassphrase() + "\n"
-            "\nArguments:\n"
-            "1. \"address\"         (string, required) The dogecoin address to use for the private key.\n"
-            "2. \"message\"         (string, required) The message to create a signature of.\n"
+            + HelpRequiringPassphraseWithNewline() +
+            "Arguments:\n"
+            "1. \"address\"         (string, required) The dogecoin address to use for the private key\n"
+            "2. \"message\"         (string, required) The message to create a signature of\n"
             "\nResult:\n"
             "\"signature\"          (string) The signature of the message encoded in base 64\n"
             "\nExamples:\n"
@@ -812,9 +812,9 @@ UniValue sendfrom(const JSONRPCRequest& request)
     if ( request.fHelp || request.params.size() < 3 || request.params.size() > 6 )
         throw std::runtime_error(
             "sendfrom \"fromaccount\" \"toaddress\" amount ( minconf \"comment\" \"comment_to\" )\n"
-            "\nDEPRECATED (use sendtoaddress). Sent an amount from an account to a dogecoin address."
-            + HelpRequiringPassphrase() + "\n"
-            "\nArguments:\n"
+            "\nDEPRECATED (use sendtoaddress). Sent an amount from an account to a dogecoin address"
+            + HelpRequiringPassphraseWithNewline() +
+            "Arguments:\n"
             "1. \"fromaccount\"       (string, required) The name of the account to send funds from. May be the default account using \"\".\n"
             "                       Specifying an account does not influence coin selection, but it does associate the newly created\n"
             "                       transaction with the account, so the account's balance computation and transaction history can reflect\n"
@@ -879,9 +879,9 @@ UniValue sendmany(const JSONRPCRequest& request)
     if ( request.fHelp || request.params.size() < 2 || request.params.size() > 5 )
         throw std::runtime_error(
             "sendmany \"fromaccount\" {\"address\":amount,...} ( minconf \"comment\" [\"address\",...] )\n"
-            "\nSend multiple times. Amounts are double-precision floating point numbers."
-            + HelpRequiringPassphrase() + "\n"
-            "\nArguments:\n"
+            "\nSend multiple times. Amounts are double-precision floating point numbers"
+            + HelpRequiringPassphraseWithNewline() +
+            "Arguments:\n"
             "1. \"fromaccount\"         (string, required) DEPRECATED. The account to send the funds from. Should be \"\" for the default account\n"
             "2. \"amounts\"             (string, required) A json object with addresses and amounts\n"
             "    {\n"
@@ -1910,9 +1910,9 @@ UniValue keypoolrefill( const JSONRPCRequest & request )
     if ( request.fHelp || request.params.size() > 1 )
         throw std::runtime_error(
             "keypoolrefill ( newsize )\n"
-            "\nFills the keypool."
-            + HelpRequiringPassphrase() + "\n"
-            "\nArguments\n"
+            "\nFills the keypool"
+            + HelpRequiringPassphraseWithNewline() +
+            "Arguments\n"
             "1. newsize     (numeric, optional, default=100) The new keypool size\n"
             "\nExamples:\n"
             + HelpExampleCli("keypoolrefill", "")

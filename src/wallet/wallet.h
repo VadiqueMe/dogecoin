@@ -155,8 +155,8 @@ struct COutputEntry
 };
 
 /**
- * A transaction with a bunch of additional info that only the owner cares about.
- * It includes any unrecorded transactions needed to link it back to the block chain.
+ * A transaction with a bunch of additional info that only the owner cares about
+ * It includes any unrecorded transactions needed to link it back to the block chain
  */
 class CWalletTx : public CMerkleTx
 {
@@ -172,9 +172,9 @@ public:
     /**
      * From me flag is set to 1 for transactions that were created by the wallet
      * on this bitcoin node, and set to 0 for transactions that were created
-     * externally and came in through the network or sendrawtransaction RPC.
+     * externally and came in through the network or sendrawtransaction RPC
      */
-    char fFromMe;
+    char fFromMe ;
     std::string strFromAccount;
     int64_t nOrderPos; //!< position in ordered transaction list
 
@@ -216,7 +216,7 @@ public:
         fTimeReceivedIsTxTime = false;
         nTimeReceived = 0;
         nTimeSmart = 0;
-        fFromMe = false;
+        fFromMe = false ;
         strFromAccount.clear();
         fDebitCached = false;
         fCreditCached = false;
@@ -264,7 +264,7 @@ public:
         READWRITE(vOrderForm);
         READWRITE(fTimeReceivedIsTxTime);
         READWRITE(nTimeReceived);
-        READWRITE(fFromMe);
+        READWRITE( fFromMe ) ;
         READWRITE(fSpent);
 
         if (ser_action.ForRead())

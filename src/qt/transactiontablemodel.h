@@ -91,14 +91,14 @@ private:
     void unsubscribeFromCoreSignals();
 
     QString lookupAddress(const std::string &address, bool tooltip) const;
-    QVariant addressColor(const TransactionRecord *wtx) const;
+    QVariant addressColor( const TransactionRecord * rtx ) const ;
     QString formatTxStatus(const TransactionRecord *wtx) const;
     QString formatTxDate(const TransactionRecord *wtx) const;
     QString formatTxType(const TransactionRecord *wtx) const;
-    QString formatTxToAddress(const TransactionRecord *wtx, bool tooltip) const;
-    QString formatTxAmount( const TransactionRecord * wtx, bool showUnconfirmed = true, UnitsOfCoin::SeparatorStyle separators = UnitsOfCoin::separatorStandard ) const ;
+    QString formatTxToAddress( const TransactionRecord * rtx, bool forTooltip ) const ;
+    QString formatTxAmount( const TransactionRecord * rtx, bool showUnconfirmed = true, UnitsOfCoin::SeparatorStyle separators = UnitsOfCoin::separatorStandard ) const ;
     QString formatTooltip(const TransactionRecord *rec) const;
-    QVariant txStatusDecoration(const TransactionRecord *wtx) const;
+    QVariant txStatusDecoration( const TransactionRecord * rtx ) const ;
     QVariant txWatchonlyDecoration(const TransactionRecord *wtx) const;
     QVariant txAddressDecoration(const TransactionRecord *wtx) const;
 

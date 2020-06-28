@@ -194,7 +194,7 @@ extern int64_t nWalletUnlockTime;
 extern CAmount AmountFromValue(const UniValue& value);
 extern UniValue ValueFromAmount(const CAmount& amount);
 extern UniValue ValueFromAmount(const arith_uint256& amount);
-extern std::string HelpRequiringPassphrase();
+extern std::string HelpRequiringPassphraseWithNewline() ;
 extern std::string HelpExampleCli(const std::string& methodname, const std::string& args);
 extern std::string HelpExampleRpc(const std::string& methodname, const std::string& args);
 

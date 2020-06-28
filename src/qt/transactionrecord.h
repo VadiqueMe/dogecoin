@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -66,8 +66,8 @@ public:
     int cur_num_blocks;
 };
 
-/** UI model for a transaction. A core transaction can be represented by multiple UI transactions if it has
-    multiple outputs.
+/** UI model for a transaction. A core transaction can be represented by multiple UI transactions
+    if it has multiple outputs
  */
 class TransactionRecord
 {
@@ -136,11 +136,11 @@ public:
 
     void setSubtransactionIndex( int idx ) ;
 
-    /** Update status from core wallet tx.
+    /** Update status from core wallet tx
      */
     void updateStatus(const CWalletTx &wtx);
 
-    /** Return whether a status update is needed.
+    /** Return whether a status update is needed
      */
     bool statusUpdateNeeded();
 

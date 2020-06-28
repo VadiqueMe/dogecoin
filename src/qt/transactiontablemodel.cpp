@@ -385,58 +385,62 @@ QVariant TransactionTableModel::txAddressDecoration(const TransactionRecord *wtx
     }
 }
 
-QString TransactionTableModel::formatTxToAddress(const TransactionRecord *wtx, bool tooltip) const
+QString TransactionTableModel::formatTxToAddress( const TransactionRecord * rtx, bool forTooltip ) const
 {
-    QString watchAddress;
-    if (tooltip) {
-        // Mark transactions involving watch-only addresses by adding " (watch-only)"
-        watchAddress = wtx->involvesWatchAddress ? QString(" (") + tr("watch-only") + QString(")") : "";
-    }
-
-    switch(wtx->type)
+    QString to ;
+    switch ( rtx->type )
     {
     case TransactionRecord::RecvFromOther:
-        return QString::fromStdString(wtx->address) + watchAddress;
+    case TransactionRecord::SendToOther:
+        to = QString::fromStdString( rtx->address ) ; break ;
     case TransactionRecord::RecvWithAddress:
     case TransactionRecord::SendToAddress:
     case TransactionRecord::Generated:
-        return lookupAddress(wtx->address, tooltip) + watchAddress;
-    case TransactionRecord::SendToOther:
-        return QString::fromStdString(wtx->address) + watchAddress;
+        to = lookupAddress( rtx->address, forTooltip ) ; break ;
     case TransactionRecord::SendToSelf:
-        return QString("(") + tr("To self") + QString(")") + watchAddress ;
+        to = QString( "(" ) + tr( "To self" ) + QString( ")" ) ; break ;
     default:
-        return tr("(n/a)") + watchAddress ;
+        to = tr( "(n/a)" ) ; break ;
     }
+
+    QString watchOnly ;
+    if ( forTooltip ) {
+        // mark transactions involving watch-only addresses by adding " (watch-only)"
+        watchOnly = rtx->involvesWatchAddress ? QString(" (") + tr("watch-only") + QString(")") : "" ;
+    }
+
+    return to + watchOnly ;
 }
 
-QVariant TransactionTableModel::addressColor(const TransactionRecord *wtx) const
+QVariant TransactionTableModel::addressColor( const TransactionRecord * rtx ) const
 {
     // Show addresses without label in a less visible color
-    switch(wtx->type)
+    switch ( rtx->type )
     {
     case TransactionRecord::RecvWithAddress:
     case TransactionRecord::SendToAddress:
     case TransactionRecord::Generated:
-        {
-        QString label = walletModel->getAddressTableModel()->labelForAddress(QString::fromStdString(wtx->address));
-        if(label.isEmpty())
-            return COLOR_BAREADDRESS;
-        } break;
+    {
+        QString label = walletModel->getAddressTableModel()->labelForAddress( QString::fromStdString( rtx->address ) ) ;
+        if ( label.isEmpty() )
+            return COLOR_BAREADDRESS ;
+    } break ;
+    case TransactionRecord::RecvFromOther:
+    case TransactionRecord::SendToOther:
     case TransactionRecord::SendToSelf:
-        return COLOR_BAREADDRESS;
+        return COLOR_BAREADDRESS ;
     default:
-        break;
+        break ;
     }
-    return QVariant();
+    return QVariant() ;
 }
 
-QString TransactionTableModel::formatTxAmount( const TransactionRecord * wtx, bool showUnconfirmed, UnitsOfCoin::SeparatorStyle separators ) const
+QString TransactionTableModel::formatTxAmount( const TransactionRecord * rtx, bool showUnconfirmed, UnitsOfCoin::SeparatorStyle separators ) const
 {
-    QString str = UnitsOfCoin::format( walletModel->getOptionsModel()->getDisplayUnit(), wtx->credit + wtx->debit, false, separators ) ;
+    QString str = UnitsOfCoin::format( walletModel->getOptionsModel()->getDisplayUnit(), rtx->credit + rtx->debit, false, separators ) ;
     if ( showUnconfirmed )
     {
-        if ( ! wtx->status.countsForBalance )
+        if ( ! rtx->status.countsForBalance )
         {
             str = QString( "[" ) + str + QString( "]" ) ;
         }
@@ -444,9 +448,9 @@ QString TransactionTableModel::formatTxAmount( const TransactionRecord * wtx, bo
     return QString( str ) ;
 }
 
-QVariant TransactionTableModel::txStatusDecoration(const TransactionRecord *wtx) const
+QVariant TransactionTableModel::txStatusDecoration( const TransactionRecord * rtx ) const
 {
-    switch(wtx->status.status)
+    switch ( rtx->status.status )
     {
     case TransactionStatus::OpenUntilBlock:
     case TransactionStatus::OpenUntilDate:
@@ -458,7 +462,7 @@ QVariant TransactionTableModel::txStatusDecoration(const TransactionRecord *wtx)
     case TransactionStatus::Abandoned :
         return QIcon( ":/icons/transaction_abandoned" ) ;
     case TransactionStatus::Confirming:
-        switch(wtx->status.depth)
+        switch ( rtx->status.depth )
         {
         case 1: return QIcon(":/icons/transaction_1");
         case 2: return QIcon(":/icons/transaction_2");
@@ -471,9 +475,9 @@ QVariant TransactionTableModel::txStatusDecoration(const TransactionRecord *wtx)
     case TransactionStatus::Conflicted:
         return QIcon(":/icons/transaction_conflicted");
     case TransactionStatus::Immature: {
-        int total = wtx->status.depth + wtx->status.matures_in;
-        int part = (wtx->status.depth * 4 / total) + 1;
-        return QIcon(QString(":/icons/transaction_%1").arg(part));
+        int total = rtx->status.depth + rtx->status.matures_in ;
+        int part = ( rtx->status.depth * 4 / total ) + 1 ;
+        return QIcon( QString( ":/icons/transaction_%1" ).arg( part ) ) ;
         }
     case TransactionStatus::MaturesWarning:
     case TransactionStatus::NotAccepted:

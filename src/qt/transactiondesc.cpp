@@ -300,14 +300,17 @@ QString TransactionDesc::toHTML( CWallet * wallet, CWalletTx & wtx, TransactionR
                     inputsHtml += "<li>" ;
 
                     const CTxOut & vout = prevoutTx->vout[ txin.prevout.n ] ;
+                    QString from ;
                     CTxDestination address ;
                     if ( ExtractDestination( vout.scriptPubKey, address ) )
                     {
                         if ( wallet->mapAddressBook.count( address ) && ! wallet->mapAddressBook[ address ].name.empty() )
-                            inputsHtml += GUIUtil::HtmlEscape( wallet->mapAddressBook[ address ].name ) + " " ;
-                        inputsHtml += QString::fromStdString( CDogecoinAddress( address ).ToString() ) ;
+                            from += GUIUtil::HtmlEscape( wallet->mapAddressBook[ address ].name ) + " " ;
+                        from += QString::fromStdString( CDogecoinAddress( address ).ToString() ) ;
                     }
-                    inputsHtml += " " + tr("Amount") + "=" + UnitsOfCoin::formatHtmlWithUnit( unit, vout.nValue ) ;
+                    if ( from.isEmpty() )
+                        from = "\"" + QString::fromStdString( ScriptToAsmStr( vout.scriptPubKey ) ) + "\"" ;
+                    inputsHtml += from + " " + tr("Amount") + "=" + UnitsOfCoin::formatHtmlWithUnit( unit, vout.nValue ) ;
                     isminetype isMine = wallet->IsMine( vout ) ;
                     inputsHtml += " isMine=" + ( isMine & ISMINE_SPENDABLE ? tr("true") : tr("false") ) ;
                     if ( isMine & ISMINE_ALL )
@@ -325,14 +328,17 @@ QString TransactionDesc::toHTML( CWallet * wallet, CWalletTx & wtx, TransactionR
                     inputsHtml += "<li>" ;
 
                     const CTxOut & vout = prevoutTx->vout[ txin.prevout.n ] ;
+                    QString from ;
                     CTxDestination address ;
                     if ( ExtractDestination( vout.scriptPubKey, address ) )
                     {
                         if ( wallet->mapAddressBook.count( address ) && ! wallet->mapAddressBook[ address ].name.empty() )
-                            inputsHtml += GUIUtil::HtmlEscape( wallet->mapAddressBook[ address ].name ) + " " ;
-                        inputsHtml += QString::fromStdString( CDogecoinAddress( address ).ToString() ) ;
+                            from += GUIUtil::HtmlEscape( wallet->mapAddressBook[ address ].name ) + " " ;
+                        from += QString::fromStdString( CDogecoinAddress( address ).ToString() ) ;
                     }
-                    inputsHtml += " " + tr("Amount") + "=" + UnitsOfCoin::formatHtmlWithUnit( unit, vout.nValue ) ;
+                    if ( from.isEmpty() )
+                        from = "\"" + QString::fromStdString( ScriptToAsmStr( vout.scriptPubKey ) ) + "\"" ;
+                    inputsHtml += from + " " + tr("Amount") + "=" + UnitsOfCoin::formatHtmlWithUnit( unit, vout.nValue ) ;
 
                     inputsHtml += "</li>" ;
                     nInputs ++ ;
@@ -363,13 +369,16 @@ QString TransactionDesc::toHTML( CWallet * wallet, CWalletTx & wtx, TransactionR
                     {
                         unspentInputsHtml += "<li>" ;
                         CTxDestination address ;
+                        QString from ;
                         if ( ExtractDestination( vout.scriptPubKey, address ) )
                         {
                             if ( wallet->mapAddressBook.count( address ) && ! wallet->mapAddressBook[ address ].name.empty() )
-                                unspentInputsHtml += GUIUtil::HtmlEscape( wallet->mapAddressBook[ address ].name ) + " " ;
-                            unspentInputsHtml += QString::fromStdString( CDogecoinAddress( address ).ToString() ) ;
+                                from += GUIUtil::HtmlEscape( wallet->mapAddressBook[ address ].name ) + " " ;
+                            from += QString::fromStdString( CDogecoinAddress( address ).ToString() ) ;
                         }
-                        unspentInputsHtml += " " + tr("Amount") + "=" + UnitsOfCoin::formatHtmlWithUnit( unit, vout.nValue ) ;
+                        if ( from.isEmpty() )
+                            from = "\"" + QString::fromStdString( ScriptToAsmStr( vout.scriptPubKey ) ) + "\"" ;
+                        unspentInputsHtml += from + " " + tr("Amount") + "=" + UnitsOfCoin::formatHtmlWithUnit( unit, vout.nValue ) ;
                         isminetype isMine = wallet->IsMine( vout ) ;
                         unspentInputsHtml += " isMine=" + ( isMine & ISMINE_SPENDABLE ? tr("true") : tr("false") ) ;
                         if ( isMine & ISMINE_ALL )
@@ -393,14 +402,17 @@ QString TransactionDesc::toHTML( CWallet * wallet, CWalletTx & wtx, TransactionR
         {
             if ( ! txout.IsNull() ) {
                 outputsHtml += "<li>" ;
+                QString from ;
                 CTxDestination address ;
                 if ( ExtractDestination( txout.scriptPubKey, address ) )
                 {
                     if ( wallet->mapAddressBook.count( address ) && ! wallet->mapAddressBook[ address ].name.empty() )
-                        outputsHtml += GUIUtil::HtmlEscape( wallet->mapAddressBook[ address ].name ) + " " ;
-                    outputsHtml += QString::fromStdString( CDogecoinAddress( address ).ToString() ) ;
+                        from += GUIUtil::HtmlEscape( wallet->mapAddressBook[ address ].name ) + " " ;
+                    from += QString::fromStdString( CDogecoinAddress( address ).ToString() ) ;
                 }
-                outputsHtml += " " + tr("Amount") + "=" + UnitsOfCoin::formatHtmlWithUnit( unit, txout.nValue ) ;
+                if ( from.isEmpty() )
+                    from = "\"" + QString::fromStdString( ScriptToAsmStr( txout.scriptPubKey ) ) + "\"" ;
+                outputsHtml += from + " " + tr("Amount") + "=" + UnitsOfCoin::formatHtmlWithUnit( unit, txout.nValue ) ;
                 isminetype isMine = wallet->IsMine( txout ) ;
                 outputsHtml += " isMine=" + ( isMine & ISMINE_SPENDABLE ? tr("true") : tr("false") ) ;
                 if ( isMine & ISMINE_ALL )

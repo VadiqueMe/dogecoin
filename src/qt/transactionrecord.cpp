@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -10,22 +10,20 @@
 #include "validation.h"
 #include "timedata.h"
 #include "wallet/wallet.h"
+#include "core_io.h" // ScriptToAsmStr
 
 #include <stdint.h>
 
-/* Return positive answer if transaction should be shown in list
- */
-bool TransactionRecord::showTransaction(const CWalletTx &wtx)
+bool TransactionRecord::showTransaction( const CWalletTx & wtx )
 {
-    if (wtx.IsCoinBase())
+    if ( wtx.IsCoinBase() )
     {
-        // Ensures we show generated coins / mined transactions at depth 1
-        if (!wtx.IsInMainChain())
-        {
-            return false;
+        // ensure to show generated coins / mined transactions at depth 1
+        if ( ! wtx.IsInMainChain() ) {
+            return false ;
         }
     }
-    return true;
+    return true ;
 }
 
 /*
@@ -139,9 +137,11 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
                 }
                 else
                 {
-                    // Send to IP, or other non-address transaction like OP_EVAL
+                    // Send to IP, or other non-address transaction like OP_EVAL or OP_RETURN
                     sub.type = TransactionRecord::SendToOther ;
                     sub.address = mapValue[ "to" ] ;
+                    if ( sub.address.empty() )
+                        sub.address = "\"" + ScriptToAsmStr( txout.scriptPubKey ) + "\"" ;
                 }
 
                 CAmount nValue = txout.nValue;
