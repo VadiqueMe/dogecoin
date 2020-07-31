@@ -518,10 +518,6 @@
         <translation>ცარიელი</translation>
     </message>
     <message>
-        <source>Confirm options reset</source>
-        <translation>დაადასტურეთ პარამეტრების დაბრუნება ნაგულისხმევზე</translation>
-    </message>
-    <message>
         <source>Client restart required to activate changes.</source>
         <translation>ცვლილებები ძალაში შევა კლიენტის ხელახალი გაშვების შემდეგ.</translation>
     </message>
@@ -824,7 +820,7 @@
     <name>SendCoinsEntry</name>
     <message>
         <source>Amount:</source>
-        <translation>რაოდენობა</translation>
+        <translation>რაოდენობა:</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -857,10 +853,6 @@
     <message>
         <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
         <translation>მესიჯი, რომელიც თან ერთვის dogecoin: URI, რომელიც შეინახება ტრანსაქციასთან ერთად. გზავნილი არ გაიგზავნება ქსელში</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>ადრესატი:</translation>
     </message>
     <message>
         <source>Memo:</source>

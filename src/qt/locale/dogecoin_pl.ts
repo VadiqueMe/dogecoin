@@ -739,10 +739,6 @@
         <translation>Użyj wybranego folderu dla danych</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation>Błąd: podany folder danych «%1» nie mógł zostać utworzony.</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Błąd</translation>
     </message>
@@ -1018,10 +1014,6 @@
     <message>
         <source>none</source>
         <translation>żaden</translation>
-    </message>
-    <message>
-        <source>Confirm options reset</source>
-        <translation>Potwierdź reset ustawień</translation>
     </message>
     <message>
         <source>Client restart required to activate changes.</source>
@@ -1323,10 +1315,6 @@
     <message>
         <source>Direction</source>
         <translation>Kierunek</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>Wersja</translation>
     </message>
     <message>
         <source>Starting Block</source>
@@ -1734,7 +1722,7 @@
     </message>
     <message>
         <source>Pay To:</source>
-        <translation>Zapłać dla:</translation>
+        <translation>Zapłać do:</translation>
     </message>
     <message>
         <source>Label:</source>
@@ -1779,10 +1767,6 @@
     <message>
         <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
         <translation>Wiadomość, która została dołączona do URI dogecoin:, która będzie przechowywana wraz z transakcją. Ta wiadomość nie będzie rozsyłana w sieci</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Wpłać do:</translation>
     </message>
     <message>
         <source>Memo:</source>
@@ -2108,10 +2092,6 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
     <message>
         <source>If &lt;category&gt; is not supplied or if &lt;category&gt; = 1, output all debugging information.</source>
         <translation>Jeżeli &lt;category&gt; nie zostanie określona lub &lt;category&gt; = 1, wyświetl wszystkie informacje debugowania.</translation>
-    </message>
-    <message>
-        <source>Prune configured below the minimum of %d MiB.  Please use a higher number.</source>
-        <translation>Przycinanie skonfigurowano poniżej minimalnych %d MiB. Proszę użyć wyższej liczby.</translation>
     </message>
     <message>
         <source>Prune: last wallet synchronisation goes beyond pruned data. You need to -reindex (download the whole blockchain again in case of pruned node)</source>

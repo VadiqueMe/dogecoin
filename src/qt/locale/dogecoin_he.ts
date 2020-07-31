@@ -477,10 +477,6 @@
         <translation>שימוש בתיקיית נתונים מותאמת אישית:</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation>שגיאה: לא ניתן ליצור את תיקיית הנתונים שצוינה „%1“.</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>שגיאה</translation>
     </message>
@@ -668,10 +664,6 @@
     <message>
         <source>none</source>
         <translation>ללא</translation>
-    </message>
-    <message>
-        <source>Confirm options reset</source>
-        <translation>אישור איפוס האפשרויות</translation>
     </message>
     <message>
         <source>Client restart required to activate changes.</source>
@@ -881,10 +873,6 @@
     <message>
         <source>Direction</source>
         <translation>כיוון</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>גרסה</translation>
     </message>
     <message>
         <source>Starting Block</source>
@@ -1227,12 +1215,8 @@
         <translation>הודעה שצורפה dogecoin: URI כתובת שתאוחסן בהעברה. הודעה זו לא תישלח ברשת</translation>
     </message>
     <message>
-        <source>Pay To:</source>
-        <translation>תשלום לטובת:</translation>
-    </message>
-    <message>
         <source>Memo:</source>
-        <translation>תזכורת:</translation>
+        <translation>תזכורת</translation>
     </message>
     </context>
 <context>

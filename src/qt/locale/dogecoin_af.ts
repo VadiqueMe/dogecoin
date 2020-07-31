@@ -570,10 +570,6 @@
         <translation>geen</translation>
     </message>
     <message>
-        <source>Confirm options reset</source>
-        <translation>Bevestig terugstel van opsies</translation>
-    </message>
-    <message>
         <source>Client restart required to activate changes.</source>
         <translation>Kliënt moet herbegin word om veranderinge te aktiveer.</translation>
     </message>
@@ -685,10 +681,6 @@
     <message>
         <source>Direction</source>
         <translation>Rigting</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>Weergawe</translation>
     </message>
     <message>
         <source>User Agent</source>

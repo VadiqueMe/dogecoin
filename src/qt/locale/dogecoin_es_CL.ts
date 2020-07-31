@@ -375,10 +375,6 @@
         <source>default</source>
         <translation>predeterminado</translation>
     </message>
-    <message>
-        <source>Confirm options reset</source>
-        <translation>Confirmar reestablecimiento de las opciones</translation>
-    </message>
     </context>
 <context>
     <name>OverviewPage</name>
@@ -551,10 +547,6 @@
     <message>
         <source>Message:</source>
         <translation>Mensaje:</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Pagar a:</translation>
     </message>
     </context>
 <context>

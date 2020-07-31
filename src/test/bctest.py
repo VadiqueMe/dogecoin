@@ -2,6 +2,7 @@
 # Copyright 2016 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php
+
 from __future__ import division,print_function,unicode_literals
 import subprocess
 import os
@@ -78,16 +79,18 @@ def bctest(testDir, testObj, exeext):
             raise
         # Compare data
         if a_parsed != b_parsed:
-            logging.error("Output data mismatch for " + outputFn + " (format " + outputType + ")")
+            data_mismatch_message = "Output data mismatch for " + outputFn + " (format " + outputType + ")"
+            logging.error(data_mismatch_message)
             raise Exception
         # Compare formatting
         if outs[0] != outputData:
-            error_message = "Output formatting mismatch for " + outputFn + ":\n"
-            error_message += "".join(difflib.context_diff(outputData.splitlines(True),
+            formatting_mismatch_message = "Output formatting mismatch for " + outputFn + ":\n"
+            formatting_mismatch_message += "".join(difflib.unified_diff(
+                                                          outputData.splitlines(True),
                                                           outs[0].splitlines(True),
                                                           fromfile=outputFn,
                                                           tofile="returned"))
-            logging.error(error_message)
+            logging.error(formatting_mismatch_message)
             raise Exception
 
     # Compare the return code to the expected return code

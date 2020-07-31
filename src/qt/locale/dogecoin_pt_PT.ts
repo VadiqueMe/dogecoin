@@ -711,10 +711,6 @@
         <translation>Utilizar uma pasta de dados personalizada:</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation>Erro: não pode ser criada a pasta de dados especificada como "%1.</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Erro</translation>
     </message>
@@ -984,10 +980,6 @@
         <translation>nenhum</translation>
     </message>
     <message>
-        <source>Confirm options reset</source>
-        <translation>Confirme a reposição das opções</translation>
-    </message>
-    <message>
         <source>Client restart required to activate changes.</source>
         <translation>É necessário reiniciar o cliente para ativar as alterações.</translation>
     </message>
@@ -1227,10 +1219,6 @@
     <message>
         <source>Direction</source>
         <translation>Direcção</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>Versão</translation>
     </message>
     <message>
         <source>Starting Block</source>
@@ -1649,10 +1637,6 @@
         <translation>Uma mensagem que estava anexada ao URI dogecoin: que será armazenada com a transação. Esta mensagem não será enviada através da rede</translation>
     </message>
     <message>
-        <source>Pay To:</source>
-        <translation>Pagar a:</translation>
-    </message>
-    <message>
         <source>Memo:</source>
         <translation>Memorando:</translation>
     </message>
@@ -1855,10 +1839,6 @@
     <message>
         <source>If &lt;category&gt; is not supplied or if &lt;category&gt; = 1, output all debugging information.</source>
         <translation>Se &lt;category&gt; não é fornecida ou &lt;category&gt; = 1, imprimir toda a informação de depuração.</translation>
-    </message>
-    <message>
-        <source>Prune configured below the minimum of %d MiB.  Please use a higher number.</source>
-        <translation>Poda configurada abaixo do mínimo de %d MiB.  Por favor, utilize um valor mais elevado.</translation>
     </message>
     <message>
         <source>Prune: last wallet synchronisation goes beyond pruned data. You need to -reindex (download the whole blockchain again in case of pruned node)</source>

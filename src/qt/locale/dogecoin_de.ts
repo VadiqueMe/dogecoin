@@ -775,10 +775,6 @@
         <translation>Ein benutzerdefiniertes Datenverzeichnis verwenden:</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation>Fehler: Angegebenes Datenverzeichnis "%1" kann nicht angelegt werden.</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
@@ -1062,10 +1058,6 @@
     <message>
         <source>none</source>
         <translation>keine</translation>
-    </message>
-    <message>
-        <source>Confirm options reset</source>
-        <translation>Zurücksetzen der Konfiguration bestätigen</translation>
     </message>
     <message>
         <source>Client restart required to activate changes.</source>
@@ -1427,10 +1419,6 @@
     <message>
         <source>Direction</source>
         <translation>Richtung</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>Version</translation>
     </message>
     <message>
         <source>Starting Block</source>
@@ -1963,10 +1951,6 @@
     <message>
         <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
         <translation>Eine an die "dogecoin:"-URI angefügte Nachricht, die zusammen mit der Transaktion gespeichert wird. Diese Nachricht wird nicht über das Netzwerk gesendet</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Empfänger:</translation>
     </message>
     <message>
         <source>Memo:</source>
@@ -2638,10 +2622,6 @@
     <message>
         <source>If &lt;category&gt; is not supplied or if &lt;category&gt; = 1, output all debugging information.</source>
         <translation>Wenn &lt;category&gt; nicht angegeben wird oder &lt;category&gt;=1, jegliche Debugginginformationen ausgeben.</translation>
-    </message>
-    <message>
-        <source>Prune configured below the minimum of %d MiB.  Please use a higher number.</source>
-        <translation>Kürzungsmodus wurde kleiner als das Minimum in Höhe von %d MiB konfiguriert. Bitte verwenden Sie einen größeren Wert.</translation>
     </message>
     <message>
         <source>Prune: last wallet synchronisation goes beyond pruned data. You need to -reindex (download the whole blockchain again in case of pruned node)</source>

@@ -939,12 +939,12 @@
 <context>
     <name>FreespaceChecker</name>
     <message>
-        <location filename="../intro.cpp" line="+78"/>
+        <location filename="../intro.cpp" line="+79"/>
         <source>A new data directory will be created.</source>
         <translation>A new data directory will be created.</translation>
     </message>
     <message>
-        <location line="+22"/>
+        <location line="+19"/>
         <source>name</source>
         <translation>name</translation>
     </message>
@@ -1134,12 +1134,7 @@
         <translation>Use a custom data directory:</translation>
     </message>
     <message>
-        <location filename="../intro.cpp" line="+94"/>
-        <source>Error: Specified data directory &quot;%1&quot; cannot be created.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+26"/>
+        <location filename="../intro.cpp" line="+119"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
@@ -1451,12 +1446,7 @@
     </message>
     <message>
         <location line="+74"/>
-        <source>Confirm options reset</source>
-        <translation>Confirm options reset</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <location line="+43"/>
+        <location line="+45"/>
         <source>Client restart required to activate changes.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3853,11 +3843,6 @@
     </message>
     <message>
         <location line="+3"/>
-        <source>Prune configured below the minimum of %d MiB.  Please use a higher number.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
         <source>Prune: last wallet synchronisation goes beyond pruned data. You need to -reindex (download the whole blockchain again in case of pruned node)</source>
         <translation type="unfinished"></translation>
     </message>

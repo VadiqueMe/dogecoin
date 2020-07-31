@@ -837,10 +837,6 @@
         <translation>Паведамленне:</translation>
     </message>
     <message>
-        <source>Pay To:</source>
-        <translation>Заплаціць да:</translation>
-    </message>
-    <message>
         <source>Memo:</source>
         <translation>Памятка:</translation>
     </message>

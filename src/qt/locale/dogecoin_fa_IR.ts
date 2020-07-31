@@ -368,7 +368,7 @@
     </message>
     <message>
         <source>Pay To:</source>
-        <translation>پرداخت و به چه کسی</translation>
+        <translation>پرداخت به</translation>
     </message>
     <message>
         <source>Label:</source>
@@ -380,15 +380,11 @@
     </message>
     <message>
         <source>Message:</source>
-        <translation>پیام:</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>پرداخت به:</translation>
+        <translation>پیام</translation>
     </message>
     <message>
         <source>Memo:</source>
-        <translation>یادداشت:</translation>
+        <translation>یادداشت</translation>
     </message>
     </context>
 <context>

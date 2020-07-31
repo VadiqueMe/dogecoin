@@ -659,10 +659,6 @@
         <translation>Gunakan direktori pilihan Anda:</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation>Kesalahan: Direktori data "%1" tidak dapat dibuat.</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Kesalahan</translation>
     </message>
@@ -864,10 +860,6 @@
         <translation>tidak satupun</translation>
     </message>
     <message>
-        <source>Confirm options reset</source>
-        <translation>Memastikan reset pilihan</translation>
-    </message>
-    <message>
         <source>Client restart required to activate changes.</source>
         <translation>Restart klien diperlukan untuk mengaktifkan perubahan.</translation>
     </message>
@@ -1005,14 +997,8 @@
         <translation>Terkirim</translation>
     </message>
     <message>
-        <source>Version</source>
-        <translation>Versi</translation>
-    </message>
-    <message>
         <source>User Agent</source>
-        <translation>Agen Pengguna
-
-</translation>
+        <translation>Agen Pengguna</translation>
     </message>
     <message>
         <source>Services</source>
@@ -1291,12 +1277,8 @@
         <translation>Masukkan label untuk alamat ini untuk dimasukan dalam daftar alamat yang pernah digunakan</translation>
     </message>
     <message>
-        <source>Pay To:</source>
-        <translation>Kirim Ke:</translation>
-    </message>
-    <message>
         <source>Memo:</source>
-        <translation>Catatan Peringatan:</translation>
+        <translation>Memo:</translation>
     </message>
     </context>
 <context>

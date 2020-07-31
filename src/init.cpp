@@ -498,7 +498,6 @@ std::string HelpMessage( WhatHelpMessage what )
         strUsage += HelpMessageOpt("-checklevel=<n>", strprintf(_("How thorough the block verification of -checkblocks is (0-4, default: %u)"), DEFAULT_CHECKLEVEL));
         strUsage += HelpMessageOpt( "-checkblockindex", strprintf( "Do a full consistency check for mapBlockIndex, setBlockIndexCandidates, chainActive and mapBlocksUnlinked occasionally. Also sets -checkmempool (default for chain \"%s\": %u)", NameOfChain(), Params().DefaultConsistencyChecks() ) ) ;
         strUsage += HelpMessageOpt( "-checkmempool=<n>", strprintf( "Run checks every <n> transactions (default for chain \"%s\": %u)", NameOfChain(), Params().DefaultConsistencyChecks() ) ) ;
-        strUsage += HelpMessageOpt("-checkpoints", strprintf("Disable expensive verification for known chain history (default: %u)", DEFAULT_CHECKPOINTS_ENABLED));
         strUsage += HelpMessageOpt("-disablesafemode", strprintf("Disable safemode, override a real safe mode event (default: %u)", DEFAULT_DISABLE_SAFEMODE));
         strUsage += HelpMessageOpt("-testsafemode", strprintf("Force safe mode (default: %u)", DEFAULT_TESTSAFEMODE));
         strUsage += HelpMessageOpt("-stopafterblockimport", strprintf("Stop running after importing blocks from disk (default: %u)", DEFAULT_STOPAFTERBLOCKIMPORT));
@@ -1010,7 +1009,6 @@ bool AppInitParameterInteraction()
         mempool.setSanityCheck(1.0 / ratio);
     }
     fCheckBlockIndex = GetBoolArg("-checkblockindex", chainparams.DefaultConsistencyChecks());
-    fCheckpointsEnabled = GetBoolArg("-checkpoints", DEFAULT_CHECKPOINTS_ENABLED);
 
     // mempool limits
     int64_t nMempoolSizeMax = GetArg("-maxmempool", DEFAULT_MAX_MEMPOOL_SIZE) * 1000000;
@@ -1032,17 +1030,18 @@ bool AppInitParameterInteraction()
     if (nPruneArg < 0) {
         return InitError(_("Prune cannot be configured with a negative value."));
     }
-    nPruneTarget = (uint64_t) nPruneArg * 1024 * 1024;
-    if (nPruneArg == 1) {  // manual pruning: -prune=1
-        LogPrintf("Block pruning enabled.  Use RPC call pruneblockchain(height) to manually prune block and undo files.\n");
-        nPruneTarget = std::numeric_limits<uint64_t>::max();
-        fPruneMode = true;
-    } else if (nPruneTarget) {
-        if (nPruneTarget < MIN_DISK_SPACE_FOR_BLOCK_FILES) {
-            return InitError(strprintf(_("Prune configured below the minimum of %d MiB.  Please use a higher number."), MIN_DISK_SPACE_FOR_BLOCK_FILES / 1024 / 1024));
+    nPruneTarget = (uint64_t) nPruneArg * 1024 * 1024 ;
+    if ( nPruneArg == 1 ) {  // manual pruning: -prune=1
+        LogPrintf( "Block pruning enabled. Use RPC call pruneblockchain(height) to manually prune block and undo files\n" ) ;
+        nPruneTarget = std::numeric_limits< uint64_t >::max() ;
+        fPruneMode = true ;
+    } else if ( nPruneTarget > 0 ) {
+        if ( nPruneTarget < MIN_DISK_SPACE_FOR_BLOCK_FILES ) {
+            LogPrintf( "-prune is configured below the minimum of %d MiB, using the minimum", MIN_DISK_SPACE_FOR_BLOCK_FILES / 1024 / 1024 ) ;
+            nPruneTarget = MIN_DISK_SPACE_FOR_BLOCK_FILES ;
         }
-        LogPrintf("Prune configured to target %uMiB on disk for block and undo files.\n", nPruneTarget / 1024 / 1024);
-        fPruneMode = true;
+        LogPrintf( "Prune configured to %u MiB on disk for block and undo files\n", nPruneTarget / 1024 / 1024 ) ;
+        fPruneMode = true ;
     }
 
     RegisterAllCoreRPCCommands(tableRPC);

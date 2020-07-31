@@ -107,8 +107,6 @@ static const int64_t DEFAULT_MAX_TIP_AGE = 24 * 60 * 60 ;
 /** Default for -permitbaremultisig */
 static const bool DEFAULT_PERMIT_BAREMULTISIG = true;
 
-static const bool DEFAULT_CHECKPOINTS_ENABLED = true;
-
 static const bool DEFAULT_TXINDEX = true ;
 
 static const unsigned int DEFAULT_BANSCORE_THRESHOLD = 100;
@@ -145,7 +143,6 @@ extern bool fTxIndex;
 extern bool fIsBareMultisigStd;
 extern bool acceptNonStandardTxs ;
 extern bool fCheckBlockIndex;
-extern bool fCheckpointsEnabled;
 extern size_t nCoinCacheUsage;
 /** Absolute maximum transaction fee (in satoshis) used by wallet and mempool (rejects high fee in sendrawtransaction) */
 extern CAmount maxTxFee;

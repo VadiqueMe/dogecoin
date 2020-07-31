@@ -383,10 +383,6 @@
         <translation>திசை</translation>
     </message>
     <message>
-        <source>Version</source>
-        <translation>பதிப்பு</translation>
-    </message>
-    <message>
         <source>User Agent</source>
         <translation>பயனர் முகவர்</translation>
     </message>

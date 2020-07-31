@@ -474,10 +474,6 @@
         <translation>por defecto</translation>
     </message>
     <message>
-        <source>Confirm options reset</source>
-        <translation>Confirmar opcións de restaurar</translation>
-    </message>
-    <message>
         <source>The supplied proxy address is invalid.</source>
         <translation>A dirección de proxy suministrada é inválida.</translation>
     </message>
@@ -741,10 +737,6 @@
     <message>
         <source>Enter a label for this address to add it to the list of used addresses</source>
         <translation>Introduce unha etiqueta para esta dirección para engadila á listaxe de direccións empregadas</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Pagar A:</translation>
     </message>
     <message>
         <source>Memo:</source>

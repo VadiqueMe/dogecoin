@@ -527,10 +527,6 @@
         <translation>Utiliser votre propre répertoire</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation>Erreur: Le répertoire de données "%1" n'a pas pu être créé. </translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
@@ -694,10 +690,6 @@
     <message>
         <source>none</source>
         <translation>aucun</translation>
-    </message>
-    <message>
-        <source>Confirm options reset</source>
-        <translation>Confirmer les options de réinitialisation </translation>
     </message>
     <message>
         <source>Client restart required to activate changes.</source>
@@ -879,10 +871,6 @@
     <message>
         <source>Direction</source>
         <translation>Direction</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>Version</translation>
     </message>
     <message>
         <source>Starting Block</source>
@@ -1193,12 +1181,8 @@
         <translation>Message :</translation>
     </message>
     <message>
-        <source>Pay To:</source>
-        <translation>Payer à :</translation>
-    </message>
-    <message>
         <source>Memo:</source>
-        <translation>Memo:</translation>
+        <translation>Memo :</translation>
     </message>
     </context>
 <context>

@@ -75,7 +75,6 @@ bool fPruneMode = false;
 bool fIsBareMultisigStd = DEFAULT_PERMIT_BAREMULTISIG;
 bool acceptNonStandardTxs = false ;
 bool fCheckBlockIndex = false;
-bool fCheckpointsEnabled = DEFAULT_CHECKPOINTS_ENABLED;
 size_t nCoinCacheUsage = 5000 * 300;
 uint64_t nPruneTarget = 0;
 bool fAlerts = DEFAULT_ALERTS;
@@ -3192,7 +3191,7 @@ static bool AcceptBlockHeader( const CBlockHeader& block, CValidationState& stat
             return state.DoS( 10, error("%s: previous block marked as rejected", __func__), REJECT_INVALID, "bad-prevblk" ) ;
 
         assert( pindexPrev != nullptr ) ;
-        if ( fCheckpointsEnabled && ! CheckIndexAgainstCheckpoint( pindexPrev, state, chainparams, hash ) )
+        if ( ! CheckIndexAgainstCheckpoint( pindexPrev, state, chainparams, hash ) )
             return error( "%s: CheckIndexAgainstCheckpoint(): %s", __func__, state.GetRejectReason().c_str() ) ;
 
         if ( ! ContextualCheckBlockHeader( block, state, pindexPrev, GetAdjustedTime() ) )
@@ -3351,7 +3350,7 @@ bool TestBlockValidity( CValidationState & state, const CChainParams & chainpara
 {
     AssertLockHeld(cs_main);
     assert( pindexPrev && pindexPrev == chainActive.Tip() ) ;
-    if ( fCheckpointsEnabled && ! CheckIndexAgainstCheckpoint( pindexPrev, state, chainparams, block.GetSha256Hash() ) )
+    if ( ! CheckIndexAgainstCheckpoint( pindexPrev, state, chainparams, block.GetSha256Hash() ) )
         return error( "%s: CheckIndexAgainstCheckpoint(): %s", __func__, state.GetRejectReason().c_str() ) ;
 
     CCoinsViewCache viewNew( pcoinsTip ) ;

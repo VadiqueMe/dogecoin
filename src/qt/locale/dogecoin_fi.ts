@@ -491,10 +491,6 @@
         <translation>Määritä oma kansio:</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation>Virhe: Annettu datahakemistoa "%1" ei voida luoda.</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Virhe</translation>
     </message>
@@ -732,10 +728,6 @@
         <translation>ei mitään</translation>
     </message>
     <message>
-        <source>Confirm options reset</source>
-        <translation>Varmista asetusten palautus</translation>
-    </message>
-    <message>
         <source>Client restart required to activate changes.</source>
         <translation>Ohjelman uudelleenkäynnistys aktivoi muutokset.</translation>
     </message>
@@ -951,10 +943,6 @@
     <message>
         <source>Direction</source>
         <translation>Suunta</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>Versio</translation>
     </message>
     <message>
         <source>Starting Block</source>
@@ -1254,7 +1242,7 @@
     </message>
     <message>
         <source>Pay To:</source>
-        <translation>Maksun saaja:</translation>
+        <translation>Saaja:</translation>
     </message>
     <message>
         <source>Label:</source>
@@ -1299,10 +1287,6 @@
     <message>
         <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
         <translation>Viesti joka liitettiin dogecoin: URI:iin tallennetaan rahansiirtoon viitteeksi. Tätä viestiä ei lähetetä verkkoon</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Saaja:</translation>
     </message>
     <message>
         <source>Memo:</source>
@@ -1463,10 +1447,6 @@
     <message>
         <source>If &lt;category&gt; is not supplied or if &lt;category&gt; = 1, output all debugging information.</source>
         <translation>Jos &lt;category&gt; on toimittamatta tai jos &lt;category&gt; = 1, tulosta kaikki debug-tieto.</translation>
-    </message>
-    <message>
-        <source>Prune configured below the minimum of %d MiB.  Please use a higher number.</source>
-        <translation>Karsinta konfiguroitu alle minimin %d MiB. Käytä surempaa numeroa.</translation>
     </message>
     <message>
         <source>Prune: last wallet synchronisation goes beyond pruned data. You need to -reindex (download the whole blockchain again in case of pruned node)</source>

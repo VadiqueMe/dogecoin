@@ -888,10 +888,6 @@
         <translation>нищо</translation>
     </message>
     <message>
-        <source>Confirm options reset</source>
-        <translation>Потвърдете отмяната на настройките.</translation>
-    </message>
-    <message>
         <source>Client restart required to activate changes.</source>
         <translation>Изисква се рестартиране на клиента за активиране на извършените промени.</translation>
     </message>
@@ -1127,10 +1123,6 @@
     <message>
         <source>Direction</source>
         <translation>Посока</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>Версия</translation>
     </message>
     <message>
         <source>User Agent</source>
@@ -1503,10 +1495,6 @@
     <message>
         <source>Message:</source>
         <translation>Съобщение:</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Плащане на:</translation>
     </message>
     <message>
         <source>Memo:</source>

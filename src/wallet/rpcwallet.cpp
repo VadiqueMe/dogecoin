@@ -54,28 +54,28 @@ void EnsureWalletIsUnlocked()
         throw JSONRPCError(RPC_WALLET_UNLOCK_NEEDED, "Error: Please enter the wallet passphrase with walletpassphrase first.");
 }
 
-void WalletTxToJSON(const CWalletTx& wtx, UniValue& entry)
+void WalletTxToJSON( const CWalletTx & wtx, UniValue & entry )
 {
-    int confirms = wtx.GetDepthInMainChain();
-    entry.push_back(Pair("confirmations", confirms));
-    if (wtx.IsCoinBase())
-        entry.push_back(Pair("generated", true));
-    if (confirms > 0)
+    int confirms = wtx.GetDepthInMainChain() ;
+    entry.pushKV( "confirmations", confirms ) ;
+    if ( wtx.IsCoinBase() )
+        entry.pushKV( "generated", true ) ;
+    if ( confirms > 0 )
     {
-        entry.push_back(Pair("blockhash", wtx.hashBlock.GetHex()));
-        entry.push_back(Pair("blockindex", wtx.nIndex));
-        entry.push_back(Pair("blocktime", mapBlockIndex[wtx.hashBlock]->GetBlockTime()));
+        entry.pushKV( "blockhash", wtx.hashBlock.GetHex() ) ;
+        entry.pushKV( "blockindex", wtx.nIndex ) ;
+        entry.pushKV( "blocktime", mapBlockIndex[ wtx.hashBlock ]->GetBlockTime() ) ;
     } else {
-        entry.push_back(Pair("trusted", wtx.IsTrusted()));
+        entry.pushKV( "trusted", wtx.IsTrusted() ) ;
     }
     uint256 hash = wtx.GetTxHash() ;
-    entry.push_back( Pair("txid", hash.GetHex()) ) ;
-    UniValue conflicts(UniValue::VARR);
+    entry.pushKV( "txid", hash.GetHex() ) ;
+    UniValue conflicts( UniValue::VARR ) ;
     for ( const uint256 & conflict : wtx.GetConflicts() )
         conflicts.push_back( conflict.GetHex() ) ;
-    entry.push_back(Pair("walletconflicts", conflicts));
-    entry.push_back(Pair("time", wtx.GetTxTime()));
-    entry.push_back(Pair("timereceived", (int64_t)wtx.nTimeReceived));
+    entry.pushKV( "walletconflicts", conflicts ) ;
+    entry.pushKV( "time", wtx.GetTxTime() ) ;
+    entry.pushKV( "timereceived", (int64_t)wtx.nTimeReceived ) ;
 
     // Add opt-in RBF status
     std::string rbfStatus = "no";
@@ -87,10 +87,10 @@ void WalletTxToJSON(const CWalletTx& wtx, UniValue& entry)
         else if (rbfState == RBF_TRANSACTIONSTATE_REPLACEABLE_BIP125)
             rbfStatus = "yes";
     }
-    entry.push_back(Pair("bip125-replaceable", rbfStatus));
+    entry.pushKV( "bip125-replaceable", rbfStatus ) ;
 
     for ( const std::pair< std::string, std::string > & item : wtx.mapValue )
-        entry.push_back( Pair( item.first, item.second ) ) ;
+        entry.pushKV( item.first, item.second ) ;
 }
 
 std::string AccountFromValue(const UniValue& value)
@@ -109,13 +109,13 @@ UniValue getnewaddress(const JSONRPCRequest& request)
     if ( request.fHelp || request.params.size() > 1 )
         throw std::runtime_error(
             "getnewaddress ( \"account\" )\n"
-            "\nReturns a new Dogecoin address for receiving payments.\n"
-            "If 'account' is specified (DEPRECATED), it is added to the address book \n"
-            "so payments received with the address will be credited to 'account'.\n"
+            "\nReturns a new Dogecoin address for receiving payments\n"
+            "\nIf 'account' is specified (DEPRECATED), it is added to the address book \n"
+            "so payments received with the address will be credited to 'account'\n"
             "\nArguments:\n"
-            "1. \"account\"        (string, optional) DEPRECATED. The account name for the address to be linked to. If not provided, the default account \"\" is used. It can also be set to the empty string \"\" to represent the default account. The account does not need to exist, it will be created if there is no account by the given name.\n"
+            "1. \"account\"  (string, optional) DEPRECATED. The account name for the address to be linked to. If not provided, the default account \"\" is used. It can also be set to the empty string \"\" to represent the default account. The account does not need to exist, it will be created if there is no account by the given name\n"
             "\nResult:\n"
-            "\"address\"    (string) The new dogecoin address\n"
+            "\"address\"    (string) the new dogecoin address\n"
             "\nExamples:\n"
             + HelpExampleCli("getnewaddress", "")
             + HelpExampleRpc("getnewaddress", "")
@@ -1223,25 +1223,22 @@ UniValue ListReceived(const UniValue& params, bool fByAccounts)
         }
         else
         {
-            UniValue obj(UniValue::VOBJ);
-            if(fIsWatchonly)
-                obj.push_back(Pair("involvesWatchonly", true));
-            obj.push_back(Pair("address",       address.ToString()));
-            obj.push_back(Pair("account",       strAccount));
-            obj.push_back(Pair("amount",        ValueFromAmount(nAmount)));
-            obj.push_back(Pair("confirmations", (nConf == std::numeric_limits<int>::max() ? 0 : nConf)));
-            if (!fByAccounts)
-                obj.push_back(Pair("label", strAccount));
+            UniValue obj( UniValue::VOBJ ) ;
+            if ( fIsWatchonly )
+                obj.pushKV( "involvesWatchonly", true ) ;
+            obj.pushKV( "address", address.ToString() ) ;
+            obj.pushKV( "account", strAccount ) ;
+            obj.pushKV( "amount", ValueFromAmount( nAmount ) ) ;
+            obj.pushKV( "confirmations", ( nConf == std::numeric_limits< int >::max() ? 0 : nConf ) ) ;
+            if ( ! fByAccounts )
+                obj.pushKV( "label", strAccount ) ;
             UniValue transactions(UniValue::VARR);
-            if (it != mapTally.end())
-            {
-                for ( const uint256 & txhash : (*it).second.txids )
-                {
+            if ( it != mapTally.end() ) {
+                for ( const uint256 & txhash : ( *it ).second.txids )
                     transactions.push_back( txhash.GetHex() ) ;
-                }
             }
-            obj.push_back(Pair("txids", transactions));
-            ret.push_back(obj);
+            obj.pushKV( "txids", transactions ) ;
+            ret.push_back( obj ) ;
         }
     }
 
@@ -1249,15 +1246,15 @@ UniValue ListReceived(const UniValue& params, bool fByAccounts)
     {
         for ( std::map< std::string, tallyitem >::iterator it = mapAccountTally.begin() ; it != mapAccountTally.end() ; ++ it )
         {
-            CAmount nAmount = (*it).second.nAmount;
-            int nConf = (*it).second.nConf;
-            UniValue obj(UniValue::VOBJ);
-            if((*it).second.fIsWatchonly)
-                obj.push_back(Pair("involvesWatchonly", true));
-            obj.push_back(Pair("account",       (*it).first));
-            obj.push_back(Pair("amount",        ValueFromAmount(nAmount)));
-            obj.push_back(Pair("confirmations", (nConf == std::numeric_limits<int>::max() ? 0 : nConf)));
-            ret.push_back(obj);
+            CAmount nAmount = ( *it ).second.nAmount ;
+            int nConf = ( *it ).second.nConf ;
+            UniValue obj( UniValue::VOBJ ) ;
+            if ( ( *it ).second.fIsWatchonly )
+                obj.pushKV( "involvesWatchonly", true ) ;
+            obj.pushKV( "account", ( *it ).first ) ;
+            obj.pushKV( "amount", ValueFromAmount( nAmount ) ) ;
+            obj.pushKV( "confirmations", ( nConf == std::numeric_limits< int >::max() ? 0 : nConf ) ) ;
+            ret.push_back( obj ) ;
         }
     }
 
@@ -1347,7 +1344,7 @@ static void MaybePushAddress(UniValue & entry, const CTxDestination &dest)
 {
     CDogecoinAddress addr ;
     if ( addr.Set( dest ) )
-        entry.push_back(Pair("address", addr.ToString()));
+        entry.pushKV( "address", addr.ToString() ) ;
 }
 
 void ListTransactions( const CWalletTx & wtx, const std::string & strAccount, int nMinDepth, bool fLong, UniValue & ret, const isminefilter & filter )
@@ -1367,21 +1364,21 @@ void ListTransactions( const CWalletTx & wtx, const std::string & strAccount, in
     {
         for ( const COutputEntry & s : listSent )
         {
-            UniValue entry(UniValue::VOBJ);
-            if(involvesWatchonly || (::IsMine(*pwalletMain, s.destination) & ISMINE_WATCH_ONLY))
-                entry.push_back(Pair("involvesWatchonly", true));
-            entry.push_back(Pair("account", strSentAccount));
-            MaybePushAddress(entry, s.destination);
-            entry.push_back(Pair("category", "send"));
-            entry.push_back(Pair("amount", ValueFromAmount(-s.amount)));
-            if (pwalletMain->mapAddressBook.count(s.destination))
-                entry.push_back(Pair("label", pwalletMain->mapAddressBook[s.destination].name));
-            entry.push_back(Pair("vout", s.vout));
-            entry.push_back(Pair("fee", ValueFromAmount(-nFee)));
-            if (fLong)
-                WalletTxToJSON(wtx, entry);
-            entry.push_back(Pair("abandoned", wtx.isAbandoned()));
-            ret.push_back(entry);
+            UniValue entry( UniValue::VOBJ ) ;
+            if ( involvesWatchonly || ( ::IsMine( *pwalletMain, s.destination ) & ISMINE_WATCH_ONLY ) )
+                entry.pushKV( "involvesWatchonly", true ) ;
+            entry.pushKV( "account", strSentAccount ) ;
+            MaybePushAddress( entry, s.destination ) ;
+            entry.pushKV( "category", "send" ) ;
+            entry.pushKV( "amount", ValueFromAmount( -s.amount ) ) ;
+            if ( pwalletMain->mapAddressBook.count( s.destination ) > 0 )
+                entry.pushKV( "label", pwalletMain->mapAddressBook[ s.destination ].name ) ;
+            entry.pushKV( "vout", s.vout ) ;
+            entry.pushKV( "fee", ValueFromAmount( -nFee ) ) ;
+            if ( fLong )
+                WalletTxToJSON( wtx, entry ) ;
+            entry.pushKV( "abandoned", wtx.isAbandoned() ) ;
+            ret.push_back( entry ) ;
         }
     }
 
@@ -1395,31 +1392,31 @@ void ListTransactions( const CWalletTx & wtx, const std::string & strAccount, in
                 account = pwalletMain->mapAddressBook[r.destination].name;
             if (fAllAccounts || (account == strAccount))
             {
-                UniValue entry(UniValue::VOBJ);
-                if(involvesWatchonly || (::IsMine(*pwalletMain, r.destination) & ISMINE_WATCH_ONLY))
-                    entry.push_back(Pair("involvesWatchonly", true));
-                entry.push_back(Pair("account", account));
-                MaybePushAddress(entry, r.destination);
-                if (wtx.IsCoinBase())
+                UniValue entry( UniValue::VOBJ ) ;
+                if ( involvesWatchonly || ( ::IsMine( *pwalletMain, r.destination ) & ISMINE_WATCH_ONLY ) )
+                    entry.pushKV( "involvesWatchonly", true ) ;
+                entry.pushKV( "account", account ) ;
+                MaybePushAddress( entry, r.destination ) ;
+                if ( wtx.IsCoinBase() )
                 {
-                    if (wtx.GetDepthInMainChain() < 1)
-                        entry.push_back(Pair("category", "orphan"));
-                    else if (wtx.GetBlocksToMaturity() > 0)
-                        entry.push_back(Pair("category", "immature"));
+                    if ( wtx.GetDepthInMainChain() < 1 )
+                        entry.pushKV( "category", "orphan" ) ;
+                    else if ( wtx.GetBlocksToMaturity() > 0 )
+                        entry.pushKV( "category", "immature" ) ;
                     else
-                        entry.push_back(Pair("category", "generate"));
+                        entry.pushKV( "category", "generate" ) ;
                 }
                 else
                 {
-                    entry.push_back(Pair("category", "receive"));
+                    entry.pushKV( "category", "receive" ) ;
                 }
-                entry.push_back(Pair("amount", ValueFromAmount(r.amount)));
-                if (pwalletMain->mapAddressBook.count(r.destination))
-                    entry.push_back(Pair("label", account));
-                entry.push_back(Pair("vout", r.vout));
-                if (fLong)
-                    WalletTxToJSON(wtx, entry);
-                ret.push_back(entry);
+                entry.pushKV( "amount", ValueFromAmount( r.amount ) ) ;
+                if ( pwalletMain->mapAddressBook.count( r.destination  ) )
+                    entry.pushKV( "label", account ) ;
+                entry.pushKV( "vout", r.vout ) ;
+                if ( fLong )
+                    WalletTxToJSON( wtx, entry ) ;
+                ret.push_back( entry ) ;
             }
         }
     }
@@ -1429,16 +1426,16 @@ void AcentryToJSON( const CAccountingEntry & acentry, const std::string & strAcc
 {
     bool fAllAccounts = ( strAccount == "*" ) ;
 
-    if (fAllAccounts || acentry.strAccount == strAccount)
+    if ( fAllAccounts || acentry.strAccount == strAccount )
     {
-        UniValue entry(UniValue::VOBJ);
-        entry.push_back(Pair("account", acentry.strAccount));
-        entry.push_back(Pair("category", "move"));
-        entry.push_back(Pair("time", acentry.nTime));
-        entry.push_back(Pair("amount", ValueFromAmount(acentry.nCreditDebit)));
-        entry.push_back(Pair("otheraccount", acentry.strOtherAccount));
-        entry.push_back(Pair("comment", acentry.strComment));
-        ret.push_back(entry);
+        UniValue entry( UniValue::VOBJ ) ;
+        entry.pushKV( "account", acentry.strAccount ) ;
+        entry.pushKV( "category", "move" ) ;
+        entry.pushKV( "time", acentry.nTime ) ;
+        entry.pushKV( "amount", ValueFromAmount( acentry.nCreditDebit ) ) ;
+        entry.pushKV( "otheraccount", acentry.strOtherAccount ) ;
+        entry.pushKV( "comment", acentry.strComment ) ;
+        ret.push_back( entry ) ;
     }
 }
 
@@ -1644,7 +1641,7 @@ UniValue listaccounts(const JSONRPCRequest& request)
 
     UniValue ret(UniValue::VOBJ);
     for ( const std::pair< std::string, CAmount > & accountBalance : mapAccountBalances ) {
-        ret.push_back( Pair( accountBalance.first, ValueFromAmount( accountBalance.second ) ) ) ;
+        ret.pushKV( accountBalance.first, ValueFromAmount( accountBalance.second ) ) ;
     }
     return ret;
 }
@@ -1748,11 +1745,11 @@ UniValue listsinceblock(const JSONRPCRequest& request)
     CBlockIndex *pblockLast = chainActive[chainActive.Height() + 1 - target_confirms];
     uint256 lastblock = pblockLast ? pblockLast->GetBlockSha256Hash() : uint256();
 
-    UniValue ret(UniValue::VOBJ);
-    ret.push_back(Pair("transactions", transactions));
-    ret.push_back(Pair("lastblock", lastblock.GetHex()));
+    UniValue ret( UniValue::VOBJ ) ;
+    ret.pushKV( "transactions", transactions ) ;
+    ret.pushKV( "lastblock", lastblock.GetHex() ) ;
 
-    return ret;
+    return ret ;
 }
 
 UniValue gettransaction(const JSONRPCRequest& request)
@@ -1825,18 +1822,18 @@ UniValue gettransaction(const JSONRPCRequest& request)
     CAmount nNet = nCredit - nDebit;
     CAmount nFee = (wtx.IsFromMe(filter) ? wtx.tx->GetValueOut() - nDebit : 0);
 
-    entry.push_back(Pair("amount", ValueFromAmount(nNet - nFee)));
-    if (wtx.IsFromMe(filter))
-        entry.push_back(Pair("fee", ValueFromAmount(nFee)));
+    entry.pushKV( "amount", ValueFromAmount( nNet - nFee ) ) ;
+    if ( wtx.IsFromMe( filter ) )
+        entry.pushKV( "fee", ValueFromAmount( nFee ) ) ;
 
     WalletTxToJSON(wtx, entry);
 
-    UniValue details(UniValue::VARR);
-    ListTransactions(wtx, "*", 0, false, details, filter);
-    entry.push_back(Pair("details", details));
+    UniValue details( UniValue::VARR ) ;
+    ListTransactions( wtx, "*", 0, false, details, filter ) ;
+    entry.pushKV( "details", details ) ;
 
     std::string txHex = EncodeHexTx( static_cast< CTransaction >( wtx ) ) ;
-    entry.push_back( Pair("hex", txHex) ) ;
+    entry.pushKV( "hex", txHex ) ;
 
     return entry ;
 }
@@ -2273,17 +2270,17 @@ UniValue listlockunspent(const JSONRPCRequest& request)
     std::vector< COutPoint > vOutpts ;
     pwalletMain->ListLockedCoins( vOutpts ) ;
 
-    UniValue ret(UniValue::VARR);
+    UniValue ret( UniValue::VARR ) ;
 
     for ( COutPoint & outpt : vOutpts ) {
-        UniValue o(UniValue::VOBJ);
+        UniValue o( UniValue::VOBJ ) ;
 
-        o.push_back(Pair("txid", outpt.hash.GetHex()));
-        o.push_back(Pair("vout", (int)outpt.n));
-        ret.push_back(o);
+        o.pushKV( "txid", outpt.hash.GetHex() ) ;
+        o.pushKV( "vout", (int)outpt.n ) ;
+        ret.push_back( o ) ;
     }
 
-    return ret;
+    return ret ;
 }
 
 UniValue settxfee(const JSONRPCRequest& request)
@@ -2342,21 +2339,21 @@ UniValue getwalletinfo(const JSONRPCRequest& request)
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
-    UniValue obj(UniValue::VOBJ);
-    obj.push_back(Pair("walletversion", pwalletMain->GetVersion()));
-    obj.push_back(Pair("balance",       ValueFromAmount(pwalletMain->GetBalance())));
-    obj.push_back(Pair("unconfirmed_balance", ValueFromAmount(pwalletMain->GetUnconfirmedBalance())));
-    obj.push_back(Pair("immature_balance",    ValueFromAmount(pwalletMain->GetImmatureBalance())));
-    obj.push_back(Pair("txcount",       (int)pwalletMain->mapWallet.size()));
-    obj.push_back(Pair("keypoololdest", pwalletMain->GetOldestKeyPoolTime()));
-    obj.push_back(Pair("keypoolsize",   (int)pwalletMain->GetKeyPoolSize()));
-    if (pwalletMain->IsCrypted())
-        obj.push_back(Pair("unlocked_until", nWalletUnlockTime));
-    obj.push_back(Pair("paytxfee", ValueFromAmount( payTxFee.GetFeePerKiloByte() ))) ;
-    CKeyID masterKeyID = pwalletMain->GetHDChain().masterKeyID;
-    if (!masterKeyID.IsNull())
-         obj.push_back(Pair("hdmasterkeyid", masterKeyID.GetHex()));
-    return obj;
+    UniValue obj( UniValue::VOBJ ) ;
+    obj.pushKV( "walletversion", pwalletMain->GetVersion() ) ;
+    obj.pushKV( "balance", ValueFromAmount( pwalletMain->GetBalance() ) ) ;
+    obj.pushKV( "unconfirmed_balance", ValueFromAmount( pwalletMain->GetUnconfirmedBalance() ) ) ;
+    obj.pushKV( "immature_balance", ValueFromAmount( pwalletMain->GetImmatureBalance() ) ) ;
+    obj.pushKV( "txcount", (int)pwalletMain->mapWallet.size() ) ;
+    obj.pushKV( "keypoololdest", pwalletMain->GetOldestKeyPoolTime() ) ;
+    obj.pushKV( "keypoolsize", (int)pwalletMain->GetKeyPoolSize() ) ;
+    if ( pwalletMain->IsCrypted() )
+        obj.pushKV( "unlocked_until", nWalletUnlockTime ) ;
+    obj.pushKV( "paytxfee", ValueFromAmount( payTxFee.GetFeePerKiloByte() ) ) ;
+    CKeyID masterKeyID = pwalletMain->GetHDChain().masterKeyID ;
+    if ( ! masterKeyID.IsNull() )
+         obj.pushKV( "hdmasterkeyid", masterKeyID.GetHex() ) ;
+    return obj ;
 }
 
 UniValue resendwallettransactions(const JSONRPCRequest& request)
@@ -2408,9 +2405,9 @@ UniValue listunspent(const JSONRPCRequest& request)
             "4. include_unsafe (bool, optional, default=true) Include outputs that are not safe to spend\n"
             "                  because they come from unconfirmed untrusted transactions or unconfirmed\n"
             "                  replacement transactions (cases where we are less sure that a conflicting\n"
-            "                  transaction won't be mined).\n"
+            "                  transaction won't be mined)\n"
             "\nResult\n"
-            "[                   (array of json object)\n"
+            "[                   (array of json objects)\n"
             "  {\n"
             "    \"txid\" : \"txid\",          (string) the transaction id \n"
             "    \"vout\" : n,               (numeric) the vout value\n"
@@ -2482,30 +2479,30 @@ UniValue listunspent(const JSONRPCRequest& request)
         if (setAddress.size() && (!fValidAddress || !setAddress.count(address)))
             continue;
 
-        UniValue entry(UniValue::VOBJ);
-        entry.push_back( Pair("txid", out.tx->GetTxHash().GetHex()) ) ;
-        entry.push_back(Pair("vout", out.i));
+        UniValue entry( UniValue::VOBJ ) ;
+        entry.pushKV( "txid", out.tx->GetTxHash().GetHex() ) ;
+        entry.pushKV( "vout", out.i ) ;
 
-        if (fValidAddress) {
-            entry.push_back( Pair( "address", CDogecoinAddress( address ).ToString() ) ) ;
+        if ( fValidAddress ) {
+            entry.pushKV( "address", CDogecoinAddress( address ).ToString() ) ;
 
-            if (pwalletMain->mapAddressBook.count(address))
-                entry.push_back(Pair("account", pwalletMain->mapAddressBook[address].name));
+            if ( pwalletMain->mapAddressBook.count( address ) )
+                entry.pushKV( "account", pwalletMain->mapAddressBook[ address ].name ) ;
 
-            if (scriptPubKey.IsPayToScriptHash()) {
-                const CScriptID& hash = boost::get<CScriptID>(address);
-                CScript redeemScript;
-                if (pwalletMain->GetCScript(hash, redeemScript))
-                    entry.push_back(Pair("redeemScript", HexStr(redeemScript.begin(), redeemScript.end())));
+            if ( scriptPubKey.IsPayToScriptHash() ) {
+                const CScriptID & hash = boost::get< CScriptID >( address ) ;
+                CScript redeemScript ;
+                if ( pwalletMain->GetCScript( hash, redeemScript ) )
+                    entry.pushKV( "redeemScript", HexStr( redeemScript.begin(), redeemScript.end() ) ) ;
             }
         }
 
-        entry.push_back(Pair("scriptPubKey", HexStr(scriptPubKey.begin(), scriptPubKey.end())));
-        entry.push_back(Pair("amount", ValueFromAmount(out.tx->tx->vout[out.i].nValue)));
-        entry.push_back(Pair("confirmations", out.nDepth));
-        entry.push_back(Pair("spendable", out.fSpendable));
-        entry.push_back(Pair("solvable", out.fSolvable));
-        results.push_back(entry);
+        entry.pushKV( "scriptPubKey", HexStr( scriptPubKey.begin(), scriptPubKey.end() ) ) ;
+        entry.pushKV( "amount", ValueFromAmount( out.tx->tx->vout[ out.i ].nValue ) ) ;
+        entry.pushKV( "confirmations", out.nDepth ) ;
+        entry.pushKV( "spendable", out.fSpendable ) ;
+        entry.pushKV( "solvable", out.fSolvable ) ;
+        results.push_back( entry ) ;
     }
 
     return results;
@@ -2658,12 +2655,11 @@ UniValue fundrawtransaction(const JSONRPCRequest& request)
     if(!pwalletMain->FundTransaction(tx, nFeeOut, overrideEstimatedFeerate, feeRate, changePosition, strFailReason, includeWatching, lockUnspents, setSubtractFeeFromOutputs, reserveChangeKey, changeAddress))
         throw JSONRPCError(RPC_WALLET_ERROR, strFailReason);
 
-    UniValue result(UniValue::VOBJ);
-    result.push_back(Pair("hex", EncodeHexTx(tx)));
-    result.push_back(Pair("changepos", changePosition));
-    result.push_back(Pair("fee", ValueFromAmount(nFeeOut)));
-
-    return result;
+    UniValue result( UniValue::VOBJ ) ;
+    result.pushKV( "hex", EncodeHexTx( tx ) ) ;
+    result.pushKV( "changepos", changePosition ) ;
+    result.pushKV( "fee", ValueFromAmount( nFeeOut ) ) ;
+    return result ;
 }
 
 // Calculate the size of the transaction assuming all signatures are max size

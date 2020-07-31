@@ -523,10 +523,6 @@
         <translation>Ngjit nga memorja e sistemit</translation>
     </message>
     <message>
-        <source>Pay To:</source>
-        <translation>Paguaj drejt:</translation>
-    </message>
-    <message>
         <source>Enter a label for this address to add it to your address book</source>
         <translation>Krijoni një etiketë për këtë adresë që t'ja shtoni librit të adresave</translation>
     </message>

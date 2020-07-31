@@ -27,37 +27,37 @@
 
 UniValue JSONRPCRequestObj( const std::string & strMethod, const UniValue & params, const UniValue & id )
 {
-    UniValue request(UniValue::VOBJ);
-    request.push_back(Pair("method", strMethod));
-    request.push_back(Pair("params", params));
-    request.push_back(Pair("id", id));
-    return request;
+    UniValue request( UniValue::VOBJ ) ;
+    request.pushKV( "method", strMethod ) ;
+    request.pushKV( "params", params ) ;
+    request.pushKV( "id", id ) ;
+    return request ;
 }
 
 UniValue JSONRPCReplyObj( const UniValue & result, const UniValue & error, const UniValue & id )
 {
-    UniValue reply(UniValue::VOBJ);
-    if (!error.isNull())
-        reply.push_back(Pair("result", NullUniValue));
+    UniValue reply( UniValue::VOBJ ) ;
+    if ( ! error.isNull() )
+        reply.pushKV( "result", NullUniValue ) ;
     else
-        reply.push_back(Pair("result", result));
-    reply.push_back(Pair("error", error));
-    reply.push_back(Pair("id", id));
-    return reply;
+        reply.pushKV( "result", result ) ;
+    reply.pushKV( "error", error ) ;
+    reply.pushKV( "id", id ) ;
+    return reply ;
 }
 
 std::string JSONRPCReply( const UniValue & result, const UniValue & error, const UniValue & id )
 {
-    UniValue reply = JSONRPCReplyObj(result, error, id);
-    return reply.write() + "\n";
+    UniValue reply = JSONRPCReplyObj( result, error, id ) ;
+    return reply.write() + "\n" ;
 }
 
 UniValue JSONRPCError( int code, const std::string & message )
 {
-    UniValue error(UniValue::VOBJ);
-    error.push_back(Pair("code", code));
-    error.push_back(Pair("message", message));
-    return error;
+    UniValue error( UniValue::VOBJ ) ;
+    error.pushKV( "code", code ) ;
+    error.pushKV( "message", message ) ;
+    return error ;
 }
 
 /** Username used when cookie authentication is in use (arbitrary, only for

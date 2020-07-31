@@ -24,8 +24,6 @@
 #include <memory>
 #include <unordered_map>
 
-using namespace RPCServer ;
-
 static std::atomic< bool > fRPCRunning( false ) ;
 static bool fRPCInWarmup = true ;
 static std::string rpcWarmupStatus( "RPC server started" ) ;

@@ -704,10 +704,6 @@ Var vänlig och försök igen.</translation>
         <translation>Använd en anpassad datakatalog:</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation>Fel: Den angivna datakatalogen "%1" kan inte skapas.</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Fel</translation>
     </message>
@@ -973,10 +969,6 @@ Var vänlig och försök igen.</translation>
         <translation>ingen</translation>
     </message>
     <message>
-        <source>Confirm options reset</source>
-        <translation>Bekräfta att alternativen ska återställs</translation>
-    </message>
-    <message>
         <source>Client restart required to activate changes.</source>
         <translation>Klientomstart är nödvändig för att aktivera ändringarna.</translation>
     </message>
@@ -1236,10 +1228,6 @@ Var vänlig och försök igen.</translation>
     <message>
         <source>Direction</source>
         <translation>Riktning</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>Version</translation>
     </message>
     <message>
         <source>Starting Block</source>
@@ -1646,12 +1634,8 @@ Var vänlig och försök igen.</translation>
         <translation>Ett meddelande som bifogades dogecoin: URI, vilket lagras med transaktionen. Meddelandet kommer inte att sändas över nätverket</translation>
     </message>
     <message>
-        <source>Pay To:</source>
-        <translation>Betala Till:</translation>
-    </message>
-    <message>
         <source>Memo:</source>
-        <translation>PM:</translation>
+        <translation>Memo:</translation>
     </message>
     </context>
 <context>
@@ -1888,10 +1872,6 @@ Var vänlig och försök igen.</translation>
     <message>
         <source>If &lt;category&gt; is not supplied or if &lt;category&gt; = 1, output all debugging information.</source>
         <translation>Om &lt;kategori&gt; inte anges eller om &lt;category&gt; = 1, visa all avlusningsinformation.</translation>
-    </message>
-    <message>
-        <source>Prune configured below the minimum of %d MiB.  Please use a higher number.</source>
-        <translation>Beskärning konfigurerad under miniminivån %d MiB. Vänligen använd ett högre värde.</translation>
     </message>
     <message>
         <source>Prune: last wallet synchronisation goes beyond pruned data. You need to -reindex (download the whole blockchain again in case of pruned node)</source>

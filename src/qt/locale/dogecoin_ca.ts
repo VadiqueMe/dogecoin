@@ -767,10 +767,6 @@
         <translation>Utilitza un directori de dades personalitzat:</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation>Error: el directori de dades «%1» especificat no pot ser creat.</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Error</translation>
     </message>
@@ -1034,10 +1030,6 @@
     <message>
         <source>none</source>
         <translation>cap</translation>
-    </message>
-    <message>
-        <source>Confirm options reset</source>
-        <translation>Confirmeu el reestabliment de les opcions</translation>
     </message>
     <message>
         <source>Client restart required to activate changes.</source>
@@ -1355,10 +1347,6 @@
     <message>
         <source>Direction</source>
         <translation>Direcció</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>Versió</translation>
     </message>
     <message>
         <source>Starting Block</source>
@@ -1847,10 +1835,6 @@
     <message>
         <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
         <translation>Un missatge que s'ha adjuntat al dogecoin: URI que s'emmagatzemarà amb la transacció. El missatge no s'enviarà a través de la xarxa</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Paga a:</translation>
     </message>
     <message>
         <source>Memo:</source>
@@ -2443,10 +2427,6 @@
     <message>
         <source>If &lt;category&gt; is not supplied or if &lt;category&gt; = 1, output all debugging information.</source>
         <translation>Si no es proporciona &lt;category&gt; o si &lt;category&gt; = 1, treu a la sortida tota la informació de depuració.</translation>
-    </message>
-    <message>
-        <source>Prune configured below the minimum of %d MiB.  Please use a higher number.</source>
-        <translation>Poda configurada per sota el mínim de %d MiB. Utilitzeu un nombre superior.</translation>
     </message>
     <message>
         <source>Prune: last wallet synchronisation goes beyond pruned data. You need to -reindex (download the whole blockchain again in case of pruned node)</source>

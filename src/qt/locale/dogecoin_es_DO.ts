@@ -502,10 +502,6 @@
         <translation>ninguno</translation>
     </message>
     <message>
-        <source>Confirm options reset</source>
-        <translation>Confirme el restablecimiento de las opciones</translation>
-    </message>
-    <message>
         <source>Client restart required to activate changes.</source>
         <translation>Reinicio del cliente para activar cambios.</translation>
     </message>
@@ -792,7 +788,7 @@
     </message>
     <message>
         <source>Pay To:</source>
-        <translation>Pagar a:</translation>
+        <translation>Paga a:</translation>
     </message>
     <message>
         <source>Label:</source>
@@ -817,10 +813,6 @@
     <message>
         <source>Enter a label for this address to add it to the list of used addresses</source>
         <translation>Introduce una etiqueta para esta dirección para añadirla a la lista de direcciones utilizadas</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Paga a:</translation>
     </message>
     <message>
         <source>Memo:</source>

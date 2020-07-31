@@ -775,10 +775,6 @@
         <translation>任意のデータ ディレクトリを使用:</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation>エラー: 指定のデータディレクトリ "%1" を作成できません。</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>エラー</translation>
     </message>
@@ -1062,10 +1058,6 @@
     <message>
         <source>none</source>
         <translation>なし</translation>
-    </message>
-    <message>
-        <source>Confirm options reset</source>
-        <translation>オプションのリセットの確認</translation>
     </message>
     <message>
         <source>Client restart required to activate changes.</source>
@@ -1431,10 +1423,6 @@
     <message>
         <source>Direction</source>
         <translation>方向</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>バージョン</translation>
     </message>
     <message>
         <source>Starting Block</source>
@@ -1914,15 +1902,15 @@
     <name>SendCoinsEntry</name>
     <message>
         <source>Amount:</source>
-        <translation>金額:</translation>
+        <translation>金額：</translation>
     </message>
     <message>
         <source>Pay To:</source>
-        <translation>送り先:</translation>
+        <translation>支払先：</translation>
     </message>
     <message>
         <source>Label:</source>
-        <translation>ラベル:</translation>
+        <translation>ラベル：</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -1963,10 +1951,6 @@
     <message>
         <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
         <translation>dogecoin: URIに添付されていたメッセージです。これはとしてトランザクションとともに保存されます。このメッセージはネットワークを通して送信されるわけではありません</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>支払先:</translation>
     </message>
     <message>
         <source>Memo:</source>
@@ -2634,10 +2618,6 @@
     <message>
         <source>If &lt;category&gt; is not supplied or if &lt;category&gt; = 1, output all debugging information.</source>
         <translation>&lt;category&gt; が与えられなかった場合や &lt;category&gt; = 1 の場合には、すべてのデバッグ情報が出力されます。</translation>
-    </message>
-    <message>
-        <source>Prune configured below the minimum of %d MiB.  Please use a higher number.</source>
-        <translation>剪定が最小値の %d MiB以下に設定されています。もっと大きな値を使用してください。</translation>
     </message>
     <message>
         <source>Prune: last wallet synchronisation goes beyond pruned data. You need to -reindex (download the whole blockchain again in case of pruned node)</source>

@@ -763,10 +763,6 @@
         <translation>使用自定义的数据目录：</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation>错误：无法创建 指定的数据目录 "%1" </translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>错误</translation>
     </message>
@@ -1046,10 +1042,6 @@
     <message>
         <source>none</source>
         <translation>无</translation>
-    </message>
-    <message>
-        <source>Confirm options reset</source>
-        <translation>确认恢复缺省设置</translation>
     </message>
     <message>
         <source>Client restart required to activate changes.</source>
@@ -1416,10 +1408,6 @@
     <message>
         <source>Direction</source>
         <translation>方向</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>版本</translation>
     </message>
     <message>
         <source>Starting Block</source>
@@ -1950,12 +1938,8 @@
         <translation>dogecoin: URI 附带的备注信息，将会和交易一起存储。该消息不会通过狗狗币网络传输</translation>
     </message>
     <message>
-        <source>Pay To:</source>
-        <translation>支付给:</translation>
-    </message>
-    <message>
         <source>Memo:</source>
-        <translation>便条：</translation>
+        <translation>便条</translation>
     </message>
     <message>
         <source>Enter a label for this address to add it to your address book</source>
@@ -2595,10 +2579,6 @@
     <message>
         <source>If &lt;category&gt; is not supplied or if &lt;category&gt; = 1, output all debugging information.</source>
         <translation>如果&lt;category&gt;未提供或&lt;category&gt; = 1，输出所有调试信息。</translation>
-    </message>
-    <message>
-        <source>Prune configured below the minimum of %d MiB.  Please use a higher number.</source>
-        <translation>修剪值被设置为低于最小值%d MiB，请使用更大的数值。</translation>
     </message>
     <message>
         <source>Prune: last wallet synchronisation goes beyond pruned data. You need to -reindex (download the whole blockchain again in case of pruned node)</source>

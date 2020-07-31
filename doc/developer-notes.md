@@ -395,19 +395,6 @@ TRY_LOCK(cs_vNodes, lockNodes);
 }
 ```
 
-Source code organization
---------------------------
-
-- Implementation code should go into the `.cpp` file and not the `.h`, unless necessary due to template usage or
-  when performance due to inlining is critical
-
-  - *Rationale*: Shorter and simpler header files are easier to read, and reduce compile time
-
-- Don't import anything into the global namespace (`using namespace ...`). Use
-  fully specified types such as `std::string`.
-
-  - *Rationale*: Avoids symbol conflicts
-
 GUI
 -----
 

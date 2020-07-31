@@ -430,10 +430,6 @@
         <source>Message:</source>
         <translation>Зурвас:</translation>
     </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Тѳлѳх хаяг:</translation>
-    </message>
     </context>
 <context>
     <name>SendConfirmationDialog</name>

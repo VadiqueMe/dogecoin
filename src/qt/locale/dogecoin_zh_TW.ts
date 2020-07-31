@@ -775,10 +775,6 @@
         <translation>使用自訂的資料目錄:</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation>錯誤: 無法新增指定的資料目錄: %1</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>錯誤</translation>
     </message>
@@ -1062,10 +1058,6 @@
     <message>
         <source>none</source>
         <translation>無</translation>
-    </message>
-    <message>
-        <source>Confirm options reset</source>
-        <translation>確認重設選項</translation>
     </message>
     <message>
         <source>Client restart required to activate changes.</source>
@@ -1431,10 +1423,6 @@
     <message>
         <source>Direction</source>
         <translation>方向</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>版本</translation>
     </message>
     <message>
         <source>Starting Block</source>
@@ -1963,10 +1951,6 @@
     <message>
         <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
         <translation>附加在付款協議的資源識別碼(dogecoin: URI)中的訊息，會和交易內容一起存起來。這個訊息不會送到網路上</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>付給:</translation>
     </message>
     <message>
         <source>Memo:</source>
@@ -2643,10 +2627,6 @@
     <message>
         <source>If &lt;category&gt; is not supplied or if &lt;category&gt; = 1, output all debugging information.</source>
         <translation>如果沒有提供 &lt;category&gt; 或是值為 1 就會輸出所有的除錯資訊。</translation>
-    </message>
-    <message>
-        <source>Prune configured below the minimum of %d MiB.  Please use a higher number.</source>
-        <translation>設定的修剪值小於最小需求的 %d 百萬位元組(MiB)。請指定大一點的數字。</translation>
     </message>
     <message>
         <source>Prune: last wallet synchronisation goes beyond pruned data. You need to -reindex (download the whole blockchain again in case of pruned node)</source>

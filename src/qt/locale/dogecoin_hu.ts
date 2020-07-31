@@ -431,10 +431,6 @@
         <translation>Saját adatkönyvtár használata:</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation>Hiba: A megadott "%1" adatkönyvtár nem hozható létre. </translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Hiba</translation>
     </message>
@@ -608,10 +604,6 @@
         <translation>semmi</translation>
     </message>
     <message>
-        <source>Confirm options reset</source>
-        <translation>Beállítások törlésének jóváhagyása.</translation>
-    </message>
-    <message>
         <source>Client restart required to activate changes.</source>
         <translation>A változtatások aktiválásahoz újra kell indítani a klienst.</translation>
     </message>
@@ -779,10 +771,6 @@
     <message>
         <source>Select a peer to view detailed information</source>
         <translation>Peer kijelölése a részletes információkért</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>Verzió</translation>
     </message>
     <message>
         <source>User Agent</source>
@@ -1039,10 +1027,6 @@
     <message>
         <source>Message:</source>
         <translation>Üzenet:</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Címzett:</translation>
     </message>
     <message>
         <source>Memo:</source>

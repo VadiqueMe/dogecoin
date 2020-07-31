@@ -538,10 +538,6 @@
         <source>Message:</source>
         <translation>Mensayi:</translation>
     </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Ibayad kang:</translation>
-    </message>
     </context>
 <context>
     <name>SendConfirmationDialog</name>

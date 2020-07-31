@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -175,7 +175,6 @@ BOOST_AUTO_TEST_CASE(CreateNewBlock_validity)
     entry.nHeight = 11;
 
     LOCK(cs_main);
-    fCheckpointsEnabled = false;
 
     // We can't make transactions until we have inputs
     // Therefore, make some blocks :)
@@ -504,12 +503,6 @@ BOOST_AUTO_TEST_CASE(CreateNewBlock_validity)
     chainActive.Tip()->nHeight--;
     SetMockTime(0);
     mempool.clear();
-
-    // Dogecoin: Package selection doesn't work that way because our fees are fundamentally
-    //           different. Need to rationalise in a later release.
-    // TestPackageSelection(chainparams, scriptPubKey, txFirst);
-
-    fCheckpointsEnabled = true;
 }
 
 BOOST_AUTO_TEST_SUITE_END()

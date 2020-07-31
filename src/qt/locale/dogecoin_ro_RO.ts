@@ -459,10 +459,6 @@
         <translation>Foloseşte un dosar de date personalizat:</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation>Eroare: Directorul datelor specificate "%1" nu poate fi creat.</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Eroare</translation>
     </message>
@@ -672,10 +668,6 @@
         <translation>nimic</translation>
     </message>
     <message>
-        <source>Confirm options reset</source>
-        <translation>Confirmă resetarea opţiunilor</translation>
-    </message>
-    <message>
         <source>Client restart required to activate changes.</source>
         <translation>Este necesară repornirea clientului pentru a activa schimbările.</translation>
     </message>
@@ -883,10 +875,6 @@
     <message>
         <source>Direction</source>
         <translation>Direcţie</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>Versiune</translation>
     </message>
     <message>
         <source>Starting Block</source>
@@ -1195,10 +1183,6 @@
     <message>
         <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
         <translation>Un mesaj a fost ataşat la dogecoin: URI care va fi stocat cu tranzacţia. Acest mesaj nu va fi trimis către reţeaua</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Plăteşte către:</translation>
     </message>
     <message>
         <source>Memo:</source>

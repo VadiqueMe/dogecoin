@@ -329,10 +329,6 @@
         <source>Paste address from clipboard</source>
         <translation>Pegar la dirección desde el portapapeles</translation>
     </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Pagar A:</translation>
-    </message>
     </context>
 <context>
     <name>SendConfirmationDialog</name>

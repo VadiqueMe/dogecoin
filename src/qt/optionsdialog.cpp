@@ -72,12 +72,12 @@ OptionsDialog::OptionsDialog( QWidget * parent, bool enableWallet, bool showUrls
     /* Display elements init */
     QDir translations(":translations");
 
-    ui->autoStartup->setToolTip( ui->autoStartup->toolTip().arg( tr(PACKAGE_NAME) ) ) ;
-    ui->autoStartup->setText( ui->autoStartup->text().arg( tr(PACKAGE_NAME) ) ) ;
+    ui->autoStartup->setToolTip( ui->autoStartup->toolTip().arg( PACKAGE_NAME ) ) ;
+    ui->autoStartup->setText( ui->autoStartup->text().arg( PACKAGE_NAME ) ) ;
 
-    ui->lang->setToolTip(ui->lang->toolTip().arg(tr(PACKAGE_NAME)));
-    ui->lang->addItem(QString("(") + tr("default") + QString(")"), QVariant(""));
-    Q_FOREACH(const QString &langStr, translations.entryList())
+    ui->lang->setToolTip( ui->lang->toolTip().arg( PACKAGE_NAME ) ) ;
+    ui->lang->addItem( QString("(") + tr("default") + QString(")"), QVariant("") ) ;
+    for ( const QString & langStr : translations.entryList() )
     {
         QLocale locale(langStr);
 
@@ -221,15 +221,16 @@ void OptionsDialog::on_resetButton_clicked()
 {
     if ( optionsModel != nullptr )
     {
-        // confirmation dialog
-        QMessageBox::StandardButton btnRetVal = QMessageBox::question(this, tr("Confirm options reset"),
-            tr("Client restart required to activate changes.") + "<br><br>" + tr("Client will be shut down. Do you want to proceed?"),
-            QMessageBox::Yes | QMessageBox::Cancel, QMessageBox::Cancel);
+        QMessageBox::StandardButton btnRetVal = QMessageBox::question( this, /* title */ "",
+            tr("Client restart required to activate changes.")
+                + "<br><br>" +
+                tr("Client will be shut down. Do you want to proceed?"),
+            QMessageBox::Yes | QMessageBox::Cancel, QMessageBox::Cancel ) ;
 
-        if(btnRetVal == QMessageBox::Cancel)
-            return;
+        if ( btnRetVal == QMessageBox::Cancel )
+            return ;
 
-        /* reset all options and close GUI */
+        // reset all options and quit
         optionsModel->Reset() ;
         QApplication::quit() ;
     }

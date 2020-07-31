@@ -83,9 +83,7 @@ uint256 CTransaction::ComputeTxHash() const
 
 uint256 CTransaction::GetWitnessHash() const
 {
-    if ( ! HasWitness() ) {
-        return GetTxHash() ;
-    }
+    if ( ! HasWitness() ) return GetTxHash() ;
     return SerializeHash( *this, SER_GETHASH, 0 ) ;
 }
 
@@ -110,7 +108,7 @@ CAmount CTransaction::GetValueOut() const
     return nValueOut ;
 }
 
-double CTransaction::ComputePriority(double dPriorityInputs, unsigned int nTxSize) const
+double CTransaction::ComputePriority( double dPriorityInputs, unsigned int nTxSize ) const
 {
     nTxSize = CalculateModifiedSize(nTxSize);
     if (nTxSize == 0) return 0.0;
@@ -144,12 +142,13 @@ unsigned int CTransaction::GetFullSize() const
 std::string CTransaction::ToString() const
 {
     std::string str ;
-    str += strprintf( "CTransaction(hash=%s, version=%d, vin.size=%u, vout.size=%u, nLockTime=%u)\n",
+    str += strprintf( "CTransaction(hash=%s, version=%d, vin.size=%u, vout.size=%u, nLockTime=%u, weight=%i)\n",
         GetTxHash().ToString(),
         nVersion,
         vin.size(),
         vout.size(),
-        nLockTime ) ;
+        nLockTime,
+        GetTransactionWeight( *this ) ) ;
     for ( unsigned int i = 0 ; i < vin.size() ; i ++ )
         str += strprintf( "    vin[%u]: ", i ) + vin[ i ].ToString() + "\n" ;
     for ( unsigned int i = 0 ; i < vin.size() ; i ++ )

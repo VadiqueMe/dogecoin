@@ -436,7 +436,7 @@
     </message>
     <message>
         <source>Pay To:</source>
-        <translation>Pagar a:</translation>
+        <translation>Pago para:</translation>
     </message>
     <message>
         <source>Label:</source>
@@ -453,10 +453,6 @@
     <message>
         <source>Message:</source>
         <translation>Mensaje:</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Pago para:</translation>
     </message>
     </context>
 <context>

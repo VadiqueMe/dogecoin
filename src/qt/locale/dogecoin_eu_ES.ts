@@ -496,11 +496,7 @@
     </message>
     <message>
         <source>Message:</source>
-        <translation>Mezua</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Ordaindu honi:</translation>
+        <translation>Mezua:</translation>
     </message>
     <message>
         <source>Enter a label for this address to add it to your address book</source>

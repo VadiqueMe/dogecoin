@@ -775,10 +775,6 @@
         <translation>Použij tento adresář pro data:</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation>Chyba: Nejde vytvořit požadovaný adresář pro data „%1“.</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
@@ -1062,10 +1058,6 @@
     <message>
         <source>none</source>
         <translation>žádné</translation>
-    </message>
-    <message>
-        <source>Confirm options reset</source>
-        <translation>Potvrzení obnovení nastavení</translation>
     </message>
     <message>
         <source>Client restart required to activate changes.</source>
@@ -1431,10 +1423,6 @@
     <message>
         <source>Direction</source>
         <translation>Směr</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>Verze</translation>
     </message>
     <message>
         <source>Starting Block</source>
@@ -1963,10 +1951,6 @@
     <message>
         <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
         <translation>Zpráva, která byla připojena k dogecoin: URI a která se ti pro přehled uloží k transakci. Tahle zpráva se neposílá s platbou po síti</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Komu:</translation>
     </message>
     <message>
         <source>Memo:</source>
@@ -2634,10 +2618,6 @@
     <message>
         <source>If &lt;category&gt; is not supplied or if &lt;category&gt; = 1, output all debugging information.</source>
         <translation>Pokud není &lt;category&gt; zadána nebo je &lt;category&gt; = 1, bude tisknout veškeré ladicí informace.</translation>
-    </message>
-    <message>
-        <source>Prune configured below the minimum of %d MiB.  Please use a higher number.</source>
-        <translation>Prořezávání je nastaveno pod minimum %d MiB.  Použij, prosím, nějaké vyšší číslo.</translation>
     </message>
     <message>
         <source>Prune: last wallet synchronisation goes beyond pruned data. You need to -reindex (download the whole blockchain again in case of pruned node)</source>

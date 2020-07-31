@@ -767,10 +767,6 @@
         <translation>Použiť vlastný dátový adresár:</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation>Chyba: Zadaný priečinok pre dáta "%1" nemôže byť vytvorený.</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
@@ -1054,10 +1050,6 @@
     <message>
         <source>none</source>
         <translation>žiadne</translation>
-    </message>
-    <message>
-        <source>Confirm options reset</source>
-        <translation>Potvrdiť obnovenie možností</translation>
     </message>
     <message>
         <source>Client restart required to activate changes.</source>
@@ -1411,10 +1403,6 @@
     <message>
         <source>Direction</source>
         <translation>Smer</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>Verzia</translation>
     </message>
     <message>
         <source>Starting Block</source>
@@ -1899,7 +1887,7 @@
     </message>
     <message>
         <source>Pay To:</source>
-        <translation>Zaplatiť:</translation>
+        <translation>Platba pre:</translation>
     </message>
     <message>
         <source>Label:</source>
@@ -1944,10 +1932,6 @@
     <message>
         <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
         <translation>Správa ktorá bola pripojená k dogecoin: URI a ktorá bude uložená s transakcou. Táto správa nebude poslaná cez sieť</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Platba pre:</translation>
     </message>
     <message>
         <source>Memo:</source>
@@ -2563,10 +2547,6 @@
     <message>
         <source>If &lt;category&gt; is not supplied or if &lt;category&gt; = 1, output all debugging information.</source>
         <translation>Pokiaľ &lt;category&gt; nie je nastavená, alebo &lt;category&gt; = 1, vypíš všetky informácie pre ladenie.</translation>
-    </message>
-    <message>
-        <source>Prune configured below the minimum of %d MiB.  Please use a higher number.</source>
-        <translation>Redukcia nastavená pod minimálnu hodnotu %d MiB. Prosím použite vyššiu hodnotu.</translation>
     </message>
     <message>
         <source>Error: A fatal internal error occurred, see debug log for details</source>

@@ -775,10 +775,6 @@
         <translation>Özel bir veri klasörü kullan:</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation>Hata: belirtilen "%1" veri klasörü oluşturulamaz.</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Hata</translation>
     </message>
@@ -1062,10 +1058,6 @@
     <message>
         <source>none</source>
         <translation>boş</translation>
-    </message>
-    <message>
-        <source>Confirm options reset</source>
-        <translation>Seçeneklerin sıfırlanmasını teyit et</translation>
     </message>
     <message>
         <source>Client restart required to activate changes.</source>
@@ -1431,10 +1423,6 @@
     <message>
         <source>Direction</source>
         <translation>Yön</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>Sürüm</translation>
     </message>
     <message>
         <source>Starting Block</source>
@@ -1959,10 +1947,6 @@
     <message>
         <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
         <translation>dogecoin: URI 'siyle iliştirilmiş işlemle birlikte depolanacak bir ileti. Bu mesaj ağı üzerinden gönderilmeyecektir</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Şu adrese öde:</translation>
     </message>
     <message>
         <source>Memo:</source>
@@ -2630,10 +2614,6 @@
     <message>
         <source>If &lt;category&gt; is not supplied or if &lt;category&gt; = 1, output all debugging information.</source>
         <translation>Eğer &lt;kategori&gt; belirtilmemişse ya da &lt;kategori&gt; = 1 ise, tüm hata ayıklama verilerini çıktı al.</translation>
-    </message>
-    <message>
-        <source>Prune configured below the minimum of %d MiB.  Please use a higher number.</source>
-        <translation>Budama, en düşük değer olan %d MiB'den düşük olarak ayarlanmıştır. Lütfen daha yüksek bir sayı kullanınız.</translation>
     </message>
     <message>
         <source>Prune: last wallet synchronisation goes beyond pruned data. You need to -reindex (download the whole blockchain again in case of pruned node)</source>

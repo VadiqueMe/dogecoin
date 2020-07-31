@@ -377,10 +377,6 @@
         <translation>Бошқа маълумотлар директориясида фойдаланинг:</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation>Хато: кўрсатилган "%1" маълумотлар директориясини яратиб бўлмайди.</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Хатолик</translation>
     </message>
@@ -516,10 +512,6 @@
     <message>
         <source>none</source>
         <translation>йўқ</translation>
-    </message>
-    <message>
-        <source>Confirm options reset</source>
-        <translation>Тасдиқлаш танловларини рад қилиш</translation>
     </message>
     <message>
         <source>Client restart required to activate changes.</source>
@@ -681,10 +673,6 @@
     <message>
         <source>Direction</source>
         <translation>Йўналиш</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>Версияси</translation>
     </message>
     <message>
         <source>User Agent</source>
@@ -932,11 +920,7 @@
     </message>
     <message>
         <source>Message:</source>
-        <translation>Хабар</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Тўлов олувчи:</translation>
+        <translation>Хабар:</translation>
     </message>
     </context>
 <context>

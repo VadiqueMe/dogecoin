@@ -632,10 +632,6 @@
         <translation>neniu</translation>
     </message>
     <message>
-        <source>Confirm options reset</source>
-        <translation>Konfirmi reŝargo de agordoj</translation>
-    </message>
-    <message>
         <source>The supplied proxy address is invalid.</source>
         <translation>La prokurila adreso estas malvalida.</translation>
     </message>
@@ -771,10 +767,6 @@
     <message>
         <source>Banned peers</source>
         <translation>Malpermesita samuloj.</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>Versio</translation>
     </message>
     <message>
         <source>User Agent</source>
@@ -970,7 +962,7 @@
     </message>
     <message>
         <source>Pay To:</source>
-        <translation>Ricevonto:</translation>
+        <translation>Pagi Al:</translation>
     </message>
     <message>
         <source>Label:</source>
@@ -995,10 +987,6 @@
     <message>
         <source>Enter a label for this address to add it to the list of used addresses</source>
         <translation>Tajpu etikedon por tiu ĉi adreso por aldoni ĝin al la listo de uzitaj adresoj</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Pagi Al:</translation>
     </message>
     <message>
         <source>Memo:</source>

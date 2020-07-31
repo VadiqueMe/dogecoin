@@ -703,10 +703,6 @@
         <translation>استخدام دليل بيانات مخصص:</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation>خطأ: لا يمكن تكوين دليل بيانات مخصص ل %1</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>خطأ</translation>
     </message>
@@ -822,10 +818,6 @@
     <message>
         <source>none</source>
         <translation>لا شيء</translation>
-    </message>
-    <message>
-        <source>Confirm options reset</source>
-        <translation>تأكيد استعادة الخيارات</translation>
     </message>
     <message>
         <source>The supplied proxy address is invalid.</source>
@@ -1271,10 +1263,6 @@
     <message>
         <source>Message:</source>
         <translation>الرسائل</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>ادفع &amp;الى :</translation>
     </message>
     <message>
         <source>Enter a label for this address to add it to your address book</source>

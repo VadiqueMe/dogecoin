@@ -772,10 +772,6 @@
         <translation>puudub</translation>
     </message>
     <message>
-        <source>Confirm options reset</source>
-        <translation>Kinnita valikute algseadistamine</translation>
-    </message>
-    <message>
         <source>The supplied proxy address is invalid.</source>
         <translation>Sisestatud kehtetu proxy aadress.</translation>
     </message>
@@ -927,10 +923,6 @@
     <message>
         <source>Direction</source>
         <translation>Suund</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>Versioon</translation>
     </message>
     <message>
         <source>Synced Headers</source>
@@ -1215,10 +1207,6 @@
     <message>
         <source>Message:</source>
         <translation>Sõnum:</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Maksa :</translation>
     </message>
     </context>
 <context>

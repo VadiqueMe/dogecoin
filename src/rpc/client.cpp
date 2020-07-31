@@ -13,15 +13,13 @@
 
 #include <univalue.h>
 
-using namespace std;
-
 class CRPCConvertParam
 {
 public:
-    std::string methodName; //!< method whose params want conversion
-    int paramIdx;           //!< 0-based idx of param to convert
-    std::string paramName;  //!< parameter name
-};
+    std::string methodName ; // method whose params want conversion
+    int paramIdx ;           // 0-based idx of param to convert
+    std::string paramName ;  // name of parameter
+} ;
 
 /**
  * Specifiy a (method, idx, name) here if the argument is a non-string RPC
@@ -163,18 +161,18 @@ CRPCConvertTable::CRPCConvertTable()
 static CRPCConvertTable rpcCvtTable;
 
 /** Non-RFC4627 JSON parser, accepts internal values (such as numbers, true, false, null)
- * as well as objects and arrays.
+ *  as well as objects and arrays
  */
-UniValue ParseNonRFCJSONValue(const std::string& strVal)
+UniValue ParseNonRFCJSONValue( const std::string & strVal )
 {
-    UniValue jVal;
-    if (!jVal.read(std::string("[")+strVal+std::string("]")) ||
-        !jVal.isArray() || jVal.size()!=1)
-        throw runtime_error(string("Error parsing JSON:")+strVal);
-    return jVal[0];
+    UniValue jVal ;
+    if ( ! jVal.read( std::string( "[" ) + strVal + std::string( "]" ) ) ||
+            ! jVal.isArray() || jVal.size() != 1 )
+        throw std::runtime_error( std::string( "Error parsing JSON:" ) + strVal ) ;
+    return jVal[ 0 ] ;
 }
 
-UniValue RPCConvertValues(const std::string &strMethod, const std::vector<std::string> &strParams)
+UniValue RPCConvertValues( const std::string & strMethod, const std::vector< std::string > & strParams )
 {
     UniValue params(UniValue::VARR);
 
@@ -193,11 +191,11 @@ UniValue RPCConvertValues(const std::string &strMethod, const std::vector<std::s
     return params;
 }
 
-UniValue RPCConvertNamedValues(const std::string &strMethod, const std::vector<std::string> &strParams)
+UniValue RPCConvertNamedValues( const std::string & strMethod, const std::vector< std::string > & strParams )
 {
     UniValue params(UniValue::VOBJ);
 
-    for (const std::string &s: strParams) {
+    for ( const std::string & s : strParams ) {
         size_t pos = s.find("=");
         if (pos == std::string::npos) {
             throw(std::runtime_error("No '=' in named argument '"+s+"', this needs to be present for every argument (even if it is empty)"));

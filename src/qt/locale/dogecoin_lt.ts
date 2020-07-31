@@ -450,10 +450,6 @@
         <translation>niekas</translation>
     </message>
     <message>
-        <source>Confirm options reset</source>
-        <translation>Patvirtinti nustatymų atstatymą</translation>
-    </message>
-    <message>
         <source>Client restart required to activate changes.</source>
         <translation>Kliento perkrovimas reikalingas nustatymų aktyvavimui</translation>
     </message>
@@ -561,10 +557,6 @@
     <message>
         <source>Direction</source>
         <translation>Kryptis</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>Versija</translation>
     </message>
     <message>
         <source>Last block time</source>
@@ -705,10 +697,6 @@
     <message>
         <source>Message:</source>
         <translation>Žinutė:</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Mokėti gavėjui:</translation>
     </message>
     </context>
 <context>

@@ -459,10 +459,6 @@
         <translation>Uporabi to podatkovno mapo:</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation>Napaka: Ni mogoče ustvariti mape "%1".</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Napaka</translation>
     </message>
@@ -664,10 +660,6 @@
         <translation>nič</translation>
     </message>
     <message>
-        <source>Confirm options reset</source>
-        <translation>Potrditev ponastavitve</translation>
-    </message>
-    <message>
         <source>Client restart required to activate changes.</source>
         <translation>Za uveljavitev sprememb je potreben ponoven zagon programa.</translation>
     </message>
@@ -859,10 +851,6 @@
     <message>
         <source>Direction</source>
         <translation>Smer povezave</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>Različica</translation>
     </message>
     <message>
         <source>User Agent</source>
@@ -1122,7 +1110,7 @@
     </message>
     <message>
         <source>Pay To:</source>
-        <translation>Prejemnik plačila:</translation>
+        <translation>Prejemnik:</translation>
     </message>
     <message>
         <source>Label:</source>
@@ -1167,10 +1155,6 @@
     <message>
         <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
         <translation>Sporočilo, ki ste ga pripeli na dogecoin: URI. Shranjeno bo skupaj s podatki o transakciji. Sporočilo ne bo poslano preko omrežja</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Prejemnik:</translation>
     </message>
     <message>
         <source>Memo:</source>

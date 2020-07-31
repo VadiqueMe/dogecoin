@@ -775,10 +775,6 @@
         <translation>커스텀 데이터 폴더 사용:</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation>오류: "%1" 지정한 데이터 디렉토리를 생성할 수 없습니다.</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>오류</translation>
     </message>
@@ -1062,10 +1058,6 @@
     <message>
         <source>none</source>
         <translation>없음</translation>
-    </message>
-    <message>
-        <source>Confirm options reset</source>
-        <translation>옵션 초기화를 확인</translation>
     </message>
     <message>
         <source>Client restart required to activate changes.</source>
@@ -1431,10 +1423,6 @@
     <message>
         <source>Direction</source>
         <translation>방향</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>버전</translation>
     </message>
     <message>
         <source>Starting Block</source>
@@ -1963,10 +1951,6 @@
     <message>
         <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
         <translation>도지코인 URI 에 첨부된 메시지는 거래기록과 함께 보관될 것입니다. 이 메시지는 네트워크를 통해 보내지 않을 것입니다</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>송금할 대상:</translation>
     </message>
     <message>
         <source>Memo:</source>
@@ -2642,10 +2626,6 @@
     <message>
         <source>If &lt;category&gt; is not supplied or if &lt;category&gt; = 1, output all debugging information.</source>
         <translation>&lt;category&gt;가 제공되지 않거나 &lt;category&gt; = 1 인 경우, 모든 디버깅 정보를 출력</translation>
-    </message>
-    <message>
-        <source>Prune configured below the minimum of %d MiB.  Please use a higher number.</source>
-        <translation>블록 축소가 최소치의 %d MiB 밑으로 설정되어 있습니다. 더 높은 값을 사용해 보세요.</translation>
     </message>
     <message>
         <source>Prune: last wallet synchronisation goes beyond pruned data. You need to -reindex (download the whole blockchain again in case of pruned node)</source>

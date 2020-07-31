@@ -739,10 +739,6 @@
         <translation>Usa una cartella dati personalizzata:</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation>Errore: La cartella dati "%1" specificata non può essere creata.</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Errore</translation>
     </message>
@@ -1002,10 +998,6 @@
     <message>
         <source>none</source>
         <translation>nessuno</translation>
-    </message>
-    <message>
-        <source>Confirm options reset</source>
-        <translation>Conferma ripristino opzioni</translation>
     </message>
     <message>
         <source>Client restart required to activate changes.</source>
@@ -1347,10 +1339,6 @@
     <message>
         <source>Direction</source>
         <translation>Direzione</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>Versione</translation>
     </message>
     <message>
         <source>Starting Block</source>
@@ -1766,7 +1754,7 @@
     </message>
     <message>
         <source>Pay To:</source>
-        <translation>Paga a:</translation>
+        <translation>Pagare a:</translation>
     </message>
     <message>
         <source>Label:</source>
@@ -1811,10 +1799,6 @@
     <message>
         <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
         <translation>Messaggio incluso nel dogecoin: URI e che sarà memorizzato con la transazione. Questo messaggio non sarà inviato attraverso la rete</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Pagare a:</translation>
     </message>
     <message>
         <source>Memo:</source>
@@ -2383,10 +2367,6 @@
     <message>
         <source>If &lt;category&gt; is not supplied or if &lt;category&gt; = 1, output all debugging information.</source>
         <translation>Se &lt;category&gt; non è specificato oppure se &lt;category&gt; = 1, mostra tutte le informazioni di debug.</translation>
-    </message>
-    <message>
-        <source>Prune configured below the minimum of %d MiB.  Please use a higher number.</source>
-        <translation>La modalità prune è configurata al di sotto del minimo di %d MB. Si prega di utilizzare un valore più elevato.</translation>
     </message>
     <message>
         <source>Prune: last wallet synchronisation goes beyond pruned data. You need to -reindex (download the whole blockchain again in case of pruned node)</source>

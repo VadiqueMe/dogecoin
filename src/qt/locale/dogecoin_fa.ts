@@ -868,10 +868,6 @@
         <translation>هیچکدام</translation>
     </message>
     <message>
-        <source>Confirm options reset</source>
-        <translation>تأییدِ بازنشانی گزینه‌ها</translation>
-    </message>
-    <message>
         <source>This change would require a client restart.</source>
         <translation>برای این تغییرات بازنشانی مشتری ضروری است</translation>
     </message>
@@ -1023,10 +1019,6 @@
     <message>
         <source>Sent</source>
         <translation>ارسال شده</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>نسخه</translation>
     </message>
     <message>
         <source>Services</source>
@@ -1310,15 +1302,11 @@
     </message>
     <message>
         <source>Message:</source>
-        <translation>پیام:</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>پرداخت به:</translation>
+        <translation>پیام</translation>
     </message>
     <message>
         <source>Memo:</source>
-        <translation>یادداشت:</translation>
+        <translation>یادداشت</translation>
     </message>
     </context>
 <context>

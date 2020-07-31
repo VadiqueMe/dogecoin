@@ -775,10 +775,6 @@
         <translation>Brug tilpasset mappe for data:</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation>Fejl: Angivet datamappe “%1” kan ikke oprettes.</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Fejl</translation>
     </message>
@@ -1062,10 +1058,6 @@
     <message>
         <source>none</source>
         <translation>ingen</translation>
-    </message>
-    <message>
-        <source>Confirm options reset</source>
-        <translation>Bekræft nulstilling af indstillinger</translation>
     </message>
     <message>
         <source>Client restart required to activate changes.</source>
@@ -1431,10 +1423,6 @@
     <message>
         <source>Direction</source>
         <translation>Retning</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>Version</translation>
     </message>
     <message>
         <source>Starting Block</source>
@@ -1963,10 +1951,6 @@
     <message>
         <source>A message that was attached to the dogecoin: URI which will be stored with the transaction. This message will not be sent over the network</source>
         <translation>En besked, som blev føjet til “dogecoin:”-URI'en, som vil gemmes med transaktionen. Denne besked vil ikke blive sendt over netværket</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Betal til:</translation>
     </message>
     <message>
         <source>Memo:</source>
@@ -2630,10 +2614,6 @@
     <message>
         <source>If &lt;category&gt; is not supplied or if &lt;category&gt; = 1, output all debugging information.</source>
         <translation>Hvis &lt;category&gt; ikke angives eller hvis &lt;category&gt; = 1, udskriv al fejlretningsinformation.</translation>
-    </message>
-    <message>
-        <source>Prune configured below the minimum of %d MiB.  Please use a higher number.</source>
-        <translation>Beskæring er sat under minimumsgrænsen på %d MiB. Brug venligst et større tal.</translation>
     </message>
     <message>
         <source>Prune: last wallet synchronisation goes beyond pruned data. You need to -reindex (download the whole blockchain again in case of pruned node)</source>

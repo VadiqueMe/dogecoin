@@ -507,10 +507,6 @@
         <translation>Προσαρμογή του φακέλου δεδομένων: </translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation>Σφάλμα: Ο καθορισμένος φάκελος δεδομένων "%1" δεν μπορεί να δημιουργηθεί.</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Σφάλμα</translation>
     </message>
@@ -708,10 +704,6 @@
         <translation>κανένα</translation>
     </message>
     <message>
-        <source>Confirm options reset</source>
-        <translation>Επιβεβαιώση των επιλογων επαναφοράς </translation>
-    </message>
-    <message>
         <source>Client restart required to activate changes.</source>
         <translation>Χρειάζεται επανεκκίνηση του προγράμματος για να ενεργοποιηθούν οι αλλαγές.</translation>
     </message>
@@ -834,7 +826,7 @@
     <name>RPCConsole</name>
     <message>
         <source>Version</source>
-        <translation>Εκδοχή</translation>
+        <translation>Έκδοση</translation>
     </message>
     <message>
         <source>Information</source>
@@ -887,10 +879,6 @@
     <message>
         <source>Select a peer to view detailed information</source>
         <translation>Επιλέξτε ένα χρήστη για να δείτε αναλυτικές πληροφορίες</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>Έκδοση</translation>
     </message>
     <message>
         <source>Services</source>
@@ -1187,10 +1175,6 @@
     <message>
         <source>Enter a label for this address to add it to the list of used addresses</source>
         <translation>Εισάγεται μία ετικέτα για αυτή την διεύθυνση για να προστεθεί στη λίστα με τις χρησιμοποιημένες διευθύνσεις</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Πληρωμή σε:</translation>
     </message>
     <message>
         <source>Memo:</source>

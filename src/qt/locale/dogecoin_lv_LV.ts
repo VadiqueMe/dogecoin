@@ -518,10 +518,6 @@
         <translation>neviena</translation>
     </message>
     <message>
-        <source>Confirm options reset</source>
-        <translation>Apstiprināt iestatījumu atiestatīšanu</translation>
-    </message>
-    <message>
         <source>The supplied proxy address is invalid.</source>
         <translation>Norādītā starpniekservera adrese nav derīga.</translation>
     </message>
@@ -829,10 +825,6 @@
     <message>
         <source>Message:</source>
         <translation>Ziņojums:</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Maksāt:</translation>
     </message>
     <message>
         <source>Memo:</source>

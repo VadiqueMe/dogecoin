@@ -72,29 +72,29 @@ UniValue getinfo(const JSONRPCRequest& request)
     GetProxy(NET_IPV4, proxy);
 
     UniValue obj(UniValue::VOBJ);
-    obj.push_back( Pair( "version", PEER_VERSION ) ) ;
-    obj.push_back( Pair( "protocolversion", PROTOCOL_VERSION ) ) ;
+    obj.pushKV( "version", PEER_VERSION ) ;
+    obj.pushKV( "protocolversion", PROTOCOL_VERSION ) ;
 #ifdef ENABLE_WALLET
     if (pwalletMain) {
-        obj.push_back(Pair("walletversion", pwalletMain->GetVersion()));
-        obj.push_back(Pair("balance",       ValueFromAmount(pwalletMain->GetBalance())));
+        obj.pushKV( "walletversion", pwalletMain->GetVersion() ) ;
+        obj.pushKV( "balance", ValueFromAmount( pwalletMain->GetBalance() ) ) ;
     }
 #endif
-    obj.push_back(Pair("blocks",        (int)chainActive.Height()));
-    obj.push_back(Pair("timeoffset",    GetTimeOffset()));
+    obj.pushKV( "blocks", (int)chainActive.Height() ) ;
+    obj.pushKV( "timeoffset", GetTimeOffset() ) ;
     if ( g_connman != nullptr )
-        obj.push_back( Pair( "connections", (int)g_connman->CountConnectedNodes() ) ) ;
-    obj.push_back( Pair( "proxy", ( proxy.IsValid() ? proxy.proxy.ToStringAddrPort() : std::string() ) ) ) ;
+        obj.pushKV( "connections", (int)g_connman->CountConnectedNodes() ) ;
+    obj.pushKV( "proxy", ( proxy.IsValid() ? proxy.proxy.ToStringAddrPort() : std::string() ) ) ;
 #ifdef ENABLE_WALLET
     if (pwalletMain) {
-        obj.push_back(Pair("keypoololdest", pwalletMain->GetOldestKeyPoolTime()));
-        obj.push_back(Pair("keypoolsize",   (int)pwalletMain->GetKeyPoolSize()));
+        obj.pushKV( "keypoololdest", pwalletMain->GetOldestKeyPoolTime() ) ;
+        obj.pushKV( "keypoolsize", (int)pwalletMain->GetKeyPoolSize() ) ;
     }
     if (pwalletMain && pwalletMain->IsCrypted())
-        obj.push_back(Pair("unlocked_until", nWalletUnlockTime));
-    obj.push_back(Pair("paytxfee", ValueFromAmount( payTxFee.GetFeePerKiloByte() ))) ;
+        obj.pushKV( "unlocked_until", nWalletUnlockTime ) ;
+    obj.pushKV( "paytxfee", ValueFromAmount( payTxFee.GetFeePerKiloByte() ) ) ;
 #endif
-    obj.push_back(Pair("errors",        GetWarnings("statusbar")));
+    obj.pushKV( "errors", GetWarnings( "statusbar" ) ) ;
     return obj;
 }
 
@@ -102,38 +102,40 @@ UniValue getinfo(const JSONRPCRequest& request)
 class DescribeAddressVisitor : public boost::static_visitor<UniValue>
 {
 public:
-    UniValue operator()(const CNoDestination &dest) const { return UniValue(UniValue::VOBJ); }
+    UniValue operator()( const CNoDestination & dest ) const {  return UniValue( UniValue::VOBJ ) ;  }
 
-    UniValue operator()(const CKeyID &keyID) const {
-        UniValue obj(UniValue::VOBJ);
-        CPubKey vchPubKey;
-        obj.push_back(Pair("isscript", false));
-        if (pwalletMain && pwalletMain->GetPubKey(keyID, vchPubKey)) {
-            obj.push_back(Pair("pubkey", HexStr(vchPubKey)));
-            obj.push_back(Pair("iscompressed", vchPubKey.IsCompressed()));
+    UniValue operator()( const CKeyID & keyID ) const
+    {
+        UniValue obj( UniValue::VOBJ ) ;
+        CPubKey vchPubKey ;
+        obj.pushKV( "isscript", false ) ;
+        if ( pwalletMain && pwalletMain->GetPubKey( keyID, vchPubKey ) ) {
+            obj.pushKV( "pubkey", HexStr( vchPubKey ) ) ;
+            obj.pushKV( "iscompressed", vchPubKey.IsCompressed() ) ;
         }
-        return obj;
+        return obj ;
     }
 
-    UniValue operator()(const CScriptID &scriptID) const {
-        UniValue obj(UniValue::VOBJ);
-        CScript subscript;
-        obj.push_back(Pair("isscript", true));
+    UniValue operator()( const CScriptID & scriptID ) const
+    {
+        UniValue obj( UniValue::VOBJ ) ;
+        CScript subscript ;
+        obj.pushKV( "isscript", true ) ;
         if (pwalletMain && pwalletMain->GetCScript(scriptID, subscript)) {
             std::vector<CTxDestination> addresses;
             txnouttype whichType;
             int nRequired;
             ExtractDestinations(subscript, whichType, addresses, nRequired);
-            obj.push_back(Pair("script", GetTxnOutputType(whichType)));
-            obj.push_back(Pair("hex", HexStr(subscript.begin(), subscript.end())));
-            UniValue a(UniValue::VARR);
+            obj.pushKV( "script", GetTxnOutputType( whichType ) ) ;
+            obj.pushKV( "hex", HexStr( subscript.begin(), subscript.end() ) ) ;
+            UniValue a( UniValue::VARR ) ;
             for ( const CTxDestination & addr : addresses )
                 a.push_back( CDogecoinAddress( addr ).ToString() ) ;
-            obj.push_back(Pair("addresses", a));
-            if (whichType == TX_MULTISIG)
-                obj.push_back(Pair("sigsrequired", nRequired));
+            obj.pushKV( "addresses", a ) ;
+            if ( whichType == TX_MULTISIG )
+                obj.pushKV( "sigsrequired", nRequired ) ;
         }
-        return obj;
+        return obj ;
     }
 };
 #endif
@@ -175,25 +177,25 @@ UniValue validateaddress(const JSONRPCRequest& request)
     CDogecoinAddress address( request.params[ 0 ].get_str() ) ;
     bool isValid = address.IsValid() ;
 
-    UniValue ret(UniValue::VOBJ);
-    ret.push_back(Pair("isvalid", isValid));
-    if (isValid)
+    UniValue ret( UniValue::VOBJ ) ;
+    ret.pushKV( "isvalid", isValid ) ;
+    if ( isValid )
     {
         CTxDestination dest = address.Get() ;
         std::string currentAddress = address.ToString() ;
-        ret.push_back( Pair( "address", currentAddress ) ) ;
+        ret.pushKV( "address", currentAddress ) ;
 
         CScript scriptPubKey = GetScriptForDestination(dest);
-        ret.push_back(Pair("scriptPubKey", HexStr(scriptPubKey.begin(), scriptPubKey.end())));
+        ret.pushKV( "scriptPubKey", HexStr( scriptPubKey.begin(), scriptPubKey.end() ) ) ;
 
 #ifdef ENABLE_WALLET
-        isminetype mine = pwalletMain ? IsMine(*pwalletMain, dest) : ISMINE_NO;
-        ret.push_back(Pair("ismine", (mine & ISMINE_SPENDABLE) ? true : false));
-        ret.push_back(Pair("iswatchonly", (mine & ISMINE_WATCH_ONLY) ? true: false));
+        isminetype mine = pwalletMain ? IsMine( *pwalletMain, dest ) : ISMINE_NO ;
+        ret.pushKV( "ismine", ( mine & ISMINE_SPENDABLE ) ? true : false ) ;
+        ret.pushKV( "iswatchonly", ( mine & ISMINE_WATCH_ONLY ) ? true: false ) ;
         UniValue detail = boost::apply_visitor(DescribeAddressVisitor(), dest);
         ret.pushKVs(detail);
         if (pwalletMain && pwalletMain->mapAddressBook.count(dest))
-            ret.push_back(Pair("account", pwalletMain->mapAddressBook[dest].name));
+            ret.pushKV( "account", pwalletMain->mapAddressBook[ dest ].name ) ;
         CKeyID keyID;
         if (pwalletMain) {
             const auto& meta = pwalletMain->mapKeyMetadata;
@@ -202,10 +204,10 @@ UniValue validateaddress(const JSONRPCRequest& request)
                 it = meta.find(CScriptID(scriptPubKey));
             }
             if (it != meta.end()) {
-                ret.push_back(Pair("timestamp", it->second.nCreateTime));
-                if (!it->second.hdKeypath.empty()) {
-                    ret.push_back(Pair("hdkeypath", it->second.hdKeypath));
-                    ret.push_back(Pair("hdmasterkeyid", it->second.hdMasterKeyID.GetHex()));
+                ret.pushKV( "timestamp", it->second.nCreateTime ) ;
+                if ( ! it->second.hdKeypath.empty() ) {
+                    ret.pushKV( "hdkeypath", it->second.hdKeypath ) ;
+                    ret.pushKV( "hdmasterkeyid", it->second.hdMasterKeyID.GetHex() ) ;
                 }
             }
         }
@@ -215,7 +217,7 @@ UniValue validateaddress(const JSONRPCRequest& request)
 }
 
 /**
- * Used by addmultisigaddress / createmultisig:
+ * Used by addmultisigaddress / createmultisig
  */
 CScript _createmultisig_redeemScript(const UniValue& params)
 {
@@ -316,8 +318,8 @@ UniValue createmultisig(const JSONRPCRequest& request)
     CDogecoinAddress address( innerID ) ;
 
     UniValue result(UniValue::VOBJ);
-    result.push_back(Pair("address", address.ToString()));
-    result.push_back(Pair("redeemScript", HexStr(inner.begin(), inner.end())));
+    result.pushKV( "address", address.ToString() ) ;
+    result.pushKV( "redeemScript", HexStr( inner.begin(), inner.end() ) ) ;
 
     return result;
 }
@@ -447,14 +449,14 @@ UniValue setmocktime(const JSONRPCRequest& request)
 static UniValue RPCLockedMemoryInfo()
 {
     LockedPool::Stats stats = LockedPoolManager::Instance().stats();
-    UniValue obj(UniValue::VOBJ);
-    obj.push_back(Pair("used", uint64_t(stats.used)));
-    obj.push_back(Pair("free", uint64_t(stats.free)));
-    obj.push_back(Pair("total", uint64_t(stats.total)));
-    obj.push_back(Pair("locked", uint64_t(stats.locked)));
-    obj.push_back(Pair("chunks_used", uint64_t(stats.chunks_used)));
-    obj.push_back(Pair("chunks_free", uint64_t(stats.chunks_free)));
-    return obj;
+    UniValue obj( UniValue::VOBJ ) ;
+    obj.pushKV( "used", uint64_t( stats.used ) ) ;
+    obj.pushKV( "free", uint64_t( stats.free ) ) ;
+    obj.pushKV( "total", uint64_t( stats.total ) ) ;
+    obj.pushKV( "locked", uint64_t( stats.locked ) ) ;
+    obj.pushKV( "chunks_used", uint64_t( stats.chunks_used ) ) ;
+    obj.pushKV( "chunks_free", uint64_t( stats.chunks_free ) ) ;
+    return obj ;
 }
 
 UniValue getmemoryinfo(const JSONRPCRequest& request)
@@ -481,9 +483,9 @@ UniValue getmemoryinfo(const JSONRPCRequest& request)
             + HelpExampleCli("getmemoryinfo", "")
             + HelpExampleRpc("getmemoryinfo", "")
         );
-    UniValue obj(UniValue::VOBJ);
-    obj.push_back(Pair("locked", RPCLockedMemoryInfo()));
-    return obj;
+    UniValue obj( UniValue::VOBJ ) ;
+    obj.pushKV( "locked", RPCLockedMemoryInfo() ) ;
+    return obj ;
 }
 
 UniValue echo(const JSONRPCRequest& request)

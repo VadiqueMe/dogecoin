@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -12,6 +13,7 @@
 #include "guiutil.h"
 
 #include "util.h"
+#include "validation.h"
 
 #include <boost/filesystem.hpp>
 
@@ -24,20 +26,20 @@
 static const uint64_t GB_BYTES = 1000000000LL;
 /* Minimum free space (in GB) needed for data directory */
 static const uint64_t BLOCK_CHAIN_SIZE = 40 ;
-/* Minimum free space (in GB) needed for data directory when pruned; Does not include prune target */
+/* Minimum free space (in GB) needed for data directory when pruned */
 static const uint64_t CHAIN_STATE_SIZE = 2;
 /* Total required space (in GB) depending on user choice (prune, not prune) */
 static uint64_t requiredSpace;
 
-/* Check free space asynchronously to prevent hanging the UI thread.
+/* Check free space asynchronously to prevent hanging the UI thread
 
    Up to one request to check a path is in flight to this thread; when the check()
    function runs, the current path is requested from the associated Intro object.
-   The reply is sent back through a signal.
+   The reply is sent back through a signal
 
    This ensures that no queue of checking requests is built up while the user is
    still entering the path, and that always the most recently entered path is checked as
-   soon as the thread becomes available.
+   soon as the thread becomes available
 */
 class FreespaceChecker : public QObject
 {
@@ -70,32 +72,28 @@ FreespaceChecker::FreespaceChecker(Intro *_intro)
 
 void FreespaceChecker::check()
 {
-    namespace fs = boost::filesystem;
-    QString dataDirStr = intro->getPathToCheck();
-    fs::path dataDir = GUIUtil::qstringToBoostPath(dataDirStr);
-    uint64_t freeBytesAvailable = 0;
+    QString dataDirStr = intro->getPathToCheck() ;
+    boost::filesystem::path dataDir = GUIUtil::qstringToBoostPath( dataDirStr ) ;
+    uint64_t freeBytesAvailable = 0 ;
     int replyStatus = ST_OK;
     QString replyMessage = tr("A new data directory will be created.");
 
-    /* Find first parent that exists, so that fs::space does not fail */
-    fs::path parentDir = dataDir;
-    fs::path parentDirOld = fs::path();
-    while(parentDir.has_parent_path() && !fs::exists(parentDir))
+    /* Find first parent that exists, so that boost::filesystem::space does not fail */
+    boost::filesystem::path parentDir = dataDir ;
+    boost::filesystem::path parentDirOld = boost::filesystem::path() ;
+    while( parentDir.has_parent_path() && ! boost::filesystem::exists( parentDir ) )
     {
-        parentDir = parentDir.parent_path();
-
-        /* Check if we make any progress, break if not to prevent an infinite loop here */
-        if (parentDirOld == parentDir)
-            break;
-
-        parentDirOld = parentDir;
+        parentDir = parentDir.parent_path() ;
+        // break if no progress to prevent an infinite loop here
+        if ( parentDirOld == parentDir ) break ;
+        parentDirOld = parentDir ;
     }
 
     try {
-        freeBytesAvailable = fs::space(parentDir).available;
-        if(fs::exists(dataDir))
+        freeBytesAvailable = boost::filesystem::space( parentDir ).available ;
+        if ( boost::filesystem::exists( dataDir ) )
         {
-            if(fs::is_directory(dataDir))
+            if ( boost::filesystem::is_directory( dataDir ) )
             {
                 QString separator = "<code>" + QDir::toNativeSeparators("/") + tr("name") + "</code>";
                 replyStatus = ST_OK;
@@ -105,7 +103,7 @@ void FreespaceChecker::check()
                 replyMessage = tr("Path already exists, and is not a directory.");
             }
         }
-    } catch (const fs::filesystem_error&)
+    } catch ( const boost::filesystem::filesystem_error & )
     {
         /* Parent directory does not exist or is not accessible */
         replyStatus = ST_ERROR;
@@ -121,20 +119,21 @@ Intro::Intro(QWidget *parent) :
     thread(0),
     signalled(false)
 {
-    ui->setupUi(this);
-    ui->welcomeLabel->setText(ui->welcomeLabel->text().arg(tr(PACKAGE_NAME)));
-    ui->storageLabel->setText(ui->storageLabel->text().arg(tr(PACKAGE_NAME)));
-    uint64_t pruneTarget = std::max<int64_t>(0, GetArg("-prune", 0));
-    requiredSpace = BLOCK_CHAIN_SIZE;
-    if (pruneTarget) {
-        uint64_t prunedGBs = std::ceil(pruneTarget * 1024 * 1024.0 / GB_BYTES);
-        if (prunedGBs <= requiredSpace) {
-            requiredSpace = prunedGBs;
-        }
+    ui->setupUi( this ) ;
+    ui->welcomeLabel->setText( ui->welcomeLabel->text().arg( PACKAGE_NAME ) ) ;
+    ui->storageLabel->setText( ui->storageLabel->text().arg( PACKAGE_NAME ) ) ;
+    uint64_t pruneArg = std::max< int64_t >( 0, GetArg( "-prune", 0 ) ) ;
+    requiredSpace = BLOCK_CHAIN_SIZE ;
+    if ( pruneArg > 1 ) {
+        if ( pruneArg < MIN_DISK_SPACE_FOR_BLOCK_FILES / 1024 / 1024 )
+            pruneArg = MIN_DISK_SPACE_FOR_BLOCK_FILES / 1024 / 1024 ;
+        uint64_t prunedGBs = std::ceil( pruneArg * 1024 * 1024.0 / GB_BYTES ) ;
+        if ( prunedGBs <= requiredSpace )
+            requiredSpace = prunedGBs ;
     }
-    requiredSpace += CHAIN_STATE_SIZE;
-    ui->sizeWarningLabel->setText(ui->sizeWarningLabel->text().arg(tr(PACKAGE_NAME)).arg(requiredSpace));
-    startThread();
+    requiredSpace += CHAIN_STATE_SIZE ;
+    ui->sizeWarningLabel->setText( ui->sizeWarningLabel->text().arg( PACKAGE_NAME ).arg( requiredSpace ) ) ;
+    startThread() ;
 }
 
 Intro::~Intro()
@@ -172,7 +171,6 @@ QString Intro::getDefaultDataDirectory()
 
 bool Intro::pickDataDirectory()
 {
-    namespace fs = boost::filesystem;
     QSettings settings;
     /* If data directory provided on command line, no need to look at settings
        or show a picking dialog */
@@ -183,27 +181,26 @@ bool Intro::pickDataDirectory()
     /* 2) Allow QSettings to override default dir */
     dataDir = settings.value("strDataDir", dataDir).toString();
 
-    if(!fs::exists(GUIUtil::qstringToBoostPath(dataDir)) || GetBoolArg("-choosedatadir", DEFAULT_CHOOSE_DATADIR) || settings.value("fReset", false).toBool() || GetBoolArg("-resetguisettings", false))
+    if ( ! boost::filesystem::exists( GUIUtil::qstringToBoostPath( dataDir ) ) ||
+            GetBoolArg( "-choosedatadir", DEFAULT_CHOOSE_DATADIR ) ||
+                settings.value( "fReset", false ).toBool() ||
+                    GetBoolArg( "-resetguisettings", false ) )
     {
         /* If current default data directory does not exist, let the user choose one */
         Intro intro;
         intro.setDataDirectory(dataDir);
         intro.setWindowIcon(QIcon(":icons/dogecoin"));
 
-        while(true)
+        while ( true )
         {
-            if(!intro.exec())
-            {
-                /* Cancel clicked */
-                return false;
-            }
-            dataDir = intro.getDataDirectory();
+            if ( ! intro.exec() ) return false ; // cancel clicked
+
+            dataDir = intro.getDataDirectory() ;
             try {
                 TryToCreateDirectory( GUIUtil::qstringToBoostPath( dataDir ) ) ;
                 break ;
-            } catch ( const fs::filesystem_error & ) {
-                QMessageBox::critical( 0, PACKAGE_NAME,
-                    tr( "Error: Specified data directory \"%1\" cannot be created." ).arg( dataDir ) ) ;
+            } catch ( const boost::filesystem::filesystem_error & ) {
+                QMessageBox::critical( 0, PACKAGE_NAME, "Oops, can't create directory \"" + dataDir + "\" for data" ) ;
                 /* fall through, back to choosing screen */
             }
         }
@@ -215,12 +212,12 @@ bool Intro::pickDataDirectory()
      * override -datadir in the dogecoin.conf file in the default data directory
      * (to be consistent with dogecoind behavior)
      */
-    if(dataDir != getDefaultDataDirectory())
-        SoftSetArg("-datadir", GUIUtil::qstringToBoostPath(dataDir).string()); // use OS locale for path setting
-    return true;
+    if ( dataDir != getDefaultDataDirectory() )
+        SoftSetArg( "-datadir", GUIUtil::qstringToBoostPath( dataDir ).string() ) ; // use OS locale for path setting
+    return true ;
 }
 
-void Intro::setStatus(int status, const QString &message, quint64 bytesAvailable)
+void Intro::setStatus( int status, const QString & message, quint64 bytesAvailable )
 {
     switch(status)
     {

@@ -374,10 +374,6 @@
         <translation>praedefinitum</translation>
     </message>
     <message>
-        <source>Confirm options reset</source>
-        <translation>Confirma optionum reconstituere</translation>
-    </message>
-    <message>
         <source>The supplied proxy address is invalid.</source>
         <translation>Inscriptio vicarii tradita non valida est.</translation>
     </message>
@@ -557,10 +553,6 @@
     <message>
         <source>Message:</source>
         <translation>Nuntius:</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Pensa Ad:</translation>
     </message>
     </context>
 <context>

@@ -511,10 +511,6 @@
         <translation>Використовувати свій каталог даних:</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation>Помилка: неможливо створити обраний каталог даних «%1».</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Помилка</translation>
     </message>
@@ -740,10 +736,6 @@
         <translation>відсутні</translation>
     </message>
     <message>
-        <source>Confirm options reset</source>
-        <translation>Підтвердження скидання параметрів</translation>
-    </message>
-    <message>
         <source>Client restart required to activate changes.</source>
         <translation>Для застосування змін необхідно перезапустити клієнта.</translation>
     </message>
@@ -955,10 +947,6 @@
     <message>
         <source>Direction</source>
         <translation>Напрямок</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>Версія</translation>
     </message>
     <message>
         <source>Starting Block</source>
@@ -1313,10 +1301,6 @@
         <translation>Повідомлення, що було додане до dogecoin: URI та буде збережено разом з транзакцією. Це повідомлення не буде відправлено в мережу</translation>
     </message>
     <message>
-        <source>Pay To:</source>
-        <translation>Отримувач:</translation>
-    </message>
-    <message>
         <source>Memo:</source>
         <translation>Нотатка:</translation>
     </message>
@@ -1483,10 +1467,6 @@
     <message>
         <source>If &lt;category&gt; is not supplied or if &lt;category&gt; = 1, output all debugging information.</source>
         <translation>Якщо &lt;category&gt; не задано, або ж якщо &lt;category&gt; = 1, виводить всю налагоджувальну інформацію.</translation>
-    </message>
-    <message>
-        <source>Prune configured below the minimum of %d MiB.  Please use a higher number.</source>
-        <translation>Встановлений розмір ланцюжка блоків є замалим (меншим за %d МіБ). Будь ласка, виберіть більше число.</translation>
     </message>
     <message>
         <source>Prune: last wallet synchronisation goes beyond pruned data. You need to -reindex (download the whole blockchain again in case of pruned node)</source>

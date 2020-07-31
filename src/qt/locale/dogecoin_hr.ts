@@ -669,10 +669,6 @@
         <translation>Smjer</translation>
     </message>
     <message>
-        <source>Version</source>
-        <translation>Verzija</translation>
-    </message>
-    <message>
         <source>Connection Time</source>
         <translation>Trajanje veze</translation>
     </message>
@@ -806,7 +802,7 @@
     </message>
     <message>
         <source>Pay To:</source>
-        <translation>Primatelj plaćanja:</translation>
+        <translation>Primatelj:</translation>
     </message>
     <message>
         <source>Label:</source>
@@ -819,10 +815,6 @@
     <message>
         <source>Message:</source>
         <translation>Poruka:</translation>
-    </message>
-    <message>
-        <source>Pay To:</source>
-        <translation>Primatelj plaćanja:</translation>
     </message>
     </context>
 <context>

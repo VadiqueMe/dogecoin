@@ -446,10 +446,6 @@
         <translation>fără</translation>
     </message>
     <message>
-        <source>Confirm options reset</source>
-        <translation>Confirmă resetarea opțiunilor</translation>
-    </message>
-    <message>
         <source>Client restart required to activate changes.</source>
         <translation>Repornirea clientului este necesară pentru ca schimbările să fie activate</translation>
     </message>
@@ -537,10 +533,6 @@
     <message>
         <source>Direction</source>
         <translation>Direcția</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>Versiune</translation>
     </message>
     <message>
         <source>Connection Time</source>
