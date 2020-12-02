@@ -322,14 +322,6 @@
         <translation>Canvia la contrasenya d'encriptació del moneder</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;Finestra de depuració</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Obre la consola de diagnòstic i depuració</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Verifica el missatge...</translation>
     </message>
@@ -1267,10 +1259,6 @@
     <message>
         <source>Information</source>
         <translation>Informació</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>Finestra de depuració</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -2437,8 +2425,8 @@
         <translation>Error: s'ha produït un error intern fatal. Vegeu debug log per a més detalls</translation>
     </message>
     <message>
-        <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
-        <translation>Comissió (en %s/kB) per afegir a les transaccions que envieu (per defecte: %s)</translation>
+        <source>Fee in %s to add to transactions you send (default: %s)</source>
+        <translation>Comissió en %s per afegir a les transaccions que envieu (per defecte: %s)</translation>
     </message>
     <message>
         <source>Pruning blockstore...</source>
@@ -2619,10 +2607,6 @@
     <message>
         <source>Execute command when a relevant alert is received or we see a really long fork (%s in cmd is replaced by message)</source>
         <translation>Executa l'ordre quan es rebi un avís rellevant o veiem una forquilla molt llarga (%s en cmd és reemplaçat per un missatge)</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -maxtxfee=&lt;amount&gt;: '%s' (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
-        <translation>Import no vàlid per a -maxtxfee=&lt;amount&gt;: '%s' (cal que sigui com a mínim la comissió de minrelay de %s per evitar que les comissions s'encallin)</translation>
     </message>
     <message>
         <source>Maximum size of data in data carrier transactions we relay and mine (default: %u)</source>

@@ -326,14 +326,6 @@
         <translation>改變錢包加密用的密碼</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>除錯視窗</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>開啓除錯和診斷主控台</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>驗證訊息...</translation>
     </message>
@@ -1347,10 +1339,6 @@
     <message>
         <source>Information</source>
         <translation>資訊</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>除錯視窗</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -2641,8 +2629,8 @@
         <translation>錯誤: 發生了致命的內部錯誤，詳情請看 debug log</translation>
     </message>
     <message>
-        <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
-        <translation>交易付款時每千位元組(kB)的交易手續費(單位是 %s，預設值: %s)</translation>
+        <source>Fee in %s to add to transactions you send (default: %s)</source>
+        <translation>发送交易的交易费（單位是 %s，預設值: %s）</translation>
     </message>
     <message>
         <source>Pruning blockstore...</source>
@@ -2699,10 +2687,6 @@
     <message>
         <source>Maximum allowed median peer time offset adjustment. Local perspective of time may be influenced by peers forward or backward by this amount. (default: %u seconds)</source>
         <translation>跟其他節點的時間差最高可接受的中位數值。本機所認為的時間可能會被其他節點影響，往前或往後在這個值之內。(預設值: %u 秒)</translation>
-    </message>
-    <message>
-        <source>Maximum total fees (in %s) to use in a single wallet transaction or raw transaction; setting this too low may abort large transactions (default: %s)</source>
-        <translation>允許一次錢包交易或未加工交易付出的最高總手續費(單位是 %s)；設定太低的話，可能會無法進行資料量大的交易(預設值: %s)</translation>
     </message>
     <message>
         <source>Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly.</source>
@@ -2789,7 +2773,7 @@
         <translation>連線選項:</translation>
     </message>
     <message>
-        <source>Copyright (C) %i-%i</source>
+        <source>Copyright (c) %i-%i</source>
         <translation>版權所有 (C) %i-%i</translation>
     </message>
     <message>
@@ -2883,10 +2867,6 @@
     <message>
         <source>Invalid -onion address: '%s'</source>
         <translation>無效的 -onion 位址: '%s'</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -%s=&lt;amount&gt;: '%s'</source>
-        <translation>參數 -%s=&lt;金額&gt; 指定的金額無效: '%s'</translation>
     </message>
     <message>
         <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
@@ -3029,10 +3009,6 @@
         <translation>當收到相關警示，或發現相當長的分支時，所要執行的指令(指令中的 %s 會被取代成警示訊息)</translation>
     </message>
     <message>
-        <source>Invalid amount for -maxtxfee=&lt;amount&gt;: '%s' (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
-        <translation>-maxtxfee=&lt;amount&gt;: '%s' 的金額無效 (必須大於最低轉發手續費 %s 以避免交易無法確認)</translation>
-    </message>
-    <message>
         <source>Maximum size of data in data carrier transactions we relay and mine (default: %u)</source>
         <translation>轉發和開採時，對只帶資料的交易的大小上限(預設值: %u)</translation>
     </message>
@@ -3083,6 +3059,10 @@
     <message>
         <source>Information</source>
         <translation>資訊</translation>
+    </message>
+    <message>
+        <source>Maximum total fees (in %s) to use in a single transaction; setting this too low may abort large transactions (default: %s)</source>
+        <translation>单笔交易最高费用（單位是 %s）；設定太低的話，可能會無法進行資料量大的交易（預設值: %s）</translation>
     </message>
     <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
@@ -3193,10 +3173,6 @@
         <translation>(1 表示保留交易描述資料，像是帳戶使用者和付款請求資訊；2 表示丟掉交易描述資料)</translation>
     </message>
     <message>
-        <source>-maxtxfee is set very high! Fees this large could be paid on a single transaction.</source>
-        <translation>參數 -maxtxfee 設定了很高的金額！這可是你一次交易就有可能付出的最高手續費。</translation>
-    </message>
-    <message>
         <source>Do not keep transactions in the mempool longer than &lt;n&gt; hours (default: %u)</source>
         <translation>不要讓交易留在記憶池中超過 &lt;n&gt; 個小時(預設值: %u)</translation>
     </message>
@@ -3233,10 +3209,6 @@
         <translation>支援用布倫過濾器來過濾區塊和交易(預設值: %u)</translation>
     </message>
     <message>
-        <source>This is the transaction fee you may pay when fee estimates are not available.</source>
-        <translation>這是當預估手續費還沒計算出來時，付款交易預設會付的手續費。</translation>
-    </message>
-    <message>
         <source>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit %s and cryptographic software written by Eric Young and UPnP software written by Thomas Bernard.</source>
         <translation>此產品包含了由 OpenSSL Project 所開發的 OpenSSL Toolkit 軟體 %s, 由 Eric Young 撰寫的加解密軟體，以及由 Thomas Bernard 所撰寫的 UPnP 軟體。</translation>
     </message>
@@ -3271,10 +3243,6 @@
     <message>
         <source>Whitelist peers connecting from the given IP address (e.g. 1.2.3.4) or CIDR notated network (e.g. 1.2.3.0/24). Can be specified multiple times.</source>
         <translation>把來自指定位址(例如：1.2.3.4)或 CIDR 格式網段(例如：1.2.3.0/24)的節點放進白名單。這個選項可以設定多次。</translation>
-    </message>
-    <message>
-        <source>%s is set very high!</source>
-        <translation>%s 的設定值異常大！</translation>
     </message>
     <message>
         <source>(default: %s)</source>
@@ -3359,10 +3327,6 @@
     <message>
         <source>Starting network threads...</source>
         <translation>正在啟動網路執行緒...</translation>
-    </message>
-    <message>
-        <source>This is the transaction fee you will pay if you send a transaction.</source>
-        <translation>這是你交易付款時所要付的手續費。</translation>
     </message>
     <message>
         <source>Threshold for disconnecting misbehaving peers (default: %u)</source>

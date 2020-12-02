@@ -5,7 +5,6 @@
 
 #include "optionsmodel.h"
 
-#include "unitsofcoin.h"
 #include "guiutil.h"
 #include "util.h"
 
@@ -69,8 +68,8 @@ void OptionsModel::Init(bool resetSettings)
 
     // Display
     if ( ! settings.contains( "nDisplayUnit" ) )
-        settings.setValue( "nDisplayUnit", UnitsOfCoin::oneCoin ) ;
-    nDisplayUnit = settings.value( "nDisplayUnit" ).toInt() ;
+        settings.setValue( "nDisplayUnit", static_cast< int >( unitofcoin::oneCoin ) ) ;
+    displayUnit = unitofcoin( settings.value( "nDisplayUnit" ).toInt() ) ;
 
     if ( ! settings.contains( "thirdPartyTxUrls" ) ) {
         QString txUrls( "" ) ;
@@ -183,10 +182,10 @@ int OptionsModel::rowCount(const QModelIndex & parent) const
 // read QSettings values and return them
 QVariant OptionsModel::data(const QModelIndex & index, int role) const
 {
-    if(role == Qt::EditRole)
+    if ( role == Qt::EditRole )
     {
-        QSettings settings;
-        switch(index.row())
+        QSettings settings ;
+        switch ( index.row() )
         {
         case StartAtStartup:
             return GUIUtil::GetStartOnSystemStartup();
@@ -236,7 +235,7 @@ QVariant OptionsModel::data(const QModelIndex & index, int role) const
             return settings.value( "bSpendZeroConfChange" ) ;
 #endif
         case DisplayUnit:
-            return nDisplayUnit ;
+            return static_cast< int >( displayUnit ) ;
         case ThirdPartyTxUrls:
             return thirdPartyTxUrls ;
         case Language:
@@ -357,7 +356,7 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
             break;
 #endif
         case DisplayUnit:
-            setDisplayUnit(value);
+            setDisplayUnit( value ) ;
             break;
         case ThirdPartyTxUrls:
             if ( thirdPartyTxUrls != value.toString() ) {
@@ -400,15 +399,15 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
     return successful;
 }
 
-/** Updates current unit in memory, settings and emits displayUnitChanged(newUnit) signal */
-void OptionsModel::setDisplayUnit(const QVariant &value)
+void OptionsModel::setDisplayUnit( const QVariant & value )
 {
-    if (!value.isNull())
+    if ( ! value.isNull() )
     {
-        QSettings settings;
-        nDisplayUnit = value.toInt();
-        settings.setValue("nDisplayUnit", nDisplayUnit);
-        Q_EMIT displayUnitChanged(nDisplayUnit);
+        int unitInt = value.toInt() ;
+        QSettings settings ;
+        settings.setValue( "nDisplayUnit", unitInt ) ;
+        displayUnit = unitofcoin( unitInt ) ;
+        Q_EMIT displayUnitChanged( displayUnit ) ;
     }
 }
 

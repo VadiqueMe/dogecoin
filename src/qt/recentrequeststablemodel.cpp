@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -11,8 +12,6 @@
 #include "peerversion.h"
 #include "streams.h"
 
-#include <boost/foreach.hpp>
-
 RecentRequestsTableModel::RecentRequestsTableModel(CWallet *wallet, WalletModel *parent) :
     QAbstractTableModel(parent), walletModel(parent)
 {
@@ -20,15 +19,15 @@ RecentRequestsTableModel::RecentRequestsTableModel(CWallet *wallet, WalletModel 
     nReceiveRequestsMaxId = 0;
 
     // Load entries from wallet
-    std::vector<std::string> vReceiveRequests;
-    parent->loadReceiveRequests(vReceiveRequests);
-    BOOST_FOREACH(const std::string& request, vReceiveRequests)
-        addNewRequest(request);
+    std::vector< std::string > vReceiveRequests ;
+    parent->loadReceiveRequests( vReceiveRequests ) ;
+    for ( const std::string & request : vReceiveRequests )
+        addNewRequest( request ) ;
 
     /* These columns must match the indices in the ColumnIndex enumeration */
     columns << tr("Date") << tr("Label") << tr("Message") << getAmountTitle();
 
-    connect(walletModel->getOptionsModel(), SIGNAL(displayUnitChanged(int)), this, SLOT(updateDisplayUnit()));
+    connect( walletModel->getOptionsModel(), SIGNAL( displayUnitChanged(unitofcoin) ), this, SLOT( updateDisplayUnit() ) ) ;
 }
 
 RecentRequestsTableModel::~RecentRequestsTableModel()
@@ -84,8 +83,8 @@ QVariant RecentRequestsTableModel::data(const QModelIndex &index, int role) cons
         case Amount:
             if (rec->recipient.amount == 0 && role == Qt::DisplayRole)
                 return tr("(no amount requested)");
-            else if (role == Qt::EditRole)
-                return UnitsOfCoin::format( walletModel->getOptionsModel()->getDisplayUnit(), rec->recipient.amount, false, UnitsOfCoin::separatorNever ) ;
+            else if ( role == Qt::EditRole )
+                return UnitsOfCoin::format( walletModel->getOptionsModel()->getDisplayUnit(), rec->recipient.amount, false, SeparatorStyle::never ) ;
             else
                 return UnitsOfCoin::format( walletModel->getOptionsModel()->getDisplayUnit(), rec->recipient.amount ) ;
         }
@@ -207,10 +206,10 @@ void RecentRequestsTableModel::addNewRequest(RecentRequestEntry &recipient)
     endInsertRows();
 }
 
-void RecentRequestsTableModel::sort(int column, Qt::SortOrder order)
+void RecentRequestsTableModel::sort( int column, Qt::SortOrder order )
 {
-    qSort(list.begin(), list.end(), RecentRequestEntryLessThan(column, order));
-    Q_EMIT dataChanged(index(0, 0, QModelIndex()), index(list.size() - 1, NUMBER_OF_COLUMNS - 1, QModelIndex()));
+    std::sort( list.begin(), list.end(), RecentRequestEntryLessThan( column, order ) ) ;
+    Q_EMIT dataChanged( index( 0, 0, QModelIndex() ), index( list.size() - 1, NUMBER_OF_COLUMNS - 1, QModelIndex() ) ) ;
 }
 
 void RecentRequestsTableModel::updateDisplayUnit()

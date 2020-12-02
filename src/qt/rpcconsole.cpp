@@ -8,7 +8,7 @@
 #endif
 
 #include "rpcconsole.h"
-#include "ui_debugwindow.h"
+#include "ui_gutswindow.h"
 
 #include "bantablemodel.h"
 #include "networkmodel.h"
@@ -820,57 +820,15 @@ void RPCConsole::message(int category, const QString &message, bool html)
 
 void RPCConsole::updateNetworkInfo()
 {
-    QString connections = QString::number( ( g_connman != nullptr ) ? g_connman->CountConnectedNodes() : 0 ) + " (" ;
+    QString connections = QString::number( ( g_connman != nullptr ) ? g_connman->CountConnectedNodes() : 0 ) ;
 
-    size_t inConnections = 0 ;
-    if ( g_connman != nullptr )
-        inConnections = g_connman->CountConnectedNodes( "all", "in" ) ;
-    size_t outConnections = 0 ;
-    if ( g_connman != nullptr )
-        outConnections = g_connman->CountConnectedNodes( "all", "out" ) ;
-
-    connections += tr("In:") + " " + QString::number( inConnections ) ;
-    if ( inConnections > 0 ) {
-        connections += QString( " = " ) ;
-        QStringList parts ;
-        size_t ipv4InConnections = 0 ;
-        size_t ipv6InConnections = 0 ;
-        size_t torInConnections = 0 ;
-        if ( g_connman != nullptr ) {
-            ipv4InConnections = g_connman->CountConnectedNodes( "ipv4", "in" ) ;
-            ipv6InConnections = g_connman->CountConnectedNodes( "ipv6", "in" ) ;
-            torInConnections = g_connman->CountConnectedNodes( "tor", "in" ) ;
-        }
-        if ( ipv4InConnections > 0 )
-            parts.push_back( QString::number( ipv4InConnections ) + " IPv4" ) ;
-        if ( ipv6InConnections > 0 )
-            parts.push_back( QString::number( ipv6InConnections ) + " IPv6" ) ;
-        if ( torInConnections > 0 )
-            parts.push_back( QString::number( torInConnections ) + " Tor" ) ;
-        connections += parts.join( " + " ) ;
+    if ( g_connman != nullptr ) {
+        connections += QString( " (" ) ;
+        connections += tr("In:") + " " + GUIUtil::connectedPeersInfo( "in" ) ;
+        connections += QString( " / " ) ;
+        connections += tr("Out:") + " " + GUIUtil::connectedPeersInfo( "out" ) ;
+        connections += QString( ")" ) ;
     }
-    connections += QString( " / " ) ;
-    connections += tr("Out:") + " " + QString::number( outConnections ) ;
-    if ( outConnections > 0 ) {
-        connections += QString( " = " ) ;
-        QStringList parts ;
-        size_t ipv4OutConnections = 0 ;
-        size_t ipv6OutConnections = 0 ;
-        size_t torOutConnections = 0 ;
-        if ( g_connman != nullptr ) {
-            ipv4OutConnections = g_connman->CountConnectedNodes( "ipv4", "out" ) ;
-            ipv6OutConnections = g_connman->CountConnectedNodes( "ipv6", "out" ) ;
-            torOutConnections = g_connman->CountConnectedNodes( "tor", "out" ) ;
-        }
-        if ( ipv4OutConnections > 0 )
-            parts.push_back( QString::number( ipv4OutConnections ) + " IPv4" ) ;
-        if ( ipv6OutConnections > 0 )
-            parts.push_back( QString::number( ipv6OutConnections ) + " IPv6" ) ;
-        if ( torOutConnections > 0 )
-            parts.push_back( QString::number( torOutConnections ) + " Tor" ) ;
-        connections += parts.join( " + " ) ;
-    }
-    connections += QString( ")" ) ;
 
     if ( networkModel != nullptr )
         if ( ! networkModel->isNetworkActive() )

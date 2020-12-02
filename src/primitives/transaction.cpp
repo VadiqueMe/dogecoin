@@ -116,22 +116,25 @@ double CTransaction::ComputePriority( double dPriorityInputs, unsigned int nTxSi
     return dPriorityInputs / nTxSize;
 }
 
-unsigned int CTransaction::CalculateModifiedSize(unsigned int nTxSize) const
+unsigned int CTransaction::CalculateModifiedSize( unsigned int nTxSize ) const
 {
     // In order to avoid disincentivizing cleaning up the UTXO set we don't count
     // the constant overhead for each txin and up to 110 bytes of scriptSig (which
     // is enough to cover a compressed pubkey p2sh redemption) for priority.
     // Providing any more cleanup incentive than making additional inputs free would
     // risk encouraging people to create junk outputs to redeem later
-    if (nTxSize == 0)
-        nTxSize = (GetTransactionWeight(*this) + WITNESS_SCALE_FACTOR - 1) / WITNESS_SCALE_FACTOR;
+
+    if ( nTxSize == 0 )
+        nTxSize = ( GetVirtualWeightOfTransaction( *this ) + WITNESS_SCALE_FACTOR - 1 ) / WITNESS_SCALE_FACTOR ;
+
     for (std::vector<CTxIn>::const_iterator it(vin.begin()); it != vin.end(); ++it)
     {
         unsigned int offset = 41U + std::min(110U, (unsigned int)it->scriptSig.size());
         if (nTxSize > offset)
             nTxSize -= offset;
     }
-    return nTxSize;
+
+    return nTxSize ;
 }
 
 unsigned int CTransaction::GetFullSize() const
@@ -139,27 +142,33 @@ unsigned int CTransaction::GetFullSize() const
     return ::GetSerializeSize( *this, SER_NETWORK, PROTOCOL_VERSION ) ;
 }
 
-std::string CTransaction::ToString() const
+std::string CTransaction::ToString( bool dumpInsOuts ) const
 {
     std::string str ;
-    str += strprintf( "CTransaction(hash=%s, version=%d, vin.size=%u, vout.size=%u, nLockTime=%u, weight=%i)\n",
+    str += strprintf( "CTransaction(hash=%s, version=%d, vin.size=%u, vout.size=%u, nLockTime=%u, weight=%i)",
         GetTxHash().ToString(),
         nVersion,
         vin.size(),
         vout.size(),
         nLockTime,
-        GetTransactionWeight( *this ) ) ;
-    for ( unsigned int i = 0 ; i < vin.size() ; i ++ )
-        str += strprintf( "    vin[%u]: ", i ) + vin[ i ].ToString() + "\n" ;
-    for ( unsigned int i = 0 ; i < vin.size() ; i ++ )
-        if ( ! vin[ i ].scriptWitness.IsNull() )
-            str += strprintf( "    vin[%u].scriptWitness: ", i ) + vin[ i ].scriptWitness.ToString() + "\n" ;
-    for ( unsigned int i = 0 ; i < vout.size() ; i ++ )
-        str += strprintf( "    vout[%u]: ", i ) + vout[ i ].ToString() + "\n" ;
+        GetVirtualWeightOfTransaction( *this ) ) ;
+
+    if ( dumpInsOuts )
+    {
+        str += "\n" ;
+        for ( unsigned int i = 0 ; i < vin.size() ; i ++ )
+            str += strprintf( "    vin[%u]: ", i ) + vin[ i ].ToString() + "\n" ;
+        for ( unsigned int i = 0 ; i < vin.size() ; i ++ )
+            if ( ! vin[ i ].scriptWitness.IsNull() )
+                str += strprintf( "    vin[%u].scriptWitness: ", i ) + vin[ i ].scriptWitness.ToString() + "\n" ;
+        for ( unsigned int i = 0 ; i < vout.size() ; i ++ )
+            str += strprintf( "    vout[%u]: ", i ) + vout[ i ].ToString() + "\n" ;
+    }
+
     return str ;
 }
 
-int64_t GetTransactionWeight( const CTransaction & tx )
+int64_t GetVirtualWeightOfTransaction( const CTransaction & tx )
 {
     return ::GetSerializeSize( tx, SER_NETWORK, PROTOCOL_VERSION | SERIALIZE_TRANSACTION_NO_WITNESS ) * ( WITNESS_SCALE_FACTOR - 1 ) + ::GetSerializeSize( tx, SER_NETWORK, PROTOCOL_VERSION ) ;
 }

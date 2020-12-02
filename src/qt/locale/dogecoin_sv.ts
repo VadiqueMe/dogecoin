@@ -327,14 +327,6 @@ Var vänlig och försök igen.</translation>
         <translation>Byt lösenfras för kryptering av plånbok</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;Debug-fönster</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Öppna debug- och diagnostikkonsolen</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Verifiera meddelande...</translation>
     </message>
@@ -1154,10 +1146,6 @@ Var vänlig och försök igen.</translation>
         <translation>Information</translation>
     </message>
     <message>
-        <source>Debug window</source>
-        <translation>Debug fönster</translation>
-    </message>
-    <message>
         <source>Using BerkeleyDB version</source>
         <translation>Använder BerkeleyDB versionen</translation>
     </message>
@@ -1886,8 +1874,8 @@ Var vänlig och försök igen.</translation>
         <translation>Fel: Ett kritiskt internt fel uppstod, se debug log för detaljer</translation>
     </message>
     <message>
-        <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
-        <translation>Avgift (i %s/kB) att lägga till på transaktioner du skickar (förvalt: %s)</translation>
+        <source>Fee in %s to add to transactions you send (default: %s)</source>
+        <translation>Avgift i %s att lägga till på transaktioner du skickar (förvalt: %s)</translation>
     </message>
     <message>
         <source>Pruning blockstore...</source>
@@ -1940,10 +1928,6 @@ Var vänlig och försök igen.</translation>
     <message>
         <source>Maximum allowed median peer time offset adjustment. Local perspective of time may be influenced by peers forward or backward by this amount. (default: %u seconds)</source>
         <translation>Maximalt tillåten median-peer tidsoffset justering. Lokalt perspektiv av tiden kan bli påverkad av partners, framåt eller bakåt denna tidsrymd. (förvalt: %u sekunder)</translation>
-    </message>
-    <message>
-        <source>Maximum total fees (in %s) to use in a single wallet transaction or raw transaction; setting this too low may abort large transactions (default: %s)</source>
-        <translation>Maximal total avgift (i %s) att använda i en plånbokstransaktion eller råa transaktioner. Sätts denna för lågt kan stora transaktioner avbrytas (förvalt: %s)</translation>
     </message>
     <message>
         <source>Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly.</source>
@@ -2010,8 +1994,8 @@ Var vänlig och försök igen.</translation>
         <translation>Anslutningsalternativ:</translation>
     </message>
     <message>
-        <source>Copyright (C) %i-%i</source>
-        <translation>Copyright (C) %i-%i</translation>
+        <source>Copyright (c) %i-%i</source>
+        <translation>Copyright (c) %i-%i</translation>
     </message>
     <message>
         <source>Corrupted block database detected</source>
@@ -2104,10 +2088,6 @@ Var vänlig och försök igen.</translation>
     <message>
         <source>Invalid -onion address: '%s'</source>
         <translation>Ogiltig -onion adress:'%s'</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -%s=&lt;amount&gt;: '%s'</source>
-        <translation>Ogiltigt belopp för -%s=&lt;belopp&gt;:'%s'</translation>
     </message>
     <message>
         <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
@@ -2250,10 +2230,6 @@ Var vänlig och försök igen.</translation>
         <translation>Exekvera kommando när ett relevant meddelande är mottagen eller när vi ser en väldigt lång förgrening (%s i cmd är utbytt med ett meddelande)</translation>
     </message>
     <message>
-        <source>Invalid amount for -maxtxfee=&lt;amount&gt;: '%s' (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
-        <translation>Otillåtet belopp för -maxtxfee=&lt;belopp&gt;: '%s' (måste åtminstånde vara minrelay avgift %s för att förhindra stoppade transkationer)</translation>
-    </message>
-    <message>
         <source>Maximum size of data in data carrier transactions we relay and mine (default: %u)</source>
         <translation>Maximal storlek på data i databärartransaktioner som vi reläar och bryter (förvalt: %u) </translation>
     </message>
@@ -2304,6 +2280,10 @@ Var vänlig och försök igen.</translation>
     <message>
         <source>Information</source>
         <translation>Information</translation>
+    </message>
+    <message>
+        <source>Maximum total fees (in %s) to use in a single transaction; setting this too low may abort large transactions (default: %s)</source>
+        <translation>Maximal total avgift (i %s) att använda i en transaktion. Sätts denna för lågt kan stora transaktioner avbrytas (förvalt: %s)</translation>
     </message>
     <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
@@ -2412,10 +2392,6 @@ Var vänlig och försök igen.</translation>
     <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation>(1 = spara tx metadata t.ex. kontoägare och betalningsbegäransinformation, 2 = släng tx metadata)</translation>
-    </message>
-    <message>
-        <source>-maxtxfee is set very high! Fees this large could be paid on a single transaction.</source>
-        <translation>-maxtxfee är väldigt högt satt! Så höga avgifter kan komma att betalas för en enstaka transaktion.</translation>
     </message>
     <message>
         <source>Do not keep transactions in the mempool longer than &lt;n&gt; hours (default: %u)</source>

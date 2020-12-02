@@ -54,7 +54,7 @@ UniValue getinfo(const JSONRPCRequest& request)
             "  \"keypoololdest\": xxxxxx,    (numeric) the timestamp (seconds since Unix epoch) of the oldest pre-generated key in the key pool\n"
             "  \"keypoolsize\": xxxx,        (numeric) how many new keys are pre-generated\n"
             "  \"unlocked_until\": ttt,      (numeric) the timestamp in seconds since epoch (midnight Jan 1 1970 GMT) that the wallet is unlocked for transfers, or 0 if the wallet is locked\n"
-            "  \"paytxfee\": x.xxxx,         (numeric) the transaction fee set in " + NameOfE8Currency() + "/kB\n"
+            "  \"paytxfee\": x.xxxx,         (numeric) the transaction fee in " + NameOfE8Currency() + "\n"
             "  \"errors\": \"...\"           (string) any error messages\n"
             "}\n"
             "\nExamples:\n"
@@ -92,7 +92,7 @@ UniValue getinfo(const JSONRPCRequest& request)
     }
     if (pwalletMain && pwalletMain->IsCrypted())
         obj.pushKV( "unlocked_until", nWalletUnlockTime ) ;
-    obj.pushKV( "paytxfee", ValueFromAmount( payTxFee.GetFeePerKiloByte() ) ) ;
+    obj.pushKV( "paytxfee", ValueFromAmount( currentTxFee ) ) ;
 #endif
     obj.pushKV( "errors", GetWarnings( "statusbar" ) ) ;
     return obj;

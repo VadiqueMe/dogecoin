@@ -10,6 +10,7 @@
 #include "crypto/scrypt.h"
 #include "hash.h"
 #include "utilstrencodings.h"
+#include "utiltime.h"
 #include "algo/Lyra2RE.h"
 
 #include <sstream>
@@ -44,12 +45,12 @@ uint256 CPureBlockHeader::GetLyra2Re2Hash() const
 std::string CPureBlockHeader::ToString() const
 {
     std::stringstream ss ;
-    ss << boost::format( "CPureBlockHeader(version=0x%x, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=0x%08x, sha256_hash=%s, scrypt_hash=%s)" )
+    ss << boost::format( "CPureBlockHeader(version=0x%x, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u '%s', nBits=%08x, nNonce=0x%08x; sha256_hash=%s, scrypt_hash=%s)" )
         % nVersion
         % hashPrevBlock.ToString()
         % hashMerkleRoot.ToString()
-        % nTime % nBits % nNonce
-        % GetSha256Hash().ToString() % GetScryptHash().ToString()
-    << std::endl ;
+        % nTime % DateTimeStrFormat( "%Y-%m-%d %H:%M:%S", nTime )
+        % nBits % nNonce
+        % GetSha256Hash().ToString() % GetScryptHash().ToString() ;
     return ss.str() ;
 }

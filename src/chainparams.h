@@ -37,22 +37,20 @@ struct ChainTxData {
     double dTxRate;
 };
 
+enum class Base58PrefixType {
+    PUBKEY_ADDRESS,
+    SCRIPT_ADDRESS,
+    SECRET_KEY,
+    EXT_PUBLIC_KEY,
+    EXT_SECRET_KEY
+} ;
+
 /**
  * CChainParams defines various tweakable parameters of a given instance
  */
 class CChainParams
 {
 public:
-    enum Base58Type {
-        PUBKEY_ADDRESS,
-        SCRIPT_ADDRESS,
-        SECRET_KEY,
-        EXT_PUBLIC_KEY,
-        EXT_SECRET_KEY,
-
-        MAX_BASE58_TYPES
-    };
-
     const Consensus::Params & GetConsensus( uint32_t nTargetHeight ) const {
         return *( pConsensusRoot -> GetConsensus( nTargetHeight ) ) ;
     }
@@ -71,7 +69,7 @@ public:
     bool OnlyStandardTransactions() const {  return fRequireStandardTxs ;  }
     uint64_t PruneAfterHeight() const { return nPruneAfterHeight; }
     bool MineBlocksOnDemand() const { return fMineBlocksOnDemand; }
-    const std::vector< unsigned char > & Base58Prefix( Base58Type type ) const {  return base58Prefixes[ type ] ;  }
+    const std::vector< unsigned char > & Base58PrefixFor( const Base58PrefixType & type ) const {  return base58Prefixes.at( type ) ;  }
     const std::vector< CDNSSeedData > & DNSSeeds() const {  return vSeeds ;  }
     const std::vector< SeedSpec6 > & FixedSeeds() const {  return vFixedSeeds ;  }
     bool UseMedianTimePast() const {  return fUseMedianTimePast ;  }
@@ -87,7 +85,7 @@ protected:
     std::vector< unsigned char > vAlertPubKey ; // raw pub key bytes for the broadcast alert signing key
     uint64_t nPruneAfterHeight ;
     CBlock genesis ;
-    std::vector< unsigned char > base58Prefixes[ MAX_BASE58_TYPES ] ;
+    std::map< Base58PrefixType, std::vector< unsigned char > > base58Prefixes ;
     std::vector< CDNSSeedData > vSeeds ;
     std::vector< SeedSpec6 > vFixedSeeds ;
     bool fMiningRequiresPeers ;

@@ -7,6 +7,7 @@
 #define DOGECOIN_QT_SENDCOINSDIALOG_H
 
 #include "walletmodel.h"
+#include "unitsofcoin.h"
 
 #include <QDialog>
 #include <QMessageBox>
@@ -47,6 +48,8 @@ public:
     void pasteEntry( const SendCoinsRecipient & rv ) ;
     bool handlePaymentRequest( const SendCoinsRecipient & recipient ) ;
 
+    static QString makeAreYouSureToSendCoinsString( const WalletModelTransaction & theTransaction, const unitofcoin & unit ) ;
+
 public Q_SLOTS:
     void clear() ;
     void reject() ;
@@ -65,6 +68,8 @@ private:
 
     bool fNewRecipientAllowed ;
 
+    QString getFeeString() ;
+
     // Process WalletModel::SendCoinsReturn and generate a pair consisting
     // of a message and message flags for use in Q_EMIT message()
     void processSendCoinsReturn( const WalletModel::SendCoinsReturn & sendCoinsReturn ) ;
@@ -77,6 +82,7 @@ private Q_SLOTS:
     void hideCoinControlClicked() ;
     void removeEntry( SendCoinsEntry * entry ) ;
     void updateDisplayUnit() ;
+    void changeCustomFeeUnit( unitofcoin newUnit ) ;
     void coinControlButtonClicked() ;
     void coinControlChangeChecked( int ) ;
     void coinControlChangeEdited( const QString & ) ;

@@ -5,7 +5,6 @@
 
 #include "coinamountfield.h"
 
-#include "unitsofcoin.h"
 #include "guiconstants.h"
 #include "qvaluecombobox.h"
 
@@ -17,13 +16,13 @@
 
 /* QSpinBox that uses fixed-point numbers internally with specific formatting/parsing stuff
  */
-class AmountSpinBox: public QAbstractSpinBox
+class AmountSpinBox : public QAbstractSpinBox
 {
     Q_OBJECT
 
 public:
     explicit AmountSpinBox( QWidget * parent ) : QAbstractSpinBox( parent )
-        , currentUnit( UnitsOfCoin::oneCoin )
+        , currentUnit( unitofcoin::oneCoin )
         , singleStep( UnitsOfCoin::factor( currentUnit ) )
         , maximumValue( UnitsOfCoin::maxMoney() )
     {
@@ -50,7 +49,7 @@ public:
         CAmount val = parse( input, &ok ) ;
         if ( ok )
         {
-            input = UnitsOfCoin::format( currentUnit, val, false, UnitsOfCoin::separatorAlways ) ;
+            input = UnitsOfCoin::format( currentUnit, val, false, SeparatorStyle::always ) ;
             lineEdit()->setText( input ) ;
         }
     }
@@ -62,7 +61,7 @@ public:
 
     void setValue( const CAmount& value )
     {
-        lineEdit()->setText( UnitsOfCoin::format( currentUnit, value, false, UnitsOfCoin::separatorAlways ) ) ;
+        lineEdit()->setText( UnitsOfCoin::format( currentUnit, value, false, SeparatorStyle::always ) ) ;
         Q_EMIT valueSetByProgram() ;
     }
 
@@ -74,14 +73,14 @@ public:
     {
         bool ok = false ;
         CAmount val = value( &ok ) ;
-        val = val + steps * singleStep ;
-        val = qMin( qMax( val, CAmount(0) ), maximumValue ) ;
+        val += steps * singleStep ;
+        val = std::min( std::max( val, CAmount(0) ), maximumValue ) ;
         setValue( val ) ;
 
         Q_EMIT valueStepped() ;
     }
 
-    void setDisplayUnit(int unit)
+    void setUnit( unitofcoin unit )
     {
         bool ok = false ;
         CAmount val = value( &ok ) ;
@@ -92,18 +91,28 @@ public:
         else clear() ;
     }
 
-    void setSingleStep( const CAmount & step ) {  singleStep = step ;  }
+    void setSingleStep( const CAmount & step )
+    {
+        singleStep = std::max< CAmount >( 1, step ) ;
+    }
+
+    void setSingleStep( unitofcoin unit ) {  setSingleStep( UnitsOfCoin::factor( unit ) ) ;  }
 
     QSize minimumSizeHint() const
     {
-        if(cachedMinimumSizeHint.isEmpty())
+        if ( cachedMinimumSizeHint.isEmpty() )
         {
-            ensurePolished();
+            ensurePolished() ;
 
-            const QFontMetrics fm(fontMetrics());
-            int h = lineEdit()->minimumSizeHint().height();
-            int w = fm.width( UnitsOfCoin::format( UnitsOfCoin::oneCoin, UnitsOfCoin::maxMoney(), false, UnitsOfCoin::separatorAlways ) ) ;
-            w += 2; // cursor blinking space
+            const QFontMetrics fm( fontMetrics() ) ;
+            int h = lineEdit()->minimumSizeHint().height() ;
+            QString maxMoneyString = UnitsOfCoin::format( unitofcoin::oneCoin, UnitsOfCoin::maxMoney(), false, SeparatorStyle::always ) ;
+#if QT_VERSION > 0x050b00
+            int w = fm.horizontalAdvance( maxMoneyString ) ;
+#else
+            int w = fm.width( maxMoneyString ) ;
+#endif
+            w += 2 ; // blinking cursor space
 
             QStyleOptionSpinBox opt;
             initStyleOption(&opt);
@@ -128,7 +137,7 @@ public:
     }
 
 private:
-    int currentUnit ;
+    unitofcoin currentUnit ;
     CAmount singleStep ;
     CAmount maximumValue ;
 
@@ -204,11 +213,11 @@ CoinAmountField::CoinAmountField( QWidget * parent ) : QWidget( parent )
     amount->installEventFilter( this ) ;
     amount->setMaximumWidth( 170 ) ;
 
-    QHBoxLayout *layout = new QHBoxLayout( this ) ;
+    QHBoxLayout * layout = new QHBoxLayout( this ) ;
     layout->addWidget( amount ) ;
-    unit = new QValueComboBox( this ) ;
-    unit->setModel( new UnitsOfCoin( this ) ) ;
-    layout->addWidget( unit ) ;
+    unitComboBox = new QValueComboBox( this ) ;
+    unitComboBox->setModel( new UnitsOfCoin( this ) ) ;
+    layout->addWidget( unitComboBox ) ;
     layout->addStretch( 1 ) ;
     layout->setContentsMargins( 0, 0, 0, 0 ) ;
 
@@ -221,38 +230,38 @@ CoinAmountField::CoinAmountField( QWidget * parent ) : QWidget( parent )
     connect( amount, SIGNAL( textOfValueEdited() ), this, SLOT( amountEdited() ) ) ;
     connect( amount, SIGNAL( valueStepped() ), this, SLOT( amountEdited() ) ) ;
     connect( amount, SIGNAL( valueSetByProgram() ), this, SLOT( amountChanged() ) ) ;
-    connect( unit, SIGNAL( currentIndexChanged(int) ), this, SLOT( unitChanged(int) ) ) ;
+    connect( unitComboBox, SIGNAL( currentIndexChanged(int) ), this, SLOT( unitIndexChanged(int) ) ) ;
 
     // Set default based on configuration
-    unitChanged( unit->currentIndex() ) ;
+    unitIndexChanged( unitComboBox->currentIndex() ) ;
 }
 
 void CoinAmountField::clear()
 {
-    amount->clear();
-    unit->setCurrentIndex(0);
+    amount->clear() ;
+    unitComboBox->setCurrentIndex( 0 ) ;
 }
 
-void CoinAmountField::setEnabled(bool fEnabled)
+void CoinAmountField::setEnabled( bool fEnabled )
 {
-    amount->setEnabled(fEnabled);
-    unit->setEnabled(fEnabled);
+    amount->setEnabled( fEnabled ) ;
+    unitComboBox->setEnabled( fEnabled ) ;
 }
 
 bool CoinAmountField::validate()
 {
-    bool valid = false;
-    value(&valid);
-    setValid(valid);
-    return valid;
+    bool valid = false ;
+    value( &valid ) ;
+    setValid( valid ) ;
+    return valid ;
 }
 
-void CoinAmountField::setValid(bool valid)
+void CoinAmountField::setValid( bool valid )
 {
-    if (valid)
-        amount->setStyleSheet("");
+    if ( valid )
+        amount->setStyleSheet( "" ) ;
     else
-        amount->setStyleSheet(STYLE_INVALID);
+        amount->setStyleSheet( STYLE_INVALID ) ;
 }
 
 bool CoinAmountField::eventFilter(QObject *object, QEvent *event)
@@ -265,11 +274,11 @@ bool CoinAmountField::eventFilter(QObject *object, QEvent *event)
     return QWidget::eventFilter(object, event);
 }
 
-QWidget *CoinAmountField::setupTabChain(QWidget *prev)
+QWidget * CoinAmountField::setupTabChain( QWidget * prev )
 {
-    QWidget::setTabOrder(prev, amount);
-    QWidget::setTabOrder(amount, unit);
-    return unit;
+    QWidget::setTabOrder( prev, amount ) ;
+    QWidget::setTabOrder( amount, unitComboBox ) ;
+    return unitComboBox ;
 }
 
 CAmount CoinAmountField::value( bool * valueOk ) const
@@ -311,28 +320,32 @@ void CoinAmountField::setMaximumValue( const CAmount & max )
     amount->setMaximumValue( max ) ;
 }
 
-void CoinAmountField::setReadOnly(bool fReadOnly)
+void CoinAmountField::setReadOnly( bool fReadOnly )
 {
-    amount->setReadOnly(fReadOnly);
+    amount->setReadOnly( fReadOnly ) ;
 }
 
-void CoinAmountField::unitChanged(int idx)
+void CoinAmountField::unitIndexChanged( int idx )
 {
     // Use description tooltip for current unit for the combobox
-    unit->setToolTip(unit->itemData(idx, Qt::ToolTipRole).toString());
+    unitComboBox->setToolTip( unitComboBox->itemData( idx, Qt::ToolTipRole ).toString() ) ;
 
     // get new unit id
-    int newUnit = unit->itemData( idx, UnitsOfCoin::UnitRole ).toInt() ;
+    int newUnit = unitComboBox->itemData( idx, UnitsOfCoin::UnitRole ).toInt() ;
 
-    amount->setDisplayUnit(newUnit);
+    if ( UnitsOfCoin::isUnitOfCoin( newUnit ) ) {
+        amount->setUnit( unitofcoin( newUnit ) ) ;
+        setSingleStep( unitofcoin( newUnit ) ) ;
+        Q_EMIT unitChanged( unitofcoin( newUnit ) ) ;
+    }
 }
 
-void CoinAmountField::setDisplayUnit(int newUnit)
+void CoinAmountField::setUnitOfCoin( unitofcoin unit )
 {
-    unit->setValue(newUnit);
+    unitComboBox->setValue( static_cast< int >( unit ) ) ;
+    amount->setUnit( unit ) ;
+    setSingleStep( unit ) ;
 }
 
-void CoinAmountField::setSingleStep(const CAmount& step)
-{
-    amount->setSingleStep(step);
-}
+void CoinAmountField::setSingleStep( const CAmount & step ) {  amount->setSingleStep( step ) ;  }
+void CoinAmountField::setSingleStep( unitofcoin unit ) {  amount->setSingleStep( unit ) ;  }

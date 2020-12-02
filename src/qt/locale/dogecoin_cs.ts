@@ -326,14 +326,6 @@
         <translation>Změň heslo k šifrování peněženky</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;Ladicí okno</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Otevři ladicí a diagnostickou konzoli</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Ověř zprávu...</translation>
     </message>
@@ -1347,10 +1339,6 @@
     <message>
         <source>Information</source>
         <translation>Informace</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>Ladicí okno</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -2632,8 +2620,8 @@
         <translation>Chyba: Přihodila se závažná vnitřní chyba, podrobnosti viz v debug log</translation>
     </message>
     <message>
-        <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
-        <translation>Poplatek (v %s/kB), který se přidá ke každé odeslané transakci (výchozí: %s)</translation>
+        <source>Fee in %s to add to transactions you send (default: %s)</source>
+        <translation>Poplatek v %s, který se přidá ke každé odeslané transakci (výchozí: %s)</translation>
     </message>
     <message>
         <source>Pruning blockstore...</source>
@@ -2690,10 +2678,6 @@
     <message>
         <source>Maximum allowed median peer time offset adjustment. Local perspective of time may be influenced by peers forward or backward by this amount. (default: %u seconds)</source>
         <translation>Maximální povolené seřizování času mediánem časů protějšků. Místní vnímání času může být ovlivněno protějšky, a to dopředu nebo dozadu až o toto množství. (výchozí: %u vteřin)</translation>
-    </message>
-    <message>
-        <source>Maximum total fees (in %s) to use in a single wallet transaction or raw transaction; setting this too low may abort large transactions (default: %s)</source>
-        <translation>Horní hranice pro celkový poplatek (v %s) za jednu transakci z peněženky nebo jednu surovou transakci; příliš nízká hodnota může zmařit velké transakce (výchozí: %s)</translation>
     </message>
     <message>
         <source>Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly.</source>
@@ -2780,8 +2764,8 @@
         <translation>Možnosti připojení:</translation>
     </message>
     <message>
-        <source>Copyright (C) %i-%i</source>
-        <translation>Copyright (C) %i–%i</translation>
+        <source>Copyright (c) %i-%i</source>
+        <translation>Copyright (c) %i–%i</translation>
     </message>
     <message>
         <source>Corrupted block database detected</source>
@@ -2874,10 +2858,6 @@
     <message>
         <source>Invalid -onion address: '%s'</source>
         <translation>Neplatná -onion adresa: '%s'</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -%s=&lt;amount&gt;: '%s'</source>
-        <translation>Neplatná částka pro -%s=&lt;částka&gt;: '%s'</translation>
     </message>
     <message>
         <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
@@ -3020,10 +3000,6 @@
         <translation>Spustit příkaz, když přijde relevantní upozornění nebo když dojde k opravdu dlouhému rozštěpení řetezce bloků (%s se v příkazu nahradí zprávou)</translation>
     </message>
     <message>
-        <source>Invalid amount for -maxtxfee=&lt;amount&gt;: '%s' (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
-        <translation>Neplatná částka pro -maxtxfee=&lt;amount&gt;: '%s' (musí být alespoň jako poplatek minrelay %s, aby transakce nezůstávaly trčet)</translation>
-    </message>
-    <message>
         <source>Maximum size of data in data carrier transactions we relay and mine (default: %u)</source>
         <translation>Maximální velikost dat v transakcích nesoucích data, se kterou jsme ochotni je ještě přeposílat a těžit (výchozí: %u)</translation>
     </message>
@@ -3074,6 +3050,10 @@
     <message>
         <source>Information</source>
         <translation>Informace</translation>
+    </message>
+    <message>
+        <source>Maximum total fees (in %s) to use in a single transaction; setting this too low may abort large transactions (default: %s)</source>
+        <translation>Horní hranice pro celkový poplatek (v %s) za jednu transakci; příliš nízká hodnota může zmařit velké transakce (výchozí: %s)</translation>
     </message>
     <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
@@ -3184,10 +3164,6 @@
         <translation>(1 = ukládat transakční metadata, např. majitele účtu a informace o platebním požadavku, 2 = mazat transakční metadata)</translation>
     </message>
     <message>
-        <source>-maxtxfee is set very high! Fees this large could be paid on a single transaction.</source>
-        <translation>-maxtxfee je nastaveno velmi vysoko! Takto vysoký poplatek může být zaplacen v jednotlivé transakci.</translation>
-    </message>
-    <message>
         <source>Do not keep transactions in the mempool longer than &lt;n&gt; hours (default: %u)</source>
         <translation>Nedržet transakce v zásobníku déle než &lt;n&gt; hodin (výchozí: %u)</translation>
     </message>
@@ -3224,10 +3200,6 @@
         <translation>Umožnit filtrování bloků a transakcí pomocí Bloomova filtru (výchozí: %u)</translation>
     </message>
     <message>
-        <source>This is the transaction fee you may pay when fee estimates are not available.</source>
-        <translation>Toto je transakční poplatek, který se platí, pokud náhodou není k dispozici odhad poplatků.</translation>
-    </message>
-    <message>
         <source>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit %s and cryptographic software written by Eric Young and UPnP software written by Thomas Bernard.</source>
         <translation>Tento produkt zahrnuje programy vyvinuté OpenSSL Projektem pro použití v OpenSSL Toolkitu %s a kryptografický program od Erika Younga a program UPnP od Thomase Bernarda.</translation>
     </message>
@@ -3262,10 +3234,6 @@
     <message>
         <source>Whitelist peers connecting from the given IP address (e.g. 1.2.3.4) or CIDR notated network (e.g. 1.2.3.0/24). Can be specified multiple times.</source>
         <translation>Vždy vítat protějšky připojující se z dané IP adresy (např. 1.2.3.4) či podsítě (CIDR zápis, např. 1.2.3.0/24). Lze zadat i vícekrát.</translation>
-    </message>
-    <message>
-        <source>%s is set very high!</source>
-        <translation>%s je nastaveno velmi vysoko!</translation>
     </message>
     <message>
         <source>(default: %s)</source>
@@ -3346,10 +3314,6 @@
     <message>
         <source>Starting network threads...</source>
         <translation>Spouštím síťová vlákna…</translation>
-    </message>
-    <message>
-        <source>This is the transaction fee you will pay if you send a transaction.</source>
-        <translation>Toto je poplatek, který zaplatíš za každou poslanou transakci.</translation>
     </message>
     <message>
         <source>Threshold for disconnecting misbehaving peers (default: %u)</source>

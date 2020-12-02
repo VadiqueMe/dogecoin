@@ -5,7 +5,6 @@
 
 #include "gui.h"
 
-#include "unitsofcoin.h"
 #include "networkmodel.h"
 #include "guiconstants.h"
 #include "guiutil.h"
@@ -102,27 +101,27 @@ DogecoinGUI::DogecoinGUI( const PlatformStyle * style, const NetworkStyle * netw
     appMenuBar(0),
     overviewTabAction( nullptr ),
     historyTabAction( nullptr ),
-    quitAction(0),
+    quitAction( nullptr ),
     sendCoinsTabAction( nullptr ),
-    sendCoinsMenuAction(0),
-    usedSendingAddressesAction(0),
-    usedReceivingAddressesAction(0),
-    signMessageAction(0),
-    verifyMessageAction(0),
-    aboutAction(0),
+    sendCoinsMenuAction( nullptr ),
+    usedSendingAddressesAction( nullptr ),
+    usedReceivingAddressesAction( nullptr ),
+    signMessageAction( nullptr ),
+    verifyMessageAction( nullptr ),
+    aboutAction( nullptr ),
     receiveCoinsTabAction( nullptr ),
-    receiveCoinsMenuAction(0),
-    optionsAction(0),
-    toggleHideAction(0),
-    encryptWalletAction(0),
-    backupWalletAction(0),
-    changePassphraseAction(0),
-    aboutQtAction(0),
-    openConsoleWindowMenuAction( nullptr ),
-    openAction(0),
-    showHelpMessageAction(0),
+    receiveCoinsMenuAction( nullptr ),
+    optionsAction( nullptr ),
+    toggleHideAction( nullptr ),
+    encryptWalletAction( nullptr ),
+    backupWalletAction( nullptr ),
+    changePassphraseAction( nullptr ),
+    aboutQtAction( nullptr ),
+    showGutsWindowMenuAction( nullptr ),
+    openAction( nullptr ),
+    showHelpMessageAction( nullptr ),
     digTabAction( nullptr ),
-    showDebugWindowButton( nullptr ),
+    showGutsWindowButton( nullptr ),
     trayIcon(0),
     trayIconMenu(0),
     notificator(0),
@@ -406,10 +405,9 @@ void DogecoinGUI::createActions()
     paperWalletAction = new QAction(QIcon(":/icons/print"), tr("&Print paper wallets"), this);
     paperWalletAction->setStatusTip(tr("Print paper wallets"));
 
-    openConsoleWindowMenuAction = new QAction( platformStyle->TextColorIcon( ":/icons/debugwindow" ), tr( "&Debug window" ), this ) ;
-    openConsoleWindowMenuAction->setStatusTip( tr( "Open debugging and diagnostic console" ) ) ;
-    // initially disable the debug window menu item
-    openConsoleWindowMenuAction->setEnabled( false ) ;
+    showGutsWindowMenuAction = new QAction( platformStyle->TextColorIcon( ":/icons/console" ), tr( "Show Guts window" ), this ) ;
+    // initially disable the guts window menu item
+    showGutsWindowMenuAction->setEnabled( false ) ;
 
     usedSendingAddressesAction = new QAction(platformStyle->TextColorIcon(":/icons/address-book"), tr("&Such sending addresses..."), this);
     usedSendingAddressesAction->setStatusTip(tr("Show the list of used sending addresses and labels"));
@@ -422,18 +420,18 @@ void DogecoinGUI::createActions()
     showHelpMessageAction = new QAction( platformStyle->TextColorIcon( ":/icons/info" ), tr("&Command-line options"), this ) ;
     showHelpMessageAction->setMenuRole( QAction::NoRole ) ;
 
-    connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
-    connect(aboutAction, SIGNAL(triggered()), this, SLOT(aboutClicked()));
-    connect(aboutQtAction, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
-    connect(optionsAction, SIGNAL(triggered()), this, SLOT(optionsClicked()));
-    connect(toggleHideAction, SIGNAL(triggered()), this, SLOT(toggleHidden()));
-    connect(showHelpMessageAction, SIGNAL(triggered()), this, SLOT(showHelpMessageClicked()));
-    connect( openConsoleWindowMenuAction, SIGNAL( triggered() ), this, SLOT( showDebugWindow() ) ) ;
-    // prevents an open debug window from becoming stuck/unusable on shutdown
-    connect(quitAction, SIGNAL(triggered()), rpcConsole, SLOT(hide()));
+    connect( quitAction, SIGNAL( triggered() ), qApp, SLOT( quit() ) ) ;
+    connect( aboutAction, SIGNAL( triggered() ), this, SLOT( aboutClicked() ) ) ;
+    connect( aboutQtAction, SIGNAL( triggered() ), qApp, SLOT( aboutQt() ) ) ;
+    connect( optionsAction, SIGNAL( triggered() ), this, SLOT( optionsClicked() ) ) ;
+    connect( toggleHideAction, SIGNAL( triggered() ), this, SLOT( toggleHidden() ) ) ;
+    connect( showHelpMessageAction, SIGNAL( triggered() ), this, SLOT( showHelpMessageClicked() ) ) ;
+    connect( showGutsWindowMenuAction, SIGNAL( triggered() ), this, SLOT( showGutsWindow() ) ) ;
+    // hide an open guts window on quit
+    connect( quitAction, SIGNAL( triggered() ), rpcConsole, SLOT( hide() ) ) ;
 
 #ifdef ENABLE_WALLET
-    if(walletFrame)
+    if ( walletFrame != nullptr )
     {
         connect(encryptWalletAction, SIGNAL(triggered(bool)), walletFrame, SLOT(encryptWallet(bool)));
         connect(backupWalletAction, SIGNAL(triggered()), walletFrame, SLOT(backupWallet()));
@@ -447,8 +445,8 @@ void DogecoinGUI::createActions()
     }
 #endif
 
-    new QShortcut( QKeySequence( Qt::CTRL + Qt::SHIFT + Qt::Key_C ), this, SLOT( showDebugWindowActivateConsole() ) ) ;
-    new QShortcut( QKeySequence( Qt::CTRL + Qt::SHIFT + Qt::Key_D ), this, SLOT( showDebugWindow() ) ) ;
+    new QShortcut( QKeySequence( Qt::CTRL + Qt::SHIFT + Qt::Key_C ), this, SLOT( showGutsWindowActivateConsole() ) ) ;
+    new QShortcut( QKeySequence( Qt::CTRL + Qt::SHIFT + Qt::Key_G ), this, SLOT( showGutsWindow() ) ) ;
 }
 
 void DogecoinGUI::createMenuBar()
@@ -487,9 +485,8 @@ void DogecoinGUI::createMenuBar()
     settings->addAction(optionsAction);
 
     QMenu *help = appMenuBar->addMenu(tr("&Help"));
-    if ( walletFrame != nullptr )
-    {
-        help->addAction( openConsoleWindowMenuAction ) ;
+    if ( walletFrame != nullptr ) {
+        help->addAction( showGutsWindowMenuAction ) ;
     }
     help->addAction(showHelpMessageAction);
     help->addSeparator();
@@ -519,13 +516,14 @@ void DogecoinGUI::createToolBars()
         filler->setSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::Ignored ) ;
         toolbar->addWidget( filler ) ;
 
-        showDebugWindowButton = new QToolButton( /* parent */ this ) ;
-        showDebugWindowButton->setIcon( platformStyle->SingleColorIcon( ":/icons/debugwindow" ) ) ;
-        showDebugWindowButton->setCheckable( false ) ;
-        showDebugWindowButton->setShortcut( QKeySequence( Qt::ALT + Qt::Key_0 ) ) ;
-        showDebugWindowButton->setToolButtonStyle( Qt::ToolButtonIconOnly ) ;
-        connect( showDebugWindowButton, SIGNAL( clicked() ), this, SLOT( showDebugWindow() ) ) ;
-        toolbar->addWidget( showDebugWindowButton ) ;
+        showGutsWindowButton = new QToolButton( /* parent */ this ) ;
+        showGutsWindowButton->setIcon( platformStyle->SingleColorIcon( ":/icons/console" ) ) ;
+        showGutsWindowButton->setCheckable( false ) ;
+        showGutsWindowButton->setShortcut( QKeySequence( Qt::ALT + Qt::Key_0 ) ) ;
+        showGutsWindowButton->setToolButtonStyle( Qt::ToolButtonIconOnly ) ;
+        showGutsWindowButton->setToolTip( "Guts" ) ;
+        connect( showGutsWindowButton, SIGNAL( clicked() ), this, SLOT( showGutsWindow() ) ) ;
+        toolbar->addWidget( showGutsWindowButton ) ;
     }
 }
 
@@ -642,14 +640,14 @@ void DogecoinGUI::setWalletActionsEnabled( bool enabled )
 void DogecoinGUI::createTrayIcon(const NetworkStyle *networkStyle)
 {
 #ifndef Q_OS_MAC
-    trayIcon = new QSystemTrayIcon(this);
+    trayIcon = new QSystemTrayIcon( this ) ;
     QString toolTip = QString( PACKAGE_NAME ) + " peer " + networkStyle->getTextToAppendToTitle() ;
-    trayIcon->setToolTip(toolTip);
-    trayIcon->setIcon(networkStyle->getTrayAndWindowIcon());
-    trayIcon->hide();
+    trayIcon->setToolTip( toolTip ) ;
+    trayIcon->setIcon( networkStyle->getTrayAndWindowIcon() ) ;
+    trayIcon->hide() ;
 #endif
 
-    notificator = new Notificator(QApplication::applicationName(), trayIcon, this);
+    notificator = new Notificator( QApplication::applicationName(), trayIcon, this ) ;
 }
 
 void DogecoinGUI::createTrayIconMenu()
@@ -665,13 +663,13 @@ void DogecoinGUI::createTrayIconMenu()
     connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
             this, SLOT(trayIconActivated(QSystemTrayIcon::ActivationReason)));
 #else
-    // Note: On Mac, the dock icon is used to provide the tray's functionality.
+    // Note: On Mac, the dock icon is used to provide the tray's functionality
     MacDockIconHandler *dockIconHandler = MacDockIconHandler::instance();
     dockIconHandler->setMainWindow((QMainWindow *)this);
     trayIconMenu = dockIconHandler->dockMenu();
 #endif
 
-    // Configuration of the tray icon (or dock icon) icon menu
+    // Configuration of the tray icon (or dock icon) menu
     trayIconMenu->addAction( toggleHideAction ) ;
     trayIconMenu->addSeparator() ;
     trayIconMenu->addAction( sendCoinsMenuAction ) ;
@@ -681,7 +679,7 @@ void DogecoinGUI::createTrayIconMenu()
     trayIconMenu->addAction( verifyMessageAction ) ;
     trayIconMenu->addSeparator() ;
     trayIconMenu->addAction( optionsAction ) ;
-    trayIconMenu->addAction( openConsoleWindowMenuAction ) ;
+    trayIconMenu->addAction( showGutsWindowMenuAction ) ;
 #ifndef Q_OS_MAC // This is built-in on Mac
     trayIconMenu->addSeparator() ;
     trayIconMenu->addAction( quitAction ) ;
@@ -716,7 +714,7 @@ void DogecoinGUI::aboutClicked()
     dlg.exec() ;
 }
 
-void DogecoinGUI::showDebugWindow()
+void DogecoinGUI::showGutsWindow()
 {
     rpcConsole->showNormal() ;
     rpcConsole->show() ;
@@ -724,10 +722,10 @@ void DogecoinGUI::showDebugWindow()
     rpcConsole->activateWindow() ;
 }
 
-void DogecoinGUI::showDebugWindowActivateConsole()
+void DogecoinGUI::showGutsWindowActivateConsole()
 {
     rpcConsole->switchToRPCConsoleTab() ;
-    showDebugWindow() ;
+    showGutsWindow() ;
 }
 
 void DogecoinGUI::showHelpMessageClicked()
@@ -806,9 +804,22 @@ void DogecoinGUI::updateNetworkInfo()
     QString tooltip ;
 
     if ( networkModel->isNetworkActive() ) {
-        tooltip = tr( "%n active connection(s) to Dogecoin network", "", count ) + QString( ".<br>" ) + tr( "Click to switch network activity off" ) ;
+        tooltip = tr( "%n active connection(s) to Dogecoin network", "", count ) ;
+
+        QString peersInfo ;
+        if ( g_connman != nullptr ) {
+            peersInfo += QString( "<br><nobr>" ) ;
+            peersInfo += QString( QChar( 0x2198 /* south east arrow */ ) ) + " " + GUIUtil::connectedPeersInfo( "in" ) ;
+            peersInfo += QString( QChar( 0x00A0 /* non-breaking space */ ) ) + QString( QChar( 0x00A0 ) ) ;
+            peersInfo += QString( QChar( 0x2196 /* north west arrow */ ) ) + " " + GUIUtil::connectedPeersInfo( "out" ) ;
+            peersInfo += QString( "</nobr>" ) ;
+        }
+        tooltip += peersInfo ;
+
+        tooltip += QString( "<br>" ) + tr( "Click to switch network activity off" ) ;
     } else {
-        tooltip = tr( "Network activity is off" )  + QString( ".<br>" ) + tr( "Click to turn it back on" ) ;
+        tooltip = tr( "Network activity is off" ) ;
+        tooltip += QString( "<br>" ) + tr( "Click to turn it back on" ) ;
         icon = ":/icons/network_disabled" ;
     }
 
@@ -1063,27 +1074,27 @@ void DogecoinGUI::closeEvent( QCloseEvent * event )
 #endif
 }
 
-void DogecoinGUI::showEvent(QShowEvent *event)
+void DogecoinGUI::showEvent( QShowEvent * event )
 {
-    // enable the debug window when the main window shows up
-    openConsoleWindowMenuAction->setEnabled( true ) ;
+    // enable guts window menu item when the main window shows up
+    showGutsWindowMenuAction->setEnabled( true ) ;
     aboutAction->setEnabled( true ) ;
     optionsAction->setEnabled( true ) ;
 }
 
 #ifdef ENABLE_WALLET
-void DogecoinGUI::incomingTransaction(const QString& date, int unit, const CAmount& amount, const QString& type, const QString& address, const QString& label)
+void DogecoinGUI::incomingTransaction( const QString & date, const unitofcoin & unit, const CAmount & amount, const QString & type, const QString & address, const QString & label )
 {
     // On new transaction, make an info balloon
-    QString msg = tr("Date: %1\n").arg(date) +
+    QString msg = tr("Date: %1\n").arg( date ) +
                   tr("Amount: %1\n").arg( UnitsOfCoin::formatWithUnit( unit, amount, true ) ) +
-                  tr("Type: %1\n").arg(type);
+                  tr("Type: %1\n").arg( type ) ;
     if (!label.isEmpty())
         msg += tr("Label: %1\n").arg(label);
     else if (!address.isEmpty())
         msg += tr("Address: %1\n").arg(address);
-    message((amount)<0 ? tr("Sent transaction") : tr("Incoming transaction"),
-             msg, CClientUserInterface::MSG_INFORMATION);
+    message( ( amount < 0 ) ? tr("Sent transaction") : tr("Incoming transaction"),
+             msg, CClientUserInterface::MSG_INFORMATION ) ;
 }
 #endif
 
@@ -1098,7 +1109,7 @@ void DogecoinGUI::dropEvent(QDropEvent *event)
 {
     if(event->mimeData()->hasUrls())
     {
-        Q_FOREACH(const QUrl &uri, event->mimeData()->urls())
+        for ( const QUrl & uri : event->mimeData()->urls() )
         {
             Q_EMIT receivedURI(uri.toString());
         }
@@ -1140,17 +1151,17 @@ void DogecoinGUI::setHDStatus(int hdEnabled)
     labelWalletHDStatusIcon->setEnabled(hdEnabled);
 }
 
-void DogecoinGUI::setEncryptionStatus(int status)
+void DogecoinGUI::setEncryptionStatus( const WalletEncryptionStatus & status )
 {
-    switch(status)
+    switch ( status )
     {
-    case WalletModel::Unencrypted:
+    case WalletEncryptionStatus::Unencrypted:
         labelWalletEncryptionIcon->hide();
         encryptWalletAction->setChecked(false);
         changePassphraseAction->setEnabled(false);
         encryptWalletAction->setEnabled(true);
         break;
-    case WalletModel::Unlocked:
+    case WalletEncryptionStatus::Unlocked:
         labelWalletEncryptionIcon->show();
         labelWalletEncryptionIcon->setPixmap(platformStyle->SingleColorIcon(":/icons/lock_open").pixmap( BOTTOMBAR_ICONSIZE, BOTTOMBAR_ICONSIZE ));
         labelWalletEncryptionIcon->setToolTip(tr("Wallet is <b>encrypted</b> and currently <b>unlocked</b>"));
@@ -1158,7 +1169,7 @@ void DogecoinGUI::setEncryptionStatus(int status)
         changePassphraseAction->setEnabled(true);
         encryptWalletAction->setEnabled(false); // TODO: decrypt currently not supported
         break;
-    case WalletModel::Locked:
+    case WalletEncryptionStatus::Locked:
         labelWalletEncryptionIcon->show();
         labelWalletEncryptionIcon->setPixmap(platformStyle->SingleColorIcon(":/icons/lock_closed").pixmap( BOTTOMBAR_ICONSIZE, BOTTOMBAR_ICONSIZE ));
         labelWalletEncryptionIcon->setToolTip(tr("Wallet is <b>encrypted</b> and currently <b>locked</b>"));
@@ -1328,22 +1339,25 @@ void DogecoinGUI::toggleNetworkActive()
         networkModel->setNetworkActive( ! networkModel->isNetworkActive() ) ;
 }
 
-UnitDisplayStatusBarControl::UnitDisplayStatusBarControl(const PlatformStyle *platformStyle) :
-    optionsModel( nullptr ),
-    menu(0)
+UnitDisplayStatusBarControl::UnitDisplayStatusBarControl( const PlatformStyle * platformStyle )
+    : optionsModel( nullptr )
+    , menu( nullptr )
 {
-    createContextMenu();
+    createContextMenu() ;
     setToolTip( tr("Unit to show amounts in. Click to choose another unit") ) ;
-    QList< UnitsOfCoin::Unit > units = UnitsOfCoin::availableUnits() ;
-    int max_width = 0;
-    const QFontMetrics fm(font());
-    Q_FOREACH (const UnitsOfCoin::Unit unit, units)
-    {
-        max_width = qMax(max_width, fm.width( UnitsOfCoin::name( unit ) )) ;
+    QList< unitofcoin > units = UnitsOfCoin::availableUnits() ;
+    int maxWidth = 0 ;
+    const QFontMetrics fm( font() ) ;
+    for ( const unitofcoin & unit : units ) {
+#if QT_VERSION > 0x050b00
+        maxWidth = std::max( maxWidth, fm.horizontalAdvance( UnitsOfCoin::name( unit ) ) ) ;
+#else
+        maxWidth = std::max( maxWidth, fm.width( UnitsOfCoin::name( unit ) ) ) ;
+#endif
     }
-    setMinimumSize(max_width, 0);
-    setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    setStyleSheet(QString("QLabel { color : %1 }").arg(platformStyle->SingleColor().name()));
+    setMinimumSize( maxWidth, 0 ) ;
+    setAlignment( Qt::AlignRight | Qt::AlignVCenter ) ;
+    setStyleSheet( QString( "QLabel { color : %1 }" ).arg( platformStyle->SingleColor().name() ) ) ;
 }
 
 /** So that it responds to button clicks */
@@ -1352,17 +1366,17 @@ void UnitDisplayStatusBarControl::mousePressEvent(QMouseEvent *event)
     onDisplayUnitsClicked(event->pos());
 }
 
-/** Creates context menu, its actions, and wires up all the relevant signals for mouse events. */
+/** Creates context menu, its actions, and wires up all the relevant signals for mouse events */
 void UnitDisplayStatusBarControl::createContextMenu()
 {
-    menu = new QMenu(this);
-    Q_FOREACH( UnitsOfCoin::Unit u, UnitsOfCoin::availableUnits() )
+    menu = new QMenu( this ) ;
+    for ( unitofcoin u : UnitsOfCoin::availableUnits() )
     {
-        QAction *menuAction = new QAction( QString( UnitsOfCoin::name( u ) ), this ) ;
-        menuAction->setData(QVariant(u));
-        menu->addAction(menuAction);
+        QAction * menuAction = new QAction( QString( UnitsOfCoin::name( u ) ), this ) ;
+        menuAction->setData( QVariant( static_cast< int >( u ) ) ) ;
+        menu->addAction( menuAction ) ;
     }
-    connect(menu,SIGNAL(triggered(QAction*)),this,SLOT(onMenuSelection(QAction*)));
+    connect( menu, SIGNAL( triggered(QAction*) ), this, SLOT( onMenuSelection(QAction*) ) ) ;
 }
 
 /** Lets the control know about the Options Model (and its signals) */
@@ -1371,22 +1385,22 @@ void UnitDisplayStatusBarControl::setOptionsModel( OptionsModel * model )
     this->optionsModel = model ;
     if ( model != nullptr )
     {
-        connect( model, SIGNAL( displayUnitChanged(int) ), this, SLOT( updateDisplayUnit(int) ) ) ;
+        connect( model, SIGNAL( displayUnitChanged(unitofcoin) ), this, SLOT( updateDisplayUnit(unitofcoin) ) ) ;
         updateDisplayUnit( model->getDisplayUnit() ) ;
     }
 }
 
 /** When Display Units are changed on OptionsModel it will refresh the display text of the control on the status bar */
-void UnitDisplayStatusBarControl::updateDisplayUnit(int newUnits)
+void UnitDisplayStatusBarControl::updateDisplayUnit( unitofcoin newUnit )
 {
-    setText( UnitsOfCoin::name( newUnits ) ) ;
+    setText( UnitsOfCoin::name( newUnit ) ) ;
 }
 
 /** Shows context menu with Display Unit options by the mouse coordinates */
-void UnitDisplayStatusBarControl::onDisplayUnitsClicked(const QPoint& point)
+void UnitDisplayStatusBarControl::onDisplayUnitsClicked( const QPoint & point )
 {
-    QPoint globalPos = mapToGlobal(point);
-    menu->exec(globalPos);
+    QPoint globalPos = mapToGlobal( point ) ;
+    menu->exec( globalPos ) ;
 }
 
 /** Tells underlying optionsModel to update its current display unit */

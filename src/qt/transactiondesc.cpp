@@ -1,11 +1,10 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "transactiondesc.h"
 
-#include "unitsofcoin.h"
 #include "guiutil.h"
 #include "paymentserver.h"
 #include "transactionrecord.h"
@@ -49,7 +48,7 @@ QString TransactionDesc::FormatTxStatus(const CWalletTx& wtx)
     }
 }
 
-QString TransactionDesc::toHTML( CWallet * wallet, CWalletTx & wtx, TransactionRecord * rec, int unit )
+QString TransactionDesc::toHTML( CWallet * wallet, CWalletTx & wtx, TransactionRecord * rec, unitofcoin unit )
 {
     QString strHTML ;
 
@@ -139,7 +138,7 @@ QString TransactionDesc::toHTML( CWallet * wallet, CWalletTx & wtx, TransactionR
             nUnmatured += wallet->GetCredit( txout, ISMINE_ALL ) ;
         strHTML += "<b>" + tr("Credit") + ":</b> ";
         if ( wtx.IsInMainChain() )
-            strHTML += UnitsOfCoin::formatHtmlWithUnit( unit, nUnmatured )+ " (" + tr("matures in %n more block(s)", "", wtx.GetBlocksToMaturity()) + ")" ;
+            strHTML += UnitsOfCoin::formatHtmlWithUnit( unit, nUnmatured ) + " (" + tr("matures in %n more block(s)", "", wtx.GetBlocksToMaturity()) + ")" ;
         else
             strHTML += "(" + tr("not accepted") + ")" ;
         strHTML += "<br>" ;
@@ -244,7 +243,7 @@ QString TransactionDesc::toHTML( CWallet * wallet, CWalletTx & wtx, TransactionR
 
     strHTML += "<b>" + tr("Hash of transaction") + ":</b> " + rec->getTxHash() + "<br>";
     strHTML += "<b>" + tr("Full size of transaction") + ":</b> " + QString::number( wtx.tx->GetFullSize() ) + " bytes<br>" ;
-    strHTML += "<b>" + tr("Output index of subtransaction") + ":</b> " + QString::number( rec->getSubtransactionIndex() ) + "<br>" ;
+    strHTML += "<b>" + tr("Index of output") + ":</b> " + QString::number( rec->getIndexOfOutput() ) + "<br>" ;
 
     // Message from dogecoin: URI like dogecoin:D123...?message=example
     for ( const std::pair< std::string, std::string > & r : wtx.vOrderForm )

@@ -11,6 +11,7 @@
 #endif
 
 #include "amount.h"
+#include "unitsofcoin.h"
 
 #include <QLabel>
 #include <QMainWindow>
@@ -31,11 +32,12 @@ class RPCConsole;
 class SendCoinsRecipient;
 class UnitDisplayStatusBarControl;
 class WalletFrame;
-class WalletModel;
+class WalletModel ;
+enum class WalletEncryptionStatus ;
 class ChainSyncOverlay ;
 class HelpMessageDialog ;
 
-class CWallet;
+class CWallet ;
 
 QT_BEGIN_NAMESPACE
 class QAction;
@@ -99,31 +101,31 @@ private:
     QProgressBar *progressBar;
     QProgressDialog *progressDialog;
 
-    QMenuBar *appMenuBar;
+    QMenuBar * appMenuBar ;
     QAction * overviewTabAction ;
     QAction * historyTabAction ;
-    QAction *quitAction;
+    QAction * quitAction ;
     QAction * sendCoinsTabAction ;
-    QAction *sendCoinsMenuAction;
-    QAction *usedSendingAddressesAction;
-    QAction *usedReceivingAddressesAction;
-    QAction *signMessageAction;
-    QAction *verifyMessageAction;
-    QAction *paperWalletAction;
-    QAction *aboutAction;
+    QAction * sendCoinsMenuAction ;
+    QAction * usedSendingAddressesAction ;
+    QAction * usedReceivingAddressesAction ;
+    QAction * signMessageAction ;
+    QAction * verifyMessageAction ;
+    QAction * paperWalletAction ;
+    QAction * aboutAction ;
     QAction * receiveCoinsTabAction ;
-    QAction *receiveCoinsMenuAction;
-    QAction *optionsAction;
-    QAction *toggleHideAction;
-    QAction *encryptWalletAction;
-    QAction *backupWalletAction;
-    QAction *changePassphraseAction;
-    QAction *aboutQtAction;
-    QAction * openConsoleWindowMenuAction ;
-    QAction *openAction;
-    QAction *showHelpMessageAction;
+    QAction * receiveCoinsMenuAction ;
+    QAction * optionsAction ;
+    QAction * toggleHideAction ;
+    QAction * encryptWalletAction ;
+    QAction * backupWalletAction ;
+    QAction * changePassphraseAction ;
+    QAction * aboutQtAction ;
+    QAction * showGutsWindowMenuAction ;
+    QAction * openAction ;
+    QAction * showHelpMessageAction ;
     QAction * digTabAction ;
-    QToolButton * showDebugWindowButton ;
+    QToolButton * showGutsWindowButton ;
 
     QSystemTrayIcon *trayIcon;
     QMenu *trayIconMenu;
@@ -182,22 +184,18 @@ public Q_SLOTS:
     void message(const QString &title, const QString &message, unsigned int style, bool *ret = NULL);
 
 #ifdef ENABLE_WALLET
-    /** Set the encryption status as shown in the UI.
-       @param[in] status            current encryption status
-       @see WalletModel::EncryptionStatus
+    /** Set the encryption status as shown in the UI
     */
-    void setEncryptionStatus(int status);
+    void setEncryptionStatus( const WalletEncryptionStatus & status ) ;
 
-    /** Set the hd-enabled status as shown in the UI.
-     @param[in] status            current hd enabled status
-     @see WalletModel::EncryptionStatus
+    /** Set the hd-enabled status as shown in the UI
      */
-    void setHDStatus(int hdEnabled);
+    void setHDStatus( int hdEnabled ) ;
 
-    bool handlePaymentRequest(const SendCoinsRecipient& recipient);
+    bool handlePaymentRequest( const SendCoinsRecipient & recipient ) ;
 
     /** Show incoming transaction notification for new transactions */
-    void incomingTransaction(const QString& date, int unit, const CAmount& amount, const QString& type, const QString& address, const QString& label);
+    void incomingTransaction( const QString & date, const unitofcoin & unit, const CAmount & amount, const QString & type, const QString & address, const QString & label ) ;
 #endif // ENABLE_WALLET
 
 private Q_SLOTS:
@@ -226,10 +224,10 @@ private Q_SLOTS:
     void optionsClicked();
     /** Show about dialog */
     void aboutClicked();
-    /** Show debug window */
-    void showDebugWindow();
-    /** Show debug window and set focus to the console */
-    void showDebugWindowActivateConsole();
+    /** Show guts window */
+    void showGutsWindow() ;
+    /** Show guts window with active console page */
+    void showGutsWindowActivateConsole() ;
     /** Show help message dialog */
     void showHelpMessageClicked();
 #ifndef Q_OS_MAC
@@ -275,19 +273,19 @@ protected:
     void mousePressEvent(QMouseEvent *event);
 
 private:
-    OptionsModel *optionsModel;
-    QMenu* menu;
+    OptionsModel * optionsModel ;
+    QMenu * menu ;
 
     /** Shows context menu with Display Unit options by the mouse coordinates */
-    void onDisplayUnitsClicked(const QPoint& point);
-    /** Creates context menu, its actions, and wires up all the relevant signals for mouse events. */
-    void createContextMenu();
+    void onDisplayUnitsClicked( const QPoint & point ) ;
+    /** Creates context menu, its actions, and wires up all the relevant signals for mouse events */
+    void createContextMenu() ;
 
 private Q_SLOTS:
     /** When Display Units are changed on OptionsModel it will refresh the display text of the control on the status bar */
-    void updateDisplayUnit(int newUnits);
-    /** Tells underlying optionsModel to update its current display unit. */
-    void onMenuSelection(QAction* action);
+    void updateDisplayUnit( unitofcoin newUnit ) ;
+    /** Tells underlying optionsModel to update its current display unit */
+    void onMenuSelection( QAction * action ) ;
 };
 
 #endif

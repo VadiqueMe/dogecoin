@@ -56,7 +56,7 @@ const CBaseChainParams & BaseParams() ;
 
 CBaseChainParams & BaseParamsFor( const std::string & chain ) ;
 
-/** Sets the params returned by Params() to those for the given network */
+/** Sets the params returned by BaseParams() to those for the given network */
 void SelectBaseParams( const std::string & chain ) ;
 
 #endif

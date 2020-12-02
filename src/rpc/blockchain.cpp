@@ -742,7 +742,7 @@ UniValue getblock( const JSONRPCRequest & request )
     CBlock block ;
     CBlockIndex * pblockindex = mapBlockIndex[ hash ] ;
 
-    if ( fHavePruned && ! ( pblockindex->nStatus & BLOCK_DATA_EXISTS ) && pblockindex->nTx > 0 )
+    if ( fHavePruned && ! ( pblockindex->nStatus & BLOCK_DATA_EXISTS ) && pblockindex->nBlockTx > 0 )
         throw JSONRPCError( RPC_MISC_ERROR, "Block not available (pruned data)" ) ;
 
     if ( ! ReadBlockFromDisk( block, pblockindex, Params().GetConsensus( pblockindex->nHeight ) ) )

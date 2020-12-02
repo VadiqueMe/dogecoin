@@ -1,12 +1,12 @@
 Translations
 ============
 
-The Bitcoin-Core project has been designed to support multiple localisations. This makes adding new phrases, and completely new languages easily achievable. For managing all application translations, Dogecoin Core makes use of the Transifex online translation management tool
+This project has been designed to support multiple localizations. This makes adding new phrases, and completely new languages easily achievable. For managing all application translations, Dogecoin Core makes use of the Transifex online translation management tool
 
 ### Helping to translate (using Transifex)
 Transifex is setup to monitor the GitHub repo for updates, and when code containing new translations is found, Transifex will process any changes. It may take several hours after a pull-request has been merged, to appear in the Transifex web interface.
 
-See the [Transifex project](https://www.transifex.com/projects/p/bitcoin/) to assist in translations. You should also join the translation mailing list for announcements - see details below
+See the [Transifex project](https://www.transifex.com/projects/p/bitcoin/) to assist in translations. Also join the translation mailing list for announcements - see details below
 
 ### Writing code with translations
 We use automated scripts to help extract translations in both Qt, and non-Qt source files. It is rarely necessary to manually edit the files in `src/qt/locale/`. The translation source files must adhere to the following format:
@@ -20,22 +20,9 @@ cd src/
 make translate
 ```
 
-`contrib/dogecoin-qt.pro` takes care of generating `.qm` (binary compiled) files from `.ts` (source files) files. It’s mostly automated, and you shouldn’t need to worry about it
-
 **Example Qt translation**
 ```cpp
-QToolBar *toolbar = addToolBar(tr("Tabs toolbar"));
-```
-
-### Creating a pull-request
-For general PRs, you shouldn’t include any updates to the translation source files. They will be updated periodically, primarily around pre-releases, allowing time for any new phrases to be translated before public releases. This is also important in avoiding translation related merge conflicts.
-
-When an updated source file is merged into the GitHub repo, Transifex will automatically detect it (although it can take several hours). Once processed, the new strings will show up as "Remaining" in the Transifex web interface and are ready for translators.
-
-To create the pull-request, use the following commands:
-```
-git add src/qt/bitcoinstrings.cpp src/qt/locale/dogecoin_en.ts
-git commit
+QToolBar * toolbar = addToolBar( tr("Tabs toolbar") ) ;
 ```
 
 ### Creating a Transifex account

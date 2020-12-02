@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -91,18 +91,19 @@ public:
 
        Call with transaction that was added, removed or changed
      */
-    void updateWallet(const uint256 &hash, int status, bool showTransaction)
+    void updateWallet( const uint256 & hash, int status, bool showTransaction )
     {
         qDebug() << "TransactionTablePriv::updateWallet: " + QString::fromStdString(hash.ToString()) + " " + QString::number(status);
 
-        // Find bounds of this transaction in model
-        QList< TransactionRecord >::iterator lower = qLowerBound(
+        // find bounds of this transaction in model
+        QList< TransactionRecord >::iterator lower = std::lower_bound(
             cachedWallet.begin(), cachedWallet.end(), hash, TxHashLessThan() ) ;
-        QList< TransactionRecord >::iterator upper = qUpperBound(
+        QList< TransactionRecord >::iterator upper = std::upper_bound(
             cachedWallet.begin(), cachedWallet.end(), hash, TxHashLessThan() ) ;
-        int lowerIndex = (lower - cachedWallet.begin());
-        int upperIndex = (upper - cachedWallet.begin());
-        bool inModel = (lower != upper);
+
+        int lowerIndex = ( lower - cachedWallet.begin() ) ;
+        int upperIndex = ( upper - cachedWallet.begin() ) ;
+        bool inModel = ( lower != upper ) ;
 
         if(status == CT_UPDATED)
         {
@@ -173,49 +174,47 @@ public:
         return cachedWallet.size();
     }
 
-    TransactionRecord *index(int idx)
+    TransactionRecord * index( int idx )
     {
-        if(idx >= 0 && idx < cachedWallet.size())
+        if ( idx >= 0 && idx < cachedWallet.size() )
         {
-            TransactionRecord *rec = &cachedWallet[idx];
+            TransactionRecord * rec = &cachedWallet[ idx ] ;
 
             // Get required locks upfront. This avoids the GUI from getting
             // stuck if the core is holding the locks for a longer time - for
             // example, during a wallet rescan
             //
             // If a status update is needed (blocks came in since last check),
-            //  update the status of this transaction from the wallet. Otherwise,
+            // update the status of this transaction from the wallet. Otherwise,
             // simply re-use the cached status
-            TRY_LOCK(cs_main, lockMain);
-            if(lockMain)
+            TRY_LOCK( cs_main, lockMain ) ;
+            if ( lockMain )
             {
-                TRY_LOCK(wallet->cs_wallet, lockWallet);
-                if(lockWallet && rec->statusUpdateNeeded())
+                TRY_LOCK( wallet->cs_wallet, lockWallet ) ;
+                if ( lockWallet && rec->isUpdateNeeded() )
                 {
                     std::map< uint256, CWalletTx >::iterator mi = wallet->mapWallet.find( rec->hashOfTransaction ) ;
 
-                    if(mi != wallet->mapWallet.end())
-                    {
-                        rec->updateStatus(mi->second);
-                    }
+                    if ( mi != wallet->mapWallet.end() )
+                        rec->updateStatus( mi->second ) ;
                 }
             }
-            return rec;
+            return rec ;
         }
-        return 0;
+        return nullptr ;
     }
 
-    QString describe(TransactionRecord *rec, int unit)
+    QString describe( TransactionRecord * rec, unitofcoin unit )
     {
         {
-            LOCK2(cs_main, wallet->cs_wallet);
+            LOCK2( cs_main, wallet->cs_wallet ) ;
             std::map< uint256, CWalletTx >::iterator mi = wallet->mapWallet.find( rec->hashOfTransaction ) ;
-            if(mi != wallet->mapWallet.end())
+            if ( mi != wallet->mapWallet.end() )
             {
-                return TransactionDesc::toHTML(wallet, mi->second, rec, unit);
+                return TransactionDesc::toHTML( wallet, mi->second, rec, unit ) ;
             }
         }
-        return QString();
+        return QString() ;
     }
 } ;
 
@@ -230,7 +229,7 @@ TransactionTableModel::TransactionTableModel(const PlatformStyle *_platformStyle
     columns << QString() << QString() << tr("Date") << tr("Type") << tr("Label") << GUIUtil::makeTitleForAmountColumn( walletModel->getOptionsModel()->getDisplayUnit() ) ;
     priv->refreshWallet();
 
-    connect(walletModel->getOptionsModel(), SIGNAL(displayUnitChanged(int)), this, SLOT(updateDisplayUnit()));
+    connect( walletModel->getOptionsModel(), SIGNAL( displayUnitChanged(unitofcoin) ), this, SLOT( updateDisplayUnit() ) ) ;
 
     subscribeToCoreSignals();
 }
@@ -285,10 +284,10 @@ QString TransactionTableModel::formatTxStatus(const TransactionRecord *wtx) cons
     switch(wtx->status.status)
     {
     case TransactionStatus::OpenUntilBlock:
-        status = tr("Open for %n more block(s)","",wtx->status.open_for);
+        status = tr("Open for %n more block(s)", "", wtx->status.open_for) ;
         break;
     case TransactionStatus::OpenUntilDate:
-        status = tr("Open until %1").arg(GUIUtil::dateTimeStr(wtx->status.open_for));
+        status = tr("Open until %1").arg( GUIUtil::dateTimeStr( wtx->status.open_for ) ) ;
         break;
     case TransactionStatus::Offline :
         status = tr("Offline") ;
@@ -300,16 +299,16 @@ QString TransactionTableModel::formatTxStatus(const TransactionRecord *wtx) cons
         status = tr("Abandoned");
         break;
     case TransactionStatus::Confirming:
-        status = tr("Confirming (%1 of %2 recommended confirmations)").arg(wtx->status.depth).arg(TransactionRecord::RecommendedNumConfirmations);
+        status = tr("Confirming (%1 of %2 recommended confirmations)").arg( wtx->status.depth ).arg( std::max< int64_t >( 1, GetArg( "-txconfirmblocks", DEFAULT_BLOCKS_TO_CONFIRM_TX ) ) );
         break;
     case TransactionStatus::Confirmed:
-        status = tr("Confirmed (%1 confirmations)").arg(wtx->status.depth);
+        status = tr("Confirmed (%1 confirmations)").arg( wtx->status.depth ) ;
         break;
     case TransactionStatus::Conflicted:
-        status = tr("Conflicted");
+        status = tr("Conflicted") ;
         break;
     case TransactionStatus::Immature:
-        status = tr("Immature (%1 confirmations, will be available after %2)").arg(wtx->status.depth).arg(wtx->status.depth + wtx->status.matures_in);
+        status = tr("Immature (%1 confirmations, will be available after %2)").arg( wtx->status.depth ).arg( wtx->status.depth + wtx->status.matures_in ) ;
         break;
     case TransactionStatus::MaturesWarning:
         status = tr("This block was not received by any other nodes and will probably not be accepted") ;
@@ -435,7 +434,7 @@ QVariant TransactionTableModel::addressColor( const TransactionRecord * rtx ) co
     return QVariant() ;
 }
 
-QString TransactionTableModel::formatTxAmount( const TransactionRecord * rtx, bool showUnconfirmed, UnitsOfCoin::SeparatorStyle separators ) const
+QString TransactionTableModel::formatTxAmount( const TransactionRecord * rtx, bool showUnconfirmed, SeparatorStyle separators ) const
 {
     QString str = UnitsOfCoin::format( walletModel->getOptionsModel()->getDisplayUnit(), rtx->credit + rtx->debit, false, separators ) ;
     if ( showUnconfirmed )
@@ -540,7 +539,7 @@ QVariant TransactionTableModel::data(const QModelIndex &index, int role) const
         case ToAddress:
             return formatTxToAddress(rec, false);
         case Amount:
-            return formatTxAmount( rec, true, UnitsOfCoin::separatorAlways ) ;
+            return formatTxAmount( rec, true, SeparatorStyle::always ) ;
         }
         break;
     case Qt::EditRole:
@@ -629,14 +628,14 @@ QVariant TransactionTableModel::data(const QModelIndex &index, int role) const
                 details.append(QString::fromStdString(rec->address));
                 details.append(" ");
             }
-            details.append( formatTxAmount( rec, false, UnitsOfCoin::separatorNever ) ) ;
+            details.append( formatTxAmount( rec, false, SeparatorStyle::never ) ) ;
             return details;
         }
     case ConfirmedRole:
         return rec->status.countsForBalance;
     case FormattedAmountRole:
         // Used for copy/export, so don't include separators
-        return formatTxAmount( rec, false, UnitsOfCoin::separatorNever ) ;
+        return formatTxAmount( rec, false, SeparatorStyle::never ) ;
     case StatusRole:
         return rec->status.status;
     }

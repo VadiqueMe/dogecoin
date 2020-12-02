@@ -318,14 +318,6 @@
         <translation>Verander die wagwoord wat ek vir kodifikasie van my beursie gebruik</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;Ontfout venster</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Maak ontfouting en diagnostiese konsole oop</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Beursie</translation>
     </message>

@@ -11,9 +11,9 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Debug window</string>
+   <string>Guts</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
+  <layout class="QVBoxLayout" name="gutsWindowVerticalLayout">
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
@@ -39,53 +39,37 @@
        <property name="horizontalSpacing">
         <number>12</number>
        </property>
-       <item row="5" column="0">
-        <spacer name="vertical_space_1">
+       <property name="verticalSpacing">
+        <number>8</number>
+       </property>
+       <item row="12" column="1" colspan="2">
+        <widget class="QLabel" name="tipBlockTime">
+         <property name="cursor">
+          <cursorShape>IBeamCursor</cursorShape>
+         </property>
+         <property name="text">
+          <string notr="true">time</string>
+         </property>
+         <property name="textFormat">
+          <enum>Qt::PlainText</enum>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::TextSelectableByMouse</set>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="0">
+        <spacer name="vertical_space_fill">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
            <width>1</width>
-           <height>4</height>
+           <height>40</height>
           </size>
          </property>
         </spacer>
-       </item>
-       <item row="7" column="1" colspan="2">
-        <widget class="QLabel" name="networkName">
-         <property name="cursor">
-          <cursorShape>IBeamCursor</cursorShape>
-         </property>
-         <property name="text">
-          <string notr="true">network</string>
-         </property>
-         <property name="textFormat">
-          <enum>Qt::PlainText</enum>
-         </property>
-         <property name="textInteractionFlags">
-          <set>Qt::TextSelectableByMouse</set>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1" colspan="2">
-        <widget class="QLabel" name="berkeleyDBVersion">
-         <property name="cursor">
-          <cursorShape>IBeamCursor</cursorShape>
-         </property>
-         <property name="text">
-          <string notr="true">BerkeleyDB</string>
-         </property>
-         <property name="textFormat">
-          <enum>Qt::PlainText</enum>
-         </property>
-         <property name="textInteractionFlags">
-          <set>Qt::TextSelectableByMouse</set>
-         </property>
-        </widget>
        </item>
        <item row="9" column="0">
         <spacer name="vertical_space_2">
@@ -103,30 +87,121 @@
          </property>
         </spacer>
        </item>
-       <item row="17" column="0">
-        <spacer name="vertical_space_fill">
+       <item row="1" column="0">
+        <widget class="QLabel" name="labelClientUserAgent">
+         <property name="text">
+          <string>User Agent</string>
+         </property>
+         <property name="indent">
+          <number>10</number>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_berkeleyDBVersion">
+         <property name="text">
+          <string>Using BerkeleyDB version</string>
+         </property>
+         <property name="indent">
+          <number>10</number>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0">
+        <widget class="QLabel" name="numberOfConnectionsLabel">
+         <property name="text">
+          <string>Number of connections</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="startupTimeLabel">
+         <property name="text">
+          <string>Startup time</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QLabel" name="nameOfNetworkLabel">
+         <property name="text">
+          <string>Name</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="labelNetwork">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Network</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" colspan="2">
+        <widget class="QLabel" name="versionOfThisPeer">
+         <property name="cursor">
+          <cursorShape>IBeamCursor</cursorShape>
+         </property>
+         <property name="text">
+          <string notr="true">unknown</string>
+         </property>
+         <property name="textFormat">
+          <enum>Qt::PlainText</enum>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::TextSelectableByMouse</set>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <spacer name="vertical_space_1">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
            <width>1</width>
-           <height>40</height>
+           <height>4</height>
           </size>
          </property>
         </spacer>
        </item>
-       <item row="16" column="0">
-        <widget class="QLabel" name="labelMemoryUsage">
+       <item row="8" column="1" colspan="2">
+        <widget class="QLabel" name="numberOfConnections">
+         <property name="cursor">
+          <cursorShape>IBeamCursor</cursorShape>
+         </property>
          <property name="text">
-          <string>Memory usage</string>
+          <string notr="true">-1</string>
+         </property>
+         <property name="textFormat">
+          <enum>Qt::PlainText</enum>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::TextSelectableByMouse</set>
          </property>
         </widget>
        </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="versionLabel">
+       <item row="11" column="1" colspan="2">
+        <widget class="QLabel" name="numberOfBlocks">
+         <property name="cursor">
+          <cursorShape>IBeamCursor</cursorShape>
+         </property>
          <property name="text">
-          <string>Version</string>
+          <string notr="true">-1</string>
+         </property>
+         <property name="textFormat">
+          <enum>Qt::PlainText</enum>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::TextSelectableByMouse</set>
          </property>
         </widget>
        </item>
@@ -159,81 +234,6 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="labelClientUserAgent">
-         <property name="text">
-          <string>User Agent</string>
-         </property>
-         <property name="indent">
-          <number>10</number>
-         </property>
-        </widget>
-       </item>
-       <item row="13" column="0">
-        <spacer name="vertical_space_3">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>1</width>
-           <height>4</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="8" column="1" colspan="2">
-        <widget class="QLabel" name="numberOfConnections">
-         <property name="cursor">
-          <cursorShape>IBeamCursor</cursorShape>
-         </property>
-         <property name="text">
-          <string notr="true">-1</string>
-         </property>
-         <property name="textFormat">
-          <enum>Qt::PlainText</enum>
-         </property>
-         <property name="textInteractionFlags">
-          <set>Qt::TextSelectableByMouse</set>
-         </property>
-        </widget>
-       </item>
-       <item row="12" column="0">
-        <widget class="QLabel" name="labelTipBlockTime">
-         <property name="text">
-          <string>Last block time</string>
-         </property>
-        </widget>
-       </item>
-       <item row="14" column="0">
-        <widget class="QLabel" name="labelMempoolTitle">
-         <property name="font">
-          <font>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Memory Pool</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0">
-        <widget class="QLabel" name="labelNetwork">
-         <property name="font">
-          <font>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Network</string>
-         </property>
-        </widget>
-       </item>
        <item row="1" column="1" colspan="2">
         <widget class="QLabel" name="nodeUserAgent">
          <property name="cursor">
@@ -250,20 +250,13 @@
          </property>
         </widget>
        </item>
-       <item row="15" column="0">
-        <widget class="QLabel" name="labelNumberOfTransactions">
-         <property name="text">
-          <string>Current number of transactions</string>
-         </property>
-        </widget>
-       </item>
-       <item row="15" column="1">
-        <widget class="QLabel" name="mempoolNumberTxs">
+       <item row="2" column="1" colspan="2">
+        <widget class="QLabel" name="berkeleyDBVersion">
          <property name="cursor">
           <cursorShape>IBeamCursor</cursorShape>
          </property>
          <property name="text">
-          <string notr="true">-1</string>
+          <string notr="true">BerkeleyDB</string>
          </property>
          <property name="textFormat">
           <enum>Qt::PlainText</enum>
@@ -273,34 +266,20 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="startupTimeLabel">
+       <item row="12" column="0">
+        <widget class="QLabel" name="labelTipBlockTime">
          <property name="text">
-          <string>Startup time</string>
+          <string>Last block time</string>
          </property>
         </widget>
        </item>
-       <item row="7" column="0">
-        <widget class="QLabel" name="nameOfNetworkLabel">
-         <property name="text">
-          <string>Name</string>
-         </property>
-        </widget>
-       </item>
-       <item row="8" column="0">
-        <widget class="QLabel" name="numberOfConnectionsLabel">
-         <property name="text">
-          <string>Number of connections</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1" colspan="2">
-        <widget class="QLabel" name="versionOfThisPeer">
+       <item row="7" column="1" colspan="2">
+        <widget class="QLabel" name="networkName">
          <property name="cursor">
           <cursorShape>IBeamCursor</cursorShape>
          </property>
          <property name="text">
-          <string notr="true">unknown</string>
+          <string notr="true">network</string>
          </property>
          <property name="textFormat">
           <enum>Qt::PlainText</enum>
@@ -329,68 +308,17 @@
          </property>
         </widget>
        </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="versionLabel">
+         <property name="text">
+          <string>Version</string>
+         </property>
+        </widget>
+       </item>
        <item row="11" column="0">
         <widget class="QLabel" name="numberOfBlocksLabel">
          <property name="text">
           <string>Current number of blocks</string>
-         </property>
-        </widget>
-       </item>
-       <item row="11" column="1" colspan="2">
-        <widget class="QLabel" name="numberOfBlocks">
-         <property name="cursor">
-          <cursorShape>IBeamCursor</cursorShape>
-         </property>
-         <property name="text">
-          <string notr="true">-1</string>
-         </property>
-         <property name="textFormat">
-          <enum>Qt::PlainText</enum>
-         </property>
-         <property name="textInteractionFlags">
-          <set>Qt::TextSelectableByMouse</set>
-         </property>
-        </widget>
-       </item>
-       <item row="16" column="1">
-        <widget class="QLabel" name="mempoolSize">
-         <property name="cursor">
-          <cursorShape>IBeamCursor</cursorShape>
-         </property>
-         <property name="text">
-          <string notr="true">0 bytes</string>
-         </property>
-         <property name="textFormat">
-          <enum>Qt::PlainText</enum>
-         </property>
-         <property name="textInteractionFlags">
-          <set>Qt::TextSelectableByMouse</set>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_berkeleyDBVersion">
-         <property name="text">
-          <string>Using BerkeleyDB version</string>
-         </property>
-         <property name="indent">
-          <number>10</number>
-         </property>
-        </widget>
-       </item>
-       <item row="12" column="1" colspan="2">
-        <widget class="QLabel" name="tipBlockTime">
-         <property name="cursor">
-          <cursorShape>IBeamCursor</cursorShape>
-         </property>
-         <property name="text">
-          <string notr="true">time</string>
-         </property>
-         <property name="textFormat">
-          <enum>Qt::PlainText</enum>
-         </property>
-         <property name="textInteractionFlags">
-          <set>Qt::TextSelectableByMouse</set>
          </property>
         </widget>
        </item>
@@ -764,6 +692,109 @@
           </widget>
          </item>
         </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_mempool">
+      <attribute name="title">
+       <string>Memory Pool</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayoutForMempoolPage">
+       <property name="spacing">
+        <number>8</number>
+       </property>
+       <property name="leftMargin">
+        <number>12</number>
+       </property>
+       <property name="topMargin">
+        <number>8</number>
+       </property>
+       <property name="rightMargin">
+        <number>12</number>
+       </property>
+       <property name="bottomMargin">
+        <number>8</number>
+       </property>
+       <item>
+        <layout class="QGridLayout" name="gridLayoutForTopOfMempool" columnstretch="0,0,0">
+         <property name="leftMargin">
+          <number>4</number>
+         </property>
+         <property name="topMargin">
+          <number>8</number>
+         </property>
+         <property name="rightMargin">
+          <number>4</number>
+         </property>
+         <property name="bottomMargin">
+          <number>8</number>
+         </property>
+         <property name="horizontalSpacing">
+          <number>12</number>
+         </property>
+         <property name="verticalSpacing">
+          <number>8</number>
+         </property>
+         <item row="1" column="0">
+          <widget class="QLabel" name="labelMemoryUsage">
+           <property name="text">
+            <string>Memory usage</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="labelNumberOfTransactions">
+           <property name="text">
+            <string>Current number of transactions</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="mempoolNumberTxs">
+           <property name="cursor">
+            <cursorShape>IBeamCursor</cursorShape>
+           </property>
+           <property name="text">
+            <string notr="true">-1</string>
+           </property>
+           <property name="textFormat">
+            <enum>Qt::PlainText</enum>
+           </property>
+           <property name="textInteractionFlags">
+            <set>Qt::TextSelectableByMouse</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1" colspan="2">
+          <widget class="QLabel" name="mempoolSize">
+           <property name="cursor">
+            <cursorShape>IBeamCursor</cursorShape>
+           </property>
+           <property name="text">
+            <string notr="true">0 bytes</string>
+           </property>
+           <property name="textFormat">
+            <enum>Qt::PlainText</enum>
+           </property>
+           <property name="textInteractionFlags">
+            <set>Qt::TextSelectableByMouse</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="mempoolBottomSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>1</width>
+           <height>10</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>

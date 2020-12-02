@@ -290,14 +290,6 @@
         <translation>Змяніць пароль шыфравання гаманца</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>Вакно адладкі</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Адкрыць кансоль дыягностыкі і адладкі</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>Праверыць паведамленне...</translation>
     </message>
@@ -687,10 +679,6 @@
     <message>
         <source>Information</source>
         <translation>Інфармацыя</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>Вакно адладкі</translation>
     </message>
     </context>
 <context>

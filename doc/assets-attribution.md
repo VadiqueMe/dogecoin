@@ -13,7 +13,7 @@ The following is a list of assets used in the dogecoin source and their proper a
     src/qt/res/icons/add.png
     src/qt/res/icons/address-book.png,
     src/qt/res/icons/configure.png
-    src/qt/res/icons/debugwindow.png
+    src/qt/res/icons/console.png
     src/qt/res/icons/edit.png,
     src/qt/res/icons/exitcopy.png
     src/qt/res/icons/editpaste.png,

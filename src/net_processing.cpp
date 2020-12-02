@@ -66,7 +66,7 @@ static const uint64_t RANDOMIZER_ID_ADDRESS_RELAY = 0x3cac0035b5866b90ULL; // SH
 
 // Internal stuff
 namespace {
-    /** Number of nodes with fSyncStarted. */
+    /** Number of nodes with fSyncStarted */
     int nSyncStarted = 0;
 
     /**
@@ -74,7 +74,7 @@ namespace {
      * messages or ban them when processing happens afterwards. Protected by
      * cs_main.
      * Set mapBlockSource[hash].second to false if the node should not be
-     * punished if the block is invalid.
+     * punished if the block is invalid
      */
     std::map<uint256, std::pair<NodeId, bool>> mapBlockSource;
 
@@ -82,7 +82,7 @@ namespace {
      * Filter for transactions that were recently rejected by
      * AcceptToMemoryPool. These are not rerequested until the chain tip
      * changes, at which point the entire filter is reset. Protected by
-     * cs_main.
+     * cs_main
      *
      * Without this filter we'd be re-requesting txs from each of our peers,
      * increasing bandwidth consumption considerably. For instance, with 100
@@ -90,39 +90,39 @@ namespace {
      * bandwidth increase. A flooding attacker attempting to roll-over the
      * filter using minimum-sized, 60byte, transactions might manage to send
      * 1000/sec if we have fast peers, so we pick 120,000 to give our peers a
-     * two minute window to send invs to us.
+     * two minute window to send invs to us
      *
      * Decreasing the false positive rate is fairly cheap, so we pick one in a
      * million to make it highly unlikely for users to have issues with this
-     * filter.
+     * filter
      *
      * Memory used: 1.3 MB
      */
-    std::unique_ptr<CRollingBloomFilter> recentRejects;
-    uint256 hashRecentRejectsChainTip;
+    std::unique_ptr< CRollingBloomFilter > recentRejects ;
+    uint256 hashRecentRejectsChainTip ;
 
-    /** Blocks that are in flight, and that are in the queue to be downloaded. Protected by cs_main. */
+    /** Blocks that are in flight, and that are in the queue to be downloaded. Protected by cs_main */
     struct QueuedBlock {
-        uint256 hash;
-        const CBlockIndex* pindex;                               //!< Optional.
-        bool fValidatedHeaders;                                  //!< Whether this block has validated headers at the time of request.
-        std::unique_ptr<PartiallyDownloadedBlock> partialBlock;  //!< Optional, used for CMPCTBLOCK downloads
+        uint256 hash ;
+        const CBlockIndex * pindex ; // optional
+        bool fValidatedHeaders ; // whether this block has validated headers at the time of request
+        std::unique_ptr< PartiallyDownloadedBlock > partialBlock ; // optional, used for CMPCTBLOCK downloads
     };
     std::map<uint256, std::pair<NodeId, std::list<QueuedBlock>::iterator> > mapBlocksInFlight;
 
     /** Stack of nodes which we have set to announce using compact blocks */
     std::list<NodeId> lNodesAnnouncingHeaderAndIDs;
 
-    /** Number of preferable block download peers. */
+    /** Number of preferable block download peers */
     int nPreferredDownload = 0;
 
-    /** Number of peers from which we're downloading blocks. */
+    /** Number of peers from which we're downloading blocks */
     int nPeersWithValidatedDownloads = 0;
 
-    /** Relay map, protected by cs_main. */
+    /** Relay map, protected by cs_main */
     typedef std::map<uint256, CTransactionRef> MapRelay;
     MapRelay mapRelay;
-    /** Expiration-time ordered list of (expire time, relay map entry) pairs, protected by cs_main). */
+    /** Expiration-time ordered list of (expire time, relay map entry) pairs, protected by cs_main) */
     std::deque<std::pair<int64_t, MapRelay::iterator>> vRelayExpiration;
 } // anon namespace
 
@@ -628,17 +628,16 @@ bool AddOrphanTx(const CTransactionRef& tx, NodeId peer) EXCLUSIVE_LOCKS_REQUIRE
     if ( mapOrphanTransactions.count( hash ) )
         return false ;
 
-    // Ignore big transactions, to avoid a
-    // send-big-orphans memory exhaustion attack. If a peer has a legitimate
-    // large transaction with a missing parent then we assume
-    // it will rebroadcast it later, after the parent transaction(s)
-    // have been mined or received.
+    // Ignore big transactions, to avoid a send-big-orphans memory
+    // exhaustion attack. If a peer has a legitimate large transaction
+    // with a missing parent then we assume it will rebroadcast it later,
+    // after the parent transaction(s) have been mined or received.
     // 100 orphans, each of which is at most 99,999 bytes big is
     // at most 10 megabytes of orphans and somewhat more byprev index (in the worst case):
-    unsigned int sz = GetTransactionWeight( *tx ) ;
-    if ( sz >= MAX_STANDARD_TX_WEIGHT )
+    unsigned int sz = GetVirtualWeightOfTransaction( *tx ) ;
+    if ( sz >= MAX_STANDARD_TX_VIRTUAL_WEIGHT )
     {
-        LogPrint( "mempool", "ignoring large orphan tx (size: %u, hash: %s)\n", sz, hash.ToString() ) ;
+        LogPrintf( "mempool: ignoring large orphan tx (weight: %u, hash: %s)\n", sz, hash.ToString() ) ;
         return false ;
     }
 
@@ -2022,7 +2021,7 @@ bool static ProcessMessage( CNode * pfrom, const std::string & strCommand, CData
             return true;
 
         if ( pindex->nHeight <= chainActive.Tip()->nHeight || // we know something better
-                pindex->nTx != 0 ) { // we had this block at some point, but pruned it
+                pindex->nBlockTx != 0 ) { // we had this block at some point, but pruned it
             if ( fAlreadyInFlight ) {
                 // we requested this block for some reason, but our mempool will probably be useless
                 // so we just grab the block via normal getdata
@@ -2517,7 +2516,7 @@ bool static ProcessMessage( CNode * pfrom, const std::string & strCommand, CData
             sProblem = "Short payload";
         }
 
-        if (!(sProblem.empty())) {
+        if ( ! sProblem.empty() ) {
             LogPrint("net", "pong peer=%d: %s, %x expected, %x received, %u bytes\n",
                 pfrom->id,
                 sProblem,
@@ -2613,7 +2612,7 @@ bool static ProcessMessage( CNode * pfrom, const std::string & strCommand, CData
     }
 
     else if ( strCommand == NetMsgType::FEEFILTER ) {
-        CAmount newFeeFilter = 0 ;
+        CAmount newFeeFilter( 0 ) ;
         vRecv >> newFeeFilter ;
         LogPrintf( "%s: ignored feefilter of %s from peer=%d\n", __func__, CFeeRate( newFeeFilter ).ToString(), pfrom->id ) ;
     }

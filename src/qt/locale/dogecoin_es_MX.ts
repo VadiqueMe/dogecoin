@@ -138,14 +138,6 @@
         <translation>Cambiar la contraseña usada para la encriptación de la cartera</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;Depurar ventana</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Abrir consola de depuración y diagnostico</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Verificar mensaje...</translation>
     </message>
@@ -362,10 +354,6 @@
     </context>
 <context>
     <name>RPCConsole</name>
-    <message>
-        <source>Debug window</source>
-        <translation>Depurar ventana</translation>
-    </message>
     </context>
 <context>
     <name>ReceiveCoinsDialog</name>

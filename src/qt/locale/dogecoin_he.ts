@@ -202,14 +202,6 @@
         <translation>החלפת מילת הצופן להצפנת הארנק</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>חלון &amp;ניפוי</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>פתיחת לוח הבקרה לאבחון ולניפוי</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;אימות הודעה…</translation>
     </message>
@@ -797,10 +789,6 @@
     <message>
         <source>Information</source>
         <translation>מידע</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>חלון ניפוי</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>

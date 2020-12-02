@@ -310,14 +310,6 @@
         <translation>Zmień hasło użyte do szyfrowania portfela</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;Okno debugowania</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Otwórz konsolę debugowania i diagnostyki</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Zweryfikuj wiadomość...</translation>
     </message>
@@ -1241,10 +1233,6 @@
         <translation>Informacje</translation>
     </message>
     <message>
-        <source>Debug window</source>
-        <translation>Okno debugowania</translation>
-    </message>
-    <message>
         <source>Using BerkeleyDB version</source>
         <translation>Używana wersja BerkeleyDB </translation>
     </message>
@@ -2106,8 +2094,8 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
         <translation>Błąd: Wystąpił fatalny błąd wewnętrzny, sprawdź szczegóły w debug log</translation>
     </message>
     <message>
-        <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
-        <translation>Prowizja (w %s/kB) dodawana do wysyłanych transakcji (domyślnie: %s)</translation>
+        <source>Fee in %s to add to transactions you send (default: %s)</source>
+        <translation>Prowizja w %s dodawana do wysyłanych transakcji (domyślnie: %s)</translation>
     </message>
     <message>
         <source>Pruning blockstore...</source>
@@ -2202,7 +2190,7 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
         <translation>Opcje połączenia:</translation>
     </message>
     <message>
-        <source>Copyright (C) %i-%i</source>
+        <source>Copyright (c) %i-%i</source>
         <translation>Prawa autorskie (C) %i-%i</translation>
     </message>
     <message>
@@ -2276,10 +2264,6 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
     <message>
         <source>Invalid -onion address: '%s'</source>
         <translation>Nieprawidłowy adres -onion: '%s'</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -%s=&lt;amount&gt;: '%s'</source>
-        <translation>Nieprawidłowa kwota dla -%s=&lt;amount&gt;: '%s'</translation>
     </message>
     <message>
         <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
@@ -2416,10 +2400,6 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
     <message>
         <source>Execute command when a relevant alert is received or we see a really long fork (%s in cmd is replaced by message)</source>
         <translation>Uruchom polecenie przy otrzymaniu odpowiedniego powiadomienia lub gdy zobaczymy naprawdę długie rozgałęzienie (%s w poleceniu jest podstawiane za komunikat)</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -maxtxfee=&lt;amount&gt;: '%s' (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
-        <translation>Niewłaściwa ilość dla -maxtxfee=&lt;ilość&gt;: '%s' (musi wynosić przynajmniej minimalną wielkość %s aby zapobiec utknięciu transakcji)</translation>
     </message>
     <message>
         <source>Maximum size of data in data carrier transactions we relay and mine (default: %u)</source>
@@ -2566,10 +2546,6 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
         <translation>(1 = zachowaj wysłane metadane np. właściciel konta i informacje o żądaniach płatności, 2 = porzuć wysłane metadane)</translation>
     </message>
     <message>
-        <source>-maxtxfee is set very high! Fees this large could be paid on a single transaction.</source>
-        <translation>-maxtxfee ma ustawioną badzo dużą wartość! Tak wysokie opłaty mogą być zapłacone w jednej transakcji.</translation>
-    </message>
-    <message>
         <source>Do not keep transactions in the mempool longer than &lt;n&gt; hours (default: %u)</source>
         <translation>Nie trzymaj w pamięci transakcji starszych niż &lt;n&gt; godz. (domyślnie: %u)</translation>
     </message>
@@ -2616,10 +2592,6 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
     <message>
         <source>Warning: Wallet file corrupt, data salvaged! Original %s saved as %s in %s; if your balance or transactions are incorrect you should restore from a backup.</source>
         <translation>Ostrzeżenie: Odtworzono dane z uszkodzonego pliku portfela! Oryginalny %s został zapisany jako %s w %s; jeśli twoje saldo lub transakcje są niepoprawne powinieneś odtworzyć kopię zapasową.</translation>
-    </message>
-    <message>
-        <source>%s is set very high!</source>
-        <translation>%s jest ustawione bardzo wysoko!</translation>
     </message>
     <message>
         <source>(default: %s)</source>

@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -104,10 +104,12 @@ void WalletView::setGUI( DogecoinGUI * gui )
         connect(this, SIGNAL(message(QString,QString,unsigned int)), gui, SLOT(message(QString,QString,unsigned int)));
 
         // Pass through encryption status changed signals
-        connect(this, SIGNAL(encryptionStatusChanged(int)), gui, SLOT(setEncryptionStatus(int)));
+        connect( this, SIGNAL( encryptionStatusChanged(WalletEncryptionStatus) ),
+                  gui, SLOT( setEncryptionStatus(const WalletEncryptionStatus&) ) ) ;
 
         // Pass through transaction notifications
-        connect(this, SIGNAL(incomingTransaction(QString,int,CAmount,QString,QString,QString)), gui, SLOT(incomingTransaction(QString,int,CAmount,QString,QString,QString)));
+        connect( this, SIGNAL( incomingTransaction(QString,unitofcoin,CAmount,QString,QString,QString) ),
+                  gui, SLOT( incomingTransaction(QString,unitofcoin,CAmount,QString,QString,QString) ) ) ;
 
         // Connect HD enabled status changed signal
         connect(this, SIGNAL(hdEnabledStatusChanged(int)), gui, SLOT(setHDStatus(int)));
@@ -142,7 +144,8 @@ void WalletView::setWalletModel( WalletModel * model )
         connect( model, SIGNAL( message(QString, QString, unsigned int) ), this, SIGNAL( message(QString, QString, unsigned int) ) ) ;
 
         // Handle changes in encryption status
-        connect( model, SIGNAL( encryptionStatusChanged(int) ), this, SIGNAL( encryptionStatusChanged(int) ) ) ;
+        connect( model, SIGNAL( encryptionStatusChanged(WalletEncryptionStatus) ),
+                  this, SIGNAL( encryptionStatusChanged(WalletEncryptionStatus) ) ) ;
         updateEncryptionStatus() ;
 
         // update HD status
@@ -177,7 +180,7 @@ void WalletView::processNewTransaction(const QModelIndex& parent, int start, int
     QString address = ttm->data(index, TransactionTableModel::AddressRole).toString();
     QString label = ttm->data(index, TransactionTableModel::LabelRole).toString();
 
-    Q_EMIT incomingTransaction(date, walletModel->getOptionsModel()->getDisplayUnit(), amount, type, address, label);
+    Q_EMIT incomingTransaction( date, walletModel->getOptionsModel()->getDisplayUnit(), amount, type, address, label ) ;
 }
 
 void WalletView::gotoOverviewPage()
@@ -259,18 +262,18 @@ void WalletView::showOutOfSyncWarning(bool fShow)
 
 void WalletView::updateEncryptionStatus()
 {
-    Q_EMIT encryptionStatusChanged(walletModel->getEncryptionStatus());
+    Q_EMIT encryptionStatusChanged( walletModel->getEncryptionStatus() ) ;
 }
 
-void WalletView::encryptWallet(bool status)
+void WalletView::encryptWallet( bool status )
 {
-    if(!walletModel)
-        return;
+    if ( walletModel == nullptr ) return ;
+
     AskPassphraseDialog dlg(status ? AskPassphraseDialog::Encrypt : AskPassphraseDialog::Decrypt, this);
     dlg.setWalletModel( walletModel ) ;
     dlg.exec();
 
-    updateEncryptionStatus();
+    updateEncryptionStatus() ;
 }
 
 void WalletView::backupWallet()
@@ -301,10 +304,10 @@ void WalletView::changePassphrase()
 
 void WalletView::unlockWallet()
 {
-    if(!walletModel)
-        return;
+    if ( walletModel == nullptr ) return ;
+
     // Unlock wallet when requested by wallet model
-    if (walletModel->getEncryptionStatus() == WalletModel::Locked)
+    if ( walletModel->getEncryptionStatus() == WalletEncryptionStatus::Locked )
     {
         AskPassphraseDialog dlg(AskPassphraseDialog::Unlock, this);
         dlg.setWalletModel( walletModel ) ;

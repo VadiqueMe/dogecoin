@@ -1,4 +1,5 @@
 // Copyright (c) 2014-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -16,7 +17,7 @@
 #include <boost/variant/static_visitor.hpp>
 
 /** All alphanumeric characters except for "0", "I", "O", and "l" */
-static const char* pszBase58 = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
+static const char* pszBase58 = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz" ;
 
 bool DecodeBase58( const std::string & str, std::vector< unsigned char > & vch )
 {
@@ -115,12 +116,12 @@ std::string EncodeBase58( const std::vector< unsigned char > & vch )
     return EncodeBase58( &vch[0], &vch[0] + vch.size() ) ;
 }
 
-std::string EncodeBase58Check(const std::vector<unsigned char>& vchIn)
+std::string EncodeBase58Check( const std::vector< unsigned char > & vchIn )
 {
     // add 4-byte hash check to the end
-    std::vector<unsigned char> vch(vchIn);
-    uint256 hash = Hash(vch.begin(), vch.end());
-    vch.insert(vch.end(), (unsigned char*)&hash, (unsigned char*)&hash + 4);
+    std::vector< unsigned char > vch( vchIn ) ;
+    uint256 hash = Hash( vch.begin(), vch.end() ) ;
+    vch.insert( vch.end(), (unsigned char*)&hash, (unsigned char*)&hash + 4 ) ;
     return EncodeBase58( vch ) ;
 }
 
@@ -132,7 +133,7 @@ bool DecodeBase58Check( const std::string & str, std::vector< unsigned char > & 
     }
     // re-calculate the checksum, insure it matches the included 4-byte checksum
     uint256 hash = Hash( vchRet.begin(), vchRet.end() - 4 ) ;
-    if ( memcmp( &hash, &vchRet.end()[-4], 4 ) != 0 ) {
+    if ( memcmp( &hash, &vchRet.end()[ -4 ], 4 ) != 0 ) {
         vchRet.clear() ;
         return false ;
     }
@@ -143,21 +144,21 @@ bool DecodeBase58Check( const std::string & str, std::vector< unsigned char > & 
 
 CBase58Data::CBase58Data()
 {
-    vchVersion.clear();
-    vchData.clear();
+    vchVersion.clear() ;
+    vchData.clear() ;
 }
 
-void CBase58Data::SetData(const std::vector<unsigned char>& vchVersionIn, const void* pdata, size_t nSize)
+void CBase58Data::SetData( const std::vector< unsigned char > & vchVersionIn, const void * pdata, size_t nSize )
 {
-    vchVersion = vchVersionIn;
-    vchData.resize(nSize);
-    if (!vchData.empty())
-        memcpy(&vchData[0], pdata, nSize);
+    vchVersion = vchVersionIn ;
+    vchData.resize( nSize ) ;
+    if ( ! vchData.empty() )
+        memcpy( &vchData[ 0 ], pdata, nSize ) ;
 }
 
-void CBase58Data::SetData(const std::vector<unsigned char>& vchVersionIn, const unsigned char* pbegin, const unsigned char* pend)
+void CBase58Data::SetData( const std::vector< unsigned char > & vchVersionIn, const unsigned char * pbegin, const unsigned char * pend )
 {
-    SetData(vchVersionIn, (void*)pbegin, pend - pbegin);
+    SetData( vchVersionIn, (void*)pbegin, pend - pbegin ) ;
 }
 
 bool CBase58Data::SetString( const std::string & str, unsigned int nVersionBytes )
@@ -165,36 +166,32 @@ bool CBase58Data::SetString( const std::string & str, unsigned int nVersionBytes
     std::vector< unsigned char > vchTemp ;
     bool rc58 = DecodeBase58Check( str, vchTemp ) ;
     if ( ! rc58 || vchTemp.size() < nVersionBytes ) {
-        vchData.clear();
-        vchVersion.clear();
-        return false;
+        vchData.clear() ;
+        vchVersion.clear() ;
+        return false ;
     }
-    vchVersion.assign(vchTemp.begin(), vchTemp.begin() + nVersionBytes);
-    vchData.resize(vchTemp.size() - nVersionBytes);
-    if (!vchData.empty())
-        memcpy(&vchData[0], &vchTemp[nVersionBytes], vchData.size());
-    memory_cleanse(&vchTemp[0], vchTemp.size());
-    return true;
+    vchVersion.assign( vchTemp.begin(), vchTemp.begin() + nVersionBytes ) ;
+    vchData.resize( vchTemp.size() - nVersionBytes ) ;
+    if ( ! vchData.empty() )
+        memcpy( &vchData[ 0 ], &vchTemp[ nVersionBytes ], vchData.size() ) ;
+    memory_cleanse( &vchTemp[ 0 ], vchTemp.size() ) ;
+    return true ;
 }
 
 std::string CBase58Data::ToString() const
 {
-    std::vector<unsigned char> vch = vchVersion;
-    vch.insert(vch.end(), vchData.begin(), vchData.end());
-    return EncodeBase58Check(vch);
+    std::vector< unsigned char > vch = vchVersion ;
+    vch.insert( vch.end(), vchData.begin(), vchData.end() ) ;
+    return EncodeBase58Check( vch ) ;
 }
 
-int CBase58Data::CompareTo(const CBase58Data& b58) const
+int CBase58Data::CompareTo( const CBase58Data & b58 ) const
 {
-    if (vchVersion < b58.vchVersion)
-        return -1;
-    if (vchVersion > b58.vchVersion)
-        return 1;
-    if (vchData < b58.vchData)
-        return -1;
-    if (vchData > b58.vchData)
-        return 1;
-    return 0;
+    if ( vchVersion < b58.vchVersion ) return -1 ;
+    if ( vchVersion > b58.vchVersion ) return 1 ;
+    if ( vchData < b58.vchData ) return -1 ;
+    if ( vchData > b58.vchData ) return 1 ;
+    return 0 ;
 }
 
 namespace
@@ -207,39 +204,34 @@ private:
 public:
     CDogecoinAddressVisitor( CDogecoinAddress * addrIn ) : addr( addrIn ) { }
 
-    bool operator()(const CKeyID& id) const { return addr->Set(id); }
-    bool operator()(const CScriptID& id) const { return addr->Set(id); }
-    bool operator()(const CNoDestination& no) const { return false; }
+    bool operator()( const CKeyID & id ) const { return addr->Set( id ) ; }
+    bool operator()( const CScriptID & id ) const { return addr->Set( id ) ; }
+    bool operator()( const CNoDestination & no ) const { return false ; }
 };
 
 } // anon namespace
 
-bool CDogecoinAddress::Set(const CKeyID& id)
+bool CDogecoinAddress::Set( const CKeyID & id, const CChainParams & params )
 {
-    SetData(Params().Base58Prefix(CChainParams::PUBKEY_ADDRESS), &id, 20);
-    return true;
+    SetData( params.Base58PrefixFor( Base58PrefixType::PUBKEY_ADDRESS ), &id, 20 ) ;
+    return true ;
 }
 
-bool CDogecoinAddress::Set(const CScriptID& id)
+bool CDogecoinAddress::Set( const CScriptID & id, const CChainParams & params )
 {
-    SetData(Params().Base58Prefix(CChainParams::SCRIPT_ADDRESS), &id, 20);
-    return true;
+    SetData( params.Base58PrefixFor( Base58PrefixType::SCRIPT_ADDRESS ), &id, 20 ) ;
+    return true ;
 }
 
-bool CDogecoinAddress::Set(const CTxDestination& dest)
+bool CDogecoinAddress::Set( const CTxDestination & dest )
 {
-    return boost::apply_visitor(CDogecoinAddressVisitor(this), dest);
-}
-
-bool CDogecoinAddress::IsValid() const
-{
-    return IsValid( Params() ) ;
+    return boost::apply_visitor( CDogecoinAddressVisitor( this ), dest ) ;
 }
 
 bool CDogecoinAddress::IsValid( const CChainParams & params ) const
 {
-    return IsValid( params.Base58Prefix( CChainParams::PUBKEY_ADDRESS ),
-                    params.Base58Prefix( CChainParams::SCRIPT_ADDRESS ) ) ;
+    return IsValid( params.Base58PrefixFor( Base58PrefixType::PUBKEY_ADDRESS ),
+                    params.Base58PrefixFor( Base58PrefixType::SCRIPT_ADDRESS ) ) ;
 }
 
 bool CDogecoinAddress::IsValid( const std::vector< unsigned char > & pubkeyPrefix,
@@ -250,33 +242,34 @@ bool CDogecoinAddress::IsValid( const std::vector< unsigned char > & pubkeyPrefi
     return fCorrectSize && fKnownVersion ;
 }
 
-CTxDestination CDogecoinAddress::Get() const
+CTxDestination CDogecoinAddress::Get( const CChainParams & params ) const
 {
-    if (!IsValid())
-        return CNoDestination();
-    uint160 id;
-    memcpy(&id, &vchData[0], 20);
-    if (vchVersion == Params().Base58Prefix(CChainParams::PUBKEY_ADDRESS))
-        return CKeyID(id);
-    else if (vchVersion == Params().Base58Prefix(CChainParams::SCRIPT_ADDRESS))
-        return CScriptID(id);
+    if ( ! IsValid() )
+        return CNoDestination() ;
+
+    uint160 id ;
+    memcpy( &id, &vchData[ 0 ], 20 ) ;
+    if ( vchVersion == params.Base58PrefixFor( Base58PrefixType::PUBKEY_ADDRESS ) )
+        return CKeyID( id ) ;
+    else if ( vchVersion == params.Base58PrefixFor( Base58PrefixType::SCRIPT_ADDRESS ) )
+        return CScriptID( id ) ;
     else
-        return CNoDestination();
+        return CNoDestination() ;
 }
 
-bool CDogecoinAddress::GetKeyID(CKeyID& keyID) const
+bool CDogecoinAddress::GetKeyID( CKeyID& keyID, const CChainParams & params ) const
 {
-    if (!IsValid() || vchVersion != Params().Base58Prefix(CChainParams::PUBKEY_ADDRESS))
-        return false;
-    uint160 id;
-    memcpy(&id, &vchData[0], 20);
-    keyID = CKeyID(id);
-    return true;
+    if ( ! IsValid() || vchVersion != params.Base58PrefixFor( Base58PrefixType::PUBKEY_ADDRESS ) )
+        return false ;
+    uint160 id ;
+    memcpy( &id, &vchData[ 0 ], 20 ) ;
+    keyID = CKeyID( id ) ;
+    return true ;
 }
 
-bool CDogecoinAddress::IsScript() const
+bool CDogecoinAddress::IsScript( const CChainParams & params ) const
 {
-    return IsValid() && vchVersion == Params().Base58Prefix(CChainParams::SCRIPT_ADDRESS);
+    return IsValid() && vchVersion == params.Base58PrefixFor( Base58PrefixType::SCRIPT_ADDRESS ) ;
 }
 
 // just some dummy data to generate a random-looking (but consistent) address
@@ -290,8 +283,8 @@ static const uint8_t dummydata[] = {
 std::string CDogecoinAddress::DummyDogecoinAddress( const CChainParams & params )
 {
     return DummyDogecoinAddress(
-                params.Base58Prefix( CChainParams::PUBKEY_ADDRESS ),
-                params.Base58Prefix( CChainParams::SCRIPT_ADDRESS ) ) ;
+                params.Base58PrefixFor( Base58PrefixType::PUBKEY_ADDRESS ),
+                params.Base58PrefixFor( Base58PrefixType::SCRIPT_ADDRESS ) ) ;
 }
 
 std::string CDogecoinAddress::DummyDogecoinAddress( const std::vector< unsigned char > & pubkeyPrefix,
@@ -316,9 +309,9 @@ void CDogecoinSecret::SetKey( const CKey & vchSecret, const std::vector< unsigne
         vchData.push_back( 1 ) ;
 }
 
-void CDogecoinSecret::SetKey( const CKey & vchSecret )
+void CDogecoinSecret::SetKey( const CKey & vchSecret, const CChainParams & params )
 {
-    SetKey( vchSecret, Params().Base58Prefix( CChainParams::SECRET_KEY ) ) ;
+    SetKey( vchSecret, params.Base58PrefixFor( Base58PrefixType::SECRET_KEY ) ) ;
 }
 
 CKey CDogecoinSecret::GetKey()
@@ -336,9 +329,9 @@ bool CDogecoinSecret::IsValidFor( const std::vector< unsigned char > & privkeyPr
     return fExpectedFormat && fCorrectVersion ;
 }
 
-bool CDogecoinSecret::IsValid() const
+bool CDogecoinSecret::IsValid( const CChainParams & params ) const
 {
-    return IsValidFor( Params().Base58Prefix( CChainParams::SECRET_KEY ) ) ;
+    return IsValidFor( params.Base58PrefixFor( Base58PrefixType::SECRET_KEY ) ) ;
 }
 
 bool CDogecoinSecret::SetString( const std::string & strSecret )

@@ -326,14 +326,6 @@
         <translation>Изменить пароль шифрования бумажника</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;Окно отладки</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Открыть консоль отладки и диагностики</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Проверить сообщение...</translation>
     </message>
@@ -1347,10 +1339,6 @@
     <message>
         <source>Information</source>
         <translation>Информация</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>Окно отладки</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -2640,8 +2628,8 @@
         <translation>Ошибка: произошла неустранимая ошибка, подробности в debug log</translation>
     </message>
     <message>
-        <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
-        <translation>Комиссия (в %s/Кб) для добавления к вашим транзакциям (по умолчанию: %s)</translation>
+        <source>Fee in %s to add to transactions you send (default: %s)</source>
+        <translation>Комиссия в %s для добавления к транзакциям (по умолчанию: %s)</translation>
     </message>
     <message>
         <source>Pruning blockstore...</source>
@@ -2698,10 +2686,6 @@
     <message>
         <source>Maximum allowed median peer time offset adjustment. Local perspective of time may be influenced by peers forward or backward by this amount. (default: %u seconds)</source>
         <translation>Максимально допустимое среднее отклонение времени участников. Локальное представление времени может меняться вперед или назад на это количество. (по умолчанию: %u секунд)</translation>
-    </message>
-    <message>
-        <source>Maximum total fees (in %s) to use in a single wallet transaction or raw transaction; setting this too low may abort large transactions (default: %s)</source>
-        <translation>Максимальная сумма комиссий (%s) для одной транзакции в бумажнике или сырой транзакции; слишком низкое значение может вызвать прерывание больших транзакций (по умолчанию: %s)</translation>
     </message>
     <message>
         <source>Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly.</source>
@@ -2788,8 +2772,8 @@
         <translation>Параметры подключения:</translation>
     </message>
     <message>
-        <source>Copyright (C) %i-%i</source>
-        <translation>Copyright (C) %i-%i</translation>
+        <source>Copyright (c) %i-%i</source>
+        <translation>Copyright (c) %i-%i</translation>
     </message>
     <message>
         <source>Corrupted block database detected</source>
@@ -2882,10 +2866,6 @@
     <message>
         <source>Invalid -onion address: '%s'</source>
         <translation>Неверный -onion адрес: '%s'</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -%s=&lt;amount&gt;: '%s'</source>
-        <translation>Недопустимая сумма для -%s=&lt;amount&gt;: '%s'</translation>
     </message>
     <message>
         <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
@@ -3028,10 +3008,6 @@
         <translation>Выполнить команду, когда приходит соответствующее сообщение о тревоге или наблюдается очень длинное расщепление цепи (%s в команде заменяется на сообщение)</translation>
     </message>
     <message>
-        <source>Invalid amount for -maxtxfee=&lt;amount&gt;: '%s' (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
-        <translation>Неверное значение для -maxtxfee=&lt;amount&gt;: '%s' (минимальная комиссия трансляции %s для предотвращения зависания транзакций)</translation>
-    </message>
-    <message>
         <source>Maximum size of data in data carrier transactions we relay and mine (default: %u)</source>
         <translation>Наибольший размер данных в носителе данных транзакций, которые мы передаем и генерируем (по умолчанию: %u)</translation>
     </message>
@@ -3082,6 +3058,10 @@
     <message>
         <source>Information</source>
         <translation>Информация</translation>
+    </message>
+    <message>
+        <source>Maximum total fees (in %s) to use in a single transaction; setting this too low may abort large transactions (default: %s)</source>
+        <translation>Максимальная сумма комиссий (в %s) для одной транзакции; слишком низкое значение может абортировать большие транзакции (по умолчанию: %s)</translation>
     </message>
     <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
@@ -3192,10 +3172,6 @@
         <translation>(1 = сохранять метаданные транзакции: например, владельца аккаунта и информацию запроса платежа; 2 = отбросить метаданные)</translation>
     </message>
     <message>
-        <source>-maxtxfee is set very high! Fees this large could be paid on a single transaction.</source>
-        <translation>Установлено очень большое значение -maxtxfee. Такие большие комиссии могут быть уплачены в отдельной транзакции.</translation>
-    </message>
-    <message>
         <source>Do not keep transactions in the mempool longer than &lt;n&gt; hours (default: %u)</source>
         <translation>Не хранить транзакции в памяти дольше, чем &lt;n&gt; часов (по умолчанию %u)</translation>
     </message>
@@ -3232,10 +3208,6 @@
         <translation>Поддерживать фильтрацию блоков и транзакций с помощью фильтра Блума (по умолчанию: %u)</translation>
     </message>
     <message>
-        <source>This is the transaction fee you may pay when fee estimates are not available.</source>
-        <translation>Это комиссия за транзакцию, которую вы можете заплатить, когда расчёт комиссии недоступен.</translation>
-    </message>
-    <message>
         <source>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit %s and cryptographic software written by Eric Young and UPnP software written by Thomas Bernard.</source>
         <translation>Этот продукт включает ПО, разработанное OpenSSL Project для использования в OpenSSL Toolkit %s и криптографическое ПО, написанное Eric Young и ПО для работы с UPnP, написанное Thomas Bernard.</translation>
     </message>
@@ -3270,10 +3242,6 @@
     <message>
         <source>Whitelist peers connecting from the given IP address (e.g. 1.2.3.4) or CIDR notated network (e.g. 1.2.3.0/24). Can be specified multiple times.</source>
         <translation>Вносить в белый список участников, подключающихся с указанного IP (напр. 1.2.3.4) или CIDR-адреса сети (напр. 1.2.3.0/24). Можно использовать многократно.</translation>
-    </message>
-    <message>
-        <source>%s is set very high!</source>
-        <translation>%s задан слишком высоким!</translation>
     </message>
     <message>
         <source>(default: %s)</source>
@@ -3358,10 +3326,6 @@
     <message>
         <source>Starting network threads...</source>
         <translation>Запускаем сетевые потоки...</translation>
-    </message>
-    <message>
-        <source>This is the transaction fee you will pay if you send a transaction.</source>
-        <translation>Это комиссия, которую вы заплатите за эту транзакцию.</translation>
     </message>
     <message>
         <source>Threshold for disconnecting misbehaving peers (default: %u)</source>

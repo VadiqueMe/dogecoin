@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2014 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -8,6 +8,8 @@
 
 #include <QObject>
 #include <QString>
+
+#include "unitsofcoin.h"
 
 class TransactionRecord;
 
@@ -22,7 +24,7 @@ class TransactionDesc: public QObject
     Q_OBJECT
 
 public:
-    static QString toHTML( CWallet * wallet, CWalletTx & wtx, TransactionRecord * rec, int unit ) ;
+    static QString toHTML( CWallet * wallet, CWalletTx & wtx, TransactionRecord * rec, unitofcoin unit ) ;
     static QString getTxHex( TransactionRecord * rec, CWallet * wallet ) ;
 
 private:

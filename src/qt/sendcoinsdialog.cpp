@@ -7,7 +7,6 @@
 #include "ui_sendcoinsdialog.h"
 
 #include "addresstablemodel.h"
-#include "unitsofcoin.h"
 #include "coincontroldialog.h"
 #include "guiutil.h"
 #include "optionsmodel.h"
@@ -136,24 +135,24 @@ void SendCoinsDialog::setWalletModel( WalletModel * model )
                     model->getWatchBalance(), model->getWatchUnconfirmedBalance(), model->getWatchImmatureBalance() ) ;
         connect( model, SIGNAL( balanceChanged(CAmount, CAmount, CAmount, CAmount, CAmount, CAmount) ),
                  this, SLOT( setBalance(CAmount, CAmount, CAmount, CAmount, CAmount, CAmount) ) ) ;
-        connect( model->getOptionsModel(), SIGNAL( displayUnitChanged(int) ), this, SLOT( updateDisplayUnit() ) ) ;
+        connect( model->getOptionsModel(), SIGNAL( displayUnitChanged(unitofcoin) ), this, SLOT( updateDisplayUnit() ) ) ;
         updateDisplayUnit() ;
 
         // coin control
-        connect( model->getOptionsModel(), SIGNAL( displayUnitChanged(int) ), this, SLOT( coinControlUpdateLabels() ) );
+        connect( model->getOptionsModel(), SIGNAL( displayUnitChanged(unitofcoin) ), this, SLOT( coinControlUpdateLabels() ) );
         coinControlUpdateLabels() ;
 
         // fees
         connect( ui->customFee, SIGNAL( valueChanged(qint64) ), this, SLOT( updateGlobalFeeVariable() ) ) ;
         connect( ui->customFee, SIGNAL( valueChanged(qint64) ), this, SLOT( coinControlUpdateLabels() ) ) ;
-        ui->customFee->setSingleStep( 1 /* * ... */ ) ;
+        connect( ui->customFee, SIGNAL( unitChanged(unitofcoin) ), this, SLOT( changeCustomFeeUnit(unitofcoin) ) ) ;
 
         connect( whichFeeChoice, SIGNAL( buttonClicked(int) ), this, SLOT( updateFeeSection() ) ) ;
         connect( whichFeeChoice, SIGNAL( buttonClicked(int) ), this, SLOT( updateGlobalFeeVariable() ) ) ;
         connect( whichFeeChoice, SIGNAL( buttonClicked(int) ), this, SLOT( coinControlUpdateLabels() ) ) ;
 
         updateFeeSection() ;
-        updateGlobalFeeVariable() ;
+        updateGlobalFeeVariable() ; // TODO: is this "global fee variable" needed at all?
     }
 }
 
@@ -166,12 +165,47 @@ SendCoinsDialog::~SendCoinsDialog()
     delete ui ;
 }
 
+QString SendCoinsDialog::makeAreYouSureToSendCoinsString( const WalletModelTransaction & theTransaction, const unitofcoin & unit )
+{
+    QString sureString = tr("Are you sure you want to send?") ;
+    sureString.append( "<br /><br />%1" ) ;
+
+    CAmount txFee = theTransaction.getTransactionFee() ;
+
+    if ( txFee > 0 )
+    {
+        // append fee string when a fee is added
+        sureString.append("<hr /><span style='color:#aa0000;'>");
+        sureString.append( UnitsOfCoin::formatHtmlWithUnit( unit, txFee ) ) ;
+        sureString.append("</span> ");
+        sureString.append(tr("added as transaction fee"));
+
+        // append transaction size
+        sureString.append( " (" + QString::number( (double)theTransaction.getSizeOfTransaction() / 1000 ) + " kB)" ) ;
+    }
+
+    // add total amount in all subdivision units
+    sureString.append( "<hr />" ) ;
+    CAmount totalAmount = theTransaction.getTotalTransactionAmount() + txFee ;
+    QStringList alternativeUnits ;
+    for ( const unitofcoin & u : UnitsOfCoin::availableUnits() ) {
+        if ( u != unit )
+            alternativeUnits.append( UnitsOfCoin::formatHtmlWithUnit( u, totalAmount ) ) ;
+    }
+    sureString.append( tr("Total Amount %1")
+        .arg( UnitsOfCoin::formatHtmlWithUnit( unit, totalAmount ) ) ) ;
+    sureString.append( QString( "<span style='font-size:10pt;font-weight:normal;'><br />(=%2)</span>" )
+        .arg( alternativeUnits.join( " " + tr("or") + "<br />" ) ) ) ;
+
+    return sureString ;
+}
+
 void SendCoinsDialog::on_sendButton_clicked()
 {
-    if ( ! walletModel || ! walletModel->getOptionsModel() )
+    if ( walletModel == nullptr || walletModel->getOptionsModel() == nullptr )
         return ;
 
-    QList< SendCoinsRecipient > recipients ;
+    std::vector< SendCoinsRecipient > recipients ;
     bool valid = true ;
 
     for ( int i = 0 ; i < ui->entries->count() ; ++ i )
@@ -180,13 +214,13 @@ void SendCoinsDialog::on_sendButton_clicked()
         if ( entry != nullptr )
         {
             if ( entry->validate() )
-                recipients.append( entry->getValue() ) ;
+                recipients.push_back( entry->getValue() ) ;
             else
                 valid = false ;
         }
     }
 
-    if ( ! valid || recipients.isEmpty() ) return ;
+    if ( ! valid || recipients.empty() ) return ;
 
     fNewRecipientAllowed = false ;
     WalletModel::UnlockContext unlock( walletModel->requestUnlock() ) ;
@@ -197,19 +231,15 @@ void SendCoinsDialog::on_sendButton_clicked()
         return ;
     }
 
-    // prepare transaction for getting txFee earlier
     WalletModelTransaction currentTransaction( recipients ) ;
-    WalletModel::SendCoinsReturn prepareStatus ;
 
-    // use a CCoinControl instance
-    CCoinControl ctrl = *CoinControlDialog::coinControl ;
-
-    prepareStatus = walletModel->prepareTransaction( currentTransaction, &ctrl ) ;
+    WalletModel::SendCoinsReturn prepareStatus =
+            walletModel->prepareTransaction( currentTransaction, CoinControlDialog::coinControl ) ;
 
     // process prepareStatus and on error show a message to user
     processSendCoinsReturn( prepareStatus ) ;
 
-    if ( prepareStatus.status != WalletModel::OK ) {
+    if ( prepareStatus.status != SendCoinsStatus::OK ) {
         fNewRecipientAllowed = true ;
         return ;
     }
@@ -252,54 +282,31 @@ void SendCoinsDialog::on_sendButton_clicked()
         formatted.append( recipientElement ) ;
     }
 
-    QString questionString = tr("Are you sure you want to send?");
-    questionString.append("<br /><br />%1");
+    // add fee for this transaction which is set by the user
+    CAmount theFee = ui->customFee->value() ;
+    if ( ui->choiceFeePerKilobyte->isChecked() )
+        theFee = CFeeRate( theFee, 1000 ).GetFeePerBytes( currentTransaction.getSizeOfTransaction() ) ;
+    currentTransaction.setTransactionFee( theFee ) ;
 
-    CAmount txFee = currentTransaction.getTransactionFee() ;
+    // ask the user to confirm send coins
+    QString questionString = makeAreYouSureToSendCoinsString( currentTransaction, walletModel->getOptionsModel()->getDisplayUnit() ) ;
 
-    if ( txFee > 0 )
-    {
-        // append fee string when a fee is added
-        questionString.append("<hr /><span style='color:#aa0000;'>");
-        questionString.append( UnitsOfCoin::formatHtmlWithUnit( walletModel->getOptionsModel()->getDisplayUnit(), txFee ) ) ;
-        questionString.append("</span> ");
-        questionString.append(tr("added as transaction fee"));
-
-        // append transaction size
-        questionString.append( " (" + QString::number( (double)currentTransaction.getTransactionSize() / 1000 ) + " kB)" ) ;
-    }
-
-    // add total amount in all subdivision units
-    questionString.append( "<hr />" ) ;
-    CAmount totalAmount = currentTransaction.getTotalTransactionAmount() + txFee ;
-    QStringList alternativeUnits ;
-    for ( const UnitsOfCoin::Unit & u : UnitsOfCoin::availableUnits() )
-    {
-        if ( u != walletModel->getOptionsModel()->getDisplayUnit() )
-            alternativeUnits.append( UnitsOfCoin::formatHtmlWithUnit( u, totalAmount ) ) ;
-    }
-    questionString.append(tr("Total Amount %1")
-        .arg( UnitsOfCoin::formatHtmlWithUnit( walletModel->getOptionsModel()->getDisplayUnit(), totalAmount ) )) ;
-    questionString.append(QString("<span style='font-size:10pt;font-weight:normal;'><br />(=%2)</span>")
-        .arg(alternativeUnits.join(" " + tr("or") + "<br />")));
-
-    SendConfirmationDialog confirmationDialog(tr("Confirm send coins"),
-        questionString.arg(formatted.join("<br />")), SEND_CONFIRM_DELAY, this);
-    confirmationDialog.exec();
-    QMessageBox::StandardButton retval = (QMessageBox::StandardButton)confirmationDialog.result();
-
-    if ( retval != QMessageBox::Yes )
-    {
+    SendConfirmationDialog confirmationDialog( tr("Confirm send coins"),
+            questionString.arg( formatted.join( "<br />" ) ),
+            SEND_CONFIRM_DELAY, this ) ;
+    confirmationDialog.exec() ;
+    QMessageBox::StandardButton retval = (QMessageBox::StandardButton)confirmationDialog.result() ;
+    if ( retval != QMessageBox::Yes ) {
         fNewRecipientAllowed = true ;
         return ;
     }
 
-    // now send the prepared transaction
+    // now send the transaction
     WalletModel::SendCoinsReturn sendStatus = walletModel->sendCoins( currentTransaction ) ;
     // process sendStatus and on error generate message shown to user
     processSendCoinsReturn( sendStatus ) ;
 
-    if ( sendStatus.status == WalletModel::OK )
+    if ( sendStatus.status == SendCoinsStatus::OK )
     {
         accept() ;
         CoinControlDialog::coinControl->UnSelectAll() ;
@@ -464,8 +471,22 @@ void SendCoinsDialog::setBalance(const CAmount& balance, const CAmount& unconfir
 
 void SendCoinsDialog::updateDisplayUnit()
 {
+    if ( walletModel == nullptr ) return ;
+
     setBalance( walletModel->getBalance(), 0, 0, 0, 0, 0 ) ;
-    ui->customFee->setDisplayUnit( walletModel->getOptionsModel()->getDisplayUnit() ) ;
+
+    if ( walletModel->getOptionsModel() != nullptr )
+        changeCustomFeeUnit( walletModel->getOptionsModel()->getDisplayUnit() ) ;
+}
+
+void SendCoinsDialog::changeCustomFeeUnit( unitofcoin newUnit )
+{
+    if ( walletModel == nullptr || walletModel->getOptionsModel() == nullptr )
+        return ;
+
+    ui->customFee->setUnitOfCoin( newUnit ) ;
+    CAmount stepForUnit = UnitsOfCoin::factor( newUnit ) / 10 ;
+    ui->customFee->setSingleStep( std::min< CAmount >( stepForUnit, UnitsOfCoin::factor( unitofcoin::oneCoin ) ) ) ;
 }
 
 void SendCoinsDialog::processSendCoinsReturn( const WalletModel::SendCoinsReturn & sendCoinsReturn )
@@ -474,42 +495,39 @@ void SendCoinsDialog::processSendCoinsReturn( const WalletModel::SendCoinsReturn
     // Default to a warning message, override if error message is needed
     msgParams.second = CClientUserInterface::MSG_WARNING ;
 
-    // This comment is specific to SendCoinsDialog usage of WalletModel::SendCoinsReturn
-    // WalletModel::TransactionCommitFailed is used only in WalletModel::sendCoins()
-    // all others are used only in WalletModel::prepareTransaction()
     switch ( sendCoinsReturn.status )
     {
-    case WalletModel::InvalidAmount:
+    case SendCoinsStatus::InvalidAmount:
         msgParams.first = "Amount ≤ 0" ;
         break ;
-    case WalletModel::InvalidAddress:
+    case SendCoinsStatus::InvalidAddress:
         msgParams.first = tr("The recipient address is not valid, please recheck") ;
         break;
-    case WalletModel::AmountExceedsBalance:
+    case SendCoinsStatus::AmountExceedsBalance:
         msgParams.first = tr("The amount exceeds your balance") ;
         break;
-    case WalletModel::AmountWithFeeExceedsBalance:
+    case SendCoinsStatus::AmountWithFeeExceedsBalance:
         msgParams.first = tr("The total exceeds your balance when the transaction fee is included") ;
         break;
-    case WalletModel::DuplicateAddress:
+    case SendCoinsStatus::DuplicateAddress:
         msgParams.first = tr("Duplicate address found, can only send to each address once per transaction") ;
         break ;
-    case WalletModel::TransactionCreationFailed:
+    case SendCoinsStatus::TransactionCreationFailed:
         msgParams.first = tr("Transaction creation failed") ;
         msgParams.second = CClientUserInterface::MSG_ERROR ;
         break;
-    case WalletModel::TransactionCommitFailed:
+    case SendCoinsStatus::TransactionCommitFailed:
         msgParams.first = tr("The transaction was rejected with the following reason: %1").arg( sendCoinsReturn.reasonCommitFailed ) ;
         msgParams.second = CClientUserInterface::MSG_ERROR ;
         break;
-    case WalletModel::AbsurdFee:
+    case SendCoinsStatus::AbsurdFee:
         msgParams.first = tr("A fee higher than %1 is considered an absurdly high fee").arg( UnitsOfCoin::formatWithUnit( walletModel->getOptionsModel()->getDisplayUnit(), maxTxFee ) ) ;
         break;
-    case WalletModel::PaymentRequestExpired:
+    case SendCoinsStatus::PaymentRequestExpired:
         msgParams.first = tr("Payment request expired") ;
         msgParams.second = CClientUserInterface::MSG_ERROR ;
         break;
-    case WalletModel::OK: // included to avoid a compiler warning
+    case SendCoinsStatus::OK: // included to avoid a compiler warning
         return ;
     default:
         return ;
@@ -557,13 +575,15 @@ void SendCoinsDialog::updateFeeSection()
     if ( ui->choiceZeroFee->isChecked() )
         ui->customFee->setValue( 0 ) ;
 
-    ui->customFee->setReadOnly( /* ui->choiceFeePerKilobyte->isChecked() || ui->choiceFixedFee->isChecked() */ true ) ;
+    ui->customFee->setReadOnly( ui->choiceZeroFee->isChecked() ) ;
 }
 
 void SendCoinsDialog::updateGlobalFeeVariable()
 {
-    // payTxFee is global, defined in wallet/wallet.cpp
-    payTxFee = CFeeRate( ui->customFee->value() ) ;
+    {   // currentTxFee is global, defined in wallet/wallet.cpp
+        LOCK2( cs_main, pwalletMain->cs_wallet ) ;
+        currentTxFee = CAmount( ui->customFee->value() ) ;
+    }
 
     bool noFee = ( ui->customFee->value() == 0 ) ;
     for ( int i = 0 ; i < ui->entries->count() ; ++ i )
@@ -574,17 +594,15 @@ void SendCoinsDialog::updateGlobalFeeVariable()
     }
 }
 
-/*
 QString SendCoinsDialog::getFeeString()
 {
-    if ( ! walletModel || ! walletModel->getOptionsModel() )
-        return ;
+    if ( walletModel == nullptr || walletModel->getOptionsModel() == nullptr )
+        return UnitsOfCoin::formatWithUnit( walletModel->getOptionsModel()->getDisplayUnit(), 0 ) ;
 
     QString feeString = UnitsOfCoin::formatWithUnit( walletModel->getOptionsModel()->getDisplayUnit(), ui->customFee->value() ) ;
     if ( ui->choiceFeePerKilobyte->isChecked() ) feeString += "/kB" ;
     return feeString ;
 }
-*/
 
 // Coin Control: copy "Quantity" to clipboard
 void SendCoinsDialog::coinControlQuantityToClipboard()

@@ -9,28 +9,34 @@
 #include "hash.h"
 #include "tinyformat.h"
 #include "utilstrencodings.h"
-#include "utiltime.h"
 #include "crypto/common.h"
 
-void CBlockHeader::SetAuxpow ( CAuxPow * auxpow )
+void CBlockHeader::SetAuxpow( CAuxPow * newAuxpow )
 {
-    this->auxpow.reset( auxpow ) ;
-    SetAuxpowInVersion( auxpow != nullptr ) ;
+    this->auxpow.reset( newAuxpow ) ;
+    SetAuxpowInVersion( newAuxpow != nullptr ) ;
+}
+
+std::string CBlockHeader::ToString() const
+{
+    std::stringstream s ;
+    s << "CBlockHeader(" ;
+      s << "::" << CPureBlockHeader::ToString() ;
+      if ( auxpow != nullptr && IsAuxpowInVersion() )
+          s << strprintf( ", auxpow=%s", auxpow->ToString() ) ;
+    s << ")" ;
+
+    return s.str() ;
 }
 
 std::string CBlock::ToString() const
 {
     std::stringstream s ;
-    s << strprintf(
-        "CBlock(sha256_hash=%s, scrypt_hash=%s, version=0x%x, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u '%s', nBits=%08x, nNonce=0x%08x, txs=%u)\n",
-        GetSha256Hash().ToString(), GetScryptHash().ToString(),
-        nVersion,
-        hashPrevBlock.ToString(),
-        hashMerkleRoot.ToString(),
-        nTime, DateTimeStrFormat( "%Y-%m-%d %H:%M:%S", nTime ),
-        nBits, nNonce,
-        vtx.size()
-    ) ;
+    s << "CBlock(" ;
+      s << "::" << CBlockHeader::ToString() ;
+      s << ", " ;
+      s << strprintf( "vtx.size=%u", vtx.size() ) ;
+    s << ")" << std::endl ;
     for ( unsigned int i = 0 ; i < vtx.size() ; i++ )
     {
         s << "  " << vtx[ i ]->ToString() ;
@@ -38,7 +44,7 @@ std::string CBlock::ToString() const
     return s.str() ;
 }
 
-int64_t GetBlockWeight(const CBlock& block)
+int64_t GetBlockWeight( const CBlock & block )
 {
     // This implements the weight = ( stripped_size * 4 ) + witness_size formula,
     // using only serialization with and without witness data. As witness_size

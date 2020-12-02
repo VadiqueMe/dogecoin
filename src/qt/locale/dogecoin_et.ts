@@ -282,14 +282,6 @@
         <translation>Rahakoti krüpteerimise salafraasi muutmine</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;Silumise aken</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Ava debugimise ja diagnostika konsool</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Kontrolli sõnumit...</translation>
     </message>
@@ -875,10 +867,6 @@
     <message>
         <source>Information</source>
         <translation>Informatsioon</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>Debugimise aken</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>

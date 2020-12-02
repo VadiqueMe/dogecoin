@@ -32,8 +32,7 @@ private:
 };
 
 /**
-   Qt model providing information about connected peers, similar to the
-   "getpeerinfo" RPC call. Used by the rpc console UI.
+   Qt model providing information about banned peers
  */
 class BanTableModel : public QAbstractTableModel
 {

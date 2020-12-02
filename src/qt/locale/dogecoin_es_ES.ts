@@ -326,14 +326,6 @@
         <translation>Cambiar la contraseña utilizada para el cifrado del monedero</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;Ventana de depuración</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Abrir la consola de depuración y diagnóstico</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Verificar mensaje...</translation>
     </message>
@@ -1291,10 +1283,6 @@
     <message>
         <source>Information</source>
         <translation>Información</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>Ventana de depuración</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -2518,8 +2506,8 @@
         <translation>Un error interno fatal ocurrió, ver debug log para detalles</translation>
     </message>
     <message>
-        <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
-        <translation>Comisión (en %s/KB) para agregar a las transacciones que envíe (por defecto: %s)</translation>
+        <source>Fee in %s to add to transactions you send (default: %s)</source>
+        <translation>Comisión en %s para agregar a las transacciones que envíe (por defecto: %s)</translation>
     </message>
     <message>
         <source>Pruning blockstore...</source>
@@ -2573,10 +2561,6 @@
     <message>
         <source>Maximum allowed median peer time offset adjustment. Local perspective of time may be influenced by peers forward or backward by this amount. (default: %u seconds)</source>
         <translation>Ajuste máximo permitido del tiempo offset medio de pares. La perspectiva local de tiempo se verá influenciada por los pares anteriores y posteriores a esta cantidad. (Por defecto: %u segundos)</translation>
-    </message>
-    <message>
-        <source>Maximum total fees (in %s) to use in a single wallet transaction or raw transaction; setting this too low may abort large transactions (default: %s)</source>
-        <translation>Máximas comisiones totales (en %s) para utilizar en una sola transacción de la cartera; establecer esto demasiado bajo puede abortar grandes transacciones (predeterminado: %s)</translation>
     </message>
     <message>
         <source>Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly.</source>
@@ -2643,8 +2627,8 @@
         <translation>Opciones de conexión:</translation>
     </message>
     <message>
-        <source>Copyright (C) %i-%i</source>
-        <translation>Copyright (C) %i-%i</translation>
+        <source>Copyright (c) %i-%i</source>
+        <translation>Copyright (c) %i-%i</translation>
     </message>
     <message>
         <source>Corrupted block database detected</source>
@@ -2737,10 +2721,6 @@
     <message>
         <source>Invalid -onion address: '%s'</source>
         <translation>Dirección -onion inválida: '%s'</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -%s=&lt;amount&gt;: '%s'</source>
-        <translation>Cantidad no valida para -%s=&lt;amount&gt;: '%s'</translation>
     </message>
     <message>
         <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
@@ -2883,10 +2863,6 @@
         <translation>Ejecutar un comando cuando se reciba una alerta importante o cuando veamos un fork demasiado largo (%s en cmd se reemplazará por el mensaje)</translation>
     </message>
     <message>
-        <source>Invalid amount for -maxtxfee=&lt;amount&gt;: '%s' (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
-        <translation>Cantidad no válida para -maxtxfee=&lt;amount&gt;: '%s' (debe ser por lo menos la cuota de comisión mínima de %s para prevenir transacciones atascadas)</translation>
-    </message>
-    <message>
         <source>Maximum size of data in data carrier transactions we relay and mine (default: %u)</source>
         <translation>El tamaño máximo de los datos en las operaciones de transporte de datos que transmitimos y el mio (default: %u)</translation>
     </message>
@@ -2937,6 +2913,10 @@
     <message>
         <source>Information</source>
         <translation>Información</translation>
+    </message>
+    <message>
+        <source>Maximum total fees (in %s) to use in a single transaction; setting this too low may abort large transactions (default: %s)</source>
+        <translation>Máximas comisiones totales (en %s) para utilizar en una sola transacción; establecer esto demasiado bajo puede abortar grandes transacciones (predeterminado: %s)</translation>
     </message>
     <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
@@ -3049,10 +3029,6 @@
         <translation>(1 = mantener los meta datos de transacción, por ejemplo: propietario e información de pago, 2 = omitir los metadatos)</translation>
     </message>
     <message>
-        <source>-maxtxfee is set very high! Fees this large could be paid on a single transaction.</source>
-        <translation>-maxtxfee tiene un ajuste muy elevado! Comisiones muy grandes podrían ser pagadas en una única transaccion.</translation>
-    </message>
-    <message>
         <source>Do not keep transactions in the mempool longer than &lt;n&gt; hours (default: %u)</source>
         <translation>No mantener transacciones en la memoria mas de &lt;n&gt; horas (predeterminado: %u)</translation>
     </message>
@@ -3107,10 +3083,6 @@
     <message>
         <source>Warning: Wallet file corrupt, data salvaged! Original %s saved as %s in %s; if your balance or transactions are incorrect you should restore from a backup.</source>
         <translation>Aviso: fichero de monedero corrupto, datos recuperados! Original %s guardado como %s en %s; si su balance de transacciones es incorrecto, debe restaurar desde una copia de seguridad.</translation>
-    </message>
-    <message>
-        <source>%s is set very high!</source>
-        <translation>%s es demasiado alto!</translation>
     </message>
     <message>
         <source>(default: %s)</source>

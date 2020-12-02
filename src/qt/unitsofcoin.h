@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -42,6 +42,24 @@
 #define THIN_SP_UTF8 REAL_THIN_SP_UTF8
 #define THIN_SP_HTML HTML_HACK_SP
 
+enum class unitofcoin
+{
+    MCoin = 3,
+    theCoin = 10,
+    kCoin = 2,
+    oneCoin = 0,
+    mCoin = 4,
+    uCoin = 5,
+    Cointoshi = 1
+} ;
+
+enum class SeparatorStyle
+{
+    never,
+    usual,
+    always
+} ;
+
 /* Units of coin definitions. Encapsulates parsing and formatting
    and serves as list model for drop-down selection boxes
 */
@@ -52,52 +70,39 @@ class UnitsOfCoin: public QAbstractListModel
 public:
     explicit UnitsOfCoin( QObject * parent ) ;
 
-    enum Unit
-    {
-        MCoin = 3,
-        theCoin = 10,
-        kCoin = 2,
-        oneCoin = 0,
-        mCoin = 4,
-        uCoin = 5,
-        Cointoshi = 1
-    };
-
-    enum SeparatorStyle
-    {
-        separatorNever,
-        separatorStandard,
-        separatorAlways
-    };
-
     // get list of units, for drop-down box
-    static QList< Unit > availableUnits() ;
-    // is this unit known?
-    static bool isOk( int unit ) ;
+    static QList< unitofcoin > availableUnits() ;
+
+    // does this int represent a unit?
+    static bool isUnitOfCoin( int unitInt ) ;
+
     // short name
-    static QString name( int unit ) ;
+    static QString name( const unitofcoin & unit ) ;
     // longer description
-    static QString description( int unit ) ;
+    static QString description( const unitofcoin & unit ) ;
     // number of atomary coin units per this unit
-    static qint64 factor( int unit ) ;
+    static qint64 factor( const unitofcoin & unit ) ;
     // number of decimals left
-    static int decimals( int unit ) ;
-    //! Format as string
-    static QString format(int unit, const CAmount& amount, bool plussign=false, SeparatorStyle separators=separatorStandard);
-    //! Format as string (with unit)
-    static QString formatWithUnit(int unit, const CAmount& amount, bool plussign=false, SeparatorStyle separators=separatorStandard);
-    //! Format as HTML string (with unit)
-    static QString formatHtmlWithUnit(int unit, const CAmount& amount, bool plussign=false, SeparatorStyle separators=separatorStandard);
-    //! Parse string to coin amount
-    static bool parseString( int unit, const QString & string, CAmount * out ) ;
+    static int decimals( const unitofcoin & unit ) ;
+
+    // format as string
+    static QString format( const unitofcoin & unit, const CAmount & amount, bool plussign = false, SeparatorStyle separators = SeparatorStyle::usual ) ;
+    static QString format( int unitInt, const CAmount & amount, bool plussign = false, SeparatorStyle separators = SeparatorStyle::usual ) ;
+    // format as string with unit
+    static QString formatWithUnit( const unitofcoin & unit, const CAmount & amount, bool plussign = false, SeparatorStyle separators = SeparatorStyle::usual ) ;
+    // format as HTML string with unit
+    static QString formatHtmlWithUnit( const unitofcoin & unit, const CAmount & amount, bool plussign = false, SeparatorStyle separators = SeparatorStyle::usual ) ;
+    // parse string to coin amount
+    static bool parseString( const unitofcoin & unit, const QString & string, CAmount * out ) ;
 
     // list model for unit drop-down selection box
     enum RoleIndex {
         /** Unit identifier */
         UnitRole = Qt::UserRole
-    };
-    int rowCount(const QModelIndex &parent) const;
-    QVariant data(const QModelIndex &index, int role) const;
+    } ;
+
+    int rowCount( const QModelIndex & parent ) const;
+    QVariant data( const QModelIndex & index, int role ) const ;
 
     static QString removeSpaces( QString text )
     {
@@ -113,10 +118,8 @@ public:
     static CAmount maxMoney() ;
 
 private:
-    QList < UnitsOfCoin::Unit > unitlist ;
+    QList < unitofcoin > unitlist ;
 
 } ;
-
-typedef UnitsOfCoin::Unit UnitOfCoin ;
 
 #endif

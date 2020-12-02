@@ -134,14 +134,6 @@
         <translation>Schimbă parola folosită pentru criptarea portofelului</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;Fereastra pentru depanare</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Pornește consola pentru depanare si diagnoză</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Verifică mesajul...</translation>
     </message>
@@ -505,10 +497,6 @@
     <message>
         <source>Information</source>
         <translation>Informații</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>Fereastra pentru depanare</translation>
     </message>
     <message>
         <source>Network</source>

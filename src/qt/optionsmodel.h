@@ -7,6 +7,7 @@
 #define DOGECOIN_QT_OPTIONSMODEL_H
 
 #include "amount.h"
+#include "unitsofcoin.h"
 
 #include <QAbstractListModel>
 
@@ -17,8 +18,7 @@ QT_END_NAMESPACE
 /** Interface from Qt to configuration data structure for Dogecoin peer.
    To Qt, the options are presented as a list with the different options
    laid out vertically.
-   This can be changed to a tree once the settings become sufficiently
-   complex
+   This can be changed to a tree once settings become sufficiently complex
  */
 
 class OptionsModel : public QAbstractListModel
@@ -40,7 +40,7 @@ public:
         ProxyUseTor,            // bool
         ProxyIPTor,             // QString
         ProxyPortTor,           // int
-        DisplayUnit,            // UnitsOfCoin::Unit
+        DisplayUnit,            // unitofcoin
         ThirdPartyTxUrls,       // QString
         Language,               // QString
         ThreadsScriptVerif,     // int
@@ -56,14 +56,13 @@ public:
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
     bool setData(const QModelIndex & index, const QVariant & value, int role = Qt::EditRole);
-    /** Updates current unit in memory, settings and emits displayUnitChanged(newUnit) signal */
-    void setDisplayUnit(const QVariant &value);
+    void setDisplayUnit( const QVariant & value ) ;
 
     /* Explicit getters */
     bool getHideTrayIcon() { return fHideTrayIcon; }
     bool getMinimizeToTray() { return fMinimizeToTray; }
     bool getMinimizeOnClose() { return fMinimizeOnClose; }
-    int getDisplayUnit() { return nDisplayUnit; }
+    unitofcoin getDisplayUnit() {  return displayUnit ;  }
     QString getThirdPartyTxUrls() {  return thirdPartyTxUrls ;  }
     bool getProxySettings( QNetworkProxy & proxy ) const ;
     const QString& getOverriddenByCommandLine() { return strOverriddenByCommandLine; }
@@ -78,7 +77,7 @@ private:
     bool fMinimizeToTray;
     bool fMinimizeOnClose;
     QString language;
-    int nDisplayUnit;
+    unitofcoin displayUnit ;
     QString thirdPartyTxUrls ;
     /* settings that were overridden by command-line */
     QString strOverriddenByCommandLine;
@@ -89,7 +88,7 @@ private:
     // Check settings version and upgrade default values if required
     void checkAndMigrate();
 Q_SIGNALS:
-    void displayUnitChanged(int unit);
+    void displayUnitChanged( unitofcoin unit ) ;
     void hideTrayIconChanged(bool);
 };
 

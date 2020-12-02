@@ -84,7 +84,7 @@ void SendCoinsEntry::setWalletModel( WalletModel * model )
     this->walletModel = model ;
 
     if ( model && model->getOptionsModel() )
-        connect( model->getOptionsModel(), SIGNAL( displayUnitChanged(int) ), this, SLOT( updateDisplayUnit() ) ) ;
+        connect( model->getOptionsModel(), SIGNAL( displayUnitChanged(unitofcoin) ), this, SLOT( updateDisplayUnit() ) ) ;
 
     clear() ;
 }
@@ -245,10 +245,10 @@ void SendCoinsEntry::updateDisplayUnit()
 {
     if ( walletModel && walletModel->getOptionsModel() )
     {
-        // Update payAmount with the current unit
-        ui->payAmount->setDisplayUnit( walletModel->getOptionsModel()->getDisplayUnit() ) ;
-        ui->payAmount_is->setDisplayUnit( walletModel->getOptionsModel()->getDisplayUnit() ) ;
-        ui->payAmount_s->setDisplayUnit( walletModel->getOptionsModel()->getDisplayUnit() ) ;
+        unitofcoin newUnit = walletModel->getOptionsModel()->getDisplayUnit() ;
+        ui->payAmount->setUnitOfCoin( newUnit ) ;
+        ui->payAmount_is->setUnitOfCoin( newUnit ) ;
+        ui->payAmount_s->setUnitOfCoin( newUnit ) ;
     }
 }
 

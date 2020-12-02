@@ -286,14 +286,6 @@
         <translation>تغییر گذرواژهٔ مورد استفاده در رمزنگاری کیف پول</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>پنجرهٔ ا&amp;شکال‌زدایی</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>باز کردن کنسول خطایابی و اشکال‌زدایی</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>با&amp;زبینی پیام...</translation>
     </message>
@@ -977,10 +969,6 @@
         <translation>اطلاعات</translation>
     </message>
     <message>
-        <source>Debug window</source>
-        <translation>پنجرهٔ اشکالزدایی</translation>
-    </message>
-    <message>
         <source>Startup time</source>
         <translation>زمان آغاز به کار</translation>
     </message>
@@ -1501,7 +1489,7 @@
         <translation>گزینه‌های اتصال:</translation>
     </message>
     <message>
-        <source>Copyright (C) %i-%i</source>
+        <source>Copyright (c) %i-%i</source>
         <translation>حق تألیف (C) %i-%i</translation>
     </message>
     <message>

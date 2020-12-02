@@ -7,6 +7,7 @@
 #define DOGECOIN_QT_COINAMOUNTFIELD_H
 
 #include "amount.h"
+#include "unitsofcoin.h"
 
 #include <QWidget>
 
@@ -38,8 +39,9 @@ public:
 
     CAmount getMaximumValue() const ;
 
-    /** Set single step in atomary coin units **/
+    /** Set single step in atomary coin units or by chosen unit **/
     void setSingleStep( const CAmount & step ) ;
+    void setSingleStep( unitofcoin unit ) ;
 
     /** Make read-only **/
     void setReadOnly( bool fReadOnly ) ;
@@ -49,8 +51,8 @@ public:
     /** Perform input validation, mark field as invalid if entered value is not valid */
     bool validate() ;
 
-    /** Change unit used to display amount */
-    void setDisplayUnit( int unit ) ;
+    /** Change unit used for amount */
+    void setUnitOfCoin( unitofcoin unit ) ;
 
     /** Make field empty and ready for new input */
     void clear() ;
@@ -65,6 +67,7 @@ public:
 Q_SIGNALS:
     void valueEdited( qint64 val ) ; // only when edited by the user
     void valueChanged( qint64 val ) ; // edited by the user or set programmatically
+    void unitChanged( unitofcoin unit ) ; // new unit selected
 
 protected:
     /** Intercept focus-in event and ',' key presses */
@@ -72,12 +75,12 @@ protected:
 
 private:
     AmountSpinBox * amount ;
-    QValueComboBox * unit ;
+    QValueComboBox * unitComboBox ;
 
 private Q_SLOTS:
     void amountEdited() ;
     void amountChanged() ;
-    void unitChanged( int idx ) ;
+    void unitIndexChanged( int idx ) ;
 
 };
 

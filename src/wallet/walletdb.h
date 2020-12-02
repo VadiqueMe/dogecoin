@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -9,6 +10,7 @@
 #include "amount.h"
 #include "primitives/transaction.h"
 #include "wallet/db.h"
+#include "wallet/wallettx.h"
 #include "key.h"
 
 #include <list>

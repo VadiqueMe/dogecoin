@@ -114,14 +114,10 @@ public:
 };
 
 /** Show warning message **/
-void InitWarning(const std::string& str);
+void InitWarning( const std::string & str ) ;
 
 /** Show error message **/
-bool InitError(const std::string& str);
-
-std::string AmountHighWarn(const std::string& optname);
-
-std::string AmountErrMsg(const char* const optname, const std::string& strValue);
+bool InitError( const std::string & str ) ;
 
 extern CClientUserInterface uiInterface ;
 

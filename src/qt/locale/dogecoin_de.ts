@@ -326,14 +326,6 @@
         <translation>Ändert die Passphrase, die für die Wallet-Verschlüsselung benutzt wird</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;Debugfenster</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Debugging- und Diagnosekonsole öffnen</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>Nachricht &amp;verifizieren...</translation>
     </message>
@@ -1343,10 +1335,6 @@
     <message>
         <source>Information</source>
         <translation>Hinweis</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>Debugfenster</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -2636,8 +2624,8 @@
         <translation>Fehler: Ein schwerer interner Fehler ist aufgetreten, siehe debug log für Details.</translation>
     </message>
     <message>
-        <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
-        <translation>Gebühr (in %s/kB), die von Ihnen gesendeten Transaktionen hinzugefügt wird (Standard: %s)</translation>
+        <source>Fee in %s to add to transactions you send (default: %s)</source>
+        <translation>Gebühr in %s, die von Ihnen gesendeten Transaktionen hinzugefügt wird (Standard: %s)</translation>
     </message>
     <message>
         <source>Pruning blockstore...</source>
@@ -2690,10 +2678,6 @@
     <message>
         <source>Maximum allowed median peer time offset adjustment. Local perspective of time may be influenced by peers forward or backward by this amount. (default: %u seconds)</source>
         <translation>Maximum allowed median peer time offset adjustment. Local perspective of time may be influenced by peers forward or backward by this amount. (default: %u seconds)</translation>
-    </message>
-    <message>
-        <source>Maximum total fees (in %s) to use in a single wallet transaction or raw transaction; setting this too low may abort large transactions (default: %s)</source>
-        <translation>Maximale Gesamtgebühr (in %s) in einer Börsentransaktion; wird dies zu niedrig gesetzten können große Transaktionen abgebrochen werden (Standard: %s)</translation>
     </message>
     <message>
         <source>Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly.</source>
@@ -2780,8 +2764,8 @@
         <translation>Verbindungsoptionen:</translation>
     </message>
     <message>
-        <source>Copyright (C) %i-%i</source>
-        <translation>Copyright (C) %i-%i</translation>
+        <source>Copyright (c) %i-%i</source>
+        <translation>Copyright (c) %i-%i</translation>
     </message>
     <message>
         <source>Corrupted block database detected</source>
@@ -2870,10 +2854,6 @@
     <message>
         <source>Invalid -onion address: '%s'</source>
         <translation>Ungültige "-onion"-Adresse: '%s'</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -%s=&lt;amount&gt;: '%s'</source>
-        <translation>Ungültiger Betrag für -%s=&lt;amount&gt;: '%s'</translation>
     </message>
     <message>
         <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
@@ -3016,10 +2996,6 @@
         <translation>Befehl ausführen wenn ein relevanter Alarm empfangen wird oder wir einen wirklich langen Fork entdecken (%s im Befehl wird durch die Nachricht ersetzt)</translation>
     </message>
     <message>
-        <source>Invalid amount for -maxtxfee=&lt;amount&gt;: '%s' (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
-        <translation>Ungültiger Betrag für -maxtxfee=&lt;amount&gt;: '%s' (muss mindestens die minimale Weiterleitungsgebühr in Höhe von %s sein, um zu verhindern dass Transaktionen nicht bearbeitet werden)</translation>
-    </message>
-    <message>
         <source>Maximum size of data in data carrier transactions we relay and mine (default: %u)</source>
         <translation>Maximale Datengröße in "Data Carrier"-Transaktionen die weitergeleitet und erarbeitet werden (Standard: %u)</translation>
     </message>
@@ -3070,6 +3046,10 @@
     <message>
         <source>Information</source>
         <translation>Hinweis</translation>
+    </message>
+    <message>
+        <source>Maximum total fees (in %s) to use in a single transaction; setting this too low may abort large transactions (default: %s)</source>
+        <translation>Maximale Gesamtgebühr (in %s) in einer Transaktion; wird dies zu niedrig gesetzten können große Transaktionen abgebrochen werden (Standard: %s)</translation>
     </message>
     <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
@@ -3180,10 +3160,6 @@
         <translation>(1 = TX-Metadaten wie z.B. Accountbesitzer und Zahlungsanforderungsinformationen behalten, 2 = TX-Metadaten verwerfen)</translation>
     </message>
     <message>
-        <source>-maxtxfee is set very high! Fees this large could be paid on a single transaction.</source>
-        <translation>-maxtxfee ist auf einen sehr hohen Wert festgelegt! Gebühren dieser Höhe könnten für eine einzelne Transaktion bezahlt werden.</translation>
-    </message>
-    <message>
         <source>Do not keep transactions in the mempool longer than &lt;n&gt; hours (default: %u)</source>
         <translation>Die Transaktion nicht länger im Speicherpool behalten als &lt;n&gt; Stunden (Standard: %u)</translation>
     </message>
@@ -3220,10 +3196,6 @@
         <translation>Unterstütze Blöcke und Transaktionen mit  Bloomfiltern zu filtern (default: %u)</translation>
     </message>
     <message>
-        <source>This is the transaction fee you may pay when fee estimates are not available.</source>
-        <translation>Das ist die Transaktionsgebühr, welche du zahlen müsstest, wenn die Gebührenschätzungen nicht verfügbar sind.</translation>
-    </message>
-    <message>
         <source>Total length of network version string (%i) exceeds maximum length (%i). Reduce the number or size of uacomments.</source>
         <translation>Gesamtlänge des Netzwerkversionstrings (%i) erreicht die maximale Länge (%i). Reduzieren Sie die Nummer oder die Größe von uacomments.</translation>
     </message>
@@ -3250,10 +3222,6 @@
     <message>
         <source>Whitelist peers connecting from the given IP address (e.g. 1.2.3.4) or CIDR notated network (e.g. 1.2.3.0/24). Can be specified multiple times.</source>
         <translation>Gegenstellen die sich von der angegebenen IP-Adresse (e.g. 1.2.3.4) oder CIDR Notation (eg. 1.2.3.0/24) aus verbinden immer zulassen. Kann mehrmals angegeben werden.</translation>
-    </message>
-    <message>
-        <source>%s is set very high!</source>
-        <translation>%s wurde sehr hoch Eingestellt!</translation>
     </message>
     <message>
         <source>(default: %s)</source>
@@ -3338,10 +3306,6 @@
     <message>
         <source>Starting network threads...</source>
         <translation>Netzwerk-Threads werden gestartet...</translation>
-    </message>
-    <message>
-        <source>This is the transaction fee you will pay if you send a transaction.</source>
-        <translation>Dies ist die Gebühr die beim Senden einer Transaktion fällig wird.</translation>
     </message>
     <message>
         <source>Threshold for disconnecting misbehaving peers (default: %u)</source>

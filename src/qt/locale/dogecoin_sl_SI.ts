@@ -142,14 +142,6 @@
         <translation>Spremenite geslo za šifriranje denarnice</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;Razhroščevalno okno</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Odprite razhroščevalno in diagnostično konzolo</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Preveri sporočilo ...</translation>
     </message>
@@ -799,10 +791,6 @@
     <message>
         <source>Information</source>
         <translation>Informacije</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>Razhroščevalno okno</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>

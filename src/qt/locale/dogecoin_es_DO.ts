@@ -134,14 +134,6 @@
         <translation>Cambiar la contraseña utilizada para el cifrado del monedero</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>Ventana de &amp;depuración</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Abrir la consola de depuración y diagnóstico</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Verificar mensaje...</translation>
     </message>
@@ -577,10 +569,6 @@
     <message>
         <source>Information</source>
         <translation>Información</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>Ventana de depuración</translation>
     </message>
     <message>
         <source>Startup time</source>

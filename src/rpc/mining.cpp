@@ -275,21 +275,20 @@ UniValue getmininginfo( const JSONRPCRequest& request )
 }
 
 
-// NOTE: Unlike wallet RPC (which use BTC values), mining RPCs follow GBT (BIP 22) in using satoshi amounts
-UniValue prioritisetransaction(const JSONRPCRequest& request)
+UniValue prioritisetransaction( const JSONRPCRequest & request )
 {
-    if (request.fHelp || request.params.size() != 3)
+    if ( request.fHelp || request.params.size() != 3 )
         throw std::runtime_error(
-            "prioritisetransaction <txid> <priority delta> <fee delta>\n"
+            "prioritisetransaction <txhash> <priority delta> <fee delta>\n"
             "Accepts the transaction into mined blocks at a higher (or lower) priority\n"
             "\nArguments:\n"
-            "1. \"txid\"       (string, required) The transaction id.\n"
+            "1. \"txhash\"     (string, required) The transaction hash\n"
             "2. priority_delta (numeric, required) The priority to add or subtract.\n"
-            "                  The transaction selection algorithm considers the tx as it would have a higher priority.\n"
+            "                  The transaction selection algorithm considers the tx as it would have a higher priority\n"
             "                  (priority of a transaction is calculated: coinage * value_in_satoshis / txsize) \n"
             "3. fee_delta      (numeric, required) The fee value (in satoshis) to add (or subtract, if negative).\n"
             "                  The fee is not actually paid, only the algorithm for selecting transactions into a block\n"
-            "                  considers the transaction as it would have paid a higher (or lower) fee.\n"
+            "                  considers the transaction as it would have paid a higher (or lower) fee\n"
             "\nResult:\n"
             "true              (boolean) Returns true\n"
             "\nExamples:\n"
@@ -619,7 +618,7 @@ UniValue getblocktemplate( const JSONRPCRequest & request )
             nTxSigOps /= WITNESS_SCALE_FACTOR;
         }
         entry.pushKV( "sigops", nTxSigOps ) ;
-        entry.pushKV( "weight", GetTransactionWeight( tx ) ) ;
+        entry.pushKV( "weight", GetVirtualWeightOfTransaction( tx ) ) ;
 
         transactions.push_back(entry);
     }

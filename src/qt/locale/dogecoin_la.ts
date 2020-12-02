@@ -106,14 +106,6 @@
         <translation>Muta tesseram utam pro cassidilis cifrando</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>Fenestra &amp;Debug</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Aperi terminalem debug et diagnosticalem</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Verifica nuntium...</translation>
     </message>
@@ -425,10 +417,6 @@
     <message>
         <source>Information</source>
         <translation>Informatio</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>Fenestra Debug</translation>
     </message>
     <message>
         <source>Startup time</source>

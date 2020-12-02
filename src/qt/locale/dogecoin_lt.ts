@@ -142,14 +142,6 @@
         <translation>Pakeisti slaptafrazę naudojamą piniginės užšifravimui</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;Derinimo langas</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Atverti derinimo ir diagnostikos konsolę</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Tikrinti žinutę...</translation>
     </message>
@@ -521,10 +513,6 @@
     <message>
         <source>Information</source>
         <translation>Informacija</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>Derinimo langas</translation>
     </message>
     <message>
         <source>Startup time</source>

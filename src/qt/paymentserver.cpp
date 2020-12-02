@@ -37,8 +37,8 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QSslCertificate>
+#include <QSslConfiguration>
 #include <QSslError>
-#include <QSslSocket>
 #include <QStringList>
 #include <QTextDocument>
 
@@ -129,21 +129,21 @@ void PaymentServer::LoadRootCAs( X509_STORE* _store )
         return ;
     }
 
-    QList<QSslCertificate> certList;
+    QList< QSslCertificate > certList ;
 
     if ( certFile != "-system-" ) {
             qDebug() << QString( "PaymentServer::%1: Using \"%2\" as trusted root certificate" ).arg( __func__ ).arg( certFile ) ;
 
-        certList = QSslCertificate::fromPath(certFile);
-        // Use those certificates when fetching payment requests, too:
-        QSslSocket::setDefaultCaCertificates(certList);
+        certList = QSslCertificate::fromPath( certFile ) ;
+        // Use those certificates when fetching payment requests too
+        QSslConfiguration::defaultConfiguration().setCaCertificates( certList ) ;
     } else
-        certList = QSslSocket::systemCaCertificates();
+        certList = QSslConfiguration::systemCaCertificates() ;
 
     int nRootCerts = 0;
     const QDateTime currentTime = QDateTime::currentDateTime();
 
-    Q_FOREACH (const QSslCertificate& cert, certList) {
+    for ( const QSslCertificate & cert : certList ) {
         // Don't log NULL certificates
         if (cert.isNull())
             continue;
@@ -642,9 +642,9 @@ void PaymentServer::fetchPaymentACK(CWallet* wallet, SendCoinsRecipient recipien
         }
     }
 
-    int length = payment.ByteSize();
-    netRequest.setHeader(QNetworkRequest::ContentLengthHeader, length);
-    QByteArray serData(length, '\0');
+    size_t length = payment.ByteSizeLong() ;
+    netRequest.setHeader( QNetworkRequest::ContentLengthHeader, QVariant::fromValue( length ) ) ;
+    QByteArray serData( length, '\0' ) ;
     if (payment.SerializeToArray(serData.data(), length)) {
         netManager->post(netRequest, serData);
     }

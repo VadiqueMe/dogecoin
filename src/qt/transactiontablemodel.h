@@ -96,7 +96,7 @@ private:
     QString formatTxDate(const TransactionRecord *wtx) const;
     QString formatTxType(const TransactionRecord *wtx) const;
     QString formatTxToAddress( const TransactionRecord * rtx, bool forTooltip ) const ;
-    QString formatTxAmount( const TransactionRecord * rtx, bool showUnconfirmed = true, UnitsOfCoin::SeparatorStyle separators = UnitsOfCoin::separatorStandard ) const ;
+    QString formatTxAmount( const TransactionRecord * rtx, bool showUnconfirmed = true, SeparatorStyle separators = SeparatorStyle::usual ) const ;
     QString formatTooltip(const TransactionRecord *rec) const;
     QVariant txStatusDecoration( const TransactionRecord * rtx ) const ;
     QVariant txWatchonlyDecoration(const TransactionRecord *wtx) const;

@@ -709,36 +709,36 @@ UniValue getbalance(const JSONRPCRequest& request)
         // TxOuts paying to the wallet, while this sums up both spent and
         // unspent TxOuts paying to the wallet, and then subtracts the values of
         // TxIns spending from the wallet. This also has fewer restrictions on
-        // which unconfirmed transactions are considered trusted.
-        CAmount nBalance = 0;
+        // which unconfirmed transactions are considered trusted
+        CAmount nBalance = 0 ;
         for ( std::map< uint256, CWalletTx >::iterator it = pwalletMain->mapWallet.begin() ; it != pwalletMain->mapWallet.end() ; ++ it )
         {
-            const CWalletTx& wtx = (*it).second;
-            if (!CheckFinalTx(wtx) || wtx.GetBlocksToMaturity() > 0 || wtx.GetDepthInMainChain() < 0)
-                continue;
+            const CWalletTx & wtx = ( *it ).second ;
+            if ( ! CheckFinalTx(wtx) || wtx.GetBlocksToMaturity() > 0 || wtx.GetDepthInMainChain() < 0 )
+                continue ;
 
-            CAmount allFee;
-            std::string strSentAccount ;
             std::list< COutputEntry > listReceived ;
             std::list< COutputEntry > listSent ;
-            wtx.GetAmounts(listReceived, listSent, allFee, strSentAccount, filter);
-            if (wtx.GetDepthInMainChain() >= nMinDepth)
+            CAmount allFee ;
+            std::string strSentAccount ;
+            wtx.GetAmounts( listReceived, listSent, allFee, strSentAccount, filter ) ;
+            if ( wtx.GetDepthInMainChain() >= nMinDepth )
             {
                 for ( const COutputEntry & r : listReceived )
                     nBalance += r.amount ;
             }
             for ( const COutputEntry & s : listSent )
                 nBalance -= s.amount ;
-            nBalance -= allFee;
+            nBalance -= allFee ;
         }
-        return  ValueFromAmount(nBalance);
+        return ValueFromAmount( nBalance ) ;
     }
 
     std::string strAccount = AccountFromValue( request.params[0] ) ;
 
-    CAmount nBalance = pwalletMain->GetAccountBalance(strAccount, nMinDepth, filter);
+    CAmount nBalance = pwalletMain->GetAccountBalance( strAccount, nMinDepth, filter ) ;
 
-    return ValueFromAmount(nBalance);
+    return ValueFromAmount( nBalance ) ;
 }
 
 UniValue getunconfirmedbalance(const JSONRPCRequest &request)
@@ -2291,23 +2291,19 @@ UniValue settxfee(const JSONRPCRequest& request)
     if ( request.fHelp || request.params.size() < 1 || request.params.size() > 1 )
         throw std::runtime_error(
             "settxfee amount\n"
-            "\nSet the transaction fee per kB. Overwrites the paytxfee parameter.\n"
+            "\nSet the transaction fee. Overwrites the paytxfee parameter\n"
             "\nArguments:\n"
-            "1. amount         (numeric or string, required) The transaction fee in " + NameOfE8Currency() + "/kB\n"
+            "1. amount         (numeric or string, required) The transaction fee in " + NameOfE8Currency() + "\n"
             "\nResult\n"
             "true|false        (boolean) Returns true if successful\n"
             "\nExamples:\n"
-            + HelpExampleCli("settxfee", "0.00001")
-            + HelpExampleRpc("settxfee", "0.00001")
+            + HelpExampleCli("settxfee", "0.2")
+            + HelpExampleRpc("settxfee", "2")
         );
 
-    LOCK2(cs_main, pwalletMain->cs_wallet);
-
-    // Amount
-    CAmount nAmount = AmountFromValue(request.params[0]);
-
-    payTxFee = CFeeRate(nAmount, 1000);
-    return true;
+    LOCK2( cs_main, pwalletMain->cs_wallet ) ;
+    currentTxFee = AmountFromValue( request.params[ 0 ] ) ;
+    return true ;
 }
 
 UniValue getwalletinfo(const JSONRPCRequest& request)
@@ -2318,7 +2314,7 @@ UniValue getwalletinfo(const JSONRPCRequest& request)
     if ( request.fHelp || request.params.size() != 0 )
         throw std::runtime_error(
             "getwalletinfo\n"
-            "Returns an object containing various wallet state info.\n"
+            "Returns an object containing various wallet info\n"
             "\nResult:\n"
             "{\n"
             "  \"walletversion\": xxxxx,       (numeric) the wallet version\n"
@@ -2329,7 +2325,7 @@ UniValue getwalletinfo(const JSONRPCRequest& request)
             "  \"keypoololdest\": xxxxxx,      (numeric) the timestamp (seconds since Unix epoch) of the oldest pre-generated key in the key pool\n"
             "  \"keypoolsize\": xxxx,          (numeric) how many new keys are pre-generated\n"
             "  \"unlocked_until\": ttt,        (numeric) the timestamp in seconds since epoch (midnight Jan 1 1970 GMT) that the wallet is unlocked for transfers, or 0 if the wallet is locked\n"
-            "  \"paytxfee\": x.xxxx,           (numeric) the transaction fee configuration, set in " + NameOfE8Currency() + "/kB\n"
+            "  \"paytxfee\": x.xxxx,           (numeric) the transaction fee in " + NameOfE8Currency() + "\n"
             "  \"hdmasterkeyid\": \"<hash160>\" (string) the Hash160 of the HD master pubkey\n"
             "}\n"
             "\nExamples:\n"
@@ -2349,7 +2345,7 @@ UniValue getwalletinfo(const JSONRPCRequest& request)
     obj.pushKV( "keypoolsize", (int)pwalletMain->GetKeyPoolSize() ) ;
     if ( pwalletMain->IsCrypted() )
         obj.pushKV( "unlocked_until", nWalletUnlockTime ) ;
-    obj.pushKV( "paytxfee", ValueFromAmount( payTxFee.GetFeePerKiloByte() ) ) ;
+    obj.pushKV( "paytxfee", ValueFromAmount( currentTxFee ) ) ;
     CKeyID masterKeyID = pwalletMain->GetHDChain().masterKeyID ;
     if ( ! masterKeyID.IsNull() )
          obj.pushKV( "hdmasterkeyid", masterKeyID.GetHex() ) ;

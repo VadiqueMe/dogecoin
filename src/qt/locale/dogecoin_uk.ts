@@ -198,14 +198,6 @@
         <translation>Змінити пароль, який використовується для шифрування гаманця</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>В&amp;ікно зневадження</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Відкрити консоль зневадження і діагностики</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>П&amp;еревірити повідомлення...</translation>
     </message>
@@ -877,10 +869,6 @@
         <translation>Інформація</translation>
     </message>
     <message>
-        <source>Debug window</source>
-        <translation>Вікно зневадження</translation>
-    </message>
-    <message>
         <source>Using BerkeleyDB version</source>
         <translation>Використовується BerkeleyDB версії</translation>
     </message>
@@ -1481,8 +1469,8 @@
         <translation>Помилка: Сталася фатальна помилка (детальніший опис наведено в debug log)</translation>
     </message>
     <message>
-        <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
-        <translation>Комісія (в %s/КБ), що додаватиметься до вихідних транзакцій (типово: %s)</translation>
+        <source>Fee in %s to add to transactions you send (default: %s)</source>
+        <translation>Комісія в %s, що додаватиметься до вихідних транзакцій (типово: %s)</translation>
     </message>
     <message>
         <source>Pruning blockstore...</source>
@@ -1709,10 +1697,6 @@
         <translation>Виконати команду при надходженні важливого сповіщення або при спостереженні тривалого розгалуження ланцюжка (замість %s буде підставлено повідомлення)</translation>
     </message>
     <message>
-        <source>Invalid amount for -maxtxfee=&lt;amount&gt;: '%s' (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
-        <translation>Неприпустима сума для -maxtxfee = &lt;amount&gt;: «%s» ( плата повинна бути, принаймні %s, щоб запобігти зависанню транзакцій)</translation>
-    </message>
-    <message>
         <source>Maximum size of data in data carrier transactions we relay and mine (default: %u)</source>
         <translation>Максимальний розмір даних в транзакціях носіїв даних, що ми передаємо і добуваємо (за замовчуванням: %u)</translation>
     </message>
@@ -1863,10 +1847,6 @@
     <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation>(1 = утримувати метадані транзакцій (до яких відноситься інформація про власника рахунку та запити платежів), 2 - відкинути)</translation>
-    </message>
-    <message>
-        <source>-maxtxfee is set very high! Fees this large could be paid on a single transaction.</source>
-        <translation>Встановлено дуже велике значення -maxtxfee! Такі великі комісії можуть бути сплачені окремою транзакцією.</translation>
     </message>
     <message>
         <source>Do not keep transactions in the mempool longer than &lt;n&gt; hours (default: %u)</source>

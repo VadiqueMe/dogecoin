@@ -6,27 +6,24 @@
 #ifndef DOGECOIN_QT_WALLETMODELTRANSACTION_H
 #define DOGECOIN_QT_WALLETMODELTRANSACTION_H
 
+#include "wallet/wallet.h"
 #include "walletmodel.h"
 
-#include <QObject>
+#include <vector>
 
 class SendCoinsRecipient ;
 
-class CReserveKey ;
-class CWallet ;
-class CWalletTx ;
-
-/** Data model for a walletmodel transaction */
 class WalletModelTransaction
 {
 public:
-    explicit WalletModelTransaction( const QList< SendCoinsRecipient > & listOfRecipients ) ;
+    explicit WalletModelTransaction( const std::vector< SendCoinsRecipient > & listOfRecipients ) ;
     ~WalletModelTransaction() ;
 
-    QList< SendCoinsRecipient > getRecipients() const {  return recipients ;  }
+    std::vector< SendCoinsRecipient > getRecipients() const {  return recipients ;  }
 
-    CWalletTx * getTransaction() ;
-    unsigned int getTransactionSize() ;
+    CWalletTx & getWalletTransaction() {  return walletTransaction ;  }
+
+    unsigned int getSizeOfTransaction() const ;
 
     void setTransactionFee( const CAmount & newFee ) {  fee = newFee ;  }
     CAmount getTransactionFee() const {  return fee ;  }
@@ -36,11 +33,11 @@ public:
     void newPossibleKeyChange( CWallet * wallet ) ;
     CReserveKey * getPossibleKeyChange() ;
 
-    void reassignAmounts( int nChangePosRet ) ; // needed for the subtract-fee-from-amount feature
+    void reassignAmounts( int nChangePosRet ) ; // for the subtract-fee-from-amount feature
 
 private:
-    QList< SendCoinsRecipient > recipients ;
-    CWalletTx * walletTransaction ;
+    std::vector< SendCoinsRecipient > recipients ;
+    CWalletTx walletTransaction ;
     CReserveKey * keyChange ;
     CAmount fee ;
 } ;

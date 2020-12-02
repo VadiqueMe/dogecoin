@@ -202,14 +202,6 @@
         <translation>Modifier la phrase de passe utilisée pour le cryptage du porte-monnaie</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;Fenêtre de débogage</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Ouvrir la console de débogage et de diagnostic</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Vérification du message</translation>
     </message>
@@ -803,10 +795,6 @@
     <message>
         <source>Information</source>
         <translation>Information</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>Fenêtre de débogage </translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>

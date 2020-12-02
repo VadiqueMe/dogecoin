@@ -134,14 +134,6 @@
         <translation>Паролни ўзгартириш ҳамённи кодлашда фойдаланилади</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;Носозликни ҳал қилиш ойнаси</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Носозликни ҳал қилиш ва ташхис терминали</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>Хабарни &amp;тасдиқлаш...</translation>
     </message>
@@ -641,10 +633,6 @@
     <message>
         <source>Information</source>
         <translation>Маълумот</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>Тузатиш ойнаси</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>

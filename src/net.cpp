@@ -120,13 +120,13 @@ bool GetLocal(CService& addr, const CNetAddr *paddrPeer)
     return nBestScore >= 0;
 }
 
-//! Convert the pnSeeds6 array into usable address objects.
+//! Convert the pnSeeds6 array into usable address objects
 static std::vector<CAddress> convertSeed6(const std::vector<SeedSpec6> &vSeedsIn)
 {
     // It'll only connect to one or two seed nodes because once it connects,
     // it'll get a pile of addresses with newer timestamps.
     // Seed nodes are given a random 'last seen time' of between one and two
-    // weeks ago.
+    // weeks ago
     const int64_t nOneWeek = 7*24*60*60;
     std::vector<CAddress> vSeedsOut;
     vSeedsOut.reserve(vSeedsIn.size());
@@ -365,7 +365,6 @@ CNode* CConnman::ConnectNode(CAddress addrConnect, const char *pszDest, bool fCo
         }
     }
 
-    /// debug print
     LogPrint("net", "trying connection %s lastseen=%.1fhrs\n",
         pszDest ? pszDest : addrConnect.ToString(),
         pszDest ? 0.0 : (double)(GetAdjustedTime() - addrConnect.nTime)/3600.0);
@@ -387,7 +386,7 @@ CNode* CConnman::ConnectNode(CAddress addrConnect, const char *pszDest, bool fCo
             // It is possible that we already have a connection to the IP/port pszDest resolved to.
             // In that case, drop the connection that was just created, and return the existing CNode instead.
             // Also store the name we used to connect in that CNode, so that future FindNode() calls to that
-            // name catch this early.
+            // name catch this early
             LOCK(cs_vNodes);
             CNode* pnode = FindNode((CService)addrConnect);
             if (pnode)
@@ -411,7 +410,7 @@ CNode* CConnman::ConnectNode(CAddress addrConnect, const char *pszDest, bool fCo
         return pnode;
     } else if (!proxyConnectionFailed) {
         // If connecting to the node failed, and failure is not caused by a problem connecting to
-        // the proxy, mark this as an attempt.
+        // the proxy, mark this as an attempt
         addrman.Attempt(addrConnect, fCountFailure);
     }
 
@@ -632,7 +631,7 @@ void CNode::SetAddrLocal( const CService & addrLocalIn )
 {
     LOCK( cs_addrLocal ) ;
     if ( addrLocal.IsValid() ) {
-        error( "Addr local already set for node: %i. Refusing to change from %s to %s",
+        error( "Addr local already set for node %i. Refusing to change from %s to %s",
                 id, addrLocal.ToString(), addrLocalIn.ToString() ) ;
     } else {
         addrLocal = addrLocalIn ;
@@ -687,7 +686,8 @@ void CNode::copyStats(CNodeStats &stats)
         nPingUsecWait = GetTimeMicros() - nPingUsecStart;
     }
 
-    // Raw ping time is in microseconds, but show it to user as whole seconds (Bitcoin users should be well used to small numbers with many decimal places by now :)
+    // Raw ping time is in microseconds, but show it to user as whole seconds
+    // (Dogecoin users should be well used to small numbers with many decimal places by now :)
     stats.dPingTime = (((double)nPingUsecTime) / 1e6);
     stats.dMinPing  = (((double)nMinPingUsecTime) / 1e6);
     stats.dPingWait = (((double)nPingUsecWait) / 1e6);
@@ -769,7 +769,7 @@ int CNode::GetSendVersion() const
     // The send version should always be explicitly set to INIT_PROTO_VERSION
     // rather than using this value until SetSendVersion has been called
     if ( nSendVersion == 0 ) {
-        error( "Requesting unset send version for node: %i, returning %i", id, INIT_PROTO_VERSION ) ;
+        error( "Requesting unset send version for node %i, returning %i", id, INIT_PROTO_VERSION ) ;
         return INIT_PROTO_VERSION ;
     }
 
@@ -814,7 +814,7 @@ int CNetMessage::readData(const char *pch, unsigned int nBytes)
     unsigned int nCopy = std::min(nRemaining, nBytes);
 
     if (vRecv.size() < nDataPos + nCopy) {
-        // Allocate up to 256 KiB ahead, but never more than the total message size.
+        // Allocate up to 256 KiB ahead, but never more than the total message size
         vRecv.resize(std::min(hdr.nMessageSize, nDataPos + nCopy + 256 * 1024));
     }
 
@@ -832,11 +832,6 @@ const uint256& CNetMessage::GetMessageHash() const
         hasher.Finalize(data_hash.begin());
     return data_hash;
 }
-
-
-
-
-
 
 
 
@@ -1432,8 +1427,6 @@ void CConnman::WakeMessageHandler()
 
 
 
-
-
 #ifdef USE_UPNP
 void ThreadMapPort()
 {
@@ -1451,7 +1444,6 @@ void ThreadMapPort()
     int error = 0;
     devlist = upnpDiscover(2000, multicastif, minissdpdpath, 0, 0, &error);
 #else
-    /* miniupnpc 1.9.20150730 */
     int error = 0;
     devlist = upnpDiscover(2000, multicastif, minissdpdpath, 0, 0, 2, &error);
 #endif
@@ -1551,8 +1543,6 @@ void MapPort(bool)
 
 
 
-
-
 static std::string GetDNSHost(const CDNSSeedData& data, ServiceFlags* requiredServiceBits)
 {
     //use default host for non-filter-capable seeds or if we use the default service bits (NODE_NETWORK)
@@ -1636,10 +1626,6 @@ void CConnman::ThreadDNSAddressSeed()
 
 
 
-
-
-
-
 void CConnman::DumpAddresses()
 {
     int64_t nStart = GetTimeMillis();
@@ -1701,7 +1687,7 @@ void CConnman::ThreadOpenConnections()
     // Initiate network connections
     int64_t nStart = GetTime();
 
-    // Minimum time before next feeler connection (in microseconds).
+    // Minimum time before next feeler connection (in microseconds)
     int64_t nNextFeeler = PoissonNextSend(nStart*1000*1000, FEELER_INTERVAL);
     while (!interruptNet)
     {
@@ -1758,18 +1744,18 @@ void CConnman::ThreadOpenConnections()
         // Feeler Connections
         //
         // Design goals:
-        //  * Increase the number of connectable addresses in the tried table.
+        //  * Increase the number of connectable addresses in the tried table
         //
         // Method:
         //  * Choose a random address from new and attempt to connect to it if we can connect
-        //    successfully it is added to tried.
+        //    successfully it is added to tried
         //  * Start attempting feeler connections only after node finishes making outbound
-        //    connections.
-        //  * Only make a feeler connection once every few minutes.
+        //    connections
+        //  * Only make a feeler connection once every few minutes
         //
         bool fFeeler = false;
         if (nOutbound >= nMaxOutbound) {
-            int64_t nTime = GetTimeMicros(); // The current time right now (in microseconds).
+            int64_t nTime = GetTimeMicros(); // The current time right now (in microseconds)
             if (nTime > nNextFeeler) {
                 nNextFeeler = PoissonNextSend(nTime, FEELER_INTERVAL);
                 fFeeler = true;
@@ -1790,7 +1776,7 @@ void CConnman::ThreadOpenConnections()
 
             // If we didn't find an appropriate destination after trying 100 addresses fetched from addrman,
             // stop this loop, and let the outer loop run again (which sleeps, adds seed nodes, recalculates
-            // already-connected network ranges, ...) before trying new addrman addresses.
+            // already-connected network ranges, ...) before trying new addrman addresses
             nTries++;
             if (nTries > 100)
                 break;
@@ -1806,7 +1792,7 @@ void CConnman::ThreadOpenConnections()
             if (nANow - addr.nLastTry < 600 && nTries < 30)
                 continue;
 
-            // only consider nodes missing relevant services after 40 failed attempts and only if less than half the outbound are up.
+            // only consider nodes missing relevant services after 40 failed attempts and only if less than half the outbound are up
             ServiceFlags nRequiredServices = nRelevantServices;
             if (nTries >= 40 && nOutbound < (nMaxOutbound >> 1)) {
                 nRequiredServices = REQUIRED_SERVICES;
@@ -1834,7 +1820,7 @@ void CConnman::ThreadOpenConnections()
         if (addrConnect.IsValid()) {
 
             if (fFeeler) {
-                // Add small amount of random noise before connection to avoid synchronization.
+                // Add small amount of random noise before connection to avoid synchronization
                 int randsleep = GetRandInt(FEELER_SLEEP_WINDOW * 1000);
                 if (!interruptNet.sleep_for(std::chrono::milliseconds(randsleep)))
                     return;
@@ -2022,7 +2008,7 @@ void CConnman::ThreadMessageHandler()
 
 
 
-bool CConnman::BindListenPort(const CService &addrBind, std::string& strError, bool fWhitelisted)
+bool CConnman::BindListenPort( const CService & addrBind, std::string & strError, bool fWhitelisted )
 {
     strError = "";
     int nOne = 1;
@@ -2090,7 +2076,7 @@ bool CConnman::BindListenPort(const CService &addrBind, std::string& strError, b
 #endif
     }
 
-    if (::bind(hListenSocket, (struct sockaddr*)&sockaddr, len) == SOCKET_ERROR)
+    if ( ::bind( hListenSocket, (struct sockaddr*)&sockaddr, len ) == SOCKET_ERROR )
     {
         int nErr = WSAGetLastError();
         if (nErr == WSAEADDRINUSE)
@@ -2101,7 +2087,7 @@ bool CConnman::BindListenPort(const CService &addrBind, std::string& strError, b
         CloseSocket(hListenSocket);
         return false;
     }
-    LogPrintf("Bound to %s\n", addrBind.ToString());
+    LogPrintf( "%s: bound to %s\n", __func__, addrBind.ToString() ) ;
 
     // Listen for incoming connections
     if (listen(hListenSocket, SOMAXCONN) == SOCKET_ERROR)
@@ -2362,16 +2348,11 @@ void CConnman::Interrupt()
 
 void CConnman::Stop()
 {
-    if (threadMessageHandler.joinable())
-        threadMessageHandler.join();
-    if (threadOpenConnections.joinable())
-        threadOpenConnections.join();
-    if (threadOpenAddedConnections.joinable())
-        threadOpenAddedConnections.join();
-    if (threadDNSAddressSeed.joinable())
-        threadDNSAddressSeed.join();
-    if (threadSocketHandler.joinable())
-        threadSocketHandler.join();
+    if ( threadMessageHandler.joinable() ) threadMessageHandler.join() ;
+    if ( threadOpenConnections.joinable() ) threadOpenConnections.join() ;
+    if ( threadOpenAddedConnections.joinable() ) threadOpenAddedConnections.join() ;
+    if ( threadDNSAddressSeed.joinable() ) threadDNSAddressSeed.join() ;
+    if ( threadSocketHandler.joinable() ) threadSocketHandler.join() ;
 
     if (fAddressesInitialized)
     {

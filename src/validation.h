@@ -54,12 +54,6 @@ static const bool DEFAULT_ALERTS = true ;
 static const bool DEFAULT_WHITELISTRELAY = true ;
 /** Default for DEFAULT_WHITELISTFORCERELAY */
 static const bool DEFAULT_WHITELISTFORCERELAY = true ;
-//! -maxtxfee default
-static const CAmount DEFAULT_TRANSACTION_MAXFEE = 100 * E8COIN ;
-//! Discourage users to set fees higher than this amount (in satoshis) per kB
-static const CAmount HIGH_TX_FEE_PER_KB = 10 * E8COIN ;
-//! -maxtxfee will warn if called with a higher fee than this amount (in satoshis)
-static const CAmount HIGH_MAX_TX_FEE = 10 * HIGH_TX_FEE_PER_KB;
 /** Default for -limitancestorcount, max number of in-mempool ancestors */
 static const unsigned int DEFAULT_ANCESTOR_LIMIT = 25;
 /** Default for -limitancestorsize, maximum kilobytes of tx + all in-mempool ancestors */
@@ -144,8 +138,6 @@ extern bool fIsBareMultisigStd;
 extern bool acceptNonStandardTxs ;
 extern bool fCheckBlockIndex;
 extern size_t nCoinCacheUsage;
-/** Absolute maximum transaction fee (in satoshis) used by wallet and mempool (rejects high fee in sendrawtransaction) */
-extern CAmount maxTxFee;
 extern bool fAlerts;
 /** If the tip is older than this (in seconds), the node is considered to be in initial block download */
 extern int64_t nMaxTipAge;

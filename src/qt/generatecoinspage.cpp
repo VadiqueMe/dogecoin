@@ -106,7 +106,7 @@ void GenerateCoinsPage::setWalletModel( WalletModel * model )
 
     if ( model && model->getOptionsModel() )
     {
-        connect( model->getOptionsModel(), SIGNAL( displayUnitChanged(int) ), this, SLOT( updateDisplayUnit() ) ) ;
+        connect( model->getOptionsModel(), SIGNAL( displayUnitChanged(unitofcoin) ), this, SLOT( updateDisplayUnit() ) ) ;
         updateDisplayUnit() ;
     }
 }
@@ -132,7 +132,7 @@ void GenerateCoinsPage::refreshBlockSubsidy()
     else if ( ui->listForChoosingHowManyCoinsToGenerate->currentText() == "zero" )
         ui->newBlockSubsidy->setValue( 0 ) ;
 
-    int unit = UnitsOfCoin::oneCoin ;
+    unitofcoin unit = unitofcoin::oneCoin ;
     if ( walletModel != nullptr && walletModel->getOptionsModel() != nullptr )
         unit = walletModel->getOptionsModel()->getDisplayUnit() ;
     ui->ofMaxSubsidyAmount->setText( UnitsOfCoin::formatHtmlWithUnit( unit, currentMaxSubsidy ) );
@@ -324,35 +324,16 @@ void GenerateCoinsPage::updateDisplayUnit()
 {
     if ( walletModel && walletModel->getOptionsModel() )
     {
-        ui->newBlockSubsidy->setDisplayUnit( walletModel->getOptionsModel()->getDisplayUnit() ) ;
+        unitofcoin displayUnit = walletModel->getOptionsModel()->getDisplayUnit() ;
+        ui->newBlockSubsidy->setUnitOfCoin( displayUnit ) ;
     }
 }
 
 void GenerateCoinsPage::updateTipBlockInfo()
 {
-    if ( chainActive.Tip() == nullptr )
-    {   // no blocks in chain
-        ui->tipBlockHeight->setText( "0" ) ;
-        ui->tipBlockTime->setText( QString( "Genesis block" ) +
-                " @ " +  QDateTime::fromTime_t( Params().GenesisBlock().GetBlockTime() ).toString() ) ;
-
-        ui->tipBlockVersion->setVisible( false );
-        ui->tipBlockVersionLabel->setVisible( false );
-        ui->tipBlockBits->setVisible( false );
-        ui->tipBlockBitsLabel->setVisible( false );
-        ui->tipBlockNonce->setVisible( false );
-        ui->tipBlockNonceLabel->setVisible( false );
-        ui->tipBlockHashSublayoutContainer->setVisible( false ) ;
-        ui->tipBlockHashLabel->setVisible( false ) ;
-        ui->tipBlockGeneratedCoins->setVisible( false );
-        ui->tipBlockGeneratedCoinsLabel->setVisible( false );
-
-        return ;
-    }
-
     // height
 
-    int chainHeight = chainActive.Tip()->nHeight /* chainActive.Height() */ ;
+    int chainHeight = chainActive.Height() ;
     QString heightString = QString::number( chainHeight ) ;
 
     QChar thinSpace = /* U+2009 THIN SPACE */ 0x2009 ;
@@ -362,11 +343,14 @@ void GenerateCoinsPage::updateTipBlockInfo()
         for ( int i = digitsInGroup ; i < length ; i += digitsInGroup )
             heightString.insert( length - i, thinSpace ) ;
 
+    if ( chainHeight <= 0 )
+        heightString = QString( "genesis (" ) + heightString + ")" ;
+
     ui->tipBlockHeight->setText( heightString ) ;
 
     // time
 
-    int64_t blockTime = chainActive.Tip()->GetBlockTime() ;
+    int64_t blockTime = chainActive.Tip() ? chainActive.Tip()->GetBlockTime() : Params().GenesisBlock().GetBlockTime() ;
 
     auto ago = std::chrono::system_clock::now() - std::chrono::system_clock::from_time_t( blockTime ) ;
     using days_duration = std::chrono::duration < int, std::ratio_multiply < std::ratio< 24 >, std::chrono::hours::period >::type > ;
@@ -394,12 +378,11 @@ void GenerateCoinsPage::updateTipBlockInfo()
     ) ;
 
     // get header of tip block
-    CBlockHeader tipBlockHeader = chainActive.Tip()->GetBlockHeader( Params().GetConsensus( chainHeight ) ) ;
+    CBlockHeader tipBlockHeader = chainActive.Tip() ?
+            chainActive.Tip()->GetBlockHeader( Params().GetConsensus( chainHeight ) ) :
+            Params().GenesisBlock().GetBlockHeader() ;
 
     // version
-
-    ui->tipBlockVersion->setVisible( true );
-    ui->tipBlockVersionLabel->setVisible( true );
 
     QString justHexVersion = QString::number( tipBlockHeader.nVersion, 16 ) ;
     QString versionString = ( tipBlockHeader.nVersion < 10 ) ? justHexVersion : QString( "0x" ) + justHexVersion ;
@@ -409,23 +392,14 @@ void GenerateCoinsPage::updateTipBlockInfo()
 
     // bits
 
-    ui->tipBlockBits->setVisible( true );
-    ui->tipBlockBitsLabel->setVisible( true );
-
     arith_uint256 expandedBits = arith_uint256().SetCompact( tipBlockHeader.nBits ) ;
     ui->tipBlockBits->setText( QString::asprintf( "%08x = %s", tipBlockHeader.nBits, expandedBits.GetHex().c_str() ) ) ;
 
     // nonce
 
-    ui->tipBlockNonce->setVisible( true );
-    ui->tipBlockNonceLabel->setVisible( true ) ;
-
     ui->tipBlockNonce->setText( QString::asprintf( "0x%08x", tipBlockHeader.nNonce ) + " = " + QString::number( tipBlockHeader.nNonce ) ) ;
 
     // hash
-
-    ui->tipBlockHashSublayoutContainer->setVisible( true ) ;
-    ui->tipBlockHashLabel->setVisible( true ) ;
 
     ui->tipBlockHashSha256->setText( QString::fromStdString( tipBlockHeader.GetSha256Hash().ToString() ) ) ;
     ui->tipBlockHashScrypt->setText( QString::fromStdString( tipBlockHeader.GetScryptHash().ToString() ) ) ;
@@ -433,7 +407,15 @@ void GenerateCoinsPage::updateTipBlockInfo()
 
     // new coins
 
-    int unit = UnitsOfCoin::oneCoin ;
+    if ( chainHeight <= 0 || chainActive.Tip() == nullptr )
+    {   // no blocks in chain
+        ui->tipBlockGeneratedCoins->setVisible( false );
+        ui->tipBlockGeneratedCoinsLabel->setVisible( false );
+
+        return ;
+    }
+
+    unitofcoin unit = unitofcoin::oneCoin ;
     if ( walletModel != nullptr && walletModel->getOptionsModel() != nullptr )
         unit = walletModel->getOptionsModel()->getDisplayUnit() ;
 
@@ -572,7 +554,7 @@ void GenerateCoinsPage::updateThreadTabs()
                 newBlockInfoText += ", " ;
                 newBlockInfoText += "transactions " + QString::number( candidate->block.vtx.size() ) ;
                 newBlockInfoText += ", " ;
-                int unit = UnitsOfCoin::oneCoin ;
+                unitofcoin unit = unitofcoin::oneCoin ;
                 if ( walletModel != nullptr && walletModel->getOptionsModel() != nullptr )
                     unit = walletModel->getOptionsModel()->getDisplayUnit() ;
                 newBlockInfoText += "fees " + UnitsOfCoin::formatWithUnit( unit, - candidate->vTxFees[ 0 ] ) ;

@@ -326,14 +326,6 @@
         <translation>ウォレット暗号化用パスフレーズの変更</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>デバッグ ウインドウ (&amp;D)</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>デバッグと診断コンソールを開く</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>メッセージの検証... (&amp;V)</translation>
     </message>
@@ -1347,10 +1339,6 @@
     <message>
         <source>Information</source>
         <translation>情報</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>デバッグ ウインドウ</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -2632,8 +2620,8 @@
         <translation>エラー：致命的な内部エラーが発生しました。詳細は debug log を参照してください</translation>
     </message>
     <message>
-        <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
-        <translation>送信するトランザクションに付加する手数料 (%s/kB単位) (初期値: %s)</translation>
+        <source>Fee in %s to add to transactions you send (default: %s)</source>
+        <translation>送信するトランザクションに付加する手数料 (%s単位) (初期値: %s)</translation>
     </message>
     <message>
         <source>Pruning blockstore...</source>
@@ -2690,10 +2678,6 @@
     <message>
         <source>Maximum allowed median peer time offset adjustment. Local perspective of time may be influenced by peers forward or backward by this amount. (default: %u seconds)</source>
         <translation>時間オフセット調整値のピア中央値に対する最大の許容値。ローカル時間の見込み値は、接続するピアにより前方ないし後方へ影響されます。(初期値: %u 秒)</translation>
-    </message>
-    <message>
-        <source>Maximum total fees (in %s) to use in a single wallet transaction or raw transaction; setting this too low may abort large transactions (default: %s)</source>
-        <translation>ひとつのウォレットトランザクションまたは生トランザクションで使用する合計手数料の最大値 (%s 単位)。低すぎる値を指定すると巨大なトランザクションの作成ができなくなります (規定値: %s)</translation>
     </message>
     <message>
         <source>Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly.</source>
@@ -2780,8 +2764,8 @@
         <translation>接続オプション：</translation>
     </message>
     <message>
-        <source>Copyright (C) %i-%i</source>
-        <translation>Copyright (C) %i-%i</translation>
+        <source>Copyright (c) %i-%i</source>
+        <translation>Copyright (c) %i-%i</translation>
     </message>
     <message>
         <source>Corrupted block database detected</source>
@@ -2875,10 +2859,6 @@
     <message>
         <source>Invalid -onion address: '%s'</source>
         <translation>無効な -onion アドレス：'%s'</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -%s=&lt;amount&gt;: '%s'</source>
-        <translation>-%s=&lt;数量&gt; に対する不正な額: '%s'</translation>
     </message>
     <message>
         <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
@@ -3021,10 +3001,6 @@
         <translation>関連のアラートをもらってもすごく長いのフォークを見てもコマンドを実行 (コマンドの中にあるの%sはメッセージから置き換えさせる)</translation>
     </message>
     <message>
-        <source>Invalid amount for -maxtxfee=&lt;amount&gt;: '%s' (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
-        <translation>-maxtxfee=&lt;amount&gt; の数量の指定が不正です: '%s' (トランザクションが詰まってしまうのを防ぐため、少なくとも %s の最小中継手数料を指定しなければいけません)</translation>
-    </message>
-    <message>
         <source>Maximum size of data in data carrier transactions we relay and mine (default: %u)</source>
         <translation>中継および採掘を行う際の、データ運送トランザクションの中のデータの最大サイズ (初期値: %u)</translation>
     </message>
@@ -3075,6 +3051,10 @@
     <message>
         <source>Information</source>
         <translation>情報</translation>
+    </message>
+    <message>
+        <source>Maximum total fees (in %s) to use in a single transaction; setting this too low may abort large transactions (default: %s)</source>
+        <translation>単一のトランザクションで使用する最大合計手数料（%s 単位）;低すぎる値を指定すると巨大なトランザクションの作成ができなくなります（規定値: %s）</translation>
     </message>
     <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
@@ -3185,10 +3165,6 @@
         <translation>(1 = トランザクションのメタデータ、例えばアカウントの所有者や支払リクエストの内容を保持する, 2 = トランザクションのメタデータを破棄する)</translation>
     </message>
     <message>
-        <source>-maxtxfee is set very high! Fees this large could be paid on a single transaction.</source>
-        <translation>-maxtxfee が非常に高く設定されています！ひとつのトランザクションでこの量の手数料が支払われてしまうことがあります。</translation>
-    </message>
-    <message>
         <source>Do not keep transactions in the mempool longer than &lt;n&gt; hours (default: %u)</source>
         <translation>mempool内でトランザクションを &lt;n&gt; 時間以上保持しない (初期値: %u)</translation>
     </message>
@@ -3225,10 +3201,6 @@
         <translation>Bloomフィルタによる、ブロックおよびトランザクションのフィルタリングを有効化する (初期値: %u)</translation>
     </message>
     <message>
-        <source>This is the transaction fee you may pay when fee estimates are not available.</source>
-        <translation>これは手数料の推定機能が利用できない場合に支払うトランザクション手数料です。</translation>
-    </message>
-    <message>
         <source>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit %s and cryptographic software written by Eric Young and UPnP software written by Thomas Bernard.</source>
         <translation>この製品はOpenSSLプロジェクトにより開発されたソフトウェアをOpenSSLツールキット %s として利用しています &lt;https://www.openssl.org/&gt;。また、Eric Young氏により開発された暗号ソフトウェア、Thomas Bernard氏により書かれたUPnPソフトウェアを用いています。</translation>
     </message>
@@ -3263,10 +3235,6 @@
     <message>
         <source>Whitelist peers connecting from the given IP address (e.g. 1.2.3.4) or CIDR notated network (e.g. 1.2.3.0/24). Can be specified multiple times.</source>
         <translation>ホワイトリストとして登録するピアノ、接続元の IP アドレス (例: 1.2.3.4) または CIDR 表現のネットワーク (例: 1.2.3.0/24)。複数回指定することもできる</translation>
-    </message>
-    <message>
-        <source>%s is set very high!</source>
-        <translation>%s の設定値は高すぎます</translation>
     </message>
     <message>
         <source>(default: %s)</source>
@@ -3351,10 +3319,6 @@
     <message>
         <source>Starting network threads...</source>
         <translation>ネットワークのスレッドを起動しています...</translation>
-    </message>
-    <message>
-        <source>This is the transaction fee you will pay if you send a transaction.</source>
-        <translation>これは取引を送信する場合に支払う取引手数料です。</translation>
     </message>
     <message>
         <source>Threshold for disconnecting misbehaving peers (default: %u)</source>

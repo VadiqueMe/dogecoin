@@ -326,14 +326,6 @@
         <translation>Skift adgangskode anvendt til tegnebogskryptering</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;Fejlsøgningsvindue</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Åbn fejlsøgnings- og diagnosticeringskonsollen</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Verificér besked…</translation>
     </message>
@@ -1347,10 +1339,6 @@
     <message>
         <source>Information</source>
         <translation>Information</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>Fejlsøgningsvindue</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -2628,8 +2616,8 @@
         <translation>Fejl: En alvorlig intern fejl er opstået. Se debug log for detaljer</translation>
     </message>
     <message>
-        <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
-        <translation>Gebyr (i %s/kB) der skal lægges til de transaktioner du sender (standard: %s)</translation>
+        <source>Fee in %s to add to transactions you send (default: %s)</source>
+        <translation>Gebyr i %s der skal lægges til de transaktioner du sender (standard: %s)</translation>
     </message>
     <message>
         <source>Pruning blockstore...</source>
@@ -2686,10 +2674,6 @@
     <message>
         <source>Maximum allowed median peer time offset adjustment. Local perspective of time may be influenced by peers forward or backward by this amount. (default: %u seconds)</source>
         <translation>Justering af maksimalt tilladt gennemsnitlig afvigelse fra peer-tid. Den lokale opfattelse af tid kan blive påvirket frem eller tilbage af peers med denne mængde tid. (standard: %u sekunder)</translation>
-    </message>
-    <message>
-        <source>Maximum total fees (in %s) to use in a single wallet transaction or raw transaction; setting this too low may abort large transactions (default: %s)</source>
-        <translation>Maksimalt totalgebyr (i %s) der må bruges i en enkelt tegnebogstransaktion eller rå transaktion; en for lav en værdi kan afbryde store transaktioner (standard: %s)</translation>
     </message>
     <message>
         <source>Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly.</source>
@@ -2776,7 +2760,7 @@
         <translation>Tilvalg for forbindelser:</translation>
     </message>
     <message>
-        <source>Copyright (C) %i-%i</source>
+        <source>Copyright (c) %i-%i</source>
         <translation>Ophavsret © %i-%i</translation>
     </message>
     <message>
@@ -2870,10 +2854,6 @@
     <message>
         <source>Invalid -onion address: '%s'</source>
         <translation>Ugyldig -onion adresse: “%s”</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -%s=&lt;amount&gt;: '%s'</source>
-        <translation>Ugyldigt beløb for -%s=&lt;beløb&gt;: “%s”</translation>
     </message>
     <message>
         <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
@@ -3016,10 +2996,6 @@
         <translation>Udfør kommando, når en relevant alarm modtages eller vi ser en virkelig lang udsplitning (%s i cmd erstattes af besked)</translation>
     </message>
     <message>
-        <source>Invalid amount for -maxtxfee=&lt;amount&gt;: '%s' (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
-        <translation>Ugyldigt beløb for -maxtxfee=&lt;beløb&gt;: “%s” (skal være på mindst minrelay-gebyret på %s for at undgå hængende transaktioner)</translation>
-    </message>
-    <message>
         <source>Maximum size of data in data carrier transactions we relay and mine (default: %u)</source>
         <translation>Maksimal størrelse på data i transaktioner til dataoverførsel, som vi videresender og miner (standard: %u)</translation>
     </message>
@@ -3070,6 +3046,10 @@
     <message>
         <source>Information</source>
         <translation>Information</translation>
+    </message>
+    <message>
+        <source>Maximum total fees (in %s) to use in a single transaction; setting this too low may abort large transactions (default: %s)</source>
+        <translation>Maksimalt totalgebyr (i %s) der må bruges i en enkelt transaktion; en for lav en værdi kan afbryde store transaktioner (standard: %s)</translation>
     </message>
     <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
@@ -3180,10 +3160,6 @@
         <translation>(1 = behold metadata for transaktion, fx kontoindehaver og information om betalingsanmodning, 2 = drop metadata for transaktion)</translation>
     </message>
     <message>
-        <source>-maxtxfee is set very high! Fees this large could be paid on a single transaction.</source>
-        <translation>-maxtxfee er sat meget højt! Gebyrer så store risikeres betalt på en enkelt transaktion.</translation>
-    </message>
-    <message>
         <source>Do not keep transactions in the mempool longer than &lt;n&gt; hours (default: %u)</source>
         <translation>Behold ikke transaktioner i hukommelsespuljen i mere end &lt;n&gt; timer (default: %u)</translation>
     </message>
@@ -3220,10 +3196,6 @@
         <translation>Understøt filtrering af blokke og transaktioner med Bloom-filtre (standard: %u)</translation>
     </message>
     <message>
-        <source>This is the transaction fee you may pay when fee estimates are not available.</source>
-        <translation>Dette er transaktionsgebyret, du kan betale, når gebyrestimeringer ikke er tilgængelige.</translation>
-    </message>
-    <message>
         <source>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit %s and cryptographic software written by Eric Young and UPnP software written by Thomas Bernard.</source>
         <translation>Dette produkt indeholder software, der er udviklet af OpenSSL-projektet for brug i OpenSSL-værktøjskassen %s, samt kryptografisk software, der er skrevet af Eric Young, samt UPnP-software, der er skrevet af Thomas Bernard.</translation>
     </message>
@@ -3258,10 +3230,6 @@
     <message>
         <source>Whitelist peers connecting from the given IP address (e.g. 1.2.3.4) or CIDR notated network (e.g. 1.2.3.0/24). Can be specified multiple times.</source>
         <translation>Sæt knuder på hvidliste, som forbinder fra den givne IP-adresse (fx 1.2.3.4) eller CIDR-noteret netværk (fx 1.2.3.0/24). Kan angives flere gange.</translation>
-    </message>
-    <message>
-        <source>%s is set very high!</source>
-        <translation>%s er meget højt sat!</translation>
     </message>
     <message>
         <source>(default: %s)</source>
@@ -3347,10 +3315,6 @@
     <message>
         <source>Starting network threads...</source>
         <translation>Starter netværkstråde…</translation>
-    </message>
-    <message>
-        <source>This is the transaction fee you will pay if you send a transaction.</source>
-        <translation>Dette er transaktionsgebyret, som betaler, når du sender en transaktion.</translation>
     </message>
     <message>
         <source>Threshold for disconnecting misbehaving peers (default: %u)</source>

@@ -110,10 +110,6 @@
         <translation>Cambiar frase secreta usada para la encriptación de la billetera</translation>
     </message>
     <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Abre la consola de depuración y diágnostico</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Billetera</translation>
     </message>

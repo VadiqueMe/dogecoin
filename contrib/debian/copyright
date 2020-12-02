@@ -17,7 +17,7 @@ Files: src/qt/res/icons/add.png
        src/qt/res/icons/address-book.png
        src/qt/res/icons/chevron.png
        src/qt/res/icons/configure.png
-       src/qt/res/icons/debugwindow.png
+       src/qt/res/icons/console.png
        src/qt/res/icons/edit.png
        src/qt/res/icons/editcopy.png
        src/qt/res/icons/editpaste.png

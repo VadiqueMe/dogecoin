@@ -447,7 +447,7 @@ std::string HelpMessage( WhatHelpMessage what )
     strUsage += HelpMessageOpt("-forcednsseed", strprintf(_("Always query for peer addresses via DNS lookup (default: %u)"), DEFAULT_FORCEDNSSEED));
     strUsage += HelpMessageOpt("-listen", _("Accept connections from outside (default: 1 if no -proxy or -connect/-noconnect)"));
     strUsage += HelpMessageOpt("-listenonion", strprintf(_("Automatically create Tor hidden service (default: %d)"), DEFAULT_LISTEN_ONION));
-    strUsage += HelpMessageOpt("-maxconnections=<n>", strprintf(_("Maintain at most <n> connections to peers (default: %u)"), DEFAULT_MAX_PEER_CONNECTIONS));
+    strUsage += HelpMessageOpt( "-maxconnections=<n>", strprintf(_("Maintain at most <n> connections to peers (default: %u)"), DEFAULT_MAX_PEER_CONNECTIONS) ) ;
     strUsage += HelpMessageOpt("-maxreceivebuffer=<n>", strprintf(_("Maximum per-connection receive buffer, <n>*1000 bytes (default: %u)"), DEFAULT_MAXRECEIVEBUFFER));
     strUsage += HelpMessageOpt("-maxsendbuffer=<n>", strprintf(_("Maximum per-connection send buffer, <n>*1000 bytes (default: %u)"), DEFAULT_MAXSENDBUFFER));
     strUsage += HelpMessageOpt("-maxtimeadjustment", strprintf(_("Maximum allowed median peer time offset adjustment. Local perspective of time may be influenced by peers forward or backward by this amount. (default: %u seconds)"), DEFAULT_MAX_TIME_ADJUSTMENT));
@@ -519,7 +519,7 @@ std::string HelpMessage( WhatHelpMessage what )
     strUsage += HelpMessageOpt("-help-debug", _("Show all debugging options (usage: --help -help-debug)"));
     strUsage += HelpMessageOpt("-logips", strprintf(_("Include IP addresses in debug output (default: %u)"), DEFAULT_LOGIPS));
     strUsage += HelpMessageOpt("-logtimestamps", strprintf(_("Prepend debug output with timestamp (default: %u)"), DEFAULT_LOGTIMESTAMPS));
-    if (showDebug)
+    if ( showDebug )
     {
         strUsage += HelpMessageOpt("-logtimemicros", strprintf("Add microsecond precision to debug timestamps (default: %u)", DEFAULT_LOGTIMEMICROS));
         strUsage += HelpMessageOpt("-mocktime=<n>", "Replace actual time with <n> seconds since epoch (default: 0)");
@@ -528,8 +528,6 @@ std::string HelpMessage( WhatHelpMessage what )
         strUsage += HelpMessageOpt("-maxsigcachesize=<n>", strprintf("Limit size of signature cache to <n> MiB (default: %u)", DEFAULT_MAX_SIG_CACHE_SIZE));
         strUsage += HelpMessageOpt( "-maxtipage=<n>", strprintf( "Maximum tip age in seconds to consider node in initial block download (default: %u)", DEFAULT_MAX_TIP_AGE ) ) ;
     }
-    strUsage += HelpMessageOpt( "-maxtxfee=<amt>", strprintf(_("Maximum total fees (in %s) to use in a single wallet transaction or raw transaction; setting this too low may abort large transactions (default: %s)"),
-        NameOfE8Currency(), FormatMoney( DEFAULT_TRANSACTION_MAXFEE )) ) ;
     strUsage += HelpMessageOpt("-printtoconsole", _("Send trace/debug info to console instead of debug log file"));
     if ( true /* showDebug */ )
     {
@@ -552,7 +550,7 @@ std::string HelpMessage( WhatHelpMessage what )
     strUsage += HelpMessageOpt("-blockmaxweight=<n>", strprintf(_("Set maximum BIP141 block weight (default: %d)"), DEFAULT_BLOCK_MAX_WEIGHT));
     strUsage += HelpMessageOpt("-blockmaxsize=<n>", strprintf(_("Set maximum block size in bytes (default: %d)"), DEFAULT_BLOCK_MAX_SIZE));
     strUsage += HelpMessageOpt( "-blockprioritysize=<n>", strprintf( _("Set maximum size of high-priority/low-fee transactions in bytes (default: %d)"), DEFAULT_BLOCK_PRIORITY_SIZE ) ) ;
-    strUsage += HelpMessageOpt( "-blockmintxfee=<amt>", strprintf( _("Set lowest fee rate (in %s/kB) for transactions to be included in block creation (default: %s)"), NameOfE8Currency(), FormatMoney( 0 ) ) ) ;
+    strUsage += HelpMessageOpt( "-blockmintxfee=<amount>", strprintf( _("Set lowest fee rate (in %s/kB) for transactions to be included in block creation (default: %s)"), NameOfE8Currency(), FormatMoney( 0 ) ) ) ;
     if (showDebug)
         strUsage += HelpMessageOpt("-blockversion=<n>", "Override block version to test forking scenarios");
 
@@ -583,7 +581,7 @@ std::string LicenseInfo()
     const std::string URL_SOURCE_CODE = "<https://github.com/VadiqueMe/dogecoin>" ;
     const std::string URL_WEBSITE = "<https://dogecoin.com>";
 
-    return CopyrightHolders(strprintf(_("Copyright (C) %i-%i"), 2013, COPYRIGHT_YEAR) + " ") + "\n" +
+    return CopyrightHolders( strprintf( _("Copyright (c) %i-%i"), 2013, COPYRIGHT_YEAR ) + " " ) + "\n" +
            "\n" +
            strprintf(_("Please contribute if you find %s useful. "
                        "Visit %s for further information about the software."),
@@ -961,17 +959,17 @@ bool AppInitParameterInteraction()
     int nBind = std::max(
                 (mapMultiArgs.count("-bind") ? mapMultiArgs.at("-bind").size() : 0) +
                 (mapMultiArgs.count("-whitebind") ? mapMultiArgs.at("-whitebind").size() : 0), size_t(1));
-    nUserMaxConnections = GetArg("-maxconnections", DEFAULT_MAX_PEER_CONNECTIONS);
-    nMaxConnections = std::max(nUserMaxConnections, 0);
+    nUserMaxConnections = GetArg( "-maxconnections", DEFAULT_MAX_PEER_CONNECTIONS ) ;
+    nMaxConnections = std::max( nUserMaxConnections, 0 ) ;
 
     // Trim requested connection counts, to fit into system limitations
-    nMaxConnections = std::max(std::min(nMaxConnections, (int)(FD_SETSIZE - nBind - MIN_CORE_FILEDESCRIPTORS - MAX_ADDNODE_CONNECTIONS)), 0);
-    nFD = RaiseFileDescriptorLimit(nMaxConnections + MIN_CORE_FILEDESCRIPTORS + MAX_ADDNODE_CONNECTIONS);
+    nMaxConnections = std::max( std::min( nMaxConnections, (int)( FD_SETSIZE - nBind - MIN_CORE_FILEDESCRIPTORS - MAX_ADDNODE_CONNECTIONS ) ), 0 ) ;
+    nFD = RaiseFileDescriptorLimit( nMaxConnections + MIN_CORE_FILEDESCRIPTORS + MAX_ADDNODE_CONNECTIONS ) ;
     if (nFD < MIN_CORE_FILEDESCRIPTORS)
         return InitError(_("Not enough file descriptors available."));
-    nMaxConnections = std::min(nFD - MIN_CORE_FILEDESCRIPTORS - MAX_ADDNODE_CONNECTIONS, nMaxConnections);
+    nMaxConnections = std::min( nFD - MIN_CORE_FILEDESCRIPTORS - MAX_ADDNODE_CONNECTIONS, nMaxConnections ) ;
 
-    if (nMaxConnections < nUserMaxConnections)
+    if ( nMaxConnections < nUserMaxConnections )
         InitWarning(strprintf(_("Reducing -maxconnections from %d to %d, because of system limitations."), nUserMaxConnections, nMaxConnections));
 
     // ********************************************************* Step 3: parameter-to-internal-flags
@@ -1058,8 +1056,9 @@ bool AppInitParameterInteraction()
     if ( IsArgSet( "-blockmintxfee" ) )
     {
         CAmount n = 0 ;
-        if ( ! ParseMoney( GetArg("-blockmintxfee", "" ), n ) )
-            return InitError( AmountErrMsg( "blockmintxfee", GetArg( "-blockmintxfee", "" ) ) ) ;
+        if ( ! ParseMoney( GetArg( "-blockmintxfee", "" ), n ) )
+            LogPrintf( "%s: can't parse amount in argument -blockmintxfee=%s, using the default %s\n", __func__,
+                        GetArg( "-blockmintxfee", "" ), FormatMoney( 0 ) ) ;
     }
 
     acceptNonStandardTxs = GetBoolArg( "-acceptnonstdtxn", ! chainparams.OnlyStandardTransactions() ) ;
@@ -1436,25 +1435,25 @@ bool AppInitMain( std::vector< std::thread > & threads, CScheduler & scheduler )
         nStart = GetTimeMillis();
         do {
             try {
-                UnloadBlockIndex();
-                delete pcoinsTip;
-                delete pcoinsdbview;
-                delete pcoinscatcher;
-                delete pblocktree;
+                UnloadBlockIndex() ;
+                delete pcoinsTip ;
+                delete pcoinsdbview ;
+                delete pcoinscatcher ;
+                delete pblocktree ;
 
-                pblocktree = new CBlockTreeDB(nBlockTreeDBCache, false, fReindex);
-                pcoinsdbview = new CCoinsViewDB(nCoinDBCache, false, fReindex || fReindexChainState);
-                pcoinscatcher = new CCoinsViewErrorCatcher(pcoinsdbview);
-                pcoinsTip = new CCoinsViewCache(pcoinscatcher);
+                pblocktree = new CBlockTreeDB( nBlockTreeDBCache, false, fReindex ) ;
+                pcoinsdbview = new CCoinsViewDB( nCoinDBCache, false, fReindex || fReindexChainState ) ;
+                pcoinscatcher = new CCoinsViewErrorCatcher( pcoinsdbview ) ;
+                pcoinsTip = new CCoinsViewCache( pcoinscatcher ) ;
 
-                if (fReindex) {
-                    pblocktree->WriteReindexing(true);
+                if ( fReindex ) {
+                    pblocktree->WriteReindexing( true ) ;
                     //If we're reindexing in prune mode, wipe away unusable block files and all undo data files
-                    if (fPruneMode)
-                        CleanupBlockRevFiles();
+                    if ( fPruneMode )
+                        CleanupBlockRevFiles() ;
                 }
 
-                if (!LoadBlockIndex(chainparams)) {
+                if ( ! LoadBlockIndex( chainparams ) ) {
                     strLoadError = _("Error loading block database");
                     break;
                 }
@@ -1629,7 +1628,7 @@ bool AppInitMain( std::vector< std::thread > & threads, CScheduler & scheduler )
 
     // ********************************************************* Step 11: start node
 
-    //// debug print
+    // some debug print
     LogPrintf( "mapBlockIndex.size() = %u\n", mapBlockIndex.size() ) ;
     LogPrintf( "nBestHeight = %d\n", chainActive.Height() ) ;
 
@@ -1645,9 +1644,9 @@ bool AppInitMain( std::vector< std::thread > & threads, CScheduler & scheduler )
     CConnman::Options connOptions;
     connOptions.nLocalServices = nLocalServices;
     connOptions.nRelevantServices = nRelevantServices;
-    connOptions.nMaxConnections = nMaxConnections;
-    connOptions.nMaxOutbound = std::min(MAX_OUTBOUND_CONNECTIONS, connOptions.nMaxConnections);
-    connOptions.nMaxAddnode = MAX_ADDNODE_CONNECTIONS;
+    connOptions.nMaxConnections = nMaxConnections ;
+    connOptions.nMaxOutbound = std::min( MAX_OUTBOUND_CONNECTIONS, connOptions.nMaxConnections ) ;
+    connOptions.nMaxAddnode = MAX_ADDNODE_CONNECTIONS ;
     connOptions.nMaxFeeler = 1;
     connOptions.nBestHeight = chainActive.Height();
     connOptions.uiInterface = &uiInterface;

@@ -15,104 +15,100 @@ UnitsOfCoin::UnitsOfCoin( QObject * parent )
 {
 }
 
-QList< UnitsOfCoin::Unit > UnitsOfCoin::availableUnits()
+QList< unitofcoin > UnitsOfCoin::availableUnits()
 {
-    QList< UnitsOfCoin::Unit > unitlist ;
-    unitlist.append( Cointoshi ) ;
-    unitlist.append( uCoin ) ;
-    unitlist.append( mCoin ) ;
-    unitlist.append( oneCoin ) ;
-    unitlist.append( kCoin ) ;
-    unitlist.append( theCoin ) ;
-    unitlist.append( MCoin ) ;
+    QList< unitofcoin > unitlist ;
+    unitlist.append( unitofcoin::Cointoshi ) ;
+    unitlist.append( unitofcoin::uCoin ) ;
+    unitlist.append( unitofcoin::mCoin ) ;
+    unitlist.append( unitofcoin::oneCoin ) ;
+    unitlist.append( unitofcoin::kCoin ) ;
+    unitlist.append( unitofcoin::theCoin ) ;
+    unitlist.append( unitofcoin::MCoin ) ;
     return unitlist ;
 }
 
-bool UnitsOfCoin::isOk( int unit )
+bool UnitsOfCoin::isUnitOfCoin( int unitInt )
 {
-    switch ( unit )
+    switch ( unitofcoin( unitInt ) )
     {
-    case MCoin :
-    case theCoin :
-    case kCoin :
-    case oneCoin :
-    case mCoin :
-    case uCoin :
-    case Cointoshi :
+    case unitofcoin::MCoin :
+    case unitofcoin::theCoin :
+    case unitofcoin::kCoin :
+    case unitofcoin::oneCoin :
+    case unitofcoin::mCoin :
+    case unitofcoin::uCoin :
+    case unitofcoin::Cointoshi :
         return true ;
     default :
         return false ;
     }
 }
 
-QString UnitsOfCoin::name( int unit )
+QString UnitsOfCoin::name( const unitofcoin & unit )
 {
     QString nameOfE8Currency = QString::fromStdString( NameOfE8Currency() ) ;
     QString nameOfChain = QString::fromStdString( NameOfChain() ) ;
 
     switch ( unit )
     {
-        case MCoin : return QString( nameOfChain != "inu" ? "M" : "Mega-" ) + nameOfE8Currency ;
-        case theCoin : return QString::fromStdString( NameOfE12Currency() ) ;
-        case kCoin : return QString( nameOfChain != "inu" ? "k" : "kilo-" ) + nameOfE8Currency ;
-        case oneCoin : return nameOfE8Currency ;
-        case mCoin : return QString( nameOfChain != "inu" ? "m" : "milli-" ) + nameOfE8Currency ;
-        case uCoin : return QString::fromUtf8( nameOfChain != "inu" ? "μ" : "micro-" ) + nameOfE8Currency ;
-        case Cointoshi : return QString( "dogetoshi" ) + ( nameOfChain == "main" ? "" : "::" + nameOfChain ) ;
+        case unitofcoin::MCoin : return QString( nameOfChain != "inu" ? "M" : "Mega-" ) + nameOfE8Currency ;
+        case unitofcoin::theCoin : return QString::fromStdString( NameOfE12Currency() ) ;
+        case unitofcoin::kCoin : return QString( nameOfChain != "inu" ? "k" : "kilo-" ) + nameOfE8Currency ;
+        case unitofcoin::oneCoin : return nameOfE8Currency ;
+        case unitofcoin::mCoin : return QString( nameOfChain != "inu" ? "m" : "milli-" ) + nameOfE8Currency ;
+        case unitofcoin::uCoin : return QString::fromUtf8( nameOfChain != "inu" ? "μ" : "micro-" ) + nameOfE8Currency ;
+        case unitofcoin::Cointoshi : return QString( "dogetoshi" ) + ( nameOfChain == "main" ? "" : "::" + nameOfChain ) ;
         default: return QString( "some " ) + nameOfE8Currency ;
     }
 }
 
-QString UnitsOfCoin::description( int unit )
+QString UnitsOfCoin::description( const unitofcoin & unit )
 {
     QString nameOfE8Currency = QString::fromStdString( NameOfE8Currency() ) ;
     switch ( unit )
     {
-        case MCoin : return QString( "Mega-Dogecoins (1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000 " + nameOfE8Currency + ")" ) ;
-        case theCoin : return QString( "Þe Ðogecoins (1" THIN_SP_UTF8 "0000 " + nameOfE8Currency + ")" ) ;
-        case kCoin : return QString( "Kilo-Dogecoins (1" THIN_SP_UTF8 "000 " + nameOfE8Currency + ")" ) ;
-        case oneCoin : return QString( "Dogecoins (1 / 1" THIN_SP_UTF8 "0000 " + UnitsOfCoin::name( theCoin ) + ")" ) ;
-        case mCoin : return QString( "Milli-Dogecoins (1 / 1" THIN_SP_UTF8 "000 " + nameOfE8Currency + ")" ) ;
-        case uCoin : return QString( "Micro-Dogecoins (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000 " + nameOfE8Currency + ")" ) ;
-        case Cointoshi : return QString( "Dogetoshis (1 / 1" THIN_SP_UTF8 "0000" THIN_SP_UTF8 "0000 " + nameOfE8Currency + ")" ) ;
+        case unitofcoin::MCoin : return QString( "Mega-Dogecoins (1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000 " + nameOfE8Currency + ")" ) ;
+        case unitofcoin::theCoin : return QString( "Þe Ðogecoins (1" THIN_SP_UTF8 "0000 " + nameOfE8Currency + ")" ) ;
+        case unitofcoin::kCoin : return QString( "Kilo-Dogecoins (1" THIN_SP_UTF8 "000 " + nameOfE8Currency + ")" ) ;
+        case unitofcoin::oneCoin : return QString( "Dogecoins (1 / 1" THIN_SP_UTF8 "0000 " + UnitsOfCoin::name( unitofcoin::theCoin ) + ")" ) ;
+        case unitofcoin::mCoin : return QString( "Milli-Dogecoins (1 / 1" THIN_SP_UTF8 "000 " + nameOfE8Currency + ")" ) ;
+        case unitofcoin::uCoin : return QString( "Micro-Dogecoins (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000 " + nameOfE8Currency + ")" ) ;
+        case unitofcoin::Cointoshi : return QString( "Dogetoshis (1 / 1" THIN_SP_UTF8 "0000" THIN_SP_UTF8 "0000 " + nameOfE8Currency + ")" ) ;
         default: return QString( "Wow-Some-Dogecoins" ) ;
     }
 }
 
-qint64 UnitsOfCoin::factor( int unit )
+qint64 UnitsOfCoin::factor( const unitofcoin & unit )
 {
     switch ( unit )
     {
-    case MCoin :   return 100000000000000 ;
-    case theCoin : return 1000000000000 ;
-    case kCoin :   return 100000000000 ;
-    case oneCoin : return 100000000 ;
-    case mCoin :   return 100000 ;
-    case uCoin :   return 100 ;
-    case Cointoshi : default :  return 1 ;
+    case unitofcoin::MCoin :   return 100000000000000 ;
+    case unitofcoin::theCoin : return 1000000000000 ;
+    case unitofcoin::kCoin :   return 100000000000 ;
+    case unitofcoin::oneCoin : return 100000000 ;
+    case unitofcoin::mCoin :   return 100000 ;
+    case unitofcoin::uCoin :   return 100 ;
+    case unitofcoin::Cointoshi : default : return 1 ;
     }
 }
 
-int UnitsOfCoin::decimals( int unit )
+int UnitsOfCoin::decimals( const unitofcoin & unit )
 {
     switch ( unit )
     {
-    case MCoin : return 14 ;
-    case theCoin : return 12 ;
-    case kCoin : return 11 ;
-    case oneCoin : return 8 ;
-    case mCoin : return 5 ;
-    case uCoin : return 2 ;
-    case Cointoshi : default : return 0 ;
+    case unitofcoin::MCoin : return 14 ;
+    case unitofcoin::theCoin : return 12 ;
+    case unitofcoin::kCoin : return 11 ;
+    case unitofcoin::oneCoin : return 8 ;
+    case unitofcoin::mCoin : return 5 ;
+    case unitofcoin::uCoin : return 2 ;
+    case unitofcoin::Cointoshi : default : return 0 ;
     }
 }
 
-QString UnitsOfCoin::format( int unit, const CAmount & nIn, bool fPlus, SeparatorStyle separators )
+QString UnitsOfCoin::format( const unitofcoin & unit, const CAmount & nIn, bool fPlus, SeparatorStyle separators )
 {   // not using straight sprintf here to NOT to get localized formatting
-
-    if ( ! isOk( unit ) )
-        return QString( "unknown unit (" ) + QString::number( unit ) + QString( ")" ) ;
-
     qint64 n = (qint64)nIn ;
     qint64 coin = factor( unit ) ;
     int num_decimals = decimals( unit ) ;
@@ -126,9 +122,9 @@ QString UnitsOfCoin::format( int unit, const CAmount & nIn, bool fPlus, Separato
     // confused with the decimal marker
     QChar thin_sp( THIN_SP_CP ) ;
     int q_size = quotient_str.size() ;
-    const int digitsInGroup = ( unit == Cointoshi || unit == theCoin ) ? 4 : 3 ;
+    const int digitsInGroup = ( unit == unitofcoin::Cointoshi || unit == unitofcoin::theCoin ) ? 4 : 3 ;
 
-    if ( separators == separatorAlways || ( separators == separatorStandard && q_size > ( digitsInGroup + 1 ) ) )
+    if ( separators == SeparatorStyle::always || ( separators == SeparatorStyle::usual && q_size > ( digitsInGroup + 1 ) ) )
         for ( int i = digitsInGroup ; i < q_size ; i += digitsInGroup )
             quotient_str.insert( q_size - i, thin_sp ) ;
 
@@ -137,19 +133,26 @@ QString UnitsOfCoin::format( int unit, const CAmount & nIn, bool fPlus, Separato
     else if ( fPlus && n > 0 )
         quotient_str.insert( 0, '+' ) ;
 
-    if ( unit == theCoin && ( separators == separatorAlways || separators == separatorStandard ) ) {
+    if ( unit == unitofcoin::theCoin && ( separators == SeparatorStyle::always || separators == SeparatorStyle::usual ) ) {
         // int remainder_size = remainder_str.size() ; // is equal to num_decimals
         for ( int i = digitsInGroup ; i < num_decimals ; i += digitsInGroup )
             remainder_str.insert( num_decimals - i, QChar( /* ’ */ 0x2019 ) ) ;
     }
 
     QString result = quotient_str ;
-    if ( unit != Cointoshi )
+    if ( unit != unitofcoin::Cointoshi )
         result += QString( "." ) + remainder_str ;
 
     return result ;
 }
 
+QString UnitsOfCoin::format( int unitInt, const CAmount & amount, bool plussign, SeparatorStyle separators )
+{
+    if ( isUnitOfCoin( unitInt ) )
+        return UnitsOfCoin::format( unitofcoin( unitInt ), amount, plussign, separators ) ;
+    else
+        return QString( "unknown unit (" ) + QString::number( unitInt ) + QString( ")" ) ;
+}
 
 // NOTE: Using formatWithUnit in an HTML context risks wrapping
 // quantities at the thousands separator. More subtly, it also results
@@ -158,23 +161,22 @@ QString UnitsOfCoin::format( int unit, const CAmount & nIn, bool fPlus, Separato
 //
 // Please take care to use formatHtmlWithUnit instead, when appropriate
 
-QString UnitsOfCoin::formatWithUnit( int unit, const CAmount & amount, bool plussign, SeparatorStyle separators )
+QString UnitsOfCoin::formatWithUnit( const unitofcoin & unit, const CAmount & amount, bool plussign, SeparatorStyle separators )
 {
     return format( unit, amount, plussign, separators ) + QString(" ") + name( unit ) ;
 }
 
-QString UnitsOfCoin::formatHtmlWithUnit( int unit, const CAmount & amount, bool plussign, SeparatorStyle separators )
+QString UnitsOfCoin::formatHtmlWithUnit( const unitofcoin & unit, const CAmount & amount, bool plussign, SeparatorStyle separators )
 {
     QString str( formatWithUnit( unit, amount, plussign, separators ) ) ;
     str.replace( QChar( THIN_SP_CP ), QString( THIN_SP_HTML ) ) ;
     return QString( "<span style='white-space: nowrap;'>%1</span>" ).arg( str ) ;
 }
 
-
-bool UnitsOfCoin::parseString( int unit, const QString & string, CAmount * out )
+bool UnitsOfCoin::parseString( const unitofcoin & unit, const QString & string, CAmount * out )
 {
-    if ( ! isOk( unit ) || string.isEmpty() )
-        return false ; // don't parse unknown unit or empty string
+    if ( /* ! isUnitOfCoin( static_cast< int >( unit ) ) || */ string.isEmpty() )
+        return false ;
 
     int num_decimals = decimals( unit ) ;
 
@@ -210,28 +212,28 @@ bool UnitsOfCoin::parseString( int unit, const QString & string, CAmount * out )
 
 int UnitsOfCoin::rowCount( const QModelIndex & parent ) const
 {
-    Q_UNUSED(parent);
-    return unitlist.size();
+    Q_UNUSED( parent ) ;
+    return unitlist.size() ;
 }
 
 QVariant UnitsOfCoin::data( const QModelIndex & index, int role ) const
 {
-    int row = index.row();
-    if(row >= 0 && row < unitlist.size())
+    int row = index.row() ;
+    if ( row >= 0 && row < unitlist.size() )
     {
-        Unit unit = unitlist.at(row);
-        switch(role)
+        unitofcoin unit = unitlist.at( row ) ;
+        switch ( role )
         {
         case Qt::EditRole:
         case Qt::DisplayRole:
-            return QVariant(name(unit));
+            return QVariant( name( unit ) ) ;
         case Qt::ToolTipRole:
-            return QVariant(description(unit));
+            return QVariant( description( unit ) ) ;
         case UnitRole:
-            return QVariant(static_cast<int>(unit));
+            return QVariant( static_cast< int >( unit ) ) ;
         }
     }
-    return QVariant();
+    return QVariant() ;
 }
 
 CAmount UnitsOfCoin::maxMoney()

@@ -85,19 +85,16 @@ public:
         SendToSelf
     };
 
-    /** Number of confirmation recommended for accepting a transaction */
-    static const int RecommendedNumConfirmations = 6 ;
-
     TransactionRecord() :
             hashOfTransaction(), time( 0 ), type( Other ), address( "" ),
             debit( 0 ), credit( 0 ),
-            subtransactionIdx( 0 )
+            indexOfOutput( -1 )
     { }
 
     TransactionRecord( uint256 hashTx, qint64 _time ) :
             hashOfTransaction( hashTx ), time( _time ), type( Other ), address( "" ),
             debit( 0 ), credit( 0 ),
-            subtransactionIdx( 0 )
+            indexOfOutput( -1 )
     { }
 
     TransactionRecord( uint256 hashTx, qint64 _time,
@@ -105,12 +102,12 @@ public:
                 const CAmount& _debit, const CAmount& _credit ) :
             hashOfTransaction( hashTx ), time( _time ), type( _type ), address( _address ),
             debit( _debit ), credit( _credit ),
-            subtransactionIdx( 0 )
+            indexOfOutput( -1 )
     { }
 
     /** Decompose CWallet transaction to model transaction records */
-    static bool showTransaction(const CWalletTx &wtx);
-    static QList<TransactionRecord> decomposeTransaction(const CWallet *wallet, const CWalletTx &wtx);
+    static bool showTransaction( const CWalletTx & wtx ) ;
+    static QList< TransactionRecord > decomposeTransaction( const CWallet * wallet, const CWalletTx & wtx ) ;
 
     /** @name Immutable transaction attributes
       @{*/
@@ -131,23 +128,19 @@ public:
     /** Return the unique identifier (hash) for this transaction */
     QString getTxHash() const ;
 
-    /** Return the output index of the subtransaction  */
-    int getSubtransactionIndex() const ;
-
-    void setSubtransactionIndex( int idx ) ;
+    int getIndexOfOutput() const {  return indexOfOutput ;  }
 
     /** Update status from core wallet tx
      */
-    void updateStatus(const CWalletTx &wtx);
+    void updateStatus( const CWalletTx & wtx ) ;
 
     /** Return whether a status update is needed
      */
-    bool statusUpdateNeeded();
+    bool isUpdateNeeded() ;
 
 private:
 
-    /** Subtransaction index, for sort key */
-    int subtransactionIdx ;
+    int indexOfOutput ;
 
 };
 

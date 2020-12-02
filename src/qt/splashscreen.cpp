@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -25,6 +26,10 @@
 #include <QDesktopWidget>
 #include <QPainter>
 #include <QRadialGradient>
+
+#if QT_VERSION > 0x050100
+#include <QScreen>
+#endif
 
 SplashScreen::SplashScreen(Qt::WindowFlags f, const NetworkStyle *networkStyle) :
     QWidget(0, f), curAlignment(0)
@@ -68,32 +73,41 @@ SplashScreen::SplashScreen(Qt::WindowFlags f, const NetworkStyle *networkStyle) 
     QRect rGradient(QPoint(0,0), splashSize);
     pixPaint.fillRect(rGradient, gradient);
 
-    // draw the bitcoin icon, expected size of PNG: 1024x1024
-    QRect rectIcon(QPoint(-150,-122), QSize(430,430));
-
-    const QSize requiredSize(1024,1024);
-    QPixmap icon(networkStyle->getAppIcon().pixmap(requiredSize));
-
-    pixPaint.drawPixmap(rectIcon, icon);
+    // draw the icon of application, expected size of PNG is 1024x1024
+    QRect rectIcon( QPoint( -150, -122 ), QSize( 430, 430 ) ) ;
+    QPixmap icon( networkStyle->getAppIcon().pixmap( QSize( 1024, 1024 ) ) ) ;
+    pixPaint.drawPixmap( rectIcon, icon ) ;
 
     // check font size and drawing with
-    pixPaint.setFont(QFont(font, 33*fontFactor));
-    QFontMetrics fm = pixPaint.fontMetrics();
-    int titleTextWidth = fm.width(titleText);
-    if (titleTextWidth > 176) {
-        fontFactor = fontFactor * 176 / titleTextWidth;
+    pixPaint.setFont( QFont( font, 33 * fontFactor ) ) ;
+    QFontMetrics fm = pixPaint.fontMetrics() ;
+#if QT_VERSION > 0x050b00
+    int titleTextWidth = fm.horizontalAdvance( titleText ) ;
+#else
+    int titleTextWidth = fm.width( titleText ) ;
+#endif
+    if ( titleTextWidth > 176 ) {
+        fontFactor = fontFactor * 176 / titleTextWidth ;
     }
 
-    pixPaint.setFont(QFont( font, 33 * fontFactor ) ) ;
-    fm = pixPaint.fontMetrics();
-    titleTextWidth  = fm.width(titleText);
-    pixPaint.drawText(pixmap.width()/devicePixelRatio-titleTextWidth-paddingRight,paddingTop,titleText);
+    pixPaint.setFont( QFont( font, 33 * fontFactor ) ) ;
+    fm = pixPaint.fontMetrics() ;
+#if QT_VERSION > 0x050b00
+    titleTextWidth = fm.horizontalAdvance( titleText ) ;
+#else
+    titleTextWidth = fm.width( titleText ) ;
+#endif
+    pixPaint.drawText( pixmap.width() / devicePixelRatio - titleTextWidth - paddingRight, paddingTop, titleText ) ;
 
     pixPaint.setFont( QFont( font, 15 * fontFactor ) ) ;
 
     // if the version string is to long, reduce size
     fm = pixPaint.fontMetrics() ;
-    int versionTextWidth  = fm.width( versionText ) ;
+#if QT_VERSION > 0x050b00
+    int versionTextWidth = fm.horizontalAdvance( versionText ) ;
+#else
+    int versionTextWidth = fm.width( versionText ) ;
+#endif
     if ( versionTextWidth > titleTextWidth + paddingRight - 10 ) {
         pixPaint.setFont( QFont( font, 12 * fontFactor ) ) ;
         titleVersionVSpace -= 3 ;
@@ -119,7 +133,11 @@ SplashScreen::SplashScreen(Qt::WindowFlags f, const NetworkStyle *networkStyle) 
         boldFont.setWeight( QFont::Bold ) ;
         pixPaint.setFont( boldFont ) ;
         fm = pixPaint.fontMetrics() ;
+#if QT_VERSION > 0x050b00
+        int widthOfTextToAppend = fm.horizontalAdvance( textToAppend ) ;
+#else
         int widthOfTextToAppend = fm.width( textToAppend ) ;
+#endif
         pixPaint.drawText( pixmap.width() / devicePixelRatio - widthOfTextToAppend - 10, 15, textToAppend ) ;
     }
 
@@ -132,7 +150,13 @@ SplashScreen::SplashScreen(Qt::WindowFlags f, const NetworkStyle *networkStyle) 
     QRect r(QPoint(), QSize(pixmap.size().width()/devicePixelRatio,pixmap.size().height()/devicePixelRatio));
     resize(r.size());
     setFixedSize(r.size());
-    move(QApplication::desktop()->screenGeometry().center() - r.center());
+
+#if QT_VERSION > 0x050100
+    QRect screenRect = ( (QGuiApplication *)QCoreApplication::instance() )->primaryScreen()->geometry() ;
+#else
+    QRect screenRect = QApplication::desktop()->screenGeometry() ;
+#endif
+    move( screenRect.center() - r.center() ) ;
 
     subscribeToCoreSignals();
 }

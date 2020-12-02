@@ -142,14 +142,6 @@
         <translation>Schimbă fraza de acces folosită pentru criptarea portofelului</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>Fereastra de &amp;depanare</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Deschide consola de depanare şi diagnosticare</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Verifică mesaj...</translation>
     </message>
@@ -811,10 +803,6 @@
     <message>
         <source>Information</source>
         <translation>Informaţii</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>Fereastra de depanare</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>

@@ -150,11 +150,11 @@ public:
         vSeeds.push_back(CDNSSeedData("multidoge.org", "seed.multidoge.org", true));
         vSeeds.push_back(CDNSSeedData("multidoge.org", "seed2.multidoge.org"));
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,30);
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,22);
-        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,158);
-        base58Prefixes[EXT_PUBLIC_KEY] = { 0x02, 0xfa, 0xca, 0xfd } ;
-        base58Prefixes[EXT_SECRET_KEY] = { 0x02, 0xfa, 0xc3, 0x98 } ;
+        base58Prefixes[ Base58PrefixType::PUBKEY_ADDRESS ] = std::vector< unsigned char >( 1, 30 ) ;
+        base58Prefixes[ Base58PrefixType::SCRIPT_ADDRESS ] = std::vector< unsigned char >( 1, 22 ) ;
+        base58Prefixes[ Base58PrefixType::SECRET_KEY ] =     std::vector< unsigned char >( 1, 158 ) ;
+        base58Prefixes[ Base58PrefixType::EXT_PUBLIC_KEY ] = { 0x02, 0xfa, 0xca, 0xfd } ;
+        base58Prefixes[ Base58PrefixType::EXT_SECRET_KEY ] = { 0x02, 0xfa, 0xc3, 0x98 } ;
 
         //TODO: fix this for dogecoin -- plddr
         //vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_main, pnSeed6_main + ARRAYLEN(pnSeed6_main));
@@ -336,22 +336,22 @@ public:
         assert( consensus.hashGenesisBlock == expectedSha256HashOfGenesis ) ;
         assert( genesis.hashMerkleRoot == expectedMerkleRootOfGenesis ) ;
 
-        base58Prefixes[ PUBKEY_ADDRESS ] = std::vector< unsigned char >( 1, 0x67 ) ;
-        base58Prefixes[ SCRIPT_ADDRESS ] = std::vector< unsigned char >( 1, 0xbe ) ;
-        base58Prefixes[ SECRET_KEY ]   =   std::vector< unsigned char >( 1, 0x77 ) ;
-        base58Prefixes[ EXT_PUBLIC_KEY ] = { 0x0a, 0xbc, 0x20, 0x88 } ;
-        base58Prefixes[ EXT_SECRET_KEY ] = { 0x0a, 0xbd, 0x81, 0xd9 } ;
+        base58Prefixes[ Base58PrefixType::PUBKEY_ADDRESS ] = std::vector< unsigned char >( 1, 0x67 ) ;
+        base58Prefixes[ Base58PrefixType::SCRIPT_ADDRESS ] = std::vector< unsigned char >( 1, 0xbe ) ;
+        base58Prefixes[ Base58PrefixType::SECRET_KEY ]   =   std::vector< unsigned char >( 1, 0x77 ) ;
+        base58Prefixes[ Base58PrefixType::EXT_PUBLIC_KEY ] = { 0x0a, 0xbc, 0x20, 0x88 } ;
+        base58Prefixes[ Base58PrefixType::EXT_SECRET_KEY ] = { 0x0a, 0xbd, 0x81, 0xd9 } ;
 
 /*
         unsigned char pubkeyFirst = 0x90 ;
         char networkPrefix = ' ' ;
         while ( networkPrefix != 'i' )
         {
-            base58Prefixes[ PUBKEY_ADDRESS ] = std::vector< unsigned char >( 1, pubkeyFirst ) ;
+            base58Prefixes[ Base58PrefixType::PUBKEY_ADDRESS ] = std::vector< unsigned char >( 1, pubkeyFirst ) ;
 
             std::string addressExample = CDogecoinAddress::DummyDogecoinAddress(
-                    Base58Prefix( CChainParams::PUBKEY_ADDRESS ),
-                    Base58Prefix( CChainParams::SCRIPT_ADDRESS )
+                    Base58PrefixFor( Base58PrefixType::PUBKEY_ADDRESS ),
+                    Base58PrefixFor( Base58PrefixType::SCRIPT_ADDRESS )
                 ) ;
             assert( addressExample.length() > 0 ) ;
             networkPrefix = addressExample[ 0 ] ;
@@ -365,12 +365,12 @@ public:
         char privkeyPrefix = ' ' ;
         while ( privkeyPrefix != 'J' )
         {
-            base58Prefixes[ SECRET_KEY ] = std::vector< unsigned char >( 1, privkeyFirst ) ;
+            base58Prefixes[ Base58PrefixType::SECRET_KEY ] = std::vector< unsigned char >( 1, privkeyFirst ) ;
 
             CKey privateKey ;
             privateKey.MakeNewKey( true ) ;
             CDogecoinSecret encodedPrivkey ;
-            encodedPrivkey.SetKey( privateKey, Base58Prefix( CChainParams::SECRET_KEY ) ) ;
+            encodedPrivkey.SetKey( privateKey, Base58PrefixFor( Base58PrefixType::SECRET_KEY ) ) ;
             std::string privateKeyExample = encodedPrivkey.ToString() ;
             printf( "private key example %s with 0x%02x\n", privateKeyExample.c_str(), privkeyFirst ) ;
             assert( privateKeyExample.length() > 0 ) ;
@@ -513,11 +513,11 @@ public:
         // nodes with support for servicebits filtering should be at the top
         vSeeds.push_back(CDNSSeedData("jrn.me.uk", "testseed.jrn.me.uk"));
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,113); // 0x71
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196); // 0xc4
-        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,241); // 0xf1
-        base58Prefixes[EXT_PUBLIC_KEY] = { 0x04, 0x35, 0x87, 0xcf } ;
-        base58Prefixes[EXT_SECRET_KEY] = { 0x04, 0x35, 0x83, 0x94 } ;
+        base58Prefixes[ Base58PrefixType::PUBKEY_ADDRESS ] = std::vector< unsigned char >( 1, 113 ) ; // 0x71
+        base58Prefixes[ Base58PrefixType::SCRIPT_ADDRESS ] = std::vector< unsigned char >( 1, 196 ) ; // 0xc4
+        base58Prefixes[ Base58PrefixType::SECRET_KEY ] =     std::vector< unsigned char >( 1, 241 ) ; // 0xf1
+        base58Prefixes[ Base58PrefixType::EXT_PUBLIC_KEY ] = { 0x04, 0x35, 0x87, 0xcf } ;
+        base58Prefixes[ Base58PrefixType::EXT_SECRET_KEY ] = { 0x04, 0x35, 0x83, 0x94 } ;
 
         //TODO: fix this for dogecoin -- plddr
         //vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_test, pnSeed6_test + ARRAYLEN(pnSeed6_test));
@@ -648,11 +648,11 @@ public:
             0
         } ;
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>( 1, 0x6f ) ;
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>( 1, 0xc4 ) ;
-        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>( 1, 0xef ) ;
-        base58Prefixes[EXT_PUBLIC_KEY] = { 0x04, 0x35, 0x87, 0xCF } ;
-        base58Prefixes[EXT_SECRET_KEY] = { 0x04, 0x35, 0x83, 0x94 } ;
+        base58Prefixes[ Base58PrefixType::PUBKEY_ADDRESS ] = std::vector< unsigned char >( 1, 0x6f ) ;
+        base58Prefixes[ Base58PrefixType::SCRIPT_ADDRESS ] = std::vector< unsigned char >( 1, 0xc4 ) ;
+        base58Prefixes[ Base58PrefixType::SECRET_KEY ] =     std::vector< unsigned char >( 1, 0xef ) ;
+        base58Prefixes[ Base58PrefixType::EXT_PUBLIC_KEY ] = { 0x04, 0x35, 0x87, 0xCF } ;
+        base58Prefixes[ Base58PrefixType::EXT_SECRET_KEY ] = { 0x04, 0x35, 0x83, 0x94 } ;
     }
 
     void changeBIP9Parameters( Consensus::DeploymentPos d, int64_t nStartTime, int64_t nTimeout )

@@ -87,7 +87,7 @@ void ReceiveCoinsDialog::setWalletModel( WalletModel * model )
     if ( model && model->getOptionsModel() )
     {
         model->getRecentRequestsTableModel()->sort( RecentRequestsTableModel::Date, Qt::DescendingOrder ) ;
-        connect( model->getOptionsModel(), SIGNAL( displayUnitChanged(int) ), this, SLOT( updateDisplayUnit() ) ) ;
+        connect( model->getOptionsModel(), SIGNAL( displayUnitChanged(unitofcoin) ), this, SLOT( updateDisplayUnit() ) ) ;
         updateDisplayUnit() ;
 
         QTableView* tableView = ui->recentRequestsView ;
@@ -109,7 +109,7 @@ void ReceiveCoinsDialog::setWalletModel( WalletModel * model )
         // last 2 columns are set by the columnResizingFixer, when the table geometry is ready
         columnResizingFixer = new GUIUtil::TableViewLastColumnResizingFixer(tableView, AMOUNT_MINIMUM_COLUMN_WIDTH, DATE_COLUMN_WIDTH, this);
 
-        connect( model->getOptionsModel(), SIGNAL( displayUnitChanged(int) ), this, SLOT( updateRequest() ) ) ;
+        connect( model->getOptionsModel(), SIGNAL( displayUnitChanged(unitofcoin) ), this, SLOT( updateRequest() ) ) ;
     }
 
     updateRequest() ;
@@ -143,7 +143,7 @@ void ReceiveCoinsDialog::updateDisplayUnit()
 {
     if ( walletModel && walletModel->getOptionsModel() )
     {
-        ui->reqAmount->setDisplayUnit( walletModel->getOptionsModel()->getDisplayUnit() ) ;
+        ui->reqAmount->setUnitOfCoin( walletModel->getOptionsModel()->getDisplayUnit() ) ;
     }
 }
 
@@ -262,14 +262,15 @@ QModelIndex ReceiveCoinsDialog::selectedRow()
 }
 
 // copy column of selected row to clipboard
-void ReceiveCoinsDialog::copyColumnToClipboard(int column)
+void ReceiveCoinsDialog::copyColumnToClipboard( int column )
 {
-    QModelIndex firstIndex = selectedRow();
-    if (!firstIndex.isValid()) {
-        return;
-    }
+    if ( ! walletModel || ! walletModel->getRecentRequestsTableModel() ) return ;
+
+    QModelIndex firstIndex = selectedRow() ;
+    if ( ! firstIndex.isValid() ) return ;
+
     GUIUtil::setClipboard( walletModel->getRecentRequestsTableModel()->data(
-        firstIndex.child( firstIndex.row(), column ), Qt::EditRole
+        walletModel->getRecentRequestsTableModel()->index( firstIndex.row(), column, firstIndex ), Qt::EditRole
     ).toString() ) ;
 }
 

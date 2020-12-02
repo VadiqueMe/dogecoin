@@ -438,7 +438,6 @@ void CoinControlDialog::updateLabels( WalletModel * model, QDialog * dialog )
     }
 
     CAmount nAmount             = 0;
-    CAmount nPayFee             = 0;
     CAmount nAfterFee           = 0;
     CAmount nChange             = 0;
     unsigned int nBytes         = 0;
@@ -525,30 +524,24 @@ void CoinControlDialog::updateLabels( WalletModel * model, QDialog * dialog )
             if ( nAmount - nPayAmount == 0 )
                 nBytes -= 34 ;
 
-        // Fee
-        nPayFee = 0 ;
-
-        if ( nBytes <= MAX_FREE_TRANSACTION_CREATE_SIZE )
-            nPayFee = 0 ;
-
         if ( nPayAmount > 0 )
         {
             nChange = nAmount - nPayAmount ;
             if ( ! CoinControlDialog::fSubtractFeeFromAmount )
-                nChange -= nPayFee ;
+                nChange -= currentTxFee ;
 
             if ( nChange == 0 && ! CoinControlDialog::fSubtractFeeFromAmount )
                 nBytes -= 34 ;
         }
 
         // after fee
-        nAfterFee = std::max< CAmount >( nAmount - nPayFee, 0 ) ;
+        nAfterFee = std::max< CAmount >( nAmount - currentTxFee, 0 ) ;
     }
 
     // actually update labels
-    int nDisplayUnit = UnitsOfCoin::oneCoin ;
-    if (model && model->getOptionsModel())
-        nDisplayUnit = model->getOptionsModel()->getDisplayUnit();
+    unitofcoin displayUnit = unitofcoin::oneCoin ;
+    if ( model && model->getOptionsModel() )
+        displayUnit = model->getOptionsModel()->getDisplayUnit() ;
 
     QLabel *l1 = dialog->findChild<QLabel *>("labelCoinControlQuantity");
     QLabel *l2 = dialog->findChild<QLabel *>("labelCoinControlAmount");
@@ -562,18 +555,18 @@ void CoinControlDialog::updateLabels( WalletModel * model, QDialog * dialog )
     dialog->findChild<QLabel *>("labelCoinControlChange")->setEnabled( nPayAmount > 0 ) ;
 
     // stats
-    l1->setText(QString::number(nQuantity));                                 // Quantity
-    l2->setText( UnitsOfCoin::formatWithUnit( nDisplayUnit, nAmount ) ) ;    // Amount
-    l3->setText( UnitsOfCoin::formatWithUnit( nDisplayUnit, nPayFee ) ) ;    // Fee
-    l4->setText( UnitsOfCoin::formatWithUnit( nDisplayUnit, nAfterFee ) ) ;  // After Fee
-    l5->setText(((nBytes > 0) ? ASYMP_UTF8 : "") + QString::number(nBytes)); // Bytes
-    l8->setText( UnitsOfCoin::formatWithUnit( nDisplayUnit, nChange ) ) ;    // Change
+    l1->setText( QString::number( nQuantity ) ) ;                              // Quantity
+    l2->setText( UnitsOfCoin::formatWithUnit( displayUnit, nAmount ) ) ;       // Amount
+    l3->setText( UnitsOfCoin::formatWithUnit( displayUnit, currentTxFee ) ) ;  // Fee
+    l4->setText( UnitsOfCoin::formatWithUnit( displayUnit, nAfterFee ) ) ;     // After Fee
+    l5->setText( ((nBytes > 0) ? ASYMP_UTF8 : "") + QString::number(nBytes) ); // Bytes
+    l8->setText( UnitsOfCoin::formatWithUnit( displayUnit, nChange ) ) ;       // Change
 
     CAmount feeVary( 0 ) ; // how many atomary coin units the estimated fee can vary per byte
-    if ( payTxFee.GetFeePerKiloByte() > 0 ) // payTxFee is global, defined in wallet/wallet.cpp
-        feeVary = payTxFee.GetFeePerBytes( 1 ) ;
+    if ( currentTxFee > 0 ) // currentTxFee is global, defined in wallet/wallet.cpp
+        feeVary = CFeeRate( currentTxFee, 1000 ).GetFeePerBytes( 1 ) ;
 
-    if ( feeVary != 0 && nPayFee > 0 /* false */ )
+    if ( feeVary != 0 && currentTxFee > 0 )
     {
         l3->setText( ASYMP_UTF8 + l3->text() ) ;
         l4->setText( ASYMP_UTF8 + l4->text() ) ;
@@ -600,7 +593,7 @@ void CoinControlDialog::updateView()
     QFlags< Qt::ItemFlag > flgCheckbox = Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable ;
     QFlags< Qt::ItemFlag > flgTristate = Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable | Qt::ItemIsTristate ;
 
-    int nDisplayUnit = walletModel->getOptionsModel()->getDisplayUnit() ;
+    unitofcoin displayUnit = walletModel->getOptionsModel()->getDisplayUnit() ;
 
     std::map< QString, std::vector< COutput > > mapCoins ;
     walletModel->listCoins( mapCoins ) ;
@@ -668,7 +661,7 @@ void CoinControlDialog::updateView()
             }
 
             // amount
-            itemOutput->setText(COLUMN_AMOUNT, UnitsOfCoin::format( nDisplayUnit, out.tx->tx->vout[out.i].nValue )) ;
+            itemOutput->setText(COLUMN_AMOUNT, UnitsOfCoin::format( displayUnit, out.tx->tx->vout[out.i].nValue )) ;
             itemOutput->setData(COLUMN_AMOUNT, Qt::UserRole, QVariant((qlonglong)out.tx->tx->vout[out.i].nValue)); // padding so that sorting works correctly
 
             // date
@@ -704,7 +697,7 @@ void CoinControlDialog::updateView()
         if ( treeView )
         {
             itemWalletAddress->setText(COLUMN_CHECKBOX, "(" + QString::number(nChildren) + ")");
-            itemWalletAddress->setText(COLUMN_AMOUNT, UnitsOfCoin::format( nDisplayUnit, nSum )) ;
+            itemWalletAddress->setText(COLUMN_AMOUNT, UnitsOfCoin::format( displayUnit, nSum )) ;
             itemWalletAddress->setData(COLUMN_AMOUNT, Qt::UserRole, QVariant((qlonglong)nSum));
         }
     }

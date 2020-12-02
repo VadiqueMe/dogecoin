@@ -110,14 +110,6 @@
         <translation>Alilan ya ing passphrase a gagamitan para king wallet encryption</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>I-&amp;Debug ing awang</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Ibuklat ing debugging at diagnostic console</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Beripikan ing message...</translation>
     </message>
@@ -421,10 +413,6 @@
     <message>
         <source>Information</source>
         <translation>Impormasion</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>I-Debug ing awang</translation>
     </message>
     <message>
         <source>Startup time</source>

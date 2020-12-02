@@ -207,7 +207,7 @@ bool CBlockTreeDB::LoadBlockIndexGuts( std::function< CBlockIndex*( const uint25
                 pindexNew->nBits          = diskindex.nBits;
                 pindexNew->nNonce         = diskindex.nNonce;
                 pindexNew->nStatus        = diskindex.nStatus;
-                pindexNew->nTx            = diskindex.nTx;
+                pindexNew->nBlockTx       = diskindex.nBlockTx ;
 
                 /* Don't check the proof-of-work here because the CDiskBlockIndex does not contain the auxpow.
                    This check isn't important, since the data on disk is expected to already be valid and can be trusted */

@@ -322,14 +322,6 @@
         <translation>Ubah kata kunci yang digunakan untuk enkripsi dompet</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;Jendela Debug</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Buka konsol debug dan diagnosa</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Verifikasi pesan...</translation>
     </message>
@@ -963,10 +955,6 @@
     <message>
         <source>Information</source>
         <translation>Informasi</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>Jendela debug</translation>
     </message>
     <message>
         <source>Startup time</source>

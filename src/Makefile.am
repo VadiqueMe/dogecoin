@@ -113,6 +113,7 @@ DOGECOIN_CORE_H = \
   limitedmap.h \
   memusage.h \
   merkleblock.h \
+  merkletx.h \
   miner.h \
   net.h \
   net_processing.h \
@@ -168,6 +169,7 @@ DOGECOIN_CORE_H = \
   wallet/rpcwallet.h \
   wallet/wallet.h \
   wallet/walletdb.h \
+  wallet/wallettx.h \
   warnings.h \
   zmq/zmqabstractnotifier.h \
   zmq/zmqconfig.h\
@@ -244,6 +246,7 @@ libdogecoin_wallet_a_SOURCES = \
   wallet/rpcwallet.cpp \
   wallet/wallet.cpp \
   wallet/walletdb.cpp \
+  wallet/wallettx.cpp \
   policy/rbf.cpp \
   $(DOGECOIN_CORE_H)
 
@@ -346,6 +349,7 @@ libdogecoin_common_a_SOURCES = \
   feerate.cpp \
   key.cpp \
   keystore.cpp \
+  merkletx.cpp \
   netaddress.cpp \
   netbase.cpp \
   primitives/block.cpp \

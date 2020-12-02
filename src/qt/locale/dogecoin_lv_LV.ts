@@ -134,14 +134,6 @@
         <translation>Mainīt maciņa šifrēšanas paroli</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;Atkļūdošanas logs</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Atvērt atkļūdošanas un diagnostikas konsoli</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Pārbaudīt ziņojumu...</translation>
     </message>
@@ -593,10 +585,6 @@
     <message>
         <source>Information</source>
         <translation>Informācija</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>Atkļūdošanas logs</translation>
     </message>
     <message>
         <source>Startup time</source>

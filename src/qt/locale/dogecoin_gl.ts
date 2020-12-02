@@ -122,14 +122,6 @@
         <translation>Cambiar o contrasinal empregado para a encriptación do moedeiro</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>Ventana de &amp;Depuración</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Abrir consola de depuración e diagnóstico</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Verificar mensaxe...</translation>
     </message>
@@ -541,10 +533,6 @@
     <message>
         <source>Information</source>
         <translation>Información</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>Ventana de Depuración</translation>
     </message>
     <message>
         <source>Startup time</source>

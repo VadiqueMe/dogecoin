@@ -1,10 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
-#ifndef BITCOIN_SCRIPT_SCRIPT_H
-#define BITCOIN_SCRIPT_SCRIPT_H
+#ifndef DOGECOIN_SCRIPT_SCRIPT_H
+#define DOGECOIN_SCRIPT_SCRIPT_H
 
 #include "crypto/common.h"
 #include "prevector.h"
@@ -316,37 +317,40 @@ public:
         return serialize(m_value);
     }
 
-    static std::vector<unsigned char> serialize(const int64_t& value)
+    static std::vector< unsigned char > serialize( const int64_t & value )
     {
-        if(value == 0)
-            return std::vector<unsigned char>();
+        if ( value == 0 )
+            return std::vector< unsigned char >() ;
 
-        std::vector<unsigned char> result;
-        const bool neg = value < 0;
-        uint64_t absvalue = neg ? -value : value;
+        std::vector< unsigned char > result ;
+        const bool neg = value < 0 ;
+        uint64_t absvalue = neg ? -value : value ;
 
-        while(absvalue)
+        while ( absvalue > 0 )
         {
-            result.push_back(absvalue & 0xff);
-            absvalue >>= 8;
+            result.push_back( absvalue & 0xff ) ;
+            absvalue >>= 8 ;
         }
 
 //    - If the most significant byte is >= 0x80 and the value is positive, push a
-//    new zero-byte to make the significant byte < 0x80 again.
+//    new zero-byte to make the significant byte < 0x80 again
 
 //    - If the most significant byte is >= 0x80 and the value is negative, push a
-//    new 0x80 byte that will be popped off when converting to an integral.
+//    new 0x80 byte that will be popped off when converting to an integral
 
 //    - If the most significant byte is < 0x80 and the value is negative, add
 //    0x80 to it, since it will be subtracted and interpreted as a negative when
-//    converting to an integral.
+//    converting to an integral
 
-        if (result.back() & 0x80)
-            result.push_back(neg ? 0x80 : 0);
-        else if (neg)
-            result.back() |= 0x80;
+        if ( ! result.empty() )
+        {
+            if ( result.back() & 0x80 )
+                result.push_back( neg ? 0x80 : 0 ) ;
+            else if ( neg )
+                *result.rbegin() |= 0x80 ;
+        }
 
-        return result;
+        return result ;
     }
 
 private:
@@ -669,4 +673,4 @@ public:
     virtual ~CReserveScript() {}
 };
 
-#endif // BITCOIN_SCRIPT_SCRIPT_H
+#endif

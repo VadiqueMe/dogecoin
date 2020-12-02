@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -26,9 +26,9 @@ class TxViewDelegate : public QAbstractItemDelegate
 {
     Q_OBJECT
 public:
-    TxViewDelegate(const PlatformStyle *_platformStyle, QObject *parent=nullptr):
-        QAbstractItemDelegate(parent), unit( UnitsOfCoin::oneCoin ),
-        platformStyle(_platformStyle)
+    TxViewDelegate( const PlatformStyle * style, QObject * parent = nullptr ):
+        QAbstractItemDelegate( parent ), unit( unitofcoin::oneCoin ),
+        platformStyle( style )
     {
 
     }
@@ -85,9 +85,8 @@ public:
             foreground = option.palette.color(QPalette::Text);
         }
         painter->setPen(foreground);
-        QString amountText = UnitsOfCoin::formatWithUnit( unit, amount, true, UnitsOfCoin::separatorAlways ) ;
-        if(!confirmed)
-        {
+        QString amountText = UnitsOfCoin::formatWithUnit( unit, amount, true, SeparatorStyle::always ) ;
+        if ( ! confirmed ) {
             amountText = QString("[") + amountText + QString("]");
         }
         painter->drawText(amountRect, Qt::AlignRight|Qt::AlignVCenter, amountText);
@@ -103,8 +102,8 @@ public:
         return QSize(DECORATION_SIZE, DECORATION_SIZE);
     }
 
-    int unit;
-    const PlatformStyle *platformStyle;
+    unitofcoin unit ;
+    const PlatformStyle * platformStyle ;
 
 } ;
 
@@ -152,6 +151,7 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
     pictureOfCoin->setText( "" ) ;
     pictureOfCoin->setAlignment( Qt::AlignCenter ) ;
     pictureOfCoin->setMargin( 2 ) ;
+    pictureOfCoin->setToolTip( QString::fromStdString( NameOfE8Currency() ) ) ;
     connect( pictureOfCoin.get(), SIGNAL( clicked() ), this, SLOT( toggleObverseReverse() ) ) ;
     ui->verticalLayoutForBalancesAndCoin->addWidget( pictureOfCoin.get() ) ;
 }
@@ -182,21 +182,21 @@ void OverviewPage::toggleObverseReverse()
 
 void OverviewPage::setBalance(const CAmount& balance, const CAmount& unconfirmedBalance, const CAmount& immatureBalance, const CAmount& watchOnlyBalance, const CAmount& watchUnconfBalance, const CAmount& watchImmatureBalance)
 {
-    int unit = walletModel->getOptionsModel()->getDisplayUnit();
+    unitofcoin unit = walletModel->getOptionsModel()->getDisplayUnit() ;
     currentBalance = balance;
     currentUnconfirmedBalance = unconfirmedBalance;
     currentImmatureBalance = immatureBalance;
     currentWatchOnlyBalance = watchOnlyBalance;
     currentWatchUnconfBalance = watchUnconfBalance;
     currentWatchImmatureBalance = watchImmatureBalance;
-    ui->labelBalance->setText( UnitsOfCoin::formatWithUnit( unit, balance, false, UnitsOfCoin::separatorAlways ) ) ;
-    ui->labelUnconfirmed->setText( UnitsOfCoin::formatWithUnit( unit, unconfirmedBalance, false, UnitsOfCoin::separatorAlways ) ) ;
-    ui->labelImmature->setText( UnitsOfCoin::formatWithUnit( unit, immatureBalance, false, UnitsOfCoin::separatorAlways ) ) ;
-    ui->labelTotal->setText( UnitsOfCoin::formatWithUnit( unit, balance + unconfirmedBalance + immatureBalance, false, UnitsOfCoin::separatorAlways ) ) ;
-    ui->labelWatchAvailable->setText( UnitsOfCoin::formatWithUnit( unit, watchOnlyBalance, false, UnitsOfCoin::separatorAlways ) ) ;
-    ui->labelWatchPending->setText( UnitsOfCoin::formatWithUnit( unit, watchUnconfBalance, false, UnitsOfCoin::separatorAlways ) ) ;
-    ui->labelWatchImmature->setText( UnitsOfCoin::formatWithUnit( unit, watchImmatureBalance, false, UnitsOfCoin::separatorAlways ) ) ;
-    ui->labelWatchTotal->setText( UnitsOfCoin::formatWithUnit( unit, watchOnlyBalance + watchUnconfBalance + watchImmatureBalance, false, UnitsOfCoin::separatorAlways ) ) ;
+    ui->labelBalance->setText( UnitsOfCoin::formatWithUnit( unit, balance, false, SeparatorStyle::always ) ) ;
+    ui->labelUnconfirmed->setText( UnitsOfCoin::formatWithUnit( unit, unconfirmedBalance, false, SeparatorStyle::always ) ) ;
+    ui->labelImmature->setText( UnitsOfCoin::formatWithUnit( unit, immatureBalance, false, SeparatorStyle::always ) ) ;
+    ui->labelTotal->setText( UnitsOfCoin::formatWithUnit( unit, balance + unconfirmedBalance + immatureBalance, false, SeparatorStyle::always ) ) ;
+    ui->labelWatchAvailable->setText( UnitsOfCoin::formatWithUnit( unit, watchOnlyBalance, false, SeparatorStyle::always ) ) ;
+    ui->labelWatchPending->setText( UnitsOfCoin::formatWithUnit( unit, watchUnconfBalance, false, SeparatorStyle::always ) ) ;
+    ui->labelWatchImmature->setText( UnitsOfCoin::formatWithUnit( unit, watchImmatureBalance, false, SeparatorStyle::always ) ) ;
+    ui->labelWatchTotal->setText( UnitsOfCoin::formatWithUnit( unit, watchOnlyBalance + watchUnconfBalance + watchImmatureBalance, false, SeparatorStyle::always ) ) ;
 
     // only show immature (newly mined) balance if it's non-zero, so as not to complicate things
     // for the non-mining users
@@ -256,7 +256,7 @@ void OverviewPage::setWalletModel(WalletModel *model)
                    model->getWatchBalance(), model->getWatchUnconfirmedBalance(), model->getWatchImmatureBalance());
         connect(model, SIGNAL(balanceChanged(CAmount,CAmount,CAmount,CAmount,CAmount,CAmount)), this, SLOT(setBalance(CAmount,CAmount,CAmount,CAmount,CAmount,CAmount)));
 
-        connect(model->getOptionsModel(), SIGNAL(displayUnitChanged(int)), this, SLOT(updateDisplayUnit()));
+        connect( model->getOptionsModel(), SIGNAL( displayUnitChanged(unitofcoin) ), this, SLOT( updateDisplayUnit() ) ) ;
 
         updateWatchOnlyLabels(model->haveWatchOnly());
         connect(model, SIGNAL(notifyWatchonlyChanged(bool)), this, SLOT(updateWatchOnlyLabels(bool)));

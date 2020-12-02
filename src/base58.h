@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -93,12 +93,11 @@ public:
 class CDogecoinAddress : public CBase58Data
 {
 public:
-    bool Set( const CKeyID & id ) ;
-    bool Set( const CScriptID &id ) ;
+    bool Set( const CKeyID & id, const CChainParams & params = Params() ) ;
+    bool Set( const CScriptID &id, const CChainParams & params = Params() ) ;
     bool Set( const CTxDestination & dest ) ;
 
-    bool IsValid() const ;
-    bool IsValid( const CChainParams & params ) const ;
+    bool IsValid( const CChainParams & params = Params() ) const ;
     bool IsValid( const std::vector< unsigned char > & pubkeyPrefix,
                   const std::vector< unsigned char > & scriptPrefix ) const ;
 
@@ -107,9 +106,9 @@ public:
     CDogecoinAddress( const std::string & strAddress ) {  SetString( strAddress ) ;  }
     CDogecoinAddress( const char * pszAddress ) {  SetString( pszAddress ) ;  }
 
-    CTxDestination Get() const ;
-    bool GetKeyID( CKeyID & keyID ) const ;
-    bool IsScript() const ;
+    CTxDestination Get( const CChainParams & params = Params() ) const ;
+    bool GetKeyID( CKeyID & keyID, const CChainParams & params = Params() ) const ;
+    bool IsScript( const CChainParams & params = Params() ) const ;
 
     static std::string DummyDogecoinAddress( const CChainParams & params ) ;
     static std::string DummyDogecoinAddress( const std::vector< unsigned char > & pubkeyPrefix,
@@ -124,9 +123,9 @@ class CDogecoinSecret : public CBase58Data
 
 public:
     CKey GetKey() ;
-    void SetKey( const CKey & vchSecret ) ;
+    void SetKey( const CKey & vchSecret, const CChainParams & params = Params() ) ;
     void SetKey( const CKey & vchSecret, const std::vector< unsigned char > & privkeyPrefix ) ;
-    bool IsValid() const ;
+    bool IsValid( const CChainParams & params = Params() ) const ;
     bool IsValidFor( const std::vector< unsigned char > & privkeyPrefix ) const ;
     bool SetString( const std::string & strSecret ) ;
 
@@ -135,14 +134,14 @@ public:
 
 } ;
 
-template < typename K, int Size, CChainParams::Base58Type Type >
+template < typename K, int Size, Base58PrefixType Type >
 class CDogecoinExtKeyBase : public CBase58Data
 {
 public:
-    void SetKey( const K & key ) {
+    void SetKey( const K & key, const CChainParams & params = Params() ) {
         unsigned char vch[ Size ] ;
         key.Encode( vch ) ;
-        SetData( Params().Base58Prefix( Type ), vch, vch + Size ) ;
+        SetData( params.Base58PrefixFor( Type ), vch, vch + Size ) ;
     }
 
     K GetKey() {
@@ -158,14 +157,14 @@ public:
         SetKey( key ) ;
     }
 
-    CDogecoinExtKeyBase( const std::string & strBase58c ) {
-        SetString( strBase58c.c_str(), Params().Base58Prefix( Type ).size() ) ;
+    CDogecoinExtKeyBase( const std::string & strBase58c, const CChainParams & params = Params() ) {
+        SetString( strBase58c.c_str(), params.Base58PrefixFor( Type ).size() ) ;
     }
 
     CDogecoinExtKeyBase() { }
 } ;
 
-typedef CDogecoinExtKeyBase< CExtKey, BIP32_EXTKEY_SIZE, CChainParams::EXT_SECRET_KEY > CDogecoinExtKey ;
-typedef CDogecoinExtKeyBase< CExtPubKey, BIP32_EXTKEY_SIZE, CChainParams::EXT_PUBLIC_KEY > CDogecoinExtPubKey ;
+typedef CDogecoinExtKeyBase< CExtKey, BIP32_EXTKEY_SIZE, Base58PrefixType::EXT_SECRET_KEY > CDogecoinExtKey ;
+typedef CDogecoinExtKeyBase< CExtPubKey, BIP32_EXTKEY_SIZE, Base58PrefixType::EXT_PUBLIC_KEY > CDogecoinExtPubKey ;
 
 #endif

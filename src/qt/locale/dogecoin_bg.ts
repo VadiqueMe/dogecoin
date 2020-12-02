@@ -306,14 +306,6 @@
         <translation>Променя паролата за портфейла</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;Прозорец за отстраняване на грешки</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Отворете конзолата за диагностика и отстраняване на грешки</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Проверка на съобщение...</translation>
     </message>
@@ -1077,12 +1069,8 @@
         <translation>Данни</translation>
     </message>
     <message>
-        <source>Debug window</source>
-        <translation>Прозорец с грешки</translation>
-    </message>
-    <message>
         <source>Using BerkeleyDB version</source>
-        <translation>Използване на база данни BerkeleyDB </translation>
+        <translation>Използване на база данни BerkeleyDB</translation>
     </message>
     <message>
         <source>Startup time</source>

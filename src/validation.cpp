@@ -62,9 +62,9 @@
 CCriticalSection cs_main ;
 
 BlockMap mapBlockIndex ;
-CChain chainActive;
-CBlockIndex *pindexBestHeader = NULL;
-CWaitableCriticalSection csBestBlock;
+CChain chainActive ;
+CBlockIndex * pindexBestHeader = nullptr ;
+CWaitableCriticalSection csBestBlock ;
 std::condition_variable cvBlockChange ;
 int nScriptCheckThreads = 0;
 std::atomic_bool fImporting(false);
@@ -80,8 +80,6 @@ uint64_t nPruneTarget = 0;
 bool fAlerts = DEFAULT_ALERTS;
 int64_t nMaxTipAge = DEFAULT_MAX_TIP_AGE ;
 bool fEnableReplacement = DEFAULT_ENABLE_REPLACEMENT;
-
-CAmount maxTxFee = DEFAULT_TRANSACTION_MAXFEE ;
 
 CTxMemPool mempool ;
 
@@ -2157,15 +2155,16 @@ void static UpdateTip( CBlockIndex * pindexNew, const CChainParams & chainParams
     ////UpdateTipBlockNewCoins( chainParams ) ;
 
     CBlockHeader newBlock = chainActive.Tip()->GetBlockHeader( chainParams.GetConsensus( chainActive.Height() ) ) ;
-    LogPrintf( "%s: tip block height=%d sha256_hash=%s scrypt_hash=%s version=0x%x%s newcoins=%lu txs=%lu date='%s' progress=%f cache=%.1fMiB(%u txs)\n", __func__,
+    double progress = GuessVerificationProgress( chainParams.TxData(), chainActive.Tip() ) ;
+    LogPrintf( "%s: tip block height=%d sha256_hash=%s scrypt_hash=%s version=0x%x%s newcoins=%lu txs=+%u(%lu) date='%s',%s cache=%.1fMiB(%u txs)\n", __func__,
         chainActive.Height(),
         /* chainActive.Tip()->GetBlockSha256Hash().ToString() */ newBlock.GetSha256Hash().ToString(),
         newBlock.GetScryptHash().ToString(),
-        newBlock.nVersion, newBlock.IsAuxpowInVersion() ? "(auxpow)" : "",
+        newBlock.nVersion, newBlock.IsAuxpowInVersion() ? strprintf( " auxpow=%s", newBlock.auxpow->ToString() ) : "",
         chainActive.Tip()->nBlockNewCoins,
-        static_cast< unsigned long >( chainActive.Tip()->nChainTx ),
+        chainActive.Tip()->nBlockTx, static_cast< unsigned long >( chainActive.Tip()->nChainTx ),
         DateTimeStrFormat( "%Y-%m-%d %H:%M:%S", /* chainActive.Tip()->GetBlockTime() */ newBlock.nTime ),
-        GuessVerificationProgress( chainParams.TxData(), chainActive.Tip() ),
+        ( progress > 0.99999 ) ? "" : strprintf( " progress=%.3f", progress * 100 ) + std::string( "%" ),
         pcoinsTip->DynamicMemoryUsage() * ( 1.0 / ( 1 << 20 ) ), pcoinsTip->GetCacheSize() ) ;
 
     if ( ! warningMessages.empty() )
@@ -2521,14 +2520,18 @@ bool ActivateBestChain( CValidationState & state, const CChainParams & chainpara
                 return true ;
 
             bool fInvalidFound = false ;
-            std::shared_ptr< const CBlock > nullBlockPtr ;
-            if ( ! ActivateBestChainStep( state, chainparams, pindexHighest, pblock && pblock->GetSha256Hash() == pindexHighest->GetBlockSha256Hash() ? pblock : nullBlockPtr, fInvalidFound, connectTrace ) )
+            const std::shared_ptr< const CBlock > nullBlockPtr ;
+            const std::shared_ptr< const CBlock > & theBlock =
+                    ( pblock != nullptr && pblock->GetSha256Hash() == pindexHighest->GetBlockSha256Hash() ? pblock : nullBlockPtr ) ;
+
+            if ( ! ActivateBestChainStep( state, chainparams, pindexHighest, theBlock, fInvalidFound, connectTrace ) )
                 return false ;
 
             if ( fInvalidFound ) {
-                // Wipe cache, we may need another branch now
+                // reset it, may need another branch now
                 pindexHighest = nullptr ;
             }
+
             pindexNewTip = chainActive.Tip() ;
             pindexFork = chainActive.FindFork( pindexOldTip ) ;
             fInitialDownload = IsInitialBlockDownload() ;
@@ -2715,10 +2718,10 @@ CBlockIndex* AddToBlockIndex( const CBlockHeader & block )
 }
 
 /** Mark a block as having its data received and checked (up to BLOCK_VALID_TRANSACTIONS) */
-bool ReceivedBlockTransactions(const CBlock &block, CValidationState& state, CBlockIndex *pindexNew, const CDiskBlockPos& pos)
+bool ReceivedBlockTransactions( const CBlock & block, CValidationState & state, CBlockIndex * pindexNew, const CDiskBlockPos & pos )
 {
-    pindexNew->nTx = block.vtx.size();
-    pindexNew->nChainTx = 0;
+    pindexNew->nBlockTx = block.vtx.size() ;
+    pindexNew->nChainTx = 0 ;
     pindexNew->nFile = pos.nFile;
     pindexNew->nDataPos = pos.nPos;
     pindexNew->nUndoPos = 0;
@@ -2736,9 +2739,9 @@ bool ReceivedBlockTransactions(const CBlock &block, CValidationState& state, CBl
 
         // Recursively process any descendant blocks that now may be eligible to be connected
         while (!queue.empty()) {
-            CBlockIndex *pindex = queue.front();
-            queue.pop_front();
-            pindex->nChainTx = (pindex->pprev ? pindex->pprev->nChainTx : 0) + pindex->nTx;
+            CBlockIndex * pindex = queue.front() ;
+            queue.pop_front() ;
+            pindex->nChainTx = ( pindex->pprev ? pindex->pprev->nChainTx : 0 ) + pindex->nBlockTx ;
             {
                 LOCK(cs_nBlockSequenceId);
                 pindex->nSequenceId = nBlockSequenceId++;
@@ -3263,7 +3266,7 @@ static bool AcceptBlock( const std::shared_ptr< const CBlock > & pblock, CValida
     // and unrequested blocks
     if ( fAlreadyHave ) return true ;
     if ( ! fRequested ) {  // If we didn't ask for it:
-        if ( pindex->nTx != 0 ) return true ;  // this is a previously-processed block that was pruned
+        if ( pindex->nBlockTx != 0 ) return true ;  // this is a previously-processed block that was pruned
         if ( ! isHigher ) return true ;  // don't process shorter chains
         if ( fTooFarAhead ) return true ;  // block is too high
     }
@@ -3312,7 +3315,7 @@ static bool AcceptBlock( const std::shared_ptr< const CBlock > & pblock, CValida
 bool ProcessNewBlock( const CChainParams & chainparams, const std::shared_ptr< const CBlock > pblock, bool fForceProcessing, bool * fNewBlock )
 {
     assert( pblock != nullptr ) ;
-    LogPrintf( "%s: block sha256_hash=%s scrypt_hash=%s version=0x%x%s date=%s\n", __func__,
+    LogPrintf( "%s: block sha256_hash=%s scrypt_hash=%s version=0x%x%s date='%s'\n", __func__,
                 pblock->GetSha256Hash().GetHex(), pblock->GetScryptHash().GetHex(),
                 pblock->nVersion, pblock->IsAuxpowInVersion() ? "(auxpow)" : "",
                 DateTimeStrFormat( "%Y-%m-%d %H:%M:%S", pblock->nTime ) ) ;
@@ -3614,16 +3617,16 @@ bool static LoadBlockIndexDB( const CChainParams & chainparams )
         pindex->nTimeMax = ( pindex->pprev ? std::max( pindex->pprev->nTimeMax, pindex->nTime ) : pindex->nTime ) ;
         // We can link the chain of blocks for which we've received transactions at some point
         // Pruned nodes may have deleted the block
-        if ( pindex->nTx > 0 ) {
+        if ( pindex->nBlockTx > 0 ) {
             if ( pindex->pprev != nullptr ) {
                 if ( pindex->pprev->nChainTx > 0 ) {
-                    pindex->nChainTx = pindex->pprev->nChainTx + pindex->nTx ;
+                    pindex->nChainTx = pindex->pprev->nChainTx + pindex->nBlockTx ;
                 } else {
                     pindex->nChainTx = 0 ;
                     mapBlocksUnlinked.insert( std::make_pair( pindex->pprev, pindex ) ) ;
                 }
             } else {
-                pindex->nChainTx = pindex->nTx ;
+                pindex->nChainTx = pindex->nBlockTx ;
             }
         }
         if ( pindex->IsValid( BLOCK_VALID_TRANSACTIONS ) && ( pindex->nChainTx > 0 || pindex->pprev == nullptr ) )
@@ -3697,12 +3700,17 @@ bool static LoadBlockIndexDB( const CChainParams & chainparams )
 
     PruneBlockIndexCandidates() ;
 
-    LogPrintf( "%s: chain's tip height=%d sha256_hash=%s date=%s progress=%f\n", __func__,
-        chainActive.Height(), chainActive.Tip()->GetBlockSha256Hash().ToString(),
-        DateTimeStrFormat( "%Y-%m-%d %H:%M:%S", chainActive.Tip()->GetBlockTime() ),
-        GuessVerificationProgress( chainparams.TxData(), chainActive.Tip() ) ) ;
+    CBlockHeader tipBlock = chainActive.Tip()->GetBlockHeader( chainparams.GetConsensus( chainActive.Height() ) ) ;
+    double progress = GuessVerificationProgress( chainparams.TxData(), chainActive.Tip() ) ;
+    LogPrintf( "%s: chain's tip height=%d sha256_hash=%s scrypt_hash=%s version=0x%x%s date='%s', progress=%s\n", __func__,
+        chainActive.Height(),
+        /* chainActive.Tip()->GetBlockSha256Hash().ToString() */ tipBlock.GetSha256Hash().ToString(),
+        tipBlock.GetScryptHash().ToString(),
+        tipBlock.nVersion, tipBlock.IsAuxpowInVersion() ? "(auxpow)" : "",
+        DateTimeStrFormat( "%Y-%m-%d %H:%M:%S", /* chainActive.Tip()->GetBlockTime() */ tipBlock.nTime ),
+        strprintf( "%.3f", progress * 100 ) + std::string( "%" ) ) ;
 
-    return true;
+    return true ;
 }
 
 WVerifyDB::WVerifyDB()
@@ -3887,9 +3895,9 @@ bool RewindBlockIndex(const CChainParams& params)
             pindexIter->nDataPos = 0;
             pindexIter->nUndoPos = 0;
             // Remove various other things
-            pindexIter->nTx = 0;
-            pindexIter->nChainTx = 0;
-            pindexIter->nSequenceId = 0;
+            pindexIter->nBlockTx = 0 ;
+            pindexIter->nChainTx = 0 ;
+            pindexIter->nSequenceId = 0 ;
 
             // Make sure it gets written
             setOfDirtyBlockIndices.insert( pindexIter ) ;
@@ -4068,11 +4076,9 @@ bool LoadExternalBlockFile(const CChainParams& chainparams, FILE* fileIn, CDiskB
                 }
 
                 // Activate the genesis block so normal node progress can continue
-                if (hash == chainparams.GetConsensus(0).hashGenesisBlock) {
-                    CValidationState state;
-                    if (!ActivateBestChain(state, chainparams)) {
-                        break;
-                    }
+                if ( hash == chainparams.GetConsensus( 0 ).hashGenesisBlock ) {
+                    CValidationState state ;
+                    if ( ! ActivateBestChain( state, chainparams ) ) break ;
                 }
 
                 NotifyHeaderTip();
@@ -4166,7 +4172,7 @@ void static CheckBlockIndex(const Consensus::Params& consensusParams)
             pindexFirstInvalid = pindex ;
         if ( pindexFirstMissing == nullptr && ! ( pindex->nStatus & BLOCK_DATA_EXISTS ) )
             pindexFirstMissing = pindex ;
-        if ( pindexFirstNeverProcessed == nullptr && pindex->nTx == 0 )
+        if ( pindexFirstNeverProcessed == nullptr && pindex->nBlockTx == 0 )
             pindexFirstNeverProcessed = pindex ;
         if ( pindex->pprev != nullptr && pindexFirstNotTreeValid == nullptr &&
                 ( pindex->nStatus & BLOCK_VALID_MASK ) < BLOCK_VALID_TREE )
@@ -4191,16 +4197,16 @@ void static CheckBlockIndex(const Consensus::Params& consensusParams)
         // VALID_TRANSACTIONS is equivalent to nTx > 0 for all nodes (whether or not pruning has occurred)
         // HAVE_DATA is only equivalent to nTx > 0 (or VALID_TRANSACTIONS) if no pruning has occurred
         if ( ! fHavePruned ) {
-            // If we've never pruned, then HAVE_DATA should be equivalent to nTx > 0
-            assert( ! ( pindex->nStatus & BLOCK_DATA_EXISTS ) == ( pindex->nTx == 0 ) ) ;
+            // If we've never pruned, then HAVE_DATA should be equivalent to nBlockTx > 0
+            assert( ! ( pindex->nStatus & BLOCK_DATA_EXISTS ) == ( pindex->nBlockTx == 0 ) ) ;
             assert( pindexFirstMissing == pindexFirstNeverProcessed ) ;
         } else {
-            // If we have pruned, then we can only say that HAVE_DATA implies nTx > 0
-            if ( pindex->nStatus & BLOCK_DATA_EXISTS ) assert( pindex->nTx > 0 ) ;
+            // If we have pruned, then we can only say that HAVE_DATA implies nBlockTx > 0
+            if ( pindex->nStatus & BLOCK_DATA_EXISTS ) assert( pindex->nBlockTx > 0 ) ;
         }
         if ( pindex->nStatus & BLOCK_UNDO_EXISTS ) assert( pindex->nStatus & BLOCK_DATA_EXISTS ) ;
 
-        assert(((pindex->nStatus & BLOCK_VALID_MASK) >= BLOCK_VALID_TRANSACTIONS) == (pindex->nTx > 0)); // This is pruning-independent.
+        assert( ( ( pindex->nStatus & BLOCK_VALID_MASK ) >= BLOCK_VALID_TRANSACTIONS ) == ( pindex->nBlockTx > 0 ) ) ; // This is pruning-independent
         // All parents having had data (at some point) is equivalent to all parents being VALID_TRANSACTIONS, which is equivalent to nChainTx being set
         assert((pindexFirstNeverProcessed != NULL) == (pindex->nChainTx == 0)); // nChainTx != 0 is used to signal that all parent blocks have been processed (but may have been pruned)
         assert((pindexFirstNotTransactionsValid != NULL) == (pindex->nChainTx == 0));

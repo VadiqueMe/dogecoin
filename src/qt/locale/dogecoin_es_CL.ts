@@ -130,14 +130,6 @@
         <translation>Cambiar la contraseña utilizada para la codificación de la billetera</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>Ventana &amp;Debug</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Abre consola de depuración y diagnóstico</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>Verificar mensaje....</translation>
     </message>
@@ -419,10 +411,6 @@
     <message>
         <source>Information</source>
         <translation>Información</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>Ventana Debug</translation>
     </message>
     <message>
         <source>Startup time</source>

@@ -170,10 +170,6 @@
         <translation>Thay đổi cụm mật mã dùng cho mã hoá Ví</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;Cửa sổ xử lý lỗi (debug)</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Tin nhắn xác thực</translation>
     </message>

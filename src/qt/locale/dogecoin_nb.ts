@@ -238,14 +238,6 @@
         <translation>Endre adgangsfrasen brukt for kryptering av lommebok</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;Feilsøkingsvindu</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Åpne konsoll for feilsøk og diagnostikk</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Verifiser melding...</translation>
     </message>
@@ -929,10 +921,6 @@
         <translation>Informasjon</translation>
     </message>
     <message>
-        <source>Debug window</source>
-        <translation>Feilsøkingsvindu</translation>
-    </message>
-    <message>
         <source>Using BerkeleyDB version</source>
         <translation>Bruker BerkeleyDB versjon</translation>
     </message>
@@ -1545,8 +1533,8 @@
         <translation>Feil: En fatal intern feil oppstod, se debug log for detaljer</translation>
     </message>
     <message>
-        <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
-        <translation>Gebyr (i %s/kB) for å legge til i transaksjoner du sender (standardverdi: %s)</translation>
+        <source>Fee in %s to add to transactions you send (default: %s)</source>
+        <translation>Gebyr i %s for å legge til i transaksjoner du sender (standardverdi: %s)</translation>
     </message>
     <message>
         <source>Pruning blockstore...</source>
@@ -1785,10 +1773,6 @@
         <translation>Utfør kommando når et relevant varsel er mottatt eller vi ser en veldig lang gaffel (%s i kommando er erstattet med melding)</translation>
     </message>
     <message>
-        <source>Invalid amount for -maxtxfee=&lt;amount&gt;: '%s' (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
-        <translation>Ugyldig beløp for -maxtxfee=&lt;amount&gt;: '%s' (må være minst minimum relé gebyr på %s for å hindre fastlåste transaksjoner)</translation>
-    </message>
-    <message>
         <source>Maximum size of data in data carrier transactions we relay and mine (default: %u)</source>
         <translation>Maksimal størrelse på data i databærende transaksjoner vi videresender og ufører graving på (standardverdi: %u)</translation>
     </message>
@@ -1939,10 +1923,6 @@
     <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation>(1 = behold metadata for transaksjon som f. eks. kontoeier og informasjon om betalingsanmodning, 2 = dropp metadata for transaksjon)</translation>
-    </message>
-    <message>
-        <source>-maxtxfee is set very high! Fees this large could be paid on a single transaction.</source>
-        <translation>-maxtxfee er satt veldig høyt! Så stort gebyr kan bli betalt ved en enkelt transaksjon.</translation>
     </message>
     <message>
         <source>Do not keep transactions in the mempool longer than &lt;n&gt; hours (default: %u)</source>

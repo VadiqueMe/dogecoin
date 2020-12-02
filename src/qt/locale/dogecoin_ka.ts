@@ -134,14 +134,6 @@
         <translation>საფულის დაშიფრვის ფრაზა-პაროლის შეცვლა</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>და&amp;ხვეწის ფანჯარა</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>დახვეწისა და გიაგნოსტიკის კონსოლის გაშვება</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;ვერიფიკაცია</translation>
     </message>
@@ -605,10 +597,6 @@
     <message>
         <source>Information</source>
         <translation>ინფორმაცია</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>დახვეწის ფანჯარა</translation>
     </message>
     <message>
         <source>Startup time</source>

@@ -7,6 +7,7 @@
 #define DOGECOIN_QT_GUIUTIL_H
 
 #include "amount.h"
+#include "unitsofcoin.h"
 
 #include <QEvent>
 #include <QHeaderView>
@@ -39,6 +40,9 @@ namespace GUIUtil
     QString dateTimeStr( const QDateTime & datetime ) ;
     QString dateTimeStr( qint64 nTime ) ;
 
+    // "in" for incoming connections, "out" for outgoing, any other for both
+    QString connectedPeersInfo( const QString & inout ) ;
+
     // Return a monospace font
     QFont fixedPitchFont();
 
@@ -52,7 +56,7 @@ namespace GUIUtil
     QString formatDogecoinURI( const SendCoinsRecipient & info ) ;
 
     // Makes title for amount column including current display unit if optionsModel reference available
-    QString makeTitleForAmountColumn( int unit ) ;
+    QString makeTitleForAmountColumn( unitofcoin unit ) ;
 
     // HTML escaping for rich text controls
     QString HtmlEscape(const QString& str, bool fMultiLine=false);

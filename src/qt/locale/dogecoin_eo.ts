@@ -202,14 +202,6 @@
         <translation>Ŝanĝi la pasfrazon por ĉifri la monujon</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>Sen&amp;cimiga fenestro</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Malfermi konzolon de sencimigo kaj diagnozo</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Kontroli mesaĝon...</translation>
     </message>
@@ -723,10 +715,6 @@
     <message>
         <source>Information</source>
         <translation>Informoj</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>Sencimiga fenestro</translation>
     </message>
     <message>
         <source>Startup time</source>

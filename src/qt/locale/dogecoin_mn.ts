@@ -114,10 +114,6 @@
         <translation>Түрүйвчийг цоожлох нууц үгийг солих</translation>
     </message>
     <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Оношилгоо ба засварын консолыг онгойлго</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Түрүйвч</translation>
     </message>

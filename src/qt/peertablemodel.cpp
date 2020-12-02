@@ -21,8 +21,8 @@ bool NodeLessThan::operator()( const CNodeCombinedStats & left, const CNodeCombi
     const CNodeStats * pLeft = &( left.nodeStats ) ;
     const CNodeStats * pRight = &( right.nodeStats ) ;
 
-    if (order == Qt::DescendingOrder)
-        std::swap(pLeft, pRight);
+    if ( order == Qt::DescendingOrder )
+        std::swap( pLeft, pRight ) ;
 
     switch(column)
     {
@@ -85,9 +85,9 @@ public:
             }
         }
 
-        if (sortColumn >= 0)
+        if ( sortColumn >= 0 )
             // sort cacheNodeStats (use stable sort to prevent rows jumping around unnecessarily)
-            qStableSort(cachedNodeStats.begin(), cachedNodeStats.end(), NodeLessThan(sortColumn, sortOrder));
+            std::stable_sort( cachedNodeStats.begin(), cachedNodeStats.end(), NodeLessThan( sortColumn, sortOrder ) ) ;
 
         // build index map
         mapNodeRows.clear();

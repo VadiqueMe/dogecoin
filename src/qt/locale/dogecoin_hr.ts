@@ -166,14 +166,6 @@
         <translation>Promijenite lozinku za šifriranje novčanika</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>Konzola za dijagnostiku</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Otvori konzolu za dijagnostiku</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Potvrdite poruku...</translation>
     </message>
@@ -631,10 +623,6 @@
     <message>
         <source>Information</source>
         <translation>Informacije</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>Konzola za dijagnostiku</translation>
     </message>
     <message>
         <source>Network</source>

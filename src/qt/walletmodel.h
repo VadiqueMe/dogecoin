@@ -38,9 +38,15 @@ QT_END_NAMESPACE
 class SendCoinsRecipient
 {
 public:
-    explicit SendCoinsRecipient() : amount(0), fSubtractFeeFromAmount(false), nVersion(SendCoinsRecipient::CURRENT_VERSION) { }
-    explicit SendCoinsRecipient(const QString &addr, const QString &_label, const CAmount& _amount, const QString &_message):
-        address(addr), label(_label), amount(_amount), message(_message), fSubtractFeeFromAmount(false), nVersion(SendCoinsRecipient::CURRENT_VERSION) {}
+    explicit SendCoinsRecipient() : amount( 0 ), fSubtractFeeFromAmount( false ), nVersion( SendCoinsRecipient::CURRENT_VERSION ) { }
+
+    explicit SendCoinsRecipient( const QString & addr, const QString &_label, const CAmount &_amount, const QString &_message )
+        : address( addr )
+        , label( _label )
+        , amount( _amount )
+        , message( _message )
+        , fSubtractFeeFromAmount( false )
+        , nVersion( SendCoinsRecipient::CURRENT_VERSION ) { }
 
     // If from an unauthenticated payment request, this is used for storing
     // the addresses, e.g. address-A, address-B, address-C
@@ -93,7 +99,28 @@ public:
             authenticatedMerchant = QString::fromStdString(sAuthenticatedMerchant);
         }
     }
-};
+} ;
+
+enum class SendCoinsStatus // returned by sendCoins() and prepareTransaction()
+{
+    OK,
+    InvalidAmount,
+    InvalidAddress,
+    AmountExceedsBalance,
+    AmountWithFeeExceedsBalance,
+    DuplicateAddress,
+    TransactionCreationFailed, // returned when wallet is still locked
+    TransactionCommitFailed,
+    AbsurdFee,
+    PaymentRequestExpired
+} ;
+
+enum class WalletEncryptionStatus
+{
+    Unencrypted,  // ! wallet->IsCrypted()
+    Locked,       // wallet->IsCrypted() && wallet->IsLocked()
+    Unlocked      // wallet->IsCrypted() && ! wallet->IsLocked()
+} ;
 
 /** Interface to the wallet from Qt code */
 class WalletModel : public QObject
@@ -101,58 +128,37 @@ class WalletModel : public QObject
     Q_OBJECT
 
 public:
-    explicit WalletModel(const PlatformStyle *platformStyle, CWallet *wallet, OptionsModel *optionsModel, QObject *parent = 0);
-    ~WalletModel();
-
-    enum StatusCode // Returned by sendCoins
-    {
-        OK,
-        InvalidAmount,
-        InvalidAddress,
-        AmountExceedsBalance,
-        AmountWithFeeExceedsBalance,
-        DuplicateAddress,
-        TransactionCreationFailed, // Error returned when wallet is still locked
-        TransactionCommitFailed,
-        AbsurdFee,
-        PaymentRequestExpired
-    };
-
-    enum EncryptionStatus
-    {
-        Unencrypted,  // ! wallet->IsCrypted()
-        Locked,       // wallet->IsCrypted() && wallet->IsLocked()
-        Unlocked      // wallet->IsCrypted() && ! wallet->IsLocked()
-    } ;
+    explicit WalletModel( const PlatformStyle * style, CWallet * wallet, OptionsModel * optionsModel, QObject * parent = nullptr ) ;
+    ~WalletModel() ;
 
     OptionsModel * getOptionsModel() {  return optionsModel ;  }
     AddressTableModel * getAddressTableModel() {  return addressTableModel ;  }
     TransactionTableModel * getTransactionTableModel() {  return transactionTableModel ;  }
     RecentRequestsTableModel * getRecentRequestsTableModel() {  return recentRequestsTableModel ;  }
 
-    CAmount getBalance(const CCoinControl *coinControl = NULL) const;
-    CAmount getUnconfirmedBalance() const;
-    CAmount getImmatureBalance() const;
-    bool haveWatchOnly() const;
-    CAmount getWatchBalance() const;
-    CAmount getWatchUnconfirmedBalance() const;
-    CAmount getWatchImmatureBalance() const;
-    EncryptionStatus getEncryptionStatus() const;
+    CAmount getBalance( const CCoinControl * coinControl = nullptr ) const ;
+    CAmount getUnconfirmedBalance() const ;
+    CAmount getImmatureBalance() const ;
+    bool haveWatchOnly() const ;
+    CAmount getWatchBalance() const ;
+    CAmount getWatchUnconfirmedBalance() const ;
+    CAmount getWatchImmatureBalance() const ;
+    WalletEncryptionStatus getEncryptionStatus() const ;
 
     // Check address for validity
-    bool validateAddress(const QString &address);
+    bool validateAddress( const QString & address ) ;
 
     // Return status record for SendCoins, contains error id + information
     struct SendCoinsReturn
     {
-        SendCoinsReturn(StatusCode _status = OK, QString _reasonCommitFailed = "")
-            : status(_status),
-              reasonCommitFailed(_reasonCommitFailed)
+        SendCoinsReturn( SendCoinsStatus sendStatus = SendCoinsStatus::OK, QString whyCommitFailed = "" )
+            : status( sendStatus ),
+              reasonCommitFailed( whyCommitFailed )
         {
         }
-        StatusCode status;
-        QString reasonCommitFailed;
-    };
+        SendCoinsStatus status ;
+        QString reasonCommitFailed ;
+    } ;
 
     // prepare transaction for getting txfee before sending coins
     SendCoinsReturn prepareTransaction( WalletModelTransaction & transaction, const CCoinControl * coinControl = nullptr ) ;
@@ -161,12 +167,13 @@ public:
     SendCoinsReturn sendCoins( WalletModelTransaction & transaction ) ;
 
     // Wallet encryption
-    bool setWalletEncrypted(bool encrypted, const SecureString &passphrase);
+    bool setWalletEncrypted( bool encrypted, const SecureString & passphrase ) ;
     // Passphrase only needed when unlocking
-    bool setWalletLocked(bool locked, const SecureString &passPhrase=SecureString());
-    bool changePassphrase(const SecureString &oldPass, const SecureString &newPass);
+    bool setWalletLocked( bool locked, const SecureString & passPhrase = SecureString() ) ;
+    bool changePassphrase( const SecureString & oldPass, const SecureString & newPass ) ;
+
     // Wallet backup
-    bool backupWallet(const QString &filename);
+    bool backupWallet( const QString & filename ) ;
 
     // RAI object for unlocking wallet, returned by requestUnlock()
     class UnlockContext
@@ -221,19 +228,19 @@ private:
     // Wallet has an options model for wallet-specific options
     OptionsModel * optionsModel ;
 
-    AddressTableModel *addressTableModel;
-    TransactionTableModel *transactionTableModel;
-    RecentRequestsTableModel *recentRequestsTableModel;
+    AddressTableModel * addressTableModel ;
+    TransactionTableModel * transactionTableModel ;
+    RecentRequestsTableModel * recentRequestsTableModel ;
 
     // Cache some values to be able to detect changes
-    CAmount cachedBalance;
-    CAmount cachedUnconfirmedBalance;
-    CAmount cachedImmatureBalance;
-    CAmount cachedWatchOnlyBalance;
-    CAmount cachedWatchUnconfBalance;
-    CAmount cachedWatchImmatureBalance;
-    EncryptionStatus cachedEncryptionStatus;
-    int cachedNumBlocks;
+    CAmount cachedBalance ;
+    CAmount cachedUnconfirmedBalance ;
+    CAmount cachedImmatureBalance ;
+    CAmount cachedWatchOnlyBalance ;
+    CAmount cachedWatchUnconfBalance ;
+    CAmount cachedWatchImmatureBalance ;
+    WalletEncryptionStatus cachedEncryptionStatus ;
+    int cachedNumBlocks ;
 
     QTimer *pollTimer;
 
@@ -247,7 +254,7 @@ Q_SIGNALS:
                         const CAmount& watchOnlyBalance, const CAmount& watchUnconfBalance, const CAmount& watchImmatureBalance);
 
     // Encryption status of wallet changed
-    void encryptionStatusChanged(int status);
+    void encryptionStatusChanged( WalletEncryptionStatus status ) ;
 
     // Signal emitted when wallet needs to be unlocked
     // It is valid behaviour for listeners to keep the wallet locked after this signal;

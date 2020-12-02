@@ -294,14 +294,6 @@
         <translation>改變錢包加密用的密碼</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>除錯視窗 &amp;D</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>開啓除錯和診斷主控台</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>驗證訊息... &amp;V</translation>
     </message>
@@ -447,10 +439,6 @@
     <message>
         <source>Information</source>
         <translation>資訊</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>除錯視窗</translation>
     </message>
     <message>
         <source>Received</source>

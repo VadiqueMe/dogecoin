@@ -162,14 +162,6 @@
         <translation>เปลี่ยนรหัสผ่านที่ใช้สำหรับการเข้ารหัสกระเป๋าเงิน</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;หน้าต่าง Debug</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>เปิด แผลงควบคุม debugging และ diagnostic</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;ยืนยันข้อความ...</translation>
     </message>

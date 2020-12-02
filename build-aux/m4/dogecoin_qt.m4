@@ -238,7 +238,7 @@ AC_DEFUN([DOGECOIN_QT_CONFIGURE],[
       dogecoin_enable_qt_dbus=yes
     fi
     if test x$use_dbus = xyes && test x$have_qt_dbus = xno; then
-      AC_MSG_ERROR("libQtDBus not found. Install libQtDBus or remove --with-qtdbus.")
+      AC_MSG_ERROR("libQtDBus not found. Install libQtDBus or remove --with-qtdbus")
     fi
     if test x$LUPDATE = x; then
       AC_MSG_WARN("lupdate is required to update qt translations")
@@ -261,7 +261,7 @@ AC_DEFUN([DOGECOIN_QT_CONFIGURE],[
 ])
 
 dnl All macros below are internal and should _not_ be used from the main
-dnl configure.ac.
+dnl configure.ac
 dnl ----
 
 dnl Internal. Check if the included version of Qt is Qt5

@@ -5,60 +5,49 @@
 
 #include "walletmodeltransaction.h"
 
-#include "policy/policy.h"
-#include "wallet/wallet.h"
+#include "policy/policy.h" // GetVirtualTransactionSize
 
-WalletModelTransaction::WalletModelTransaction( const QList< SendCoinsRecipient > & listOfRecipients )
+WalletModelTransaction::WalletModelTransaction( const std::vector< SendCoinsRecipient > & listOfRecipients )
     : recipients( listOfRecipients )
-    , walletTransaction( new CWalletTx() )
+    , walletTransaction()
     , keyChange( nullptr )
     , fee( 0 )
 {}
 
 WalletModelTransaction::~WalletModelTransaction()
 {
-    delete keyChange ;
-    delete walletTransaction ;
+    delete keyChange ; keyChange = nullptr ;
 }
 
-CWalletTx * WalletModelTransaction::getTransaction()
+unsigned int WalletModelTransaction::getSizeOfTransaction() const
 {
-    return walletTransaction ;
+    return ::GetVirtualTransactionSize( walletTransaction ) ;
 }
 
-unsigned int WalletModelTransaction::getTransactionSize()
+void WalletModelTransaction::reassignAmounts( int nChangePosRet )
 {
-    return ( ! walletTransaction ? 0 : ::GetVirtualTransactionSize( *walletTransaction ) ) ;
-}
-
-void WalletModelTransaction::reassignAmounts(int nChangePosRet)
-{
-    int i = 0;
-    for (QList<SendCoinsRecipient>::iterator it = recipients.begin(); it != recipients.end(); ++it)
+    int i = 0 ;
+    for ( SendCoinsRecipient & rcp : recipients )
     {
-        SendCoinsRecipient& rcp = (*it);
-
-        if (rcp.paymentRequest.IsInitialized())
+        if ( rcp.paymentRequest.IsInitialized() )
         {
-            CAmount subtotal = 0;
-            const payments::PaymentDetails& details = rcp.paymentRequest.getDetails();
-            for (int j = 0; j < details.outputs_size(); j++)
+            CAmount subtotal = 0 ;
+            const payments::PaymentDetails & details = rcp.paymentRequest.getDetails() ;
+            for ( int j = 0 ; j < details.outputs_size() ; j ++ )
             {
-                const payments::Output& out = details.outputs(j);
-                if (out.amount() <= 0) continue;
-                if (i == nChangePosRet)
-                    i++;
-                subtotal += walletTransaction->tx->vout[i].nValue;
-                i++;
+                const payments::Output & out = details.outputs( j ) ;
+                if ( out.amount() <= 0 ) continue;
+                if ( i == nChangePosRet ) i++ ;
+                subtotal += walletTransaction.tx->vout[ i ].nValue ;
+                i ++ ;
             }
-            rcp.amount = subtotal;
+            rcp.amount = subtotal ;
         }
         else // normal recipient (no payment request)
         {
-            if (i == nChangePosRet)
-                i++;
-            rcp.amount = walletTransaction->tx->vout[i].nValue;
-            i++;
+            if ( i == nChangePosRet ) i++ ;
+            rcp.amount = walletTransaction.tx->vout[ i ].nValue ;
+            i ++ ;
         }
     }
 }
@@ -66,8 +55,7 @@ void WalletModelTransaction::reassignAmounts(int nChangePosRet)
 CAmount WalletModelTransaction::getTotalTransactionAmount() const
 {
     CAmount totalTransactionAmount = 0 ;
-    for ( const SendCoinsRecipient & rcp : recipients )
-    {
+    for ( const SendCoinsRecipient & rcp : recipients ) {
         totalTransactionAmount += rcp.amount ;
     }
     return totalTransactionAmount ;

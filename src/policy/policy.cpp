@@ -61,13 +61,11 @@ bool IsStandardTx(const CTransaction& tx, std::string& reason, const bool witnes
         return false ;
     }
 
-    // Extremely large transactions with lots of inputs can cost the network
-    // almost as much to process as they cost the sender in fees, because
-    // computing signature hashes is O(ninputs*txsize). Limiting transactions
-    // to MAX_STANDARD_TX_WEIGHT mitigates CPU exhaustion attacks
-    unsigned int sz = GetTransactionWeight( tx ) ;
-    if ( sz >= MAX_STANDARD_TX_WEIGHT ) {
-        reason = "tx-size" ;
+    // Limiting transactions to MAX_STANDARD_TX_VIRTUAL_WEIGHT mitigates
+    // CPU exhaustion attacks, computing signature hashes is O(ninputs*txsize)
+    unsigned int sz = GetVirtualWeightOfTransaction( tx ) ;
+    if ( sz >= MAX_STANDARD_TX_VIRTUAL_WEIGHT ) {
+        reason = "tx-weight" ;
         return false ;
     }
 
@@ -201,14 +199,14 @@ bool IsWitnessStandard(const CTransaction& tx, const CCoinsViewCache& mapInputs)
     return true;
 }
 
-unsigned int nBytesPerSigOp = DEFAULT_BYTES_PER_SIGOP;
+unsigned int nBytesPerSigOp = DEFAULT_BYTES_PER_SIGOP ;
 
-int64_t GetVirtualTransactionSize(int64_t nWeight, int64_t nSigOpCost)
+int64_t GetVirtualTransactionSize( int64_t nWeight, int64_t nSigOpCost )
 {
-    return (std::max(nWeight, nSigOpCost * nBytesPerSigOp) + WITNESS_SCALE_FACTOR - 1) / WITNESS_SCALE_FACTOR;
+    return ( std::max( nWeight, nSigOpCost * nBytesPerSigOp ) + WITNESS_SCALE_FACTOR - 1 ) / WITNESS_SCALE_FACTOR ;
 }
 
-int64_t GetVirtualTransactionSize(const CTransaction& tx, int64_t nSigOpCost)
+int64_t GetVirtualTransactionSize( const CTransaction & tx, int64_t nSigOpCost )
 {
-    return GetVirtualTransactionSize(GetTransactionWeight(tx), nSigOpCost);
+    return GetVirtualTransactionSize( GetVirtualWeightOfTransaction( tx ), nSigOpCost ) ;
 }

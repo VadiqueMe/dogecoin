@@ -26,7 +26,7 @@ import xml.etree.ElementTree as ET
 # Name of transifex tool
 TX = 'tx'
 # Name of source language file
-SOURCE_LANG = 'bitcoin_en.ts'
+SOURCE_LANG = 'dogecoin_en.ts'
 # Directory with locale files
 LOCALE_DIR = 'src/qt/locale'
 # Minimum number of messages for translation to be considered at all
@@ -69,7 +69,7 @@ def split_format_specifiers(specifiers):
     # with a Qt-formatted message. In the case of Qt formatting (see https://doc.qt.io/qt-5/qstring.html#arg)
     # only numeric formats are replaced at all. This means "(percentage: %1%)" is valid, without needing
     # any kind of escaping that would be necessary for strprintf. Without this, this function
-    # would wrongly detect '%)' as a printf format specifier.
+    # would wrongly detect '%)' as a printf format specifier
     if numeric:
         other = []
 

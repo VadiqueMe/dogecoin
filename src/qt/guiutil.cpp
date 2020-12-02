@@ -6,7 +6,6 @@
 #include "guiutil.h"
 
 #include "coinaddressvalidator.h"
-#include "unitsofcoin.h"
 #include "qvalidatedlineedit.h"
 #include "walletmodel.h"
 
@@ -16,6 +15,7 @@
 #include "protocol.h"
 #include "script/script.h"
 #include "script/standard.h"
+#include "net.h" // for g_connman
 #include "util.h"
 #include "utillog.h"
 #include "chainparamsutil.h"
@@ -66,6 +66,10 @@
 #include <QUrlQuery>
 #endif
 
+#if QT_VERSION > 0x050100
+#include <QScreen>
+#endif
+
 #if QT_VERSION >= 0x50200
 #include <QFontDatabase>
 #endif
@@ -94,6 +98,36 @@ QString dateTimeStr( const QDateTime & date )
 QString dateTimeStr( qint64 nTime )
 {
     return dateTimeStr( QDateTime::fromTime_t( (qint32)nTime ) ) ;
+}
+
+QString connectedPeersInfo( const QString & inout )
+{
+    if ( g_connman == nullptr ) return QString( "" ) ;
+
+    std::string inoutall = "all" ;
+    if ( QString::compare( inout, "in", Qt::CaseInsensitive ) == 0 )
+        inoutall = "in" ;
+    else if ( QString::compare( inout, "out", Qt::CaseInsensitive ) == 0 )
+        inoutall = "out" ;
+
+    size_t numConnections = g_connman->CountConnectedNodes( "all", inoutall ) ;
+    QString result = QString::number( numConnections ) ;
+    if ( numConnections > 0 ) {
+        result += QString( " = " ) ;
+        size_t ipv4Connections = g_connman->CountConnectedNodes( "ipv4", inoutall ) ;
+        size_t ipv6Connections = g_connman->CountConnectedNodes( "ipv6", inoutall ) ;
+        size_t torConnections = g_connman->CountConnectedNodes( "tor", inoutall ) ;
+        QStringList parts ;
+        if ( ipv4Connections > 0 )
+            parts.push_back( QString::number( ipv4Connections ) + " IPv4" ) ;
+        if ( ipv6Connections > 0 )
+            parts.push_back( QString::number( ipv6Connections ) + " IPv6" ) ;
+        if ( torConnections > 0 )
+            parts.push_back( QString::number( torConnections ) + " Tor" ) ;
+        result += parts.join( " + " ) ;
+    }
+
+    return result ;
 }
 
 QFont fixedPitchFont()
@@ -168,14 +202,11 @@ bool parseDogecoinURI( const QUrl & uri, SendCoinsRecipient * out )
         }
         else if (i->first == "amount")
         {
-            if( ! i->second.isEmpty() )
-            {
-                if ( ! UnitsOfCoin::parseString( UnitsOfCoin::oneCoin, i->second, &rv.amount ) )
-                {
-                    return false;
-                }
+            if ( ! i->second.isEmpty() ) {
+                if ( ! UnitsOfCoin::parseString( unitofcoin::oneCoin, i->second, &rv.amount ) )
+                    return false ;
             }
-            fShouldReturnFalse = false;
+            fShouldReturnFalse = false ;
         }
 
         if (fShouldReturnFalse)
@@ -208,7 +239,7 @@ QString formatDogecoinURI( const SendCoinsRecipient & info )
 
     if (info.amount)
     {
-        ret += QString( "?amount=%1" ).arg( UnitsOfCoin::format( UnitsOfCoin::oneCoin, info.amount, false, UnitsOfCoin::separatorNever ) ) ;
+        ret += QString( "?amount=%1" ).arg( UnitsOfCoin::format( unitofcoin::oneCoin, info.amount, false, SeparatorStyle::never ) ) ;
         paramCount++;
     }
 
@@ -229,13 +260,10 @@ QString formatDogecoinURI( const SendCoinsRecipient & info )
     return ret;
 }
 
-QString makeTitleForAmountColumn( int unit )
+QString makeTitleForAmountColumn( unitofcoin unit )
 {
     QString amountTitle = QObject::tr( "Amount" ) ;
-    if ( UnitsOfCoin::isOk( unit ) )
-    {
-        amountTitle += " (" + UnitsOfCoin::name( unit ) + ")" ;
-    }
+    amountTitle += " (" + UnitsOfCoin::name( unit ) + ")" ;
     return amountTitle ;
 }
 
@@ -824,27 +852,31 @@ bool SetStartOnSystemStartup(bool fAutoStart) { return false; }
 
 #endif
 
-void saveWindowGeometry(const QString& strSetting, QWidget *parent)
+void saveWindowGeometry( const QString & strSetting, QWidget * parent )
 {
-    QSettings settings;
-    settings.setValue(strSetting + "Pos", parent->pos());
-    settings.setValue(strSetting + "Size", parent->size());
+    QSettings settings ;
+    settings.setValue( strSetting + "Pos", parent->pos() ) ;
+    settings.setValue( strSetting + "Size", parent->size() ) ;
 }
 
-void restoreWindowGeometry(const QString& strSetting, const QSize& defaultSize, QWidget *parent)
+void restoreWindowGeometry( const QString & strSetting, const QSize & defaultSize, QWidget * parent )
 {
-    QSettings settings;
-    QPoint pos = settings.value(strSetting + "Pos").toPoint();
-    QSize size = settings.value(strSetting + "Size", defaultSize).toSize();
+    QSettings settings ;
+    QPoint pos = settings.value( strSetting + "Pos" ).toPoint() ;
+    QSize size = settings.value( strSetting + "Size", defaultSize ).toSize() ;
 
-    if (!pos.x() && !pos.y()) {
-        QRect screen = QApplication::desktop()->screenGeometry();
-        pos.setX((screen.width() - size.width()) / 2);
-        pos.setY((screen.height() - size.height()) / 2);
+    if ( pos.x() == 0 && pos.y() == 0 ) {
+#if QT_VERSION > 0x050100
+        QRect screenRect = ( (QGuiApplication *)QCoreApplication::instance() )->primaryScreen()->geometry() ;
+#else
+        QRect screenRect = QApplication::desktop()->screenGeometry() ;
+#endif
+        pos.setX( ( screenRect.width() - size.width() ) / 2 ) ;
+        pos.setY( ( screenRect.height() - size.height() ) / 2 ) ;
     }
 
-    parent->resize(size);
-    parent->move(pos);
+    parent->resize( size ) ;
+    parent->move( pos ) ;
 }
 
 void setClipboard(const QString& str)

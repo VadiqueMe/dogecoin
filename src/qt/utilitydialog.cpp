@@ -139,7 +139,7 @@ HelpMessageDialog::HelpMessageDialog(QWidget *parent, bool about) :
         QTextCharFormat bold;
         bold.setFontWeight(QFont::Bold);
 
-        Q_FOREACH (const QString &line, coreOptions.split("\n")) {
+        for ( const QString & line : coreOptions.split( "\n" ) ) {
             if (line.startsWith("  -"))
             {
                 cursor.currentTable()->appendRows(1);
@@ -368,64 +368,62 @@ void PaperWalletDialog::on_printButton_clicked()
     QRegion walletRegion = QRegion(ui->paperTemplate->x(), ui->paperTemplate->y(), ui->paperTemplate->width(), ui->paperTemplate->height());
     painter.scale(scale, scale);
 
-    for (int i = 0; i < walletCount; i++) {
-        QPoint point = QPoint(PAPER_WALLET_PAGE_MARGIN, (PAPER_WALLET_PAGE_MARGIN / 2) + (i % walletsPerPage) * (walletHeight + walletPadding));
-        this->render(&painter, point, walletRegion);
-        recipientPubKeyHashes.append(ui->addressText->text());
+    for ( int i = 0 ; i < walletCount ; i++ ) {
+        QPoint point = QPoint( PAPER_WALLET_PAGE_MARGIN, ( PAPER_WALLET_PAGE_MARGIN / 2 ) + ( i % walletsPerPage ) * ( walletHeight + walletPadding ) ) ;
+        this->render( &painter, point, walletRegion ) ;
+        recipientPubKeyHashes.append( ui->addressText->text() ) ;
 
-        if (i % walletsPerPage == (walletsPerPage - 1)) {
-            printer.newPage();
+        if ( i % walletsPerPage == ( walletsPerPage - 1 ) ) {
+            printer.newPage() ;
         }
 
-        this->on_getNewAddress_clicked();
+        this->on_getNewAddress_clicked() ;
     }
 
-    painter.end();
+    painter.end() ;
 
 #ifdef ENABLE_WALLET
     QStringList formatted;
 
     WalletModelTransaction* tx;
-    while (true) {
+    while ( true )
+    {
         bool ok;
 
         // Ask for an amount to send to each paper wallet. It might be better to try to use the CoinAmountField, but this works fine
         double amountInput = QInputDialog::getDouble(this, tr("Load Paper Wallets"), tr("The paper wallet printing process has begun.<br/>Please wait for the wallets to print completely and verify that everything printed correctly.<br/>Check for misalignments, ink bleeding, smears, or anything else that could make the private keys unreadable.<br/>Now, enter the number of DOGE you wish to send to each wallet:"), 0, 0, 2147483647, 8, &ok);
 
-        if (!ok) {
-            return;
-        }
+        if ( ! ok ) return ;
 
         WalletModel::UnlockContext ctx( walletModel->requestUnlock() ) ;
         if (!ctx.isValid()) {
             return;
         }
 
-        QList<SendCoinsRecipient> recipients;
+        std::vector< SendCoinsRecipient > recipients ;
         quint64 amount = (quint64)( amountInput * E8COIN ) ;
         for ( const QString & dest : recipientPubKeyHashes ) {
-            recipients.append(SendCoinsRecipient(dest, tr("Paper wallet %1").arg(dest), amount, ""));
+            recipients.push_back( SendCoinsRecipient( dest, tr("Paper wallet %1").arg( dest ), amount, "" ) ) ;
             formatted.append(tr("<b>%1</b> to Paper Wallet <span style='font-family: monospace;'>%2</span>").arg(QString::number(amountInput, 'f', 8), GUIUtil::HtmlEscape(dest)));
         }
 
-        tx = new WalletModelTransaction(recipients);
+        tx = new WalletModelTransaction( recipients ) ;
 
         WalletModel::SendCoinsReturn prepareStatus = walletModel->prepareTransaction( *tx, CoinControlDialog::coinControl );
-        /* prepareStatus = walletModel->prepareTransaction( *tx ) ; */
 
-        if ( prepareStatus.status == WalletModel::InvalidAmount ) {
+        if ( prepareStatus.status == SendCoinsStatus::InvalidAmount ) {
             QMessageBox::critical( this, tr("Send Coins"), "Amount ≤ 0", QMessageBox::Ok, QMessageBox::Ok ) ;
-        } else if ( prepareStatus.status == WalletModel::InvalidAddress ) {
+        } else if ( prepareStatus.status == SendCoinsStatus::InvalidAddress ) {
             QMessageBox::critical( this, tr("Send Coins"), tr("The recipient address is not valid, please recheck"), QMessageBox::Ok, QMessageBox::Ok ) ;
-        } else if ( prepareStatus.status == WalletModel::AmountExceedsBalance ) {
+        } else if ( prepareStatus.status == SendCoinsStatus::AmountExceedsBalance ) {
             QMessageBox::critical( this, tr("Send Coins"), tr("The amount exceeds your balance"), QMessageBox::Ok, QMessageBox::Ok ) ;
-        } else if ( prepareStatus.status == WalletModel::AmountWithFeeExceedsBalance ) {
+        } else if ( prepareStatus.status == SendCoinsStatus::AmountWithFeeExceedsBalance ) {
             QMessageBox::critical( this, tr("Send Coins"), tr("The total exceeds your balance when the transaction fee is included"), QMessageBox::Ok, QMessageBox::Ok ) ;
-        } else if ( prepareStatus.status == WalletModel::DuplicateAddress ) {
+        } else if ( prepareStatus.status == SendCoinsStatus::DuplicateAddress ) {
             QMessageBox::critical( this, tr("Send Coins"), tr("Duplicate address found, can only send to each address once per transaction"), QMessageBox::Ok, QMessageBox::Ok ) ;
-        } else if ( prepareStatus.status == WalletModel::TransactionCreationFailed ) {
+        } else if ( prepareStatus.status == SendCoinsStatus::TransactionCreationFailed ) {
             QMessageBox::critical( this, tr("Send Coins"), tr("Transaction creation failed"), QMessageBox::Ok, QMessageBox::Ok ) ;
-        } else if ( prepareStatus.status == WalletModel::OK ) {
+        } else if ( prepareStatus.status == SendCoinsStatus::OK ) {
             break ;
         } else {
             delete tx ;
@@ -433,51 +431,29 @@ void PaperWalletDialog::on_printButton_clicked()
         }
     }
 
-    // copied from sendcoinsdialog.cpp
-    qint64 txFee = tx->getTransactionFee();
-    QString questionString = tr("Are you sure you want to send?");
-    questionString.append("<br /><br />%1");
+    QString questionString = SendCoinsDialog::makeAreYouSureToSendCoinsString( *tx, walletModel->getOptionsModel()->getDisplayUnit() ) ;
 
-    if ( txFee > 0 ) {
-        // append fee string if there's a non-zero fee
-        questionString.append("<hr /><span style='color:#aa0000;'>");
-        questionString.append( UnitsOfCoin::formatWithUnit( walletModel->getOptionsModel()->getDisplayUnit(), txFee ) ) ;
-        questionString.append("</span> ");
-        questionString.append(tr("added as transaction fee"));
+    QMessageBox::StandardButton retval = QMessageBox::question( this, tr("Confirm send coins"),
+            questionString.arg( formatted.join( "<br />" ) ),
+            QMessageBox::Yes | QMessageBox::Cancel, QMessageBox::Cancel ) ;
+    if ( retval != QMessageBox::Yes ) {
+        delete tx ;
+        return ;
     }
 
-    // add total amount in all subdivision units
-    questionString.append("<hr />");
-    qint64 totalAmount = tx->getTotalTransactionAmount() + txFee;
-    QStringList alternativeUnits;
-    Q_FOREACH ( UnitsOfCoin::Unit u, UnitsOfCoin::availableUnits() ) {
-        if ( u != walletModel->getOptionsModel()->getDisplayUnit() )
-            alternativeUnits.append( UnitsOfCoin::formatWithUnit( u, totalAmount ) ) ;
-    }
-
-    questionString.append(tr("Total Amount %1 (= %2)")
-                              .arg( UnitsOfCoin::formatWithUnit( walletModel->getOptionsModel()->getDisplayUnit(), totalAmount ) )
-                              .arg(alternativeUnits.join(" " + tr("or") + " ")));
-
-    QMessageBox::StandardButton retval = QMessageBox::question(this, tr("Confirm send coins"), questionString.arg(formatted.join("<br />")), QMessageBox::Yes | QMessageBox::Cancel, QMessageBox::Cancel);
-
-    if (retval != QMessageBox::Yes) {
-        delete tx;
-        return;
-    }
-
+    // now send the transaction
     WalletModel::SendCoinsReturn sendStatus = walletModel->sendCoins( *tx ) ;
 
-    if (sendStatus.status == WalletModel::TransactionCommitFailed) {
+    if ( sendStatus.status == SendCoinsStatus::TransactionCommitFailed ) {
         QMessageBox::critical( this, tr("Send Coins"), "The transaction was rejected! This might happen if some of the coins in your wallet were already spent, such as if you used a copy of wallet file and coins were spent in the copy but not marked as spent here", QMessageBox::Ok, QMessageBox::Ok ) ;
     }
-    delete tx;
+    delete tx ;
 #endif
-    return;
+    return ;
 }
 
 /** "Shutdown" window */
-ShutdownWindow::ShutdownWindow( QWidget *parent, Qt::WindowFlags f ) :
+ShutdownWindow::ShutdownWindow( QWidget * parent, Qt::WindowFlags f ) :
     QWidget( parent, f )
 {
     QVBoxLayout * layout = new QVBoxLayout() ;

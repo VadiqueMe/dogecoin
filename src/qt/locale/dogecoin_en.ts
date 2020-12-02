@@ -122,7 +122,7 @@
 <context>
     <name>AddressTableModel</name>
     <message>
-        <location filename="../addresstablemodel.cpp" line="+168"/>
+        <location filename="../addresstablemodel.cpp" line="+171"/>
         <source>Label</source>
         <translation type="unfinished"></translation>
     </message>
@@ -496,7 +496,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+245"/>
+        <location line="+238"/>
         <source>change from %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -517,7 +517,7 @@
 <context>
     <name>DogecoinGUI</name>
     <message>
-        <location filename="../gui.cpp" line="+144"/>
+        <location filename="../gui.cpp" line="+143"/>
         <source>Wallet</source>
         <translation type="unfinished">Wallet</translation>
     </message>
@@ -633,13 +633,8 @@
     </message>
     <message>
         <location line="+2"/>
-        <source>&amp;Debug window</source>
-        <translation type="unfinished">&amp;Debug window</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Open debugging and diagnostic console</source>
-        <translation type="unfinished">Open debugging and diagnostic console</translation>
+        <source>Show Guts window</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+4"/>
@@ -692,12 +687,12 @@
         <translation type="unfinished">&amp;Help</translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="+14"/>
         <source>Tabs toolbar</source>
         <translation type="unfinished">Tabs toolbar</translation>
     </message>
     <message numerus="yes">
-        <location line="+305"/>
+        <location line="+306"/>
         <source>%n active connection(s) to Dogecoin network</source>
         <translation type="unfinished">
             <numerusform>%n active connection to Dogecoin network</numerusform>
@@ -705,7 +700,7 @@
         </translation>
     </message>
     <message>
-        <location line="+0"/>
+        <location line="+12"/>
         <source>Click to switch network activity off</source>
         <translation type="unfinished"></translation>
     </message>
@@ -715,7 +710,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+0"/>
+        <location line="+1"/>
         <source>Click to turn it back on</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1663,7 +1658,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+38"/>
+        <location line="+39"/>
         <source>Load Paper Wallets</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1673,7 +1668,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+14"/>
+        <location line="+12"/>
         <source>Paper wallet %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1683,18 +1678,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+9"/>
+        <location line="+8"/>
         <location line="+2"/>
         <location line="+2"/>
         <location line="+2"/>
         <location line="+2"/>
         <location line="+2"/>
-        <location line="+45"/>
+        <location line="+23"/>
         <source>Send Coins</source>
         <translation type="unfinished">Send Coins</translation>
     </message>
     <message>
-        <location line="-53"/>
+        <location line="-31"/>
         <source>The recipient address is not valid, please recheck</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1720,26 +1715,6 @@
     </message>
     <message>
         <location line="+15"/>
-        <source>Are you sure you want to send?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>added as transaction fee</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>Total Amount %1 (= %2)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>or</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
         <source>Confirm send coins</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1890,17 +1865,17 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../guiutil.cpp" line="+234"/>
+        <location filename="../guiutil.cpp" line="+265"/>
         <source>Amount</source>
         <translation type="unfinished">Amount</translation>
     </message>
     <message>
-        <location line="-122"/>
+        <location line="-119"/>
         <source>Enter a Dogecoin address (like %1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+802"/>
+        <location line="+800"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2008,78 +1983,78 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <location filename="../forms/debugwindow.ui" line="+24"/>
+        <location filename="../forms/gutswindow.ui" line="+24"/>
         <source>Information</source>
         <translation>Information</translation>
     </message>
     <message>
-        <location line="-10"/>
-        <source>Debug window</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+360"/>
+        <location line="+79"/>
         <source>Using BerkeleyDB version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="+225"/>
         <source>Datadir</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-121"/>
+        <location line="-208"/>
         <source>Startup time</source>
         <translation>Startup time</translation>
     </message>
     <message>
-        <location line="-46"/>
+        <location line="+20"/>
         <source>Network</source>
         <translation>Network</translation>
     </message>
     <message>
-        <location line="+53"/>
+        <location line="-13"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-14"/>
         <source>Number of connections</source>
         <translation>Number of connections</translation>
     </message>
     <message>
-        <location line="-135"/>
+        <location line="+120"/>
         <source>Block chain</source>
         <translation>Block chain</translation>
     </message>
     <message>
-        <location line="+177"/>
+        <location line="+88"/>
         <source>Current number of blocks</source>
         <translation>Current number of blocks</translation>
     </message>
     <message>
-        <location line="-115"/>
+        <location line="+379"/>
         <source>Memory Pool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+36"/>
+        <location line="+48"/>
         <source>Current number of transactions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-134"/>
+        <location line="-7"/>
         <source>Memory usage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+286"/>
+        <location line="-727"/>
+        <source>Guts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+322"/>
         <source>Log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+479"/>
-        <location filename="../rpcconsole.cpp" line="+1373"/>
+        <location line="+582"/>
+        <location filename="../rpcconsole.cpp" line="+1331"/>
         <source>Received</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2121,7 +2096,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/debugwindow.ui" line="-894"/>
+        <location filename="../forms/gutswindow.ui" line="-740"/>
         <location filename="../rpcconsole.cpp" line="+1"/>
         <source>Version</source>
         <translation type="unfinished"></translation>
@@ -2142,7 +2117,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/debugwindow.ui" line="+36"/>
+        <location filename="../forms/gutswindow.ui" line="-221"/>
         <location filename="../rpcconsole.cpp" line="-4"/>
         <source>User Agent</source>
         <translation type="unfinished"></translation>
@@ -2203,12 +2178,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/debugwindow.ui" line="-438"/>
+        <location filename="../forms/gutswindow.ui" line="-301"/>
         <source>Last block time</source>
         <translation>Last block time</translation>
     </message>
     <message>
-        <location line="+357"/>
+        <location line="+220"/>
         <source>&amp;Open</source>
         <translation>&amp;Open</translation>
     </message>
@@ -2218,7 +2193,7 @@
         <translation>Console</translation>
     </message>
     <message>
-        <location line="+195"/>
+        <location line="+298"/>
         <source>Network Traffic</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2228,22 +2203,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../rpcconsole.cpp" line="-545"/>
+        <location filename="../rpcconsole.cpp" line="-508"/>
         <source>In:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+21"/>
+        <location line="+2"/>
         <source>Out:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/debugwindow.ui" line="-147"/>
+        <location filename="../forms/gutswindow.ui" line="-250"/>
         <source>Clear console</source>
         <translation>Clear console</translation>
     </message>
     <message>
-        <location filename="../rpcconsole.cpp" line="-242"/>
+        <location filename="../rpcconsole.cpp" line="-218"/>
         <source>Send message</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2300,7 +2275,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+85"/>
+        <location line="+43"/>
         <source>Network activity is off</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2430,7 +2405,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+261"/>
+        <location line="+262"/>
         <source>Request payment to %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2473,7 +2448,7 @@
 <context>
     <name>RecentRequestsTableModel</name>
     <message>
-        <location filename="../recentrequeststablemodel.cpp" line="+29"/>
+        <location filename="../recentrequeststablemodel.cpp" line="+28"/>
         <source>Date</source>
         <translation type="unfinished">Date</translation>
     </message>
@@ -2512,7 +2487,7 @@
     <name>SendCoinsDialog</name>
     <message>
         <location filename="../forms/sendcoinsdialog.ui" line="+14"/>
-        <location filename="../sendcoinsdialog.cpp" line="+519"/>
+        <location filename="../sendcoinsdialog.cpp" line="+537"/>
         <source>Send Coins</source>
         <translation>Send Coins</translation>
     </message>
@@ -2627,7 +2602,7 @@
         <translation>S&amp;end</translation>
     </message>
     <message>
-        <location filename="../sendcoinsdialog.cpp" line="-450"/>
+        <location filename="../sendcoinsdialog.cpp" line="-469"/>
         <source>Copy quantity</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2657,7 +2632,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+161"/>
+        <location line="+192"/>
         <location line="+5"/>
         <location line="+5"/>
         <location line="+4"/>
@@ -2665,7 +2640,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="-109"/>
         <source>Are you sure you want to send?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2675,7 +2650,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="+14"/>
         <source>Total Amount %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2685,12 +2660,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+96"/>
         <source>Confirm send coins</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+200"/>
+        <location line="+210"/>
         <source>The recipient address is not valid, please recheck</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2837,7 +2812,7 @@
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <location filename="../utilitydialog.cpp" line="+24"/>
+        <location filename="../utilitydialog.cpp" line="+26"/>
         <source>%1 is shutting down...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3024,7 +2999,7 @@
 <context>
     <name>TransactionDesc</name>
     <message numerus="yes">
-        <location filename="../transactiondesc.cpp" line="+32"/>
+        <location filename="../transactiondesc.cpp" line="+31"/>
         <source>Open for %n more block(s)</source>
         <translation>
             <numerusform>Open for %n more block</numerusform>
@@ -3210,12 +3185,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Output index of subtransaction</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+24"/>
+        <location line="+25"/>
         <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to &quot;not accepted&quot; and it won&apos;t be spendable. This may occasionally happen if another node generates a block within a few seconds of yours</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3230,7 +3200,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+183"/>
+        <location line="+2"/>
+        <source>Index of output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+181"/>
         <source>Transaction</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3274,7 +3249,7 @@
 <context>
     <name>TransactionTableModel</name>
     <message>
-        <location filename="../transactiontablemodel.cpp" line="+230"/>
+        <location filename="../transactiontablemodel.cpp" line="+229"/>
         <source>Date</source>
         <translation type="unfinished">Date</translation>
     </message>
@@ -3601,7 +3576,7 @@
 <context>
     <name>WalletModel</name>
     <message>
-        <location filename="../walletmodel.cpp" line="+284"/>
+        <location filename="../walletmodel.cpp" line="+282"/>
         <source>Send Coins</source>
         <translation type="unfinished">Send Coins</translation>
     </message>
@@ -3619,7 +3594,7 @@
         <translation type="unfinished">Export the data in the current tab to a file</translation>
     </message>
     <message>
-        <location line="+226"/>
+        <location line="+229"/>
         <source>Backup Wallet</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3669,11 +3644,6 @@
     <message>
         <location line="+1"/>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>-maxtxfee is set very high! Fees this large could be paid on a single transaction.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3812,12 +3782,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+3"/>
-        <source>Maximum total fees (in %s) to use in a single wallet transaction or raw transaction; setting this too low may abort large transactions (default: %s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
+        <location line="+6"/>
         <source>Number of blocks (one with the transaction plus more subsequent blocks above it) to count the transaction as confirmed (default: %u)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3983,11 +3948,6 @@
     </message>
     <message>
         <location line="+1"/>
-        <source>%s is set very high!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>(default: %s)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4092,12 +4052,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Copyright (C) %i-%i</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Corrupted block database detected</source>
         <translation type="unfinished">Corrupted block database detected</translation>
     </message>
@@ -4212,12 +4167,7 @@
         <translation type="unfinished">Failed to listen on any port. Use -listen=0 if you want this.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>How many blocks to check at startup (default: %u, 0 = all)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4267,12 +4217,22 @@
         <translation type="unfinished">Invalid -proxy address: &apos;%s&apos;</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Invalid amount for -%s=&lt;amount&gt;: &apos;%s&apos;</source>
+        <location line="-10"/>
+        <source>Fee in %s to add to transactions you send (default: %s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-153"/>
+        <source>Maximum total fees (in %s) to use in a single transaction; setting this too low may abort large transactions (default: %s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+129"/>
+        <source>Copyright (c) %i-%i</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+35"/>
         <source>Invalid netmask specified in -whitelist: &apos;%s&apos;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4539,11 +4499,6 @@
     <message>
         <location line="+1"/>
         <source>This is experimental software.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>This is the transaction fee you will pay if you send a transaction.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -198,14 +198,6 @@
         <translation>Αλλαγή του κωδικού κρυπτογράφησης του πορτοφολιού</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;Παράθυρο αποσφαλμάτωσης</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Άνοιγμα κονσόλας αποσφαλμάτωσης και διαγνωστικών</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Επιβεβαίωση μηνύματος</translation>
     </message>
@@ -831,10 +823,6 @@
     <message>
         <source>Information</source>
         <translation>&amp;Πληροφορία</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>Παράθυρο αποσφαλμάτωσης</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>

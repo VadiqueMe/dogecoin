@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -28,38 +28,41 @@ public:
 
     CBlockHeader()
     {
-        SetNull();
+        SetNull() ;
     }
 
-    ADD_SERIALIZE_METHODS;
+    std::string ToString() const ;
 
-    template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action) {
-        READWRITE(*(CPureBlockHeader*)this);
+    ADD_SERIALIZE_METHODS ;
 
-        if ( this->IsAuxpowInVersion() )
+    template < typename Stream, typename Operation >
+    inline void SerializationOp( Stream & s, Operation ser_action )
+    {
+        READWRITE( *(CPureBlockHeader*)this ) ;
+
+        if ( IsAuxpowInVersion() )
         {
-            if (ser_action.ForRead())
-                auxpow.reset(new CAuxPow());
-            assert(auxpow);
-            READWRITE(*auxpow);
-        } else if (ser_action.ForRead())
-            auxpow.reset();
+            if ( ser_action.ForRead() )
+                auxpow.reset( new CAuxPow() ) ;
+            assert( auxpow != nullptr ) ;
+            READWRITE( *auxpow ) ;
+        } else if ( ser_action.ForRead() )
+            auxpow.reset() ;
     }
 
     void SetNull()
     {
-        CPureBlockHeader::SetNull();
-        auxpow.reset();
+        CPureBlockHeader::SetNull() ;
+        auxpow.reset() ;
     }
 
     /**
      * Set the block's auxpow (or unset it). This takes care of updating
      * the version accordingly
-     * @param apow Pointer to the auxpow to use or NULL
+     * @param pointer to the auxpow to use or null
      */
-    void SetAuxpow( CAuxPow * auxpow ) ;
-};
+    void SetAuxpow( CAuxPow * newAuxpow ) ;
+} ;
 
 
 class CBlock : public CBlockHeader
@@ -114,10 +117,11 @@ public:
     // If non-NULL, *mutated is set to whether mutation was detected in the merkle
     // tree (a duplication of transactions in the block leading to an identical
     // merkle root)
-    uint256 BuildMerkleTree(bool* mutated = NULL) const;
+    uint256 BuildMerkleTree( bool* mutated = nullptr ) const ;
 
-    std::vector<uint256> GetMerkleBranch(int nIndex) const;
-    static uint256 CheckMerkleBranch(uint256 hash, const std::vector<uint256>& vMerkleBranch, int nIndex);
+    std::vector< uint256 > GetMerkleBranch( int nIndex ) const ;
+    static uint256 CheckMerkleBranch( uint256 hash, const std::vector< uint256 > & vMerkleBranch, int nIndex ) ;
+
     std::string ToString() const ;
 } ;
 
@@ -127,37 +131,30 @@ public:
  */
 struct CBlockLocator
 {
-    std::vector<uint256> vHave;
+    std::vector< uint256 > vHave ;
 
     CBlockLocator() {}
 
-    CBlockLocator(const std::vector<uint256>& vHaveIn)
+    CBlockLocator( const std::vector< uint256 > & vHaveIn )
     {
-        vHave = vHaveIn;
+        vHave = vHaveIn ;
     }
 
-    ADD_SERIALIZE_METHODS;
+    ADD_SERIALIZE_METHODS ;
 
-    template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action) {
-        int nVersion = s.GetVersion();
-        if (!(s.GetType() & SER_GETHASH))
-            READWRITE(nVersion);
-        READWRITE(vHave);
+    template < typename Stream, typename Operation >
+    inline void SerializationOp( Stream & s, Operation ser_action ) {
+        int nVersion = s.GetVersion() ;
+        if ( ! ( s.GetType() & SER_GETHASH ) )
+            READWRITE( nVersion ) ;
+        READWRITE( vHave ) ;
     }
 
-    void SetNull()
-    {
-        vHave.clear();
-    }
-
-    bool IsNull() const
-    {
-        return vHave.empty();
-    }
+    void SetNull() {  vHave.clear() ;  }
+    bool IsNull() const {  return vHave.empty() ;  }
 };
 
 /** Compute the consensus-critical block weight (see BIP 141) */
-int64_t GetBlockWeight(const CBlock& tx);
+int64_t GetBlockWeight( const CBlock & tx ) ;
 
 #endif

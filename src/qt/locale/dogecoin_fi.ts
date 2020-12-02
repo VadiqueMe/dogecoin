@@ -150,14 +150,6 @@
         <translation>Vaihda lompakon salaukseen käytettävä tunnuslause</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;Testausikkuna</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Avaa debuggaus- ja diagnostiikkakonsoli</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>Varmista &amp;viesti...</translation>
     </message>
@@ -869,10 +861,6 @@
         <translation>Tietoa</translation>
     </message>
     <message>
-        <source>Debug window</source>
-        <translation>Debug-ikkuna</translation>
-    </message>
-    <message>
         <source>Using BerkeleyDB version</source>
         <translation>Käyttää BerkeleyDB-versiota</translation>
     </message>
@@ -1461,8 +1449,8 @@
         <translation>Virhe: Kriittinen sisäinen virhe kohdattiin, katso debug log lisätietoja varten</translation>
     </message>
     <message>
-        <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
-        <translation>Kulu (muodossa %s/kB) joka lisätään rahansiirtoihin joita lähetät (oletus: %s)</translation>
+        <source>Fee in %s to add to transactions you send (default: %s)</source>
+        <translation>Kulu muodossa %s joka lisätään rahansiirtoihin joita lähetät (oletus: %s)</translation>
     </message>
     <message>
         <source>Pruning blockstore...</source>
@@ -1549,7 +1537,7 @@
         <translation>Yhteyden valinnat:</translation>
     </message>
     <message>
-        <source>Copyright (C) %i-%i</source>
+        <source>Copyright (c) %i-%i</source>
         <translation>Tekijänoikeus (C) %i-%i</translation>
     </message>
     <message>
@@ -1619,10 +1607,6 @@
     <message>
         <source>Invalid -onion address: '%s'</source>
         <translation>Virheellinen -onion osoite: '%s'</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -%s=&lt;amount&gt;: '%s'</source>
-        <translation>Virheellinen määrä -%s=&lt;amount&gt;: '%s'</translation>
     </message>
     <message>
         <source>Loading banlist...</source>
@@ -1843,10 +1827,6 @@
     <message>
         <source>Loading addresses...</source>
         <translation>Ladataan osoitteita...</translation>
-    </message>
-    <message>
-        <source>-maxtxfee is set very high! Fees this large could be paid on a single transaction.</source>
-        <translation>-maxtxfee on asetettu erittäin suureksi! Tämänkokoisia kuluja saatetaan maksaa yhdessä rahansiirrossa.</translation>
     </message>
     <message>
         <source>Do not keep transactions in the mempool longer than &lt;n&gt; hours (default: %u)</source>

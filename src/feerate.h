@@ -1,14 +1,13 @@
-// Copyright (c) 2019 vadique
+// Copyright (c) 2019-2020 vadique
 // Distributed under the WTFPLv2 software license http://www.wtfpl.net
 
 #ifndef DOGECOIN_FEERATE_H
 #define DOGECOIN_FEERATE_H
 
 #include "amount.h"
-#include "serialize.h"
 
 /**
- * Fee rate in atomary coin units per kilobyte, CAmount / kB
+ * Fee rate in atomary coin units per kilobyte (1000 bytes), CAmount / kB
  */
 class CFeeRate
 {
@@ -34,13 +33,6 @@ public:
     friend bool operator>=( const CFeeRate & a, const CFeeRate & b ) {  return a.nCoinuPerK >= b.nCoinuPerK ;  }
     CFeeRate & operator+= ( const CFeeRate & a ) {  nCoinuPerK += a.nCoinuPerK ; return *this ;  }
     std::string ToString() const ;
-
-    ADD_SERIALIZE_METHODS ;
-
-    template < typename Stream, typename Operation >
-    inline void SerializationOp( Stream & s, Operation ser_action ) {
-        READWRITE( nCoinuPerK ) ;
-    }
 
 } ;
 

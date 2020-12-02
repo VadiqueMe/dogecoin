@@ -306,14 +306,6 @@
         <translation>Cambia la passphrase utilizzata per la cifratura del portamonete</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>Finestra di &amp;debug</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Apri la console di debugging e diagnostica</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Verifica messaggio...</translation>
     </message>
@@ -1263,10 +1255,6 @@
     <message>
         <source>Information</source>
         <translation>Informazioni</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>Finestra di debug</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -2381,8 +2369,8 @@
         <translation>Errore: si è presentato un errore interno fatale, consulta il file debug log per maggiori dettagli</translation>
     </message>
     <message>
-        <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
-        <translation>Commissione (in %s/kB) da aggiungere alle transazioni inviate (default: %s)</translation>
+        <source>Fee in %s to add to transactions you send (default: %s)</source>
+        <translation>Commissione in %s da aggiungere alle transazioni inviate (default: %s)</translation>
     </message>
     <message>
         <source>Pruning blockstore...</source>
@@ -2435,10 +2423,6 @@
     <message>
         <source>Maximum allowed median peer time offset adjustment. Local perspective of time may be influenced by peers forward or backward by this amount. (default: %u seconds)</source>
         <translation>Regolazione della massima differenza media di tempo dei peer consentita. L'impostazione dell'orario locale può essere impostata in avanti o indietro di questa quantità. (default %u secondi)</translation>
-    </message>
-    <message>
-        <source>Maximum total fees (in %s) to use in a single wallet transaction or raw transaction; setting this too low may abort large transactions (default: %s)</source>
-        <translation>Totale massimo di commissioni (in %s) da usare in una transazione singola o di gruppo del wallet; valori troppo bassi possono abortire grandi transazioni (default: %s)</translation>
     </message>
     <message>
         <source>Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly.</source>
@@ -2505,8 +2489,8 @@
         <translation>Opzioni di connessione:</translation>
     </message>
     <message>
-        <source>Copyright (C) %i-%i</source>
-        <translation>Copyright (C) %i-%i</translation>
+        <source>Copyright (c) %i-%i</source>
+        <translation>Copyright (c) %i-%i</translation>
     </message>
     <message>
         <source>Corrupted block database detected</source>
@@ -2599,10 +2583,6 @@
     <message>
         <source>Invalid -onion address: '%s'</source>
         <translation>Indirizzo -onion non valido: '%s'</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -%s=&lt;amount&gt;: '%s'</source>
-        <translation>Importo non valido per -%s=&lt;amount&gt;: '%s'</translation>
     </message>
     <message>
         <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
@@ -2745,10 +2725,6 @@
         <translation>Esegue un comando in caso di ricezione di un allarme pertinente o se si rileva un fork molto lungo (%s in cmd è sostituito dal messaggio)</translation>
     </message>
     <message>
-        <source>Invalid amount for -maxtxfee=&lt;amount&gt;: '%s' (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
-        <translation>Importo non valido per -maxtxfee=&lt;amount&gt;: '%s' (deve essere almeno pari alla commissione 'minrelay fee' di %s per prevenire transazioni bloccate)</translation>
-    </message>
-    <message>
         <source>Maximum size of data in data carrier transactions we relay and mine (default: %u)</source>
         <translation>Dimensione massima dei dati in transazioni di trasporto dati che saranno trasmesse ed incluse nei blocchi (predefinito: %u)</translation>
     </message>
@@ -2799,6 +2775,10 @@
     <message>
         <source>Information</source>
         <translation>Informazioni</translation>
+    </message>
+    <message>
+        <source>Maximum total fees (in %s) to use in a single transaction; setting this too low may abort large transactions (default: %s)</source>
+        <translation>Totale massimo di commissioni (in %s) da usare in una transazione singola; valori troppo bassi possono abortire grandi transazioni (default: %s)</translation>
     </message>
     <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
@@ -2907,10 +2887,6 @@
     <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation>(1 = mantiene metadati tx, ad es. proprietario account ed informazioni di richiesta di pagamento, 2 = scarta metadati tx)</translation>
-    </message>
-    <message>
-        <source>-maxtxfee is set very high! Fees this large could be paid on a single transaction.</source>
-        <translation>-maxtxfee è impostato molto alto! Commissioni così alte possono venir pagate anche su una singola transazione.</translation>
     </message>
     <message>
         <source>Do not keep transactions in the mempool longer than &lt;n&gt; hours (default: %u)</source>

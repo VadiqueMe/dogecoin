@@ -298,14 +298,6 @@
         <translation>Alterar a frase de segurança utilizada na encriptação da carteira</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>Janela de &amp;Depuração</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Abrir consola de diagnóstico e depuração</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Verificar mensagem...</translation>
     </message>
@@ -1149,10 +1141,6 @@
         <translation>Informação</translation>
     </message>
     <message>
-        <source>Debug window</source>
-        <translation>Janela de depuração</translation>
-    </message>
-    <message>
         <source>Using BerkeleyDB version</source>
         <translation>Versão BerkeleyDB em uso</translation>
     </message>
@@ -1853,8 +1841,8 @@
         <translation>Erro: Um erro fatal interno ocorreu, verificar debug log para mais informação</translation>
     </message>
     <message>
-        <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
-        <translation>Taxa (em %s/kB) para adicionar às transações que envia (predefinição: %s)</translation>
+        <source>Fee in %s to add to transactions you send (default: %s)</source>
+        <translation>Taxa em %s para adicionar às transações que envia (predefinição: %s)</translation>
     </message>
     <message>
         <source>Pruning blockstore...</source>
@@ -2009,10 +1997,6 @@
         <translation>Endereço -onion inválido: '%s'</translation>
     </message>
     <message>
-        <source>Invalid amount for -%s=&lt;amount&gt;: '%s'</source>
-        <translation>Valor inválido para -%s=&lt;amount&gt;: '%s'</translation>
-    </message>
-    <message>
         <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
         <translation>Manter o banco de memória da transação abaixo de &lt;n&gt; megabytes (predefinição: %u)</translation>
     </message>
@@ -2119,10 +2103,6 @@
     <message>
         <source>Execute command when a relevant alert is received or we see a really long fork (%s in cmd is replaced by message)</source>
         <translation>Executar comando quando um alerta relevante for recebido ou em caso de uma divisão longa da cadeia de blocos (no comando, %s é substituído pela mensagem)</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -maxtxfee=&lt;amount&gt;: '%s' (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
-        <translation>Montante inválido para -maxtxfee=&lt;amount&gt;: '%s' (deverá ser, no mínimo , a taxa mínima de propagação de %s, de modo a evitar transações bloqueadas)</translation>
     </message>
     <message>
         <source>Maximum size of data in data carrier transactions we relay and mine (default: %u)</source>
@@ -2279,10 +2259,6 @@
     <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation>(1 = guardar metadados da transacção ex: proprietário da conta e informação do pedido de pagamento, 2 = descartar metadados da transacção)</translation>
-    </message>
-    <message>
-        <source>-maxtxfee is set very high! Fees this large could be paid on a single transaction.</source>
-        <translation>-maxtxfee está definido com um valor muito alto! Taxas desta magnitude podem ser pagas numa única transacção.</translation>
     </message>
     <message>
         <source>Do not keep transactions in the mempool longer than &lt;n&gt; hours (default: %u)</source>

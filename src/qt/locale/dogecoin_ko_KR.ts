@@ -326,14 +326,6 @@
         <translation>지갑 암호화에 사용되는 암호를 변경합니다</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>디버그 창(&amp;D)</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>디버깅 및 진단 콘솔을 엽니다</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>메시지 확인(&amp;V)...</translation>
     </message>
@@ -1347,10 +1339,6 @@
     <message>
         <source>Information</source>
         <translation>정보</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>디버그 창</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -2640,8 +2628,8 @@
         <translation>에러: 치명적인 내부 오류가 발생했습니다, 자세한 내용은 debug log 를 확인해주세요.</translation>
     </message>
     <message>
-        <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
-        <translation>송금 거래시 추가되는 수수료 (%s/kB) (기본값: %s)</translation>
+        <source>Fee in %s to add to transactions you send (default: %s)</source>
+        <translation>송금 거래시 추가되는 수수료 (%s) (기본값: %s)</translation>
     </message>
     <message>
         <source>Pruning blockstore...</source>
@@ -2780,8 +2768,8 @@
         <translation>연결 설정 : </translation>
     </message>
     <message>
-        <source>Copyright (C) %i-%i</source>
-        <translation>Copyright (C) %i-%i</translation>
+        <source>Copyright (c) %i-%i</source>
+        <translation>Copyright (c) %i-%i</translation>
     </message>
     <message>
         <source>Corrupted block database detected</source>
@@ -2874,10 +2862,6 @@
     <message>
         <source>Invalid -onion address: '%s'</source>
         <translation>잘못된 -onion 주소입니다: '%s'</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -%s=&lt;amount&gt;: '%s'</source>
-        <translation>유효하지 않은 금액 -%s=&lt;amount&gt;: '%s'</translation>
     </message>
     <message>
         <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
@@ -3018,10 +3002,6 @@
     <message>
         <source>Execute command when a relevant alert is received or we see a really long fork (%s in cmd is replaced by message)</source>
         <translation>이 사항과 관련있는 경고가 발생하거나 아주 긴 포크가 발생했을 때 명령어를 실행해 주세요. (cmd 명령어 목록에서 %s는 메시지로 대체됩니다) </translation>
-    </message>
-    <message>
-        <source>Invalid amount for -maxtxfee=&lt;amount&gt;: '%s' (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
-        <translation>유효하지 않은 금액 -maxtxfee=&lt;amount&gt;: '%s' (거래가 막히는 상황을 방지하게 위해 적어도 %s 의 중계 수수료를 지정해야 합니다)</translation>
     </message>
     <message>
         <source>Maximum size of data in data carrier transactions we relay and mine (default: %u)</source>
@@ -3180,10 +3160,6 @@
         <translation>(1 = 거래의 메타 데이터를 유지함 예. 계좌정보 와 지불 요구 정보, 2 = 거래 메타 데이터 파기)</translation>
     </message>
     <message>
-        <source>-maxtxfee is set very high! Fees this large could be paid on a single transaction.</source>
-        <translation>-maxtxfee값이 너무 큽니다!  하나의 거래에 너무 큰 수수료가 지불 됩니다.</translation>
-    </message>
-    <message>
         <source>Do not keep transactions in the mempool longer than &lt;n&gt; hours (default: %u)</source>
         <translation>메모리 풀에 있는 거래 기록을 &lt;n&gt;시간 후 부터는 유지하지 않기 (기본값: %u)</translation>
     </message>
@@ -3220,10 +3196,6 @@
         <translation>블룸필터를 통해 블록과 거래 필터링 지원 (기본값: %u)</translation>
     </message>
     <message>
-        <source>This is the transaction fee you may pay when fee estimates are not available.</source>
-        <translation>이것은 수수료 견적을 이용할 수 없을 때 지불 할 수 있는 거래 수수료입니다.</translation>
-    </message>
-    <message>
         <source>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit %s and cryptographic software written by Eric Young and UPnP software written by Thomas Bernard.</source>
         <translation>이 제품에는 OpenSSL Project에서 OpenSSL Toolkit %s으로 사용하기 위해 개발 한 소프트웨어와 Eric Young이 작성한 암호화 소프트웨어 및 Thomas Bernard가 작성한 UPnP 소프트웨어가 포함되어 있습니다.</translation>
     </message>
@@ -3258,10 +3230,6 @@
     <message>
         <source>Whitelist peers connecting from the given IP address (e.g. 1.2.3.4) or CIDR notated network (e.g. 1.2.3.0/24). Can be specified multiple times.</source>
         <translation>설정된 IP주소 (보기 1.2.3.4) 혹은 CIDR로 작성된 네트워크 (보기 1.2.3.0/24)로 화이트리스트에 포함된 피어에 접속합니다. 이 설정은 복수로 지정 할 수 있습니다.</translation>
-    </message>
-    <message>
-        <source>%s is set very high!</source>
-        <translation>%s가 매우 높게 설정되었습니다!</translation>
     </message>
     <message>
         <source>(default: %s)</source>
@@ -3346,10 +3314,6 @@
     <message>
         <source>Starting network threads...</source>
         <translation>네트워크 스레드 시작중...</translation>
-    </message>
-    <message>
-        <source>This is the transaction fee you will pay if you send a transaction.</source>
-        <translation>이것은 거래를 보낼 경우 지불 할 거래 수수료입니다.</translation>
     </message>
     <message>
         <source>Threshold for disconnecting misbehaving peers (default: %u)</source>

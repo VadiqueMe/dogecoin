@@ -166,14 +166,6 @@
         <source>Change the passphrase used for wallet encryption</source>
         <translation>वालेट इन्क्रिप्सनमा प्रयोग हुने इन्क्रिप्सन पासफ्रेज परिवर्तन गर्नुहोस्</translation>
     </message>
-    <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;amp;डिबग विन्डो</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>डिबगिङ र डायाग्नोस्टिक कन्सोल खोल्नुहोस्</translation>
-    </message>
     </context>
 <context>
     <name>CoinControlDialog</name>
@@ -449,7 +441,7 @@
         <translation>कनेक्सनको विकल्प:</translation>
     </message>
     <message>
-        <source>Copyright (C) %i-%i</source>
+        <source>Copyright (c) %i-%i</source>
         <translation>सर्वाधिकार (C) %i-%i</translation>
     </message>
     <message>
@@ -539,10 +531,6 @@
     <message>
         <source>Execute command when a relevant alert is received or we see a really long fork (%s in cmd is replaced by message)</source>
         <translation>सान्दर्भिक चेतावनी प्राप्त गर्दा आदेश कार्यान्वयन गर्नुहोस् नभए धेरै लामो फोर्क देखा पर्न सक्छ । (cmd को %s लाई सन्देशले प्रतिस्थापन गर्छ)</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -maxtxfee=&lt;amount&gt;: '%s' (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
-        <translation>maxtxfee=&amp;lt;रकम&amp;gt;: का लागि अमान्य रकम &amp;apos;%s&amp;apos; (कारोबारलाई अड्कन नदिन अनिवार्य रूपमा कम्तिमा %s को न्यूनतम रिले शुल्क हुनु पर्छ)</translation>
     </message>
     <message>
         <source>Maximum size of data in data carrier transactions we relay and mine (default: %u)</source>

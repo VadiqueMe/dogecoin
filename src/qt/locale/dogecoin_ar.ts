@@ -306,14 +306,6 @@
         <translation>تغيير كلمة المرور المستخدمة لتشفير المحفظة</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;نافذة المعالجة</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>إفتح وحدة التصحيح و التشخيص</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;التحقق من الرسالة...</translation>
     </message>
@@ -903,10 +895,6 @@
     <message>
         <source>Information</source>
         <translation>المعلومات</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>نافذة المعالجة</translation>
     </message>
     <message>
         <source>Startup time</source>

@@ -322,14 +322,6 @@
         <translation>更改钱包加密口令</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>调试窗口(&amp;D)</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>打开调试和诊断控制台</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>验证消息(&amp;V)...</translation>
     </message>
@@ -1332,10 +1324,6 @@
     <message>
         <source>Information</source>
         <translation>信息</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>调试窗口</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -2593,8 +2581,8 @@
         <translation>错误：发生了致命的内部错误，详情见 debug log 文件</translation>
     </message>
     <message>
-        <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
-        <translation>为付款交易添加交易费 (%s/kB) (默认: %s) </translation>
+        <source>Fee in %s to add to transactions you send (default: %s)</source>
+        <translation>为付款交易添加交易费 (%s) (默认: %s) </translation>
     </message>
     <message>
         <source>Pruning blockstore...</source>
@@ -2671,7 +2659,7 @@
         <translation>连接选项：</translation>
     </message>
     <message>
-        <source>Copyright (C) %i-%i</source>
+        <source>Copyright (c) %i-%i</source>
         <translation>版权所有 (C) %i-%i</translation>
     </message>
     <message>
@@ -2863,10 +2851,6 @@
         <translation>当收到相关提醒或者我们看到一个长分叉时执行命令（%s 将替换为消息）</translation>
     </message>
     <message>
-        <source>Invalid amount for -maxtxfee=&lt;amount&gt;: '%s' (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
-        <translation>-maxtxfee=&lt;amount&gt;: '%s' 的金额无效（交易费至少为 %s，以免交易滞留过久）</translation>
-    </message>
-    <message>
         <source>Maximum size of data in data carrier transactions we relay and mine (default: %u)</source>
         <translation>Maximum size of data in data carrier transactions we relay and mine (default: %u)</translation>
     </message>
@@ -3022,10 +3006,6 @@
     <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation>(1 = 保留 tx meta data , 如 account owner 和 payment request information, 2 = 不保留 tx meta data) </translation>
-    </message>
-    <message>
-        <source>-maxtxfee is set very high! Fees this large could be paid on a single transaction.</source>
-        <translation>参数 -maxtxfee 设定了很高的金额！这是你一次交易就有可能付出的最高手续费。</translation>
     </message>
     <message>
         <source>Do not keep transactions in the mempool longer than &lt;n&gt; hours (default: %u)</source>

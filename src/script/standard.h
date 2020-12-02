@@ -1,11 +1,13 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #ifndef DOGECOIN_SCRIPT_STANDARD_H
 #define DOGECOIN_SCRIPT_STANDARD_H
 
+#include "script/script.h"
 #include "script/interpreter.h"
 #include "uint256.h"
 
@@ -13,10 +15,9 @@
 
 #include <stdint.h>
 
-static const bool DEFAULT_ACCEPT_DATACARRIER = true;
+static const bool DEFAULT_ACCEPT_DATACARRIER = true ;
 
-class CKeyID;
-class CScript;
+class CKeyID ; // #include "pubkey.h"
 
 /** A reference to a CScript: the Hash160 of its serialization (see script.h) */
 class CScriptID : public uint160

@@ -146,14 +146,6 @@
         <translation>Tárca-titkosító jelszó megváltoztatása</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;Debug ablak</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Hibakereső és diagnosztikai konzol megnyitása</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>Üzenet &amp;valódiságának ellenőrzése</translation>
     </message>
@@ -715,10 +707,6 @@
     <message>
         <source>Information</source>
         <translation>Információ</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>Debug ablak</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>

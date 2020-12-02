@@ -118,14 +118,6 @@
         <translation>Cambiar la contraseña usando la encriptación de la billetera</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;Ventana desarrollador</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Abrir consola de diagnóstico y desarrollo</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Verificar Mensaje...</translation>
     </message>

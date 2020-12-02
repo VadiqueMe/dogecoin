@@ -326,14 +326,6 @@
         <translation>Zmeniť heslo použité na šifrovanie peňaženky</translation>
     </message>
     <message>
-        <source>&amp;Debug window</source>
-        <translation>&amp;Okno pre ladenie</translation>
-    </message>
-    <message>
-        <source>Open debugging and diagnostic console</source>
-        <translation>Otvor konzolu pre ladenie a diagnostiku</translation>
-    </message>
-    <message>
         <source>&amp;Verify message...</source>
         <translation>O&amp;veriť správu...</translation>
     </message>
@@ -1327,10 +1319,6 @@
     <message>
         <source>Information</source>
         <translation>Informácia</translation>
-    </message>
-    <message>
-        <source>Debug window</source>
-        <translation>Okno pre ladenie</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
@@ -2553,8 +2541,8 @@
         <translation>Chyba: Vyskytla sa interná chyba, pre viac informácií zobrazte debug log</translation>
     </message>
     <message>
-        <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
-        <translation>Poplatok (za %s/kB) pridaný do transakcie, ktorú posielate (predvolené: %s)</translation>
+        <source>Fee in %s to add to transactions you send (default: %s)</source>
+        <translation>Poplatok za %s pridaný do transakcie, ktorú posielate (predvolené: %s)</translation>
     </message>
     <message>
         <source>Pruning blockstore...</source>
@@ -2645,8 +2633,8 @@
         <translation>Možnosti pripojenia:</translation>
     </message>
     <message>
-        <source>Copyright (C) %i-%i</source>
-        <translation>Copyright (C) %i-%i</translation>
+        <source>Copyright (c) %i-%i</source>
+        <translation>Copyright (c) %i-%i</translation>
     </message>
     <message>
         <source>Corrupted block database detected</source>
@@ -2731,10 +2719,6 @@
     <message>
         <source>Invalid -onion address: '%s'</source>
         <translation>Neplatná -onion adresa:  '%s'</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -%s=&lt;amount&gt;: '%s'</source>
-        <translation>Neplatná suma pre -%s=&lt;amount&gt;: '%s'</translation>
     </message>
     <message>
         <source>Loading banlist...</source>
@@ -2863,10 +2847,6 @@
     <message>
         <source>Execute command when a relevant alert is received or we see a really long fork (%s in cmd is replaced by message)</source>
         <translation>Vykonať príkaz po prijatí patričného varovania alebo uvidíme veľmi dlhé rozdvojenie siete (%s v cmd je nahradené správou)</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -maxtxfee=&lt;amount&gt;: '%s' (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
-        <translation>Neplatná suma pre -maxtxfee=&lt;amount&gt;: '%s' (aby sa transakcia nezasekla, minimálny prenosový poplatok musí byť aspoň %s)</translation>
     </message>
     <message>
         <source>Maximum size of data in data carrier transactions we relay and mine (default: %u)</source>
@@ -3017,10 +2997,6 @@
         <translation>Výstupné ladiace informácie (predvolené: %u, dodanie &lt;category&gt; je voliteľné)</translation>
     </message>
     <message>
-        <source>This is the transaction fee you may pay when fee estimates are not available.</source>
-        <translation>Toto je poplatok za transakciu keď odhad poplatkov ešte nie je k dispozícii.</translation>
-    </message>
-    <message>
         <source>Total length of network version string (%i) exceeds maximum length (%i). Reduce the number or size of uacomments.</source>
         <translation>Celková dĺžka verzie sieťového reťazca (%i) prekračuje maximálnu dĺžku (%i). Znížte počet a veľkosť komentárov.</translation>
     </message>
@@ -3051,10 +3027,6 @@
     <message>
         <source>Whitelist peers connecting from the given IP address (e.g. 1.2.3.4) or CIDR notated network (e.g. 1.2.3.0/24). Can be specified multiple times.</source>
         <translation>Povoliť partnerov pripájajúcich sa z danej IP adresy (napr. 1.2.3.4) alebo zo siete vo formáte CIDR (napr. 1.2.3.0/24). Môže byť zadané viackrát.</translation>
-    </message>
-    <message>
-        <source>%s is set very high!</source>
-        <translation>Hodnota %s je nastavená veľmi vysoko!</translation>
     </message>
     <message>
         <source>(default: %s)</source>
@@ -3127,10 +3099,6 @@
     <message>
         <source>Starting network threads...</source>
         <translation>Spúšťajú sa sieťové vlákna...</translation>
-    </message>
-    <message>
-        <source>This is the transaction fee you will pay if you send a transaction.</source>
-        <translation>Toto je poplatok za transakciu pri odoslaní transakcie.</translation>
     </message>
     <message>
         <source>Threshold for disconnecting misbehaving peers (default: %u)</source>
