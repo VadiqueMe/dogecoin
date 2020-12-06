@@ -1,6 +1,6 @@
 // Copyright (c) 2012-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 #include "key.h"
 
@@ -20,10 +20,10 @@ static const std::string strSecret1     ("6JFPe8b4jbpup7petSB98M8tcaqXCigji8fGrC
 static const std::string strSecret2     ("6KLE6U3w8x3rM7nA1ZQxR4KnyEzeirPEt4YaXWdY4roF7Tt96rq");
 static const std::string strSecret1C    ("QP8WvtVMV2iU6y7LE27ksRspp4MAJizPWYovx88W71g1nfSdAhkV");
 static const std::string strSecret2C    ("QTuro8Pwx5yaonvJmU4jbBfwuEmTViyAGNeNyfnG82o7HWJmnrLj");
-static const CDogecoinAddress addr1 ( "DSpgzjPyfQB6ZzeSbMWpaZiTTxGf2oBCs4" ) ;
-static const CDogecoinAddress addr2 ( "DR9VqfbWgEHZhNst34KQnABQXpPWXeLAJD" ) ;
-static const CDogecoinAddress addr1C( "D8jZ6R8uuyQwiybupiVs3eDCedKdZ5bYV3" ) ;
-static const CDogecoinAddress addr2C( "DP7rGcDbpAvMb1dKup981zNt1heWUuVLP7" ) ;
+static const CBase58Address addr1 ( "DSpgzjPyfQB6ZzeSbMWpaZiTTxGf2oBCs4" ) ;
+static const CBase58Address addr2 ( "DR9VqfbWgEHZhNst34KQnABQXpPWXeLAJD" ) ;
+static const CBase58Address addr1C( "D8jZ6R8uuyQwiybupiVs3eDCedKdZ5bYV3" ) ;
+static const CBase58Address addr2C( "DP7rGcDbpAvMb1dKup981zNt1heWUuVLP7" ) ;
 
 static const std::string strAddressBad ( "DRjyUS2uuieEPkhZNdQz8hE5YycxVEqSXA" ) ;
 
@@ -43,14 +43,14 @@ void dumpKeyInfo(uint256 privkey)
     {
         bool fCompressed = nCompressed == 1;
         printf("  * %s:\n", fCompressed ? "compressed" : "uncompressed");
-        CDogecoinSecret bsecret ;
+        CBase58Secret bsecret ;
         bsecret.SetSecret( secret, fCompressed ) ;
         printf("    * secret (base58): %s\n", bsecret.ToString().c_str());
         CKey key;
         key.SetSecret(secret, fCompressed);
         std::vector<unsigned char> vchPubKey = key.GetPubKey();
         printf("    * pubkey (hex): %s\n", HexStr(vchPubKey).c_str());
-        printf("    * address (base58): %s\n", CDogecoinAddress( vchPubKey ).ToString().c_str());
+        printf("    * address (base58): %s\n", CBase58Address( vchPubKey ).ToString().c_str());
     }
 }
 #endif
@@ -60,12 +60,12 @@ BOOST_FIXTURE_TEST_SUITE(key_tests, BasicTestingSetup)
 
 BOOST_AUTO_TEST_CASE( key_test1 )
 {
-    CDogecoinSecret bsecret1, bsecret2, bsecret1C, bsecret2C, baddress1 ;
-    BOOST_CHECK( bsecret1.SetString (strSecret1));
-    BOOST_CHECK( bsecret2.SetString (strSecret2));
-    BOOST_CHECK( bsecret1C.SetString(strSecret1C));
-    BOOST_CHECK( bsecret2C.SetString(strSecret2C));
-    BOOST_CHECK(!baddress1.SetString(strAddressBad));
+    CBase58Secret bsecret1, bsecret2, bsecret1C, bsecret2C, baddress1 ;
+    BOOST_CHECK( bsecret1.SetString( strSecret1, Params() ) ) ;
+    BOOST_CHECK( bsecret2.SetString( strSecret2, Params() ) ) ;
+    BOOST_CHECK( bsecret1C.SetString( strSecret1C, Params() ) ) ;
+    BOOST_CHECK( bsecret2C.SetString( strSecret2C, Params() ) ) ;
+    BOOST_CHECK( ! baddress1.SetString( strAddressBad, Params() ) ) ;
 
     CKey key1  = bsecret1.GetKey();
     BOOST_CHECK(key1.IsCompressed() == false);

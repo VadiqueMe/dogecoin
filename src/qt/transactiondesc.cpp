@@ -92,9 +92,9 @@ QString TransactionDesc::toHTML( CWallet * wallet, CWalletTx & wtx, TransactionR
         if (nNet > 0)
         {
             // Credit
-            if ( CDogecoinAddress( rec->address ).IsValid() )
+            if ( CBase58Address( rec->address ).IsValid() )
             {
-                CTxDestination address = CDogecoinAddress( rec->address ).Get() ;
+                CTxDestination address = CBase58Address( rec->address ).Get() ;
                 if (wallet->mapAddressBook.count(address))
                 {
                     strHTML += "<b>" + tr("From") + ":</b> " + tr("unknown") + "<br>";
@@ -119,7 +119,7 @@ QString TransactionDesc::toHTML( CWallet * wallet, CWalletTx & wtx, TransactionR
         // Online transaction
         std::string strAddress = wtx.mapValue["to"];
         strHTML += "<b>" + tr("To") + ":</b> ";
-        CTxDestination dest = CDogecoinAddress( strAddress ).Get() ;
+        CTxDestination dest = CBase58Address( strAddress ).Get() ;
         if (wallet->mapAddressBook.count(dest) && !wallet->mapAddressBook[dest].name.empty())
             strHTML += GUIUtil::HtmlEscape(wallet->mapAddressBook[dest].name) + " ";
         strHTML += GUIUtil::HtmlEscape(strAddress) + "<br>";
@@ -190,7 +190,7 @@ QString TransactionDesc::toHTML( CWallet * wallet, CWalletTx & wtx, TransactionR
                         strHTML += "<b>" + tr("To") + ":</b> ";
                         if (wallet->mapAddressBook.count(address) && !wallet->mapAddressBook[address].name.empty())
                             strHTML += GUIUtil::HtmlEscape(wallet->mapAddressBook[address].name) + " ";
-                        strHTML += GUIUtil::HtmlEscape( CDogecoinAddress( address ).ToString() ) ;
+                        strHTML += GUIUtil::HtmlEscape( CBase58Address( address ).ToString() ) ;
                         if(toSelf == ISMINE_SPENDABLE)
                             strHTML += " (own address)";
                         else if(toSelf & ISMINE_WATCH_ONLY)
@@ -305,7 +305,7 @@ QString TransactionDesc::toHTML( CWallet * wallet, CWalletTx & wtx, TransactionR
                     {
                         if ( wallet->mapAddressBook.count( address ) && ! wallet->mapAddressBook[ address ].name.empty() )
                             from += GUIUtil::HtmlEscape( wallet->mapAddressBook[ address ].name ) + " " ;
-                        from += QString::fromStdString( CDogecoinAddress( address ).ToString() ) ;
+                        from += QString::fromStdString( CBase58Address( address ).ToString() ) ;
                     }
                     if ( from.isEmpty() )
                         from = "\"" + QString::fromStdString( ScriptToAsmStr( vout.scriptPubKey ) ) + "\"" ;
@@ -333,7 +333,7 @@ QString TransactionDesc::toHTML( CWallet * wallet, CWalletTx & wtx, TransactionR
                     {
                         if ( wallet->mapAddressBook.count( address ) && ! wallet->mapAddressBook[ address ].name.empty() )
                             from += GUIUtil::HtmlEscape( wallet->mapAddressBook[ address ].name ) + " " ;
-                        from += QString::fromStdString( CDogecoinAddress( address ).ToString() ) ;
+                        from += QString::fromStdString( CBase58Address( address ).ToString() ) ;
                     }
                     if ( from.isEmpty() )
                         from = "\"" + QString::fromStdString( ScriptToAsmStr( vout.scriptPubKey ) ) + "\"" ;
@@ -373,7 +373,7 @@ QString TransactionDesc::toHTML( CWallet * wallet, CWalletTx & wtx, TransactionR
                         {
                             if ( wallet->mapAddressBook.count( address ) && ! wallet->mapAddressBook[ address ].name.empty() )
                                 from += GUIUtil::HtmlEscape( wallet->mapAddressBook[ address ].name ) + " " ;
-                            from += QString::fromStdString( CDogecoinAddress( address ).ToString() ) ;
+                            from += QString::fromStdString( CBase58Address( address ).ToString() ) ;
                         }
                         if ( from.isEmpty() )
                             from = "\"" + QString::fromStdString( ScriptToAsmStr( vout.scriptPubKey ) ) + "\"" ;
@@ -407,7 +407,7 @@ QString TransactionDesc::toHTML( CWallet * wallet, CWalletTx & wtx, TransactionR
                 {
                     if ( wallet->mapAddressBook.count( address ) && ! wallet->mapAddressBook[ address ].name.empty() )
                         from += GUIUtil::HtmlEscape( wallet->mapAddressBook[ address ].name ) + " " ;
-                    from += QString::fromStdString( CDogecoinAddress( address ).ToString() ) ;
+                    from += QString::fromStdString( CBase58Address( address ).ToString() ) ;
                 }
                 if ( from.isEmpty() )
                     from = "\"" + QString::fromStdString( ScriptToAsmStr( txout.scriptPubKey ) ) + "\"" ;

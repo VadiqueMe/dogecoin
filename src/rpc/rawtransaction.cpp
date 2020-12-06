@@ -52,7 +52,7 @@ void ScriptPubKeyToJSON(const CScript& scriptPubKey, UniValue& out, bool fInclud
 
     UniValue a( UniValue::VARR ) ;
     for ( const CTxDestination & addr : addresses )
-        a.push_back( CDogecoinAddress( addr ).ToString() ) ;
+        a.push_back( CBase58Address( addr ).ToString() ) ;
     out.pushKV( "addresses", a ) ;
 }
 
@@ -434,7 +434,7 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
         rawTx.vin.push_back(in);
     }
 
-    std::set< CDogecoinAddress > setAddress ;
+    std::set< CBase58Address > setAddress ;
     std::vector< std::string > addrList = sendTo.getKeys() ;
     for ( const std::string & name : addrList )
     {
@@ -444,7 +444,7 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
             CTxOut out(0, CScript() << OP_RETURN << data);
             rawTx.vout.push_back(out);
         } else {
-            CDogecoinAddress address( name ) ;
+            CBase58Address address( name ) ;
             if ( ! address.IsValid() )
                 throw JSONRPCError( RPC_INVALID_ADDRESS_OR_KEY, std::string( "Invalid Dogecoin address: " ) + name ) ;
 
@@ -575,7 +575,7 @@ UniValue decodescript(const JSONRPCRequest& request)
     if ( type.isStr() && type.get_str() != "scripthash" ) {
         // P2SH cannot be wrapped in a P2SH. If this script is already a P2SH,
         // don't return the address for a P2SH of the P2SH
-        r.pushKV( "p2sh", CDogecoinAddress( CScriptID( script ) ).ToString() ) ;
+        r.pushKV( "p2sh", CBase58Address( CScriptID( script ) ).ToString() ) ;
     }
 
     return r;
@@ -704,16 +704,16 @@ UniValue signrawtransaction(const JSONRPCRequest& request)
     if ( request.params.size() > 3 && ! request.params[ 3 ].isNull() ) {
         fGivenKeys = true ;
         UniValue keys = request.params[ 3 ].get_array() ;
-        for (unsigned int idx = 0; idx < keys.size(); idx++) {
-            UniValue k = keys[idx];
-            CDogecoinSecret vchSecret ;
-            bool fGood = vchSecret.SetString(k.get_str());
-            if (!fGood)
-                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid private key");
-            CKey key = vchSecret.GetKey();
-            if (!key.IsValid())
-                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Private key outside allowed range");
-            tempKeystore.AddKey(key);
+        for ( unsigned int idx = 0 ; idx < keys.size() ; idx ++ ) {
+            UniValue k = keys[ idx ] ;
+            CBase58Secret vchSecret ;
+            bool fGood = vchSecret.SetString( k.get_str(), Params() ) ;
+            if ( ! fGood )
+                throw JSONRPCError( RPC_INVALID_ADDRESS_OR_KEY, "Invalid private key" ) ;
+            CKey key = vchSecret.GetKey() ;
+            if ( ! key.IsValid() )
+                throw JSONRPCError( RPC_INVALID_ADDRESS_OR_KEY, "Private key outside allowed range" ) ;
+            tempKeystore.AddKey( key ) ;
         }
     }
 #ifdef ENABLE_WALLET

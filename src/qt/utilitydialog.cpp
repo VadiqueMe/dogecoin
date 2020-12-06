@@ -245,11 +245,10 @@ void PaperWalletDialog::on_getNewAddress_clicked()
     CPubKey pubkey = privKey.GetPubKey();
 
     // Derive the public key hash
-    CDogecoinAddress pubkeyhash ;
-    pubkeyhash.Set( pubkey.GetID() ) ;
+    CBase58Address pubkeyhash( pubkey.GetID() ) ;
 
     // Create String versions of each
-    std::string myPrivKey = CDogecoinSecret( privKey ).ToString() ;
+    std::string myPrivKey = CBase58Secret( privKey ).ToString() ;
     std::string myPubKey = HexStr( pubkey.begin(), pubkey.end() ) ;
     std::string myAddress = pubkeyhash.ToString() ;
 

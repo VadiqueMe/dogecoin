@@ -217,7 +217,7 @@ void PaymentServer::ipcParseCommandLine(int argc, char* argv[])
             SendCoinsRecipient r;
             if ( GUIUtil::parseDogecoinURI( arg, &r ) && ! r.address.isEmpty() )
             {
-                CDogecoinAddress address( r.address.toStdString() ) ;
+                CBase58Address address( r.address.toStdString() ) ;
 
                 std::vector< std::string > chains = { "main", "inu", "test" } ;
                 for ( const std::string & chain : chains )
@@ -430,7 +430,7 @@ void PaymentServer::handleURIOrFile(const QString& s)
             SendCoinsRecipient recipient ;
             if ( GUIUtil::parseDogecoinURI( s, &recipient ) )
             {
-                CDogecoinAddress address( recipient.address.toStdString() ) ;
+                CBase58Address address( recipient.address.toStdString() ) ;
                 if ( ! address.IsValid() ) {
                     Q_EMIT message( tr("URI handling"), tr("Invalid payment address %1").arg( recipient.address ),
                         CClientUserInterface::MSG_ERROR ) ;
@@ -546,7 +546,7 @@ bool PaymentServer::processPaymentRequest( const PaymentRequestPlus & request, S
         CTxDestination dest ;
         if ( ExtractDestination( sendingTo.first, dest ) ) {
             // Append destination address
-            addresses.append( QString::fromStdString( CDogecoinAddress( dest ).ToString() ) ) ;
+            addresses.append( QString::fromStdString( CBase58Address( dest ).ToString() ) ) ;
         }
         else if ( ! recipient.authenticatedMerchant.isEmpty() ) {
             // Unauthenticated payment requests to custom dogecoin addresses are not supported

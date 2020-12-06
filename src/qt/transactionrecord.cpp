@@ -61,7 +61,7 @@ QList< TransactionRecord > TransactionRecord::decomposeTransaction( const CWalle
                 {
                     // Received by Dogecoin address
                     sub.type = TransactionRecord::RecvWithAddress ;
-                    sub.address = CDogecoinAddress( address ).ToString() ;
+                    sub.address = CBase58Address( address ).ToString() ;
                 }
                 else
                 {
@@ -134,7 +134,7 @@ QList< TransactionRecord > TransactionRecord::decomposeTransaction( const CWalle
                 {
                     // Send to Dogecoin address
                     sub.type = TransactionRecord::SendToAddress ;
-                    sub.address = CDogecoinAddress( address ).ToString() ;
+                    sub.address = CBase58Address( address ).ToString() ;
                 }
                 else
                 {

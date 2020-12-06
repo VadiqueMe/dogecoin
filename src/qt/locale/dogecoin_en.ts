@@ -1653,7 +1653,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+133"/>
+        <location line="+132"/>
         <source>failed to open file, is it writable?</source>
         <translation type="unfinished"></translation>
     </message>

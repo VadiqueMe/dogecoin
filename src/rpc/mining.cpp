@@ -212,8 +212,8 @@ UniValue generatetoaddress( const JSONRPCRequest & request )
             "\nResult:\n"
             "[ blockhashes ]   (array) hashes of blocks generated\n"
             "\nExamples:\n"
-            "\nGenerate 11 blocks to " + CDogecoinAddress::DummyDogecoinAddress( Params() ) + "\n"
-            + HelpExampleCli( "generatetoaddress", "11 \"" + CDogecoinAddress::DummyDogecoinAddress( Params() ) + "\"" )
+            "\nGenerate 11 blocks to " + CBase58Address::DummyCoinAddress( Params() ) + "\n"
+            + HelpExampleCli( "generatetoaddress", "11 \"" + CBase58Address::DummyCoinAddress( Params() ) + "\"" )
         ) ;
 
     if ( NameOfChain() == "inu" )
@@ -225,7 +225,7 @@ UniValue generatetoaddress( const JSONRPCRequest & request )
         nMaxTries = request.params[ 2 ].get_int() ;
     }
 
-    CDogecoinAddress address( request.params[ 1 ].get_str() ) ;
+    CBase58Address address( request.params[ 1 ].get_str() ) ;
     if ( ! address.IsValid() )
         throw JSONRPCError( RPC_INVALID_ADDRESS_OR_KEY, "Error: Invalid address" ) ;
 

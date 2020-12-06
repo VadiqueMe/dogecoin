@@ -349,7 +349,7 @@ public:
         {
             base58Prefixes[ Base58PrefixType::PUBKEY_ADDRESS ] = std::vector< unsigned char >( 1, pubkeyFirst ) ;
 
-            std::string addressExample = CDogecoinAddress::DummyDogecoinAddress(
+            std::string addressExample = CBase58Address::DummyCoinAddress(
                     Base58PrefixFor( Base58PrefixType::PUBKEY_ADDRESS ),
                     Base58PrefixFor( Base58PrefixType::SCRIPT_ADDRESS )
                 ) ;
@@ -369,7 +369,7 @@ public:
 
             CKey privateKey ;
             privateKey.MakeNewKey( true ) ;
-            CDogecoinSecret encodedPrivkey ;
+            CBase58Secret encodedPrivkey ;
             encodedPrivkey.SetKey( privateKey, Base58PrefixFor( Base58PrefixType::SECRET_KEY ) ) ;
             std::string privateKeyExample = encodedPrivkey.ToString() ;
             printf( "private key example %s with 0x%02x\n", privateKeyExample.c_str(), privkeyFirst ) ;

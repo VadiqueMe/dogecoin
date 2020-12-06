@@ -59,19 +59,19 @@ inline bool DecodeBase58Check( const std::string & str, std::vector< unsigned ch
 class CBase58Data
 {
 protected:
-    // version byte(s)
-    std::vector< unsigned char > vchVersion ;
+    // prefix byte(s)
+    std::vector< unsigned char > vchPrefix ;
 
     // actually encoded data
     typedef std::vector< unsigned char, zero_after_free_allocator< unsigned char > > vector_uchar ;
     vector_uchar vchData ;
 
     CBase58Data() ;
-    void SetData( const std::vector< unsigned char > & vchVersionIn, const void * pdata, size_t nSize ) ;
-    void SetData( const std::vector< unsigned char > & vchVersionIn, const unsigned char * pbegin, const unsigned char * pend ) ;
+    void SetData( const std::vector< unsigned char > & vchPrefixIn, const void * pdata, size_t nSize ) ;
+    void SetData( const std::vector< unsigned char > & vchPrefixIn, const unsigned char * pbegin, const unsigned char * pend ) ;
 
 public:
-    bool SetString( const std::string & str, unsigned int nVersionBytes = 1 ) ;
+    bool SetString( const std::string & str, unsigned int nPrefixBytes = 1 ) ;
     std::string ToString() const ;
     int CompareTo( const CBase58Data & b58 ) const ;
 
@@ -85,52 +85,75 @@ public:
 
 /** base58-encoded coin addresses
  *
- * Public-key-hash-addresses have version 0 (or 111 testnet)
- * The data vector contains RIPEMD160(SHA256(pubkey)), where pubkey is the serialized public key
- * Script-hash-addresses have version 5 (or 196 testnet)
- * The data vector contains RIPEMD160(SHA256(cscript)), where cscript is the serialized redemption script
+ * Public-key-hash-addresses
+ *   The data vector contains RIPEMD160(SHA256(pubkey)), where pubkey is the serialized public key
+ * Script-hash-addresses
+ *   The data vector contains RIPEMD160(SHA256(cscript)), where cscript is the serialized redemption script
  */
-class CDogecoinAddress : public CBase58Data
+class CBase58Address : public CBase58Data
 {
 public:
-    bool Set( const CKeyID & id, const CChainParams & params = Params() ) ;
-    bool Set( const CScriptID &id, const CChainParams & params = Params() ) ;
-    bool Set( const CTxDestination & dest ) ;
+    bool Set( const CTxDestination & dest,
+                const std::vector< unsigned char > & pubkeyPrefix,
+                const std::vector< unsigned char > & scriptPrefix ) ;
+    bool Set( const CTxDestination & dest, const CChainParams & params ) ;
+
+    bool SetByKeyID( const CKeyID & id, const std::vector< unsigned char > & pubkeyPrefix ) ;
+    bool SetByScriptID( const CScriptID & id, const std::vector< unsigned char > & scriptPrefix ) ;
 
     bool IsValid( const CChainParams & params = Params() ) const ;
     bool IsValid( const std::vector< unsigned char > & pubkeyPrefix,
                   const std::vector< unsigned char > & scriptPrefix ) const ;
 
-    CDogecoinAddress() {}
-    CDogecoinAddress( const CTxDestination & dest ) {  Set( dest ) ;  }
-    CDogecoinAddress( const std::string & strAddress ) {  SetString( strAddress ) ;  }
-    CDogecoinAddress( const char * pszAddress ) {  SetString( pszAddress ) ;  }
+    CBase58Address() {}
+
+    CBase58Address( const CTxDestination & dest, const CChainParams & params = Params() )
+    {
+        Set( dest, params ) ;
+    }
+
+    CBase58Address( const CTxDestination & dest,
+                      const std::vector< unsigned char > & pubkeyPrefix,
+                      const std::vector< unsigned char > & scriptPrefix )
+    {
+        Set( dest, pubkeyPrefix, scriptPrefix ) ;
+    }
+
+    CBase58Address( const std::string & strAddress )
+    {
+        SetString( strAddress ) ;
+    }
 
     CTxDestination Get( const CChainParams & params = Params() ) const ;
     bool GetKeyID( CKeyID & keyID, const CChainParams & params = Params() ) const ;
     bool IsScript( const CChainParams & params = Params() ) const ;
 
-    static std::string DummyDogecoinAddress( const CChainParams & params ) ;
-    static std::string DummyDogecoinAddress( const std::vector< unsigned char > & pubkeyPrefix,
-                                             const std::vector< unsigned char > & scriptPrefix ) ;
+    static std::string DummyCoinAddress( const CChainParams & params ) ;
+    static std::string DummyCoinAddress( const std::vector< unsigned char > & pubkeyPrefix,
+                                         const std::vector< unsigned char > & scriptPrefix ) ;
 } ;
 
 /**
  * A base58-encoded secret key
  */
-class CDogecoinSecret : public CBase58Data
+class CBase58Secret : public CBase58Data
 {
 
 public:
     CKey GetKey() ;
-    void SetKey( const CKey & vchSecret, const CChainParams & params = Params() ) ;
-    void SetKey( const CKey & vchSecret, const std::vector< unsigned char > & privkeyPrefix ) ;
+    void SetKey( const CKey & secretKey, const std::vector< unsigned char > & privkeyPrefix ) ;
+    void SetKey( const CKey & secretKey, const CChainParams & params ) ;
     bool IsValid( const CChainParams & params = Params() ) const ;
     bool IsValidFor( const std::vector< unsigned char > & privkeyPrefix ) const ;
-    bool SetString( const std::string & strSecret ) ;
+    bool SetString( const std::string & strSecret, const std::vector< unsigned char > & privkeyPrefix ) ;
+    bool SetString( const std::string & strSecret, const CChainParams & params ) ;
 
-    CDogecoinSecret( const CKey & vchSecret ) {  SetKey( vchSecret ) ;  }
-    CDogecoinSecret() {}
+    CBase58Secret( const CKey & secretKey, const CChainParams & params = Params() )
+    {
+        SetKey( secretKey, params ) ;
+    }
+
+    CBase58Secret() {}
 
 } ;
 

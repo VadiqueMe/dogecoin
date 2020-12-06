@@ -130,7 +130,7 @@ public:
             obj.pushKV( "hex", HexStr( subscript.begin(), subscript.end() ) ) ;
             UniValue a( UniValue::VARR ) ;
             for ( const CTxDestination & addr : addresses )
-                a.push_back( CDogecoinAddress( addr ).ToString() ) ;
+                a.push_back( CBase58Address( addr ).ToString() ) ;
             obj.pushKV( "addresses", a ) ;
             if ( whichType == TX_MULTISIG )
                 obj.pushKV( "sigsrequired", nRequired ) ;
@@ -174,7 +174,7 @@ UniValue validateaddress(const JSONRPCRequest& request)
     LOCK(cs_main);
 #endif
 
-    CDogecoinAddress address( request.params[ 0 ].get_str() ) ;
+    CBase58Address address( request.params[ 0 ].get_str() ) ;
     bool isValid = address.IsValid() ;
 
     UniValue ret( UniValue::VOBJ ) ;
@@ -240,7 +240,7 @@ CScript _createmultisig_redeemScript(const UniValue& params)
         const std::string& ks = keys[i].get_str();
 #ifdef ENABLE_WALLET
         // Case 1: Dogecoin address and we have full public key:
-        CDogecoinAddress address( ks ) ;
+        CBase58Address address( ks ) ;
         if ( pwalletMain && address.IsValid() )
         {
             CKeyID keyID ;
@@ -315,7 +315,7 @@ UniValue createmultisig(const JSONRPCRequest& request)
     // Construct using pay-to-script-hash:
     CScript inner = _createmultisig_redeemScript( request.params ) ;
     CScriptID innerID( inner ) ;
-    CDogecoinAddress address( innerID ) ;
+    CBase58Address address( innerID ) ;
 
     UniValue result(UniValue::VOBJ);
     result.pushKV( "address", address.ToString() ) ;
@@ -353,7 +353,7 @@ UniValue verifymessage(const JSONRPCRequest& request)
     std::string strSign     = request.params[ 1 ].get_str() ;
     std::string strMessage  = request.params[ 2 ].get_str() ;
 
-    CDogecoinAddress addr( strAddress ) ;
+    CBase58Address addr( strAddress ) ;
     if ( ! addr.IsValid() )
         throw JSONRPCError( RPC_TYPE_ERROR, "Invalid address" ) ;
 
@@ -385,8 +385,8 @@ UniValue signmessagewithprivkey(const JSONRPCRequest& request)
             "signmessagewithprivkey \"privkey\" \"message\"\n"
             "\nSign a message with the private key of an address\n"
             "\nArguments:\n"
-            "1. \"privkey\"         (string, required) The private key to sign the message with.\n"
-            "2. \"message\"         (string, required) The message to create a signature of.\n"
+            "1. \"privkey\"         (string, required) The private key to sign the message with\n"
+            "2. \"message\"         (string, required) The message to create a signature of\n"
             "\nResult:\n"
             "\"signature\"          (string) The signature of the message encoded in base 64\n"
             "\nExamples:\n"
@@ -401,17 +401,17 @@ UniValue signmessagewithprivkey(const JSONRPCRequest& request)
     std::string strPrivkey = request.params[ 0 ].get_str() ;
     std::string strMessage = request.params[ 1 ].get_str() ;
 
-    CDogecoinSecret vchSecret ;
-    bool fGood = vchSecret.SetString(strPrivkey);
-    if (!fGood)
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid private key");
-    CKey key = vchSecret.GetKey();
-    if (!key.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Private key outside allowed range");
+    CBase58Secret vchSecret ;
+    bool fGood = vchSecret.SetString( strPrivkey, Params() ) ;
+    if ( ! fGood )
+        throw JSONRPCError( RPC_INVALID_ADDRESS_OR_KEY, "Invalid private key" ) ;
+    CKey key = vchSecret.GetKey() ;
+    if ( ! key.IsValid() )
+        throw JSONRPCError( RPC_INVALID_ADDRESS_OR_KEY, "Private key outside allowed range" ) ;
 
-    CHashWriter ss(SER_GETHASH, 0);
-    ss << strMessageMagic;
-    ss << strMessage;
+    CHashWriter ss( SER_GETHASH, 0 ) ;
+    ss << strMessageMagic ;
+    ss << strMessage ;
 
     std::vector< unsigned char > vchSig ;
     if (!key.SignCompact(ss.GetHash(), vchSig))

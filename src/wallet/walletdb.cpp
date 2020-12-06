@@ -287,13 +287,13 @@ ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue,
         {
             std::string strAddress ;
             ssKey >> strAddress ;
-            ssValue >> pwallet->mapAddressBook[ CDogecoinAddress( strAddress ).Get() ].name ;
+            ssValue >> pwallet->mapAddressBook[ CBase58Address( strAddress ).Get() ].name ;
         }
         else if (strType == "purpose")
         {
             std::string strAddress ;
             ssKey >> strAddress ;
-            ssValue >> pwallet->mapAddressBook[ CDogecoinAddress( strAddress ).Get() ].purpose ;
+            ssValue >> pwallet->mapAddressBook[ CBase58Address( strAddress ).Get() ].purpose ;
         }
         else if ( strType == "tx" )
         {
@@ -519,7 +519,7 @@ ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue,
             ssKey >> strAddress;
             ssKey >> strKey;
             ssValue >> strValue;
-            if ( ! pwallet->LoadDestData( CDogecoinAddress( strAddress ).Get(), strKey, strValue ) )
+            if ( ! pwallet->LoadDestData( CBase58Address( strAddress ).Get(), strKey, strValue ) )
             {
                 strErr = "Error reading wallet database: LoadDestData failed";
                 return false;

@@ -144,7 +144,7 @@ void setupAddressWidget( QValidatedLineEdit * widget, QWidget * parent )
     widget->setFont( fixedPitchFont() ) ;
 #if QT_VERSION >= 0x040700
     widget->setPlaceholderText( QObject::tr( "Enter a Dogecoin address (like %1)" ).arg(
-        QString::fromStdString( CDogecoinAddress::DummyDogecoinAddress( Params() ) )
+        QString::fromStdString( CBase58Address::DummyCoinAddress( Params() ) )
     ) ) ;
 #endif
     widget->setValidator( new CoinAddressEntryValidator( parent ) ) ;

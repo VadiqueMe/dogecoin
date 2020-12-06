@@ -90,7 +90,7 @@ QValidator::State CoinAddressCheckValidator::validate( QString & input, int & po
 {
     Q_UNUSED(pos);
 
-    CDogecoinAddress addr( input.toStdString() ) ;
+    CBase58Address addr( input.toStdString() ) ;
     if ( addr.IsValid() )
         return QValidator::Acceptable ;
 

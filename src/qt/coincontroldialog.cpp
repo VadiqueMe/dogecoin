@@ -638,7 +638,7 @@ void CoinControlDialog::updateView()
             QString sAddress = "" ;
             if ( ExtractDestination( out.tx->tx->vout[ out.i ].scriptPubKey, outputAddress ) )
             {
-                sAddress = QString::fromStdString( CDogecoinAddress( outputAddress ).ToString() ) ;
+                sAddress = QString::fromStdString( CBase58Address( outputAddress ).ToString() ) ;
 
                 // if list view or change => show dogecoin address
                 // in tree view, address is not shown again for direct wallet address outputs

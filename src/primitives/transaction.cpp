@@ -11,7 +11,7 @@
 #include "utilstrencodings.h"
 
 #include "core_io.h" // ScriptToAsmStr
-#include "base58.h" // CDogecoinAddress
+#include "base58.h" // CBase58Address
 #include "script/standard.h" // ExtractDestination
 
 std::string COutPoint::ToString() const
@@ -57,7 +57,7 @@ std::string CTxOut::ToString() const
     {
         CTxDestination destination ;
         if ( ExtractDestination( scriptPubKey, destination ) )
-            outAddress = CDogecoinAddress( destination ).ToString() ;
+            outAddress = CBase58Address( destination ).ToString() ;
     }
 
     return strprintf( "CTxOut(nValue=%ld, scriptPubKey=%s \"%s\"%s)",

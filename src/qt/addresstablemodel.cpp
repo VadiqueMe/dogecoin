@@ -82,7 +82,7 @@ public:
             LOCK(wallet->cs_wallet);
             for ( const std::pair< CTxDestination, CAddressBookData > & item : wallet->mapAddressBook )
             {
-                const CDogecoinAddress & address = item.first ;
+                const CBase58Address & address = item.first ;
                 bool fMine = IsMine(*wallet, address.Get());
                 AddressTableEntry::Type addressType = translateTransactionType(
                         QString::fromStdString(item.second.purpose), fMine);
@@ -248,7 +248,7 @@ bool AddressTableModel::setData(const QModelIndex &index, const QVariant &value,
     if(role == Qt::EditRole)
     {
         LOCK(wallet->cs_wallet); /* For SetAddressBook / DelAddressBook */
-        CTxDestination curAddress = CDogecoinAddress( rec->address.toStdString() ).Get() ;
+        CTxDestination curAddress = CBase58Address( rec->address.toStdString() ).Get() ;
         if(index.column() == Label)
         {
             // Do nothing, if old label == new label
@@ -259,7 +259,7 @@ bool AddressTableModel::setData(const QModelIndex &index, const QVariant &value,
             }
             wallet->SetAddressBook(curAddress, value.toString().toStdString(), strPurpose);
         } else if(index.column() == Address) {
-            CTxDestination newAddress = CDogecoinAddress( value.toString().toStdString() ).Get() ;
+            CTxDestination newAddress = CBase58Address( value.toString().toStdString() ).Get() ;
             // Refuse to set invalid address, set error status and return false
             if(boost::get<CNoDestination>(&newAddress))
             {
@@ -360,7 +360,7 @@ QString AddressTableModel::addRow(const QString &type, const QString &label, con
         // Check for duplicate addresses
         {
             LOCK(wallet->cs_wallet);
-            if ( wallet->mapAddressBook.count( CDogecoinAddress( strAddress ).Get() ) )
+            if ( wallet->mapAddressBook.count( CBase58Address( strAddress ).Get() ) )
             {
                 editStatus = DUPLICATE_ADDRESS;
                 return QString();
@@ -386,7 +386,7 @@ QString AddressTableModel::addRow(const QString &type, const QString &label, con
                 return QString();
             }
         }
-        strAddress = CDogecoinAddress( newKey.GetID() ).ToString() ;
+        strAddress = CBase58Address( newKey.GetID() ).ToString() ;
     }
     else
     {
@@ -395,11 +395,11 @@ QString AddressTableModel::addRow(const QString &type, const QString &label, con
 
     // Add entry
     {
-        LOCK(wallet->cs_wallet);
-        wallet->SetAddressBook(CDogecoinAddress(strAddress).Get(), strLabel,
-                               (type == Send ? "send" : "receive"));
+        LOCK( wallet->cs_wallet ) ;
+        wallet->SetAddressBook( CBase58Address( strAddress ).Get(), strLabel,
+                                ( type == Send ? "send" : "receive" ) ) ;
     }
-    return QString::fromStdString(strAddress);
+    return QString::fromStdString( strAddress ) ;
 }
 
 bool AddressTableModel::removeRows(int row, int count, const QModelIndex &parent)
@@ -409,23 +409,23 @@ bool AddressTableModel::removeRows(int row, int count, const QModelIndex &parent
     if(count != 1 || !rec || rec->type == AddressTableEntry::Receiving)
     {
         // Can only remove one row at a time, and cannot remove rows not in model.
-        // Also refuse to remove receiving addresses.
+        // Also refuse to remove receiving addresses
         return false;
     }
     {
         LOCK(wallet->cs_wallet);
-        wallet->DelAddressBook( CDogecoinAddress( rec->address.toStdString() ).Get() ) ;
+        wallet->DelAddressBook( CBase58Address( rec->address.toStdString() ).Get() ) ;
     }
     return true;
 }
 
-/* Look up label for address in address book, if not found return empty string.
+/* Look up label for address in address book, if not found return empty string
  */
 QString AddressTableModel::labelForAddress(const QString &address) const
 {
     {
         LOCK(wallet->cs_wallet);
-        CDogecoinAddress address_parsed( address.toStdString() ) ;
+        CBase58Address address_parsed( address.toStdString() ) ;
         std::map<CTxDestination, CAddressBookData>::iterator mi = wallet->mapAddressBook.find(address_parsed.Get());
         if (mi != wallet->mapAddressBook.end())
         {
@@ -435,17 +435,14 @@ QString AddressTableModel::labelForAddress(const QString &address) const
     return QString();
 }
 
-int AddressTableModel::lookupAddress(const QString &address) const
+int AddressTableModel::lookupAddress( const QString & address ) const
 {
-    QModelIndexList lst = match(index(0, Address, QModelIndex()),
-                                Qt::EditRole, address, 1, Qt::MatchExactly);
-    if(lst.isEmpty())
-    {
-        return -1;
-    }
-    else
-    {
-        return lst.at(0).row();
+    QModelIndexList lst = match( index( 0, Address, QModelIndex() ),
+                                 Qt::EditRole, address, 1, Qt::MatchExactly ) ;
+    if ( lst.isEmpty() ) {
+        return -1 ;
+    } else {
+        return lst.at( 0 ).row() ;
     }
 }
 

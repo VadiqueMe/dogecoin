@@ -12,6 +12,7 @@
 #include "consensus/consensus.h"
 #include "consensus/merkle.h"
 #include "script/script.h"
+#include "base58.h"
 #include "chainparams.h"
 #include "validation.h"
 #include "utillog.h" // for error(
@@ -31,7 +32,18 @@ std::string CAuxPow::ToString() const
 {
     std::stringstream s ;
     s << "CAuxPow(" ;
-      s << "::" << CMerkleTx::ToString() << ", " ;
+      s << "::" << CMerkleTx::ToString() ;
+      if ( tx->IsCoinBase() ) {
+          CTxDestination destination ;
+          if ( ExtractDestination( tx->vout[ 0 ].scriptPubKey, destination ) )
+              s << "(tx->vout[0]: address_litecoin="
+                << CBase58Address(
+                       destination,
+                       litecoin_main_base58Prefixes.at( Base58PrefixType::PUBKEY_ADDRESS ),
+                       litecoin_main_base58Prefixes.at( Base58PrefixType::SCRIPT_ADDRESS )
+                   ).ToString() << ")" ;
+      }
+      s << ", " ;
       s << "vChainMerkleBranch[" << vChainMerkleBranch.size() << "]={" ;
         bool first = true ;
         for ( const uint256 & entry : vChainMerkleBranch ) {
@@ -81,7 +93,7 @@ bool CAuxPow::check( const uint256 & hashAuxBlock, int nChainId, const Consensus
     if ( pc == script.end() )
         return error( "Aux PoW missing chain merkle root in parent coinbase" ) ;
 
-    if (pcHead != script.end())
+    if ( pcHead != script.end() )
     {
         // Enforce only one chain merkle root by checking that a single instance of the merged
         // mining header exists just before

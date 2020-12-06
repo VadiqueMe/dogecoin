@@ -580,7 +580,7 @@ void GenerateCoinsPage::updateThreadTabs()
                     const CScript & scriptPublicKey = candidate->block.vtx[ 0 ]->vout[ 0 ].scriptPubKey ;
                     CTxDestination destination ;
                     if ( ExtractDestination( scriptPublicKey, destination ) )
-                        coinsToText += " address " + QString::fromStdString( CDogecoinAddress( destination ).ToString() ) ;
+                        coinsToText += " address " + QString::fromStdString( CBase58Address( destination ).ToString() ) ;
                     else coinsToText += " unknown address" ;
                     tab->getCoinsToLabel()->setText( coinsToText ) ;
                     tab->getCoinsToLabel()->setFont( biggerFont ) ;

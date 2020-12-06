@@ -676,7 +676,7 @@ void SendCoinsDialog::coinControlChangeEdited( const QString & text )
         if ( text.isEmpty() ) // nothing entered
             return ;
 
-        CDogecoinAddress addr = CDogecoinAddress( text.toStdString() ) ;
+        CBase58Address addr = CBase58Address( text.toStdString() ) ;
 
         if ( ! addr.IsValid() ) // invalid address
         {

@@ -11,7 +11,7 @@
 #include "script/sign.h"
 #include "streams.h"
 
-// FIXME: Dedup with BuildCreditingTransaction in test/script_tests.cpp.
+// FIXME: Dedup with BuildCreditingTransaction in test/script_tests.cpp
 static CMutableTransaction BuildCreditingTransaction(const CScript& scriptPubKey)
 {
     CMutableTransaction txCredit;
@@ -47,13 +47,13 @@ static CMutableTransaction BuildSpendingTransaction(const CScript& scriptSig, co
 }
 
 // Microbenchmark for verification of a basic P2WPKH script. Can be easily
-// modified to measure performance of other types of scripts.
+// modified to measure performance of other types of scripts
 static void VerifyScriptBench(benchmark::State& state)
 {
     const int flags = SCRIPT_VERIFY_WITNESS | SCRIPT_VERIFY_P2SH;
     const int witnessversion = 0;
 
-    // Keypair.
+    // Keypair
     CKey key;
     const unsigned char vchKey[32] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1};
     key.Set(vchKey, vchKey + 32, false);
@@ -61,7 +61,7 @@ static void VerifyScriptBench(benchmark::State& state)
     uint160 pubkeyHash;
     CHash160().Write(pubkey.begin(), pubkey.size()).Finalize(pubkeyHash.begin());
 
-    // Script.
+    // Script
     CScript scriptPubKey = CScript() << witnessversion << ToByteVector(pubkeyHash);
     CScript scriptSig;
     CScript witScriptPubkey = CScript() << OP_DUP << OP_HASH160 << ToByteVector(pubkeyHash) << OP_EQUALVERIFY << OP_CHECKSIG;
@@ -73,7 +73,7 @@ static void VerifyScriptBench(benchmark::State& state)
     witness.stack.back().push_back(static_cast<unsigned char>(SIGHASH_ALL));
     witness.stack.push_back(ToByteVector(pubkey));
 
-    // Benchmark.
+    // Benchmark
     while (state.KeepRunning()) {
         ScriptError err;
         bool success = VerifyScript(

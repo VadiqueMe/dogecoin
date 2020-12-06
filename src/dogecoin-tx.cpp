@@ -255,16 +255,16 @@ static void MutateTxAddOutAddr(CMutableTransaction& tx, const std::string& strIn
     CAmount value = ExtractAndValidateValue(vStrInputParts[0]);
 
     // extract and validate ADDRESS
-    std::string strAddr = vStrInputParts[1];
-    CDogecoinAddress addr(strAddr);
-    if (!addr.IsValid())
-        throw std::runtime_error("invalid TX output address");
-    // build standard output script via GetScriptForDestination()
-    CScript scriptPubKey = GetScriptForDestination(addr.Get());
+    std::string strAddr = vStrInputParts[ 1 ] ;
+    CBase58Address addr( strAddr ) ;
+    if ( ! addr.IsValid() )
+        throw std::runtime_error( "invalid TX output address" ) ;
+    // build standard output script
+    CScript scriptPubKey = GetScriptForDestination( addr.Get() ) ;
 
     // construct TxOut, append to transaction output list
-    CTxOut txout(value, scriptPubKey);
-    tx.vout.push_back(txout);
+    CTxOut txout( value, scriptPubKey ) ;
+    tx.vout.push_back( txout ) ;
 }
 
 static void MutateTxAddOutPubKey(CMutableTransaction& tx, const std::string& strInput)
@@ -283,8 +283,9 @@ static void MutateTxAddOutPubKey(CMutableTransaction& tx, const std::string& str
     CPubKey pubkey(ParseHex(vStrInputParts[1]));
     if (!pubkey.IsFullyValid())
         throw std::runtime_error("invalid TX output pubkey");
-    CScript scriptPubKey = GetScriptForRawPubKey(pubkey);
-    CDogecoinAddress addr(scriptPubKey);
+
+    CScript scriptPubKey = GetScriptForRawPubKey( pubkey ) ;
+    CBase58Address addr( scriptPubKey ) ;
 
     // Extract and validate FLAGS
     bool bSegWit = false;
@@ -295,20 +296,20 @@ static void MutateTxAddOutPubKey(CMutableTransaction& tx, const std::string& str
         bScriptHash = (flags.find("S") != std::string::npos);
     }
 
-    if (bSegWit) {
+    if ( bSegWit ) {
         // Call GetScriptForWitness() to build a P2WSH scriptPubKey
-        scriptPubKey = GetScriptForWitness(scriptPubKey);
+        scriptPubKey = GetScriptForWitness( scriptPubKey ) ;
     }
-    if (bScriptHash) {
+    if ( bScriptHash ) {
         // Get the address for the redeem script, then call
-        // GetScriptForDestination() to construct a P2SH scriptPubKey.
-        CDogecoinAddress redeemScriptAddr(scriptPubKey);
-        scriptPubKey = GetScriptForDestination(redeemScriptAddr.Get());
+        // GetScriptForDestination() to construct a P2SH scriptPubKey
+        CBase58Address redeemScriptAddr( scriptPubKey ) ;
+        scriptPubKey = GetScriptForDestination( redeemScriptAddr.Get() ) ;
     }
 
     // construct TxOut, append to transaction output list
-    CTxOut txout(value, scriptPubKey);
-    tx.vout.push_back(txout);
+    CTxOut txout( value, scriptPubKey ) ;
+    tx.vout.push_back( txout ) ;
 }
 
 static void MutateTxAddOutMultiSig(CMutableTransaction& tx, const std::string& strInput)
@@ -362,20 +363,20 @@ static void MutateTxAddOutMultiSig(CMutableTransaction& tx, const std::string& s
 
     CScript scriptPubKey = GetScriptForMultisig(required, pubkeys);
 
-    if (bSegWit) {
+    if ( bSegWit ) {
         // Call GetScriptForWitness() to build a P2WSH scriptPubKey
-        scriptPubKey = GetScriptForWitness(scriptPubKey);
+        scriptPubKey = GetScriptForWitness( scriptPubKey ) ;
     }
-    if (bScriptHash) {
+    if ( bScriptHash ) {
         // Get the address for the redeem script, then call
-        // GetScriptForDestination() to construct a P2SH scriptPubKey.
-        CDogecoinAddress addr(scriptPubKey);
-        scriptPubKey = GetScriptForDestination(addr.Get());
+        // GetScriptForDestination() to construct a P2SH scriptPubKey
+        CBase58Address addr( scriptPubKey ) ;
+        scriptPubKey = GetScriptForDestination( addr.Get() ) ;
     }
 
     // construct TxOut, append to transaction output list
-    CTxOut txout(value, scriptPubKey);
-    tx.vout.push_back(txout);
+    CTxOut txout( value, scriptPubKey ) ;
+    tx.vout.push_back( txout ) ;
 }
 
 static void MutateTxAddOutData(CMutableTransaction& tx, const std::string& strInput)
@@ -417,8 +418,8 @@ static void MutateTxAddOutScript(CMutableTransaction& tx, const std::string& str
     CAmount value = ExtractAndValidateValue(vStrInputParts[0]);
 
     // extract and validate script
-    std::string strScript = vStrInputParts[1];
-    CScript scriptPubKey = ParseScript(strScript);
+    std::string strScript = vStrInputParts[ 1 ] ;
+    CScript scriptPubKey = ParseScript( strScript ) ;
 
     // Extract FLAGS
     bool bSegWit = false;
@@ -429,17 +430,17 @@ static void MutateTxAddOutScript(CMutableTransaction& tx, const std::string& str
         bScriptHash = (flags.find("S") != std::string::npos);
     }
 
-    if (bSegWit) {
-      scriptPubKey = GetScriptForWitness(scriptPubKey);
+    if ( bSegWit ) {
+        scriptPubKey = GetScriptForWitness( scriptPubKey ) ;
     }
-    if (bScriptHash) {
-      CDogecoinAddress addr(scriptPubKey);
-      scriptPubKey = GetScriptForDestination(addr.Get());
+    if ( bScriptHash ) {
+        CBase58Address addr( scriptPubKey ) ;
+        scriptPubKey = GetScriptForDestination( addr.Get() ) ;
     }
 
     // construct TxOut, append to transaction output list
-    CTxOut txout(value, scriptPubKey);
-    tx.vout.push_back(txout);
+    CTxOut txout( value, scriptPubKey ) ;
+    tx.vout.push_back( txout ) ;
 }
 
 static void MutateTxDelInput(CMutableTransaction& tx, const std::string& strInIdx)
@@ -543,47 +544,47 @@ static void MutateTxSign(CMutableTransaction& tx, const std::string& flagStr)
 
     if ( ! registers.count( "privatekeys" ) )
         throw std::runtime_error( "privatekeys register variable must be set" ) ;
-    CBasicKeyStore tempKeystore;
-    UniValue keysObj = registers["privatekeys"];
+    CBasicKeyStore tempKeystore ;
+    UniValue keysObj = registers[ "privatekeys" ] ;
 
-    for (unsigned int kidx = 0; kidx < keysObj.size(); kidx++) {
-        if (!keysObj[kidx].isStr())
-            throw std::runtime_error("privatekey not a std::string");
-        CDogecoinSecret vchSecret ;
-        bool fGood = vchSecret.SetString(keysObj[kidx].getValStr());
-        if (!fGood)
-            throw std::runtime_error("privatekey not valid");
+    for ( unsigned int kidx = 0 ; kidx < keysObj.size() ; kidx ++ ) {
+        if ( ! keysObj[ kidx ].isStr() )
+            throw std::runtime_error( "privatekey not a std::string" ) ;
+        CBase58Secret vchSecret ;
+        bool fGood = vchSecret.SetString( keysObj[ kidx ].getValStr(), Params() ) ;
+        if ( ! fGood )
+            throw std::runtime_error( "privatekey not valid" ) ;
 
-        CKey key = vchSecret.GetKey();
-        tempKeystore.AddKey(key);
+        CKey key = vchSecret.GetKey() ;
+        tempKeystore.AddKey( key ) ;
     }
 
     // Add previous txouts given in the RPC call:
-    if (!registers.count("prevtxs"))
-        throw std::runtime_error("prevtxs register variable must be set.");
-    UniValue prevtxsObj = registers["prevtxs"];
+    if ( ! registers.count( "prevtxs" ) )
+        throw std::runtime_error( "prevtxs register variable must be set" ) ;
+    UniValue prevtxsObj = registers[ "prevtxs" ] ;
     {
-        for (unsigned int previdx = 0; previdx < prevtxsObj.size(); previdx++) {
-            UniValue prevOut = prevtxsObj[previdx];
-            if (!prevOut.isObject())
-                throw std::runtime_error("expected prevtxs internal object");
+        for ( unsigned int previdx = 0 ; previdx < prevtxsObj.size() ; previdx ++ ) {
+            UniValue prevOut = prevtxsObj[ previdx ] ;
+            if ( ! prevOut.isObject() )
+                throw std::runtime_error( "expected prevtxs internal object" ) ;
 
             std::map< std::string, UniValue::VType > types = {
                 { "txid", UniValue::VSTR },
                 { "vout", UniValue::VNUM },
                 { "scriptPubKey", UniValue::VSTR }
             } ;
-            if (!prevOut.checkObject(types))
-                throw std::runtime_error("prevtxs internal object typecheck fail");
+            if ( ! prevOut.checkObject( types ) )
+                throw std::runtime_error( "prevtxs internal object typecheck fail" ) ;
 
-            uint256 txid = ParseHashUV(prevOut["txid"], "txid");
+            uint256 txid = ParseHashUV( prevOut[ "txid" ], "txid" ) ;
 
-            int nOut = atoi(prevOut["vout"].getValStr());
-            if (nOut < 0)
-                throw std::runtime_error("vout must be positive");
+            int nOut = atoi( prevOut[ "vout" ].getValStr() ) ;
+            if ( nOut < 0 )
+                throw std::runtime_error( "vout must be positive" ) ;
 
-            std::vector<unsigned char> pkData(ParseHexUV(prevOut["scriptPubKey"], "scriptPubKey"));
-            CScript scriptPubKey(pkData.begin(), pkData.end());
+            std::vector< unsigned char > pkData( ParseHexUV( prevOut[ "scriptPubKey" ], "scriptPubKey" ) ) ;
+            CScript scriptPubKey( pkData.begin(), pkData.end() ) ;
 
             {
                 CCoinsModifier coins = view.ModifyCoins(txid);

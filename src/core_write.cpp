@@ -139,7 +139,7 @@ void ScriptPubKeyToUniv(const CScript& scriptPubKey,
 
     UniValue a( UniValue::VARR ) ;
     for ( const CTxDestination & addr : addresses )
-        a.push_back( CDogecoinAddress( addr ).ToString() ) ;
+        a.push_back( CBase58Address( addr ).ToString() ) ;
     out.pushKV( "addresses", a ) ;
 }
 
