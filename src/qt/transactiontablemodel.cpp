@@ -74,14 +74,14 @@ public:
      */
     void refreshWallet()
     {
-        qDebug() << "TransactionTablePriv::refreshWallet";
-        cachedWallet.clear();
+        qDebug() << "TransactionTablePriv::" << __func__ ;
+        cachedWallet.clear() ;
         {
-            LOCK2(cs_main, wallet->cs_wallet);
-            for(std::map<uint256, CWalletTx>::iterator it = wallet->mapWallet.begin(); it != wallet->mapWallet.end(); ++it)
+            LOCK2( cs_main, wallet->cs_wallet ) ;
+            for ( const std::pair< uint256, CWalletTx > & entry : wallet->mapWallet )
             {
-                if(TransactionRecord::showTransaction(it->second))
-                    cachedWallet.append(TransactionRecord::decomposeTransaction(wallet, it->second));
+                if ( TransactionRecord::showTransaction( entry.second ) )
+                    cachedWallet.append( TransactionRecord::decomposeTransaction( wallet, entry.second ) ) ;
             }
         }
     }
@@ -702,22 +702,20 @@ private:
 static bool fQueueNotifications = false;
 static std::vector< TransactionNotification > vQueueNotifications;
 
-static void NotifyTransactionChanged(TransactionTableModel *ttm, CWallet *wallet, const uint256 &hash, ChangeType status)
+static void NotifyTransactionChanged( TransactionTableModel * ttm, CWallet * wallet, const uint256 & hash, ChangeType status )
 {
     // Find transaction in wallet
-    std::map<uint256, CWalletTx>::iterator mi = wallet->mapWallet.find(hash);
+    std::map< uint256, CWalletTx >::iterator mi = wallet->mapWallet.find( hash ) ;
     // Determine whether to show transaction or not (determine this here so that no relocking is needed in GUI thread)
-    bool inWallet = mi != wallet->mapWallet.end();
-    bool showTransaction = (inWallet && TransactionRecord::showTransaction(mi->second));
+    bool inWallet = mi != wallet->mapWallet.end() ;
+    bool showTransaction = ( inWallet && TransactionRecord::showTransaction( mi->second ) ) ;
 
-    TransactionNotification notification(hash, status, showTransaction);
+    TransactionNotification notification( hash, status, showTransaction ) ;
 
-    if (fQueueNotifications)
-    {
-        vQueueNotifications.push_back(notification);
-        return;
-    }
-    notification.invoke(ttm);
+    if ( fQueueNotifications )
+        vQueueNotifications.push_back( notification ) ;
+    else
+        notification.invoke( ttm ) ;
 }
 
 static void ShowProgress(TransactionTableModel *ttm, const std::string &title, int nProgress)
@@ -735,9 +733,9 @@ static void ShowProgress(TransactionTableModel *ttm, const std::string &title, i
             if (vQueueNotifications.size() - i <= 10)
                 QMetaObject::invokeMethod(ttm, "setProcessingQueuedTransactions", Qt::QueuedConnection, Q_ARG(bool, false));
 
-            vQueueNotifications[i].invoke(ttm);
+            vQueueNotifications[ i ].invoke( ttm ) ;
         }
-        std::vector<TransactionNotification >().swap(vQueueNotifications); // clear
+        std::vector< TransactionNotification >().swap( vQueueNotifications ) ; // clear
     }
 }
 

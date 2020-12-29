@@ -1537,8 +1537,8 @@
         <translation>Digite &lt;b&gt;help&lt;/b&gt; para uma visão geral dos comandos disponíveis.</translation>
     </message>
     <message>
-        <source>WARNING: Scammers have been active, telling users to type commands here, stealing their wallet contents. Do not use this console without fully understanding the ramification of a command.</source>
-        <translation>AVISO: Scammers atacam essa área, dizendo aos usuários que comandos digitar aqui, roubando informações da carteira. Não use este console sem entender completamente as ramificações do comando.</translation>
+        <source>Do not use this console without fully understanding the ramification of a command.</source>
+        <translation>Não use este console sem entender completamente as ramificações do comando.</translation>
     </message>
     <message>
         <source>Network activity disabled</source>

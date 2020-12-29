@@ -81,9 +81,7 @@ public:
     const uint256 & GetTxHash() const {  return tx->GetTxHash() ;  }
     bool IsCoinBase() const {  return tx->IsCoinBase() ;  }
 
-    static uint256 CheckMerkleBranch( uint256 hash,
-                                      const std::vector< uint256 > & vMerkleBranch,
-                                      int nIndex ) ;
+    static uint256 CheckMerkleBranch( uint256 hash, const std::vector< uint256 > & vMerkleBranch, int nIndex ) ;
 } ;
 
 #endif

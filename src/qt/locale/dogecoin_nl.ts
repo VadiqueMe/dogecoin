@@ -1541,8 +1541,8 @@
         <translation>Typ &lt;b&gt;help&lt;/b&gt; voor een overzicht van de beschikbare opdrachten.</translation>
     </message>
     <message>
-        <source>WARNING: Scammers have been active, telling users to type commands here, stealing their wallet contents. Do not use this console without fully understanding the ramification of a command.</source>
-        <translation>WAARSCHUWING: Er zijn Scammers actief geweest, die gebruikers vragen om hier commando's te typen, waardoor de inhoud van hun portefeuille werd gestolen. Gebruik deze console niet zonder de toedracht van een opdracht volledig te begrijpen.</translation>
+        <source>Do not use this console without fully understanding the ramification of a command.</source>
+        <translation>Gebruik deze console niet zonder de toedracht van een opdracht volledig te begrijpen.</translation>
     </message>
     <message>
         <source>Network activity disabled</source>

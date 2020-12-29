@@ -133,12 +133,12 @@ CAuxpowBuilder::buildAuxpowChain(const uint256& hashAux, unsigned h, int index)
 {
     auxpowChainIndex = index;
 
-    /* Just use "something" for the branch.  Doesn't really matter.  */
+    /* Just use "something" for the branch. Doesn't really matter */
     auxpowChainMerkleBranch.clear();
     for (unsigned i = 0; i < h; ++i)
         auxpowChainMerkleBranch.push_back(ArithToUint256(arith_uint256(i)));
 
-    const uint256 hash = CAuxPow::CheckMerkleBranch(hashAux, auxpowChainMerkleBranch, index);
+    const uint256 hash = CMerkleTx::CheckMerkleBranch( hashAux, auxpowChainMerkleBranch, index ) ;
 
     std::vector<unsigned char> res = ToByteVector(hash);
     std::reverse(res.begin(), res.end());

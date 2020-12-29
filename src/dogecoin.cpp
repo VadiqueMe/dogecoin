@@ -212,11 +212,3 @@ CAmount GetDogecoinBlockSubsidy( int nHeight, const Consensus::Params & consensu
         return 1 * E12COIN ;
     }
 }
-
-CAmount GetDogecoinMinRelayFee( const CTransaction & tx, unsigned int nBytes )
-{
-    ( void ) tx ;
-    ( void ) nBytes ;
-
-    return 0 ;
-}

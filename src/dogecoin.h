@@ -20,6 +20,3 @@ uint32_t CalculateDogecoinNextWorkRequired( const CBlockIndex* pindexLast, int64
  * @return True iff the PoW is correct
  */
 bool CheckDogecoinProofOfWork( const CBlockHeader & block, const Consensus::Params & params ) ;
-
-CAmount GetDogecoinMinRelayFee( const CTransaction & tx, unsigned int nBytes ) ;
-

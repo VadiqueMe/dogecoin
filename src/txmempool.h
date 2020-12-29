@@ -86,11 +86,10 @@ private:
     int64_t feeDelta;          //!< Used for determining the priority of the transaction for mining in a block
     LockPoints lockPoints;     //!< Track the height and time at which tx was final
 
-    // Information about descendants of this transaction that are in the
-    // mempool; if we remove this transaction we must remove all of these
-    // descendants as well.  if nCountWithDescendants is 0, treat this entry as
-    // dirty, and nSizeWithDescendants and nModFeesWithDescendants will not be
-    // correct.
+    // Information about descendants of this transaction that are in the mempool;
+    // if we remove this transaction we must remove all of these descendants as well.
+    // If nCountWithDescendants is 0, treat this entry as dirty,
+    // and nSizeWithDescendants and nModFeesWithDescendants will not be correct
     uint64_t nCountWithDescendants;  //!< number of descendant transactions
     uint64_t nSizeWithDescendants;   //!< ... and size
     CAmount nModFeesWithDescendants; //!< ... and total fees (all including us)
@@ -109,8 +108,9 @@ public:
 
     CTxMemPoolEntry(const CTxMemPoolEntry& other);
 
-    const CTransaction& GetTx() const { return *this->tx; }
-    CTransactionRef GetSharedTx() const { return this->tx; }
+    const CTransaction & GetTx() const {  return *this->tx ;  }
+    CTransactionRef GetTxPtr() const {  return this->tx ;  }
+
     /**
      * Fast calculation of lower bound of current priority as update
      * from entry priority. Only inputs that were originally in-chain will age
@@ -139,7 +139,7 @@ public:
     uint64_t GetSizeWithDescendants() const { return nSizeWithDescendants; }
     CAmount GetModFeesWithDescendants() const { return nModFeesWithDescendants; }
 
-    bool GetSpendsCoinbase() const { return spendsCoinbase; }
+    bool SpendsCoinbase() const {  return spendsCoinbase ;  }
 
     uint64_t GetCountWithAncestors() const { return nCountWithAncestors; }
     uint64_t GetSizeWithAncestors() const { return nSizeWithAncestors; }
@@ -415,19 +415,10 @@ private:
     uint32_t nCheckFrequency; //!< Value n means that n times in 2^32 we check
     unsigned int nTransactionsUpdated; //!< Used by getblocktemplate to trigger CreateNewBlock() invocation
 
-    uint64_t totalTxSize;      //!< sum of all mempool tx's virtual sizes. Differs from serialized tx size since witness data is discounted. Defined in BIP 141.
+    uint64_t totalTxSize;      //!< sum of all mempool tx's virtual sizes. Differs from serialized tx size since witness data is discounted. Defined in BIP 141
     uint64_t cachedInnerUsage; //!< sum of dynamic memory usage of all the map elements (NOT the maps themselves)
 
-    mutable int64_t lastRollingFeeUpdate;
-    mutable bool blockSinceLastRollingFeeBump;
-    mutable double rollingMinimumFeeRate; //!< minimum fee to get into the pool, decreases exponentially
-
-    void trackPackageRemoved(const CFeeRate& rate);
-
 public:
-
-    static const int ROLLING_FEE_HALFLIFE = 60 * 60 * 1 ; // public only for testing
-
     typedef boost::multi_index_container<
         CTxMemPoolEntry,
         boost::multi_index::indexed_by<
@@ -531,7 +522,7 @@ public:
     void AddTransactionsUpdated(unsigned int n);
     /**
      * Check that none of this transactions inputs are in the mempool, and thus
-     * the tx is not dependent on other mempool transactions to be included in a block.
+     * the tx is not dependent on other mempool transactions to be included in a block
      */
     bool HasNoInputsOf(const CTransaction& tx) const;
 
@@ -546,7 +537,7 @@ public:
      *  also be in the set, unless this transaction is being removed for being
      *  in a block.
      *  Set updateDescendants to true when removing a tx that was in a block, so
-     *  that any in-mempool descendants have their ancestor state updated.
+     *  that any in-mempool descendants have their ancestor state updated
      */
     void RemoveStaged(setEntries &stage, bool updateDescendants, MemPoolRemovalReason reason = MemPoolRemovalReason::UNKNOWN);
 
@@ -557,9 +548,9 @@ public:
      *  descendant state for each transaction in hashesToUpdate (excluding any
      *  child transactions present in hashesToUpdate, which are already accounted
      *  for).  Note: hashesToUpdate should be the set of transactions from the
-     *  disconnected block that have been accepted back into the mempool.
+     *  disconnected block that have been accepted back into the mempool
      */
-    void UpdateTransactionsFromBlock(const std::vector<uint256> &hashesToUpdate);
+    void UpdateTransactionsFromBlock( const std::vector< uint256 > & hashesToUpdate ) ;
 
     /** Try to calculate all in-mempool ancestors of entry.
      *  (these are all calculated including the tx itself)
@@ -575,7 +566,7 @@ public:
 
     /** Populate setDescendants with all in-mempool descendants of hash.
      *  Assumes that setDescendants includes all in-mempool descendants of anything
-     *  already in it.  */
+     *  already in it */
     void CalculateDescendants(txiter it, setEntries &setDescendants);
 
     /** Remove transactions from the mempool until its dynamic size is <= sizelimit.
@@ -584,7 +575,8 @@ public:
       */
     void TrimToSize(size_t sizelimit, std::vector<uint256>* pvNoSpendsRemaining=NULL);
 
-    /** Expire all transaction (and their dependencies) in the mempool older than time. Return the number of removed transactions */
+    /** Expire all transaction (and their dependencies) in the mempool older than time.
+      * Return the number of removed transactions */
     int Expire(int64_t time);
 
     /** Returns false if the transaction is in the mempool and not within the chain limit specified */
@@ -625,24 +617,24 @@ private:
      *  mempool that must not be accounted for (because any descendants in
      *  setExclude were added to the mempool after the transaction being
      *  updated and hence their state is already reflected in the parent
-     *  state).
+     *  state)
      *
      *  cachedDescendants will be updated with the descendants of the transaction
      *  being updated, so that future invocations don't need to walk the
-     *  same transaction again, if encountered in another transaction chain.
+     *  same transaction again, if encountered in another transaction chain
      */
     void UpdateForDescendants(txiter updateIt,
             cacheMap &cachedDescendants,
             const std::set<uint256> &setExclude);
-    /** Update ancestors of hash to add/remove it as a descendant transaction. */
+    /** Update ancestors of hash to add/remove it as a descendant transaction */
     void UpdateAncestorsOf(bool add, txiter hash, setEntries &setAncestors);
     /** Set ancestor state for an entry */
     void UpdateEntryForAncestors(txiter it, const setEntries &setAncestors);
     /** For each transaction being removed, update ancestors and any direct children.
       * If updateDescendants is true, then also update in-mempool descendants'
-      * ancestor state. */
+      * ancestor state */
     void UpdateForRemoveFromMempool(const setEntries &entriesToRemove, bool updateDescendants);
-    /** Sever link between specified transaction and direct children. */
+    /** Sever link between specified transaction and direct children */
     void UpdateChildrenForRemoval(txiter entry);
 
     /** Before calling removeUnchecked for a given transaction,
@@ -651,7 +643,7 @@ private:
      *  CTxMemPoolEntry's setMemPoolParents in order to walk ancestors of a
      *  given transaction that is removed, so we can't remove intermediate
      *  transactions in a chain before we've updated all the state for the
-     *  removal.
+     *  removal
      */
     void removeUnchecked(txiter entry, MemPoolRemovalReason reason = MemPoolRemovalReason::UNKNOWN);
 };

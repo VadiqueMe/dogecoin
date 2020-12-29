@@ -1541,8 +1541,8 @@
         <translation>Taper &lt;b&gt;help&lt;/b&gt; pour afficher une vue générale des commandes proposées.</translation>
     </message>
     <message>
-        <source>WARNING: Scammers have been active, telling users to type commands here, stealing their wallet contents. Do not use this console without fully understanding the ramification of a command.</source>
-        <translation>AVERTISSEMENT : des fraudeurs sont réputés être à l'oeuvre, demandant aux utilisateurs de taper des commandes ici, et dérobant le contenu de leurs porte-monnaie. Ne pas utiliser cette console sans une compréhension parfaite des conséquences d'une commande.</translation>
+        <source>Do not use this console without fully understanding the ramification of a command.</source>
+        <translation>Ne pas utiliser cette console sans une compréhension parfaite des conséquences d'une commande.</translation>
     </message>
     <message>
         <source>Network activity disabled</source>

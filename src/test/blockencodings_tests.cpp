@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -52,18 +53,18 @@ static CBlock BuildBlockTestCase() {
     return block ;
 }
 
-// Number of shared use_counts we expect for a tx we havent touched
-// == 2 (mempool + our copy from the GetSharedTx call)
-#define SHARED_TX_OFFSET 2
+// Number of use_counts we expect for a tx we haven't touched
+// == 2 (mempool + our copy from the GetTxPtr call)
+#define TXREF_OFFSET 2
 
 BOOST_AUTO_TEST_CASE(SimpleRoundTripTest)
 {
     CTxMemPool pool ;
-    TestMemPoolEntryHelper entry;
-    CBlock block(BuildBlockTestCase());
+    TestMemPoolEntryHelper entry ;
+    CBlock block( BuildBlockTestCase() ) ;
 
     pool.addUnchecked( block.vtx[ 2 ]->GetTxHash(), entry.FromTx( *block.vtx[ 2 ] ) ) ;
-    BOOST_CHECK_EQUAL( pool.mapTx.find( block.vtx[ 2 ]->GetTxHash() )->GetSharedTx().use_count(), SHARED_TX_OFFSET + 0 ) ;
+    BOOST_CHECK_EQUAL( pool.mapTx.find( block.vtx[ 2 ]->GetTxHash() )->GetTxPtr().use_count(), TXREF_OFFSET + 0 ) ;
 
     // Do a simple ShortTxIDs RT
     {
@@ -81,7 +82,7 @@ BOOST_AUTO_TEST_CASE(SimpleRoundTripTest)
         BOOST_CHECK(!partialBlock.IsTxAvailable(1));
         BOOST_CHECK( partialBlock.IsTxAvailable(2));
 
-        BOOST_CHECK_EQUAL( pool.mapTx.find( block.vtx[ 2 ]->GetTxHash() )->GetSharedTx().use_count(), SHARED_TX_OFFSET + 1 ) ;
+        BOOST_CHECK_EQUAL( pool.mapTx.find( block.vtx[ 2 ]->GetTxHash() )->GetTxPtr().use_count(), TXREF_OFFSET + 1 ) ;
 
         size_t poolSize = pool.size();
         pool.removeRecursive(*block.vtx[2]);
@@ -162,7 +163,7 @@ BOOST_AUTO_TEST_CASE(NonCoinbasePreforwardRTTest)
     CBlock block(BuildBlockTestCase());
 
     pool.addUnchecked( block.vtx[ 2 ]->GetTxHash(), entry.FromTx( *block.vtx[ 2 ] ) ) ;
-    BOOST_CHECK_EQUAL( pool.mapTx.find( block.vtx[ 2 ]->GetTxHash() )->GetSharedTx().use_count(), SHARED_TX_OFFSET + 0 ) ;
+    BOOST_CHECK_EQUAL( pool.mapTx.find( block.vtx[ 2 ]->GetTxHash() )->GetTxPtr().use_count(), TXREF_OFFSET + 0 ) ;
 
     uint256 txhash;
 
@@ -187,7 +188,7 @@ BOOST_AUTO_TEST_CASE(NonCoinbasePreforwardRTTest)
         BOOST_CHECK( partialBlock.IsTxAvailable(1));
         BOOST_CHECK( partialBlock.IsTxAvailable(2));
 
-        BOOST_CHECK_EQUAL( pool.mapTx.find( block.vtx[ 2 ]->GetTxHash() )->GetSharedTx().use_count(), SHARED_TX_OFFSET + 1 ) ;
+        BOOST_CHECK_EQUAL( pool.mapTx.find( block.vtx[ 2 ]->GetTxHash() )->GetTxPtr().use_count(), TXREF_OFFSET + 1 ) ;
 
         CBlock block2;
         {
@@ -212,13 +213,13 @@ BOOST_AUTO_TEST_CASE(NonCoinbasePreforwardRTTest)
         BOOST_CHECK_EQUAL( block.hashMerkleRoot.ToString(), BlockMerkleRoot( block3, &mutated ).ToString() ) ;
         BOOST_CHECK( ! mutated ) ;
 
-        txhash = block.vtx[2]->GetTxHash() ;
-        block.vtx.clear();
-        block2.vtx.clear();
-        block3.vtx.clear();
-        BOOST_CHECK_EQUAL(pool.mapTx.find(txhash)->GetSharedTx().use_count(), SHARED_TX_OFFSET + 1); // + 1 because of partialBlockCopy.
+        txhash = block.vtx[ 2 ]->GetTxHash() ;
+        block.vtx.clear() ;
+        block2.vtx.clear() ;
+        block3.vtx.clear() ;
+        BOOST_CHECK_EQUAL( pool.mapTx.find( txhash )->GetTxPtr().use_count(), TXREF_OFFSET + 1 ) ; // + 1 because of partialBlockCopy
     }
-    BOOST_CHECK_EQUAL(pool.mapTx.find(txhash)->GetSharedTx().use_count(), SHARED_TX_OFFSET + 0);
+    BOOST_CHECK_EQUAL( pool.mapTx.find( txhash )->GetTxPtr().use_count(), TXREF_OFFSET + 0 ) ;
 }
 
 BOOST_AUTO_TEST_CASE(SufficientPreforwardRTTest)
@@ -228,7 +229,7 @@ BOOST_AUTO_TEST_CASE(SufficientPreforwardRTTest)
     CBlock block(BuildBlockTestCase());
 
     pool.addUnchecked( block.vtx[ 1 ]->GetTxHash(), entry.FromTx( *block.vtx[ 1 ] ) ) ;
-    BOOST_CHECK_EQUAL( pool.mapTx.find( block.vtx[ 1 ]->GetTxHash() )->GetSharedTx().use_count(), SHARED_TX_OFFSET + 0 ) ;
+    BOOST_CHECK_EQUAL( pool.mapTx.find( block.vtx[ 1 ]->GetTxHash() )->GetTxPtr().use_count(), TXREF_OFFSET + 0 ) ;
 
     uint256 txhash;
 
@@ -253,7 +254,7 @@ BOOST_AUTO_TEST_CASE(SufficientPreforwardRTTest)
         BOOST_CHECK( partialBlock.IsTxAvailable( 1 ) ) ;
         BOOST_CHECK( partialBlock.IsTxAvailable( 2 ) ) ;
 
-        BOOST_CHECK_EQUAL( pool.mapTx.find( block.vtx[ 1 ]->GetTxHash() )->GetSharedTx().use_count(), SHARED_TX_OFFSET + 1 ) ;
+        BOOST_CHECK_EQUAL( pool.mapTx.find( block.vtx[ 1 ]->GetTxHash() )->GetTxPtr().use_count(), TXREF_OFFSET + 1 ) ;
 
         CBlock block2 ;
         PartiallyDownloadedBlock partialBlockCopy = partialBlock ;
@@ -264,11 +265,11 @@ BOOST_AUTO_TEST_CASE(SufficientPreforwardRTTest)
         BOOST_CHECK( ! mutated ) ;
 
         txhash = block.vtx[ 1 ]->GetTxHash() ;
-        block.vtx.clear();
-        block2.vtx.clear();
-        BOOST_CHECK_EQUAL(pool.mapTx.find(txhash)->GetSharedTx().use_count(), SHARED_TX_OFFSET + 1); // + 1 because of partialBlockCopy
+        block.vtx.clear() ;
+        block2.vtx.clear() ;
+        BOOST_CHECK_EQUAL( pool.mapTx.find( txhash )->GetTxPtr().use_count(), TXREF_OFFSET + 1 ) ; // + 1 because of partialBlockCopy
     }
-    BOOST_CHECK_EQUAL(pool.mapTx.find(txhash)->GetSharedTx().use_count(), SHARED_TX_OFFSET + 0);
+    BOOST_CHECK_EQUAL( pool.mapTx.find( txhash )->GetTxPtr().use_count(), TXREF_OFFSET + 0 ) ;
 }
 
 BOOST_AUTO_TEST_CASE(EmptyBlockRoundTripTest)

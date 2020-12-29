@@ -110,9 +110,9 @@ public:
     }
 };
 
-PeerTableModel::PeerTableModel( NetworkModel * parent ) :
-    QAbstractTableModel(parent),
-    timer(0)
+PeerTableModel::PeerTableModel( NetworkModel * parent )
+    : QAbstractTableModel( parent )
+    , timer( 0 )
 {
     columns << tr("NodeId") << tr("Node/Service") << tr("User Agent") << tr("Ping");
     priv.reset(new PeerTablePriv());
@@ -157,10 +157,10 @@ int PeerTableModel::columnCount(const QModelIndex &parent) const
 
 QVariant PeerTableModel::data(const QModelIndex &index, int role) const
 {
-    if(!index.isValid())
-        return QVariant();
+    if ( ! index.isValid() )
+        return QVariant() ;
 
-    CNodeCombinedStats *rec = static_cast<CNodeCombinedStats*>(index.internalPointer());
+    CNodeCombinedStats * rec = static_cast< CNodeCombinedStats* >( index.internalPointer() ) ;
 
     if ( role == Qt::DisplayRole ) {
         switch ( index.column() )
@@ -220,9 +220,9 @@ const CNodeCombinedStats *PeerTableModel::getNodeStats(int idx)
 
 void PeerTableModel::refresh()
 {
-    Q_EMIT layoutAboutToBeChanged();
-    priv->refreshPeers();
-    Q_EMIT layoutChanged();
+    Q_EMIT layoutAboutToBeChanged() ;
+    priv->refreshPeers() ;
+    Q_EMIT layoutChanged() ;
 }
 
 int PeerTableModel::getRowByNodeId(NodeId nodeid)

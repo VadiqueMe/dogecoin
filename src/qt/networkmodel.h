@@ -81,7 +81,7 @@ private:
     PeerTableModel * peerTableModel ;
     BanTableModel * banTableModel ;
 
-    QTimer *pollTimer;
+    QTimer * pollTimer ;
 
     void subscribeToCoreSignals();
     void unsubscribeFromCoreSignals();

@@ -552,15 +552,15 @@ std::string FormatStateMessage(const CValidationState &state)
         state.GetRejectCode());
 }
 
-bool AcceptToMemoryPoolWorker( CTxMemPool& pool, CValidationState& state, const CTransactionRef& ptx, bool fLimitFree,
-                               bool* pfMissingInputs, int64_t nAcceptTime, std::list<CTransactionRef>* plTxnReplaced,
-                               std::vector<uint256>& vHashTxnToUncache )
+bool AcceptToMemoryPoolWorker( CTxMemPool & pool, CValidationState & state, const CTransactionRef & ptx, bool fLimitFree,
+                               bool * pfMissingInputs, int64_t nAcceptTime, std::list< CTransactionRef > * plTxnReplaced,
+                               std::vector< uint256 > & vHashTxnToUncache )
 {
-    const CTransaction& tx = *ptx;
+    const CTransaction & tx = *ptx ;
     const uint256 hash = tx.GetTxHash() ;
-    AssertLockHeld(cs_main);
-    if (pfMissingInputs)
-        *pfMissingInputs = false;
+    AssertLockHeld( cs_main ) ;
+    if ( pfMissingInputs != nullptr )
+        *pfMissingInputs = false ;
 
     if ( ! CheckTransaction( tx, state ) )
         return false ; // state filled in by CheckTransaction
@@ -698,32 +698,33 @@ bool AcceptToMemoryPoolWorker( CTxMemPool& pool, CValidationState& state, const 
 
         CAmount nValueOut = tx.GetValueOut() ;
         CAmount nFees = nValueIn - nValueOut ;
+
         // nModifiedFees includes any fee deltas from PrioritiseTransaction
         CAmount nModifiedFees = nFees ;
         double nPriorityDummy = 0 ;
         pool.ApplyDeltas( hash, nPriorityDummy, nModifiedFees ) ;
 
-        CAmount inChainInputValue;
-        double dPriority = view.GetPriority(tx, chainActive.Height(), inChainInputValue);
+        CAmount inChainInputValue ;
+        double dPriority = view.GetPriority( tx, chainActive.Height(), inChainInputValue ) ;
 
         // Keep track of transactions that spend a coinbase, which we re-scan
         // during reorgs to ensure coinbase maturity is still met
-        bool fSpendsCoinbase = false;
+        bool fSpendsCoinbase = false ;
         for ( const CTxIn & txin : tx.vin ) {
-            const CCoins *coins = view.AccessCoins(txin.prevout.hash);
-            if (coins->IsCoinBase()) {
-                fSpendsCoinbase = true;
-                break;
+            const CCoins * coins = view.AccessCoins( txin.prevout.hash ) ;
+            if ( coins->IsCoinBase() ) {
+                fSpendsCoinbase = true ;
+                break ;
             }
         }
 
-        CTxMemPoolEntry entry(ptx, nFees, nAcceptTime, dPriority, chainActive.Height(),
-                              inChainInputValue, fSpendsCoinbase, nSigOpsCost, lp);
-        unsigned int nSize = entry.GetTxSize();
+        CTxMemPoolEntry entry( ptx, nFees, nAcceptTime, dPriority, chainActive.Height(),
+                               inChainInputValue, fSpendsCoinbase, nSigOpsCost, lp ) ;
+        unsigned int nSize = entry.GetTxSize() ;
 
         // Check that the transaction doesn't have an excessive number of
         // sigops, making it impossible to mine. Since the coinbase transaction
-        // itself can contain sigops MAX_STANDARD_TX_SIGOPS is less than
+        // itself can contain sigops, MAX_STANDARD_TX_SIGOPS is less than
         // MAX_BLOCK_SIGOPS; we still consider this an invalid rather than
         // merely non-standard transaction
         if ( nSigOpsCost > MAX_STANDARD_TX_SIGOPS_COST )
@@ -733,26 +734,27 @@ bool AcceptToMemoryPoolWorker( CTxMemPool& pool, CValidationState& state, const 
         // Continuously rate-limit free (really, very-low-fee) transactions
         // This mitigates 'penny-flooding' -- sending thousands of free transactions just to
         // be annoying or make others' transactions take longer to confirm
-        if ( fLimitFree && nModifiedFees < GetDogecoinMinRelayFee( tx, nSize ) )
+        static const CAmount VERY_LOW_FEE = 10000 ;
+        if ( fLimitFree && nModifiedFees < VERY_LOW_FEE )
         {
-            static CCriticalSection csFreeLimiter;
-            static double dFreeCount;
-            static int64_t nLastTime;
-            int64_t nNow = GetTime();
+            static CCriticalSection csFreeLimiter ;
+            static double dFreeCount ;
+            static int64_t nLastTime ;
+            int64_t nNow = GetTime() ;
 
-            LOCK(csFreeLimiter);
+            LOCK( csFreeLimiter ) ;
 
             // Use an exponentially decaying ~10-minute window:
-            dFreeCount *= pow(1.0 - 1.0/600.0, (double)(nNow - nLastTime));
-            nLastTime = nNow;
+            dFreeCount *= pow( 1.0 - 1.0/600.0, (double)( nNow - nLastTime ) ) ;
+            nLastTime = nNow ;
             // -limitfreerelay unit is thousand-bytes-per-minute
             if ( dFreeCount + nSize >= GetArg( "-limitfreerelay", DEFAULT_LIMITFREERELAY ) * 10 * 1000 )
                 return false ; // rate limited free transaction
-            LogPrint("mempool", "Rate limit dFreeCount: %g => %g\n", dFreeCount, dFreeCount+nSize);
-            dFreeCount += nSize;
+            LogPrintf( "%s: rate limit dFreeCount: %g => %g\n", __func__, dFreeCount, dFreeCount + nSize ) ;
+            dFreeCount += nSize ;
         }
 
-        // Calculate in-mempool ancestors, up to a limit.
+        // Calculate in-mempool ancestors, up to a limit
         CTxMemPool::setEntries setAncestors;
         size_t nLimitAncestors = GetArg("-limitancestorcount", DEFAULT_ANCESTOR_LIMIT);
         size_t nLimitAncestorSize = GetArg("-limitancestorsize", DEFAULT_ANCESTOR_SIZE_LIMIT)*1000;
@@ -900,8 +902,8 @@ bool AcceptToMemoryPoolWorker( CTxMemPool& pool, CValidationState& state, const 
                     hash.ToString(),
                     FormatMoney( nModifiedFees - nConflictingFees ),
                     (int)nSize - (int)nConflictingSize ) ;
-            if (plTxnReplaced)
-                plTxnReplaced->push_back(it->GetSharedTx());
+            if ( plTxnReplaced != nullptr )
+                plTxnReplaced->push_back( it->GetTxPtr() ) ;
         }
         pool.RemoveStaged(allConflicting, false, MemPoolRemovalReason::REPLACED);
 

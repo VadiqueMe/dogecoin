@@ -200,7 +200,7 @@ QString TransactionDesc::toHTML( CWallet * wallet, CWalletTx & wtx, TransactionR
                 }
 
                 strHTML += "<b>" + tr("Debit") + ":</b> " + UnitsOfCoin::formatHtmlWithUnit( unit, -txout.nValue ) + "<br>" ;
-                if(toSelf)
+                if ( toSelf )
                     strHTML += "<b>" + tr("Credit") + ":</b> " + UnitsOfCoin::formatHtmlWithUnit( unit, txout.nValue ) + "<br>" ;
             }
 

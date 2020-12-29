@@ -34,19 +34,17 @@ static int64_t nLastBlockTipUpdateNotification = 0;
 
 NetworkModel::NetworkModel( QObject * parent ) :
     QObject( parent ),
-    peerTableModel( nullptr ),
-    banTableModel( nullptr ),
-    pollTimer( 0 )
+    peerTableModel( new PeerTableModel( this ) ),
+    banTableModel( new BanTableModel( this ) ),
+    pollTimer( nullptr )
 {
-    cachedBestHeaderHeight = -1;
-    cachedBestHeaderTime = -1;
-    peerTableModel = new PeerTableModel(this);
-    banTableModel = new BanTableModel(this);
-    pollTimer = new QTimer(this);
-    connect(pollTimer, SIGNAL(timeout()), this, SLOT(updateTimer()));
-    pollTimer->start(MODEL_UPDATE_DELAY);
+    cachedBestHeaderHeight = -1 ;
+    cachedBestHeaderTime = -1 ;
+    pollTimer = new QTimer( this ) ;
+    connect( pollTimer, SIGNAL( timeout() ), this, SLOT( updateTimer() ) ) ;
+    pollTimer->start( MODEL_UPDATE_DELAY ) ;
 
-    subscribeToCoreSignals();
+    subscribeToCoreSignals() ;
 }
 
 NetworkModel::~NetworkModel()
@@ -128,8 +126,8 @@ void NetworkModel::updateTimer()
 {
     // no locking required at this point
     // the following calls will acquire the required lock
-    Q_EMIT mempoolSizeChanged(getMempoolSize(), getMempoolDynamicUsage());
-    Q_EMIT bytesChanged(getTotalBytesRecv(), getTotalBytesSent());
+    Q_EMIT mempoolSizeChanged( getMempoolSize(), getMempoolDynamicUsage() ) ;
+    Q_EMIT bytesChanged( getTotalBytesRecv(), getTotalBytesSent() ) ;
 }
 
 void NetworkModel::updateNumConnections( int numConnections )
@@ -283,7 +281,7 @@ static void BlockTipChanged( NetworkModel * netmodel, bool initialSync, const CB
         netmodel->cachedBestHeaderTime = pIndex->GetBlockTime() ;
     }
     // if we are in-sync, update the UI regardless of last update time
-    if (!initialSync || now - nLastUpdateNotification > MODEL_UPDATE_DELAY) {
+    if ( ! initialSync || now - nLastUpdateNotification > MODEL_UPDATE_DELAY ) {
         // pass to the user interface thread
         QMetaObject::invokeMethod(netmodel, "numBlocksChanged", Qt::QueuedConnection,
                                   Q_ARG(int, pIndex->nHeight),

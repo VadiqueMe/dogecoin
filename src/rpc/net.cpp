@@ -519,35 +519,37 @@ UniValue setban(const JSONRPCRequest& request)
         if (request.params.size() == 4 && request.params[3].isTrue())
             absolute = true;
 
-        isSubnet ? g_connman->Ban(subNet, BanReasonManuallyAdded, banTime, absolute) : g_connman->Ban(netAddr, BanReasonManuallyAdded, banTime, absolute);
+        isSubnet ?
+            g_connman->Ban( subNet, BanReasonManuallyAdded, banTime, absolute ) :
+            g_connman->Ban( netAddr, BanReasonManuallyAdded, banTime, absolute ) ;
     }
     else if ( strCommand == "remove" )
     {
         if ( ! ( isSubnet ? g_connman->Unban( subNet ) : g_connman->Unban( netAddr ) ) )
             throw JSONRPCError( RPC_CLIENT_INVALID_IP_OR_SUBNET, "Error: Unban failed. Requested address/subnet was not previously banned" ) ;
     }
-    return NullUniValue;
+    return NullUniValue ;
 }
 
-UniValue listbanned(const JSONRPCRequest& request)
+UniValue listbanned( const JSONRPCRequest & request )
 {
-    if (request.fHelp || request.params.size() != 0)
+    if ( request.fHelp || request.params.size() != 0 )
         throw std::runtime_error(
                             "listbanned\n"
-                            "\nList all banned IPs/Subnets.\n"
+                            "\nList all banned IPs/subnets\n"
                             "\nExamples:\n"
-                            + HelpExampleCli("listbanned", "")
-                            + HelpExampleRpc("listbanned", "")
-                            );
+                            + HelpExampleCli( "listbanned", "" )
+                            + HelpExampleRpc( "listbanned", "" )
+                            ) ;
 
     if ( g_connman == nullptr )
         throw JSONRPCError( RPC_CLIENT_P2P_DISABLED, "Error: Peer-to-peer functionality is absent" ) ;
 
-    banmap_t banMap;
-    g_connman->GetBanned(banMap);
+    banmap_t banMap ;
+    g_connman->GetBanned( banMap ) ;
 
-    UniValue bannedAddresses(UniValue::VARR);
-    for (banmap_t::iterator it = banMap.begin(); it != banMap.end(); it++)
+    UniValue bannedAddresses( UniValue::VARR ) ;
+    for ( banmap_t::iterator it = banMap.begin() ; it != banMap.end() ; ++ it )
     {
         CBanEntry banEntry = ( *it ).second ;
         UniValue rec( UniValue::VOBJ ) ;
@@ -556,44 +558,44 @@ UniValue listbanned(const JSONRPCRequest& request)
         rec.pushKV( "ban_created", banEntry.nCreateTime ) ;
         rec.pushKV( "ban_reason", banEntry.banReasonToString() ) ;
 
-        bannedAddresses.push_back(rec);
+        bannedAddresses.push_back( rec ) ;
     }
 
-    return bannedAddresses;
+    return bannedAddresses ;
 }
 
-UniValue clearbanned(const JSONRPCRequest& request)
+UniValue clearbanned( const JSONRPCRequest & request )
 {
-    if (request.fHelp || request.params.size() != 0)
+    if ( request.fHelp || request.params.size() != 0 )
         throw std::runtime_error(
                             "clearbanned\n"
-                            "\nClear all banned IPs.\n"
+                            "\nClear all banned IPs\n"
                             "\nExamples:\n"
-                            + HelpExampleCli("clearbanned", "")
-                            + HelpExampleRpc("clearbanned", "")
-                            );
+                            + HelpExampleCli( "clearbanned", "" )
+                            + HelpExampleRpc( "clearbanned", "" )
+                            ) ;
+
     if ( g_connman == nullptr )
         throw JSONRPCError( RPC_CLIENT_P2P_DISABLED, "Error: Peer-to-peer functionality is absent" ) ;
 
-    g_connman->ClearBanned();
+    g_connman->ClearBanned() ;
 
-    return NullUniValue;
+    return NullUniValue ;
 }
 
-UniValue setnetworkactive(const JSONRPCRequest& request)
+UniValue setnetworkactive( const JSONRPCRequest & request )
 {
-    if (request.fHelp || request.params.size() != 1) {
+    if ( request.fHelp || request.params.size() != 1 ) {
         throw std::runtime_error(
             "setnetworkactive true|false\n"
-            "\nDisable/enable all p2p network activity.\n"
+            "\nDisable/enable all p2p network activity\n"
             "\nArguments:\n"
-            "1. \"state\"        (boolean, required) true to enable networking, false to disable\n"
-        );
+            "    \"state\"    (boolean, required) true to enable networking, false to disable\n"
+        ) ;
     }
 
-    if ( g_connman == nullptr ) {
+    if ( g_connman == nullptr )
         throw JSONRPCError( RPC_CLIENT_P2P_DISABLED, "Error: Peer-to-peer functionality is absent" ) ;
-    }
 
     g_connman->SetNetworkActive( request.params[0].get_bool() ) ;
 
@@ -614,7 +616,7 @@ UniValue sendtextmsg( const JSONRPCRequest & request )
             + HelpExampleCli( "sendtextmsg", "1 \"aloha dude\"" )
             + HelpExampleCli( "sendtextmsg", "92.168.10.200:" + std::to_string( BaseParams().GetDefaultPort() ) + " sun is shining" )
             + HelpExampleRpc( "sendtextmsg", "92.168.10.200:" + std::to_string( BaseParams().GetDefaultPort() ) + ", pong" )
-        );
+        ) ;
 
     if ( g_connman == nullptr )
         throw JSONRPCError( RPC_CLIENT_P2P_DISABLED, "Error: Peer-to-peer functionality is absent" ) ;

@@ -517,7 +517,7 @@
 <context>
     <name>DogecoinGUI</name>
     <message>
-        <location filename="../gui.cpp" line="+143"/>
+        <location filename="../gui.cpp" line="+156"/>
         <source>Wallet</source>
         <translation type="unfinished">Wallet</translation>
     </message>
@@ -527,7 +527,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+205"/>
+        <location line="+192"/>
         <source>Transactions</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1153,7 +1153,7 @@
 <context>
     <name>NetworkModel</name>
     <message>
-        <location filename="../networkmodel.cpp" line="+159"/>
+        <location filename="../networkmodel.cpp" line="+157"/>
         <source>Network Alert</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1983,7 +1983,7 @@
 <context>
     <name>RPCConsole</name>
     <message>
-        <location filename="../forms/gutswindow.ui" line="+24"/>
+        <location filename="../forms/gutswindow.ui" line="+219"/>
         <source>Information</source>
         <translation>Information</translation>
     </message>
@@ -2028,33 +2028,33 @@
         <translation>Current number of blocks</translation>
     </message>
     <message>
-        <location line="+379"/>
+        <location line="+184"/>
         <source>Memory Pool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+48"/>
+        <location line="+38"/>
         <source>Current number of transactions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-7"/>
+        <location line="+39"/>
         <source>Memory usage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-727"/>
+        <location line="-763"/>
         <source>Guts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+322"/>
+        <location line="+517"/>
         <source>Log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+582"/>
-        <location filename="../rpcconsole.cpp" line="+1331"/>
+        <location line="+428"/>
+        <location filename="../rpcconsole.cpp" line="+1349"/>
         <source>Received</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2096,7 +2096,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/gutswindow.ui" line="-740"/>
+        <location filename="../forms/gutswindow.ui" line="-586"/>
         <location filename="../rpcconsole.cpp" line="+1"/>
         <source>Version</source>
         <translation type="unfinished"></translation>
@@ -2123,7 +2123,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+448"/>
+        <location line="-228"/>
         <source>Decrease font size</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2148,7 +2148,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-532"/>
+        <source>Do not use this console without fully understanding the ramification of a command.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+533"/>
         <source>Last Send</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2178,7 +2183,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/gutswindow.ui" line="-301"/>
+        <location filename="../forms/gutswindow.ui" line="+375"/>
         <source>Last block time</source>
         <translation>Last block time</translation>
     </message>
@@ -2188,12 +2193,12 @@
         <translation>&amp;Open</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="-663"/>
         <source>Console</source>
         <translation>Console</translation>
     </message>
     <message>
-        <location line="+298"/>
+        <location line="+820"/>
         <source>Network Traffic</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2203,7 +2208,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../rpcconsole.cpp" line="-508"/>
+        <location filename="../rpcconsole.cpp" line="-505"/>
         <source>In:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2213,12 +2218,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/gutswindow.ui" line="-250"/>
+        <location filename="../forms/gutswindow.ui" line="-772"/>
         <source>Clear console</source>
         <translation>Clear console</translation>
     </message>
     <message>
-        <location filename="../rpcconsole.cpp" line="-218"/>
+        <location filename="../rpcconsole.cpp" line="-217"/>
         <source>Send message</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2250,7 +2255,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+46"/>
+        <location line="+45"/>
         <source>&amp;Unban</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2270,17 +2275,12 @@
         <translation>Type &lt;b&gt;help&lt;/b&gt; for an overview of available commands.</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>WARNING: Scammers have been active, telling users to type commands here, stealing their wallet contents. Do not use this console without fully understanding the ramification of a command.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+43"/>
+        <location line="+45"/>
         <source>Network activity is off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+536"/>
+        <location line="+533"/>
         <source>(node id: %1)</source>
         <translation type="unfinished"></translation>
     </message>

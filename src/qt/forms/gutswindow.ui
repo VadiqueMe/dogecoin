@@ -17,8 +17,203 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
+     <widget class="QWidget" name="tab_console">
+      <attribute name="title">
+       <string>Console</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="consoleVerticalLayout">
+       <property name="spacing">
+        <number>3</number>
+       </property>
+       <property name="bottomMargin">
+        <number>5</number>
+       </property>
+       <item>
+        <layout class="QHBoxLayout" name="consoleToolbarHorizontalLayout">
+         <property name="spacing">
+          <number>4</number>
+         </property>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="fontSmallerButton">
+           <property name="maximumSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>Decrease font size</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../dogecoin.qrc">
+             <normaloff>:/icons/fontsmaller</normaloff>:/icons/fontsmaller</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="autoDefault">
+            <bool>false</bool>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="fontBiggerButton">
+           <property name="maximumSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>Increase font size</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../dogecoin.qrc">
+             <normaloff>:/icons/fontbigger</normaloff>:/icons/fontbigger</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="autoDefault">
+            <bool>false</bool>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="clearConsoleButton">
+           <property name="maximumSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>Clear console</string>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../dogecoin.qrc">
+             <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
+           </property>
+           <property name="shortcut">
+            <string notr="true">Ctrl+L</string>
+           </property>
+           <property name="autoDefault">
+            <bool>false</bool>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QTextEdit" name="messagesWidget">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>100</height>
+          </size>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+         <property name="tabKeyNavigation" stdset="0">
+          <bool>false</bool>
+         </property>
+         <property name="columnCount" stdset="0">
+          <number>2</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayoutPrompt">
+         <property name="spacing">
+          <number>3</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="promptIcon">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../dogecoin.qrc">
+             <normaloff>:/icons/prompticon</normaloff>
+             <disabledoff>:/icons/prompticon</disabledoff>:/icons/prompticon</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>14</width>
+             <height>14</height>
+            </size>
+           </property>
+           <property name="autoDefault">
+            <bool>false</bool>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit">
+           <property name="placeholderText">
+            <string/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
      <widget class="QWidget" name="tab_info">
       <attribute name="title">
        <string>Information</string>
@@ -500,201 +695,6 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab_console">
-      <attribute name="title">
-       <string>Console</string>
-      </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
-       <property name="spacing">
-        <number>3</number>
-       </property>
-       <property name="bottomMargin">
-        <number>5</number>
-       </property>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
-         <property name="spacing">
-          <number>4</number>
-         </property>
-         <item>
-          <spacer name="horizontalSpacer">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QPushButton" name="fontSmallerButton">
-           <property name="maximumSize">
-            <size>
-             <width>24</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>Decrease font size</string>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../dogecoin.qrc">
-             <normaloff>:/icons/fontsmaller</normaloff>:/icons/fontsmaller</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>24</width>
-             <height>16</height>
-            </size>
-           </property>
-           <property name="autoDefault">
-            <bool>false</bool>
-           </property>
-           <property name="flat">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="fontBiggerButton">
-           <property name="maximumSize">
-            <size>
-             <width>24</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>Increase font size</string>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../dogecoin.qrc">
-             <normaloff>:/icons/fontbigger</normaloff>:/icons/fontbigger</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>24</width>
-             <height>16</height>
-            </size>
-           </property>
-           <property name="autoDefault">
-            <bool>false</bool>
-           </property>
-           <property name="flat">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="clearConsoleButton">
-           <property name="maximumSize">
-            <size>
-             <width>24</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>Clear console</string>
-           </property>
-           <property name="layoutDirection">
-            <enum>Qt::LeftToRight</enum>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../dogecoin.qrc">
-             <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
-           </property>
-           <property name="shortcut">
-            <string notr="true">Ctrl+L</string>
-           </property>
-           <property name="autoDefault">
-            <bool>false</bool>
-           </property>
-           <property name="flat">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <widget class="QTextEdit" name="messagesWidget">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>100</height>
-          </size>
-         </property>
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-         <property name="tabKeyNavigation" stdset="0">
-          <bool>false</bool>
-         </property>
-         <property name="columnCount" stdset="0">
-          <number>2</number>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayoutPrompt">
-         <property name="spacing">
-          <number>3</number>
-         </property>
-         <item>
-          <widget class="QPushButton" name="promptIcon">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../dogecoin.qrc">
-             <normaloff>:/icons/prompticon</normaloff>
-             <disabledoff>:/icons/prompticon</disabledoff>:/icons/prompticon</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>14</width>
-             <height>14</height>
-            </size>
-           </property>
-           <property name="autoDefault">
-            <bool>false</bool>
-           </property>
-           <property name="flat">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="lineEdit">
-           <property name="placeholderText">
-            <string/>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </widget>
      <widget class="QWidget" name="tab_mempool">
       <attribute name="title">
        <string>Memory Pool</string>
@@ -716,40 +716,30 @@
         <number>8</number>
        </property>
        <item>
-        <layout class="QGridLayout" name="gridLayoutForTopOfMempool" columnstretch="0,0,0">
+        <layout class="QHBoxLayout" name="layoutForMempoolInfoLine">
+         <property name="spacing">
+          <number>20</number>
+         </property>
          <property name="leftMargin">
           <number>4</number>
          </property>
          <property name="topMargin">
-          <number>8</number>
+          <number>4</number>
          </property>
          <property name="rightMargin">
           <number>4</number>
          </property>
          <property name="bottomMargin">
-          <number>8</number>
+          <number>4</number>
          </property>
-         <property name="horizontalSpacing">
-          <number>12</number>
-         </property>
-         <property name="verticalSpacing">
-          <number>8</number>
-         </property>
-         <item row="1" column="0">
-          <widget class="QLabel" name="labelMemoryUsage">
-           <property name="text">
-            <string>Memory usage</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
+         <item>
           <widget class="QLabel" name="labelNumberOfTransactions">
            <property name="text">
             <string>Current number of transactions</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="1">
+         <item>
           <widget class="QLabel" name="mempoolNumberTxs">
            <property name="cursor">
             <cursorShape>IBeamCursor</cursorShape>
@@ -765,7 +755,33 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="1" colspan="2">
+         <item>
+          <spacer name="mempool_mid_column">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Expanding</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>50</width>
+             <height>1</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLabel" name="labelMemoryUsage">
+           <property name="text">
+            <string>Memory usage</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignAbsolute|Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QLabel" name="mempoolSize">
            <property name="cursor">
             <cursorShape>IBeamCursor</cursorShape>
@@ -776,6 +792,9 @@
            <property name="textFormat">
             <enum>Qt::PlainText</enum>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignAbsolute|Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
            <property name="textInteractionFlags">
             <set>Qt::TextSelectableByMouse</set>
            </property>
@@ -784,14 +803,36 @@
         </layout>
        </item>
        <item>
-        <spacer name="mempoolBottomSpacer">
+        <widget class="QTableView" name="mempoolTable">
+         <property name="verticalScrollBarPolicy">
+          <enum>Qt::ScrollBarAsNeeded</enum>
+         </property>
+         <property name="horizontalScrollBarPolicy">
+          <enum>Qt::ScrollBarAsNeeded</enum>
+         </property>
+         <property name="tabKeyNavigation">
+          <bool>false</bool>
+         </property>
+         <property name="sortingEnabled">
+          <bool>true</bool>
+         </property>
+         <attribute name="horizontalHeaderHighlightSections">
+          <bool>false</bool>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <spacer name="vspaceAfterMempoolTable">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
            <width>1</width>
-           <height>10</height>
+           <height>3</height>
           </size>
          </property>
         </spacer>
@@ -802,7 +843,7 @@
       <attribute name="title">
        <string>Network Traffic</string>
       </attribute>
-      <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <layout class="QHBoxLayout" name="netTrafficHorizontalLayout">
        <item>
         <layout class="QVBoxLayout" name="layoutForGraph">
          <item>

@@ -203,8 +203,8 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction
 
     if ( recipients.empty() ) return SendCoinsStatus::OK ;
 
-    QSet< QString > setAddress ; // Used to detect duplicates
-    int nAddresses = 0 ;
+    QSet< QString > uniqueAddresses ; // used to detect duplicates
+    size_t nAddresses = 0 ;
 
     // Pre-check input data for validity
     for ( const SendCoinsRecipient & rcp : recipients )
@@ -219,12 +219,12 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction
             for ( int i = 0 ; i < details.outputs_size() ; i ++ )
             {
                 const payments::Output & out = details.outputs( i ) ;
-                CAmount amount = out.amount() ;
-                if ( amount <= 0 ) continue ;
-                subtotal += amount ;
+                if ( out.amount() <= 0 ) continue ;
+                CAmount outAmount = out.amount() ;
+                subtotal += outAmount ;
                 const unsigned char* scriptStr = (const unsigned char*)out.script().data() ;
                 CScript scriptPubKey( scriptStr, scriptStr + out.script().size() ) ;
-                CRecipient recipient = { scriptPubKey, amount, rcp.fSubtractFeeFromAmount } ;
+                CRecipient recipient = { scriptPubKey, outAmount, rcp.fSubtractFeeFromAmount } ;
                 vecSend.push_back( recipient ) ;
             }
             if ( subtotal <= 0 )
@@ -233,13 +233,13 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction
             total += subtotal;
         }
         else
-        {   // entered dogecoin address / amount
+        {   // entered dogecoin address and amount
             if ( ! validateAddress( rcp.address ) )
                 return SendCoinsStatus::InvalidAddress ;
             if ( rcp.amount <= 0 )
                 return SendCoinsStatus::InvalidAmount ;
 
-            setAddress.insert( rcp.address ) ;
+            uniqueAddresses.insert( rcp.address ) ;
             ++ nAddresses ;
 
             CScript scriptPubKey = GetScriptForDestination( CBase58Address( rcp.address.toStdString() ).Get() ) ;
@@ -250,7 +250,7 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction
         }
     }
 
-    if ( setAddress.size() != nAddresses )
+    if ( uniqueAddresses.size() != nAddresses )
         return SendCoinsStatus::DuplicateAddress ;
 
     CAmount nBalance = getBalance( coinControl ) ;

@@ -240,8 +240,6 @@ public:
         , coinbaseScript( nullptr )
         , howManyBlocksWereGeneratedByThisThread( 0 )
         , currentCandidate( nullptr )
-        , smallestScryptHashBlock( ~ arith_uint256() )
-        , smallestScryptHashAll( ~ arith_uint256() )
         , randomDevice()
         , randomNumber( randomDevice() )
         , threadBeginsMillis( GetTimeMillis() )
@@ -265,7 +263,7 @@ public:
 
     void MineBlocks() ;
 
-    std::string threadMiningInfoString( bool withSmallestHashes = true ) const ;
+    std::string threadMiningInfoString() const ;
 
     size_t getNumberOfThread() const {  return numberOfThread ;  }
 
@@ -293,10 +291,6 @@ public:
     {
         return currentCandidate->block.vtx[ 0 ]->vout[ 0 ].nValue + /* <= 0 */ currentCandidate->vTxFees[ 0 ] ;
     }
-
-    const arith_uint256 & getSmallestScryptHashFoundForCurrentBlock() const {  return smallestScryptHashBlock ;  }
-
-    const arith_uint256 & getSmallestScryptHashEverFoundByThisThread() const {  return smallestScryptHashAll ;  }
 
     uint32_t howManyNoncesAreTriedForCurrentBlock() const {  return noncesScanned ;  }
 
@@ -334,9 +328,6 @@ private:
     size_t howManyBlocksWereGeneratedByThisThread ;
 
     std::unique_ptr< CBlockTemplate > currentCandidate ;
-
-    arith_uint256 smallestScryptHashBlock ;
-    arith_uint256 smallestScryptHashAll ;
 
     std::random_device randomDevice ;
     std::mt19937 randomNumber ;

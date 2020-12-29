@@ -10,7 +10,7 @@
 #include "rpcconsole.h"
 #include "ui_gutswindow.h"
 
-#include "bantablemodel.h"
+#include "mempoolmodel.h"
 #include "networkmodel.h"
 #include "guiutil.h"
 #include "platformstyle.h"
@@ -432,13 +432,14 @@ void RPCPerformer::request( const QString & command )
 
 RPCConsole::RPCConsole( const PlatformStyle * style, QWidget * parent )
     : QWidget( parent )
-    , ui( new Ui::RPCConsole )
-    , networkModel(0)
-    , historyPtr(0)
+    , ui( new Ui::RPCConsole() )
+    , mempoolModel( nullptr )
+    , networkModel( nullptr )
+    , historyPtr( 0 )
     , platformStyle( style )
-    , peersTableContextMenu(0)
-    , banTableContextMenu(0)
-    , consoleFontSize(0)
+    , peersTableContextMenu( nullptr )
+    , banTableContextMenu( nullptr )
+    , consoleFontSize( 0 )
     , pathToLogFile( GUIUtil::boostPathToQString(boost::filesystem::path( GetDirForData() / LOG_FILE_NAME )) )
     , logFileWatcher()
     , resetBytesRecv( 0 )
@@ -467,6 +468,26 @@ RPCConsole::RPCConsole( const PlatformStyle * style, QWidget * parent )
         ui->openDebugLogButton->setIcon( platformStyle->SingleColorIcon( ":/icons/export" ) ) ;
 
     connect( &logFileWatcher, SIGNAL( fileChanged(QString) ), this, SLOT( onFileChange(const QString &) ) ) ;
+
+    // tx memory pool table
+    mempoolModel = new MempoolModel( ui->mempoolTable ) ;
+    mempoolModel->sort( MempoolModel::ColumnIndex::Time, Qt::DescendingOrder ) ;
+    ui->mempoolTable->horizontalHeader()->setSortIndicator( MempoolModel::ColumnIndex::Time, Qt::DescendingOrder ) ;
+    ui->mempoolTable->setModel( mempoolModel ) ;
+    ui->mempoolTable->verticalHeader()->hide() ;
+    ui->mempoolTable->horizontalHeader()->setSectionResizeMode( MempoolModel::ColumnIndex::Priority, QHeaderView::Interactive ) ;
+    ui->mempoolTable->horizontalHeader()->setSectionResizeMode( MempoolModel::ColumnIndex::Time, QHeaderView::Interactive ) ;
+    ui->mempoolTable->horizontalHeader()->setSectionResizeMode( MempoolModel::ColumnIndex::Hash, QHeaderView::Stretch ) ;
+    ui->mempoolTable->horizontalHeader()->setSectionResizeMode( MempoolModel::ColumnIndex::Credit, QHeaderView::ResizeToContents ) ;
+    ui->mempoolTable->horizontalHeader()->setSectionResizeMode( MempoolModel::ColumnIndex::Fee, QHeaderView::ResizeToContents ) ;
+    ui->mempoolTable->resizeRowsToContents() ;
+    ui->mempoolTable->verticalHeader()->setDefaultSectionSize( ui->mempoolTable->rowHeight( 0 ) ) ;
+    ui->mempoolTable->setEditTriggers( QAbstractItemView::NoEditTriggers ) ;
+    ui->mempoolTable->setSelectionBehavior( QAbstractItemView::SelectRows ) ;
+    ui->mempoolTable->setSelectionMode( QAbstractItemView::SingleSelection ) ;
+    ui->mempoolTable->setContextMenuPolicy( Qt::NoContextMenu ) ;
+
+    ////connect( mempoolModel, SIGNAL( layoutChanged() ), this, SLOT( mempoolLayoutChanged() ) ) ;
 
     ui->clearConsoleButton->setIcon( platformStyle->SingleColorIcon( ":/icons/remove" ) ) ;
     ui->fontBiggerButton->setIcon( platformStyle->SingleColorIcon( ":/icons/fontbigger" ) ) ;
@@ -526,7 +547,7 @@ RPCConsole::~RPCConsole()
 {
     GUIUtil::saveWindowGeometry( "nRPCConsoleWindow", this ) ;
     RPCUnsetTimerInterface( rpcTimerInterface ) ;
-    delete rpcTimerInterface ;
+    delete rpcTimerInterface ; rpcTimerInterface = nullptr ;
     delete ui ;
 }
 
@@ -594,18 +615,19 @@ void RPCConsole::setNetworkModel( NetworkModel * model )
         connect( model, SIGNAL( bytesChanged(quint64, quint64) ), this, SLOT( updateTrafficStats() ) ) ;
 
         connect( model, SIGNAL( mempoolSizeChanged(long, size_t) ), this, SLOT( setMempoolSize(long, size_t) ) ) ;
+        connect( model, SIGNAL( mempoolSizeChanged(long, size_t) ), mempoolModel, SLOT( refresh() ) ) ;
 
         // set up peer table
         ui->peerWidget->setModel( model->getPeerTableModel() ) ;
-        ui->peerWidget->verticalHeader()->hide();
-        ui->peerWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
-        ui->peerWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
-        ui->peerWidget->setSelectionMode(QAbstractItemView::ExtendedSelection);
-        ui->peerWidget->setContextMenuPolicy(Qt::CustomContextMenu);
-        ui->peerWidget->setColumnWidth(PeerTableModel::Address, ADDRESS_COLUMN_WIDTH);
-        ui->peerWidget->setColumnWidth(PeerTableModel::Subversion, SUBVERSION_COLUMN_WIDTH);
-        ui->peerWidget->setColumnWidth(PeerTableModel::Ping, PING_COLUMN_WIDTH);
-        ui->peerWidget->horizontalHeader()->setStretchLastSection(true);
+        ui->peerWidget->verticalHeader()->hide() ;
+        ui->peerWidget->horizontalHeader()->setStretchLastSection( true ) ;
+        ui->peerWidget->setEditTriggers( QAbstractItemView::NoEditTriggers ) ;
+        ui->peerWidget->setSelectionBehavior( QAbstractItemView::SelectRows ) ;
+        ui->peerWidget->setSelectionMode( QAbstractItemView::SingleSelection ) ;
+        ui->peerWidget->setContextMenuPolicy( Qt::CustomContextMenu ) ;
+        ui->peerWidget->setColumnWidth( PeerTableModel::Address, ADDRESS_COLUMN_WIDTH ) ;
+        ui->peerWidget->setColumnWidth( PeerTableModel::Subversion, SUBVERSION_COLUMN_WIDTH ) ;
+        ui->peerWidget->setColumnWidth( PeerTableModel::Ping, PING_COLUMN_WIDTH ) ;
 
         // create peer table context menu actions
         QAction* sendMessageAction = new QAction( tr("Send message") + "...", this ) ;
@@ -640,25 +662,24 @@ void RPCConsole::setNetworkModel( NetworkModel * model )
 
         // peer table signal handling - update peer details when selecting new node
         connect( ui->peerWidget->selectionModel(), SIGNAL( selectionChanged(const QItemSelection &, const QItemSelection &) ),
-            this, SLOT( peerSelected(const QItemSelection &, const QItemSelection &) ) ) ;
+                 this, SLOT( peerSelected(const QItemSelection &, const QItemSelection &) ) ) ;
         // peer table signal handling - update peer details when new nodes are added to the model
-        connect(model->getPeerTableModel(), SIGNAL(layoutChanged()), this, SLOT(peerLayoutChanged()));
+        connect( model->getPeerTableModel(), SIGNAL( layoutChanged() ), this, SLOT( peerLayoutChanged() ) ) ;
         // peer table signal handling - cache selected node ids
-        connect(model->getPeerTableModel(), SIGNAL(layoutAboutToBeChanged()), this, SLOT(peerLayoutAboutToChange()));
+        connect( model->getPeerTableModel(), SIGNAL( layoutAboutToBeChanged() ), this, SLOT( peerLayoutAboutToChange() ) ) ;
 
         // set up ban table
         ui->banlistWidget->setModel( model->getBanTableModel() ) ;
-        ui->banlistWidget->verticalHeader()->hide();
-        ui->banlistWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
-        ui->banlistWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
-        ui->banlistWidget->setSelectionMode(QAbstractItemView::SingleSelection);
-        ui->banlistWidget->setContextMenuPolicy(Qt::CustomContextMenu);
-        ui->banlistWidget->setColumnWidth(BanTableModel::Address, BANSUBNET_COLUMN_WIDTH);
-        ui->banlistWidget->setColumnWidth(BanTableModel::Bantime, BANTIME_COLUMN_WIDTH);
-        ui->banlistWidget->horizontalHeader()->setStretchLastSection(true);
+        ui->banlistWidget->verticalHeader()->hide() ;
+        ui->banlistWidget->horizontalHeader()->setStretchLastSection( true ) ;
+        ui->banlistWidget->setEditTriggers( QAbstractItemView::NoEditTriggers ) ;
+        ui->banlistWidget->setSelectionBehavior( QAbstractItemView::SelectRows ) ;
+        ui->banlistWidget->setSelectionMode( QAbstractItemView::SingleSelection ) ;
+        ui->banlistWidget->setContextMenuPolicy( Qt::CustomContextMenu ) ;
+        ui->banlistWidget->setColumnWidth( BanTableModel::Address, BANSUBNET_COLUMN_WIDTH ) ;
+        ui->banlistWidget->setColumnWidth( BanTableModel::Bantime, BANTIME_COLUMN_WIDTH ) ;
 
-        // create ban table context menu action
-        QAction* unbanAction = new QAction(tr("&Unban"), this);
+        QAction* unbanAction = new QAction( tr("&Unban"), this ) ;
 
         // create ban table context menu
         banTableContextMenu = new QMenu( this ) ;
@@ -780,7 +801,7 @@ void RPCConsole::clearConsole( bool clearHistory )
                 "td.message { font-family: %1; font-size: %2; white-space:pre-wrap; } "
                 "td.cmd-request { color: #006060; } "
                 "td.cmd-error { color: red; } "
-                ".secwarning { color: red; }"
+                ".msgknowledge { color: red; }"
                 "b { color: #006060; } "
             ).arg(fixedFontInfo.family(), QString("%1pt").arg(consoleFontSize))
         );
@@ -788,8 +809,8 @@ void RPCConsole::clearConsole( bool clearHistory )
     message( CMD_REPLY, ( tr("Welcome to the %1 RPC console.").arg( PACKAGE_NAME ) + "<br>" +
                           tr("Use up and down arrows to navigate history, and <b>Ctrl-L</b> to clear screen.") + "<br>" +
                           tr("Type <b>help</b> for an overview of available commands.") ) +
-                        "<br><span class=\"secwarning\">" +
-                        tr("WARNING: Scammers have been active, telling users to type commands here, stealing their wallet contents. Do not use this console without fully understanding the ramification of a command.") +
+                        "<br><span class=\"msgknowledge\">" +
+                        tr("Do not use this console without fully understanding the ramification of a command.") +
                         "</span>",
                     true ) ;
 }
@@ -856,21 +877,21 @@ void RPCConsole::setNumBlocks( int count, const QDateTime & blockDate, double pr
     }
 }
 
-void RPCConsole::setMempoolSize(long numberOfTxs, size_t dynUsage)
+void RPCConsole::setMempoolSize( long numberOfTxs, size_t dynUsage )
 {
-    ui->mempoolNumberTxs->setText(QString::number(numberOfTxs));
+    ui->mempoolNumberTxs->setText( QString::number( numberOfTxs ) ) ;
 
-    if (dynUsage < 1000000)
-        ui->mempoolSize->setText(QString::number(dynUsage/1000.0, 'f', 2) + " KB");
+    if ( dynUsage < 1000000 )
+        ui->mempoolSize->setText( QString::number( dynUsage/1000.0, 'f', 2 ) + " KB" ) ;
     else
-        ui->mempoolSize->setText(QString::number(dynUsage/1000000.0, 'f', 2) + " MB");
+        ui->mempoolSize->setText( QString::number( dynUsage/1000000.0, 'f', 2 ) + " MB" ) ;
 }
 
 void RPCConsole::on_lineEdit_returnPressed()
 {
-    QString cmd = ui->lineEdit->text();
+    QString cmd = ui->lineEdit->text() ;
 
-    if(!cmd.isEmpty())
+    if ( ! cmd.isEmpty() )
     {
         std::string strFilteredCmd;
         try {
@@ -1217,15 +1238,13 @@ void RPCConsole::peerLayoutChanged()
     bool fUnselect = false;
     bool fReselect = false;
 
-    if (cachedNodeids.empty()) // no node selected yet
-        return;
+    if ( cachedNodeids.empty() ) return ; // no node selected yet
 
     // find the currently selected row
-    int selectedRow = -1;
-    QModelIndexList selectedModelIndex = ui->peerWidget->selectionModel()->selectedIndexes();
-    if (!selectedModelIndex.isEmpty()) {
-        selectedRow = selectedModelIndex.first().row();
-    }
+    int selectedRow = -1 ;
+    QModelIndexList selectedModelIndex = ui->peerWidget->selectionModel()->selectedIndexes() ;
+    if ( ! selectedModelIndex.isEmpty() )
+        selectedRow = selectedModelIndex.first().row() ;
 
     // check if our detail node has a row in the table (it may not necessarily
     // be at selectedRow since its position can change after a layout change)
@@ -1238,11 +1257,10 @@ void RPCConsole::peerLayoutChanged()
     }
     else
     {
-        if (detailNodeRow != selectedRow)
-        {
+        if ( detailNodeRow != selectedRow ) {
             // detail node moved position
-            fUnselect = true;
-            fReselect = true;
+            fUnselect = true ;
+            fReselect = true ;
         }
 
         // get fresh stats on the detail node
@@ -1253,7 +1271,7 @@ void RPCConsole::peerLayoutChanged()
         clearSelectedNode() ;
     }
 
-    if (fReselect)
+    if ( fReselect )
     {
         for ( int i = 0 ; i < cachedNodeids.size() ; i ++ )
         {
@@ -1341,7 +1359,7 @@ void RPCConsole::constructPeerDetailsWidget()
 
     QGridLayout * peerDetailsLayout = new QGridLayout() ;
     int row = 0 ;
-    for ( std::pair< QString, QLabel * > detail : peerDetails )
+    for ( const std::pair< QString, QLabel * > & detail : peerDetails )
     {
         QLabel * textLabel = new QLabel( detail.first, peerDetailsWidget.get() ) ;
         peerDetailsLayout->addWidget( textLabel, row, /* column */ 0 ) ;
@@ -1446,18 +1464,18 @@ void RPCConsole::hideEvent(QHideEvent *event)
     networkModel->getPeerTableModel()->stopAutoRefresh() ;
 }
 
-void RPCConsole::showPeersTableContextMenu(const QPoint& point)
+void RPCConsole::showPeersTableContextMenu( const QPoint & point )
 {
-    QModelIndex index = ui->peerWidget->indexAt(point);
-    if (index.isValid())
-        peersTableContextMenu->exec(QCursor::pos());
+    QModelIndex index = ui->peerWidget->indexAt( point ) ;
+    if ( index.isValid() )
+        peersTableContextMenu->exec( QCursor::pos() ) ;
 }
 
-void RPCConsole::showBanTableContextMenu(const QPoint& point)
+void RPCConsole::showBanTableContextMenu( const QPoint & point )
 {
-    QModelIndex index = ui->banlistWidget->indexAt(point);
-    if (index.isValid())
-        banTableContextMenu->exec(QCursor::pos());
+    QModelIndex index = ui->banlistWidget->indexAt( point ) ;
+    if ( index.isValid() )
+        banTableContextMenu->exec( QCursor::pos() ) ;
 }
 
 #include <QInputDialog>

@@ -83,22 +83,22 @@ const std::string DogecoinGUI::DEFAULT_UIPLATFORM =
 const QString DogecoinGUI::DEFAULT_WALLET = "~Default" ;
 
 DogecoinGUI::DogecoinGUI( const PlatformStyle * style, const NetworkStyle * networkStyle, QWidget * parent ) :
-    QMainWindow(parent),
-    enableWallet(false),
+    QMainWindow( parent ),
+    enableWallet( false ),
     networkModel( nullptr ),
     optionsModel( nullptr ),
     walletFrame( nullptr ),
-    unitDisplayControl(0),
-    labelWalletEncryptionIcon(0),
-    labelWalletHDStatusIcon(0),
+    unitDisplayControl( nullptr ),
+    labelWalletEncryptionIcon( nullptr ),
+    labelWalletHDStatusIcon( nullptr ),
     connectionsControl( nullptr ),
     onionIcon( nullptr ),
-    labelBlocksIcon(0),
+    labelBlocksIcon( nullptr ),
     generatingLabel( nullptr ),
-    progressBarLabel(0),
-    progressBar(0),
-    progressDialog(0),
-    appMenuBar(0),
+    progressBarLabel( nullptr ),
+    progressBar( nullptr ),
+    progressDialog( nullptr ),
+    appMenuBar( nullptr ),
     overviewTabAction( nullptr ),
     historyTabAction( nullptr ),
     quitAction( nullptr ),
@@ -122,18 +122,31 @@ DogecoinGUI::DogecoinGUI( const PlatformStyle * style, const NetworkStyle * netw
     showHelpMessageAction( nullptr ),
     digTabAction( nullptr ),
     showGutsWindowButton( nullptr ),
-    trayIcon(0),
-    trayIconMenu(0),
-    notificator(0),
-    rpcConsole(0),
+    trayIcon( nullptr ),
+    trayIconMenu( nullptr ),
+    notificator( nullptr ),
+    rpcConsole( nullptr ),
     chainsyncOverlay( nullptr ),
     helpMessageDialog( nullptr ),
-    prevBlocks(0),
-    spinnerFrame(0),
+    prevBlocks( 0 ),
+    spinnerFrame( 0 ),
     platformStyle( style ),
     everySecondTimer( new QTimer() )
 {
     GUIUtil::restoreWindowGeometry("nWindow", QSize(850, 550), this);
+
+    // Dogecoin: load fallback font in case Comic Sans is not availble on the system
+    QFontDatabase::addApplicationFont( ":fonts/ComicNeue-Bold" ) ;
+    QFontDatabase::addApplicationFont( ":fonts/ComicNeue-Bold-Oblique" ) ;
+    QFontDatabase::addApplicationFont( ":fonts/ComicNeue-Light" ) ;
+    QFontDatabase::addApplicationFont( ":fonts/ComicNeue-Light-Oblique" ) ;
+    QFontDatabase::addApplicationFont( ":fonts/ComicNeue-Regular" ) ;
+    QFontDatabase::addApplicationFont( ":fonts/ComicNeue-Regular-Oblique" ) ;
+    QFont::insertSubstitution( "Comic Sans MS", "Comic Neue" ) ;
+
+    // Dogecoin: Specify Comic Sans as new application font
+    QFont newFont( "Comic Sans MS", 10 ) ;
+    QApplication::setFont( newFont ) ;
 
     QString windowTitle = QString( PACKAGE_NAME ) + " - " ;
 #ifdef ENABLE_WALLET
@@ -175,19 +188,6 @@ DogecoinGUI::DogecoinGUI( const PlatformStyle * style, const NetworkStyle * netw
          */
         setCentralWidget( rpcConsole ) ;
     }
-
-    // Dogecoin: load fallback font in case Comic Sans is not availble on the system
-    QFontDatabase::addApplicationFont( ":fonts/ComicNeue-Bold" ) ;
-    QFontDatabase::addApplicationFont( ":fonts/ComicNeue-Bold-Oblique" ) ;
-    QFontDatabase::addApplicationFont( ":fonts/ComicNeue-Light" ) ;
-    QFontDatabase::addApplicationFont( ":fonts/ComicNeue-Light-Oblique" ) ;
-    QFontDatabase::addApplicationFont( ":fonts/ComicNeue-Regular" ) ;
-    QFontDatabase::addApplicationFont( ":fonts/ComicNeue-Regular-Oblique" ) ;
-    QFont::insertSubstitution( "Comic Sans MS", "Comic Neue" ) ;
-
-    // Dogecoin: Specify Comic Sans as new application font
-    QFont newFont( "Comic Sans MS", 10 ) ;
-    QApplication::setFont( newFont ) ;
 
     // Accept D&D of URIs
     setAcceptDrops(true);

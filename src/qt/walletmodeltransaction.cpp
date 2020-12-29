@@ -21,7 +21,7 @@ WalletModelTransaction::~WalletModelTransaction()
 
 unsigned int WalletModelTransaction::getSizeOfTransaction() const
 {
-    return ::GetVirtualTransactionSize( walletTransaction ) ;
+    return GetVirtualTransactionSize( walletTransaction ) ;
 }
 
 void WalletModelTransaction::reassignAmounts( int nChangePosRet )

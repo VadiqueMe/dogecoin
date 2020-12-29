@@ -1541,8 +1541,8 @@
         <translation>Tast &lt;b&gt;help&lt;/b&gt; for en oversigt over de tilgængelige kommandoer.</translation>
     </message>
     <message>
-        <source>WARNING: Scammers have been active, telling users to type commands here, stealing their wallet contents. Do not use this console without fully understanding the ramification of a command.</source>
-        <translation>ADVARSEL: Svindlere har tidligere forsøgt at få folk til at indtaste kommandoer her og derved stjæle indholdet af deres tegnebog. Brug ikke denne konsol uden fuldt ud at forstå følgerne for en kommando.</translation>
+        <source>Do not use this console without fully understanding the ramification of a command.</source>
+        <translation>Brug ikke denne konsol uden fuldt ud at forstå følgerne for en kommando.</translation>
     </message>
     <message>
         <source>Network activity disabled</source>

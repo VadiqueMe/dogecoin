@@ -18,6 +18,7 @@
 #include <QFileSystemWatcher>
 
 class NetworkModel ;
+class MempoolModel ;
 class PlatformStyle ;
 class RPCTimerInterface ;
 
@@ -100,7 +101,7 @@ public Q_SLOTS:
     /** Set number of blocks and last block date shown in the UI */
     void setNumBlocks( int count, const QDateTime & blockDate, double progress, bool headers ) ;
     /** Set size (number of transactions and memory usage) of the mempool in the UI */
-    void setMempoolSize(long numberOfTxs, size_t dynUsage);
+    void setMempoolSize( long numberOfTxs, size_t dynUsage ) ;
     /** Go forward or back in history */
     void browseHistory(int offset);
     /** Scroll console view to end */
@@ -145,19 +146,20 @@ private:
         BANTIME_COLUMN_WIDTH = 250
     };
 
-    Ui::RPCConsole *ui;
+    Ui::RPCConsole * ui ;
+    MempoolModel * mempoolModel ;
     NetworkModel * networkModel ;
-    QStringList history;
-    int historyPtr;
-    QString cmdBeforeBrowsing;
-    QList<NodeId> cachedNodeids;
-    const PlatformStyle *platformStyle;
-    RPCTimerInterface *rpcTimerInterface;
-    QMenu *peersTableContextMenu;
-    QMenu *banTableContextMenu;
-    int consoleFontSize;
-    QCompleter *autoCompleter;
-    QThread thread;
+    QStringList history ;
+    int historyPtr ;
+    QString cmdBeforeBrowsing ;
+    QList< NodeId > cachedNodeids ;
+    const PlatformStyle * platformStyle ;
+    RPCTimerInterface * rpcTimerInterface ;
+    QMenu * peersTableContextMenu ;
+    QMenu * banTableContextMenu ;
+    int consoleFontSize ;
+    QCompleter * autoCompleter ;
+    QThread thread ;
 
     QString pathToLogFile ;
     QFileSystemWatcher logFileWatcher ;

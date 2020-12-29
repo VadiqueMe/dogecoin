@@ -1,4 +1,5 @@
 // Copyright (c) 2016 The Bitcoin Core developers
+// Copyright (c) 2020 vadique
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -99,37 +100,37 @@ ReadStatus PartiallyDownloadedBlock::InitData(const CBlockHeaderAndShortTxIDs& c
             return READ_STATUS_FAILED;
     }
     // TODO: in the shortid-collision case, we should instead request both transactions
-    // which collided. Falling back to full-block-request here is overkill.
+    // which collided. Falling back to full-block-request here is overkill
     if (shorttxids.size() != cmpctblock.shorttxids.size())
         return READ_STATUS_FAILED; // Short ID collision
 
     std::vector<bool> have_txn(txn_available.size());
     {
-    LOCK(pool->cs);
-    const std::vector<std::pair<uint256, CTxMemPool::txiter> >& vTxHashes = pool->vTxHashes;
-    for (size_t i = 0; i < vTxHashes.size(); i++) {
-        uint64_t shortid = cmpctblock.GetShortID(vTxHashes[i].first);
-        std::unordered_map<uint64_t, uint16_t>::iterator idit = shorttxids.find(shortid);
-        if (idit != shorttxids.end()) {
-            if (!have_txn[idit->second]) {
-                txn_available[idit->second] = vTxHashes[i].second->GetSharedTx();
-                have_txn[idit->second]  = true;
-                mempool_count++;
+    LOCK( pool->cs ) ;
+    const std::vector< std::pair< uint256, CTxMemPool::txiter > > & vTxHashes = pool->vTxHashes ;
+    for ( size_t i = 0 ; i < vTxHashes.size() ; i ++ ) {
+        uint64_t shortid = cmpctblock.GetShortID( vTxHashes[ i ].first ) ;
+        std::unordered_map< uint64_t, uint16_t >::iterator idit = shorttxids.find( shortid ) ;
+        if ( idit != shorttxids.end() ) {
+            if ( ! have_txn[ idit->second ] ) {
+                txn_available[ idit->second ] = vTxHashes[ i ].second->GetTxPtr() ;
+                have_txn[ idit->second ]  = true ;
+                mempool_count ++ ;
             } else {
                 // If we find two mempool txn that match the short id, just request it.
                 // This should be rare enough that the extra bandwidth doesn't matter,
                 // but eating a round-trip due to FillBlock failure would be annoying
-                if (txn_available[idit->second]) {
-                    txn_available[idit->second].reset();
-                    mempool_count--;
+                if ( txn_available[ idit->second ] ) {
+                    txn_available[ idit->second ].reset() ;
+                    mempool_count -- ;
                 }
             }
         }
         // Though ideally we'd continue scanning for the two-txn-match-shortid case,
         // the performance win of an early exit here is too good to pass up and worth
-        // the extra risk.
-        if (mempool_count == shorttxids.size())
-            break;
+        // the extra risk
+        if ( mempool_count == shorttxids.size() )
+            break ;
     }
     }
 
@@ -159,9 +160,9 @@ ReadStatus PartiallyDownloadedBlock::InitData(const CBlockHeaderAndShortTxIDs& c
         }
         // Though ideally we'd continue scanning for the two-txn-match-shortid case,
         // the performance win of an early exit here is too good to pass up and worth
-        // the extra risk.
-        if (mempool_count == shorttxids.size())
-            break;
+        // the extra risk
+        if ( mempool_count == shorttxids.size() )
+            break ;
     }
 
     LogPrint( "cmpctblock", "Initialized PartiallyDownloadedBlock for block %s using a cmpctblock of size %lu\n",
@@ -205,7 +206,7 @@ ReadStatus PartiallyDownloadedBlock::FillBlock(CBlock& block, const std::vector<
         // TODO: We really want to just check merkle tree manually here,
         // but that is expensive, and CheckBlock caches a block's
         // "checked-status" (in the CBlock?). CBlock should be able to
-        // check its own merkle root and cache that check.
+        // check its own merkle root and cache that check
         if (state.CorruptionPossible())
             return READ_STATUS_FAILED; // Possible Short ID collision
         return READ_STATUS_CHECKBLOCK_FAILED;

@@ -587,7 +587,7 @@ void GenerateCoinsPage::updateThreadTabs()
                 }
             }
 
-            std::string miningInfoText = tab->getThread()->threadMiningInfoString( NameOfChain() != "inu" ) ;
+            std::string miningInfoText = tab->getThread()->threadMiningInfoString() ;
             tab->getMiningInfoLabel()->setText( QString::fromStdString( miningInfoText ) ) ;
             tab->getMiningInfoLabel()->setFont( smallerFont ) ;
 

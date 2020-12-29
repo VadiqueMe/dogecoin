@@ -1526,8 +1526,8 @@
         <translation>使用 &lt;b&gt;help&lt;/b&gt; 命令显示帮助信息。</translation>
     </message>
     <message>
-        <source>WARNING: Scammers have been active, telling users to type commands here, stealing their wallet contents. Do not use this console without fully understanding the ramification of a command.</source>
-        <translation>警告： 已有骗子通过要求用户在此输入指令以盗取钱包。不要在没有完全理解命令规范时使用控制台。</translation>
+        <source>Do not use this console without fully understanding the ramification of a command.</source>
+        <translation>不要在没有完全理解命令规范时使用控制台。</translation>
     </message>
     <message>
         <source>Network activity disabled</source>

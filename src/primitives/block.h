@@ -57,8 +57,7 @@ public:
     }
 
     /**
-     * Set the block's auxpow (or unset it). This takes care of updating
-     * the version accordingly
+     * Set the block's auxpow (or unset it). Update the version accordingly
      * @param pointer to the auxpow to use or null
      */
     void SetAuxpow( CAuxPow * newAuxpow ) ;
@@ -117,10 +116,11 @@ public:
     // If non-NULL, *mutated is set to whether mutation was detected in the merkle
     // tree (a duplication of transactions in the block leading to an identical
     // merkle root)
-    uint256 BuildMerkleTree( bool* mutated = nullptr ) const ;
+    //// uint256 BuildMerkleTree( bool* mutated = nullptr ) const ;
+    // new version is BlockMerkleRoot in consensus/merkle.h
 
-    std::vector< uint256 > GetMerkleBranch( int nIndex ) const ;
-    static uint256 CheckMerkleBranch( uint256 hash, const std::vector< uint256 > & vMerkleBranch, int nIndex ) ;
+    //// std::vector< uint256 > GetMerkleBranch( int nIndex ) const ;
+    // new version is BlockMerkleBranch in consensus/merkle.h
 
     std::string ToString() const ;
 } ;

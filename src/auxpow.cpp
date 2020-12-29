@@ -72,12 +72,12 @@ bool CAuxPow::check( const uint256 & hashAuxBlock, int nChainId, const Consensus
 
     // Check that the chain merkle root is in the coinbase
     const uint256 nRootHash
-      = CheckMerkleBranch(hashAuxBlock, vChainMerkleBranch, nChainIndex);
-    std::vector<unsigned char> vchRootHash(nRootHash.begin(), nRootHash.end());
-    std::reverse(vchRootHash.begin(), vchRootHash.end()); // correct endian
+      = CMerkleTx::CheckMerkleBranch( hashAuxBlock, vChainMerkleBranch, nChainIndex ) ;
+    std::vector< unsigned char > vchRootHash( nRootHash.begin(), nRootHash.end() ) ;
+    std::reverse( vchRootHash.begin(), vchRootHash.end() ) ; // correct endian
 
     // Check that we are in the parent block merkle tree
-    if ( CheckMerkleBranch( GetTxHash(), vMerkleBranch, nIndex ) != parentBlock.hashMerkleRoot )
+    if ( CMerkleTx::CheckMerkleBranch( GetTxHash(), vMerkleBranch, nIndex ) != parentBlock.hashMerkleRoot )
         return error( "Aux POW merkle root incorrect" ) ;
 
     const CScript script = tx->vin[ 0 ].scriptSig ;

@@ -1900,16 +1900,27 @@ bool CWallet::SelectCoins( const std::vector< COutput > & vAvailableCoins,
     return res;
 }
 
-bool CWallet::FundTransaction(CMutableTransaction& tx, CAmount& nFeeRet, bool overrideEstimatedFeeRate, const CFeeRate& specificFeeRate, int& nChangePosInOut, std::string& strFailReason, bool includeWatching, bool lockUnspents, const std::set<int>& setSubtractFeeFromOutputs, bool keepReserveKey, const CTxDestination& destChange)
+bool CWallet::FundTransaction(
+        CMutableTransaction & tx,
+        CAmount & nFeeRet,
+        bool overrideEstimatedFeeRate,
+        const CFeeRate & specificFeeRate,
+        int & nChangePosInOut,
+        std::string & strFailReason,
+        bool includeWatching,
+        bool lockUnspents,
+        const std::set< int > & setSubtractFeeFromOutputs,
+        bool keepReserveKey,
+        const CTxDestination & destChange )
 {
     std::vector< CRecipient > vecSend ;
 
     // Turn the txout set into a CRecipient vector
-    for (size_t idx = 0; idx < tx.vout.size(); idx++)
+    for ( size_t idx = 0 ; idx < tx.vout.size() ; idx ++ )
     {
-        const CTxOut& txOut = tx.vout[idx];
-        CRecipient recipient = {txOut.scriptPubKey, txOut.nValue, setSubtractFeeFromOutputs.count(idx) == 1};
-        vecSend.push_back(recipient);
+        const CTxOut& txOut = tx.vout[ idx ] ;
+        CRecipient recipient = { txOut.scriptPubKey, txOut.nValue, setSubtractFeeFromOutputs.count( idx ) == 1 } ;
+        vecSend.push_back( recipient ) ;
     }
 
     CCoinControl coinControl ;
@@ -1922,25 +1933,24 @@ bool CWallet::FundTransaction(CMutableTransaction& tx, CAmount& nFeeRet, bool ov
 
     CReserveKey reservekey(this);
     CWalletTx wtx;
-    if (!CreateTransaction(vecSend, wtx, reservekey, nFeeRet, nChangePosInOut, strFailReason, &coinControl, false))
-        return false;
+    if ( ! CreateTransaction( vecSend, wtx, reservekey, nFeeRet, nChangePosInOut, strFailReason, &coinControl, false ) )
+        return false ;
 
-    if (nChangePosInOut != -1)
-        tx.vout.insert(tx.vout.begin() + nChangePosInOut, wtx.tx->vout[nChangePosInOut]);
+    if ( nChangePosInOut != -1 )
+        tx.vout.insert( tx.vout.begin() + nChangePosInOut, wtx.tx->vout[ nChangePosInOut ] ) ;
 
     // Copy output sizes from new transaction; they may have had the fee subtracted from them
-    for (unsigned int idx = 0; idx < tx.vout.size(); idx++)
-        tx.vout[idx].nValue = wtx.tx->vout[idx].nValue;
+    for ( unsigned int idx = 0 ; idx < tx.vout.size() ; idx ++ )
+        tx.vout[ idx ].nValue = wtx.tx->vout[ idx ].nValue ;
 
     // Add new txins (keeping original txin scriptSig/order)
     for ( const CTxIn & txin : wtx.tx->vin )
     {
-        if (!coinControl.IsSelected(txin.prevout))
+        if ( ! coinControl.IsSelected( txin.prevout ) )
         {
-            tx.vin.push_back(txin);
+            tx.vin.push_back( txin ) ;
 
-            if (lockUnspents)
-            {
+            if ( lockUnspents ) {
               LOCK2(cs_main, cs_wallet);
               LockCoin(txin.prevout);
             }
@@ -1948,43 +1958,46 @@ bool CWallet::FundTransaction(CMutableTransaction& tx, CAmount& nFeeRet, bool ov
     }
 
     // optionally keep the change output key
-    if (keepReserveKey)
-        reservekey.KeepKey();
+    if ( keepReserveKey )
+        reservekey.KeepKey() ;
 
-    return true;
+    return true ;
 }
 
-bool CWallet::CreateTransaction( const std::vector< CRecipient > & vecSend,
-                                 CWalletTx & wtxNew, CReserveKey & reservekey,
-                                 CAmount & nFeeRet, int & nChangePosInOut,
-                                 std::string & strFailReason,
-                                 const CCoinControl * coinControl,
-                                 bool sign )
+bool CWallet::CreateTransaction(
+        const std::vector< CRecipient > & vecSend,
+        CWalletTx & wtxNew,
+        CReserveKey & reservekey,
+        CAmount & nFeeRet,
+        int & nChangePosInOut,
+        std::string & strFailReason,
+        const CCoinControl * coinControl,
+        bool sign )
 {
-    CAmount nValue = 0;
-    int nChangePosRequest = nChangePosInOut;
-    unsigned int nSubtractFeeFromAmount = 0;
-    for (const auto& recipient : vecSend)
+    CAmount nValue = 0 ;
+    int nChangePosRequest = nChangePosInOut ;
+    unsigned int nSubtractFeeFromAmount = 0 ;
+    for ( const CRecipient & recipient : vecSend )
     {
-        if (nValue < 0 || recipient.nAmount < 0)
+        if ( nValue < 0 || recipient.nAmount < 0 )
         {
             strFailReason = _("Transaction amounts must not be negative");
             return false;
         }
-        nValue += recipient.nAmount;
+        nValue += recipient.nAmount ;
 
-        if (recipient.fSubtractFeeFromAmount)
-            nSubtractFeeFromAmount++;
+        if ( recipient.fSubtractFeeFromAmount )
+            nSubtractFeeFromAmount++ ;
     }
-    if (vecSend.empty())
+    if ( vecSend.empty() )
     {
         strFailReason = _("Transaction must have at least one recipient");
         return false;
     }
 
-    wtxNew.fTimeReceivedIsTxTime = true;
-    wtxNew.BindWallet(this);
-    CMutableTransaction txNew;
+    wtxNew.fTimeReceivedIsTxTime = true ;
+    wtxNew.BindWallet( this ) ;
+    CMutableTransaction txNew ;
 
     // Discourage fee sniping
     //

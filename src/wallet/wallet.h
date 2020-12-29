@@ -493,6 +493,7 @@ public:
     void ReacceptWalletTransactions();
     void ResendWalletTransactions(int64_t nBestBlockTime, CConnman* connman) override;
     std::vector<uint256> ResendWalletTransactionsBefore(int64_t nTime, CConnman* connman);
+
     CAmount GetBalance() const;
     CAmount GetUnconfirmedBalance() const;
     CAmount GetImmatureBalance() const;
@@ -501,19 +502,34 @@ public:
     CAmount GetImmatureWatchOnlyBalance() const;
 
     /**
-     * Insert additional inputs into the transaction by
-     * calling CreateTransaction();
+     * Insert additional inputs into the transaction by calling CreateTransaction()
      */
-    bool FundTransaction(CMutableTransaction& tx, CAmount& nFeeRet, bool overrideEstimatedFeeRate, const CFeeRate& specificFeeRate, int& nChangePosInOut, std::string& strFailReason, bool includeWatching, bool lockUnspents, const std::set<int>& setSubtractFeeFromOutputs, bool keepReserveKey = true, const CTxDestination& destChange = CNoDestination());
+    bool FundTransaction( CMutableTransaction & tx,
+                          CAmount & nFeeRet,
+                          bool overrideEstimatedFeeRate,
+                          const CFeeRate & specificFeeRate,
+                          int & nChangePosInOut,
+                          std::string & strFailReason,
+                          bool includeWatching,
+                          bool lockUnspents,
+                          const std::set< int > & setSubtractFeeFromOutputs,
+                          bool keepReserveKey = true,
+                          const CTxDestination & destChange = CNoDestination() ) ;
 
     /**
      * Create a new transaction paying the recipients with a set of coins
-     * selected by SelectCoins(); Also create the change output, when needed
+     * selected by SelectCoins(). Also create the change output, when needed
      * @note passing nChangePosInOut as -1 will result in setting a random position
      */
-    bool CreateTransaction(const std::vector<CRecipient>& vecSend, CWalletTx& wtxNew, CReserveKey& reservekey, CAmount& nFeeRet, int& nChangePosInOut,
-                           std::string& strFailReason, const CCoinControl *coinControl = NULL, bool sign = true);
-    bool CommitTransaction(CWalletTx& wtxNew, CReserveKey& reservekey, CConnman* connman, CValidationState& state);
+    bool CreateTransaction( const std::vector< CRecipient > & vecSend,
+                            CWalletTx & wtxNew,
+                            CReserveKey & reservekey,
+                            CAmount & nFeeRet,
+                            int & nChangePosInOut,
+                            std::string & strFailReason,
+                            const CCoinControl * coinControl = nullptr,
+                            bool sign = true ) ;
+    bool CommitTransaction( CWalletTx & wtxNew, CReserveKey & reservekey, CConnman * connman, CValidationState & state ) ;
 
     void ListAccountCreditDebit(const std::string& strAccount, std::list<CAccountingEntry>& entries);
     bool AddAccountingEntry(const CAccountingEntry&);

@@ -1541,8 +1541,8 @@
         <translation>사용할 수 있는 명령을 둘러보려면 &lt;b&gt;help&lt;/b&gt;를 입력하십시오.</translation>
     </message>
     <message>
-        <source>WARNING: Scammers have been active, telling users to type commands here, stealing their wallet contents. Do not use this console without fully understanding the ramification of a command.</source>
-        <translation>경고 : 사기꾼이 사용자에게 여기에 명령을 입력하게 하여 지갑 내용을 훔칠수 있다는 사실을 알려드립니다. 명령어를 완전히 이해하지 못한다면 콘솔을 사용하지 마십시오.</translation>
+        <source>Do not use this console without fully understanding the ramification of a command.</source>
+        <translation>명령어를 완전히 이해하지 못한다면 콘솔을 사용하지 마십시오.</translation>
     </message>
     <message>
         <source>Network activity disabled</source>
