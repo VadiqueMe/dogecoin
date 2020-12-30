@@ -506,7 +506,6 @@ public:
      */
     bool FundTransaction( CMutableTransaction & tx,
                           CAmount & nFeeRet,
-                          bool overrideEstimatedFeeRate,
                           const CFeeRate & specificFeeRate,
                           int & nChangePosInOut,
                           std::string & strFailReason,

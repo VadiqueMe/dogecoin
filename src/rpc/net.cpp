@@ -48,7 +48,7 @@ UniValue ping(const JSONRPCRequest& request)
             "ping\n"
             "\nRequests that a ping be sent to all other nodes, to measure ping time.\n"
             "Results provided in getpeerinfo, pingtime and pingwait fields are decimal seconds.\n"
-            "Ping command is handled in queue with all other commands, so it measures processing backlog, not just network ping.\n"
+            "Ping command is handled in queue with all other commands, so it measures processing backlog, not just network ping\n"
             "\nExamples:\n"
             + HelpExampleCli("ping", "")
             + HelpExampleRpc("ping", "")
@@ -69,7 +69,7 @@ UniValue getpeerinfo(const JSONRPCRequest& request)
     if (request.fHelp || request.params.size() != 0)
         throw std::runtime_error(
             "getpeerinfo\n"
-            "\nReturns data about each connected network node as a json array of objects.\n"
+            "\nReturns data about each connected network node as a json array of objects\n"
             "\nResult:\n"
             "[\n"
             "  {\n"
@@ -401,10 +401,10 @@ UniValue getnetworkinfo( const JSONRPCRequest & request )
             "\nResult:\n"
             "{\n"
             "  \"version\": xxxxx,                      (numeric) the version of this peer\n"
-            "  \"subversion\": \"/Inutoshi:x.x.x/\",    (string) the subversion string of this peer\n"
+            "  \"subversion\": \"/Inutoshi:x.x.x/\",    (string) the user-agent string of this peer\n"
             "  \"protocolversion\": xxxxx,              (numeric) the protocol version\n"
             "  \"localservices\": \"xxxxxxxxxxxxxxxx\", (string) services this peer offers to the network\n"
-            "  \"localrelay\": true|false,              (bool) true if transaction relay is requested from peers\n"
+            "  \"localrelay\": true|false,              (bool) true if transaction relay is requested from peers, false if -blocksonly\n"
             "  \"timeoffset\": xxxxx,                   (numeric) the time offset\n"
             "  \"connections\": xxxxx,                  (numeric) the number of connections\n"
             "  \"networkactive\": true|false,           (bool) whether p2p networking is enabled\n"
@@ -419,7 +419,6 @@ UniValue getnetworkinfo( const JSONRPCRequest & request )
             "  }\n"
             "  ,...\n"
             "  ],\n"
-            "  \"relayfee\": x.xxxxxxxx,                (numeric) minimum relay fee for non-free transactions in " + NameOfE8Currency() + "/kB\n"
             "  \"localaddresses\": [                    (array) list of local addresses\n"
             "  {\n"
             "    \"address\": \"xxxx\",                 (string) network address\n"
@@ -449,7 +448,6 @@ UniValue getnetworkinfo( const JSONRPCRequest & request )
         obj.pushKV( "connections", (int)g_connman->CountConnectedNodes() ) ;
     }
     obj.pushKV( "networks", GetNetworksInfo() ) ;
-    obj.pushKV( "relayfee", ValueFromAmount( 0 ) ) ;
     UniValue localAddresses(UniValue::VARR);
     {
         LOCK(cs_mapLocalHost);

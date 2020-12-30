@@ -1477,16 +1477,16 @@
         <translation>Kytkeydy annettuun osoitteeseen ja pidä linja aina auki. Käytä [host]:portin merkintätapaa IPv6:lle.</translation>
     </message>
     <message>
-        <source>Cannot obtain a lock on data directory %s. %s is probably already running.</source>
-        <translation>Ei voida lukita data-hakemistoa %s. %s on luultavasti jo käynnissä.</translation>
+        <source>Cannot obtain a lock on data directory %s. %s is probably already running</source>
+        <translation>Ei voida lukita data-hakemistoa %s. %s on luultavasti jo käynnissä</translation>
     </message>
     <message>
         <source>Execute command when a wallet transaction changes (%s in cmd is replaced by TxID)</source>
         <translation>Suorita käsky kun lompakossa rahansiirto muuttuu (%s cmd on vaihdettu TxID kanssa)</translation>
     </message>
     <message>
-        <source>Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly.</source>
-        <translation>Tarkistathan että tietokoneesi päivämäärä ja kellonaika ovat oikeassa! Jos kellosi on väärässä, %s ei toimi oikein.</translation>
+        <source>Please check that your computer's date and time are correct. If your clock is wrong, %s will not work properly</source>
+        <translation>Tarkistathan että tietokoneesi päivämäärä ja kellonaika ovat oikeassa. Jos kellosi on väärässä, %s ei toimi oikein</translation>
     </message>
     <message>
         <source>Please contribute if you find %s useful. Visit %s for further information about the software.</source>

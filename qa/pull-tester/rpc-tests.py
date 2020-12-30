@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2014-2016 The Bitcoin Core developers
+# Copyright (c) 2020 vadique
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -10,14 +11,12 @@ This module calls down into individual test cases via subprocess. It will
 forward all unrecognized arguments onto the individual test scripts, other
 than:
 
-    - `-extended`: run the "extended" test suite in addition to the basic one.
-    - `-win`: signal that this is running in a Windows environment, and we
-      should run the tests.
-    - `--coverage`: this generates a basic coverage report for the RPC
-      interface.
+    - `-extended`: run the "extended" test suite in addition to the basic one
+    - `-win`: signal that this is running in a Windows environment
+    - `--coverage`: this generates a basic coverage report for the RPC interface
 
 For a description of arguments recognized by test scripts, see
-`qa/pull-tester/test_framework/test_framework.py:DogecoinTestFramework.main`.
+`qa/pull-tester/test_framework/test_framework.py:DogecoinTestFramework.main`
 
 """
 
@@ -278,7 +277,7 @@ class RPCTestHandler:
             log_stderr = tempfile.SpooledTemporaryFile(max_size=2**16)
             self.jobs.append((t,
                               time.time(),
-                              subprocess.Popen(['python3.6']+(RPC_TESTS_DIR + t).split() + self.flags + port_seed,
+                              subprocess.Popen(['python3']+(RPC_TESTS_DIR + t).split() + self.flags + port_seed,
                                                universal_newlines=True,
                                                stdout=log_stdout,
                                                stderr=log_stderr),

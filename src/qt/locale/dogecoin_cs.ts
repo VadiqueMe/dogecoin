@@ -1291,10 +1291,6 @@
         <source>%n year(s)</source>
         <translation><numerusform>%n rok</numerusform><numerusform>%n roky</numerusform><numerusform>%n roků</numerusform></translation>
     </message>
-    <message>
-        <source>%1 didn't yet exit safely...</source>
-        <translation>%1 ještě bezpečně neskončil…</translation>
-    </message>
 </context>
 <context>
     <name>QObject::QObject</name>
@@ -2652,8 +2648,8 @@
         <translation>Poslouchat na zadané adrese. Pro zápis IPv6 adresy použij notaci [adresa]:port</translation>
     </message>
     <message>
-        <source>Cannot obtain a lock on data directory %s. %s is probably already running.</source>
-        <translation>Nedaří se mi získat zámek na datový adresář %s. %s pravděpodobně už jednou běží.</translation>
+        <source>Cannot obtain a lock on data directory %s. %s is probably already running</source>
+        <translation>Nedaří se mi získat zámek na datový adresář %s. %s pravděpodobně už jednou běží</translation>
     </message>
     <message>
         <source>Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup</source>
@@ -2680,8 +2676,8 @@
         <translation>Maximální povolené seřizování času mediánem časů protějšků. Místní vnímání času může být ovlivněno protějšky, a to dopředu nebo dozadu až o toto množství. (výchozí: %u vteřin)</translation>
     </message>
     <message>
-        <source>Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly.</source>
-        <translation>Zkontroluj, že máš v počítači správně nastavený datum a čas! Pokud jsou nastaveny špatně, %s nebude fungovat správně.</translation>
+        <source>Please check that your computer's date and time are correct. If your clock is wrong, %s will not work properly</source>
+        <translation>Zkontroluj, že máš v počítači správně nastavený datum a čas. Pokud jsou nastaveny špatně, %s nebude fungovat správně</translation>
     </message>
     <message>
         <source>Please contribute if you find %s useful. Visit %s for further information about the software.</source>
@@ -2924,8 +2920,8 @@
         <translation>Zdrojový kód je na %s</translation>
     </message>
     <message>
-        <source>Unable to bind to %s on this computer. %s is probably already running.</source>
-        <translation>Nedaří se mi připojit na %s na tomhle počítači. %s už pravděpodobně jednou běží.</translation>
+        <source>Unable to bind to %s on this computer. %s is probably already running</source>
+        <translation>Nedaří se mi připojit na %s na tomhle počítači. %s už pravděpodobně jednou běží</translation>
     </message>
     <message>
         <source>Unsupported argument -benchmark ignored, use -debug=bench.</source>

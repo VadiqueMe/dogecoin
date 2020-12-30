@@ -1276,10 +1276,6 @@
         <source>%n year(s)</source>
         <translation><numerusform>%n 年</numerusform></translation>
     </message>
-    <message>
-        <source>%1 didn't yet exit safely...</source>
-        <translation>%1 尚未安全退出</translation>
-    </message>
 </context>
 <context>
     <name>QObject::QObject</name>

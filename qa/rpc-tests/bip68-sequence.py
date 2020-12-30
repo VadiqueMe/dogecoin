@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2014-2016 The Bitcoin Core developers
+# Copyright (c) 2020 vadique
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -32,7 +33,6 @@ class BIP68Test(DogecoinTestFramework):
         self.nodes.append(start_node(0, self.options.tmpdir, ["-debug", "-blockprioritysize=0"]))
         self.nodes.append(start_node(1, self.options.tmpdir, ["-debug", "-blockprioritysize=0", "-acceptnonstdtxn=0"]))
         self.is_network_split = False
-        self.relayfee = self.nodes[0].getnetworkinfo()["relayfee"]
         connect_nodes(self.nodes[0], 1)
 
     def run_test(self):
@@ -75,7 +75,7 @@ class BIP68Test(DogecoinTestFramework):
         utxo = utxos[0]
 
         tx1 = CTransaction()
-        value = int(satoshi_round(utxo["amount"] - self.relayfee)*COIN)
+        value = int(satoshi_round(utxo["amount"])*COIN)
 
         # Check that the disable flag disables relative locktime.
         # If sequence locks were used, this would require 1 block for the
@@ -94,7 +94,7 @@ class BIP68Test(DogecoinTestFramework):
         tx2.nVersion = 2
         sequence_value = sequence_value & 0x7fffffff
         tx2.vin = [CTxIn(COutPoint(tx1_id, 0), nSequence=sequence_value)]
-        tx2.vout = [CTxOut(int(value-self.relayfee*COIN), CScript([b'a']))]
+        tx2.vout = [CTxOut(int(value), CScript([b'a']))]
         tx2.rehash()
 
         try:
@@ -194,7 +194,7 @@ class BIP68Test(DogecoinTestFramework):
                 value += utxos[j]["amount"]*COIN
             # Overestimate the size of the tx - signatures should be less than 120 bytes, and leave 50 for the output
             tx_size = len(ToHex(tx))//2 + 120*num_inputs + 50
-            tx.vout.append(CTxOut(int(value-self.relayfee*tx_size*COIN/1000), CScript([b'a'])))
+            tx.vout.append(CTxOut(int(value), CScript([b'a'])))
             rawtx = self.nodes[0].signrawtransaction(ToHex(tx))["hex"]
 
             try:
@@ -225,7 +225,7 @@ class BIP68Test(DogecoinTestFramework):
         tx2 = CTransaction()
         tx2.nVersion = 2
         tx2.vin = [CTxIn(COutPoint(tx1.sha256, 0), nSequence=0)]
-        tx2.vout = [CTxOut(int(tx1.vout[0].nValue - self.relayfee*COIN), CScript([b'a']))]
+        tx2.vout = [CTxOut(int(tx1.vout[0].nValue), CScript([b'a']))]
         tx2_raw = self.nodes[0].signrawtransaction(ToHex(tx2))["hex"]
         tx2 = FromHex(tx2, tx2_raw)
         tx2.rehash()
@@ -233,9 +233,9 @@ class BIP68Test(DogecoinTestFramework):
         self.nodes[0].sendrawtransaction(tx2_raw)
 
         # Create a spend of the 0th output of orig_tx with a sequence lock
-        # of 1, and test what happens when submitting.
+        # of 1, and test what happens when submitting
         # orig_tx.vout[0] must be an anyone-can-spend output
-        def test_nonzero_locks(orig_tx, node, relayfee, use_height_lock):
+        def test_nonzero_locks(orig_tx, node, use_height_lock):
             sequence_value = 1
             if not use_height_lock:
                 sequence_value |= SEQUENCE_LOCKTIME_TYPE_FLAG
@@ -243,7 +243,7 @@ class BIP68Test(DogecoinTestFramework):
             tx = CTransaction()
             tx.nVersion = 2
             tx.vin = [CTxIn(COutPoint(orig_tx.sha256, 0), nSequence=sequence_value)]
-            tx.vout = [CTxOut(int(orig_tx.vout[0].nValue - relayfee*COIN), CScript([b'a']))]
+            tx.vout = [CTxOut(int(orig_tx.vout[0].nValue), CScript([b'a']))]
             tx.rehash()
 
             try:
@@ -256,12 +256,12 @@ class BIP68Test(DogecoinTestFramework):
                 assert(orig_tx.hash not in node.getrawmempool())
             return tx
 
-        test_nonzero_locks(tx2, self.nodes[0], self.relayfee, use_height_lock=True)
-        test_nonzero_locks(tx2, self.nodes[0], self.relayfee, use_height_lock=False)
+        test_nonzero_locks(tx2, self.nodes[0], use_height_lock=True)
+        test_nonzero_locks(tx2, self.nodes[0], use_height_lock=False)
 
         # Now mine some blocks, but make sure tx2 doesn't get mined.
         # Use prioritisetransaction to lower the effective feerate to 0
-        self.nodes[0].prioritisetransaction(tx2.hash, -1e15, int(-self.relayfee*COIN))
+        self.nodes[0].prioritisetransaction(tx2.hash, -1e15, int(-1*COIN))
         cur_time = int(time.time())
         for i in range(10):
             self.nodes[0].setmocktime(cur_time + 600)
@@ -270,11 +270,11 @@ class BIP68Test(DogecoinTestFramework):
 
         assert(tx2.hash in self.nodes[0].getrawmempool())
 
-        test_nonzero_locks(tx2, self.nodes[0], self.relayfee, use_height_lock=True)
-        test_nonzero_locks(tx2, self.nodes[0], self.relayfee, use_height_lock=False)
+        test_nonzero_locks(tx2, self.nodes[0], use_height_lock=True)
+        test_nonzero_locks(tx2, self.nodes[0], use_height_lock=False)
 
         # Mine tx2, and then try again
-        self.nodes[0].prioritisetransaction(tx2.hash, 1e15, int(self.relayfee*COIN))
+        self.nodes[0].prioritisetransaction(tx2.hash, 1e15, int(1*COIN))
 
         # Advance the time on the node so that we can test timelocks
         self.nodes[0].setmocktime(cur_time+600)
@@ -283,18 +283,18 @@ class BIP68Test(DogecoinTestFramework):
 
         # Now that tx2 is not in the mempool, a sequence locked spend should
         # succeed
-        tx3 = test_nonzero_locks(tx2, self.nodes[0], self.relayfee, use_height_lock=False)
+        tx3 = test_nonzero_locks(tx2, self.nodes[0], use_height_lock=False)
         assert(tx3.hash in self.nodes[0].getrawmempool())
 
         self.nodes[0].generate(1)
         assert(tx3.hash not in self.nodes[0].getrawmempool())
 
         # One more test, this time using height locks
-        tx4 = test_nonzero_locks(tx3, self.nodes[0], self.relayfee, use_height_lock=True)
+        tx4 = test_nonzero_locks(tx3, self.nodes[0], use_height_lock=True)
         assert(tx4.hash in self.nodes[0].getrawmempool())
 
         # Now try combining confirmed and unconfirmed inputs
-        tx5 = test_nonzero_locks(tx4, self.nodes[0], self.relayfee, use_height_lock=True)
+        tx5 = test_nonzero_locks(tx4, self.nodes[0], use_height_lock=True)
         assert(tx5.hash not in self.nodes[0].getrawmempool())
 
         utxos = self.nodes[0].listunspent()
@@ -362,7 +362,7 @@ class BIP68Test(DogecoinTestFramework):
         tx2 = CTransaction()
         tx2.nVersion = 1
         tx2.vin = [CTxIn(COutPoint(tx1.sha256, 0), nSequence=0)]
-        tx2.vout = [CTxOut(int(tx1.vout[0].nValue - self.relayfee*COIN), CScript([b'a']))]
+        tx2.vout = [CTxOut(int(tx1.vout[0].nValue - 1*COIN), CScript([b'a']))]
 
         # sign tx2
         tx2_raw = self.nodes[0].signrawtransaction(ToHex(tx2))["hex"]
@@ -377,7 +377,7 @@ class BIP68Test(DogecoinTestFramework):
         tx3 = CTransaction()
         tx3.nVersion = 2
         tx3.vin = [CTxIn(COutPoint(tx2.sha256, 0), nSequence=sequence_value)]
-        tx3.vout = [CTxOut(int(tx2.vout[0].nValue - self.relayfee*COIN), CScript([b'a']))]
+        tx3.vout = [CTxOut(int(tx2.vout[0].nValue), CScript([b'a']))]
         tx3.rehash()
 
         try:

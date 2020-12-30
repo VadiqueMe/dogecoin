@@ -1,23 +1,24 @@
 #!/usr/bin/env python
 # Copyright 2014 BitPay Inc.
 # Copyright 2016 The Bitcoin Core developers
+# Copyright 2020 vadique
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php
 
 from __future__ import division,print_function,unicode_literals
 import os
-import bctest
+import testit
 import buildenv
 import argparse
 import logging
 
-help_text="""Test framework for bitcoin utils.
+help_text="""Test suite for Dogecoin utilities
 
-Runs automatically during `make check`.
+Runs automatically during `make check`
 
-Can also be run manually from the src directory by specifying the source directory:
+Can also be run manually from the src directory:
 
-test/dogecoin-util-test.py --srcdir='srcdir' [--verbose]
+test/dogecoin-util-test.py --srcdir=`pwd` [--verbose]
 """
 
 if __name__ == '__main__':
@@ -43,4 +44,4 @@ if __name__ == '__main__':
     # Add the format/level to the logger
     logging.basicConfig(format = formatter, level=level)
 
-    bctest.bctester(srcdir + "/test/data", "dogecoin-util-test.json", buildenv)
+    testit.tester(srcdir + "/test/data", "dogecoin-util-test.json", buildenv)

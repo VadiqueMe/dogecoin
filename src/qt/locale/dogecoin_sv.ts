@@ -1906,8 +1906,8 @@ Var vänlig och försök igen.</translation>
         <translation>Bind till given adress och lyssna alltid på den. Använd [värd]:port notation för IPv6</translation>
     </message>
     <message>
-        <source>Cannot obtain a lock on data directory %s. %s is probably already running.</source>
-        <translation>Kan inte låsa data-mappen %s. %s körs förmodligen redan.</translation>
+        <source>Cannot obtain a lock on data directory %s. %s is probably already running</source>
+        <translation>Kan inte låsa data-mappen %s. %s körs förmodligen redan</translation>
     </message>
     <message>
         <source>Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup</source>
@@ -1930,8 +1930,8 @@ Var vänlig och försök igen.</translation>
         <translation>Maximalt tillåten median-peer tidsoffset justering. Lokalt perspektiv av tiden kan bli påverkad av partners, framåt eller bakåt denna tidsrymd. (förvalt: %u sekunder)</translation>
     </message>
     <message>
-        <source>Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly.</source>
-        <translation>Vänligen kolla så att din dators datum och tid är korrekt! Om din klocka går fel kommer %s inte att fungera korrekt.</translation>
+        <source>Please check that your computer's date and time are correct. If your clock is wrong, %s will not work properly</source>
+        <translation>Vänligen kolla så att din dators datum och tid är korrekt. Om din klocka går fel kommer %s inte att fungera korrekt</translation>
     </message>
     <message>
         <source>Please contribute if you find %s useful. Visit %s for further information about the software.</source>
@@ -2154,8 +2154,8 @@ Var vänlig och försök igen.</translation>
         <translation>Källkoden är på %s</translation>
     </message>
     <message>
-        <source>Unable to bind to %s on this computer. %s is probably already running.</source>
-        <translation>Det går inte att binda till %s på den här datorn. %s är förmodligen redan igång.</translation>
+        <source>Unable to bind to %s on this computer. %s is probably already running</source>
+        <translation>Det går inte att binda till %s på den här datorn. %s är förmodligen redan igång</translation>
     </message>
     <message>
         <source>Unsupported argument -benchmark ignored, use -debug=bench.</source>

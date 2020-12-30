@@ -1291,10 +1291,6 @@
         <source>%n year(s)</source>
         <translation><numerusform>%n 년</numerusform></translation>
     </message>
-    <message>
-        <source>%1 didn't yet exit safely...</source>
-        <translation>%1가 아직 안전하게 종료되지 않았습니다...</translation>
-    </message>
 </context>
 <context>
     <name>QObject::QObject</name>
@@ -2660,8 +2656,8 @@
         <translation>선택된 주소로 고정하며 항상 리슨(Listen)합니다. IPv6 프로토콜인 경우  [host]:port 방식의 명령어 표기법을 사용합니다.</translation>
     </message>
     <message>
-        <source>Cannot obtain a lock on data directory %s. %s is probably already running.</source>
-        <translation>%s 데이터 디렉토리에 락을 걸 수 없었습니다. %s가 이미 실행 중인 것으로 보입니다.</translation>
+        <source>Cannot obtain a lock on data directory %s. %s is probably already running</source>
+        <translation>%s 데이터 디렉토리에 락을 걸 수 없었습니다. %s가 이미 실행 중인 것으로 보입니다</translation>
     </message>
     <message>
         <source>Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup</source>
@@ -2688,8 +2684,8 @@
         <translation>허용 된 최대 중간 피어 시간 오프셋 조정. 시간에 대한 지역적 전망치는 전방 또는 후방의 피어에 의해 영향을 받을 수 있습니다. (기본값: %u 초)</translation>
     </message>
     <message>
-        <source>Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly.</source>
-        <translation>컴퓨터의 날짜와 시간이 올바른지 확인하십시오! 시간이 잘못되면 %s은 제대로 동작하지 않습니다.</translation>
+        <source>Please check that your computer's date and time are correct. If your clock is wrong, %s will not work properly</source>
+        <translation>컴퓨터의 날짜와 시간이 올바른지 확인하십시오. 시간이 잘못되면 %s은 제대로 동작하지 않습니다</translation>
     </message>
     <message>
         <source>Please contribute if you find %s useful. Visit %s for further information about the software.</source>
@@ -2928,8 +2924,8 @@
         <translation>소스 코드는 %s 에 있습니다</translation>
     </message>
     <message>
-        <source>Unable to bind to %s on this computer. %s is probably already running.</source>
-        <translation>이 컴퓨터의 %s에 바인딩 할 수 없습니다. 아마도 %s이 실행중인 것 같습니다.</translation>
+        <source>Unable to bind to %s on this computer. %s is probably already running</source>
+        <translation>이 컴퓨터의 %s에 바인딩 할 수 없습니다. 아마도 %s이 실행중인 것 같습니다</translation>
     </message>
     <message>
         <source>Unsupported argument -benchmark ignored, use -debug=bench.</source>

@@ -83,7 +83,7 @@ class TestNode(NodeConnCB):
             time.sleep(self.sleep_time)
             timeout -= self.sleep_time
         raise AssertionError("Sync failed to complete")
-        
+
     def sync_with_ping(self, timeout=60):
         self.send_message(msg_ping(nonce=self.ping_counter))
         test_function = lambda: self.last_pong.nonce == self.ping_counter
@@ -288,7 +288,7 @@ class SegWitTest(DogecoinTestFramework):
         # rule).
         self.test_node.test_witness_block(block, accepted=False)
         # TODO: fix synchronization so we can test reject reason
-        # Right now, bitcoind delays sending reject messages for blocks
+        # Right now, dogecoind delays sending reject messages for blocks
         # until the future, making synchronization here difficult.
         #assert_equal(self.test_node.last_reject.reason, "unexpected-witness")
 
@@ -529,7 +529,7 @@ class SegWitTest(DogecoinTestFramework):
         block = self.build_next_block()
 
         assert(len(self.utxo) > 0)
-        
+
         # Create a P2WSH transaction.
         # The witness program will be a bunch of OP_2DROP's, followed by OP_TRUE.
         # This should give us plenty of room to tweak the spending tx's
@@ -612,7 +612,7 @@ class SegWitTest(DogecoinTestFramework):
         self.nodes[0].submitblock(bytes_to_hex_str(block.serialize(True)))
         assert(self.nodes[0].getbestblockhash() != block.hash)
 
-        # Now redo commitment with the standard nonce, but let bitcoind fill it in.
+        # Now redo commitment with the standard nonce, but let dogecoind fill it in
         add_witness_commitment(block, nonce=0)
         block.vtx[0].wit = CTxWitness()
         block.solve()
@@ -641,7 +641,7 @@ class SegWitTest(DogecoinTestFramework):
         print("\tTesting extra witness data in tx")
 
         assert(len(self.utxo) > 0)
-        
+
         block = self.build_next_block()
 
         witness_program = CScript([OP_DROP, OP_TRUE])
@@ -809,7 +809,7 @@ class SegWitTest(DogecoinTestFramework):
         witness_program = CScript([OP_DROP, OP_TRUE])
         witness_hash = sha256(witness_program)
         scriptPubKey = CScript([OP_0, witness_hash])
-        
+
         # Create a transaction that splits our utxo into many outputs
         tx = CTransaction()
         tx.vin.append(CTxIn(COutPoint(self.utxo[0].sha256, self.utxo[0].n), b""))
@@ -1517,7 +1517,7 @@ class SegWitTest(DogecoinTestFramework):
         self.test_node.test_witness_block(block, accepted=True, with_witness=segwit_activated)
         sync_blocks(self.nodes)
 
-        # Now test attempts to spend the output.
+        # Now test attempts to spend the output
         spend_tx = CTransaction()
         spend_tx.vin.append(CTxIn(COutPoint(tx.sha256, 0), scriptSig))
         spend_tx.vout.append(CTxOut(tx.vout[0].nValue-1000, CScript([OP_TRUE])))
@@ -1526,17 +1526,17 @@ class SegWitTest(DogecoinTestFramework):
         # This transaction should not be accepted into the mempool pre- or
         # post-segwit.  Mempool acceptance will use SCRIPT_VERIFY_WITNESS which
         # will require a witness to spend a witness program regardless of
-        # segwit activation.  Note that older bitcoind's that are not
-        # segwit-aware would also reject this for failing CLEANSTACK.
+        # segwit activation.  Note that older dogecoind's that are not
+        # segwit-aware would also reject this for failing CLEANSTACK
         self.test_node.test_transaction_acceptance(spend_tx, with_witness=False, accepted=False)
 
-        # Try to put the witness script in the scriptSig, should also fail.
+        # Try to put the witness script in the scriptSig, should also fail
         spend_tx.vin[0].scriptSig = CScript([p2wsh_pubkey, b'a'])
         spend_tx.rehash()
         self.test_node.test_transaction_acceptance(spend_tx, with_witness=False, accepted=False)
 
         # Now put the witness script in the witness, should succeed after
-        # segwit activates.
+        # segwit activates
         spend_tx.vin[0].scriptSig = scriptSig
         spend_tx.rehash()
         spend_tx.wit.vtxinwit.append(CTxInWitness())
@@ -1562,12 +1562,12 @@ class SegWitTest(DogecoinTestFramework):
     # Test the behavior of starting up a segwit-aware node after the softfork
     # has activated.  As segwit requires different block data than pre-segwit
     # nodes would have stored, this requires special handling.
-    # To enable this test, pass --oldbinary=<path-to-pre-segwit-bitcoind> to
-    # the test.
+    # To enable this test, pass --oldbinary=<path-to-pre-segwit-dogecoind> to
+    # the test
     def test_upgrade_after_activation(self, node, node_id):
         print("\tTesting software upgrade after softfork activation")
 
-        assert(node_id != 0) # node0 is assumed to be a segwit-active bitcoind
+        assert(node_id != 0) # node0 is assumed to be a segwit-active dogecoind
 
         # Make sure the nodes are all up
         sync_blocks(self.nodes)
@@ -1579,10 +1579,10 @@ class SegWitTest(DogecoinTestFramework):
 
         sync_blocks(self.nodes)
 
-        # Make sure that this peer thinks segwit has activated.
+        # Make sure that this peer thinks segwit has activated
         assert(get_bip9_status(node, 'segwit')['status'] == "active")
 
-        # Make sure this peers blocks match those of node0.
+        # Make sure this peers blocks match those of node0
         height = node.getblockcount()
         while height >= 0:
             block_hash = node.getblockhash(height)
@@ -1648,7 +1648,7 @@ class SegWitTest(DogecoinTestFramework):
             tx2.wit.vtxinwit.append(CTxInWitness())
             tx2.wit.vtxinwit[-1].scriptWitness.stack = [ witness_program ]
             total_value += tx.vout[i].nValue
-        tx2.wit.vtxinwit[-1].scriptWitness.stack = [ witness_program_toomany ] 
+        tx2.wit.vtxinwit[-1].scriptWitness.stack = [ witness_program_toomany ]
         tx2.vout.append(CTxOut(total_value, CScript([OP_TRUE])))
         tx2.rehash()
 

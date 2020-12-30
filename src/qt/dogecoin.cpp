@@ -696,7 +696,7 @@ int main(int argc, char *argv[])
         app.createWindow(networkStyle.data());
         app.requestInitialize();
 #if defined(Q_OS_WIN) && QT_VERSION >= 0x050000
-        WinShutdownMonitor::registerShutdownBlockReason(QObject::tr("%1 didn't yet exit safely...").arg(QObject::tr(PACKAGE_NAME)), (HWND)app.getMainWinId());
+        WinShutdownMonitor::registerShutdownBlockReason( QString( PACKAGE_NAME ) + " didn't yet exit", (HWND)app.getMainWinId() ) ;
 #endif
         app.exec();
         app.requestShutdown();

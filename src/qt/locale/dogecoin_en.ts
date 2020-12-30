@@ -1933,16 +1933,11 @@
             <numerusform>%n years</numerusform>
         </translation>
     </message>
-    <message>
-        <location filename="../dogecoin.cpp" line="+180"/>
-        <source>%1 didn&apos;t yet exit safely...</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>QObject::QObject</name>
     <message>
-        <location line="-100"/>
+        <location filename="../dogecoin.cpp" line="+80"/>
         <source>Error: Specified data directory &quot;%1&quot; does not exist.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2054,7 +2049,7 @@
     </message>
     <message>
         <location line="+428"/>
-        <location filename="../rpcconsole.cpp" line="+1349"/>
+        <location filename="../rpcconsole.cpp" line="+1348"/>
         <source>Received</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3677,12 +3672,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+4"/>
-        <source>Cannot obtain a lock on data directory %s. %s is probably already running.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
+        <location line="+6"/>
         <source>Connect only to the specified node(s); -noconnect or -connect=0 alone to disable automatic connections</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3797,12 +3787,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Please check that your computer&apos;s date and time are correct! If your clock is wrong, %s will not work properly.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
+        <location line="+5"/>
         <source>Please contribute if you find %s useful. Visit %s for further information about the software.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4217,17 +4202,32 @@
         <translation type="unfinished">Invalid -proxy address: &apos;%s&apos;</translation>
     </message>
     <message>
-        <location line="-10"/>
+        <location line="+63"/>
+        <source>Unable to bind to %s on this computer. %s is probably already running</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-73"/>
         <source>Fee in %s to add to transactions you send (default: %s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-153"/>
+        <location line="-211"/>
+        <source>Cannot obtain a lock on data directory %s. %s is probably already running</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+58"/>
         <source>Maximum total fees (in %s) to use in a single transaction; setting this too low may abort large transactions (default: %s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+129"/>
+        <location line="+10"/>
+        <source>Please check that your computer&apos;s date and time are correct. If your clock is wrong, %s will not work properly</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+119"/>
         <source>Copyright (c) %i-%i</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4542,12 +4542,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Unable to bind to %s on this computer. %s is probably already running.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Unable to start HTTP server. See debug log for details.</source>
         <translation type="unfinished"></translation>
     </message>

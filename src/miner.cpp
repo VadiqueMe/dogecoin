@@ -877,7 +877,6 @@ void MiningThread::MineBlocks()
             noncesScanned = 0 ;
 
             uint32_t solutionBits = currentBlock->nBits ;
-            arith_uint256 solutionHash = arith_uint256().SetCompact( solutionBits ) ;
             currentBlock->nNonce = randomNumber() ;
 
             LogPrintf(
@@ -885,7 +884,7 @@ void MiningThread::MineBlocks()
                 numberOfThread,
                 currentBlock->vtx.size(),
                 ::GetSerializeSize( *currentBlock, SER_NETWORK, PROTOCOL_VERSION ),
-                ( verbose ? strprintf( ", looking for scrypt hash <= %s", solutionHash.GetHex() ) : "" ),
+                ( verbose ? strprintf( ", looking for scrypt hash <= %s", arith_uint256().SetCompact( solutionBits ).GetHex() ) : "" ),
                 ( verbose ? strprintf( ", random initial nonce 0x%x", currentBlock->nNonce ) : "" )
             ) ;
 
@@ -913,6 +912,7 @@ void MiningThread::MineBlocks()
                 {
                     std::string proofOfWorkFound = strprintf( "MiningThread (%d):\n", numberOfThread ) ;
                     proofOfWorkFound += strprintf( "proof-of-work found with nonce 0x%x\n", currentBlock->nNonce ) ;
+                    arith_uint256 solutionHash = arith_uint256().SetCompact( solutionBits ) ;
                     proofOfWorkFound += strprintf( "   scrypt hash %s\n   <= solution %s\n",
                                                     currentBlock->GetScryptHash().GetHex(), solutionHash.GetHex() ) ;
                     if ( NameOfChain() == "inu" ) {
@@ -960,10 +960,8 @@ void MiningThread::MineBlocks()
                 if ( deltaTime < 0 ) break ;
 
                 // changing block's time can change proof-of-work bits
-                if ( solutionBits != currentBlock->nBits ) {
+                if ( solutionBits != currentBlock->nBits )
                     solutionBits = currentBlock->nBits ;
-                    solutionHash.SetCompact( solutionBits ) ;
-                }
 
                 // next nonce is random
                 currentBlock->nNonce = randomNumber() ;

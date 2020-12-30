@@ -12,6 +12,7 @@
 #include "utiltime.h" // GetTime, DateTimeStrFormat
 
 #include <QTableView>
+#include <QHeaderView>
 
 bool MempoolRowLessThan::operator()( const MempoolTableRow & left, const MempoolTableRow & right ) const
 {
@@ -168,6 +169,7 @@ void MempoolModel::sort( int column, Qt::SortOrder order )
 {
     sortColumn = column ;
     sortOrder = order ;
+    static_cast< QTableView * >( parent() )->horizontalHeader()->setSortIndicator( column, order ) ;
     refresh() ;
 }
 

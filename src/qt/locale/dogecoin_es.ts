@@ -1291,10 +1291,6 @@
         <source>%n year(s)</source>
         <translation><numerusform>%n año</numerusform><numerusform>%n años</numerusform></translation>
     </message>
-    <message>
-        <source>%1 didn't yet exit safely...</source>
-        <translation>%1 no se ha cerrado de forma segura todavía...</translation>
-    </message>
 </context>
 <context>
     <name>QObject::QObject</name>
@@ -2659,8 +2655,8 @@
         <translation>Vincular a la dirección dada y escuchar siempre en ella. Utilice la notación [host]:port para IPv6</translation>
     </message>
     <message>
-        <source>Cannot obtain a lock on data directory %s. %s is probably already running.</source>
-        <translation>No se puede bloquear el directorio %s. %s ya se está ejecutando.</translation>
+        <source>Cannot obtain a lock on data directory %s. %s is probably already running</source>
+        <translation>No se puede bloquear el directorio %s. %s ya se está ejecutando</translation>
     </message>
     <message>
         <source>Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup</source>
@@ -2687,8 +2683,8 @@
         <translation>Ajuste máximo permitido del tiempo offset medio de pares. La perspectiva local de tiempo se verá influenciada por los pares anteriores y posteriores a esta cantidad. (Por defecto: %u segundos)</translation>
     </message>
     <message>
-        <source>Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly.</source>
-        <translation>Por favor, compruebe si la fecha y hora en su computadora son correctas! Si su reloj esta mal, %s no trabajara correctamente. </translation>
+        <source>Please check that your computer's date and time are correct. If your clock is wrong, %s will not work properly</source>
+        <translation>Por favor, compruebe si la fecha y hora en su computadora son correctas. Si su reloj esta mal, %s no trabajara correctamente</translation>
     </message>
     <message>
         <source>Please contribute if you find %s useful. Visit %s for further information about the software.</source>
@@ -2931,8 +2927,8 @@
         <translation>El código fuente está en %s</translation>
     </message>
     <message>
-        <source>Unable to bind to %s on this computer. %s is probably already running.</source>
-        <translation>No se ha podido conectar con %s en este equipo. %s es posible que este todavia en ejecución.</translation>
+        <source>Unable to bind to %s on this computer. %s is probably already running</source>
+        <translation>No se ha podido conectar con %s en este equipo. %s es posible que este todavia en ejecución</translation>
     </message>
     <message>
         <source>Unsupported argument -benchmark ignored, use -debug=bench.</source>

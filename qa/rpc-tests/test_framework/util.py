@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2014-2016 The Bitcoin Core developers
+# Copyright (c) 2020 vadique
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -35,7 +36,9 @@ PORT_MIN = 11000
 # The number of ports to "reserve" for p2p and rpc, each
 PORT_RANGE = 5000
 
-DOGECOIND_PROC_WAIT_TIMEOUT = 60
+DOGECOIND_PROC_WAIT_TIMEOUT = 120
+
+SYNC_TIMEOUT = 120
 
 
 class PortSeed:
@@ -46,7 +49,7 @@ class PortSeed:
 #MOCKTIME is only needed for scripts that use the
 #cached version of the blockchain.  If the cached
 #version of the blockchain is used without MOCKTIME
-#then the mempools will not sync due to IBD.
+#then the mempools will not sync due to IBD
 MOCKTIME = 0
 
 def enable_mocktime():
@@ -121,18 +124,18 @@ def hex_str_to_bytes(hex_str):
 def str_to_b64str(string):
     return b64encode(string.encode('utf-8')).decode('ascii')
 
-def sync_blocks(rpc_connections, *, wait=1, timeout=60):
+def sync_blocks(rpc_connections, *, wait=1, timeout=SYNC_TIMEOUT):
     """
-    Wait until everybody has the same tip.
+    Wait until everybody has the same tip
 
     sync_blocks needs to be called with an rpc_connections set that has least
     one node already synced to the latest, stable tip, otherwise there's a
-    chance it might return before all nodes are stably synced.
+    chance it might return before all nodes are stably synced
     """
     # Use getblockcount() instead of waitforblockheight() to determine the
     # initial max height because the two RPCs look at different internal global
     # variables (chainActive vs latestBlock) and the former gets updated
-    # earlier.
+    # earlier
     maxheight = max(x.getblockcount() for x in rpc_connections)
     start_time = cur_time = time.time()
     while cur_time <= start_time + timeout:
@@ -146,7 +149,7 @@ def sync_blocks(rpc_connections, *, wait=1, timeout=60):
     raise AssertionError("Block sync to height {} timed out:{}".format(
                          maxheight, "".join("\n  {!r}".format(tip) for tip in tips)))
 
-def sync_chain(rpc_connections, *, wait=1, timeout=60):
+def sync_chain(rpc_connections, *, wait=1, timeout=SYNC_TIMEOUT):
     """
     Wait until everybody has the same best block
     """
@@ -158,10 +161,9 @@ def sync_chain(rpc_connections, *, wait=1, timeout=60):
         timeout -= wait
     raise AssertionError("Chain sync failed: Best block hashes don't match")
 
-def sync_mempools(rpc_connections, *, wait=1, timeout=60):
+def sync_mempools(rpc_connections, *, wait=1, timeout=SYNC_TIMEOUT):
     """
-    Wait until everybody has the same transactions in their memory
-    pools
+    Wait until everybody has the same transactions in their memory pools
     """
     while timeout > 0:
         pool = set(rpc_connections[0].getrawmempool())
@@ -382,7 +384,7 @@ def stop_node(node, i):
 def stop_nodes(nodes):
     for i, node in enumerate(nodes):
         stop_node(node, i)
-    assert not dogecoind_processes.values() # All connections must be gone now
+    ##assert not dogecoind_processes.values() # All connections must be gone now
 
 def set_node_times(nodes, t):
     for node in nodes:
@@ -448,7 +450,7 @@ def make_change(from_node, amount_in, amount_out, fee):
 
 def send_zeropri_transaction(from_node, to_node, amount, fee):
     """
-    Create&broadcast a zero-priority transaction.
+    Create&broadcast a zero-priority transaction
     Returns (txid, hex-encoded-txdata)
     Ensures transaction is zero-priority by first creating a send-to-self,
     then using its output
@@ -478,7 +480,7 @@ def send_zeropri_transaction(from_node, to_node, amount, fee):
 
 def random_zeropri_transaction(nodes, amount, min_fee, fee_increment, fee_variants):
     """
-    Create a random zero-priority transaction.
+    Create a random zero-priority transaction
     Returns (txid, hex-encoded-transaction-data, fee)
     """
     from_node = random.choice(nodes)
@@ -489,7 +491,7 @@ def random_zeropri_transaction(nodes, amount, min_fee, fee_increment, fee_varian
 
 def random_transaction(nodes, amount, min_fee, fee_increment, fee_variants):
     """
-    Create a random transaction.
+    Create a random transaction
     Returns (txid, hex-encoded-transaction-data, fee)
     """
     from_node = random.choice(nodes)
@@ -545,25 +547,25 @@ def assert_raises_message(exc, message, fun, *args, **kwds):
         raise AssertionError("No exception raised")
 
 def assert_raises_jsonrpc(code, message, fun, *args, **kwds):
-    """Run an RPC and verify that a specific JSONRPC exception code and message is raised.
+    """Run an RPC and verify that a specific JSONRPC exception code and message is raised
 
     Calls function `fun` with arguments `args` and `kwds`. Catches a JSONRPCException
     and verifies that the error code and message are as expected. Throws AssertionError if
-    no JSONRPCException was returned or if the error code/message are not as expected.
+    no JSONRPCException was returned or if the error code/message are not as expected
 
     Args:
         code (int), optional: the error code returned by the RPC call (defined
-            in src/rpc/protocol.h). Set to None if checking the error code is not required.
+            in src/rpc/protocol.h). Set to None if checking the error code is not required
         message (string), optional: [a substring of] the error string returned by the
             RPC call. Set to None if checking the error string is not required
-        fun (function): the function to call. This should be the name of an RPC.
-        args*: positional arguments for the function.
-        kwds**: named arguments for the function.
+        fun (function): the function to call. This should be the name of an RPC
+        args*: positional arguments for the function
+        kwds**: named arguments for the function
     """
     try:
         fun(*args, **kwds)
     except JSONRPCException as e:
-        # JSONRPCException was thrown as expected. Check the code and message values are correct.
+        # JSONRPCException was thrown as expected. Check the code and message values are correct
         if (code is not None) and (code != e.error["code"]):
             raise AssertionError("Unexpected JSONRPC error code %i" % e.error["code"])
         if (message is not None) and (message not in e.error['message']):
@@ -623,7 +625,7 @@ def satoshi_round(amount):
     return Decimal(amount).quantize(Decimal('0.00000001'), rounding=ROUND_DOWN)
 
 # Helper to create at least "count" utxos
-# Pass in a fee that is sufficient for relay and mining new transactions.
+# Pass in a fee that is sufficient for relay and mining new transactions
 def create_confirmed_utxos(fee, node, count):
     node.generate(int(0.5*count)+61)
     utxos = node.listunspent()
@@ -652,7 +654,7 @@ def create_confirmed_utxos(fee, node, count):
     return utxos
 
 # Create large OP_RETURN txouts that can be appended to a transaction
-# to make it large (helper for constructing large transactions).
+# to make it large (helper for constructing large transactions)
 def gen_return_txouts():
     # Some pre-processing to create a bunch of OP_RETURN txouts to insert into transactions we create
     # So we have big transactions (and therefore can't fit very many into each block)
@@ -680,7 +682,7 @@ def create_tx(node, coinbase, to_address, amount):
     return signresult["hex"]
 
 # Create a spend of each passed-in utxo, splicing in "txouts" to each raw
-# transaction to make it large.  See gen_return_txouts() above.
+# transaction to make it large.  See gen_return_txouts() above
 def create_lots_of_big_transactions(node, txouts, utxos, num, fee):
     addr = node.getnewaddress()
     txids = []
@@ -708,7 +710,7 @@ def mine_large_block(node, utxos=None):
     if len(utxos) < num:
         utxos.clear()
         utxos.extend(node.listunspent())
-    fee = 100 * node.getnetworkinfo()["relayfee"]
+    fee = 0
     create_lots_of_big_transactions(node, txouts, utxos, num, fee=fee)
     node.generate(1)
 

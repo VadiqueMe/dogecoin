@@ -42,7 +42,7 @@ void WaitForShutdown( std::vector< std::thread > * threadGroup )
 //
 // Begin
 //
-bool AppInit(int argc, char* argv[])
+bool AppInit( int argc, char* argv[] )
 {
     //
     // Parameters
@@ -111,14 +111,14 @@ bool AppInit(int argc, char* argv[])
             fprintf( stderr, "Error: There is no RPC client functionality in dogecoind anymore. Use the dogecoin-cli utility instead\n" ) ;
             exit( EXIT_FAILURE ) ;
         }
-        // -server defaults to true for bitcoind but not for the GUI so do this here
+        // -server defaults to true for dogecoind but not for the GUI so do this here
         SoftSetBoolArg( "-server", true ) ;
 
         InitParameterInteraction() ;
         if ( ! AppInitBasicSetup() || ! AppInitParameterInteraction() || ! AppInitSanityChecks() )
         {
             // InitError will have been called with detailed error, which ends up on console
-            exit( 1 ) ;
+            exit( EXIT_FAILURE ) ;
         }
 
         if ( GetBoolArg( "-daemon", false ) )
@@ -160,7 +160,7 @@ int main(int argc, char* argv[])
 {
     SetupEnvironment();
 
-    // Connect bitcoind signal handlers
+    // Connect dogecoind signal handlers
     noui_connect();
 
     return (AppInit(argc, argv) ? EXIT_SUCCESS : EXIT_FAILURE);

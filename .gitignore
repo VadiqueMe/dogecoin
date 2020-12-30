@@ -1,6 +1,3 @@
-*.tar.gz
-
-*.exe
 src/dogecoin
 src/dogecoind
 src/dogecoin-cli

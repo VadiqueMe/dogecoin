@@ -11,7 +11,7 @@ TEST_BINARY=test/test_dogecoin$(EXEEXT)
 
 
 EXTRA_DIST += \
-	test/bctest.py \
+	test/testit.py \
 	test/dogecoin-util-test.py \
 	test/data/dogecoin-util-test.json \
 	test/data/blanktxv1.hex \

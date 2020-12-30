@@ -1291,10 +1291,6 @@
         <source>%n year(s)</source>
         <translation><numerusform>%n år</numerusform><numerusform>%n år</numerusform></translation>
     </message>
-    <message>
-        <source>%1 didn't yet exit safely...</source>
-        <translation>%1 har endnu ikke afsluttet på sikker vis…</translation>
-    </message>
 </context>
 <context>
     <name>QObject::QObject</name>
@@ -2648,8 +2644,8 @@
         <translation>Tildel til den givne adresse og lyt altid på den. Brug [vært]:port-notation for IPv6</translation>
     </message>
     <message>
-        <source>Cannot obtain a lock on data directory %s. %s is probably already running.</source>
-        <translation>Kan ikke opnå en lås på datamappe %s. %s kører sansynligvis allerede.</translation>
+        <source>Cannot obtain a lock on data directory %s. %s is probably already running</source>
+        <translation>Kan ikke opnå en lås på datamappe %s. %s kører sansynligvis allerede</translation>
     </message>
     <message>
         <source>Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup</source>
@@ -2676,8 +2672,8 @@
         <translation>Justering af maksimalt tilladt gennemsnitlig afvigelse fra peer-tid. Den lokale opfattelse af tid kan blive påvirket frem eller tilbage af peers med denne mængde tid. (standard: %u sekunder)</translation>
     </message>
     <message>
-        <source>Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly.</source>
-        <translation>Undersøg venligst at din computers dato og klokkeslet er korrekt indstillet! Hvis der er fejl i disse, vil %s ikke fungere korrekt.</translation>
+        <source>Please check that your computer's date and time are correct. If your clock is wrong, %s will not work properly</source>
+        <translation>Undersøg venligst at din computers dato og klokkeslet er korrekt indstillet. Hvis der er fejl i disse, vil %s ikke fungere korrekt</translation>
     </message>
     <message>
         <source>Please contribute if you find %s useful. Visit %s for further information about the software.</source>
@@ -2920,8 +2916,8 @@
         <translation>Kildekoden findes på %s</translation>
     </message>
     <message>
-        <source>Unable to bind to %s on this computer. %s is probably already running.</source>
-        <translation>Ikke i stand til at tildele til %s på denne computer. %s kører formodentlig allerede.</translation>
+        <source>Unable to bind to %s on this computer. %s is probably already running</source>
+        <translation>Ikke i stand til at tildele til %s på denne computer. %s kører formodentlig allerede</translation>
     </message>
     <message>
         <source>Unsupported argument -benchmark ignored, use -debug=bench.</source>

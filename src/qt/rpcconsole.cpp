@@ -472,7 +472,6 @@ RPCConsole::RPCConsole( const PlatformStyle * style, QWidget * parent )
     // tx memory pool table
     mempoolModel = new MempoolModel( ui->mempoolTable ) ;
     mempoolModel->sort( MempoolModel::ColumnIndex::Time, Qt::DescendingOrder ) ;
-    ui->mempoolTable->horizontalHeader()->setSortIndicator( MempoolModel::ColumnIndex::Time, Qt::DescendingOrder ) ;
     ui->mempoolTable->setModel( mempoolModel ) ;
     ui->mempoolTable->verticalHeader()->hide() ;
     ui->mempoolTable->horizontalHeader()->setSectionResizeMode( MempoolModel::ColumnIndex::Priority, QHeaderView::Interactive ) ;

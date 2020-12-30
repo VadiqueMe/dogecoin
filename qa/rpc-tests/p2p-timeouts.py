@@ -4,11 +4,11 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php
 """ TimeoutsTest -- test various net timeouts (only in extended tests)
 
-- Create three bitcoind nodes:
+- Create three dogecoind nodes:
 
     no_verack_node - we never send a verack in response to their version
     no_version_node - we never send a version (only a ping)
-    no_send_node - we never send any P2P message.
+    no_send_node - we never send any P2P message
 
 - Start all three nodes
 - Wait 1 second
@@ -53,7 +53,7 @@ class TimeoutsTest(DogecoinTestFramework):
         self.nodes = []
 
         # Start up node0 to be a version 1, pre-segwit node.
-        self.nodes = start_nodes(self.num_nodes, self.options.tmpdir, 
+        self.nodes = start_nodes(self.num_nodes, self.options.tmpdir,
                 [["-debug", "-logtimemicros=1"]])
 
     def run_test(self):

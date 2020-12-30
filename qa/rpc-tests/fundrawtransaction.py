@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2014-2016 The Bitcoin Core developers
+# Copyright (c) 2020 vadique
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -35,19 +36,8 @@ class RawTransactionsTest(DogecoinTestFramework):
     def run_test(self):
         print("Mining blocks...")
 
-        min_relay_tx_fee = self.nodes[0].getnetworkinfo()['relayfee']
-        # This test is not meant to test fee estimation and we'd like
-        # to be sure all txs are sent at a consistent desired feerate
         for node in self.nodes:
-            node.settxfee(min_relay_tx_fee)
-
-        # if the fee's positive delta is higher than this value tests will fail,
-        # neg. delta always fail the tests.
-        # The size of the signature of every input may be at most 2 bytes larger
-        # than a minimum sized signature.
-
-        #            = 2 bytes * minRelayTxFeePerByte
-        feeTolerance = 2 * min_relay_tx_fee/1000
+            node.settxfee(0)
 
         self.nodes[2].generate(1)
         self.sync_all()
@@ -319,97 +309,6 @@ class RawTransactionsTest(DogecoinTestFramework):
 
         assert_raises_jsonrpc(-4, "Insufficient funds", self.nodes[2].fundrawtransaction, rawtx)
 
-        ############################################################
-        #compare fee of a standard pubkeyhash transaction
-        inputs = []
-        outputs = {self.nodes[1].getnewaddress():1.1}
-        rawTx = self.nodes[0].createrawtransaction(inputs, outputs)
-        fundedTx = self.nodes[0].fundrawtransaction(rawTx)
-
-        #create same transaction over sendtoaddress
-        txId = self.nodes[0].sendtoaddress(self.nodes[1].getnewaddress(), 1.1)
-        signedFee = self.nodes[0].getrawmempool(True)[txId]['fee']
-
-        #compare fee
-        feeDelta = Decimal(fundedTx['fee']) - Decimal(signedFee)
-        assert(feeDelta >= 0 and feeDelta <= feeTolerance)
-        ############################################################
-
-        ############################################################
-        #compare fee of a standard pubkeyhash transaction with multiple outputs
-        inputs = []
-        outputs = {self.nodes[1].getnewaddress():1.1,self.nodes[1].getnewaddress():1.2,self.nodes[1].getnewaddress():0.1,self.nodes[1].getnewaddress():1.3,self.nodes[1].getnewaddress():0.2,self.nodes[1].getnewaddress():0.3}
-        rawTx = self.nodes[0].createrawtransaction(inputs, outputs)
-        fundedTx = self.nodes[0].fundrawtransaction(rawTx)
-        #create same transaction over sendtoaddress
-        txId = self.nodes[0].sendmany("", outputs)
-        signedFee = self.nodes[0].getrawmempool(True)[txId]['fee']
-
-        #compare fee
-        feeDelta = Decimal(fundedTx['fee']) - Decimal(signedFee)
-        assert(feeDelta >= 0 and feeDelta <= feeTolerance)
-        ############################################################
-
-
-        ############################################################
-        #compare fee of a 2of2 multisig p2sh transaction
-
-        # create 2of2 addr
-        addr1 = self.nodes[1].getnewaddress()
-        addr2 = self.nodes[1].getnewaddress()
-
-        addr1Obj = self.nodes[1].validateaddress(addr1)
-        addr2Obj = self.nodes[1].validateaddress(addr2)
-
-        mSigObj = self.nodes[1].addmultisigaddress(2, [addr1Obj['pubkey'], addr2Obj['pubkey']])
-
-        inputs = []
-        outputs = {mSigObj:1.1}
-        rawTx = self.nodes[0].createrawtransaction(inputs, outputs)
-        fundedTx = self.nodes[0].fundrawtransaction(rawTx)
-
-        #create same transaction over sendtoaddress
-        txId = self.nodes[0].sendtoaddress(mSigObj, 1.1)
-        signedFee = self.nodes[0].getrawmempool(True)[txId]['fee']
-
-        #compare fee
-        feeDelta = Decimal(fundedTx['fee']) - Decimal(signedFee)
-        assert(feeDelta >= 0 and feeDelta <= feeTolerance)
-        ############################################################
-
-
-        ############################################################
-        #compare fee of a standard pubkeyhash transaction
-
-        # create 4of5 addr
-        addr1 = self.nodes[1].getnewaddress()
-        addr2 = self.nodes[1].getnewaddress()
-        addr3 = self.nodes[1].getnewaddress()
-        addr4 = self.nodes[1].getnewaddress()
-        addr5 = self.nodes[1].getnewaddress()
-
-        addr1Obj = self.nodes[1].validateaddress(addr1)
-        addr2Obj = self.nodes[1].validateaddress(addr2)
-        addr3Obj = self.nodes[1].validateaddress(addr3)
-        addr4Obj = self.nodes[1].validateaddress(addr4)
-        addr5Obj = self.nodes[1].validateaddress(addr5)
-
-        mSigObj = self.nodes[1].addmultisigaddress(4, [addr1Obj['pubkey'], addr2Obj['pubkey'], addr3Obj['pubkey'], addr4Obj['pubkey'], addr5Obj['pubkey']])
-
-        inputs = []
-        outputs = {mSigObj:1.1}
-        rawTx = self.nodes[0].createrawtransaction(inputs, outputs)
-        fundedTx = self.nodes[0].fundrawtransaction(rawTx)
-
-        #create same transaction over sendtoaddress
-        txId = self.nodes[0].sendtoaddress(mSigObj, 1.1)
-        signedFee = self.nodes[0].getrawmempool(True)[txId]['fee']
-
-        #compare fee
-        feeDelta = Decimal(fundedTx['fee']) - Decimal(signedFee)
-        assert(feeDelta >= 0 and feeDelta <= feeTolerance)
-        ############################################################
-
 
         ############################################################
         # spend a 2of2 multisig transaction over fundraw
@@ -424,7 +323,7 @@ class RawTransactionsTest(DogecoinTestFramework):
         mSigObj = self.nodes[2].addmultisigaddress(2, [addr1Obj['pubkey'], addr2Obj['pubkey']])
 
 
-        # send 1.2 BTC to msig addr
+        # send 1.2 DOGE to msig addr
         txId = self.nodes[0].sendtoaddress(mSigObj, 1.2)
         self.sync_all()
         self.nodes[1].generate(1)
@@ -454,10 +353,9 @@ class RawTransactionsTest(DogecoinTestFramework):
         stop_node(self.nodes[2], 3)
 
         self.nodes = start_nodes(self.num_nodes, self.options.tmpdir)
-        # This test is not meant to test fee estimation and we'd like
-        # to be sure all txs are sent at a consistent desired feerate
+
         for node in self.nodes:
-            node.settxfee(min_relay_tx_fee)
+            node.settxfee(0)
 
         connect_nodes_bi(self.nodes,0,1)
         connect_nodes_bi(self.nodes,1,2)
@@ -523,11 +421,6 @@ class RawTransactionsTest(DogecoinTestFramework):
 
         #create same transaction over sendtoaddress
         txId = self.nodes[1].sendmany("", outputs)
-        signedFee = self.nodes[1].getrawmempool(True)[txId]['fee']
-
-        #compare fee
-        feeDelta = Decimal(fundedTx['fee']) - Decimal(signedFee)
-        assert(feeDelta >= 0 and feeDelta <= feeTolerance*19) #~19 inputs
 
 
         #############################################
@@ -628,23 +521,6 @@ class RawTransactionsTest(DogecoinTestFramework):
         self.nodes[0].generate(1)
         self.sync_all()
 
-        #######################
-        # Test feeRate option #
-        #######################
-
-        # Make sure there is exactly one input so coin selection can't skew the result
-        assert_equal(len(self.nodes[3].listunspent(1)), 1)
-
-        inputs = []
-        outputs = {self.nodes[3].getnewaddress() : 1}
-        rawtx = self.nodes[3].createrawtransaction(inputs, outputs)
-        result = self.nodes[3].fundrawtransaction(rawtx) # uses min_relay_tx_fee (set by settxfee)
-        result2 = self.nodes[3].fundrawtransaction(rawtx, {"feeRate": 2*min_relay_tx_fee})
-        result3 = self.nodes[3].fundrawtransaction(rawtx, {"feeRate": 10*min_relay_tx_fee})
-        result_fee_rate = result['fee'] * 1000 / round_tx_size(count_bytes(result['hex']))
-        assert_fee_amount(result2['fee'], count_bytes(result2['hex']), 2 * result_fee_rate)
-        assert_fee_amount(result3['fee'], count_bytes(result3['hex']), 10 * result_fee_rate)
-
         #############################
         # Test address reuse option #
         #############################
@@ -682,11 +558,11 @@ class RawTransactionsTest(DogecoinTestFramework):
         outputs = {self.nodes[2].getnewaddress(): 10}
         rawtx = self.nodes[3].createrawtransaction(inputs, outputs)
 
-        result = [self.nodes[3].fundrawtransaction(rawtx), # uses min_relay_tx_fee (set by settxfee)
+        result = [self.nodes[3].fundrawtransaction(rawtx),
                   self.nodes[3].fundrawtransaction(rawtx, {"subtractFeeFromOutputs": []}), # empty subtraction list
-                  self.nodes[3].fundrawtransaction(rawtx, {"subtractFeeFromOutputs": [0]}), # uses min_relay_tx_fee (set by settxfee)
-                  self.nodes[3].fundrawtransaction(rawtx, {"feeRate": 2*min_relay_tx_fee}),
-                  self.nodes[3].fundrawtransaction(rawtx, {"feeRate": 2*min_relay_tx_fee, "subtractFeeFromOutputs": [0]})]
+                  self.nodes[3].fundrawtransaction(rawtx, {"subtractFeeFromOutputs": [0]}),
+                  self.nodes[3].fundrawtransaction(rawtx, {"feeRate": 0}),
+                  self.nodes[3].fundrawtransaction(rawtx, {"feeRate": 0, "subtractFeeFromOutputs": [0]})]
 
         dec_tx = [self.nodes[3].decoderawtransaction(tx['hex']) for tx in result]
         output = [d['vout'][1 - r['changepos']]['value'] for d, r in zip(dec_tx, result)]

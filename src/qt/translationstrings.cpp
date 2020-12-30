@@ -36,7 +36,7 @@ QT_TRANSLATE_NOOP("dogecoin-core", ""
 "notation for IPv6. This option can be specified multiple times (default: "
 "bind to all interfaces)"),
 QT_TRANSLATE_NOOP("dogecoin-core", ""
-"Cannot obtain a lock on data directory %s. %s is probably already running."),
+"Cannot obtain a lock on data directory %s. %s is probably already running"),
 QT_TRANSLATE_NOOP("dogecoin-core", ""
 "Connect only to the specified node(s); -noconnect or -connect=0 alone to "
 "disable automatic connections"),
@@ -104,8 +104,8 @@ QT_TRANSLATE_NOOP("dogecoin-core", ""
 QT_TRANSLATE_NOOP("dogecoin-core", ""
 "Output debugging information (default: %u, supplying <category> is optional)"),
 QT_TRANSLATE_NOOP("dogecoin-core", ""
-"Please check that your computer's date and time are correct! If your clock "
-"is wrong, %s will not work properly."),
+"Please check that your computer's date and time are correct. If your clock "
+"is wrong, %s will not work properly"),
 QT_TRANSLATE_NOOP("dogecoin-core", ""
 "Please contribute if you find %s useful. Visit %s for further information "
 "about the software."),
@@ -319,7 +319,7 @@ QT_TRANSLATE_NOOP("dogecoin-core", "Transaction has too long of a mempool chain"
 QT_TRANSLATE_NOOP("dogecoin-core", "Transaction must have at least one recipient"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Transaction too large"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Unable to bind to %s on this computer (bind returned error %s)"),
-QT_TRANSLATE_NOOP("dogecoin-core", "Unable to bind to %s on this computer. %s is probably already running."),
+QT_TRANSLATE_NOOP("dogecoin-core", "Unable to bind to %s on this computer. %s is probably already running"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Unable to start HTTP server. See debug log for details."),
 QT_TRANSLATE_NOOP("dogecoin-core", "Unknown network specified in -onlynet: '%s'"),
 QT_TRANSLATE_NOOP("dogecoin-core", "Unsupported argument -benchmark ignored, use -debug=bench."),

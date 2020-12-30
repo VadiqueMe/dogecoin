@@ -1903,7 +1903,6 @@ bool CWallet::SelectCoins( const std::vector< COutput > & vAvailableCoins,
 bool CWallet::FundTransaction(
         CMutableTransaction & tx,
         CAmount & nFeeRet,
-        bool overrideEstimatedFeeRate,
         const CFeeRate & specificFeeRate,
         int & nChangePosInOut,
         std::string & strFailReason,

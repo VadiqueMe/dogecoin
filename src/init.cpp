@@ -1132,27 +1132,25 @@ bool AppInitParameterInteraction()
     return true;
 }
 
-static bool LockDataDirectory(bool probeOnly)
+static bool LockDataDirectory( bool probeOnly )
 {
     std::string strDataDir = GetDirForData().string() ;
 
     // Make sure only a single Dogecoin process is using the data directory
     boost::filesystem::path pathLockFile = GetDirForData() / ".lock" ;
-    FILE* file = fopen(pathLockFile.string().c_str(), "a"); // empty lock file; created if it doesn't exist
-    if (file) fclose(file);
+    FILE* file = fopen( pathLockFile.string().c_str(), "a" ); // empty lock file; create if it doesn't exist
+    if ( file ) fclose( file ) ;
 
     try {
-        static boost::interprocess::file_lock lock(pathLockFile.string().c_str());
-        if (!lock.try_lock()) {
-            return InitError(strprintf(_("Cannot obtain a lock on data directory %s. %s is probably already running."), strDataDir, _(PACKAGE_NAME)));
+        static boost::interprocess::file_lock lock( pathLockFile.string().c_str() ) ;
+        if ( ! lock.try_lock() ) {
+            return InitError( strprintf( _("Cannot obtain a lock on data directory %s. %s is probably already running"), strDataDir, PACKAGE_NAME ) ) ;
         }
-        if (probeOnly) {
-            lock.unlock();
-        }
-    } catch(const boost::interprocess::interprocess_exception& e) {
-        return InitError(strprintf(_("Cannot obtain a lock on data directory %s. %s is probably already running.") + " %s.", strDataDir, _(PACKAGE_NAME), e.what()));
+        if ( probeOnly ) lock.unlock() ;
+    } catch ( const boost::interprocess::interprocess_exception & e ) {
+        return InitError( strprintf( _("Cannot obtain a lock on data directory %s. %s is probably already running") + " (%s)", strDataDir, PACKAGE_NAME, e.what() ) ) ;
     }
-    return true;
+    return true ;
 }
 
 bool AppInitSanityChecks()

@@ -51,8 +51,7 @@ public:
 
     // To keep things as simple as possible, there is no unschedule
 
-    // Services the queue 'forever'. Should be run in a thread,
-    // and interrupted using boost::interrupt_thread
+    // Services the queue 'forever', run it in a thread
     void serviceQueue() ;
 
     // Tell any threads running serviceQueue to stop as soon as they're

@@ -1291,10 +1291,6 @@
         <source>%n year(s)</source>
         <translation><numerusform>%n 年</numerusform></translation>
     </message>
-    <message>
-        <source>%1 didn't yet exit safely...</source>
-        <translation>%1 はまだ安全に終了していません...</translation>
-    </message>
 </context>
 <context>
     <name>QObject::QObject</name>
@@ -2652,8 +2648,8 @@
         <translation>指定のアドレスへバインドし、その上で常にリスンします。IPv6 は [ホスト名]:ポート番号 と表記します</translation>
     </message>
     <message>
-        <source>Cannot obtain a lock on data directory %s. %s is probably already running.</source>
-        <translation>データ ディレクトリ %s のロックを取得することができません。おそらく %s は実行中です。</translation>
+        <source>Cannot obtain a lock on data directory %s. %s is probably already running</source>
+        <translation>データ ディレクトリ %s のロックを取得することができません。おそらく %s は実行中です</translation>
     </message>
     <message>
         <source>Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup</source>
@@ -2680,8 +2676,8 @@
         <translation>時間オフセット調整値のピア中央値に対する最大の許容値。ローカル時間の見込み値は、接続するピアにより前方ないし後方へ影響されます。(初期値: %u 秒)</translation>
     </message>
     <message>
-        <source>Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly.</source>
-        <translation>あなたのPCの日付と時刻が正しいことを確認して下さい！ もしあなたの時計が正しくなければ %s が正確に動作しません。</translation>
+        <source>Please check that your computer's date and time are correct. If your clock is wrong, %s will not work properly</source>
+        <translation>あなたのPCの日付と時刻が正しいことを確認して下さい。もしあなたの時計が正しくなければ %s が正確に動作しません</translation>
     </message>
     <message>
         <source>Please contribute if you find %s useful. Visit %s for further information about the software.</source>
@@ -2925,8 +2921,8 @@
         <translation>ソースコードは %s にあります</translation>
     </message>
     <message>
-        <source>Unable to bind to %s on this computer. %s is probably already running.</source>
-        <translation>このコンピュータの %s にバインドすることができません。おそらく %s は既に実行されています。</translation>
+        <source>Unable to bind to %s on this computer. %s is probably already running</source>
+        <translation>このコンピュータの %s にバインドすることができません。おそらく %s は既に実行されています</translation>
     </message>
     <message>
         <source>Unsupported argument -benchmark ignored, use -debug=bench.</source>

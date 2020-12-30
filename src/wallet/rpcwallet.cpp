@@ -2565,7 +2565,6 @@ UniValue fundrawtransaction(const JSONRPCRequest& request)
     bool lockUnspents = false;
     bool reserveChangeKey = true;
     CFeeRate feeRate = CFeeRate(0);
-    bool overrideEstimatedFeerate = false;
     UniValue subtractFeeFromOutputs;
     std::set< int > setSubtractFeeFromOutputs ;
 
@@ -2612,11 +2611,8 @@ UniValue fundrawtransaction(const JSONRPCRequest& request)
         if (options.exists("reserveChangeKey"))
             reserveChangeKey = options["reserveChangeKey"].get_bool();
 
-        if (options.exists("feeRate"))
-        {
-            feeRate = CFeeRate(AmountFromValue(options["feeRate"]));
-            overrideEstimatedFeerate = true;
-        }
+        if ( options.exists( "feeRate" ) )
+            feeRate = CFeeRate( AmountFromValue( options["feeRate"] ) ) ;
 
         if (options.exists("subtractFeeFromOutputs"))
             subtractFeeFromOutputs = options["subtractFeeFromOutputs"].get_array();
@@ -2648,8 +2644,8 @@ UniValue fundrawtransaction(const JSONRPCRequest& request)
     CAmount nFeeOut ;
     std::string strFailReason ;
 
-    if(!pwalletMain->FundTransaction(tx, nFeeOut, overrideEstimatedFeerate, feeRate, changePosition, strFailReason, includeWatching, lockUnspents, setSubtractFeeFromOutputs, reserveChangeKey, changeAddress))
-        throw JSONRPCError(RPC_WALLET_ERROR, strFailReason);
+    if ( ! pwalletMain->FundTransaction( tx, nFeeOut, feeRate, changePosition, strFailReason, includeWatching, lockUnspents, setSubtractFeeFromOutputs, reserveChangeKey, changeAddress ) )
+        throw JSONRPCError( RPC_WALLET_ERROR, strFailReason ) ;
 
     UniValue result( UniValue::VOBJ ) ;
     result.pushKV( "hex", EncodeHexTx( tx ) ) ;

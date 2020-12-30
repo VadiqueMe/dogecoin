@@ -22,7 +22,7 @@ static CCriticalSection cs_nTimeOffset ;
 static int64_t nTimeOffset = 0 ;
 
 /**
- * "Never go to sea with two chronometers; take one or three."
+ * "Never go to sea with two chronometers; take one or three"
  * Our three time sources are:
  *  - System clock
  *  - Median of other nodes clocks
@@ -87,23 +87,23 @@ void AddTimeData(const CNetAddr& ip, int64_t nOffsetSample)
         }
         else
         {
-            nTimeOffset = 0;
+            nTimeOffset = 0 ;
 
-            static bool fDone;
-            if (!fDone)
+            static bool fDone ;
+            if ( ! fDone )
             {
                 // If nobody has a time different than ours but within 5 minutes of ours, give a warning
-                bool fMatch = false;
+                bool fMatch = false ;
                 for ( int64_t nOffset : vSorted )
-                    if (nOffset != 0 && abs64(nOffset) < 5 * 60)
-                        fMatch = true;
+                    if ( nOffset != 0 && abs64( nOffset ) < 5 * 60 )
+                        fMatch = true ;
 
-                if (!fMatch)
+                if ( ! fMatch )
                 {
-                    fDone = true;
-                    std::string strMessage = strprintf(_("Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly."), _(PACKAGE_NAME));
-                    SetMiscWarning(strMessage);
-                    uiInterface.ThreadSafeMessageBox( strMessage, "", CClientUserInterface::MSG_WARNING ) ;
+                    fDone = true ;
+                    std::string message = strprintf( _("Please check that your computer's date and time are correct. If your clock is wrong, %s will not work properly"), PACKAGE_NAME ) ;
+                    SetMiscWarning( message ) ;
+                    uiInterface.ThreadSafeMessageBox( message, "", CClientUserInterface::MSG_WARNING ) ;
                 }
             }
         }

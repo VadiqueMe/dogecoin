@@ -46,15 +46,15 @@ static bool noui_ThreadSafeQuestion(const std::string& /* ignored interactive me
     return noui_ThreadSafeMessageBox(message, caption, style);
 }
 
-static void noui_InitMessage(const std::string& message)
+static void noui_InitMessage( const std::string & message )
 {
-    LogPrintf("init message: %s\n", message);
+    LogPrintf( "init message: %s\n", message ) ;
 }
 
 void noui_connect()
 {
-    // Connect bitcoind signal handlers
-    uiInterface.ThreadSafeMessageBox.connect(noui_ThreadSafeMessageBox);
-    uiInterface.ThreadSafeQuestion.connect(noui_ThreadSafeQuestion);
-    uiInterface.InitMessage.connect(noui_InitMessage);
+    // Connect dogecoind signal handlers
+    uiInterface.ThreadSafeMessageBox.connect( noui_ThreadSafeMessageBox ) ;
+    uiInterface.ThreadSafeQuestion.connect( noui_ThreadSafeQuestion ) ;
+    uiInterface.InitMessage.connect( noui_InitMessage ) ;
 }

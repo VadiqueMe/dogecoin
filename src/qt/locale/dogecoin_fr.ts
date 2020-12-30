@@ -1291,10 +1291,6 @@
         <source>%n year(s)</source>
         <translation><numerusform>%n an</numerusform><numerusform>%n ans</numerusform></translation>
     </message>
-    <message>
-        <source>%1 didn't yet exit safely...</source>
-        <translation>%1 ne s'est pas encore arrêté en toute sécurité...</translation>
-    </message>
 </context>
 <context>
     <name>QObject::QObject</name>
@@ -2660,8 +2656,8 @@
         <translation>Se lier à l'adresse donnée et toujours l'écouter. Utiliser la notation [host]:port pour l'IPv6</translation>
     </message>
     <message>
-        <source>Cannot obtain a lock on data directory %s. %s is probably already running.</source>
-        <translation>Impossible d’obtenir un verrou sur le répertoire de données %s. %s fonctionne probablement déjà.</translation>
+        <source>Cannot obtain a lock on data directory %s. %s is probably already running</source>
+        <translation>Impossible d’obtenir un verrou sur le répertoire de données %s. %s fonctionne probablement déjà</translation>
     </message>
     <message>
         <source>Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup</source>
@@ -2684,8 +2680,8 @@
         <translation>Réglage moyen maximal autorisé de décalage de l'heure d'un pair. La perspective locale du temps peut être influencée par les pairs, en avance ou en retard, de cette valeur. (Par défaut : %u secondes)</translation>
     </message>
     <message>
-        <source>Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly.</source>
-        <translation>Veuillez vérifier que l'heure et la date de votre ordinateur sont justes ! Si votre horloge n'est pas à l'heure, %s ne fonctionnera pas correctement.</translation>
+        <source>Please check that your computer's date and time are correct. If your clock is wrong, %s will not work properly</source>
+        <translation>Veuillez vérifier que l'heure et la date de votre ordinateur sont justes. Si votre horloge n'est pas à l'heure, %s ne fonctionnera pas correctement</translation>
     </message>
     <message>
         <source>Please contribute if you find %s useful. Visit %s for further information about the software.</source>
@@ -2928,8 +2924,8 @@
         <translation>Le code source est sur %s</translation>
     </message>
     <message>
-        <source>Unable to bind to %s on this computer. %s is probably already running.</source>
-        <translation>Impossible de se lier à %s sur cet ordinateur. %s fonctionne probablement déjà.</translation>
+        <source>Unable to bind to %s on this computer. %s is probably already running</source>
+        <translation>Impossible de se lier à %s sur cet ordinateur. %s fonctionne probablement déjà</translation>
     </message>
     <message>
         <source>Unsupported argument -benchmark ignored, use -debug=bench.</source>

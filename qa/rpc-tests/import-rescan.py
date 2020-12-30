@@ -159,18 +159,18 @@ class ImportRescanTest(DogecoinTestFramework):
                 variant.expected_txs = 0
                 variant.check()
 
-        # Create new transactions sending to each address.
-        fee = self.nodes[0].getnetworkinfo()["relayfee"]
+        # Create new transactions sending to each address
+        fee = 0
         for i, variant in enumerate(IMPORT_VARIANTS):
             variant.sent_amount = 10 - (2 * i + 1) / 8.0
             variant.sent_txid = self.nodes[0].sendtoaddress(variant.address["address"], variant.sent_amount)
 
-        # Generate a block containing the new transactions.
+        # Generate a block containing the new transactions
         self.nodes[0].generate(1)
         assert_equal(self.nodes[0].getrawmempool(), [])
         sync_blocks(self.nodes)
 
-        # Check the latest results from getbalance and listtransactions.
+        # Check the latest results from getbalance and listtransactions
         for variant in IMPORT_VARIANTS:
             if not variant.expect_disabled:
                 variant.expected_balance += variant.sent_amount

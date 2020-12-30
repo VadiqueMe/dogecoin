@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2014-2016 The Bitcoin Core developers
+# Copyright (c) 2020 vadique
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -7,7 +8,7 @@
 # Test pruning code
 # ********
 # WARNING:
-# This test uses 4GB of disk space.
+# This test uses 4GB of disk space
 # This test takes 30 mins or more (up to 2 hours)
 # ********
 
@@ -20,7 +21,7 @@ MIN_BLOCKS_TO_KEEP = 288
 
 # Rescans start at the earliest block up to 2 hours before a key timestamp, so
 # the manual prune RPC avoids pruning blocks in the same window to be
-# compatible with pruning based on key creation time.
+# compatible with pruning based on key creation time
 RESCAN_WINDOW = 2 * 60 * 60
 
 
@@ -56,9 +57,6 @@ class PruneTest(DogecoinTestFramework):
 
         # Create nodes 5 to test wallet in prune mode, but do not connect
         self.nodes.append(start_node(5, self.options.tmpdir, ["-debug=0", "-prune=550"]))
-
-        # Determine default relay fee
-        self.relayfee = self.nodes[0].getnetworkinfo()["relayfee"]
 
         connect_nodes(self.nodes[0], 1)
         connect_nodes(self.nodes[1], 2)
@@ -251,7 +249,7 @@ class PruneTest(DogecoinTestFramework):
             # that the return value is less than or equal to the expected
             # value, because when more than one block is generated per second,
             # a timestamp will not be granular enough to uniquely identify an
-            # individual block.
+            # individual block
             if expected_ret is None:
                 expected_ret = index
             if use_timestamp:
@@ -295,7 +293,7 @@ class PruneTest(DogecoinTestFramework):
         if has_block(1):
             raise AssertionError("blk00001.dat is still there, should be pruned by now")
 
-        # height=1000 should not prune anything more, because tip-288 is in blk00002.dat.
+        # height=1000 should not prune anything more, because tip-288 is in blk00002.dat
         prune(1000, 1001 - MIN_BLOCKS_TO_KEEP)
         if not has_block(2):
             raise AssertionError("blk00002.dat is still there, should be pruned by now")
@@ -321,8 +319,8 @@ class PruneTest(DogecoinTestFramework):
         start_node(2, self.options.tmpdir, ["-debug=1","-prune=550"])
         print("Success")
 
-        # check that wallet loads loads successfully when restarting a pruned node after IBD.
-        # this was reported to fail in #7494.
+        # check that wallet loads loads successfully when restarting a pruned node after IBD
+        # this was reported to fail in #7494
         print ("Syncing node 5 to test wallet")
         connect_nodes(self.nodes[0], 5)
         nds = [self.nodes[0], self.nodes[5]]

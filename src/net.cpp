@@ -2078,14 +2078,14 @@ bool CConnman::BindListenPort( const CService & addrBind, std::string & strError
 
     if ( ::bind( hListenSocket, (struct sockaddr*)&sockaddr, len ) == SOCKET_ERROR )
     {
-        int nErr = WSAGetLastError();
-        if (nErr == WSAEADDRINUSE)
-            strError = strprintf(_("Unable to bind to %s on this computer. %s is probably already running."), addrBind.ToString(), _(PACKAGE_NAME));
+        int nErr = WSAGetLastError() ;
+        if ( nErr == WSAEADDRINUSE )
+            strError = strprintf( _("Unable to bind to %s on this computer. %s is probably already running"), addrBind.ToString(), PACKAGE_NAME ) ;
         else
-            strError = strprintf(_("Unable to bind to %s on this computer (bind returned error %s)"), addrBind.ToString(), NetworkErrorString(nErr));
-        LogPrintf("%s\n", strError);
-        CloseSocket(hListenSocket);
-        return false;
+            strError = strprintf( _("Unable to bind to %s on this computer (bind returned error %s)"), addrBind.ToString(), NetworkErrorString( nErr ) ) ;
+        LogPrintf( "%s\n", strError ) ;
+        CloseSocket( hListenSocket ) ;
+        return false ;
     }
     LogPrintf( "%s: bound to %s\n", __func__, addrBind.ToString() ) ;
 

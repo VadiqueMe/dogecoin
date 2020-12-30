@@ -1291,10 +1291,6 @@
         <source>%n year(s)</source>
         <translation><numerusform>%n 年</numerusform></translation>
     </message>
-    <message>
-        <source>%1 didn't yet exit safely...</source>
-        <translation>%1 還沒有安全地結束...</translation>
-    </message>
 </context>
 <context>
     <name>QObject::QObject</name>
@@ -2661,8 +2657,8 @@
         <translation>和指定的位址繫結，並且一直在指定位址聽候連線。IPv6 請用 [主機]:通訊埠 這種格式</translation>
     </message>
     <message>
-        <source>Cannot obtain a lock on data directory %s. %s is probably already running.</source>
-        <translation>沒辦法鎖定資料目錄 %s。%s 可能已經在執行了。</translation>
+        <source>Cannot obtain a lock on data directory %s. %s is probably already running</source>
+        <translation>沒辦法鎖定資料目錄 %s。%s 可能已經在執行了</translation>
     </message>
     <message>
         <source>Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup</source>
@@ -2689,8 +2685,8 @@
         <translation>跟其他節點的時間差最高可接受的中位數值。本機所認為的時間可能會被其他節點影響，往前或往後在這個值之內。(預設值: %u 秒)</translation>
     </message>
     <message>
-        <source>Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly.</source>
-        <translation>請檢查電腦日期和時間是否正確！%s 沒辦法在時鐘不準的情況下正常運作。</translation>
+        <source>Please check that your computer's date and time are correct. If your clock is wrong, %s will not work properly</source>
+        <translation>請檢查電腦日期和時間是否正確。%s 沒辦法在時鐘不準的情況下正常運作</translation>
     </message>
     <message>
         <source>Please contribute if you find %s useful. Visit %s for further information about the software.</source>
@@ -2933,8 +2929,8 @@
         <translation>源代码在 %s 上</translation>
     </message>
     <message>
-        <source>Unable to bind to %s on this computer. %s is probably already running.</source>
-        <translation>沒辦法繫結在這台電腦上的 %s 。%s 可能已經在執行了。</translation>
+        <source>Unable to bind to %s on this computer. %s is probably already running</source>
+        <translation>沒辦法繫結在這台電腦上的 %s 。%s 可能已經在執行了</translation>
     </message>
     <message>
         <source>Unsupported argument -benchmark ignored, use -debug=bench.</source>

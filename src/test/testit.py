@@ -1,5 +1,6 @@
 # Copyright 2014 BitPay Inc.
 # Copyright 2016 The Bitcoin Core developers
+# Copyright 2020 vadique
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php
 
@@ -13,9 +14,9 @@ import difflib
 import logging
 
 def parse_output(a, fmt):
-    """Parse the output according to specified format.
+    """Parse the output according to specified format
 
-    Raise an error if the output can't be parsed."""
+    Raise an error if the output can't be parsed"""
     if fmt == 'json': # json: compare parsed data
         return json.loads(a)
     elif fmt == 'hex': # hex: parse and compare binary data
@@ -23,11 +24,11 @@ def parse_output(a, fmt):
     else:
         raise NotImplementedError("Don't know how to compare %s" % fmt)
 
-def bctest(testDir, testObj, exeext):
-    """Runs a single test, comparing output and RC to expected output and RC.
+def testme(testDir, testObj, exeext):
+    """Runs a single test, comparing output and RC to expected output and RC
 
     Raises an error if input can't be read, executable fails, or output/RC
-    are not as expected. Error is caught by bctester() and reported.
+    are not as expected. Error is caught by tester() and reported
     """
     # Get the exec names and arguments
     execprog = testObj['exec'] + exeext
@@ -81,6 +82,7 @@ def bctest(testDir, testObj, exeext):
         if a_parsed != b_parsed:
             data_mismatch_message = "Output data mismatch for " + outputFn + " (format " + outputType + ")"
             logging.error(data_mismatch_message)
+            logging.info(outs[0])
             raise Exception
         # Compare formatting
         if outs[0] != outputData:
@@ -108,12 +110,12 @@ def bctest(testDir, testObj, exeext):
         # That stderr is empty if no errors are expected. However, bitcoin-tx
         # emits DISPLAY errors when running as a windows application on
         # linux through wine. Just assert that the expected error text appears
-        # somewhere in stderr.
+        # somewhere in stderr
         if want_error not in outs[1]:
             logging.error("Error mismatch:\n" + "Expected: " + want_error + "\nReceived: " + outs[1].rstrip())
             raise Exception
 
-def bctester(testDir, input_basename, buildenv):
+def tester(testDir, input_basename, buildenv):
     """ Loads and parses the input file, runs all tests and reports results"""
     input_filename = testDir + "/" + input_basename
     raw_data = open(input_filename).read()
@@ -123,7 +125,7 @@ def bctester(testDir, input_basename, buildenv):
 
     for testObj in input_data:
         try:
-            bctest(testDir, testObj, buildenv.exeext)
+            testme(testDir, testObj, buildenv.exeext)
             logging.info("PASSED: " + testObj["description"])
         except:
             logging.info("FAILED: " + testObj["description"])

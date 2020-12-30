@@ -63,13 +63,13 @@ class CLazyNode(NodeConnCB):
     def on_blocktxn(self, conn, message): self.bad_message(message)
 
 # Node that never sends a version. We'll use this to send a bunch of messages
-# anyway, and eventually get disconnected.
+# anyway, and eventually get disconnected
 class CNodeNoVersionBan(CLazyNode):
     def __init__(self):
         super().__init__()
 
     # send a bunch of veracks without sending a message. This should get us disconnected.
-    # NOTE: implementation-specific check here. Remove if bitcoind ban behavior changes
+    # NOTE: implementation-specific check here. Remove if dogecoind ban behavior changes
     def on_open(self, conn):
         super().on_open(conn)
         for i in range(banscore):
@@ -83,7 +83,7 @@ class CNodeNoVersionIdle(CLazyNode):
     def __init__(self):
         super().__init__()
 
-# Node that sends a version but not a verack.
+# Node that sends a version but not a verack
 class CNodeNoVerackIdle(CLazyNode):
     def __init__(self):
         self.version_received = False

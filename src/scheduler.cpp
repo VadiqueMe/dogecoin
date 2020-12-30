@@ -16,7 +16,7 @@ CScheduler::CScheduler() : inQueue( 0 ), stopRequested( false ), stopWhenEmpty( 
 
 CScheduler::~CScheduler()
 {
-    assert( inQueue == 0 ) ;
+    //assert( inQueue == 0 ) ;
 }
 
 void CScheduler::serviceQueue()

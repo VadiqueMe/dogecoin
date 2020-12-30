@@ -15,7 +15,6 @@ class MempoolLimitTest(DogecoinTestFramework):
         self.nodes.append(start_node(0, self.options.tmpdir, ["-maxmempool=5", "-spendzeroconfchange=0", "-debug"]))
         self.is_network_split = False
         self.sync_all()
-        self.relayfee = self.nodes[0].getnetworkinfo()['relayfee']
 
     def __init__(self):
         super().__init__()
@@ -26,21 +25,20 @@ class MempoolLimitTest(DogecoinTestFramework):
 
     def run_test(self):
         txids = []
-        utxos = create_confirmed_utxos(self.relayfee, self.nodes[0], 91)
+        utxos = create_confirmed_utxos(0, self.nodes[0], 91)
 
         #create a mempool tx that will be evicted
         us0 = utxos.pop()
         inputs = [{ "txid" : us0["txid"], "vout" : us0["vout"]}]
         outputs = {self.nodes[0].getnewaddress() : 1}
         tx = self.nodes[0].createrawtransaction(inputs, outputs)
-        self.nodes[0].settxfee(self.relayfee) # specifically fund this tx with low fee
+        self.nodes[0].settxfee(0)
         txF = self.nodes[0].fundrawtransaction(tx)
-        self.nodes[0].settxfee(0) # return to automatic fee selection
+        self.nodes[0].settxfee(0)
         txFS = self.nodes[0].signrawtransaction(txF['hex'])
         txid = self.nodes[0].sendrawtransaction(txFS['hex'])
 
-        relayfee = self.nodes[0].getnetworkinfo()['relayfee']
-        base_fee = relayfee*100
+        base_fee = 100*COIN
         for i in range (3):
             txids.append([])
             txids[i] = create_lots_of_big_transactions(self.nodes[0], self.txouts, utxos[30*i:30*i+30], 30, (i+1)*base_fee)
