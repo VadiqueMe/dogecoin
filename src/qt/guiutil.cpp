@@ -286,24 +286,24 @@ QString HtmlEscape(const std::string& str, bool fMultiLine)
     return HtmlEscape(QString::fromStdString(str), fMultiLine);
 }
 
-void copyEntryData(QAbstractItemView *view, int column, int role)
+void copyEntryData( QAbstractItemView * view, int column, int role )
 {
-    if(!view || !view->selectionModel())
-        return;
-    QModelIndexList selection = view->selectionModel()->selectedRows(column);
+    if ( view == nullptr || view->selectionModel() == nullptr ) return ;
 
-    if(!selection.isEmpty())
+    QModelIndexList selection = view->selectionModel()->selectedRows( column ) ;
+    if ( ! selection.isEmpty() )
     {
         // Copy first item
-        setClipboard(selection.at(0).data(role).toString());
+        setClipboard( selection.at( 0 ).data( role ).toString() ) ;
     }
 }
 
-QList<QModelIndex> getEntryData(QAbstractItemView *view, int column)
+QList< QModelIndex > getEntryData( QAbstractItemView * view, int column )
 {
-    if(!view || !view->selectionModel())
-        return QList<QModelIndex>();
-    return view->selectionModel()->selectedRows(column);
+    if ( view == nullptr || view->selectionModel() == nullptr )
+        return QList< QModelIndex >() ;
+
+    return view->selectionModel()->selectedRows( column ) ;
 }
 
 QString getSaveFileName(QWidget *parent, const QString &caption, const QString &dir,

@@ -13,6 +13,7 @@
 
 #include <QTableView>
 #include <QHeaderView>
+#include <QSet>
 
 bool MempoolRowLessThan::operator()( const MempoolTableRow & left, const MempoolTableRow & right ) const
 {
@@ -140,10 +141,24 @@ bool MempoolModel::isEmpty() const
     return tableRows.size() == 0 ;
 }
 
+static inline uint qHash( const arith_uint256 & hash, uint seed = 0 ) {
+    return qHash( QString::fromStdString( hash.GetHex() ), seed ) ;
+}
+
 void MempoolModel::refresh()
 {
+    // store currently selected entries
+    QSet< arith_uint256 > selectedHashes ;
+    QItemSelectionModel * selectionModel = static_cast< QTableView * >( parent() )->selectionModel() ;
+    if ( selectionModel != nullptr ) {
+        QModelIndexList selection = selectionModel->selectedRows( ColumnIndex::Hash ) ;
+        for ( const QModelIndex & idx : selection )
+            selectedHashes << tableRows[ idx.row() ].hash ;
+    }
+
     Q_EMIT layoutAboutToBeChanged() ;
 
+    // clear
     tableRows.clear() ;
 
     // collect info about mempool entries
@@ -159,10 +174,23 @@ void MempoolModel::refresh()
         ) ) ;
     }
 
+    // sort
     if ( sortColumn >= 0 )
         std::stable_sort( tableRows.begin(), tableRows.end(), MempoolRowLessThan( sortColumn, sortOrder ) ) ;
 
     Q_EMIT layoutChanged() ;
+
+    // reselect
+    static_cast< QTableView * >( parent() )->clearSelection() ;
+    if ( ! selectedHashes.isEmpty() &&
+            static_cast< QTableView * >( parent() )->selectionMode() != QAbstractItemView::NoSelection )
+    {
+        for ( size_t j = 0 ; j < tableRows.size() ; ++ j ) {
+            if ( selectedHashes.contains( tableRows[ j ].hash ) ) {
+                static_cast< QTableView * >( parent() )->selectRow( j ) ;
+            }
+        }
+    }
 }
 
 void MempoolModel::sort( int column, Qt::SortOrder order )
